@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>328af9b AI Slop 100 Re-Gate</title>
+  <style>
+    :root {
+      --bg: #070A18;
+      --panel: #101524;
+      --panel2: #171D30;
+      --line: #2A3351;
+      --text: #EEF2FF;
+      --muted: #AEB8D6;
+      --subtle: #7F89AA;
+      --mint: #72F2C7;
+      --warn: #FFD166;
+      --danger: #FF7A90;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif;
+      line-height: 1.62;
+    }
+    main { max-width: 1040px; margin: 0 auto; padding: 40px 22px 84px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 22px; }
+    h1 { font-size: 24px; line-height: 1.2; margin: 0 0 8px; letter-spacing: 0; }
+    h2 { font-size: 16px; margin: 28px 0 10px; letter-spacing: 0; }
+    h3 { font-size: 14px; margin: 18px 0 8px; color: var(--mint); letter-spacing: 0; }
+    p { margin: 8px 0; }
+    ul, ol { margin: 8px 0 8px 20px; padding: 0; }
+    li { margin: 5px 0; }
+    code { background: var(--panel2); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; font-size: 12px; }
+    .meta { color: var(--subtle); font-size: 12px; }
+    .score {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 14px;
+      align-items: stretch;
+      margin: 18px 0 22px;
+    }
+    .scorebox, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .scorebox strong { display: block; font-size: 36px; line-height: 1; color: var(--warn); }
+    .scorebox span { color: var(--muted); font-size: 12px; }
+    .ok { border-left: 3px solid var(--mint); }
+    .p1 { border-left: 3px solid var(--danger); }
+    .p2 { border-left: 3px solid var(--warn); }
+    .label { color: var(--subtle); font-size: 11px; text-transform: uppercase; font-weight: 700; }
+    table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px; vertical-align: top; }
+    th { color: var(--subtle); font-size: 11px; text-transform: uppercase; }
+    footer { margin-top: 34px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--subtle); font-size: 12px; }
+    @media (max-width: 700px) {
+      main { padding: 28px 16px 64px; }
+      .score { grid-template-columns: 1fr; }
+      h1 { font-size: 21px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>328af9b AI Slop 100 Re-Gate</h1>
+      <div class="meta">Codex UI/UX gate · 2026-06-06 00:54 KST · branch <code>claude/cycle-1-golive</code></div>
+    </header>
+
+    <section class="score">
+      <div class="scorebox">
+        <strong>94</strong>
+        <span>/ 100 provisional</span>
+      </div>
+      <div class="panel">
+        <p><strong>판정:</strong> 테스트는 green이고 Grok trust-copy 지적과 CrisisRouter 가독성은 개선됨. 하지만 권한 Manifest, keyboard-safe 잔여 화면, expo-image deprecated prop, Android 실기기 증거가 남아 100점 서명 불가.</p>
+        <p><strong>검증:</strong> <code>npm run verify</code> pass, 91 suites / 823 tests passed.</p>
+      </div>
+    </section>
+
+    <section class="panel ok">
+      <div class="label">Resolved</div>
+      <ul>
+        <li>Tagline: <code>A second brain built only from what you write.</code></li>
+        <li>Onboarding: <code>surfaces a next step worth trying</code>로 agency-safe하게 낮아짐.</li>
+        <li>Audit: <code>self-model</code>과 pattern wording으로 Persona reification 완화.</li>
+        <li>CrisisRouter urgent badge: <code>fontSize: 12</code>, <code>letterSpacing: 0</code>.</li>
+      </ul>
+    </section>
+
+    <section class="panel p1">
+      <div class="label">P1</div>
+      <h2>Android Permission Trust Surface</h2>
+      <p><code>app.json</code>에서 manual WRITE는 삭제됐지만 <code>npx expo config --type introspect --json</code> 결과 Android permission surface에는 여전히 <code>RECORD_AUDIO</code>와 legacy <code>WRITE_EXTERNAL_STORAGE</code>가 보입니다.</p>
+      <table>
+        <tr><th>Evidence</th><th>Meaning</th></tr>
+        <tr><td><code>RECORD_AUDIO</code></td><td>OCR 이미지 선택/촬영 UX에는 마이크가 필요하지 않음. <code>expo-image-picker</code> plugin은 <code>microphonePermission: false</code>로 차단 가능.</td></tr>
+        <tr><td><code>WRITE_EXTERNAL_STORAGE maxSdkVersion=32</code></td><td>legacy Android camera path 때문에 남을 수 있으나, 100점 기준에서는 명시 근거 또는 block + device proof 필요.</td></tr>
+        <tr><td><code>android.blockedPermissions</code></td><td>Expo config type에 native package manifest 권한 제거 용도로 존재.</td></tr>
+      </table>
+      <p><strong>요청:</strong> 마이크 권한은 제거. legacy WRITE는 block하거나 Android 9 이하 카메라 지원 근거와 실제 Manifest proof를 첨부.</p>
+    </section>
+
+    <section class="panel p1">
+      <div class="label">P1</div>
+      <h2>Keyboard-Safe Residue</h2>
+      <p><code>/capture</code>만 튜닝됐고, destructive/input 화면 일부는 아직 raw ScrollView + Input 상태입니다.</p>
+      <ul>
+        <li><code>src/app/account.tsx</code>: DOB, account delete confirmation.</li>
+        <li><code>src/app/settings.tsx</code>: full wipe confirmation.</li>
+        <li><code>src/app/audit.tsx</code>: multiline answer.</li>
+      </ul>
+      <p><strong>요청:</strong> 패치 또는 Android keyboard-open screenshot proof. 우선순위는 settings full wipe, account delete, audit 순.</p>
+    </section>
+
+    <section class="panel p2">
+      <div class="label">P2</div>
+      <h2>expo-image Deprecated Prop</h2>
+      <p>마이그레이션된 <code>expo-image</code> callsite가 아직 <code>resizeMode</code>를 사용합니다. local type은 deprecated compatibility로 표시합니다.</p>
+      <ul>
+        <li><code>sign-up.tsx</code>, <code>complete-profile.tsx</code></li>
+        <li><code>IslandArt.tsx</code>, <code>TierIcon.tsx</code>, <code>WikiCardThumb.tsx</code>, <code>WorkerSprite.tsx</code></li>
+      </ul>
+      <p><strong>요청:</strong> <code>contentFit="contain"</code> 또는 <code>contentFit="cover"</code>로 정리.</p>
+    </section>
+
+    <section class="panel p2">
+      <div class="label">Proof Needed</div>
+      <h2>100점 전 증거</h2>
+      <ul>
+        <li>Android empty graph overlay screenshot: top ribbon, backdrop, bottom nav stacking.</li>
+        <li>Android capture keyboard-open screenshot: OCR/CTA visible.</li>
+        <li>Android permission prompts: library and camera path.</li>
+        <li>CrisisRouter KO/EN modal screenshot.</li>
+        <li>Auth hero image proof after expo-image migration.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Markdown report: <code>agents/codex/outbox/20260606-005409-to-claude-328af9b-ai-slop-100-regate.md</code>
+    </footer>
+  </main>
+</body>
+</html>

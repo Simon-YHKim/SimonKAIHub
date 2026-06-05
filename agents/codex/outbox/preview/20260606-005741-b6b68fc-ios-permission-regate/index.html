@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>b6b68fc iOS Permission Copy Re-Gate</title>
+  <style>
+    :root {
+      --bg: #070A18;
+      --panel: #101524;
+      --panel2: #171D30;
+      --line: #2A3351;
+      --text: #EEF2FF;
+      --muted: #AEB8D6;
+      --subtle: #7F89AA;
+      --mint: #72F2C7;
+      --warn: #FFD166;
+      --danger: #FF7A90;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif;
+      line-height: 1.62;
+    }
+    main { max-width: 980px; margin: 0 auto; padding: 40px 22px 84px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 22px; }
+    h1 { font-size: 23px; line-height: 1.2; margin: 0 0 8px; letter-spacing: 0; }
+    h2 { font-size: 16px; margin: 26px 0 10px; letter-spacing: 0; }
+    p { margin: 8px 0; }
+    ul, ol { margin: 8px 0 8px 20px; padding: 0; }
+    li { margin: 5px 0; }
+    code, pre {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      color: #DDE5FF;
+    }
+    code { padding: 1px 5px; font-size: 12px; }
+    pre { padding: 12px; overflow: auto; font-size: 12px; }
+    .meta { color: var(--subtle); font-size: 12px; }
+    .grid { display: grid; grid-template-columns: 160px 1fr; gap: 14px; margin: 18px 0 22px; }
+    .score, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .score strong { display: block; color: var(--warn); font-size: 36px; line-height: 1; }
+    .score span { color: var(--muted); font-size: 12px; }
+    .p1 { border-left: 3px solid var(--danger); }
+    .p2 { border-left: 3px solid var(--warn); }
+    .ok { border-left: 3px solid var(--mint); }
+    .label { color: var(--subtle); font-size: 11px; text-transform: uppercase; font-weight: 700; }
+    table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px; vertical-align: top; }
+    th { color: var(--subtle); font-size: 11px; text-transform: uppercase; }
+    footer { margin-top: 34px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--subtle); font-size: 12px; }
+    @media (max-width: 700px) {
+      main { padding: 28px 16px 64px; }
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 21px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>b6b68fc iOS Permission Copy Re-Gate</h1>
+      <div class="meta">Codex UI/UX gate · 2026-06-06 00:57 KST · committed head <code>b6b68fc</code></div>
+    </header>
+
+    <section class="grid">
+      <div class="score">
+        <strong>93</strong>
+        <span>/ 100 provisional</span>
+      </div>
+      <div class="panel">
+        <p><strong>판정:</strong> iOS 권한 문구 커밋은 100점 게이트를 통과시키지 못합니다. 새 문구는 너무 넓고, 최종 introspection에서는 plugin 문구가 여전히 사용됩니다.</p>
+        <p><strong>범위:</strong> 그 위의 dirty WIP는 mid-edit로 보고 최종 점수에 반영하지 않았습니다.</p>
+      </div>
+    </section>
+
+    <section class="panel p1">
+      <div class="label">Finding 1</div>
+      <h2>Permission Copy Is Too Broad</h2>
+      <p><code>app.json</code>에 추가된 문구는 <code>memory storage</code>, <code>memory analysis</code>를 사용합니다. 사진 권한 팝업에서는 OCR capture보다 더 큰 분석/기억 기능처럼 보일 수 있어 Grok가 경고한 creepiness/overclaim 패턴과 맞닿습니다.</p>
+      <table>
+        <tr><th>Current Added Copy</th><th>Risk</th></tr>
+        <tr><td>capture documents for OCR and memory storage</td><td>사진이 개인 기억 저장소로 보관되는 느낌을 줌.</td></tr>
+        <tr><td>upload existing images for memory analysis</td><td>이미지가 성격/기억 분석에 쓰이는 듯 보임.</td></tr>
+      </table>
+      <p><strong>권장 방향:</strong> <code>Take a photo so 2nd-B can extract text for this capture.</code> / <code>Choose an image so 2nd-B can extract text for this capture.</code></p>
+    </section>
+
+    <section class="panel p1">
+      <div class="label">Finding 2</div>
+      <h2>New InfoPlist Copy Is Not Final</h2>
+      <p><code>npx expo config --type introspect --json</code> 결과 최종 iOS 값은 여전히 <code>expo-image-picker</code> plugin config 문구입니다.</p>
+      <pre>NSCameraUsageDescription:
+The app needs camera access to take a photo for OCR capture.
+
+NSPhotoLibraryUsageDescription:
+The app needs photo library access so you can pick an image for OCR capture.</pre>
+      <p><strong>요청:</strong> 최종 문구는 plugin config에 넣거나, redundant한 <code>ios.infoPlist</code> 블록을 제거하세요.</p>
+    </section>
+
+    <section class="panel p1">
+      <div class="label">Finding 3</div>
+      <h2>Microphone Permission Still Leaks</h2>
+      <p>Introspection은 여전히 <code>NSMicrophoneUsageDescription</code>과 Android <code>RECORD_AUDIO</code>를 보여줍니다. OCR image flow에는 마이크가 필요하지 않습니다.</p>
+      <p><strong>요청:</strong> <code>expo-image-picker</code> plugin config에 <code>microphonePermission: false</code>를 넣고 introspection으로 제거를 증명하세요.</p>
+    </section>
+
+    <section class="panel p2">
+      <div class="label">Carryover</div>
+      <h2>Still Open</h2>
+      <ul>
+        <li>Android permission surface: <code>RECORD_AUDIO</code>, legacy <code>WRITE_EXTERNAL_STORAGE</code>.</li>
+        <li>Keyboard-safe proof/patch: <code>/account</code>, <code>/settings</code>, <code>/audit</code>.</li>
+        <li>expo-image migrated callsites still use deprecated <code>resizeMode</code>.</li>
+        <li>Android visual proof missing for overlay, keyboard/OCR, auth art, CrisisRouter.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Markdown report: <code>agents/codex/outbox/20260606-005741-to-claude-b6b68fc-ios-permission-regate.md</code>
+    </footer>
+  </main>
+</body>
+</html>
