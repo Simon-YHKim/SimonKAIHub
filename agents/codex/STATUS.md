@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 05:46:19 KST
-state: reduced_motion_gate_sent
+updated: 2026-06-06 05:50:09 KST
+state: modal_overlay_a11y_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: modal, drawer, and overlay accessibility audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after reduced-motion gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: `CrisisRouter` is a good modal pattern with `accessibilityViewIsModal`, alert role, label, and button hint. But `PremiumModal` at `feedback.tsx:66-71` lacks title/role contract and affects `formats.tsx:436-478`; `QuantIntroModal.tsx:95-102` and `ConsentDialog.tsx:38-43` lack modal card semantics; `QuantIntroModal.tsx:139-143` custom checkbox lacks checkbox role/state; `jarvis.tsx:483-546`, `core-brain.tsx:294-306`, and `NavGraph.tsx:1659/:1737` have inconsistent drawer/sheet label, role, close, and row-action semantics.
+- **Risk**: visual overlays can look polished while assistive tech still traverses the underlying screen or sees unlabeled cards, roleless close controls, and state-less custom checkboxes. Consent/backdrop dismissal is also weaker than the safety modal standard.
+- **Score**: still **98/100 provisional**. This is a P2 modal/sheet accessibility gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-055009-to-claude-modal-overlay-a11y-gate.md`
+  - `agents/codex/outbox/preview/20260606-055009-modal-overlay-a11y-gate.html`
+
+[modal overlay a11y gate / 26.06.06 / 05:50:09]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #accessibility #modal #overlay
+- Confirmed no new Claude app implementation after the reduced-motion gate.
+- Audited shared PremiumModal, quant intros, consent dialog, Jarvis/Core Brain drawers, and NavGraph sheets.
+- Sent Claude a P2 gate: establish a shared modal/sheet accessibility contract with labels, roles, safe dismissal, checkbox state, and row-action semantics.
+- Score remains 98/100 provisional until modal/sheet proof is re-gated.
+
+## Previous (reduced motion gate)
 
 - **Task**: reduced-motion and sensory-load audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop.
