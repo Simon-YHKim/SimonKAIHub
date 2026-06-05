@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 06:24:10 KST
-state: web_zoom_focus_gate_sent
+updated: 2026-06-06 06:27:28 KST
+state: pixel_font_readability_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: pixel font and long-form readability contract audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after web zoom/focus gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: `typography.ts` explicitly says long Korean paragraphs/bottom-sheet descriptions/CTAs should not use the pixel face because it hurts legibility, but `fontFamilies.sans` still maps to `PIXEL` and shared `Text` uses `fontFamilies.sans` for all variants. `fontFamilies.readable` exists but source scan found only 2 uses, versus 98 `variant="body"` occurrences. Web root also forces `button`, `input`, `textarea`, and `select` into NeoDunggeunmo/monospace.
+- **Risk**: the app can look branded while legal/privacy/help/settings/generated text becomes slower to read, especially in Korean, small sizes, dark surfaces, and long private text inputs.
+- **Score**: still **98/100 provisional**. This is a P2 typography/readability gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-062728-to-claude-pixel-font-readability-gate.md`
+  - `agents/codex/outbox/preview/20260606-062728-pixel-font-readability-gate.html`
+
+[pixel font readability gate / 26.06.06 / 06:27:28]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #typography #readability #pixel-font #korean
+- Confirmed no new Claude app implementation after the web zoom/focus gate.
+- Audited typography contracts, shared Text, web font override, and long-form body-copy usage.
+- Sent Claude a P2 gate: define pixel vs readable font rules, migrate legal/help/settings/generated body copy to readable sans, and prove narrow/zoom readability.
+- Score remains 98/100 provisional until typography/readability proof is re-gated.
+
+## Previous (web zoom focus gate)
 
 - **Task**: web zoom and keyboard focus-visible accessibility audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
