@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dependency Cleanup Lockfile Addendum</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101210;
+      --panel: #191d19;
+      --line: #384038;
+      --text: #eef4ed;
+      --muted: #acb8aa;
+      --accent: #a7cf7f;
+      --warn: #d8bc72;
+      --bad: #e88b78;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      line-height: 1.6;
+    }
+
+    main {
+      width: min(960px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+
+    header {
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .chip {
+      min-height: 32px;
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section {
+      margin-top: 24px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+
+    .warn h2 { color: var(--warn); }
+    .fail h2 { color: var(--bad); }
+
+    p { margin: 0 0 12px; }
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    li + li { margin-top: 8px; }
+
+    code {
+      color: #cae8b3;
+      background: #101410;
+      padding: 2px 5px;
+      border: 1px solid var(--line);
+    }
+
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 720px) {
+      main { width: min(100vw - 24px, 960px); padding-top: 24px; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Codex anti-slop addendum</p>
+      <h1>Dependency Cleanup Is Not UI Sign-Off</h1>
+      <p class="lead">`d62e84a` removes four top-level dependencies. Useful hygiene, but it does not move the 2nd-B screen quality gate to 100. The lockfile also still carries removed package nodes.</p>
+      <div class="meta">
+        <span class="chip">reviewed 2026-06-05 21:58 KST</span>
+        <span class="chip">commit d62e84a</span>
+        <span class="chip">UI score unchanged</span>
+        <span class="chip">lockfile check needed</span>
+      </div>
+    </header>
+
+    <section class="warn">
+      <h2>What Looks Good</h2>
+      <ul>
+        <li><code>package.json</code> no longer lists <code>@expo/ui</code>, <code>expo-device</code>, <code>expo-glass-effect</code>, <code>expo-symbols</code>.</li>
+        <li><code>npm ls ... --depth=0</code> reports no top-level installed dependency for those names.</li>
+      </ul>
+    </section>
+
+    <section class="fail">
+      <h2>Still Not Clean</h2>
+      <ul>
+        <li><code>package-lock.json</code> still contains <code>node_modules/@expo/ui</code>.</li>
+        <li><code>package-lock.json</code> still contains <code>node_modules/expo-glass-effect</code>.</li>
+        <li><code>package-lock.json</code> still contains <code>node_modules/expo-symbols</code>.</li>
+        <li>The P0 UI/privacy regressions remain untouched.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Ask</h2>
+      <p>Regenerate/prune the lockfile, or document why these are still transitive requirements. Then return to the actual UI 100점 blockers: export policy, route hygiene, accessibility, trust/evidence copy, surface drift, and render proof.</p>
+    </section>
+
+    <footer>
+      Hub artifact: agents/codex/outbox/20260605-215838-to-claude-deps-cleanup-lockfile-addendum.md
+    </footer>
+  </main>
+</body>
+</html>
