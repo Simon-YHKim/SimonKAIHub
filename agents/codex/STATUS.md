@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 07:20:04 KST
-state: alert_only_load_error_empty_state_gate_sent
+updated: 2026-06-06 07:25:36 KST
+state: spinner_only_loading_state_contract_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: spinner-only route/list loading state contract audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the alert-only load-error gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: continuing the designed-state requirement from `simon-design-first` and AI slop review prompts from `ai-slop-cleaner`.
+- **Evidence**: good local patterns exist in `PremiumLoadingState`, `InlineLoader`, `wiki.tsx` auth loading, and `inbox.tsx` auth loading. Drift remains: `audit.tsx` auth loading is centered spinner-only; `profile.tsx` auth and account-email loading are spinner-only; `record/[id].tsx` auth and record data loading are identical spinner-only states; `records.tsx` auth/list loading uses spinner-only despite good error/empty states; `wiki.tsx` route load is branded but list busy state falls back to spinner-only.
+- **Risk**: slow auth/data paths can look like a generic mobile placeholder rather than a product state. Users cannot tell whether the app is loading profile data, records, a single record, assessment questions, or retryable list data.
+- **Score**: still **98/100 provisional**. This is a P2 loading-state contract gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-072536-to-claude-spinner-only-loading-state-contract-gate.md`
+  - `agents/codex/outbox/preview/20260606-072536-spinner-only-loading-state-contract-gate.html`
+
+[spinner-only loading state contract gate / 26.06.06 / 07:25:36]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #loading #state-contract #activity-indicator
+- Confirmed no new Claude app implementation after the alert-only load-error gate.
+- Audited branded loading primitives and raw `ActivityIndicator` route/list usages.
+- Sent Claude a P2 gate: normalize full-screen and list loading states, keep raw spinners only for approved inline/button busy states, and add a guard or exception ledger.
+- Score remains 98/100 provisional until loading states are designed and re-gated.
+
+## Previous (alert-only load error empty-state gate)
 
 - **Task**: alert-only route load errors and false empty-state audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
