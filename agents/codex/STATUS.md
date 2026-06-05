@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 00:21:30 KST
-state: verify_green_config_dirty_keyboard_scope_open
+updated: 2026-06-06 00:23:55 KST
+state: simonk_design_skill_basis_loaded
 ---
 
 # Codex STATUS
@@ -11,13 +11,23 @@ state: verify_green_config_dirty_keyboard_scope_open
 
 - **작업**: Simon 지시 - AI slop 100/100 목표. Claude가 관련 작업을 완료할 때마다 Codex가 모든 화면 UI/UX를 재리뷰하고, 100점까지 반복 의견 제공.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
-- **검수 기준**: SimonK-stack 계열 anti-slop 관점(`ai-slop-cleaner`, `visual-verdict`, `frontend-ui-ux`)을 참고하되 맹목 적용하지 않고, 실제 사용 화면의 겹침/과장/불안정/키보드 occlusion 기준으로 판정.
+- **검수 기준**: SimonK-stack 계열 `ai-slop-cleaner`, `visual-verdict`, `frontend-ui-ux`를 확인. 맹목 적용하지 않고, 실제 사용 화면의 작은 글자/무근거 그림자/중복/검증부족/키보드 occlusion 기준으로 판정.
 - **앱 상태**: `E:\2ndB` branch `claude/cycle-1-golive`, committed HEAD `6c506cf`. 현재 앱 worktree에는 `app.json`, `package.json` 미커밋 설정 변경만 있음.
 - **평가**: `6c506cf` micro-type readability pass는 수용. 임시 스크립트 제거 후 `npm run verify` green(91 suites, 823 tests). 단 `/account`, `/settings`, `/audit`, `/interview`, `/jarvis` keyboard P1 proof/patch와 Android device proof가 남아 **94/100 provisional**.
 - **최신 산출물**:
   - `agents/codex/outbox/20260606-002130-to-claude-verify-green-config-dirty-regate.md`
   - `agents/codex/outbox/preview/20260606-002130-verify-green-config-dirty-regate/index.html`
 - **대기**: Claude가 새 keyboard scope를 patch/proof하면 Codex가 all-input scan과 anti-slop re-gate 반복.
+
+[SimonK design skill basis loaded / 26.06.06 / 00:23:55]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #simonk-stack #claude-fyi
+- Read relevant SimonK-stack skill guidance:
+  - `Harrness Eng\SimonK-stack\external\oh-my-claudecode\skills\ai-slop-cleaner\SKILL.md`
+  - `Harrness Eng\SimonK-stack\external\oh-my-claudecode\skills\visual-verdict\SKILL.md`
+  - `Harrness Eng\SimonK-stack\external\oh-my-openagent\src\features\builtin-skills\frontend-ui-ux\SKILL.md`
+- Applied as reviewer criteria: preserve behavior, evidence-dense review, small reversible fixes, no generic AI UI residue, no blind aesthetic overreach.
+- FYI written: `agents/codex/outbox/20260606-002355-to-claude-simonk-design-skill-basis.md`
+- HTML preview written: `agents/codex/outbox/preview/20260606-002355-simonk-design-skill-basis/index.html`
 
 [Verify green, config dirty re-gate / 26.06.06 / 00:21:30]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #verify #claude-request
