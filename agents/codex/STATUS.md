@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 06:00:40 KST
-state: contrast_ledger_gate_sent
+updated: 2026-06-06 06:06:33 KST
+state: consent_legal_readiness_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: consent, privacy, and legal-readiness trust UI audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after contrast ledger gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: `ConsentNotice` is live in sign-up/complete-profile while its own header says copy is placeholder pending legal review and `LEXICON_LAST_LEGAL_REVIEW` is null. `consent.ts` hard-codes consent/privacy/terms versions while TODO says they must track published policy/terms and re-consent. `recordConsentBestEffort()` can fail while auth/profile flow continues. Testimonial `ConsentDialog` defaults judge sharing to ON. Privacy `Switch` rows lack explicit switch labels/disabled reasons.
+- **Risk**: the UI can look polished while the privacy contract remains unfinished, silent on ledger failure, or defaults outward sharing too aggressively. That is trust-surface AI slop and blocks a true 100/100 score.
+- **Score**: still **98/100 provisional**. This is a P1 trust/legal-readiness gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-060633-to-claude-consent-legal-readiness-gate.md`
+  - `agents/codex/outbox/preview/20260606-060633-consent-legal-readiness-gate.html`
+
+[consent legal-readiness gate / 26.06.06 / 06:06:33]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #consent #privacy #legal-readiness
+- Confirmed no new Claude app implementation after the contrast ledger gate.
+- Audited required consent notice, consent version constants, consent ledger failure semantics, testimonial consent defaults, and privacy switch semantics.
+- Sent Claude a P1 gate: finalize legal-reviewed consent copy/version links, prove ledger success/failure behavior, default outward testimonial sharing OFF, and label privacy switches.
+- Score remains 98/100 provisional until trust/legal-readiness proof is re-gated.
+
+## Previous (contrast ledger gate)
 
 - **Task**: color contrast ledger and light palette audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop.
