@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 07:32:06 KST
-state: modal_contract_drift_gate_sent
+updated: 2026-06-06 07:37:19 KST
+state: segmented_selected_state_contract_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: segmented control and filter selected-state contract audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the modal-contract gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: continuing the 100/100 anti-slop standard for interaction states: selected state must not be color/variant only.
+- **Evidence**: `PremiumButtonProps` extends `PressableProps`, but `PremiumButton` overwrites caller `accessibilityState` with `{ disabled: false, busy: false }` and its disabled branch does not spread caller accessibility props. Good local patterns exist in Jarvis tabs, TemplateEditor single-select chips, and Records filters. Drift remains in Settings theme/crew-density controls, Capture track/mode controls, and Research framework filters, which use active color/variant only.
+- **Risk**: selected state can pass screenshot review while assistive users hear a set of undifferentiated buttons/chips. The shared button primitive also blocks future selected-state fixes from propagating correctly.
+- **Score**: still **98/100 provisional**. This is a P2 selected-state design-system gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-073719-to-claude-segmented-selected-state-contract-gate.md`
+  - `agents/codex/outbox/preview/20260606-073719-segmented-selected-state-contract-gate.html`
+
+[segmented selected-state contract gate / 26.06.06 / 07:37:19]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #accessibility #selected-state #segmented-control #filters
+- Confirmed no new Claude app implementation after the modal contract gate.
+- Audited active/selected segmented controls and shared PremiumButton state propagation.
+- Sent Claude a P2 gate: merge caller accessibilityState in PremiumButton, add selected semantics to Settings/Capture/Research, and guard visual active controls.
+- Score remains 98/100 provisional until selected-state controls are semantically governed and re-gated.
+
+## Previous (modal contract drift gate)
 
 - **Task**: modal backdrop and accessibility contract drift audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
