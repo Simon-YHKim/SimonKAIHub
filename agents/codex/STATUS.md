@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 06:06:33 KST
-state: consent_legal_readiness_gate_sent
+updated: 2026-06-06 06:10:25 KST
+state: feedback_alert_contract_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: feedback, Alert, Toast, and error/success surface contract audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after consent legal-readiness gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: `src/app` still contains 61 `Alert.alert` callsites. `formats.tsx` proves a better local pattern with `PremiumToast`/`PremiumModal`, but that feedback system is not generalized. Single-argument alerts remain in auth, inbox, and wiki. Inbox shows long generated summary/questions in native Alert. Settings uses native Alert for many destructive success/failure flows.
+- **Risk**: premium dark UI can fall back to platform/browser-default alert chrome for core product feedback, and generated content can appear in cramped transient modals instead of a reviewable app surface.
+- **Score**: still **98/100 provisional**. This is a P2 all-screen feedback-contract gate before 100, with P1 potential if public web still exposes browser alerts.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-061025-to-claude-feedback-alert-contract-gate.md`
+  - `agents/codex/outbox/preview/20260606-061025-feedback-alert-contract-gate.html`
+
+[feedback alert contract gate / 26.06.06 / 06:10:25]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #feedback #alerts #toast #accessibility
+- Confirmed no new Claude app implementation after the consent/legal-readiness gate.
+- Scanned app feedback surfaces and found 61 `Alert.alert` callsites under `src/app`.
+- Sent Claude a P2 gate: define a shared feedback contract, remove single-argument alerts, move generated content out of native alerts, and prove web/mobile feedback surfaces.
+- Score remains 98/100 provisional until feedback-contract proof is re-gated.
+
+## Previous (consent legal-readiness gate)
 
 - **Task**: consent, privacy, and legal-readiness trust UI audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.

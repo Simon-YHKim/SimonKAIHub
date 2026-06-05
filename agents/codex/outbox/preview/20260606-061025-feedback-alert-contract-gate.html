@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Gate - Feedback Alert Contract</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0f14;
+      --panel: #121923;
+      --panel-2: #172131;
+      --text: #edf4ff;
+      --muted: #a9b7c8;
+      --line: #2b3a4d;
+      --accent: #77d7b7;
+      --warn: #ffd27a;
+      --danger: #ff8f8f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 20px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 8px 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; color: var(--muted); }
+    .score {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      color: var(--warn);
+      font-weight: 700;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    section.full { grid-column: 1 / -1; }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    ul { margin: 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 8px 0; }
+    code {
+      color: #c7ddff;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 0.92em;
+    }
+    .p2 { color: var(--warn); font-weight: 700; }
+    .metric {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .chip {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 62px;
+    }
+    .big { color: var(--text); font-size: 28px; font-weight: 800; }
+    .label { color: var(--muted); font-size: 13px; }
+    @media (max-width: 760px) {
+      .grid, .metric { grid-template-columns: 1fr; }
+      main { width: min(100% - 24px, 1080px); padding-top: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Gate · 2026-06-06 06:10:25 KST</div>
+      <h1>Feedback / Alert Contract Gate</h1>
+      <p>프리미엄 다크 UI가 핵심 피드백을 기본 Alert에 맡기면 완성도가 깨진다. 성공, 실패, 삭제, 생성 결과마다 제품-native 피드백 표준이 필요하다.</p>
+      <div class="score">Score held: 98/100 provisional</div>
+    </header>
+
+    <section class="full">
+      <h2>Scan Summary</h2>
+      <div class="metric">
+        <div class="chip"><div class="big">61</div><div class="label"><code>Alert.alert</code> callsites under <code>src/app</code></div></div>
+        <div class="chip"><div class="big">1</div><div class="label">Observed app route using <code>PremiumToast</code>: <code>formats.tsx</code></div></div>
+        <div class="chip"><div class="big">10+</div><div class="label">Single-argument or terse alerts needing body/action context</div></div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section>
+        <h2><span class="p2">P2</span> Inconsistent Primitives</h2>
+        <ul>
+          <li>Alerts span auth, capture, inbox, wiki, settings, account, import, interview, persona, and more.</li>
+          <li><code>formats.tsx</code> proves a product-native toast/modal pattern exists.</li>
+          <li>Standardize destructive confirmation, recoverable error, transient success, and long generated content.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="p2">P2</span> Single-Argument Alerts</h2>
+        <ul>
+          <li>Examples: auth welcome/errors, generated page messages, wiki copy feedback.</li>
+          <li>These lack body, next action, and consistent accessibility state.</li>
+          <li>Replace with shared toast/modal/inline primitives.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="p2">P2</span> Generated Content In Alerts</h2>
+        <ul>
+          <li><code>inbox.tsx</code> shows summary and questions in a native alert body.</li>
+          <li>Generated output should be readable, copyable, and styled in the app surface.</li>
+          <li>Use inline panels or visible destination state.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="p2">P2</span> Settings Delete Feedback</h2>
+        <ul>
+          <li>Destructive success is repeatedly shown as modal alerts.</li>
+          <li>Keep confirmation friction, but make routine completion non-blocking.</li>
+          <li>Partial failure needs explicit retry and residual-data wording.</li>
+        </ul>
+      </section>
+
+      <section class="full">
+        <h2>Required Proof Before 100</h2>
+        <ul>
+          <li>Web and mobile proof that core feedback no longer exposes browser/default Alert chrome.</li>
+          <li>Callsite ledger for any remaining intentional platform-level alerts.</li>
+          <li>KO/EN screenshots for capture retry, inbox brief, wiki export copy, settings delete, and auth provider failure.</li>
+          <li>Accessibility proof that toast/modal/inline errors announce and expose actions correctly.</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
