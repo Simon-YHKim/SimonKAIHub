@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2nd-B UI Review + Grok Alignment</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a14;
+      --panel: #0f1426;
+      --panel-2: #151b31;
+      --text: #eef3ff;
+      --muted: #aeb8d2;
+      --line: #2c3756;
+      --mint: #72f2c7;
+      --violet: #9f7bff;
+      --warn: #ffd166;
+      --danger: #ff7a90;
+      --ok: #87e8a6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+    main { max-width: 1180px; margin: 0 auto; padding: 28px 18px 56px; }
+    h1, h2, h3 { margin: 0 0 10px; line-height: 1.2; letter-spacing: 0; }
+    h1 { font-size: 30px; }
+    h2 { font-size: 21px; margin-top: 30px; }
+    h3 { font-size: 16px; margin-top: 18px; color: var(--mint); }
+    p { margin: 8px 0; color: var(--muted); }
+    code { color: var(--mint); background: rgba(114, 242, 199, 0.08); padding: 1px 5px; border-radius: 4px; }
+    .hero {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 22px;
+      border-radius: 8px;
+    }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .chip {
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      color: var(--muted);
+      padding: 5px 9px;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 14px;
+      border-radius: 8px;
+    }
+    .card strong { color: var(--text); }
+    .sev { font-weight: 700; }
+    .p0 { color: var(--danger); }
+    .p1 { color: var(--warn); }
+    .p2 { color: var(--violet); }
+    .ok { color: var(--ok); }
+    ul { margin: 8px 0 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 4px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 9px 10px;
+      vertical-align: top;
+      text-align: left;
+      font-size: 13px;
+    }
+    th { background: #121932; color: var(--text); position: sticky; top: 0; }
+    tr:nth-child(even) td { background: rgba(255,255,255,0.018); }
+    .shots {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    figure {
+      margin: 0;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    figure img { width: 100%; display: block; background: #000; }
+    figcaption { padding: 8px 10px; color: var(--muted); font-size: 12px; }
+    .note {
+      border-left: 4px solid var(--mint);
+      background: rgba(114, 242, 199, 0.07);
+      padding: 12px 14px;
+      border-radius: 6px;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+    @media (max-width: 900px) {
+      .grid, .shots { grid-template-columns: 1fr; }
+      h1 { font-size: 24px; }
+      main { padding: 18px 12px 42px; }
+      th, td { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <h1>2nd-B 전체 화면 UI 추가 리뷰 + Grok 의견 반영</h1>
+    <p>Codex UI/UX lane 기준 추가 보고. Grok의 X 소비자 리스크 리서치를 읽고, 현재 2nd-B 화면 구조가 그 리스크를 얼마나 해소하는지 매핑했다.</p>
+    <div class="meta">
+      <span class="chip">created 2026-06-05 19:09 KST</span>
+      <span class="chip">routes 39</span>
+      <span class="chip">branch claude/cycle-1-phase6-screens</span>
+      <span class="chip">public render: Chrome headless, 390x844 + 1440x1100</span>
+      <span class="chip">code edits: none by Codex</span>
+    </div>
+  </section>
+
+  <h2>결론</h2>
+  <div class="grid">
+    <div class="card">
+      <strong class="sev p0">P0 방향</strong>
+      <p>첫 화면과 가이드 화면이 아직 데스크톱에서 content lane 없이 전체 폭으로 벌어진다. 모바일 가로 overflow는 이번 작업트리에서 해소됐지만, 데스크톱 완성도는 낮다.</p>
+    </div>
+    <div class="card">
+      <strong class="sev p1">P1 방향</strong>
+      <p>Grok의 핵심 리스크인 maintenance fatigue, privacy, sovereignty, Barnum skepticism이 로그인, 매뉴얼, 설정, 지원 화면에서 아직 즉시 해소되지 않는다.</p>
+    </div>
+    <div class="card">
+      <strong class="sev p1">P1 IA</strong>
+      <p><code>/journal</code>, <code>/trinity</code>, <code>/mbti</code> 잔여 진입점이 줄었지만 아직 남아 있다. 출시 IA는 Capture, Jarvis, Wiki, Records, Profile/Settings 중심으로 수렴해야 한다.</p>
+    </div>
+  </div>
+
+  <h2>Grok 의견을 UI 우선순위로 번역</h2>
+  <table>
+    <thead>
+      <tr><th>Grok 리스크</th><th>UI/UX 해석</th><th>현재 화면에서 보이는 문제</th><th>Codex 권장</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Maintenance fatigue, second job</td>
+        <td>앱이 처음부터 해야 할 일이 많아 보이면 시장 불신을 강화한다.</td>
+        <td>회원가입 동의, 매뉴얼, 설정 danger zone, 프로필 허브가 정보량이 많고 기능 나열형이다.</td>
+        <td>첫 5분 플로우는 "하루 1개 조각만 남기면 나머지는 AI가 정리"로 좁히고, 고급/삭제/평가 기능은 후순위로 접는다.</td>
+      </tr>
+      <tr>
+        <td>Company betrayal, sovereignty cynicism</td>
+        <td>데이터를 언제든 내보낼 수 있다는 신뢰 신호가 첫 화면부터 보여야 한다.</td>
+        <td>로그인 전에는 privacy, data, support 화면이 대부분 sign-in으로 돌아가며, 매뉴얼도 export/local 메시지가 부차적이다.</td>
+        <td>로그인 전 공개 trust center를 만든다. "full export", "source visible", "delete anytime", "local option roadmap"을 첫 화면/매뉴얼/권한 화면에 연결한다.</td>
+      </tr>
+      <tr>
+        <td>Privacy and creepiness</td>
+        <td>"너를 학습"은 강점이지만 "AI가 너무 많이 안다"로 읽힐 수 있다.</td>
+        <td>권한 화면은 좋지만 별도 섬이고, 로그인/가입 화면에는 red-zone, source transparency, analytics consent 신호가 약하다.</td>
+        <td>가입 전 짧은 신뢰 문장 3개를 고정한다: source-backed, user-owned, no diagnosis. 긴 법적 문구와 분리한다.</td>
+      </tr>
+      <tr>
+        <td>Barnum/MBTI skepticism</td>
+        <td>심리 화면은 "검사 앱"처럼 보이면 바로 신뢰를 잃는다.</td>
+        <td>MBTI는 profile/persona 메인 노출에서 내려갔지만 route는 남고, docs에는 TIPI/MBTI/Trinity 잔재가 있다.</td>
+        <td>MBTI는 deep-link/reference only. Persona/Insights/Core Brain은 모든 판단 카드에 evidence route와 confidence copy를 붙인다.</td>
+      </tr>
+      <tr>
+        <td>Another AI journal wrapper</td>
+        <td>화면 수가 많을수록 "또 기능 많은 wrapper"처럼 보인다.</td>
+        <td>39개 route 중 보조/레거시/설정성 화면이 많다. Profile과 Settings가 모두 허브 역할을 한다.</td>
+        <td>출시 노출 sitemap을 5개 탭 + Profile + Settings로 제한하고, 연구/평가/데이터는 profile/settings 하위로 접는다.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>검증 결과</h2>
+  <ul>
+    <li><span class="ok">PASS</span> <code>npm run lint</code></li>
+    <li><span class="ok">PASS</span> <code>npm run type-check</code></li>
+    <li><span class="ok">PASS</span> <code>npm run check:i18n</code> - 204 keys, 9 namespaces</li>
+    <li><span class="ok">PASS</span> <code>npm run check:emdash</code></li>
+    <li><span class="ok">PASS/PART</span> <code>npm run check:constraints</code> - C11은 기존 PART</li>
+    <li><span class="ok">PASS</span> 공개 화면 width metric: mobile <code>scrollWidth=390</code>, desktop <code>scrollWidth=1440</code></li>
+  </ul>
+  <div class="note">런타임 콘솔 반복 경고: <code>shadow*</code> deprecated, <code>props.pointerEvents</code> deprecated, <code>useNativeDriver</code> JS fallback, password field not inside native form. 크래시는 없었지만 웹 품질/접근성 이슈로 관리 필요.</div>
+
+  <h2>공개 화면 캡처</h2>
+  <div class="shots">
+    <figure><img src="mobile-sign-in.png" alt="mobile sign in"><figcaption>mobile /sign-in - overflow는 해소, 첫 화면 CTA 밀도 높음</figcaption></figure>
+    <figure><img src="mobile-sign-up.png" alt="mobile sign up"><figcaption>mobile /sign-up - 동의문이 첫 가입 화면을 무겁게 만듦</figcaption></figure>
+    <figure><img src="mobile-manual.png" alt="mobile manual"><figcaption>mobile /manual - 폭은 안정, 본문 밀도 높음</figcaption></figure>
+    <figure><img src="mobile-permissions.png" alt="mobile permissions"><figcaption>mobile /permissions - 신뢰 화면으로 유지 가치 높음</figcaption></figure>
+    <figure><img src="desktop-sign-in.png" alt="desktop sign in"><figcaption>desktop /sign-in - form이 전체 폭으로 벌어짐</figcaption></figure>
+    <figure><img src="desktop-sign-up.png" alt="desktop sign up"><figcaption>desktop /sign-up - lane 부재, 동의 카드 과확장</figcaption></figure>
+    <figure><img src="desktop-manual.png" alt="desktop manual"><figcaption>desktop /manual - 카드 전체폭, 읽기 리듬 약함</figcaption></figure>
+    <figure><img src="mobile-not-found.png" alt="mobile not found"><figcaption>mobile 404 - 여전히 Journal 링크 존재</figcaption></figure>
+  </div>
+
+  <h2>주요 발견</h2>
+  <table>
+    <thead>
+      <tr><th>Severity</th><th>발견</th><th>근거</th><th>권장</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="sev p0">P0</td>
+        <td>Desktop content lane 부재</td>
+        <td><code>PremiumAppShell</code>은 padding만 제공. <code>/sign-in</code>은 <code>paddingHorizontal: 24</code>, sign-up/manual/support류는 route lane maxWidth가 없다.</td>
+        <td>공통 <code>ScreenLane</code> 또는 route별 <code>maxWidth</code> 계약을 만든다. Auth 560/640, guide 720, settings 760, dashboard 1040 등.</td>
+      </tr>
+      <tr>
+        <td class="sev p1">P1</td>
+        <td>Trust/support가 로그인 뒤로 숨어 있다</td>
+        <td><code>/support</code>, <code>/privacy</code>, <code>/data</code>, <code>/account</code>, <code>/theme</code>는 비로그인 시 <code>/sign-in</code>으로 redirect.</td>
+        <td>로그인 전 trust center: support, privacy summary, export/delete policy, AI/source policy는 공개한다.</td>
+      </tr>
+      <tr>
+        <td class="sev p1">P1</td>
+        <td><code>/journal</code> 잔여 진입점</td>
+        <td><code>audit</code>, <code>core-brain</code>, <code>+not-found</code>, <code>wiki</code>, <code>trinity</code>, <code>settings</code>, <code>insights</code>, <code>persona</code>, <code>index</code>, <code>onboarding</code>, lib evidence routes.</td>
+        <td>사용자-facing CTA는 <code>/capture</code> 또는 <code>/records</code>로 바꾼다. <code>/journal</code>은 redirect-only compatibility로 숨긴다.</td>
+      </tr>
+      <tr>
+        <td class="sev p1">P1</td>
+        <td>Settings가 너무 많은 일을 한다</td>
+        <td>Navigation hub, theme, crew density, partial delete, assessment delete, wiki/source delete, full wipe, sign out가 한 화면에 모두 있음.</td>
+        <td>Settings는 account/privacy/data/theme/support 하위로 분리하고 danger zone은 별도 confirm flow로 둔다.</td>
+      </tr>
+      <tr>
+        <td class="sev p1">P1</td>
+        <td>DESIGN.md와 실제 shared UI의 불일치</td>
+        <td><code>LinearGradient/RadialGradient</code>, "glassy" 주석, shadows/elevation, raw rgba/hex가 shared primitive와 route 전반에 존재.</td>
+        <td>DESIGN에 art-only glow 예외를 명시하고, surface/button/card shadow와 glass wording은 제거한다.</td>
+      </tr>
+      <tr>
+        <td class="sev p2">P2</td>
+        <td>텍스트 밀도와 픽셀 폰트 피로</td>
+        <td>manual, sign-up consent, permissions, settings danger copy가 모두 NeoDunggeunmo 본문 밀도로 길다.</td>
+        <td>픽셀 폰트는 heading/label 중심, 긴 설명은 읽기용 body face 또는 짧은 accordion 형태로 조절한다.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>39개 화면별 전수 판정</h2>
+  <table>
+    <thead>
+      <tr><th>Route</th><th>판정</th><th>Codex 의견</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>src/app/(auth)/_layout.tsx</code></td><td class="ok">OK</td><td>auth group infra. 별도 UI 이슈 없음.</td></tr>
+      <tr><td><code>src/app/(auth)/sign-in.tsx</code></td><td class="sev p0">P0</td><td>모바일 폭은 개선됐지만 desktop form lane 없음. support/privacy 신뢰 신호가 약함.</td></tr>
+      <tr><td><code>src/app/(auth)/sign-up.tsx</code></td><td class="sev p0">P0</td><td>desktop lane 없음. 동의문이 첫 가입 화면을 압도해 Grok의 maintenance fatigue 리스크를 키움.</td></tr>
+      <tr><td><code>src/app/(auth)/complete-profile.tsx</code></td><td class="sev p1">P1</td><td>OAuth 후 필수 화면. sign-up과 같은 lane/consent 계약 필요. 비로그인 캡처는 sign-in redirect 정상.</td></tr>
+      <tr><td><code>src/app/(auth)/oauth-callback.tsx</code></td><td class="ok">OK</td><td>전환용 화면. 실패/대기 카피만 짧고 명확하면 충분.</td></tr>
+      <tr><td><code>src/app/_layout.tsx</code></td><td class="sev p1">P1</td><td>global BackArrow/TabBar는 좋음. Stack에는 <code>journal</code>, <code>trinity</code>, <code>mbti</code>가 남아 compatibility임을 문서/IA에서 분명히 해야 함.</td></tr>
+      <tr><td><code>src/app/+html.tsx</code></td><td class="ok">OK</td><td>HTML infra. UI 판정 제외.</td></tr>
+      <tr><td><code>src/app/+not-found.tsx</code></td><td class="sev p1">P1</td><td>시각은 안정적이나 common destinations에 Journal 잔재. Capture로 교체.</td></tr>
+      <tr><td><code>src/app/index.tsx</code></td><td class="sev p1">P1</td><td>메인 그래프. empty CTA가 <code>/journal</code>로 이동. 출시 첫 성공 행동은 <code>/capture</code>여야 함.</td></tr>
+      <tr><td><code>src/app/capture.tsx</code></td><td class="sev p1">P1</td><td>핵심 입력 화면. 기능이 많아지는 중이므로 mode segmentation과 bottom composer clearance를 QA해야 함.</td></tr>
+      <tr><td><code>src/app/jarvis.tsx</code></td><td class="sev p1">P1</td><td>핵심 assistant. Composer, evidence chips, modal이 tab bar/keyboard와 충돌하지 않는지 네이티브 QA 필요.</td></tr>
+      <tr><td><code>src/app/wiki.tsx</code></td><td class="sev p1">P1</td><td>지식 창고 핵심. <code>/journal</code> 링크 2개 잔재. export/source transparency를 더 전면화할 가치 있음.</td></tr>
+      <tr><td><code>src/app/records.tsx</code></td><td class="sev p2">P2</td><td>기록 보관소. 긴 리스트가 ScrollView 구조라 네이티브 성능 리스크. UI는 필터/검색 밀도 점검 필요.</td></tr>
+      <tr><td><code>src/app/record/[id].tsx</code></td><td class="sev p2">P2</td><td>상세 화면. evidenceRoute가 journal/imagine 같은 compatibility route로 갈 수 있음.</td></tr>
+      <tr><td><code>src/app/inbox.tsx</code></td><td class="sev p2">P2</td><td>받은편지함. Capture/Wiki 연결은 좋음. 데이터가 많을 때 리스트 가상화 필요.</td></tr>
+      <tr><td><code>src/app/import.tsx</code></td><td class="sev p2">P2</td><td>외부 자료 가져오기. Grok의 sovereignty hook과 맞음. first-run trust flow와 연결하면 가치 큼.</td></tr>
+      <tr><td><code>src/app/formats.tsx</code></td><td class="sev p2">P2</td><td>캡처 템플릿 관리. 고급 화면으로 profile/settings 하위 노출이 적절.</td></tr>
+      <tr><td><code>src/app/data.tsx</code></td><td class="sev p1">P1</td><td>데이터 관리가 로그인 뒤에만 있음. 최소한 export/delete 설명은 공개 trust center로 분리.</td></tr>
+      <tr><td><code>src/app/profile.tsx</code></td><td class="sev p1">P1</td><td>MBTI 메인 노출은 제거됨. 다만 Profile과 Settings 둘 다 허브 역할이라 IA 중복.</td></tr>
+      <tr><td><code>src/app/settings.tsx</code></td><td class="sev p1">P1</td><td>가장 과밀. full wipe 후 <code>/journal</code> redirect. danger actions는 별도 flow 필요.</td></tr>
+      <tr><td><code>src/app/privacy.tsx</code></td><td class="sev p1">P1</td><td>신뢰 핵심인데 로그인 필요. 공개 요약 화면 또는 sign-up trust link 필요.</td></tr>
+      <tr><td><code>src/app/account.tsx</code></td><td class="sev p2">P2</td><td>계정 관리. delete account 문맥은 support/privacy/data와 일관된 confirmation copy 필요.</td></tr>
+      <tr><td><code>src/app/theme.tsx</code></td><td class="sev p2">P2</td><td>보조 설정. 현재 product trust보다 우선순위 낮음.</td></tr>
+      <tr><td><code>src/app/support.tsx</code></td><td class="sev p1">P1</td><td>비로그인 상태에서 sign-in redirect. 로그인 실패/개인정보 문의를 위해 public이어야 함.</td></tr>
+      <tr><td><code>src/app/manual.tsx</code></td><td class="sev p1">P1</td><td>TIPI/MBTI 일부 수정됨. desktop lane 없음, 본문 밀도 높음. Grok hook 중심으로 더 짧게 재구성.</td></tr>
+      <tr><td><code>src/app/permissions.tsx</code></td><td class="ok">OK/P2</td><td>공개 접근 가능하고 신뢰 메시지로 유용. 다만 body copy가 길어 scan-friendly하게 정리 필요.</td></tr>
+      <tr><td><code>src/app/onboarding.tsx</code></td><td class="sev p1">P1</td><td>firstRun이 <code>/journal</code>로 감. Capture로 바꾸고 "1 entry only" 약속을 강조.</td></tr>
+      <tr><td><code>src/app/persona.tsx</code></td><td class="sev p1">P1</td><td>MBTI 평가 CTA 제거됨. "Back to journal" 잔재. 판단 카드에는 source/confidence를 더 붙여야 Barnum 리스크가 줄어듦.</td></tr>
+      <tr><td><code>src/app/big-five.tsx</code></td><td class="ok">OK/P2</td><td>BFI-44로 정렬. 평가 화면은 진행/저장 후 evidence 연결 유지.</td></tr>
+      <tr><td><code>src/app/attachment.tsx</code></td><td class="ok">OK/P2</td><td>ECR-S 평가. Big Five와 같은 평가 UX consistency 유지.</td></tr>
+      <tr><td><code>src/app/mbti.tsx</code></td><td class="sev p1">P1</td><td>참고용 라벨 추가됨. 직접 route는 유지하되 profile/persona primary IA에서 계속 숨김 유지.</td></tr>
+      <tr><td><code>src/app/audit.tsx</code></td><td class="sev p1">P1</td><td>완료/취소 CTA가 <code>/journal</code>로 이동. Persona 또는 Capture로 변경.</td></tr>
+      <tr><td><code>src/app/interview.tsx</code></td><td class="sev p2">P2</td><td>채팅형 평가. keyboard/safe area와 source 저장 UX QA 필요.</td></tr>
+      <tr><td><code>src/app/insights.tsx</code></td><td class="sev p1">P1</td><td>empty/CTA가 <code>/journal</code>로 이동. Insights는 source transparency를 강화할 핵심 화면.</td></tr>
+      <tr><td><code>src/app/research.tsx</code></td><td class="ok">OK/P2</td><td>validated psych 신뢰를 지탱하는 화면. manual/profile에서 더 명확히 연결.</td></tr>
+      <tr><td><code>src/app/core-brain.tsx</code></td><td class="sev p1">P1</td><td>중심 대시보드. <code>/journal</code> CTA 잔재. Grok 기준으로 "memory augmentation, not replacement" 카피가 필요.</td></tr>
+      <tr><td><code>src/app/trinity.tsx</code></td><td class="sev p1">P1</td><td>legacy 분석 화면. Profile 하위 deep link로만 유지하거나 Core Brain으로 흡수.</td></tr>
+      <tr><td><code>src/app/journal.tsx</code></td><td class="ok">compat</td><td>redirect-only compatibility로 유지 가능. 사용자-facing 링크는 제거.</td></tr>
+      <tr><td><code>src/app/imagine.tsx</code></td><td class="ok">compat</td><td>Jarvis divergent redirect. 사용자-facing route로 노출하지 않으면 OK.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Claude에게 권장하는 다음 작업 순서</h2>
+  <ol>
+    <li>공통 content lane 계약부터 적용: auth, guide, settings, dashboard 별 maxWidth.</li>
+    <li><code>/journal</code> 사용자-facing 링크 전부 <code>/capture</code> 또는 <code>/records</code>로 교체.</li>
+    <li>로그인 전 공개 trust center 또는 manual trust section 추가: export, delete, source, no diagnosis, privacy.</li>
+    <li>Settings 분리: Theme/Profile/Privacy/Data/Support/Danger zone을 하위 화면으로 정리.</li>
+    <li>Shared UI에서 glass/shadow/gradient 정책을 DESIGN.md와 맞추거나 art-only 예외를 문서화.</li>
+  </ol>
+</main>
+</body>
+</html>
