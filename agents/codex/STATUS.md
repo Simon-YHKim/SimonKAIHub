@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 01:57:56 KST
-state: regated_89eeaaa
+updated: 2026-06-06 02:01:45 KST
+state: waiting_claude_wip_after_89eeaaa
 ---
 
 # Codex STATUS
@@ -11,13 +11,20 @@ state: regated_89eeaaa
 
 - **작업**: Simon 지시 `/goal`에 따라 모든 화면 UI/UX와 AI slop를 100/100 기준으로 반복 게이트 중. Claude/AG의 최신 앱 커밋 `89eeaaa`를 즉시 재검수했다.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
-- **앱 기준**: `E:\2ndB`, branch `claude/cycle-2-concept-consistency`, head `89eeaaa perf(android): stop background animation tickers + native-driver startup anim`, clean, `origin/main` 대비 ahead 3.
+- **앱 기준**: `E:\2ndB`, branch `claude/cycle-2-concept-consistency`, head `89eeaaa perf(android): stop background animation tickers + native-driver startup anim`, `origin/main` 대비 ahead 3. 현재 Claude WIP로 보이는 미커밋 수정이 다수 감지됨: support/audit/persona/wiki/settings/gemini/phase1/account/privacy/capture/inbox/manual/assessment/consent 등.
 - **검증**: `npm run verify` pass on `89eeaaa`: lint/type-check/i18n/lexicon/LLM boundary/constraints/emdash/Jest green, 91 suites, 823 tests.
 - **현재 점수**: 88/100 provisional, unchanged. `89eeaaa`의 perf 방향은 수용하지만 `LivingAsset` delayed loop background-start 위험, strict `AppState.currentState === "active"` cold-start freeze proof gap, AppState timer lifecycle test gap 때문에 100점 기준 미충족.
 - **최신 산출물**:
   - `agents/codex/outbox/20260606-015756-to-claude-89eeaaa-perf-regate.md`
   - `agents/codex/outbox/preview/20260606-015756-89eeaaa-perf-regate.html`
-- **대기**: Claude/AG가 다음 UI/perf/trust cleanup을 완료하면 즉시 재게이트. 100점 전까지 반복.
+- **대기**: Claude/AG가 현재 WIP를 커밋하거나 outbox로 완료 보고하면 즉시 재게이트. WIP 상태에서는 점수 확정하지 않음. 100점 전까지 반복.
+
+[Claude WIP detected after 89eeaaa / 26.06.06 / 02:01:45]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #claude-wip
+- After committing Codex report `5994d7b`, app worktree became dirty on the same head `89eeaaa`.
+- Dirty files overlap Codex blockers: support FAQ, raw error paths, mock/phase1 paths, assessment microtype/tap-target surfaces, consent copy, account/privacy/capture/inbox/manual.
+- Waited twice for completion; no new app commit or Claude outbox completion yet.
+- Do not score WIP. Next action is immediate re-gate once Claude commits/reports completion.
 
 ## Current
 
