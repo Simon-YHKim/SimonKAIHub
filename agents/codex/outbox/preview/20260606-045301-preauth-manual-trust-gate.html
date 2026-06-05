@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pre-Auth Manual Trust Gate</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0e1117; --panel:#151a22; --panel2:#10151d; --text:#eef2f8; --muted:#a9b3c3; --line:#293241; --danger:#ff6b6b; --warn:#ffd166; --accent:#8ab4ff; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:Arial,"Helvetica Neue",sans-serif; line-height:1.55; }
+    main { width:min(1060px, calc(100% - 32px)); margin:0 auto; padding:36px 0 56px; }
+    header { border-bottom:1px solid var(--line); padding-bottom:20px; margin-bottom:22px; }
+    h1 { margin:0 0 10px; font-size:clamp(28px,4vw,46px); line-height:1.05; letter-spacing:0; }
+    .meta { display:flex; flex-wrap:wrap; gap:8px; color:var(--muted); font-size:14px; }
+    .pill { border:1px solid var(--line); background:var(--panel2); border-radius:999px; padding:5px 10px; }
+    section { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:20px; margin:16px 0; }
+    h2 { margin:0 0 10px; font-size:20px; letter-spacing:0; }
+    p { margin:8px 0; } ul { margin:10px 0 0; padding-left:20px; } li { margin:6px 0; }
+    code { color:#dbe8ff; background:#0b0f15; border:1px solid #263142; border-radius:5px; padding:1px 5px; font-family:Consolas,"SFMono-Regular",monospace; font-size:.94em; }
+    .critical h2 { color:var(--danger); } .warn h2 { color:var(--warn); } .accent h2 { color:var(--accent); }
+    @media (max-width:700px){ main{width:min(100% - 22px,1060px); padding-top:24px;} section{padding:16px;} }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Pre-Auth Manual Trust Gate</h1>
+      <div class="meta">
+        <span class="pill">Codex UI/UX gate</span>
+        <span class="pill">manual + auth recovery</span>
+        <span class="pill">2026-06-06 04:53 KST</span>
+        <span class="pill">P2 onboarding trust</span>
+      </div>
+    </header>
+    <section class="critical">
+      <h2>First-Run Manual Exposes Architecture</h2>
+      <p>The manual is linked from sign-in/sign-up as a 1-minute first-run guide, but it still exposes terms such as <code>RLS</code>, <code>auth.uid()</code>, <code>RAG</code>, <code>system context</code>, <code>LLM</code>, raw route names, and wiki-link syntax.</p>
+      <ul>
+        <li>Replace implementation terms with user concepts.</li>
+        <li>Keep technical terms in comments/tests/developer docs, not first-run copy.</li>
+      </ul>
+    </section>
+    <section class="warn">
+      <h2>Manual Links To Auth-Gated Research</h2>
+      <p><code>manual.tsx:260-262</code> links pre-auth users to <code>/research</code>, while <code>research.tsx:93-95</code> redirects unauthenticated users back to sign-in.</p>
+      <ul>
+        <li>Hide or label auth-only CTAs for pre-auth users.</li>
+        <li>Prefer a public static research summary, with full research unlocked after sign-up.</li>
+      </ul>
+    </section>
+    <section class="accent">
+      <h2>Recovery A11y</h2>
+      <p><code>sign-in.tsx:286-290</code> forgot-password is a custom <code>Pressable</code> without role/label. It sits in a recovery path, so semantics matter.</p>
+    </section>
+  </main>
+</body>
+</html>

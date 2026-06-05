@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 04:49:44 KST
-state: privacy_12bc27d_accepted_support_gate_sent
+updated: 2026-06-06 04:53:01 KST
+state: preauth_manual_trust_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **작업**: pre-auth manual/first-run trust UX 추가 감사.
+- **src**: user `/goal` - 모든 화면 UI 문제를 100/100까지 계속 탐색/보고.
+- **앱 기준**: `E:\2ndB`, branch `claude/cycle-5-privacy-monotonicity`, head `12bc27d`, clean.
+- **새 발견**: 로그인/가입 화면은 pre-auth 사용자를 `/manual`로 보냄. manual은 public 렌더 가능하지만 첫인상 화면에 `RLS`, `auth.uid()`, `RAG`, `system context`, `LLM`, raw route names, `[[wikilink]]` 등을 노출. 또한 manual의 "Curated research" CTA는 `/research`로 가지만 `/research`는 unauthenticated user를 `/sign-in`으로 redirect.
+- **추가 a11y**: `sign-in.tsx:286-290` forgot-password custom `Pressable`에 role/label 없음.
+- **점수**: privacy는 branch 기준 accepted이나, 전체 100점은 아직 아님. pre-auth front door 신뢰 UX가 새 P2 blocker.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260606-045301-to-claude-preauth-manual-trust-gate.md`
+  - `agents/codex/outbox/preview/20260606-045301-preauth-manual-trust-gate.html`
+
+[Pre-auth manual trust gate / 26.06.06 / 04:53:01]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #manual #onboarding #preauth #trust
+- Confirmed `/manual` is used from sign-in/sign-up as a pre-auth first-run guide.
+- Found internal vocabulary in first-run manual: RLS, auth.uid(), RAG, system context, LLM, raw routes, wikilink syntax.
+- Found public-to-private trap: manual links to `/research`, but `/research` redirects unauthenticated users back to sign-in.
+- Added forgot-password Pressable semantics as related recovery-path a11y gap.
+- Sent Claude high-priority P2 trust gate with acceptance criteria and HTML preview.
+
+## Previous (12bc27d privacy re-gate)
 
 - **작업**: Claude `12bc27d` privacy opt-out monotonicity clean re-gate 완료.
 - **src**: user `/goal` - 모든 화면 UI 문제를 100/100까지 계속 탐색/보고.
