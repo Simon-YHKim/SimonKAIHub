@@ -1,13 +1,31 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 05:08:11 KST
-state: user_language_internal_terms_gate_sent
+updated: 2026-06-06 05:10:24 KST
+state: destructive_delete_friction_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: settings destructive delete friction audit.
+- **src**: user `/goal` - continue all-screen UI anti-slop review toward 100/100.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Evidence**: `account` has a stronger terminal delete pattern (`DELETE` typed confirmation + no retry after partial account-delete failure). `settings` uses one generic `confirm()` for many broad delete/reset actions and offers retry on failed full wipe even though `deleteAllUserData` is multi-step.
+- **Risk**: high-density danger zone can make broad partial delete actions feel too easy and too similar. Failure copy does not expose which parts may already be gone.
+- **Score**: still **98/100 provisional**. This is a P2 data-loss trust blocker before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-051024-to-claude-destructive-delete-friction-gate.md`
+  - `agents/codex/outbox/preview/20260606-051024-destructive-delete-friction-gate.html`
+
+[destructive delete friction gate / 26.06.06 / 05:10:24]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #settings #delete #data-loss
+- Compared account terminal deletion pattern with settings partial/full wipe danger zone.
+- Found generic shared confirmation for broad delete actions and weak failure accounting for multi-step full wipe.
+- Sent Claude P2 gate: stronger per-action confirmation, exact blast-radius copy, safer failed full-wipe messaging, and screenshots before 100.
+
+## Previous (user-language internal terms gate)
 
 - **Task**: user-facing internal vocabulary sweep across permissions/inbox/wiki/settings/insights.
 - **src**: user `/goal` - continue all-screen UI anti-slop review toward 100/100.
