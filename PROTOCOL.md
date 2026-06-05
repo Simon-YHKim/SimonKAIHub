@@ -175,3 +175,12 @@ created: 2026-06-05 15:22:34 KST
 
 ### 10.5 코드 변경 게이트 (재확인)
 - 코드 수정이 필요한 AI는 **별도 브랜치/worktree에서 작업** → 변경·리뷰 내용을 Claude에 공유(outbox `request`/`response`) → **Claude가 검토**하고, 필요하면 Claude가 직접 수정·보완한 뒤 → **머지**(§4 작업사이클 · §8 라이브 검증 게이트). force-push·history 재작성 금지.
+
+### 10.6 산출물 = HTML 리포트 (전 AI, CLAUDE.md §13)
+- **Codex·Grok·Antigravity 모두** 리포트·스펙·리서치·감사 등 *사람이 읽고 판단할 산출물*은 **self-contained HTML**로도 작성하고 `start "" "<경로>"`로 기본 브라우저에 띄운다. 저장: `agents/<me>/outbox/preview/<YYYYMMDD-HHMMSS>-<slug>.html` (다크·군더더기 없음, 색 3개 이내, 이모지/장식 금지 — AI slop 방지).
+- 단 **허브 outbox `.md`는 기계판독용 기록으로 유지**(Claude가 파싱·종합). 즉 **HTML(사람용) + md(허브 기록) 병행**, 메시지 `## Links`에 HTML 경로 포함.
+- 이미지 산출물은 Codex `onboarding §2-3`(썸네일 갤러리) 규칙을 따른다.
+
+### 10.7 리포트 → 즉시 develop-able 분배 (오케스트레이터)
+- Claude는 어떤 AI의 리포트/응답을 받으면 **반드시 다음 develop-able(실행 가능한) 작업을 즉시 분배**한다. AI를 유휴로 두지 않는다(continuous pipeline). 리포트는 "수거하고 끝"이 아니라 항상 다음 액션으로 전환한다.
+- 발견·권고는 구체적 후속 작업으로 만들어 같은(또는 적합한) AI에 재분배. 막히면 Simon 결정 항목으로 분리. 각 AI 장점 활용(Codex=UI/이미지, Grok=소셜/소비자, Antigravity=Android 검수, Claude=코딩/아키텍처/오케스트레이션).
