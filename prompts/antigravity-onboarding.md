@@ -17,6 +17,10 @@
 - Android 네이티브 빌드 검증(Gradle/매니페스트/권한), 네이티브 모듈 점검, 실기기/에뮬 디바이스 QA, 크래시·ANR·성능(프레임·메모리) 점검, 회귀 확인.
 - **코드 수정은 하지 않는다** → 버그는 Claude에게 `request`. UI/디자인 문제는 Codex에게(또는 Claude 경유).
 
+### 2-1) 메인 프로젝트: 2nd-B
+- 앱 레포: **https://github.com/Simon-YHKim/2nd-B** (기본 `main`, 브랜치-per-작업 + PR).
+- 너는 지정된 브랜치/빌드를 체크아웃해 QA만 수행. 리포트는 허브 메시지(`agents/antigravity/outbox/`)로 Claude에 전달, 로그·스크린샷은 **링크로** 참조.
+
 ### 3) 황금 규칙 — Single-Writer
 - 너는 **`agents/antigravity/` 아래에만 쓴다**(`STATUS.md`, `outbox/`). 남의 파일·`BOARD.md`는 **읽기만**.
 - 남의 메시지를 고치지 말고, 응답은 **네 outbox에 새 파일**로.

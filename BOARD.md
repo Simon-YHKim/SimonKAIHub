@@ -1,7 +1,7 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity는 읽기 전용."
-last-updated: 2026-06-05 15:22:34 KST
+last-updated: 2026-06-05 15:33:32 KST
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
@@ -28,7 +28,7 @@ last-updated: 2026-06-05 15:22:34 KST
 - (없음)
 
 ## 📌 활성 프로젝트
-| 프로젝트 | 경로 | 단계 |
-|---|---|---|
-| _TEMPLATE | `projects/_TEMPLATE/` | 템플릿 |
-| _(미등록)_ | 사용자가 첫 앱 레포 지정 예정 | — |
+| 프로젝트 | 레포 | 경로 | 단계 |
+|---|---|---|---|
+| **2nd-B** | github.com/Simon-YHKim/2nd-B (main, 138 br) | `projects/2nd-B/` | build |
+| _TEMPLATE | — | `projects/_TEMPLATE/` | 템플릿 |

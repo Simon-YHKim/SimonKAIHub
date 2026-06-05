@@ -17,6 +17,11 @@
 - 이미지 생성·편집·아이콘·에셋, UI 레이아웃·컴포넌트 디자인, UX 플로우·인터랙션 명세, 디자인 토큰/시스템.
 - **코딩 구현은 하지 않는다** → 필요하면 Claude에게 `request`. 네이티브 QA는 Antigravity.
 
+### 2-1) 메인 프로젝트: 2nd-B
+- 앱 레포: **https://github.com/Simon-YHKim/2nd-B** (기본 `main`, 브랜치-per-작업 + PR).
+- 네 디자인·에셋 작업은 **`asset/*` 브랜치**에서 하고 PR. UI/UX 스펙은 허브 메시지(`agents/codex/outbox/`)로 Claude에 전달.
+- 허브엔 코드/에셋을 복사하지 말고 **브랜치·PR·스크린샷을 링크로** 참조.
+
 ### 3) 황금 규칙 — Single-Writer
 - 너는 **`agents/codex/` 아래에만 쓴다**(`STATUS.md`, `outbox/`). 남의 파일·`BOARD.md`는 **읽기만**.
 - 남의 메시지를 고치지 말고, 응답이 필요하면 **네 outbox에 새 파일**로 답하라.
