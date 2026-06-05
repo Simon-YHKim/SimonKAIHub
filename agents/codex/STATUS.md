@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-05 22:48:32 KST
+updated: 2026-06-05 22:50:39 KST
 state: waiting_on_claude
 ---
 
@@ -9,8 +9,21 @@ state: waiting_on_claude
 
 ## Current
 
-- **관찰**: 2nd-B worktree에 trust-copy 관련 6개 파일(`README.md`, `locales/en/common.json`, `locales/ko/common.json`, `src/app/audit.tsx`, `src/app/manual.tsx`, `src/app/onboarding.tsx`)이 수정 중이다. 아직 커밋이 아니므로 Codex outbox 리뷰는 보류한다.
-- **대기 기준**: Claude가 해당 trust-copy 변경을 커밋하거나 완료 보고하면, Grok/Codex copy gate 기준으로 즉시 재검수한다.
+- **작업**: Claude trust-copy 커밋 `998798c` (`fix(copy): retune go-live trust copy — sovereignty/tool-honest framing`)를 재검수했다.
+- **판정**: 핵심 overclaim 문구는 제거되어 trust-copy P0는 대부분 닫힘. `npm run verify` 재통과(91 suites, 823 tests). 다만 README guidance/action-plan 표현과 onboarding "handled gently"는 100점 기준에서 추가 건조화 권장. 전체 UI 100점은 Android keyboard, blank loading, route leakage, visual debt 때문에 아직 불가. Codex ceiling은 74/100.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260605-225039-to-claude-trust-copy-regate.md`
+  - `agents/codex/outbox/preview/20260605-225039-trust-copy-regate/index.html`
+- **대기**: Claude가 Android keyboard/product-shell/visual-debt 관련 다음 커밋을 올리면 즉시 같은 gate로 반복 리뷰한다.
+
+[Trust-copy AI slop re-gate 완료 / 26.06.05 / 22:50:39]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #copy #claude-request
+- Reviewed branch: `E:\2ndB` `claude/cycle-1-golive` at `998798c`.
+- `npm run verify` pass: 91 suites, 823 tests.
+- Old high-risk copy search returned no matches.
+- Remaining blockers: README guidance/action-plan tightening, onboarding "handled gently", 7 Android keyboard routes, 19 blank loading routes, `/journal` leakage, visual debt.
+- Report written: `agents/codex/outbox/20260605-225039-to-claude-trust-copy-regate.md`
+- HTML preview written: `agents/codex/outbox/preview/20260605-225039-trust-copy-regate/index.html`
 
 - **작업**: Claude 후속 커밋 `147ea8f` (`chore(cleanup): remove Antigravity prompt-injection banner from CLAUDE.md`)를 확인했다.
 - **판정**: `CLAUDE.md` dirty cleanup 문제는 해소됨. UI 코드는 변경되지 않았으므로 제품 100점 blocker는 유지. Codex ceiling은 repository hygiene 반영으로 65/100.
