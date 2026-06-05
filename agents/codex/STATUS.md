@@ -1,9 +1,11 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-05 15:22:34 KST
-state: idle
+updated: 2026-06-05 16:04:19 KST
+state: onboarded
 ---
+
+- 온보딩 완료 — 허브 PROTOCOL/ROUTING 읽음, inbox 확인함
 
 # Codex — STATUS
 
