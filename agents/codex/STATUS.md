@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 00:29:48 KST
-state: expo_image_wip_regate_reported
+updated: 2026-06-06 00:33:20 KST
+state: crisis_router_readability_gate_reported
 ---
 
 # Codex STATUS
@@ -14,11 +14,21 @@ state: expo_image_wip_regate_reported
 - **검수 기준**: SimonK-stack `ai-slop-cleaner`, `visual-verdict`, `frontend-ui-ux`를 근거로 하되 2nd-B의 기존 dark premium/village system을 보존. 작은 글자, 무근거 glow/shadow, deprecated prop 잔여물, 임시 스크립트, 키보드 occlusion, 검증부족을 우선 점검.
 - **앱 상태**: `E:\2ndB` branch `claude/cycle-1-golive`, committed HEAD `6c506cf`. 현재 tracked WIP: `complete-profile`, `sign-up`, `IslandArt`, `TierIcon`, `WikiCardThumb`, `WorkerSprite`의 `Image` import가 `expo-image`로 전환됨. Untracked root scripts: `refactor_wiki.py`, `refactor_wiki2.py`, `replace_image.py`.
 - **검증**: 현재 WIP 기준 `npm run verify` pass: 91 suites, 823 tests. `git diff --check`, `npm run lint`, `npm run type-check` pass.
-- **평가**: `expo-image` 전환은 방향성은 좋지만 `resizeMode` deprecated compatibility prop가 8곳 남아 있고, root temp scripts가 있어 clean sign-off 불가. 기존 keyboard/device proof 게이트도 미해결. **93/100 provisional**.
+- **평가**: `expo-image` 전환은 방향성은 좋지만 `resizeMode` deprecated compatibility prop가 8곳 남아 있고, root temp scripts가 있어 clean sign-off 불가. 추가 sweep에서 `CrisisRouter` 안전 모달의 `URGENT/긴급` badge가 10px로 확인되어 safety surface readability P1도 추가. 기존 keyboard/device proof 게이트도 미해결. **92/100 provisional**.
 - **최신 산출물**:
-  - `agents/codex/outbox/20260606-002948-to-claude-expo-image-wip-regate.md`
-  - `agents/codex/outbox/preview/20260606-002948-expo-image-wip-regate/index.html`
+  - `agents/codex/outbox/20260606-003320-to-claude-crisis-router-readability-gate.md`
+  - `agents/codex/outbox/preview/20260606-003320-crisis-router-readability-gate/index.html`
 - **대기**: Claude가 expo-image cleanup, root temp script cleanup, keyboard/device proof를 반영하면 Codex가 all-screen re-gate 반복.
+
+[CrisisRouter readability gate / 26.06.06 / 00:33:20]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #safety #claude-request
+- Reviewed safety modal surface `src/components/safety/CrisisRouter.tsx`.
+- Found `hotlineBadgeText` at `fontSize: 10`, `letterSpacing: 1`, rendered via `Text variant="subtle"`.
+- This is not a decorative marketing chip; it labels a crisis safety alert. Under SimonK anti-slop criteria, safety-critical text should favor immediate readability over micro-label styling.
+- Request: raise to at least app caption scale or 12px, reduce letter spacing if needed, and verify Korean/English badge fit.
+- Score adjusted: 93/100 -> 92/100 provisional because this is a safety/trust surface.
+- Report written: `agents/codex/outbox/20260606-003320-to-claude-crisis-router-readability-gate.md`
+- HTML preview written: `agents/codex/outbox/preview/20260606-003320-crisis-router-readability-gate/index.html`
 
 [Expo-image WIP re-gate / 26.06.06 / 00:29:48]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #expo-image #claude-request
