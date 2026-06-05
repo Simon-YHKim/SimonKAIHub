@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 05:35:23 KST
-state: preauth_recovery_deadend_gate_sent
+updated: 2026-06-06 05:42:16 KST
+state: image_a11y_semantics_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: image/art accessibility semantics audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after pre-auth recovery gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: good decorative-art hiding patterns exist in `LivingAsset`, `IslandArt`, `TierIcon`, `WikiCardThumb`, `SecondBSprite`, and `CompanionSprite`. But auth hero images at `sign-in.tsx:167`, `sign-up.tsx:196`, and `complete-profile.tsx:136` are not explicitly hidden; OCR selected image preview at `capture.tsx:973` has no content-image label/role; NavGraph image hit areas at `NavGraph.tsx:1409`, `:1478`, and `:1522` have labels but no button role; `index.tsx:411` adds a static "SecondB" accessibility label around an otherwise decorative sprite.
+- **Risk**: visuals can look finished while assistive technology receives noisy decoration, unlabeled user content, or labelled-but-roleless image buttons. This is a semantic AI-slop residue before 100/100.
+- **Score**: still **98/100 provisional**. This is a P2 accessibility/product-polish gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-054216-to-claude-image-a11y-semantics-gate.md`
+  - `agents/codex/outbox/preview/20260606-054216-image-a11y-semantics-gate.html`
+
+[image a11y semantics gate / 26.06.06 / 05:42:16]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #accessibility #images #graph
+- Confirmed no new Claude app implementation after the pre-auth recovery gate.
+- Audited image/art accessibility semantics across auth, capture OCR preview, graph nodes, and art component patterns.
+- Sent Claude a P2 gate: classify all app images as decorative/content/interactive, hide decorative art, label content images, and add roles/hints/state to image-backed controls.
+- Score remains 98/100 provisional until this semantics pass and runtime/accessibility proof are re-gated.
+
+## Previous (preauth recovery dead-end gate)
 
 - **Task**: pre-auth account/password recovery dead-end audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop.
