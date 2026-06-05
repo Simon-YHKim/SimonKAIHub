@@ -1,16 +1,18 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-05 21:18:32 KST
+updated: 2026-06-05 21:26:32 KST
 state: waiting_on_claude
 ---
 
 # Codex STATUS
 
-- **현재 작업**: 2nd-B 전체 UI 감사에 SimonK-stack 디자인 스킬 기준을 참고한 AI Slop 방지 게이트를 추가해 Claude 구현 요청 완료.
-- **출처**: src: user - "AI Slop 방지해서 디자인을 검수하자. SimonKstack에 디자인 관련 스킬이 있으니 참고해. 물론 이걸 무조껀 따를 필요는 없어. Slop만 없으면 돼."
-- **범위**: `E:\2ndB` 현재 브랜치의 `DESIGN.md`, `docs/DESIGN_TOKENS.md`, `src/app`, `src/components`, `src/theme`, `src/lib/theme` 정적 감사. SimonK-stack `simon-design-first` 및 `design-review` 스킬은 참고 기준으로만 사용.
+- **현재 작업**: 2nd-B 전체 UI 감사 후 honest insight framing, assessment/persona confidence, export privacy disclosure 개선 요청을 Claude에게 추가 보고 완료.
+- **출처**: src: user - "계속해서 모든 화면에 대한 UI 문제점을 찾아내고 개선해."
+- **범위**: `E:\2ndB` head `9e0e9e0` 기준 manual/onboarding/audit/persona/assessment/insights/wiki/data/export UI 정적 감사. Grok 최신 honest journaling framing과 새 wiki export allowlist 보안 커밋을 UI 계약으로 연결.
 - **최근 산출물**:
+  - `agents/codex/outbox/20260605-212632-to-claude-honest-insight-export-privacy-ui.md`
+  - `agents/codex/outbox/preview/20260605-212632-honest-insight-export-privacy-ui/index.html`
   - `agents/codex/outbox/20260605-211832-to-claude-ai-slop-design-audit.md`
   - `agents/codex/outbox/preview/20260605-211832-ai-slop-design-audit/index.html`
   - `agents/codex/outbox/20260605-211135-to-claude-screen-by-screen-ui-defect-matrix.md`
@@ -20,7 +22,16 @@ state: waiting_on_claude
   - `agents/codex/outbox/20260605-210053-to-claude-grok-opinion-release-gate-addendum.md`
   - `agents/codex/outbox/preview/20260605-210053-grok-opinion-release-gate-addendum/index.html`
 - **블로커**: Codex가 2nd-B 코드를 직접 수정하지 않는 운영 규칙상 Claude 구현 대기. 이후 렌더 QA 환경이 열리면 desktop/mobile 스크린샷 기반 재검수 필요.
-- **다음**: Claude가 design SoT 정리, AppPanel/GraphWorldPanel 분리, 좌측 컬러 보더/글로우/토큰 우회/폰트 적용을 정리하면 Codex가 실제 화면 캡처 기준으로 Slop 잔존 여부를 다시 평가한다.
+- **다음**: Claude가 trust copy, confidence/evidence chips, export receipt/disclosure, `/journal` retirement, anti-slop surface split을 반영하면 Codex가 실제 화면 캡처 기준으로 잔존 결함을 다시 평가한다.
+
+[Honest insight/export privacy UI 요청 완료 / 26.06.05 / 21:26:32]
+#comm #codex #user #2nd-B #ui-ux #trust-copy #export-privacy #claude-request
+- 현재 `E:\2ndB` branch `claude/cycle-1-data-hygiene` at `9e0e9e0` 기준 추가 정적 감사.
+- Grok `20260605-211932-re-honest-journaling-framing.md` 확인: journaling benefit은 작은 평균효과/개인차/역효과 가능성을 인정하고, AI insight는 tentative + sourced로 보여야 함.
+- 새 wiki export allowlist 보안 커밋은 UI에 아직 충분히 드러나지 않음: `wiki.tsx`는 `exportText.length`만 보여주고 `pageCount/sourceCount/pageCountsByKind` 및 포함/제외 metadata 설명을 버림.
+- 추가 문제: `manual.tsx`의 "An AI that learns you", "No MBTI" 문구가 실제 MBTI route와 충돌. `onboarding.tsx`의 "AI friend", `audit.tsx`의 "the sharper your Persona becomes", `persona.tsx`의 numeric score/MBTI combined subtitle도 confidence/evidence 표기가 필요.
+- Claude request 작성: `agents/codex/outbox/20260605-212632-to-claude-honest-insight-export-privacy-ui.md`
+- HTML preview 작성: `agents/codex/outbox/preview/20260605-212632-honest-insight-export-privacy-ui/index.html`
 
 [AI Slop 디자인 감사 요청 완료 / 26.06.05 / 21:18:32]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #design-review #claude-request
