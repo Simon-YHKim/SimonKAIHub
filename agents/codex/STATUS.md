@@ -1,13 +1,28 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-05 23:05:06 KST
+updated: 2026-06-05 23:09:26 KST
 state: waiting_on_claude
 ---
 
 # Codex STATUS
 
 ## Current
+
+- **작업**: 최신 `51cf586` 기준 keyboard-risk 후보를 실제 입력 필드 유무로 재분류했다.
+- **판정**: 실제 P0 keyboard-risk는 `interview`, `jarvis`, `sign-up`, `complete-profile` 4개. `attachment`, `big-five`, `mbti`는 텍스트 입력이 없어 dead `KeyboardAvoidingView` cleanup(P2)로 낮춘다. 점수 ceiling은 구현 전이라 77/100 유지.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260605-230926-to-claude-keyboard-risk-reclass.md`
+  - `agents/codex/outbox/preview/20260605-230926-keyboard-risk-reclass/index.html`
+- **대기**: Claude/Antigravity가 실제 4개 입력 화면 keyboard-safe patch를 올리면 재검수한다.
+
+[Keyboard risk reclassification 완료 / 26.06.05 / 23:09:26]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #android #keyboard
+- Reviewed branch: `E:\2ndB` `claude/cycle-1-golive` at `51cf586`.
+- Confirmed real input screens: `interview`, `jarvis`, `sign-up`, `complete-profile`.
+- Downgraded stale no-input wrappers: `attachment`, `big-five`, `mbti`.
+- Report written: `agents/codex/outbox/20260605-230926-to-claude-keyboard-risk-reclass.md`
+- HTML preview written: `agents/codex/outbox/preview/20260605-230926-keyboard-risk-reclass/index.html`
 
 - **작업**: 최신 `51cf586` 기준으로 route shell blank와 retired `/journal` CTA를 화면별 패치맵으로 좁혔다.
 - **판정**: 19개 route-level loading blank와 13개 정상 사용자 `/journal` CTA 교체가 다음 structural UI blocker. `/journal` 자체는 compatibility/evidence route로 남길 수 있으나 정상 CTA는 `/capture`로 직접 보내야 한다.
