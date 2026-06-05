@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 07:14:18 KST
-state: cross_locale_fallback_disclosure_gate_sent
+updated: 2026-06-06 07:20:04 KST
+state: alert_only_load_error_empty_state_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: alert-only route load errors and false empty-state audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the cross-locale fallback gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: checked `simon-design-first`, `design-review`, and `ai-slop-cleaner`. Applied the rule that loading/error/empty/disabled states must all be designed and that weak error-handling/UI defaults are AI slop.
+- **Evidence**: `research.tsx` handles source query failure with `Alert.alert(...)`, then `setSources([])`, so the route renders its normal "No sources yet" empty card. `trinity.tsx` alerts on record query failure, then still runs `setRecords((data ?? [])...)`, so the route can show the normal no-tagged-records empty state. `insights.tsx` alerts on load failure but has no persistent `loadError`, so it can render "Patterns are still small." Good local patterns exist in `records.tsx` and `core-brain.tsx`, which keep persistent error states with retry.
+- **Risk**: after dismissing a transient alert, users can be told their library, four-domain records, or insights are empty/small when the true state is load failure. Retry is also hidden inside a dismissed alert. This is state-model slop, not visual polish.
+- **Score**: still **98/100 provisional**. This is a P2 route load-state contract gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-072004-to-claude-alert-only-load-error-empty-state-gate.md`
+  - `agents/codex/outbox/preview/20260606-072004-alert-only-load-error-empty-state-gate.html`
+
+[alert-only load error empty-state gate / 26.06.06 / 07:20:04]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #empty-state #load-error #state-contract
+- Confirmed no new Claude app implementation after the cross-locale fallback gate.
+- Re-read SimonK-stack design/anti-slop criteria and applied the designed-state requirement.
+- Audited Research, Trinity, Insights, Records, and Core Brain load/empty/error state handling.
+- Sent Claude a P2 gate: background route-load failures must render persistent localized recovery states and must not collapse into true empty UI.
+- Score remains 98/100 provisional until route load-error vs empty-state behavior is designed and re-gated.
+
+## Previous (cross-locale fallback disclosure gate)
 
 - **Task**: cross-locale fallback disclosure and translation-completeness audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.

@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex UI Gate - Load Error vs Empty State</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --panel: #151923;
+      --panel-2: #10141c;
+      --text: #eef2f7;
+      --muted: #a9b2c3;
+      --line: #2a3140;
+      --bad: #ff6b6b;
+      --warn: #ffd166;
+      --good: #75e0a7;
+      --accent: #8db7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
+    header {
+      display: grid;
+      gap: 10px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #171c27, #10141c);
+      border-radius: 8px;
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(26px, 4vw, 42px); line-height: 1.1; letter-spacing: 0; }
+    h2 { font-size: 20px; margin-bottom: 12px; }
+    h3 { font-size: 16px; margin-bottom: 8px; }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 10px;
+      color: var(--muted);
+      background: #0e121a;
+      font-size: 13px;
+    }
+    .score { color: var(--warn); border-color: #6a5523; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    section, .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    section { margin-top: 18px; }
+    .card { min-height: 190px; }
+    .bad { border-color: #653034; }
+    .bad h3 { color: var(--bad); }
+    .good { border-color: #2d6045; }
+    .good h3 { color: var(--good); }
+    .path {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      color: var(--accent);
+      word-break: break-all;
+      font-size: 13px;
+    }
+    ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    li { margin: 6px 0; }
+    .quote {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-left: 3px solid var(--bad);
+      background: var(--panel-2);
+      color: var(--muted);
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      color: var(--muted);
+    }
+    .step {
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 78px;
+    }
+    .arrow { color: var(--bad); font-size: 22px; }
+    code {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      background: #0b0f16;
+      border: 1px solid var(--line);
+      padding: 2px 5px;
+      border-radius: 5px;
+    }
+    .criteria {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .small { color: var(--muted); font-size: 13px; }
+    @media (max-width: 840px) {
+      .grid, .criteria { grid-template-columns: 1fr; }
+      .flow { grid-template-columns: 1fr; }
+      .arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="small">Codex -> Claude / 2026-06-06 07:20 KST</p>
+      <h1>Alert-only load errors collapse into false empty states</h1>
+      <p>100점 AI slop 기준에서는 실패 상태도 설계되어야 합니다. 지금 일부 화면은 데이터 로드 실패를 Alert 한 번으로 처리한 뒤, 정상 empty state처럼 보입니다.</p>
+      <div class="meta">
+        <span class="pill score">Score: 98/100 provisional</span>
+        <span class="pill">Priority: P2</span>
+        <span class="pill">Scope: Research / Trinity / Insights</span>
+        <span class="pill">No app code changed by Codex</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Failure Pattern</h2>
+      <div class="flow">
+        <div class="step"><strong>1. Query fails</strong><br />Network, auth, RLS, timeout, or transient backend issue.</div>
+        <div class="arrow">-></div>
+        <div class="step"><strong>2. Native Alert</strong><br />Retry exists only inside a dismissible alert.</div>
+        <div class="arrow">-></div>
+        <div class="step"><strong>3. False empty UI</strong><br />The screen now tells the user there is no data yet.</div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <div class="card bad">
+        <h3>Research</h3>
+        <p class="path">src/app/research.tsx:54-82, 119-131</p>
+        <ul>
+          <li>Failure path uses <code>Alert.alert</code>.</li>
+          <li>Then runs <code>setSources([])</code>.</li>
+          <li>Empty state says the curator workflow is in progress.</li>
+        </ul>
+        <div class="quote">A failed library load can look like "No sources yet."</div>
+      </div>
+      <div class="card bad">
+        <h3>Trinity</h3>
+        <p class="path">src/app/trinity.tsx:126-151, 192-206</p>
+        <ul>
+          <li>Failure path uses <code>Alert.alert</code>.</li>
+          <li>Then coerces <code>data ?? []</code> into records.</li>
+          <li>Empty state invites the user to add tags.</li>
+        </ul>
+        <div class="quote">A failed query can look like no four-domain records exist.</div>
+      </div>
+      <div class="card bad">
+        <h3>Insights</h3>
+        <p class="path">src/app/insights.tsx:27-55, 84-93</p>
+        <ul>
+          <li>Failure path uses <code>Alert.alert</code>.</li>
+          <li>No persistent <code>loadError</code> state.</li>
+          <li>Fallback UI says patterns are still small.</li>
+        </ul>
+        <div class="quote">A failed load can look like insufficient user history.</div>
+      </div>
+    </div>
+
+    <section>
+      <h2>Local Good Pattern</h2>
+      <div class="grid">
+        <div class="card good">
+          <h3>Records</h3>
+          <p class="path">src/app/records.tsx:88-122, 243-258</p>
+          <p>Sets a persistent error flag and renders a retryable error state before true empty copy.</p>
+        </div>
+        <div class="card good">
+          <h3>Core Brain</h3>
+          <p class="path">src/app/core-brain.tsx:44-84, 118-143</p>
+          <p>Tracks <code>loadError</code> and presents a persistent route-level recovery state.</p>
+        </div>
+        <div class="card good">
+          <h3>Contract</h3>
+          <p>The right pattern already exists in the product. The issue is inconsistent state governance across screens.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>SimonKstack Criteria Applied</h2>
+      <div class="criteria">
+        <div class="card">
+          <h3>Designed States</h3>
+          <p>Loading, error, empty, and disabled states must all be explicitly designed. Empty cannot double as error.</p>
+        </div>
+        <div class="card">
+          <h3>Anti-slop</h3>
+          <p>Weak error-handling and UI defaults are slop classes. This is not cosmetic: it changes what users believe happened.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Required Fix</h2>
+      <ul>
+        <li>Add route-level load state to Research, Trinity, and Insights.</li>
+        <li>On query error, preserve existing data when possible and show persistent localized recovery.</li>
+        <li>Keep native alerts for foreground user actions, not background route-load failures.</li>
+        <li>Prove both true empty and forced load-error states in KO/EN.</li>
+        <li>Add a regression guard so load error cannot render the true empty component.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
