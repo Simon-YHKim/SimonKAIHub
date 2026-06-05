@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2nd-B UI Audit - 2026-06-05</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070A18;
+      --panel: #0D1530;
+      --line: #2A345A;
+      --text: #E8ECF8;
+      --muted: #8D98B8;
+      --mint: #72F2C7;
+      --violet: #A78BFA;
+      --rose: #FF7A90;
+      --lamp: #FFD166;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Apple SD Gothic Neo", system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 32px 18px 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 22px;
+      margin-bottom: 28px;
+    }
+    .eyebrow {
+      color: var(--mint);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 8px 0 10px;
+      font-size: clamp(30px, 5vw, 54px);
+      line-height: 1.05;
+    }
+    h2 {
+      margin: 30px 0 12px;
+      font-size: 23px;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+    }
+    p { margin: 0 0 12px; }
+    .lead {
+      color: var(--muted);
+      max-width: 900px;
+      font-size: 17px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .sev {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 0 9px;
+      border: 1px solid currentColor;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .p0 { color: var(--rose); }
+    .p1 { color: var(--lamp); }
+    .p2 { color: var(--violet); }
+    .pass { color: var(--mint); }
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+    li { margin: 6px 0; }
+    code {
+      color: var(--mint);
+      background: rgba(114,242,199,.08);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .shots {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    figure {
+      margin: 0;
+      border: 1px solid var(--line);
+      background: #05070f;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    figure img {
+      display: block;
+      width: 100%;
+      height: 260px;
+      object-fit: contain;
+      background: #02040a;
+    }
+    figcaption {
+      border-top: 1px solid var(--line);
+      padding: 10px 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .wide img { height: 340px; }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .meta span {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 6px 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Audit</div>
+      <h1>2nd-B 전체 UI 재검사</h1>
+      <p class="lead">
+        정적 검사와 실제 웹 렌더 캡처를 함께 봤다. 브랜드 방향은 강하지만, 모바일 반응형 폭 제어와 DESIGN.md 규칙 실행 사이에 launch-blocker급 간극이 있다.
+      </p>
+      <div class="meta">
+        <span>검사일: 2026-06-05 KST</span>
+        <span>대상: E:\2ndB</span>
+        <span>라우트: src/app 전체 43개</span>
+        <span>브라우저: Chrome headless</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>결론</h2>
+      <div class="grid">
+        <article class="card">
+          <div class="sev p0">P0</div>
+          <h3>기본 로컬 환경에서 앱이 첫 렌더 전에 죽음</h3>
+          <p>현재 `.env`의 `EXPO_PUBLIC_SUPABASE_ANON_KEY`가 비어 있지는 않지만 20자 미만이라 zod 검증에서 즉시 crash가 난다. UI 감사도 dummy 공개값을 별도 프로세스에 주입해야 진행 가능했다.</p>
+        </article>
+        <article class="card">
+          <div class="sev p0">P0</div>
+          <h3>모바일 가로 오버플로</h3>
+          <p>`/sign-in`, `/sign-up`, `/manual`, 그래프 프리뷰에서 390px 폭 기준 오른쪽 콘텐츠가 잘린다. 첫 인상 화면과 약관 화면이 동시에 깨져 launch blocker로 본다.</p>
+        </article>
+        <article class="card">
+          <div class="sev p1">P1</div>
+          <h3>DESIGN.md와 구현의 시각 규칙 불일치</h3>
+          <p>no gradient, no glass, no dark shadow 규칙과 다르게 app shell, panels, buttons, graph labels가 gradient, glass copy, shadow props를 구조적으로 쓴다.</p>
+        </article>
+        <article class="card">
+          <div class="sev p1">P1</div>
+          <h3>정보구조 잔여 부채</h3>
+          <p>`/journal`, `/imagine`, `/mbti`, `/trinity`, dev preview routes가 아직 사용자 경험 또는 route tree에 남아 있다. "담기 단일 입력"과 검증된 자기이해 포지션이 흔들린다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>주요 발견</h2>
+      <div class="grid">
+        <article class="card">
+          <div class="sev p0">P0</div>
+          <h3>Auth screens width policy 없음</h3>
+          <ul>
+            <li>데스크톱에서는 로그인 폼이 화면 폭 대부분을 차지해 집중도가 떨어진다.</li>
+            <li>모바일에서는 폼과 hero 이미지가 viewport 오른쪽을 넘어간다.</li>
+            <li>권장: auth form에 `width: "100%"`, `maxWidth`, `alignSelf: "center"`를 일관 적용하고 web root overflow를 QA한다.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="sev p1">P1</div>
+          <h3>긴 본문이 pixel font로 과밀하게 보임</h3>
+          <ul>
+            <li>`typography.ts` 주석은 긴 Korean copy에 readable sans를 쓰겠다고 하지만 `fontFamilies.sans`는 NeoDunggeunmo다.</li>
+            <li>회원가입 동의문과 매뉴얼 카드에서 줄바꿈이 조밀하고 clipping이 두드러진다.</li>
+            <li>권장: heading/labels는 pixel, 긴 문단과 legal copy는 readable alias로 분리한다.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="sev p1">P1</div>
+          <h3>그래프 모바일 fit 부족</h3>
+          <ul>
+            <li>390px 폭에서 오른쪽 core label과 top segmented control이 잘린다.</li>
+            <li>실제 그래프가 pan 가능한 의도여도 첫 화면에서 node label이 잘리는 것은 완성도가 낮아 보인다.</li>
+            <li>권장: initial scale/center를 viewport 기반으로 계산하고 dev controls는 production에서 제거한다.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="sev p2">P2</div>
+          <h3>Expo web warning noise</h3>
+          <ul>
+            <li>`shadow*` deprecated, `pointerEvents` deprecated, `useNativeDriver` unsupported warnings가 반복된다.</li>
+            <li>시각 결함과 직접 동일하지는 않지만 web polish와 성능 신뢰를 떨어뜨린다.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>검증 결과</h2>
+      <div class="grid">
+        <article class="card">
+          <div class="sev pass">PASS</div>
+          <h3>정적 품질 명령</h3>
+          <ul>
+            <li>`npm run lint` 통과</li>
+            <li>`npm run type-check` 통과</li>
+            <li>`npm run check:i18n` 통과</li>
+            <li>`npm run check:emdash` 통과</li>
+            <li>`npm run check:constraints` 통과, C11은 기존 PART</li>
+            <li>`npm run check:lexicon` 통과</li>
+          </ul>
+        </article>
+        <article class="card">
+          <div class="sev p1">SCAN</div>
+          <h3>디자인 규칙 스캔</h3>
+          <ul>
+            <li>`shadowColor|shadowOpacity|shadowRadius|elevation`: 180건</li>
+            <li>route/component raw color literal: 109건</li>
+            <li>`rgba|hex` literal in route/component: 114건</li>
+            <li>gradient 사용: `InlineLoader`, `premium/background`</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>스크린샷 갤러리</h2>
+      <div class="shots">
+        <figure class="wide">
+          <img src="signin-desktop-ok.png" alt="Sign in desktop" />
+          <figcaption>로그인 desktop - 브랜드는 강하지만 form이 지나치게 넓다.</figcaption>
+        </figure>
+        <figure>
+          <img src="signin-mobile-ok.png" alt="Sign in mobile" />
+          <figcaption>로그인 mobile - 오른쪽 form 영역 clipping.</figcaption>
+        </figure>
+        <figure class="wide">
+          <img src="signup-desktop-ok.png" alt="Sign up desktop" />
+          <figcaption>회원가입 desktop - legal/form surface가 전폭으로 커져 과밀하다.</figcaption>
+        </figure>
+        <figure>
+          <img src="signup-mobile-ok.png" alt="Sign up mobile" />
+          <figcaption>회원가입 mobile - hero와 긴 동의문이 오른쪽으로 잘린다.</figcaption>
+        </figure>
+        <figure class="wide">
+          <img src="manual-desktop-ok.png" alt="Manual desktop" />
+          <figcaption>매뉴얼 desktop - 방향성은 좋지만 card copy가 매우 dense하다.</figcaption>
+        </figure>
+        <figure>
+          <img src="manual-mobile-ok.png" alt="Manual mobile" />
+          <figcaption>매뉴얼 mobile - 카드 본문 오른쪽 clipping.</figcaption>
+        </figure>
+        <figure>
+          <img src="notfound-mobile-ok.png" alt="Not found mobile" />
+          <figcaption>404 mobile - stale `/journal` destination이 노출된다.</figcaption>
+        </figure>
+        <figure class="wide">
+          <img src="asset-preview-desktop-ok.png" alt="Graph preview desktop" />
+          <figcaption>그래프 preview desktop - visual direction은 가장 선명하다.</figcaption>
+        </figure>
+        <figure>
+          <img src="asset-preview-mobile-ok.png" alt="Graph preview mobile" />
+          <figcaption>그래프 preview mobile - right node와 segmented control clipping.</figcaption>
+        </figure>
+        <figure class="wide">
+          <img src="signin-desktop.png" alt="Initial env error" />
+          <figcaption>초기 실행 - `.env` anon key 검증 실패로 AuthProvider crash.</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
