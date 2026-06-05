@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>사람을 가장 정확히 파악하는 구조 — 2nd-B 적용 설계 (근거 기반)</title>
+<style>
+  :root{
+    --bg:#0d1018; --panel:#141925; --panel2:#1a2030; --line:#2a3145;
+    --ink:#e6e9f2; --muted:#aab2c8; --subtle:#7e879e;
+    --mint:#72f2c7; --blue:#4cc9f0; --violet:#a78bfa; --amber:#ffd166; --rose:#ff7a90;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Malgun Gothic","맑은 고딕",sans-serif;
+    line-height:1.65;font-size:15px}
+  .wrap{max-width:1000px;margin:0 auto;padding:40px 28px 80px}
+  h1{font-size:25px;font-weight:700;letter-spacing:-.01em;margin:0 0 6px}
+  h2{font-size:19px;font-weight:700;margin:42px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  h3{font-size:15.5px;font-weight:600;margin:22px 0 6px;color:var(--mint)}
+  .sub{color:var(--muted);font-size:14px;margin:0}
+  .meta{color:var(--subtle);font-size:12.5px;margin-top:10px}
+  .lead{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:20px 0}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+  td code,p code,li code{background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:12.5px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#cdd6f0}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:14px 0}
+  ul,ol{margin:8px 0;padding-left:22px} li{margin:5px 0}
+  a{color:var(--blue);text-decoration:none} a:hover{text-decoration:underline}
+  .muted{color:var(--muted)} .small{font-size:12.5px}
+  .key{border-left:3px solid var(--mint);background:rgba(124,242,199,.05);padding:12px 16px;margin:14px 0;border-radius:0 8px 8px 0}
+  .warn{border-left:3px solid var(--amber);background:rgba(255,209,102,.06);padding:10px 16px;margin:14px 0;border-radius:0 8px 8px 0}
+  .num{display:inline-flex;width:24px;height:24px;border-radius:7px;background:var(--panel2);border:1px solid var(--line);
+    align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--mint);margin-right:9px;flex:0 0 auto}
+  .pr{display:flex;gap:0;margin:10px 0;align-items:flex-start}
+  .src{font-size:11.5px;color:var(--muted);word-break:break-word}
+  .tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:4px;border:1px solid var(--line);color:var(--muted);margin-left:6px}
+  .verified{color:var(--mint);border-color:rgba(124,242,199,.3)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>사람을 가장 정확히 파악하는 구조 — 2nd-B 적용 설계</h1>
+  <p class="sub">근거 기반(SOKA·multi-source·behavioral accumulation) + 2nd-B 현실(자기보고 단일 소스)의 종합</p>
+  <div class="meta">2026-06-05 KST · deep-research(112 agents, 25 claims 중 22 검증통과) + docs-consistency + 기존 4프레임워크 종합 · 산출: Claude(Opus 4.8)</div>
+</header>
+
+<div class="lead">
+  <strong>핵심 결론.</strong> 사람을 가장 정확히 파악하는 구조는 <b>"단일 자기보고"가 아니다.</b> ① <b>특성의 성질(관찰가능성×평가성)에 따라 데이터 소스를 다르게</b> 쓰고, ② <b>1회 검사가 아니라 객관적 행동을 시계열로 반복 관찰해 누적</b>하며, ③ <b>타당도를 "자기-타인 일치"가 아니라 실제 행동 준거로 벤치마킹</b>하고, ④ <b>피드백을 과잉확신 없이 잠정적으로</b> 제시하는 것이다. — 이는 2nd-B에 **직접적·구조적 함의**를 준다(아래).
+</div>
+
+<!-- SCIENCE -->
+<h2>1. 검증된 과학 (deep-research, 1차 문헌)</h2>
+<table>
+<tr><th>발견</th><th>출처 (DOI)</th></tr>
+<tr>
+  <td><b>SOKA 2×2 격자</b>: 누가 무엇을 더 잘 아는가는 <b>관찰가능성 × 평가성</b>으로 예측. 자기는 <b>"저관찰성 AND 저평가성"</b> 내적 특성(불안·신경증)에서만 우위. 평가성 높은 특성(지성)은 관찰가능성 무관하게 <b>타인이 더 정확</b>. <span class="tag verified">3-0 검증</span></td>
+  <td class="src">Vazire 2010, JPSP 98(2):281-300 · 10.1037/a0017908</td>
+</tr>
+<tr>
+  <td><b>자기·타인은 비중복(unique) 측면을 포착 → 완전한 파악은 반드시 두 관점 결합</b>. 자기=신경증, 친구=지성, 외향성=동등. <span class="tag verified">3-0</span></td>
+  <td class="src">Carlson, Vazire & Oltmanns 2013, J.Personality 81(2):155-170 · 10.1111/j.1467-6494.2012.00794.x (N=991)</td>
+</tr>
+<tr>
+  <td><b>타인이 더 정확해지는 이유 = 정보 + 동기</b>. 자기는 생각·감정에 특권적 접근(정보)이나, <b>평가적 특성은 self-enhancement/self-verification 동기로 왜곡</b>. <span class="tag verified">3-0</span></td>
+  <td class="src">Vazire & Carlson 2011, Curr.Dir.Psych.Sci 20(2):104-108 · 10.1177/0963721411402478</td>
+</tr>
+<tr>
+  <td><b>"내가 나를 가장 잘 안다"는 통념 반박</b>: 자기·타인 지각은 행동·결과 예측에서 <b>대략 동등</b>. 내성(introspection)은 의식에 가려진 부분이 많아 <b>제한된 경로</b>(Wilson 2009). 자기보고 단독은 체계적 사각지대. <span class="tag verified">3-0</span></td>
+  <td class="src">Vazire & Carlson 2011 (위)</td>
+</tr>
+<tr>
+  <td><b>자기지식 한계는 무작위가 아니라 체계적 — 특히 도덕 영역</b>(정직·겸손·친절)에서 가장 부정확. 사회적으로 바람직하고 타인이 쉽게 관찰하는 특성일수록 외부·행동 보강이 가장 필요. <span class="tag verified">3-0</span></td>
+  <td class="src">Thielmann & Burghart 2025, Curr.Opin.Psych 65 · 10.1016/j.copsyc.2025.102069</td>
+</tr>
+<tr>
+  <td><b>타당도는 "자기-타인 일치"가 아니라 객관적 행동 준거로 벤치마킹</b>해야. 둘이 서로 일치해도 실제 행동에선 둘 다 빗나갈 수 있음(공유된 부정확). 자기·또래 보고는 중간 정도만 일치, 둘 다 실제 도덕 행동과 잘 안 맞음(EAR 녹음). <span class="tag verified">3-0</span></td>
+  <td class="src">Bollich 2016, WUSTL 학위논문 · 10.7936/K7VH5M7N (N=216 / 또래 982)</td>
+</tr>
+<tr>
+  <td><b>정확도는 여러 독립 관찰의 누적에서 나온다</b>. 행동 결과(학업·직무) 예측에서 타인평정이 자기보고를 실질 능가 + 증분타당도. <b>단일 관찰자는 불충분 — .80 신뢰도에 5~10명 집계</b> 필요. 결합 시 ρ=.55(일반지능 ~.50 능가). <span class="tag verified">3-0</span></td>
+  <td class="src">Connelly & Ones 2010 메타 N=44,178; Oh et al. 2011</td>
+</tr>
+<tr>
+  <td><b>성격 피드백 제시는 행동을 바꾼다</b>(자기충족·라벨 효과) → 잠정적·근거기반 제시 필수, 단정 금지. <span class="tag verified">3-0</span></td>
+  <td class="src">(deep-research 확정 claim; 포러/라벨 효과 문헌과 수렴)</td>
+</tr>
+</table>
+
+<div class="warn small">
+  <strong>정직 고지(검증 경계).</strong> (a)(b) 자기-타인 정확도·다원 소스는 <b>강하게 입증</b>됨. 그러나 <b>(c) 저널링·표현적 글쓰기(Pennebaker)·narrative identity(McAdams), (d) ESM 반복관찰, (e) AI/LLM 텍스트 추론 정확도</b>는 이번 verify 통과 claim에서 1차 문헌으로 직접 입증되지 않음 → <b>후속 deep-research 필요</b>. 아래 설계의 (c)(d)(e) 의존 부분은 "유망하나 미검증"으로 표기.
+</div>
+
+<!-- IMPLICATION -->
+<h2>2. 2nd-B에 대한 구조적 함의 (핵심)</h2>
+<div class="key">
+  <b>2nd-B는 "자기보고(저널) 단일 소스" 제품이다.</b> 그런데 과학은 <b>자기보고가 가장 부정확한 영역 = 평가적·도덕적·외현 특성 + self-enhancement 사각지대</b>라고 정확히 지목한다. 즉 <b>제품이 돕고 싶은 바로 그 영역에서 단일 자기보고는 구조적 정확도 천장</b>에 걸린다. → 보강 없이는 "정확한 자기파악"을 약속할 수 없다(XPRIZE·Barnum 리스크와도 직결).
+</div>
+<p>다행히 2nd-B의 자산(매일 누적되는 기록 = <b>다수의 독립 관찰</b>)은 과학이 말하는 정확도의 원천("여러 독립 관찰의 누적")과 정확히 맞물린다. 관건은 <b>그 기록을 "자기평가"가 아니라 "행동 흔적(=타인관찰 대용)"으로 다루는 것</b>이다.</p>
+
+<!-- STRUCTURE -->
+<h2>3. 권장 구조 — "사람을 가장 정확히 파악하는" 6원칙 → 2nd-B 적용</h2>
+
+<div class="panel">
+<div class="pr"><span class="num">1</span><div><b>특성을 SOKA로 계층화한다.</b> 내적·비평가적 특성(불안·기분·내적 가치·정서)은 <b>자기보고(저널 텍스트)를 높은 신뢰로</b>. 외현·평가적·도덕적 특성(성실성-실행·대인 인상·도덕 패턴)은 <b>행동 흔적에서 추론하고 낮은 신뢰 + 관찰로</b>.<br><span class="small muted">2nd-B 적용: <code>persona/build.ts</code>의 trait 합성에 <b>trait별 confidence + 소스 표기</b> 추가. 내적=저널 기반 / 외현·도덕=행동 기반.</span></div></div>
+
+<div class="pr"><span class="num">2</span><div><b>"행동 흔적"을 타인관찰의 대용으로 삼는다.</b> 진짜 타인 평정자가 없으므로, <b>사용자가 실제로 기록·수행한 것(무엇을 했는지·무엇을 캡처·반복 행동)</b>을 객관 행동 신호로 써서 평가적 특성을 추론한다 — <b>사용자의 자기평가가 아니라.</b> 이게 정확도 최대 레버다.<br><span class="small muted">2nd-B 적용: persona 추론을 "사용자가 자신을 어떻게 평가했나"가 아니라 "기록된 행동 패턴이 무엇을 시사하나"로. 평가적 특성에 self-rating 직접 사용 지양.</span></div></div>
+
+<div class="pr"><span class="num">3</span><div><b>스냅샷이 아니라 시계열로 누적한다.</b> 정확도는 다수 독립 관찰의 집계에서 온다. 1회 검사보다 <b>여러 entry에 반복 출현한 패턴</b>을 가중. <b>관찰 누적 횟수를 confidence로</b>.<br><span class="small muted">2nd-B 적용(구조적 강점): "이 패턴은 N개 기록에서 반복" 표기. MBTI/1회 검사형은 강등(이미 진행), 누적 관찰형을 1급으로.</span></div></div>
+
+<div class="pr"><span class="num">4</span><div><b>객관 준거로 근거를 단다(일치가 아니라 행동).</b> 모든 추론 특성은 <b>그게 나온 실제 entry를 인용</b>한다. "자기-타인 일치"나 quiz 점수가 아니라 사용자의 실제 행동·기록이 준거.<br><span class="small muted">2nd-B 적용: C8(인용 시 DOI/URL+검증) 정신을 persona 인사이트에도 — "당신의 N월 N일 기록에서". Barnum·source-transparency 동시 충족.</span></div></div>
+
+<div class="pr"><span class="num">5</span><div><b>잠정적으로 제시한다(단정 금지).</b> 피드백 라벨 자체가 행동을 바꾸므로(자기충족), confidence를 관찰 수·관찰가능성에 맞춰 노출하고 <b>도덕·평가적 특성은 "자기보고 사각지대 — 가볍게 보세요"로 플래그</b>.<br><span class="small muted">2nd-B 적용: DESIGN.md voice("관찰이지 단정 아님")와 일치. "당신은 X다" 금지, "기록상 ~ 경향이 보입니다(관찰 N회)".</span></div></div>
+
+<div class="pr"><span class="num">6</span><div><b>(v-next) 외부 관점 모듈.</b> 단일 관찰자는 불충분(5~10명 이상적)이나 <b>1~2명만 추가해도 증분타당도</b>. 신뢰하는 타인 초대 평정(소수)이나, SecondB가 <b>자기서사를 빼고 행동만 되비추는 "외부 관찰자 모드"</b>로 사각지대(특히 도덕·대인 인상) 보강.<br><span class="small muted">2nd-B 적용: 선택 기능. 프라이버시·동의 경계 준수(consent_records). 미검증 영역이라 실험적으로.</span></div></div>
+</div>
+
+<div class="key small">
+  <b>한 줄 요약 구조:</b> <b>내적 특성=저널 자기보고(고신뢰)</b> + <b>외현·도덕 특성=행동 흔적 추론(저신뢰·관찰)</b> + <b>시계열 누적(관찰 N회=confidence)</b> + <b>실제 entry 인용(객관 준거)</b> + <b>잠정 제시(단정·Barnum 금지)</b> + <b>(선택) 외부 관점</b>. 이 결합이 단일 자기보고보다 구조적으로 더 정확하다.
+</div>
+
+<!-- NEXT -->
+<h2>4. 다음 단계 (구현·검증)</h2>
+<ol>
+  <li><b>persona/inference 엔진 스펙</b>으로 위 6원칙을 반영 — trait별 source/confidence/관찰수/근거-entry 구조. (Claude 설계 → 구현)</li>
+  <li><b>(c)(d)(e) 후속 deep-research</b> — 표현적 글쓰기 효과·ESM·LLM 텍스트 추론 정확도(미검증)를 별도 검증해 설계 보강.</li>
+  <li><b>docs 반영</b> — 이 구조를 <code>docs/</code>의 근거 자료(VISION/ARCHITECTURE)에 "정확한 인물 모델 원칙"으로 추가(정합성 유지).</li>
+  <li><b>Curator(C8) 연동</b> — 위 1차 문헌(Vazire·Carlson·Thielmann·Bollich·Connelly&Ones)을 knowledge_sources에 검증 인용으로 등록.</li>
+</ol>
+
+<p class="small muted" style="margin-top:36px;border-top:1px solid var(--line);padding-top:14px">
+산출 위치: 허브 <code>projects/2nd-B/accurate-person-model-structure.html</code> · 근거: deep-research 출력(22/25 검증) + docs-consistency 감사 + 기존 프레임워크(Big Five/SDT/Attachment/VIA). 미검증 영역(c·d·e)은 후속 조사 대상으로 명시.
+</p>
+</div>
+</body>
+</html>
