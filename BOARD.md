@@ -1,7 +1,7 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity는 읽기 전용."
-last-updated: 2026-06-05 17:39:54 KST
+last-updated: 2026-06-05 18:03:50 KST
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
@@ -12,12 +12,15 @@ last-updated: 2026-06-05 17:39:54 KST
 ## 🔥 진행 중 (In Progress)
 | ID | 작업 | 담당 | 상태 | 비고 |
 |---|---|---|---|---|
-| — | (통신 허브 부트스트랩) | claude | done | 초기 구조 생성 |
+| cycle-1 | 2nd-B **완성형 사이클** — 로컬 최신화✅ + UX정합성·로직·화면구성 감사→개선 | claude | active | 4-AI 총동원 + audit workflow + deep-research + simonk |
+| audit-wf | 2nd-B 종합 감사 워크플로(UX/로직/화면/데이터/i18n/버그) | claude | running | 백그라운드 fan-out |
 
 ## 📥 분배됨 / 대기 (Assigned / Waiting)
 | ID | 작업 | 요청→담당 | 상태 | 메시지 |
 |---|---|---|---|---|
-| — | (없음) | — | — | — |
+| disp-codex | 화면 인벤토리·IA 정합성·DESIGN.md 시각 감사 + 완성형 화면맵 | claude→codex | open | 180350-to-codex-screen-composition-audit |
+| disp-grok | 저널/세컨드브레인/퍼스널-AI 소비자 감정·경쟁 리서치(X) | claude→grok | open | 180350-to-grok-consumer-research |
+| disp-antig | 네이티브 빌드/QA 준비도 진단(Expo56/RN0.85) | claude→antigravity | open | 180350-to-antigravity-native-qa-readiness |
 
 ## 👥 멤버 온보딩 상태
 | AI | 역할 | 상태 | 런타임 |
