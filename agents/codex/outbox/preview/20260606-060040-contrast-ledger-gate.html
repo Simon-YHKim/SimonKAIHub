@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Gate - Contrast Ledger</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a0f1d;
+      --panel: #111827;
+      --panel2: #162033;
+      --text: #eef4ff;
+      --muted: #aab7d4;
+      --line: #2a3958;
+      --accent: #8bd3ff;
+      --risk: #ff9aa8;
+      --warn: #fcd34d;
+      --ok: #9be7c4;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    main { max-width: 1120px; margin: 0 auto; padding: 36px 20px 56px; }
+    header { display: grid; gap: 12px; margin-bottom: 22px; }
+    .eyebrow { color: var(--accent); font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 44px); line-height: 1.1; letter-spacing: 0; }
+    p { margin: 0; color: var(--muted); }
+    .score {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 10px;
+      border: 1px solid rgba(252, 211, 77, .45);
+      border-radius: 8px;
+      color: var(--warn);
+      background: rgba(252, 211, 77, .1);
+      font-weight: 800;
+    }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .wide { grid-column: 1 / -1; }
+    h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+    table { width: 100%; border-collapse: collapse; color: var(--muted); margin-top: 10px; }
+    th, td { padding: 9px 8px; border-top: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: var(--text); font-size: 13px; }
+    td:nth-child(2), td:nth-child(3) { white-space: nowrap; }
+    ul, ol { margin: 8px 0 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 6px 0; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+      color: #dbeafe;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 1px 5px;
+    }
+    .risk { color: var(--risk); }
+    .ok { color: var(--ok); }
+    .rule {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 12px;
+      padding: 12px 0 0;
+      margin-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+    .rule strong { color: var(--text); }
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+      .rule { grid-template-columns: 1fr; gap: 4px; }
+      td:nth-child(2), td:nth-child(3) { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex to Claude · UI/UX Gate</div>
+      <h1>Contrast Ledger / Light Palette</h1>
+      <p>어두운 기본 팔레트는 대부분 통과한다. 문제는 대비 테스트 부재, light palette의 normal text 실패, 그리고 sign-in disabled CTA의 whole-opacity 처리다.</p>
+      <div class="score">Score: 98/100 provisional · contrast proof gate open</div>
+    </header>
+
+    <section class="grid">
+      <article class="card wide">
+        <h2>Measured Contrast</h2>
+        <table>
+          <thead><tr><th>Pair</th><th>Ratio</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr><td>Dark subtle on dark surface</td><td>6.39</td><td class="ok">Pass</td></tr>
+            <tr><td>Primary button text on mint</td><td>14.30</td><td class="ok">Pass</td></tr>
+            <tr><td>Danger button text on dark danger wash</td><td>5.66</td><td class="ok">Pass</td></tr>
+            <tr><td>Light <code>textSubtle</code> on bg</td><td>4.18</td><td class="risk">Fail normal text</td></tr>
+            <tr><td>Light <code>textSubtle</code> on surface</td><td>3.89</td><td class="risk">Fail normal text</td></tr>
+            <tr><td>Light <code>warning</code> on bg</td><td>4.35</td><td class="risk">Fail normal text</td></tr>
+            <tr><td>Sign-in disabled submit after <code>opacity: .4</code></td><td>3.04</td><td class="risk">Weak state legibility</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="card">
+        <h2 class="risk">P2 · Light Palette</h2>
+        <p><code>tokens.ts:162-176</code>, <code>Text.tsx:19</code></p>
+        <ul>
+          <li><code>textSubtle</code> is used at 12px and fails on light bg/surface.</li>
+          <li><code>warning</code> also fails normal text on light bg.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2 class="risk">P2 · Missing Tests</h2>
+        <p><code>lightCosmic.test.ts:8-41</code></p>
+        <ul>
+          <li>Current tests lock shape and color family.</li>
+          <li>They do not assert contrast minima for text or buttons.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>P3 · Sign-In Disabled CTA</h2>
+        <p><code>sign-in.tsx:226-229</code>, <code>:419</code></p>
+        <ul>
+          <li>Whole-control <code>opacity: 0.4</code> dims text and background together.</li>
+          <li>Use dedicated disabled tokens like <code>PremiumButton</code>.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>Proof Needed</h2>
+        <ul>
+          <li>Automated contrast tests for dark and light semantic tokens.</li>
+          <li>Sign-in disabled state screenshot.</li>
+          <li>Light mode proof if the Light promise remains.</li>
+        </ul>
+      </article>
+
+      <article class="card wide">
+        <h2>Acceptance Criteria</h2>
+        <div class="rule"><strong>Token Tests</strong><p>semantic dark/light text tokens and button pairs have automated contrast assertions.</p></div>
+        <div class="rule"><strong>Light Fix</strong><p><code>textSubtle</code> and <code>warning</code> clear 4.5:1 for normal text on light backgrounds/surfaces.</p></div>
+        <div class="rule"><strong>Disabled CTA</strong><p>Pre-auth sign-in disabled buttons use dedicated disabled colors and show the reason the user cannot continue.</p></div>
+        <div class="rule"><strong>Theme Link</strong><p>Resolve with the existing theme contract gate: Light is either real and contrast-safe, or removed/renamed.</p></div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

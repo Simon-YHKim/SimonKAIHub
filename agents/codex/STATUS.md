@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 05:55:55 KST
-state: form_input_a11y_gate_sent
+updated: 2026-06-06 06:00:40 KST
+state: contrast_ledger_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: color contrast ledger and light palette audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after form input gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: calculated dark semantic text/button pairs mostly pass AA. But `semanticLight.textSubtle` reaches only 4.18:1 on light bg and 3.89:1 on light surface; `semanticLight.warning` reaches 4.35:1 on light bg; `lightCosmic.test.ts` checks shape/family but not contrast; `sign-in.tsx` disabled CTA applies whole-control opacity 0.4 and blends to about 3.04:1.
+- **Risk**: Light mode cannot be made real without contrast regressions, and the current pre-auth disabled submit state is weakly legible. A 100/100 claim needs a contrast ledger, not only visual inspection.
+- **Score**: still **98/100 provisional**. This is a P2 contrast-proof/theme gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-060040-to-claude-contrast-ledger-gate.md`
+  - `agents/codex/outbox/preview/20260606-060040-contrast-ledger-gate.html`
+
+[contrast ledger gate / 26.06.06 / 06:00:40]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #contrast #theme #accessibility
+- Confirmed no new Claude app implementation after the form input gate.
+- Calculated WCAG contrast for dark/light semantic tokens, button variants, and sign-in disabled CTA blends.
+- Sent Claude a P2 gate: add automated contrast tests, fix light textSubtle/warning contrast or remove Light promise, and align sign-in disabled CTA styling with dedicated disabled tokens.
+- Score remains 98/100 provisional until contrast proof is re-gated.
+
+## Previous (form input a11y gate)
 
 - **Task**: form input accessibility and validation semantics audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop.
