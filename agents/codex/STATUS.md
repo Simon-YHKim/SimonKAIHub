@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-05 22:08:43 KST
+updated: 2026-06-05 22:12:18 KST
 state: waiting_on_claude
 ---
 
@@ -9,7 +9,7 @@ state: waiting_on_claude
 
 ## Current
 
-- **현재 작업**: Grok capstone `20260605-220000`을 현재 2nd-B source와 대조하고, live source에 남은 trust-copy blocker를 Claude에게 파일별 gate로 추가 보고 완료.
+- **현재 작업**: Claude 최신 commit `1a55147` onboarding Android hardware-back fix를 Codex anti-slop 100점 gate로 재검토하고, narrow pass/global fail 의견을 Claude에게 보고 완료.
 - **출처**: src: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
 - **적용 기준**: SimonK-stack `design-review`, `ai-slop-cleaner`, `frontend-ui-ux` 기준을 참고하되, 2nd-B의 Cosmic Pixel Graph 정체성과 실제 화면 사용성에 맞게 100-point anti-slop rubric으로 변환.
 - **최신 산출물**:
@@ -25,10 +25,20 @@ state: waiting_on_claude
   - `agents/codex/outbox/preview/20260605-220459-bottom-sheet-backhandler-review/index.html`
   - `agents/codex/outbox/20260605-220843-to-claude-grok-capstone-source-copy-gate.md`
   - `agents/codex/outbox/preview/20260605-220843-grok-capstone-source-copy-gate/index.html`
+  - `agents/codex/outbox/20260605-221218-to-claude-onboarding-backhandler-review.md`
+  - `agents/codex/outbox/preview/20260605-221218-onboarding-backhandler-review/index.html`
   - `agents/codex/outbox/20260605-214415-to-claude-ai-slop-100-review-loop.md`
   - `agents/codex/outbox/preview/20260605-214415-ai-slop-100-review-loop/index.html`
-- **현재 판정**: `E:\2ndB` `claude/cycle-1-phase6-screens` at `f80b3de` 기준은 아직 100점 아님. Live source에 "An AI that learns you", "AI friend", "helps you find your next step", "sharper your Persona"류 trust-copy blocker가 남아 있고, `PremiumBottomSheet` back handler는 narrow pass이나 active graph sheets가 같은 contract를 쓰는지 증명되지 않았으며, lockfile residue, imagine UI residue, P0 merge regression, `/journal`, coming-soon, blank loading, interaction/accessibility gaps, surface drift가 남아 있다.
+- **현재 판정**: `E:\2ndB` `claude/cycle-1-phase6-screens` at `1a55147` 기준은 아직 100점 아님. Onboarding hardware back은 index>0에서 narrow pass이나 step 0 default back, onboarding/loading blank state, live trust-copy blockers, `PremiumBottomSheet` active-route coverage, lockfile residue, imagine UI residue, P0 merge regression, `/journal`, coming-soon, cross-route blank loading, interaction/accessibility gaps, surface drift가 남아 있다.
 - **다음**: Claude가 수정 완료/새 commit을 남기면 Codex가 최신 브랜치를 다시 검사하고 score 100/100 전까지 blocker와 delta를 반복 보고한다.
+
+[Onboarding back-handler 재리뷰 완료 / 26.06.05 / 22:12:18]
+#comm #codex #user #2nd-B #ui-ux #accessibility #android #onboarding #ai-slop #claude-request
+- 검토 commit: `1a55147 fix(android): onboarding 하드웨어 백버튼이 이전 step으로 (Antigravity #3)`
+- 판정: narrow PASS, global FAIL. `index > 0`에서 이전 step으로 돌아가는 것은 맞지만, step 0 default back/blank loading/trust-copy blockers가 남아 있음.
+- Static evidence: `if (loading) return null` 및 overclaim copy blockers가 여러 route/source에 여전히 존재.
+- Claude request 작성: `agents/codex/outbox/20260605-221218-to-claude-onboarding-backhandler-review.md`
+- HTML preview 작성: `agents/codex/outbox/preview/20260605-221218-onboarding-backhandler-review/index.html`
 
 [Grok capstone source-copy gate 보고 완료 / 26.06.05 / 22:08:43]
 #comm #codex #user #grok #2nd-B #ui-ux #trust-copy #ai-slop #claude-request
