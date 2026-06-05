@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex UI Gate - Micro Visual Debt Pack</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --panel: #121620;
+      --panel2: #171d29;
+      --text: #f4f7fb;
+      --muted: #9aa8b8;
+      --line: #2a3445;
+      --ok: #68d8a8;
+      --warn: #ffd166;
+      --bad: #ff7b7b;
+      --accent: #7cc7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1140px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 56px;
+    }
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: end;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 22px;
+      margin-bottom: 24px;
+    }
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 44px); line-height: 1.05; letter-spacing: 0; }
+    h2 { margin: 0 0 12px; font-size: 18px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 15px; letter-spacing: 0; color: var(--text); }
+    p { margin: 0 0 10px; color: var(--muted); }
+    .score {
+      min-width: 170px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 16px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .score strong { display: block; font-size: 34px; color: var(--warn); }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    section, .item {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .wide { grid-column: 1 / -1; }
+    .items { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 8px 0; color: var(--muted); }
+    b, code { color: var(--text); }
+    code {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: Consolas, monospace;
+      font-size: 0.92em;
+    }
+    .pass { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .tagrow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tag {
+      border: 1px solid var(--line);
+      color: var(--muted);
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+    @media (max-width: 800px) {
+      header, .grid, .items { grid-template-columns: 1fr; }
+      .score { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>Micro Visual Debt Pack</h1>
+        <p>Clean HEAD <code>22446f9</code> 기준, 실기기 없이 줄일 수 있는 정적 AI slop 후보를 분류했습니다.</p>
+        <div class="tagrow">
+          <span class="tag">branch: claude/cycle-1-golive</span>
+          <span class="tag">HEAD: 22446f9</span>
+          <span class="tag">2026-06-06 00:03:21 KST</span>
+        </div>
+      </div>
+      <div class="score">
+        <span>현재 점수</span>
+        <strong>94/100</strong>
+        <span class="warn">bounded pass pending</span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section>
+        <h2>우선 패치 후보</h2>
+        <div class="items">
+          <div class="item">
+            <h3>surfaces.tsx</h3>
+            <ul>
+              <li><code>brandChipSub</code> 8px는 11px 이상으로.</li>
+              <li>전역 <code>panelGlow</code> 강도를 낮추거나 hero/active에 한정.</li>
+              <li>secondary button halo는 줄이고 primary/active만 강조.</li>
+            </ul>
+          </div>
+          <div class="item">
+            <h3>DrillProgress.tsx</h3>
+            <ul>
+              <li><code>headerMicro</code> 9px, <code>headerLabel</code> 10px는 한국어 가독성 취약.</li>
+              <li>grid 크기는 고정 유지, 글자만 10-11px 또는 narrow에서 숨김.</li>
+              <li>active cell glow 0.7은 border/color 중심으로 낮춤.</li>
+            </ul>
+          </div>
+          <div class="item">
+            <h3>audit.tsx</h3>
+            <ul>
+              <li><code>completeBadgeText</code> 10px는 status text로 작음.</li>
+              <li>11-12px 또는 caption token 사용.</li>
+            </ul>
+          </div>
+          <div class="item">
+            <h3>interview.tsx</h3>
+            <ul>
+              <li><code>layerTag</code> 10px는 active workflow label로 작음.</li>
+              <li>11px 이상 또는 caption token으로 조정.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>유지할 표현</h2>
+        <ul>
+          <li><code>SceneHero</code>, <code>NavGraph</code>, graph bits glow는 제품 정체성입니다.</li>
+          <li>art sprite shadow는 asset language로 유지합니다.</li>
+          <li>tab bar 11px label은 스크린샷에서 truncation이 보이지 않으면 유지 가능합니다.</li>
+          <li>schema chip 11px는 dense technical chip으로 허용 가능합니다.</li>
+        </ul>
+      </section>
+
+      <section class="wide">
+        <h2>아직 100점이 아닌 이유</h2>
+        <ul>
+          <li>폼 화면 static patch는 끝났지만 Android keyboard-open proof가 없습니다.</li>
+          <li><code>interview</code>, <code>jarvis</code> composer는 아직 device proof 또는 Android bottom padding patch가 필요합니다.</li>
+          <li>OCR permission dialog, portrait/wide preview, graph background/resume proof가 남았습니다.</li>
+          <li>FlatList work는 AG 전용 브랜치에서 spacing/clipping proof와 함께 재작업해야 합니다.</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
