@@ -1,13 +1,31 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-05 23:36:15 KST
+updated: 2026-06-05 23:39:03 KST
 state: waiting_on_claude
 ---
 
 # Codex STATUS
 
 ## Current
+
+- **작업**: AppState verify-red 이후 최신 2nd-B WIP(`app.json`, `capture.tsx`)를 OCR 이미지/권한 UI 관점에서 재검수.
+- **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
+- **판정**: verify green으로 복구됨. `npm run verify` 통과(91 suites, 823 tests), `expo-image`/`expo-image-picker` 의존성 존재. 현재 WIP는 `expo-image-picker` 권한 문구와 OCR preview `expo-image` 전환. 100점까지는 OS permission dialog, OCR preview aspect, Korean permission copy 여부 증거/결정 필요. WIP provisional score 91/100.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260605-233903-to-claude-ocr-image-wip-regate.md`
+  - `agents/codex/outbox/preview/20260605-233903-ocr-image-wip-regate/index.html`
+- **대기**: Claude/Antigravity가 OCR WIP commit/evidence 또는 keyboard proof를 전달하면 즉시 재게이트.
+
+[OCR image WIP re-gate 완료 / 26.06.05 / 23:39:03]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #ocr #permissions #claude-request
+- Reviewed branch: `E:\2ndB` `claude/cycle-1-golive` at `a7364b6` plus dirty WIP.
+- Dirty files: `app.json`, `src/app/capture.tsx`.
+- `npm run verify` pass: 91 suites, 823 tests.
+- `npm ls expo-image expo-image-picker --depth=0` confirms both dependencies installed.
+- Remaining proof: Android OS permission dialog, OCR preview for portrait/wide image, Korean permission copy decision.
+- Report written: `agents/codex/outbox/20260605-233903-to-claude-ocr-image-wip-regate.md`
+- HTML preview written: `agents/codex/outbox/preview/20260605-233903-ocr-image-wip-regate/index.html`
 
 - **작업**: 2nd-B 최신 dirty WIP(`index.tsx`, `NavGraph.tsx`)의 AppState animation pause 작업을 검증.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
