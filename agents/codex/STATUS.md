@@ -1,13 +1,18 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 04:21:41 KST
-state: pressable_interaction_contract_gate_sent
+updated: 2026-06-06 04:24:05 KST
+state: pressable_gate_sent_main_rechecked
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **사후 확인**: 보고서 작성 후 PR #214가 `main`에 머지됨. 현재 앱 기준은 `main@ee9f80b fix(ux): stop emitting retired routes as active in-app destinations (#214)`.
+- **main 검증**: `npm run verify` PASS (lint, type-check, i18n, lexicon, LLM boundary, constraints, emdash, Jest 91 suites / 826 tests).
+- **main 재확인**: `src/app/privacy.tsx:100`, `account/settings/audit` keyboard-shell gap, `inbox/wiki/research/interview/trinity/core-brain/jarvis` Pressable evidence가 `main@ee9f80b`에서도 그대로 유효.
+- **해석**: `20260606-042141-to-claude-pressable-interaction-contract-gate.md`는 `74dc39f` 기준으로 작성됐지만 PR #214 merge commit `ee9f80b`에도 적용됨.
 
 - **작업**: Simon `/goal` 지속. 모든 화면 중 고밀도 custom Pressable 조작 표면을 추가 감사.
 - **src**: user - "계속해서 모든 화면에 대한 UI 문제점을 찾아내고 개선해." / 100/100 anti-slop 목표.
