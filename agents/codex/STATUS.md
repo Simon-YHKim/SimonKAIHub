@@ -1,20 +1,22 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 02:23:04 KST
-state: regated_944d2dc_flatlist
+updated: 2026-06-06 02:32:12 KST
+state: regated_b7472d5_raw_error_sweep
 ---
 
 # Codex STATUS
 
 ## Current (latest)
 
-- **작업**: Simon 지시 `/goal`에 따라 모든 화면 UI/UX와 AI slop를 100/100 기준으로 반복 게이트 중. Claude/AG의 최신 앱 커밋 `89eeaaa`를 즉시 재검수했다.
+- **작업**: Simon 지시 `/goal`에 따라 모든 화면 UI/UX와 AI slop를 100/100 기준으로 반복 게이트 중. Claude의 최신 앱 커밋 `b7472d5` raw-error sweep을 즉시 재검수했다.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
-- **앱 기준**: `E:\2ndB`, branch `antigravity/perf-flatlist`, head `944d2dc perf(ui): virtualize records/inbox/wiki lists with FlatList`, clean.
-- **검증**: `npm run verify` pass on `944d2dc`: lint/type-check/i18n/lexicon/LLM boundary/constraints/emdash/Jest green, 91 suites, 823 tests.
-- **현재 점수**: `944d2dc` re-gate = 92/100 provisional. P0 hook-order fixed and FlatList perf direction accepted, but raw error visibility in touched screens, persona diagnosis-copy policy conflict, consent/legal placeholder, provider/device proof, tiny wiki tag hitSlop, and missing runtime visual proof keep it below 100.
+- **앱 기준**: `E:\2ndB`, branch `claude/cycle-2-concept-consistency`, head `b7472d5 fix(ui): replace raw error messages with product-tone copy + retry across 11 screens`, clean.
+- **검증**: `npm run verify` pass on `b7472d5`: lint/type-check/i18n/lexicon/LLM boundary/constraints/emdash/Jest green, 91 suites, 823 tests. `git diff --check` pass.
+- **현재 점수**: `b7472d5` re-gate = 94/100 provisional. Raw-error slop and Grok trust-copy concerns are mostly closed, but persona diagnosis-copy policy conflict, unproven Google/Apple/Kakao provider buttons, consent/legal placeholder + no durable retry, small capture/wiki tap targets, and missing runtime visual proof keep it below 100.
 - **최신 산출물**:
+  - `agents/codex/outbox/20260606-023212-to-claude-b7472d5-raw-error-regate.md`
+  - `agents/codex/outbox/preview/20260606-023212-b7472d5-raw-error-regate.html`
   - `agents/codex/outbox/20260606-022304-to-claude-944d2dc-flatlist-regate.md`
   - `agents/codex/outbox/preview/20260606-022304-944d2dc-flatlist-regate.html`
   - `agents/codex/outbox/20260606-021454-to-claude-flatlist-wip-p0-preflight.md`
@@ -25,7 +27,16 @@ state: regated_944d2dc_flatlist
   - `agents/codex/outbox/preview/20260606-020542-wip-slop-cleanup-preflight.html`
   - `agents/codex/outbox/20260606-015756-to-claude-89eeaaa-perf-regate.md`
   - `agents/codex/outbox/preview/20260606-015756-89eeaaa-perf-regate.html`
-- **대기**: Claude/AG가 다음 raw-error/trust/proof cleanup을 커밋하거나 outbox 완료 보고하면 즉시 재게이트. 100점 전까지 반복.
+- **대기**: Claude/AG가 다음 persona/trust/provider/consent/tap-target/proof cleanup을 커밋하거나 outbox 완료 보고하면 즉시 재게이트. 100점 전까지 반복.
+
+[b7472d5 raw-error re-gate / 26.06.06 / 02:32:12]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #regate #raw-errors #grok
+- Detected Claude commit `b7472d5 fix(ui): replace raw error messages with product-tone copy + retry across 11 screens`; app worktree clean.
+- Ran `npm run verify`: pass, 91 suites, 823 tests. Ran `git diff --check`: pass.
+- Accepted: raw implementation errors are now product-tone alerts/inline errors across 11 screens; Grok's "AI friend/learns you/find next step" trust-copy risks are mostly reflected; user-visible `[MOCK]` is gone.
+- Score raised from 92 to 94/100 provisional.
+- Still not 100: persona `진단이 아니며/Not a diagnosis` source-of-truth conflict, always-visible Google/Apple/Kakao provider buttons without proof, consent legal placeholder + no durable ledger retry, small capture/wiki hit targets, and runtime visual proof gap.
+- Report/preview written and opened.
 
 [944d2dc FlatList re-gate / 26.06.06 / 02:23:04]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #flatlist #antigravity #regate
