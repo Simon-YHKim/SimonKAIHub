@@ -1,7 +1,7 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity는 읽기 전용."
-last-updated: 2026-06-06 02:48:00 KST
+last-updated: 2026-06-06 04:12:00 KST
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
@@ -12,7 +12,8 @@ last-updated: 2026-06-06 02:48:00 KST
 ## 🔥 진행 중 (In Progress)
 | ID | 작업 | 담당 | 상태 | 비고 |
 |---|---|---|---|---|
-| cycle-2 | 2nd-B **UX 완벽화 사이클** — 10커밋 green, Codex 95/100 상승중 | claude | executing | branch `claude/cycle-2-concept-consistency` @`65e5ac4`. HTML `agents/claude/outbox/preview/20260606-cycle2-progress.html` |
+| cycle-3 | 2nd-B **적대적 버그헌트 + 수정** — 42발견→P0:0/P1:3/P2:11/P3:13, 18+4수정 | claude | ✅ **머지+라이브** | PR #213 main `ada9bd2`, Codex 8.5 MERGE-SAFE(2 HIGH 블로커 잡고 수정). HTML `agents/claude/outbox/preview/20260606-overnight-summary.html` |
+| cycle-2 | 2nd-B UX 완벽화 — **머지+라이브** (PR #212, main `d8ba4a0`) | claude | ✅ done | Codex 97. FlatList·NavGraph LOD·raw에러·trust(persona/social/consent) |
 | cycle-1 | 2nd-B 완성형 사이클 — **머지 완료** (PR #211, main `0bfbfa3`) | claude | ✅ done | 보안·trust·route·Android네이티브·a11y |
 | research-2 | deep-research: 사람을 정확히 파악하는 구조(SOKA·informant·표현적글쓰기·ESM·LLM) | claude | 실행중 | → "구조" 설계 culminating 산출 |
 
@@ -45,9 +46,14 @@ last-updated: 2026-06-06 02:48:00 KST
 | onboard-antig | Antigravity(gemini) 허브 온보딩 + self-commit 실증 | antigravity | 2026-06-05 |
 | boot-0 | 3-AI 통신 프로토콜·구조 생성 | claude | 2026-06-05 |
 
-## 🧱 블로커 / 결정 대기 (Blocked / Decisions)
-- **consent 법무 카피 사인오프** (2nd-B cycle-2) — ConsentNotice placeholder + `LEXICON_LAST_LEGAL_REVIEW=null`. 런치 게이트, Simon/법무 결정 필요.
-- **런타임 device 증명** (2nd-B cycle-2) — AG Gradle 8.13 에뮬 빌드 성공, 스크린샷 수급 중(Codex 100점 요건).
+## 🧱 블로커 / 결정 대기 (Blocked / Decisions) — Simon 결정 필요 (cycle-3 펀치리스트)
+- **`EXPO_PUBLIC_FORCE_TIER="brain"`** — 페이월 전면 개방(테스트 기본값). judge/release 전 `off` 전환 여부 + 소유자. 무감독 변경 안 함.
+- **HIBP 네이티브 폴리필** — 유출비번 검사 네이티브 무력화. expo-crypto 의존성 추가 여부(미성년 비번 정책).
+- **consent 법무 사인오프** — ConsentNotice placeholder + `LEXICON_LAST_LEGAL_REVIEW=null`. + account 삭제 "삭제권" 카피 법무 리뷰.
+- **consent durable 큐** — 현재 in-memory 재시도. 앱 재시작 후 재전송 큐는 감독 패스 권장.
+- **social provider 실설정** — 라이브 Supabase 실등록 provider 확인 → 나머지 `ENABLE_*=false`.
+- **런타임 device 증명** — AG Gradle 8.13 에뮬 빌드 성공, 스크린샷 수급(Codex 100점).
+- **NavGraph perf ×3 + chat quota 타이밍** — 복잡파일/과금. 감독 패스.
 
 ## 📌 활성 프로젝트
 | 프로젝트 | 레포 | 경로 | 단계 |
