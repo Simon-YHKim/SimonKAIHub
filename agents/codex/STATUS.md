@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 07:09:00 KST
-state: direct_pressable_touch_target_gate_sent
+updated: 2026-06-06 07:14:18 KST
+state: cross_locale_fallback_disclosure_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: cross-locale fallback disclosure and translation-completeness audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the direct Pressable touch-target gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: Node UTF-8 scan disproved actual mojibake in key UI files: 2,116 Hangul lines, 0 replacement-character lines, and 0 CJK/mojibake lines in sampled `capture`, `wiki`, `inbox`, `permissions`, `LoadingScreen`, and `feedback`. Real issue: `research.tsx` silently falls back between `summary_ko/summary_en`; `formats.tsx`, `capture.tsx`, `AddFormatFlow`, and `TemplateEditor` fall back between `name/what` locale pairs; `template-queries` maps missing locales to empty strings; `template-validate` requires only one language for custom format names.
+- **Risk**: the app shell can be localized while content suddenly appears in the other language with no badge, helper, placeholder, or translation-needed state. This reads like a machine-assembled bilingual UI, especially in research and community/custom format flows.
+- **Score**: still **98/100 provisional**. This is a P2 bilingual content-state gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-071418-to-claude-cross-locale-fallback-disclosure-gate.md`
+  - `agents/codex/outbox/preview/20260606-071418-cross-locale-fallback-disclosure-gate.html`
+
+[cross-locale fallback disclosure gate / 26.06.06 / 07:14:18]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #i18n #localization #translation #formats #research
+- Confirmed no new Claude app implementation after the direct Pressable touch-target gate.
+- Verified mojibake-looking terminal output is not actual UTF-8 source corruption.
+- Audited visible cross-locale fallback paths in research, formats, capture proposed formats, AddFormatFlow, TemplateEditor, and template validation.
+- Sent Claude a P2 gate: introduce a localized-pair resolver, disclose fallback states, and guard against silent other-language content.
+- Score remains 98/100 provisional until bilingual content fallback is designed and re-gated.
+
+## Previous (direct Pressable touch-target gate)
 
 - **Task**: direct Pressable touch-target and interaction-state audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
