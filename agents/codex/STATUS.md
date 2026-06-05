@@ -1,85 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 00:25:51 KST
-state: root_temp_scripts_reappeared
+updated: 2026-06-06 00:29:48 KST
+state: expo_image_wip_regate_reported
 ---
 
 # Codex STATUS
 
 ## Current
 
-- **작업**: Simon 지시 - AI slop 100/100 목표. Claude가 관련 작업을 완료할 때마다 Codex가 모든 화면 UI/UX를 재리뷰하고, 100점까지 반복 의견 제공.
+- **작업**: Simon 지시 - 모든 화면 UI 문제를 계속 찾아내고, AI slop 100/100까지 Claude 작업물을 반복 리뷰.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
-- **검수 기준**: SimonK-stack 계열 `ai-slop-cleaner`, `visual-verdict`, `frontend-ui-ux`를 확인. 맹목 적용하지 않고, 실제 사용 화면의 작은 글자/무근거 그림자/중복/검증부족/키보드 occlusion 기준으로 판정.
-- **앱 상태**: `E:\2ndB` branch `claude/cycle-1-golive`, committed HEAD `6c506cf`. tracked worktree는 clean이나 root temp scripts `refactor_wiki.py`, `replace_image.py`가 untracked로 다시 나타남.
-- **평가**: `6c506cf` micro-type readability pass는 수용. 직전 `npm run verify` green(91 suites, 823 tests). 단 root temp scripts, `/account`, `/settings`, `/audit`, `/interview`, `/jarvis` keyboard P1 proof/patch와 Android device proof가 남아 **94/100 provisional**.
+- **검수 기준**: SimonK-stack `ai-slop-cleaner`, `visual-verdict`, `frontend-ui-ux`를 근거로 하되 2nd-B의 기존 dark premium/village system을 보존. 작은 글자, 무근거 glow/shadow, deprecated prop 잔여물, 임시 스크립트, 키보드 occlusion, 검증부족을 우선 점검.
+- **앱 상태**: `E:\2ndB` branch `claude/cycle-1-golive`, committed HEAD `6c506cf`. 현재 tracked WIP: `complete-profile`, `sign-up`, `IslandArt`, `TierIcon`, `WikiCardThumb`, `WorkerSprite`의 `Image` import가 `expo-image`로 전환됨. Untracked root scripts: `refactor_wiki.py`, `refactor_wiki2.py`, `replace_image.py`.
+- **검증**: 현재 WIP 기준 `npm run verify` pass: 91 suites, 823 tests. `git diff --check`, `npm run lint`, `npm run type-check` pass.
+- **평가**: `expo-image` 전환은 방향성은 좋지만 `resizeMode` deprecated compatibility prop가 8곳 남아 있고, root temp scripts가 있어 clean sign-off 불가. 기존 keyboard/device proof 게이트도 미해결. **93/100 provisional**.
 - **최신 산출물**:
-  - `agents/codex/outbox/20260606-002551-to-claude-root-temp-scripts-reappeared.md`
-  - `agents/codex/outbox/preview/20260606-002551-root-temp-scripts-reappeared/index.html`
-- **대기**: Claude가 새 keyboard scope를 patch/proof하면 Codex가 all-input scan과 anti-slop re-gate 반복.
+  - `agents/codex/outbox/20260606-002948-to-claude-expo-image-wip-regate.md`
+  - `agents/codex/outbox/preview/20260606-002948-expo-image-wip-regate/index.html`
+- **대기**: Claude가 expo-image cleanup, root temp script cleanup, keyboard/device proof를 반영하면 Codex가 all-screen re-gate 반복.
 
-[Root temp scripts reappeared / 26.06.06 / 00:25:51]
-#comm #codex #user #2nd-B #ui-ux #ai-slop #temp-scripts #claude-fyi
-- Reviewed branch: `E:\2ndB` `claude/cycle-1-golive` at `6c506cf`.
-- Tracked app worktree currently clean, but untracked root temp scripts are present: `refactor_wiki.py`, `replace_image.py`.
-- These are not a UI code regression, but they block final clean-head sign-off.
-- FYI written: `agents/codex/outbox/20260606-002551-to-claude-root-temp-scripts-reappeared.md`
-- HTML preview written: `agents/codex/outbox/preview/20260606-002551-root-temp-scripts-reappeared/index.html`
-
-[SimonK design skill basis loaded / 26.06.06 / 00:23:55]
-#comm #codex #user #2nd-B #ui-ux #ai-slop #simonk-stack #claude-fyi
-- Read relevant SimonK-stack skill guidance:
-  - `Harrness Eng\SimonK-stack\external\oh-my-claudecode\skills\ai-slop-cleaner\SKILL.md`
-  - `Harrness Eng\SimonK-stack\external\oh-my-claudecode\skills\visual-verdict\SKILL.md`
-  - `Harrness Eng\SimonK-stack\external\oh-my-openagent\src\features\builtin-skills\frontend-ui-ux\SKILL.md`
-- Applied as reviewer criteria: preserve behavior, evidence-dense review, small reversible fixes, no generic AI UI residue, no blind aesthetic overreach.
-- FYI written: `agents/codex/outbox/20260606-002355-to-claude-simonk-design-skill-basis.md`
-- HTML preview written: `agents/codex/outbox/preview/20260606-002355-simonk-design-skill-basis/index.html`
-
-[Verify green, config dirty re-gate / 26.06.06 / 00:21:30]
-#comm #codex #user #2nd-B #ui-ux #ai-slop #verify #claude-request
-- Reviewed branch: `E:\2ndB` `claude/cycle-1-golive` at `6c506cf`.
-- Temp scripts no longer present; `npm run verify` pass: 91 suites, 823 tests.
-- App worktree still dirty: `app.json`, `package.json`.
-- Micro pass accepted; score remains 94/100 provisional because keyboard/device proof gates remain.
-- Report written: `agents/codex/outbox/20260606-002130-to-claude-verify-green-config-dirty-regate.md`
-- HTML preview written: `agents/codex/outbox/preview/20260606-002130-verify-green-config-dirty-regate/index.html`
-
-[Micro pass accepted but verify red / 26.06.06 / 00:18:47]
-#comm #codex #user #2nd-B #ui-ux #ai-slop #verify #claude-request
-- Reviewed branch: `E:\2ndB` `claude/cycle-1-golive` at `6c506cf`.
-- Commit accepted for micro readability: `brandChipSub`, `completeBadgeText`, `layerTag`, `DrillProgress` header labels moved out of 8-10px residue range.
-- Worktree dirty: `app.json`, `package.json`, `refactor_wiki.py`, `replace-image.js`.
-- `npm run verify` failed at lint because `replace-image.js:27:13` has a parsing error.
-- Score: 94/100 provisional after micro pass; no 100 sign-off while verify is red and keyboard P1 scope remains.
-- Report written: `agents/codex/outbox/20260606-001847-to-claude-micro-pass-verify-red-regate.md`
-- HTML preview written: `agents/codex/outbox/preview/20260606-001847-micro-pass-verify-red-regate/index.html`
-
-[All-input keyboard scope correction 작성 / 26.06.06 / 00:13:16]
-#comm #codex #user #2nd-B #ui-ux #ai-slop #keyboard #claude-request
-- Reviewed branch: `E:\2ndB` `claude/cycle-1-golive` at `9a9795c`.
-- App worktree dirty: `src/app/inbox.tsx` WIP detected and left untouched.
-- Static all-input sweep found unaccounted input surfaces outside the prior six-form matrix.
-- New P1 patch/proof requests: `/account`, `/settings`, `/audit`.
-- P2 evidence-only surfaces: `/records`, `/wiki`; `/formats` embedded editors considered covered by parent keyboard-safe route.
-- Score adjusted: 95/100 -> 93/100 provisional until all input-bearing routes are classified or proven.
-- Report written: `agents/codex/outbox/20260606-001316-to-claude-all-input-keyboard-scope-correction.md`
-- HTML preview written: `agents/codex/outbox/preview/20260606-001316-all-input-keyboard-scope-correction/index.html`
-
-[NavGraph prune green re-gate 완료 / 26.06.06 / 00:06:39]
-#comm #codex #user #2nd-B #ui-ux #ai-slop #graph #android #claude-request
-- Reviewed branch: `E:\2ndB` `claude/cycle-1-golive` at `9a9795c`.
+[Expo-image WIP re-gate / 26.06.06 / 00:29:48]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #expo-image #claude-request
+- Reviewed branch: `E:\2ndB` `claude/cycle-1-golive` at `6c506cf` with current dirty WIP.
+- WIP changed six image-bearing files from React Native `Image` to `expo-image`.
+- Static/type evidence: local `expo-image` types mark `resizeMode` as deprecated compatibility and recommend `contentFit`/`contentPosition`.
+- `resizeMode` remains in auth hero and art sprite/thumb/icon components.
 - `npm run verify` pass: 91 suites, 823 tests.
-- Resolved: stale data-node drift-loop map cleanup in `NavGraph`.
-- Score: 95/100 at that gate. Remaining then: Android background/resume proof, OCR permission/preview proof, interview/jarvis keyboard proof or patch, micro type/shadow pass.
-- Report: `agents/codex/outbox/20260606-000639-to-claude-navgraph-prune-green-regate.md`
-- Preview: `agents/codex/outbox/preview/20260606-000639-navgraph-prune-green-regate/index.html`
-
-[Micro visual debt pack 작성 / 26.06.06 / 00:03:21]
-#comm #codex #user #2nd-B #ui-ux #ai-slop #visual-debt #claude-request
-- Reviewed branch: `E:\2ndB` `claude/cycle-1-golive` at `22446f9`.
-- Patch candidates: `surfaces.tsx` brand chip/glow tuning, `DrillProgress.tsx` micro headers, `audit.tsx` complete badge, `interview.tsx` layer tag.
-- Keep as intentional unless screenshot proof fails: graph bits, SceneHero/NavGraph/art sprites, most modal elevation, schema chips/tab labels.
-- Report: `agents/codex/outbox/20260606-000321-to-claude-micro-visual-debt-pack.md`
-- Preview: `agents/codex/outbox/preview/20260606-000321-micro-visual-debt-pack/index.html`
+- Root temp scripts remain: `refactor_wiki.py`, `refactor_wiki2.py`, `replace_image.py`.
+- Score: 93/100 provisional; no final sign-off.
+- Report written: `agents/codex/outbox/20260606-002948-to-claude-expo-image-wip-regate.md`
+- HTML preview written: `agents/codex/outbox/preview/20260606-002948-expo-image-wip-regate/index.html`
