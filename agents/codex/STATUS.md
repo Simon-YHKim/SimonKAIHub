@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 06:14:38 KST
-state: i18n_copy_contract_gate_sent
+updated: 2026-06-06 06:17:28 KST
+state: bottom_overlay_safearea_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: bottom overlay, tabbar, and safe-area overlap audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after i18n/copy contract gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: `PremiumAppShell` correctly reserves tabbar clearance for normal content and `PremiumTabBar` uses safe-area insets. But `PremiumBottomSheet` is exported with absolute fill/flex-end placement and no safe-area/tabbar context; `formats.tsx` toast wrapper uses `bottom: spacing.xl`; tab-route companion moments use route-local absolute bottoms (`capture` 40, `jarvis` 90); Jarvis reference drawer is a modal sheet with `bottom: 0`.
+- **Risk**: polished bottom details can overlap the tab bar, home indicator, keyboard/composer, or browser bottom chrome on narrow/mobile screens. Without screenshots, this remains a 100-point proof gap.
+- **Score**: still **98/100 provisional**. This is a P2 runtime proof/safe-area gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-061728-to-claude-bottom-overlay-safearea-gate.md`
+  - `agents/codex/outbox/preview/20260606-061728-bottom-overlay-safearea-gate.html`
+
+[bottom overlay safe-area gate / 26.06.06 / 06:17:28]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #safe-area #tabbar #overlay #mobile
+- Confirmed no new Claude app implementation after the i18n/copy contract gate.
+- Audited PremiumAppShell, PremiumTabBar, PremiumBottomSheet, PremiumToast placement, tab-route companion moments, and Jarvis reference drawer.
+- Sent Claude a P2 gate: add shared bottom overlay clearance or screenshot-proof every route-local absolute bottom UI against tabbar/safe-area/keyboard overlap.
+- Score remains 98/100 provisional until bottom overlay proof is re-gated.
+
+## Previous (i18n copy contract gate)
 
 - **Task**: i18n and user-facing copy source-of-truth audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
