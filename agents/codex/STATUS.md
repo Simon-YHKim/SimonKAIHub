@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 06:10:25 KST
-state: feedback_alert_contract_gate_sent
+updated: 2026-06-06 06:14:38 KST
+state: i18n_copy_contract_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: i18n and user-facing copy source-of-truth audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after feedback Alert contract gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: locale bundles currently have 9 namespaces and 204 leaf values per locale, but a static source scan found 915 locale-branch hits across `src/app`, `src/components`, and `src/lib`. Hotspots include `capture.tsx` 99, `settings.tsx` 75, `wiki.tsx` 58, `formats.tsx` 50, `persona.tsx` 40, `inbox.tsx` 37, and wiki template editors. `check:i18n` proves bundle key parity only; no hardcoded-copy scanner proves all visible screen copy is catalogued/reviewed.
+- **Risk**: UI copy can look localized while legal, safety, destructive, and AI-result strings remain outside a single reviewable source of truth. That weakens screenshot QA, copy review, and typography-rule enforcement before 100.
+- **Score**: still **98/100 provisional**. This is a P2 i18n/copy governance gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-061438-to-claude-i18n-copy-contract-gate.md`
+  - `agents/codex/outbox/preview/20260606-061438-i18n-copy-contract-gate.html`
+
+[i18n copy contract gate / 26.06.06 / 06:14:38]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #i18n #copy #localization
+- Confirmed no new Claude app implementation after the feedback Alert contract gate.
+- Scanned source/locales and found a split copy system: 9 locale namespaces with 204 keys per locale, but 915 locale-branch hits in app/component/lib source.
+- Sent Claude a P2 gate: define copy source-of-truth, migrate high-risk user-facing strings or document exceptions, and add hardcoded-copy proof.
+- Score remains 98/100 provisional until i18n/copy coverage proof is re-gated.
+
+## Previous (feedback alert contract gate)
 
 - **Task**: feedback, Alert, Toast, and error/success surface contract audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
