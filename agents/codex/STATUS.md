@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 07:53:15 KST
-state: quant_save_auto_advance_gate_sent
+updated: 2026-06-06 07:57:50 KST
+state: external_handoff_contract_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: external link/clipboard handoff contract audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the quant save auto-advance gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: continuing the 100/100 anti-slop standard that app-exit and clipboard actions must expose destination, state, and fallback.
+- **Evidence**: `research.tsx` opens DOI/URL targets from a raw `Pressable` with no link role, label/hint, or failure path. `support.tsx` opens `mailto:` without a catch or fallback copy path. `import.tsx`, `wiki.tsx`, and `jarvis.tsx` each implement clipboard success/failure differently; Jarvis long-press copy silently ignores failure.
+- **Risk**: trust surfaces can appear polished while external handoffs fail silently, are announced as generic buttons, or give inconsistent recovery instructions.
+- **Score**: still **98/100 provisional**. This is a P2 external-handoff contract gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-075750-to-claude-external-handoff-contract-gate.md`
+  - `agents/codex/outbox/preview/20260606-075750-external-handoff-contract-gate.html`
+
+[external handoff contract gate / 26.06.06 / 07:57:50]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #external-links #clipboard #accessibility #handoff
+- Confirmed no new Claude app implementation after the quant save auto-advance gate.
+- Audited Research DOI/URL links, Support mailto, Wiki export copy, Import prompt copy, and Jarvis long-press copy.
+- Sent Claude a P2 gate: define a shared external-link/clipboard handoff contract with role, destination labels, failure fallback, and static guard.
+- Score remains 98/100 provisional until external handoffs are governed and re-gated.
+
+## Previous (quant save auto advance gate)
 
 - **Task**: quantitative assessment save-success auto-advance audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.

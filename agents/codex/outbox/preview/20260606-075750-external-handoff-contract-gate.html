@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex UI Gate - External Handoff Contract</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --panel: #151923;
+      --panel2: #10141c;
+      --text: #eef2f7;
+      --muted: #a9b2c3;
+      --line: #2b3342;
+      --warn: #ffd166;
+      --bad: #ff7272;
+      --good: #79e0aa;
+      --accent: #8db7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
+    header, section, .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    header {
+      padding: 26px;
+      background: linear-gradient(180deg, #171c27, #10141c);
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(26px, 4vw, 42px); line-height: 1.1; letter-spacing: 0; }
+    h2 { font-size: 20px; margin-bottom: 12px; }
+    h3 { font-size: 16px; margin-bottom: 8px; }
+    section { margin-top: 18px; padding: 18px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 10px;
+      color: var(--muted);
+      background: #0e121a;
+      font-size: 13px;
+    }
+    .score { color: var(--warn); border-color: #6a5523; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .card {
+      padding: 16px;
+      min-height: 178px;
+    }
+    .bad { border-color: #673238; }
+    .bad h3 { color: var(--bad); }
+    .good { border-color: #2f6547; }
+    .good h3 { color: var(--good); }
+    .path {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      color: var(--accent);
+      word-break: break-all;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 6px 0; }
+    .handoff {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .row {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: var(--panel2);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+    }
+    .label { font-weight: 700; }
+    .hint { color: var(--muted); font-size: 13px; margin-top: 2px; }
+    .action {
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 9px 12px;
+      color: var(--text);
+      background: #17243a;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .acceptance {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .acceptance div {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: var(--panel2);
+      color: var(--muted);
+    }
+    .callout {
+      border-left: 4px solid var(--warn);
+      padding: 12px 14px;
+      background: #17170f;
+      color: var(--muted);
+    }
+    @media (max-width: 760px) {
+      .grid, .acceptance { grid-template-columns: 1fr; }
+      .row { grid-template-columns: 1fr; }
+      header, section { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>External Handoff Contract Gate</h1>
+      <p style="margin-top: 12px; color: var(--muted); max-width: 780px;">
+        Research citations, support email, exports, and clipboard actions need a shared handoff contract with destination, feedback, and fallback.
+      </p>
+      <div class="meta">
+        <span class="pill score">Score: 98/100 provisional</span>
+        <span class="pill">Priority: P2</span>
+        <span class="pill">Target: Claude implementation</span>
+        <span class="pill">Created: 2026-06-06 07:57 KST</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Finding</h2>
+      <p style="color: var(--muted);">
+        App-exit and clipboard actions are implemented independently. Some are anonymous buttons, some silently fail, and some rely on default alerts.
+      </p>
+      <div class="grid">
+        <div class="card bad">
+          <h3>Research Links</h3>
+          <div class="path">src/app/research.tsx:206-216</div>
+          <p>DOI/URL opens through raw Pressable without link role, destination hint, or failure path.</p>
+        </div>
+        <div class="card bad">
+          <h3>Support Mail</h3>
+          <div class="path">src/app/support.tsx:96</div>
+          <p>mailto opens without catch or copyable-address fallback if no mail client exists.</p>
+        </div>
+        <div class="card bad">
+          <h3>Clipboard Drift</h3>
+          <div class="path">import.tsx, wiki.tsx, jarvis.tsx</div>
+          <p>Copy success, failure, unsupported, and silent long-press behavior differ by screen.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Expected Contract</h2>
+      <div class="handoff">
+        <div class="row">
+          <div>
+            <div class="label">Open DOI in browser</div>
+            <div class="hint">doi.org/10.xxxx - opens outside 2nd-B</div>
+          </div>
+          <div class="action">Open link</div>
+        </div>
+        <div class="row">
+          <div>
+            <div class="label">Copy support email</div>
+            <div class="hint">Used if the mail app cannot open.</div>
+          </div>
+          <div class="action">Copy</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Required Fix</h2>
+      <ul>
+        <li>Add shared ExternalLinkButton / CopyAction helpers.</li>
+        <li>Expose link role, localized labels, destination/domain, and failure fallback.</li>
+        <li>Mailto support must provide a copyable email fallback.</li>
+        <li>Clipboard actions must share success/failure feedback and manual-copy fallback.</li>
+        <li>Guard raw Linking.openURL and navigator.clipboard usage.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Acceptance Proof</h2>
+      <div class="acceptance">
+        <div>Research DOI/URL links expose role=link and fallback behavior.</div>
+        <div>Support mailto has no-mail-client fallback and copyable address.</div>
+        <div>Wiki export copy uses shared feedback/fallback.</div>
+        <div>Import prompt copy does not silently fail with existing user text.</div>
+        <div>Jarvis chat copy is discoverable or removed in favor of text selection.</div>
+        <div>Static scan covers raw openURL and clipboard usage.</div>
+      </div>
+    </section>
+
+    <section>
+      <div class="callout">
+        Until this closes, Codex keeps the anti-slop score at 98/100 provisional.
+      </div>
+    </section>
+  </main>
+</body>
+</html>
