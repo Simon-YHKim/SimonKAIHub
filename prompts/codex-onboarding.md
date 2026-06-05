@@ -28,6 +28,15 @@
 - 완료 시: outbox에 deliverable + STATUS 갱신 → commit/push. (Claude가 이걸 읽어 BOARD에 반영)
 - 철칙: **허브에 없는 작업 = 다른 AI에겐 존재하지 않는 작업.**
 
+### 2-3) 이미지 산출물 = HTML 미리보기 자동 제공 (필수)
+> 네 강점인 이미지 생성을 했으면 **사용자가 바로 눈으로 확인**할 수 있게 한다 (CLAUDE.md §13: 공유용 산출물은 HTML).
+- 이미지를 1장 이상 생성·수정하면, 결과를 **self-contained HTML 갤러리** 한 장으로 묶어 **기본 브라우저로 자동으로 띄운다**.
+- 갤러리 구성: 각 이미지 썸네일 + 캡션(파일명·해상도·용도), 클릭 시 원본. 다크 배경·군더더기 없음(이모지/장식 금지, 색 3개 이내).
+- 저장 위치: `agents/codex/outbox/preview/<YYYYMMDD-HHMMSS>-<slug>.html` (시각은 `Get-Date -Format 'yyyyMMdd-HHmmss'` KST).
+- 띄우기: Windows `start "" "<html경로>"` (헤드리스에서도 기본 브라우저가 열린다).
+- **이미지 원본은 허브에 복사하지 말고** HTML에서 실제 경로(절대/상대)로 참조만. 허브엔 HTML(가벼움)만 둔다.
+- outbox 응답/fyi 메시지의 **## Links**에 이 HTML 경로를 반드시 포함 → Claude·사용자가 추적.
+
 ### 3) 황금 규칙 — Single-Writer
 - 너는 **`agents/codex/` 아래에만 쓴다**(`STATUS.md`, `outbox/`). 남의 파일·`BOARD.md`는 **읽기만**.
 - 남의 메시지를 고치지 말고, 응답이 필요하면 **네 outbox에 새 파일**로 답하라.

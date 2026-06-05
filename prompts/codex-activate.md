@@ -24,6 +24,10 @@
 
 **4) 코드는 직접 구현하지 않는다** → 필요하면 Claude에 outbox `request`. 네 디자인·에셋은 2nd-B의 `asset/*` 브랜치 + PR로, 허브엔 코드 복사 말고 **링크로만** 참조.
 
+**4-1) 이미지 산출물 = HTML 미리보기 자동 제공** (onboarding §2-3 · CLAUDE.md §13):
+- 이미지를 생성·수정하면 결과를 **self-contained HTML 갤러리**(썸네일+캡션, 다크·군더더기 없음)로 묶어 `agents/codex/outbox/preview/<ts>-<slug>.html`에 저장하고 `start "" "<경로>"`로 **기본 브라우저에 자동으로 띄워** 사용자에게 즉시 보여준다.
+- 이미지 원본은 허브에 복사하지 말고 경로 참조. outbox 메시지 **## Links**에 HTML 경로 포함.
+
 **5) 세션 현황 파악·보고가 필요할 때**는 `prompts/codex-sync.md` 절차를 따른다.
 
 읽고 이해했으면 `agents/codex/STATUS.md`를 갱신·커밋하고 **"Codex 활성화 완료, inbox N건"**이라고 보고해.
