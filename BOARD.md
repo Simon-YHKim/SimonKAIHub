@@ -1,7 +1,7 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity는 읽기 전용."
-last-updated: 2026-06-05 18:22:53 KST
+last-updated: 2026-06-05 19:00:00 KST
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
@@ -12,14 +12,17 @@ last-updated: 2026-06-05 18:22:53 KST
 ## 🔥 진행 중 (In Progress)
 | ID | 작업 | 담당 | 상태 | 비고 |
 |---|---|---|---|---|
-| cycle-1 | 2nd-B **완성형 사이클** — 실행 중 (2 PR 로컬 커밋·verify green, 나머지 큐) | claude | executing | 리포트 `projects/2nd-B/cycle-1-completion-audit.html` |
-| pr-iris | worldview canon=Iris (7파일+test) | claude | ✅ 로컬커밋 `77d10fe` verify837 | branch `claude/cycle-1-worldview-iris` (push 보류=사이클 게이트) |
-| pr-phase6 | Phase6 화면정리 — 프리뷰5 제거✅ / MBTI강등·journal링크 이관 큐 | claude | 진행중 `37a4e6f` | branch `claude/cycle-1-phase6-screens` — **Codex 충돌주의**(mbti/profile/persona) |
+| cycle-1 | 2nd-B **완성형 사이클** — 실행 중 (3 로컬 커밋·verify green) | claude | executing | 리포트 `projects/2nd-B/cycle-1-completion-audit.html` |
+| pr-iris | worldview canon=Iris (7파일+test) | claude | ✅ `77d10fe` verify837 | branch `claude/cycle-1-worldview-iris` (push=사이클 게이트) |
+| pr-phase6 | Phase6: 프리뷰5 제거✅ + MBTI 강등✅(진입점숨김·참고값·삭제태그버그) | claude | ✅ `37a4e6f`,`94a2c36` verify green | branch `claude/cycle-1-phase6-screens` |
+| pr-mobile | 모바일 가로 오버플로우(P0) — Codex 반응형 width 스펙 ready, 구현 대기 | claude | 스펙완료 | sign-in560/signup·support640/manual720, ConsentNotice minWidth:0. Claude구현→Codex 런타임 재검수 |
 
 ## 📥 분배됨 / 대기 (Assigned / Waiting)
 | ID | 작업 | 요청→담당 | 상태 | 메시지 |
 |---|---|---|---|---|
-| — | (cycle-1 분배 전부 회수 완료 — Done 참조) | — | — | — |
+| disp-codex2 | MBTI 강등 스펙 + DESIGN 판정 + 모바일 오버플로우 스펙 | claude→codex | ✅ done | 회수 완료, 구현 반영중 |
+| user-grok | 나이대별·국가별 X 선호/유입/트렌드 10+cycle 딥다이브 | **user**→grok | 진행/완료 | §10.4 user-direct (`85d1322`) |
+| user-android | Android 10+ 심층 검사 리포트 (part 1·2) | **user**→? | 진행 | §10.4 user-direct (`1582810`,`e4722b5`) |
 
 ## 👥 멤버 온보딩 상태
 | AI | 역할 | 상태 | 런타임 |
