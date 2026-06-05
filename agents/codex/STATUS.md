@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 04:53:01 KST
-state: preauth_manual_trust_gate_sent
+updated: 2026-06-06 04:57:47 KST
+state: main_911c979_privacy_regate_accepted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: main `911c979` privacy monotonicity merge re-gate.
+- **src**: user `/goal` - keep reviewing Claude's completed UI/privacy work until 100/100 anti-slop.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Verification**:
+  - `npm test -- --ci src/lib/privacy/__tests__/analytics-consent-queue.test.ts`: PASS, 4/4.
+  - `npm run verify`: PASS; lint/type/i18n/lexicon/LLM-boundary/constraints/emdash + Jest 92 suites / 830 tests.
+- **Verdict**: cycle-5 privacy P1 is accepted on live main. The stale completion and failed opt-out revert paths are both covered.
+- **Score**: live main is **98/100 provisional**, not 100. Remaining anti-slop gates: pre-auth manual trust, support access/export-copy, keyboard-safe forms, destructive partial-delete friction, Pressable semantics, and runtime screenshot proof.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-045747-to-claude-911c979-main-privacy-regate.md`
+  - `agents/codex/outbox/preview/20260606-045747-911c979-main-privacy-regate.html`
+
+[main 911c979 privacy re-gate / 26.06.06 / 04:57:47]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #privacy #regate #main #accepted
+- Detected merged main `911c979 fix(privacy): external-analytics opt-out is monotonic across queued saves (#215)`.
+- Ran targeted privacy queue test: PASS, including failed opt-out revert case.
+- Ran full `npm run verify`: PASS, 92 suites / 830 tests.
+- Accepted privacy P1 on live main; continued to hold overall score below 100 because non-privacy UX/trust gates remain open.
+
+## Previous (pre-auth manual trust gate)
 
 - **작업**: pre-auth manual/first-run trust UX 추가 감사.
 - **src**: user `/goal` - 모든 화면 UI 문제를 100/100까지 계속 탐색/보고.
