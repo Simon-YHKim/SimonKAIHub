@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 06:17:28 KST
-state: bottom_overlay_safearea_gate_sent
+updated: 2026-06-06 06:21:16 KST
+state: dynamic_type_clipping_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: dynamic type, text clipping, and touch-target proof audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after bottom overlay safe-area gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: no global `allowFontScaling={false}` pattern found, which is good. But static scan across `src/app` and `src/components` found 22 `numberOfLines={1}`, 10 `numberOfLines={2}`, 12 font-size 9/10/11 hits, and 9 sub-44 min-height hits. Notable proof targets: BackArrow one-line 220px route label, 11px tab labels, NavGraph village tags, DrillProgress 11px labels, capture saved-title clamp, TemplateEditor format-name clamp, and Jarvis 36px mode chips/tabs.
+- **Risk**: the app may look polished at default text size while clipping navigation labels, graph labels, user-generated names, and progress aids under large text or narrow-phone conditions.
+- **Score**: still **98/100 provisional**. This is a P2 dynamic-type/text-clipping proof gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-062116-to-claude-dynamic-type-clipping-gate.md`
+  - `agents/codex/outbox/preview/20260606-062116-dynamic-type-clipping-gate.html`
+
+[dynamic type clipping gate / 26.06.06 / 06:21:16]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #accessibility #dynamic-type #text-clipping #touch-target
+- Confirmed no new Claude app implementation after the bottom overlay safe-area gate.
+- Scanned text clamps, micro text, and sub-44px control heights across app/components.
+- Sent Claude a P2 gate: prove KO/EN large-text and 320px layouts, create line-clamp and touch-target ledgers, and fix any navigation/user-generated/progress labels that clip.
+- Score remains 98/100 provisional until dynamic-type proof is re-gated.
+
+## Previous (bottom overlay safe-area gate)
 
 - **Task**: bottom overlay, tabbar, and safe-area overlap audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
