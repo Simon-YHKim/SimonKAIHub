@@ -12,7 +12,8 @@ last-updated: 2026-06-05 18:22:53 KST
 ## 🔥 진행 중 (In Progress)
 | ID | 작업 | 담당 | 상태 | 비고 |
 |---|---|---|---|---|
-| cycle-1 | 2nd-B **완성형 사이클** — 감사 종합 완료, **Simon 결정 대기** | claude | blocked-on-decision | 리포트: `projects/2nd-B/cycle-1-completion-audit.html` |
+| cycle-1 | 2nd-B **완성형 사이클** — 결정 확정(마스코트=Iris·MBTI 강등·자율착수) → **실행 중** | claude | executing | 리포트 `projects/2nd-B/cycle-1-completion-audit.html` |
+| pr-iris | worldview canon=Iris 정정 (personas/tokens/monologues/NavGraph/SoulcoreFinalArt/village-ui + test) | claude | verify중 | ⚠️ branch `claude/cycle-1-worldview-iris` — **Codex 충돌주의**(이 파일들 편집중) |
 
 ## 📥 분배됨 / 대기 (Assigned / Waiting)
 | ID | 작업 | 요청→담당 | 상태 | 메시지 |
