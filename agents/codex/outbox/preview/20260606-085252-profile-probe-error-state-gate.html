@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex UI Gate - Profile Probe Error State</title>
+  <style>
+    :root {
+      --bg: #070a12;
+      --panel: #101623;
+      --panel2: #151d2b;
+      --text: #eef5f3;
+      --muted: #9eaaa7;
+      --line: rgba(148, 163, 184, .24);
+      --mint: #7cf4c8;
+      --amber: #f2cc60;
+      --red: #ff7b72;
+      --blue: #8ab4ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Apple SD Gothic Neo", system-ui, sans-serif;
+      letter-spacing: 0;
+    }
+    main {
+      width: min(1080px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 36px 0 48px;
+    }
+    header, .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 22px;
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: 30px; line-height: 1.15; }
+    h2 { font-size: 18px; margin-bottom: 10px; }
+    h3 { font-size: 15px; margin-bottom: 6px; }
+    p, li { color: var(--muted); line-height: 1.55; }
+    code {
+      color: var(--mint);
+      background: rgba(124, 244, 200, .08);
+      padding: 1px 5px;
+      border-radius: 5px;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: 999px;
+      padding: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .section { margin-top: 18px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .state {
+      min-height: 126px;
+      border: 1px solid var(--line);
+      background: var(--panel2);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .state.good { border-color: rgba(124, 244, 200, .35); }
+    .state.bad { border-color: rgba(255, 123, 114, .42); }
+    .state.warn { border-color: rgba(242, 204, 96, .45); }
+    .state strong { display: block; color: var(--text); margin-bottom: 7px; }
+    .pre {
+      white-space: pre-wrap;
+      border: 1px solid var(--line);
+      background: #0b101a;
+      border-radius: 8px;
+      padding: 14px;
+      color: var(--muted);
+      line-height: 1.45;
+      overflow-x: auto;
+    }
+    ul { margin: 10px 0 0; padding-left: 20px; }
+    li + li { margin-top: 6px; }
+    .score { color: var(--amber); font-weight: 700; }
+    .arrow {
+      display: grid;
+      grid-template-columns: 1fr 42px 1fr;
+      gap: 12px;
+      align-items: center;
+      margin-top: 12px;
+    }
+    .box {
+      border: 1px solid var(--line);
+      background: var(--panel2);
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 118px;
+    }
+    .box.bad { border-color: rgba(255, 123, 114, .42); }
+    .box.good { border-color: rgba(124, 244, 200, .35); }
+    .arrowIcon { text-align: center; color: var(--amber); font-size: 24px; }
+    @media (max-width: 860px) {
+      .grid, .arrow { grid-template-columns: 1fr; }
+      .arrowIcon { display: none; }
+      h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Profile Probe Error State Gate</h1>
+      <p style="margin-top: 10px;">A completed account should not be sent to the profile-completion form because the profile check timed out or failed.</p>
+      <div class="meta">
+        <span class="pill">Project: 2nd-B</span>
+        <span class="pill">Head: 911c979</span>
+        <span class="pill">Score: <span class="score">98/100 provisional</span></span>
+        <span class="pill">Priority: P1/P2</span>
+      </div>
+    </header>
+
+    <section class="card section">
+      <h2>Current Conflation</h2>
+      <div class="arrow">
+        <div class="box bad">
+          <h3>Probe error or timeout</h3>
+          <p><code>fetchProfile</code> error and timeout fallback both return <code>hasProfile: false</code>.</p>
+        </div>
+        <div class="arrowIcon">-&gt;</div>
+        <div class="box bad">
+          <h3>Wrong user-facing state</h3>
+          <p>Root routing interprets false as "profile missing" and redirects to <code>/complete-profile</code>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card section">
+      <h2>Evidence</h2>
+      <div class="pre">src/lib/auth/AuthContext.tsx:47-48
+  profile probe failed -> { hasProfile: false, isMinor: null }
+
+src/lib/auth/AuthContext.tsx:58-78
+  timeout/catch -> fallback
+
+src/lib/auth/AuthContext.tsx:133-134
+  fallback -> { hasProfile: false, isMinor: null }
+
+src/app/_layout.tsx:165-167
+  hasProfile === false -> Redirect /complete-profile</div>
+    </section>
+
+    <section class="card section">
+      <h2>Expected Contract</h2>
+      <div class="grid">
+        <div class="state"><strong>No user</strong><p>Signed-out route state. Show sign-in or public route.</p></div>
+        <div class="state good"><strong>Profile present</strong><p>Allow app entry with confirmed DOB/minor state.</p></div>
+        <div class="state"><strong>Profile missing</strong><p>Only confirmed absent row routes to completion.</p></div>
+        <div class="state warn"><strong>Profile unknown</strong><p>Error or timeout shows retryable profile-check state, not completion form.</p></div>
+      </div>
+    </section>
+
+    <section class="card section">
+      <h2>Acceptance</h2>
+      <ul>
+        <li>Introduce explicit profile status such as <code>checking</code>, <code>present</code>, <code>missing</code>, and <code>error</code>.</li>
+        <li>Redirect to <code>/complete-profile</code> only for confirmed missing profile.</li>
+        <li>On query error or timeout, render a branded retry path with sign-out/support fallback.</li>
+        <li>Keep AI/crisis feature screens blocked while profile status is checking or error.</li>
+        <li>Add tests for present, missing, query error, and timeout cases.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

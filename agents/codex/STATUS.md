@@ -1,25 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 08:49:01 KST
-state: quant_intro_storage_flicker_gate_sent
+updated: 2026-06-06 08:52:52 KST
+state: profile_probe_error_state_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
 
-- **Task**: quantitative assessment intro storage-state flicker audit.
+- **Task**: auth/profile probe error-state audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
 - **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
-- **Claude state**: no newer Claude implementation after the onboarding step-progress semantics gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
-- **SimonK-stack reference**: applying the 100/100 anti-slop standard that persisted user decisions must not flash the opposite UI state, even for one render.
-- **Evidence**: `src/components/quant/QuantIntroModal.tsx:37` initializes `visible` as `true`, `41-43` later reads `AsyncStorage` and flips to `seen !== "1"`, and `87-90` auto-starts only after the false state. A returning user who checked "Skip this intro next time" can briefly see the intro modal before `/big-five` or `/attachment` starts.
-- **Risk**: assessment start looks unstable and contradicts the user's saved preference; this is route-state flicker, not visual polish.
-- **Score**: still **98/100 provisional**. This is a P2 quant intro storage-state gate before 100.
+- **Claude state**: no newer Claude implementation after the quant intro storage-state flicker gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: applying the 100/100 anti-slop standard that account/profile route state must be truthful and retryable, not visually polished but semantically wrong.
+- **Evidence**: `src/lib/auth/AuthContext.tsx:47-48` returns `hasProfile: false` on profile query error, `58-78` resolves timeouts/catches to fallback, `133-134` uses a first-probe fallback of `{ hasProfile: false, isMinor: null }`, and `_layout.tsx:165-167` redirects `hasProfile === false` to `/complete-profile`.
+- **Risk**: a completed signed-in user can see the DOB/consent completion route because the app failed to confirm profile status. That confuses transient failure with an incomplete account.
+- **Score**: still **98/100 provisional**. This is a P1/P2 auth/profile trust-state gate before 100.
 - **Latest outputs**:
-  - `agents/codex/outbox/20260606-084901-to-claude-quant-intro-storage-flicker-gate.md`
-  - `agents/codex/outbox/preview/20260606-084901-quant-intro-storage-flicker-gate.html`
+  - `agents/codex/outbox/20260606-085252-to-claude-profile-probe-error-state-gate.md`
+  - `agents/codex/outbox/preview/20260606-085252-profile-probe-error-state-gate.html`
+
+[profile probe error state gate / 26.06.06 / 08:52:52]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #auth #profile #routing #trust #claude-request
+- Confirmed this is distinct from the complete-profile loading, sign-up guest-only, sign-in loading-aware, and alert-only load-error gates.
+- Audited `AuthContext.fetchProfile`, timeout fallback, and root `IntroGate` profile redirect.
+- Sent Claude a P1/P2 gate: profile query error/timeout must not be represented as confirmed missing profile; add an explicit retryable profile-check error state.
+- Score remains 98/100 provisional until auth/profile state distinguishes present, missing, checking, and error.
 
 [quant intro storage flicker gate / 26.06.06 / 08:49:01]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #assessment #quant #routing #state #claude-request
