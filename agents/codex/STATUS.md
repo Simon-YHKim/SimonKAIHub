@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 06:29:44 KST
-state: visual_qa_automation_gate_sent
+updated: 2026-06-06 06:35:18 KST
+state: document_lang_input_assist_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: document language and browser/mobile input assistance audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the visual QA automation gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: `src/app/+html.tsx:44` hard-codes `<html lang="ko">` while app routes and auth/manual language toggles can render English. `i18n/index.ts` persists `languageChanged`, but source scan found no `document.documentElement.lang` sync. Static input scan across `src/app` and `src/components` found `TextInput=12`, `<Input=26`, `autoComplete=4`, `textContentType=0`, `keyboardType=3`, `returnKeyType=3`. Auth email/password fields have useful hints, but consent birth date and destructive confirmation fields lack a fuller field-purpose contract.
+- **Risk**: the UI can look localized while the browser, screen reader, spellcheck, translation, and autofill semantics remain wrong or generic. This is semantic AI slop, especially on English web and high-risk consent/account/settings forms.
+- **Score**: still **98/100 provisional**. This is a P1 document-language gate plus P2 input-assistance gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-063518-to-claude-document-lang-input-assist-gate.md`
+  - `agents/codex/outbox/preview/20260606-063518-document-lang-input-assist-gate.html`
+
+[document language input assistance gate / 26.06.06 / 06:35:18]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #i18n #accessibility #forms #autofill
+- Confirmed no new Claude app implementation after the visual QA automation gate.
+- Audited web root language metadata, i18n language persistence, and input-purpose hints across app/components.
+- Sent Claude a P1/P2 gate: sync document language with KO/EN, define high-risk field input contracts, and add regression proof.
+- Score remains 98/100 provisional until document-language and input-assistance proof is re-gated.
+
+## Previous (visual QA automation gate)
 
 - **Task**: visual QA automation and screenshot-proof infrastructure audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
