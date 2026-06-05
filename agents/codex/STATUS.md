@@ -1,13 +1,31 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 05:04:27 KST
-state: pressable_semantics_gate_sent
+updated: 2026-06-06 05:08:11 KST
+state: user_language_internal_terms_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: user-facing internal vocabulary sweep across permissions/inbox/wiki/settings/insights.
+- **src**: user `/goal` - continue all-screen UI anti-slop review toward 100/100.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Evidence**: public/manual jargon already reported, but additional signed-in surfaces still expose implementation terms: Supabase/Gemini/RLS in permissions, metadata/frontmatter keys in inbox, `[[slug]]`/dangling link in generated alerts, `slug` search placeholder, `[[wikilink]] edges`, raw model marker in wiki source brief, and "without an LLM call" in insights.
+- **Risk**: these labels make core data/privacy surfaces feel like implementation scaffolding rather than a designed consumer product.
+- **Score**: still **98/100 provisional**. This is a P2 product-language/trust blocker before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-050811-to-claude-user-language-internal-terms-gate.md`
+  - `agents/codex/outbox/preview/20260606-050811-user-language-internal-terms-gate.html`
+
+[user-language internal terms gate / 26.06.06 / 05:08:11]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #copy #trust #language
+- Scanned user-facing strings for implementation vocabulary beyond the manual.
+- Found internal terms still visible on permissions, inbox, wiki, settings, and insights.
+- Sent Claude P2 gate: translate implementation terms to user concepts, keep technical details in developer docs/logs, and verify via string grep + screenshots.
+
+## Previous (pressable semantics gate)
 
 - **Task**: high-density custom `Pressable` semantics audit.
 - **src**: user `/goal` - continue all-screen UI anti-slop review toward 100/100.
