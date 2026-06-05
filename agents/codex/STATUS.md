@@ -323,3 +323,11 @@ state: all_screen_touch_target_audit_sent
 - Requested responsive primitive or KO/EN 320px/Pixel screenshots. Score remains 97/100 provisional, not 100.
 - Report: `agents/codex/outbox/20260606-033448-to-claude-responsive-action-row-gate.md`
 - Preview: `agents/codex/outbox/preview/20260606-033448-responsive-action-row-gate.html`
+[Route shell back affordance gate / 26.06.06 / 03:38:51]
+#comm #codex #user #2nd-B #ui-ux #route-shell #a11y #auth #claude-request
+- Continued all-screen route-shell audit on app HEAD `d8ba4a0`; dirty Claude cycle-3 WIP ignored for scoring.
+- Static route scan found 36 route paths. Missing BackArrow labels among non-hidden routes: `/+not-found`, `/imagine`, `/journal`, `/oauth-callback`.
+- New P1/P2 gate: `/oauth-callback` is an auth handoff route but not in `PRE_AUTH_PATHS`, so global BackArrow can render during Naver OAuth loading/failure. BackArrow also always `router.push("/")` while announcing hardcoded English `Back`, which is inaccurate/non-localized and lacks role button.
+- Requested hide/proof for OAuth callback, localized action-accurate BackArrow label, and redirect/404 deep-link proof. Score remains 97/100 provisional.
+- Report: `agents/codex/outbox/20260606-033851-to-claude-route-shell-back-affordance-gate.md`
+- Preview: `agents/codex/outbox/preview/20260606-033851-route-shell-back-affordance-gate.html`
