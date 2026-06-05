@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 01:32:20 KST
-state: route_mock_entry_audit_reported
+updated: 2026-06-06 01:39:07 KST
+state: cycle2_1_ai_slop_regate_reported
 ---
 
 # Codex STATUS
@@ -11,13 +11,15 @@ state: route_mock_entry_audit_reported
 
 - **작업**: Simon 지시 - 모든 화면 UI/UX와 AI slop를 100/100 기준으로 반복 게이트. Claude 완료물은 즉시 재리뷰하고, 100점 전까지 outbox로 의견을 계속 남긴다.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
-- **최신 Claude 기준**: `agents/claude/outbox/20260606-012034-to-codex-cycle2-ui-audit.md` 요청에 따라 `CONCEPT-SPEC-2ndb-worldview.md` 기준 merged main `0bfbfa3` UI/UX 전수 감사.
-- **검사 기준**: SimonK-stack `design-review`, `simon-design-first`, `ai-slop-cleaner`, `frontend-ui-ux`를 참고하되 2nd-B 기존 dark premium/village system을 보존. 과장 카피, 불필요한 권한, 작은 한글/과한 tracking, generic glow/shadow, keyboard occlusion, deprecated prop, 숨은 route, placeholder/coming-soon, 컨셉 source-of-truth 불일치를 100점 감점 요인으로 본다.
+- **최신 Claude 기준**: `agents/claude/outbox/20260606-013358-to-all-cycle2-audit-baseline.md` FYI와 앱 커밋 `f1ced87` 주석 정리 완료분을 재게이트.
+- **검사 기준**: SimonK-stack `simon-design-first`, `design-review`, `design-consultation`, `design-html`를 참고하되 2nd-B 기존 `DESIGN.md` dark premium/village system을 보존. 사용자에게 보이는 mock/stub/placeholder/coming-soon, 권한 불일치, unproven provider, keyboard/list proof gap, source-of-truth split, stale worldview residue를 100점 감점 요인으로 본다.
 - **대상 앱 상태**:
-  - App worktree `E:\2ndB` branch `claude/cycle-2-concept-consistency`, clean, head `0bfbfa3` (`origin/main`).
-- **검증**: `npm run verify` pass on `0bfbfa3`: lint/type-check/i18n/lexicon/constraints/emdash/tests green, 91 suites, 823 tests.
-- **현재 점수**: cycle-2 main UI audit = 86/100 provisional after additional route/mock audit. Build/test green, but 100/100 is blocked by reachable placeholder flows, user-visible mock-mode strings, permission transparency mismatch, Lumina/Iris worldview mismatch, orphan route cleanup, keyboard/list proof, and route-label polish.
+  - App worktree `E:\2ndB` branch `claude/cycle-2-concept-consistency`, clean, head `f1ced87` (ahead 1 from `origin/main`).
+- **검증**: `npm run verify` pass on `f1ced87`: lint/type-check/i18n/lexicon/constraints/emdash/tests green, 91 suites, 823 tests.
+- **현재 점수**: cycle-2.1 AI slop gate = 87/100 provisional. Iris is now accepted per Simon decision and `f1ced87` comment cleanup is safe, but 100/100 remains blocked by user-visible mock-mode strings, reachable placeholder flows, permission transparency mismatch, unproven social provider affordances, partial Vela/stale comment cleanup, source-of-truth split (`Iris` decision vs `CONCEPT-SPEC` Lumina), orphan route cleanup, and keyboard/list proof.
 - **최신 산출물**:
+  - `agents/codex/outbox/20260606-013907-to-claude-cycle2-1-ai-slop-regate.md`
+  - `agents/codex/outbox/preview/20260606-013907-cycle2-1-ai-slop-regate.html`
   - `agents/codex/outbox/20260606-013220-to-claude-route-mock-entry-audit.md`
   - `agents/codex/outbox/preview/20260606-013220-route-mock-entry-audit/index.html`
   - `agents/codex/outbox/20260606-012524-to-claude-cycle2-ui-audit.md`
@@ -28,7 +30,17 @@ state: route_mock_entry_audit_reported
   - `agents/codex/outbox/preview/20260606-011114-flatlist-followup-gate/index.html`
   - `agents/codex/outbox/20260606-011522-to-claude-wip-touch-action-gate.md`
   - `agents/codex/outbox/preview/20260606-011522-wip-touch-action-gate/index.html`
-- **대기**: Claude/AG가 cycle-2 follow-up을 완료하면 즉시 100점 기준으로 재게이트. 특히 Lumina 명칭, placeholder 제거, mock-mode 사용자 노출 제거, permission surface 정합성, keyboard/list proof를 먼저 본다.
+- **대기**: Claude/AG가 cycle-2 follow-up을 완료하면 즉시 100점 기준으로 재게이트. 특히 mock-mode 사용자 노출 제거, placeholder 제거, permission surface 정합성, provider gating/proof, keyboard/list proof, stale worldview residue를 먼저 본다.
+
+[Cycle-2.1 AI slop re-gate / 26.06.06 / 01:39:07]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #cycle2 #claude-request #regate
+- Reviewed Claude FYI `20260606-013358-to-all-cycle2-audit-baseline.md` and app commit `f1ced87`.
+- Accepted: `Iris` is intentional per Simon decision; `f1ced87` is comment-only and safe.
+- Ran `npm run verify` on `f1ced87`: pass, 91 suites, 823 tests.
+- Score adjusted to 87/100 provisional. Cannot exceed 90 until user-visible P1 mock/placeholder/permission/provider issues close.
+- New finding: Vela cleanup is partial (`src/lib/motion/signature.ts:6`, `src/app/jarvis.tsx:246`, `BackArrow.tsx`, tab-bar comments).
+- New finding: source-of-truth split remains because Claude FYI says Iris but `CONCEPT-SPEC-2ndb-worldview.md:38` still says Lumina.
+- Report/preview written and opened.
 
 [Route/mock entry audit / 26.06.06 / 01:32:20]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #cycle2 #mock #route-entry #claude-request

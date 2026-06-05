@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex cycle-2.1 AI slop re-gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080b16;
+      --panel: #101521;
+      --panel2: #161d2a;
+      --text: #e8ecf8;
+      --muted: #aeb8d0;
+      --line: #2a345a;
+      --mint: #72f2c7;
+      --warn: #ffd166;
+      --rose: #ff7a90;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      word-break: keep-all;
+    }
+    main {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 36px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(26px, 4vw, 42px); line-height: 1.12; letter-spacing: 0; }
+    h2 { font-size: 20px; margin: 28px 0 12px; }
+    h3 { font-size: 16px; margin: 0 0 8px; }
+    p { color: var(--muted); }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .chip {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      border-radius: 6px;
+      padding: 6px 9px;
+      font-size: 13px;
+    }
+    .score {
+      display: grid;
+      grid-template-columns: minmax(160px, 220px) 1fr;
+      gap: 16px;
+      align-items: stretch;
+      margin: 24px 0;
+    }
+    .scorebox, .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .num {
+      font-size: 56px;
+      line-height: 1;
+      font-weight: 800;
+      color: var(--warn);
+    }
+    .label { color: var(--muted); margin-top: 8px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .card strong { color: var(--text); }
+    .severity {
+      display: inline-block;
+      min-width: 36px;
+      color: #070a18;
+      background: var(--rose);
+      border-radius: 4px;
+      padding: 2px 6px;
+      margin-right: 6px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .severity.p2 { background: var(--warn); }
+    ul { margin: 10px 0 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 7px 0; }
+    code {
+      color: var(--mint);
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-size: 13px;
+    }
+    .ok { color: var(--mint); }
+    .bar {
+      height: 10px;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 14px;
+    }
+    .fill {
+      width: 87%;
+      height: 100%;
+      background: var(--warn);
+    }
+    @media (max-width: 760px) {
+      main { width: min(100% - 24px, 1080px); padding-top: 24px; }
+      .score, .grid { grid-template-columns: 1fr; }
+      .num { font-size: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Codex cycle-2.1 AI slop re-gate</h1>
+      <p>Claude cycle-2 completion baseline reviewed against 100-point no-slop target.</p>
+      <div class="meta">
+        <span class="chip">Status: DONE_WITH_CONCERNS</span>
+        <span class="chip">Branch: claude/cycle-2-concept-consistency</span>
+        <span class="chip">Head: f1ced87</span>
+        <span class="chip">Verify: pass, 91 suites / 823 tests</span>
+      </div>
+    </header>
+
+    <section class="score">
+      <div class="scorebox">
+        <div class="num">87</div>
+        <div class="label">Provisional score / 100</div>
+        <div class="bar"><div class="fill"></div></div>
+      </div>
+      <div class="card">
+        <h2 style="margin-top:0">Verdict</h2>
+        <p><span class="ok">Accepted:</span> Iris is intentional per Simon decision. Claude's `f1ced87` comment cleanup is behavior-safe.</p>
+        <p style="margin-top:10px">Score remains capped because users can still hit mock copy, placeholder flows, permission inconsistency, and unproven provider/keyboard surfaces.</p>
+      </div>
+    </section>
+
+    <h2>Blocks 100</h2>
+    <section class="grid">
+      <article class="card">
+        <h3><span class="severity">P1</span>User-visible mock mode</h3>
+        <p>`[MOCK]`, `stub`, `Gemini key`, `placeholder`, and `임시 응답` can surface through public no-key flows.</p>
+        <ul>
+          <li><code>src/lib/env.ts:96-100</code></li>
+          <li><code>src/lib/llm/gemini.ts:87-108</code></li>
+          <li><code>src/app/wiki.tsx:709</code></li>
+          <li><code>src/lib/wiki/phase1.ts:85-96</code></li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3><span class="severity">P1</span>Reachable placeholders</h3>
+        <p>Password reset, subscription, device reset, and support still show "coming soon" style product debt.</p>
+        <ul>
+          <li><code>src/app/(auth)/sign-in.tsx:126</code></li>
+          <li><code>src/app/capture.tsx:747</code></li>
+          <li><code>src/app/data.tsx:88</code></li>
+          <li><code>src/app/support.tsx:71</code></li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3><span class="severity">P1</span>Permission mismatch</h3>
+        <p>Binary declarations, OS prompt copy, and `/permissions` do not yet tell one exact story.</p>
+        <ul>
+          <li><code>app.json:14-21</code></li>
+          <li><code>src/app/permissions.tsx:63-69</code></li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3><span class="severity">P1</span>Auth provider proof</h3>
+        <p>Google, Apple, and Kakao buttons remain visible without the same explicit config gating as Naver.</p>
+        <ul>
+          <li><code>src/app/(auth)/sign-in.tsx:228-266</code></li>
+          <li><code>src/app/(auth)/sign-up.tsx:263-288</code></li>
+        </ul>
+      </article>
+    </section>
+
+    <h2>Cycle-2.1 Findings</h2>
+    <section class="grid">
+      <article class="card">
+        <h3><span class="severity p2">P2</span>Vela cleanup is partial</h3>
+        <p>Claude FYI says Vela comments are cleaned, but static search still finds stale worldview breadcrumbs.</p>
+        <ul>
+          <li><code>src/lib/motion/signature.ts:6</code></li>
+          <li><code>src/app/jarvis.tsx:246</code></li>
+          <li><code>src/components/ui/BackArrow.tsx:25</code></li>
+          <li><code>src/components/premium/tab-bar.tsx:17</code></li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3><span class="severity p2">P2</span>Spec still says Lumina</h3>
+        <p>Simon decision says Iris, but the concept spec still says `Lumi -> Lumina`, which can recreate the same audit loop.</p>
+        <ul>
+          <li><code>agents/claude/outbox/20260606-013358-to-all-cycle2-audit-baseline.md:21</code></li>
+          <li><code>agents/claude/outbox/CONCEPT-SPEC-2ndb-worldview.md:38</code></li>
+        </ul>
+      </article>
+    </section>
+
+    <h2>Next Gate</h2>
+    <div class="card">
+      <p>Codex will not move the score above 90 until all P1 user-visible mock, placeholder, permission, and provider issues are closed with code evidence. It will not be 100 until screenshot or device proof covers login, onboarding, graph, capture, persona assessments, Jarvis, wiki/inbox/records, privacy/account/data/support/settings, and error/empty/loading states.</p>
+    </div>
+  </main>
+</body>
+</html>
