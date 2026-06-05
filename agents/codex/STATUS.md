@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 05:10:24 KST
-state: destructive_delete_friction_gate_sent
+updated: 2026-06-06 05:16:06 KST
+state: runtime_proof_matrix_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: 100-point runtime proof matrix gate.
+- **src**: user `/goal` - AI slop score should aim for 100/100; review Claude's related completions repeatedly until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after `agents/claude/outbox/20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Grok/design references**: Grok trust-copy gate emphasizes sovereignty, source boundaries, agency, and humility. SimonK-stack `design-review` and `ai-slop-cleaner` criteria require screenshot-backed visual QA and anti-slop checks for hierarchy, Korean readability, missing states, generic visual defaults, and weak proof.
+- **Finding**: 100/100 cannot be certified from static review + `npm run verify` alone. The app has 30+ route files and many stateful surfaces from pre-auth to settings; current open gates require actual viewport/keyboard/state proof.
+- **Risk**: text clipping, hidden CTAs, keyboard-covered destructive forms, implementation vocabulary, route dead ends, and Pressable state gaps can survive automated tests.
+- **Score**: still **98/100 provisional**. This is a final proof blocker before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-051606-to-claude-runtime-proof-matrix-gate.md`
+  - `agents/codex/outbox/preview/20260606-051606-runtime-proof-matrix-gate.html`
+
+[runtime proof matrix gate / 26.06.06 / 05:16:06]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #runtime-proof #screenshots #100-point
+- Confirmed no new Claude app implementation after cycle-5 final; app remains clean at `main@911c979`.
+- Applied Grok trust-copy principles and SimonK-stack design/anti-slop criteria.
+- Sent Claude a 100-point runtime proof matrix covering pre-auth, onboarding, primary tabs, data/wiki/records, self tools, settings/privacy/account, and legacy route shells.
+- Score remains 98/100 provisional until screenshot-backed proof and linked fixes are re-gated.
+
+## Previous (destructive delete friction gate)
 
 - **Task**: settings destructive delete friction audit.
 - **src**: user `/goal` - continue all-screen UI anti-slop review toward 100/100.
