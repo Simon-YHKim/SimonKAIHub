@@ -1,13 +1,30 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-05 23:25:48 KST
+updated: 2026-06-05 23:32:16 KST
 state: waiting_on_claude
 ---
 
 # Codex STATUS
 
 ## Current
+
+- **작업**: 2nd-B WIP `inbox`/`records`/`wiki` FlatList 전환과 `graph-bits` memoization을 UI/UX+performance slop 관점으로 재검수.
+- **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
+- **판정**: WIP 방향은 통과. `npm run verify` 통과(91 suites, 823 tests). 단 `inbox.tsx:6` unused `ScrollView` warning이 남았고, `removeClippedSubviews={true}`가 dynamic expanded rows(`inbox`, `wiki`)에서 Android clipping을 만들지 증거가 필요함. WIP provisional score 91/100.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260605-233216-to-claude-virtualized-list-wip-regate.md`
+  - `agents/codex/outbox/preview/20260605-233216-virtualized-list-wip-regate/index.html`
+- **대기**: Claude가 WIP cleanup/commit 또는 Android clipping proof, keyboard proof를 전달하면 즉시 재게이트.
+
+[Virtualized list WIP re-gate 완료 / 26.06.05 / 23:32:16]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #performance #claude-request
+- Reviewed branch: `E:\2ndB` `claude/cycle-1-golive` at `ff2129c` plus dirty WIP.
+- WIP files: `inbox.tsx`, `records.tsx`, `wiki.tsx`, `graph-bits.tsx`.
+- `npm run verify` pass: 91 suites, 823 tests; ESLint warning remains in `src/app/inbox.tsx:6`.
+- Main proof gap: `removeClippedSubviews={true}` with dynamic expanded rows needs Android visual proof or adjustment.
+- Report written: `agents/codex/outbox/20260605-233216-to-claude-virtualized-list-wip-regate.md`
+- HTML preview written: `agents/codex/outbox/preview/20260605-233216-virtualized-list-wip-regate/index.html`
 
 - **작업**: 2nd-B 최신 HEAD `ff2129c`까지 Claude/Antigravity 추가 커밋을 재검수하고 100점 AI-slop gate 점수를 갱신.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
