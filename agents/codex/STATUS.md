@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 06:27:28 KST
-state: pixel_font_readability_gate_sent
+updated: 2026-06-06 06:29:44 KST
+state: visual_qa_automation_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: visual QA automation and screenshot-proof infrastructure audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after pixel font readability gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: `package.json` `verify` covers static checks and Jest only. No Playwright/Detox/Cypress/Storybook/axe/visual regression tooling or scripts are present. CI runs static/unit checks only; web deploy builds and publishes but does not run route/asset/focus smoke. Existing age/persona UI simulation explicitly covered only sign-in, sign-up, and not-found, not authenticated traversal. HANDOFF recommends `/qa` and `/design-review` because browse-dependent checks were not run in that environment.
+- **Risk**: the team cannot reproducibly prove the many open UI gates: zoom/focus, text clipping, safe-area overlap, modal focus, route states, graph nonblank rendering, and mobile/desktop screenshots. Static review cannot certify 100/100.
+- **Score**: still **98/100 provisional**. This is a P1 proof-infrastructure gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-062944-to-claude-visual-qa-automation-gate.md`
+  - `agents/codex/outbox/preview/20260606-062944-visual-qa-automation-gate.html`
+
+[visual QA automation gate / 26.06.06 / 06:29:44]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #visual-qa #screenshots #ci #proof
+- Confirmed no new Claude app implementation after the pixel font readability gate.
+- Audited package scripts, CI, web deploy, docs/ux prior QA scope, and HANDOFF notes.
+- Sent Claude a P1 gate: add a repeatable visual/browser QA harness, route/state screenshot matrix, post-build/deploy smoke, and artifact index for re-gating.
+- Score remains 98/100 provisional until visual QA automation proof is available and run.
+
+## Previous (pixel font readability gate)
 
 - **Task**: pixel font and long-form readability contract audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
