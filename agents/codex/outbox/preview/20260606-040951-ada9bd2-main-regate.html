@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex PR 213 Post-Merge Re-Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d1117;
+      --panel: #151b23;
+      --panel-2: #10161f;
+      --text: #e6edf3;
+      --muted: #9fb0c3;
+      --line: #263241;
+      --danger: #ff6b7a;
+      --warn: #f7c46c;
+      --ok: #7bd88f;
+      --info: #7bb7ff;
+      --chip: #1d2633;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.55 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main { max-width: 1120px; margin: 0 auto; padding: 32px 18px 56px; }
+    header {
+      display: grid;
+      gap: 10px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #151b23, #10161f);
+      border-radius: 8px;
+    }
+    h1 { margin: 0; font-size: clamp(24px, 4vw, 40px); line-height: 1.1; letter-spacing: 0; }
+    h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+    h3 { margin: 0 0 6px; font-size: 15px; letter-spacing: 0; }
+    p { margin: 0; color: var(--muted); }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: #0b121c;
+      color: #d6e6ff;
+      font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+    }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 3px 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--chip);
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .score {
+      color: var(--warn);
+      border-color: rgba(247,196,108,.35);
+      background: rgba(247,196,108,.1);
+    }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; margin-top: 16px; }
+    .card {
+      grid-column: span 12;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    @media (min-width: 820px) {
+      .half { grid-column: span 6; }
+      .third { grid-column: span 4; }
+    }
+    .finding { border-left: 4px solid var(--warn); }
+    .p1 { border-left-color: var(--danger); }
+    .p3 { border-left-color: var(--info); }
+    .accepted { border-left: 4px solid var(--ok); }
+    ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
+    li + li { margin-top: 6px; }
+    .evidence {
+      margin-top: 10px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      border-radius: 8px;
+    }
+    .evidence strong { color: var(--text); }
+    .footer { margin-top: 18px; color: var(--muted); font-size: 12px; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>PR 213 Post-Merge Re-Gate</h1>
+      <p><code>main@ada9bd2</code> passed full verification, but the 100/100 anti-slop gate is still open.</p>
+      <div class="meta">
+        <span class="chip">npm run verify: PASS</span>
+        <span class="chip">Jest: 91 suites / 824 tests</span>
+        <span class="chip score">Score: 97/100 provisional</span>
+        <span class="chip">Reviewer: Codex UI/UX</span>
+      </div>
+    </header>
+
+    <section class="grid">
+      <article class="card accepted half">
+        <h2>Accepted</h2>
+        <ul>
+          <li>PR #213 is clean on <code>origin/main</code>.</li>
+          <li>Lint, type-check, constraints, i18n, lexicon, emdash, and tests pass.</li>
+          <li>Account deletion copy is more truthful about partial erasure and support.</li>
+          <li>Safety/minor/privacy coverage improved over the prior cycle.</li>
+        </ul>
+      </article>
+
+      <article class="card finding p1 half">
+        <h2>P1: Privacy Opt-Out Is Not Monotonic</h2>
+        <p>Queued save completions can still call <code>setAnalyticsConsent(payload.external_analytics)</code> from an older payload.</p>
+        <div class="evidence">
+          <strong>Evidence:</strong>
+          <p><code>src/app/privacy.tsx:91-101</code>, <code>src/lib/supabase/privacy.ts:31-34</code></p>
+        </div>
+        <ul>
+          <li>On -> off rapid toggle can briefly re-enable external analytics when Save A resolves after the opt-out.</li>
+          <li>Opt-out should disable immediately and never be undone by stale completions.</li>
+          <li>Needs a regression test for out-of-order save resolution.</li>
+        </ul>
+      </article>
+
+      <article class="card finding half">
+        <h2>P2: Retired Routes Still Power Active UI</h2>
+        <p>Compatibility redirects are fine, but current helpers still emit <code>/journal</code> and <code>/imagine</code> as active destinations.</p>
+        <div class="evidence">
+          <strong>Evidence:</strong>
+          <p><code>village-ui.ts</code>, <code>persona/evidence.ts</code>, <code>persona/self-portrait.ts</code>, related tests.</p>
+        </div>
+        <ul>
+          <li>Journal/do destinations should emit <code>/capture</code>.</li>
+          <li>Imagine/goal destinations should emit <code>/jarvis?mode=divergent</code>.</li>
+          <li>Tests currently assert the retired destinations, so they need to flip.</li>
+        </ul>
+      </article>
+
+      <article class="card finding half">
+        <h2>P2: Settings Keyboard + Deletion Friction</h2>
+        <p>High-stakes input screens still lack the keyboard-safe shell used elsewhere, and broad partial wipes are one generic Alert away.</p>
+        <div class="evidence">
+          <strong>Evidence:</strong>
+          <p><code>account.tsx:228-239</code>, <code>audit.tsx:211</code>, <code>settings.tsx:131-145</code>, <code>settings.tsx:391-530</code></p>
+        </div>
+        <ul>
+          <li>Add <code>KeyboardAvoidingView</code> and <code>keyboardShouldPersistTaps</code>.</li>
+          <li>Use typed/category-specific confirmation for broad irreversible deletes.</li>
+          <li>Keep export CTA/count preview close to destructive choices.</li>
+        </ul>
+      </article>
+
+      <article class="card finding p3 third">
+        <h2>P3: Jargon</h2>
+        <p><code>RLS</code>, <code>LLM</code>, <code>Gemini</code>, and vendor terms still appear in primary user copy. Move technical detail behind secondary disclosure.</p>
+      </article>
+
+      <article class="card finding p3 third">
+        <h2>P3: Pressable A11y</h2>
+        <p>Several custom rows/chips in inbox, research, trinity, interview, and wiki still need complete role/state/label coverage.</p>
+      </article>
+
+      <article class="card finding p3 third">
+        <h2>P3: Runtime Proof</h2>
+        <p>Static checks do not prove mobile layout. Need Pixel-class screenshots for auth, main graph, capture, Jarvis, persona, records/wiki, and settings.</p>
+      </article>
+    </section>
+
+    <p class="footer">Generated 2026-06-06 04:09:51 KST. Hub artifact only; app code was not modified by Codex.</p>
+  </main>
+</body>
+</html>

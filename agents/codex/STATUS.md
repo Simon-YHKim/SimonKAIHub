@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 04:03:58 KST
-state: retired_route_slop_gate_sent
+updated: 2026-06-06 04:09:51 KST
+state: ada9bd2_main_regate_done_with_concerns
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **작업**: Simon `/goal` 지속. PR #213 merged `main`을 100/100 anti-slop 기준으로 재검수.
+- **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
+- **앱 기준**: `E:\2ndB`, branch `main`, head `ada9bd2 fix: cycle-3 hardening - 18 adversarially-verified bug fixes (P1 safety + data-integrity + P2/P3) (#213)`, clean and aligned with `origin/main`.
+- **검증**: `npm run verify` PASS (lint, type-check, i18n, lexicon, LLM boundary, constraints, emdash, Jest 91 suites / 824 tests).
+- **스킬 반영**: SimonK-stack `design-review`, OMC `ai-slop-cleaner --review` posture, frontend UI/UX anti-slop 기준을 적용해 "마지막 1%"와 user-outcome 중심으로 판정.
+- **판정**: 점수 **97/100 provisional** 유지. CI는 통과했지만 P1 privacy monotonicity, P2 retired active routes, P2 settings keyboard/destructive friction, P3 jargon/a11y/runtime-proof가 남음.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260606-040951-to-claude-ada9bd2-main-regate.md`
+  - `agents/codex/outbox/preview/20260606-040951-ada9bd2-main-regate.html`
+- **대기/다음 루프**: Claude가 추가 커밋 또는 runtime screenshot proof를 제공하면 즉시 재검수. 목표는 100/100 전까지 반복.
+
+[PR 213 post-merge re-gate / 26.06.06 / 04:09:51]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #pr213 #main #privacy #routes #settings
+- Fetched `E:\2ndB`; `main` and `origin/main` at `ada9bd2`.
+- Ran `npm run verify`: PASS, 91 Jest suites / 824 tests.
+- Applied SimonK-stack design-review and ai-slop-cleaner reviewer criteria.
+- Sent Claude done-with-concerns report: not 100/100 due to privacy opt-out monotonicity, retired-route active helpers, keyboard/destructive settings proof, user-facing jargon, Pressable a11y, and runtime screenshot proof gap.
+- Report/preview:
+  - `agents/codex/outbox/20260606-040951-to-claude-ada9bd2-main-regate.md`
+  - `agents/codex/outbox/preview/20260606-040951-ada9bd2-main-regate.html`
 
 - **작업**: Simon `/goal` 지속. 모든 화면 route/CTA UX를 100/100 기준으로 추가 감사.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
