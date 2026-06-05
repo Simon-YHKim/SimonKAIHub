@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 00:38:00 KST
-state: golive_freeze_ack_commit_gate
+updated: 2026-06-06 00:42:42 KST
+state: head_moved_expo_image_regate
 ---
 
 # Codex STATUS
@@ -12,13 +12,24 @@ state: golive_freeze_ack_commit_gate
 - **작업**: Simon 지시 - 모든 화면 UI 문제를 계속 찾아내고, AI slop 100/100까지 Claude 작업물을 반복 리뷰.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
 - **검수 기준**: SimonK-stack `ai-slop-cleaner`, `visual-verdict`, `frontend-ui-ux`를 근거로 하되 2nd-B의 기존 dark premium/village system을 보존. 작은 글자, 무근거 glow/shadow, deprecated prop 잔여물, 임시 스크립트, 키보드 occlusion, 검증부족을 우선 점검.
-- **앱 상태**: `E:\2ndB` branch `claude/cycle-1-golive`, clean committed HEAD `6c506cf`. 이전 expo-image/root-script WIP는 현재 worktree에 없음.
-- **검증**: clean HEAD 기준 `npm run verify` pass: 91 suites, 823 tests.
-- **평가**: Claude freeze directive 기준 go-live gate는 clean committed `6c506cf`만 사용하고 **95/100 green baseline**으로 정렬. Codex가 찾은 `CrisisRouter` badge readability와 keyboard/device proof 항목은 100/100 follow-up backlog로 유지하되, dirty/mid-edit gate나 go-live blocker로 다루지 않음.
+- **앱 상태**: `E:\2ndB` branch `claude/cycle-1-golive`, clean committed HEAD `85d4f65`. Note: this conflicts with prior Claude freeze directive that fixed go-live at `6c506cf`.
+- **검증**: `85d4f65` 기준 `npm run verify` pass: 91 suites, 823 tests.
+- **평가**: `CrisisRouter` safety badge readability는 resolved. `expo-image` migration은 committed됐지만 migrated call sites still use deprecated `resizeMode` compatibility prop; request `contentFit` cleanup before 100/100. Also request Claude to clarify whether go-live freeze moved from `6c506cf` to `85d4f65`. Current follow-up score: **95/100 green, no 100/100 sign-off**.
 - **최신 산출물**:
-  - `agents/codex/outbox/20260606-003800-to-claude-golive-freeze-ack.md`
-  - `agents/codex/outbox/preview/20260606-003800-golive-freeze-ack/index.html`
-- **대기**: go-live freeze 동안 Codex는 `6c506cf` committed head 기준만 리뷰. 100/100 항목은 follow-up PR/branch에서 재게이트.
+  - `agents/codex/outbox/20260606-004242-to-claude-head-moved-expo-image-regate.md`
+  - `agents/codex/outbox/preview/20260606-004242-head-moved-expo-image-regate/index.html`
+- **대기**: Claude freeze source-of-truth clarification and/or `contentFit` cleanup. Keyboard/device proof backlog remains.
+
+[Head moved + expo-image re-gate / 26.06.06 / 00:42:42]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #expo-image #freeze #claude-request
+- Reviewed latest committed app head `85d4f65`.
+- App worktree clean.
+- `npm run verify` pass: 91 suites, 823 tests.
+- Resolved: `CrisisRouter` badge now `fontSize: 12`, `letterSpacing: 0`.
+- Still open: `expo-image` migration leaves `resizeMode` on auth hero and art components; local expo-image types mark `resizeMode` deprecated compatibility.
+- Freeze ambiguity: prior directive froze go-live at `6c506cf`, but branch/origin now points to `85d4f65`.
+- Report written: `agents/codex/outbox/20260606-004242-to-claude-head-moved-expo-image-regate.md`
+- HTML preview written: `agents/codex/outbox/preview/20260606-004242-head-moved-expo-image-regate/index.html`
 
 [Go-live freeze ACK / 26.06.06 / 00:38:00]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #freeze #claude-directive
