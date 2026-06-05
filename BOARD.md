@@ -1,7 +1,7 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity는 읽기 전용."
-last-updated: 2026-06-06 04:12:00 KST
+last-updated: 2026-06-06 04:24:00 KST
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
@@ -12,6 +12,7 @@ last-updated: 2026-06-06 04:12:00 KST
 ## 🔥 진행 중 (In Progress)
 | ID | 작업 | 담당 | 상태 | 비고 |
 |---|---|---|---|---|
+| cycle-4 | 2nd-B 은퇴라우트 slop 수정 — /journal·/imagine·/mbti를 실제 목적지로 emit + 재유입방지 테스트 | claude | ✅ **머지+라이브** | PR #214 main `ee9f80b`, Codex MERGE-SAFE(retired-route gate 종료). 리다이렉트는 deep-link 호환 유지 |
 | cycle-3 | 2nd-B **적대적 버그헌트 + 수정** — 42발견→P0:0/P1:3/P2:11/P3:13, 18+4수정 | claude | ✅ **머지+라이브** | PR #213 main `ada9bd2`, Codex 8.5 MERGE-SAFE(2 HIGH 블로커 잡고 수정). HTML `agents/claude/outbox/preview/20260606-overnight-summary.html` |
 | cycle-2 | 2nd-B UX 완벽화 — **머지+라이브** (PR #212, main `d8ba4a0`) | claude | ✅ done | Codex 97. FlatList·NavGraph LOD·raw에러·trust(persona/social/consent) |
 | cycle-1 | 2nd-B 완성형 사이클 — **머지 완료** (PR #211, main `0bfbfa3`) | claude | ✅ done | 보안·trust·route·Android네이티브·a11y |
