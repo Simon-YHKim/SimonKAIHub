@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 02:01:45 KST
-state: waiting_claude_wip_after_89eeaaa
+updated: 2026-06-06 02:05:42 KST
+state: reviewed_claude_wip_preflight
 ---
 
 # Codex STATUS
@@ -11,13 +11,24 @@ state: waiting_claude_wip_after_89eeaaa
 
 - **작업**: Simon 지시 `/goal`에 따라 모든 화면 UI/UX와 AI slop를 100/100 기준으로 반복 게이트 중. Claude/AG의 최신 앱 커밋 `89eeaaa`를 즉시 재검수했다.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
-- **앱 기준**: `E:\2ndB`, branch `claude/cycle-2-concept-consistency`, head `89eeaaa perf(android): stop background animation tickers + native-driver startup anim`, `origin/main` 대비 ahead 3. 현재 Claude WIP로 보이는 미커밋 수정이 다수 감지됨: support/audit/persona/wiki/settings/gemini/phase1/account/privacy/capture/inbox/manual/assessment/consent 등.
-- **검증**: `npm run verify` pass on `89eeaaa`: lint/type-check/i18n/lexicon/LLM boundary/constraints/emdash/Jest green, 91 suites, 823 tests.
-- **현재 점수**: 88/100 provisional, unchanged. `89eeaaa`의 perf 방향은 수용하지만 `LivingAsset` delayed loop background-start 위험, strict `AppState.currentState === "active"` cold-start freeze proof gap, AppState timer lifecycle test gap 때문에 100점 기준 미충족.
+- **앱 기준**: `E:\2ndB`, branch `claude/cycle-2-concept-consistency`, head `89eeaaa perf(android): stop background animation tickers + native-driver startup anim`, `origin/main` 대비 ahead 3. Claude WIP로 보이는 미커밋 수정 19개 파일 감지됨.
+- **검증**: `npm run verify` pass on current WIP after test updates: lint/type-check/i18n/lexicon/LLM boundary/constraints/emdash/Jest green, 91 suites, 823 tests. Earlier failing `[MOCK]` expectation was fixed in the WIP tests before the rerun.
+- **현재 점수**: WIP라 최종 점수 미확정. 방향은 88점보다 확실히 개선되지만 100/100은 아님. Remaining blockers: `persona.tsx` visible diagnosis copy, broad raw error alerts/states across all screens, consent/legal placeholder readiness, `LivingAsset` AppState perf edge, small hitSlop leftovers.
 - **최신 산출물**:
+  - `agents/codex/outbox/20260606-020542-to-claude-wip-slop-cleanup-preflight.md`
+  - `agents/codex/outbox/preview/20260606-020542-wip-slop-cleanup-preflight.html`
   - `agents/codex/outbox/20260606-015756-to-claude-89eeaaa-perf-regate.md`
   - `agents/codex/outbox/preview/20260606-015756-89eeaaa-perf-regate.html`
 - **대기**: Claude/AG가 현재 WIP를 커밋하거나 outbox로 완료 보고하면 즉시 재게이트. WIP 상태에서는 점수 확정하지 않음. 100점 전까지 반복.
+
+[WIP slop cleanup preflight / 26.06.06 / 02:05:42]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #claude-wip #preflight
+- Reviewed current uncommitted WIP on app head `89eeaaa`; no app code modified by Codex.
+- Initial `npm run verify` failed because tests still expected visible `[MOCK]`; Claude/WIP tests updated during review.
+- Reran `npm run verify`: pass, 91 suites, 823 tests.
+- Accepted direction: support clinical FAQ fixed, user-visible `[MOCK]` removed, Phase 1 mostly changed to Source brief / 요약과 질문, assessment scale hit targets improved, KO eyebrow tracking improved.
+- Still blocking 100: persona visible "진단이 아니며 / Not a diagnosis", raw errors across multiple routes, consent legal placeholder readiness, LivingAsset AppState perf edge, small hitSlop leftovers.
+- WIP preflight report/preview written and opened.
 
 [Claude WIP detected after 89eeaaa / 26.06.06 / 02:01:45]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #claude-wip
