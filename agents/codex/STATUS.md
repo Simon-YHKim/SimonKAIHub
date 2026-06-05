@@ -1,25 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 08:26:16 KST
-state: complete_profile_auth_loading_redirect_gate_sent
+updated: 2026-06-06 08:30:32 KST
+state: signup_guest_only_guard_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
 
-- **Task**: complete-profile auth loading and premature redirect audit.
+- **Task**: sign-up guest-only route guard audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
 - **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
-- **Claude state**: no newer Claude implementation after the persona export share/fallback gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
-- **SimonK-stack reference**: continuing the 100/100 anti-slop standard that first-run trust routes must be stable, explicit, and not flicker into wrong destinations while state is unresolved.
-- **Evidence**: `AuthContext` default/provider state starts as `userId:null`, `hasProfile:null`, `loading:true`, and first signed-in profile probe keeps loading true while resolving. `complete-profile.tsx` reads only `userId` and `hasProfile`, then redirects to `/sign-in` when `userId === null`, with no route-local loading state.
-- **Risk**: the required OAuth DOB/consent gate can route a still-resolving user to sign-in on direct load, same-tab refresh after intro, or auth re-probe edge. That weakens first-run trust and the legal/profile completion contract.
-- **Score**: still **98/100 provisional**. This is a P1/P2 first-run route-stability gate before 100.
+- **Claude state**: no newer Claude implementation after the complete-profile auth-loading redirect gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: continuing the 100/100 anti-slop standard that auth entry routes must expose the correct workflow for the current session.
+- **Evidence**: `/sign-in` reads `useAuth()` and redirects signed-in users home. `/sign-up` imports neither `useAuth` nor `Redirect`, initializes the account-creation form directly, and the root profile gate exempts `(auth)` routes. Thus signed-in or profile-incomplete users can deep-link to a fresh sign-up form.
+- **Risk**: auth route state is inconsistent: the product contract treats sign-in/sign-up as guest-only, but only sign-in enforces it. This can confuse signed-in users, profile-incomplete OAuth users, and route QA.
+- **Score**: still **98/100 provisional**. This is a P2 auth route-state gate before 100.
 - **Latest outputs**:
-  - `agents/codex/outbox/20260606-082616-to-claude-complete-profile-auth-loading-redirect-gate.md`
-  - `agents/codex/outbox/preview/20260606-082616-complete-profile-auth-loading-redirect-gate.html`
+  - `agents/codex/outbox/20260606-083032-to-claude-signup-guest-only-guard-gate.md`
+  - `agents/codex/outbox/preview/20260606-083032-signup-guest-only-guard-gate.html`
+
+[sign-up guest-only guard gate / 26.06.06 / 08:30:32]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #auth #sign-up #routing #guest-only #claude-request
+- Confirmed sign-up guard drift is not the same as the complete-profile loading redirect gate.
+- Audited sign-in/sign-up auth route state and root `(auth)` exemption.
+- Sent Claude a P2 gate: `/sign-up` must own guest-only auth state, wait for auth resolution, and redirect signed-in users to `/` or `/complete-profile`.
+- Score remains 98/100 provisional until sign-in and sign-up share the same guest-only route contract.
 
 [complete-profile auth loading redirect gate / 26.06.06 / 08:26:16]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #auth #complete-profile #routing #first-run #claude-request
