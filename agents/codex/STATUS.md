@@ -1,13 +1,55 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 04:38:35 KST
-state: privacy_0fe8be5_regate_done_with_concerns
+updated: 2026-06-06 04:49:44 KST
+state: privacy_12bc27d_accepted_support_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **작업**: Claude `12bc27d` privacy opt-out monotonicity clean re-gate 완료.
+- **src**: user `/goal` - 모든 화면 UI 문제를 100/100까지 계속 탐색/보고.
+- **앱 기준**: `E:\2ndB`, branch `claude/cycle-5-privacy-monotonicity`, head `12bc27d`, clean and aligned with `origin/claude/cycle-5-privacy-monotonicity`.
+- **검증**: failed opt-out inline probe `applied: [false]`; `npm run verify` PASS (92 suites / 830 tests). `node_modules/.bin`이 일부 사라져 있어 `npm install --legacy-peer-deps`로 로컬 deps를 복구한 뒤 재검증했고 git worktree는 clean 유지.
+- **판정**: privacy P1은 이 브랜치 기준 accepted. stale successful completion과 failed opt-out revert path 모두 닫힘.
+- **점수**: branch score **98/100 provisional**. main merge 전까지 live 기준은 별도 re-gate 필요. 전체 100점은 아직 아님: keyboard-safe shells, destructive partial-delete friction, Pressable semantics, internal vocabulary, support access/export-copy, runtime screenshot proof 남음.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260606-044944-to-claude-12bc27d-privacy-regate.md`
+  - `agents/codex/outbox/preview/20260606-044944-12bc27d-privacy-regate.html`
+
+[12bc27d privacy re-gate / 26.06.06 / 04:49:44]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #privacy #regate #accepted
+- Detected clean commit `12bc27d fix(privacy): a failed opt-out save must not re-enable analytics via revert`.
+- Restored broken local `node_modules/.bin` with `npm install --legacy-peer-deps`; no git-tracked app changes.
+- Ran full `npm run verify`: PASS, 92 Jest suites / 830 tests.
+- Confirmed failed opt-out probe returns `applied: [false]`.
+- Accepted privacy P1 on branch; branch score now 98/100 provisional, with non-privacy UI gates still open.
+
+## Previous (privacy WIP preaccept + support gate)
+
+- **작업**: Claude privacy fail-closed WIP read-only preflight + 설정 인접 화면 추가 trust UX gate.
+- **src**: user `/goal` - 모든 화면 UI 문제를 100/100까지 계속 탐색/보고.
+- **앱 기준**: `E:\2ndB`, branch `claude/cycle-5-privacy-monotonicity`, head `0fe8be5`, dirty WIP: `src/lib/privacy/analytics-consent-queue.ts`, `src/lib/privacy/__tests__/analytics-consent-queue.test.ts`.
+- **privacy WIP 판정**: failed opt-out 재현이 `[false,true]`에서 `[false]`로 개선. targeted queue test PASS(4 tests), inline failed opt-out probe PASS, `npm run type-check` PASS, `git diff --check` PASS, `npm run verify` PASS(92 suites / 830 tests). 커밋/푸시 후 clean re-gate되면 P1 privacy blocker를 닫을 수 있는 상태.
+- **새 UI gate**: `/support`가 auth-gated라 로그인 실패/비밀번호 문제 사용자가 지원 화면을 못 여는 support dead-end. `support.tsx:42`는 "Export in Settings"라고 안내하지만 실제 export는 `/data` -> `/wiki`/store 쪽.
+- **점수**: privacy WIP는 pre-accept. 전체 점수는 아직 **97/100 provisional** 유지. privacy 커밋 후에는 상승 가능하지만 keyboard/destructive/Pressable/jargon/runtime proof/support access가 남음.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260606-044505-to-claude-privacy-failclosed-wip-preaccept.md`
+  - `agents/codex/outbox/preview/20260606-044505-privacy-failclosed-wip-preaccept.html`
+  - `agents/codex/outbox/20260606-044505-to-claude-support-access-export-gate.md`
+  - `agents/codex/outbox/preview/20260606-044505-support-access-export-gate.html`
+
+[Privacy fail-closed WIP + support gate / 26.06.06 / 04:45:05]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #privacy #support #export #preflight
+- Detected dirty fail-closed privacy follow-up on `claude/cycle-5-privacy-monotonicity`.
+- Verified failed opt-out no longer re-enables analytics: inline probe `applied: [false]`.
+- Ran full `npm run verify`: PASS, 92 Jest suites / 830 tests.
+- Sent pre-accept report: privacy P1 can close after committed/pushed clean re-gate.
+- Continued settings-adjacent all-screen audit and sent new P2 trust gate: `/support` is auth-gated and Support FAQ points export to Settings while actual export is wiki/store.
+
+## Previous (0fe8be5 privacy re-gate)
 
 - **작업**: Claude `0fe8be5` privacy monotonicity patch re-gate.
 - **src**: user `/goal` - 100/100 anti-slop까지 Claude 완료분을 반복 리뷰.
