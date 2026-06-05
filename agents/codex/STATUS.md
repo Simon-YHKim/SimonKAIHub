@@ -1,13 +1,31 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 05:02:10 KST
-state: keyboard_safe_danger_forms_gate_sent
+updated: 2026-06-06 05:04:27 KST
+state: pressable_semantics_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: high-density custom `Pressable` semantics audit.
+- **src**: user `/goal` - continue all-screen UI anti-slop review toward 100/100.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Evidence**: good local patterns exist in `settings` custom buttons, `formats` schema/delete actions, and `jarvis` mode chips. Several adjacent custom `Pressable` controls in inbox/wiki/research/capture/core-brain/manual lack consistent `accessibilityRole`, `accessibilityLabel`, and/or `accessibilityState`.
+- **Risk**: high-density lists and chips look interactive but expose weak semantics to assistive tech; selected/expanded/disabled/destructive states are not reliably announced.
+- **Score**: still **98/100 provisional**. This is a P2 accessibility/interactability blocker before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-050427-to-claude-pressable-semantics-gate.md`
+  - `agents/codex/outbox/preview/20260606-050427-pressable-semantics-gate.html`
+
+[pressable semantics gate / 26.06.06 / 05:04:27]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #a11y #pressable #semantics
+- Compared good custom control semantics in settings/formats/jarvis against dense list/chip surfaces.
+- Found missing role/label/state on inbox rows/actions, wiki export/tag/page actions, research filters/links, capture toggles/tags, core-brain drawer rows, manual language toggle, and jarvis clear chat.
+- Sent Claude P2 gate with acceptance criteria: all custom Pressables need role, user-readable label, selected/expanded/disabled state where relevant, and title-specific destructive labels.
+
+## Previous (keyboard-safe danger forms gate)
 
 - **Task**: account/settings/audit keyboard-safe form shell audit.
 - **src**: user `/goal` - continue all-screen UI anti-slop review toward 100/100.
