@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex FlatList WIP P0 Preflight</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #10131a;
+      --panel: #171b24;
+      --panel-2: #202633;
+      --text: #eef2f8;
+      --muted: #aeb8c9;
+      --line: #2b3445;
+      --accent: #7cc7ff;
+      --ok: #8ee6a8;
+      --warn: #ffcf70;
+      --bad: #ff9d9d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Pretendard", "Segoe UI", system-ui, sans-serif;
+      line-height: 1.58;
+      word-break: keep-all;
+    }
+    main {
+      width: min(1000px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 22px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(30px, 5vw, 52px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+    .summary {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+    .banner {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 18px;
+      align-items: center;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+    .banner strong {
+      display: block;
+      color: var(--bad);
+      font-size: 34px;
+      line-height: 1.05;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      margin-top: 16px;
+    }
+    h2 { font-size: 20px; margin: 0 0 14px; letter-spacing: 0; }
+    h3 { font-size: 16px; margin: 18px 0 8px; letter-spacing: 0; }
+    p { margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 21px; }
+    li + li { margin-top: 7px; }
+    code, pre {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      color: #d8e8ff;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 0.94em;
+    }
+    code { padding: 1px 5px; }
+    pre { padding: 12px; overflow: auto; }
+    .tag {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 9px;
+      margin-right: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .bad { color: var(--bad); }
+    .warn { color: var(--warn); }
+    .ok { color: var(--ok); }
+    @media (max-width: 720px) {
+      main { width: min(100vw - 22px, 1000px); padding-top: 24px; }
+      .banner { grid-template-columns: 1fr; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Codex UI/UX Preflight</p>
+      <h1>FlatList WIP Blocker</h1>
+      <p class="summary">`inbox`, `records`, `wiki` FlatList 전환 WIP를 검수했다. 방향은 맞지만 현재 상태는 hook order 실패로 verify가 깨져서 커밋하면 안 된다.</p>
+    </header>
+
+    <div class="banner">
+      <strong>P0<br>fail</strong>
+      <div>
+        <span class="tag">verify failed</span>
+        <span class="tag">wiki hooks</span>
+        <span class="tag">WIP unscored</span>
+        <p style="margin-top:10px;">커밋된 `121bc87` 점수는 91/100 유지. 현재 FlatList WIP는 별도이며, 지금 커밋하면 게이트 실패다.</p>
+      </div>
+    </div>
+
+    <section>
+      <h2>P0 Hook Order</h2>
+      <p><code>src/app/wiki.tsx</code>에서 새 <code>useCallback</code>들이 auth/no-profile early return 뒤에 추가되어 React hooks 규칙을 깨고 있다.</p>
+      <pre>207:24  useCallback is called conditionally
+242:28  useCallback is called conditionally
+270:33  useCallback is called conditionally
+316:24  useCallback is called conditionally
+319:28  useCallback is called conditionally
+322:28  useCallback is called conditionally
+326:22  useCallback is called conditionally</pre>
+      <p>수정 방향: 모든 hooks/callback을 early return 위로 올리거나, 해당 함수들을 hook이 아닌 일반 함수로 되돌린다.</p>
+    </section>
+
+    <section>
+      <h2>P1 Raw Errors</h2>
+      <p>WIP 안에서도 raw error message가 visible state/alert로 남아 있다.</p>
+      <ul>
+        <li><code>inbox.tsx</code>: <code>setError((e as Error).message)</code>가 error card에 표시된다.</li>
+        <li><code>inbox.tsx</code>: delete/generate-page 실패가 raw message를 alert에 붙인다.</li>
+        <li><code>wiki.tsx</code>: delete/export 실패가 raw message를 alert에 붙인다.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>P2 Visual Proof</h2>
+      <p>FlatList 방향은 좋다. 완료 전에는 header/empty spacing, pull-to-refresh, horizontal chip strip, expanded wiki row, backlinks/export modal 스크롤 proof가 필요하다.</p>
+    </section>
+  </main>
+</body>
+</html>

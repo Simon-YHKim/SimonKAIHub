@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 02:10:46 KST
-state: regated_121bc87
+updated: 2026-06-06 02:14:54 KST
+state: flatlist_wip_p0_preflight
 ---
 
 # Codex STATUS
@@ -11,17 +11,28 @@ state: regated_121bc87
 
 - **작업**: Simon 지시 `/goal`에 따라 모든 화면 UI/UX와 AI slop를 100/100 기준으로 반복 게이트 중. Claude/AG의 최신 앱 커밋 `89eeaaa`를 즉시 재검수했다.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
-- **앱 기준**: `E:\2ndB`, branch `claude/cycle-2-concept-consistency`, reviewed committed head `121bc87` after `9f9d6cd`; `origin/main` 대비 ahead 5. Review score excludes later uncommitted FlatList/perf WIP in `src/app/inbox.tsx`, `src/app/records.tsx`, `src/app/wiki.tsx`.
-- **검증**: `npm run verify` pass during `121bc87` re-gate: lint/type-check/i18n/lexicon/LLM boundary/constraints/emdash/Jest green, 91 suites, 823 tests.
-- **현재 점수**: `121bc87` re-gate = 91/100 provisional. Crossed 90; still not 100. Remaining blockers: broad raw error alerts/states across all screens, `persona.tsx` diagnosis-copy source-of-truth conflict, consent/legal placeholder readiness, social provider/device proof, small hitSlop leftovers, and new FlatList WIP still unscored.
+- **앱 기준**: `E:\2ndB`, branch `claude/cycle-2-concept-consistency`, committed head remains `121bc87`; `origin/main` 대비 ahead 5. Current dirty WIP: `src/app/inbox.tsx`, `src/app/records.tsx`, `src/app/wiki.tsx`.
+- **검증**: committed `121bc87` re-gate passed earlier, but current FlatList WIP fails `npm run verify` at ESLint due `src/app/wiki.tsx` conditional hook-order errors.
+- **현재 점수**: committed `121bc87` score remains 91/100 provisional. Current FlatList WIP is unscored and P0-blocked; if committed as-is it fails the gate.
 - **최신 산출물**:
+  - `agents/codex/outbox/20260606-021454-to-claude-flatlist-wip-p0-preflight.md`
+  - `agents/codex/outbox/preview/20260606-021454-flatlist-wip-p0-preflight.html`
   - `agents/codex/outbox/20260606-021046-to-claude-121bc87-regate.md`
   - `agents/codex/outbox/preview/20260606-021046-121bc87-regate.html`
   - `agents/codex/outbox/20260606-020542-to-claude-wip-slop-cleanup-preflight.md`
   - `agents/codex/outbox/preview/20260606-020542-wip-slop-cleanup-preflight.html`
   - `agents/codex/outbox/20260606-015756-to-claude-89eeaaa-perf-regate.md`
   - `agents/codex/outbox/preview/20260606-015756-89eeaaa-perf-regate.html`
-- **대기**: Claude/AG가 현재 FlatList/perf WIP를 커밋하거나 outbox로 완료 보고하면 즉시 재게이트. 100점 전까지 반복.
+- **대기**: Claude/AG가 FlatList/perf WIP P0 hook-order failure를 고치고 커밋/완료 보고하면 즉시 재게이트. 100점 전까지 반복.
+
+[FlatList WIP P0 preflight / 26.06.06 / 02:14:54]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #flatlist #preflight #p0
+- Reviewed current dirty FlatList/perf WIP in `inbox`, `records`, `wiki`; no app code modified by Codex.
+- Ran `npm run verify`: failed at ESLint.
+- P0: `src/app/wiki.tsx` new `useCallback` hooks are after auth/no-profile early returns, violating `react-hooks/rules-of-hooks` at lines 207, 242, 270, 316, 319, 322, 326.
+- P1: WIP still leaves raw error message exposure in inbox/wiki visible state/alerts.
+- P2: FlatList spacing/scroll behavior needs visual proof before final score.
+- Report/preview written and opened.
 
 [121bc87 re-gate / 26.06.06 / 02:10:46]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #claude-request #regate
