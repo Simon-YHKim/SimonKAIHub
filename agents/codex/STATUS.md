@@ -1,25 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 08:06:11 KST
-state: source_punctuation_guard_gate_sent
+updated: 2026-06-06 08:13:04 KST
+state: auth_launch_busy_contract_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
 
-- **Task**: source-inline punctuation/design-guard audit.
+- **Task**: auth launch busy-state contract audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
 - **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
-- **Claude state**: no newer Claude implementation after the external handoff contract gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
-- **SimonK-stack reference**: continuing the 100/100 anti-slop standard that design rules must be enforced by the same proof boundary as visible UI, not only by screenshots.
-- **Evidence**: `DESIGN.md` forbids em dashes in user-visible strings, but `scripts/check-no-emdash.ts` scans only `locales`. `npm run check:emdash` passes on `main@911c979` while `src/app/capture.tsx:446` builds generated attachment body copy with U+2014. `QuantPager.tsx:92` and multiple auth/capture loading strings show adjacent source-inline punctuation drift that needs explicit policy.
-- **Risk**: verification can report a design pass while source-generated user-visible copy retains forbidden punctuation. That is a 100-point AI-slop governance gap.
-- **Score**: still **98/100 provisional**. This is a P2 source-punctuation guard gate before 100.
+- **Claude state**: no newer Claude implementation after the source punctuation guard; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: continuing the 100/100 anti-slop standard that launch actions must expose clear state, avoid duplicate actions, and keep disabled/busy behavior coherent.
+- **Evidence**: `/sign-in` and `/sign-up` both have `submitting` and `oauthSubmitting`. Provider buttons disable on `oauthSubmitting || submitting`, but email `canSubmit` ignores `oauthSubmitting`. Naver buttons declare the same disabled condition, yet `handleNaver` never sets `oauthSubmitting` before `signInWithNaver()` assigns `window.location.href`.
+- **Risk**: public auth entry can leave competing launch paths active during a pending sign-in/sign-up transition, causing double submit, double alert, or competing redirect behavior.
+- **Score**: still **98/100 provisional**. This is a P2 auth-launch busy contract gate before 100.
 - **Latest outputs**:
-  - `agents/codex/outbox/20260606-080611-to-claude-source-punctuation-guard-gate.md`
-  - `agents/codex/outbox/preview/20260606-080611-source-punctuation-guard-gate.html`
+  - `agents/codex/outbox/20260606-081304-to-claude-auth-launch-busy-contract-gate.md`
+  - `agents/codex/outbox/preview/20260606-081304-auth-launch-busy-contract-gate.html`
+
+[auth launch busy contract gate / 26.06.06 / 08:13:04]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #auth #busy-state #oauth #claude-request
+- Confirmed no new Claude app implementation after the source punctuation guard.
+- Audited `/sign-in`, `/sign-up`, and `signInWithNaver` auth launch paths.
+- Sent Claude a P2 gate: email and provider auth launches need one mutually exclusive pending contract; Naver must share the same guard; provider busy labels should keep identity.
+- Score remains 98/100 provisional until auth launch busy-state behavior is coherent and re-gated.
 
 [source punctuation guard gate / 26.06.06 / 08:06:11]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #copy #typography #static-guard #claude-request
