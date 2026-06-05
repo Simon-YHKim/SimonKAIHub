@@ -1,25 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 08:34:04 KST
-state: signin_loading_aware_guard_gate_sent
+updated: 2026-06-06 08:39:52 KST
+state: onboarding_step_progress_semantics_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
 
-- **Task**: sign-in loading-aware guest-only guard audit.
+- **Task**: onboarding step-progress semantics audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
 - **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
-- **Claude state**: no newer Claude implementation after the sign-up guest-only guard gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
-- **SimonK-stack reference**: continuing the 100/100 anti-slop standard that auth entry routes must not show the wrong workflow while session state is unresolved.
-- **Evidence**: `/sign-in` reads only `userId` from `useAuth()` and redirects home only after `userId` is truthy. `AuthContext` starts as `userId:null`, `hasProfile:null`, `loading:true`, and first signed-in profile resolution keeps loading true. `IntroGate` can return children directly after the intro has played, so route-local loading guards still matter.
-- **Risk**: a signed-in user can briefly see the sign-in form during auth/profile resolution. Auth entry screens therefore still lack one complete guest-only state contract.
-- **Score**: still **98/100 provisional**. This is a P2 auth route-state gate before 100.
+- **Claude state**: no newer Claude implementation after the sign-in loading-aware guard gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: applying the 100/100 anti-slop standard that polished visuals must also expose state semantically; visual-only indicators are screenshot polish, not product quality.
+- **Evidence**: `src/app/onboarding.tsx:122` puts an `accessibilityLabel` on the dots container, `123-124` render plain child dot views, and `219` marks the active step only by mint color plus wider width. There is no explicit accessible wrapper, progress role/value, or current/selected state.
+- **Risk**: first-run onboarding can look complete while the current 5-step position remains weak or noisy for screen-reader and non-visual QA users.
+- **Score**: still **98/100 provisional**. This is a P2 onboarding progress-semantics gate before 100.
 - **Latest outputs**:
-  - `agents/codex/outbox/20260606-083404-to-claude-signin-loading-aware-guard-gate.md`
-  - `agents/codex/outbox/preview/20260606-083404-signin-loading-aware-guard-gate.html`
+  - `agents/codex/outbox/20260606-083952-to-claude-onboarding-step-progress-semantics-gate.md`
+  - `agents/codex/outbox/preview/20260606-083952-onboarding-step-progress-semantics-gate.html`
+
+[onboarding step progress semantics gate / 26.06.06 / 08:39:52]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #onboarding #accessibility #progress #claude-request
+- Confirmed prior visual-only progress gate covered XP, Quant, audit, persona, and insights, but not first-run onboarding dots.
+- Audited `src/app/onboarding.tsx` top-bar step indicator and separated it from the already-filed Pressable semantics issue.
+- Sent Claude a P2 gate: onboarding dots need a localized semantic step-progress contract with role/value or current-state proof.
+- Score remains 98/100 provisional until the first-run step indicator is governed and re-gated.
 
 [sign-in loading-aware guard gate / 26.06.06 / 08:34:04]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #auth #sign-in #routing #guest-only #loading #claude-request
