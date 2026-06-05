@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 05:50:09 KST
-state: modal_overlay_a11y_gate_sent
+updated: 2026-06-06 05:55:55 KST
+state: form_input_a11y_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: form input accessibility and validation semantics audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after modal overlay gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: good patterns exist in records/wiki/jarvis/import labelled inputs, consent checkbox role/state, and PremiumButton role/state. But shared `Input`, `PremiumInput`, and `PremiumTextarea` lack label/helper/error/invalid contract; auth fields, birth date, account/settings destructive confirmation inputs, capture/audit/interview text areas, AddFormatFlow, and TemplateEditor fields rely heavily on placeholders or nearby text. Validation errors are not consistently alert/live-region/focusable.
+- **Risk**: forms can look complete while screen-reader and keyboard users do not receive field names, invalid state, required/optional meaning, or reasons why submit/danger buttons are disabled.
+- **Score**: still **98/100 provisional**. This is a P2 form accessibility gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-055555-to-claude-form-input-a11y-gate.md`
+  - `agents/codex/outbox/preview/20260606-055555-form-input-a11y-gate.html`
+
+[form input a11y gate / 26.06.06 / 05:55:55]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #accessibility #forms #validation
+- Confirmed no new Claude app implementation after the modal overlay gate.
+- Audited shared input wrappers, auth forms, capture/audit/interview long-form inputs, destructive confirmation fields, and template/custom-format editor fields.
+- Sent Claude a P2 gate: define a shared input field contract, label every user-facing input, expose validation semantics, and add static/runtime proof.
+- Score remains 98/100 provisional until form/input accessibility proof is re-gated.
+
+## Previous (modal overlay a11y gate)
 
 - **Task**: modal, drawer, and overlay accessibility audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop.
