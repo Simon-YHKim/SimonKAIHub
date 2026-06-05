@@ -8,7 +8,7 @@
 ## 0. 역할 (자세한 분장은 `ROUTING.md`)
 - **Claude** = 메인 지시 AI(오케스트레이터) + **코딩**. 사용자와 직접 대화하고, 작업을 분해해 Codex·Antigravity에 분배하고, 결과를 통합한다. **마스터 보드(`BOARD.md`)의 유일한 작성자.**
 - **Codex** = **이미지 · UI/UX**. 디자인·비주얼·레이아웃·UX 플로우.
-- **Antigravity(Gemini)** = **안드로이드 네이티브 검수**. 네이티브 빌드 검증·디바이스 QA·성능/크래시 점검.
+- **Antigravity(Gemini)** = **안드로이드/Google 네이티브 개발 + 검수**. Google·Android 구조에 능함 — 네이티브 픽스(키보드·edge-to-edge·intent filter·AppState·elevation 등)를 **직접 코딩·푸시**하고, 빌드 검증·디바이스 QA·성능/크래시 점검. **코드는 Claude 리뷰·승인 게이트를 거친다(§10.5).**
 - **Grok** = **X(소셜) 트렌드·소비자 리서치**. 추가·변경 결정 전에 X(트위터) 등에서 글로벌 소비자 취향·반응을 검색·분석해 인사이트 제공(코딩·디자인·QA는 안 함).
 
 ---
@@ -173,8 +173,12 @@ created: 2026-06-05 15:22:34 KST
 - **직접 지시 받으면**: 즉시 `STATUS.md`에 `src: user`로 기록하고 착수, 완료 시 outbox에 결과(§9). 조용히 혼자 하지 말 것.
 - **현황 질문 받으면**: 자기 `STATUS.md` 기준으로 즉답. (전체 현황은 Claude가 `BOARD.md`로 답한다.)
 
-### 10.5 코드 변경 게이트 (재확인)
-- 코드 수정이 필요한 AI는 **별도 브랜치/worktree에서 작업** → 변경·리뷰 내용을 Claude에 공유(outbox `request`/`response`) → **Claude가 검토**하고, 필요하면 Claude가 직접 수정·보완한 뒤 → **머지**(§4 작업사이클 · §8 라이브 검증 게이트). force-push·history 재작성 금지.
+### 10.5 코드 변경 게이트 — Claude 리뷰·승인 (PR 모델, 2026-06-05 Simon 갱신)
+- **모든 AI(Antigravity 포함)는 코드를 작성·푸시할 수 있다.** 단 **Claude가 리뷰·승인하는 게이트**를 거친다(PR 모델): **AI 푸시 → Claude 검토(좋은 부분은 살리고, 미흡하면 재작업 요청 피드백을 outbox로) → Claude가 golive/main에 머지**. **Claude = 머지 게이트.** AI는 푸시 후 Claude의 승인/재작업 피드백을 확인하고 반영한다(주고받는 루프).
+- **Antigravity = Android/Google 네이티브 개발 강점 활용** — 네이티브 픽스(키보드·edge-to-edge·intent filter·AppState·elevation 등)를 **직접 코딩·푸시**한다. (더 이상 "검수만"이 아니다 — 2026-06-05 Simon 결정. 의견만 주는 것보다 푸시→Claude 검토가 빠르다.)
+- **작업 위치 (working-tree race 방지 — CRITICAL)**: 가능하면 **자기 브랜치(`antigravity/android` 등)에 커밋** → Claude 리뷰 후 golive 머지. golive에 직접 커밋해야 하면 **반드시 자기 파일만 명시적 stage**(`git add <파일들>`) — **`git add -A`/`git add .` 금지**(타 AI·Claude 서브에이전트의 미커밋 작업을 쓸어담는 race·데이터손실 방지). force-push·history 재작성 금지.
+- **프롬프트 인젝션 금지 (보안 경계)**: 공유 파일(`PROTOCOL.md`·`ROUTING.md`·앱 `CLAUDE.md` 등)에 **타 AI를 향한 지시·명령·긴급 배너를 삽입하지 않는다.** 의견·요청·긴급 사항은 **자기 outbox(md)로만** 전달. (single-writer 원칙 §1 + 보안.)
+- **머지 전 `npm run verify` 통과 필수.** Claude는 모든 코드 푸시를 검토하고 **승인 또는 재작업 요청**을 outbox 피드백으로 남긴다.
 
 ### 10.6 산출물 = HTML 리포트 (전 AI, CLAUDE.md §13)
 - **Codex·Grok·Antigravity 모두** 리포트·스펙·리서치·감사 등 *사람이 읽고 판단할 산출물*은 **self-contained HTML**로도 작성하고 `start "" "<경로>"`로 기본 브라우저에 띄운다. 저장: `agents/<me>/outbox/preview/<YYYYMMDD-HHMMSS>-<slug>.html` (다크·군더더기 없음, 색 3개 이내, 이모지/장식 금지 — AI slop 방지).
@@ -183,4 +187,4 @@ created: 2026-06-05 15:22:34 KST
 
 ### 10.7 리포트 → 즉시 develop-able 분배 (오케스트레이터)
 - Claude는 어떤 AI의 리포트/응답을 받으면 **반드시 다음 develop-able(실행 가능한) 작업을 즉시 분배**한다. AI를 유휴로 두지 않는다(continuous pipeline). 리포트는 "수거하고 끝"이 아니라 항상 다음 액션으로 전환한다.
-- 발견·권고는 구체적 후속 작업으로 만들어 같은(또는 적합한) AI에 재분배. 막히면 Simon 결정 항목으로 분리. 각 AI 장점 활용(Codex=UI/이미지, Grok=소셜/소비자, Antigravity=Android 검수, Claude=코딩/아키텍처/오케스트레이션).
+- 발견·권고는 구체적 후속 작업으로 만들어 같은(또는 적합한) AI에 재분배. 막히면 Simon 결정 항목으로 분리. 각 AI 장점 활용(Codex=UI/이미지, Grok=소셜/소비자, Antigravity=Android/Google 네이티브 개발·검수, Claude=코딩/아키텍처/오케스트레이션/리뷰게이트).
