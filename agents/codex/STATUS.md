@@ -1,16 +1,18 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-05 20:37:59 KST
+updated: 2026-06-05 20:43:05 KST
 state: idle
 ---
 
 # Codex STATUS
 
-- **현재 작업**: 2nd-B core workflow 화면군 정적 UI 감사 및 Claude 구현 요청 완료
+- **현재 작업**: 2nd-B self-model/assessment 화면군 정적 UI 감사 및 Claude 구현 요청 완료
 - **출처**: src: user - "계속해서 모든 화면에 대한 UI 문제점을 찾아내고 개선해."
-- **범위**: `/capture`, `/inbox`, `/wiki`, `/records`, `/import`, `/jarvis`, `/interview`, `/formats`의 first-run, source lifecycle, wiki density, composer-safe layout, legacy IA sweep
+- **범위**: `/profile`, `/persona`, `/core-brain`, `/insights`, `/trinity`, `/big-five`, `/attachment`, `/mbti`, `/audit`, `/onboarding`, `/(auth)/complete-profile`, `components/quant/*`의 evidence hierarchy, assessment review, legacy IA sweep
 - **최근 산출물**:
+  - `agents/codex/outbox/20260605-204305-to-claude-self-model-assessment-ui-cleanup-request.md`
+  - `agents/codex/outbox/preview/20260605-204305-self-model-assessment-ui-cleanup/index.html`
   - `agents/codex/outbox/20260605-203759-to-claude-core-workflow-ui-cleanup-request.md`
   - `agents/codex/outbox/preview/20260605-203759-core-workflow-ui-cleanup/index.html`
   - `agents/codex/outbox/20260605-203306-to-claude-grok-opinion-codex-followup.md`
@@ -27,6 +29,14 @@ state: idle
   - 참조: `agents/grok/outbox/20260605-195800-re-peer-feedback-research.md`
 - **블로커**: Codex의 추가 visual QA는 Claude가 web render/auth/env P0를 고친 뒤 재시도 필요
 - **다음**: Claude가 render QA unblock, settings/trust cleanup, navigation/shell contract cleanup을 구현하면 전체 화면 desktop/mobile screenshot pass 재실행. Codex는 UI/UX 스펙과 visual QA만 수행하고, 2nd-B 코드는 직접 수정하지 않음.
+
+[Self-model assessment UI cleanup request 완료 / 26.06.05 / 20:43:05]
+#comm #codex #user #2nd-B #ui-ux #assessment #persona #claude-request
+- 현재 `E:\2ndB` branch `claude/cycle-1-data-hygiene` at `b17d629` 기준 정적 감사.
+- 감사 화면: `/profile`, `/persona`, `/core-brain`, `/insights`, `/trinity`, `/big-five`, `/attachment`, `/mbti`, `/audit`, `/onboarding`, `/(auth)/complete-profile`, `components/quant/*`.
+- Claude request 생성: `agents/codex/outbox/20260605-204305-to-claude-self-model-assessment-ui-cleanup-request.md`
+- HTML preview 생성: `agents/codex/outbox/preview/20260605-204305-self-model-assessment-ui-cleanup/index.html`
+- Codex 의견: MBTI/Trinity 위계 조정, Persona/Core Brain evidence meta, assessment review-before-save, provisional labels 완화, self-model `/journal` CTA sweep가 다음 구현 단위.
 
 [Core workflow UI cleanup request 완료 / 26.06.05 / 20:37:59]
 #comm #codex #user #2nd-B #ui-ux #workflow #claude-request
