@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex UI Gate - Modal Contract Drift</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --panel: #151923;
+      --panel2: #10141c;
+      --text: #eef2f7;
+      --muted: #a9b2c3;
+      --line: #2b3342;
+      --warn: #ffd166;
+      --bad: #ff7272;
+      --good: #79e0aa;
+      --accent: #8db7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
+    header, section, .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    header {
+      padding: 26px;
+      background: linear-gradient(180deg, #171c27, #10141c);
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(26px, 4vw, 42px); line-height: 1.1; letter-spacing: 0; }
+    h2 { font-size: 20px; margin-bottom: 12px; }
+    h3 { font-size: 16px; margin-bottom: 8px; }
+    section { margin-top: 18px; padding: 18px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 10px;
+      color: var(--muted);
+      background: #0e121a;
+      font-size: 13px;
+    }
+    .score { color: var(--warn); border-color: #6a5523; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .card {
+      padding: 16px;
+      min-height: 172px;
+    }
+    .bad { border-color: #673238; }
+    .bad h3 { color: var(--bad); }
+    .good { border-color: #2f6547; }
+    .good h3 { color: var(--good); }
+    .path {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      color: var(--accent);
+      word-break: break-all;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 6px 0; }
+    .diagram {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .modalMock {
+      min-height: 150px;
+      border-radius: 8px;
+      background: rgba(2, 4, 10, 0.78);
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      text-align: center;
+    }
+    .modalCard {
+      width: min(220px, 100%);
+      border-radius: 8px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      padding: 18px;
+    }
+    .dangerCard { border-color: var(--bad); }
+    .safeCard { border-color: var(--good); }
+    code {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      background: #0b0f16;
+      border: 1px solid var(--line);
+      padding: 2px 5px;
+      border-radius: 5px;
+    }
+    .small { color: var(--muted); font-size: 13px; }
+    @media (max-width: 840px) {
+      .grid, .diagram { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="small">Codex -> Claude / 2026-06-06 07:32 KST</p>
+      <h1>Modal surfaces drift from the shared contract</h1>
+      <p>동의, 평가 안내, 인트로, 참조 drawer는 모두 의사결정 표면입니다. backdrop과 modal semantics가 화면마다 다르면 100점 UI가 아닙니다.</p>
+      <div class="meta">
+        <span class="pill score">Score: 98/100 provisional</span>
+        <span class="pill">Priority: P2</span>
+        <span class="pill">P1 risk if consent dialog is wired</span>
+        <span class="pill">No app code changed by Codex</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Contract Split</h2>
+      <div class="diagram">
+        <div class="modalMock">
+          <div class="modalCard dangerCard">
+            <strong>Risk pattern</strong>
+            <p class="small">Backdrop Pressable wraps a plain View card. Card whitespace can inherit decline/close behavior.</p>
+          </div>
+        </div>
+        <div class="modalMock">
+          <div class="modalCard safeCard">
+            <strong>Safe pattern</strong>
+            <p class="small">Backdrop can close only when allowed; inner card stops propagation and announces modal semantics.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <div class="grid">
+        <div class="card good">
+          <h3>PremiumModal</h3>
+          <p class="path">src/components/premium/feedback.tsx:68-72</p>
+          <p>Backdrop close plus inner <code>stopPropagation</code> and <code>accessibilityViewIsModal</code>.</p>
+        </div>
+        <div class="card good">
+          <h3>CrisisRouter</h3>
+          <p class="path">src/components/safety/CrisisRouter.tsx:46-56</p>
+          <p>High-risk modal does not dismiss on backdrop and uses alert/modal semantics.</p>
+        </div>
+        <div class="card bad">
+          <h3>ConsentDialog</h3>
+          <p class="path">src/components/consent/ConsentDialog.tsx:38-58</p>
+          <p>Backdrop <code>Pressable</code> wraps the card <code>View</code>; decline is implicit on backdrop/card area.</p>
+        </div>
+        <div class="card bad">
+          <h3>Jarvis Intro</h3>
+          <p class="path">src/app/jarvis.tsx:483-510</p>
+          <p>Stops propagation, but lacks modal semantics/label on the content surface.</p>
+        </div>
+        <div class="card bad">
+          <h3>Quant Intro</h3>
+          <p class="path">src/components/quant/QuantIntroModal.tsx:95-97</p>
+          <p>Plain backdrop/card views without modal semantics or label.</p>
+        </div>
+        <div class="card">
+          <h3>Ledger Needed</h3>
+          <p class="path">8 raw &lt;Modal&gt; usages</p>
+          <p>Every modal should either use the shared contract or appear in an exception ledger.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Required Fix</h2>
+      <ul>
+        <li>Use a shared <code>PremiumModal</code>, <code>ModalSurface</code>, or <code>DecisionModal</code> contract.</li>
+        <li>Do not decline/close high-risk consent or safety decisions through accidental card/backdrop taps.</li>
+        <li>Require inner-card propagation handling when backdrop dismissal is allowed.</li>
+        <li>Add localized modal labels and <code>accessibilityViewIsModal</code>.</li>
+        <li>Add a raw <code>&lt;Modal&gt;</code> ledger/static guard.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

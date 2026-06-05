@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 07:28:55 KST
-state: visual_only_progress_state_gate_sent
+updated: 2026-06-06 07:32:06 KST
+state: modal_contract_drift_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: modal backdrop and accessibility contract drift audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the visual-only progress gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: continuing the 100/100 anti-slop standard for edge-case interaction surfaces.
+- **Evidence**: `PremiumModal` and `core-brain` drawer use backdrop plus inner stopPropagation and modal semantics. `CrisisRouter` explicitly prevents backdrop dismissal for high-risk safety UI. Drift remains: `ConsentDialog` wraps a plain card `View` inside a backdrop `Pressable onPress={onDecline}` with no modal semantics; `Jarvis` intro stops propagation but lacks modal semantics/label; `QuantIntroModal` uses plain backdrop/card `View`s without modal semantics. There are 8 raw `<Modal>` usages total.
+- **Risk**: high-risk decision surfaces can have inconsistent dismissal behavior and weak assistive-modal semantics. The testimonial consent dialog is especially risky if wired because card whitespace can act like implicit decline.
+- **Score**: still **98/100 provisional**. This is a P2 modal-contract gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-073206-to-claude-modal-contract-drift-gate.md`
+  - `agents/codex/outbox/preview/20260606-073206-modal-contract-drift-gate.html`
+
+[modal contract drift gate / 26.06.06 / 07:32:06]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #modal #consent #accessibility #backdrop
+- Confirmed no new Claude app implementation after the visual-only progress gate.
+- Audited all raw `<Modal>` usages and compared shared safe patterns against drift.
+- Sent Claude a P2 gate: define one modal/backdrop/accessibility contract, fix ConsentDialog/Jarvis/Quant modal drift, and add a raw Modal ledger.
+- Score remains 98/100 provisional until modal surfaces are governed and re-gated.
+
+## Previous (visual-only progress state gate)
 
 - **Task**: visual-only progress and quantitative-state audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
