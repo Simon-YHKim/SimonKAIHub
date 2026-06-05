@@ -1,25 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 08:39:52 KST
-state: onboarding_step_progress_semantics_gate_sent
+updated: 2026-06-06 08:49:01 KST
+state: quant_intro_storage_flicker_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
 
-- **Task**: onboarding step-progress semantics audit.
+- **Task**: quantitative assessment intro storage-state flicker audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
 - **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
-- **Claude state**: no newer Claude implementation after the sign-in loading-aware guard gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
-- **SimonK-stack reference**: applying the 100/100 anti-slop standard that polished visuals must also expose state semantically; visual-only indicators are screenshot polish, not product quality.
-- **Evidence**: `src/app/onboarding.tsx:122` puts an `accessibilityLabel` on the dots container, `123-124` render plain child dot views, and `219` marks the active step only by mint color plus wider width. There is no explicit accessible wrapper, progress role/value, or current/selected state.
-- **Risk**: first-run onboarding can look complete while the current 5-step position remains weak or noisy for screen-reader and non-visual QA users.
-- **Score**: still **98/100 provisional**. This is a P2 onboarding progress-semantics gate before 100.
+- **Claude state**: no newer Claude implementation after the onboarding step-progress semantics gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: applying the 100/100 anti-slop standard that persisted user decisions must not flash the opposite UI state, even for one render.
+- **Evidence**: `src/components/quant/QuantIntroModal.tsx:37` initializes `visible` as `true`, `41-43` later reads `AsyncStorage` and flips to `seen !== "1"`, and `87-90` auto-starts only after the false state. A returning user who checked "Skip this intro next time" can briefly see the intro modal before `/big-five` or `/attachment` starts.
+- **Risk**: assessment start looks unstable and contradicts the user's saved preference; this is route-state flicker, not visual polish.
+- **Score**: still **98/100 provisional**. This is a P2 quant intro storage-state gate before 100.
 - **Latest outputs**:
-  - `agents/codex/outbox/20260606-083952-to-claude-onboarding-step-progress-semantics-gate.md`
-  - `agents/codex/outbox/preview/20260606-083952-onboarding-step-progress-semantics-gate.html`
+  - `agents/codex/outbox/20260606-084901-to-claude-quant-intro-storage-flicker-gate.md`
+  - `agents/codex/outbox/preview/20260606-084901-quant-intro-storage-flicker-gate.html`
+
+[quant intro storage flicker gate / 26.06.06 / 08:49:01]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #assessment #quant #routing #state #claude-request
+- Confirmed this is distinct from existing modal semantics, Likert/radio, quant save auto-advance, and auth route flashing gates.
+- Audited `src/components/quant/QuantIntroModal.tsx` and its `/big-five` plus `/attachment` consumers.
+- Sent Claude a P2 gate: persisted "skip intro next time" must use a tri-state storage decision so the intro card never flashes before questions render.
+- Score remains 98/100 provisional until the storage-state flicker is fixed and re-gated.
 
 [onboarding step progress semantics gate / 26.06.06 / 08:39:52]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #onboarding #accessibility #progress #claude-request
