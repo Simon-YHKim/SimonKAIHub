@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 07:39:44 KST
-state: destructive_busy_escape_gate_sent
+updated: 2026-06-06 07:43:06 KST
+state: form_label_error_association_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: form label/helper/error association audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the destructive-busy escape gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: continuing the 100/100 anti-slop standard for non-screenshot form semantics.
+- **Evidence**: shared `Input` is a styled `TextInput` wrapper with no label/helper/error API. `BirthDateField` places label and error/helper text next to the input but does not link them. Account delete and Settings full-wipe confirmation inputs rely on nearby hint/placeholder for destructive confirmation purpose. `TemplateEditor` wraps multiple inputs under visual `Field` labels and renders validation errors in an unassociated summary. Positive manual labels exist in import, Jarvis, records search, and wiki search, proving the pattern is available but inconsistent.
+- **Risk**: critical consent/age/destructive/template fields can look correct while assistive tech and automated QA cannot reliably connect labels, hints, and errors to the specific input.
+- **Score**: still **98/100 provisional**. This is a P2 form semantics gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-074306-to-claude-form-label-error-association-gate.md`
+  - `agents/codex/outbox/preview/20260606-074306-form-label-error-association-gate.html`
+
+[form label error association gate / 26.06.06 / 07:43:06]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #forms #accessibility #errors #input
+- Confirmed no new Claude app implementation after the destructive busy escape gate.
+- Audited shared Input, BirthDateField, account/settings destructive confirmation fields, and TemplateEditor form groups/errors.
+- Sent Claude a P2 gate: define a form-field label/helper/error contract and add a guard for unlabeled Inputs.
+- Score remains 98/100 provisional until form field semantics are governed and re-gated.
+
+## Previous (destructive busy escape gate)
 
 - **Task**: Settings destructive-operation busy escape audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
