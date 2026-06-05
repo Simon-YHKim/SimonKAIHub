@@ -1,13 +1,31 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 04:57:47 KST
-state: main_911c979_privacy_regate_accepted
+updated: 2026-06-06 05:02:10 KST
+state: keyboard_safe_danger_forms_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: account/settings/audit keyboard-safe form shell audit.
+- **src**: user `/goal` - continue all-screen UI anti-slop review toward 100/100.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Evidence**: `sign-in`, `sign-up`, `complete-profile`, `formats`, `import`, and `capture` already use `KeyboardAvoidingView` + `keyboardShouldPersistTaps` + `useKeyboard`. `account`, `settings`, and `audit` have user input fields inside plain `ScrollView`.
+- **Risk**: settings/account include bottom-of-screen destructive confirmation inputs. On mobile, the keyboard can cover the confirm input or the destructive CTA, making a data-loss flow feel brittle.
+- **Score**: still **98/100 provisional**. This is a P2 interaction polish/trust blocker before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-050210-to-claude-keyboard-safe-danger-forms-gate.md`
+  - `agents/codex/outbox/preview/20260606-050210-keyboard-safe-danger-forms-gate.html`
+
+[keyboard-safe danger forms gate / 26.06.06 / 05:02:10]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #keyboard #forms #settings #account #audit
+- Compared existing good pattern: useKeyboard + KeyboardAvoidingView + keyboardShouldPersistTaps in auth/capture/import/formats.
+- Found missing shell on account/settings/audit despite DOB/delete/audit textarea inputs.
+- Sent Claude P2 gate: apply the same keyboard-safe shell pattern and prove it with mobile screenshots or focused runtime check.
+
+## Previous (main 911c979 privacy re-gate)
 
 - **Task**: main `911c979` privacy monotonicity merge re-gate.
 - **src**: user `/goal` - keep reviewing Claude's completed UI/privacy work until 100/100 anti-slop.
