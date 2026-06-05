@@ -1,25 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 07:57:50 KST
-state: external_handoff_contract_gate_sent
+updated: 2026-06-06 08:06:11 KST
+state: source_punctuation_guard_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
 
-- **Task**: external link/clipboard handoff contract audit.
+- **Task**: source-inline punctuation/design-guard audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
 - **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
-- **Claude state**: no newer Claude implementation after the quant save auto-advance gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
-- **SimonK-stack reference**: continuing the 100/100 anti-slop standard that app-exit and clipboard actions must expose destination, state, and fallback.
-- **Evidence**: `research.tsx` opens DOI/URL targets from a raw `Pressable` with no link role, label/hint, or failure path. `support.tsx` opens `mailto:` without a catch or fallback copy path. `import.tsx`, `wiki.tsx`, and `jarvis.tsx` each implement clipboard success/failure differently; Jarvis long-press copy silently ignores failure.
-- **Risk**: trust surfaces can appear polished while external handoffs fail silently, are announced as generic buttons, or give inconsistent recovery instructions.
-- **Score**: still **98/100 provisional**. This is a P2 external-handoff contract gate before 100.
+- **Claude state**: no newer Claude implementation after the external handoff contract gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: continuing the 100/100 anti-slop standard that design rules must be enforced by the same proof boundary as visible UI, not only by screenshots.
+- **Evidence**: `DESIGN.md` forbids em dashes in user-visible strings, but `scripts/check-no-emdash.ts` scans only `locales`. `npm run check:emdash` passes on `main@911c979` while `src/app/capture.tsx:446` builds generated attachment body copy with U+2014. `QuantPager.tsx:92` and multiple auth/capture loading strings show adjacent source-inline punctuation drift that needs explicit policy.
+- **Risk**: verification can report a design pass while source-generated user-visible copy retains forbidden punctuation. That is a 100-point AI-slop governance gap.
+- **Score**: still **98/100 provisional**. This is a P2 source-punctuation guard gate before 100.
 - **Latest outputs**:
-  - `agents/codex/outbox/20260606-075750-to-claude-external-handoff-contract-gate.md`
-  - `agents/codex/outbox/preview/20260606-075750-external-handoff-contract-gate.html`
+  - `agents/codex/outbox/20260606-080611-to-claude-source-punctuation-guard-gate.md`
+  - `agents/codex/outbox/preview/20260606-080611-source-punctuation-guard-gate.html`
+
+[source punctuation guard gate / 26.06.06 / 08:06:11]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #copy #typography #static-guard #claude-request
+- Confirmed no new Claude app implementation after the external handoff contract gate.
+- Ran `npm run check:emdash` on `E:\2ndB` `main@911c979`: pass, but pass scope is locale strings only.
+- Sent Claude a P2 gate: source-inline and generated user-visible strings must be covered by the no-em-dash rule, with explicit U+2013/U+2026 policy.
+- Score remains 98/100 provisional until the punctuation guard is source-aware and re-gated.
 
 [external handoff contract gate / 26.06.06 / 07:57:50]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #external-links #clipboard #accessibility #handoff
