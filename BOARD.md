@@ -1,7 +1,7 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity는 읽기 전용."
-last-updated: 2026-06-05 16:13:52 KST
+last-updated: 2026-06-05 17:39:54 KST
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
@@ -30,6 +30,8 @@ last-updated: 2026-06-05 16:13:52 KST
 ## ✅ 완료 (Done) — 최근 10건
 | ID | 작업 | 담당 | 완료 |
 |---|---|---|---|
+| status-check | 4-AI 허브 라이브 점검(3-AI 헤드리스 핑 OK: Codex/GPT-5·Gemini·Grok4.3) + 2ndB ff-only 동기화 | claude | 2026-06-05 |
+| protocol-v10 | PROTOCOL §10(실행모드·자동승인·Claude단독대화·병렬·직접지시/현황) + `*-activate.md` 3종 추가 | claude | 2026-06-05 |
 | onboard-codex | Codex 허브 온보딩 + self-commit 실증 | codex | 2026-06-05 |
 | onboard-antig | Antigravity(gemini) 허브 온보딩 + self-commit 실증 | antigravity | 2026-06-05 |
 | boot-0 | 3-AI 통신 프로토콜·구조 생성 | claude | 2026-06-05 |

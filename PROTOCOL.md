@@ -141,3 +141,37 @@ created: 2026-06-05 15:22:34 KST
 - **예시**: 사용자가 Codex에 디자인을 **직접** 지시 → Codex는 `STATUS.md`에 `src: user — 로그인 디자인 작업중` 기록 + (영향 있으면) `fyi`로 알림 → 완료 시 outbox에 deliverable.
 - **Claude(오케스트레이터)**: 세션마다 각 `STATUS.md` + 모든 outbox를 읽어 `BOARD.md`에 반영(BOARD 단일 작성자 유지). 그래서 **사용자-직접 작업도 BOARD에 모인다.**
 - **철칙**: 허브에 없는 작업 = 다른 AI에겐 *존재하지 않는* 작업. 조용히 혼자 일하지 말 것.
+
+---
+
+## 10. 실행 모드 & 협업 운영 (4-AI 동시 가동)
+> 이 절은 4-AI가 같은 머신에서 **동시·병렬·자동**으로 돌 때의 운영 규칙이다.
+
+### 10.1 권한·실행 모드 (자동승인)
+각 AI는 헤드리스/대화형 모두 **자동승인 모드**로 가동한다. CLI별 등가 플래그:
+
+| AI | 자동승인 플래그 |
+|---|---|
+| Claude | `bypassPermissions` (대화형, 사용자와 직접 소통) |
+| Codex | `-s danger-full-access` |
+| Gemini(Antigravity) | `-y` / `--approval-mode yolo` |
+| Grok | `--always-approve` |
+| Antigravity(agy) | `--dangerously-skip-permissions` (1회 OAuth 인증 후) |
+
+- **예외 — 자동승인이어도 항상 사용자 확인**: ① 파괴적 작업(force-push·`reset --hard`·DROP·대량 삭제) ② 비용 발생(결제·API 폭증) ③ secrets/credentials 수정·전송.
+- 대화형으로 띄울 때 필요한 OS 권한(Windows cmd/PowerShell · 화면제어(computer use) · Chrome · Android Studio/에뮬 등)은 **세션 초반 1회 일괄** 사용자에게 요청한다.
+
+### 10.2 대화 채널 — Claude 단독 대면
+- **Claude만 사용자와 실시간 대화**하며 작업을 지휘한다. Codex·Antigravity·Grok은 **백그라운드에서 Claude의 지시를 수행**하고 결과를 허브에 남긴다.
+- 단, 사용자가 특정 AI의 **터미널을 직접 띄워** 대화하면 그 세션에선 사용자와 직접 소통한다(§10.4).
+
+### 10.3 병렬 기본
+- **맥락이 침해되지 않는 한 모든 작업은 최대한 병렬**로 진행한다(독립 작업 동시 실행). 의존성 있는 작업만 직렬. 공유 git 커밋은 `pull --ff-only` 후 작은 단위로.
+
+### 10.4 사용자 직접 지시 / 현황 질의 (상시)
+- 사용자는 **언제든** 특정 AI에게 직접 작업을 지시하거나 진행현황을 물을 수 있다.
+- **직접 지시 받으면**: 즉시 `STATUS.md`에 `src: user`로 기록하고 착수, 완료 시 outbox에 결과(§9). 조용히 혼자 하지 말 것.
+- **현황 질문 받으면**: 자기 `STATUS.md` 기준으로 즉답. (전체 현황은 Claude가 `BOARD.md`로 답한다.)
+
+### 10.5 코드 변경 게이트 (재확인)
+- 코드 수정이 필요한 AI는 **별도 브랜치/worktree에서 작업** → 변경·리뷰 내용을 Claude에 공유(outbox `request`/`response`) → **Claude가 검토**하고, 필요하면 Claude가 직접 수정·보완한 뒤 → **머지**(§4 작업사이클 · §8 라이브 검증 게이트). force-push·history 재작성 금지.
