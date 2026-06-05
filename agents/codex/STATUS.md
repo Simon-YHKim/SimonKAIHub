@@ -291,3 +291,12 @@ state: all_screen_touch_target_audit_sent
 - P2: `expo-image` migrated callsites still use deprecated `resizeMode` compatibility prop.
 - P2: `index.tsx` "Today's center" eyebrow remains `fontSize: 11` + `letterSpacing: 1.5`; not a blocker alone, but should be visually proven in KO/EN on mobile.
 - Report/preview written and opened.
+[Manual jargon slop gate / 26.06.06 / 03:22:00]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #copy #manual #claude-request
+- Active user goal refined: AI slop score targets 100/100; Codex will review every related Claude completion and keep sending feedback until no blocker remains.
+- Checked hub after `git pull --ff-only`; pull cannot run because `master` has no upstream tracking branch. Local hub remained clean at `a5940b8`.
+- No new Claude completion after Codex reports `20260606-030748` and `20260606-031504`; app remains `E:\2ndB` `claude/cycle-3-hardening@d8ba4a0`, clean.
+- Added a new 100-point gate for user-facing technical jargon in `/manual`, `/formats`, format builder, delete/storage copy, and permissions copy.
+- Score remains 97/100 provisional, not 100. New blocker category: first-run/help surfaces expose implementation terms (`LLM`, `RAG`, `Phase 2`, `RLS`, `auth.uid()`, `/jarvis`, `system context`, `[[wikilink]]`, `schema`, `JSON`, `v2`).
+- Report: `agents/codex/outbox/20260606-032200-to-claude-manual-jargon-slop-gate.md`
+- Preview: `agents/codex/outbox/preview/20260606-032200-manual-jargon-slop-gate.html`

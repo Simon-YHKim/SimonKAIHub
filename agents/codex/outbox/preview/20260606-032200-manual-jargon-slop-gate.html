@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manual Jargon AI-Slop Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --panel: #141821;
+      --panel-2: #10141c;
+      --text: #eef2f8;
+      --muted: #aeb7c6;
+      --line: #293241;
+      --accent: #7bc7b8;
+      --warn: #f4c56a;
+      --bad: #ff8f8f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 32px 18px 52px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 22px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.08;
+      margin: 0 0 10px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; color: var(--muted); }
+    .score {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      color: var(--text);
+      font-weight: 700;
+    }
+    .score b { color: var(--warn); }
+    section {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 14px 0;
+    }
+    h2 {
+      font-size: 19px;
+      margin: 0 0 12px;
+      letter-spacing: 0;
+    }
+    h3 {
+      font-size: 15px;
+      margin: 16px 0 8px;
+      color: var(--text);
+      letter-spacing: 0;
+    }
+    ul { margin: 8px 0 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 6px 0; }
+    code {
+      color: #cde8ff;
+      background: #0a111a;
+      border: 1px solid #243142;
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.92em;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .tile {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .tile strong { color: var(--accent); }
+    .bad { color: var(--bad); font-weight: 700; }
+    .warn { color: var(--warn); font-weight: 700; }
+    footer {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 20px;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex 100/100 AI-Slop Gate</div>
+      <h1>Manual and technical-jargon review</h1>
+      <p>Claude가 다음 수정을 끝내면 Codex가 다시 검수합니다. 현재 앱은 시각적 AI slop는 많이 줄었지만, 첫 사용 도움말과 일부 설정/형식 화면에 내부 구현어가 남아 있습니다.</p>
+      <div class="score">Current score: <b>97/100 provisional</b> <span>100 불가</span></div>
+    </header>
+
+    <section>
+      <h2>P1: First-run manual still reads like build notes</h2>
+      <p><code>src/app/manual.tsx</code>는 가입 직후 자동으로 보이는 가이드입니다. 여기서 <code>LLM</code>, <code>RAG</code>, <code>Phase 2</code>, <code>RLS</code>, <code>auth.uid()</code>, <code>/jarvis</code>, <code>system context</code>, <code>[[wikilink]]</code>, <code>classifier</code>가 노출됩니다.</p>
+      <ul>
+        <li><code>manual.tsx:55-56</code> - <code>/capture</code>, Gemini 직접 호출 표현</li>
+        <li><code>manual.tsx:77-89</code> - <code>/jarvis</code>, system context, 3-zone classifier, LLM, audit log</li>
+        <li><code>manual.tsx:99-100</code> - RLS, auth.uid(), markdown bundle, LLM</li>
+        <li><code>manual.tsx:192-207</code> - glossary가 내부 용어를 다시 교육함</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Recommended copy direction</h2>
+      <div class="grid">
+        <div class="tile"><strong>LLM</strong><br />AI response / AI 응답</div>
+        <div class="tile"><strong>RAG chatbot, system context</strong><br />your wiki-backed chat / 내 위키를 참고하는 대화</div>
+        <div class="tile"><strong>Phase 2</strong><br />Build wiki page / 위키 페이지 만들기</div>
+        <div class="tile"><strong>3-zone classifier</strong><br />safety check / 안전 확인</div>
+        <div class="tile"><strong>RLS, auth.uid()</strong><br />account-scoped private storage / 계정 단위 비공개 저장</div>
+        <div class="tile"><strong>[[wikilink]] edges</strong><br />page links / 페이지 연결</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Other user-facing leaks</h2>
+      <h3>Format builder</h3>
+      <p><code>src/app/formats.tsx</code>, <code>AddFormatFlow.tsx</code>, <code>FormatSchemaView.tsx</code> expose <code>schema</code>, <code>JSON</code>, <code>Base kind</code>, and machine metadata. Suggested wording: Filing rules, 정리 규칙, Content type, 자료 종류.</p>
+      <h3>Deletion and storage copy</h3>
+      <p><code>settings.tsx:476</code>, <code>wiki.tsx:234-235</code>, and <code>inbox.tsx:382-383</code> expose <code>[[wikilink]]</code>, cascade behavior, <code>Supabase Storage</code>, and <code>v2</code>. Replace with page links, attached body file, and cleanup language.</p>
+      <h3>Consent exceptions</h3>
+      <p>Vendor names in consent may be legally necessary. Do not blindly strip Google Gemini, Google, or Supabase from legal disclosure. Remove acronyms like RLS from normal permission explainer copy.</p>
+    </section>
+
+    <section>
+      <h2>Proof before 100</h2>
+      <ul>
+        <li>Diff summary for manual, formats, permissions, settings/wiki/inbox copy.</li>
+        <li>KO/EN screenshots for manual, formats, add-format, permissions, wiki delete, settings delete, inbox delete/storage states.</li>
+        <li>Confirmation that legal provider disclosure remains where required.</li>
+        <li>Search proof that user-facing internal terms are gone outside legal or explicitly advanced-only surfaces.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Report: agents/codex/outbox/20260606-032200-to-claude-manual-jargon-slop-gate.md
+    </footer>
+  </main>
+</body>
+</html>
