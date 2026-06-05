@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 02:05:42 KST
-state: reviewed_claude_wip_preflight
+updated: 2026-06-06 02:10:46 KST
+state: regated_121bc87
 ---
 
 # Codex STATUS
@@ -11,15 +11,28 @@ state: reviewed_claude_wip_preflight
 
 - **작업**: Simon 지시 `/goal`에 따라 모든 화면 UI/UX와 AI slop를 100/100 기준으로 반복 게이트 중. Claude/AG의 최신 앱 커밋 `89eeaaa`를 즉시 재검수했다.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
-- **앱 기준**: `E:\2ndB`, branch `claude/cycle-2-concept-consistency`, head `89eeaaa perf(android): stop background animation tickers + native-driver startup anim`, `origin/main` 대비 ahead 3. Claude WIP로 보이는 미커밋 수정 19개 파일 감지됨.
-- **검증**: `npm run verify` pass on current WIP after test updates: lint/type-check/i18n/lexicon/LLM boundary/constraints/emdash/Jest green, 91 suites, 823 tests. Earlier failing `[MOCK]` expectation was fixed in the WIP tests before the rerun.
-- **현재 점수**: WIP라 최종 점수 미확정. 방향은 88점보다 확실히 개선되지만 100/100은 아님. Remaining blockers: `persona.tsx` visible diagnosis copy, broad raw error alerts/states across all screens, consent/legal placeholder readiness, `LivingAsset` AppState perf edge, small hitSlop leftovers.
+- **앱 기준**: `E:\2ndB`, branch `claude/cycle-2-concept-consistency`, reviewed committed head `121bc87` after `9f9d6cd`; `origin/main` 대비 ahead 5. Review score excludes later uncommitted FlatList/perf WIP in `src/app/inbox.tsx`, `src/app/records.tsx`, `src/app/wiki.tsx`.
+- **검증**: `npm run verify` pass during `121bc87` re-gate: lint/type-check/i18n/lexicon/LLM boundary/constraints/emdash/Jest green, 91 suites, 823 tests.
+- **현재 점수**: `121bc87` re-gate = 91/100 provisional. Crossed 90; still not 100. Remaining blockers: broad raw error alerts/states across all screens, `persona.tsx` diagnosis-copy source-of-truth conflict, consent/legal placeholder readiness, social provider/device proof, small hitSlop leftovers, and new FlatList WIP still unscored.
 - **최신 산출물**:
+  - `agents/codex/outbox/20260606-021046-to-claude-121bc87-regate.md`
+  - `agents/codex/outbox/preview/20260606-021046-121bc87-regate.html`
   - `agents/codex/outbox/20260606-020542-to-claude-wip-slop-cleanup-preflight.md`
   - `agents/codex/outbox/preview/20260606-020542-wip-slop-cleanup-preflight.html`
   - `agents/codex/outbox/20260606-015756-to-claude-89eeaaa-perf-regate.md`
   - `agents/codex/outbox/preview/20260606-015756-89eeaaa-perf-regate.html`
-- **대기**: Claude/AG가 현재 WIP를 커밋하거나 outbox로 완료 보고하면 즉시 재게이트. WIP 상태에서는 점수 확정하지 않음. 100점 전까지 반복.
+- **대기**: Claude/AG가 현재 FlatList/perf WIP를 커밋하거나 outbox로 완료 보고하면 즉시 재게이트. 100점 전까지 반복.
+
+[121bc87 re-gate / 26.06.06 / 02:10:46]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #claude-request #regate
+- Read Claude request `20260606-020843-to-codex-regate-121bc87.md`.
+- Reviewed commits `9f9d6cd` and `121bc87`.
+- Ran `npm run verify`: pass, 91 suites, 823 tests.
+- Score raised from 88 to 91/100 provisional.
+- Accepted: support clinical FAQ fix, user-visible mock token removal, Phase 1 -> Source brief/요약과 질문, assessment tap target fix, KO microtype, LivingAsset/AppState perf hardening.
+- Still not 100: raw error alerts across many screens, persona diagnosis-copy source-of-truth conflict, consent/legal placeholder, provider/device proof, small hitSlop leftovers.
+- Detected later uncommitted FlatList/perf WIP in inbox/records/wiki; not included in score.
+- Report/preview written and opened.
 
 [WIP slop cleanup preflight / 26.06.06 / 02:05:42]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #claude-wip #preflight
