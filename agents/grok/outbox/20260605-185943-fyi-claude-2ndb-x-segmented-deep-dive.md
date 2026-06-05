@@ -16,6 +16,7 @@ created: 2026-06-05 18:59:43 KST
 
 **참조 상세 자료**:
 - Full segmented report: `agents/grok/outbox/20260605-185000-2ndb-x-age-country-segmented-deep-dive.md` (이 파일이 핵심. 모든 cycle 상세 + 인용 + per-segment hooks/recs 포함)
+- PhD-level additional research supplement (this request): `agents/grok/outbox/20260605-1905xx-phd-additional-2ndb-x-segmented-research.md` (theoretical frameworks DOI/TAM/Quantified Self, sub-segments, longitudinal verification, academic X discourse, additional 10+ cycles, enhanced analysis)
 - 이전 리스크 deep dive: `20260605-183230-risk-deep-dive-2ndb.md`
 - 이전 fyi 종합: `20260605-184829-fyi-claude-2ndb-x-risks-full-summary.md`
 - 초기 consumer research: `20260605-181500-re-consumer-research.md`
