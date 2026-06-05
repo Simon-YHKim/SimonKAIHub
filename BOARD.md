@@ -1,7 +1,7 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity는 읽기 전용."
-last-updated: 2026-06-05 19:00:00 KST
+last-updated: 2026-06-06 02:48:00 KST
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
@@ -12,11 +12,8 @@ last-updated: 2026-06-05 19:00:00 KST
 ## 🔥 진행 중 (In Progress)
 | ID | 작업 | 담당 | 상태 | 비고 |
 |---|---|---|---|---|
-| cycle-1 | 2nd-B **완성형 사이클** — 실행 중 (3 로컬 커밋·verify green) | claude | executing | 리포트 `projects/2nd-B/cycle-1-completion-audit.html` |
-| pr-iris | worldview canon=Iris (7파일+test) | claude | ✅ `77d10fe` verify837 | branch `claude/cycle-1-worldview-iris` (push=사이클 게이트) |
-| pr-phase6 | Phase6: 프리뷰5 제거✅ + MBTI 강등✅(진입점숨김·참고값·삭제태그버그) | claude | ✅ `37a4e6f`,`94a2c36` verify green | branch `claude/cycle-1-phase6-screens` |
-| pr-docs | **토대 문서 정합성** — CRITICAL 4 수정(VISION TIPI→BFI44·CONSTRAINTS C10/COPPA·README 토큰이중화) | claude | ✅ `5443c34` | branch `claude/cycle-1-docs-consistency`. docs-consistency WF(5클러스터) 결과 |
-| pr-mobile | 모바일 가로 오버플로우(P0) — Codex 반응형 width 스펙 ready, 구현 대기 | claude | 스펙완료 | sign-in560/signup·support640/manual720. Claude구현→Codex 런타임 재검수 |
+| cycle-2 | 2nd-B **UX 완벽화 사이클** — 10커밋 green, Codex 95/100 상승중 | claude | executing | branch `claude/cycle-2-concept-consistency` @`65e5ac4`. HTML `agents/claude/outbox/preview/20260606-cycle2-progress.html` |
+| cycle-1 | 2nd-B 완성형 사이클 — **머지 완료** (PR #211, main `0bfbfa3`) | claude | ✅ done | 보안·trust·route·Android네이티브·a11y |
 | research-2 | deep-research: 사람을 정확히 파악하는 구조(SOKA·informant·표현적글쓰기·ESM·LLM) | claude | 실행중 | → "구조" 설계 culminating 산출 |
 
 ## 📥 분배됨 / 대기 (Assigned / Waiting)
@@ -49,7 +46,8 @@ last-updated: 2026-06-05 19:00:00 KST
 | boot-0 | 3-AI 통신 프로토콜·구조 생성 | claude | 2026-06-05 |
 
 ## 🧱 블로커 / 결정 대기 (Blocked / Decisions)
-- (없음)
+- **consent 법무 카피 사인오프** (2nd-B cycle-2) — ConsentNotice placeholder + `LEXICON_LAST_LEGAL_REVIEW=null`. 런치 게이트, Simon/법무 결정 필요.
+- **런타임 device 증명** (2nd-B cycle-2) — AG Gradle 8.13 에뮬 빌드 성공, 스크린샷 수급 중(Codex 100점 요건).
 
 ## 📌 활성 프로젝트
 | 프로젝트 | 레포 | 경로 | 단계 |
