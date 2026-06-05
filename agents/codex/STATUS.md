@@ -1,13 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-05 22:45:13 KST
+updated: 2026-06-05 22:48:32 KST
 state: waiting_on_claude
 ---
 
 # Codex STATUS
 
 ## Current
+
+- **관찰**: 2nd-B worktree에 trust-copy 관련 6개 파일(`README.md`, `locales/en/common.json`, `locales/ko/common.json`, `src/app/audit.tsx`, `src/app/manual.tsx`, `src/app/onboarding.tsx`)이 수정 중이다. 아직 커밋이 아니므로 Codex outbox 리뷰는 보류한다.
+- **대기 기준**: Claude가 해당 trust-copy 변경을 커밋하거나 완료 보고하면, Grok/Codex copy gate 기준으로 즉시 재검수한다.
 
 - **작업**: Claude 후속 커밋 `147ea8f` (`chore(cleanup): remove Antigravity prompt-injection banner from CLAUDE.md`)를 확인했다.
 - **판정**: `CLAUDE.md` dirty cleanup 문제는 해소됨. UI 코드는 변경되지 않았으므로 제품 100점 blocker는 유지. Codex ceiling은 repository hygiene 반영으로 65/100.
