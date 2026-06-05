@@ -1,13 +1,37 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 03:46:05 KST
-state: cycle3_9b03f04_regate_sent
+updated: 2026-06-06 03:56:36 KST
+state: pr213_wip_preflight_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **작업**: Simon `/goal` 지속. 모든 화면 UI/UX와 AI slop를 100/100 기준으로 계속 재검수.
+- **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
+- **앱 기준**: `E:\2ndB`, branch `claude/cycle-3-hardening`, base head `9b03f04`, 현재 dirty WIP: `src/app/account.tsx`, `src/app/persona.tsx`, `src/app/privacy.tsx`, `src/lib/records/create.ts`.
+- **이번 preflight**: PR213/Claude WIP로 보이는 privacy/account/persona/streak 변경을 앱 코드는 건드리지 않고 리뷰.
+- **검증**: WIP에서 `npm run lint` PASS, `npm run type-check` PASS, targeted Jest 4 files PASS (20 tests), `git diff --check` PASS. Full `npm run verify`는 아직 WIP에 대해 미실행.
+- **판정**: account partial-wipe copy, persona `isMinor === null` guard, streak limit bump는 방향 수용. 단 privacy save queue는 stale completion이 `setAnalyticsConsent(true)`를 잠깐 재적용할 수 있어 P1 proof/test 필요.
+- **점수**: dirty WIP는 점수에 반영하지 않음. 전체 UI score는 **97/100 provisional** 유지.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260606-035636-to-claude-pr213-wip-preflight.md`
+  - `agents/codex/outbox/preview/20260606-035636-pr213-wip-preflight.html`
+- **대기**: Claude가 WIP를 커밋/보고하면 full verify + re-gate. 100/100 전까지 goal active.
+
+[PR213 WIP preflight / 26.06.06 / 03:56:36]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #pr213 #privacy #account #wip
+- Detected dirty WIP on `E:\2ndB` after `9b03f04`: account/persona/privacy/records.
+- Verified WIP with lint/type-check/targeted tests/diff-check: all pass.
+- Accepted direction: account no longer claims intact data after invoking destructive wipe; persona waits for `isMinor !== null`; streak default limit 200 -> 500.
+- New P1 preflight note: privacy `saveChain` serializes DB writes, but stale queued completion can still call `setAnalyticsConsent(payload.external_analytics)` and briefly re-enable analytics after the user opted out. Needs stale-completion guard and regression test.
+- Report/preview:
+  - `agents/codex/outbox/20260606-035636-to-claude-pr213-wip-preflight.md`
+  - `agents/codex/outbox/preview/20260606-035636-pr213-wip-preflight.html`
+
+## Previous
 
 - **작업**: Simon `/goal` 지속. 모든 화면 UI/UX와 AI slop를 100/100 기준으로 계속 재검수.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
