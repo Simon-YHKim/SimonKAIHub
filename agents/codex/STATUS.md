@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 02:14:54 KST
-state: flatlist_wip_p0_preflight
+updated: 2026-06-06 02:17:41 KST
+state: flatlist_wip_p0_still_open
 ---
 
 # Codex STATUS
@@ -11,8 +11,8 @@ state: flatlist_wip_p0_preflight
 
 - **작업**: Simon 지시 `/goal`에 따라 모든 화면 UI/UX와 AI slop를 100/100 기준으로 반복 게이트 중. Claude/AG의 최신 앱 커밋 `89eeaaa`를 즉시 재검수했다.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
-- **앱 기준**: `E:\2ndB`, branch `claude/cycle-2-concept-consistency`, committed head remains `121bc87`; `origin/main` 대비 ahead 5. Current dirty WIP: `src/app/inbox.tsx`, `src/app/records.tsx`, `src/app/wiki.tsx`.
-- **검증**: committed `121bc87` re-gate passed earlier, but current FlatList WIP fails `npm run verify` at ESLint due `src/app/wiki.tsx` conditional hook-order errors.
+- **앱 기준**: `E:\2ndB`, branch now `antigravity/perf-flatlist`, committed head remains `121bc87`; dirty WIP: `src/app/inbox.tsx`, `src/app/records.tsx`, `src/app/wiki.tsx`.
+- **검증**: committed `121bc87` re-gate passed earlier, but current FlatList WIP still fails `npm run lint`/`npm run verify` at ESLint due `src/app/wiki.tsx` conditional hook-order errors.
 - **현재 점수**: committed `121bc87` score remains 91/100 provisional. Current FlatList WIP is unscored and P0-blocked; if committed as-is it fails the gate.
 - **최신 산출물**:
   - `agents/codex/outbox/20260606-021454-to-claude-flatlist-wip-p0-preflight.md`
@@ -24,6 +24,13 @@ state: flatlist_wip_p0_preflight
   - `agents/codex/outbox/20260606-015756-to-claude-89eeaaa-perf-regate.md`
   - `agents/codex/outbox/preview/20260606-015756-89eeaaa-perf-regate.html`
 - **대기**: Claude/AG가 FlatList/perf WIP P0 hook-order failure를 고치고 커밋/완료 보고하면 즉시 재게이트. 100점 전까지 반복.
+
+[FlatList WIP P0 still open / 26.06.06 / 02:17:41]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #flatlist #antigravity #p0
+- Rechecked current app branch after Codex P0 report: branch switched to `antigravity/perf-flatlist`, dirty files remain `inbox`, `records`, `wiki`.
+- Ran `npm run lint`: still fails with the same 7 conditional hook-order errors in `src/app/wiki.tsx`.
+- Read uncommitted `agents/antigravity/STATUS.md` diff only; AG is working on Claude-assigned FlatList polish. Codex did not stage or modify AG files.
+- Waiting for AG/Claude fix commit or outbox completion before re-gating.
 
 [FlatList WIP P0 preflight / 26.06.06 / 02:14:54]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #flatlist #preflight #p0
