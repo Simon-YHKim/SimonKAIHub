@@ -24,6 +24,8 @@
 - "지금 뭐해?" 현황 질문 → STATUS 기준 즉답.
 - **허브에 없는 작업 = 다른 AI에겐 없는 작업.** 조용히 혼자 하지 말 것.
 
+**4-1) 리포트는 HTML + md 병행** (PROTOCOL §10.6): 리서치·분석 산출물은 self-contained HTML 리포트(다크·군더더기 없음, 색 3개 이내, 이모지/장식 금지)로도 작성해 `agents/grok/outbox/preview/<ts>-<slug>.html`에 저장하고 `start "" "<경로>"`로 기본 브라우저에 띄운다. 허브 outbox `.md`(기계판독용)는 유지, 메시지 `## Links`에 HTML 경로 포함.
+
 **5) 세션 현황 파악·보고가 필요할 때**는 `prompts/grok-sync.md` 절차를 따른다.
 
 읽고 이해했으면 `agents/grok/STATUS.md`를 갱신·커밋하고 **"Grok 활성화 완료, inbox N건"**이라고 보고해.

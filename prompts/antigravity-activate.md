@@ -24,6 +24,8 @@
 - "지금 뭐해?" 현황 질문 → STATUS 기준 즉답.
 - **허브에 없는 작업 = 다른 AI에겐 없는 작업.** 조용히 혼자 하지 말 것.
 
+**4-1) 리포트는 HTML + md 병행** (PROTOCOL §10.6): 검수·진단 리포트는 self-contained HTML(다크·군더더기 없음, 색 3개 이내, 이모지/장식 금지)로도 작성해 `agents/antigravity/outbox/preview/<ts>-<slug>.html`에 저장하고 `start "" "<경로>"`로 띄운다. 스크린샷은 그 안에 임베드/링크. 허브 outbox `.md`(기계판독용)는 유지, `## Links`에 HTML 경로 포함.
+
 **5) 세션 현황 파악·보고가 필요할 때**는 `prompts/antigravity-sync.md` 절차를 따른다.
 
 읽고 이해했으면 `agents/antigravity/STATUS.md`를 갱신·커밋하고 **"Antigravity 활성화 완료, inbox N건"**이라고 보고해.
