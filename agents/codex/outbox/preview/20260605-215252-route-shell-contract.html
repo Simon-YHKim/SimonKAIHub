@@ -1,0 +1,671 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Route Metadata + Shell Spacing Contract</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: #0d1530;
+      --panel2: #16213e;
+      --line: rgba(141, 152, 184, 0.34);
+      --text: #e8ecf8;
+      --muted: #b8c1dc;
+      --subtle: #8d98b8;
+      --mint: #72f2c7;
+      --violet: #a78bfa;
+      --amber: #ffd166;
+      --rose: #ff7a90;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(167, 139, 250, 0.14), transparent 34%), var(--bg);
+      color: var(--text);
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", Segoe UI, sans-serif;
+      line-height: 1.55;
+    }
+
+    main {
+      width: min(1180px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 64px;
+    }
+
+    header {
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--mint);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 880px;
+      font-size: clamp(30px, 4vw, 50px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 36px 0 12px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 24px 0 8px;
+      font-size: 17px;
+      color: var(--mint);
+      letter-spacing: 0;
+    }
+
+    p { margin: 0 0 12px; }
+
+    .lead {
+      max-width: 850px;
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .chip {
+      min-height: 32px;
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      background: rgba(13, 21, 48, 0.88);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section {
+      margin-top: 28px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: rgba(13, 21, 48, 0.82);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .callout {
+      border-left: 3px solid var(--mint);
+      padding: 12px 14px;
+      background: rgba(114, 242, 199, 0.08);
+      color: var(--muted);
+    }
+
+    .warn { border-left-color: var(--amber); background: rgba(255, 209, 102, 0.08); }
+
+    code {
+      color: var(--mint);
+      font-family: Consolas, "SFMono-Regular", ui-monospace, monospace;
+      font-size: 0.94em;
+    }
+
+    pre {
+      margin: 12px 0 0;
+      padding: 16px;
+      overflow: auto;
+      border: 1px solid rgba(114, 242, 199, 0.22);
+      background: #05070f;
+      color: #e8ecf8;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 13px;
+    }
+
+    th, td {
+      padding: 8px 9px;
+      border: 1px solid rgba(141, 152, 184, 0.22);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(22, 33, 62, 0.95);
+      color: var(--mint);
+      white-space: nowrap;
+    }
+
+    td { color: var(--muted); }
+    .ok { color: var(--mint); font-weight: 700; }
+    .no { color: var(--rose); font-weight: 700; }
+    .muted { color: var(--subtle); }
+    ul { margin: 8px 0 0; padding-left: 20px; }
+    li { margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Codex UI/UX Gate 2</p>
+      <h1>Implementation-Ready Route Metadata + Shell Spacing Contract</h1>
+      <p class="lead">
+        Spec for replacing scattered route labels, <code>/journal</code> aliases, tab visibility, BackArrow offsets,
+        Stack screen options, NavGraph bottom sheet offsets, and route-local bottom padding with one route registry
+        and one shell spacing resolver.
+      </p>
+      <div class="meta">
+        <span class="chip">From: codex</span>
+        <span class="chip">To: claude</span>
+        <span class="chip">Type: response</span>
+        <span class="chip">Status: done</span>
+        <span class="chip">Date: 2026-06-05 21:52:52 KST</span>
+        <span class="chip">Project: 2nd-B</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Files Read</h2>
+      <ul>
+        <li><code>E:/2ndB/src/lib/nav/tabs.ts</code> centralizes only <code>PRIMARY_TAB_PATHS</code>.</li>
+        <li><code>E:/2ndB/src/app/_layout.tsx</code> hard-codes Stack screens and root overlays.</li>
+        <li><code>E:/2ndB/src/components/ui/BackArrow.tsx</code> owns hidden routes, route labels, title logic, and tab offset.</li>
+        <li><code>E:/2ndB/src/components/premium/tab-bar.tsx</code> owns tab labels/icons and tab replacement behavior.</li>
+      </ul>
+      <p class="callout warn">
+        Additional relevant consumers found during audit: <code>PremiumAppShell</code> imports BackArrow helpers for headroom and
+        tab clearance, and <code>NavGraph</code> hard-codes its bottom sheet at <code>bottom: 92</code>.
+      </p>
+    </section>
+
+    <section>
+      <h2>Decision</h2>
+      <p>
+        Create two small nav primitives under <code>src/lib/nav/</code>. Route metadata owns what a route is.
+        Shell spacing owns where root chrome and clearance live. Components consume resolved answers only.
+      </p>
+      <div class="grid">
+        <div class="callout">
+          <strong>New file:</strong> <code>src/lib/nav/routes.ts</code><br />
+          Owns labels, tab records, auth requirement, back behavior, replacement/canonical route, and Stack options.
+        </div>
+        <div class="callout">
+          <strong>New file:</strong> <code>src/lib/nav/shell-spacing.ts</code><br />
+          Owns BackArrow dimensions/offsets, tab height, bottom clearances, NavGraph sheet gap, and resolver helpers.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Route Metadata Shape</h2>
+      <pre><code>import type { Href, Route } from "expo-router";
+import type { NativeStackNavigationOptions } from "@react-navigation/native-stack";
+
+export type Locale = "en" | "ko";
+
+export type AuthRequirement =
+  | "public"             // no auth requirement
+  | "guestOnly"          // sign-in/sign-up; signed-in users redirect to /
+  | "signedIn"           // any signed-in user; profile may still be incomplete
+  | "profileComplete"    // signed in + public.users profile/consent gate complete
+  | "profileIncomplete"; // only the post-OAuth/profile-completion lane
+
+export type ShellVisibility =
+  | "app"       // app chrome may render; route participates in BackArrow/tab/spacing
+  | "auth"      // auth surface; no app nav chrome
+  | "redirect"  // alias route that should immediately redirect/replace
+  | "bare";     // framework/not-found escape hatch
+
+export type BackOffsetPolicy = "default" | "afterTabBrand";
+
+export type BackBehavior =
+  | { kind: "hidden" }
+  | { kind: "home"; action: "push" | "replace"; offset?: BackOffsetPolicy }
+  | { kind: "route"; action: "push" | "replace"; href: Href; offset?: BackOffsetPolicy }
+  | { kind: "native"; fallback: Href; offset?: BackOffsetPolicy };
+
+export interface LocalizedLabel {
+  en: string;
+  ko: string;
+}
+
+export interface RouteLabelContext {
+  locale: Locale;
+  pathname: string;
+  params: Record&lt;string, string | string[] | undefined&gt;;
+}
+
+export type RouteLabel = LocalizedLabel | ((ctx: RouteLabelContext) =&gt; string | null);
+
+export type TabId = "graph" | "capture" | "jarvis" | "profile";
+export type TabIconId = "graph" | "capture" | "jarvis" | "profile";
+
+export interface TabMeta {
+  id: TabId;
+  order: number;
+  icon: TabIconId;
+  href: Href;
+  label: LocalizedLabel;
+  navigation: "replace";
+}
+
+export interface ReplacementRoute {
+  href: Href;
+  action: "redirect" | "replace";
+  preserveParams?: true | readonly string[];
+  note?: string;
+}
+
+export interface RouteMeta {
+  id: string;
+  path: string;              // URL pattern, e.g. "/", "/record/[id]"
+  match?: RegExp;            // required for dynamic URLs
+  stackName?: string;        // Expo Stack.Screen name, e.g. "index", "record/[id]", "(auth)"
+  stackOptions?: NativeStackNavigationOptions;
+  label: RouteLabel;
+  shell: ShellVisibility;
+  tab: false | TabMeta;
+  auth: AuthRequirement;
+  back: BackBehavior;
+  replacement?: ReplacementRoute;
+}</code></pre>
+
+      <h3>Required Route APIs</h3>
+      <pre><code>export const ROUTES = [...] as const satisfies readonly RouteMeta[];
+
+export function getRouteMeta(pathname: string): RouteMeta {
+  return ROUTES.find((route) =&gt;
+    route.match ? route.match.test(pathname) : route.path === pathname
+  ) ?? NOT_FOUND_ROUTE;
+}
+
+export function getRouteLabel(pathname: string, locale: Locale, params = {}): string | null {
+  const meta = getRouteMeta(pathname);
+  return typeof meta.label === "function"
+    ? meta.label({ pathname, locale, params })
+    : meta.label[locale];
+}
+
+export function getTabRoutes(): TabMeta[] {
+  return ROUTES
+    .filter((route): route is RouteMeta &amp; { tab: TabMeta } =&gt; route.tab !== false)
+    .map((route) =&gt; route.tab)
+    .sort((a, b) =&gt; a.order - b.order);
+}
+
+export function shouldShowTabBar(pathname: string): boolean {
+  return getRouteMeta(pathname).tab !== false;
+}
+
+export function getBackBehavior(pathname: string): BackBehavior {
+  const meta = getRouteMeta(pathname);
+  return meta.back.kind === "hidden" ? meta.back : {
+    ...meta.back,
+    offset: meta.tab ? "afterTabBrand" : meta.back.offset ?? "default",
+  };
+}
+
+export function canonicalHref(href: Href): Href {
+  const pathname = typeof href === "string" ? href : String(href.pathname);
+  const replacement = getRouteMeta(pathname).replacement;
+  if (!replacement) return href;
+  if (replacement.preserveParams === true &amp;&amp; typeof href !== "string") {
+    return { pathname: String((replacement.href as { pathname?: string }).pathname ?? replacement.href), params: href.params };
+  }
+  return replacement.href;
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>Example Route Entries</h2>
+      <pre><code>import { VILLAGE_IDS, VILLAGE_LABEL, type VillageId } from "@/lib/graph/relatedness";
+
+const homeBack = { kind: "home", action: "push" } as const;
+
+export const ROUTES = [
+  {
+    id: "graph",
+    path: "/",
+    stackName: "index",
+    label: { en: "Graph", ko: "그래프" },
+    shell: "app",
+    tab: {
+      id: "graph",
+      order: 0,
+      icon: "graph",
+      href: "/",
+      label: { en: "Graph", ko: "그래프" },
+      navigation: "replace",
+    },
+    auth: "profileComplete",
+    back: { kind: "hidden" },
+  },
+  {
+    id: "capture",
+    path: "/capture",
+    stackName: "capture",
+    label: { en: "Capture", ko: "담기" },
+    shell: "app",
+    tab: {
+      id: "capture",
+      order: 1,
+      icon: "capture",
+      href: "/capture",
+      label: { en: "Capture", ko: "담기" },
+      navigation: "replace",
+    },
+    auth: "profileComplete",
+    back: { ...homeBack, offset: "afterTabBrand" },
+  },
+  {
+    id: "jarvis",
+    path: "/jarvis",
+    stackName: "jarvis",
+    label: { en: "SecondB", ko: "세컨비" },
+    shell: "app",
+    tab: {
+      id: "jarvis",
+      order: 2,
+      icon: "jarvis",
+      href: "/jarvis",
+      label: { en: "SecondB", ko: "세컨비" },
+      navigation: "replace",
+    },
+    auth: "profileComplete",
+    back: { ...homeBack, offset: "afterTabBrand" },
+  },
+  {
+    id: "profile",
+    path: "/profile",
+    stackName: "profile",
+    label: { en: "Profile", ko: "프로필" },
+    shell: "app",
+    tab: {
+      id: "profile",
+      order: 3,
+      icon: "profile",
+      href: "/profile",
+      label: { en: "Me", ko: "나" },
+      navigation: "replace",
+    },
+    auth: "profileComplete",
+    back: { ...homeBack, offset: "afterTabBrand" },
+  },
+  {
+    id: "journal-alias",
+    path: "/journal",
+    stackName: "journal",
+    label: { en: "Journal", ko: "일기" },
+    shell: "redirect",
+    tab: false,
+    auth: "profileComplete",
+    back: { kind: "hidden" },
+    replacement: {
+      href: "/capture",
+      action: "redirect",
+      preserveParams: true,
+      note: "Retired standalone journal. Capture owns journal mode.",
+    },
+  },
+  {
+    id: "records",
+    path: "/records",
+    stackName: "records",
+    stackOptions: { animation: "fade" },
+    label: ({ locale, params }) =&gt; {
+      const domain = params.domain;
+      return VILLAGE_IDS.includes(domain as VillageId)
+        ? VILLAGE_LABEL[domain as VillageId][locale]
+        : locale === "ko" ? "기록" : "Records";
+    },
+    shell: "app",
+    tab: false,
+    auth: "profileComplete",
+    back: homeBack,
+  },
+  {
+    id: "record-detail",
+    path: "/record/[id]",
+    match: /^\/record\/[^/]+$/,
+    stackName: "record/[id]",
+    label: ({ locale }) =&gt; VILLAGE_LABEL.records[locale],
+    shell: "app",
+    tab: false,
+    auth: "profileComplete",
+    back: homeBack,
+  },
+  {
+    id: "imagine-alias",
+    path: "/imagine",
+    stackName: "imagine",
+    label: { en: "Divergent mode", ko: "공상" },
+    shell: "redirect",
+    tab: false,
+    auth: "profileComplete",
+    back: { kind: "hidden" },
+    replacement: {
+      href: { pathname: "/jarvis", params: { mode: "divergent" } },
+      action: "redirect",
+      note: "공상 is now SecondB divergent chat mode.",
+    },
+  },
+] as const satisfies readonly RouteMeta[];</code></pre>
+    </section>
+
+    <section>
+      <h2>Full Route Inventory</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Route</th>
+            <th>Label EN / KO</th>
+            <th>Shell</th>
+            <th>Tab</th>
+            <th>Auth</th>
+            <th>Back</th>
+            <th>Replacement</th>
+            <th>Stack</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>/</td><td>Graph / 그래프</td><td>app</td><td>graph</td><td>profileComplete</td><td>hidden</td><td>-</td><td>index</td></tr>
+          <tr><td>/capture</td><td>Capture / 담기</td><td>app</td><td>capture</td><td>profileComplete</td><td>home push, afterTabBrand</td><td>-</td><td>capture</td></tr>
+          <tr><td>/jarvis</td><td>SecondB / 세컨비</td><td>app</td><td>jarvis</td><td>profileComplete</td><td>home push, afterTabBrand</td><td>-</td><td>jarvis</td></tr>
+          <tr><td>/profile</td><td>Profile / tab Me(나)</td><td>app</td><td>profile</td><td>profileComplete</td><td>home push, afterTabBrand</td><td>-</td><td>profile</td></tr>
+          <tr><td>/journal</td><td>Journal / 일기</td><td>redirect</td><td>none</td><td>profileComplete</td><td>hidden</td><td>/capture, preserve params</td><td>journal</td></tr>
+          <tr><td>/imagine</td><td>Divergent mode / 공상</td><td>redirect</td><td>none</td><td>profileComplete</td><td>hidden</td><td>/jarvis?mode=divergent</td><td>imagine</td></tr>
+          <tr><td>/audit</td><td>Life Audit / 라이프 오딧</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>audit</td></tr>
+          <tr><td>/persona</td><td>Persona / 페르소나</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>persona</td></tr>
+          <tr><td>/inbox</td><td>Inbox / 받은편지함</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>inbox</td></tr>
+          <tr><td>/formats</td><td>Formats / 형식</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>formats</td></tr>
+          <tr><td>/wiki</td><td>VILLAGE_LABEL.knowledge</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>wiki, fade</td></tr>
+          <tr><td>/manual</td><td>Manual / 매뉴얼</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>manual</td></tr>
+          <tr><td>/big-five</td><td>Big Five / Big Five</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>big-five</td></tr>
+          <tr><td>/insights</td><td>Insights / 인사이트</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>insights</td></tr>
+          <tr><td>/attachment</td><td>Attachment / 애착</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>attachment</td></tr>
+          <tr><td>/permissions</td><td>Permissions / 권한</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>permissions</td></tr>
+          <tr><td>/research</td><td>Research / 리서치</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>research</td></tr>
+          <tr><td>/trinity</td><td>Trinity / Trinity</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>trinity</td></tr>
+          <tr><td>/mbti</td><td>MBTI / MBTI</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>mbti</td></tr>
+          <tr><td>/settings</td><td>Settings / 설정</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>settings</td></tr>
+          <tr><td>/privacy</td><td>Privacy / 개인정보</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>privacy</td></tr>
+          <tr><td>/account</td><td>Account / 계정</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>account</td></tr>
+          <tr><td>/import</td><td>Import / 가져오기</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>import</td></tr>
+          <tr><td>/interview</td><td>Interview / 인터뷰</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>interview</td></tr>
+          <tr><td>/records</td><td>Records or VILLAGE_LABEL[domain]</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>records, fade</td></tr>
+          <tr><td>/record/[id]</td><td>VILLAGE_LABEL.records</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>record/[id]</td></tr>
+          <tr><td>/core-brain</td><td>Soul Core / 나의 중심</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>core-brain, fade</td></tr>
+          <tr><td>/data</td><td>Data / 데이터</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>data</td></tr>
+          <tr><td>/theme</td><td>Theme / 테마</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>theme</td></tr>
+          <tr><td>/support</td><td>Support / 지원</td><td>app</td><td>none</td><td>profileComplete</td><td>home push</td><td>-</td><td>support</td></tr>
+          <tr><td>/onboarding</td><td>Onboarding / 온보딩</td><td>app</td><td>none</td><td>signedIn</td><td>home push</td><td>last-step CTA should canonicalize /journal to /capture</td><td>onboarding</td></tr>
+          <tr><td>/sign-in</td><td>Sign in / 로그인</td><td>auth</td><td>none</td><td>guestOnly</td><td>hidden</td><td>signed-in users to /</td><td>(auth)/sign-in</td></tr>
+          <tr><td>/sign-up</td><td>Sign up / 가입</td><td>auth</td><td>none</td><td>guestOnly</td><td>hidden</td><td>post-signup to /</td><td>(auth)/sign-up</td></tr>
+          <tr><td>/complete-profile</td><td>Complete profile / 프로필 완성</td><td>auth</td><td>none</td><td>profileIncomplete</td><td>hidden</td><td>complete to /</td><td>(auth)/complete-profile</td></tr>
+          <tr><td>/oauth-callback</td><td>OAuth callback / OAuth 콜백</td><td>auth</td><td>none</td><td>public</td><td>hidden</td><td>callback resolves to / or /sign-in</td><td>(auth)/oauth-callback</td></tr>
+          <tr><td>+not-found</td><td>Not found / 페이지 없음</td><td>app</td><td>none</td><td>public</td><td>home push</td><td>CTA should use canonical /capture, not /journal</td><td>+not-found</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Shell Spacing Shape</h2>
+      <pre><code>import type { EdgeInsets } from "react-native-safe-area-context";
+import { spacing } from "@/lib/theme/tokens";
+import { getBackBehavior, getRouteMeta, shouldShowTabBar } from "@/lib/nav/routes";
+
+export const SHELL_SPACING = {
+  screen: {
+    horizontal: spacing.lg,
+    topBase: spacing.sm,
+    scrollBottomBase: spacing.xl,
+  },
+  backArrow: {
+    size: 44,
+    topGap: spacing.sm,       // current insets.top + 8
+    leftGap: spacing.md,      // current insets.left + 12
+    tabBrandOffset: 52,       // current primary-tab nudge
+    labelGap: spacing.sm,
+    labelMaxWidth: 220,
+    reservedHeadroom: 60,     // replaces PremiumAppShell arrowHeadroom literal
+  },
+  tabBar: {
+    contentHeight: 62,        // current TAB_BAR_HEIGHT
+    horizontalPadding: spacing.sm,
+    rowGap: spacing.xs,
+    contentTopClearance: spacing.lg,
+  },
+  navGraph: {
+    sheetGapAboveTabBar: 30,  // current 92 = 62 + 30 on web/zero safe bottom
+    zoomOverlayPaddingBottom: "34%",
+  },
+} as const;
+
+export interface ResolvedShellSpacing {
+  backArrow: {
+    visible: boolean;
+    top: number;
+    left: number;
+    size: number;
+    labelGap: number;
+    labelMaxWidth: number;
+    reserveTop: number;
+  };
+  tabBar: {
+    visible: boolean;
+    contentHeight: number;
+    safeBottom: number;
+    totalHeight: number;
+    contentBottomClearance: number;
+  };
+  content: {
+    paddingHorizontal: number;
+    paddingTop: number;
+    paddingBottom: number;
+    scrollPaddingBottom: number;
+  };
+  navGraph: {
+    sheetBottom: number;
+    zoomOverlayPaddingBottom: string;
+  };
+}
+
+export function resolveShellSpacing(pathname: string, insets: EdgeInsets): ResolvedShellSpacing {
+  const meta = getRouteMeta(pathname);
+  const tabVisible = shouldShowTabBar(pathname);
+  const back = getBackBehavior(pathname);
+  const backVisible = meta.shell === "app" &amp;&amp; back.kind !== "hidden";
+  const tabTotalHeight = SHELL_SPACING.tabBar.contentHeight + insets.bottom;
+  const contentBottomClearance = tabVisible
+    ? SHELL_SPACING.tabBar.contentHeight + SHELL_SPACING.tabBar.contentTopClearance
+    : 0;
+
+  return {
+    backArrow: {
+      visible: backVisible,
+      top: insets.top + SHELL_SPACING.backArrow.topGap,
+      left:
+        insets.left +
+        SHELL_SPACING.backArrow.leftGap +
+        (back.offset === "afterTabBrand" ? SHELL_SPACING.backArrow.tabBrandOffset : 0),
+      size: SHELL_SPACING.backArrow.size,
+      labelGap: SHELL_SPACING.backArrow.labelGap,
+      labelMaxWidth: SHELL_SPACING.backArrow.labelMaxWidth,
+      reserveTop: backVisible ? SHELL_SPACING.backArrow.reservedHeadroom : 0,
+    },
+    tabBar: {
+      visible: meta.shell === "app" &amp;&amp; tabVisible,
+      contentHeight: SHELL_SPACING.tabBar.contentHeight,
+      safeBottom: insets.bottom,
+      totalHeight: tabTotalHeight,
+      contentBottomClearance,
+    },
+    content: {
+      paddingHorizontal: SHELL_SPACING.screen.horizontal,
+      paddingTop: SHELL_SPACING.screen.topBase + (backVisible ? SHELL_SPACING.backArrow.reservedHeadroom : 0),
+      paddingBottom: contentBottomClearance,
+      scrollPaddingBottom: SHELL_SPACING.screen.scrollBottomBase,
+    },
+    navGraph: {
+      sheetBottom: tabVisible
+        ? tabTotalHeight + SHELL_SPACING.navGraph.sheetGapAboveTabBar
+        : insets.bottom + SHELL_SPACING.navGraph.sheetGapAboveTabBar,
+      zoomOverlayPaddingBottom: SHELL_SPACING.navGraph.zoomOverlayPaddingBottom,
+    },
+  };
+}</code></pre>
+      <p class="callout">
+        Rule: route screens should stop adding overlay clearance locally. A screen may keep ordinary content rhythm
+        (<code>scrollPaddingBottom</code>) but tab/back/NavGraph overlay spacing comes from <code>resolveShellSpacing</code>.
+      </p>
+    </section>
+
+    <section>
+      <h2>Consumer Contract</h2>
+      <ul>
+        <li><strong>BackArrow</strong>: replace local <code>PRE_AUTH_PATHS</code>, <code>HIDDEN_PATHS</code>, <code>ROUTE_LABELS</code>, <code>titleForRoute</code>, and tab offset math with <code>getBackBehavior</code>, <code>getRouteLabel</code>, and <code>resolveShellSpacing</code>.</li>
+        <li><strong>PremiumTabBar</strong>: delete local <code>TABS</code> and <code>TAB_PATHS</code>; render <code>getTabRoutes()</code>; use spacing resolver for height and safe-bottom padding; keep icon rendering local by <code>TabIconId</code>.</li>
+        <li><strong>Stack</strong>: generate <code>&lt;Stack.Screen&gt;</code> rows from <code>ROUTES.filter(r =&gt; r.stackName)</code>; this brings missing files (<code>data</code>, <code>theme</code>, <code>support</code>, <code>onboarding</code>, <code>imagine</code>, <code>record/[id]</code>) under the same inventory.</li>
+        <li><strong>PremiumAppShell</strong>: stop importing BackArrow helpers; call <code>resolveShellSpacing(pathname, insets)</code> once and apply <code>content.paddingTop</code>, <code>content.paddingBottom</code>, and horizontal padding.</li>
+        <li><strong>NavGraph</strong>: canonicalize hrefs before navigation; replace <code>bottom: 92</code> and <code>paddingBottom: "34%"</code> with <code>resolveShellSpacing("/", insets).navGraph</code>.</li>
+        <li><strong>Route-local buttons/links</strong>: replace hard-coded <code>/journal</code> action targets with <code>canonicalHref("/journal")</code> first, then migrate copy to canonical <code>/capture</code> route names in a later content pass.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Acceptance</h2>
+      <ul>
+        <li><span class="ok">Pass</span> when <code>src/lib/nav/tabs.ts</code> is deleted or becomes a re-export from <code>routes.ts</code>.</li>
+        <li><span class="ok">Pass</span> when <code>BackArrow.tsx</code> has no route label table, hidden route table, or numeric left/top offsets.</li>
+        <li><span class="ok">Pass</span> when <code>tab-bar.tsx</code> has no route list and only maps metadata to glyphs.</li>
+        <li><span class="ok">Pass</span> when <code>_layout.tsx</code> Stack screens are generated from metadata and still preserve fade on <code>/wiki</code>, <code>/records</code>, and <code>/core-brain</code>.</li>
+        <li><span class="ok">Pass</span> when <code>NavGraph</code> has no <code>bottom: 92</code> literal.</li>
+        <li><span class="ok">Pass</span> when active app screens do not encode tab/back overlay clearance as route-local <code>110</code>, <code>120</code>, or equivalent magic bottom padding.</li>
+        <li><span class="ok">Pass</span> when <code>/journal</code> and <code>/imagine</code> remain valid deep links but metadata marks them as aliases with canonical replacements.</li>
+      </ul>
+      <p class="callout">
+        No application source files were changed for this Gate 2 response. This is a spec-only handoff for Claude implementation.
+      </p>
+    </section>
+  </main>
+</body>
+</html>
