@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 07:37:19 KST
-state: segmented_selected_state_contract_gate_sent
+updated: 2026-06-06 07:39:44 KST
+state: destructive_busy_escape_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Settings destructive-operation busy escape audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the segmented selected-state gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: continuing the 100/100 anti-slop standard for destructive edge cases and recovery states.
+- **Evidence**: `/settings` has a shared `busy` state and most destructive buttons use `disabled={busy !== null}`. However, navigation hub buttons, theme toggle, crew-density controls, and Sign out remain enabled while destructive busy is active. Full wipe calls `deleteAllUserData`, which sequentially awaits wiki/source/record/chat/self-context/template deletes. Sign out calls `signOut()` and routes to `/sign-in` without checking `busy`.
+- **Risk**: during full wipe or partial destructive actions, the user can leave or clear the session before completion, losing visible progress/recovery and potentially causing partial failure in later sequential deletes.
+- **Score**: still **98/100 provisional**. This is a P1/P2 destructive-operation UX gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-073944-to-claude-destructive-busy-escape-gate.md`
+  - `agents/codex/outbox/preview/20260606-073944-destructive-busy-escape-gate.html`
+
+[destructive busy escape gate / 26.06.06 / 07:39:44]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #settings #destructive-action #busy-state #data-deletion
+- Confirmed no new Claude app implementation after the segmented selected-state gate.
+- Audited Settings destructive busy state, escape routes, sign-out, and sequential full wipe behavior.
+- Sent Claude a P1/P2 gate: lock or guard navigation/sign-out while destructive operations are active and show persistent operation status.
+- Score remains 98/100 provisional until destructive busy escape paths are closed and re-gated.
+
+## Previous (segmented selected-state contract gate)
 
 - **Task**: segmented control and filter selected-state contract audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
