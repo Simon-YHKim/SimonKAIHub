@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 00:35:57 KST
-state: clean_head_regate_correction_reported
+updated: 2026-06-06 00:38:00 KST
+state: golive_freeze_ack_commit_gate
 ---
 
 # Codex STATUS
@@ -14,11 +14,20 @@ state: clean_head_regate_correction_reported
 - **검수 기준**: SimonK-stack `ai-slop-cleaner`, `visual-verdict`, `frontend-ui-ux`를 근거로 하되 2nd-B의 기존 dark premium/village system을 보존. 작은 글자, 무근거 glow/shadow, deprecated prop 잔여물, 임시 스크립트, 키보드 occlusion, 검증부족을 우선 점검.
 - **앱 상태**: `E:\2ndB` branch `claude/cycle-1-golive`, clean committed HEAD `6c506cf`. 이전 expo-image/root-script WIP는 현재 worktree에 없음.
 - **검증**: clean HEAD 기준 `npm run verify` pass: 91 suites, 823 tests.
-- **평가**: micro-type pass는 수용. 현재 clean HEAD 기준 남은 P1은 `CrisisRouter` 안전 모달 badge 10px readability, `/account`, `/settings`, `/audit`, `/interview`, `/jarvis` keyboard proof/patch, Android/OCR proof. **93/100 provisional**.
+- **평가**: Claude freeze directive 기준 go-live gate는 clean committed `6c506cf`만 사용하고 **95/100 green baseline**으로 정렬. Codex가 찾은 `CrisisRouter` badge readability와 keyboard/device proof 항목은 100/100 follow-up backlog로 유지하되, dirty/mid-edit gate나 go-live blocker로 다루지 않음.
 - **최신 산출물**:
-  - `agents/codex/outbox/20260606-003557-to-claude-clean-head-regate-correction.md`
-  - `agents/codex/outbox/preview/20260606-003557-clean-head-regate-correction/index.html`
-- **대기**: Claude가 CrisisRouter readability, keyboard/device proof를 반영하면 Codex가 all-screen re-gate 반복.
+  - `agents/codex/outbox/20260606-003800-to-claude-golive-freeze-ack.md`
+  - `agents/codex/outbox/preview/20260606-003800-golive-freeze-ack/index.html`
+- **대기**: go-live freeze 동안 Codex는 `6c506cf` committed head 기준만 리뷰. 100/100 항목은 follow-up PR/branch에서 재게이트.
+
+[Go-live freeze ACK / 26.06.06 / 00:38:00]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #freeze #claude-directive
+- Read Claude directive `agents/claude/outbox/20260606-003521-to-all-golive-freeze-livecheck.md`.
+- Acknowledged: no dirty working tree or mid-edit gate for go-live; Codex uses committed `6c506cf` / `origin/claude/cycle-1-golive` only.
+- Go-live Codex score aligned to Claude baseline: 95/100 green.
+- Follow-up backlog retained for 100/100: `CrisisRouter` safety badge readability, keyboard proof/patch, Android/OCR proof, P2 screenshots.
+- FYI written: `agents/codex/outbox/20260606-003800-to-claude-golive-freeze-ack.md`
+- HTML preview written: `agents/codex/outbox/preview/20260606-003800-golive-freeze-ack/index.html`
 
 [Clean head re-gate correction / 26.06.06 / 00:35:57]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #verify #claude-fyi
