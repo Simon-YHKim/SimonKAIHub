@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2nd-B Navigation Shell Contract Audit</title>
+  <style>
+    :root {
+      --bg: #080b10;
+      --panel: #101720;
+      --text: #e9eef4;
+      --muted: #94a3b8;
+      --accent: #4ade80;
+      --warn: #f97316;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Apple SD Gothic Neo", system-ui, sans-serif;
+      line-height: 1.58;
+    }
+    main {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 48px 0 64px;
+    }
+    header {
+      border-bottom: 1px solid rgba(148, 163, 184, .28);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    h1 {
+      margin: 8px 0 12px;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 34px 0 12px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    .summary { max-width: 880px; color: var(--muted); font-size: 17px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 18px 0;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid rgba(148, 163, 184, .22);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .card strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+    code {
+      color: var(--accent);
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: .95em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+    }
+    th, td {
+      border: 1px solid rgba(148, 163, 184, .22);
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: rgba(74, 222, 128, .1); }
+    ul { margin: 10px 0 0; padding-left: 20px; }
+    li { margin: 8px 0; }
+    .sev { color: var(--warn); font-weight: 700; }
+    footer { margin-top: 40px; color: var(--muted); font-size: 13px; }
+    @media (max-width: 760px) {
+      main { width: min(100% - 28px, 1120px); padding-top: 32px; }
+      .grid { grid-template-columns: 1fr; }
+      table { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex Static UI Audit</div>
+      <h1>Navigation / Shell 계약 추가 리뷰</h1>
+      <p class="summary">렌더 P0가 아직 막혀 있어도, route metadata·bottom tab·BackArrow·shell padding의 단일 출처가 깨진 것은 정적 근거로 확인된다. 이 계약을 먼저 정리해야 전체 화면 screenshot QA가 안정된다.</p>
+    </header>
+
+    <section>
+      <h2>Key Findings</h2>
+      <div class="grid">
+        <div class="card">
+          <strong><span class="sev">P1</span> Bottom tab + BackArrow drift</strong>
+          <p><code>/capture</code>, <code>/jarvis</code>, <code>/profile</code> are primary tabs, but BackArrow hides only pre-auth routes and <code>/</code>.</p>
+        </div>
+        <div class="card">
+          <strong><span class="sev">P1</span> Incomplete Stack contract</strong>
+          <p>Route files include <code>profile</code>, <code>data</code>, <code>theme</code>, <code>support</code>, <code>record/[id]</code>, etc. but they are not explicit in <code>_layout.tsx</code>.</p>
+        </div>
+        <div class="card">
+          <strong><span class="sev">P1</span> Duplicated bottom clearance</strong>
+          <p><code>PremiumAppShell</code> adds tab clearance, while individual screens keep mixed <code>paddingBottom</code> values.</p>
+        </div>
+        <div class="card">
+          <strong><span class="sev">P2</span> Route labels incomplete</strong>
+          <p>BackArrow route labels are local and incomplete. Some screens get orientation labels, others do not.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <table>
+        <thead>
+          <tr><th>Area</th><th>Evidence</th><th>Risk</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tab route source</td>
+            <td><code>src/lib/nav/tabs.ts:9</code></td>
+            <td>Primary tab list is separate from BackArrow hidden route list.</td>
+          </tr>
+          <tr>
+            <td>BackArrow hidden paths</td>
+            <td><code>src/components/ui/BackArrow.tsx:20-28</code></td>
+            <td>Tab destinations can show both bottom tab and floating arrow.</td>
+          </tr>
+          <tr>
+            <td>Shell clearance</td>
+            <td><code>src/components/premium/background.tsx:105-126</code></td>
+            <td>Root tab clearance combines with screen-specific scroll padding.</td>
+          </tr>
+          <tr>
+            <td>Explicit stack list</td>
+            <td><code>src/app/_layout.tsx:49-80</code></td>
+            <td>Product route behavior is not described in one route metadata source.</td>
+          </tr>
+          <tr>
+            <td>Missing explicit stack entries</td>
+            <td><code>profile</code>, <code>data</code>, <code>theme</code>, <code>support</code>, <code>onboarding</code>, <code>imagine</code>, <code>record/[id]</code>, preview variants</td>
+            <td>Animation, labels, public/private policy, and QA route inventory can drift.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Requested Contract</h2>
+      <ul>
+        <li>Create one route metadata table: path, public/auth policy, tab visibility, BackArrow visibility, KO/EN label, shell lane type.</li>
+        <li>Make <code>PremiumTabBar</code>, <code>BackArrow</code>, and <code>PremiumAppShell</code> consume that table.</li>
+        <li>Hide generic BackArrow on primary tab destinations, or redesign it as an explicit graph-home action.</li>
+        <li>Centralize scroll bottom clearance in a <code>ShellScroll</code> or <code>ScreenLane</code> helper.</li>
+        <li>Remove/gate dev preview routes and complete route label metadata.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Markdown request: agents/codex/outbox/20260605-202656-to-claude-navigation-shell-contract-request.md. Codex did not modify E:\2ndB code.
+    </footer>
+  </main>
+</body>
+</html>
