@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex 944d2dc FlatList Re-gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #10131a;
+      --panel: #171b24;
+      --panel-2: #202633;
+      --text: #eef2f8;
+      --muted: #aeb8c9;
+      --line: #2b3445;
+      --accent: #7cc7ff;
+      --ok: #8ee6a8;
+      --warn: #ffcf70;
+      --bad: #ff9d9d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Pretendard", "Segoe UI", system-ui, sans-serif;
+      line-height: 1.58;
+      word-break: keep-all;
+    }
+    main {
+      width: min(1040px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 22px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(30px, 5vw, 52px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+    .summary {
+      max-width: 780px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+    .score {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 18px;
+      align-items: center;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+    .score strong {
+      display: block;
+      color: var(--ok);
+      font-size: 42px;
+      line-height: 1;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      margin-top: 16px;
+    }
+    h2 { font-size: 20px; margin: 0 0 14px; letter-spacing: 0; }
+    h3 { font-size: 16px; margin: 18px 0 8px; letter-spacing: 0; }
+    p { margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 21px; }
+    li + li { margin-top: 7px; }
+    code {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      color: #d8e8ff;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 0.94em;
+    }
+    .tag {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 9px;
+      margin-right: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .mini {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    @media (max-width: 720px) {
+      main { width: min(100vw - 22px, 1040px); padding-top: 24px; }
+      .score, .grid { grid-template-columns: 1fr; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Codex UI/UX Re-gate</p>
+      <h1>944d2dc FlatList Review</h1>
+      <p class="summary">records, inbox, wiki의 FlatList 전환 완료 커밋을 검수했다. P0 hook-order는 닫혔고 verify도 통과했다. 다만 raw error와 runtime visual proof 부족 때문에 100점은 아니다.</p>
+    </header>
+
+    <div class="score">
+      <strong>92</strong>
+      <div>
+        <span class="tag">provisional</span>
+        <span class="tag">verify pass</span>
+        <span class="tag">P0 closed</span>
+        <p style="margin-top:10px;">`121bc87`의 91점에서 +1. 성능 방향은 수용하지만, high-blast-radius 레이아웃 변경치고 visual proof가 아직 없다.</p>
+      </div>
+    </div>
+
+    <section>
+      <h2>Accepted</h2>
+      <div class="grid">
+        <div class="mini"><b class="ok">Hook order</b><p><code>wiki.tsx</code>의 conditional hook-order P0가 닫혔다.</p></div>
+        <div class="mini"><b class="ok">Virtualization</b><p>records/inbox/wiki가 <code>FlatList</code>로 전환되어 Android OOM 위험이 줄었다.</p></div>
+        <div class="mini"><b class="ok">Memo rows</b><p>row extraction and memoization 방향은 list jank 방지에 맞다.</p></div>
+        <div class="mini"><b class="ok">Memory prune</b><p>inbox body cache와 wiki backlink cache가 5개로 제한된다.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Still Blocking 100</h2>
+      <h3><span class="bad">P1</span> Raw error details</h3>
+      <ul>
+        <li><code>inbox.tsx:269</code> visible error card stores raw message.</li>
+        <li><code>inbox.tsx:387</code>, <code>413</code> alerts append raw message.</li>
+        <li><code>wiki.tsx:246</code>, <code>294</code> alerts append raw message.</li>
+      </ul>
+
+      <h3><span class="bad">P1</span> Trust blockers</h3>
+      <p>Persona diagnosis copy source-of-truth conflict, consent/legal placeholder, social provider and device proof remain open.</p>
+
+      <h3><span class="warn">P2</span> Tap target and visual proof</h3>
+      <p><code>wiki.tsx:801</code> still has <code>hitSlop={2}</code>. Runtime screenshots/proof are still needed for loading/empty/error, header spacing, pull-to-refresh, expanded rows, and long list scroll.</p>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <p><code>npm run verify</code> passed: 91 suites, 823 tests.</p>
+    </section>
+  </main>
+</body>
+</html>

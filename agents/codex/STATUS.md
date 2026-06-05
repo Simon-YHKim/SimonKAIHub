@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 02:20:18 KST
-state: flatlist_wip_p0_still_open
+updated: 2026-06-06 02:23:04 KST
+state: regated_944d2dc_flatlist
 ---
 
 # Codex STATUS
@@ -11,10 +11,12 @@ state: flatlist_wip_p0_still_open
 
 - **작업**: Simon 지시 `/goal`에 따라 모든 화면 UI/UX와 AI slop를 100/100 기준으로 반복 게이트 중. Claude/AG의 최신 앱 커밋 `89eeaaa`를 즉시 재검수했다.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
-- **앱 기준**: `E:\2ndB`, branch now `antigravity/perf-flatlist`, committed head remains `121bc87`; dirty WIP: `src/app/inbox.tsx`, `src/app/records.tsx`, `src/app/wiki.tsx`.
-- **검증**: committed `121bc87` re-gate passed earlier, but current FlatList WIP still fails `npm run lint`/`npm run verify` at ESLint due `src/app/wiki.tsx` conditional hook-order errors.
-- **현재 점수**: committed `121bc87` score remains 91/100 provisional. Current FlatList WIP is unscored and P0-blocked; if committed as-is it fails the gate.
+- **앱 기준**: `E:\2ndB`, branch `antigravity/perf-flatlist`, head `944d2dc perf(ui): virtualize records/inbox/wiki lists with FlatList`, clean.
+- **검증**: `npm run verify` pass on `944d2dc`: lint/type-check/i18n/lexicon/LLM boundary/constraints/emdash/Jest green, 91 suites, 823 tests.
+- **현재 점수**: `944d2dc` re-gate = 92/100 provisional. P0 hook-order fixed and FlatList perf direction accepted, but raw error visibility in touched screens, persona diagnosis-copy policy conflict, consent/legal placeholder, provider/device proof, tiny wiki tag hitSlop, and missing runtime visual proof keep it below 100.
 - **최신 산출물**:
+  - `agents/codex/outbox/20260606-022304-to-claude-944d2dc-flatlist-regate.md`
+  - `agents/codex/outbox/preview/20260606-022304-944d2dc-flatlist-regate.html`
   - `agents/codex/outbox/20260606-021454-to-claude-flatlist-wip-p0-preflight.md`
   - `agents/codex/outbox/preview/20260606-021454-flatlist-wip-p0-preflight.html`
   - `agents/codex/outbox/20260606-021046-to-claude-121bc87-regate.md`
@@ -23,7 +25,16 @@ state: flatlist_wip_p0_still_open
   - `agents/codex/outbox/preview/20260606-020542-wip-slop-cleanup-preflight.html`
   - `agents/codex/outbox/20260606-015756-to-claude-89eeaaa-perf-regate.md`
   - `agents/codex/outbox/preview/20260606-015756-89eeaaa-perf-regate.html`
-- **대기**: Claude/AG가 FlatList/perf WIP P0 hook-order failure를 고치고 커밋/완료 보고하면 즉시 재게이트. 100점 전까지 반복.
+- **대기**: Claude/AG가 다음 raw-error/trust/proof cleanup을 커밋하거나 outbox 완료 보고하면 즉시 재게이트. 100점 전까지 반복.
+
+[944d2dc FlatList re-gate / 26.06.06 / 02:23:04]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #flatlist #antigravity #regate
+- Detected AG commit `944d2dc perf(ui): virtualize records/inbox/wiki lists with FlatList`; app worktree clean.
+- Ran `npm run verify`: pass, 91 suites, 823 tests.
+- Accepted: previous hook-order P0 fixed; records/inbox/wiki use FlatList, memoized rows, list header/empty components, separator spacing, cache pruning, and preserved RefreshControl.
+- Score raised from 91 to 92/100 provisional.
+- Still not 100: raw error details remain visible in inbox/wiki failures, persona diagnosis-copy policy conflict remains, consent/legal/provider/device proof remains, `wiki.tsx:801` tiny hitSlop remains, and runtime visual proof is missing for the new virtualized layouts.
+- Report/preview written and opened.
 
 [FlatList WIP P0 unchanged / 26.06.06 / 02:20:18]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #flatlist #antigravity #p0
