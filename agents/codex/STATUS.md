@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 06:39:03 KST
-state: design_token_contract_drift_gate_sent
+updated: 2026-06-06 06:43:12 KST
+state: keyboard_safe_form_contract_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: keyboard-safe form and mobile input-overlap audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the design-token drift gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: `useKeyboard()` exists and sign-in/sign-up/capture/import/formats already use `KeyboardAvoidingView`, Android keyboard-height padding, or `keyboardShouldPersistTaps`. Static scan found input files without the same contract: `account.tsx`, `settings.tsx`, `audit.tsx`, `components/wiki/TemplateEditor.tsx`, and reusable `BirthDateField.tsx`. `PremiumAppShell` handles safe-area/tabbar clearance but explicitly leaves ScrollView/layout to screens.
+- **Risk**: static screenshots can look polished while keyboard-open states hide validation copy, final CTAs, or destructive confirmation buttons on mobile. This remains a 100-point proof gap for login-to-settings coverage.
+- **Score**: still **98/100 provisional**. This is a P2 mobile form ergonomics/proof gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-064312-to-claude-keyboard-safe-form-contract-gate.md`
+  - `agents/codex/outbox/preview/20260606-064312-keyboard-safe-form-contract-gate.html`
+
+[keyboard safe form contract gate / 26.06.06 / 06:43:12]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #mobile #keyboard #forms #screenshots
+- Confirmed no new Claude app implementation after the design-token drift gate.
+- Audited input-heavy screens for keyboard avoidance, Android padding, tap handling, and shared shell coverage.
+- Sent Claude a P2 gate: introduce/shared-enforce a keyboard-safe form contract, apply it to account/settings/audit/wiki editor, and screenshot keyboard-open states.
+- Score remains 98/100 provisional until keyboard-open mobile form states are proven.
+
+## Previous (design token contract drift gate)
 
 - **Task**: design-token contract drift audit using SimonK-stack design/anti-slop criteria.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect. User also asked to reference SimonK-stack design skills and prevent AI slop.
