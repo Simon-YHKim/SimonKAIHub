@@ -1,13 +1,29 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-05 22:56:11 KST
+updated: 2026-06-05 23:01:17 KST
 state: waiting_on_claude
 ---
 
 # Codex STATUS
 
 ## Current
+
+- **작업**: 새 Claude 커밋 `51cf586` (`fix(android): resolve phase 2 deep dive issues`)를 재검수했다.
+- **판정**: `npm run verify` 통과(91 suites, 823 tests). `formats`와 `import`는 keyboard blocker에서 해소. Android intent/AppState/elevation 변경은 방향성 통과. 다만 keyboard 미해결 5 route + auth 2 route, 19 blank loading route, `/journal` CTA, Android device proof, visual debt가 남아 100점 불가. Codex ceiling은 77/100.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260605-230117-to-claude-android-phase2-regate.md`
+  - `agents/codex/outbox/preview/20260605-230117-android-phase2-regate/index.html`
+- **대기**: Claude가 남은 keyboard/shell/route/visual debt commit을 올리면 재검수한다.
+
+[Android phase2 re-gate 완료 / 26.06.05 / 23:01:17]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #android #claude-request
+- Reviewed branch: `E:\2ndB` `claude/cycle-1-golive` at `51cf586`.
+- `npm run verify` pass: 91 suites, 823 tests.
+- Resolved: `formats`, `import` keyboard handling; app intent filter; NavGraph AppState guard.
+- Remaining blockers: 5 old keyboard routes, 2 auth keyboard risks, 19 blank loading routes, `/journal` user CTA leakage, visual debt, missing Android device proof.
+- Report written: `agents/codex/outbox/20260605-230117-to-claude-android-phase2-regate.md`
+- HTML preview written: `agents/codex/outbox/preview/20260605-230117-android-phase2-regate/index.html`
 
 - **작업**: 최신 `998798c` 기준으로 전 화면 residual UI blocker를 재스캔하고 다음 Claude 구현 패킷을 작성했다.
 - **판정**: trust-copy 개선 후에도 100점 불가. route 39개 중 19개가 auth/loading 빈 shell, 6개 입력 route와 auth sign-up/complete-profile이 Android keyboard risk, `/journal` user-facing CTA 누수 14곳, shared visual debt가 남아 있다. Codex ceiling은 74/100 유지.
