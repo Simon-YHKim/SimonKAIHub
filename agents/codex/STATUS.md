@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 01:11:14 KST
-state: flatlist_followup_gate_reported
+updated: 2026-06-06 01:15:22 KST
+state: wip_touch_action_gate_reported
 ---
 
 # Codex STATUS
@@ -17,13 +17,26 @@ state: flatlist_followup_gate_reported
   - Live/merged gate: detached worktree `E:\Coding Infra\_worktrees\2ndB-main-gate` at `origin/main` `0bfbfa3`.
   - Follow-up branch: `E:\2ndB` `claude/cycle-1-golive` at committed `e29f1d1` plus dirty WIP in `+html.tsx`, `capture.tsx`, `NavGraph.tsx`, and untracked `refactor_wiki.py`.
 - **검증**: current follow-up branch + dirty WIP 기준 `npm run verify` pass: 91 suites, 823 tests. `git diff --check` pass. Lint exits green but warns about unused `ScrollView` in `inbox.tsx` and unused `SafeAreaView` in `background.tsx`.
-- **현재 점수**: follow-up branch direction = 94/100 provisional. FlatList migration addresses a real Android OOM/perf risk, but 100/100 is still blocked by permission surface/copy, keyboard proof, `contentFit`, visual proof, and minor cleanup.
+- **현재 점수**: follow-up branch direction = 94/100 provisional. Dirty WIP is not scored as completed work. 100/100 is still blocked by permission surface/copy, keyboard proof, `contentFit`, visual proof, and current WIP proof.
 - **최신 산출물**:
   - `agents/codex/outbox/20260606-010625-to-claude-main-live-ui-gate.md`
   - `agents/codex/outbox/preview/20260606-010625-main-live-ui-gate/index.html`
   - `agents/codex/outbox/20260606-011114-to-claude-flatlist-followup-gate.md`
   - `agents/codex/outbox/preview/20260606-011114-flatlist-followup-gate/index.html`
+  - `agents/codex/outbox/20260606-011522-to-claude-wip-touch-action-gate.md`
+  - `agents/codex/outbox/preview/20260606-011522-wip-touch-action-gate/index.html`
 - **대기**: follow-up PR에서 permission copy/surface, keyboard-safe 잔여 화면, expo-image `contentFit`, Android/visual proof가 완료되면 즉시 재게이트.
+
+[WIP touch-action gate / 26.06.06 / 01:15:22]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #wip #touch #claude-request
+- Reviewed current dirty WIP on top of `e29f1d1`.
+- Files: `src/app/+html.tsx`, `src/app/capture.tsx`, `src/components/graph/NavGraph.tsx`, untracked `refactor_wiki.py`.
+- P1 if committed: `+html.tsx` changes global `touch-action` from `pan-x pan-y` to `none`. This must be scoped to the graph surface or proven on mobile web across long list/input routes.
+- Acceptable direction with proof: `<base href="/2nd-B/">` likely aligns GitHub Pages base path, but should be verified with refresh/deep link/static asset loading.
+- Capture WIP is mostly no-op/proof-needed: `keyboardVerticalOffset={0}` adds no behavior, `contentInsetAdjustmentBehavior="never"` needs iOS/capture keyboard screenshot.
+- NavGraph WIP is plausible but proof-needed: viewport resize re-clamp and offHome debounce need web/native pan/zoom/reset proof.
+- P2: remove untracked root `refactor_wiki.py` before PR; it is a mechanical migration script residue.
+- Report/preview written and opened.
 
 [FlatList follow-up gate / 26.06.06 / 01:11:14]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #flatlist #android #claude-request
