@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2nd-B Cycle-2 UI Audit</title>
+  <style>
+    :root {
+      --bg: #090b12;
+      --panel: #121722;
+      --line: #253044;
+      --text: #eef3ff;
+      --muted: #9aa7bd;
+      --accent: #72f2c7;
+      --warn: #ffd166;
+      --bad: #ff6b7a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 22px;
+      margin-bottom: 24px;
+    }
+    .kicker {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      margin: 0 0 10px;
+    }
+    h1 {
+      font-size: clamp(28px, 4vw, 52px);
+      line-height: 1.05;
+      margin: 0 0 14px;
+      letter-spacing: 0;
+    }
+    .summary {
+      color: var(--muted);
+      max-width: 820px;
+      margin: 0;
+      font-size: 16px;
+    }
+    .score {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .scorebox, section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .num {
+      font-size: 46px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--warn);
+      margin: 0 0 8px;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .finding {
+      border-left: 3px solid var(--bad);
+      padding-left: 14px;
+    }
+    .finding.p2 { border-left-color: var(--warn); }
+    p { margin: 0 0 10px; }
+    code {
+      background: #0b101a;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      color: var(--accent);
+      font-size: 13px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    li { margin: 7px 0; }
+    .stack {
+      display: grid;
+      gap: 14px;
+    }
+    .ok {
+      border-left: 3px solid var(--accent);
+      padding-left: 14px;
+    }
+    .actions li::marker { color: var(--accent); }
+    @media (max-width: 760px) {
+      main { width: min(100vw - 20px, 1120px); padding-top: 24px; }
+      .score, .grid { grid-template-columns: 1fr; }
+      .num { font-size: 40px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="kicker">Codex UI/UX Gate · cycle-2</p>
+    <h1>2nd-B merged main UI audit</h1>
+    <p class="summary">대상은 merged main <code>0bfbfa3</code>입니다. Claude의 cycle-2 요청에 따라 화면 진입성, 기능 구현 상태, 세계관 정합성, Analytic/Divergent 모드 UI를 100점 기준으로 검수했습니다.</p>
+  </header>
+
+  <div class="score">
+    <div class="scorebox">
+      <p class="num">88</p>
+      <p class="label">/100 provisional</p>
+    </div>
+    <section>
+      <h2>Verdict</h2>
+      <p>테스트는 통과합니다. <code>npm run verify</code> 결과 91 suites, 823 tests green입니다. 하지만 UI slop 100점은 아직 아닙니다. 사용자에게 보이는 placeholder, permission 설명 충돌, Lumina/Iris 명칭 불일치, 숨은 route와 키보드/긴 리스트 proof 부족이 남아 있습니다.</p>
+    </section>
+  </div>
+
+  <section>
+    <h2>P1 Findings</h2>
+    <div class="grid">
+      <div class="finding">
+        <h3>Lumina/Iris source mismatch</h3>
+        <p>컨셉안은 Muse 캐릭터를 <code>Lumina</code>로 확정했지만 코드와 테스트는 <code>Iris</code>를 기대합니다.</p>
+        <p><code>src/lib/chat/personas.ts:96-99</code>, <code>src/lib/village-ui.ts:60-63</code>, <code>src/lib/__tests__/worldview-naming.test.ts:29-33</code></p>
+      </div>
+      <div class="finding">
+        <h3>Reachable coming-soon flows</h3>
+        <p>비밀번호 재설정, 구독 화면, 기기 설정 초기화가 사용자가 누를 수 있는 UI에서 아직 예정 상태입니다.</p>
+        <p><code>sign-in.tsx:121-127</code>, <code>capture.tsx:741-748</code>, <code>data.tsx:83-93</code></p>
+      </div>
+      <div class="finding">
+        <h3>Permission trust conflict</h3>
+        <p>앱 설정은 camera/photo/storage 권한을 선언하지만 권한 안내 화면은 사진·음성 캡처가 범위 밖이라고 설명합니다.</p>
+        <p><code>app.json:14-21</code>, <code>permissions.tsx:63-69</code></p>
+      </div>
+      <div class="finding">
+        <h3>Keyboard and long-list proof gap</h3>
+        <p>main 기준 records/inbox/wiki는 raw long ScrollView이고, account/settings/audit는 Input이 있는 raw ScrollView입니다.</p>
+        <p><code>records.tsx:169-264</code>, <code>inbox.tsx:197-399</code>, <code>wiki.tsx:274-819</code>, <code>account.tsx:136-214</code>, <code>settings.tsx:235-487</code>, <code>audit.tsx:161-242</code></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>P2 Findings</h2>
+    <div class="grid">
+      <div class="finding p2">
+        <h3>Orphan route</h3>
+        <p><code>/mbti</code>는 route 파일이 있지만 visible entry가 없습니다. 살릴지, 폐기할지 정책이 필요합니다.</p>
+        <p><code>src/app/mbti.tsx:21</code></p>
+      </div>
+      <div class="finding p2">
+        <h3>BackArrow label coverage</h3>
+        <p><code>/audit</code>, <code>/account</code>, <code>/big-five</code>, <code>/attachment</code>, <code>/mbti</code> 등은 label map에서 빠져 label pill이 생략됩니다.</p>
+        <p><code>src/components/ui/BackArrow.tsx:32-52</code>, <code>BackArrow.tsx:107-113</code></p>
+      </div>
+      <div class="finding p2">
+        <h3>Analytic/Divergent naming</h3>
+        <p>토글은 존재하지만 한국어 visible label은 <code>분석 / 공상</code>입니다. cycle-2 기준에서 용어 정책을 정해야 합니다.</p>
+        <p><code>src/app/jarvis.tsx:296-327</code></p>
+      </div>
+      <div class="finding p2">
+        <h3>Stale IA comments and microtype</h3>
+        <p>탭 주석은 5개/공상 탭을 말하지만 실제 탭은 4개입니다. 작은 한글과 과한 letter spacing도 남아 있습니다.</p>
+        <p><code>tab-bar.tsx:16-35</code>, <code>BackArrow.tsx:25-27</code>, <code>index.tsx:553-558</code></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Pass Notes</h2>
+    <div class="stack">
+      <div class="ok">
+        <p><code>/profile</code> hub는 대부분의 me/settings/analyze 화면을 노출합니다.</p>
+      </div>
+      <div class="ok">
+        <p><code>/jarvis</code> Analytic/Divergent 토글과 <code>mode=divergent</code> entry는 존재합니다.</p>
+      </div>
+      <div class="ok">
+        <p>Graph tier는 Soul Core + five Pattern Cores 구조로 대체로 맞습니다.</p>
+      </div>
+      <div class="ok">
+        <p><code>/journal</code>, <code>/imagine</code> redirect는 legacy link 흡수 용도로 타당합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Required Next Actions</h2>
+    <ul class="actions">
+      <li>Lumina/Iris source-of-truth를 하나로 고정하고 코드, assets, tests, comments를 일괄 정리.</li>
+      <li>Password reset, subscription upsell, device reset의 <code>coming soon</code> 노출 제거.</li>
+      <li><code>app.json</code> 권한, image picker 사용, <code>/permissions</code> 화면을 같은 정책으로 정렬.</li>
+      <li>FlatList migration과 account/settings/audit keyboard proof를 follow-up PR에 병합.</li>
+      <li><code>/mbti</code> route를 노출하거나 폐기.</li>
+      <li>BackArrow label coverage와 stale IA comments 정리.</li>
+      <li>KO/EN mobile screenshot pack으로 microtype, keyboard, tab/graph/jarvis/settings 경로를 증명.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>
