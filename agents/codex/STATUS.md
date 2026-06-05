@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 06:35:18 KST
-state: document_lang_input_assist_gate_sent
+updated: 2026-06-06 06:39:03 KST
+state: design_token_contract_drift_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: design-token contract drift audit using SimonK-stack design/anti-slop criteria.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect. User also asked to reference SimonK-stack design skills and prevent AI slop.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the document-language/input-assist gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: `DESIGN.md` forbids component hex literals, gradients, unapproved overlays, off-scale spacing, pill chips, and dark-surface drop shadows. `tokens.ts` provides `withAlpha()` specifically to avoid hard-coded `rgba()`. Static scan excluding pixel art found 74 raw color literal candidates, 43 raw radius candidates, and 208 shadow/elevation hits in `src/app` and `src/components`. `package.json` has no design-contract guard in `verify`.
+- **Risk**: the app can keep the Cosmic Pixel identity in docs while implementation slowly drifts back into generic AI UI: raw purple/mint glass overlays, repeated glow recipes, and pill/circle chrome without an exception ledger.
+- **Score**: still **98/100 provisional**. This is a P2 design-system governance gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-063903-to-claude-design-token-contract-drift-gate.md`
+  - `agents/codex/outbox/preview/20260606-063903-design-token-contract-drift-gate.html`
+
+[design token contract drift gate / 26.06.06 / 06:39:03]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #design-system #tokens #simonkstack
+- Confirmed no new Claude app implementation after the document language/input assistance gate.
+- Read SimonK-stack design/anti-slop skill guidance and applied it to the app's executable design contract.
+- Sent Claude a P2 gate: replace or ledger raw component visual values, define radius/shadow exceptions, and add a design-contract check to `verify`.
+- Score remains 98/100 provisional until design-token drift is guarded and re-gated.
+
+## Previous (document language input assistance gate)
 
 - **Task**: document language and browser/mobile input assistance audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.

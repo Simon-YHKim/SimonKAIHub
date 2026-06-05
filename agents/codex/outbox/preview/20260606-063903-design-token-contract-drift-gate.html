@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Gate - Design Token Contract Drift</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090b12;
+      --panel: #111520;
+      --panel-2: #151b28;
+      --text: #f4f7fb;
+      --muted: #aab4c5;
+      --line: #2b3448;
+      --accent: #7cc7ff;
+      --warn: #f7bf5f;
+      --danger: #ff6b7a;
+      --ok: #77d897;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1120px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+    header {
+      display: grid;
+      gap: 12px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 5vw, 58px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+    h2 { margin: 0 0 12px; font-size: 20px; }
+    h3 { margin: 0 0 8px; font-size: 16px; }
+    p { margin: 0; color: var(--muted); }
+    code {
+      color: #d9e8ff;
+      background: #0b1020;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: .92em;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+    .card {
+      grid-column: span 12;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .third { grid-column: span 4; }
+    .half { grid-column: span 6; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #1a1100;
+      background: var(--warn);
+      margin-bottom: 12px;
+    }
+    .metric {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      color: var(--muted);
+    }
+    .metric:last-child { border-bottom: 0; }
+    .metric strong { color: var(--text); font-size: 18px; }
+    ul { margin: 10px 0 0; padding-left: 20px; color: var(--muted); }
+    li + li { margin-top: 7px; }
+    .note { background: var(--panel-2); border-left: 4px solid var(--accent); }
+    @media (max-width: 760px) {
+      main { width: min(100vw - 24px, 1120px); padding-top: 28px; }
+      .third, .half { grid-column: span 12; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Gate - 2026-06-06 06:39 KST</div>
+      <h1>Design Token Contract Drift</h1>
+      <p>Score remains <strong>98/100 provisional</strong>. The design system is strong, but its rules are not yet executable enough to prevent visual drift.</p>
+    </header>
+
+    <section class="grid" aria-label="Metrics">
+      <article class="card third">
+        <span class="badge">P2</span>
+        <h2>Raw colors</h2>
+        <div class="metric"><span>Component/screen color literal candidates</span><strong>74</strong></div>
+        <p>Excludes pixel art components. Shared premium primitives still contain raw rgba values.</p>
+      </article>
+      <article class="card third">
+        <span class="badge">P2</span>
+        <h2>Radius drift</h2>
+        <div class="metric"><span>Raw radius candidates</span><strong>43</strong></div>
+        <p>Includes <code>borderRadius: 999</code> in NavGraph, which needs an exception or replacement.</p>
+      </article>
+      <article class="card third">
+        <span class="badge">P2</span>
+        <h2>Shadow budget</h2>
+        <div class="metric"><span>Shadow/elevation hits</span><strong>208</strong></div>
+        <p>Dark-surface glow recipes are repeated without a named elevation budget.</p>
+      </article>
+    </section>
+
+    <section class="grid" aria-label="Evidence">
+      <article class="card half">
+        <h2>Source Contract</h2>
+        <ul>
+          <li><code>DESIGN.md:98</code> forbids component hex literals and requires theme tokens.</li>
+          <li><code>DESIGN.md:99-100</code> forbids gradients and limits translucent overlays.</li>
+          <li><code>DESIGN.md:156</code> requires the spacing scale exactly.</li>
+          <li><code>DESIGN.md:321</code> forbids pill-shaped chips.</li>
+          <li><code>DESIGN.md:324</code> warns that dark-surface shadows read as smudges.</li>
+        </ul>
+      </article>
+      <article class="card half">
+        <h2>Implementation Gap</h2>
+        <ul>
+          <li><code>tokens.ts:59-62</code> provides <code>withAlpha()</code> to avoid raw rgba literals.</li>
+          <li><code>package.json</code> has no design-token/literal check in <code>verify</code>.</li>
+          <li>Examples appear in BackArrow, Jarvis, index, premium feedback, premium surfaces, tab bar, CrisisRouter, and NavGraph.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid" aria-label="Acceptance">
+      <article class="card note">
+        <h2>Acceptance Before 100</h2>
+        <ul>
+          <li>Move recurring component colors and overlays to tokens, named helpers, or <code>withAlpha()</code>.</li>
+          <li>Classify raw radius values as intrinsic geometry, graph/sprite exceptions, or violations.</li>
+          <li>Define an elevation/glow budget or remove decorative dark-surface shadows.</li>
+          <li>Add a design contract check to <code>npm run verify</code> with documented exceptions.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
