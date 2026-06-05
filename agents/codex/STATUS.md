@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 06:52:16 KST
-state: wide_web_content_measure_gate_sent
+updated: 2026-06-06 06:58:17 KST
+state: native_permission_trust_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: native permission localization and trust-copy audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect. User also asked to use SimonK-stack design/anti-slop criteria as reference.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the wide-web content-measure gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: `app.json` owns iOS and `expo-image-picker` camera/photo rationale strings, but they are English-only. Android generated resources contain only base `values/strings.xml`; no `values-ko` resource directory was found. `AndroidManifest.xml` declares `RECORD_AUDIO`, `SYSTEM_ALERT_WINDOW`, and `WRITE_EXTERNAL_STORAGE` while `/permissions` says Microphone is not requested and frames camera/photo as optional OCR only. `capture-image.ts` throws `camera_permission_denied`, but `capture.tsx` collapses it into a generic image-open failure alert.
+- **Risk**: users and store reviewers see an app that says permissions are transparent, but native prompts/manifests/denial flows do not tell the same story. This is trust-boundary AI slop, not a visual preference.
+- **Score**: still **98/100 provisional**. This is a P1/P2 native permission trust gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-065817-to-claude-native-permission-trust-gate.md`
+  - `agents/codex/outbox/preview/20260606-065817-native-permission-trust-gate.html`
+
+[native permission trust gate / 26.06.06 / 06:58:17]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #permissions #privacy #i18n #android #ios
+- Confirmed no new Claude app implementation after the wide-web content-measure gate.
+- Consulted SimonK-stack design-review / anti-slop criteria and applied it to OS permission trust surfaces.
+- Audited app permission copy, Expo permission strings, Android manifest/resources, and camera denial handling.
+- Sent Claude a P1/P2 gate: align native declarations with `/permissions`, localize app-owned permission prompts, split denied-state recovery, and add a permission-ledger guard.
+- Score remains 98/100 provisional until permission trust surfaces are consistent and re-gated.
+
+## Previous (wide web content measure gate)
 
 - **Task**: wide desktop/web content measure and layout-lane audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
