@@ -1,16 +1,18 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-05 21:33:17 KST
+updated: 2026-06-05 21:39:01 KST
 state: waiting_on_claude
 ---
 
 # Codex STATUS
 
-- **현재 작업**: 2nd-B 전체 UI 감사 후 interaction/accessibility/loading baseline 개선 요청을 Claude에게 추가 보고 완료.
+- **현재 작업**: 2nd-B Phase 6 screen branch 검증 후 merge regression 및 잔여 UI gate를 Claude에게 추가 보고 완료.
 - **출처**: src: user - "계속해서 모든 화면에 대한 UI 문제점을 찾아내고 개선해."
-- **범위**: `E:\2ndB` head `9e0e9e0` 기준 Pressable/keyboard/input/loading/empty/error state 정적 감사. 로그인, 캡처, 인박스, 위키, 평가, Jarvis, graph empty card, route auth-loading 화면 포함.
+- **범위**: `E:\2ndB` current branch `claude/cycle-1-phase6-screens` at `fecb85f` 기준. Phase 6 dev preview removal/MBTI demotion 반영 확인, branch merge regression, `/journal`, coming-soon, loading blank, interaction/accessibility 잔여 gate 정적 감사.
 - **최근 산출물**:
+  - `agents/codex/outbox/20260605-213901-to-claude-phase6-verification-merge-regression.md`
+  - `agents/codex/outbox/preview/20260605-213901-phase6-verification-merge-regression/index.html`
   - `agents/codex/outbox/20260605-213317-to-claude-interaction-accessibility-baseline.md`
   - `agents/codex/outbox/preview/20260605-213317-interaction-accessibility-baseline/index.html`
   - `agents/codex/outbox/20260605-212632-to-claude-honest-insight-export-privacy-ui.md`
@@ -25,6 +27,15 @@ state: waiting_on_claude
   - `agents/codex/outbox/preview/20260605-210053-grok-opinion-release-gate-addendum/index.html`
 - **블로커**: Codex가 2nd-B 코드를 직접 수정하지 않는 운영 규칙상 Claude 구현 대기. 이후 렌더 QA 환경이 열리면 desktop/mobile 스크린샷 기반 재검수 필요.
 - **다음**: Claude가 trust copy, confidence/evidence chips, export receipt/disclosure, `/journal` retirement, anti-slop surface split, interaction/accessibility primitives를 반영하면 Codex가 실제 화면 캡처와 keyboard/screen-reader contract 기준으로 잔존 결함을 다시 평가한다.
+
+[Phase 6 검증 및 merge regression 요청 완료 / 26.06.05 / 21:39:01]
+#comm #codex #user #2nd-B #ui-ux #phase6 #merge-regression #claude-request
+- 현재 `E:\2ndB` branch `claude/cycle-1-phase6-screens` at `fecb85f` 기준 검증.
+- 긍정 확인: route files 39개로 감소, `asset-motion-preview`/preview-only hits 0, MBTI manual "No MBTI" 직접 모순은 완화됨.
+- P0 regression: 현재 branch는 `9e0e9e0` wiki export allowlist 및 `93d7e1d` knowledge_sources read policy를 포함하지 않음. `src/lib/wiki/export.ts`에서 `EXPORT_SAFE_FRONTMATTER_KEYS`가 사라진 상태.
+- 잔여 UI gate: `/journal` hits 44, coming-soon hits 7, auth/loading `return null` 19, interaction/accessibility primitive 미적용, glass/left-border drift 잔존.
+- Claude request 작성: `agents/codex/outbox/20260605-213901-to-claude-phase6-verification-merge-regression.md`
+- HTML preview 작성: `agents/codex/outbox/preview/20260605-213901-phase6-verification-merge-regression/index.html`
 
 [Interaction accessibility baseline 요청 완료 / 26.06.05 / 21:33:17]
 #comm #codex #user #2nd-B #ui-ux #accessibility #interaction #claude-request
