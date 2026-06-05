@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 00:42:42 KST
-state: head_moved_expo_image_regate
+updated: 2026-06-06 00:46:27 KST
+state: android_permission_wip_gate_reported
 ---
 
 # Codex STATUS
@@ -12,13 +12,23 @@ state: head_moved_expo_image_regate
 - **작업**: Simon 지시 - 모든 화면 UI 문제를 계속 찾아내고, AI slop 100/100까지 Claude 작업물을 반복 리뷰.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
 - **검수 기준**: SimonK-stack `ai-slop-cleaner`, `visual-verdict`, `frontend-ui-ux`를 근거로 하되 2nd-B의 기존 dark premium/village system을 보존. 작은 글자, 무근거 glow/shadow, deprecated prop 잔여물, 임시 스크립트, 키보드 occlusion, 검증부족을 우선 점검.
-- **앱 상태**: `E:\2ndB` branch `claude/cycle-1-golive`, clean committed HEAD `85d4f65`. Note: this conflicts with prior Claude freeze directive that fixed go-live at `6c506cf`.
-- **검증**: `85d4f65` 기준 `npm run verify` pass: 91 suites, 823 tests.
-- **평가**: `CrisisRouter` safety badge readability는 resolved. `expo-image` migration은 committed됐지만 migrated call sites still use deprecated `resizeMode` compatibility prop; request `contentFit` cleanup before 100/100. Also request Claude to clarify whether go-live freeze moved from `6c506cf` to `85d4f65`. Current follow-up score: **95/100 green, no 100/100 sign-off**.
+- **앱 상태**: `E:\2ndB` branch `claude/cycle-1-golive`, committed HEAD `85d4f65`, with dirty WIP in `app.json`, `capture.tsx`, `index.tsx`, `NavGraph.tsx`, `SceneHero.tsx`.
+- **검증**: current WIP 기준 `npm run verify` pass: 91 suites, 823 tests; `git diff --check` pass.
+- **평가**: `CrisisRouter` readability resolved, NavGraph cleanup/overlay elevation WIP mechanically green. New P1 trust/permission concern: `app.json` adds `READ_MEDIA_IMAGES`, `READ_EXTERNAL_STORAGE`, `WRITE_EXTERNAL_STORAGE` for OCR image picking. Request minimum-permission justification or reduction before 100/100 sign-off.
 - **최신 산출물**:
-  - `agents/codex/outbox/20260606-004242-to-claude-head-moved-expo-image-regate.md`
-  - `agents/codex/outbox/preview/20260606-004242-head-moved-expo-image-regate/index.html`
-- **대기**: Claude freeze source-of-truth clarification and/or `contentFit` cleanup. Keyboard/device proof backlog remains.
+  - `agents/codex/outbox/20260606-004627-to-claude-android-permission-wip-gate.md`
+  - `agents/codex/outbox/preview/20260606-004627-android-permission-wip-gate/index.html`
+- **대기**: Claude permission rationale/reduction, `contentFit` cleanup, keyboard/device proof backlog.
+
+[Android permission WIP gate / 26.06.06 / 00:46:27]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #android #permissions #claude-request
+- Reviewed dirty WIP after `85d4f65`.
+- WIP adds Android storage permissions: `READ_MEDIA_IMAGES`, `READ_EXTERNAL_STORAGE`, `WRITE_EXTERNAL_STORAGE`.
+- Current OCR flow uses `expo-image-picker` to pick/camera image, with explicit camera request and plugin-level permission copy.
+- Local expo-image-picker plugin notes storage permissions are ambiguous and used for more than image picker; request minimum-permission rationale.
+- `npm run verify` pass: 91 suites, 823 tests. `git diff --check` pass.
+- Report written: `agents/codex/outbox/20260606-004627-to-claude-android-permission-wip-gate.md`
+- HTML preview written: `agents/codex/outbox/preview/20260606-004627-android-permission-wip-gate/index.html`
 
 [Head moved + expo-image re-gate / 26.06.06 / 00:42:42]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #expo-image #freeze #claude-request
