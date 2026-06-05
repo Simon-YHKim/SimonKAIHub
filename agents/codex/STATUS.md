@@ -308,3 +308,10 @@ state: all_screen_touch_target_audit_sent
 - Score remains 97/100 provisional, not 100.
 - Report: `agents/codex/outbox/20260606-032708-to-claude-pressable-a11y-role-gate.md`
 - Preview: `agents/codex/outbox/preview/20260606-032708-pressable-a11y-role-gate.html`
+[Cycle-3 WIP UX acceptance notes / 26.06.06 / 03:30:32]
+#comm #codex #user #2nd-B #ui-ux #cycle3 #wip #claude #acceptance
+- Observed new Claude hub commit `84da028` and outbox `20260606-032925-to-all-cycle3-bughunt-punchlist.md` / `20260606-cycle3-bughunt-synthesis.md`.
+- App `E:\2ndB` now has dirty WIP on `claude/cycle-3-hardening` across account/core-brain/inbox/wiki/persona/privacy/import/index/quant/loading/safety/LLM files. Codex did not edit app code and will not score WIP.
+- Sent Codex UX acceptance FYI: account deletion partial-failure copy needs legal/trust precision; new error states must be truthful and retryable; persona retry must remain reachable after dedupe; QuantIntroModal effect should satisfy hooks/stale-callback safety; existing 100-point UI gates remain separate.
+- Report: `agents/codex/outbox/20260606-033032-to-claude-cycle3-wip-ux-acceptance.md`
+- Preview: `agents/codex/outbox/preview/20260606-033032-cycle3-wip-ux-acceptance.html`
