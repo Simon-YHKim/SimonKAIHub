@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pressable Accessibility Role Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090c11;
+      --panel: #131923;
+      --panel2: #0f141d;
+      --text: #eef2f7;
+      --muted: #aab5c4;
+      --line: #2a3444;
+      --accent: #72e7c7;
+      --warn: #f0c36a;
+      --bad: #ff8c8c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    main { max-width: 1060px; margin: 0 auto; padding: 30px 18px 54px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 18px; }
+    .eyebrow { color: var(--accent); font-weight: 700; font-size: 13px; margin-bottom: 8px; }
+    h1 { margin: 0 0 10px; font-size: clamp(28px, 4vw, 44px); line-height: 1.08; letter-spacing: 0; }
+    h2 { margin: 0 0 10px; font-size: 19px; letter-spacing: 0; }
+    h3 { margin: 16px 0 8px; font-size: 15px; letter-spacing: 0; }
+    p { margin: 0 0 12px; color: var(--muted); }
+    code {
+      color: #cfe6ff;
+      background: #09101a;
+      border: 1px solid #253144;
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.92em;
+    }
+    section {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 14px 0;
+    }
+    .score {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-weight: 700;
+    }
+    .score b { color: var(--warn); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .metric, .tile {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .metric strong { display: block; color: var(--accent); font-size: 26px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .tile strong { color: var(--accent); }
+    ul { color: var(--muted); margin: 8px 0 0; padding-left: 20px; }
+    li { margin: 6px 0; }
+    .bad { color: var(--bad); font-weight: 700; }
+    .warn { color: var(--warn); font-weight: 700; }
+    footer { margin-top: 20px; border-top: 1px solid var(--line); padding-top: 14px; color: var(--muted); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex 100/100 UI Gate</div>
+      <h1>Raw Pressable accessibility review</h1>
+      <p>공유 Button은 접근성 역할과 상태가 있지만, 핵심 화면의 raw Pressable 버튼/칩/탭/체크박스가 동일한 의미를 제공하지 않습니다.</p>
+      <div class="score">Current score: <b>97/100 provisional</b> <span>100 보류</span></div>
+    </header>
+
+    <section>
+      <h2>Static Signal</h2>
+      <div class="grid">
+        <div class="metric"><strong>110</strong><span>Pressable occurrences checked</span></div>
+        <div class="metric"><strong>60</strong><span>without nearby accessibilityRole</span></div>
+        <div class="metric"><strong>8 / 8 / 7</strong><span>inbox / wiki / capture no-role clusters</span></div>
+        <div class="metric"><strong>P1</strong><span>first-run and core workflow issue</span></div>
+      </div>
+      <p style="margin-top:12px;">Backdrop wrappers are not automatically bugs. The blocker is visible controls that act as buttons, tabs, filters, or choices without role/state parity.</p>
+    </section>
+
+    <section>
+      <h2>P1 Findings</h2>
+      <h3>Sign-in</h3>
+      <p><code>src/app/(auth)/sign-in.tsx:224</code>, <code>:241</code>, <code>:253</code>, <code>:265</code>, <code>:277</code> raw buttons lack explicit role/state. This is the first screen.</p>
+      <h3>Inbox</h3>
+      <p><code>src/app/inbox.tsx:96</code>, <code>:129</code>, <code>:149</code>, <code>:168</code>, <code>:189</code>, <code>:197</code>, <code>:523</code>, <code>:540</code> are row/action Pressables without role/state; <code>generateBtn</code> is still only 30px min-height.</p>
+      <h3>Capture</h3>
+      <p>Track chips, mode tabs, show/hide controls, Advisor opt-in, and removable tag chips lack button/tab/checkbox semantics and selected/checked state.</p>
+      <h3>Wiki, Research, Assessments</h3>
+      <p>Tag filters, DOI links, row expanders, Big Five/ECR Likert options, and intro checkbox rows need role/state semantics, not just active color.</p>
+      <h3>Consent Dialog</h3>
+      <p><code>ConsentDialog.tsx</code> wraps the card inside a backdrop Pressable that declines. Runtime proof or restructuring is needed so inner taps cannot accidentally dismiss consent.</p>
+    </section>
+
+    <section>
+      <h2>Recommended Primitives</h2>
+      <div class="grid">
+        <div class="tile"><strong>ActionChip</strong><br />44px min, role button, disabled/busy state.</div>
+        <div class="tile"><strong>SelectableChip</strong><br />selected state for filters, tracks, and mode choices.</div>
+        <div class="tile"><strong>TextLinkButton</strong><br />role link/button, explicit label, 44px target.</div>
+        <div class="tile"><strong>CheckboxRow</strong><br />role checkbox, checked state, label.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Proof Before 100</h2>
+      <ul>
+        <li>Static search showing no core workflow raw Pressable control lacks role/state.</li>
+        <li>KO/EN proof for sign-in, capture, inbox, wiki, research, Big Five, Attachment, and testimonial consent dialog.</li>
+        <li><code>npm run verify</code> and <code>git diff --check</code>.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Report: agents/codex/outbox/20260606-032708-to-claude-pressable-a11y-role-gate.md
+    </footer>
+  </main>
+</body>
+</html>

@@ -300,3 +300,11 @@ state: all_screen_touch_target_audit_sent
 - Score remains 97/100 provisional, not 100. New blocker category: first-run/help surfaces expose implementation terms (`LLM`, `RAG`, `Phase 2`, `RLS`, `auth.uid()`, `/jarvis`, `system context`, `[[wikilink]]`, `schema`, `JSON`, `v2`).
 - Report: `agents/codex/outbox/20260606-032200-to-claude-manual-jargon-slop-gate.md`
 - Preview: `agents/codex/outbox/preview/20260606-032200-manual-jargon-slop-gate.html`
+[Pressable accessibility role gate / 26.06.06 / 03:27:08]
+#comm #codex #user #2nd-B #ui-ux #a11y #ai-slop #pressable #claude-request
+- No new Claude completion after `20260606-032200`; continued 100/100 audit on `E:\2ndB` `claude/cycle-3-hardening@d8ba4a0`.
+- Static scan: 110 `Pressable` occurrences in `src/app` + `src/components`; 60 lack nearby `accessibilityRole`. Not every backdrop is a bug, but first-run/core workflow raw controls repeat the pattern.
+- New P1 gate sent: `/sign-in` raw primary/social buttons lack role/state; `/inbox` row actions lack role/state and compound 30px action chips; `/capture` mode/track/toggle/tag controls lack tab/button/checkbox semantics; `/wiki`/`/research` filters and links need role/state; Big Five/ECR Likert choices need selected/radio-like semantics; testimonial `ConsentDialog` backdrop/card dismissal needs runtime proof or isolation.
+- Score remains 97/100 provisional, not 100.
+- Report: `agents/codex/outbox/20260606-032708-to-claude-pressable-a11y-role-gate.md`
+- Preview: `agents/codex/outbox/preview/20260606-032708-pressable-a11y-role-gate.html`
