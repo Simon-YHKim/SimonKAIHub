@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2nd-B UI Release Backlog & Gates</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f1218;
+      --panel: #171c24;
+      --panel2: #202733;
+      --text: #edf1f7;
+      --muted: #aeb7c6;
+      --line: #333c4d;
+      --accent: #7dd3c7;
+      --warn: #f2c96d;
+      --danger: #ef8f8f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1180px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 42px 0 56px;
+    }
+    header {
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .kicker {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: 36px;
+      line-height: 1.12;
+      letter-spacing: 0;
+      margin: 0;
+    }
+    .sub {
+      color: var(--muted);
+      max-width: 900px;
+      margin: 14px 0 0;
+      font-size: 16px;
+    }
+    .meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 999px;
+      padding: 6px 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    section { margin-top: 30px; }
+    h2 {
+      font-size: 21px;
+      margin: 0 0 12px;
+      letter-spacing: 0;
+    }
+    h3 {
+      font-size: 15px;
+      margin: 0 0 8px;
+      letter-spacing: 0;
+    }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .metric, .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 28px;
+      line-height: 1;
+      letter-spacing: 0;
+      color: var(--text);
+    }
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .card p, li {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .card p { margin: 0; }
+    .tag {
+      display: inline-block;
+      color: var(--bg);
+      background: var(--accent);
+      font-weight: 800;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    .tag.p1 { background: var(--warn); }
+    .tag.p2 { background: #b9c8ff; }
+    .tag.p3 { background: #d6dce8; }
+    .danger { color: var(--danger); font-weight: 800; }
+    .warn { color: var(--warn); font-weight: 800; }
+    .good { color: var(--accent); font-weight: 800; }
+    .table {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 840px;
+    }
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+    th {
+      background: #1d2430;
+      color: var(--text);
+    }
+    td { color: var(--muted); }
+    tr:last-child td { border-bottom: 0; }
+    ol, ul { margin: 0; padding-left: 20px; }
+    li + li { margin-top: 8px; }
+    code {
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 0.92em;
+      color: var(--text);
+      background: #111720;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+    }
+    pre {
+      overflow: auto;
+      margin: 0;
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #111720;
+      color: var(--text);
+      font-size: 13px;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    @media (max-width: 940px) {
+      main { width: min(100vw - 28px, 1180px); padding-top: 28px; }
+      h1 { font-size: 29px; }
+      .metric-grid, .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="kicker">Codex to Claude · UI/UX Release Backlog</div>
+      <h1>2nd-B 전 화면 UI 릴리즈 게이트</h1>
+      <p class="sub">44개 route 파일을 다시 훑어 남은 UI 문제를 route/shell/evidence/trust primitives 중심으로 통합했다. 화면별 미세 수정 전에 공통 계약을 먼저 구현해야 한다.</p>
+      <div class="meta">
+        <span class="pill">Created: 2026-06-05 21:06:40 KST</span>
+        <span class="pill">Branch: claude/cycle-1-data-hygiene</span>
+        <span class="pill">Head: b17d629</span>
+        <span class="pill">Status: request open</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Static Scan</h2>
+      <div class="metric-grid">
+        <div class="metric"><strong>44</strong><span>route files</span></div>
+        <div class="metric"><strong>13,177</strong><span>app route lines</span></div>
+        <div class="metric"><strong>10</strong><span>active /journal targets</span></div>
+        <div class="metric"><strong>68</strong><span>Alert.alert calls</span></div>
+        <div class="metric"><strong>34</strong><span>hard clearance refs</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Coverage</h2>
+      <div class="grid">
+        <article class="card"><h3>System and Shell</h3><p><code>_layout</code>, <code>+not-found</code>, BackArrow, tab bar, NavGraph.</p></article>
+        <article class="card"><h3>Public/Auth/Trust</h3><p>Sign-in, sign-up, OAuth, profile completion, manual, permissions, support, privacy, onboarding.</p></article>
+        <article class="card"><h3>Core Workflow</h3><p>Capture, inbox, wiki, records, record detail, import, jarvis, interview, formats.</p></article>
+        <article class="card"><h3>Self Model</h3><p>Profile, persona, core brain, insights, trinity, Big Five, attachment, MBTI, audit.</p></article>
+        <article class="card"><h3>Settings/Data</h3><p>Settings, data, account, theme, research, imagine.</p></article>
+        <article class="card"><h3>Legacy/Dev</h3><p>Retired journal path and asset-motion-preview route family.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Release Gates</h2>
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th>Priority</th>
+              <th>Gate</th>
+              <th>Acceptance Signal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="danger">P0</span></td>
+              <td>Render QA unblock</td>
+              <td>Local web QA mode renders auth, public, signed-in shell, and error states without private auth.</td>
+            </tr>
+            <tr>
+              <td><span class="danger">P0</span></td>
+              <td>Route and shell contract</td>
+              <td>One route metadata table owns labels, auth, tabs, back behavior, route replacement, and safe clearance.</td>
+            </tr>
+            <tr>
+              <td><span class="warn">P1</span></td>
+              <td>Public/auth trust surface</td>
+              <td>Export/delete/source/no-diagnosis contract appears across sign-in, sign-up, manual, privacy, support.</td>
+            </tr>
+            <tr>
+              <td><span class="warn">P1</span></td>
+              <td>Evidence-first self-model</td>
+              <td>Persona, Core Brain, Insights, Records, Wiki, and assessments show source count and why link.</td>
+            </tr>
+            <tr>
+              <td><span class="warn">P1</span></td>
+              <td>First-run capture</td>
+              <td><code>/capture</code> first viewport prioritizes user-owned raw input before AI/personality/subscription messaging.</td>
+            </tr>
+            <tr>
+              <td><span class="warn">P1</span></td>
+              <td>Outside view safe rollout</td>
+              <td>No rating/score/evaluation copy; trusted invite, strengths-first, recipient-only visibility.</td>
+            </tr>
+            <tr>
+              <td><span class="good">P2</span></td>
+              <td>Settings/data/account destructive flows</td>
+              <td>Export-first inline confirmations replace alert-only delete flows.</td>
+            </tr>
+            <tr>
+              <td><span class="good">P2</span></td>
+              <td>Dev preview production gate</td>
+              <td><code>asset-motion-preview*</code> is dev-only or removed from production route registration.</td>
+            </tr>
+            <tr>
+              <td><span class="good">P2</span></td>
+              <td><code>/journal</code> retirement</td>
+              <td>No user-facing active targets remain; compatibility redirect only if needed.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Verification Commands</h2>
+      <pre><code>cd E:\2ndB
+rg -n 'router\.(push|replace).*"/journal"|href="/journal"|primaryRoute:\s*"/journal"' src\app src\lib
+rg -n -i 'coming soon|곧 추가|PREVIEW ONLY|Preview only' src\app
+rg -n 'Alert\.alert' src\app\(auth\) src\app\settings.tsx src\app\account.tsx src\app\inbox.tsx src\app\wiki.tsx
+rg -n 'paddingBottom:\s*(110|120|spacing\.xl|spacing\.xxl)|bottom:\s*(40|92)' src\app src\components
+npm run type-check
+npm run check:lexicon</code></pre>
+    </section>
+
+    <section>
+      <h2>Screenshot QA Target Set</h2>
+      <ul>
+        <li>Public/auth: sign-in, sign-up, complete-profile, manual, support, privacy.</li>
+        <li>Core workflow: capture, inbox, wiki, records, record detail, import, jarvis, interview, formats.</li>
+        <li>Self-model: persona, core-brain, insights, trinity, Big Five, attachment, MBTI, audit.</li>
+        <li>Shell/settings: home graph, settings, data, account, theme, research, not-found.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Links</h2>
+      <ul>
+        <li><a href="../../../20260605-210640-to-claude-ui-release-backlog-and-gates.md">Markdown report</a></li>
+        <li><a href="../../../20260605-201732-to-claude-render-qa-unblock-ui-request.md">Render QA unblock</a></li>
+        <li><a href="../../../20260605-202656-to-claude-navigation-shell-contract-request.md">Shell contract</a></li>
+        <li><a href="../../../20260605-210053-to-claude-grok-opinion-release-gate-addendum.md">Grok release gate addendum</a></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
