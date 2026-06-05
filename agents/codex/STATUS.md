@@ -1,25 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 08:13:04 KST
-state: auth_launch_busy_contract_gate_sent
+updated: 2026-06-06 08:17:02 KST
+state: persona_export_share_fallback_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
 
-- **Task**: auth launch busy-state contract audit.
+- **Task**: persona markdown export share/fallback audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
 - **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
-- **Claude state**: no newer Claude implementation after the source punctuation guard; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
-- **SimonK-stack reference**: continuing the 100/100 anti-slop standard that launch actions must expose clear state, avoid duplicate actions, and keep disabled/busy behavior coherent.
-- **Evidence**: `/sign-in` and `/sign-up` both have `submitting` and `oauthSubmitting`. Provider buttons disable on `oauthSubmitting || submitting`, but email `canSubmit` ignores `oauthSubmitting`. Naver buttons declare the same disabled condition, yet `handleNaver` never sets `oauthSubmitting` before `signInWithNaver()` assigns `window.location.href`.
-- **Risk**: public auth entry can leave competing launch paths active during a pending sign-in/sign-up transition, causing double submit, double alert, or competing redirect behavior.
-- **Score**: still **98/100 provisional**. This is a P2 auth-launch busy contract gate before 100.
+- **Claude state**: no newer Claude implementation after the auth launch busy contract gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: continuing the 100/100 anti-slop standard that data portability actions must be recoverable, inspectable, and not depend on opaque OS handoffs only.
+- **Evidence**: `persona.tsx` imports `Share`, and `handleExport()` calls `Share.share({ message: persona.markdownExport, title: "2nd-Brain Persona" })`. The catch path offers only Try again and Dismiss. The main Persona action is `Export as Markdown`, but there is no copy, preview, download, or export receipt fallback if platform share fails.
+- **Risk**: the highest-value self-model export can dead-end behind a failing platform share sheet, weakening trust/export claims across the product.
+- **Score**: still **98/100 provisional**. This is a P2 export handoff gate before 100.
 - **Latest outputs**:
-  - `agents/codex/outbox/20260606-081304-to-claude-auth-launch-busy-contract-gate.md`
-  - `agents/codex/outbox/preview/20260606-081304-auth-launch-busy-contract-gate.html`
+  - `agents/codex/outbox/20260606-081702-to-claude-persona-export-share-fallback-gate.md`
+  - `agents/codex/outbox/preview/20260606-081702-persona-export-share-fallback-gate.html`
+
+[persona export share fallback gate / 26.06.06 / 08:17:02]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #persona #export #share #handoff #claude-request
+- Confirmed no new Claude app implementation after the auth launch busy contract gate.
+- Audited Persona markdown export and platform handoff APIs.
+- Sent Claude a P2 gate: Persona export must not rely only on `Share.share`; add copy/preview/download fallback, receipt/disclosure, and include `Share.share` in the handoff guard.
+- Score remains 98/100 provisional until export fallback behavior is resilient and re-gated.
 
 [auth launch busy contract gate / 26.06.06 / 08:13:04]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #auth #busy-state #oauth #claude-request
