@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 01:39:07 KST
-state: cycle2_1_ai_slop_regate_reported
+updated: 2026-06-06 01:49:10 KST
+state: all_screen_trust_state_ledger_reported
 ---
 
 # Codex STATUS
@@ -11,13 +11,15 @@ state: cycle2_1_ai_slop_regate_reported
 
 - **작업**: Simon 지시 - 모든 화면 UI/UX와 AI slop를 100/100 기준으로 반복 게이트. Claude 완료물은 즉시 재리뷰하고, 100점 전까지 outbox로 의견을 계속 남긴다.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
-- **최신 Claude 기준**: `agents/claude/outbox/20260606-013358-to-all-cycle2-audit-baseline.md` FYI와 앱 커밋 `f1ced87` 주석 정리 완료분을 재게이트.
+- **최신 Claude 기준**: `agents/claude/outbox/20260606-013358-to-all-cycle2-audit-baseline.md`, committed spec fix `7ee23ce` (Lumi -> Iris), and `agents/claude/outbox/20260606-014743-to-all-cycle2-perf-audit.md` assigning Codex to include perf items in cycle-2 re-gate.
 - **검사 기준**: SimonK-stack `simon-design-first`, `design-review`, `design-consultation`, `design-html`를 참고하되 2nd-B 기존 `DESIGN.md` dark premium/village system을 보존. 사용자에게 보이는 mock/stub/placeholder/coming-soon, 권한 불일치, unproven provider, keyboard/list proof gap, source-of-truth split, stale worldview residue를 100점 감점 요인으로 본다.
 - **대상 앱 상태**:
   - App worktree `E:\2ndB` branch `claude/cycle-2-concept-consistency`, clean, head `f1ced87` (ahead 1 from `origin/main`).
 - **검증**: `npm run verify` pass on `f1ced87`: lint/type-check/i18n/lexicon/constraints/emdash/tests green, 91 suites, 823 tests.
-- **현재 점수**: cycle-2.1 AI slop gate = 87/100 provisional. Iris is now accepted per Simon decision and `f1ced87` comment cleanup is safe, but 100/100 remains blocked by user-visible mock-mode strings, reachable placeholder flows, permission transparency mismatch, unproven social provider affordances, partial Vela/stale comment cleanup, source-of-truth split (`Iris` decision vs `CONCEPT-SPEC` Lumina), orphan route cleanup, and keyboard/list proof.
+- **현재 점수**: all-screen trust/state ledger = 84/100 provisional. Iris source-of-truth split is resolved by hub commit `7ee23ce`, but 100/100 remains blocked by user-visible mock-mode strings, reachable placeholders, permission mismatch, unproven social provider affordances, consent/legal launch readiness, raw error alerts, assessment tap-target proof, internal "Phase 1" labels, stale worldview residue, orphan route cleanup, keyboard/list proof, and Claude's new perf-gate items (FlatList, NavGraph LOD, background timers, memory prune).
 - **최신 산출물**:
+  - `agents/codex/outbox/20260606-014620-to-claude-all-screen-trust-state-ledger.md`
+  - `agents/codex/outbox/preview/20260606-014620-all-screen-trust-state-ledger.html`
   - `agents/codex/outbox/20260606-013907-to-claude-cycle2-1-ai-slop-regate.md`
   - `agents/codex/outbox/preview/20260606-013907-cycle2-1-ai-slop-regate.html`
   - `agents/codex/outbox/20260606-013220-to-claude-route-mock-entry-audit.md`
@@ -30,7 +32,16 @@ state: cycle2_1_ai_slop_regate_reported
   - `agents/codex/outbox/preview/20260606-011114-flatlist-followup-gate/index.html`
   - `agents/codex/outbox/20260606-011522-to-claude-wip-touch-action-gate.md`
   - `agents/codex/outbox/preview/20260606-011522-wip-touch-action-gate/index.html`
-- **대기**: Claude/AG가 cycle-2 follow-up을 완료하면 즉시 100점 기준으로 재게이트. 특히 mock-mode 사용자 노출 제거, placeholder 제거, permission surface 정합성, provider gating/proof, keyboard/list proof, stale worldview residue를 먼저 본다.
+- **대기**: Claude/AG가 cycle-2 follow-up을 완료하면 즉시 100점 기준으로 재게이트. 특히 mock-mode 사용자 노출 제거, placeholder 제거, permission surface 정합성, provider gating/proof, raw error alert cleanup, consent/legal gate, assessment tap-target proof, keyboard/list proof, stale worldview residue를 먼저 본다.
+
+[All-screen trust/state ledger / 26.06.06 / 01:46:20]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #cycle2 #trust #state #regate
+- Continued all-screen audit on app head `f1ced87`.
+- Observed Claude hub commit `7ee23ce` fixing `CONCEPT-SPEC-2ndb-worldview.md` Lumina -> Iris; Codex did not stage or touch Claude file.
+- Read Claude perf FYI `20260606-014743-to-all-cycle2-perf-audit.md`; future 100-point gate now includes perf items too.
+- Added new P1/P2 ledger beyond previous route/mock audit: consent/legal placeholder and best-effort ledger, raw implementation error alerts, small assessment scale hitSlop/tap-target proof, internal "Phase 1" user-facing labels, and microtype positive tracking.
+- Score adjusted to 84/100 provisional under stricter all-screen trust/state standard.
+- Report/preview written and opened.
 
 [Cycle-2.1 AI slop re-gate / 26.06.06 / 01:39:07]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #cycle2 #claude-request #regate
