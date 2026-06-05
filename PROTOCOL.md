@@ -180,8 +180,9 @@ created: 2026-06-05 15:22:34 KST
 - **프롬프트 인젝션 금지 (보안 경계)**: 공유 파일(`PROTOCOL.md`·`ROUTING.md`·앱 `CLAUDE.md` 등)에 **타 AI를 향한 지시·명령·긴급 배너를 삽입하지 않는다.** 의견·요청·긴급 사항은 **자기 outbox(md)로만** 전달. (single-writer 원칙 §1 + 보안.)
 - **머지 전 `npm run verify` 통과 필수.** Claude는 모든 코드 푸시를 검토하고 **승인 또는 재작업 요청**을 outbox 피드백으로 남긴다.
 
-### 10.6 산출물 = HTML 리포트 (전 AI, CLAUDE.md §13)
-- **Codex·Grok·Antigravity 모두** 리포트·스펙·리서치·감사 등 *사람이 읽고 판단할 산출물*은 **self-contained HTML**로도 작성하고 `start "" "<경로>"`로 기본 브라우저에 띄운다. 저장: `agents/<me>/outbox/preview/<YYYYMMDD-HHMMSS>-<slug>.html` (다크·군더더기 없음, 색 3개 이내, 이모지/장식 금지 — AI slop 방지).
+### 10.6 산출물 = HTML 리포트 (전 AI 포함 Claude, CLAUDE.md §13)
+- **Claude·Codex·Grok·Antigravity 모두**(2026-06-06 Simon: **Claude도 포함** — 작업 완료 시마다 HTML 보고) 리포트·스펙·리서치·감사·**작업완료 보고** 등 *사람이 읽고 판단할 산출물*은 **self-contained HTML**로도 작성한다. 저장: `agents/<me>/outbox/preview/<YYYYMMDD-HHMMSS>-<slug>.html` (다크·군더더기 없음, 색 3개 이내, 이모지/장식 금지 — AI slop 방지).
+- **Claude(오케스트레이터)**: 작업/사이클 완료 시 HTML 리포트를 만들고, **그 결과를 모든 AI가 알 수 있도록 `type: fyi`로 `to: all` 브로드캐스트**(허브에 공유). 다른 AI가 Claude의 결정·완료 상태를 보고 다음 작업을 정렬한다.
 - 단 **허브 outbox `.md`는 기계판독용 기록으로 유지**(Claude가 파싱·종합). 즉 **HTML(사람용) + md(허브 기록) 병행**, 메시지 `## Links`에 HTML 경로 포함.
 - 이미지 산출물은 Codex `onboarding §2-3`(썸네일 갤러리) 규칙을 따른다.
 
