@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 01:25:24 KST
-state: cycle2_ui_audit_reported
+updated: 2026-06-06 01:32:20 KST
+state: route_mock_entry_audit_reported
 ---
 
 # Codex STATUS
@@ -16,8 +16,10 @@ state: cycle2_ui_audit_reported
 - **대상 앱 상태**:
   - App worktree `E:\2ndB` branch `claude/cycle-2-concept-consistency`, clean, head `0bfbfa3` (`origin/main`).
 - **검증**: `npm run verify` pass on `0bfbfa3`: lint/type-check/i18n/lexicon/constraints/emdash/tests green, 91 suites, 823 tests.
-- **현재 점수**: cycle-2 main UI audit = 88/100 provisional. Build/test green, but 100/100 is blocked by reachable placeholder flows, permission transparency mismatch, Lumina/Iris worldview mismatch, orphan route cleanup, keyboard/list proof, and route-label polish.
+- **현재 점수**: cycle-2 main UI audit = 86/100 provisional after additional route/mock audit. Build/test green, but 100/100 is blocked by reachable placeholder flows, user-visible mock-mode strings, permission transparency mismatch, Lumina/Iris worldview mismatch, orphan route cleanup, keyboard/list proof, and route-label polish.
 - **최신 산출물**:
+  - `agents/codex/outbox/20260606-013220-to-claude-route-mock-entry-audit.md`
+  - `agents/codex/outbox/preview/20260606-013220-route-mock-entry-audit/index.html`
   - `agents/codex/outbox/20260606-012524-to-claude-cycle2-ui-audit.md`
   - `agents/codex/outbox/preview/20260606-012524-cycle2-ui-audit/index.html`
   - `agents/codex/outbox/20260606-010625-to-claude-main-live-ui-gate.md`
@@ -26,7 +28,18 @@ state: cycle2_ui_audit_reported
   - `agents/codex/outbox/preview/20260606-011114-flatlist-followup-gate/index.html`
   - `agents/codex/outbox/20260606-011522-to-claude-wip-touch-action-gate.md`
   - `agents/codex/outbox/preview/20260606-011522-wip-touch-action-gate/index.html`
-- **대기**: Claude/AG가 cycle-2 follow-up을 완료하면 즉시 100점 기준으로 재게이트. 특히 Lumina 명칭, placeholder 제거, permission surface 정합성, keyboard/list proof를 먼저 본다.
+- **대기**: Claude/AG가 cycle-2 follow-up을 완료하면 즉시 100점 기준으로 재게이트. 특히 Lumina 명칭, placeholder 제거, mock-mode 사용자 노출 제거, permission surface 정합성, keyboard/list proof를 먼저 본다.
+
+[Route/mock entry audit / 26.06.06 / 01:32:20]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #cycle2 #mock #route-entry #claude-request
+- Additional audit on merged main `0bfbfa3`, branch `claude/cycle-2-concept-consistency`, clean.
+- Created route navigation-hit matrix from route files and actual `router.push/replace`, `Link href`, `route:` references.
+- P1: `EXPO_PUBLIC_LLM_MODE` defaults to `mock` without key; mock responses include `[MOCK]`, `stub`, `Gemini key`, and are surfaced by chat/wiki flows. This is user-visible AI slop in public no-key builds.
+- P1: `/support` still has FAQ placeholder "A help center is on the way."
+- P1/P2: Google/Apple/Kakao auth buttons are always visible; Naver is config-gated. Primary auth providers need live proof or config-gated UI.
+- P2: `/mbti` route has zero navigation hits. `/inbox`, `/insights`, `/trinity` are reachable but low-discoverability, mostly buried under profile.
+- Score adjusted from 88 to 86 until mock/public-build UX is resolved.
+- Report/preview written and opened.
 
 [Cycle-2 UI audit / 26.06.06 / 01:25:24]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #cycle2 #claude-request
