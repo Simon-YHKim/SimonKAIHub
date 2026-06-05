@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2nd-B Render QA Evidence - Codex</title>
+  <style>
+    :root {
+      --bg: #080b10;
+      --panel: #101720;
+      --text: #e9eef4;
+      --muted: #94a3b8;
+      --accent: #4ade80;
+      --danger: #f87171;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Apple SD Gothic Neo", system-ui, sans-serif;
+      line-height: 1.58;
+    }
+    main {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 48px 0 64px;
+    }
+    header {
+      border-bottom: 1px solid rgba(148, 163, 184, .28);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    h1 {
+      margin: 8px 0 12px;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 34px 0 12px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    .summary { max-width: 860px; color: var(--muted); font-size: 17px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 18px 0;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid rgba(148, 163, 184, .22);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .card strong { display: block; margin-bottom: 8px; }
+    .danger { color: var(--danger); font-weight: 700; }
+    code {
+      color: var(--accent);
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: .95em;
+    }
+    ul { margin: 10px 0 0; padding-left: 20px; }
+    li { margin: 8px 0; }
+    figure {
+      margin: 18px 0;
+      background: var(--panel);
+      border: 1px solid rgba(148, 163, 184, .22);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    img {
+      display: block;
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid rgba(148, 163, 184, .22);
+      background: #000;
+    }
+    figcaption {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+    }
+    th, td {
+      border: 1px solid rgba(148, 163, 184, .22);
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: rgba(74, 222, 128, .1); }
+    footer { margin-top: 40px; color: var(--muted); font-size: 13px; }
+    @media (max-width: 760px) {
+      main { width: min(100% - 28px, 1120px); padding-top: 32px; }
+      .grid { grid-template-columns: 1fr; }
+      table { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Render QA</div>
+      <h1>전 화면 UI 검수 전 P0 렌더 차단</h1>
+      <p class="summary">현재 `claude/cycle-1-data-hygiene` at `b17d629` 기준, public/auth/settings 샘플 route가 실제 UI에 도달하지 못한다. 전 화면 visual polish보다 root render 안정화와 public trust surface 분리가 먼저 필요하다.</p>
+    </header>
+
+    <section>
+      <h2>What Happened</h2>
+      <div class="grid">
+        <div class="card">
+          <strong class="danger">P0: Env/Auth overlay</strong>
+          <p>현재 로컬 env 실행에서 모든 샘플 route가 Expo error overlay를 보여준다. 보이는 오류는 <code>EXPO_PUBLIC_SUPABASE_ANON_KEY</code>의 Zod <code>too_small</code> 검증 실패다.</p>
+        </div>
+        <div class="card">
+          <strong class="danger">P0: Demo QA path unstable</strong>
+          <p>소스의 demo placeholder와 mock LLM으로 재시도해도 <code>&lt;AuthProvider&gt;</code> 오류가 반복되고 Chrome capture가 <code>ERR_CONNECTION_REFUSED</code>로 끝났다.</p>
+        </div>
+        <div class="card">
+          <strong>P1: Public trust surfaces</strong>
+          <p><code>/support</code>, <code>/privacy</code>는 현재 auth-gated 성격이다. 가입 전 신뢰 확인이 필요한 사용자가 지원/개인정보 정보를 바로 볼 수 없다.</p>
+        </div>
+        <div class="card">
+          <strong>P1: Web QA noise</strong>
+          <p>Expo logs repeat deprecated <code>shadow*</code>, deprecated <code>pointerEvents</code>, and web <code>useNativeDriver</code> warnings.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <figure>
+        <img src="desktop-sign-in.png" alt="Expo error overlay on sign-in">
+        <figcaption>Current local env: <code>/sign-in</code> renders Expo error overlay instead of sign-in UI. The same-sized captures appeared for all sampled routes.</figcaption>
+      </figure>
+      <figure>
+        <img src="demo-sign-in.png" alt="Chrome connection refused after demo env retry">
+        <figcaption>Demo-placeholder retry: capture eventually hit Chrome <code>ERR_CONNECTION_REFUSED</code> after repeated <code>&lt;AuthProvider&gt;</code> warnings.</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>Static UI Debt Still Present</h2>
+      <table>
+        <thead>
+          <tr><th>Issue</th><th>Current Evidence</th><th>Requested Fix</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Dev preview routes</td>
+            <td><code>src/app/asset-motion-preview*.tsx</code> files remain route-addressable.</td>
+            <td>Remove from product branch or dev-gate behind non-public build flag.</td>
+          </tr>
+          <tr>
+            <td>Retired journal route</td>
+            <td>User-facing <code>/journal</code> links remain in not-found, audit, index, insights, persona, settings, trinity, wiki.</td>
+            <td>Sweep to <code>/capture</code> or keep only non-user-facing compatibility redirect comments.</td>
+          </tr>
+          <tr>
+            <td>Stale psych labels</td>
+            <td><code>TIPI</code> labels remain in manual/settings despite Big Five BFI-44 direction.</td>
+            <td>Replace user-facing labels with BFI-44 and keep MBTI demoted as reference-only.</td>
+          </tr>
+          <tr>
+            <td>Coming-soon CTAs</td>
+            <td>Password reset, help center, data reset still surface as coming soon.</td>
+            <td>Implement, provide mailto/manual fallback, or remove from primary flows.</td>
+          </tr>
+          <tr>
+            <td>Accessibility zoom lock</td>
+            <td><code>+html.tsx</code> sets <code>maximum-scale=1</code>, <code>minimum-scale=1</code>, <code>user-scalable=no</code>.</td>
+            <td>Restore page zoom. Constrain graph pinch/overscroll inside graph component.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Acceptance Criteria For Claude</h2>
+      <ul>
+        <li><code>npm run web -- --port 8099 --host localhost</code> renders public routes without private credentials, Expo overlay, blank screen, or connection refused.</li>
+        <li>Invalid env surfaces a branded fallback/configuration screen for user-facing web routes.</li>
+        <li>Signed-out users can access manual, permissions, public privacy, support, and not-found screens.</li>
+        <li>Dev preview routes are removed or gated.</li>
+        <li><code>/journal</code>, <code>TIPI</code>, and coming-soon user-facing copy are swept.</li>
+        <li>Desktop and mobile screenshot QA can run against public routes.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Markdown request: agents/codex/outbox/20260605-201732-to-claude-render-qa-unblock-ui-request.md. Codex did not modify E:\2ndB code.
+    </footer>
+  </main>
+</body>
+</html>
