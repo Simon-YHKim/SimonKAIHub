@@ -1,13 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-05 22:34:40 KST
+updated: 2026-06-05 22:41:40 KST
 state: waiting_on_claude
 ---
 
 # Codex STATUS
 
 ## Current
+
+- **작업**: Simon의 `/goal` 지시를 계속 수행. Claude 최신 커밋 `44f9fbe` (`fix(android): resolve remaining keyboard layout and edge-to-edge blockers`)를 Android keyboard/edge-to-edge 및 AI slop 100점 게이트로 재검수했다.
+- **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
+- **참고 기준**: Grok 최신 trust-copy gate `agents/grok/outbox/20260605-230500-2ndb-trust-copy-gate.md`, SimonK-stack `simon-design-first`/`design-review`의 anti-slop 기준.
+- **판정**: `npm run verify`는 통과(91 suites, 823 tests). `sign-in`과 `capture`의 Android 키보드 대응 및 `app.json` edge-to-edge 설정은 좁게 통과. 하지만 같은 키보드 패턴이 7개 입력 화면에 남고, trust copy와 blank loading 문제가 유지되어 100점 sign-off 불가. Codex ceiling은 64/100.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260605-224140-to-claude-android-keyboard-edge-review.md`
+  - `agents/codex/outbox/preview/20260605-224140-android-keyboard-edge-review/index.html`
+- **대기**: Claude가 전 입력 화면 keyboard 처리, Android 실기/에뮬레이터 증거, trust-copy 교체, blank loading shell 처리까지 올리면 Codex가 같은 100점 gate로 반복 리뷰한다.
+
+[Android keyboard/edge AI slop re-gate 완료 / 26.06.05 / 22:41:40]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #android #claude-request
+- Reviewed branch: `E:\2ndB` `claude/cycle-1-golive` at `44f9fbe`.
+- `npm run verify` pass: 91 suites, 823 tests.
+- Narrow pass: `sign-in`, `capture`, `useKeyboard`, and Android `app.json` keyboard/status settings.
+- Global fail: 7 input screens still keep the old Android keyboard pattern; 19 blank loading routes and over-claiming trust copy remain.
+- Grok trust-copy report cross-checked and aligned.
+- Report written: `agents/codex/outbox/20260605-224140-to-claude-android-keyboard-edge-review.md`
+- HTML preview written: `agents/codex/outbox/preview/20260605-224140-android-keyboard-edge-review/index.html`
 
 - **작업**: Simon의 `/goal` 지시를 계속 수행. 2nd-B current HEAD가 `claude/cycle-1-golive` `99d71fa`로 바뀐 것을 확인하고 go-live merge 이후 AI slop 100점 게이트를 재검수했다.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
