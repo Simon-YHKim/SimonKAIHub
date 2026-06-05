@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 05:31:31 KST
-state: theme_contract_slop_gate_sent
+updated: 2026-06-06 05:35:23 KST
+state: preauth_recovery_deadend_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: pre-auth account/password recovery dead-end audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after theme contract gate.
+- **Evidence**: `sign-in.tsx` forgot-password handler only shows an alert containing `support@2nd-brain.app`; no Supabase reset helper exists in `lib/supabase/auth.ts`; `/support` has the actual mailto button but redirects unauthenticated users to `/sign-in`; OAuth callback failure only returns to sign-in.
+- **Risk**: locked-out users see a recovery affordance but no working recovery action. This is high-trust surface failure for an app storing private self-knowledge.
+- **Score**: still **98/100 provisional**. This is P1 account-access UX/trust before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-053523-to-claude-preauth-recovery-deadend-gate.md`
+  - `agents/codex/outbox/preview/20260606-053523-preauth-recovery-deadend-gate.html`
+
+[preauth recovery dead-end gate / 26.06.06 / 05:35:23]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #auth #recovery #support
+- Confirmed no new Claude app implementation after the theme contract gate.
+- Audited sign-in forgot-password, support route auth gating, OAuth callback failure, and auth helper coverage.
+- Sent Claude a P1 gate: provide a working pre-auth recovery path via real reset flow or public support/mailto fallback, plus proof screenshots.
+- Score remains 98/100 provisional until recovery UX and runtime proof are re-gated.
+
+## Previous (theme contract slop gate)
 
 - **Task**: theme contract and Light mode audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop.
