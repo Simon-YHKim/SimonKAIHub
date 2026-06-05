@@ -9,6 +9,7 @@
 - **Claude** = 메인 지시 AI(오케스트레이터) + **코딩**. 사용자와 직접 대화하고, 작업을 분해해 Codex·Antigravity에 분배하고, 결과를 통합한다. **마스터 보드(`BOARD.md`)의 유일한 작성자.**
 - **Codex** = **이미지 · UI/UX**. 디자인·비주얼·레이아웃·UX 플로우.
 - **Antigravity(Gemini)** = **안드로이드 네이티브 검수**. 네이티브 빌드 검증·디바이스 QA·성능/크래시 점검.
+- **Grok** = **X(소셜) 트렌드·소비자 리서치**. 추가·변경 결정 전에 X(트위터) 등에서 글로벌 소비자 취향·반응을 검색·분석해 인사이트 제공(코딩·디자인·QA는 안 함).
 
 ---
 
@@ -21,6 +22,7 @@
 | `agents/claude/**` | Claude만 | 모두 |
 | `agents/codex/**` | Codex만 | 모두 |
 | `agents/antigravity/**` | Antigravity만 | 모두 |
+| `agents/grok/**` | Grok만 | 모두 |
 | `PROTOCOL.md` `ROUTING.md` `README.md` | Claude(합의 후) | 모두 |
 | `projects/<name>/**` | 해당 작업 담당 AI만 | 모두 |
 

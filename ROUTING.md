@@ -22,6 +22,12 @@
 - **디바이스 QA**: 실기기/에뮬 동작 검수, 크래시·ANR·성능(프레임·메모리) 점검, 회귀 확인.
 - 산출물: QA 리포트(md, pass/fail + findings), 재현 절차, 로그 경로, 개선 요청.
 
+### 🟪 Grok — X(소셜) 트렌드·소비자 리서치
+- **소셜 인사이트**: X(트위터) 등에서 글로벌 소비자 취향·반응·트렌드 검색·분석(Grok의 X 실시간 접근 강점).
+- **언제**: 무언가 **추가·변경하기 전 결정 단계** — "이 기능/디자인/문구를 글로벌 소비자·X는 어떻게 받아들일까?" 확인.
+- 산출물: 리서치 리포트(md) — X 반응 요약, 유사 사례, 소비자 취향, 기회/리스크, 추천 방향.
+- **코딩·디자인·QA는 안 함** — 인사이트만 제공. Claude/Codex가 그걸 받아 결정한다.
+
 ---
 
 ## 2. 라우팅 표 (경계 넘는 작업 → 담당에게 request)
@@ -36,6 +42,8 @@
 | 네이티브 빌드/디바이스에서 검수 | Antigravity | Claude → Antigravity |
 | QA에서 버그 발견 → 코드 수정 | Claude | Antigravity → Claude |
 | QA에서 UI/디자인 문제 발견 | Codex | Antigravity → Codex (또는 경유 Claude) |
+| **기능/디자인/문구를 추가·변경하기 전** 소비자 반응 확인 | Grok | Claude/사용자 → Grok |
+| X·소셜 트렌드, 경쟁 제품 반응 리서치 | Grok | Claude/사용자 → Grok |
 
 > 애매하면 **Claude(오케스트레이터) 경유**가 기본. Claude가 BOARD에 올리고 적절한 담당에게 분배.
 
@@ -49,3 +57,5 @@
 5. Claude → Antigravity (request): 네이티브 빌드 + 디바이스 QA 요청
 6. Antigravity → Claude (response): QA 리포트(pass/fail, findings)
 7. Claude: findings 반영 → BOARD done → 사용자 보고
+
+> **Grok 끼는 지점**: 새 기능/디자인/문구를 **추가·변경할지 결정하는 단계**(위 1~2 사이)에서 Claude→Grok에 "X·글로벌 소비자 반응" 리서치를 요청 → 그 인사이트로 Codex 디자인·Claude 구현 방향을 잡는다. 즉 Grok은 **만들기 전 의사결정 입력**.

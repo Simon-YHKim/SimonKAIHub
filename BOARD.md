@@ -24,7 +24,8 @@ last-updated: 2026-06-05 16:13:52 KST
 |---|---|---|---|
 | Claude | 오케스트레이터 + 코딩 | ✅ active | Claude Code |
 | Codex | 이미지 · UI/UX | ✅ onboarded | codex CLI (헤드리스 OK) |
-| Antigravity | 안드로이드 네이티브 검수 | ✅ onboarded | gemini CLI (헤드리스 OK) / Antigravity IDE(수동) |
+| Antigravity | 안드로이드 네이티브 검수 | ✅ onboarded | agy CLI (헤드리스, 검증중) / gemini CLI(폴백) / IDE(수동) |
+| Grok | X(소셜) 트렌드·소비자 리서치 | 🆕 추가됨 | grok CLI `grok --cwd <hub> --always-approve` |
 
 ## ✅ 완료 (Done) — 최근 10건
 | ID | 작업 | 담당 | 완료 |
