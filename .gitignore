@@ -1,0 +1,21 @@
+# 통신 허브 — 무시 목록
+# 비밀·자격증명 (메시지에 평문 금지, 혹시 모를 사고 차단)
+*.key
+*.pem
+*.env
+.env
+.env.*
+secrets*.json
+credentials*.json
+
+# OS / 에디터 잡파일
+Thumbs.db
+.DS_Store
+desktop.ini
+*.swp
+*~
+
+# 임시·캐시
+*.tmp
+*.log
+.cache/
