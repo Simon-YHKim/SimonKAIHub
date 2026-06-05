@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2nd-B All Screens UI Matrix</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d0f12;
+      --panel: #151920;
+      --panel2: #10141a;
+      --line: #2a313c;
+      --text: #edf1f7;
+      --muted: #aab4c2;
+      --accent: #7dd3fc;
+      --danger: #fca5a5;
+      --warn: #fbbf24;
+      --ok: #86efac;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+    main { width: min(1280px, calc(100% - 28px)); margin: 0 auto; padding: 34px 0 56px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 24px; }
+    h1 { margin: 0 0 10px; font-size: clamp(28px, 4vw, 44px); line-height: 1.08; letter-spacing: 0; }
+    h2 { margin: 30px 0 12px; font-size: 20px; letter-spacing: 0; }
+    p { margin: 0 0 12px; color: var(--muted); }
+    code { color: var(--ok); background: #0b1210; border: 1px solid #1f3a2b; border-radius: 5px; padding: 1px 5px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pill { border: 1px solid var(--line); background: var(--panel2); color: var(--muted); padding: 7px 10px; border-radius: 8px; font-size: 13px; }
+    .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .stat { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 14px; }
+    .stat strong { display: block; font-size: 28px; line-height: 1; margin-bottom: 8px; }
+    .stat span { color: var(--muted); font-size: 13px; }
+    table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); background: var(--panel); border-radius: 8px; overflow: hidden; }
+    th, td { border-bottom: 1px solid var(--line); padding: 10px 11px; text-align: left; vertical-align: top; font-size: 13px; }
+    th { background: #11161d; color: var(--text); white-space: nowrap; }
+    tr:last-child td { border-bottom: 0; }
+    .sev { font-weight: 800; white-space: nowrap; }
+    .critical, .p0 { color: var(--danger); }
+    .p1 { color: var(--warn); }
+    .p2 { color: var(--accent); }
+    .ok { color: var(--ok); }
+    .route { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; color: var(--ok); }
+    .group { color: var(--accent); white-space: nowrap; }
+    ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 4px 0; }
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: 1fr; }
+      table, tbody, tr, th, td { display: block; width: 100%; }
+      thead { display: none; }
+      tr { border-bottom: 1px solid var(--line); padding: 10px 0; }
+      td { border-bottom: 0; padding: 4px 12px; }
+      td::before { content: attr(data-label); display: block; color: var(--muted); font-size: 11px; margin-bottom: 2px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>2nd-B 전 화면 UI 개선 매트릭스</h1>
+      <p><code>claude/cycle-1-docs-consistency</code> at <code>5443c34</code> 기준, <code>src/app</code> route 44개를 화면별로 분해한 Codex UI/UX 매트릭스입니다.</p>
+      <div class="meta">
+        <span class="pill">from: Codex</span>
+        <span class="pill">to: Claude</span>
+        <span class="pill">project: 2nd-B</span>
+        <span class="pill">created: 2026-06-05 19:47 KST</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Summary</h2>
+      <div class="grid">
+        <div class="stat"><strong>44</strong><span>route files</span></div>
+        <div class="stat"><strong>5</strong><span>dev preview routes to remove</span></div>
+        <div class="stat"><strong>12</strong><span>first-priority screens</span></div>
+        <div class="stat"><strong>0</strong><span>2nd-B code edits by Codex</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>First 12</h2>
+      <p>먼저 고치면 제품 인상이 크게 바뀌는 route입니다: <code>_layout</code>, <code>asset-motion-preview*</code>, <code>sign-in</code>, <code>sign-up</code>, <code>support</code>, <code>manual</code>, <code>capture</code>, <code>index</code>, <code>settings</code>, <code>data</code>, <code>persona</code>, <code>insights</code>.</p>
+    </section>
+
+    <section>
+      <h2>Matrix</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Group</th>
+            <th>Route</th>
+            <th>Severity</th>
+            <th>Current UI Problem</th>
+            <th>First Fix / Acceptance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td data-label="Group" class="group">System</td><td data-label="Route" class="route">_layout</td><td data-label="Severity" class="sev p0">P0</td><td data-label="Current">asset preview Stack.Screen remains.</td><td data-label="Fix">Remove preview stack entry. Keep journal redirect if needed.</td></tr>
+          <tr><td class="group">System</td><td class="route">+html</td><td class="sev ok">OK</td><td>Not a user screen.</td><td>No UI action.</td></tr>
+          <tr><td class="group">System</td><td class="route">(auth)/_layout</td><td class="sev ok">OK</td><td>Not a user screen.</td><td>No UI action.</td></tr>
+          <tr><td class="group">System</td><td class="route">journal</td><td class="sev ok">OK</td><td>Compatibility redirect.</td><td>Keep. Update stale comments after sweep.</td></tr>
+          <tr><td class="group">System</td><td class="route">imagine</td><td class="sev ok">OK</td><td>Divergent mode redirect.</td><td>Keep; future links can point to Jarvis divergent directly.</td></tr>
+          <tr><td class="group">System</td><td class="route">asset-motion-preview*</td><td class="sev critical">CRITICAL</td><td>Five dev preview routes remain in app.</td><td>Delete all five files and BackArrow/layout references.</td></tr>
+
+          <tr><td class="group">Public/Auth</td><td class="route">+not-found</td><td class="sev p1">P1</td><td>Links to /journal.</td><td>Route to /capture and relabel as Capture/today's piece.</td></tr>
+          <tr><td class="group">Public/Auth</td><td class="route">oauth-callback</td><td class="sev p2">P2</td><td>Auth transition lane/feedback weak.</td><td>Use auth lane and stable loading/error copy.</td></tr>
+          <tr><td class="group">Public/Auth</td><td class="route">sign-in</td><td class="sev p0">P0</td><td>No desktop lane, reset coming soon, weak trust links.</td><td>Auth lane 560. Remove coming soon. Add support/permissions/manual links.</td></tr>
+          <tr><td class="group">Public/Auth</td><td class="route">sign-up</td><td class="sev p0">P0</td><td>No desktop lane; trust bullets missing.</td><td>Form lane 640. Add export/delete/source-backed/no-diagnosis bullets.</td></tr>
+          <tr><td class="group">Public/Auth</td><td class="route">complete-profile</td><td class="sev p1">P1</td><td>No desktop lane; isolated post-signup step.</td><td>Form lane 640. Add support/manual fallback.</td></tr>
+          <tr><td class="group">Public/Auth</td><td class="route">manual</td><td class="sev p0">P0</td><td>No lane, stale TIPI, trust section weak.</td><td>Guide lane 720. TIPI -> BFI-44. Add memory trust block.</td></tr>
+          <tr><td class="group">Public/Auth</td><td class="route">permissions</td><td class="sev p1">P1</td><td>Good trust content, no lane.</td><td>Guide lane and stronger links from support/manual.</td></tr>
+          <tr><td class="group">Public/Auth</td><td class="route">support</td><td class="sev p0">P0</td><td>Auth-gated; FAQ placeholder.</td><td>Make public. Replace placeholder with real trust/help actions.</td></tr>
+
+          <tr><td class="group">Main</td><td class="route">index</td><td class="sev p1">P1</td><td>First-piece CTA routes to /journal.</td><td>Route to /capture with firstRun params.</td></tr>
+
+          <tr><td class="group">Capture/Records</td><td class="route">capture</td><td class="sev p1">P1</td><td>Subscription coming soon; raw-entry promise weak.</td><td>Hide upgrade CTA until route exists. First experience emphasizes one-line/raw entry.</td></tr>
+          <tr><td class="group">Capture/Records</td><td class="route">records</td><td class="sev p2">P2</td><td>ScrollView/map list and no wide lane.</td><td>Wide lane. Mark FlatList migration candidate.</td></tr>
+          <tr><td class="group">Capture/Records</td><td class="route">record/[id]</td><td class="sev p1">P1</td><td>Detail lane/source meta can be clearer.</td><td>Guide lane. Keep source/date/type meta at top.</td></tr>
+          <tr><td class="group">Capture/Records</td><td class="route">wiki</td><td class="sev p1">P1</td><td>/journal links, long map list, no lane.</td><td>Sweep to /capture. Wide lane. FlatList candidate.</td></tr>
+          <tr><td class="group">Capture/Records</td><td class="route">inbox</td><td class="sev p2">P2</td><td>Rows map list and dense row actions.</td><td>Wide lane. FlatList candidate. Improve promoted/delete hierarchy.</td></tr>
+          <tr><td class="group">Capture/Records</td><td class="route">formats</td><td class="sev p2">P2</td><td>Template lists and delete affordances dense.</td><td>Settings/wide lane. SectionList candidate. Group delete actions.</td></tr>
+
+          <tr><td class="group">AI</td><td class="route">jarvis</td><td class="sev p2">P2</td><td>Chat ScrollView needs runtime QA.</td><td>Android keyboard/safe-area/bottom input clearance QA.</td></tr>
+          <tr><td class="group">AI</td><td class="route">interview</td><td class="sev p2">P2</td><td>Chat flow needs completion/evidence handoff clarity.</td><td>QA keyboard. Completion routes to persona/evidence path.</td></tr>
+          <tr><td class="group">AI</td><td class="route">import</td><td class="sev p1">P1</td><td>No lane; imported claims need visible confidence/source.</td><td>Guide lane. Repeat confidence/source labels on imported items.</td></tr>
+          <tr><td class="group">AI</td><td class="route">research</td><td class="sev p2">P2</td><td>No lane; glow/shadow overuse.</td><td>Guide lane. Make reference/source content primary.</td></tr>
+
+          <tr><td class="group">Self Model</td><td class="route">audit</td><td class="sev p1">P1</td><td>Completion/exit routes to /journal.</td><td>Completion to /persona or /core-brain; exit to /capture.</td></tr>
+          <tr><td class="group">Self Model</td><td class="route">big-five</td><td class="sev p1">P1</td><td>No lane; result meta weak.</td><td>Guide/form lane. BFI-44 source/version/not-diagnosis meta.</td></tr>
+          <tr><td class="group">Self Model</td><td class="route">attachment</td><td class="sev p1">P1</td><td>No lane; result meta weak.</td><td>Guide/form lane. ECR-S source/version/not-diagnosis meta.</td></tr>
+          <tr><td class="group">Self Model</td><td class="route">mbti</td><td class="sev p1">P1</td><td>Reference-only copy exists, but IA demotion incomplete.</td><td>Guide lane. Keep reference-only. Lower profile/persona hierarchy.</td></tr>
+          <tr><td class="group">Self Model</td><td class="route">persona</td><td class="sev p1">P1</td><td>/journal back CTA; card-level evidence weak.</td><td>CTA to /capture. Add source/count/why affordance to cards.</td></tr>
+          <tr><td class="group">Self Model</td><td class="route">core-brain</td><td class="sev p1">P1</td><td>Good drawer, but empty CTA /journal.</td><td>CTA to /capture. Add evidence count/meta to section headers.</td></tr>
+          <tr><td class="group">Self Model</td><td class="route">insights</td><td class="sev p1">P1</td><td>/journal CTAs; card-level source meta missing.</td><td>CTA to /capture. Add recordCount/daySpan/local-compute meta to cards.</td></tr>
+          <tr><td class="group">Self Model</td><td class="route">trinity</td><td class="sev p1">P1</td><td>/journal CTAs and source accountability weak.</td><td>CTA to /capture or /records. Add source count/date range to domain cards.</td></tr>
+          <tr><td class="group">Self Model</td><td class="route">onboarding</td><td class="sev p1">P1</td><td>firstRun route to /journal.</td><td>Route to /capture with firstRun params.</td></tr>
+
+          <tr><td class="group">Settings</td><td class="route">settings</td><td class="sev p0">P0</td><td>Full wipe redirects /journal; stale TIPI; danger actions dense.</td><td>Redirect /capture or /. TIPI -> BFI-44. Export-first CTA before danger.</td></tr>
+          <tr><td class="group">Settings</td><td class="route">data</td><td class="sev p1">P1</td><td>Device reset coming soon; export only through wiki.</td><td>Remove placeholder. Make Export/Import/Delete hub explicit.</td></tr>
+          <tr><td class="group">Settings</td><td class="route">account</td><td class="sev p1">P1</td><td>Delete account lacks export/support preface.</td><td>Settings lane. Add export/support guidance before danger.</td></tr>
+          <tr><td class="group">Settings</td><td class="route">privacy</td><td class="sev p1">P1</td><td>Trust-critical content hidden behind auth.</td><td>Settings lane. Mirror public summary in support/manual.</td></tr>
+          <tr><td class="group">Settings</td><td class="route">profile</td><td class="sev p1">P1</td><td>MBTI/Trinity visible with high hierarchy.</td><td>Settings/guide lane. MBTI label as reference-only.</td></tr>
+          <tr><td class="group">Settings</td><td class="route">theme</td><td class="sev p1">P1</td><td>No lane; duplicates quick setting.</td><td>Settings lane. Clarify relation with Settings quick toggle.</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
