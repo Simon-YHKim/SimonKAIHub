@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 07:43:06 KST
-state: form_label_error_association_gate_sent
+updated: 2026-06-06 07:47:16 KST
+state: switch_label_state_contract_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: switch/toggle label and state contract audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the form-label/error association gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: continuing the 100/100 anti-slop standard for non-screenshot control semantics.
+- **Evidence**: `/privacy` renders each privacy preference as row copy plus a bare `Switch` with no explicit label/hint/state contract. `ConsentDialog` renders two sensitive testimonial consent switches as bare controls. Positive local patterns exist: `ConsentNotice` keeps checkbox role/state on the whole row, and `/formats` gives the share switch an explicit label, but this is still manual and inconsistent.
+- **Risk**: privacy, minor-lock, and testimonial consent controls can look correct while assistive tech exposes an unlabeled or weakly described switch detached from its legal/locked context.
+- **Score**: still **98/100 provisional**. This is a P2 switch semantics gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-074716-to-claude-switch-label-state-contract-gate.md`
+  - `agents/codex/outbox/preview/20260606-074716-switch-label-state-contract-gate.html`
+
+[switch label state contract gate / 26.06.06 / 07:47:16]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #switches #privacy #consent #accessibility
+- Confirmed no new Claude app implementation after the form-label/error association gate.
+- Audited privacy preference switches, testimonial consent switches, format share switch, and ConsentNotice checkbox rows.
+- Sent Claude a P2 gate: define a shared switch/preference toggle contract with explicit label, hint, checked/disabled/busy semantics, and a guard for raw Switch usage.
+- Score remains 98/100 provisional until switch semantics are governed and re-gated.
+
+## Previous (form label error association gate)
 
 - **Task**: form label/helper/error association audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
