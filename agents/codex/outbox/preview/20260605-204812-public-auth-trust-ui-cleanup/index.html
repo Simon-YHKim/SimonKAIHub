@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2nd-B Public Auth Trust UI Cleanup</title>
+  <style>
+    :root {
+      --bg: #090b10;
+      --panel: #111722;
+      --line: #263349;
+      --text: #eef4ff;
+      --muted: #9aa8bd;
+      --mint: #69f5c8;
+      --violet: #b8a7ff;
+      --warn: #ffd17a;
+      --danger: #ff8e8e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Apple SD Gothic Neo", system-ui, sans-serif;
+      line-height: 1.58;
+    }
+    main {
+      width: min(1180px, calc(100vw - 36px));
+      margin: 0 auto;
+      padding: 44px 0 68px;
+    }
+    header, section {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    header {
+      padding: 30px;
+      background: linear-gradient(135deg, rgba(105, 245, 200, 0.08), rgba(184, 167, 255, 0.08));
+      margin-bottom: 18px;
+    }
+    section {
+      padding: 24px;
+      margin-top: 18px;
+    }
+    .eyebrow {
+      color: var(--mint);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    h1, h2, h3 { margin: 0; letter-spacing: 0; }
+    h1 {
+      max-width: 920px;
+      font-size: clamp(30px, 5vw, 56px);
+      line-height: 1.03;
+    }
+    h2 {
+      color: var(--mint);
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+    h3 {
+      color: var(--violet);
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+    p { margin: 0; color: var(--muted); }
+    .summary {
+      max-width: 900px;
+      margin-top: 18px;
+      color: #d7e3f5;
+      font-size: 17px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: rgba(105, 245, 200, 0.04);
+    }
+    .metric strong {
+      display: block;
+      color: var(--text);
+      font-size: 20px;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .metric span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.025);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 11px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      color: var(--text);
+      background: rgba(105, 245, 200, 0.08);
+      font-size: 13px;
+    }
+    td {
+      color: #d8e3f2;
+      font-size: 14px;
+    }
+    code {
+      color: var(--mint);
+      background: rgba(105, 245, 200, 0.08);
+      border: 1px solid rgba(105, 245, 200, 0.2);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.92em;
+    }
+    ul, ol {
+      color: #d8e3f2;
+      margin: 10px 0 0 18px;
+      padding: 0;
+    }
+    li { margin: 7px 0; }
+    .p1 { color: var(--warn); font-weight: 700; }
+    .p2 { color: var(--violet); font-weight: 700; }
+    .danger { color: var(--danger); font-weight: 700; }
+    footer {
+      padding: 20px 4px 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 820px) {
+      main { width: min(100vw - 24px, 1180px); padding-top: 24px; }
+      header, section { padding: 18px; }
+      .grid, .metrics { grid-template-columns: 1fr; }
+      h1 { font-size: 34px; }
+      table, thead, tbody, tr, th, td { display: block; }
+      thead { display: none; }
+      tr { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin-top: 10px; }
+      td { border: 0; border-top: 1px solid var(--line); }
+      td:first-child { border-top: 0; color: var(--mint); font-weight: 700; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex Static UI Audit</div>
+      <h1>Public/Auth Trust Funnel Cleanup</h1>
+      <p class="summary">2nd-B는 가입 전에 신뢰를 증명해야 한다. 현재 support와 privacy는 로그인 뒤에 있고, auth 화면은 manual만 연결한다. Privacy, support, permissions, export/delete, no-diagnosis 정보를 public trust cluster로 끌어올려야 한다.</p>
+      <div class="metrics">
+        <div class="metric"><strong>428</strong><span>/sign-in lines</span></div>
+        <div class="metric"><strong>376</strong><span>/sign-up lines</span></div>
+        <div class="metric"><strong>2</strong><span>trust pages auth-gated</span></div>
+        <div class="metric"><strong>10</strong><span>surfaces audited</span></div>
+      </div>
+    </header>
+
+    <section>
+      <h2>Complexity Matrix</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Surface</th>
+            <th>Lines</th>
+            <th>Buttons</th>
+            <th>Routes</th>
+            <th>Alerts</th>
+            <th>Primary UI Risk</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>/sign-in</code></td><td>428</td><td>10</td><td>6</td><td>4</td><td>Alert-only errors, coming-soon password reset, weak trust footer.</td></tr>
+          <tr><td><code>/sign-up</code></td><td>376</td><td>8</td><td>6</td><td>6</td><td>Consent-heavy form but no adjacent privacy/support/export trust strip.</td></tr>
+          <tr><td><code>/oauth-callback</code></td><td>78</td><td>1</td><td>3</td><td>0</td><td>No support/troubleshooting lane.</td></tr>
+          <tr><td><code>/complete-profile</code></td><td>201</td><td>2</td><td>6</td><td>3</td><td>Profile completion uses alerts and root redirect.</td></tr>
+          <tr><td><code>/support</code></td><td>88</td><td>1</td><td>1</td><td>0</td><td>Auth-gated support.</td></tr>
+          <tr><td><code>/privacy</code></td><td>196</td><td>0</td><td>1</td><td>0</td><td>Auth-gated privacy settings, not public policy.</td></tr>
+          <tr><td><code>/manual</code></td><td>311</td><td>5</td><td>9</td><td>0</td><td>Good trust copy, weak trust-link cluster.</td></tr>
+          <tr><td><code>/permissions</code></td><td>216</td><td>1</td><td>3</td><td>0</td><td>Good public content but isolated.</td></tr>
+          <tr><td><code>+not-found</code></td><td>89</td><td>1</td><td>11</td><td>0</td><td>Links retired/auth-gated destinations.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>P1 Findings</h2>
+      <div class="grid">
+        <div class="card">
+          <h3><span class="p1">P1</span> Public Support & Privacy</h3>
+          <p><code>/support</code> and <code>/privacy</code> redirect logged-out users. That blocks the exact users who need trust evidence before creating an account.</p>
+          <ul>
+            <li>Make Support public.</li>
+            <li>Make Privacy public policy + signed-in controls, or split <code>/privacy-settings</code>.</li>
+            <li>Expose Privacy, Support, Permissions, Manual from auth footers.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="p1">P1</span> Auth Trust Strip</h3>
+          <p>Sign-in/sign-up only link to Manual. Sign-up asks for consent and DOB without adjacent export/delete/no-diagnosis context.</p>
+          <ul>
+            <li>Add compact trust strip: Privacy, Support, Permissions, Export/delete.</li>
+            <li>Add four bullets near consent: data yours, export before delete, source-backed, no diagnosis.</li>
+            <li>Keep touch targets at least 44px.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="p1">P1</span> Auth Error UX</h3>
+          <p>Auth errors and password reset are system alerts. Password reset says coming soon, which reads unfinished at the most sensitive moment.</p>
+          <ul>
+            <li>Use inline persistent banners.</li>
+            <li>Replace coming-soon reset with real reset or support mailto.</li>
+            <li>OAuth failure needs retry + support path.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="p1">P1</span> Shared Auth Shell</h3>
+          <p>Sign-in uses a custom cosmic shell; sign-up and complete-profile use PremiumAppShell. The funnel does not feel like one product flow.</p>
+          <ul>
+            <li>Standardize <code>AuthShell</code> with lane, hero, status, footer, keyboard-safe scroll.</li>
+            <li>Use one visual grammar across auth screens.</li>
+            <li>Remove route-local bottom padding assumptions.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>P2 Findings</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Area</th>
+            <th>Issue</th>
+            <th>Requested Direction</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>/manual</code> / <code>/permissions</code></td>
+            <td>Useful trust content exists but does not form a strong public cluster.</td>
+            <td>Cross-link Manual, Permissions, Privacy, Support, Sign up, Sign in; mark auth-gated Research as sign-in required or hide.</td>
+          </tr>
+          <tr>
+            <td><code>+not-found</code></td>
+            <td>Common destinations include <code>/journal</code>, <code>/audit</code>, <code>/persona</code>.</td>
+            <td>Session-aware destinations: public routes when logged out, capture/wiki/settings when logged in.</td>
+          </tr>
+          <tr>
+            <td><code>/onboarding</code></td>
+            <td>Trust step is behind auth and final route still targets <code>/journal</code>.</td>
+            <td>Route final first-run to Capture or graph root, and expose key trust copy in public auth/manual surfaces.</td>
+          </tr>
+          <tr>
+            <td><code>/oauth-callback</code></td>
+            <td>Failure path is minimal and lacks support context.</td>
+            <td>Add verifying/failed/retry/support callback panel without raw error leakage.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Implementation Order</h2>
+      <ol>
+        <li>Make <code>/support</code> and <code>/privacy</code> readable before login.</li>
+        <li>Create shared <code>AuthShell</code> and inline status banner.</li>
+        <li>Add sign-in/sign-up trust strip and sign-up consent trust bullets.</li>
+        <li>Replace password-reset coming soon and alert-only errors.</li>
+        <li>Build a public trust cluster across Manual, Permissions, Privacy, Support.</li>
+        <li>Clean 404 destinations and onboarding <code>/journal</code> route.</li>
+        <li>Improve OAuth callback transition state.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Release Acceptance</h2>
+      <ul>
+        <li>Logged-out users can open <code>/support</code>, <code>/privacy</code>, <code>/permissions</code>, and <code>/manual</code>.</li>
+        <li>Sign-in and sign-up footers expose Support, Privacy, Permissions, and Manual.</li>
+        <li>Sign-up shows data ownership, export/delete, source-backed, no-diagnosis trust bullets near consent.</li>
+        <li>No user-facing password reset "coming soon" alert remains.</li>
+        <li>Auth failure states are inline and screenshot-visible.</li>
+        <li>Logged-out 404 users are not sent to retired or auth-gated routes without context.</li>
+        <li>Public/trust routes do not promote <code>/journal</code> as a current destination.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Markdown request: agents/codex/outbox/20260605-204812-to-claude-public-auth-trust-ui-cleanup-request.md. Codex did not modify E:\2ndB code.
+    </footer>
+  </main>
+</body>
+</html>
