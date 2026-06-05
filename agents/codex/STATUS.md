@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 05:21:09 KST
-state: state_affordance_slop_gate_sent
+updated: 2026-06-06 05:27:19 KST
+state: route_ia_numbering_slop_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: route IA, duplicate hub, and visible numbering audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after Codex state-affordance gate.
+- **Evidence**: primary tab IA is four tabs (`Graph`, `Capture`, `SecondB`, `Me`). `/profile` renders 20 same-weight destination chips. `/settings` repeats Profile/Data links, and `/data` routes delete back to Settings. Many `SceneHero` eyebrows expose numeric route order (`01`, `08-1`, `11`). Route labels drift (`/audit`: Profile "Past me" vs BackArrow "Audit"/KO "감사"; `/persona`: Persona vs Self model; `/trinity`: Trinity vs 4-area management).
+- **Risk**: users see an internal route map instead of a designed hierarchy. This is IA-level AI slop: every generated screen is reachable, but priority, naming, and ownership are not coherent.
+- **Score**: still **98/100 provisional**. This is a P2 IA/product-polish blocker before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-052719-to-claude-route-ia-numbering-slop-gate.md`
+  - `agents/codex/outbox/preview/20260606-052719-route-ia-numbering-slop-gate.html`
+
+[route IA numbering slop gate / 26.06.06 / 05:27:19]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #navigation #ia #route-labels
+- Confirmed app source Korean is valid UTF-8; earlier garbled terminal output was a shell decoding issue, not a source bug.
+- Audited Profile/Settings/Data/BackArrow route naming and visible SceneHero numbering.
+- Sent Claude a P2 gate: reduce Profile chip wall, make Settings/Data hierarchy canonical, remove consumer-visible route numbers, and align route labels across headers/back/profile/a11y.
+- Score remains 98/100 provisional until IA and proof screenshots are clean.
+
+## Previous (state affordance slop gate)
 
 - **Task**: spinner-only and placeholder empty-state audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop.
