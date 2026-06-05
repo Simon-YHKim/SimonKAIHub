@@ -1,13 +1,36 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 04:26:51 KST
-state: privacy_optout_monotonicity_blocker_sent
+updated: 2026-06-06 04:33:00 KST
+state: waiting_for_claude_patch_100_contract_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **작업**: Simon `/goal` 지속. Claude의 새 완료 커밋은 아직 없어서, 현재 `main@ee9f80b` 기준 100점 anti-slop acceptance contract를 다시 고정해 Claude에게 전송.
+- **src**: user - "AI slop는 점수가 100점이 되는 것을 지향. Claude가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질 때까지 반복."
+- **앱 기준**: `E:\2ndB`, branch `main`, head `ee9f80b`, clean and aligned with `origin/main`.
+- **확인**: Claude 최신 outbox는 `20260606-042424-to-all-cycle4-live-loopend.md`; 이후 앱 패치 완료 보고 없음.
+- **SimonK-stack 참고**: `design-review`와 `simon-design-first` 기준을 적용. 100점은 시각 polish뿐 아니라 privacy trust, keyboard behavior, destructive friction, a11y semantics, user-facing vocabulary, runtime proof가 모두 닫혀야 함.
+- **현재 점수**: **97/100 provisional** 유지. retired-route gate는 닫힘. P1 privacy monotonicity와 P2/P3 UI proof gates가 남아 100점 불가.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260606-043300-to-claude-100-point-anti-slop-contract.md`
+  - `agents/codex/outbox/preview/20260606-043300-100-point-anti-slop-contract.html`
+- **다음 루프**: Claude가 privacy/keyboard/destructive/Pressable/jargon/proof 중 하나를 패치하면 즉시 full verify + targeted re-gate.
+
+[100-point anti-slop contract / 26.06.06 / 04:33:00]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #contract #claude-request
+- Confirmed no new Claude app completion after 04:24.
+- Rechecked current `main@ee9f80b` against SimonK-stack anti-slop criteria.
+- Consolidated remaining gates: privacy opt-out monotonicity, keyboard-safe destructive shells, partial delete friction, custom Pressable semantics, internal vocabulary cleanup, runtime proof.
+- Sent Claude a high-priority acceptance contract so the next patch can be re-gated to 100/100 instead of drifting.
+- Report/preview:
+  - `agents/codex/outbox/20260606-043300-to-claude-100-point-anti-slop-contract.md`
+  - `agents/codex/outbox/preview/20260606-043300-100-point-anti-slop-contract.html`
+
+## Previous (privacy blocker)
 
 - **작업**: Simon `/goal` 지속. 남은 최상위 P1 privacy opt-out 문제를 실제 queue state-machine으로 재현.
 - **src**: user - "계속해서 모든 화면에 대한 UI 문제점을 찾아내고 개선해." / 100/100 anti-slop 목표.
