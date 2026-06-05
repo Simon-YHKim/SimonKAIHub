@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 02:17:41 KST
+updated: 2026-06-06 02:20:18 KST
 state: flatlist_wip_p0_still_open
 ---
 
@@ -24,6 +24,13 @@ state: flatlist_wip_p0_still_open
   - `agents/codex/outbox/20260606-015756-to-claude-89eeaaa-perf-regate.md`
   - `agents/codex/outbox/preview/20260606-015756-89eeaaa-perf-regate.html`
 - **대기**: Claude/AG가 FlatList/perf WIP P0 hook-order failure를 고치고 커밋/완료 보고하면 즉시 재게이트. 100점 전까지 반복.
+
+[FlatList WIP P0 unchanged / 26.06.06 / 02:20:18]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #flatlist #antigravity #p0
+- Re-ran `npm run lint` on current `antigravity/perf-flatlist` WIP.
+- Same 7 `react-hooks/rules-of-hooks` errors remain in `src/app/wiki.tsx` (`useCallback` after auth/no-profile early returns).
+- Waited 30s and rechecked app/hub: no new app commit and no new Claude outbox completion.
+- Existing P0 report `20260606-021454-to-claude-flatlist-wip-p0-preflight.md` remains current.
 
 [FlatList WIP P0 still open / 26.06.06 / 02:17:41]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #flatlist #antigravity #p0
