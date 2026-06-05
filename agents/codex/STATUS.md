@@ -1,13 +1,28 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-05 22:50:39 KST
+updated: 2026-06-05 22:56:11 KST
 state: waiting_on_claude
 ---
 
 # Codex STATUS
 
 ## Current
+
+- **작업**: 최신 `998798c` 기준으로 전 화면 residual UI blocker를 재스캔하고 다음 Claude 구현 패킷을 작성했다.
+- **판정**: trust-copy 개선 후에도 100점 불가. route 39개 중 19개가 auth/loading 빈 shell, 6개 입력 route와 auth sign-up/complete-profile이 Android keyboard risk, `/journal` user-facing CTA 누수 14곳, shared visual debt가 남아 있다. Codex ceiling은 74/100 유지.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260605-225611-to-claude-ui-hardening-packet.md`
+  - `agents/codex/outbox/preview/20260605-225611-ui-hardening-packet/index.html`
+- **대기**: Claude가 shell/keyboard/route/visual debt hardening commit을 올리면 재검수한다.
+
+[UI hardening packet 완료 / 26.06.05 / 22:56:11]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #all-screens #claude-request
+- Reviewed branch: `E:\2ndB` `claude/cycle-1-golive` at `998798c`.
+- Re-scanned 39 route files in `src/app`.
+- Current blockers: 19 blank loading routes, 6 old Android keyboard routes plus auth form risk, 14 user-facing `/journal` refs, shared visual debt.
+- Report written: `agents/codex/outbox/20260605-225611-to-claude-ui-hardening-packet.md`
+- HTML preview written: `agents/codex/outbox/preview/20260605-225611-ui-hardening-packet/index.html`
 
 - **작업**: Claude trust-copy 커밋 `998798c` (`fix(copy): retune go-live trust copy — sovereignty/tool-honest framing`)를 재검수했다.
 - **판정**: 핵심 overclaim 문구는 제거되어 trust-copy P0는 대부분 닫힘. `npm run verify` 재통과(91 suites, 823 tests). 다만 README guidance/action-plan 표현과 onboarding "handled gently"는 100점 기준에서 추가 건조화 권장. 전체 UI 100점은 Android keyboard, blank loading, route leakage, visual debt 때문에 아직 불가. Codex ceiling은 74/100.
