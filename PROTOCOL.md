@@ -120,9 +120,11 @@ created: 2026-06-05 15:22:34 KST
   1. 사이클 결과를 `2nd-B`에 **push**.
   2. **PR로 `main`에 merge** (force-push 금지, 항상 PR 경유, 다른 AI 브랜치와 충돌 점검 후).
   3. 머지 후 **라이브 화면**을 사용자에게 제공.
-- **라이브 화면 수단**:
-  - **기본 (옵션 2 — 로컬 빌드 + 스크린샷)**: Android Studio/Gradle(`gradlew`)로 빌드 → 에뮬레이터(AVD `Pixel_9_Pro_XL`)에서 실행 → 스크린샷 캡처해 전달. 빌드/실행/캡처는 **Antigravity(네이티브 검수)에게 위임 가능**, Claude가 사용자에게 전달.
-  - **향후 (옵션 1 — 자동배포 URL)**: 계정·계정별 데이터가 필요한 작업에서는 클라우드 배포 URL(예: GitHub Actions + Cloudflare/Vercel)로 제공. 그 시점에 배포 파이프라인 구축.
-- **환경(준비됨)**: Android SDK `%LOCALAPPDATA%\Android\Sdk` · Android Studio · JDK17 · AVD `Pixel_9_Pro_XL`. `adb`/`emulator`는 SDK 내 풀패스 또는 PATH 등록 후 사용.
+- **라이브 화면 수단** (2nd-B = Expo ~56 / RN managed, 클론 `E:\2ndB`):
+  - **빠른 UI 확인 (기본)**: `npm run web`(`expo start --web`) → 로컬 웹 → 스크린샷. 가장 빠름, 에뮬 불필요.
+  - **네이티브 확인**: `npx expo run:android` → prebuild + 에뮬레이터(AVD `Pixel_9_Pro_XL`) 실행 → 스크린샷. **Antigravity(네이티브 검수) 위임 가능**, Claude가 전달.
+  - **계정·데이터 작업 (옵션 1)**: `vercel.json` + Supabase 기존 구성 → Vercel 배포 URL로 제공.
+- **머지 전 품질 게이트**: `npm run verify` (lint+type-check+i18n+lexicon+llm-boundary+constraints+no-emdash+jest) 통과 필수.
+- **환경(준비됨)**: node v24 · npm 11 · node_modules 설치됨 · Android SDK/Studio/JDK17 · AVD `Pixel_9_Pro_XL`.
 - **주의**: `main` 머지는 공유 레포에 영향 → 머지 전 `git fetch` + 충돌 점검. 머지 직전 사용자에게 한 줄 고지.
 - 사이클 중간 산출물은 라이브로 올리지 않는다(브랜치/PR 링크로만 공유).
