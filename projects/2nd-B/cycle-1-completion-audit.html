@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2nd-B 완성형 사이클 — 4-AI 종합 감사 리포트 (2026-06-05)</title>
+<style>
+  :root{
+    --bg:#0d1018; --panel:#141925; --panel2:#1a2030; --line:#2a3145;
+    --ink:#e6e9f2; --muted:#aab2c8; --subtle:#7e879e;
+    --mint:#72f2c7; --blue:#4cc9f0; --violet:#a78bfa; --amber:#ffd166; --rose:#ff7a90;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Malgun Gothic","맑은 고딕",sans-serif;
+    line-height:1.6;font-size:15px}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 28px 80px}
+  h1{font-size:26px;font-weight:700;letter-spacing:-.01em;margin:0 0 6px}
+  h2{font-size:20px;font-weight:700;margin:44px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  h3{font-size:16px;font-weight:600;margin:26px 0 8px;color:var(--mint)}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 4px}
+  .tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;border:1px solid var(--line);
+    color:var(--muted);margin-right:6px;vertical-align:middle}
+  .lead{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:20px 0}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+  td code,p code,li code{background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:12.5px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:#cdd6f0}
+  .sev{font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap}
+  .crit{background:rgba(255,122,144,.15);color:#ff9fb0;border:1px solid rgba(255,122,144,.4)}
+  .high{background:rgba(255,159,90,.13);color:#ffb877;border:1px solid rgba(255,159,90,.35)}
+  .med{background:rgba(255,209,102,.13);color:#ffd98a;border:1px solid rgba(255,209,102,.33)}
+  .low{background:rgba(124,242,199,.1);color:#9af0cf;border:1px solid rgba(124,242,199,.28)}
+  .pill{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px}
+  .auto{background:rgba(124,242,199,.12);color:var(--mint)}
+  .decide{background:rgba(167,139,250,.14);color:#c4b5fd}
+  .deploy{background:rgba(76,201,240,.12);color:#7dd9f5}
+  .new{background:rgba(255,209,102,.13);color:#ffd98a}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin:14px 0}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  ul{margin:8px 0;padding-left:20px} li{margin:4px 0}
+  a{color:var(--blue);text-decoration:none} a:hover{text-decoration:underline}
+  .muted{color:var(--muted)} .small{font-size:12.5px}
+  .caveat{border-left:3px solid var(--amber);background:rgba(255,209,102,.06);padding:10px 16px;margin:14px 0;border-radius:0 8px 8px 0}
+  .ok{border-left:3px solid var(--mint);background:rgba(124,242,199,.05);padding:10px 16px;margin:14px 0;border-radius:0 8px 8px 0}
+  .num{display:inline-flex;width:22px;height:22px;border-radius:6px;background:var(--panel2);border:1px solid var(--line);
+    align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--mint);margin-right:8px}
+  header .meta{color:var(--subtle);font-size:13px;margin-top:10px}
+  .src{font-size:12px;color:var(--muted);word-break:break-all}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>2nd-B 완성형 사이클 — 4-AI 종합 감사 리포트</h1>
+  <p class="sub">2nd-Brain · Build with Gemini XPRIZE (Education &amp; Human Potential) · 마감 2026-08-17</p>
+  <div class="meta">생성 2026-06-05 KST · 오케스트레이터 Claude(Opus 4.8) · 동원 Codex(GPT-5)·Grok 4.3·Antigravity(Gemini)·deep-research·audit-workflow · 로컬 <code>E:\2ndB</code> @ <code>b17d629</code></div>
+</header>
+
+<div class="lead">
+  <strong>한 줄 결론.</strong> 코드 correctness/security는 이미 <strong>"PERFECT bar"</strong>(2026-06-04, 재감사 4~6라운드 수렴, <code>verify 821/821</code>). 따라서 "완성형"의 실제 레버리지는 <strong>재감사가 아니라</strong> ① <strong>화면 구성 정리(Phase 6)</strong> ② <strong>월드뷰 어휘 일관성</strong> ③ <strong>신규 데이터/RAG 위생</strong> ④ <strong>포지셔닝·신뢰성(문헌·시장 근거)</strong> ⑤ <strong>네이티브 기기 QA</strong> 다섯 축이다. 본 사이클은 4-AI + 2개 워크플로로 이 다섯 축을 병렬 진단했다.
+</div>
+
+<div class="ok small">
+  <strong>방법.</strong> 5개 스트림 병렬: <b>Codex</b>(화면 IA·DESIGN 시각감사) · <b>Grok</b>(X/소비자·경쟁 리서치) · <b>Antigravity</b>(네이티브 빌드/QA 준비도) · <b>deep-research WF</b>(심리 토대 문헌) · <b>audit WF</b>(7차원 코드감사→적대적 검증). 모든 코드 발견은 <b>실제 파일 대조로 적대적 재검증</b>했고, 닫힌 원장 <code>docs/AUDIT_2026-06-03.md</code>(58 findings, rounds 4-6 closed)와 대조해 중복을 제거했다.
+</div>
+
+<div class="caveat small">
+  <strong>검증 레이어 부분 장애 (정직 고지).</strong> deep-research와 audit WF의 일부 적대적-검증 서브에이전트가 하네스 버그(<code>StructuredOutput 미호출</code>)로 실패했다. ⑴ <b>문헌(deep-research)</b>: 검증 레이어가 전면 실패 → 24개 claim은 <b>1차 출처 기반이나 미검증</b>. 앱의 <b>C8(인용 전 인간 검증 필수)</b> 원칙대로 Curator 반영 전 사람 확인 필요. ⑵ <b>코드(audit WF)</b>: 다수 차원이 실패했으나 <b>data-rag·worldview 차원은 검증 통과</b> → 아래 8개는 실코드 대조 확정. 화면/DESIGN/제약/i18n 차원은 Codex·기존 원장이 커버.
+</div>
+
+<!-- ============ A. STRATEGY ============ -->
+<h2>A. 전략·포지셔닝 — 문헌 ∩ 시장 수렴 <span class="pill new">순수 신규</span></h2>
+<p class="sub">deep-research(문헌)와 Grok(시장)이 <b>독립적으로 같은 결론</b>에 도달 — 강한 신호.</p>
+
+<h3>① 성격유형 결정론 = 신뢰성 부채 (3중 삼각검증)</h3>
+<table>
+<tr><th>스트림</th><th>근거</th></tr>
+<tr><td>문헌</td><td>MBTI 재검사 4지표 동시일치 47%뿐, 이분법 < Big Five/HEXACO 연속척도(예측타당도↓), EEOC 채용 사용 경고. 포러효과: <b>가짜 피드백("인기"든 "학술"든)이 실제 행동을 바꿈</b>(자기충족예언, 일본 표본).</td></tr>
+<tr><td>시장(Grok)</td><td>"MBTI is astrology for HR"(@thebogbitch), "라벨을 과학이라 착각"(@OakfieldSzn) — informed 20–40대 빌더의 강한 회의.</td></tr>
+<tr><td>코드(Codex)</td><td><code>manual.tsx:110</code>은 "No MBTI"라 명시하는데 <code>src/app/mbti.tsx</code>가 존재하고 <code>/profile</code>·<code>/persona</code>에서 노출 — <b>제품 카피와 코드가 모순</b>.</td></tr>
+</table>
+<p><span class="pill decide">결정 필요</span> XPRIZE "검증된 심리학" 포지셔닝에서 MBTI 화면은 신뢰성·화면구성 양쪽 부채. <b>권장: 제거 또는 "인기하나 비검증 — 그래서 Big Five 중심" 명시 강등.</b></p>
+
+<h3>② 심리추론의 동의·프라이버시 = 법적·신뢰 급소</h3>
+<p class="small">문헌: 추론된 정신데이터도 GDPR 개인정보(Oxford JLB lsac006), 추론데이터 법적 회색지대, 권력불균형하 동의 무효화, MDPIA 권고. 시장: Limitless(Meta 매각·"trains on your data"), Dot(셧다운), Replika(정책변경→대규모 trauma·이탈). <b>→ 2nd-B의 기존 방어(C9 red-zone·C10·consent_records·"학습 미사용"·portable export)가 정확히 정답. 약점이 아니라 세일즈 포인트로 전면화.</b></p>
+
+<h3>③ "Portable &amp; Sovereign" = 최강 후크 (Grok)</h3>
+<p class="small">Claude memory import 열풍과 정확히 맞물림. 2nd-B의 Markdown/JSON portable RAG + "any LLM"은 이 욕구 직격. <b>온보딩 첫 화면에 export 데모 권장.</b> "listens before it talks" + 출처 투명성(모든 인사이트에 "당신의 N월 entry에서") 병행.</p>
+
+<div class="panel small">
+  <strong>실행 함의 (포지셔닝):</strong>
+  <ul>
+    <li><span class="pill decide">결정</span> MBTI 화면 처분 (제거/강등/재프레이밍)</li>
+    <li><span class="pill auto">자율</span> <b>Anti-Barnum 언어 가드</b> 검토 — "당신을 완벽히 압니다"·vague 호의문구 금지(기존 forbidden-lexicon과 동형 CI 가드). Grok 명시 제안.</li>
+    <li><span class="pill auto">자율</span> 인사이트 출처 투명성 원칙 문서화(이미 C8 정신과 일치)</li>
+    <li><span class="pill decide">결정</span> 랜딩·온보딩 카피 = portable/sovereign + "listens before it talks" 전면화</li>
+  </ul>
+</div>
+
+<!-- ============ B. SCREENS ============ -->
+<h2>B. 화면·IA 정리 — Phase 6 청사진 (Codex) <span class="pill new">사용자 핵심 지목</span></h2>
+<p class="sub"><code>MENU_RESTRUCTURE.md</code> Phase 1~5 완료, ⬜ Phase 6(죽은 라우트·중복 제거)만 남음. Codex가 43개 라우트 전수 분류.</p>
+<table>
+<tr><th>처분</th><th>대상</th><th>근거 / 조치</th></tr>
+<tr><td><span class="sev crit">제거</span></td><td><code>asset-motion-preview</code> ×5</td><td>개발 전용 프리뷰. <code>_layout</code>엔 1개만 등록, BackArrow도 1개만 숨김 → 프로덕션 번들에서 전부 제외(dev-only segment/flag).</td></tr>
+<tr><td><span class="sev high">숨김/병합</span></td><td><code>mbti.tsx</code></td><td>제품 카피("No MBTI")와 모순 + 신뢰성 부채(섹션 A). <b>결정 필요.</b></td></tr>
+<tr><td><span class="sev high">숨김/병합</span></td><td><code>trinity.tsx</code></td><td>Simon 개인 4영역 대시보드 — 5-tier 월드뷰 미매핑. <code>/insights</code> 또는 미래 Planner로 병합.</td></tr>
+<tr><td><span class="sev med">링크 정리</span></td><td><code>journal.tsx</code></td><td>이미 <code>/capture</code> redirect인데 <b>8곳에서 아직 직접 링크</b>(audit/core-brain/insights/onboarding/persona/wiki/settings/+not-found) → 단일입력 원칙 위반. CTA를 <code>/capture</code>로 교체, redirect만 잔존.</td></tr>
+<tr><td><span class="sev low">정리</span></td><td><code>imagine.tsx</code></td><td>이미 <code>/jarvis?mode=divergent</code> redirect. stale 5-tab 주석 제거.</td></tr>
+</table>
+<h3>DESIGN.md 시각 위반 후보 (검증 필요)</h3>
+<ul class="small">
+  <li><code>premium/background.tsx</code> — <b>LinearGradient + RadialGradient</b> (그래디언트 금지; sky-drift 예외인지 확인)</li>
+  <li><code>premium/surfaces.tsx</code> + 다수 — glass/shadow 언어, <code>shadowColor/elevation</code>(다크 표면 드롭섀도 금지)</li>
+  <li><code>QuantPager.tsx:92</code> en-dash · <code>NavGraph.tsx:1775</code>·<code>SoulcoreFinalArt.tsx:506</code> <code>borderRadius:999</code>(pill 금지 vs 진짜 원형 art 예외)</li>
+  <li><b>stale "Big Five (TIPI)" 카피</b> — 실제는 BFI-44 (<code>manual.tsx:216/224</code>, <code>settings.tsx:355</code>)</li>
+  <li>7엔진 갭: <b>Planner 미구현</b> (trinity 병합 또는 jarvis 내 섹션 권장)</li>
+</ul>
+
+<!-- ============ C. CODE AUDIT ============ -->
+<h2>C. 코드 감사 — 적대적 검증 확정 8건 (audit WF) <span class="pill new">대부분 신규</span></h2>
+<p class="sub">검증된 최종 severity 기준(원 보고 severity 아님). CRITICAL/HIGH 0건 — 모든 원-HIGH가 mitigation 확인되어 하향.</p>
+<table>
+<tr><th>Sev</th><th>발견 / 파일</th><th>조치 · 태그</th></tr>
+<tr>
+  <td><span class="sev med">MED</span></td>
+  <td><b>knowledge_sources 전역읽기+인증쓰기 → 타 유저 Advisor로 저장형 프롬프트 인젝션</b><br><code>db/migrations/0009_rls_policies.sql</code> <span class="muted small">conf .85</span></td>
+  <td><code>ks_auth_insert</code> 제거(seed는 service-role) 또는 읽기/<code>queryRows</code>에 <code>verified_at IS NOT NULL</code> 필터. C8을 읽기시점에 강제. <code>&lt;UNTRUSTED&gt;</code> 펜싱은 보조방어 유지.<br><span class="pill auto">코드 자율</span><span class="pill deploy">prod 배포는 Simon</span></td>
+</tr>
+<tr>
+  <td><span class="sev med">MED</span></td>
+  <td><b>knowledge_sources DDL 이중 마이그레이션 트리 (schema drift)</b><br><code>supabase/migrations/20260525000000_…sql</code> <span class="muted small">conf .90</span></td>
+  <td>orphan 트리(현재 어떤 runner도 미사용) 삭제 또는 <code>db/migrations</code>로 일원화. service-role-write-only 채택 시 위 항목 동시 해결.<br><span class="pill auto">자율</span></td>
+</tr>
+<tr>
+  <td><span class="sev med">MED</span></td>
+  <td><b>Wiki export가 source_url·relevance·전체 frontmatter를 외부 LLM로 PII 스크럽 없이 유출</b><br><code>src/lib/wiki/export.ts</code> <span class="muted small">conf .90</span></td>
+  <td>frontmatter denylist(<code>!_</code>)→<b>allowlist</b> 전환, <code>source_url</code> opt-in, body 리댁션 옵션.<br><span class="pill auto">자율</span></td>
+</tr>
+<tr>
+  <td><span class="sev med">MED</span></td>
+  <td><b>마스코트 이름 canon 위반: 코드 "Lumina" vs 정전 "Iris"</b> (7개 코드사이트, 라이브 채팅 노출)<br><code>src/lib/chat/personas.ts</code> 외 <span class="muted small">conf .95</span></td>
+  <td>정전 확정 후 personas/monologues/tokens/village-ui/NavGraph/SoulcoreFinalArt 일괄 동기화.<br><span class="pill decide">canon 결정 = Simon</span></td>
+</tr>
+<tr>
+  <td><span class="sev med">MED</span></td>
+  <td><b>회귀테스트가 canon "Iris"를 금지하고 "Lumina"를 강제 → 올바른 수정 시 빌드 차단</b><br><code>src/lib/__tests__/worldview-naming.test.ts</code> <span class="muted small">conf .95</span></td>
+  <td>canon 확정 직후 <code>OLD_NAMES</code>에서 Iris 제거, line 32를 정전으로. <b>위 마스코트 작업과 한 PR로 묶어야 빌드 통과.</b><br><span class="pill decide">결정 후 자율</span></td>
+</tr>
+<tr>
+  <td><span class="sev low">LOW</span></td>
+  <td>에셋층(Iris 스프라이트) vs 표시층(Lumina) 내부 불일치 — <code>soulcore-v3.ts</code> (default-off flag 뒤)</td>
+  <td>위 마스코트 작업에 흡수 (폴더/alias 리네임 + CONTEXT/asset_mapping 정렬). <span class="pill decide">결정 후 자율</span></td>
+</tr>
+<tr>
+  <td><span class="sev low">LOW</span></td>
+  <td>"공상"이 Divergent 모드 아닌 장소/소스 라벨로 잔존 — <code>persona/evidence.ts</code>, <code>records.tsx</code> (모드 토글 자체는 정상)</td>
+  <td><code>imagine:"공상"</code> TYPE_LABEL 리네임 또는 TYPE_FILTERS에서 제거. <span class="pill auto">자율</span></td>
+</tr>
+<tr>
+  <td><span class="sev low">LOW</span></td>
+  <td>폐기된 Vela/벨라 imagine-pulse 배선 + stale 주석 (dormant) — <code>useSignatureMotion.ts</code> 외</td>
+  <td>dormant 경로/"공상 조각" 타이틀 정리 또는 주석에서 Vela 제거. <span class="pill auto">자율</span></td>
+</tr>
+</table>
+
+<!-- ============ D. NATIVE ============ -->
+<h2>D. 네이티브 QA 준비도 (Antigravity) <span class="pill new">순수 신규 (그간 미뤄짐)</span></h2>
+<div class="grid">
+  <div class="panel small"><strong>판정: 조건부 가능</strong><br><code>npx expo run:android</code>가 prebuild 경유 빌드. <b>유일 리스크 = Reanimated v4 + RN 0.85 New Architecture C++ 호환</b> (실패 시 보통 <code>android/app/build.gradle</code> C++ 의존성). 선행: 에뮬 <code>Pixel_9_Pro_XL</code> 부팅 + <code>expo prebuild --clean</code>.</div>
+  <div class="panel small"><strong>네이티브 깨짐 위험 화면</strong><br>① <code>index/core-brain</code>(SVG·Reanimated 프레임) ② IntroGate(폰트 비동기 → FOUT) ③ crisis modal/bottom-sheet(safe-area·키보드 가림). 폰트: NeoDunggeunmo 로딩 OK, fallback 경로 점검.</div>
+</div>
+
+<!-- ============ E. PLAN ============ -->
+<h2>E. 완성형 실행 계획 — Top 10</h2>
+<p class="sub">레버리지 순. 마스코트 묶음은 <b>테스트→코드→에셋→문서</b>를 한 PR로(빌드 차단 회피). 모두 <b>branch-first · draft PR · 머지는 Simon · prod 배포 별도 확인</b>.</p>
+<ol>
+  <li><span class="pill decide">결정</span> <b>마스코트 canon 확정</b> (Iris vs Lumina) — 나머지 4개 worldview 항목의 분기. 증거는 Iris 우세(CONTEXT/VISION/DESIGN/에셋/2026-06-03 V3_ASSET_BRIEF 결정).</li>
+  <li><span class="pill auto">자율</span> <b>회귀테스트 먼저 정렬</b> → 표시층 7개 사이트 일괄 리네임 → 에셋층 정렬 (1~의 결정 직후, 단일 PR)</li>
+  <li><span class="pill auto">자율</span> <b>Phase 6 화면정리</b>: asset-motion-preview ×5 프로덕션 제외 + journal 링크 8곳 <code>/capture</code> 이관</li>
+  <li><span class="pill auto">자율</span><span class="pill deploy">배포 Simon</span> <b>knowledge_sources RLS 큐레이션 잠금</b> (마이그레이션 작성→draft PR, prod 적용은 확인)</li>
+  <li><span class="pill auto">자율</span> <b>마이그레이션 이중트리 일원화</b> (4와 함께 → 두 data-rag 동시 해결)</li>
+  <li><span class="pill auto">자율</span> <b>Wiki export allowlist 전환</b> (frontmatter denylist→allowlist, source_url opt-in)</li>
+  <li><span class="pill decide">결정</span> <b>MBTI 화면 처분</b> + Anti-Barnum 언어 가드</li>
+  <li><span class="pill auto">자율</span> "공상" 소스 라벨 + dormant Vela 배선 정리 (worldview LOW)</li>
+  <li><span class="pill auto">자율</span> stale "Big Five (TIPI)"→BFI-44 카피 + en-dash/borderRadius 위반 정리(검증 후)</li>
+  <li><span class="pill decide">결정</span><span class="pill deploy">Simon</span> 네이티브 기기 QA 1회(Antigravity) + go-live 항목(<code>FORCE_TIER=off</code>, GA4/Clarity ID 등)</li>
+</ol>
+
+<!-- ============ F. DECISIONS ============ -->
+<h2>F. Simon 결정 필요 (자율 진행 안 함)</h2>
+<div class="panel">
+  <p><span class="num">1</span><b>마스코트 정전 이름: Iris vs Lumina?</b> — 증거는 <b>Iris</b> 우세(정전 문서 5종 + 2026-06-03 dated 결정). 단 코드·CI테스트는 Lumina. 사용자가 채팅하는 브랜딩이라 확정 필요. <span class="muted small">권장: Iris로 코드·테스트 정정.</span></p>
+  <p><span class="num">2</span><b>MBTI 화면 처분</b> — 제거 / "비검증" 명시 강등 / 유지? <span class="muted small">권장: 강등(제거 시 기존 데이터 마이그레이션 확인).</span></p>
+  <p><span class="num">3</span><b>나머지 자율 항목 즉시 착수 여부</b> — Phase 6 정리·RLS 큐레이션·export allowlist 등을 branch-first/draft PR로 지금 진행할지.</p>
+</div>
+
+<!-- ============ APPENDIX ============ -->
+<h2>부록 — 문헌 출처 (C8 인간검증 대상)</h2>
+<p class="small muted">deep-research가 수집한 1차/주요 출처. 검증 레이어 장애로 <b>미검증</b> → Curator 반영 전 사람 확인 필수.</p>
+<table class="small">
+<tr><th>주제</th><th>출처</th></tr>
+<tr><td>LLM 성격추론 r≈0.29, per-trait 편향</td><td class="src">PMC11211928</td></tr>
+<tr><td>MBTI 재검사 47%, Big Five/HEXACO 우월, EEOC</td><td class="src">Frontiers Comp. Neuroscience 10.3389/fncom.2026.1800284</td></tr>
+<tr><td>정신데이터 GDPR·MDPIA</td><td class="src">Oxford J. Law &amp; Biosciences 10.1093/jlb/lsac006</td></tr>
+<tr><td>VIA 메타분석 130연구 N=275,007 (hope/zest r=.52)</td><td class="src">SAGE 10.1177/08902070251366765</td></tr>
+<tr><td>성격검사 피드백 자기충족예언(일본 표본)</td><td class="src">ResearchGate Pub. 229938513</td></tr>
+<tr><td>시장: Day One·Limitless·Dot·Replika·Mem·Tana 감정 + Barnum</td><td class="src">→ 허브 <code>agents/grok/outbox/20260605-181500-re-consumer-research.md</code> (X·Reddit·TechCrunch·App Store 링크 다수)</td></tr>
+</table>
+
+<p class="small muted" style="margin-top:40px;border-top:1px solid var(--line);padding-top:16px">
+  산출물 위치: 허브 <code>projects/2nd-B/cycle-1-completion-audit.html</code> · 원천: <code>agents/{codex,grok,antigravity}/outbox/</code> + audit/deep-research 워크플로 transcript · 베이스라인 <code>docs/AUDIT_2026-06-03.md</code>(닫힘) + <code>docs/HANDOFF.md</code>(2026-06-04).
+</p>
+</div>
+</body>
+</html>
