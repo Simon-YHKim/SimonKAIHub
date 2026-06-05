@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cycle-2 설치앱 성능 감사 — 2nd-B</title>
+<style>
+  :root { --bg:#0a0d1a; --tx:#d7dcea; --ac:#f0a36b; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--tx); font-family:-apple-system,"Pretendard",system-ui,sans-serif; line-height:1.6; padding:48px 20px; }
+  main { max-width:880px; margin:0 auto; }
+  h1 { font-size:24px; font-weight:700; margin:0 0 4px; }
+  .sub { color:#8089a3; font-size:13px; margin:0 0 28px; }
+  h2 { font-size:16px; font-weight:600; color:var(--ac); margin:34px 0 12px; border-bottom:1px solid #1c2236; padding-bottom:8px; }
+  table { width:100%; border-collapse:collapse; font-size:13.5px; margin:8px 0; }
+  th,td { text-align:left; padding:9px 12px; border-bottom:1px solid #161b2c; vertical-align:top; }
+  th { color:#8089a3; font-weight:600; font-size:12px; }
+  .p1 { color:var(--ac); font-weight:700; }
+  .p2 { color:#8089a3; font-weight:600; }
+  code { background:#161b2c; padding:1px 6px; border-radius:4px; font-size:12px; color:#aeb6cf; }
+  ul { padding-left:18px; } li { margin:5px 0; }
+  .note { background:#11162a; border-left:3px solid var(--ac); padding:12px 16px; border-radius:6px; margin:14px 0; font-size:13px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>cycle-2 설치앱 성능 감사</h1>
+  <p class="sub">2nd-B · branch claude/cycle-2-concept-consistency · 설치앱(Android/iOS/web) 런타임 성능저하 요소 전수 · 2026-06-06</p>
+
+  <h2>Top 5 위험</h2>
+  <table>
+    <tr><th>#</th><th>등급</th><th>이슈</th><th>위치</th><th>증상 / 수정</th></tr>
+    <tr><td>1</td><td class="p1">P1</td><td>ScrollView+.map() 비가상화 리스트</td><td>records.tsx:244 · inbox.tsx:252 · wiki.tsx:598</td><td>50+ 항목 Android OOM/크래시 → FlatList 가상화(row memo, keyExtractor)</td></tr>
+    <tr><td>2</td><td class="p1">P1</td><td>NavGraph 노드당 Animated + 엣지당 signal 루프</td><td>NavGraph.tsx:684</td><td>100+ 노드/엣지 시 JS 스레드 포화 jank → LOD(노드>30 시 drift/pulse 끄기, 엣지>100 애니 캡)</td></tr>
+    <tr><td>3</td><td class="p1">P1</td><td>setInterval 백그라운드 미정지(콜백만 skip)</td><td>WorkerSprite.tsx:48 · CharacterPathLayer.tsx:120 · LivingAsset.tsx:35</td><td>타이머 계속 돌아 배터리 → AppState로 clearInterval/loop.stop()</td></tr>
+    <tr><td>4</td><td class="p2">P2</td><td>backlinks/body 세션 메모리 누적</td><td>wiki.tsx:93(backlinksById) · inbox.tsx:58(bodyById)</td><td>확장 페이지마다 누적, 미정리 → 최근 N개만 유지/prune</td></tr>
+    <tr><td>5</td><td class="p2">P2</td><td>114개 PNG eager require</td><td>11 파일(worker/island/core art)</td><td>시작 메모리/번들 bloat → lazy require 또는 expo-image CDN</td></tr>
+  </table>
+
+  <h2>추가 P2</h2>
+  <ul>
+    <li>시작 애니(sky drift + logo) JS 스레드 750ms → native driver 또는 첫 프레임 후 defer (index.tsx:47,180).</li>
+    <li>inbox/wiki row 컴포넌트 React.memo 누락 → 확장/refresh 시 전체 리렌더.</li>
+    <li>setCrewDensity 빠른 연타 시 AsyncStorage 쓰기 큐 → debounce.</li>
+  </ul>
+
+  <h2>로봇 기능(§11) 타당성</h2>
+  <div class="note">monochrome 절반크기 로봇 = <b>이미 CrewLayer/useCrewCount로 존재 가능성 높음</b>(crew 스프라이트가 노드수 비례, <code>DENSITY_MAX.many=12</code> cap, EXPO_PUBLIC_USE_V3_ART SVG). 성능상 <b>feasible</b> — 단 12 cap 유지 + 단순 pathfinding 전제. 검증 필요: CrewLayer가 모모 닮은 monochrome 스프라이트인지.</div>
+
+  <h2>분배 (cycle-2 perf batch)</h2>
+  <ul>
+    <li><b>Antigravity</b> — FlatList(records/inbox/wiki) #1 위험. stash된 작업 재작업(per-item wrapper gap버그 수정 + churn 없이) → antigravity/perf-flatlist.</li>
+    <li><b>Claude(perf workflow)</b> — 백그라운드 ticker AppState 정지 · 메모리 prune · NavGraph LOD · 시작 애니 · row memo.</li>
+  </ul>
+</main>
+</body>
+</html>
