@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 00:33:20 KST
-state: crisis_router_readability_gate_reported
+updated: 2026-06-06 00:35:57 KST
+state: clean_head_regate_correction_reported
 ---
 
 # Codex STATUS
@@ -12,13 +12,23 @@ state: crisis_router_readability_gate_reported
 - **작업**: Simon 지시 - 모든 화면 UI 문제를 계속 찾아내고, AI slop 100/100까지 Claude 작업물을 반복 리뷰.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
 - **검수 기준**: SimonK-stack `ai-slop-cleaner`, `visual-verdict`, `frontend-ui-ux`를 근거로 하되 2nd-B의 기존 dark premium/village system을 보존. 작은 글자, 무근거 glow/shadow, deprecated prop 잔여물, 임시 스크립트, 키보드 occlusion, 검증부족을 우선 점검.
-- **앱 상태**: `E:\2ndB` branch `claude/cycle-1-golive`, committed HEAD `6c506cf`. 현재 tracked WIP: `complete-profile`, `sign-up`, `IslandArt`, `TierIcon`, `WikiCardThumb`, `WorkerSprite`의 `Image` import가 `expo-image`로 전환됨. Untracked root scripts: `refactor_wiki.py`, `refactor_wiki2.py`, `replace_image.py`.
-- **검증**: 현재 WIP 기준 `npm run verify` pass: 91 suites, 823 tests. `git diff --check`, `npm run lint`, `npm run type-check` pass.
-- **평가**: `expo-image` 전환은 방향성은 좋지만 `resizeMode` deprecated compatibility prop가 8곳 남아 있고, root temp scripts가 있어 clean sign-off 불가. 추가 sweep에서 `CrisisRouter` 안전 모달의 `URGENT/긴급` badge가 10px로 확인되어 safety surface readability P1도 추가. 기존 keyboard/device proof 게이트도 미해결. **92/100 provisional**.
+- **앱 상태**: `E:\2ndB` branch `claude/cycle-1-golive`, clean committed HEAD `6c506cf`. 이전 expo-image/root-script WIP는 현재 worktree에 없음.
+- **검증**: clean HEAD 기준 `npm run verify` pass: 91 suites, 823 tests.
+- **평가**: micro-type pass는 수용. 현재 clean HEAD 기준 남은 P1은 `CrisisRouter` 안전 모달 badge 10px readability, `/account`, `/settings`, `/audit`, `/interview`, `/jarvis` keyboard proof/patch, Android/OCR proof. **93/100 provisional**.
 - **최신 산출물**:
-  - `agents/codex/outbox/20260606-003320-to-claude-crisis-router-readability-gate.md`
-  - `agents/codex/outbox/preview/20260606-003320-crisis-router-readability-gate/index.html`
-- **대기**: Claude가 expo-image cleanup, root temp script cleanup, keyboard/device proof를 반영하면 Codex가 all-screen re-gate 반복.
+  - `agents/codex/outbox/20260606-003557-to-claude-clean-head-regate-correction.md`
+  - `agents/codex/outbox/preview/20260606-003557-clean-head-regate-correction/index.html`
+- **대기**: Claude가 CrisisRouter readability, keyboard/device proof를 반영하면 Codex가 all-screen re-gate 반복.
+
+[Clean head re-gate correction / 26.06.06 / 00:35:57]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #verify #claude-fyi
+- Rechecked `E:\2ndB` after dirty WIP disappeared.
+- Current app worktree clean at `6c506cf`; no `expo-image` migration WIP or root temp scripts present.
+- `npm run verify` pass on clean HEAD: 91 suites, 823 tests.
+- Current score corrected to 93/100 provisional.
+- Remaining P1 gates: `CrisisRouter` 10px safety badge, keyboard proof/patch for `/account`, `/settings`, `/audit`, `/interview`, `/jarvis`, Android/OCR proof.
+- FYI written: `agents/codex/outbox/20260606-003557-to-claude-clean-head-regate-correction.md`
+- HTML preview written: `agents/codex/outbox/preview/20260606-003557-clean-head-regate-correction/index.html`
 
 [CrisisRouter readability gate / 26.06.06 / 00:33:20]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #safety #claude-request
