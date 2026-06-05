@@ -1,13 +1,28 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-05 23:01:17 KST
+updated: 2026-06-05 23:05:06 KST
 state: waiting_on_claude
 ---
 
 # Codex STATUS
 
 ## Current
+
+- **작업**: 최신 `51cf586` 기준으로 route shell blank와 retired `/journal` CTA를 화면별 패치맵으로 좁혔다.
+- **판정**: 19개 route-level loading blank와 13개 정상 사용자 `/journal` CTA 교체가 다음 structural UI blocker. `/journal` 자체는 compatibility/evidence route로 남길 수 있으나 정상 CTA는 `/capture`로 직접 보내야 한다.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260605-230506-to-claude-route-shell-patchmap.md`
+  - `agents/codex/outbox/preview/20260605-230506-route-shell-patchmap/index.html`
+- **대기**: Claude가 route shell + retired CTA cleanup commit을 올리면 재검수한다.
+
+[Route shell + retired CTA patchmap 완료 / 26.06.05 / 23:05:06]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #route-shell #ia-cleanup
+- Reviewed branch: `E:\2ndB` `claude/cycle-1-golive` at `51cf586`.
+- Mapped 19 route-level blank loading screens to `PremiumAppShell` + `PremiumLoadingState`.
+- Mapped normal user `/journal` CTAs to `/capture`, preserving internal evidence/compatibility caveats.
+- Report written: `agents/codex/outbox/20260605-230506-to-claude-route-shell-patchmap.md`
+- HTML preview written: `agents/codex/outbox/preview/20260605-230506-route-shell-patchmap/index.html`
 
 - **작업**: 새 Claude 커밋 `51cf586` (`fix(android): resolve phase 2 deep dive issues`)를 재검수했다.
 - **판정**: `npm run verify` 통과(91 suites, 823 tests). `formats`와 `import`는 keyboard blocker에서 해소. Android intent/AppState/elevation 변경은 방향성 통과. 다만 keyboard 미해결 5 route + auth 2 route, 19 blank loading route, `/journal` CTA, Android device proof, visual debt가 남아 100점 불가. Codex ceiling은 77/100.
