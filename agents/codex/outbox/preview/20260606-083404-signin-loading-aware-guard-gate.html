@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex UI Gate - Sign-In Loading Guard</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d1117;
+      --panel: #151b23;
+      --panel2: #10161f;
+      --text: #f0f3f7;
+      --muted: #a8b3c4;
+      --line: #2b3545;
+      --mint: #56e6c0;
+      --warn: #ffd166;
+      --danger: #ff7a90;
+      --code: #d7e0ee;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, "Noto Sans KR", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1020px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 36px 0 48px;
+    }
+    header, section, .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+    }
+    header { padding: 24px; margin-bottom: 16px; }
+    section { padding: 18px; margin-top: 16px; }
+    .kicker {
+      margin: 0 0 8px;
+      color: var(--mint);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    h1 { margin: 0; font-size: 30px; line-height: 1.15; letter-spacing: 0; }
+    h2 { margin: 0 0 10px; font-size: 19px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 15px; letter-spacing: 0; }
+    p { margin: 0 0 10px; }
+    p:last-child { margin-bottom: 0; }
+    .lead { color: var(--muted); max-width: 820px; margin-top: 12px; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 3px 8px;
+      color: var(--muted);
+      font-size: 13px;
+      margin-right: 6px;
+      margin-top: 10px;
+    }
+    .p2 { color: var(--warn); border-color: rgba(255,209,102,.55); }
+    .score { color: var(--mint); border-color: rgba(86,230,192,.55); }
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .step {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 116px;
+    }
+    .bad { border-left: 4px solid var(--danger); }
+    .good { border-left: 4px solid var(--mint); }
+    .small { color: var(--muted); font-size: 13px; }
+    ul { margin: 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 7px 0; }
+    code, pre {
+      color: var(--code);
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+    code { padding: 1px 5px; }
+    pre {
+      margin: 10px 0 0;
+      padding: 12px;
+      overflow: auto;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+    @media (max-width: 760px) {
+      main { width: min(100vw - 20px, 1020px); padding-top: 18px; }
+      header { padding: 18px; }
+      h1 { font-size: 24px; }
+      .timeline { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="kicker">Codex UI/UX Gate</p>
+      <h1>Sign-in can show the wrong workflow while auth resolves</h1>
+      <p class="lead">The route redirects signed-in users only after <code>userId</code> is populated. During unresolved auth, it renders the login form.</p>
+      <span class="badge p2">P2 auth route-state</span>
+      <span class="badge score">98/100 provisional</span>
+      <span class="badge">Baseline: E:\2ndB main@911c979</span>
+    </header>
+
+    <section>
+      <h2>Failure Shape</h2>
+      <div class="timeline">
+        <div class="step bad">
+          <h3>1. Session exists</h3>
+          <p class="small">User is signed in or returning from a prior tab session.</p>
+        </div>
+        <div class="step bad">
+          <h3>2. Auth unresolved</h3>
+          <p class="small"><code>AuthContext</code> is still <code>userId:null</code>, <code>loading:true</code>.</p>
+        </div>
+        <div class="step bad">
+          <h3>3. Sign-in renders</h3>
+          <p class="small">The form appears because the route only guards on populated <code>userId</code>.</p>
+        </div>
+        <div class="step good">
+          <h3>Expected</h3>
+          <p class="small">Show checking state, then route to the correct destination.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Code Evidence</h2>
+      <ul>
+        <li><code>sign-in.tsx:48</code> reads only <code>userId</code> from auth context.</li>
+        <li><code>sign-in.tsx:60-64</code> redirects signed-in users only after <code>userId</code> is truthy.</li>
+        <li><code>AuthContext.tsx:27-31</code> and <code>:87-91</code> start unresolved with <code>loading:true</code>.</li>
+        <li><code>AuthContext.tsx:131-140</code> marks first signed-in profile resolution as loading.</li>
+        <li><code>_layout.tsx:169-171</code> can return children directly after intro has played, so route-local loading guards still matter.</li>
+      </ul>
+      <pre>const { userId } = useAuth();
+
+if (userId) return &lt;Redirect href="/" /&gt;;</pre>
+    </section>
+
+    <section>
+      <h2>Required Contract</h2>
+      <ul>
+        <li><code>/sign-in</code> waits for auth loading before rendering a form.</li>
+        <li>Signed-in complete-profile users route to <code>/</code>.</li>
+        <li>Signed-in missing-profile users route to <code>/complete-profile</code>.</li>
+        <li>Signed-out users see the normal sign-in form.</li>
+        <li><code>/sign-in</code>, <code>/sign-up</code>, and <code>/complete-profile</code> share the same route-state primitive or documented contract.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
