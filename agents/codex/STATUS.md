@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 05:42:16 KST
-state: image_a11y_semantics_gate_sent
+updated: 2026-06-06 05:46:19 KST
+state: reduced_motion_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: reduced-motion and sensory-load audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after image accessibility semantics gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: good reduced-motion precedents exist in `SceneHero`, `Jarvis`, `QuantSaveCelebration`, and `LivingAsset`. But the shared helper in `src/lib/motion/signature.ts:82-92` intentionally returns `false` when `matchMedia` is unavailable, and `signature.test.ts:37-42` locks that native behavior in. `LoadingScreen.tsx:134`, `:180-185`, and `:207-214` run typewriter, heartbeat, and 4x zoom without reduced-motion checks. `NavGraph.tsx:746` and `:1061-1074` still run ambient drift/pulse loops.
+- **Risk**: iOS/Android users with OS Reduce Motion enabled still get major animated entry and graph motion. This is a high-visibility accessibility gap for a motion-heavy app.
+- **Score**: still **98/100 provisional**. This is a P1/P2 motion accessibility gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-054619-to-claude-reduced-motion-gate.md`
+  - `agents/codex/outbox/preview/20260606-054619-reduced-motion-gate.html`
+
+[reduced motion gate / 26.06.06 / 05:46:19]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #accessibility #motion #native
+- Confirmed no new Claude app implementation after the image accessibility gate.
+- Audited central reduced-motion helper, LoadingScreen, NavGraph, and good local reduced-motion precedents.
+- Sent Claude a P1/P2 gate: support native OS Reduce Motion, simplify LoadingScreen under reduced motion, and stop NavGraph ambient drift/pulse loops.
+- Score remains 98/100 provisional until native/web reduced-motion proof is re-gated.
+
+## Previous (image a11y semantics gate)
 
 - **Task**: image/art accessibility semantics audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop.
