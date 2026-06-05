@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex d4a55ec Tap Target LOD Re-gate</title>
+  <style>
+    :root {
+      --bg: #070a18;
+      --panel: #11162a;
+      --panel2: #151d33;
+      --text: #e8ecf8;
+      --muted: #aab4d0;
+      --line: #2a345a;
+      --mint: #72f2c7;
+      --warn: #ffd166;
+      --rose: #ff7a90;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Noto Sans KR", system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    main { width: min(1040px, calc(100% - 32px)); margin: 0 auto; padding: 36px 0 52px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 20px; }
+    .eyebrow { color: var(--mint); font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 44px); line-height: 1.15; letter-spacing: 0; }
+    .sub { margin-top: 10px; color: var(--muted); max-width: 820px; }
+    .score { display: grid; grid-template-columns: 160px 1fr; gap: 14px; align-items: stretch; margin: 24px 0; }
+    .scorebox, section { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 18px; }
+    .scorebox strong { display: block; color: var(--mint); font-size: 42px; line-height: 1; }
+    .scorebox span, .muted { color: var(--muted); }
+    .bar { height: 12px; background: var(--panel2); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin-top: 10px; }
+    .bar > i { display: block; width: 95%; height: 100%; background: var(--mint); }
+    section { margin-top: 14px; }
+    h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+    ul { margin: 8px 0 0; padding-left: 20px; }
+    li { margin: 7px 0; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .finding { background: var(--panel2); border: 1px solid var(--line); border-left: 4px solid var(--warn); border-radius: 8px; padding: 14px; }
+    .finding.p1 { border-left-color: var(--rose); }
+    .finding.ok { border-left-color: var(--mint); }
+    .finding h3 { margin: 0 0 8px; font-size: 16px; }
+    code { color: var(--mint); background: rgba(114, 242, 199, 0.08); padding: 1px 5px; border-radius: 4px; }
+    @media (max-width: 720px) {
+      .score, .grid { grid-template-columns: 1fr; }
+      main { width: min(100% - 24px, 1040px); padding-top: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Gate · 2026-06-06 02:39 KST</div>
+      <h1>d4a55ec tap-target + LOD re-gate</h1>
+      <p class="sub">작은 터치 타깃과 NavGraph tier-4 LOD는 정적 기준에서 닫혔다. 100점까지는 persona wording, provider proof, consent legal state, runtime proof가 남았다.</p>
+    </header>
+
+    <div class="score">
+      <div class="scorebox"><strong>95</strong><span>/ 100 provisional</span></div>
+      <section>
+        <h2>Verdict</h2>
+        <div class="bar"><i></i></div>
+        <p class="muted">`npm run verify` pass, `git diff --check` pass, `hitSlop={2}` zero hits.</p>
+      </section>
+    </div>
+
+    <section>
+      <h2>Accepted</h2>
+      <div class="grid">
+        <div class="finding ok">
+          <h3>Tap Targets</h3>
+          <p><code>capture</code>, <code>wiki</code>, <code>TemplateEditor</code> moved obvious 2pt hit slop to 8pt.</p>
+        </div>
+        <div class="finding ok">
+          <h3>NavGraph LOD</h3>
+          <p>Tier-4 drift/fade loops are gated after 30 data dots, keeping structural village animation intact.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Still Blocking 100</h2>
+      <ul>
+        <li><strong>P1:</strong> Persona copy still has diagnosis wording at committed <code>d4a55ec</code>. New WIP is detected but not scored.</li>
+        <li><strong>P1:</strong> Google, Apple, Kakao buttons are always visible without live proof or config gates.</li>
+        <li><strong>P1:</strong> Consent notice/legal versioning remains placeholder and ledger retry is not durable.</li>
+        <li><strong>P2:</strong> Runtime visual proof is still missing across login, consent, capture, inbox/wiki, persona, settings/account, and big NavGraph.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

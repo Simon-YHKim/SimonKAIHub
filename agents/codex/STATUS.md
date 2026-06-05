@@ -1,21 +1,23 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 02:35:38 KST
-state: waiting_claude_wip_after_b7472d5
+updated: 2026-06-06 02:39:30 KST
+state: waiting_persona_wip_after_d4a55ec
 ---
 
 # Codex STATUS
 
 ## Current (latest)
 
-- **작업**: Simon 지시 `/goal`에 따라 모든 화면 UI/UX와 AI slop를 100/100 기준으로 반복 게이트 중. Claude의 최신 완료 커밋 `b7472d5` raw-error sweep은 재검수 완료했고, 이후 새 WIP를 감지해 완료 대기 중이다.
+- **작업**: Simon 지시 `/goal`에 따라 모든 화면 UI/UX와 AI slop를 100/100 기준으로 반복 게이트 중. Claude의 최신 완료 커밋 `d4a55ec` tap-target/NavGraph LOD sweep을 즉시 재검수했고, 이후 persona WIP를 감지해 완료 대기 중이다.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
-- **앱 기준**: `E:\2ndB`, branch `claude/cycle-2-concept-consistency`, head `b7472d5 fix(ui): replace raw error messages with product-tone copy + retry across 11 screens`.
-- **현재 WIP**: app worktree dirty in `src/app/capture.tsx`, `src/app/wiki.tsx`, `src/components/wiki/TemplateEditor.tsx`, `src/components/graph/NavGraph.tsx`. Diff appears to address remaining `hitSlop={2}` and NavGraph LOD, but not scored until Claude commits/reports completion.
-- **검증**: `npm run verify` pass on `b7472d5`: lint/type-check/i18n/lexicon/LLM boundary/constraints/emdash/Jest green, 91 suites, 823 tests. `git diff --check` pass.
-- **현재 점수**: `b7472d5` re-gate = 94/100 provisional. Raw-error slop and Grok trust-copy concerns are mostly closed, but persona diagnosis-copy policy conflict, unproven Google/Apple/Kakao provider buttons, consent/legal placeholder + no durable retry, small capture/wiki tap targets, and missing runtime visual proof keep it below 100.
+- **앱 기준**: `E:\2ndB`, branch `claude/cycle-2-concept-consistency`, head `d4a55ec perf(graph): tier-4 LOD for drift/edges + raise small chip tap targets`.
+- **현재 WIP**: app worktree dirty in `src/app/persona.tsx`, `src/lib/safety/lexicon.ts`. Diff removes persona diagnosis wording/allowlist, but current draft uses `medical assessment/의학적 평가`; not scored until Claude commits/reports completion.
+- **검증**: `npm run verify` pass on `d4a55ec`: lint/type-check/i18n/lexicon/LLM boundary/constraints/emdash/Jest green, 91 suites, 823 tests. `git diff --check` pass. `hitSlop={2}` / `hitSlop: 2` static search = 0.
+- **현재 점수**: `d4a55ec` re-gate = 95/100 provisional. Small tap-target and NavGraph LOD P2 are accepted, but persona wording, unproven Google/Apple/Kakao provider buttons, consent/legal placeholder + no durable retry, and missing runtime visual proof keep it below 100.
 - **최신 산출물**:
+  - `agents/codex/outbox/20260606-023930-to-claude-d4a55ec-tap-lod-regate.md`
+  - `agents/codex/outbox/preview/20260606-023930-d4a55ec-tap-lod-regate.html`
   - `agents/codex/outbox/20260606-023212-to-claude-b7472d5-raw-error-regate.md`
   - `agents/codex/outbox/preview/20260606-023212-b7472d5-raw-error-regate.html`
   - `agents/codex/outbox/20260606-022304-to-claude-944d2dc-flatlist-regate.md`
@@ -28,7 +30,17 @@ state: waiting_claude_wip_after_b7472d5
   - `agents/codex/outbox/preview/20260606-020542-wip-slop-cleanup-preflight.html`
   - `agents/codex/outbox/20260606-015756-to-claude-89eeaaa-perf-regate.md`
   - `agents/codex/outbox/preview/20260606-015756-89eeaaa-perf-regate.html`
-- **대기**: Claude/AG가 current WIP or next persona/trust/provider/consent/tap-target/proof cleanup을 커밋하거나 outbox 완료 보고하면 즉시 재게이트. 100점 전까지 반복.
+- **대기**: Claude/AG가 current persona WIP or next trust/provider/consent/proof cleanup을 커밋하거나 outbox 완료 보고하면 즉시 재게이트. 100점 전까지 반복.
+
+[d4a55ec tap-target + LOD re-gate / 26.06.06 / 02:39:30]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #regate #tap-target #navgraph
+- Detected Claude commit `d4a55ec perf(graph): tier-4 LOD for drift/edges + raise small chip tap targets`.
+- Ran `npm run verify`: pass, 91 suites, 823 tests. Ran `git diff --check`: pass.
+- Accepted: `hitSlop={2}` / `hitSlop: 2` search now has 0 hits; capture/wiki/TemplateEditor small target issue is closed at static level; NavGraph tier-4 drift/fade LOD direction accepted.
+- Score raised from 94 to 95/100 provisional.
+- Still not 100: persona wording conflict, always-visible Google/Apple/Kakao provider buttons without proof, consent legal placeholder + no durable ledger retry, and runtime visual proof gap.
+- New WIP detected after re-gate: `persona.tsx` + `lexicon.ts` are dirty, apparently addressing diagnosis wording. Not scored until committed.
+- Report/preview written and opened.
 
 [Claude WIP detected after b7472d5 / 26.06.06 / 02:35:38]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #claude-wip
