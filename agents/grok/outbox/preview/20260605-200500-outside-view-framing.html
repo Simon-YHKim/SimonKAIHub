@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Outside View Framing Validation — 2nd-B Consumer Research</title>
+<style>
+:root {
+  --bg: #0d1018;
+  --panel: #141925;
+  --panel2: #1a2030;
+  --line: #2a3145;
+  --ink: #e6e9f2;
+  --muted: #aab2c8;
+  --subtle: #7e879e;
+  --accent: #72f2c7;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", sans-serif; line-height: 1.6; font-size: 15px; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 48px 24px 80px; }
+header { margin-bottom: 32px; }
+h1 { font-size: 22px; font-weight: 700; margin: 0 0 6px; letter-spacing: -.01em; }
+.meta { color: var(--subtle); font-size: 12.5px; margin-top: 8px; }
+h2 { font-size: 16px; font-weight: 700; margin: 36px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 14px; font-weight: 600; margin: 18px 0 6px; color: var(--accent); }
+.lead { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 16px 0; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
+ul, ol { margin: 8px 0; padding-left: 20px; }
+li { margin: 4px 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.muted { color: var(--muted); }
+.small { font-size: 12.5px; }
+.key { border-left: 3px solid var(--accent); background: rgba(114, 242, 199, 0.05); padding: 10px 14px; margin: 12px 0; border-radius: 0 6px 6px 0; }
+.warn { border-left: 3px solid #ffd166; background: rgba(255, 209, 102, 0.06); padding: 10px 14px; margin: 12px 0; border-radius: 0 6px 6px 0; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .03em; }
+code { background: var(--panel2); padding: 1px 5px; border-radius: 3px; font-size: 12px; font-family: ui-monospace, Menlo, Consolas, monospace; color: #cdd6f0; }
+.source { font-size: 11.5px; color: var(--subtle); word-break: break-all; margin-top: 4px; }
+footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--subtle); }
+.q { font-weight: 600; margin: 14px 0 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Outside View (밖에서 본 나) — Safe Framing Validation</h1>
+  <p class="meta">Grok · X/social + reviews + consumer signals · 2026-06-05 · 2nd-B</p>
+  <p class="meta">Protocol §10.6 self-contained HTML report (dark, 3 colors, no emoji)</p>
+</header>
+
+<div class="lead">
+  <strong>Scope</strong>: Validate three framing questions for 2nd-B planned "Outside view" / peer-eval social layer (self vs others perspective for self-model accuracy). 
+  Pulled real X posts, web reviews, app histories, live tool sites, 360 stats, psych sources. All URLs primary or direct.
+</div>
+
+<h2>1. Does 'mirror / blind-spot / 360-for-self-understanding / Johari' land better than 'peer evaluation/rating'?</h2>
+
+<div class="panel">
+  <p><strong>Yes — significantly better.</strong></p>
+  <p>Consumer tools that survived and are actively used frame exactly as self-awareness mirror, not evaluation.</p>
+  <ul>
+    <li><strong>johari-window.com</strong>: "Discover how you see yourself — and how others see you". "Spot what’s shared, hidden, and new to deepen self-awareness." "Compare perspectives with the people who know you best." Shareable link + adjective selection (positive + nohari negative option). Testimonials focus on "amazed at how positively people see me" and team-building value. <span class="source"><a href="https://johari-window.com/">https://johari-window.com/</a></span></li>
+    <li><strong>SelfStir Individual</strong>: Explicit "friends" or "family" survey context. "A safe and anonymous environment." "intended for development, pure and simple." "highlight ... blind spots." "increased self-awareness ... how you come across to people." 30k+ users, 100k+ raters claimed. Privacy and confidentiality heavily marketed. <span class="source"><a href="https://www.selfstir.com/individual-solution/">https://www.selfstir.com/individual-solution/</a></span></li>
+  </ul>
+</div>
+
+<div class="warn">
+  <strong>Contrast — "peer evaluation / rating" framing risk</strong><br>
+  Peeple ("Yelp for people", real-name rating of friends/exes/colleagues) triggered immediate mass backlash: privacy panic, harassment fears, "people are not products", death threats to founder. Site taken down fast. Positivity pivot failed to recover. <span class="source"><a href="https://www.wired.com/story/peeple-offline/">WIRED</a> · <a href="https://www.businessinsider.com/peeple-no-longer-online-2015-10">Business Insider</a></span>
+</div>
+
+<p>Workplace 360 (closest analog to structured peer input) shows persistent consumer/worker resistance even in professional context:</p>
+<table>
+  <tr><th>Metric</th><th>Figure</th><th>Source</th></tr>
+  <tr><td>Would opt out if choice</td><td>79%</td><td rowspan="6"><a href="https://www.breakroomapp.com/glossary/360-review">Breakroom 360 Review stats (2025)</a></td></tr>
+  <tr><td>Results feel unfair/biased/inaccurate</td><td>74%</td></tr>
+  <tr><td>Suspect grudges / politics</td><td>79% / 48%</td></tr>
+  <tr><td>Strained workplace relationships</td><td>39%</td></tr>
+  <tr><td>Increased stress / self-doubt</td><td>35%</td></tr>
+  <tr><td>Decreased productivity/motivation</td><td>30%</td></tr>
+</table>
+
+<p>Personal/friends context has <strong>no professional buffer</strong> — relationship stakes higher, anxiety amplified. X and forum signals around "ask friends to rate/feedback on me" surface avoidance or "weird/awkward" more than enthusiasm (general pattern; direct "rate my personality app" discussions rare and skeptical).</p>
+
+<p><strong>Conclusion on (1)</strong>: Johari / "outside view / blind spot / mirror for self-understanding" is the established, lower-creep, higher-acceptance language. It matches scientific informant-report value (prior peer report) while avoiding verdict/eval trigger words that activate judgment anxiety and Peeple-style backlash. "Peer evaluation/rating" should be avoided in all user-facing copy, UI, and marketing.</p>
+
+<h2>2. Positive+strengths-only at launch, then optionally balanced — appetite + risks</h2>
+
+<div class="key">
+  <strong>Appetite for positive/strengths-first: high for entry.</strong><br>
+  tbh (2017) and Gas (2022) used pre-written positive-only compliment polls ("most likely to...", "gassing up"). Both hit #1 App Store in teen segments via school targeting + FOMO invites. Constrained positive reduced toxicity vector. <span class="source"><a href="https://en.wikipedia.org/wiki/Tbh">Wikipedia tbh</a> · <a href="https://en.wikipedia.org/wiki/Gas_(app)">Gas</a> · <a href="https://www.businessinsider.com/gas-social-media-app-highschool-send-anonymous-compliments-not-trafficking-2022-10">Business Insider</a></span>
+</div>
+
+<p>Live Johari tools default to or prominently feature positive adjective lists; users report "helpful" and "positive" experiences in controlled/team settings. SelfStir allows competency selection but markets strengths + blind spots discovery.</p>
+
+<div class="warn">
+  <strong>Risks of positive-only (and why phased is smart)</strong>
+  <ul>
+    <li>Politeness / sugarcoating bias: raters (especially friends) default to nice. Blind spot discovery diluted. Prior peer research noted "friends are 예쁘게 말하거나 속마음 숨길 거다".</li>
+    <li>Perceived as fluffy or low-value: "not real feedback" criticism appears in LinkedIn endorsement discussions and some 360 commentary.</li>
+    <li>Short-term virality, long-term churn: tbh acquired by FB then shut for "low usage"; Gas acquired by Discord then steep decline and shutdown 2023. Positive constraint helped initial safety/virality but not retention at scale. <span class="source"><a href="https://www.theinformation.com/articles/discord-shutters-gas-making-it-two-in-a-row-for-gas-founder">The Information (Gas shutdown)</a></span></li>
+  </ul>
+</div>
+
+<p><strong>Balanced rollout appetite</strong>: Lower at start, higher post-trust among growth-oriented users. Workplace data shows balanced 360 still carries 35%+ stress/strain even with anonymity and process. In consumer personal circle: trust is everything. Phased approach (positive launch → optional "growth suggestions" mode after 1-2 successful rounds + education) aligns with caution in psychsafety.com: "use with care... awareness can feel uncomfortable... without context risks undermining trust". <span class="source"><a href="https://psychsafety.com/the-johari-window/">psychsafety.com Johari caution</a></span></p>
+
+<p>PositivePsychology.com notes potential for "discomfort or even psychological distress" if feedback received without proper framing/support. <span class="source"><a href="https://positivepsychology.com/johari-window/">PositivePsychology Johari</a></span></p>
+
+<p><strong>Recommendation</strong>: Launch strengths-primary / positive reflections + one "helpful observation for growth" (structured). Make balanced (more direct constructive) an explicit later opt-in with strong disclaimers, aggregate views first, easy hide/delete, and "this is for your model only" education. Test with small pilot circle.</p>
+
+<h2>3. Optimal invite-message copy — maximizes safe adoption, reduces judgment-anxiety</h2>
+
+<p>Core anxiety drivers from signals: fear of negative verdict, relationship damage, "what if they think less of me", lack of control, public exposure, sugarcoating suspicion, obligation pressure.</p>
+
+<p><strong>Reducing mechanisms that work (from live tools + best practice + backlash patterns)</strong>:</p>
+<ul>
+  <li>Explicit "optional / no pressure"</li>
+  <li>"Trusted / close circle / people who know you best"</li>
+  <li>"For my self-understanding / personal growth / mirror exercise" (not "so you can tell me the truth about me")</li>
+  <li>"Results private to me only" + "you decide what to share"</li>
+  <li>Strengths / positive / "helpful observation" language first</li>
+  <li>Low time commitment (2 min, structured link)</li>
+  <li>Recipient control emphasized (even if rater side)</li>
+</ul>
+
+<div class="panel">
+  <p class="q">Recommended primary invite copy (short message + link)</p>
+  <p>"Hey [Name], I'm doing a small self-understanding exercise (Johari-style mirror) with a few people I trust. Goal is to see how I come across vs how I see myself — blind spots and strengths. Would you be open to sharing 1-2 things you think are my strengths or one observation that might help me grow? Completely optional, takes ~2 minutes via link, everything stays private to me. No pressure at all — only reply if it feels good."</p>
+  <p class="small muted">Why it works: growth framing + optional + private + trusted + strengths-first + low friction + explicit permission. Matches johari-window.com and SelfStir safe language. Avoids Peeple/NGL/Sarahah triggers.</p>
+</div>
+
+<div class="panel">
+  <p class="q">Variant for more structured / strengths-primary (good for first round)</p>
+  <p>"I'm running a quick personal growth check-in with my closest circle. Using a simple mirror tool (like Johari). If you're up for it: pick a couple strengths you see in me that I might underplay, or one way I could show up better. Link is private, only I see results, and it's optional. Takes a minute. Grateful either way."</p>
+</div>
+
+<div class="panel">
+  <p class="q">In-app / email subject + body short version</p>
+  <p>Subject: "Quick mirror exercise — optional (2 min)"<br>
+  Body: "I'm collecting outside perspectives on myself for a self-model accuracy thing. Only from people I trust. Positive reflections or one growth note welcome. Private to me. Link below if you want to contribute — zero obligation."</p>
+</div>
+
+<p><strong>What to avoid in copy</strong>:</p>
+<ul>
+  <li>"Rate me", "evaluate", "score", "judge"</li>
+  <li>"Be honest / tell me what you really think / no filter"</li>
+  <li>"My weaknesses" or "what I'm bad at"</li>
+  <li>Implied obligation ("help me out", "I need this")</li>
+  <li>Any hint of public, leaderboard, or mutual reveal without explicit consent</li>
+  <li>God-mode / reveal paid features (NGL backlash precedent)</li>
+</ul>
+
+<p>Live evidence: johari-window.com uses neutral "invite them to describe you" + shareable link. SelfStir emphasizes safe/private/development. Professional 360 request templates stress "growth and development", "no career impact", "confidential". Personal consumer version must be stricter on warmth + optionality.</p>
+
+<h2>Overall recs for 2nd-B (framing + rollout)</h2>
+<ol>
+  <li><strong>Positioning language lock</strong>: "Outside view (밖에서 본 나)", "mirror", "blind spot as growth cue", "self vs others perspective for accuracy", "trusted circle insights". Never "peer rating", "eval", "feedback score". Aligns with projects/2nd-B/social-peer-eval-architecture.html existing "내가 본 나 / 밖에서 본 나" split and "성장 단서".</li>
+  <li><strong>Launch positive/strengths-primary</strong> with structured prompts (adjective list or "strength + one observable helpful note"). Recipient-only visibility by default. Explicit education: "This is one data point for your model, not verdict."</li>
+  <li><strong>Invite flow</strong>: opt-in, small circle (3-8), mutual connection first, no contact scraping. Copy variants above + A/B test "growth" vs "understanding" phrasing.</li>
+  <li><strong>Phased balanced</strong>: gate behind completed positive round + user toggle. Always aggregate or hidden-by-default for sensitive items. Strong recipient controls (hide, delete, pause feature).</li>
+  <li><strong>Guardrails from history</strong>: no open free-text anon, no public anything, toxicity/moderation hard, easy exit, clear "this feature is optional and core journal works without it".</li>
+</ol>
+
+<div class="key">
+  This framing validation reduces the creepiness/judgment vector identified in prior peer-feedback research while preserving the scientific value of informant perspectives for self-model accuracy.
+</div>
+
+<footer>
+  Sources (primary links used): johari-window.com, selfstir.com/individual-solution, positivepsychology.com/johari-window, psychsafety.com/the-johari-window, breakroomapp.com/glossary/360-review, en.wikipedia.org/wiki/Tbh + /Gas_(app), ftc.gov (NGL 2024 order + NYT coverage), wired.com (Peeple), theinformation.com (Gas), edweek.org (Gas context), prior 20260605-195800-re-peer-feedback-research.md for baseline cases. X keyword searches surfaced mostly leadership/Johari educational posts with limited recent consumer app discussion (consistent with post-2017/2023 toxicity fatigue in category).
+  <br><br>
+  Report generated autonomously per user direct task. HTML opened via start. Pointer md + git commit follow.
+</footer>
+
+</div>
+</body>
+</html>
