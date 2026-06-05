@@ -1,11 +1,29 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-05 21:39:01 KST
+updated: 2026-06-05 21:44:15 KST
 state: waiting_on_claude
 ---
 
 # Codex STATUS
+
+## Current
+
+- **현재 작업**: AI slop 100점 목표를 standing release gate로 등록하고, Claude가 관련 UI/UX 구현을 완료할 때마다 Codex가 100점 기준으로 반복 리뷰하도록 요청 완료.
+- **출처**: src: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
+- **적용 기준**: SimonK-stack `design-review`, `ai-slop-cleaner`, `frontend-ui-ux` 기준을 참고하되, 2nd-B의 Cosmic Pixel Graph 정체성과 실제 화면 사용성에 맞게 100-point anti-slop rubric으로 변환.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260605-214415-to-claude-ai-slop-100-review-loop.md`
+  - `agents/codex/outbox/preview/20260605-214415-ai-slop-100-review-loop/index.html`
+- **현재 판정**: `E:\2ndB` `claude/cycle-1-phase6-screens` 기준은 아직 100점 아님. P0 merge regression, `/journal`, coming-soon, blank loading, interaction/accessibility gaps, surface drift가 남아 있다.
+- **다음**: Claude가 수정 완료/새 commit을 남기면 Codex가 최신 브랜치를 다시 검사하고 score 100/100 전까지 blocker와 delta를 반복 보고한다.
+
+[AI Slop 100 review loop 기준 등록 완료 / 26.06.05 / 21:44:15]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #design-review #claude-request
+- 사용자 직접 지시를 `src: user`로 STATUS에 기록.
+- Claude request 작성: `agents/codex/outbox/20260605-214415-to-claude-ai-slop-100-review-loop.md`
+- HTML preview 작성: `agents/codex/outbox/preview/20260605-214415-ai-slop-100-review-loop/index.html`
+- 100점 rubric: SoT alignment 15, visual mode separation 15, surface discipline 15, typography/readability 10, trust copy/evidence 15, interaction/accessibility 15, route/completion hygiene 10, render QA proof 5.
 
 - **현재 작업**: 2nd-B Phase 6 screen branch 검증 후 merge regression 및 잔여 UI gate를 Claude에게 추가 보고 완료.
 - **출처**: src: user - "계속해서 모든 화면에 대한 UI 문제점을 찾아내고 개선해."

@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Slop 100 Review Loop Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0e1110;
+      --panel: #171b19;
+      --panel-2: #202620;
+      --line: #343c34;
+      --text: #eef3ec;
+      --muted: #aab6aa;
+      --accent: #9fcf7f;
+      --bad: #ea8a7a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      line-height: 1.6;
+    }
+
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+
+    header {
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 56px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 780px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section {
+      margin-top: 28px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 21px;
+      letter-spacing: 0;
+    }
+
+    p { margin: 0 0 12px; }
+    p:last-child { margin-bottom: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 12px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--accent);
+      background: var(--panel-2);
+      font-size: 13px;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .points {
+      width: 72px;
+      color: var(--text);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .callout {
+      border-color: color-mix(in srgb, var(--bad) 60%, var(--line));
+      background: #211817;
+    }
+
+    .callout h2 { color: var(--bad); }
+
+    ol, ul {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    li + li { margin-top: 8px; }
+
+    .score {
+      display: grid;
+      grid-template-columns: 144px 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .score strong {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 128px;
+      height: 128px;
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      color: var(--accent);
+      font-size: 40px;
+    }
+
+    code {
+      color: #c8e6b0;
+      background: #101410;
+      padding: 2px 5px;
+      border: 1px solid var(--line);
+    }
+
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      main { width: min(100vw - 24px, 1120px); padding-top: 24px; }
+      section { padding: 18px; }
+      .grid, .score { grid-template-columns: 1fr; }
+      .score strong { width: 100%; height: 96px; }
+      table { font-size: 13px; }
+      th, td { padding: 10px 8px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">2nd-B UI/UX gate</p>
+      <h1>AI Slop 100 Review Loop</h1>
+      <p class="lead">Claude가 관련 UI 작업을 완료할 때마다 Codex가 다시 리뷰한다. 목표는 100점이다. 100점 미만이면 남은 결함을 Claude에게 돌려보내고 같은 루프를 반복한다.</p>
+      <div class="meta">
+        <span class="chip">created 2026-06-05 21:44 KST</span>
+        <span class="chip">lane Codex UI/UX</span>
+        <span class="chip">project 2nd-B</span>
+        <span class="chip">final sign-off 100/100 only</span>
+      </div>
+    </header>
+
+    <section class="score">
+      <strong>100</strong>
+      <div>
+        <h2>Definition</h2>
+        <p>100점은 "충분히 보기 좋다"가 아니다. 사용자가 실제로 누르고 읽고 믿는 화면에서 반복 장식, 과장 copy, dead route, 불명확한 AI 추론, 접근성 누락이 알려진 범위 안에서 0개인 상태다.</p>
+        <p>95점은 release candidate일 수 있지만 final sign-off는 아니다. P0/P1이 하나라도 남으면 점수와 무관하게 fail이다.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Scoring Rubric</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Area</th>
+            <th class="points">Points</th>
+            <th>Pass condition</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Source-of-truth alignment</td>
+            <td class="points">15</td>
+            <td><code>DESIGN.md</code>, token docs, real components say the same thing. No Cosmic versus Phytoncide drift.</td>
+          </tr>
+          <tr>
+            <td>Visual mode separation</td>
+            <td class="points">15</td>
+            <td>Graph/world screens can be expressive. Utility/auth/settings/data screens stay restrained and task-first.</td>
+          </tr>
+          <tr>
+            <td>Surface discipline</td>
+            <td class="points">15</td>
+            <td>No repeated left-border cards, nested cards, or decorative shadow/glass unless they clarify hierarchy.</td>
+          </tr>
+          <tr>
+            <td>Typography/readability</td>
+            <td class="points">10</td>
+            <td>Korean body text is readable. Pixel/display type is limited to identity moments, not long copy.</td>
+          </tr>
+          <tr>
+            <td>Trust copy + evidence</td>
+            <td class="points">15</td>
+            <td>No overclaim. Persona, export, and insight surfaces show source, confidence, last updated, and exclusions.</td>
+          </tr>
+          <tr>
+            <td>Interaction/accessibility</td>
+            <td class="points">15</td>
+            <td>No blank loading, placeholder-only labels, unlabeled Pressables, tiny tap targets, or missing selected states.</td>
+          </tr>
+          <tr>
+            <td>Route/completion hygiene</td>
+            <td class="points">10</td>
+            <td>No active coming-soon, dev preview, retired <code>/journal</code> target, or dead navigation path.</td>
+          </tr>
+          <tr>
+            <td>Render QA proof</td>
+            <td class="points">5</td>
+            <td>Desktop/mobile screenshots or device QA prove no blank, overlap, clipping, or contrast break.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="grid">
+      <section>
+        <h2>Review Loop</h2>
+        <ol>
+          <li>Claude posts implementation completion with branch and commit.</li>
+          <li>Codex fetches/status-checks the latest branch without reverting other agents' dirty work.</li>
+          <li>Codex runs static gates for route, copy, token, accessibility, and export disclosure issues.</li>
+          <li>Codex runs render QA when the app can be opened.</li>
+          <li>Codex writes score, blockers, remaining delta, and HTML preview to hub outbox.</li>
+          <li>If score is below 100, Claude fixes and the loop repeats.</li>
+        </ol>
+      </section>
+
+      <section class="callout">
+        <h2>Current Baseline Is Not 100</h2>
+        <ul>
+          <li>P0: Phase 6 branch is missing data-hygiene export/read-policy commits.</li>
+          <li>P1: <code>/journal</code>, coming-soon, blank loading, and primitive accessibility gaps remain.</li>
+          <li>P1: utility surfaces still show glass/glow/left-border drift.</li>
+          <li>P1: AI insight and export UX still need source, confidence, and receipt clarity.</li>
+        </ul>
+      </section>
+    </div>
+
+    <section>
+      <h2>SimonK-stack References Applied</h2>
+      <p><code>design-review</code> gives the visual QA posture: hierarchy, spacing, interaction quality, score deltas, and AI slop detection. <code>ai-slop-cleaner</code> adds reviewer separation, behavior preservation, Korean readability, shadow restraint, palette rationale, hierarchy cleanup, and gradient restraint. <code>frontend-ui-ux</code> adds intentional aesthetic direction, but 2nd-B should apply it through its own Cosmic Pixel Graph identity instead of generic blue/purple defaults.</p>
+    </section>
+
+    <footer>
+      Hub artifact: agents/codex/outbox/20260605-214415-to-claude-ai-slop-100-review-loop.md
+    </footer>
+  </main>
+</body>
+</html>
