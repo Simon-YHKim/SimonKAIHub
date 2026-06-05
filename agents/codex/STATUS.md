@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 04:16:51 KST
-state: cycle4_retired_routes_regate_done_with_concerns
+updated: 2026-06-06 04:21:41 KST
+state: pressable_interaction_contract_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **작업**: Simon `/goal` 지속. 모든 화면 중 고밀도 custom Pressable 조작 표면을 추가 감사.
+- **src**: user - "계속해서 모든 화면에 대한 UI 문제점을 찾아내고 개선해." / 100/100 anti-slop 목표.
+- **앱 기준**: `E:\2ndB`, branch `claude/cycle-4-retired-routes`, head `74dc39f`, clean and aligned with `origin/claude/cycle-4-retired-routes`.
+- **이번 추가 감사**: `inbox`, `wiki`, `research`, `interview`, `trinity`, `core-brain`, `records`, `jarvis`, `manual`, `settings`의 custom `Pressable` interaction contract.
+- **판정**: retired-route gate는 통과했지만, custom Pressable semantics가 앱 전반 패턴 debt. 시각적 버튼/칩/행/링크가 role/label/selected/expanded/disabled/busy state를 충분히 노출하지 않음.
+- **정확화**: 단순 카운터는 모달 백드롭/멀티라인 때문에 과검출하므로 보고서에는 직접 확인한 사용자-facing controls만 라인 근거로 포함.
+- **인코딩 확인**: PowerShell `Get-Content` 일부 출력은 mojibake처럼 보였으나 `git show` 및 Node UTF-8 검사에서 replacement/triple-question runs 0. 실제 소스 문자열 문제로 보고하지 않음.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260606-042141-to-claude-pressable-interaction-contract-gate.md`
+  - `agents/codex/outbox/preview/20260606-042141-pressable-interaction-contract-gate.html`
+- **다음 루프**: Claude가 Pressable a11y 또는 privacy monotonicity 패스를 올리면 즉시 재검수. 그 전에는 keyboard/destructive/runtime proof를 계속 확장 감사.
+
+[Pressable interaction contract gate / 26.06.06 / 04:21:41]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #a11y #pressable #interaction-contract
+- Ran targeted static audit on custom `Pressable` surfaces after `74dc39f`.
+- Identified concrete user-facing missing semantics in inbox/wiki/research/interview/trinity/core-brain/jarvis.
+- Kept P1 privacy monotonicity as separate score blocker; this is a separate P2/P3 anti-slop class.
+- Sent Claude high-priority request with acceptance criteria: role, label, selected/expanded/disabled/busy states, link semantics, modal backdrop policy, and lightweight regression guard/checklist.
+- Report/preview:
+  - `agents/codex/outbox/20260606-042141-to-claude-pressable-interaction-contract-gate.md`
+  - `agents/codex/outbox/preview/20260606-042141-pressable-interaction-contract-gate.html`
 
 - **작업**: Simon `/goal` 지속. Claude cycle-4 retired-route cleanup을 즉시 재검수하고, 남은 전체 화면 UI slop를 추가 식별.
 - **src**: user - "계속해서 모든 화면에 대한 UI 문제점을 찾아내고 개선해." / "AI slop는 점수가 100점 이 되는것을 지향해..."
