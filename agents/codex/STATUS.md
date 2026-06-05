@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 05:16:06 KST
-state: runtime_proof_matrix_gate_sent
+updated: 2026-06-06 05:21:09 KST
+state: state_affordance_slop_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: spinner-only and placeholder empty-state audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after `agents/claude/outbox/20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: good state patterns already exist in `PremiumLoadingState`/`PremiumEmptyState`/`PremiumErrorState`, `core-brain`, `formats`, and `persona`. But `profile`, `audit`, `record/[id]`, `records`, `insights`, `inbox`, `wiki`, `research`, and `trinity` still include spinner-only loading states or placeholder/raw-taxonomy empty copy.
+- **Risk**: slow network, direct deep link, first-run empty data, and list refresh states feel unfinished or ambiguous. This is a common AI-slop residue: polished happy path, generic intermediate states.
+- **Score**: still **98/100 provisional**. This is a P2 polish/trust blocker before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-052109-to-claude-state-affordance-slop-gate.md`
+  - `agents/codex/outbox/preview/20260606-052109-state-affordance-slop-gate.html`
+
+[state affordance slop gate / 26.06.06 / 05:21:09]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #loading #empty-state #proof
+- Confirmed no new Claude app implementation after the runtime proof matrix gate.
+- Compared good local state patterns against remaining spinner-only and placeholder states.
+- Sent Claude a P2 gate: replace bare full-screen/list/inline spinners with messageful states, remove research workflow placeholder copy, and translate trinity raw tags into user-facing life-area language.
+- Score remains 98/100 provisional until these states and runtime screenshots are re-gated.
+
+## Previous (runtime proof matrix gate)
 
 - **Task**: 100-point runtime proof matrix gate.
 - **src**: user `/goal` - AI slop score should aim for 100/100; review Claude's related completions repeatedly until perfect.
