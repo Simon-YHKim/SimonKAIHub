@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 00:13:16 KST
-state: requested_all_input_keyboard_scope_correction
+updated: 2026-06-06 00:18:47 KST
+state: reported_micro_pass_but_verify_red
 ---
 
 # Codex STATUS
@@ -12,12 +12,22 @@ state: requested_all_input_keyboard_scope_correction
 - **작업**: Simon 지시 - AI slop 100/100 목표. Claude가 관련 작업을 완료할 때마다 Codex가 모든 화면 UI/UX를 재리뷰하고, 100점까지 반복 의견 제공.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
 - **검수 기준**: SimonK-stack 계열 anti-slop 관점(`ai-slop-cleaner`, `visual-verdict`, `frontend-ui-ux`)을 참고하되 맹목 적용하지 않고, 실제 사용 화면의 겹침/과장/불안정/키보드 occlusion 기준으로 판정.
-- **앱 상태**: `E:\2ndB` branch `claude/cycle-1-golive`, committed HEAD `9a9795c`. 현재 앱 worktree에는 타 에이전트 WIP로 보이는 `src/app/inbox.tsx` 미커밋 변경이 있음.
-- **평가**: 이전 95/100 판정에서 all-screen 입력 범위를 보정. `/account`, `/settings`, `/audit`에 6개 폼 범위 밖 keyboard occlusion 리스크가 있어 **93/100 provisional**로 재게이트.
+- **앱 상태**: `E:\2ndB` branch `claude/cycle-1-golive`, committed HEAD `6c506cf`. 현재 앱 worktree에는 `app.json`, `package.json`, `refactor_wiki.py`, `replace-image.js` 미커밋 변경이 있음.
+- **평가**: `6c506cf` micro-type readability pass는 Codex 요청 범위를 보수적으로 잘 반영. 다만 현재 worktree `replace-image.js` 파싱 에러로 `npm run verify`가 실패하고, `/account`, `/settings`, `/audit` keyboard P1 scope가 여전히 남아 **94/100 provisional, no sign-off**.
 - **최신 산출물**:
-  - `agents/codex/outbox/20260606-001316-to-claude-all-input-keyboard-scope-correction.md`
-  - `agents/codex/outbox/preview/20260606-001316-all-input-keyboard-scope-correction/index.html`
+  - `agents/codex/outbox/20260606-001847-to-claude-micro-pass-verify-red-regate.md`
+  - `agents/codex/outbox/preview/20260606-001847-micro-pass-verify-red-regate/index.html`
 - **대기**: Claude가 새 keyboard scope를 patch/proof하면 Codex가 all-input scan과 anti-slop re-gate 반복.
+
+[Micro pass accepted but verify red / 26.06.06 / 00:18:47]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #verify #claude-request
+- Reviewed branch: `E:\2ndB` `claude/cycle-1-golive` at `6c506cf`.
+- Commit accepted for micro readability: `brandChipSub`, `completeBadgeText`, `layerTag`, `DrillProgress` header labels moved out of 8-10px residue range.
+- Worktree dirty: `app.json`, `package.json`, `refactor_wiki.py`, `replace-image.js`.
+- `npm run verify` failed at lint because `replace-image.js:27:13` has a parsing error.
+- Score: 94/100 provisional after micro pass; no 100 sign-off while verify is red and keyboard P1 scope remains.
+- Report written: `agents/codex/outbox/20260606-001847-to-claude-micro-pass-verify-red-regate.md`
+- HTML preview written: `agents/codex/outbox/preview/20260606-001847-micro-pass-verify-red-regate/index.html`
 
 [All-input keyboard scope correction 작성 / 26.06.06 / 00:13:16]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #keyboard #claude-request
