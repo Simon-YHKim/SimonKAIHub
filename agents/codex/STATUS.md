@@ -1,21 +1,22 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 02:39:30 KST
-state: waiting_persona_wip_after_d4a55ec
+updated: 2026-06-06 02:47:29 KST
+state: regated_65e5ac4_trust
 ---
 
 # Codex STATUS
 
 ## Current (latest)
 
-- **작업**: Simon 지시 `/goal`에 따라 모든 화면 UI/UX와 AI slop를 100/100 기준으로 반복 게이트 중. Claude의 최신 완료 커밋 `d4a55ec` tap-target/NavGraph LOD sweep을 즉시 재검수했고, 이후 persona WIP를 감지해 완료 대기 중이다.
+- **작업**: Simon 지시 `/goal`에 따라 모든 화면 UI/UX와 AI slop를 100/100 기준으로 반복 게이트 중. Claude의 최신 완료 커밋 `65e5ac4` trust cleanup을 즉시 재검수했다.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
-- **앱 기준**: `E:\2ndB`, branch `claude/cycle-2-concept-consistency`, head `d4a55ec perf(graph): tier-4 LOD for drift/edges + raise small chip tap targets`.
-- **현재 WIP**: app worktree dirty in `src/app/persona.tsx`, `src/lib/safety/lexicon.ts`. Diff removes persona diagnosis wording/allowlist, but current draft uses `medical assessment/의학적 평가`; not scored until Claude commits/reports completion.
-- **검증**: `npm run verify` pass on `d4a55ec`: lint/type-check/i18n/lexicon/LLM boundary/constraints/emdash/Jest green, 91 suites, 823 tests. `git diff --check` pass. `hitSlop={2}` / `hitSlop: 2` static search = 0.
-- **현재 점수**: `d4a55ec` re-gate = 95/100 provisional. Small tap-target and NavGraph LOD P2 are accepted, but persona wording, unproven Google/Apple/Kakao provider buttons, consent/legal placeholder + no durable retry, and missing runtime visual proof keep it below 100.
+- **앱 기준**: `E:\2ndB`, branch `claude/cycle-2-concept-consistency`, head `65e5ac4 fix(trust): drop medical framing from persona copy + gate sign-up social providers`, clean.
+- **검증**: `npm run verify` pass on `65e5ac4`: lint/type-check/i18n/lexicon/LLM boundary/constraints/emdash/Jest green, 91 suites, 823 tests. `git diff --check` pass.
+- **현재 점수**: `65e5ac4` re-gate = 97/100 provisional. Persona wording, social provider UI gating, consent retry, raw-error cleanup, tap targets, and NavGraph LOD are accepted. 100/100 still needs provider deployment/live proof or default-off flags, legal sign-off/visible release gate for consent copy, and runtime visual proof.
 - **최신 산출물**:
+  - `agents/codex/outbox/20260606-024729-to-claude-65e5ac4-trust-regate.md`
+  - `agents/codex/outbox/preview/20260606-024729-65e5ac4-trust-regate.html`
   - `agents/codex/outbox/20260606-023930-to-claude-d4a55ec-tap-lod-regate.md`
   - `agents/codex/outbox/preview/20260606-023930-d4a55ec-tap-lod-regate.html`
   - `agents/codex/outbox/20260606-023212-to-claude-b7472d5-raw-error-regate.md`
@@ -30,7 +31,16 @@ state: waiting_persona_wip_after_d4a55ec
   - `agents/codex/outbox/preview/20260606-020542-wip-slop-cleanup-preflight.html`
   - `agents/codex/outbox/20260606-015756-to-claude-89eeaaa-perf-regate.md`
   - `agents/codex/outbox/preview/20260606-015756-89eeaaa-perf-regate.html`
-- **대기**: Claude/AG가 current persona WIP or next trust/provider/consent/proof cleanup을 커밋하거나 outbox 완료 보고하면 즉시 재게이트. 100점 전까지 반복.
+- **대기**: Claude/AG가 provider deployment proof, legal sign-off/release gate, runtime visual proof, or next cleanup을 커밋/보고하면 즉시 재게이트. 100점 전까지 반복.
+
+[65e5ac4 trust re-gate / 26.06.06 / 02:47:29]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #regate #trust #provider #consent
+- Detected Claude commit `65e5ac4 fix(trust): drop medical framing from persona copy + gate sign-up social providers`.
+- Ran `npm run verify`: pass, 91 suites, 823 tests. Ran `git diff --check`: pass.
+- Accepted: visible diagnosis/medical framing gone from persona; sign-in and sign-up both gate Google/Apple/Kakao via `isProviderEnabled`; consent ledger retries transient failures; earlier raw-error/tap-target/NavGraph gates remain green.
+- Score raised from 95 to 97/100 provisional.
+- Still not 100: provider flags default true unless deploy env proves otherwise, consent/legal wording is still explicitly pending with `LEXICON_LAST_LEGAL_REVIEW = null`, and runtime visual proof is missing.
+- Report/preview written and opened.
 
 [d4a55ec tap-target + LOD re-gate / 26.06.06 / 02:39:30]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #regate #tap-target #navgraph
