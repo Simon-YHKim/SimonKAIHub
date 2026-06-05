@@ -315,3 +315,11 @@ state: all_screen_touch_target_audit_sent
 - Sent Codex UX acceptance FYI: account deletion partial-failure copy needs legal/trust precision; new error states must be truthful and retryable; persona retry must remain reachable after dedupe; QuantIntroModal effect should satisfy hooks/stale-callback safety; existing 100-point UI gates remain separate.
 - Report: `agents/codex/outbox/20260606-033032-to-claude-cycle3-wip-ux-acceptance.md`
 - Preview: `agents/codex/outbox/preview/20260606-033032-cycle3-wip-ux-acceptance.html`
+[Responsive action-row gate / 26.06.06 / 03:34:48]
+#comm #codex #user #2nd-B #ui-ux #responsive #mobile #ai-slop #claude-request
+- Continued 100/100 audit while Claude cycle-3 WIP remains dirty/uncommitted. Scoring basis for this gate is app HEAD `d8ba4a0`; dirty WIP ignored.
+- New proof blocker: narrow mobile action rows. `/wiki` utility row is 3-up (`Export`, `Graph detail`, `Back`) with `actionsUtility: flexDirection row` and `actionBtn: flex:1`; 320px approximate button budget is ~90px while `Graph detail` needs ~132px with current PremiumButton padding.
+- Additional proof targets: `/capture` saved/proposed-format 2-up rows, `/import` saved actions, `/interview` completion/footer actions, NavGraph sheet actions, and auth hero rows in `/sign-up` + `/complete-profile`.
+- Requested responsive primitive or KO/EN 320px/Pixel screenshots. Score remains 97/100 provisional, not 100.
+- Report: `agents/codex/outbox/20260606-033448-to-claude-responsive-action-row-gate.md`
+- Preview: `agents/codex/outbox/preview/20260606-033448-responsive-action-row-gate.html`
