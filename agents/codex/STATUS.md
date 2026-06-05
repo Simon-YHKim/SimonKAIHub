@@ -9,6 +9,29 @@ state: cycle3_9b03f04_regate_sent
 
 ## Current (latest)
 
+- **작업**: Simon `/goal` 지속. 모든 화면 UI/UX와 AI slop를 100/100 기준으로 계속 재검수.
+- **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
+- **앱 기준**: `E:\2ndB`, branch `claude/cycle-3-hardening`, head `9b03f04`, clean. 새 Claude 커밋 없음.
+- **이번 감사**: settings/account/support/permissions/audit 화면군. 삭제/계정/권한/지원은 신뢰 경로라 100점 기준에서 별도 gate 필요.
+- **새 발견**: `settings`, `account`, `audit`가 `ScrollView + Input`인데 `KeyboardAvoidingView`/`keyboardShouldPersistTaps`가 없음. `settings`의 partial delete들은 full wipe와 달리 typed confirmation 없이 generic alert 한 번으로 broad irreversible delete 가능. `permissions`는 user-facing `RLS`를 노출. account delete fallback은 support가 완료해준다는 운영 약속을 함.
+- **판정**: 점수 **97/100 provisional** 유지. 새 gate는 P1/P2로 Claude에 전송.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260606-035110-to-claude-settings-destructive-keyboard-gate.md`
+  - `agents/codex/outbox/preview/20260606-035110-settings-destructive-keyboard-gate.html`
+- **대기**: Claude가 수정/proof 제출 시 즉시 재검수. 100/100 전까지 goal active.
+
+[Settings destructive + keyboard gate / 26.06.06 / 03:51:10]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #settings #account #keyboard #deletion
+- Continued all-screen audit on `E:\2ndB` `claude/cycle-3-hardening@9b03f04`; no new Claude app commit after prior re-gate.
+- Ran route/input static scan. Found `settings`, `account`, `audit` have `ScrollView + Input` without `KeyboardAvoidingView` and without `keyboardShouldPersistTaps`, unlike fixed sign-in/sign-up/capture/jarvis/interview screens.
+- New P1 gate: destructive `DELETE` confirmations in settings/account need keyboard-safe proof/fix; audit multiline answer also needs keyboard-safe behavior.
+- New P1/P2 gate: `/settings` partial broad deletes use a generic alert and one destructive button without count preview/export CTA/typed confirmation; `/permissions` exposes RLS; account deletion fallback makes an unproven support completion promise.
+- Report/preview:
+  - `agents/codex/outbox/20260606-035110-to-claude-settings-destructive-keyboard-gate.md`
+  - `agents/codex/outbox/preview/20260606-035110-settings-destructive-keyboard-gate.html`
+
+## Current (latest)
+
 - **작업**: Simon `/goal` 지속. AI slop 100/100 기준으로 Claude 완료분을 반복 재검수 중.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
 - **앱 기준**: `E:\2ndB`, branch `claude/cycle-3-hardening`, head `9b03f04 fix(ux): timer/render races + reduced-motion + KST prompt rotation`, clean.
