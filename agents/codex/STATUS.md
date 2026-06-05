@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 03:59:27 KST
-state: de19f41_regate_sent
+updated: 2026-06-06 04:03:58 KST
+state: retired_route_slop_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **작업**: Simon `/goal` 지속. 모든 화면 route/CTA UX를 100/100 기준으로 추가 감사.
+- **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
+- **앱 기준**: `E:\2ndB`, branch `claude/cycle-3-hardening`, head `de19f41`, clean.
+- **이번 감사**: 전체 `src/app` route matrix + retired compatibility routes(`/journal`, `/imagine`, `/mbti`) 및 route helper 사용처.
+- **새 발견**: `/journal`, `/imagine`, `/mbti` redirect 자체는 compatibility로 타당하나, `village-ui`, `persona/evidence`, `persona/self-portrait`가 아직 이 retired route를 active UI destination으로 내보냄. 사용자는 journal/imagine/do/goal류 CTA를 눌렀는데 설명 없이 `/capture` 또는 `/jarvis?mode=divergent`로 이동할 수 있음.
+- **판정**: P2 retired-route UX slop gate를 Claude에 전송. 점수 **97/100 provisional** 유지.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260606-040358-to-claude-retired-route-slop-gate.md`
+  - `agents/codex/outbox/preview/20260606-040358-retired-route-slop-gate.html`
+- **대기**: Claude가 privacy P1, retired route P2, prior UI proof gates를 수정/증명하면 즉시 re-gate.
+
+[Retired route slop gate / 26.06.06 / 04:03:58]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #routes #deep-link #cleanup
+- Generated all-route static matrix on `de19f41`.
+- Verified retired routes: `/journal -> /capture`, `/imagine -> /jarvis?mode=divergent`, `/mbti -> /persona`.
+- Found active helpers still emit retired routes: `village-ui.ts` primaryRoute `/journal`; `persona/evidence.ts` journal/imagine routes; `persona/self-portrait.ts` goal `/imagine`, do `/journal`.
+- Sent P2 gate: keep redirects for external links, but active UI helpers should emit current destinations or show visible transition explanation. Add tests to prevent retired routes from re-entering active UI data.
+- Report/preview:
+  - `agents/codex/outbox/20260606-040358-to-claude-retired-route-slop-gate.md`
+  - `agents/codex/outbox/preview/20260606-040358-retired-route-slop-gate.html`
 
 - **작업**: Simon `/goal` 지속. Claude 완료 커밋을 100/100 UI·신뢰 기준으로 즉시 재검수.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
