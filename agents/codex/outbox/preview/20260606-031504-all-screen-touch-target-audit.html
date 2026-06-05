@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>All-Screen Touch Target Audit</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: rgba(167, 139, 250, 0.08);
+      --panel2: rgba(114, 242, 199, 0.07);
+      --line: #2a345a;
+      --text: #e8ecf8;
+      --muted: #c9d0e6;
+      --subtle: #8d98b8;
+      --brand: #72f2c7;
+      --warn: #ffd166;
+      --danger: #ff7a90;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    main { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 32px 0 48px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 20px; }
+    .eyebrow { color: var(--brand); font-size: 12px; font-weight: 700; }
+    h1 { margin: 6px 0 10px; font-size: clamp(28px, 5vw, 48px); line-height: 1.1; }
+    h2 { font-size: 18px; margin: 0 0 10px; }
+    p { margin: 0 0 12px; color: var(--muted); }
+    code { color: var(--brand); background: rgba(114, 242, 199, 0.08); padding: 1px 5px; border-radius: 4px; }
+    .score, section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 12px 0;
+    }
+    .score { display: grid; grid-template-columns: 160px 1fr; gap: 12px; align-items: center; }
+    .num { font-size: 42px; font-weight: 800; color: var(--warn); }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .ok { background: var(--panel2); }
+    ul { margin: 8px 0 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 6px 0; }
+    .p1 { color: var(--danger); font-weight: 700; }
+    .p2 { color: var(--warn); font-weight: 700; }
+    .route { color: var(--subtle); font-size: 13px; margin-top: 8px; }
+    @media (max-width: 760px) {
+      .grid, .score { grid-template-columns: 1fr; }
+      main { width: min(100% - 24px, 1120px); padding-top: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Audit - 2026-06-06 03:15:04 KST</div>
+      <h1>All-Screen Touch Target Audit</h1>
+      <p>범위: <code>E:\2ndB claude/cycle-3-hardening@d8ba4a0</code>, <code>src/app</code> 39개 route 파일.</p>
+    </header>
+
+    <div class="score">
+      <div class="num">97/100</div>
+      <p>점수 유지. 100점 차단 사유가 더 구체화됐다. 공유 Button 계열은 44px를 만족하지만, 직접 만든 Pressable 링크와 칩이 여러 화면에서 아직 증빙되지 않았다.</p>
+    </div>
+
+    <section class="ok">
+      <h2>Accepted Baseline</h2>
+      <ul>
+        <li><code>PremiumButton</code> / <code>Button</code>은 <code>minHeight: 44</code>를 상속한다.</li>
+        <li><code>records.tsx</code> 타입 칩과 <code>TemplateEditor</code> 일부 controls는 이미 <code>minHeight: 44</code>다.</li>
+        <li>NavGraph 주요 노드는 큰 <code>hitSlop</code>를 사용한다.</li>
+      </ul>
+    </section>
+
+    <div class="grid">
+      <section>
+        <h2><span class="p1">P1</span> Core Brain</h2>
+        <ul>
+          <li><code>fieldRow</code>, <code>evidenceBtn</code>, <code>evRow</code> 모두 <code>paddingVertical: spacing.xs</code>만 있음.</li>
+          <li>Self-portrait, evidence drawer는 핵심 탐색 경로라 <code>minHeight: 44</code> 필요.</li>
+        </ul>
+        <div class="route">core-brain.tsx:186-190, 220, 262-264, 329, 332, 347</div>
+      </section>
+
+      <section>
+        <h2><span class="p1">P1</span> Profile Hub</h2>
+        <ul>
+          <li>허브 chips가 <code>paddingVertical: spacing.sm</code>만 사용하고 <code>minHeight</code> 없음.</li>
+          <li>로그인부터 설정까지 이어지는 허브라 precision tap을 요구하면 안 됨.</li>
+        </ul>
+        <div class="route">profile.tsx:167-171, 205-211</div>
+      </section>
+
+      <section>
+        <h2><span class="p1">P1</span> Research</h2>
+        <ul>
+          <li>Framework filter chips는 <code>paddingVertical: 4</code>만 있음.</li>
+          <li>DOI/URL link는 <code>hitSlop=4</code>만 있고 row target 보장 없음.</li>
+        </ul>
+        <div class="route">research.tsx:139-151, 206-211, 254-258</div>
+      </section>
+
+      <section>
+        <h2><span class="p1">P1</span> Trinity</h2>
+        <ul>
+          <li>Empty CTA가 text-only <code>Pressable hitSlop=6</code>로 되어 있음.</li>
+          <li>첫 행동 유도이므로 Button 또는 44px link style 필요.</li>
+        </ul>
+        <div class="route">trinity.tsx:203</div>
+      </section>
+
+      <section>
+        <h2><span class="p1">P1</span> Inbox</h2>
+        <ul>
+          <li><code>generateBtn.minHeight = 30</code>, <code>hitSlop=4</code>, effective vertical target about 38px.</li>
+          <li>Row actions, error retry, empty CTA 모두 44px 보강 필요.</li>
+        </ul>
+        <div class="route">inbox.tsx:129-203, 523, 540, 642-650</div>
+      </section>
+
+      <section>
+        <h2><span class="p1">P1</span> Capture</h2>
+        <ul>
+          <li><code>tagAddChip</code> is <code>28x28</code> with <code>hitSlop=4</code>, effective target about 36px.</li>
+          <li>Journal text links and tag chips need minHeight or measured proof.</li>
+        </ul>
+        <div class="route">capture.tsx:838, 864, 1094-1097, 1300-1302</div>
+      </section>
+
+      <section>
+        <h2><span class="p1">P1</span> Wiki</h2>
+        <ul>
+          <li>Tag chips, clear chip, export copy/close, Phase 1 trigger rely on low padding + hitSlop.</li>
+          <li>Dense wiki rows must not require precision tapping.</li>
+        </ul>
+        <div class="route">wiki.tsx:581-608, 637-650, 842-849, 1056-1070, 1138</div>
+      </section>
+
+      <section>
+        <h2><span class="p2">P2</span> Graph Proof</h2>
+        <ul>
+          <li>Sheet imagine action and reset control are probably usable, but still need runtime proof or explicit minHeight/minWidth.</li>
+          <li>AG screenshot/tap proof should include the sheet open state.</li>
+        </ul>
+        <div class="route">NavGraph.tsx:1546, 1696, 1910</div>
+      </section>
+    </div>
+
+    <section>
+      <h2>Recommended Fix Shape</h2>
+      <p>개별 화면마다 감으로 조절하지 말고, <code>tapTargetTextLink</code>, <code>tapTargetChip</code>, <code>tapTargetSquare</code> 같은 shared style/helper로 <code>minHeight: 44</code>, <code>minWidth: 44</code>, center alignment를 보장하는 쪽이 낫다.</p>
+    </section>
+  </main>
+</body>
+</html>
