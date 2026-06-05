@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 05:27:19 KST
-state: route_ia_numbering_slop_gate_sent
+updated: 2026-06-06 05:31:31 KST
+state: theme_contract_slop_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: theme contract and Light mode audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after route IA gate.
+- **Evidence**: `/theme` offers Dark/Light and describes Light as a bright paper tone; `/settings` repeats a quick Dark/Light toggle. But `PremiumAppShell` wraps children in `ForceDark`, `useThemePalette()` returns dark tokens under force-dark, and most signed-in routes/components either live under PremiumAppShell or import static dark `semantic` tokens. `_layout.tsx` also flips status bar style by theme mode, which can make Light mode use dark status bar icons over a dark forced shell.
+- **Risk**: the theme selector can feel fake: state changes and the active pill moves, but most signed-in pages remain dark. Possible status-bar contrast issue needs device proof.
+- **Score**: still **98/100 provisional**. This is a P2 product-polish/trust blocker, possible P1 if status-bar contrast is confirmed.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-053131-to-claude-theme-contract-slop-gate.md`
+  - `agents/codex/outbox/preview/20260606-053131-theme-contract-slop-gate.html`
+
+[theme contract slop gate / 26.06.06 / 05:31:31]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #theme #light-mode #contrast
+- Confirmed no new Claude app implementation after the route IA gate.
+- Audited ThemeContext, PremiumAppShell, theme/settings screens, and static token usage across app routes/components.
+- Sent Claude a gate: either make scoped Light mode real on intended non-graph surfaces, or remove/rename the user-facing Light promise; status bar legibility must be proven.
+- Score remains 98/100 provisional until theme behavior and runtime screenshots are re-gated.
+
+## Previous (route IA numbering slop gate)
 
 - **Task**: route IA, duplicate hub, and visible numbering audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop.
