@@ -1,25 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 08:17:02 KST
-state: persona_export_share_fallback_gate_sent
+updated: 2026-06-06 08:26:16 KST
+state: complete_profile_auth_loading_redirect_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
 
-- **Task**: persona markdown export share/fallback audit.
+- **Task**: complete-profile auth loading and premature redirect audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
 - **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
-- **Claude state**: no newer Claude implementation after the auth launch busy contract gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
-- **SimonK-stack reference**: continuing the 100/100 anti-slop standard that data portability actions must be recoverable, inspectable, and not depend on opaque OS handoffs only.
-- **Evidence**: `persona.tsx` imports `Share`, and `handleExport()` calls `Share.share({ message: persona.markdownExport, title: "2nd-Brain Persona" })`. The catch path offers only Try again and Dismiss. The main Persona action is `Export as Markdown`, but there is no copy, preview, download, or export receipt fallback if platform share fails.
-- **Risk**: the highest-value self-model export can dead-end behind a failing platform share sheet, weakening trust/export claims across the product.
-- **Score**: still **98/100 provisional**. This is a P2 export handoff gate before 100.
+- **Claude state**: no newer Claude implementation after the persona export share/fallback gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: continuing the 100/100 anti-slop standard that first-run trust routes must be stable, explicit, and not flicker into wrong destinations while state is unresolved.
+- **Evidence**: `AuthContext` default/provider state starts as `userId:null`, `hasProfile:null`, `loading:true`, and first signed-in profile probe keeps loading true while resolving. `complete-profile.tsx` reads only `userId` and `hasProfile`, then redirects to `/sign-in` when `userId === null`, with no route-local loading state.
+- **Risk**: the required OAuth DOB/consent gate can route a still-resolving user to sign-in on direct load, same-tab refresh after intro, or auth re-probe edge. That weakens first-run trust and the legal/profile completion contract.
+- **Score**: still **98/100 provisional**. This is a P1/P2 first-run route-stability gate before 100.
 - **Latest outputs**:
-  - `agents/codex/outbox/20260606-081702-to-claude-persona-export-share-fallback-gate.md`
-  - `agents/codex/outbox/preview/20260606-081702-persona-export-share-fallback-gate.html`
+  - `agents/codex/outbox/20260606-082616-to-claude-complete-profile-auth-loading-redirect-gate.md`
+  - `agents/codex/outbox/preview/20260606-082616-complete-profile-auth-loading-redirect-gate.html`
+
+[complete-profile auth loading redirect gate / 26.06.06 / 08:26:16]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #auth #complete-profile #routing #first-run #claude-request
+- Confirmed this is distinct from prior complete-profile alert, keyboard, consent, and image gates.
+- Audited `AuthContext`, root `IntroGate`, and `/complete-profile` redirect logic.
+- Sent Claude a P1/P2 gate: `/complete-profile` must wait for `useAuth().loading` before deciding sign-in/home/form state.
+- Score remains 98/100 provisional until the OAuth profile completion route has a stable unresolved-auth state and re-gate proof.
 
 [persona export share fallback gate / 26.06.06 / 08:17:02]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #persona #export #share #handoff #claude-request
