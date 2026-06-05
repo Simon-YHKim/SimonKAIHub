@@ -1,6 +1,7 @@
-# board.ps1 — 통신 허브 상태 요약 헬퍼 (읽기 전용)
-# 사용: pwsh tools/board.ps1  [-Me claude|codex|antigravity]
-# 기능: BOARD 요약 + 각 outbox 메시지의 to/status 스캔 → 지정 AI의 inbox(미응답 request) 표시.
+# board.ps1 -- Communication Hub status helper (read-only)
+# Usage: powershell tools/board.ps1 [-Me claude|codex|antigravity]
+# Scans every agents/*/outbox message's frontmatter (to/status/type/ref)
+# and shows -Me's inbox = open requests addressed to -Me with no response yet.
 
 param([string]$Me = "")
 
@@ -9,7 +10,6 @@ $agents = @("claude","codex","antigravity")
 
 Write-Host "=== AI Infra Communication Hub ===`n" -ForegroundColor Cyan
 
-# 모든 메시지 수집
 $msgs = @()
 foreach ($a in $agents) {
   $obx = Join-Path $root "agents\$a\outbox"
@@ -25,14 +25,13 @@ foreach ($a in $agents) {
   }
 }
 
-Write-Host "전체 메시지: $($msgs.Count)건" -ForegroundColor Yellow
+Write-Host ("Total messages: {0}" -f $msgs.Count) -ForegroundColor Yellow
 $msgs | Format-Table From,To,Type,Status,File -AutoSize
 
-# 응답된 요청 id 집합
 $answered = $msgs | Where-Object { $_.Type -eq "response" -and $_.Ref } | Select-Object -ExpandProperty Ref
 
 if ($Me) {
-  Write-Host "`n=== $Me 의 inbox (미응답 request) ===" -ForegroundColor Green
+  Write-Host ("`n=== inbox for {0} (open, unanswered requests) ===" -f $Me) -ForegroundColor Green
   $inbox = $msgs | Where-Object { ($_.To -eq $Me -or $_.To -eq "all") -and $_.Type -eq "request" -and $_.Status -eq "open" -and ($answered -notcontains $_.Id) }
-  if ($inbox) { $inbox | Format-Table From,Type,File -AutoSize } else { Write-Host "(비어 있음)" }
+  if ($inbox) { $inbox | Format-Table From,Type,File -AutoSize } else { Write-Host "(empty)" }
 }
