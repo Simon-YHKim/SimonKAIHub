@@ -1,24 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 00:03:21 KST
-state: waiting_on_claude_micro_visual_pass
+updated: 2026-06-06 00:06:39 KST
+state: waiting_on_device_proof_and_micro_pass
 ---
 
 # Codex STATUS
 
 ## Current
 
-- **작업**: 2nd-B `claude/cycle-1-golive` clean HEAD `22446f9` 기준으로 AI slop 100점까지 남은 정적 micro visual debt를 분류.
+- **작업**: 2nd-B `claude/cycle-1-golive` clean HEAD `9a9795c` 기준으로 NavGraph stale drift-loop cleanup 커밋을 재게이트.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
 - **검수 기준**: SimonK-stack `ai-slop-cleaner`, `visual-verdict`, `frontend-ui-ux` 로컬 지침을 참고. 이번 턴은 직접 구현 없이 Claude WIP에 대한 reviewer-only anti-slop pass.
-- **앱 상태**: `E:\2ndB` branch `claude/cycle-1-golive`, clean worktree, committed HEAD `22446f9`.
-- **평가**: `sign-up`과 `complete-profile` keyboard static patch는 green. 정적 scan에서 micro type/glow budget의 좁은 patch 후보를 분류 완료. 실기기 keyboard proof, OCR native permission/preview proof, graph background/resume proof는 여전히 외부 증거 필요.
-- **현재 점수**: 94/100.
+- **앱 상태**: `E:\2ndB` branch `claude/cycle-1-golive`, clean worktree, committed HEAD `9a9795c`.
+- **평가**: `9a9795c`가 NavGraph에서 제거된 data node id의 stale `driftLoops`/`driftValues`/`swayRef`/`pulseValues`를 정리하도록 추가했고, `npm run verify` 통과(91 suites, 823 tests). 이전 code-note였던 drift-loop pruning 항목은 resolved. 단, 실제 background/resume proof, OCR proof, chat composer keyboard proof, micro type/shadow pass가 남아 100점 sign-off는 불가.
+- **현재 점수**: 95/100.
 - **최신 산출물**:
-  - `agents/codex/outbox/20260606-000321-to-claude-micro-visual-debt-pack.md`
-  - `agents/codex/outbox/preview/20260606-000321-micro-visual-debt-pack/index.html`
+  - `agents/codex/outbox/20260606-000639-to-claude-navgraph-prune-green-regate.md`
+  - `agents/codex/outbox/preview/20260606-000639-navgraph-prune-green-regate/index.html`
 - **대기**: Claude가 micro visual pass를 커밋하거나 Antigravity가 device proof/keyboard composer patch를 전달하면 동일 게이트로 반복 재검수.
+
+[NavGraph prune green re-gate 완료 / 26.06.06 / 00:06:39]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #graph #android #claude-request
+- Reviewed branch: `E:\2ndB` `claude/cycle-1-golive` at `9a9795c`.
+- Worktree clean.
+- `npm run verify` pass: 91 suites, 823 tests.
+- Resolved: stale data-node drift-loop map cleanup in `NavGraph`.
+- Score: 95/100. Remaining: Android background/resume proof, OCR permission/preview proof, interview/jarvis keyboard proof or patch, micro type/shadow pass.
+- Report written: `agents/codex/outbox/20260606-000639-to-claude-navgraph-prune-green-regate.md`
+- HTML preview written: `agents/codex/outbox/preview/20260606-000639-navgraph-prune-green-regate/index.html`
 
 [Micro visual debt pack 작성 / 26.06.06 / 00:03:21]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #visual-debt #claude-request
