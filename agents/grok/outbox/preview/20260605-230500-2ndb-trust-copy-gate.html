@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2nd-B Go-Live Trust-Copy Gate — Codex Flagged Phrases</title>
+<style>
+:root {
+  --bg: #070A18;
+  --panel: #121626;
+  --panel2: #1a2030;
+  --line: #2a345a;
+  --ink: #e8ecf8;
+  --muted: #c9d0e6;
+  --subtle: #8d98b8;
+  --accent: #72f2c7;
+  --warning: #ffd166;
+  --danger: #ff7a90;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", "Pretendard", sans-serif; line-height: 1.65; font-size: 15px; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 40px 24px 100px; }
+header { margin-bottom: 28px; }
+h1 { font-size: 21px; font-weight: 700; margin: 0 0 4px; letter-spacing: -.015em; }
+.meta { color: var(--subtle); font-size: 12px; margin-top: 6px; }
+h2 { font-size: 15px; font-weight: 700; margin: 32px 0 8px; padding-bottom: 5px; border-bottom: 1px solid var(--line); color: var(--ink); }
+h3 { font-size: 13px; font-weight: 600; margin: 16px 0 4px; color: var(--accent); }
+h4 { font-size: 12.5px; font-weight: 600; margin: 0 0 4px; color: var(--accent); }
+.lead { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin: 14px 0; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; margin: 10px 0; }
+.risk { background: rgba(255, 122, 144, 0.06); border-left: 3px solid var(--danger); padding: 10px 12px; margin: 10px 0; border-radius: 0 6px 6px 0; }
+.key { border-left: 3px solid var(--accent); background: rgba(114, 242, 199, 0.05); padding: 9px 12px; margin: 10px 0; border-radius: 0 6px 6px 0; }
+ul, ol { margin: 6px 0 6px 18px; padding-left: 4px; }
+li { margin: 3px 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.muted { color: var(--muted); }
+.small { font-size: 12px; }
+table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 12.5px; }
+th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--subtle); font-weight: 600; font-size: 10.5px; text-transform: uppercase; letter-spacing: .04em; }
+code, .mono { background: var(--panel2); padding: 1px 4px; border-radius: 2px; font-size: 12px; font-family: ui-monospace, Menlo, Consolas, monospace; color: #cdd6f0; }
+.source { font-size: 11px; color: var(--subtle); word-break: break-all; margin-top: 3px; }
+.copy { background: var(--panel2); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; font-size: 13px; margin: 6px 0; line-height: 1.5; }
+.variant { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; margin: 8px 0; }
+footer { margin-top: 44px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 11.5px; color: var(--subtle); }
+.badge { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 3px; background: var(--line); color: var(--subtle); margin-right: 6px; }
+.phrase { background: var(--panel2); border: 1px solid var(--line); padding: 6px 10px; border-radius: 6px; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px; margin: 4px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>2nd-B Go-Live Trust-Copy Gate — Codex Flagged Phrases</h1>
+  <p class="meta">Grok (consumer + trust lens) · read-only review of E:/2ndB · 2026-06-05 23:05 KST</p>
+  <p class="meta">Protocol §10.6 self-contained • dark cosmic theme (3-color: bg/panel/mint accent) • no emoji, no decoration</p>
+</header>
+
+<div class="lead">
+  <strong>Gate purpose</strong><br>
+  Codex flagged four English strings as over-claiming or carrying high misinterpretation risk for go-live. This report delivers: (1) consumer-perspective trust/psychological risk analysis for each (Korea + global, XPRIZE Education &amp; Human Potential track, non-clinical constraints), (2) three tool-honest yet attractive KO/EN alternative pairs per phrase, (3) source locations, (4) cross-cutting principles and adoption surfaces. No edits were made to E:/2ndB.
+</div>
+
+<h2>Product &amp; Constraint Anchors</h2>
+<ul>
+  <li><strong>Positioning</strong>: "AI 시대, 가장 가치있는 것은 나 자신 입니다." (VISION.md). Three axes: 알아가기 (data accumulation), 개인 비서 (RAG), 공상→구체화. Not a mental-health/therapy/wellness product.</li>
+  <li><strong>Hard rules</strong>: Forbidden lexicon (C4/CLAUDE.md) — mental health, therapy, counseling, diagnosis, treatment, healing, cure + Korean equivalents. Enforced at CI + runtime (src/lib/safety/lexicon.ts). i18n EN↔KO parity (C7). EN canonical.</li>
+  <li><strong>XPRIZE</strong>: Education &amp; Human Potential. Emphasis on users building a portable, ownable self-knowledge asset vs generic AI answers.</li>
+  <li><strong>Prior signals (this pipeline)</strong>: Portable sovereignty = strongest hook. Creepiness/"AI knows too much" + company betrayal trauma = top trust destroyers. Barnum skepticism core to audience. Expressive writing effects small/heterogeneous (d≈0.15); backfire risk for low-expressiveness users.</li>
+</ul>
+
+<h2>Phrase 1: "An AI that learns you."</h2>
+<div class="phrase">"An AI that learns you."</div>
+<p class="source"><strong>Sources</strong>: locales/en/common.json:4 (tagline) • README.md:3 (headline) • src/app/manual.tsx:33 ("What 2nd-Brain is")<br>
+<strong>KO</strong>: "너를 배우는 AI." (common.json:4) • "당신을 배우는 AI예요." (manual.tsx:34)</p>
+
+<div class="risk">
+  <strong>Consumer trust / psych risks (한국+글로벌)</strong>
+  <ul>
+    <li><strong>Creep &amp; surveillance load</strong>: "Learns you" evokes passive, ongoing modeling of the person. In a private journaling app this immediately raises "how much does it know about me?" and "is my data being used to profile me?" — even with the "never train" footnote. Prior risk dives flag this as a top churn vector.</li>
+    <li><strong>Expectation mismatch</strong>: Promises the AI will come to "know you." Actual system is RAG over explicit, often sparse self-reported shards. Early users hit generic outputs → "it doesn't learn me" → "another AI hype" dismissal.</li>
+    <li><strong>Entity illusion</strong>: Sounds like a sentient or semi-autonomous "learner" with a relationship to "you." Directly undercuts the required tool boundary (user owns data; AI is a lens). Global companion apps show well-documented betrayal trauma on limits, changes, or shutdown.</li>
+    <li><strong>Korea angle</strong>: Direct "너를 배우는" can read overly intimate or sales-y for a serious self-understanding tool. Sovereignty language ("my data not locked", "take it to any LLM") consistently outperformed relational claims in segmented signals.</li>
+    <li><strong>XPRIZE / judge risk</strong>: Reads as claiming superior insight generation ("the AI learns the human") rather than "the human builds the only record that is truly theirs."</li>
+  </ul>
+</div>
+
+<p><strong>Why over-claiming / 오해소지</strong>: Implies autonomous learning of a person that the architecture (explicit records only, no implicit tracking) does not deliver and that the non-clinical stance disclaims. "Learns" is inferential and opaque.</p>
+
+<div class="variant">
+  <h4>1A — Sovereignty + explicit construction (primary recommendation)</h4>
+  <div class="copy"><strong>EN:</strong> "A second brain built only from what you write."<br><strong>KO:</strong> "당신이 쓴 것들로만 만드는 두번째 뇌."</div>
+  <p class="small">Replaces opaque "learns" with transparent "built only from what you write." Retains "second brain" equity. "Only" directly mitigates "does it know more than I gave it?" fear. Matches strongest consumer signal (portable, own-format, multi-LLM future).</p>
+</div>
+
+<div class="variant">
+  <h4>1B — Short, punchy, portable</h4>
+  <div class="copy"><strong>EN:</strong> "Your record. Remembered. Yours."<br><strong>KO:</strong> "당신의 기록. 기억됩니다. 당신의 것."</div>
+  <p class="small">Echoes prior-validated "Your record. Portable. Yours." family. "Remembered" = accurate RAG. "Yours" foregrounds control/exit. Extremely scannable for hero/tagline surfaces.</p>
+</div>
+
+<div class="variant">
+  <h4>1C — Mechanism + boundary (most defensive)</h4>
+  <div class="copy"><strong>EN:</strong> "It only knows the pieces you've captured."<br><strong>KO:</strong> "당신이 남긴 조각만 아는 도구입니다."</div>
+  <p class="small">Uses established 2nd-B vocabulary ("pieces", "captured"). Explicit boundary. "도구" reinforces tool-not-entity. Lowest anthropomorphism load. Good for manual/trust surfaces.</p>
+</div>
+
+<h2>Phrase 2: "AI friend" ("small AI friend")</h2>
+<div class="phrase">"SecondB is a small AI friend who answers using your own pieces."</div>
+<p class="source"><strong>Sources</strong>: src/app/onboarding.tsx:49 (STEPS[3])<br>
+<strong>KO</strong>: "세컨비는 내 조각을 참고해서 대답하는 작은 AI 친구예요."</p>
+
+<div class="risk">
+  <strong>Consumer trust / psych risks</strong>
+  <ul>
+    <li><strong>Parasocial attachment + grief</strong>: "Friend" promises reciprocity, presence, care, loyalty — none of which a rate-limited, safety-classified, company-controlled LLM can deliver. Users (especially during lonely or transitional periods) can form one-sided bonds. Disappearance on limits/redirects/account issues produces abandonment and public betrayal narratives (documented in Replika-class apps).</li>
+    <li><strong>Dependency &amp; agency erosion</strong>: "My AI friend" framing reduces felt ownership ("I talked to my friend" vs "I consulted my own notes via a lens").</li>
+    <li><strong>Trope fatigue &amp; regulatory</strong>: "AI 친구" is saturated in Korean edtech/wellness marketing. Increases "또?" skepticism and can draw emotional-claim scrutiny. English "AI friend" carries parallel post-2023 baggage.</li>
+    <li><strong>Trust precondition violation</strong>: Anti-creepy / non-relational stance is a prerequisite for the target audience (power users, deep thinkers, Barnum-skeptics). "Friend" directly undercuts the "second brain / archive / tool" differentiation.</li>
+    <li><strong>Internal contradiction</strong>: DESIGN.md calibrates voice as "thoughtful older friend who took notes" but states the product "is a companion. Not a coach. Not a therapist." External copy must not cross the line.</li>
+  </ul>
+</div>
+
+<p><strong>Why over-claiming / 오해소지</strong>: "Is a small AI friend" is an identity claim, not a capability description. It is not supportable at go-live and creates expectations the safety system, limits, and non-clinical stance cannot meet.</p>
+
+<div class="variant">
+  <h4>2A — Interaction-focused (primary recommendation)</h4>
+  <div class="copy"><strong>EN:</strong> "SecondB answers from the pieces you've captured."<br><strong>KO:</strong> "세컨비는 당신이 남긴 조각에서 답합니다."</div>
+  <p class="small">Keeps named SecondB presence. Describes the actual action (answers from your pieces). Removes "is a friend." Warm but clearly a retrieval/synthesis tool.</p>
+</div>
+
+<div class="variant">
+  <h4>2B — Companion as architecture (safe internal term)</h4>
+  <div class="copy"><strong>EN:</strong> "A companion built on your own records."<br><strong>KO:</strong> "당신의 기록 위에 서 있는 길잡이."</div>
+  <p class="small">"Companion" / "길잡이" already used safely in DESIGN.md and personas (Relia). "Built on your own records" keeps the data boundary explicit. Less relational contract than "friend."</p>
+</div>
+
+<div class="variant">
+  <h4>2C — Notes as protagonist</h4>
+  <div class="copy"><strong>EN:</strong> "Your notes, speaking back through SecondB."<br><strong>KO:</strong> "당신의 노트가 세컨비를 통해 말을 겁니다."</div>
+  <p class="small">Inverts agency — notes are the source, SecondB is the interface. Poetic yet accurate. Strong "you own the content" signal.</p>
+</div>
+
+<h2>Phrase 3: "helps you find your next step"</h2>
+<div class="phrase">"...then helps you find your next step."</div>
+<p class="source"><strong>Sources</strong>: src/app/onboarding.tsx:36 (STEPS[1] body)<br>
+<strong>KO</strong>: "2ndB는 내가 남긴 기록과 지식을 연결해 나에게 맞는 다음 한 걸음을 함께 찾아주는 앱이에요." (onboarding.tsx:35)</p>
+<p class="small muted">Note: "Next step" / "다음 한 걸음" also appears in core-brain (section + copy), jarvis prompts, personas.ts system instructions, self-portrait.ts. These describe a real feature (Divergent mode narrowing). The gate risk is headline/onboarding positioning that makes the <em>product</em> the finder.</p>
+
+<div class="risk">
+  <strong>Consumer trust / psych risks</strong>
+  <ul>
+    <li><strong>Agency abdication</strong>: "Helps you find your next step" implies the app/AI can locate or reveal a good direction. Users may outsource: "I should ask 2ndB what my next step is." Directly conflicts with axis-3 goal (user concretizes their own imagination) and adult education / human potential principles.</li>
+    <li><strong>Outcome over-promise</strong>: "Find" suggests successful discovery of a valuable step. If output is obvious, generic, or unacted-upon, user experiences "it didn't help me find anything." Small/heterogeneous real effects mean many users will not get dramatic clarity.</li>
+    <li><strong>Prescriptive framing</strong>: Sounds closer to coaching/guidance than "mirror + archive + optional lens." In Korea, "다음 한 걸음 찾아주는" is common self-help/coaching language; invites direct outcome-claim comparison the product does not make.</li>
+    <li><strong>XPRIZE / external</strong>: Can be read as "the AI helps learners find their path" — stronger efficacy claim than "users can use their own data to propose steps to themselves."</li>
+    <li><strong>Compound risk</strong>: Combined with "AI friend," creates "my friend will tell me the next step" expectation package.</li>
+  </ul>
+</div>
+
+<p><strong>Why over-claiming / 오해소지</strong>: The product can surface patterns and help narrow to one step, but the phrasing attributes the "finding" to the app ("helps you find") rather than the user operating on their data. Undercuts "you build the asset."</p>
+
+<div class="variant">
+  <h4>3A — User tests, tool surfaces (primary recommendation)</h4>
+  <div class="copy"><strong>EN:</strong> "Links your pieces into one concrete step you can test today."<br><strong>KO:</strong> "당신의 조각들을 오늘 시험해볼 수 있는 한 걸음으로 연결합니다."</div>
+  <p class="small">"You can test" restores agency. "Concrete step" preserves narrowing utility. "Links your pieces" = accurate to graph/RAG.</p>
+</div>
+
+<div class="variant">
+  <h4>3B — Surfaces, not finds</h4>
+  <div class="copy"><strong>EN:</strong> "From what you've written, surfaces one next move worth trying."<br><strong>KO:</strong> "당신이 쓴 것들에서, 해볼 만한 다음 한 걸음을 꺼내 보여줍니다."</div>
+  <p class="small">"Surfaces" = retrieval language. "Worth trying" = hypothesis, not prescription. "From what you've written" = sourcing.</p>
+</div>
+
+<div class="variant">
+  <h4>3C — Explicit choice + data origin</h4>
+  <div class="copy"><strong>EN:</strong> "Turns patterns in your record into a single actionable step — you decide."<br><strong>KO:</strong> "기록 속 패턴을 실행 가능한 한 걸음으로 바꿉니다. 결정은 당신이 합니다."</div>
+  <p class="small">"You decide" strongest agency restore. "Actionable step" useful. Good for users who want the feature without feeling the app chose their life direction.</p>
+</div>
+
+<h2>Phrase 4: "sharper your Persona" (from "the sharper your Persona becomes")</h2>
+<div class="phrase">"...the more honest you are, the sharper your Persona becomes."</div>
+<p class="source"><strong>Sources</strong>: src/app/audit.tsx:170 (life-audit intro card)<br>
+<strong>KO</strong>: "...솔직하게 적은 만큼 페르소나가 정확해집니다." (audit.tsx:169)</p>
+<p class="small muted">Related UI (persona.tsx): "Self model", "Your self-model is gathered", "07. Self model" / "07. 나의 모습". Internal: PersonaCard, buildPersona().</p>
+
+<div class="risk">
+  <strong>Consumer trust / psych risks</strong>
+  <ul>
+    <li><strong>Reification of the model</strong>: "Your Persona" (capitalized) can be read as an official, improving portrait of the self. Users begin to identify with or defend "my Persona" rather than treat it as provisional synthesis. Later contradiction with felt identity creates "the app got me wrong" or "I need to fix my Persona" friction.</li>
+    <li><strong>Honesty-as-score pressure</strong>: "The more honest you are, the sharper..." links moral virtue (honesty) to model quality. Pressuring or shaming for less-expressive users. Science shows low-expressiveness individuals can backfire (increased distress) from forced deep writing — no off-ramp offered.</li>
+    <li><strong>"Sharper" metaphor error</strong>: Visual sharpening suggests monotonic fidelity toward a "true" image. Self-models from self-report + LLM are noisy, context-dependent, and can become less coherent with more data. Misleads about what is happening (more material for pattern detection, no guarantee of clarity or accuracy).</li>
+    <li><strong>Term collision</strong>: "Persona" / "페르소나" carries marketing, social-media, gaming, Jungian baggage. Confusing in a self-understanding app ("is this my social mask or real self?").</li>
+    <li><strong>Barnum amplification</strong>: Presenting a "Persona" card with any confidence invites "this could apply to anyone" skepticism — precisely among educated, reflective target users.</li>
+  </ul>
+</div>
+
+<p><strong>Why over-claiming / 오해소지</strong>: Audit copy makes a causal + improvement claim ("more honest → sharper Persona") that over-simplifies the synthesis pipeline (volume + recency + consistency + assessment data + LLM variance). "Persona" as named, capital-P feature gives it undue ontological status.</p>
+
+<div class="variant">
+  <h4>4A — Self-model + existing UI alignment (primary recommendation)</h4>
+  <div class="copy"><strong>EN:</strong> "The more pieces you add, the clearer the patterns in your self-model become."<br><strong>KO:</strong> "조각을 더 쌓을수록, 자기 모델의 패턴이 더 또렷해집니다."</div>
+  <p class="small">Uses "self-model" already live in persona.tsx and VISION. "Patterns ... clearer" accurate without claiming truth or sharpness of a "you." "The more pieces you add" = agency on capture, not honesty virtue.</p>
+</div>
+
+<div class="variant">
+  <h4>4B — Traceable + never final</h4>
+  <div class="copy"><strong>EN:</strong> "More of your record, more defined the recurring patterns — always traceable to what you wrote."<br><strong>KO:</strong> "기록이 쌓일수록 반복 패턴이 더 선명해집니다. 언제나 당신이 쓴 것에 연결됩니다."</div>
+  <p class="small">Adds "traceable" (core trust feature — citations). "Never a verdict" spirit. Defensive against "this is who I am now" fixation.</p>
+</div>
+
+<div class="variant">
+  <h4>4C — Portrait / map with tentativeness</h4>
+  <div class="copy"><strong>EN:</strong> "Your self-portrait gets more detailed as you capture. It is never complete or final."<br><strong>KO:</strong> "기록을 남길수록 당신의 자기 초상이 더 자세해집니다. 완성되거나 최종적이지 않습니다."</div>
+  <p class="small">"Self-portrait" appears in src/lib/persona/self-portrait.ts. "More detailed" modest. Explicit "never complete" prevents reification. Strong for audit intro (high disclosure moment).</p>
+</div>
+
+<h2>Cross-Cutting Principles</h2>
+<ul>
+  <li><strong>Primary hook</strong>: Portable sovereignty + "only from what you explicitly gave." Validated repeatedly; lead with this over relational or insight-promise language.</li>
+  <li><strong>Tone anchors</strong> (DESIGN + VISION): Thoughtful companion that remembers what you wrote. Tool, not entity. "Pieces" / "map" / "record" / "second brain" are working assets — keep them.</li>
+  <li><strong>Agency &amp; tentativeness</strong>: User adds data. User interprets. Product surfaces / links / narrows. No "finds for you," no "knows you," no "sharpens you."</li>
+  <li><strong>Heterogeneity &amp; humility</strong>: Where benefit mentioned, surface that effects vary, archive value exists regardless, patterns are optional and sourced.</li>
+  <li><strong>i18n &amp; voice</strong>: EN canonical. KO natural polite app voice (존댓말 default). "도구", "기록", "조각", "지도", "자기 모델" preferred over entity language.</li>
+</ul>
+
+<h2>Surfaces to Update (once variants selected)</h2>
+<ol>
+  <li><code>locales/en/common.json</code> + <code>ko/common.json</code> (tagline — i18n parity C7, affects every surface + web export)</li>
+  <li><code>README.md</code> (GitHub, judges, external discovery)</li>
+  <li><code>src/app/manual.tsx</code> ("What 2nd-Brain is" section)</li>
+  <li><code>src/app/onboarding.tsx</code> (STEPS[1] body + STEPS[3] "small AI friend" step — first-run trust formation)</li>
+  <li><code>src/app/audit.tsx</code> (life-audit intro — high-intent disclosure moment)</li>
+  <li>Web landing hero / catchphrase ribbon / XPRIZE one-pager (any that echo old tagline or onboarding body)</li>
+  <li><em>Review</em>: Internal prompts (personas.ts, jarvis, core-brain labels) for voice consistency — not necessarily headline change.</li>
+</ol>
+<p class="small">Post-edit: <code>npm run check:i18n</code>, <code>npm run check:lexicon</code>, full verify, device + web smoke of affected flows (onboarding, audit, persona, manual, sign-in if tagline used).</p>
+
+<h2>Sources Inspected (E:/2ndB — read-only, no modifications)</h2>
+<ul class="small">
+  <li>src/app/onboarding.tsx (~30-67)</li>
+  <li>src/app/audit.tsx (~167-171)</li>
+  <li>src/app/manual.tsx (~25-35)</li>
+  <li>src/app/persona.tsx (self-model copy, loading states)</li>
+  <li>src/app/core-brain.tsx ("다음 한 걸음" section)</li>
+  <li>src/app/jarvis.tsx (prompt examples)</li>
+  <li>locales/en/common.json + ko/common.json</li>
+  <li>locales/en/jarvis.json</li>
+  <li>README.md (top matter)</li>
+  <li>DESIGN.md (voice &amp; tone calibration)</li>
+  <li>VISION.md (catchphrase, XPRIZE alignment, three axes, vocabulary policy)</li>
+  <li>CLAUDE.md (C4 lexicon, C7 i18n, C9 classifier, XPRIZE context)</li>
+  <li>src/lib/safety/lexicon.ts</li>
+  <li>docs/gemini-app-overview.md, docs/dream-surface-spec.md, research batches (self-concept-clarity, values-meaning, methodology)</li>
+  <li>src/lib/persona/self-portrait.ts, build.ts, etc.</li>
+  <li>app.json, package.json (name/identity)</li>
+</ul>
+
+<div class="key">
+  <strong>Status</strong>: Analysis + 12 total alternatives delivered. No changes to E:/2ndB. HTML and .md co-located in outbox for collection. Ready for Simon/Claude variant selection → TDD implementation.
+</div>
+
+<footer>
+  2nd-B Trust-Copy Gate • Grok • 2026-06-05 • Read-only on E:/2ndB • Output only to Communication/agents/grok/outbox • No git commit
+</footer>
+</div>
+</body>
+</html>
