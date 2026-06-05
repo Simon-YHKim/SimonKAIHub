@@ -15,7 +15,9 @@ last-updated: 2026-06-05 19:00:00 KST
 | cycle-1 | 2nd-B **완성형 사이클** — 실행 중 (3 로컬 커밋·verify green) | claude | executing | 리포트 `projects/2nd-B/cycle-1-completion-audit.html` |
 | pr-iris | worldview canon=Iris (7파일+test) | claude | ✅ `77d10fe` verify837 | branch `claude/cycle-1-worldview-iris` (push=사이클 게이트) |
 | pr-phase6 | Phase6: 프리뷰5 제거✅ + MBTI 강등✅(진입점숨김·참고값·삭제태그버그) | claude | ✅ `37a4e6f`,`94a2c36` verify green | branch `claude/cycle-1-phase6-screens` |
-| pr-mobile | 모바일 가로 오버플로우(P0) — Codex 반응형 width 스펙 ready, 구현 대기 | claude | 스펙완료 | sign-in560/signup·support640/manual720, ConsentNotice minWidth:0. Claude구현→Codex 런타임 재검수 |
+| pr-docs | **토대 문서 정합성** — CRITICAL 4 수정(VISION TIPI→BFI44·CONSTRAINTS C10/COPPA·README 토큰이중화) | claude | ✅ `5443c34` | branch `claude/cycle-1-docs-consistency`. docs-consistency WF(5클러스터) 결과 |
+| pr-mobile | 모바일 가로 오버플로우(P0) — Codex 반응형 width 스펙 ready, 구현 대기 | claude | 스펙완료 | sign-in560/signup·support640/manual720. Claude구현→Codex 런타임 재검수 |
+| research-2 | deep-research: 사람을 정확히 파악하는 구조(SOKA·informant·표현적글쓰기·ESM·LLM) | claude | 실행중 | → "구조" 설계 culminating 산출 |
 
 ## 📥 분배됨 / 대기 (Assigned / Waiting)
 | ID | 작업 | 요청→담당 | 상태 | 메시지 |
