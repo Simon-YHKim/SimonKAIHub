@@ -1,13 +1,40 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 04:09:51 KST
-state: ada9bd2_main_regate_done_with_concerns
+updated: 2026-06-06 04:16:51 KST
+state: cycle4_retired_routes_regate_done_with_concerns
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **작업**: Simon `/goal` 지속. Claude cycle-4 retired-route cleanup을 즉시 재검수하고, 남은 전체 화면 UI slop를 추가 식별.
+- **src**: user - "계속해서 모든 화면에 대한 UI 문제점을 찾아내고 개선해." / "AI slop는 점수가 100점 이 되는것을 지향해..."
+- **앱 기준**: `E:\2ndB`, branch `claude/cycle-4-retired-routes`, head `74dc39f fix(ux): stop emitting retired routes as active in-app destinations`, clean and aligned with `origin/claude/cycle-4-retired-routes`.
+- **검증**:
+  - `npm test -- src/lib/persona/__tests__/evidence.test.ts --runInBand` PASS.
+  - `npm test -- src/lib/persona/__tests__/self-portrait.test.ts --runInBand` PASS.
+  - `npm test -- src/lib/__tests__/village-ui.test.ts --runInBand` PASS.
+  - `npm run verify` PASS (lint, type-check, i18n, lexicon, LLM boundary, constraints, emdash, Jest 91 suites / 826 tests).
+  - `git diff --check` PASS.
+- **판정**: retired-route active UI gate는 ACCEPT. 단 전체 점수는 **97/100 provisional** 유지: privacy opt-out P1, settings/account/audit keyboard shell, broad destructive friction, Pressable a11y debt, runtime proof가 남음.
+- **새 sharpened finding**: 고밀도 화면의 custom `Pressable` 접근성 계약 부족. `inbox`, `research`, `interview`, `wiki`, `trinity`의 row/chip/link/action에 role/label/state가 누락된 사례를 라인 근거로 보고.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260606-041651-to-claude-74dc39f-retired-routes-regate.md`
+  - `agents/codex/outbox/preview/20260606-041651-74dc39f-retired-routes-regate.html`
+- **다음 루프**: Claude가 privacy monotonicity 또는 Pressable a11y cleanup을 올리면 즉시 재검수. 그 전에는 account/settings/privacy/data/support/permissions runtime/keyboard/deletion proof를 계속 확장 감사.
+
+[Cycle-4 retired-route re-gate / 26.06.06 / 04:16:51]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #routes #a11y #privacy #settings
+- Detected Claude branch switch/WIP, then final clean branch `claude/cycle-4-retired-routes` at `74dc39f`.
+- Verified retired route cleanup with targeted tests + full `npm run verify`.
+- Accepted retired-route cleanup: active helpers no longer emit `/journal`, `/imagine`, `/mbti`; tests prevent regression.
+- Kept overall score 97/100 provisional because P1 privacy opt-out monotonicity remains.
+- Added precise Pressable a11y debt gate for high-density screens.
+- Report/preview:
+  - `agents/codex/outbox/20260606-041651-to-claude-74dc39f-retired-routes-regate.md`
+  - `agents/codex/outbox/preview/20260606-041651-74dc39f-retired-routes-regate.html`
 
 - **작업**: Simon `/goal` 지속. PR #213 merged `main`을 100/100 anti-slop 기준으로 재검수.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
