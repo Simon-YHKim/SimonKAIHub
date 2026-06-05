@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 01:49:10 KST
-state: all_screen_trust_state_ledger_reported
+updated: 2026-06-06 01:52:30 KST
+state: regated_71f44fe
 ---
 
 # Codex STATUS
@@ -14,10 +14,12 @@ state: all_screen_trust_state_ledger_reported
 - **최신 Claude 기준**: `agents/claude/outbox/20260606-013358-to-all-cycle2-audit-baseline.md`, committed spec fix `7ee23ce` (Lumi -> Iris), and `agents/claude/outbox/20260606-014743-to-all-cycle2-perf-audit.md` assigning Codex to include perf items in cycle-2 re-gate.
 - **검사 기준**: SimonK-stack `simon-design-first`, `design-review`, `design-consultation`, `design-html`를 참고하되 2nd-B 기존 `DESIGN.md` dark premium/village system을 보존. 사용자에게 보이는 mock/stub/placeholder/coming-soon, 권한 불일치, unproven provider, keyboard/list proof gap, source-of-truth split, stale worldview residue를 100점 감점 요인으로 본다.
 - **대상 앱 상태**:
-  - App worktree `E:\2ndB` branch `claude/cycle-2-concept-consistency`, clean, head `f1ced87` (ahead 1 from `origin/main`).
-- **검증**: `npm run verify` pass on `f1ced87`: lint/type-check/i18n/lexicon/constraints/emdash/tests green, 91 suites, 823 tests.
-- **현재 점수**: all-screen trust/state ledger = 84/100 provisional. Iris source-of-truth split is resolved by hub commit `7ee23ce`, but 100/100 remains blocked by user-visible mock-mode strings, reachable placeholders, permission mismatch, unproven social provider affordances, consent/legal launch readiness, raw error alerts, assessment tap-target proof, internal "Phase 1" labels, stale worldview residue, orphan route cleanup, keyboard/list proof, and Claude's new perf-gate items (FlatList, NavGraph LOD, background timers, memory prune).
+  - App worktree `E:\2ndB` branch `claude/cycle-2-concept-consistency`, clean, head `71f44fe` (ahead 2 from `origin/main`).
+- **검증**: `npm run verify` pass on `71f44fe`: lint/type-check/i18n/lexicon/constraints/emdash/tests green, 91 suites, 823 tests.
+- **현재 점수**: 71f44fe UI re-gate = 88/100 provisional. Placeholder/permission/MBTI/BackArrow fixes are accepted, but 100/100 remains blocked by support FAQ vocabulary policy violation, raw error alerts, user-visible mock-mode strings, unproven social provider affordances, consent/legal launch readiness, assessment tap-target proof, internal "Phase 1" labels, stale worldview residue, keyboard/list proof, and Claude's new perf-gate items (FlatList, NavGraph LOD, background timers, memory prune).
 - **최신 산출물**:
+  - `agents/codex/outbox/20260606-015230-to-claude-71f44fe-ui-regate.md`
+  - `agents/codex/outbox/preview/20260606-015230-71f44fe-ui-regate.html`
   - `agents/codex/outbox/20260606-014620-to-claude-all-screen-trust-state-ledger.md`
   - `agents/codex/outbox/preview/20260606-014620-all-screen-trust-state-ledger.html`
   - `agents/codex/outbox/20260606-013907-to-claude-cycle2-1-ai-slop-regate.md`
@@ -32,7 +34,17 @@ state: all_screen_trust_state_ledger_reported
   - `agents/codex/outbox/preview/20260606-011114-flatlist-followup-gate/index.html`
   - `agents/codex/outbox/20260606-011522-to-claude-wip-touch-action-gate.md`
   - `agents/codex/outbox/preview/20260606-011522-wip-touch-action-gate/index.html`
-- **대기**: Claude/AG가 cycle-2 follow-up을 완료하면 즉시 100점 기준으로 재게이트. 특히 mock-mode 사용자 노출 제거, placeholder 제거, permission surface 정합성, provider gating/proof, raw error alert cleanup, consent/legal gate, assessment tap-target proof, keyboard/list proof, stale worldview residue를 먼저 본다.
+- **대기**: Claude/AG가 cycle-2 follow-up을 완료하면 즉시 100점 기준으로 재게이트. 특히 support FAQ vocabulary, mock-mode 사용자 노출 제거, raw error alert cleanup, provider gating/proof, consent/legal gate, assessment tap-target proof, keyboard/list proof, stale worldview residue, perf items를 먼저 본다.
+
+[71f44fe UI re-gate / 26.06.06 / 01:52:30]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #cycle2 #regate #claude-commit
+- Reviewed app commit `71f44fe fix(ui): cycle-2 Codex gap fixes`.
+- Ran `npm run verify`: pass, 91 suites, 823 tests.
+- Accepted closed/improved items: password reset coming-soon, free journal subscription placeholder, device reset placeholder, permission copy, `/mbti` redirect, BackArrow labels, support placeholder FAQ.
+- New P1: support FAQ uses vocabulary policy violations (`진단이나 치료`, `diagnoses or treats`) despite lexicon check passing.
+- Still open: raw implementation error alerts, user-visible mock strings, "Phase 1" internal labels, assessment tap targets, positive tracking, consent/legal launch readiness, provider gating/proof, perf items.
+- Score adjusted up to 88/100 provisional, still below 90.
+- Report/preview written and opened.
 
 [All-screen trust/state ledger / 26.06.06 / 01:46:20]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #cycle2 #trust #state #regate
