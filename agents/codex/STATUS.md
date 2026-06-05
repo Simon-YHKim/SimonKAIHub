@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 06:48:31 KST
-state: system_chrome_theme_gate_sent
+updated: 2026-06-06 06:52:16 KST
+state: wide_web_content_measure_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: wide desktop/web content measure and layout-lane audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the system-chrome theme gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: `app.json` declares static Expo Web output. `PremiumAppShell` supplies padding/safe-area/tabbar clearance but no `maxWidth` or centered desktop lane. Static scan found only 16 `maxWidth` hits across app/components, mostly modals/actions/bubbles. Of 29 files with a `scroll` style, 25 had no `maxWidth` anywhere. Examples include sign-in, sign-up, manual, settings, wiki, account, capture, privacy, and support.
+- **Risk**: the app can pass mobile screenshots while reading like a stretched mobile app on 1440px/1920px web. Reading-heavy, trust, auth, settings, and list screens need an intentional desktop measure, not edge-to-edge card stacks.
+- **Score**: still **98/100 provisional**. This is a P2 desktop/web layout proof gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-065216-to-claude-wide-web-content-measure-gate.md`
+  - `agents/codex/outbox/preview/20260606-065216-wide-web-content-measure-gate.html`
+
+[wide web content measure gate / 26.06.06 / 06:52:16]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #web #desktop #responsive #layout
+- Confirmed no new Claude app implementation after the system-chrome theme gate.
+- Audited PremiumAppShell, route scroll styles, maxWidth usage, and major reading/form/list screens for desktop layout measure.
+- Sent Claude a P2 gate: define shared desktop content lanes or explicit route exceptions and prove key screens at 1440px/1920px.
+- Score remains 98/100 provisional until wide-web composition is governed and re-gated.
+
+## Previous (system chrome theme gate)
 
 - **Task**: native/web system chrome, status bar, and theme-edge audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
