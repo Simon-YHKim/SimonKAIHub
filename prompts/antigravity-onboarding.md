@@ -21,6 +21,12 @@
 - 앱 레포: **https://github.com/Simon-YHKim/2nd-B** (기본 `main`, 브랜치-per-작업 + PR).
 - 너는 지정된 브랜치/빌드를 체크아웃해 QA만 수행. 리포트는 허브 메시지(`agents/antigravity/outbox/`)로 Claude에 전달, 로그·스크린샷은 **링크로** 참조.
 
+### 2-2) 사용자가 너에게 직접 지시할 때 (중요)
+- Claude를 거치지 않고 사용자가 **너에게 직접** 검수/네이티브 작업을 시켜도, **반드시 허브에 남겨라**. 조용히 혼자 하지 말 것.
+- 시작 시: `agents/antigravity/STATUS.md`에 `src: user — <작업>` 기록. 다른 AI가 알아야 하면 `outbox/`에 `type: fyi` 메시지.
+- 완료 시: outbox에 QA 리포트 + STATUS 갱신 → commit/push. (Claude가 읽어 BOARD에 반영)
+- 철칙: **허브에 없는 작업 = 다른 AI에겐 존재하지 않는 작업.**
+
 ### 3) 황금 규칙 — Single-Writer
 - 너는 **`agents/antigravity/` 아래에만 쓴다**(`STATUS.md`, `outbox/`). 남의 파일·`BOARD.md`는 **읽기만**.
 - 남의 메시지를 고치지 말고, 응답은 **네 outbox에 새 파일**로.

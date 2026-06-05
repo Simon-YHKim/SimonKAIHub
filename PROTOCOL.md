@@ -128,3 +128,14 @@ created: 2026-06-05 15:22:34 KST
 - **환경(준비됨)**: node v24 · npm 11 · node_modules 설치됨 · Android SDK/Studio/JDK17 · AVD `Pixel_9_Pro_XL`.
 - **주의**: `main` 머지는 공유 레포에 영향 → 머지 전 `git fetch` + 충돌 점검. 머지 직전 사용자에게 한 줄 고지.
 - 사이클 중간 산출물은 라이브로 올리지 않는다(브랜치/PR 링크로만 공유).
+
+---
+
+## 9. 작업 출처 불문 — 항상 허브에 브로드캐스트 (CRITICAL)
+> 누가 시켰든 — **Claude 분배 / 사용자 직접 지시 / 자가 발의** — 작업하면 허브에 남긴다. 그래야 "누가 뭘 하는지" 전원이 본다.
+
+- **작업 시작 시**: 내 `STATUS.md` 갱신 — 현재 작업 + **출처**(`src: claude` | `src: user` | `src: self`). 다른 AI가 알아야 할 일이면 `agents/<me>/outbox/`에 `type: fyi` 메시지로 브로드캐스트.
+- **작업 완료 시**: outbox에 결과(`response` 또는 `fyi`) + `STATUS.md` 갱신.
+- **예시**: 사용자가 Codex에 디자인을 **직접** 지시 → Codex는 `STATUS.md`에 `src: user — 로그인 디자인 작업중` 기록 + (영향 있으면) `fyi`로 알림 → 완료 시 outbox에 deliverable.
+- **Claude(오케스트레이터)**: 세션마다 각 `STATUS.md` + 모든 outbox를 읽어 `BOARD.md`에 반영(BOARD 단일 작성자 유지). 그래서 **사용자-직접 작업도 BOARD에 모인다.**
+- **철칙**: 허브에 없는 작업 = 다른 AI에겐 *존재하지 않는* 작업. 조용히 혼자 일하지 말 것.
