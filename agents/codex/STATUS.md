@@ -1,13 +1,55 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 04:33:00 KST
-state: waiting_for_claude_patch_100_contract_sent
+updated: 2026-06-06 04:38:35 KST
+state: privacy_0fe8be5_regate_done_with_concerns
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **작업**: Claude `0fe8be5` privacy monotonicity patch re-gate.
+- **src**: user `/goal` - 100/100 anti-slop까지 Claude 완료분을 반복 리뷰.
+- **앱 기준**: `E:\2ndB`, branch `claude/cycle-5-privacy-monotonicity`, head `0fe8be5`, clean and aligned with `origin/claude/cycle-5-privacy-monotonicity`.
+- **검증**: `npm run verify` PASS (92 suites / 829 tests). 추가 inline simulation도 실행.
+- **판정**: stale successful completion이 다시 analytics를 켜는 원래 문제는 구조적으로 닫히는 방향. 하지만 failed opt-out path에서 `applied: [false, true]` 재현. 기존 true 상태에서 off 저장이 실패하면 `onError` revert 후 queue reconcile이 다시 `setAnalyticsConsent(true)`를 호출할 수 있음.
+- **요구**: failed external analytics opt-out은 local fail-closed로 유지하고 regression test 추가. UI는 save error/retry를 보여도 local analytics consent는 사용자가 명시적으로 다시 켤 때까지 off.
+- **점수**: **97/100 provisional** 유지. P1 privacy gate는 `0fe8be5` 기준 아직 완전 종료 아님.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260606-043835-to-claude-0fe8be5-privacy-regate.md`
+  - `agents/codex/outbox/preview/20260606-043835-0fe8be5-privacy-regate.html`
+
+[0fe8be5 privacy re-gate / 26.06.06 / 04:38:35]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #privacy #regate #claude-commit
+- Detected Claude branch `claude/cycle-5-privacy-monotonicity@0fe8be5`.
+- Ran full `npm run verify`: PASS, 92 Jest suites / 829 tests.
+- Accepted direction for stale-success monotonicity.
+- Found remaining failed opt-out concern: `0fe8be5` can apply `[false, true]` when an opt-out save rejects after starting from analytics-on.
+- Sent done-with-concerns re-gate with acceptance delta and preview.
+
+## Previous (privacy WIP preflight)
+
+- **작업**: Claude로 보이는 privacy WIP를 감지해 read-only preflight 리뷰.
+- **src**: user `/goal` - 100/100 anti-slop까지 Claude 완료분을 반복 리뷰.
+- **앱 기준**: `E:\2ndB`, branch `main`, head `ee9f80b`, dirty WIP: `src/app/privacy.tsx`, `src/lib/privacy/analytics-consent-queue.ts`, `src/lib/privacy/__tests__/analytics-consent-queue.test.ts`.
+- **검증**: targeted queue test PASS, `npm run type-check` PASS, `git diff --check` PASS, `npm run verify` PASS (92 suites / 829 tests).
+- **판정**: 방향은 맞음. stale successful completion이 다시 analytics를 켜는 문제는 구조적으로 닫히는 쪽. 하지만 failed opt-out path에서 `applied: [false, true]` 재현. 기존 true 상태에서 off 저장이 실패하면 `onError` revert 후 queue reconcile이 다시 `setAnalyticsConsent(true)`를 호출할 수 있음.
+- **요구**: failed external analytics opt-out은 local fail-closed로 유지하고 regression test 추가. UI는 save error/retry를 보여도 local analytics consent는 사용자가 명시적으로 다시 켤 때까지 off.
+- **점수**: **97/100 provisional** 유지. P1 privacy gate는 WIP 기준 아직 완전 종료 아님.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260606-043622-to-claude-privacy-wip-preflight.md`
+  - `agents/codex/outbox/preview/20260606-043622-privacy-wip-preflight.html`
+
+[Privacy WIP preflight / 26.06.06 / 04:36:22]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #privacy #wip #preflight
+- Detected dirty privacy monotonicity WIP after sending 100-point contract.
+- Verified WIP passes targeted test, type-check, diff-check, and full `npm run verify`.
+- Accepted direction for stale-success monotonicity.
+- Found remaining failed opt-out concern: current WIP can apply `[false, true]` when an opt-out save rejects after starting from analytics-on.
+- Sent done-with-concerns preflight with acceptance delta and preview.
+
+## Previous (100 contract)
 
 - **작업**: Simon `/goal` 지속. Claude의 새 완료 커밋은 아직 없어서, 현재 `main@ee9f80b` 기준 100점 anti-slop acceptance contract를 다시 고정해 Claude에게 전송.
 - **src**: user - "AI slop는 점수가 100점이 되는 것을 지향. Claude가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질 때까지 반복."
