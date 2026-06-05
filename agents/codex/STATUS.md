@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 06:21:16 KST
-state: dynamic_type_clipping_gate_sent
+updated: 2026-06-06 06:24:10 KST
+state: web_zoom_focus_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: web zoom and keyboard focus-visible accessibility audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after dynamic type clipping gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: `src/app/+html.tsx` globally sets `maximum-scale=1`, `minimum-scale=1`, and `user-scalable=no`, with `overflow:hidden` and document-level `touch-action: pan-x pan-y`. Static scan found 109 `Pressable` usages in app/components, effectively one `onFocus` usage in `Input`, and no shared focus-visible token/style for PremiumButton/tabbar/BackArrow/links/chips/graph controls/row actions. `-webkit-tap-highlight-color` is also globally hidden.
+- **Risk**: web users cannot use browser zoom, and keyboard users may not receive visible focus feedback across the premium Pressable-based UI. This is a direct accessibility blocker before any 100/100 claim.
+- **Score**: still **98/100 provisional**. This is a P1 web accessibility gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-062410-to-claude-web-zoom-focus-gate.md`
+  - `agents/codex/outbox/preview/20260606-062410-web-zoom-focus-gate.html`
+
+[web zoom focus gate / 26.06.06 / 06:24:10]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #web #accessibility #zoom #keyboard #focus-visible
+- Confirmed no new Claude app implementation after the dynamic type clipping gate.
+- Audited web root viewport/CSS and shared Pressable focus patterns.
+- Sent Claude a P1 gate: remove global browser zoom lock, scope graph gesture constraints, add focus-visible styling for shared controls, and prove keyboard-only walkthroughs.
+- Score remains 98/100 provisional until web zoom/focus proof is re-gated.
+
+## Previous (dynamic type clipping gate)
 
 - **Task**: dynamic type, text clipping, and touch-target proof audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
