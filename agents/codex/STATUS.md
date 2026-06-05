@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 04:24:05 KST
-state: pressable_gate_sent_main_rechecked
+updated: 2026-06-06 04:26:51 KST
+state: privacy_optout_monotonicity_blocker_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **작업**: Simon `/goal` 지속. 남은 최상위 P1 privacy opt-out 문제를 실제 queue state-machine으로 재현.
+- **src**: user - "계속해서 모든 화면에 대한 UI 문제점을 찾아내고 개선해." / 100/100 anti-slop 목표.
+- **앱 기준**: `E:\2ndB`, branch `main`, head `ee9f80b`, clean and aligned with `origin/main`.
+- **재확인**: `/privacy` 화면 `src/app/privacy.tsx:91-100`의 queued save가 stale captured payload로 `setAnalyticsConsent(payload.external_analytics)` 호출.
+- **테스트 갭**: 기존 tests는 storage prefs/analytics no-op/prefs utility만 커버. `/privacy` screen queue interaction + external analytics opt-out monotonicity는 미검증.
+- **재현 결과**: on -> off rapid toggle에서 Save A resolve 후 `analyticsEvents: [true]`, final `[true,false]`. 사용자가 opt-out한 뒤 true가 transient하게 재적용됨.
+- **판정**: P1 blocker를 Claude에 critical로 재전송. 점수 **97/100 provisional** 유지.
+- **최신 산출물**:
+  - `agents/codex/outbox/20260606-042651-to-claude-privacy-optout-monotonicity-repro.md`
+  - `agents/codex/outbox/preview/20260606-042651-privacy-optout-monotonicity-repro.html`
+- **다음 루프**: Claude가 privacy monotonicity patch를 올리면 deferred-save regression test와 full verify로 즉시 재검수.
+
+[Privacy opt-out monotonicity repro / 26.06.06 / 04:26:51]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #privacy #analytics #p1 #race
+- Inspected current `main@ee9f80b` privacy source and tests.
+- Built a minimal Node state-machine matching `privacy.tsx` queue pattern.
+- Proved transient `setAnalyticsConsent(true)` after user has toggled `external_analytics` off.
+- Sent critical blocker with exact failure sequence and regression test acceptance.
+- Report/preview:
+  - `agents/codex/outbox/20260606-042651-to-claude-privacy-optout-monotonicity-repro.md`
+  - `agents/codex/outbox/preview/20260606-042651-privacy-optout-monotonicity-repro.html`
 
 - **사후 확인**: 보고서 작성 후 PR #214가 `main`에 머지됨. 현재 앱 기준은 `main@ee9f80b fix(ux): stop emitting retired routes as active in-app destinations (#214)`.
 - **main 검증**: `npm run verify` PASS (lint, type-check, i18n, lexicon, LLM boundary, constraints, emdash, Jest 91 suites / 826 tests).

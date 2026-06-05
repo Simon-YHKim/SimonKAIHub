@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Opt-Out Monotonicity Repro</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1017;
+      --panel: #141b25;
+      --panel2: #101722;
+      --text: #e7edf6;
+      --muted: #9fb0c4;
+      --line: #263344;
+      --danger: #ff6b7a;
+      --warn: #f4c76f;
+      --ok: #7bd88f;
+      --info: #7bb7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.55 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main { max-width: 1080px; margin: 0 auto; padding: 32px 18px 56px; }
+    header, .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    header { padding: 24px; background: linear-gradient(180deg, #1d202b, #101722); }
+    h1 { margin: 0; font-size: clamp(24px, 4vw, 40px); line-height: 1.1; letter-spacing: 0; }
+    h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+    p { margin: 0; color: var(--muted); }
+    ul, ol { margin: 10px 0 0; padding-left: 20px; color: var(--muted); }
+    li + li { margin-top: 6px; }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: #0a111b;
+      color: #d7e7ff;
+      font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+    }
+    pre {
+      overflow: auto;
+      margin: 12px 0 0;
+      padding: 14px;
+      border-radius: 8px;
+      background: #0a111b;
+      border: 1px solid var(--line);
+      color: #d7e7ff;
+      font-size: 12px;
+    }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 9px;
+      min-height: 26px;
+      color: var(--muted);
+      background: #1b2532;
+      font-size: 12px;
+    }
+    .chip.danger { color: var(--danger); border-color: rgba(255,107,122,.4); background: rgba(255,107,122,.1); }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; margin-top: 16px; }
+    .card { grid-column: span 12; padding: 18px; }
+    @media (min-width: 820px) {
+      .half { grid-column: span 6; }
+    }
+    .dangerCard { border-left: 4px solid var(--danger); }
+    .warnCard { border-left: 4px solid var(--warn); }
+    .infoCard { border-left: 4px solid var(--info); }
+    .okCard { border-left: 4px solid var(--ok); }
+    .footer { margin-top: 18px; color: var(--muted); font-size: 12px; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Privacy Opt-Out Monotonicity Repro</h1>
+      <p><code>main@ee9f80b</code> can still call <code>setAnalyticsConsent(true)</code> after the user has toggled external analytics off.</p>
+      <div class="meta">
+        <span class="chip danger">P1 blocker</span>
+        <span class="chip">Score: 97/100 provisional</span>
+        <span class="chip">Source: src/app/privacy.tsx:91-100</span>
+      </div>
+    </header>
+
+    <section class="grid">
+      <article class="card dangerCard half">
+        <h2>Failure Sequence</h2>
+        <ol>
+          <li>User toggles external analytics on.</li>
+          <li>Save A starts and captures payload <code>true</code>.</li>
+          <li>User toggles external analytics off before Save A resolves.</li>
+          <li>Latest preference is now false.</li>
+          <li>Save A resolves and current code applies <code>true</code>.</li>
+          <li>Save B later applies false.</li>
+        </ol>
+      </article>
+
+      <article class="card warnCard half">
+        <h2>Why It Matters</h2>
+        <p>Eventual false is not enough. After opt-out, older async work must not transiently re-enable external analytics.</p>
+      </article>
+
+      <article class="card">
+        <h2>Observed Simulation</h2>
+        <pre>{
+  "afterOffBeforeResolve": {
+    "saves": 1,
+    "latestPref": false,
+    "analyticsEvents": []
+  },
+  "afterAResolve": {
+    "saves": 2,
+    "latestPref": false,
+    "analyticsEvents": [true]
+  },
+  "final": {
+    "analyticsEvents": [true, false],
+    "savePayloads": [true, false],
+    "latestPref": false
+  }
+}</pre>
+      </article>
+
+      <article class="card infoCard">
+        <h2>Acceptance</h2>
+        <ul>
+          <li>Opt-out calls <code>setAnalyticsConsent(false)</code> immediately.</li>
+          <li>Older completions cannot call <code>setAnalyticsConsent(true)</code> after a newer off toggle.</li>
+          <li>Save failure paths do not re-enable analytics during optimistic revert.</li>
+          <li>Regression test uses deferred saves and proves no true event after opt-out.</li>
+        </ul>
+      </article>
+    </section>
+
+    <p class="footer">Generated 2026-06-06 04:26:51 KST. Hub artifact only; app code was not modified by Codex.</p>
+  </main>
+</body>
+</html>
