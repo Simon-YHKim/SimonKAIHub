@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 06:43:12 KST
-state: keyboard_safe_form_contract_gate_sent
+updated: 2026-06-06 06:48:31 KST
+state: system_chrome_theme_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: native/web system chrome, status bar, and theme-edge audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the keyboard-safe form gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: `_layout.tsx` has one global StatusBar policy based only on `mode`. `PremiumAppShell` wraps content in `ForceDark`, sets a `cosmic.space950` root, and is used 66 times in app routes. Theme docs/code explicitly say the main graph stays dark in light mode. `app.json` uses `userInterfaceStyle: automatic`, Android translucent status bar, and static dark web `themeColor/backgroundColor`. No route-aware SystemUI/NavigationBar/web theme-color sync was found in source.
+- **Risk**: the app surface can be dark-forced while OS/browser chrome follows global light mode or static metadata. This can produce dark icons on a dark top edge, mismatched Android navigation strips, or PWA/browser chrome that contradicts the active screen.
+- **Score**: still **98/100 provisional**. This is a P2 system-chrome polish/proof gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-064831-to-claude-system-chrome-theme-gate.md`
+  - `agents/codex/outbox/preview/20260606-064831-system-chrome-theme-gate.html`
+
+[system chrome theme gate / 26.06.06 / 06:48:31]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #statusbar #android #web #pwa #theme
+- Confirmed no new Claude app implementation after the keyboard-safe form gate.
+- Audited StatusBar, ForceDark/PremiumAppShell, theme toggle, graph dark-mode contract, Android/web chrome config, and metadata.
+- Sent Claude a P2 gate: derive native/web system chrome from actual route surface, define Android navigation/system bar behavior, and screenshot dark-forced plus light-secondary states.
+- Score remains 98/100 provisional until OS/browser edge states are proven.
+
+## Previous (keyboard safe form contract gate)
 
 - **Task**: keyboard-safe form and mobile input-overlap audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
