@@ -1,17 +1,18 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 02:32:12 KST
-state: regated_b7472d5_raw_error_sweep
+updated: 2026-06-06 02:35:38 KST
+state: waiting_claude_wip_after_b7472d5
 ---
 
 # Codex STATUS
 
 ## Current (latest)
 
-- **작업**: Simon 지시 `/goal`에 따라 모든 화면 UI/UX와 AI slop를 100/100 기준으로 반복 게이트 중. Claude의 최신 앱 커밋 `b7472d5` raw-error sweep을 즉시 재검수했다.
+- **작업**: Simon 지시 `/goal`에 따라 모든 화면 UI/UX와 AI slop를 100/100 기준으로 반복 게이트 중. Claude의 최신 완료 커밋 `b7472d5` raw-error sweep은 재검수 완료했고, 이후 새 WIP를 감지해 완료 대기 중이다.
 - **src**: user - "AI slop는 점수가 100점 이 되는것을 지향해. 클로드가 관련 작업을 완료하면 리뷰하고 의견주기를 완벽해질때까지 반복해. /goal"
-- **앱 기준**: `E:\2ndB`, branch `claude/cycle-2-concept-consistency`, head `b7472d5 fix(ui): replace raw error messages with product-tone copy + retry across 11 screens`, clean.
+- **앱 기준**: `E:\2ndB`, branch `claude/cycle-2-concept-consistency`, head `b7472d5 fix(ui): replace raw error messages with product-tone copy + retry across 11 screens`.
+- **현재 WIP**: app worktree dirty in `src/app/capture.tsx`, `src/app/wiki.tsx`, `src/components/wiki/TemplateEditor.tsx`, `src/components/graph/NavGraph.tsx`. Diff appears to address remaining `hitSlop={2}` and NavGraph LOD, but not scored until Claude commits/reports completion.
 - **검증**: `npm run verify` pass on `b7472d5`: lint/type-check/i18n/lexicon/LLM boundary/constraints/emdash/Jest green, 91 suites, 823 tests. `git diff --check` pass.
 - **현재 점수**: `b7472d5` re-gate = 94/100 provisional. Raw-error slop and Grok trust-copy concerns are mostly closed, but persona diagnosis-copy policy conflict, unproven Google/Apple/Kakao provider buttons, consent/legal placeholder + no durable retry, small capture/wiki tap targets, and missing runtime visual proof keep it below 100.
 - **최신 산출물**:
@@ -27,7 +28,14 @@ state: regated_b7472d5_raw_error_sweep
   - `agents/codex/outbox/preview/20260606-020542-wip-slop-cleanup-preflight.html`
   - `agents/codex/outbox/20260606-015756-to-claude-89eeaaa-perf-regate.md`
   - `agents/codex/outbox/preview/20260606-015756-89eeaaa-perf-regate.html`
-- **대기**: Claude/AG가 다음 persona/trust/provider/consent/tap-target/proof cleanup을 커밋하거나 outbox 완료 보고하면 즉시 재게이트. 100점 전까지 반복.
+- **대기**: Claude/AG가 current WIP or next persona/trust/provider/consent/tap-target/proof cleanup을 커밋하거나 outbox 완료 보고하면 즉시 재게이트. 100점 전까지 반복.
+
+[Claude WIP detected after b7472d5 / 26.06.06 / 02:35:38]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #claude-wip
+- After committing Codex report `a2fe3a1`, app worktree became dirty again on `b7472d5`.
+- Dirty files: `capture`, `wiki`, `TemplateEditor`, `NavGraph`.
+- Quick diff: `hitSlop={2}` is being changed to `hitSlop={8}` in capture/wiki/TemplateEditor; NavGraph adds tier-4 LOD gating for drift/fade loops.
+- Not scored yet because there is no app commit or Claude outbox completion. Codex will re-gate once committed.
 
 [b7472d5 raw-error re-gate / 26.06.06 / 02:32:12]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #regate #raw-errors #grok
