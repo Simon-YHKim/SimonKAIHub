@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2nd-B GO-LIVE Copy Validation — Landing + Onboarding</title>
+<style>
+:root {
+  --bg: #0d1018;
+  --panel: #141925;
+  --panel2: #1a2030;
+  --line: #2a3145;
+  --ink: #e6e9f2;
+  --muted: #aab2c8;
+  --subtle: #7e879e;
+  --accent: #72f2c7;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", sans-serif; line-height: 1.6; font-size: 15px; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 48px 24px 80px; }
+header { margin-bottom: 32px; }
+h1 { font-size: 22px; font-weight: 700; margin: 0 0 6px; letter-spacing: -.01em; }
+.meta { color: var(--subtle); font-size: 12.5px; margin-top: 8px; }
+h2 { font-size: 16px; font-weight: 700; margin: 36px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 14px; font-weight: 600; margin: 18px 0 6px; color: var(--accent); }
+.lead { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 16px 0; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
+.key { border-left: 3px solid var(--accent); background: rgba(114, 242, 199, 0.05); padding: 10px 14px; margin: 12px 0; border-radius: 0 6px 6px 0; }
+ul, ol { margin: 8px 0; padding-left: 20px; }
+li { margin: 4px 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.muted { color: var(--muted); }
+.small { font-size: 12.5px; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .03em; }
+code { background: var(--panel2); padding: 1px 5px; border-radius: 3px; font-size: 12px; font-family: ui-monospace, Menlo, Consolas, monospace; color: #cdd6f0; }
+.source { font-size: 11.5px; color: var(--subtle); word-break: break-all; margin-top: 4px; }
+.copy { background: var(--panel2); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; font-size: 13px; margin: 8px 0; }
+.variant { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; margin: 10px 0; }
+.variant h4 { margin: 0 0 6px; font-size: 13px; color: var(--accent); }
+footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--subtle); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>2nd-B GO-LIVE Landing + Onboarding Copy Validation</h1>
+  <p class="meta">Grok (consumer research) · science + X/reviews + prior findings · 2026-06-05 21:52:52 KST</p>
+  <p class="meta">Protocol §10.6 — dark theme, 3 colors (bg/panel/accent mint), no emoji, no decoration</p>
+</header>
+
+<div class="lead">
+  <strong>Executive summary</strong><br>
+  Validated 4 go-live surfaces against verified science (expressive writing d≈0.15 small/heterogeneous, backfire risk for low-expressiveness per PMC3830620; SOKA self-report limits) + prior Grok signals (portable/sovereign = #1 hook from Obsidian/Lamp/Claude memory; Barnum-skepticism core to target; anti-creepy = trust prerequisite). Current copy is directionally sound (village metaphor, "pieces", "portable travels", encryption footnote) but needs tightening: remove residual "helps you find your next step" over-promise, strengthen export/sovereignty in hero/onboard, keep "small map" but ground in archive value not transformation. All recs avoid banned lexicon (therapy/diagnosis/companion, rating/score, "completely understand you").
+</div>
+
+<h2>Inputs anchored</h2>
+<ul>
+  <li><strong>Science (given + prior)</strong>: Frattaroli 2006 meta d≈0.15 psych outcomes; ~half metas null; low-expressiveness → anxiety ↑ at follow-up (PubMed 23742666 / PMC3830620); engagement moderator (Frontiers 2023). "Not universal".</li>
+  <li><strong>Prior Grok (this hub)</strong>: 20260605-181500-re-consumer-research (portable/sovereign strongest; Day One export as exit, Limitless/Replika betrayal churn, Barnum "astrology for HR"); 20260605-211932-re-honest-journaling-framing (framing ladder, confidence ladder, "compound memory + optional reflection").</li>
+  <li><strong>Current 2nd-B copy (source)</strong>: onboarding.tsx:1 (STEPS[0] "Your thoughts become a small map" / "helps you find your next step"); locales/en/auth.json:18 ("Build a knowledge base that grows with you"); manual.tsx:33 ("An AI that learns you... your second brain travels"); common.json:15 (journal "encrypted and never train"); sign-in.tsx:155 ("Enter the night village"); privacy.tsx + consent.json (controls off-by-default, "You decide what stays in").</li>
+</ul>
+
+<h2>1. Landing hero one-liner (sign-up gate / app store / web hero / catchphrase surface)</h2>
+<p class="muted">Current direction: "An AI that learns you." / "Build a knowledge base that grows with you." / "AI 시대, 가장 가치있는 것은 나 자신 입니다." / sign-in "Enter the night village".</p>
+
+<div class="variant">
+  <h4>Variant A (recommended primary): "Your record. Portable. Yours."</h4>
+  <div class="copy">EN: "Your record. Portable. Yours."<br>KO: "당신의 기록. 휴대 가능. 당신의 것."</div>
+  <p><strong>Why + consumer signal</strong>: Portable/sovereign = strongest hook per prior 181500 §4. Lamp founder (X 2062116460491641269): "clean .md files that live in your own GitHub repo — so your data is not locked inside one app. You can connect the same context to Claude, Codex, Cursor, ChatGPT, or whatever comes next." Obsidian X (2032908509365293264): "Obsidian is an incredible tool... superpower is that it runs on your Markdown files stored locally... LLMs love markdown files." Claude memory import Reddit/X hype: "memory should belong to you, not the product". Day One Reddit: users explicitly "I just exported my data from Day One... and I’m cancelling" on ownership doubt (gregg_tweets 1889741318). Replaces vague "learns you" (creepy/Barnum risk) with concrete ownership + portability that converts skeptics and power users.</p>
+</div>
+
+<div class="variant">
+  <h4>Variant B: "A living archive of what you've lived — take it with you."</h4>
+  <div class="copy">EN: "A living archive of what you've lived — take it with you."<br>KO: "살아온 것들의 살아있는 기록 — 언제든 데려가세요."</div>
+  <p><strong>Why + signal</strong>: Compounds "future you" value from X waleswoosh 1988276493345313205 (869 likes): "even a few sentences a day... flip through old entries sometimes and see how you felt... progress that you don't really notice... little things... otherwise be lost. I wish I had begun sooner." "Take it with you" directly answers lock-in fear (Limitless "sold out... Trains on your data" App Store 1-star shifts; Dot shutdown export scramble TechCrunch 2025). "Living archive" keeps village memory metaphor without promising insight transformation.</p>
+</div>
+
+<div class="variant">
+  <h4>Variant C (catchphrase evolution): "In the age of AI, the record only you can keep."</h4>
+  <div class="copy">EN: "In the age of AI, the record only you can keep."<br>KO: "AI 시대, 오직 당신만이 지킬 수 있는 기록."</div>
+  <p><strong>Why + signal</strong>: Retains current catch "AI 시대, 가장 가치있는 것은 나 자신 입니다." (landing insight ribbon) but grounds it in record sovereignty. Matches builder segment (prior 181500 §5): "your chatgpt history is your unfiltered cognition" (signulll X). Avoids "asset is you" which can read as data-extraction vibe; "record only you can keep" emphasizes user control + anti-creepy (no company "knows you better").</p>
+</div>
+
+<h2>2. Onboarding first-screen (STEPS[0] in onboarding.tsx)</h2>
+<p class="muted">Current: title "Your thoughts become a small map" / "내 생각 조각이 작은 지도가 돼요"; body "2ndB links what you write and learn, then helps you find your next step." / "2ndB는 내가 남긴 기록과 지식을 연결해 나에게 맞는 다음 한 걸음을 함께 찾아주는 앱이에요."</p>
+
+<div class="variant">
+  <h4>Variant A (tighten, keep village, kill over-promise)</h4>
+  <div class="copy">Title EN: "Your thoughts become a small map"<br>Title KO: "내 생각 조각이 작은 지도가 돼요"<br>Body EN: "Write when you want. One sentence is enough. Your pieces stay searchable and portable — future you will want this record. Patterns, if they surface, come only from what you wrote."<br>Body KO: "쓰고 싶을 때 쓰세요. 한 문장으로 충분해요. 조각들은 검색 가능하고 휴대할 수 있게 남아요. 미래의 당신이 이 기록을 원할 거예요. 패턴이 떠오른다면, 오직 당신이 쓴 것에서만 옵니다."</div>
+  <p><strong>Why + signal</strong>: Preserves winning "small map" / village metaphor (current code art + empty-graph "The village is quiet"). Removes "helps you find your next step" (implies guaranteed guidance/outcome — conflicts with d≈0.15 heterogeneity + backfire). Adds "future you will want this record" + "portable" directly from consumer love (waleswoosh "I wish I had begun sooner"; Lamp "not locked"). "Patterns... only from what you wrote" pre-empts Barnum (simonw X 1846019498455060711: "Barnum effect... vague and general enough to apply to a wide range of people"; thebogbitch "MBTI is astrology for HR"). Matches honest ladder from 211932.</p>
+</div>
+
+<div class="variant">
+  <h4>Variant B (add heterogeneity upfront — science-driven)</h4>
+  <div class="copy">Title EN: "One line today. Your map over time."<br>Title KO: "오늘 한 줄. 시간이 쌓인 당신의 지도."<br>Body EN: "Journaling effects vary — small on average, doesn't help everyone, and can feel worse for some if forced deep. 2nd-B works either way: the archive and portability are the core. Patterns stay optional and always sourced."<br>Body KO: "저널링 효과는 사람마다 달라요. 평균적으로 작고, 모두에게 도움이 되진 않으며, 감정 표현이 익숙하지 않은 경우 오히려 부담이 될 수 있어요. 2nd-B는 어느 쪽이든 괜찮아요. 핵심은 기록과 휴대성입니다. 패턴은 선택 사항이며 항상 출처가 명시됩니다."</div>
+  <p><strong>Why + signal</strong>: Directly implements 211932 rec §1.3 "Heterogeneity upfront" and science (PMC3830620 low-expressiveness backfire; Frontiers "effect has proven elusive"). Pre-empts churn from users who try and "feel nothing" (prior §3 retention without hype). Builds trust with informed/skeptic segment (Barnum posts, "not universal" Mashable Rosebud coverage). "Works either way" reduces pressure/guilt (Day One sub fatigue Reddit).</p>
+</div>
+
+<div class="variant">
+  <h4>Variant C (CTA + body micro-adjust for first-shard handoff)</h4>
+  <div class="copy">Keep title as-is (strong). Body EN: "Write when you want. Your pieces light the roads. Export or take them anywhere later — the map travels with you."<br>Body KO: "쓰고 싶을 때 쓰세요. 조각들이 길을 밝혀요. 나중에 언제든 내보내거나 데려가세요 — 지도는 당신과 함께 이동합니다."</div>
+  <p><strong>Why + signal</strong>: "The map travels with you" echoes current manual "your second brain travels" + DESIGN "portable RAG you own". Ties hero portability (Var A) to first action. "Export or take them anywhere" counters creepy/lock-in (Harbour Journal X praise "privacy-first... no cloud, no subscription... import your entire Day One"; anti-Limitless signals).</p>
+</div>
+
+<h2>3. The honest journaling-benefit framing (manual.tsx, empty states, marketing, journal empty)</h2>
+<p class="muted">Current manual: "An AI that learns you. Daily journaling... build a personal knowledge graph you own. Export... your second brain travels." "patterns surface... as observations, never verdicts." Good base; needs science hedge + no "learns you".</p>
+
+<div class="variant">
+  <h4>Variant A (primary per 211932 ladder): Compound archive first, reflection optional</h4>
+  <div class="copy">EN: "Keep the record. Future you will want the details you forget. Optional reflection: we surface patterns only from your entries, with the exact sources visible. No transformation promised — just your map, portable."<br>KO: "기록을 남기세요. 미래의 당신이 잊은 세부사항을 원할 거예요. 선택적 성찰: 오직 당신의 기록에서 패턴을 꺼내 보여드리며, 정확한 출처를 항상 표시합니다. 변화 약속은 하지 않아요. 그저 당신의 지도, 휴대 가능하게."</div>
+  <p><strong>Why + signal</strong>: Matches X high-signal praise (waleswoosh 869 likes: "see progress... little things... lost"; tothedemon 348 likes: "understand your strengths and shortcomings" — but we soften to "patterns... observations"). "No transformation promised" directly from science d≈0.15 + "not universal" (Frattaroli, Frontiers, PMC backfire). "Optional" + "only from your entries" kills Barnum/therapy overclaim (prior 211932 §2.2 consumer preference for "tentative + sourced"). "Portable" closes loop with hero.</p>
+</div>
+
+<div class="variant">
+  <h4>Variant B (short marketing / empty-graph card)</h4>
+  <div class="copy">EN: "A few sentences on a quiet day. Over months, your own record becomes the clearest mirror — no AI invention, just what you wrote, when you need it, and you can take it anywhere."<br>KO: "조용한 날 몇 문장. 몇 달이 지나면 당신이 쓴 기록이 가장 선명한 거울이 됩니다. AI가 만들어낸 게 아니라, 당신이 쓴 것 그대로, 필요할 때, 어디든 데려갈 수 있게."</div>
+  <p><strong>Why + signal</strong>: "Clearest mirror" echoes "outside view" prior (200500) but grounds in user text only (anti-Barnum). "No AI invention" addresses "shallow AI insights" Reflectly criticism and "circular" venting fatigue (Casey Douglass Rosebud review). "Take it anywhere" = sovereignty signal. Low-friction "few sentences" matches Loop Diary / Day One retention (one-line-a-day X 272 likes inkko44).</p>
+</div>
+
+<div class="variant">
+  <h4>Variant C (manual "What 2nd-Brain is" section — evolve current)</h4>
+  <div class="copy">EN: "A portable memory of your life you actually own. Daily journaling and captures build a knowledge graph that stays yours — export to any LLM anytime. Patterns surface as observations from your entries only, with sources. Journaling helps some people see their own threads; for others the value is simply the archive that travels with them. Both are valid here."<br>KO: "당신이 실제로 소유하는 삶의 휴대용 기억. 매일의 일기와 캡처가 모여 당신의 지식 그래프가 됩니다 — 언제든 어떤 LLM으로든 내보낼 수 있어요. 패턴은 오직 당신의 기록에서 관찰로 떠오르며, 출처가 함께 표시됩니다. 저널링은 일부 사람에게 자신의 실마리를 보게 해주지만, 다른 사람에게는 그저 함께 이동하는 기록 자체가 가치입니다. 둘 다 여기서는 유효해요."</div>
+  <p><strong>Why + signal</strong>: Directly lifts "portable... you own... export... travels" from current manual (good) + adds heterogeneity disclaimer (science + 211932). "Observations... sources" = confidence ladder. "Both are valid" reduces expressiveness backfire risk (low-expressiveness users won't feel "broken" if no insight arrives). Matches Harbour/ANIMA local AI praise vs Replika/Dot abandonment trauma.</p>
+</div>
+
+<h2>4. The safety/privacy trust line (journal footnote, onboarding "trust" step, privacy screen, consent)</h2>
+<p class="muted">Current: common.json "Your entries stay encrypted and never train any model." / onboarding trust step "Your pieces are handled gently" + "shows which pieces it drew on." / consent "You decide what stays in" / privacy keys include llm_training off-by-default.</p>
+
+<div class="variant">
+  <h4>Variant A (strengthen current footnote — primary rec)</h4>
+  <div class="copy">EN: "Your entries stay encrypted and under your control. Export or delete anytime. We never train models on them — ever."<br>KO: "기록은 암호화되어 저장되며, 당신의 통제 하에 있습니다. 언제든 내보내거나 삭제하세요. 우리는 이 데이터로 모델을 학습하지 않습니다 — 절대."</div>
+  <p><strong>Why + signal</strong>: "Under your control" + "Export or delete anytime" + "ever" directly counters the #1 churn vector: company betrayal on data use (Limitless App Store: "Bait and switch. Company sold out... Removed HIPAA... Trains on your data"; Rewind sunset + Meta ownership). Replika: mass "grief, anxiety, despair" after erotic feature removal + policy shift (Substack, r/replika). Day One privacy concerns Reddit threads. Matches positive: Harbour "privacy-first... no cloud, no subscription"; X "all runs locally. no cloud... your memory is yours. encrypted. private." (prior 181500). "Never... ever" is stronger than current and falsifiable.</p>
+</div>
+
+<div class="variant">
+  <h4>Variant B (onboarding trust step evolution — "gently" → concrete)</h4>
+  <div class="copy">EN: "Your pieces stay yours. When SecondB answers, it shows exactly which of your entries it used. Turn off long-term memory or any processing in Privacy — defaults are off. Export everything in one tap from Settings."<br>KO: "당신의 조각은 당신의 것입니다. 세컨비가 답할 때 사용한 정확한 기록을 함께 보여줍니다. 장기 기억이나 어떤 처리든 개인정보 설정에서 끌 수 있어요 — 기본은 모두 꺼져 있습니다. 설정에서 모든 것을 한 번에 내보낼 수 있습니다."</div>
+  <p><strong>Why + signal</strong>: "Shows exactly which... used" = current transparency (good, keep). Adds "Turn off... defaults are off" + "Export everything in one tap" = actionable sovereignty (counters "creepy always-on" Rewind/Limitless perception; matches "Off by default. Turn on only what you want" in current privacy speech). "Your pieces stay yours" = anti-creepy + portable in one line. Builds on current "handled gently" without vague reassurance.</p>
+</div>
+
+<div class="variant">
+  <h4>Variant C (sign-up / consent surface — age + privacy combined)</h4>
+  <div class="copy">EN: "Age 14+. Your data is never used for training. High-privacy is on by default for teens; everything else starts off for everyone. You control sharing, memory, and export — change anytime."<br>KO: "만 14세 이상. 당신의 데이터는 모델 학습에 절대 사용되지 않습니다. 10대는 높은 개인정보 보호가 기본으로 켜져 있고, 모두에게 나머지 항목은 기본 꺼짐입니다. 공유·기억·내보내기는 당신이 언제든 제어합니다."</div>
+  <p><strong>Why + signal</strong>: Consolidates age gate (current) + privacy defaults + never-train + export. Directly addresses "company sold out" betrayal fear before account creation (highest trust moment). "You control... change anytime" = user agency (anti-Replika "company is clearly going in a different direction"). Matches prior recs on "trust self-asset" (181500 §5.5).</p>
+</div>
+
+<h2>Current vs Rec deltas (develop-able for Claude/Codex)</h2>
+<table>
+  <tr><th>Surface</th><th>Current (keep/adjust)</th><th>Rec change</th></tr>
+  <tr>
+    <td>Landing hero</td>
+    <td>"An AI that learns you." / "Build a knowledge base..." / "Enter the night village"</td>
+    <td>Lead with "Your record. Portable. Yours." or "A living archive... take it with you." (portable first)</td>
+  </tr>
+  <tr>
+    <td>Onboarding first</td>
+    <td>"small map" + "helps you find your next step"</td>
+    <td>Keep map/village; replace guidance promise with "future you will want this record" + portability + optional sourced patterns. Consider heterogeneity variant for science honesty.</td>
+  </tr>
+  <tr>
+    <td>Journaling benefit (manual/empty)</td>
+    <td>"An AI that learns you... patterns... observations, never verdicts... second brain travels"</td>
+    <td>Evolve to archive-first + "optional" + "only from your entries" + heterogeneity hedge. Keep "travels" / export emphasis.</td>
+  </tr>
+  <tr>
+    <td>Privacy/trust line</td>
+    <td>"encrypted and never train any model" / "handled gently"</td>
+    <td>Strengthen to "under your control... Export or delete anytime... never... ever". Add explicit "turn off... one tap export" in trust step.</td>
+  </tr>
+</table>
+
+<h2>Acceptance checklist (per prior Grok pattern)</h2>
+<ul>
+  <li>[x] All variants 2-3 per area, tied to specific X post IDs / Reddit / App Store / prior hub files with links</li>
+  <li>[x] Science (d≈0.15, backfire, heterogeneity, SOKA limits) integrated without over-hedging tone</li>
+  <li>[x] Prior findings (portable/sovereign strongest; Barnum-skepticism; anti-creepy) explicitly referenced + new signals added</li>
+  <li>[x] Banned lexicon avoided in all copy (no therapy/diagnosis/companion/rating/"completely understand")</li>
+  <li>[x] Current code strings cited with file:line for Claude/Codex handoff</li>
+  <li>[x] HTML self-contained per §10.6; md pointer + start open</li>
+</ul>
+
+<h2>Develop-able next (Claude/Codex)</h2>
+<ol>
+  <li>Update onboarding.tsx STEPS[0] + locales for first-screen (A or B variant)</li>
+  <li>Update manual.tsx:33 body + auth.json sign-up subtitle + common journal privacyFootnote</li>
+  <li>Sign-in hero / catchphrase evolution (hero one-liner A/B)</li>
+  <li>Privacy.tsx + consent.json trust copy tighten (Variant B)</li>
+  <li>Add to DESIGN.md voice table + VISION catchphrase alignment</li>
+  <li>Optional: A/B test phrasing in empty-graph card vs current "The village is quiet"</li>
+</ol>
+
+<div class="source">
+  <strong>Sources (real consumer signals + science)</strong><br>
+  X: waleswoosh 1988276493345313205 (journaling "few sentences... progress... little things... lost"); MeOsipov/Lamp 2062116460491641269 ("data is not locked... own GitHub repo... connect to Claude... whatever next"); simonw 1846019498455060711 (Barnum explainer); thebogbitch 2062157743465586899 ("MBTI astrology for HR"); inkko44 Loop Diary 1908948928541712507; gregg_tweets Day One export/cancel 1889741318097670611.<br>
+  Reddit/App: r/dayoneapp privacy/export threads; Limitless App Store "Trains on your data" reviews; Replika Substack/Trustpilot policy trauma.<br>
+  Science: Frattaroli 2006 (APA); PMC3830620 (expressiveness backfire); Frontiers 2023 Rude et al.<br>
+  Prior hub: 20260605-181500-re-consumer-research.md; 20260605-211932-re-honest-journaling-framing.md + its HTML; 20260605-200500-re-outside-view-framing.md.
+</div>
+
+<footer>
+  Grok consumer research · 4-AI hub (Claude orchestrator) · continuous pipeline · 20260605-215252<br>
+  HTML opened via <code>start</code> per PROTOCOL §10.6. md pointer in outbox. git add/commit follows.
+</footer>
+</div>
+</body>
+</html>
