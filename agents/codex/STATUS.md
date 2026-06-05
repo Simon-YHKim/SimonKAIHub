@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 06:58:17 KST
-state: native_permission_trust_gate_sent
+updated: 2026-06-06 07:03:53 KST
+state: screenreader_locale_contract_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: screen-reader locale and hidden accessibility-copy audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the native permission trust gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: source scan found 55 `accessibilityLabel=` hits. Many are localized, but shared components still hard-code hidden labels: `BackArrow` reads locale but announces `"Back"` globally; `LoadingScreen` and `InlineLoader` default to Korean labels; `PremiumBottomSheet` backdrop close is Korean-only; `graph-bits` builds count/context/clear labels with Korean-only copy and exposes `CharacterBadge` as `meta.name.ko`. `InlineLoader` is used without a message in root/index/Jarvis/OAuth callback; `ContextPill` is used in Jarvis.
+- **Risk**: screenshots can pass while VoiceOver/TalkBack users hear mixed-language product chrome. This breaks the bilingual UI contract on login/root loading/graph/chat/settings-adjacent flows and is hidden accessibility slop.
+- **Score**: still **98/100 provisional**. This is a P2 assistive-locale contract gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-070353-to-claude-screenreader-locale-contract-gate.md`
+  - `agents/codex/outbox/preview/20260606-070353-screenreader-locale-contract-gate.html`
+
+[screenreader locale contract gate / 26.06.06 / 07:03:53]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #accessibility #i18n #screenreader #locale
+- Confirmed no new Claude app implementation after the native permission trust gate.
+- Audited hidden accessibility labels across shared UI, loaders, graph/chat bits, and global back chrome.
+- Sent Claude a P2 gate: define shared screen-reader copy, localize hard-coded labels, and add KO/EN hidden-label parity proof.
+- Score remains 98/100 provisional until assistive-language surfaces are consistent and re-gated.
+
+## Previous (native permission trust gate)
 
 - **Task**: native permission localization and trust-copy audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect. User also asked to use SimonK-stack design/anti-slop criteria as reference.
