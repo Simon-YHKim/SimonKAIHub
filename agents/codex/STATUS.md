@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 07:03:53 KST
-state: screenreader_locale_contract_gate_sent
+updated: 2026-06-06 07:09:00 KST
+state: direct_pressable_touch_target_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: direct Pressable touch-target and interaction-state audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the screen-reader locale gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **Evidence**: `PremiumButton` has a good 44px + disabled/busy baseline, but static scan found 110 direct `Pressable` hits outside tests, 42 `hitSlop={4}`/`{6}` occurrences, and 75 small-target signatures. High-risk examples include inbox row actions at `minHeight: 30`, capture hashtag add at 28x28, capture inline topic/extras/advisor actions, Jarvis mode chips at 36px, wiki tag/phase actions, research filter chips with padding only, and manual language pill at 36px. `package.json` verify has no touch-target/direct-Pressable guard.
+- **Risk**: screenshots can look polished while mobile users miss small inline actions such as clear chat, generate wiki page, use prompt as topic, retry, tag filters, and hashtag add. Two parallel interaction systems are drifting: shared controls are governed, direct Pressables are local and inconsistent.
+- **Score**: still **98/100 provisional**. This is a P2 mobile interaction ergonomics/governance gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-070900-to-claude-direct-pressable-touch-target-gate.md`
+  - `agents/codex/outbox/preview/20260606-070900-direct-pressable-touch-target-gate.html`
+
+[direct Pressable touch-target gate / 26.06.06 / 07:09:00]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #touch-target #pressable #mobile #accessibility
+- Confirmed no new Claude app implementation after the screen-reader locale gate.
+- Audited direct Pressable usage, small hitSlop signatures, shared button baseline, and verify-script coverage.
+- Sent Claude a P2 gate: formalize direct interaction primitives, migrate high-risk inline actions/chips, and add a touch-target regression guard.
+- Score remains 98/100 provisional until direct Pressable ergonomics are governed and re-gated.
+
+## Previous (screenreader locale contract gate)
 
 - **Task**: screen-reader locale and hidden accessibility-copy audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
