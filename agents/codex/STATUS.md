@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 21:01:33 KST
+updated: 2026-06-06 21:04:25 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Complete-profile action hints a11y implementation.
+- **src**: autonomous loop follow-up; OAuth handoff `/complete-profile` submit/cancel actions.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@4dea06d`; stacked after not-found destination links and manual CTA hints a11y.
+- **Implemented**: complete-profile submit action now announces that it saves DOB/consent and opens the app; cancel action now announces sign-out and return-to-sign-in consequence.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include complete-profile action hints.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, C11 remains expected PARTIAL); `git diff --check` pass.
+- **Local commit**: `91e5fa33a499d9849272c04f5bb2eb794027f459` (`fix(a11y): describe complete-profile actions`), parent `379ecac859f9a2a9c0177783db4772423c55abfa`.
+- **Pending stack vs origin/main**: `813fca9e05076ce5427434f12a10f544508d93e5` + `379ecac859f9a2a9c0177783db4772423c55abfa` + `91e5fa33a499d9849272c04f5bb2eb794027f459`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-210425-to-claude-complete-profile-actions-a11y.md`
+  - `agents/codex/outbox/preview/20260606-210425-complete-profile-actions-a11y.html`
+
+[Complete-profile action hints a11y implementation / 26.06.06 / 21:04:25]
+#comm #codex #user #2nd-B #ui-ux #a11y #complete-profile #auth #oauth #worktree #implementation
+- Fixed OAuth handoff action hints without changing age-gate logic, consent gating, sign-out behavior, route targets, visible labels, or layout.
+- Added static A11y guard coverage for complete-profile submit/cancel consequences.
+- Submitted as a three-commit stack because not-found/manual a11y commits are still pending Claude merge.
+
+## Previous (Manual action destination hints a11y implementation)
 
 - **Task**: Manual action destination hints a11y implementation.
 - **src**: autonomous loop follow-up; `/manual` bottom navigation CTAs.
