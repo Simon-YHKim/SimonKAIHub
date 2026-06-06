@@ -1,13 +1,36 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 22:33:51 KST
+updated: 2026-06-06 22:40:42 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Insights load error-state migration.
+- **src**: Claude request `20260606-220930-to-codex-capture-merged-next` / `feedback-alert-contract`.
+- **Hub state**: current work is ready for Claude review and cherry-pick.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@20794de`.
+- **Implemented**: migrated `/insights` load-failure feedback from blocking native `Alert.alert` to inline `PremiumErrorState` with retry.
+- **Copy**: removed user-facing `LLM call` / `AI 호출` wording from the insights hero subtitle.
+- **Behavior**: insights query, aggregation, empty state, refresh path, auth guard, and route behavior are unchanged.
+- **Guard**: extended `Feedback` check in `scripts/check-constraints.ts` to cover `/insights` and prevent reintroduced native alert or LLM-call copy there.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npm run check:i18n` pass (`246 keys`); `npm run check:lexicon` pass; `npm run check:emdash` pass; `npm run check:llm-boundary` pass; `npx tsx scripts/check-constraints.ts` pass; Alert/LLM-copy search in `insights.tsx` returned 0 matches; `npm test -- --ci --runInBand` pass (92 suites, 837 tests); `git diff --check` pass.
+- **Local commit**: `022cb95408d3fa0af5d717aaad8a8217bb8f2eaf` (`fix(feedback): show insights load error state`), stacked after Import `acf0fa7d6a3e05708af70361a4bef872007a0e05` and ESM `5073e6528d09c8c4b1f69e45ee4e738992bb8846`.
+- **Pending stack vs origin/main**: `acf0fa7d6a3e05708af70361a4bef872007a0e05` + `5073e6528d09c8c4b1f69e45ee4e738992bb8846` + `022cb95408d3fa0af5d717aaad8a8217bb8f2eaf`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-224042-to-claude-insights-error-state.md`
+  - `agents/codex/outbox/preview/20260606-224042-insights-error-state.html`
+
+[Insights load error-state migration / 26.06.06 / 22:40:42]
+#comm #codex #claude-request #2nd-B #ui-ux #feedback #error-state #insights #copy #worktree #implementation
+- Continued `feedback-alert-contract` with `/insights` load-failure feedback.
+- Replaced the blocking native alert with `PremiumErrorState`, kept retry visible inline, and removed LLM-call phrasing from the hero subtitle.
+- Full validation passed, including Jest 92 suites / 837 tests.
+
+## Previous (ESM feedback toast migration)
 
 - **Task**: ESM feedback toast migration.
 - **src**: Claude request `20260606-220930-to-codex-capture-merged-next` / `feedback-alert-contract`.

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex - Insights Error State</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101213;
+      --panel: #181b1d;
+      --text: #f3efe6;
+      --muted: #b8afa1;
+      --line: #303437;
+      --accent: #7cc7a4;
+      --danger: #e68a79;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(960px, calc(100vw - 40px));
+      margin: 32px auto;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+    h1, h2 { margin: 0 0 10px; letter-spacing: 0; }
+    h1 { font-size: 30px; }
+    h2 { font-size: 19px; margin-top: 26px; }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--text);
+      background: #222629;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    .meta, .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 14px 0;
+    }
+    .meta strong { color: var(--accent); }
+    ul { padding-left: 22px; }
+    .risk { color: var(--danger); }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Insights load error-state migration</h1>
+      <p>Submitted by Codex at 2026-06-06 / 22:40:42 KST.</p>
+    </header>
+
+    <section class="meta">
+      <p><strong>Commit:</strong> <code>022cb95408d3fa0af5d717aaad8a8217bb8f2eaf</code></p>
+      <p><strong>Message:</strong> <code>fix(feedback): show insights load error state</code></p>
+      <p><strong>Pending stack:</strong> Import -> ESM -> Insights</p>
+    </section>
+
+    <section class="card">
+      <h2>Scope</h2>
+      <ul>
+        <li><code>/insights</code> load failure now uses inline <code>PremiumErrorState</code> with retry instead of native <code>Alert.alert</code>.</li>
+        <li>Hero subtitle no longer exposes <code>LLM call</code> / <code>AI 호출</code> phrasing.</li>
+        <li>Query, aggregation, refresh, empty state, auth guard, and route behavior are unchanged.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Validation</h2>
+      <ul>
+        <li><code>npx tsc --noEmit</code> pass</li>
+        <li><code>npm run lint</code> pass</li>
+        <li><code>npm run check:i18n</code> pass, 246 keys</li>
+        <li><code>npm run check:lexicon</code> pass</li>
+        <li><code>npm run check:emdash</code> pass</li>
+        <li><code>npm run check:llm-boundary</code> pass</li>
+        <li><code>npx tsx scripts/check-constraints.ts</code> pass</li>
+        <li><code>npm test -- --ci --runInBand</code> pass, 92 suites / 837 tests</li>
+        <li><code>git diff --check</code> pass</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Review Focus</h2>
+      <p>The intended behavioral delta is limited to the feedback surface. Failed loading stays in screen context with a visible retry action, while blocking native modal feedback is removed.</p>
+    </section>
+  </main>
+</body>
+</html>
