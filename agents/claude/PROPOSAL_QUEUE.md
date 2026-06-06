@@ -63,3 +63,24 @@
 - **social provider 실설정** (D-05).
 - ~~permissions phantom notification~~ — ✅ **AG가 행 제거 머지 `707387e`**(expo-notifications 미구현이므로 phantom 행 삭제가 정답). 해소됨.
 - go-live freeze 상태 명확화.
+
+---
+
+## E. UX 자연스러움·직관·정보위계·자산일관성 (페르소나 시뮬 §26)
+> 페르소나-UX 워크플로(wv5i3ngxx, 연령10밴드×직업+자산+모션) **264 발견**. 전체: `agents/claude/persona-ux-findings-20260607.json`.
+> 유형: non-intuitive 87·a11y 47·hidden 42·overload 42·stiffness 31·asset 15. 담당: codex 190·claude 33·ag 34·simon 7.
+> ⚠️ **소득구간·문화/국가 축은 확장 시뮬에서 추가**(아래 진행).
+
+| # | 테마 | 담당 | sev | status |
+|---|---|---|---|---|
+| E1 | **capture 정보과잉** — 5모드(journal/memo/link/ocr/file)+트랙+해시태그 동시노출. 최다 공통지적 → 기본 1모드 + 고급 '더보기' 점진공개 | claude(상태/기본모드)+codex(탭/시각) | high | open |
+| E2 | **비직관 라벨/카피** — "영차영차 던지기"/"Send to the cells", 모드 아이콘만(텍스트 없음) → 직관 동사 + 아이콘 텍스트 라벨 | codex | high | open |
+| E3 | **a11y 라벨 누락** — 아트(IslandArt·SecondBSprite·authHero)·NavGraph 노드에 accessibilityLabel/role 없음(스크린리더 빈화면) | codex | high | open |
+| E4 | **네이티브 접근성·터치** — 터치타깃 ≥44/48px·hitSlop·입력 48px·텍스트 16px(고령)·EyeIcon 영역. NavGraph 제스처→버튼 계층탐색. 에뮬 증명 | ag | high | open |
+| E5 | **hidden 발견성** — settings 진입점 없음→NavGraph floating settings(ag). wiki export 묻힘→주요액션 승격(codex) | ag+codex | high | open |
+| E6 | **NavGraph 초보자 모드** — tier1-2만 먼저+단계공개+첫방문 가이드+노드 설명 라벨 | claude | high | open |
+| E7 | 평가도구 Likert 고령 접근성 — 세로배열·큰버튼·16px·끝점 라벨 | codex | med | open |
+| E8 | **stiffness 31건** — 전환·press 피드백·로딩 등장 부드럽게(즉각 cut 제거), 부드러운 ease | ag(perf)+codex(스타일) | med | open |
+| E9 | **자산 일관성 15건** — 네이밍 혼재·버전접미사(v1/v3/final/candidate)·스타일 혼합·미사용 정규화 | codex+claude | med | open |
+| E10 | settings 전체삭제 확인 — typed 'DELETE'는 의도된 안전마찰 → 제거 대신 카피 명확화만(전체wipe는 typed 유지) | claude review | low | open |
+| E11 | 미래기능 비전 7건 — 협업/공유·이미지 스튜디오 등 → '곧 옴'/숨김 | simon | — | open |
