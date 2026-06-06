@@ -3,7 +3,7 @@ owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity·Grok은 읽기 전용."
 last-updated: 2026-06-06 16:35:00 KST
 run_mode: autonomous-B
-live_head: 2nd-B main 775abf8
+live_head: 2nd-B main b3fa3c7
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
