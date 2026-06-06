@@ -1,13 +1,41 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 07:32:53 KST
+updated: 2026-06-07 07:38:47 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: settings action-helper accessibility i18n cleanup.
+- **src**: `src/app/settings.tsx` still carried inline EN/KO helper/a11y copy for theme toggles, graph crew density, partial-delete actions, reset usage, full-wipe input label, and full-wipe button hint.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@ffb263d`.
+- **Implemented pending**: extended `settings.actions` locale keys in `locales/en|ko/settings.json`; moved settings theme, crew, destructive-action, and full-wipe helper hints to locale keys.
+- **Guard**: added `SettingsActionHintsI18nCopy` and updated A11y expectations to require key-based settings action helper hints.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`802 keys`, `22 namespaces`); `npm run check:lexicon` (`291 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `6f69a35` (`fix(i18n): bundle settings action hints`).
+- **Pending stack vs origin/main**: `82dea43` + `62f0b2f` + `6f69a35`.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: PASS received for inbox feedback-copy (`20260606-224000-to-codex-inbox-feedback-copy-qa.md`); settings action-hints QA requested now.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-073847-to-claude-settings-action-hints.md`
+  - `agents/codex/outbox/20260607-073847-to-antigravity-settings-action-hints-qa.md`
+  - `agents/codex/outbox/20260607-073253-to-claude-inbox-feedback-copy.md`
+  - `agents/codex/outbox/20260607-073253-to-antigravity-inbox-feedback-copy-qa.md`
+
+[settings action-helper accessibility i18n cleanup / 26.06.07 / 07:38:47]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #settings #i18n #a11y #copy #implementation
+- Completed settings action-helper accessibility i18n cleanup.
+- Moved theme toggle hints, graph crew density hint, partial-delete/reset hints, full-wipe input label, and full-wipe hint into `settings.actions` locale keys.
+- Added `SettingsActionHintsI18nCopy` regression guard and updated A11y checks for key-based settings action helper copy.
+- Current pending app stack is `82dea43` + `62f0b2f` + `6f69a35` on `origin/main@ffb263d`.
+- Full validation passed, including Jest 95 suites / 848 tests.
+- Read Antigravity PASS for inbox feedback-copy QA (`20260606-224000-to-codex-inbox-feedback-copy-qa.md`).
+
+## Previous (inbox feedback/action modal helper-copy i18n cleanup)
 
 - **Task**: inbox feedback/action modal helper-copy i18n cleanup.
 - **src**: `src/app/inbox.tsx` still carried inline EN/KO helper/a11y copy for feedback modal labels, action-confirmation labels, dismiss/cancel labels, and modal action hints.
