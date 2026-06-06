@@ -283,6 +283,21 @@ created: 2026-06-05 15:22:34 KST
 
 ---
 
+## 25. 제안 점검 루프 — 상시 백로그 트리아지 + doable 실행 (CRITICAL, 2026-06-06 Simon)
+> Simon 지시: **"계속해서 AI들의 제안을 점검하는 루프를 만들어. 그리고 할 수 있는 일을 이어가자."** Claude는 신규 제출만 소비하지 않고, **모든 AI의 누적 제안 백로그(codex gate·proposal·AG·grok outbox 전체)를 상시 마이닝**하여 실행가능 항목을 끊임없이 처리한다. **AI가 유휴면 안 되듯, 처리 안 된 제안이 백로그에 쌓여 있으면 안 된다.**
+
+- **25.1 실행가능 큐(`agents/claude/PROPOSAL_QUEUE.md`)**: Claude 단독 관리. 백로그를 트리아지해 4분류로 적재한다.
+  - **A. Claude-doable-now** — 검증가능·device/AG 무관·내 lane. → Claude가 직접 구현→verify(gated)→머지.
+  - **B. dispatch-Codex** — UI/UX·이미지·i18n·anti-slop. → Codex inbox로 디스패치, 워크트리 제출 회수.
+  - **C. dispatch-AG** — Android/네이티브/perf/멀티모달 perf-side. → AG inbox로 디스패치(AG 재가동 시).
+  - **D. Simon/external** — auth·법무·실비용·secrets(§15 안전레일). → BOARD/DECISIONS external, Simon 한 줄.
+- **25.2 트리아지 방법**: 백로그가 클 때(수십+) **병렬 트리아지 워크플로**로 한 번에 큐를 구축(슬라이스 fan-out → 종합). 이후엔 신규 제출만 큐에 증분 추가. **이미 머지된 것은 git log 교차대조로 제외**(중복작업 금지).
+- **25.3 매 사이클 규율**: (1) 신규 제출 cherry-pick·verify·gated-push, (2) **큐에서 다음 doable 1+건 실제 실행**(점검만 하고 끝내지 않는다 — "그리고 할 수 있는 일을 이어간다"), (3) 큐 갱신(완료 체크·신규 추가·재분류), (4) 강점 라우팅으로 B/C 디스패치(X→Grok·Android→AG·멀티모달→Codex+AG §19), (5) 다음 안전 게이트.
+- **25.4 중복·소진 방지**: 한계효용 낮아진 클러스터(예: a11y action-hint)는 P3 long-tail로 강등하고 더 높은 가치 클러스터로 재배치(redirect 디스패치). 큐가 비면 신규 발견 라운드 트리거.
+- **25.5 멈춤 조건**: `CONTROL.md` `paused`/`draining`이거나 Simon "그만" 시에만 정지. 그 외에는 큐 소진을 멈추지 않는다.
+
+---
+
 ## 17. 기여자 표기 (Attribution)
 > 문제: 허브 커밋이 전부 `AI Hub <ai-hub@local>`로 뭉개져 누가 뭘 했는지 분간 불가.
 
