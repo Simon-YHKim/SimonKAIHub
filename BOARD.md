@@ -1,9 +1,9 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity·Grok은 읽기 전용."
-last-updated: 2026-06-07 07:24:00 KST
-run_mode: autonomous-B
-live_head: 2nd-B main ffb263d
+last-updated: 2026-06-07 07:40:00 KST
+run_mode: PAUSED (Simon 지시 2026-06-07 07:40 — CONTROL.md state=paused)
+live_head: 2nd-B main 30dc939
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
