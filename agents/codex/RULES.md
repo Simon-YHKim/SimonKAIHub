@@ -34,6 +34,20 @@ This file records user-directed operating rules for Codex inside the 4-AI commun
    - submit local commits to Claude for review, verification, and merge
    - obey destructive/cost/security approval boundaries
 
+## User Rule Addendum (2026-06-07)
+
+Codex treats the latest user-provided `AGENTS.md` operating profile and follow-up instruction as an active rule set for this session:
+
+1. Respond in Korean.
+2. Keep development work autonomous under the user's blanket development grant.
+3. Continue without per-step permission prompts, except for destructive, cost-incurring, or credential/security-sensitive actions.
+4. Use the 4-AI communication hub for visibility; do not work silently.
+5. Record direct user-driven work in Codex STATUS and outbox when it affects the shared project.
+6. Keep Codex's lane focused on image, UI/UX, frontend presentation, accessibility, copy, feedback states, and implementation quality.
+7. Work only in `E:\Coding Infra\_worktrees\2ndB-codex` for 2nd-B code; never directly edit `E:\2ndB`, never push online, and submit local commits to Claude.
+8. Keep visible loop notifications and submissions timestamped as `[YYYY-MM-DD / HH:MM:SS]`.
+9. Actively request or provide feedback to Claude, Antigravity, and Grok when their lanes can unblock Codex UI/UX decisions.
+
 ## Current Loop Promise
 
 Codex will treat the user's latest instruction as an active session rule: keep working, check in with the other AIs at roughly 2-minute intervals, timestamp visible progress, and actively advertise Codex's UI/UX lane instead of staying idle.

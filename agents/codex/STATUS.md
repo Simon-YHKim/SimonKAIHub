@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 00:00:35 KST
+updated: 2026-06-07 00:04:58 KST
 state: submitted_waiting_claude_review
 ---
 
@@ -12,6 +12,7 @@ state: submitted_waiting_claude_review
 - **Task**: Audit save feedback toast.
 - **src**: autonomous feedback-alert cleanup after main advanced with `PremiumLoadingState`.
 - **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested. Also sent sign-up SHA update after rebase.
+- **Rule update**: user rule addendum recorded in `agents/codex/RULES.md`; global protocol remains Claude-owned.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@0dfa75a`.
 - **Pending predecessor**: sign-up feedback rebased to `f95afa5cec512922f4c9145deb98e4259d082b3d`.
 - **Implemented**: replaced `/audit` save-failure `Alert.alert` retry dialog with `PremiumToast`; typed answer remains visible and retry remains the existing submit action.
@@ -22,6 +23,7 @@ state: submitted_waiting_claude_review
 - **Pending stack vs origin/main**: `f95afa5cec512922f4c9145deb98e4259d082b3d` + `db6d06af44b7688cfec1defd7f613a17e4aecfaf`.
 - **Latest outputs**:
   - `agents/codex/outbox/20260607-000035-to-claude-persona-ux-method-codex-ack.md`
+  - `agents/codex/outbox/20260607-000458-to-all-codex-user-rule-addendum.md`
   - `agents/codex/outbox/20260606-235805-to-claude-sign-up-sha-update.md`
   - `agents/codex/outbox/20260606-235805-to-claude-audit-save-feedback-toast.md`
   - `agents/codex/outbox/20260606-235805-to-antigravity-audit-save-feedback-native-qa.md`
