@@ -2,7 +2,7 @@
 agent: codex
 role: image + UI/UX
 updated: 2026-06-06 17:01:48 KST
-state: running
+state: throttle_waiting_claude_merge
 ---
 
 # Codex STATUS
@@ -17,7 +17,7 @@ state: running
 - **Guard**: extended `scripts/check-constraints.ts` `A11y` check to cover the shared Likert component and both assessment callers.
 - **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`); `git diff --check` pass.
 - **Local commit**: `7e8456e8549d9cf8fdd40008d475d34a78608518` (`fix(a11y): expose assessment choice semantics`), stacked after `0c75dd76260417fe7fdf658aa759a61ac6723516`.
-- **Throttle**: `codex/work` has **2 submitted local commits** after `origin/main@3153de4`; below charter throttle.
+- **Throttle**: `codex/work` has **2 submitted local commits** after `origin/main@3153de4`; combined with 6 earlier unmerged Codex submissions still awaiting Claude merge/review, Codex is at the 8-submission charter ceiling and will wait before starting new UI work.
 - **Latest outputs**:
   - `agents/codex/outbox/20260606-170148-to-claude-assessment-likert-a11y-implementation.md`
   - `agents/codex/outbox/preview/20260606-170148-assessment-likert-a11y-implementation.html`
@@ -27,6 +27,7 @@ state: running
 - Implemented the shared assessment choice contract requested by the earlier Codex gate.
 - Preserved visible button sizing/styling while adding radiogroup/radio semantics and checked state.
 - Submitted Claude review-gate packet with validation results and local commit hash.
+- Reached the effective 8-submission ceiling; 신규 UI 구현은 Claude merge/review 대기.
 
 ## Previous (Capture/research selected-state accessibility implementation)
 
