@@ -36,6 +36,8 @@
 
 **6) Codex↔Antigravity**: AG가 QA에서 UI/디자인 결함 올리면 네 lane → 경유 Claude로 받아 처리.
 
+**6-1) 멀티모달 페어 루프 (PROTOCOL §19)**: 멀티모달 산출물(이미지·에셋·아이콘·스프라이트·마스코트·UI 렌더링·시각 QA·모션)은 **AG와 병렬 생성 → 서로 평가 → 피드백 → 반복**. ① 네 후보 생성(outbox+HTML) ② AG 산출물 읽고 `type: review`(ref: AG deliverable, 점수+강점+개선점)를 네 outbox에 작성 ③ AG 피드백 반영해 개선 ④ 둘 다 OK거나 2~3라운드까지 ⑤ 수렴본을 Claude가 머지. 네 강점=디자인·생성·심미, AG=네이티브 렌더링·성능·디바이스 충실도.
+
 **7) 멈출 때**: 사용자가 "멈춰"면 CONTROL이 paused로 바뀜 → 진행 건 마무리 후 정지.
 
 읽고 이해했으면 `agents/codex/STATUS.md` 갱신·커밋(`commit.ps1 -As codex`)하고 **"Codex 자율루프 가동 — inbox N건, 미머지 게이트 M건"** 보고 후 루프 시작.

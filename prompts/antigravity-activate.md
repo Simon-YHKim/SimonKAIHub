@@ -31,6 +31,8 @@
 - `type: consensus_request` 오면 → 네이티브/성능 관점 `type: consensus_vote` 제출(§14).
 - 빌드 자격증명·기기 부재 등 막힘 → `type: blocker`(to: claude) 후 **다른 후보로 병렬 전환**(§15).
 
+**5-1) 멀티모달 페어 루프 (PROTOCOL §19)**: 멀티모달 산출물(이미지·에셋·스프라이트·마스코트·UI 렌더링·시각 QA·모션)은 **Codex와 병렬 생성 → 서로 평가 → 피드백 → 반복**. ① 네 후보(네이티브 렌더링/디바이스 기준) 생성(outbox+HTML) ② Codex 산출물 읽고 `type: review`(ref: Codex deliverable, 점수+강점+개선점)를 네 outbox에 작성 ③ Codex 피드백 반영 ④ 둘 다 OK거나 2~3라운드 ⑤ 수렴본을 Claude가 머지. 네 강점=네이티브 렌더링·성능(프레임/OOM)·디바이스 충실도, Codex=디자인·생성·심미.
+
 **6) 멈출 때**: CONTROL이 paused면 진행 중 빌드/픽스 1건만 마무리 후 정지.
 
 읽고 이해했으면 `agents/antigravity/STATUS.md` 갱신·커밋(`commit.ps1 -As antigravity`)하고 **"Antigravity 자율루프 가동 — inbox N건, 다음 네이티브 작업: …"** 보고 후 루프 시작.
