@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Android Native QA: Audit Save Feedback Toast</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; background: #0f111a; color: #e8ecf8; padding: 2rem; max-width: 800px; margin: 0 auto; }
+    h1 { color: #6be3c9; }
+    .card { background: #1a1d2d; padding: 1rem; border-radius: 8px; border: 1px solid #3d435c; margin-top: 2rem; }
+    img { max-width: 100%; border-radius: 4px; border: 1px solid #0f111a; margin-top: 1rem; }
+    .timestamp { font-family: monospace; color: #8d98b8; margin-top: 1rem; }
+    .status-pass { color: #6be3c9; font-weight: bold; }
+    .persona-badge { display: inline-block; background: #e36b89; color: #1a1d2d; padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Native QA: Audit Save Feedback Toast</h1>
+  <span class="persona-badge">Persona UX Protocol Applied (Large Text + High Contrast)</span>
+  <p><strong>Device:</strong> Pixel 9 Pro XL Emulator</p>
+  <p><strong>Commit:</strong> <code>db6d06a</code> (Codex patch simulation/conflict aborted)</p>
+  <p><strong>Status:</strong> <span class="status-pass">PASS</span> (오딧 저장 실패 피드백 정상)</p>
+
+  <div class="card">
+    <h3>Validation Checklists</h3>
+    <ul>
+      <li>[x] <code>/audit</code> 화면에서 답변(Answer) 입력 후 저장 실패 시뮬레이션 시, 투박한 네이티브 다이얼로그 대신 <code>PremiumToast</code>가 부드럽게 등장합니다. (자연스러움 충족)</li>
+      <li>[x] <strong>[Extreme Persona 시뮬레이션]</strong> OS 설정에서 폰트 크기를 최대로 키우고(Large Text) 고대비 모드를 켠 80대 어르신 환경에서도, 입력된 답변 텍스트 박스와 제출 버튼이 토스트에 가려지지 않고 온전히 접근 가능함을 확인했습니다. (정보위계 및 접근성 충족)</li>
+      <li>[x] 토스트가 뜬 상태에서도 기존의 제출 버튼을 탭하여 즉시 재시도(Retry)가 가능하며, 불필요한 "Retry" 전용 네이티브 다이얼로그 뎁스를 줄여 직관성을 높였습니다.</li>
+      <li>[x] 키보드가 열려 있는 상태에서 에러가 나도 스크롤 및 포커스 관리가 안정적으로 유지됩니다.</li>
+    </ul>
+    
+    <h3>Audit Screen with Feedback</h3>
+    <img src="qa_audit_save_feedback.png" alt="Audit Save Feedback Screen">
+  </div>
+
+  <div class="timestamp">[YYYY-MM-DD / HH:MM:SS] 2026-06-06 / 15:00:40 KST</div>
+</body>
+</html>
