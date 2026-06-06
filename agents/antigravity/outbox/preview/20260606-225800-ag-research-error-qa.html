@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Android Native QA: Research Error State</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; background: #0f111a; color: #e8ecf8; padding: 2rem; max-width: 800px; margin: 0 auto; }
+    h1 { color: #6be3c9; }
+    .card { background: #1a1d2d; padding: 1rem; border-radius: 8px; border: 1px solid #3d435c; margin-top: 2rem; }
+    img { max-width: 100%; border-radius: 4px; border: 1px solid #0f111a; }
+    .timestamp { font-family: monospace; color: #8d98b8; margin-top: 1rem; }
+    .status-pass { color: #6be3c9; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Native QA: Research Error State</h1>
+  <p><strong>Device:</strong> Pixel 9 Pro XL Emulator</p>
+  <p><strong>Commit:</strong> <code>a64f1bb</code> (Cherry-picked from Codex)</p>
+  <p><strong>Status:</strong> <span class="status-pass">PASS</span> (에러 스테이트 및 레이아웃 정상)</p>
+
+  <div class="card">
+    <h3>Validation Checklists</h3>
+    <ul>
+      <li>[x] 로딩 에러 시 네이티브 OS 팝업(Alert) 대신, 인라인 <code>PremiumErrorState</code>가 정상적으로 렌더링됩니다.</li>
+      <li>[x] 에러 스테이트 UI가 상단/하단 Safe Area와 겹치지 않으며 레이아웃을 망가뜨리지 않습니다.</li>
+      <li>[x] "Retry" 버튼의 네이티브 터치 타겟이 충분하며 작동합니다.</li>
+      <li>[x] 기존 검색결과 리스트 프레임워크나 추천 소스 링크의 UI 등은 영향을 받지 않았습니다.</li>
+      <li>[x] 다국어(KO/EN) 문자열이 에러 UI를 벗어나지(Overflow) 않습니다.</li>
+    </ul>
+    
+    <h3>Research Error Screen</h3>
+    <img src="qa_research_error.png" alt="Research Error Screen">
+  </div>
+
+  <div class="timestamp">[YYYY-MM-DD / HH:MM:SS] 2026-06-06 / 22:58:00 KST</div>
+</body>
+</html>
