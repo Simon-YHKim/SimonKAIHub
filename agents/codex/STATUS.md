@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 06:27:28 KST
+updated: 2026-06-07 06:31:35 KST
 state: submitted
 ---
 
@@ -9,18 +9,20 @@ state: submitted
 
 ## Current (latest)
 
-- **Task**: premium shared a11y locale cleanup.
-- **src**: Shared premium components still had hardcoded KO accessibility copy on EN screens (`닫기`, KO graph chip/count/context labels, KO-only character badge labels).
+- **Task**: premium feedback default-copy locale cleanup.
+- **src**: Shared premium loading/error primitives had Korean fallback labels, so an EN surface could leak mixed-language UI if a caller omitted `message` or `retryLabel`.
 - **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@dc0d5ef`.
-- **Implemented pending**: added `common.actions.close`; localized premium modal/sheet close labels; made graph chip count, character badge, and context pill labels locale-aware.
-- **Guard**: added `PremiumA11yLocaleCopy` constraint and updated `ArtA11ySemantics`.
-- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`610 keys`, `21 namespaces`); `npm run check:lexicon` (`289 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass after rebase.
-- **Local commits**: `c864608` (`fix(copy): replace old guidance wording`) + `b6c8e5c` (`fix(a11y): localize premium shared labels`).
-- **Pending stack vs origin/main**: `c864608` + `b6c8e5c` only.
+- **Implemented pending**: added `common.actions.retry` and `common.states.loading`; moved `PremiumLoadingState` and `PremiumErrorState` default labels to common locale keys.
+- **Guard**: extended `PremiumA11yLocaleCopy` to require key-based premium feedback fallback copy and reject hardcoded Korean defaults.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`612 keys`, `21 namespaces`); `npm run check:lexicon` (`289 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commits**: `c864608` (`fix(copy): replace old guidance wording`) + `b6c8e5c` (`fix(a11y): localize premium shared labels`) + `661404c` (`fix(i18n): localize premium feedback defaults`).
+- **Pending stack vs origin/main**: `c864608` + `b6c8e5c` + `661404c`.
 - **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
-- **Antigravity QA**: PASS received for formats community-copy, sign-in hero-copy, wiki hero-copy, old-guidance-copy, and premium-a11y-locale. The last two PASS notes refer to pre-rebase SHAs; current stack is aligned in `20260607-062728-to-claude-ag-pass-rebased-stack.md`.
+- **Antigravity QA**: PASS received for formats community-copy, sign-in hero-copy, wiki hero-copy, old-guidance-copy, and premium-a11y-locale. Premium feedback-default QA requested now.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-063135-to-claude-premium-feedback-defaults.md`
+  - `agents/codex/outbox/20260607-063135-to-antigravity-premium-feedback-defaults-qa.md`
   - `agents/codex/outbox/20260607-062728-to-claude-ag-pass-rebased-stack.md`
   - `agents/codex/outbox/20260607-062431-to-claude-rebased-old-guidance-premium-a11y.md`
   - `agents/codex/outbox/20260607-062431-to-antigravity-rebased-old-guidance-premium-a11y-qa.md`
@@ -44,6 +46,13 @@ state: submitted
 #comm #codex #claude #antigravity-qa #2nd-B #ui-ux #rebase #sha-alignment
 - Read Antigravity PASS responses for `old-guidance-copy` and `premium-a11y-locale`.
 - Sent Claude a SHA-alignment FYI because the QA notes reference pre-rebase SHAs while Codex's current pending app stack is `c864608` + `b6c8e5c`.
+
+[premium feedback default-copy cleanup / 26.06.07 / 06:31:35]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #i18n #premium-components #implementation
+- Completed a shared premium feedback default-copy cleanup.
+- Added common retry/loading locale keys and moved shared loading/error fallbacks to `useTranslation("common")`.
+- Extended the static premium locale guard to keep these defaults key-based.
+- Full validation passed, including Jest 95 suites / 848 tests.
 
 ## Previous (old guidance copy residue cleanup)
 
