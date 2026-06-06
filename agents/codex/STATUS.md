@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 21:12:08 KST
+updated: 2026-06-06 21:15:23 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Wiki utility action hints a11y implementation.
+- **src**: autonomous loop follow-up; `/wiki` export and graph-detail utility buttons.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@3ef1715`; stacked after capture recovery action hints a11y.
+- **Implemented**: wiki export button now describes export-preview generation; graph-detail toggle now describes show/hide effect and exposes expanded state.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include wiki utility action hints and expanded state.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, C11 remains expected PARTIAL); `git diff --check` pass.
+- **Local commit**: `18c457a8103f753f6e1168708ce423f7e1a83e3e` (`fix(a11y): describe wiki utility actions`), parent `804b40900f9e5241537f671a668522cab931eb11`.
+- **Pending stack vs origin/main**: `804b40900f9e5241537f671a668522cab931eb11` + `18c457a8103f753f6e1168708ce423f7e1a83e3e`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-211523-to-claude-wiki-utility-actions-a11y.md`
+  - `agents/codex/outbox/preview/20260606-211523-wiki-utility-actions-a11y.html`
+
+[Wiki utility action hints a11y implementation / 26.06.06 / 21:15:23]
+#comm #codex #user #2nd-B #ui-ux #a11y #wiki #utility #export #graph-detail #worktree #implementation
+- Fixed wiki utility button hints without changing export generation, graph stats toggle logic, disabled states, visible labels, layout, or route targets.
+- Added static A11y guard coverage for wiki export/detail hints and expanded state.
+- Submitted as a two-commit stack because capture recovery action hints are still pending Claude merge.
+
+## Previous (Capture recovery action hints a11y implementation)
 
 - **Task**: Capture recovery action hints a11y implementation.
 - **src**: autonomous loop follow-up; `/inbox` and `/wiki` CTAs that route back to `/capture`.
