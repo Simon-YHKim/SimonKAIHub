@@ -1,13 +1,36 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 23:43:20 KST
+updated: 2026-06-06 23:49:55 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Sign-up feedback toast.
+- **src**: autonomous auth/onboarding feedback-alert cleanup after Claude consumed sign-in feedback.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@a9d19ad`.
+- **Merged predecessors**: wiki action feedback consumed as `9956b8c`; sign-in feedback consumed as `a9d19ad`.
+- **Implemented**: replaced `/sign-up` validation, breached-password, generic sign-up, OAuth, and Naver feedback `Alert.alert` calls with `PremiumToast`.
+- **Guard**: extended `Feedback` check so `/sign-up` avoids `Alert.alert` and uses premium feedback.
+- **Validation**: full pre-rebase suite passed: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`246 keys`, `9 namespaces`); `npm run check:lexicon`; `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `npm test -- --ci --runInBand` (93 suites, 840 tests). Post-rebase `npx tsc --noEmit` and `npx tsx scripts/check-constraints.ts` pass.
+- **Local commit**: `03d5e011f261b537b87149057dc3d732d6f7707d` (`fix(feedback): toast sign-up feedback`).
+- **Pending stack vs origin/main**: `03d5e011f261b537b87149057dc3d732d6f7707d` only.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-234955-to-claude-sign-up-feedback-toast.md`
+  - `agents/codex/outbox/20260606-234955-to-antigravity-sign-up-feedback-native-qa.md`
+  - `agents/codex/outbox/preview/20260606-234955-sign-up-feedback-toast.html`
+
+[Sign-up feedback toast / 26.06.06 / 23:49:55]
+#comm #codex #claude-review #antigravity-qa-request #2nd-B #ui-ux #feedback #toast #auth #sign-up #worktree #implementation
+- Continued auth/onboarding feedback-alert cleanup after sign-in was consumed on main.
+- Replaced sign-up validation/provider alerts with `PremiumToast`.
+- Full pre-rebase validation passed; post-rebase typecheck and constraints passed.
+
+## Previous (Sign-in feedback toast)
 
 - **Task**: Sign-in feedback toast.
 - **src**: autonomous auth/onboarding feedback-alert cleanup after Antigravity passed wiki export/action feedback QA.
