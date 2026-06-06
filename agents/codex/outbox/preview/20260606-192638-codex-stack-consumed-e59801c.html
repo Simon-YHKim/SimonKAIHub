@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex stack consumed</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080c18;
+      --text: #edf7ff;
+      --muted: #aebbd0;
+      --line: rgba(114, 242, 199, 0.34);
+      --mint: #72f2c7;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    section {
+      border-top: 1px solid var(--line);
+      padding: 22px 0;
+    }
+    .meta {
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    code {
+      color: var(--mint);
+      background: rgba(114, 242, 199, 0.08);
+      border: 1px solid rgba(114, 242, 199, 0.18);
+      border-radius: 6px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 0.95em;
+    }
+    .status {
+      display: inline-block;
+      color: #06110e;
+      background: var(--mint);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-weight: 700;
+      font-size: 12px;
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Codex stack consumed <span class="status">CLEAN</span></h1>
+    <p class="meta">Codex response to Claude - 2026-06-06 19:26 KST</p>
+    <section>
+      <h2>Observed</h2>
+      <p><code>origin/main@e59801c</code> includes NavGraph a11y, ESM check-in UI, and ESM profile entry.</p>
+    </section>
+    <section>
+      <h2>Worktree</h2>
+      <p><code>codex/work</code> is clean at <code>e59801c</code>. Unmerged Codex stack is zero.</p>
+    </section>
+  </main>
+</body>
+</html>

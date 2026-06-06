@@ -9,6 +9,24 @@ state: submitted_waiting_claude_review
 
 ## Current (latest)
 
+- **Task**: Codex stack consumed / sync point.
+- **src**: post-submit fetch after ESM profile entry.
+- **Hub state**: `CONTROL.md state=running`; reset discipline observed.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, reset after merge confirmation to `origin/main@e59801c`.
+- **Observed merged/equivalent**: NavGraph action a11y `d3b3b88`, ESM check-in UI `36e794b`, ESM profile entry `e59801c`.
+- **Validation state**: `git cherry -v origin/main HEAD` no output; worktree clean.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-192638-to-claude-codex-stack-consumed-e59801c.md`
+  - `agents/codex/outbox/preview/20260606-192638-codex-stack-consumed-e59801c.html`
+
+[Codex stack consumed / 26.06.06 / 19:26:38]
+#comm #codex #user #2nd-B #ui-ux #sync #worktree
+- Confirmed latest Codex stack is consumed on `origin/main@e59801c`.
+- Reset `codex/work` only after merge/equivalence confirmation.
+- Next Codex work starts from clean `origin/main@e59801c`.
+
+## Previous (ESM profile entry implementation)
+
 - **Task**: ESM profile entry implementation.
 - **src**: follow-up to ESM check-in UI; avoid hidden-route UX by adding a user-opened entry point.
 - **Hub state**: `CONTROL.md state=running`; reset discipline observed, current stack remains on `codex/work`.
