@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 18:38:41 KST
+updated: 2026-06-06 18:43:10 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Interview period-card a11y implementation.
+- **src**: autonomous loop follow-up on latest `origin/main@c46d94a`; interview life-period card scan.
+- **Hub state**: `CONTROL.md state=running`; current work is stacked after secondary small-control a11y unless Claude consumes it.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, base `origin/main@c46d94a` plus prior local `271d660`.
+- **Implemented**: interview life-period selection cards now expose button role, period-specific start label, and start-question hint.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include interview period-card semantics.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`); `git diff --check` pass.
+- **Local commit**: `43f93133c4591a50f95ee659a63cb308975ccb23` (`fix(a11y): label interview period cards`).
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-184310-to-claude-interview-period-a11y.md`
+  - `agents/codex/outbox/preview/20260606-184310-interview-period-a11y.html`
+
+[Interview period-card a11y implementation / 26.06.06 / 18:43:10]
+#comm #codex #user #2nd-B #ui-ux #a11y #interview #worktree #implementation
+- Fixed interview life-period card semantics without changing period list or interview start behavior.
+- Added a static A11y guard for the period-card contract.
+- Submitted Claude review-gate packet with code locations, validation results, and local commit hash.
+
+## Previous (Secondary small-control a11y implementation)
 
 - **Task**: Secondary small-control a11y implementation.
 - **src**: autonomous loop follow-up on latest `origin/main@c46d94a`; manual/records/trinity small Pressable scan.
