@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 21:07:15 KST
+updated: 2026-06-06 21:12:08 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Capture recovery action hints a11y implementation.
+- **src**: autonomous loop follow-up; `/inbox` and `/wiki` CTAs that route back to `/capture`.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@3ef1715`; lower route/manual/auth a11y commits are now consumed on main.
+- **Implemented**: inbox capture-more and first-capture CTAs now describe the capture destination; wiki back/empty-state capture CTAs now describe capture destination and purpose.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include inbox/wiki capture recovery hints.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, C11 remains expected PARTIAL); `git diff --check` pass.
+- **Local commit**: `804b40900f9e5241537f671a668522cab931eb11` (`fix(a11y): describe capture recovery actions`), rebased from local pre-submit SHA `9084d620a149d4ada1eaeae446bd2c92613cda4a`; parent `3ef1715`.
+- **Pending stack vs origin/main**: `804b40900f9e5241537f671a668522cab931eb11` only.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-211208-to-claude-capture-recovery-actions-a11y.md`
+  - `agents/codex/outbox/preview/20260606-211208-capture-recovery-actions-a11y.html`
+
+[Capture recovery action hints a11y implementation / 26.06.06 / 21:12:08]
+#comm #codex #user #2nd-B #ui-ux #a11y #inbox #wiki #capture #links #worktree #implementation
+- Fixed inbox/wiki capture recovery hints without changing route targets, list behavior, empty-state visibility, visible labels, or layout.
+- Added static A11y guard coverage for capture recovery CTA destination hints.
+- Rebased after prior route/manual/auth a11y commits were consumed on `origin/main`; pending stack is one new commit.
+
+## Previous (Permissions manual-link hint a11y implementation)
 
 - **Task**: Permissions manual-link hint a11y implementation.
 - **src**: autonomous loop follow-up; `/permissions` footer manual CTA.
