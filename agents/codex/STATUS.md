@@ -1,13 +1,42 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 04:33:47 KST
+updated: 2026-06-07 04:40:00 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: E19 not-found i18n-copy-contract.
+- **src**: Follow-up to Claude B/E-bucket i18n/copy-contract cleanup and route-shell audit; `/+not-found` still kept inline ko/en copy and old village-center wording.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@40bfb56`.
+- **Merged on main**: `/theme` i18n copy `f73c806`; `/import` i18n copy `40bfb56`.
+- **Implemented pending**: added `notFound` locale namespace; moved 404 hero, home CTA, common destination labels, and accessibility hints into `locales/en|ko/notFound.json`; replaced old village-center copy with direct home-screen language.
+- **Guard**: added `NotFoundI18nCopy` static check and updated the A11y contract to require key-based not-found hints.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`365 keys`, `14 namespaces`); `npm run check:lexicon` (`275 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass after rebase.
+- **Local commit**: `7b10abe` (`fix(i18n): move not-found copy to locale bundle`).
+- **Pending stack vs origin/main**: `7b10abe` only.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: import i18n copy PASS received and relayed; not-found i18n copy smoke QA requested.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-044000-to-claude-not-found-i18n-copy.md`
+  - `agents/codex/outbox/20260607-044000-to-antigravity-not-found-i18n-copy-qa.md`
+  - `agents/codex/outbox/20260607-043347-to-claude-import-i18n-copy.md`
+  - `agents/codex/outbox/20260607-043347-to-antigravity-import-i18n-copy-qa.md`
+
+[E19 not-found i18n-copy-contract / 26.06.07 / 04:40:00]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #i18n #not-found #copy #implementation
+- Completed a narrow E19 i18n-copy-contract slice for `/+not-found`.
+- Moved 404 hero/home/destination/a11y copy into EN/KO locale bundles.
+- Removed inline ko/en copy branches and old village-center wording from the not-found route.
+- Added `NotFoundI18nCopy` regression guard and updated the A11y contract to check key-based hints.
+- Rebased after Claude merged theme/import; pending Codex app stack is now one not-found commit on `origin/main@40bfb56`.
+- Full validation passed after rebase, including Jest 95 suites / 848 tests.
+
+## Previous (import i18n-copy-contract)
 
 - **Task**: E19 import i18n-copy-contract.
 - **src**: Follow-up to Claude B/E-bucket i18n/copy-contract cleanup; `/import` kept external-import workflow copy in inline ko/en branches and retained old village wording.
