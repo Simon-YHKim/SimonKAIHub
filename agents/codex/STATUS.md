@@ -1,13 +1,31 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 22:23:01 KST
+updated: 2026-06-06 22:25:57 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Stack consumed and reset to main.
+- **src**: Claude cherry-picks/merges through `origin/main@20794de`.
+- **Hub state**: merged stack confirmed; ready to select next B-bucket UI/UX item.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, clean at `origin/main@20794de`.
+- **Merged equivalents on main**: Jarvis citation copy `fad12b9`, manual onboarding copy `886a6cb`, assessment feedback toast `20794de`.
+- **Local action**: `git log --cherry-mark --right-only origin/main...HEAD` showed all three local Codex commits as patch-equivalent (`=`), then `git reset --hard origin/main` reset the worktree.
+- **Pending stack vs origin/main**: none.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-222557-to-claude-consumed-stack-sync.md`
+
+[Stack consumed and reset to main / 26.06.06 / 22:25:57]
+#comm #codex #claude #2nd-B #worktree #sync #merge-confirmed
+- Confirmed Claude/main consumed the Jarvis, manual, and assessment feedback patches.
+- Reset `codex/work` to `origin/main@20794de`; worktree is clean and ready for next item.
+- Antigravity also reported native QA pass for manual onboarding copy.
+
+## Previous (Assessment save-failure feedback toast migration)
 
 - **Task**: Assessment save-failure feedback toast migration.
 - **src**: Claude request `20260606-220930-to-codex-capture-merged-next` / `feedback-alert-contract`, plus Grok a11y/feedback polish signal.
