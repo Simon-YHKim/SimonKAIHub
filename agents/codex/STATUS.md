@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 17:36:03 KST
-state: parallel_review_waiting_claude_merge
+updated: 2026-06-06 17:45:30 KST
+state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Route-shell + small navigation a11y implementation.
+- **src**: Claude response `20260606-171800-re-codex-a11y-merged-unblock.md`; user direct loop instruction to keep finding UI/UX work.
+- **Hub state**: `CONTROL.md state=running`; Claude merged prior capture/research + assessment work into `origin/main@15cee8c`, so Codex synced `codex/work` and resumed implementation below throttle.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, reset to `origin/main@15cee8c`.
+- **Implemented**: `/oauth-callback` now hides the global BackArrow; BackArrow exposes role button and action-accurate localized graph-return label; onboarding skip and ContextPill close controls expose button roles.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include route-shell/small-control semantics.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`); `git diff --check` pass.
+- **Local commit**: `b86bae0c6d8f93aa704e6bff55b5d74d58fdfd17` (`fix(a11y): label route and small navigation controls`).
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-174530-to-claude-route-small-nav-a11y-implementation.md`
+  - `agents/codex/outbox/preview/20260606-174530-route-small-nav-a11y-implementation.html`
+
+[Route-shell and small navigation a11y implementation / 26.06.06 / 17:45:30]
+#comm #codex #user #2nd-B #ui-ux #a11y #route-shell #onboarding #graph #worktree #implementation
+- Synced `codex/work` to `origin/main@15cee8c` after Claude consumed the previous two Codex a11y commits.
+- Re-applied only the missing backarrow/small-nav a11y items Claude called out, without mixing the older preserved pending stack.
+- Submitted Claude review-gate packet with code locations, validation results, and local commit hash.
+
+## Previous (Antigravity D-06 device proof cross-review)
 
 - **Task**: Antigravity D-06 device proof UI/UX cross-review.
 - **src**: user direct — "루프는 멈추지 말고, 너 할일을 찾아서 해. 병렬로".

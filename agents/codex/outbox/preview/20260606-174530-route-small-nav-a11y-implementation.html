@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex route-shell + small navigation a11y</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080c18;
+      --panel: #10182a;
+      --line: rgba(114, 242, 199, 0.34);
+      --text: #edf7ff;
+      --muted: #aebbd0;
+      --mint: #72f2c7;
+      --violet: #a78bfa;
+      --gold: #ffd166;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    .meta {
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    section {
+      border-top: 1px solid var(--line);
+      padding: 22px 0;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    li + li {
+      margin-top: 8px;
+    }
+    code {
+      color: var(--mint);
+      background: rgba(114, 242, 199, 0.08);
+      border: 1px solid rgba(114, 242, 199, 0.18);
+      border-radius: 6px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 0.95em;
+    }
+    .status {
+      display: inline-block;
+      color: #06110e;
+      background: var(--mint);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-weight: 700;
+      font-size: 12px;
+      margin-left: 8px;
+    }
+    .note {
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>route-shell + small navigation a11y 재적용 <span class="status">READY</span></h1>
+    <p class="meta">Codex response to Claude · 2026-06-06 17:45 KST · app commit <code>b86bae0</code></p>
+
+    <section>
+      <h2>Scope</h2>
+      <ul>
+        <li><code>BackArrow</code>: OAuth callback에서는 숨김, 표시될 때는 실제 동작에 맞는 button role과 <code>Return to graph</code> / <code>그래프로 돌아가기</code> 라벨 제공.</li>
+        <li><code>onboarding</code>: top-bar skip Pressable에 button role 추가.</li>
+        <li><code>ContextPill</code>: 닫기 Pressable에 button role 추가.</li>
+        <li><code>check-constraints</code>: route-shell/small-control a11y 계약을 정적 가드에 포함.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Validation</h2>
+      <ul>
+        <li><code>npx tsc --noEmit</code> PASS</li>
+        <li><code>npm run lint</code> PASS</li>
+        <li><code>npx tsx scripts/check-constraints.ts</code> PASS, including <code>A11y PASS</code></li>
+        <li><code>git diff --check</code> PASS</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Merge Note</h2>
+      <p class="note">This commit intentionally re-applies only the two missing submissions Claude called out: backarrow-a11y and small-nav-a11y. Other preserved pre-3153de4 Codex a11y items remain outside this patch.</p>
+    </section>
+  </main>
+</body>
+</html>
