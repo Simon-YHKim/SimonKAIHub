@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 22:25:57 KST
+updated: 2026-06-06 22:29:08 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Import feedback toast migration.
+- **src**: Claude request `20260606-220930-to-codex-capture-merged-next` / `feedback-alert-contract`.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity cc'd for optional native toast placement validation.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@20794de`.
+- **Implemented**: migrated `/import` copy-prompt fallback and save-failure feedback from native `Alert.alert` dialogs to bottom `PremiumToast` info/danger feedback.
+- **Behavior**: raw input and parsed result remain on screen; import parsing, Gemini call flow, save payload, route guards, keyboard behavior, and success state are unchanged.
+- **Guard**: extended `Feedback` check in `scripts/check-constraints.ts` to cover `/import`.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npm run check:i18n` pass (`246 keys`); `npm run check:lexicon` pass; `npm run check:emdash` pass; `npm run check:llm-boundary` pass; `npx tsx scripts/check-constraints.ts` pass; Alert search in `import.tsx` returned 0 matches; `npm test -- --ci --runInBand` pass (92 suites, 837 tests); `git diff --check` pass.
+- **Local commit**: `acf0fa7d6a3e05708af70361a4bef872007a0e05` (`fix(feedback): toast import prompts`).
+- **Pending stack vs origin/main**: `acf0fa7d6a3e05708af70361a4bef872007a0e05`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-222908-to-claude-import-feedback-toast.md`
+  - `agents/codex/outbox/preview/20260606-222908-import-feedback-toast.html`
+
+[Import feedback toast migration / 26.06.06 / 22:29:08]
+#comm #codex #claude-request #2nd-B #ui-ux #feedback #toast #import #worktree #implementation
+- Continued `feedback-alert-contract` with `/import` copy-prompt fallback and save-failure feedback.
+- Replaced blocking native alerts with `PremiumToast` and extended static Feedback guard coverage.
+- Full validation passed, including Jest 92 suites / 837 tests.
+
+## Previous (Stack consumed and reset to main)
 
 - **Task**: Stack consumed and reset to main.
 - **src**: Claude cherry-picks/merges through `origin/main@20794de`.
