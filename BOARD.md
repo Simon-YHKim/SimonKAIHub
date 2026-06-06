@@ -1,80 +1,81 @@
-﻿---
+---
 owner: claude
-note: "???뚯씪? Claude(?ㅼ??ㅽ듃?덉씠??留??묒꽦?쒕떎. Codex쨌Antigravity쨌Grok? ?쎄린 ?꾩슜."
+note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity·Grok은 읽기 전용."
 last-updated: 2026-06-06 16:35:00 KST
 run_mode: autonomous-B
 live_head: 2nd-B main 775abf8
 ---
 
-# BOARD.md ??留덉뒪???곹깭??(always-latest)
+# BOARD.md — 마스터 상태판 (always-latest)
 
-> ?꾩껜 ?묒뾽???⑥씪 吏꾩떎 ?뚯뒪(single source of truth). Claude媛 媛깆떊.
-> Codex쨌Antigravity쨌Grok? ?몄뀡 ?쒖옉 ?????뚯씪濡??꾩옱 ?곹솴???뚯븙?쒕떎.
-> **???ㅽ뀒?댄듃??`CONTROL.md`, ?⑹쓽??`DECISIONS.md`.** ?댁슜 紐⑤뜽 = B(?먯쑉, PROTOCOL 짠11).
+> 전체 작업의 단일 진실 소스(single source of truth). Claude가 갱신.
+> Codex·Antigravity·Grok은 세션 시작 시 이 파일로 현재 상황을 파악한다.
+> **런-스테이트는 `CONTROL.md`, 합의는 `DECISIONS.md`.** 운용 모델 = B(자율, PROTOCOL §11).
 
-## ?봽 ?먯쑉 猷⑦봽 ?곹깭 (Autonomous Loops, PROTOCOL 짠12)
-| AI | 猷⑦봽 | ?곹깭 | charter |
+## 🔄 자율 루프 상태 (Autonomous Loops, PROTOCOL §12)
+| AI | 루프 | 상태 | charter |
 |---|---|---|---|
-| Claude | ?듯빀(援ы쁽쨌癒몄?쨌?⑤씪?퇱it) | running | inbox/DECISIONS ?뚮퉬 ??verify ??merge |
-| Codex | anti-slop 諛쒓껄 | running | 誘몃㉧吏 8嫄?珥덇낵 ??諛쒓껄以묒?쨌P3 ?듯빀 |
-| Antigravity | ?ㅼ씠?곕툕 ?쎌뒪쨌QA | running | ?먭린 釉뚮옖移?而ㅻ컠 ??Claude 由щ럭寃뚯씠??|
-| Grok | ?몃젋?쑣룰껐?뺤엯??| running | ?⑹쓽 ?낅젰 + 30遺??몃젋??紐⑤땲??|
+| Claude | 통합(구현·머지·온라인git) | running | inbox/DECISIONS 소비 → verify → merge |
+| Codex | anti-slop 발견 | running | 미머지 8건 초과 시 발견중지·P3 통합 |
+| Antigravity | 네이티브 픽스·QA | running | 자기 브랜치 커밋 → Claude 리뷰게이트 |
+| Grok | 트렌드·결정입력 | running | 합의 입력 + 30분 트렌드 모니터 |
 
-## ?뵍 ?몃??섏〈 釉붾줈而?(Simon 媛쒖엯 ?꾩슂 ??짠15)
-- (DECISIONS.md `external` ??ぉ 李몄“: D-03 consent 踰뺣Т, D-05 social provider ?ㅼ꽕??
+## 🔐 외부의존 블로커 (Simon 개입 필요 — §15)
+- (DECISIONS.md `external` 항목 참조: D-03 consent 법무, D-05 social provider 실설정)
 
-## ?쩃 ?⑹쓽 吏꾪뻾 (Consensus ??DECISIONS.md)
-- D-01~D-07 ?ы몴 ?湲?(?移섎━?ㅽ듃 ?닿?). 媛?AI??`type: consensus_vote`濡?李몄뿬.
+## 🤝 합의 진행 (Consensus — DECISIONS.md)
+- D-01~D-07 투표 대기 (펀치리스트 이관). 각 AI는 `type: consensus_vote`로 참여.
 
-## ?뵦 吏꾪뻾 以?(In Progress)
-| ID | ?묒뾽 | ?대떦 | ?곹깭 | 鍮꾧퀬 |
+## 🔥 진행 중 (In Progress)
+| ID | 작업 | 담당 | 상태 | 비고 |
 |---|---|---|---|---|
-| cycle-5 | 2nd-B privacy opt-out monotonicity P1 ???숈쓽 寃뚯씠?멸? stale/?ㅽ뙣 ?꾨즺濡??ы솢?깊솕?섎뜕 ?뚭? | claude | ??**癒몄?+?쇱씠釉?* | PR #215 main `911c979`, Codex MERGE-SAFE+closes_p1(2?쇱슫?? stale?꾨즺쨌?ㅽ뙣revert ????. cycle-3 吏곷젹???섏젙???붿뿬 consent 臾닿껐??踰꾧렇 |
-| cycle-4 | 2nd-B ??대씪?고듃 slop ?섏젙 ??/journal쨌/imagine쨌/mbti瑜??ㅼ젣 紐⑹쟻吏濡?emit + ?ъ쑀?낅갑吏 ?뚯뒪??| claude | ??**癒몄?+?쇱씠釉?* | PR #214 main `ee9f80b`, Codex MERGE-SAFE(retired-route gate 醫낅즺). 由щ떎?대젆?몃뒗 deep-link ?명솚 ?좎? |
-| cycle-3 | 2nd-B **?곷???踰꾧렇?뚰듃 + ?섏젙** ??42諛쒓껄?뭁0:0/P1:3/P2:11/P3:13, 18+4?섏젙 | claude | ??**癒몄?+?쇱씠釉?* | PR #213 main `ada9bd2`, Codex 8.5 MERGE-SAFE(2 HIGH 釉붾줈而??↔퀬 ?섏젙). HTML `agents/claude/outbox/preview/20260606-overnight-summary.html` |
-| cycle-2 | 2nd-B UX ?꾨꼍????**癒몄?+?쇱씠釉?* (PR #212, main `d8ba4a0`) | claude | ??done | Codex 97. FlatList쨌NavGraph LOD쨌raw?먮윭쨌trust(persona/social/consent) |
-| cycle-1 | 2nd-B ?꾩꽦???ъ씠????**癒몄? ?꾨즺** (PR #211, main `0bfbfa3`) | claude | ??done | 蹂댁븞쨌trust쨌route쨌Android?ㅼ씠?곕툕쨌a11y |
-| research-2 | deep-research: ?щ엺???뺥솗???뚯븙?섎뒗 援ъ“(SOKA쨌informant쨌?쒗쁽?곴??곌린쨌ESM쨌LLM) | claude | ?ㅽ뻾以?| ??"援ъ“" ?ㅺ퀎 culminating ?곗텧 |
-| gate-stream | Codex 100??UX 寃뚯씠???ㅽ듃由???130 諛쒓껄. ?좊ː移댄뵾쨌a11y쨌?뚭눼UX쨌i18n 4?대윭?ㅽ꽣 | codex+claude | ?윟 ?뚮퉬以?| **癒몄? 6嫄?*: preauth-trust`cbf61cc`쨌PremiumButton-a11y`c2a7e6c`쨌settings-selected`f7004c1`쨌permissions+formats`3569ae6`쨌insights-false-empty`3153de4`(+4?뚯뒪?? 834 green). Codex=capture/research selected, settings/account+濡쒖쭅寃뚯씠??claude |
-| pipeline-test | 4-AI ??뚯씠?꾨씪??+ ?쇰뱶諛?round-trip ?ㅼ쬆 | claude | ??寃利?| ?ㅻ뱶由ъ뒪 codex/grok/gemini ?쇱슫?쒗듃由?OK(湲곗뿬?먮퀎 而ㅻ컠). Grok 寃利?PASS. AG D-06 ?쒖븞. ?덇굅??48 遺꾨쪟(38??젣/10keep). ?⑥젙=?ㅻ뱶由ъ뒪 湲??쒓? ?꾨＼?꾪듃??stdin UTF-8 |
-| false-empty | source-only false-empty ?곗씠?곗쭊??寃뚯씠??insights쨌core-brain쨌trinity ?뺤젣) | claude | ??3/3 ?꾧껐 | insights`3153de4`쨌core-brain`3becd09`쨌trinity`34c7da5` 癒몄?(records+sources 吏묎퀎). ?곗씠??吏꾩떎 family ?꾧껐 |
-| hub-v2 | 4-AI ?덈툕 ?먯쑉??媛쒗렪(B紐⑤뜽) ??CONTROL쨌DECISIONS쨌PROTOCOL 짠11~18쨌board.ps1쨌commit.ps1쨌4 activate ?꾨＼?꾪듃쨌湲곗뿬?먰몴湲?| claude | ??援ы쁽?꾨즺 | 5媛덈옒 議곗궗 ?뚰겕?뚮줈 湲곕컲. Simon??4 ?꾨＼?꾪듃 媛??곕????낅젰 ?덉젙 |
+| cycle-5 | 2nd-B privacy opt-out monotonicity P1 — 동의 게이트가 stale/실패 완료로 재활성화되던 회귀 | claude | ✅ **머지+라이브** | PR #215 main `911c979`, Codex MERGE-SAFE+closes_p1(2라운드: stale완료·실패revert 둘 다). cycle-3 직렬화 수정의 잔여 consent 무결성 버그 |
+| cycle-4 | 2nd-B 은퇴라우트 slop 수정 — /journal·/imagine·/mbti를 실제 목적지로 emit + 재유입방지 테스트 | claude | ✅ **머지+라이브** | PR #214 main `ee9f80b`, Codex MERGE-SAFE(retired-route gate 종료). 리다이렉트는 deep-link 호환 유지 |
+| cycle-3 | 2nd-B **적대적 버그헌트 + 수정** — 42발견→P0:0/P1:3/P2:11/P3:13, 18+4수정 | claude | ✅ **머지+라이브** | PR #213 main `ada9bd2`, Codex 8.5 MERGE-SAFE(2 HIGH 블로커 잡고 수정). HTML `agents/claude/outbox/preview/20260606-overnight-summary.html` |
+| cycle-2 | 2nd-B UX 완벽화 — **머지+라이브** (PR #212, main `d8ba4a0`) | claude | ✅ done | Codex 97. FlatList·NavGraph LOD·raw에러·trust(persona/social/consent) |
+| cycle-1 | 2nd-B 완성형 사이클 — **머지 완료** (PR #211, main `0bfbfa3`) | claude | ✅ done | 보안·trust·route·Android네이티브·a11y |
+| research-2 | deep-research: 사람을 정확히 파악하는 구조(SOKA·informant·표현적글쓰기·ESM·LLM) | claude | 실행중 | → "구조" 설계 culminating 산출 |
+| gate-stream | Codex 100점 UX 게이트 스트림 — 130 발견. 신뢰카피·a11y·파괴UX·i18n 4클러스터 | codex+claude | 🟢 소비중 | **머지 6건**: preauth-trust`cbf61cc`·PremiumButton-a11y`c2a7e6c`·settings-selected`f7004c1`·permissions+formats`3569ae6`·insights-false-empty`3153de4`(+4테스트, 834 green). Codex=capture/research selected, settings/account+로직게이트=claude |
+| pipeline-test | 4-AI 풀파이프라인 + 피드백 round-trip 실증 | claude | ✅ 검증 | 헤드리스 codex/grok/gemini 라운드트립 OK(기여자별 커밋). Grok 검증 PASS. AG D-06 제안. 레거시 48 분류(38삭제/10keep). 함정=헤드리스 긴 한글 프롬프트는 stdin UTF-8 |
+| false-empty | source-only false-empty 데이터진실 게이트(insights·core-brain·trinity 형제) | claude | ✅ 3/3 완결 | insights`3153de4`·core-brain`3becd09`·trinity`34c7da5` 머지(records+sources 집계). 데이터-진실 family 완결 |
+| hub-v2 | 4-AI 허브 자율화 개편(B모델) — CONTROL·DECISIONS·PROTOCOL §11~18·board.ps1·commit.ps1·4 activate 프롬프트·기여자표기 | claude | ✅ 구현완료 | 5갈래 조사 워크플로 기반. Simon이 4 프롬프트 각 터미널 입력 예정 |
 
-## ?뱿 遺꾨같??/ ?湲?(Assigned / Waiting)
-| ID | ?묒뾽 | ?붿껌?믩떞??| ?곹깭 | 硫붿떆吏 |
+## 📥 분배됨 / 대기 (Assigned / Waiting)
+| ID | 작업 | 요청→담당 | 상태 | 메시지 |
 |---|---|---|---|---|
-| disp-codex2 | MBTI 媛뺣벑 ?ㅽ럺 + DESIGN ?먯젙 + 紐⑤컮???ㅻ쾭?뚮줈???ㅽ럺 | claude?뭖odex | ??done | ?뚯닔 ?꾨즺, 援ы쁽 諛섏쁺以?|
-| user-grok | ?섏씠?蹂꽷룰뎅媛蹂?X ?좏샇/?좎엯/?몃젋??10+cycle ?λ떎?대툕 | **user**?뭛rok | 吏꾪뻾/?꾨즺 | 짠10.4 user-direct (`85d1322`) |
-| user-android | Android 10+ ?ъ링 寃??由ы룷??(part 1쨌2) | **user**?? | 吏꾪뻾 | 짠10.4 user-direct (`1582810`,`e4722b5`) |
+| disp-codex2 | MBTI 강등 스펙 + DESIGN 판정 + 모바일 오버플로우 스펙 | claude→codex | ✅ done | 회수 완료, 구현 반영중 |
+| user-grok | 나이대별·국가별 X 선호/유입/트렌드 10+cycle 딥다이브 | **user**→grok | 진행/완료 | §10.4 user-direct (`85d1322`) |
+| user-android | Android 10+ 심층 검사 리포트 (part 1·2) | **user**→? | 진행 | §10.4 user-direct (`1582810`,`e4722b5`) |
 
-## ?뫁 硫ㅻ쾭 ?⑤낫???곹깭
-| AI | ??븷 | ?곹깭 | ?고???|
+## 👥 멤버 온보딩 상태
+| AI | 역할 | 상태 | 런타임 |
 |---|---|---|---|
-| Claude | ?ㅼ??ㅽ듃?덉씠??+ 肄붾뵫 | ??active | Claude Code |
-| Codex | ?대?吏 쨌 UI/UX | ??onboarded | codex CLI (?ㅻ뱶由ъ뒪 OK) |
-| Antigravity | Android/Google ?ㅼ씠?곕툕 **媛쒕컻+寃??* | ??onboarded | **gemini CLI**(?ㅻ뱶由ъ뒪 ?묐룞) / agy CLI(?ㅻ뱶由ъ뒪 hang?붿껀 ?몄쬆 ?꾩슂) / IDE(?섎룞) |
-| Grok | X(?뚯뀥) ?몃젋?쑣룹냼鍮꾩옄 由ъ꽌移?| ??onboarded | grok CLI (`--prompt-file` UTF-8, ?ㅻ뱶由ъ뒪 ?묐룞) |
+| Claude | 오케스트레이터 + 코딩 | ✅ active | Claude Code |
+| Codex | 이미지 · UI/UX | ✅ onboarded | codex CLI (헤드리스 OK) |
+| Antigravity | Android/Google 네이티브 **개발+검수** | ✅ onboarded | **gemini CLI**(헤드리스 작동) / agy CLI(헤드리스 hang—첫 인증 필요) / IDE(수동) |
+| Grok | X(소셜) 트렌드·소비자 리서치 | ✅ onboarded | grok CLI (`--prompt-file` UTF-8, 헤드리스 작동) |
 
-## ???꾨즺 (Done) ??理쒓렐 10嫄?| ID | ?묒뾽 | ?대떦 | ?꾨즺 |
+## ✅ 완료 (Done) — 최근 10건
+| ID | 작업 | 담당 | 완료 |
 |---|---|---|---|
-| disp-codex | ?붾㈃ ?몃깽?좊━쨌IA 媛먯궗: 43?쇱슦??遺꾨쪟 + Phase6 ?붾㈃留?+ DESIGN ?꾨컲 ?꾨낫 | codex | 2026-06-05 |
-| disp-grok | ?뚮퉬?먃룰꼍??由ъ꽌移?7?쒗뭹 媛먯젙 + Barnum + portable hook + 沅뚭퀬5) | grok | 2026-06-05 |
-| disp-antig | ?ㅼ씠?곕툕 QA 以鍮꾨룄: 議곌굔遺 媛??Reanimated v4/RN0.85 由ъ뒪?? + QA 泥댄겕由ъ뒪??| antigravity | 2026-06-05 |
-| audit-wf | 7李⑥썝 肄붾뱶媛먯궗 ??8嫄??뺤젙(0C/0H/5M/3L): knowledge_sources RLS ?몄젥?샕텱DL drift쨌wiki export PII쨌留덉뒪肄뷀듃 canon | claude | 2026-06-05 |
-| deepres-wf | ?щ━?좊? 臾명뿄(Big5/SDT/Attach/VIA) 24 claim ?섏쭛(寃利앸젅?댁뼱 ?μ븷?묬8 ?멸컙寃利???? | claude | 2026-06-05 |
-| status-check | 4-AI ?덈툕 ?쇱씠釉??먭?(3-AI ?ㅻ뱶由ъ뒪 ??OK: Codex/GPT-5쨌Gemini쨌Grok4.3) + 2ndB ff-only ?숆린??| claude | 2026-06-05 |
-| protocol-v10 | PROTOCOL 짠10(?ㅽ뻾紐⑤뱶쨌?먮룞?뱀씤쨌Claude?⑤룆??붋룸퀝??룹쭅?묒????꾪솴) + `*-activate.md` 3醫?異붽? | claude | 2026-06-05 |
-| onboard-codex | Codex ?덈툕 ?⑤낫??+ self-commit ?ㅼ쬆 | codex | 2026-06-05 |
-| onboard-antig | Antigravity(gemini) ?덈툕 ?⑤낫??+ self-commit ?ㅼ쬆 | antigravity | 2026-06-05 |
-| boot-0 | 3-AI ?듭떊 ?꾨줈?좎퐳쨌援ъ“ ?앹꽦 | claude | 2026-06-05 |
+| disp-codex | 화면 인벤토리·IA 감사: 43라우트 분류 + Phase6 화면맵 + DESIGN 위반 후보 | codex | 2026-06-05 |
+| disp-grok | 소비자·경쟁 리서치(7제품 감정 + Barnum + portable hook + 권고5) | grok | 2026-06-05 |
+| disp-antig | 네이티브 QA 준비도: 조건부 가능(Reanimated v4/RN0.85 리스크) + QA 체크리스트 | antigravity | 2026-06-05 |
+| audit-wf | 7차원 코드감사 → 8건 확정(0C/0H/5M/3L): knowledge_sources RLS 인젝션·DDL drift·wiki export PII·마스코트 canon | claude | 2026-06-05 |
+| deepres-wf | 심리토대 문헌(Big5/SDT/Attach/VIA) 24 claim 수집(검증레이어 장애→C8 인간검증 대상) | claude | 2026-06-05 |
+| status-check | 4-AI 허브 라이브 점검(3-AI 헤드리스 핑 OK: Codex/GPT-5·Gemini·Grok4.3) + 2ndB ff-only 동기화 | claude | 2026-06-05 |
+| protocol-v10 | PROTOCOL §10(실행모드·자동승인·Claude단독대화·병렬·직접지시/현황) + `*-activate.md` 3종 추가 | claude | 2026-06-05 |
+| onboard-codex | Codex 허브 온보딩 + self-commit 실증 | codex | 2026-06-05 |
+| onboard-antig | Antigravity(gemini) 허브 온보딩 + self-commit 실증 | antigravity | 2026-06-05 |
+| boot-0 | 3-AI 통신 프로토콜·구조 생성 | claude | 2026-06-05 |
 
-## ?㎟ 寃곗젙 ?湲???DECISIONS.md濡??닿? (PROTOCOL 짠14 ?⑹쓽)
-> ?덉쟾 "Simon 寃곗젙 ?移섎━?ㅽ듃"??**?⑹쓽 ?먯옣 `DECISIONS.md` D-01~D-07**濡???꼈??
-> ?遺遺꾩? **4-AI ?⑹쓽濡?寃곗젙쨌吏꾪뻾**(decide), 吏꾩쭨 ?몃??섏〈留?Simon(external): D-03 consent 踰뺣Т쨌D-05 social provider ?ㅼ꽕??
-> ?덉쟾?덉씪(?뚭눼쨌?ㅻ퉬?㈑톝ecrets)? ?⑹쓽 ?고쉶 遺덇? ??洹몃?濡?Simon ?뺤씤.
+## 🧱 결정 대기 → DECISIONS.md로 이관 (PROTOCOL §14 합의)
+> 예전 "Simon 결정 펀치리스트"는 **합의 원장 `DECISIONS.md` D-01~D-07**로 옮겼다.
+> 대부분은 **4-AI 합의로 결정·진행**(decide), 진짜 외부의존만 Simon(external): D-03 consent 법무·D-05 social provider 실설정.
+> 안전레일(파괴·실비용·secrets)은 합의 우회 불가 — 그대로 Simon 확인.
 
-## ?뱦 ?쒖꽦 ?꾨줈?앺듃
-| ?꾨줈?앺듃 | ?덊룷 | 寃쎈줈 | ?④퀎 |
+## 📌 활성 프로젝트
+| 프로젝트 | 레포 | 경로 | 단계 |
 |---|---|---|---|
 | **2nd-B** | github.com/Simon-YHKim/2nd-B (main, 138 br) | `projects/2nd-B/` | build |
-| _TEMPLATE | ??| `projects/_TEMPLATE/` | ?쒗뵆由?|
+| _TEMPLATE | — | `projects/_TEMPLATE/` | 템플릿 |
