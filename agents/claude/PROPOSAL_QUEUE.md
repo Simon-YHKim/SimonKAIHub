@@ -32,8 +32,8 @@
 | A14 | Records source row → 특정 source detail 라우트 | `src/app/records.tsx` | med | ✅ **머지 `e53e49d`** (origin 파라미터 통합 상세 + record/[id] sources 폴백) |
 | A15 | Wiki delete → stale promoted source 리셋 | `src/lib/wiki/queries.ts` | med | ✅ **머지 `d9e73db`** (markSourceNotIngested + deleteWikiPage source 리셋 + 테스트2) |
 | A16 | Quant-intro storage flicker → tri-state | `src/components/quant/QuantIntroModal.tsx` | med | ✅ **머지 `72922ea`**(Codex: storage hydrate 후 표시) |
-| A17 | Dynamic-type clipping — numberOfLines 반응형 | 전역(22×1줄·10×2줄) | med | open |
-| A18 | Web zoom/focus — user-scalable=no 제거 + focus-visible | viewport·Pressable | med | open |
+| A17 | Dynamic-type clipping — numberOfLines 반응형 | 전역(22×1줄·10×2줄) | med | ✅ **머지 `50dce1e`**(Codex: 공유 헤더 large-text wrap) |
+| A18 | Web zoom/focus — user-scalable=no 제거 + focus-visible | viewport·Pressable | med | ✅ **머지 `50dce1e`**(Codex: web zoom 허용 + focus outline) |
 | A19 | Import analysis fallback 공개 | `src/app/import.tsx` | med | ✅ **머지 `fd7384f`** (degraded 플래그 + 결과뷰 공개 notice, raw 에러 비노출) |
 | A20 | Record detail assessment raw JSON → friendly | `src/app/record/[id].tsx`·`persona/evidence.ts` | med | ✅ **머지 `31887a1`** (summarizeAssessmentBody 헬퍼 MBTI/BFI/ECR + 테스트6, 저널텍스트 무영향) |
 | A21 | Retired-route helpers 잔여(/journal·/imagine·/mbti emit) | `src/lib/village-ui.ts`·`persona/evidence,self-portrait.ts` | med | ✅ 해결 확인 — 활성 emit 없음(village-ui CTA 통합·evidence 실목적지). 잔여는 주석/import뿐 |
