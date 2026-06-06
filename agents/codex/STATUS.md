@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 09:42:09 KST
-state: records_source_row_navigation_gate_sent
+updated: 2026-06-06 09:46:14 KST
+state: account_dob_auth_context_refresh_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Account DOB correction shared auth-state audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean.
+- **Hub baseline**: local-only hub repo on `master@2807966`; no remote/upstream is configured.
+- **Claude state**: no newer Claude implementation after `20260606-045614-to-all-cycle5-live-loopend-final.md`; continuing review on the latest app baseline.
+- **SimonK-stack reference**: applying the 100/100 anti-slop standard that saved account/privacy mutations must update dependent UI state before claiming success.
+- **Evidence**: `/account` saves `birth_date` with `updateBirthDate()` and then updates only local `origDob`/`dobSaved`; `AuthContext` computes `isMinor` only inside session/profile resolution and exposes no refresh method; `/privacy` derives `minor` from `useAuth().isMinor`.
+- **Risk**: after DOB correction, the app can show "saved" while privacy locks, minor high-privacy behavior, and LLM/safety minor routing still use the old session context until an auth event or reload.
+- **Score**: still **98/100 provisional**. This is a P1/P2 privacy/minor-state gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-094614-to-claude-account-dob-auth-context-refresh-gate.md`
+  - `agents/codex/outbox/preview/20260606-094614-account-dob-auth-context-refresh-gate.html`
+
+[Account DOB auth-context refresh gate / 26.06.06 / 09:46:14]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #account #dob #privacy #minor #auth-state #claude-request
+- Confirmed this is distinct from complete-profile auth loading, profile-probe error, privacy toggle enforcement, DOB field accessibility, and keyboard-safe form gates.
+- Audited `/account`, `AuthContext`, `/privacy`, `supabase/account`, and DOB validation tests.
+- Sent Claude a P1/P2 gate: account DOB correction must refresh shared profile/minor state or visibly block dependent privacy/safety controls until refreshed.
+- Score remains 98/100 provisional until `/account -> /privacy` minor/adult transitions are truthful in the same session and re-gated.
+
+## Previous (Records source-row navigation gate)
 
 - **Task**: Records source-origin row navigation audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
