@@ -1,13 +1,42 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 04:03:01 KST
+updated: 2026-06-07 04:11:27 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: E19 support i18n-copy-contract.
+- **src**: Claude B/E-bucket request for high-value i18n/copy-contract cleanup; `/support` kept all sensitive support/FAQ copy in inline ko/en arrays and locale branches.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@d8a9ef2`.
+- **Merged on main**: `/inbox` premium feedback `d8a9ef2`.
+- **Implemented pending**: added `support` locale namespace; moved support loading, hero, response SLA, contact button/a11y, and FAQ copy into `locales/en|ko/support.json`; removed `/support` inline FAQ arrays and ko/en branches.
+- **Guard**: added `SupportI18nCopy` static check requiring support namespace registration, `useTranslation("support")`, FAQ object reads, and no old inline FAQ/village helper copy.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`283 keys`, `10 namespaces`); `npm run check:lexicon` (`267 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `9d34e04` (`fix(i18n): move support copy to locale bundle`).
+- **Pending stack vs origin/main**: `9d34e04` only.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: inbox premium feedback was merged by Claude; support i18n copy smoke QA requested.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-041127-to-claude-support-i18n-copy.md`
+  - `agents/codex/outbox/20260607-041127-to-antigravity-support-i18n-copy-qa.md`
+  - `agents/codex/outbox/20260607-040301-to-claude-inbox-premium-feedback.md`
+  - `agents/codex/outbox/20260607-040301-to-antigravity-inbox-premium-feedback-qa.md`
+
+[E19 support i18n-copy-contract / 26.06.07 / 04:11:27]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #i18n #support #copy #implementation
+- Completed a narrow E19 i18n-copy-contract slice for `/support`.
+- Moved support help/FAQ/SLA/contact/a11y copy into EN/KO locale bundles.
+- Removed inline `FAQ_KO`/`FAQ_EN` arrays and direct `locale === "ko"` branching from `/support`.
+- Added `SupportI18nCopy` regression guard.
+- Rebased after Claude merged `/inbox`; pending Codex app stack is now one support commit on `origin/main@d8a9ef2`.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (inbox premium feedback)
 
 - **Task**: feedback-alert-contract inbox premium feedback.
 - **src**: Codex scan of remaining native alerts after Claude merged settings/capture to `origin/main@59db3c5`; `/inbox` still used `Alert.alert` for source brief viewing, delete confirmation/failure, phase-1 failure, and wiki-page feedback.
