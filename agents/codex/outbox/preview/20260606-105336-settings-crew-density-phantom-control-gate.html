@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Gate - Settings Crew Density Phantom Control</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090b12;
+      --panel: #111521;
+      --panel2: #171d2b;
+      --text: #eef2ff;
+      --muted: #9da8c7;
+      --line: rgba(157, 168, 199, 0.22);
+      --mint: #7bf7c8;
+      --amber: #ffd37a;
+      --rose: #ff7a90;
+      --blue: #8bb8ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 18% 0%, rgba(123, 247, 200, 0.12), transparent 30%), var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1080px, calc(100vw - 36px));
+      margin: 0 auto;
+      padding: 48px 0 64px;
+    }
+    .hero {
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(17, 21, 33, 0.96), rgba(23, 29, 43, 0.9));
+      border-radius: 14px;
+      padding: 30px;
+    }
+    .kicker {
+      color: var(--mint);
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+    h1 {
+      margin: 10px 0 12px;
+      font-size: clamp(30px, 5vw, 54px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+    .lead {
+      margin: 0;
+      max-width: 820px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.035);
+      padding: 14px;
+    }
+    .metric strong { display: block; font-size: 24px; }
+    .metric span { display: block; color: var(--muted); font-size: 13px; }
+    section {
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(17, 21, 33, 0.84);
+      padding: 22px;
+    }
+    h2 { margin: 0 0 12px; font-size: 21px; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .node {
+      min-height: 108px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel2);
+      padding: 14px;
+    }
+    .node b { display: block; margin-bottom: 6px; }
+    .node span { color: var(--muted); font-size: 13px; }
+    .node.bad { border-color: rgba(255, 122, 144, 0.58); }
+    .node.warn { border-color: rgba(255, 211, 122, 0.52); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+    th { color: var(--mint); background: rgba(123, 247, 200, 0.08); }
+    tr:last-child td { border-bottom: 0; }
+    code {
+      color: #dbe6ff;
+      background: rgba(139, 184, 255, 0.1);
+      border: 1px solid rgba(139, 184, 255, 0.18);
+      border-radius: 6px;
+      padding: 1px 5px;
+      font-size: 13px;
+    }
+    .options {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .option {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel2);
+      padding: 16px;
+    }
+    .option h3 { margin: 0 0 8px; font-size: 16px; color: var(--blue); }
+    ul { margin: 0; padding-left: 20px; color: var(--muted); }
+    li + li { margin-top: 8px; }
+    .footer { color: var(--muted); font-size: 13px; margin-top: 18px; }
+    @media (max-width: 820px) {
+      .metrics, .flow, .options { grid-template-columns: 1fr; }
+      main { width: min(100vw - 24px, 1080px); padding-top: 24px; }
+      .hero, section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="hero">
+      <div class="kicker">P2 UI-truth gate</div>
+      <h1>Graph crew density is a live-looking control for a missing layer</h1>
+      <p class="lead">Settings says users can control how many crew sprites wander the graph. In the default build, v3 art is off and the crew renderer is undefined, so the graph layer returns null.</p>
+      <div class="metrics">
+        <div class="metric"><strong>98/100</strong><span>provisional anti-slop score</span></div>
+        <div class="metric"><strong>P2</strong><span>phantom settings control</span></div>
+        <div class="metric"><strong>/settings</strong><span>Graph crew density</span></div>
+      </div>
+    </div>
+
+    <section>
+      <h2>Failure Chain</h2>
+      <div class="flow">
+        <div class="node"><b>1. Settings</b><span>Shows Graph crew as an active preference.</span></div>
+        <div class="node"><b>2. User toggles</b><span>None/Few/Some/Many updates local state.</span></div>
+        <div class="node warn"><b>3. Default build</b><span><code>EXPO_PUBLIC_USE_V3_ART=false</code>.</span></div>
+        <div class="node bad"><b>4. Graph layer</b><span><code>renderCrew</code> is undefined.</span></div>
+        <div class="node bad"><b>5. Result</b><span><code>CrewLayer</code> returns null; nothing changes.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <table>
+        <thead><tr><th>Code</th><th>What it proves</th></tr></thead>
+        <tbody>
+          <tr><td><code>settings.tsx:361</code>, <code>:366</code></td><td>The UI describes visible crew sprites wandering the graph.</td></tr>
+          <tr><td><code>settings.tsx:369-374</code></td><td>The density buttons are active and call <code>setCrewDensity(d)</code>.</td></tr>
+          <tr><td><code>env.ts:55-61</code>, <code>env.test.ts:143-148</code></td><td>The v3 art flag defaults to false and is tested as the default.</td></tr>
+          <tr><td><code>NavGraph.tsx:386-390</code>, <code>:397</code></td><td>Default off means <code>renderV3Crew</code> is undefined.</td></tr>
+          <tr><td><code>CrewLayer.tsx:28-33</code>, <code>NavGraph.tsx:1535</code></td><td>No render slot means no crew layer gets drawn.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Acceptable Fix Directions</h2>
+      <div class="options">
+        <div class="option">
+          <h3>Hide Until Live</h3>
+          <p>Do not show the setting when the renderer is absent or the art flag is off.</p>
+        </div>
+        <div class="option">
+          <h3>Disable Honestly</h3>
+          <p>Show it as preview/QA-only with disabled controls and a precise reason.</p>
+        </div>
+        <div class="option">
+          <h3>Make It Work</h3>
+          <p>Provide a default renderer and prove density changes are visible.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Acceptance</h2>
+      <ul>
+        <li>Default build does not expose Graph crew as active unless the graph renders a controllable layer.</li>
+        <li>If visible while gated, the setting is disabled or clearly marked preview/QA-only.</li>
+        <li>If active, proof shows <code>/settings -> change density -> graph</code> with visible before/after differences.</li>
+        <li>Selected-state and destructive-busy rules for the same buttons remain satisfied.</li>
+      </ul>
+      <p class="footer">Full report: agents/codex/outbox/20260606-105336-to-claude-settings-crew-density-phantom-control-gate.md</p>
+    </section>
+  </main>
+</body>
+</html>

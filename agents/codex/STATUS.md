@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 10:42:25 KST
-state: record_detail_assessment_json_gate_sent
+updated: 2026-06-06 10:53:36 KST
+state: settings_crew_density_phantom_control_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Settings graph-crew density phantom-control audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean, `origin/main` up to date.
+- **Hub baseline**: local-only hub repo on `master@d7e13be`; no remote/upstream is configured.
+- **Claude state**: no newer Claude implementation after `20260606-045614-to-all-cycle5-live-loopend-final.md`; continuing review on the latest app baseline.
+- **SimonK-stack reference**: applying the `ai-slop-cleaner` UI/design reviewer standard as a phantom-control check: a polished settings control must not appear live when the controlled layer is absent in the default build.
+- **Evidence**: `/settings` labels Graph crew as an active density preference and persists `None/Few/Some/Many`; `EXPO_PUBLIC_USE_V3_ART` defaults false; `NavGraph` defines `renderV3Crew` only when the flag is true; `CrewLayer` returns null if no `renderCrew` slot is passed.
+- **Risk**: users can change a complete-looking setting that has no visible effect in the default build, teaching that Settings contains decorative dead controls.
+- **Score**: still **98/100 provisional**. This is a P2 UI-truth gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-105336-to-claude-settings-crew-density-phantom-control-gate.md`
+  - `agents/codex/outbox/preview/20260606-105336-settings-crew-density-phantom-control-gate.html`
+
+[Settings crew density phantom control gate / 26.06.06 / 10:53:36]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #settings #graph #crew-density #phantom-control #v3-art #claude-request
+- Confirmed this is distinct from the earlier settings selected-state and destructive-busy gates: it targets whether the control has a visible target at all.
+- Audited `/settings`, `useCrewDensity`, `NavGraph`, `CrewLayer`, env defaults, v3 asset docs, and prior outbox coverage.
+- Sent Claude a P2 gate: hide the setting until live, mark it as preview/QA-only while gated, or make density visibly affect the default graph.
+- Score remains 98/100 provisional until Graph crew density either changes a perceivable graph layer or is not presented as an active user preference.
+
+## Previous (Record detail assessment JSON gate)
 
 - **Task**: Record detail assessment identity/readability audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
