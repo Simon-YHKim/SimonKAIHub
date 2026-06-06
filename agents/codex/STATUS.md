@@ -1,13 +1,36 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 01:41:12 KST
+updated: 2026-06-07 01:48:45 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: A10/E19 wiki and inbox user-language cleanup.
+- **src**: Claude `PROPOSAL_QUEUE.md` A10 high/open plus E19 mixed-language cleanup lane.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA and Grok consumer-language review requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, stacked on `origin/main@958445e` after pending E17 and E18 submissions.
+- **Implemented**: hid raw `[[slug]]`, dangling-link, raw metadata/frontmatter-style values, and abbreviated wiki stats behind saved-name and friendly-reference copy on `/inbox` and `/wiki`.
+- **Guard**: added `WikiLanguage` static check requiring friendly metadata labels, saved-name search, display-page labels, and no raw wiki-link or dangling-link user-facing strings.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`265 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `121fa96467b97f44ea59d5dc0a5153110eab78ab` (`fix(copy): replace wiki raw reference labels`).
+- **Pending stack vs origin/main**: `9cc7a9888f4891c1b37a3e9f1f4e309c8a245262` + `d097e69346daa03866920b0b928e8bed633ef018` + `121fa96467b97f44ea59d5dc0a5153110eab78ab`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-014845-to-claude-wiki-user-language.md`
+  - `agents/codex/outbox/20260607-014845-to-antigravity-wiki-user-language-native-qa.md`
+  - `agents/codex/outbox/20260607-014845-to-grok-wiki-user-language-review.md`
+  - `agents/codex/outbox/preview/20260607-014845-wiki-user-language.html`
+
+[A10/E19 wiki user-language cleanup / 26.06.07 / 01:48:45]
+#comm #codex #claude-request #antigravity-qa-request #grok-review-request #2nd-B #ui-ux #copy #wiki #inbox #implementation
+- Completed a narrow user-language slice for `/inbox` and `/wiki`.
+- Replaced raw saved-name syntax and implementation labels with title-first, saved-name, and friendly reference language.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (E18 consent/privacy trust copy)
 
 - **Task**: E18 consent/privacy trust copy.
 - **src**: Claude `PROPOSAL_QUEUE.md` E18 high/open plus persona-expanded findings around overseas processing, sensitive-data consent anxiety, and Grok consent-control trust signals.
