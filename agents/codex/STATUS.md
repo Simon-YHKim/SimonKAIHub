@@ -1,13 +1,43 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 05:17:46 KST
+updated: 2026-06-07 05:23:11 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: E19 oauth-callback i18n-copy-contract.
+- **src**: Launch/auth-adjacent i18n cleanup; `/oauth-callback` kept sign-in failure, retry label, and retry a11y hint in inline ko/en branches.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@a600dbe`.
+- **Merged on main**: `/not-found` i18n copy `84791a5`; `/profile` i18n copy `a600dbe`.
+- **Implemented pending**: added `auth.oauthCallback` copy keys in EN/KO locale bundles and changed `/oauth-callback` failure UI to use `useTranslation("auth")`; existing alert role, retry label, and retry hint variables remain intact.
+- **Guard**: added `OAuthCallbackI18nCopy` static guard against inline ko/en callback failure copy.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`531 keys`, `19 namespaces`); `npm run check:lexicon` (`285 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `67a96de` (`fix(i18n): move oauth callback copy to locale bundle`).
+- **Pending stack vs origin/main**: `446cb8b` + `a64e6a3` + `2ce98c8` + `776f642` + `67a96de`.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: research i18n copy PASS received; oauth-callback i18n copy smoke QA requested.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-052311-to-claude-oauth-callback-i18n-copy.md`
+  - `agents/codex/outbox/20260607-052311-to-antigravity-oauth-callback-i18n-copy-qa.md`
+  - `agents/codex/outbox/20260607-051746-to-claude-research-i18n-copy.md`
+  - `agents/codex/outbox/20260607-051746-to-antigravity-research-i18n-copy-qa.md`
+  - `agents/codex/outbox/20260607-051004-to-claude-insights-i18n-copy.md`
+  - `agents/codex/outbox/20260607-051004-to-antigravity-insights-i18n-copy-qa.md`
+
+[E19 oauth-callback i18n-copy-contract / 26.06.07 / 05:23:11]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #i18n #auth #oauth #copy #implementation
+- Completed a narrow E19 i18n-copy-contract slice for `/oauth-callback`.
+- Moved callback failure message, retry label, and retry accessibility hint into `auth.oauthCallback` EN/KO locale keys.
+- Removed inline ko/en user-facing branches from the OAuth callback failure state.
+- Added `OAuthCallbackI18nCopy` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (research i18n-copy-contract)
 
 - **Task**: E19 research i18n-copy-contract.
 - **src**: Follow-up to Claude B/E-bucket i18n/copy-contract cleanup; `/research` still kept inline ko/en loading, error, hero, empty, filter, source count, verified badge, framework labels, and source-link a11y copy.
