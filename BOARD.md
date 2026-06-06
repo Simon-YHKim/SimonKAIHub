@@ -3,7 +3,7 @@ owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity·Grok은 읽기 전용."
 last-updated: 2026-06-06 16:35:00 KST
 run_mode: autonomous-B
-live_head: 2nd-B main 3becd09
+live_head: 2nd-B main 34c7da5
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
@@ -37,7 +37,7 @@ live_head: 2nd-B main 3becd09
 | research-2 | deep-research: 사람을 정확히 파악하는 구조(SOKA·informant·표현적글쓰기·ESM·LLM) | claude | 실행중 | → "구조" 설계 culminating 산출 |
 | gate-stream | Codex 100점 UX 게이트 스트림 — 130 발견. 신뢰카피·a11y·파괴UX·i18n 4클러스터 | codex+claude | 🟢 소비중 | **머지 6건**: preauth-trust`cbf61cc`·PremiumButton-a11y`c2a7e6c`·settings-selected`f7004c1`·permissions+formats`3569ae6`·insights-false-empty`3153de4`(+4테스트, 834 green). Codex=capture/research selected, settings/account+로직게이트=claude |
 | pipeline-test | 4-AI 풀파이프라인 + 피드백 round-trip 실증 | claude | ✅ 검증 | 헤드리스 codex/grok/gemini 라운드트립 OK(기여자별 커밋). Grok 검증 PASS. AG D-06 제안. 레거시 48 분류(38삭제/10keep). 함정=헤드리스 긴 한글 프롬프트는 stdin UTF-8 |
-| false-empty | source-only false-empty 데이터진실 게이트(insights·core-brain·trinity 형제) | claude | 🟢 2/3 | insights`3153de4`·core-brain`3becd09` 머지(records+sources mergeEvidence). trinity 남음 |
+| false-empty | source-only false-empty 데이터진실 게이트(insights·core-brain·trinity 형제) | claude | ✅ 3/3 완결 | insights`3153de4`·core-brain`3becd09`·trinity`34c7da5` 머지(records+sources 집계). 데이터-진실 family 완결 |
 | hub-v2 | 4-AI 허브 자율화 개편(B모델) — CONTROL·DECISIONS·PROTOCOL §11~18·board.ps1·commit.ps1·4 activate 프롬프트·기여자표기 | claude | ✅ 구현완료 | 5갈래 조사 워크플로 기반. Simon이 4 프롬프트 각 터미널 입력 예정 |
 
 ## 📥 분배됨 / 대기 (Assigned / Waiting)
