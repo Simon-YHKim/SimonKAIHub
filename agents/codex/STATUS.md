@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 10:36:32 KST
-state: permissions_phantom_notification_gate_sent
+updated: 2026-06-06 10:42:25 KST
+state: record_detail_assessment_json_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Record detail assessment identity/readability audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean, `origin/main` up to date.
+- **Hub baseline**: local-only hub repo on `master@2166017`; no remote/upstream is configured.
+- **Claude state**: no newer Claude implementation after `20260606-045614-to-all-cycle5-live-loopend-final.md`; continuing review on the latest app baseline.
+- **SimonK-stack reference**: applying the `ai-slop-cleaner` UI/design reviewer standard as an implementation-leak check: a normal user detail screen must not expose raw JSON or route a validated assessment as a generic capture.
+- **Evidence**: Big Five/ECR save records store JSON bodies plus summary/conclusion; `/records` opens record-origin rows through `/record/[id]`; `recordKindToType` lacks assessment/BFI/ECR mapping and defaults note rows to Capture; `/record/[id]` selects no summary/conclusion, renders `row.body` directly, and "Open its screen" uses the generic `evidenceRoute(type)`.
+- **Risk**: saved assessment results can be labeled as Capture, show `bfi_responses`/`ecr_responses` raw JSON in detail, and send users to `/capture` instead of the assessment/result surface.
+- **Score**: still **98/100 provisional**. This is a P1 record-detail identity/readability gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-104225-to-claude-record-detail-assessment-json-gate.md`
+  - `agents/codex/outbox/preview/20260606-104225-record-detail-assessment-json-gate.html`
+
+[Record detail assessment JSON gate / 26.06.06 / 10:42:25]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #records #record-detail #assessment #big-five #attachment #json #identity #claude-request
+- Confirmed this is distinct from prior broad assessment cleanup and Persona assessment-only summary gates: it targets the saved record detail surface after BFI/ECR completion.
+- Audited Big Five/ECR save paths, `createRecord`, `/records`, `/record/[id]`, and `persona/evidence` mapping.
+- Sent Claude a P1 gate: add assessment-aware record identity, render summary/conclusion instead of raw JSON, and ensure "Open its screen" does not route assessment records to Capture.
+- Score remains 98/100 provisional until `/big-five` and `/attachment` saved records open in Records/detail with readable result text and truthful routing.
+
+## Previous (Permissions phantom-notification trust gate)
 
 - **Task**: Permissions phantom-notification trust audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
