@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 00:50:04 KST
+updated: 2026-06-07 01:03:08 KST
 state: submitted_waiting_claude_review
 ---
 
@@ -9,40 +9,40 @@ state: submitted_waiting_claude_review
 
 ## Current (latest)
 
-- **Task**: Wiki export discoverability E5.
-- **src**: Claude request `20260607-001100-to-codex-ux-ebucket` / E5 promote wiki export from utility action and add example copy.
+- **Task**: Capture progressive modes E1.
+- **src**: Claude request `20260607-001100-to-codex-ux-ebucket` / E1 reduce capture information overload with progressive disclosure.
 - **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested.
-- **Rule update**: user rule addendum recorded in `agents/codex/RULES.md`; global protocol remains Claude-owned.
-- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@31887a1`.
-- **Pending predecessors**: Likert accessibility `291a2d722874c663306cbecf4ed746291c25bcfb`.
-- **Implemented**: promoted `/wiki` export into a primary copy-ready action with purpose and example copy; moved graph detail/back into the remaining utility row; moved export helper copy into locale bundles.
-- **Guard**: extended A11y constraint to require the new export action locale usage, primary variant, hint, and helper copy.
-- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`257 keys`, `9 namespaces`); `npm run check:lexicon`; `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `npm test -- --ci --runInBand` (94 suites, 846 tests) all pass.
-- **Local commit**: `07d3bedc42b79f2e4689d6085859905fe1f60c07` (`fix(ux): promote wiki export action`).
-- **Pending stack vs origin/main**: `291a2d722874c663306cbecf4ed746291c25bcfb` + `07d3bedc42b79f2e4689d6085859905fe1f60c07`.
+- **Rule update**: user-provided `AGENTS.md` operating profile reconfirmed in Codex-owned `agents/codex/RULES.md`; global protocol remains Claude-owned.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@fd7384f`.
+- **Pending predecessors**: none. Prior Likert and Wiki patches are already represented on main as `47644b2` and `f710b50`.
+- **Implemented**: `/capture` mode row now starts with Journal plus More only; More reveals Note, Link, Photo, and File; Less collapses advanced options and returns advanced-mode users to Journal while clearing per-mode input.
+- **A11y/UI**: More/Less has button role, expanded state, EN/KO labels and hints; mode row wraps and the toggle keeps a 48px minimum height.
+- **Guard**: extended capture locale coverage and A11y constraints to require the progressive-disclosure contract.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`261 keys`, `9 namespaces`); `npm run check:lexicon`; `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (94 suites, 846 tests) all pass after rebase onto `origin/main@fd7384f`.
+- **Local commit**: `106e5ff7a45cf3ae1687a9aa887eee932abb9351` (`fix(ux): disclose capture modes progressively`).
+- **Pending stack vs origin/main**: `106e5ff7a45cf3ae1687a9aa887eee932abb9351` only.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-010308-to-claude-capture-progressive-modes.md`
+  - `agents/codex/outbox/20260607-010308-to-antigravity-capture-progressive-modes-native-qa.md`
+  - `agents/codex/outbox/preview/20260607-010308-capture-progressive-modes.html`
   - `agents/codex/outbox/20260607-005004-to-claude-wiki-export-discoverability.md`
-  - `agents/codex/outbox/20260607-005004-to-antigravity-wiki-export-native-qa.md`
-  - `agents/codex/outbox/preview/20260607-005004-wiki-export-discoverability.html`
+  - `agents/codex/outbox/20260607-005305-to-claude-wiki-export-native-qa-pass-relay.md`
   - `agents/codex/outbox/20260607-004138-to-claude-likert-accessibility.md`
   - `agents/codex/outbox/20260607-004454-to-claude-likert-accessibility-sha-update.md`
-  - `agents/codex/outbox/20260607-004138-to-antigravity-likert-accessibility-native-qa.md`
-  - `agents/codex/outbox/preview/20260607-004138-likert-accessibility.html`
-  - `agents/codex/outbox/20260607-003341-to-claude-auth-hero-a11y.md`
-  - `agents/codex/outbox/20260607-003341-to-antigravity-auth-hero-a11y-native-qa.md`
-  - `agents/codex/outbox/preview/20260607-003341-auth-hero-a11y.html`
-  - `agents/codex/outbox/20260607-002620-to-claude-capture-mode-copy.md`
-  - `agents/codex/outbox/20260607-002620-to-antigravity-capture-mode-copy-native-qa.md`
-  - `agents/codex/outbox/preview/20260607-002620-capture-mode-copy.html`
-  - `agents/codex/outbox/20260607-001312-to-claude-persona-feedback-error-states.md`
-  - `agents/codex/outbox/20260607-001312-to-antigravity-persona-feedback-native-qa.md`
-  - `agents/codex/outbox/preview/20260607-001312-persona-feedback-error-states.html`
 
-[Wiki export discoverability E5 / 26.06.07 / 00:50:04]
-#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #copy #discoverability #wiki #export #ebucket #worktree #implementation
-- Completed E5 from Claude's UX E-bucket.
-- Promoted wiki export into a primary action with plain purpose and use-case copy.
-- Full validation passed, including Jest 94 suites / 846 tests.
+[Capture progressive modes E1 / 26.06.07 / 01:03:08]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #a11y #capture #progressive-disclosure #ebucket #worktree #implementation
+- Completed E1 from Claude's UX E-bucket.
+- Reduced first-view capture choice overload by hiding advanced modes behind More.
+- Full validation passed after rebase, including Jest 94 suites / 846 tests.
+
+## Previous (Wiki export discoverability E5)
+
+- **Local commit**: `07d3bedc42b79f2e4689d6085859905fe1f60c07` (`fix(ux): promote wiki export action`), consumed on main as `f710b50`.
+- **Implemented**: promoted `/wiki` export into a primary copy-ready action with purpose and example copy; moved graph detail/back into the remaining utility row; moved export helper copy into locale bundles.
+- **Native QA**: Antigravity Wiki export QA PASS relayed to Claude.
+- **Validation**: full suite passed, including Jest 94 suites / 846 tests.
+- **Outputs**: `agents/codex/outbox/20260607-005004-to-claude-wiki-export-discoverability.md`; `agents/codex/outbox/20260607-005305-to-claude-wiki-export-native-qa-pass-relay.md`; `agents/codex/outbox/preview/20260607-005004-wiki-export-discoverability.html`.
 
 ## Previous (Likert accessibility E7)
 

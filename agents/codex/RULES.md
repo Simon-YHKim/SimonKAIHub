@@ -1,7 +1,7 @@
 ---
 agent: codex
 owner: codex
-updated: 2026-06-06 21:40:03 KST
+updated: 2026-06-07 01:03:08 KST
 source: user-direct
 status: active
 ---
@@ -51,3 +51,7 @@ Codex treats the latest user-provided `AGENTS.md` operating profile and follow-u
 ## Current Loop Promise
 
 Codex will treat the user's latest instruction as an active session rule: keep working, check in with the other AIs at roughly 2-minute intervals, timestamp visible progress, and actively advertise Codex's UI/UX lane instead of staying idle.
+
+## Reconfirmation (2026-06-07 01:03:08 KST)
+
+Simon provided the `AGENTS.md` operating profile again and explicitly asked to set it as rules. Codex confirms this file is the active Codex-owned rule mirror for those instructions. Hub-specific constraints still apply for 2nd-B work: edit only `E:\Coding Infra\_worktrees\2ndB-codex`, never edit `E:\2ndB` directly, never push online, and submit local commits to Claude for review and merge.

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Capture Progressive Modes E1</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101318;
+      --panel: #171c23;
+      --panel2: #202731;
+      --text: #f4f7fb;
+      --muted: #a9b3c0;
+      --brand: #72d2b4;
+      --line: #33404f;
+      --warn: #f0b86c;
+    }
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 22px 64px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin-top: 28px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    .stamp {
+      color: var(--brand);
+      font-weight: 700;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-top: 18px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+    }
+    .card {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    code {
+      color: var(--brand);
+      overflow-wrap: anywhere;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin: 7px 0;
+    }
+    .mode-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .chip {
+      min-width: 72px;
+      min-height: 48px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 12px;
+      font-weight: 700;
+    }
+    .chip.active {
+      background: var(--brand);
+      color: #0b1412;
+      border-color: var(--brand);
+    }
+    .chip.more {
+      border-style: dashed;
+      color: var(--brand);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="stamp">[2026-06-07 / 01:03:08]</p>
+    <h1>Capture Progressive Modes E1</h1>
+    <p>Codex implemented progressive disclosure for `/capture` so the first view starts with Journal and exposes other capture modes only when the user asks for More.</p>
+
+    <section class="panel">
+      <h2>Commit</h2>
+      <div class="grid">
+        <div class="card"><div class="label">Branch</div><code>codex/work</code></div>
+        <div class="card"><div class="label">Baseline</div><code>origin/main@fd7384f</code></div>
+        <div class="card"><div class="label">Commit</div><code>106e5ff7a45cf3ae1687a9aa887eee932abb9351</code></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>UI Structure</h2>
+      <p>Initial state:</p>
+      <div class="mode-row">
+        <span class="chip active">Journal</span>
+        <span class="chip more">More</span>
+      </div>
+      <p>Expanded state:</p>
+      <div class="mode-row">
+        <span class="chip active">Journal</span>
+        <span class="chip">Note</span>
+        <span class="chip">Link</span>
+        <span class="chip">Photo</span>
+        <span class="chip">File</span>
+        <span class="chip more">Less</span>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Changed Files</h2>
+      <ul>
+        <li><code>src/app/capture.tsx</code>: Journal-only default, More/Less toggle, expanded state, wrap-safe mode row.</li>
+        <li><code>locales/en/capture.json</code> and <code>locales/ko/capture.json</code>: More/Less labels and hints.</li>
+        <li><code>scripts/check-constraints.ts</code>: locale and a11y guard for the new disclosure contract.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Validation</h2>
+      <ul>
+        <li>TypeScript, ESLint, i18n, lexicon, em dash, LLM boundary, constraints, diff check all passed.</li>
+        <li>Jest passed: 94 suites, 846 tests.</li>
+        <li>Native QA requested from Antigravity.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
