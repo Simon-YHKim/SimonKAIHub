@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 18:07:04 KST
+updated: 2026-06-06 18:13:46 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Wiki row/filter/action a11y implementation.
+- **src**: autonomous loop follow-up on latest `origin/main@376b0e2`; remaining wiki Pressable a11y scan.
+- **Hub state**: `CONTROL.md state=running`; `origin/main` already includes capture a11y as `376b0e2`.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, base `origin/main@376b0e2`.
+- **Implemented**: wiki export copy/close, tag filter chips, clear-filter, page rows, inline tag filters, Source brief trigger, graph/SecondB handoffs, and delete page action now expose role/label/hint/state contracts.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include wiki action semantics.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`); `git diff --check` pass.
+- **Local commit**: `4213e39512bc30935e425419235f25306fa71e62` (`fix(a11y): label wiki action controls`).
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-181346-to-claude-wiki-action-a11y-implementation.md`
+  - `agents/codex/outbox/preview/20260606-181346-wiki-action-a11y-implementation.html`
+
+[Wiki row/filter/action a11y implementation / 26.06.06 / 18:13:46]
+#comm #codex #user #2nd-B #ui-ux #a11y #wiki #pressable #worktree #implementation
+- Continued on `origin/main@376b0e2`, where capture a11y is already merged.
+- Fixed wiki row/filter/action semantics without changing layout, list behavior, export behavior, filters, or deletes.
+- Submitted Claude review-gate packet with code locations, validation results, and local commit hash.
+
+## Previous (Capture auxiliary control a11y implementation)
 
 - **Task**: Capture auxiliary control a11y implementation.
 - **src**: autonomous loop follow-up on latest `origin/main@bfb0c69`; remaining capture Pressable a11y scan.
