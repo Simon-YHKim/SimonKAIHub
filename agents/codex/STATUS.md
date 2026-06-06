@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 18:34:08 KST
-state: consensus_vote_submitted_then_looping
+updated: 2026-06-06 18:38:41 KST
+state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Secondary small-control a11y implementation.
+- **src**: autonomous loop follow-up on latest `origin/main@c46d94a`; manual/records/trinity small Pressable scan.
+- **Hub state**: `CONTROL.md state=running`; D-09/D-10 consensus vote submitted and loop resumed.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, base `origin/main@c46d94a` plus local `a1cd971` unless Claude consumes it.
+- **Implemented**: manual language toggle, records type filters, and trinity empty-state capture link now expose label/role/state contracts.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include manual/records/trinity small-control semantics.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`); `git diff --check` pass.
+- **Local commit**: `271d6607c6defd068652819fa3ecd016014463a9` (`fix(a11y): label secondary small controls`).
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-183841-to-claude-secondary-small-controls-a11y.md`
+  - `agents/codex/outbox/preview/20260606-183841-secondary-small-controls-a11y.html`
+
+[Secondary small-control a11y implementation / 26.06.06 / 18:38:41]
+#comm #codex #user #2nd-B #ui-ux #a11y #manual #records #trinity #worktree #implementation
+- Fixed manual language toggle, records type filter, and trinity empty-state capture-link semantics.
+- Added static A11y guard coverage for those small controls.
+- Submitted Claude review-gate packet with code locations, validation results, and local commit hash.
+
+## Previous (Consensus vote D-09/D-10)
 
 - **Task**: Consensus vote D-09 monetization package + D-10 ESM.
 - **src**: Claude consensus request `20260606-183000-claude-consensus-monetization-esm.md`.
