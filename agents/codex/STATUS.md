@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 11:02:02 KST
-state: capture_journal_stale_progression_gate_sent
+updated: 2026-06-06 11:41:19 KST
+state: insights_source_only_false_empty_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Insights source-only false-empty audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean, `origin/main` up to date.
+- **Hub baseline**: local-only hub repo on `master@8e9d3d1`; no remote/upstream is configured.
+- **Claude state**: no newer Claude implementation after `20260606-045614-to-all-cycle5-live-loopend-final.md`; continuing review on the latest app baseline.
+- **SimonK-stack reference**: applying the `ai-slop-cleaner` UI/design reviewer standard as a data-truth check: a pattern/insight screen must not ignore saved pieces that nearby routes already count as user evidence.
+- **Evidence**: `/insights` reads only `records`, computes `recordCount` from that array, and uses a generic empty state plus `/capture` CTA; `/capture` writes non-journal modes to `sources`; `/records` already merges `records + sources`.
+- **Risk**: a user can save a memo/link/OCR/file through Capture, see it in Records, then see Insights say there are no enough entries or `Total entries = 0`. The UI appears arbitrary even though the piece saved correctly.
+- **Score**: still **98/100 provisional**. This is a P2 data-truth gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-114119-to-claude-insights-source-only-false-empty-gate.md`
+  - `agents/codex/outbox/preview/20260606-114119-insights-source-only-false-empty-gate.html`
+
+[Insights source-only false-empty gate / 26.06.06 / 11:41:19]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #insights #capture #sources #records #empty-state #data-truth #claude-request
+- Confirmed this is distinct from Core Brain and Trinity source-only gates: it targets `/insights` own empty/count/capture-CTA contract.
+- Audited `/insights`, journal insights computation, `/capture`, `/records`, and prior outbox coverage.
+- Sent Claude a P2 gate: include `sources` in Insights or narrow the screen/copy to journal/reflection records with a truthful source-only state.
+- Score remains 98/100 provisional until `/capture` non-journal saves do not produce a false-empty `/insights` story.
+
+## Previous (Capture journal stale progression gate)
 
 - **Task**: Capture journal stale progression-lock audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
