@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>4-AI 허브 v2 — 자율운용(B모델) 개편 보고</title>
+<style>
+  :root { --bg:#16151c; --surface:#1e1d26; --line:#2c2b37; --text:#e7e6ee; --muted:#9b99ad; --mint:#7fd8c2; --amber:#d8c27f; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text);
+    font-family:'Pretendard','Pretendard Variable',-apple-system,system-ui,sans-serif;
+    line-height:1.65; font-size:15px; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:920px; margin:0 auto; padding:56px 28px 90px; }
+  h1 { font-size:23px; font-weight:700; letter-spacing:-0.01em; margin:0 0 6px; }
+  .sub { color:var(--muted); font-size:13px; margin:0 0 32px; }
+  h2 { font-size:15px; font-weight:700; color:var(--mint); margin:34px 0 12px;
+    padding-bottom:8px; border-bottom:1px solid var(--line); letter-spacing:0.01em; }
+  h2.amber { color:var(--amber); }
+  p { margin:0 0 12px; }
+  code { background:var(--surface); border:1px solid var(--line); border-radius:4px;
+    padding:1px 6px; font-family:'SFMono-Regular',Consolas,monospace; font-size:12.5px; color:var(--mint); }
+  table { width:100%; border-collapse:collapse; margin:8px 0 18px; font-size:13.5px; }
+  th,td { text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--muted); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:0.04em; }
+  td.k { color:var(--mint); font-family:'SFMono-Regular',Consolas,monospace; font-size:12px; white-space:nowrap; }
+  ul { margin:0 0 14px; padding-left:18px; }
+  li { margin:0 0 7px; }
+  .muted { color:var(--muted); }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:18px 20px; margin:0 0 14px; }
+  .tag { display:inline-block; font-size:11px; padding:1px 7px; border-radius:4px; border:1px solid var(--line); color:var(--muted); margin-right:4px; }
+  .foot { color:var(--muted); font-size:12px; margin-top:40px; padding-top:16px; border-top:1px solid var(--line); }
+  .q { color:var(--amber); font-weight:600; }
+  .ok { color:var(--mint); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>4-AI 허브 v2 · 자율운용(B모델) 개편 완료</h1>
+  <p class="sub">Claude (오케스트레이터) · 2026-06-06 12:37 KST · ultracode · "내가 없이도 작업이 계속 이어지게" 요구 반영</p>
+
+  <div class="card">
+    <p style="margin:0 0 6px;"><strong>한 줄 요약</strong></p>
+    <p class="muted" style="margin:0;">발견만 돌고 통합이 멈춰 130 미머지 백로그가 쌓인 구조를, <strong class="ok">발견·통합·합의·정지가 짝을 이루는 무인 자율 시스템</strong>으로 개편. 사용자 개입은 auth/외부의존 병목 단 하나로 축소.</p>
+  </div>
+
+  <h2>1. 무엇을 바꿨나 (허브 헌법 v2)</h2>
+  <table>
+    <tr><th>파일</th><th>내용</th></tr>
+    <tr><td class="k">CONTROL.md</td><td>신설 — 런-스테이트 세마포어. 사용자가 "멈춰" → <code>state: paused</code> → 모든 AI가 진행 사이클만 마치고 정지. 1신호 전원 제어.</td></tr>
+    <tr><td class="k">DECISIONS.md</td><td>신설 — 합의 원장. "Simon 결정 필요"의 대부분을 <strong>4-AI 투표로 결정·진행</strong>. 펀치리스트 7건을 D-01~D-07로 이관.</td></tr>
+    <tr><td class="k">PROTOCOL §11~18</td><td>자율모델 B · 루프 차터(stop-condition) · pause/resume · 합의 · 외부의존 에스컬레이션 · 모니터링/HTML · 기여자표기 · 위키 연계.</td></tr>
+    <tr><td class="k">ROUTING §4</td><td>AI별 자율 루프(lane loop) 정의. AG는 "검수만"→"네이티브 개발 직접" 반영.</td></tr>
+    <tr><td class="k">tools/commit.ps1</td><td>신설 — AI별 기여자 표기 헬퍼. 커밋이 전부 <code>AI Hub</code>로 뭉개지던 문제 수정.</td></tr>
+    <tr><td class="k">tools/board.ps1</td><td>grok 추가 + 런상태·외부의존 블로커·합의·최근 HTML 한 화면 모니터링.</td></tr>
+    <tr><td class="k">prompts/*-activate</td><td>4종(claude 신규 + codex/AG/grok) 자율루프·pause·합의·HTML자동open·기여자 주입. grok-onboarding 전면 보강(X 방법론·신뢰도·템플릿).</td></tr>
+  </table>
+
+  <h2>2. 자율 운용 규칙 (B모델, PROTOCOL §11)</h2>
+  <ul>
+    <li><strong>각 AI = 강점 lane 자율 루프</strong> → 로컬 작업 → Claude 푸시. Claude가 자기 작업+전달작업을 병렬 점검·머지.</li>
+    <li><strong>온라인 git(2nd-B push·CI·PR·merge)은 Claude 단독.</strong></li>
+    <li><strong>사용자 개입 = 외부의존 병목 단 하나</strong>(auth/credentials·법무). 그 외 "사용자 결정"은 4-AI 합의로 진행. 막히면 병렬로 다른 일.</li>
+    <li><strong>안전레일은 우회 불가</strong> — 파괴적·실비용·secrets는 그대로 Simon 확인.</li>
+    <li><strong>우선순위</strong> — 런치차단 &gt; P1 &gt; P2 &gt; P3. 폴리시 갈며 런치차단 방치 금지.</li>
+    <li><strong>charter</strong> — 미머지 8건 초과 시 발견 중지·P3 통합·중복 baseline 금지(130 백로그 재발 방지).</li>
+  </ul>
+
+  <h2>3. 기여자 표기 수정 (검증됨)</h2>
+  <p>허브 커밋 author가 전부 <code>AI Hub &lt;ai-hub@local&gt;</code>였던 문제 → 이번 커밋은 <code class="ok">Claude &lt;claude@2nd-b.ai&gt;</code>로 정상 기록. 각 AI는 <code>tools/commit.ps1 -As &lt;ai&gt;</code>로 자기 정체성 커밋. 2nd-B(GitHub)는 표준 Co-Authored-By 트레일러.</p>
+
+  <h2>4. SimonKWiki 교훈 축적 (로컬+GitHub 푸시 완료)</h2>
+  <ul>
+    <li><strong>T-017</strong> 추가 — "발견 루프엔 통합 루프+charter가 짝이어야"(생산자≫소비자 불균형). <code>LESSONS_LEARNED.md</code>.</li>
+    <li><strong>2nd-b.md</strong> 프로젝트 페이지 신설 — <strong>SimonKWiki 설계원칙의 제품화 후예</strong>임을 명시(raw immutability·frontmatter·7-category·index/log·lint 차용). index/log 동시 갱신(위키 헌법 준수).</li>
+    <li>push: <code>c914c1f..e19ae7c main</code> → <code>github.com/Simon-YHKim/SimonKWiki</code>.</li>
+    <li>PROTOCOL §18 — 큰 작업 전 위키 확인으로 중복 방지 규칙 명문화.</li>
+  </ul>
+
+  <h2 class="amber">5. 당신이 할 일 — 4개 터미널에 프롬프트 입력</h2>
+  <p>각 AI 새 세션 터미널에 <code>prompts/&lt;ai&gt;-activate.md</code>의 "붙여넣기" 구간을 입력하면 자율 루프 가동. 채팅에 복붙용 4종을 함께 드렸습니다.</p>
+  <p class="muted">Claude(이 세션)는 통합 루프 주체이자 유일한 온라인 git 주체. Codex/AG/Grok은 헤드리스 자율 루프.</p>
+
+  <h2>상태</h2>
+  <ul>
+    <li>허브 커밋: <code>590f71f</code> (feat(comm): 자율운용 B모델) · author=Claude</li>
+    <li>2nd-B 라이브: main <code>911c979</code> (변경 없음 — 시스템 작업만)</li>
+    <li>Codex 미커밋 2파일은 보존(single-writer 존중)</li>
+  </ul>
+
+  <p class="foot">PROTOCOL §16 — 작업 완료 HTML 보고 + 브라우저 자동 표시. 프롬프트 입력하시면 4-AI 자율 파이프라인이 가동됩니다.</p>
+</div>
+</body>
+</html>
