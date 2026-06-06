@@ -34,6 +34,10 @@ last-updated: 2026-06-06 12:30:00 KST
 | D-05 | social provider 실설정값(라이브 Supabase 등록 provider) | external | 실등록 정보 필요(AI 불가). 미설정 자동숨김은 이미 적용 | — | Simon |
 | D-06 | 런타임 device 증명(AG 에뮬 스크린샷 매트릭스) | decide | Antigravity 자율 사이클로 수급 → Codex 100점 게이트 종료 | — | AG 루프 배정 |
 | D-07 | consent durable 큐(앱 재시작 후 재전송) | decide | A:durable 구현 / B:현행 in-memory 유지 / C:법무 후 | — | 투표대기 |
+| D-08 | 자기이해 방식 (질문지 vs 인터뷰 vs ESM) | decide | **하이브리드 3층 권고**(질문지 시드→인터뷰→ESM, SOKA 특성별 신뢰도) | — | 리서치 완료, 권고확정. ①persona모델 구현예정 |
+| D-09 | 수익화 가격·패키징 (KR+Global) | decide→Simon | Freemium+2~3티어. KR ₩4,900/9,900 · Global $4.99/9.99 · RevenueCat | — | 설계완료(HTML). 최종가격 Simon |
+| D-10 | ESM 층 도입 (알림인프라+신규테이블) | decide | A:도입(정확도 최대레버) / B:보류(공수) / C:phase2 | — | go/no-go 대기 |
+| D-11 | 마케팅 GTM (KR+Global) | decide | marketing 워크플로+Grok 리서치 진행중 | — | 도착 후 |
 
 ## 해결됨 (Resolved) — 최근
 - (없음 — 신설)
