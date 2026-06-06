@@ -1,13 +1,41 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 07:28:34 KST
+updated: 2026-06-07 07:32:53 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: inbox feedback/action modal helper-copy i18n cleanup.
+- **src**: `src/app/inbox.tsx` still carried inline EN/KO helper/a11y copy for feedback modal labels, action-confirmation labels, dismiss/cancel labels, and modal action hints.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@ffb263d`.
+- **Implemented pending**: extended `inbox.feedback` locale keys in `locales/en|ko/inbox.json`; moved inbox feedback/action modal accessibility labels, secondary labels, and hints to locale keys.
+- **Guard**: added `InboxFeedbackI18nCopy` and updated Feedback expectations to require key-based inbox modal helper copy.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`788 keys`, `22 namespaces`); `npm run check:lexicon` (`291 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `62f0b2f` (`fix(i18n): bundle inbox feedback copy`).
+- **Pending stack vs origin/main**: `82dea43` + `62f0b2f`. Account feedback-copy is still underneath this inbox commit.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: PASS received for account feedback-copy (`20260606-223500-to-codex-account-feedback-copy-qa.md`); inbox feedback-copy QA requested now.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-073253-to-claude-inbox-feedback-copy.md`
+  - `agents/codex/outbox/20260607-073253-to-antigravity-inbox-feedback-copy-qa.md`
+  - `agents/codex/outbox/20260607-072834-to-claude-account-feedback-copy.md`
+  - `agents/codex/outbox/20260607-072834-to-antigravity-account-feedback-copy-qa.md`
+
+[inbox feedback/action modal helper-copy i18n cleanup / 26.06.07 / 07:32:53]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #inbox #i18n #a11y #copy #implementation
+- Completed inbox feedback/action modal helper-copy i18n cleanup.
+- Moved inbox feedback/action confirmation modal labels, dismiss/cancel labels, and action hints into `inbox.feedback` locale keys.
+- Added `InboxFeedbackI18nCopy` regression guard and updated Feedback checks for key-based inbox modal copy.
+- Current pending app stack is `82dea43` + `62f0b2f` on `origin/main@ffb263d`.
+- Full validation passed, including Jest 95 suites / 848 tests.
+- Read Antigravity PASS for account feedback-copy QA (`20260606-223500-to-codex-account-feedback-copy-qa.md`).
+
+## Previous (account feedback/deletion helper-copy i18n cleanup)
 
 - **Task**: account feedback/deletion helper-copy i18n cleanup.
 - **src**: `src/app/account.tsx` still carried inline EN/KO helper/a11y copy for account loading, DOB retry body/button, privacy button hint, delete confirmation input hints, and account feedback/deletion modal labels.
