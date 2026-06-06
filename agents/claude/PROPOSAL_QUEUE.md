@@ -94,7 +94,7 @@
 | E16 | **데이터 사용량 힌트** — OCR/File 데이터 비용·Wi-Fi 권장(저사양·선불폰·데이터민감) | ag | high | open |
 | E17 | **온보딩 메타포 추상성** → 구체 시나리오 카피·축약 | codex | high | ✅ **머지 `6036353`**(Codex 온보딩 간소화) |
 | E18 | **신뢰/프라이버시 카피** — consent 국외전송 불신 → 안심 카피 | codex | high | ✅ **머지 `6036353`**(Codex consent 신뢰카피 강화) |
-| E19 | **locale-i18n(18)** — 영어 혼용 레이블(long_term_memory 등)·해당언어 부재 폴백 노출·통화 표기 | codex | med | open |
+| E19 | **locale-i18n(18)** — 인라인 locale 분기→번들·영어 혼용 레이블·폴백 | codex | med | 🟢 **착수 `68277b9`**(Codex: data·support 카피 번들 이관, alert-contract→i18n 전환), 진행 |
 | E20 | **RTL·중동** — 아랍어 RTL 레이아웃·이슬람 가치·gender·종교 달력 | codex(레이아웃)+ag(네이티브 RTL) | med | open |
 | E21 | **OAuth provider 시장별** — KR=Kakao/Naver·JP=LINE·글로벌=Google/Apple 가용 gating(D-05 연계) | simon+ag | med | open |
 | E22 | **cultural-fit(24)** — 자기성찰/저널링 수용성·톤(존댓말/겸손/관계중심)·종교/가족/집단주의 카피 적응 | codex | med | open |
