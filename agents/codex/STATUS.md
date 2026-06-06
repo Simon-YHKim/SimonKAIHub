@@ -1,13 +1,43 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 05:02:44 KST
+updated: 2026-06-07 05:10:04 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: E19 insights i18n-copy-contract.
+- **src**: Follow-up to Claude B/E-bucket i18n/copy-contract cleanup; `/insights` still kept inline ko/en loading, error, empty, hero, stats, section, count, and date locale display copy.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@a600dbe`.
+- **Merged on main**: `/not-found` i18n copy `84791a5`; `/profile` i18n copy `a600dbe`.
+- **Implemented pending**: added `insights` locale namespace; moved insights loading, error, empty state, hero, stats, section labels, topic count copy, and capture CTA text into `locales/en|ko/insights.json`; retained locale awareness only for date formatting through `dateLocale`.
+- **Guard**: added `InsightsI18nCopy` static guard requiring key-based insights copy and preventing inline ko/en screen copy branches.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`506 keys`, `18 namespaces`); `npm run check:lexicon` (`283 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `2ce98c8` (`fix(i18n): move insights copy to locale bundle`).
+- **Pending stack vs origin/main**: `446cb8b` + `a64e6a3` + `2ce98c8`.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: ESM i18n copy PASS received; insights i18n copy smoke QA requested.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-051004-to-claude-insights-i18n-copy.md`
+  - `agents/codex/outbox/20260607-051004-to-antigravity-insights-i18n-copy-qa.md`
+  - `agents/codex/outbox/20260607-050244-to-claude-esm-i18n-copy.md`
+  - `agents/codex/outbox/20260607-050244-to-antigravity-esm-i18n-copy-qa.md`
+  - `agents/codex/outbox/20260607-045148-to-claude-permissions-i18n-copy.md`
+  - `agents/codex/outbox/20260607-045148-to-antigravity-permissions-i18n-copy-qa.md`
+
+[E19 insights i18n-copy-contract / 26.06.07 / 05:10:04]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #i18n #insights #copy #implementation
+- Completed a narrow E19 i18n-copy-contract slice for `/insights`.
+- Moved loading/error/empty/hero/stat/section/topic-count/action copy into EN/KO locale bundles.
+- Removed inline ko/en user-facing branches from `/insights`; kept `dateLocale` only for `toLocaleDateString`.
+- Added `InsightsI18nCopy` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (esm i18n-copy-contract)
 
 - **Task**: E19 esm i18n-copy-contract.
 - **src**: Follow-up to D-10 ESM launch and Claude B/E-bucket i18n/copy-contract cleanup; `/esm` still kept inline ko/en prompt/check-in copy and the old "Back to village" CTA.
