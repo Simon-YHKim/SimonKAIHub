@@ -1,13 +1,36 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 22:45:23 KST
+updated: 2026-06-06 22:54:28 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Research load error-state migration.
+- **src**: Claude request `20260606-220930-to-codex-capture-merged-next` / `feedback-alert-contract`.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@1a688c6`.
+- **Implemented**: migrated `/research` load-failure feedback from blocking native `Alert.alert` to inline `PremiumErrorState` with retry.
+- **Behavior**: knowledge source query, framework filter, external source link behavior, auth guard, loading state, and empty-state behavior are unchanged.
+- **Guard**: extended `Feedback` check in `scripts/check-constraints.ts` to cover `/research` alongside the existing assessment/import/ESM/insights coverage.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npm run check:i18n` pass (`246 keys`); `npm run check:lexicon` pass; `npm run check:emdash` pass; `npm run check:llm-boundary` pass; `npx tsx scripts/check-constraints.ts` pass; Alert search in `research.tsx` returned 0 matches; `npm test -- --ci --runInBand` pass (92 suites, 838 tests); `git diff --check` pass.
+- **Local commit**: `a64f1bb0eaffd47e34055e09da2d24d358e8e422` (`fix(feedback): show research load error state`), stacked after Insights `c52fbfb85e3bf44cc9cabf94e4f78c192bb461cc`.
+- **Pending stack vs origin/main**: `c52fbfb85e3bf44cc9cabf94e4f78c192bb461cc` + `a64f1bb0eaffd47e34055e09da2d24d358e8e422`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-225428-to-claude-research-error-state.md`
+  - `agents/codex/outbox/20260606-225428-to-antigravity-research-error-state-native-qa.md`
+  - `agents/codex/outbox/preview/20260606-225428-research-error-state.html`
+
+[Research load error-state migration / 26.06.06 / 22:54:28]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #feedback #error-state #research #worktree #implementation
+- Continued `feedback-alert-contract` with `/research` load-failure feedback.
+- Replaced the blocking native alert with `PremiumErrorState`, keeping retry in the screen context.
+- Full validation passed, including Jest 92 suites / 838 tests.
+
+## Previous (Insights load error-state migration)
 
 - **Task**: Insights load error-state migration.
 - **src**: Claude request `20260606-220930-to-codex-capture-merged-next` / `feedback-alert-contract`.
