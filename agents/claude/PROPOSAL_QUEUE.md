@@ -1,0 +1,64 @@
+# PROPOSAL_QUEUE.md — 실행가능 큐 (PROTOCOL §25)
+
+> Claude 단독 관리. AI 제안 백로그(132 gate + AG 33 + Grok 24 + proposal 7)를 병렬 트리아지(wf wdze15wze, 152분류)해 테마로 dedup한 큐.
+> 버킷: **A.Claude즉시 / B.Codex디스패치 / C.AG디스패치 / D.Simon·external**. 매 사이클 상위 doable 소진 → verify(gated) → push → 완료체크.
+> generated: 2026-06-06 21:50 KST · 소스 SHA-regate들은 같은 블로커를 반복 → 테마로 통합.
+
+## 제외 (이미 머지됨 — git log 교차대조)
+- data-truth false-empty 3종: `/insights`·`/core-brain`·`/trinity` sources 집계 → **머지 완료** (gate 093848·100749·114119은 stale).
+- segmented/PremiumButton `accessibilityState` 병합, assessment Likert 시맨틱 → 머지됨.
+- expo-crypto HIBP(D-04), AppState 토큰 refresh perf → 머지됨.
+- a11y 라벨 대량(전 화면), preauth/permissions/formats jargon 일부, retired-route(#214 부분), privacy monotonic 코어(#215) → 머지됨.
+
+---
+
+## A. Claude-doable-now (검증가능·device무관·내 lane)
+| # | 테마 | 파일 | value | status |
+|---|---|---|---|---|
+| A1 | **Raw error → product-tone copy + recovery** (실패경로 11화면) | account·capture·wiki·inbox·interview·settings·records 실패 핸들러 | high | open |
+| A2 | **Privacy 토글 진실** — 8스위치 중 external_analytics만 enforce, 7개 phantom | `src/app/privacy.tsx` (+enforcement 코드) | high | open |
+| A3 | **Privacy failed-opt-out fail-closed** — #215가 실패세이브 revert 커버하는지 검증, 미흡 시 guard+test | `src/lib/privacy/analytics-consent-queue.ts` | high | open |
+| A4 | **Auth loading-aware guards** — signin/signup guest guard + complete-profile redirect가 loading 무시 → 잘못된 화면 flash | `src/app/(auth)/sign-in,sign-up,complete-profile.tsx` | high | ✅ **머지 `3ee8885`** (InlineLoader guard, sign-up guest guard 신설) |
+| A5 | **Data export scope 진실** — export 약속(파일) vs 실제(clipboard) 불일치 통일 | support·data·settings·wiki | high | open |
+| A6 | **Theme native 영속** — native에서 localStorage만 써 영속 안 됨 → AsyncStorage 또는 컨트롤 숨김 | `src/lib/theme/ThemeContext.tsx` | high | open |
+| A7 | **Persona assessment-only summary** — audit 없을 때 LLM summary 생성(날조) 차단 | `src/lib/persona/build.ts` | high | open |
+| A8 | **Crisis badge 가독성** — hotline badge 10→12px (안전표면) | `src/components/safety/CrisisRouter.tsx` | high | ✅ 이미 `fontSize:12` 적용됨 (stale gate) |
+| A9 | **Account DOB auth refresh** — DOB 저장 후 minor state 미갱신 | `src/app/account.tsx` | high | open |
+| A10 | **내부용어→사용자언어** (로직 문자열) — RLS/RAG/LLM/[[slug]]/frontmatter | permissions·inbox·wiki·settings·insights | high | open (Codex와 분담) |
+| A11 | Spinner-only → PremiumLoadingState | audit·profile·record/[id] | med | open |
+| A12 | Destructive busy-escape — busy 중 sign-out/nav 비활성화 | `src/app/settings.tsx` | med | open |
+| A13 | Inbox 'View in wiki' → 정확한 slug 페이지 | `src/app/inbox.tsx`·`wiki.tsx` | med | open |
+| A14 | Records source row → 특정 source detail 라우트 | `src/app/records.tsx` | med | open |
+| A15 | Wiki delete → stale promoted source 리셋 | `src/lib/wiki/queries.ts` | med | open |
+| A16 | Quant-intro storage flicker → tri-state | `src/components/quant/QuantIntroModal.tsx` | med | open |
+| A17 | Dynamic-type clipping — numberOfLines 반응형 | 전역(22×1줄·10×2줄) | med | open |
+| A18 | Web zoom/focus — user-scalable=no 제거 + focus-visible | viewport·Pressable | med | open |
+| A19 | Import analysis fallback 공개 | `src/app/import.tsx` | med | open |
+| A20 | Record detail assessment raw JSON → friendly | `src/app/record/[id].tsx`·`persona/evidence.ts` | med | open |
+| A21 | Retired-route helpers 잔여(/journal·/imagine·/mbti emit) | `src/lib/village-ui.ts`·`persona/evidence,self-portrait.ts` | med | open(부분) |
+| A22 | **GTM/마케팅 docs** (Grok X신호) — docs/GTM.md + i18n trust signals + core 명칭 직관화 | docs·locales·DESIGN.md | high(마케팅) | open |
+| A23 | LOW: capture stale journal lock 제거, source emdash, post97 microtype | capture·ConsentNotice·NavGraph | low | open |
+
+## B. dispatch-Codex (UI/UX·i18n·anti-slop·이미지)
+- **i18n 번들 이관** (915 inline locale 분기 → 번들) ← 이미 redirect(20260606-212300). 신뢰·법무 카피 우선.
+- 카피 jargon: capture-input(markdown/frontmatter)·jarvis-citation([[slug]])·manual-jargon·theme-contract(Light 실제구현)·pixel-font→readable.
+- 공유 컴포넌트: SwitchRow/PreferenceToggle·LikertScaleQuestion·ExternalLinkButton/CopyAction·ActionChip primitives.
+- **feedback-alert-contract** (61 Alert.alert → PremiumToast/Modal).
+- formats dead CTA(mock)·settings crew-density phantom·route-ia-numbering·design-token drift(74 hex/rgba).
+- reduced-motion·contrast-ledger(Light palette).
+- a11y P3 long-tail: image·modal-overlay·form-input·onboarding-dots·pressable-interaction.
+- expo-image resizeMode→contentFit(6파일)·temp script 정리.
+- §19 그래프빌리지 비주얼 패스(AG perf 교차검증 대기).
+
+## C. dispatch-AG (Android/네이티브/perf/멀티모달 perf-side) — **AG 재가동 필요**
+- Android 키보드 증명(7화면)·FlatList 런타임 증명·NavGraph resume/drift 증명.
+- LivingAsset AppState guard+cold-start·OCR 권한/프리뷰 증명·native permission 감사.
+- D-10 알림 하드닝(POST_NOTIFICATIONS·Doze)·native permission trust.
+- §19 그래프빌리지 perf-side(프레임/OOM 측정).
+
+## D. Simon / external (§15 안전레일 — 합의 우회 불가)
+- **consent legal readiness** — placeholder 법무카피→확정본+versioning (D-03).
+- **deployment env 진실** — FORCE_TIER/ENABLE_*/LLM_MODE 기본값 확정 (D-01).
+- **social provider 실설정** (D-05).
+- permissions phantom notification — expo-notifications 구현은 Simon, **행 제거는 Claude 가능**(A로 이관 가능).
+- go-live freeze 상태 명확화.

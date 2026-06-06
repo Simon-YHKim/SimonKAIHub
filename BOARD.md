@@ -1,9 +1,9 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity·Grok은 읽기 전용."
-last-updated: 2026-06-06 21:23:00 KST
+last-updated: 2026-06-06 21:53:00 KST
 run_mode: autonomous-B
-live_head: 2nd-B main a73c8d9
+live_head: 2nd-B main 3ee8885
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
@@ -15,7 +15,7 @@ live_head: 2nd-B main a73c8d9
 ## 🔄 자율 루프 상태 (Autonomous Loops, PROTOCOL §12)
 | AI | 루프 | 상태 | charter |
 |---|---|---|---|
-| Claude | 통합(구현·머지·온라인git) | running | inbox/DECISIONS 소비 → verify → merge |
+| Claude | 통합(구현·머지·온라인git) + **제안 큐(§25)** | running | 백로그 트리아지 → PROPOSAL_QUEUE 소진 → verify → merge |
 | Codex | anti-slop 발견 | running | 미머지 8건 초과 시 발견중지·P3 통합 |
 | Antigravity | 네이티브 픽스·QA | running | 자기 브랜치 커밋 → Claude 리뷰게이트 |
 | Grok | 트렌드·결정입력 | running | 합의 입력 + 30분 트렌드 모니터 |
