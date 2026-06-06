@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 10:22:00 KST
-state: inbox_wiki_promotion_identity_gate_sent
+updated: 2026-06-06 10:30:37 KST
+state: wiki_delete_source_lifecycle_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Wiki deletion/source lifecycle truth audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean, `origin/main` up to date.
+- **Hub baseline**: local-only hub repo on `master@573d6cc`; no remote/upstream is configured.
+- **Claude state**: no newer Claude implementation after `20260606-045614-to-all-cycle5-live-loopend-final.md`; continuing review on the latest app baseline.
+- **SimonK-stack reference**: applying the `ai-slop-cleaner` UI/design reviewer standard as a workflow-truth check: deletion must not leave polished status chips and next-actions that describe an object the system just removed.
+- **Evidence**: `generateSourcePage` marks a source `ingested=true`; `/wiki` page delete and `/settings` bulk wiki delete remove `wiki_pages` only; `/inbox` uses `r.ingested` alone to show the ingested chip, hide Generate/Delete, and show "View in wiki".
+- **Risk**: after deleting a source-backed wiki page, Inbox can still display the source as promoted and route the user toward a missing page/generic wiki list, with no visible re-promote or delete recovery.
+- **Score**: still **98/100 provisional**. This is a P1 source-lifecycle truth gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-103037-to-claude-wiki-delete-source-lifecycle-gate.md`
+  - `agents/codex/outbox/preview/20260606-103037-wiki-delete-source-lifecycle-gate.html`
+
+[Wiki delete source lifecycle gate / 26.06.06 / 10:30:37]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #wiki #inbox #settings #source-lifecycle #delete #state-truth #claude-request
+- Confirmed this is distinct from the prior Inbox "View in wiki" identity gate: it targets stale promoted source state after wiki page deletion, not just generic navigation after generation.
+- Audited `/inbox`, `/wiki`, `/settings`, `phase2`, wiki queries, bulk delete helpers, and prior outbox coverage.
+- Sent Claude a P1 gate: either demote linked sources on source-page deletion, show a missing-page recovery state, or prevent source-backed page deletion from breaking source lifecycle.
+- Score remains 98/100 provisional until `/inbox -> Generate wiki page -> /wiki or /settings delete wiki page -> /inbox` tells a truthful state story.
+
+## Previous (Inbox wiki promotion identity gate)
 
 - **Task**: Inbox generated wiki-page identity hand-off audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
