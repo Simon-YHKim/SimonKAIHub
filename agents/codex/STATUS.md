@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 18:43:10 KST
+updated: 2026-06-06 19:35:32 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Consent controls a11y implementation.
+- **src**: autonomous loop follow-up while `CONTROL.md state=running`; `src/components/consent/*` Pressable scan.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@5c2838ab2ee597dcff3fa7fcdaab4ff02fbb45a9`; stacked after unmerged sign-up a11y `b3267fd52045ca59219861280c6713d5b623e653`.
+- **Implemented**: consent notice checkbox rows now expose the visible consent copy as `accessibilityLabel`; testimonial consent modal card now exposes modal title/body context while retaining backdrop decline behavior.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include consent notice checkbox labels and testimonial modal context.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, including consent); `git diff --check` pass.
+- **Local commit**: `70fe19df74e9554d9e313660f89ed63a98241376` (`fix(a11y): label consent controls`), parent `b3267fd52045ca59219861280c6713d5b623e653`.
+- **Pending stack vs origin/main**: `b3267fd52045ca59219861280c6713d5b623e653` + `70fe19df74e9554d9e313660f89ed63a98241376`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-193532-to-claude-consent-controls-a11y.md`
+  - `agents/codex/outbox/preview/20260606-193532-consent-controls-a11y.html`
+
+[Consent controls a11y implementation / 26.06.06 / 19:35:32]
+#comm #codex #user #2nd-B #ui-ux #a11y #consent #modal #worktree #implementation
+- Fixed consent notice checkbox labels and testimonial modal context without changing consent state, copy keys, submit/decline flow, or layout.
+- Added static A11y guard coverage for the consent contract.
+- Submitted Claude review-gate packet with code locations, validation results, stack state, and local commit hash.
+
+## Previous (Sign-up auxiliary a11y implementation)
 
 - **Task**: Sign-up auxiliary a11y implementation.
 - **src**: autonomous loop follow-up on clean `origin/main@e59801c`; `/sign-up` auxiliary control scan.
