@@ -28,10 +28,10 @@
 | A11 | Spinner-only → PremiumLoadingState | audit·profile·record/[id] | med | ✅ **머지 `0dfa75a`** (라우트 로딩 3화면, profile 인라인 spinner는 적정 유지) |
 | (alert-load) | alert-only load error → 지속 에러상태(false-empty 방지) | research·insights | high | ✅ **Codex 머지 `f74efc1`** (research·insights). trinity 남음 |
 | A12 | Destructive busy-escape — busy 중 sign-out/nav 비활성화 | `src/app/settings.tsx` | med | ✅ **머지 `db31d6f`** (Sign out busy 가드 + 지속 배너 screen-reader 알림) |
-| A13 | Inbox 'View in wiki' → 정확한 slug 페이지 | `src/app/inbox.tsx`·`wiki.tsx` | med | open |
+| A13 | Inbox 'View in wiki' → 정확한 slug 페이지 | `src/app/inbox.tsx`·`wiki.tsx` | med | ✅ **머지 `72922ea`**(Codex: inbox→wiki 특정 페이지 focus) |
 | A14 | Records source row → 특정 source detail 라우트 | `src/app/records.tsx` | med | ✅ **머지 `e53e49d`** (origin 파라미터 통합 상세 + record/[id] sources 폴백) |
 | A15 | Wiki delete → stale promoted source 리셋 | `src/lib/wiki/queries.ts` | med | ✅ **머지 `d9e73db`** (markSourceNotIngested + deleteWikiPage source 리셋 + 테스트2) |
-| A16 | Quant-intro storage flicker → tri-state | `src/components/quant/QuantIntroModal.tsx` | med | open |
+| A16 | Quant-intro storage flicker → tri-state | `src/components/quant/QuantIntroModal.tsx` | med | ✅ **머지 `72922ea`**(Codex: storage hydrate 후 표시) |
 | A17 | Dynamic-type clipping — numberOfLines 반응형 | 전역(22×1줄·10×2줄) | med | open |
 | A18 | Web zoom/focus — user-scalable=no 제거 + focus-visible | viewport·Pressable | med | open |
 | A19 | Import analysis fallback 공개 | `src/app/import.tsx` | med | ✅ **머지 `fd7384f`** (degraded 플래그 + 결과뷰 공개 notice, raw 에러 비노출) |
