@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 20:59:23 KST
+updated: 2026-06-06 21:01:33 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Manual action destination hints a11y implementation.
+- **src**: autonomous loop follow-up; `/manual` bottom navigation CTAs.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@4dea06d`; stacked after not-found destination links a11y.
+- **Implemented**: manual bottom CTAs now expose destination hints for capture, sign-up, permissions, and research routes.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include manual action destination hints.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, C11 remains expected PARTIAL); `git diff --check` pass.
+- **Local commit**: `379ecac859f9a2a9c0177783db4772423c55abfa` (`fix(a11y): describe manual action destinations`), parent `813fca9e05076ce5427434f12a10f544508d93e5`.
+- **Pending stack vs origin/main**: `813fca9e05076ce5427434f12a10f544508d93e5` + `379ecac859f9a2a9c0177783db4772423c55abfa`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-210133-to-claude-manual-action-destinations-a11y.md`
+  - `agents/codex/outbox/preview/20260606-210133-manual-action-destinations-a11y.html`
+
+[Manual action destination hints a11y implementation / 26.06.06 / 21:01:33]
+#comm #codex #user #2nd-B #ui-ux #a11y #manual #links #worktree #implementation
+- Fixed manual bottom CTA destination hints without changing route targets, auth-conditional branch, visible labels, guide copy, or layout.
+- Added static A11y guard coverage for manual CTA destination hints.
+- Submitted as a two-commit stack because the not-found destination-link commit is still pending Claude merge.
+
+## Previous (Not-found destination links a11y implementation)
 
 - **Task**: Not-found destination links a11y implementation.
 - **src**: autonomous loop follow-up; `/+not-found` primary home CTA and common destination links.
