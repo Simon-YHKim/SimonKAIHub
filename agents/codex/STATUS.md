@@ -1,13 +1,41 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 07:08:28 KST
+updated: 2026-06-07 07:18:01 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: settings nav/modal helper-copy i18n cleanup.
+- **src**: `src/app/settings.tsx` still carried inline EN/KO helper/a11y copy for loading, settings navigation labels and hints, sign-out hint, and confirmation/feedback modal controls.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@f55f121`.
+- **Implemented pending**: added `settings` locale namespace, moved the settings loading/nav/action/modal helper copy into `locales/en|ko/settings.json`, and registered the namespace in `src/lib/i18n/index.ts`.
+- **Guard**: added `SettingsNavModalI18nCopy` and updated Feedback/A11y expectations to require key-based settings modal/nav helper copy.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`767 keys`, `22 namespaces`); `npm run check:lexicon` (`291 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `24e200a` (`fix(i18n): bundle settings nav modal copy`).
+- **Pending stack vs origin/main**: `24e200a` only. Rebase skipped already-merged patch-equivalent commits `cb80c1f` and `15e494d`.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: PASS received for auth entry helper-copy (`20260606-221500-to-codex-auth-entry-helper-copy-qa.md`); settings nav/modal-copy QA requested now.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-071801-to-claude-settings-nav-modal-copy.md`
+  - `agents/codex/outbox/20260607-071801-to-antigravity-settings-nav-modal-copy-qa.md`
+  - `agents/codex/outbox/20260607-070828-to-claude-auth-entry-helper-copy.md`
+  - `agents/codex/outbox/20260607-070828-to-antigravity-auth-entry-helper-copy-qa.md`
+
+[settings nav/modal helper-copy i18n cleanup / 26.06.07 / 07:18:01]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #settings #i18n #a11y #copy #implementation
+- Completed settings nav/modal helper-copy i18n cleanup.
+- Moved settings loading, nav labels/hints, sign-out hint, and confirm/feedback modal labels and hints into a new `settings` locale namespace.
+- Added `SettingsNavModalI18nCopy` regression guard and updated Feedback/A11y checks for key-based settings helper copy.
+- Rebased onto `origin/main@f55f121`; current pending app stack is only `24e200a`.
+- Full validation passed, including Jest 95 suites / 848 tests.
+- Read Antigravity PASS for auth entry helper-copy QA (`20260606-221500-to-codex-auth-entry-helper-copy-qa.md`).
+
+## Previous (auth entry helper-copy i18n cleanup)
 
 - **Task**: auth entry helper-copy i18n cleanup.
 - **src**: auth entry screens still had inline EN/KO helper/a11y copy for loading, language toggle, hero artwork alt text, input hints, password visibility, reset helper, manual links, and complete-profile button hints; sign-up language toggle also had a mismatched language label.
