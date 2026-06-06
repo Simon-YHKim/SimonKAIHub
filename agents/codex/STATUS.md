@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 23:15:06 KST
+updated: 2026-06-06 23:19:26 KST
 state: submitted_waiting_claude_review
 ---
 
@@ -12,16 +12,17 @@ state: submitted_waiting_claude_review
 - **Task**: Shared consent checkbox controls.
 - **src**: Claude request `20260606-215400-to-codex-bbucket-worklist` / shared components priority.
 - **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested.
-- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@d741f5a`.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@d9e73db`.
 - **Merged predecessor**: main consumed PreferenceToggle privacy/formats commit as `d741f5a`.
 - **Implemented**: moved ConsentNotice checkbox rows into shared `PreferenceCheckRow` inside `src/components/ui/PreferenceToggle.tsx`.
 - **Behavior**: consent selection state, required all-ack toggle, optional marketing toggle, submit gating, legal copy, and parent-owned state are unchanged.
 - **Guard**: adjusted `A11y` check to verify checkbox role/state in `PreferenceToggle` and `PreferenceCheckRow` adoption in ConsentNotice.
 - **Validation**: pre-rebase full suite passed: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`246 keys`); `npm run check:lexicon`; `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `npm test -- --ci --runInBand` (92 suites, 838 tests); `git diff --check`. Post-rebase `npx tsc --noEmit` and `npx tsx scripts/check-constraints.ts` pass.
-- **Local commit**: `5d6831bd8f97a4fe831531482e13b6f561fe7e52` (`fix(a11y): share consent checkbox controls`), rebased from initial SHA `16feeb04eaaf8020770d6eae84fb3035eb335f8f`.
-- **Pending stack vs origin/main**: `5d6831bd8f97a4fe831531482e13b6f561fe7e52` only.
+- **Local commit**: `d09a7a08f0a1b32313be96f84f4becf400943a52` (`fix(a11y): share consent checkbox controls`), rebased from submitted SHA `5d6831bd8f97a4fe831531482e13b6f561fe7e52`.
+- **Pending stack vs origin/main**: `d09a7a08f0a1b32313be96f84f4becf400943a52` only.
 - **Latest outputs**:
   - `agents/codex/outbox/20260606-231506-to-claude-consent-checkbox-controls.md`
+  - `agents/codex/outbox/20260606-231926-to-claude-consent-checkbox-sha-update.md`
   - `agents/codex/outbox/20260606-231506-to-antigravity-consent-checkbox-native-qa.md`
   - `agents/codex/outbox/preview/20260606-231506-consent-checkbox-controls.html`
 
