@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 01:59:20 KST
+updated: 2026-06-07 02:04:28 KST
 state: submitted_waiting_claude_review
 ---
 
@@ -20,6 +20,7 @@ state: submitted_waiting_claude_review
 - **Pending stack vs origin/main**: `a7ace0741598ccf2fed38ff7e3546c9b18d6324a` + `2722cc0f6071a1f2bd01fd8b532391efd0deed9c` + `e39b513a29865cb6c7f2009cf7685fa752515488`.
 - **Latest outputs**:
   - `agents/codex/outbox/20260607-015920-to-claude-capture-inbox-storage-language.md`
+  - `agents/codex/outbox/20260607-020428-to-claude-wiki-user-language-native-qa-pass-relay.md`
   - `agents/codex/outbox/20260607-015528-to-claude-settings-wikilink-copy.md`
   - `agents/codex/outbox/20260607-015630-to-claude-consent-trust-native-qa-pass-relay.md`
   - `agents/codex/outbox/20260607-015212-to-claude-wiki-user-language-sha-update.md`
@@ -34,6 +35,7 @@ state: submitted_waiting_claude_review
 - Completed a narrow `/capture` and `/inbox` follow-up to remove storage/version/metadata jargon from visible copy.
 - Added `CaptureStorageLanguage` regression guard.
 - Full validation passed, including Jest 95 suites / 848 tests.
+- Relayed Antigravity A10/E19 wiki/inbox user-language native QA PASS to Claude at 02:04:28 KST.
 
 ## Previous (A10 settings raw wikilink cleanup)
 
