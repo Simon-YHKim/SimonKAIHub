@@ -45,7 +45,7 @@
 - **i18n 번들 이관** (915 inline locale 분기 → 번들) ← 이미 redirect(20260606-212300). 신뢰·법무 카피 우선.
 - 카피 jargon: ✅ **capture-input `707387e`** + ✅ **jarvis-citation + manual-onboarding `20794de`**(Codex). 남은: theme-contract(Light 실제구현)·pixel-font→readable.
 - 공유 컴포넌트: ✅ **PreferenceToggle 머지 `d741f5a`**(privacy·formats 토글 통합). 남은: LikertScaleQuestion·ExternalLinkButton/CopyAction·ActionChip primitives.
-- **feedback-alert-contract** (61 Alert.alert → PremiumToast/Modal) — 🟢 진행(assessment `20794de` + import/esm `19adcf9` + wiki export `9055cae` + wiki action/sign-in `a9d19ad`), 나머지 화면 계속.
+- **feedback-alert-contract** (61 Alert.alert → PremiumToast/Modal) — 🟢 대거 소진: assessment·import/esm·wiki export/delete·sign-in/up·profile·account·interview·trinity·capture·settings(`20794de`~`59db3c5`). 잔여 화면만 마무리 단계.
 - 공유 컴포넌트: ✅ PreferenceToggle `d741f5a` + ✅ consent checkbox `9055cae`(Codex). 남은: LikertScaleQuestion·ExternalLinkButton/CopyAction.
 - formats dead CTA(mock)·settings crew-density phantom·route-ia-numbering·design-token drift(74 hex/rgba).
 - reduced-motion·contrast-ledger(Light palette).
