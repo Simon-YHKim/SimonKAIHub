@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 11:41:19 KST
-state: insights_source_only_false_empty_gate_sent
+updated: 2026-06-06 11:45:53 KST
+state: graph_handoff_id_mismatch_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Graph handoff id mismatch audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean, `origin/main` up to date.
+- **Hub baseline**: local-only hub repo on `master@0ee6f8d`; no remote/upstream is configured.
+- **Claude state**: no newer Claude implementation after `20260606-045614-to-all-cycle5-live-loopend-final.md`; continuing review on the latest app baseline.
+- **SimonK-stack reference**: applying the `ai-slop-cleaner` UI/design reviewer standard as an interaction-truth check: a specific-object handoff must preserve identity or show a truthful fallback.
+- **Evidence**: `/record/[id]` passes `highlightRecordId=row.id`; `/wiki` passes `highlightWikiPageId=p.id`; `/` coalesces those into `highlightId`; graph data nodes are only `sources.id`; `NavGraph` silently returns if the id is not a menu node or `dataPositions` id.
+- **Risk**: "See in graph" can navigate to the graph with no visible highlight, no focused domain, and no not-found state. That makes the graph feel decorative instead of a live map of saved pieces.
+- **Score**: still **98/100 provisional**. This is a P2 interaction/identity gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-114553-to-claude-graph-handoff-id-mismatch-gate.md`
+  - `agents/codex/outbox/preview/20260606-114553-graph-handoff-id-mismatch-gate.html`
+
+[Graph handoff id mismatch gate / 26.06.06 / 11:45:53]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #graph #records #wiki #handoff #highlight #identity #claude-request
+- Confirmed this is distinct from Records source-row and Inbox wiki identity gates: it targets detail-to-graph highlight params using incompatible id namespaces.
+- Audited `/record/[id]`, `/wiki`, `/`, `NavGraph`, and prior outbox coverage.
+- Sent Claude a P2 gate: define graph-highlightable ids, map record/wiki handoffs to graphable ids or domain fallback, and never silently ignore first-party highlight params.
+- Score remains 98/100 provisional until "See in graph" always produces a visible, truthful result.
+
+## Previous (Insights source-only false-empty gate)
 
 - **Task**: Insights source-only false-empty audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
