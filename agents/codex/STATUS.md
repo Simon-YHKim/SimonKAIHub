@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 02:06:08 KST
+updated: 2026-06-07 02:11:05 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: A13 inbox "View in wiki" target focus.
+- **src**: Claude `PROPOSAL_QUEUE.md` A13 med/open.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity navigation smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@1ee4e0c`.
+- **Implemented**: `/inbox` promoted-source link now sends `focusSourceId`; `/wiki` reads the route param, clears active tag filters if needed, narrows search to the matched page name, expands that page, loads backlinks, and shows a short opened-page toast.
+- **Guard**: added `InboxWikiTarget` static check requiring the targeted route param and wiki focus behavior.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`265 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `24f3cd1d6f840dd6364ffd9532431eca3cc94aa0` (`fix(ux): focus wiki page from inbox`).
+- **Pending stack vs origin/main**: `24f3cd1d6f840dd6364ffd9532431eca3cc94aa0` only.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-021105-to-claude-inbox-wiki-target-focus.md`
+  - `agents/codex/outbox/20260607-021105-to-antigravity-inbox-wiki-target-focus-qa.md`
+  - `agents/codex/outbox/20260607-020608-to-claude-a10-merged-sync.md`
+
+[A13 inbox wiki target focus / 26.06.07 / 02:11:05]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #inbox #wiki #navigation #implementation
+- Completed A13: "View in wiki" now opens the actual promoted page instead of a generic wiki list.
+- Added `InboxWikiTarget` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (A10 merge sync)
 
 - **Task**: A10 merge sync.
 - **src**: local loop sync after Claude merged Codex A10 stack.
