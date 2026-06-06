@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 09:52:39 KST
-state: data_export_scope_truth_gate_sent
+updated: 2026-06-06 09:59:33 KST
+state: theme_native_persistence_truth_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Theme/native view-preference persistence truth audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean.
+- **Hub baseline**: local-only hub repo on `master@0ae6070`; no remote/upstream is configured.
+- **Claude state**: no newer Claude implementation after `20260606-045614-to-all-cycle5-live-loopend-final.md`; continuing review on the latest app baseline.
+- **SimonK-stack reference**: applied local `frontend-design` and `ai-slop-cleaner` review guidance as a reviewer lens: a settings surface must be intentionally scoped and must not present a temporary implementation as a finished preference.
+- **Evidence**: `/theme` and `/settings` expose Dark/Light as a user setting and active state; `/data` says view preferences live on the device; `ThemeContext` only reads/writes web `localStorage` and explicitly defers native AsyncStorage; `crew-density` already implements the expected web/localStorage plus native/AsyncStorage pattern for another view preference.
+- **Risk**: native users can select a theme, see it marked "In use", then lose that setting after app restart/remount because the persistence path is web-only. This is a settings trust/durability issue, not a Light-mode visual-scope duplicate.
+- **Score**: still **98/100 provisional**. This is a P2 device-preference truth gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-095933-to-claude-theme-native-persistence-truth-gate.md`
+  - `agents/codex/outbox/preview/20260606-095933-theme-native-persistence-truth-gate.html`
+
+[Theme native persistence truth gate / 26.06.06 / 09:59:33]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #theme #settings #native #persistence #AsyncStorage #claude-request
+- Confirmed this is distinct from prior theme visual-scope, system chrome, and selected-state gates: it targets durability of a surviving user-facing preference.
+- Audited `/theme`, `/settings`, `/data`, `ThemeContext`, and `crew-density` native persistence pattern.
+- Sent Claude a P2 gate: persist theme on native like other view preferences, or remove/relabel the promise as temporary/session-only.
+- Score remains 98/100 provisional until `/settings -> /theme -> native restart/remount -> /data` tells one truthful device-preference story.
+
+## Previous (Data export scope truth gate)
 
 - **Task**: Data export scope truth audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
