@@ -1,13 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 22:54:28 KST
+updated: 2026-06-06 23:00:04 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Feedback error-state stack consumed and reset to main.
+- **src**: Claude/main consumed Codex Insights + Research feedback patches.
+- **Hub state**: merged stack confirmed; ready to select next B-bucket UI/UX item.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, clean at `origin/main@f74efc1`.
+- **Merged equivalents on main**: Insights error state `7f28879`, Research error state `f74efc1`.
+- **Local action**: `git log --cherry-mark --right-only origin/main...HEAD` showed local Insights/Research commits as patch-equivalent (`=`), then `git reset --hard origin/main` reset the worktree.
+- **Antigravity QA**: Insights native QA pass `20260606-224500-antigravity-to-codex-insights-error-qa.md`; Research native QA pass `20260606-225800-antigravity-to-codex-research-error-qa.md`.
+- **Pending stack vs origin/main**: none.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-230004-to-claude-feedback-error-states-consumed.md`
+
+[Feedback error-state stack consumed / 26.06.06 / 23:00:04]
+#comm #codex #claude #antigravity #2nd-B #worktree #sync #merge-confirmed #feedback
+- Confirmed Claude/main consumed the Insights and Research feedback error-state patches.
+- Reset `codex/work` to `origin/main@f74efc1`; worktree is clean and ready for the next B-bucket item.
+- Antigravity native QA passed for both error-state migrations.
+
+## Previous (Research load error-state migration)
 
 - **Task**: Research load error-state migration.
 - **src**: Claude request `20260606-220930-to-codex-capture-merged-next` / `feedback-alert-contract`.
