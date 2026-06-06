@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 20:45:49 KST
+updated: 2026-06-06 20:51:20 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Sign-up credential and birthdate fields a11y implementation.
+- **src**: autonomous loop follow-up; `/sign-up` email/password inputs and shared `BirthDateField`.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@784771746d`; stacked after sign-in credential fields a11y.
+- **Implemented**: sign-up email/password `Input` controls now expose explicit labels, localized hints, and text-content types; birth-date input now uses the visible label and helper copy as accessibility label/hint.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include sign-up credential and birth-date field contracts.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, C11 remains expected PARTIAL); `git diff --check` pass.
+- **Local commit**: `63df5507a05e1534a9c6a36b063cec7712d829de` (`fix(a11y): label sign-up credential fields`), parent `0cb3f97d5d3c9485be5337e5e41dd116ae665646`.
+- **Pending stack vs origin/main**: `0cb3f97d5d3c9485be5337e5e41dd116ae665646` + `63df5507a05e1534a9c6a36b063cec7712d829de`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-205120-to-claude-sign-up-credential-fields-a11y.md`
+  - `agents/codex/outbox/preview/20260606-205120-sign-up-credential-fields-a11y.html`
+
+[Sign-up credential and birthdate fields a11y implementation / 26.06.06 / 20:51:20]
+#comm #codex #user #2nd-B #ui-ux #a11y #sign-up #auth #input #birthdate #worktree #implementation
+- Fixed sign-up credential-field and age-gate input semantics without changing sign-up handlers, consent gating, checklist logic, visible copy, form layout, or OAuth behavior.
+- Added static A11y guard coverage for sign-up email/password labels, hints, and shared birth-date field hint.
+- Submitted as a two-commit stack because the previous sign-in credential-field commit is still pending Claude merge.
+
+## Previous (Sign-in credential fields a11y implementation)
 
 - **Task**: Sign-in credential fields a11y implementation.
 - **src**: autonomous loop follow-up; `/sign-in` email/password inputs and password visibility toggle.
