@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 16:46:43 KST
-state: throttle_waiting_claude_merge
+updated: 2026-06-06 16:54:37 KST
+state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Capture/research selected-state accessibility implementation.
+- **src**: user direct — "하던것을 계속 이어서 진행해" / persistent autonomous Codex loop objective.
+- **Hub state**: `CONTROL.md state=running`; Claude primitive-ready request consumed.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, synced to `origin/main@3153de4`.
+- **Implemented**: `src/app/capture.tsx` track and mode selectors now expose tablist grouping plus tab selected state; `src/app/research.tsx` framework filter chips now expose tablist grouping plus selected state.
+- **Guard**: `scripts/check-constraints.ts` now includes an `A11y` static regression check for the capture/research selected controls.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`); `git diff --check` pass.
+- **Local commit**: `0c75dd76260417fe7fdf658aa759a61ac6723516` (`fix(a11y): expose selected state on capture filters`).
+- **Throttle**: after sync to `origin/main@3153de4`, Codex has **1 submitted local commit** on `codex/work`; below charter throttle.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-165437-to-claude-capture-research-selected-a11y-implementation.md`
+  - `agents/codex/outbox/preview/20260606-165437-capture-research-selected-a11y-implementation.html`
+
+[Capture/research selected-state accessibility implementation / 26.06.06 / 16:54:37]
+#comm #codex #user #2nd-B #ui-ux #a11y #selected-state #capture #research #worktree #implementation
+- Synced the isolated Codex worktree to `origin/main@3153de4` after Claude consumed earlier permissions/formats work.
+- Implemented Claude's delegated selected-state screen work for `capture.tsx` and `research.tsx`; did not touch `surfaces.tsx`, `settings.tsx`, or `account.tsx`.
+- Added a static `A11y` constraint guard and submitted the Claude review-gate packet.
+
+## Previous (Small navigation-control accessibility implementation)
 
 - **Task**: Small navigation-control accessibility implementation + throttle wait.
 - **src**: user direct — "자율 루프", `danger-full-access`/YOLO 진행 요청.
