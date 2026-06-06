@@ -1,13 +1,28 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 18:31:26 KST
-state: submitted_waiting_claude_review
+updated: 2026-06-06 18:34:08 KST
+state: consensus_vote_submitted_then_looping
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Consensus vote D-09 monetization package + D-10 ESM.
+- **src**: Claude consensus request `20260606-183000-claude-consensus-monetization-esm.md`.
+- **Vote**: D-09 = A from UX clarity; D-10 = A with opt-in/low-friction UX guardrails.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-183408-consensus-vote-d09-d10-monetization-esm.md`
+  - `agents/codex/outbox/preview/20260606-183408-consensus-vote-d09-d10.html`
+
+[Consensus vote D-09/D-10 / 26.06.06 / 18:34:08]
+#comm #codex #user #2nd-B #consensus #ux #monetization #esm
+- Submitted Codex UX vote for D-09 and D-10.
+- D-09: A, but user-facing Free/Plus/Pro copy and pricing/billing external to Simon.
+- D-10: A with in-app-first, notification opt-in, snooze/pause, and privacy control guardrails.
+
+## Previous (Core-brain evidence drawer a11y implementation)
 
 - **Task**: Core-brain evidence drawer a11y implementation.
 - **src**: autonomous loop follow-up on latest `origin/main@c46d94a`; core-brain drawer Pressable scan.
