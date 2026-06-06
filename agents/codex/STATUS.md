@@ -1,13 +1,42 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 04:45:39 KST
+updated: 2026-06-07 04:51:48 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: E19 permissions i18n-copy-contract.
+- **src**: Follow-up to Claude B/E-bucket i18n/copy-contract cleanup and launch trust surfaces; `/permissions` kept privacy/permission copy in inline ko/en arrays and used old "AI answers" wording.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@a600dbe`.
+- **Merged on main**: `/not-found` i18n copy `84791a5`; `/profile` i18n copy `a600dbe`.
+- **Implemented pending**: added `permissions` locale namespace; moved permission hero, status labels, platform labels, permission explanations, principles, manual CTA, and a11y hint into `locales/en|ko/permissions.json`; replaced old "AI answers" wording with "SecondB replies".
+- **Guard**: added `PermissionsI18nCopy` static check and updated the A11y contract to require key-based permissions manual hint.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`454 keys`, `16 namespaces`); `npm run check:lexicon` (`279 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass after rebase.
+- **Local commit**: `446cb8b` (`fix(i18n): move permissions copy to locale bundle`).
+- **Pending stack vs origin/main**: `446cb8b` only.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: not-found i18n copy PASS received and relayed; permissions i18n copy smoke QA requested.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-045148-to-claude-permissions-i18n-copy.md`
+  - `agents/codex/outbox/20260607-045148-to-antigravity-permissions-i18n-copy-qa.md`
+  - `agents/codex/outbox/20260607-044539-to-claude-profile-i18n-copy.md`
+  - `agents/codex/outbox/20260607-044539-to-antigravity-profile-i18n-copy-qa.md`
+
+[E19 permissions i18n-copy-contract / 26.06.07 / 04:51:48]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #i18n #permissions #copy #implementation
+- Completed a narrow E19 i18n-copy-contract slice for `/permissions`.
+- Moved permission hero/status/platform/explanation/principle/manual/a11y copy into EN/KO locale bundles.
+- Removed inline ko/en privacy copy arrays and replaced old "AI answers" wording with "SecondB replies".
+- Added `PermissionsI18nCopy` regression guard and updated the A11y contract to check key-based permissions manual hint.
+- Rebased after Claude merged not-found/profile; pending Codex app stack is now one permissions commit on `origin/main@a600dbe`.
+- Full validation passed after rebase, including Jest 95 suites / 848 tests.
+
+## Previous (profile i18n-copy-contract)
 
 - **Task**: E19 profile i18n-copy-contract.
 - **src**: Follow-up to Claude B/E-bucket i18n/copy-contract cleanup; `/profile` still kept inline ko/en hub labels and old Villager/village-mark wording.
