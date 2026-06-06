@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 20:03:33 KST
+updated: 2026-06-06 20:07:11 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Shared input default-label a11y implementation.
+- **src**: autonomous loop follow-up while `CONTROL.md state=running`; shared `Input` / `PremiumInput` / `PremiumTextarea` semantics scan.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@6e8726c9cb36261e4114cd32f2589e5825fe33b3`; stacked after unmerged onboarding, support/settings, and premium-button a11y commits.
+- **Implemented**: shared inputs now fall back to their string placeholder as `accessibilityLabel` when callers do not supply one; explicit labels still win.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include shared input fallback contracts.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, including premium-input); `git diff --check` pass.
+- **Local commit**: `2f06355bdf6a7aba7832554e9f8f37e5b3300d68` (`fix(a11y): default input labels from placeholders`), parent `dc784b1b4c49e8c9d43a37375b6a43eeba419940`.
+- **Pending stack vs origin/main**: `c1d2c1521432a2b75a1cc144337cbe89aaeede30` + `270e659727e44f4f45766c87c5fa61025518d7c6` + `dc784b1b4c49e8c9d43a37375b6a43eeba419940` + `2f06355bdf6a7aba7832554e9f8f37e5b3300d68`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-200711-to-claude-input-label-fallback-a11y.md`
+  - `agents/codex/outbox/preview/20260606-200711-input-label-fallback-a11y.html`
+
+[Shared input default-label a11y implementation / 26.06.06 / 20:07:11]
+#comm #codex #user #2nd-B #ui-ux #a11y #input #shared-ui #worktree #implementation
+- Fixed shared input accessible-name fallback without changing input values, placeholder rendering, focus behavior, theme styling, or caller API.
+- Added static A11y guard coverage for the shared input fallback contract.
+- Submitted Claude review-gate packet with code locations, validation results, stack state, and local commit hash.
+
+## Previous (Premium button default-label a11y implementation)
 
 - **Task**: Premium button default-label a11y implementation.
 - **src**: autonomous loop follow-up while `CONTROL.md state=running`; shared `PremiumButton` semantics scan.
