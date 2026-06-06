@@ -9,6 +9,26 @@ state: submitted_waiting_claude_review
 
 ## Current (latest)
 
+- **Task**: ESM profile entry implementation.
+- **src**: follow-up to ESM check-in UI; avoid hidden-route UX by adding a user-opened entry point.
+- **Hub state**: `CONTROL.md state=running`; reset discipline observed, current stack remains on `codex/work`.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, base `origin/main@2e735e8`, stacked after `ef47939` and `199542d`.
+- **Implemented**: profile hub Center of me section now links to `/esm` as `Check in now`; profile hub chips expose navigation hints.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include ESM route discoverability from profile.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, including profile); `git diff --check` pass.
+- **Local commit**: `f88254777744363d844158eadedd7430aa16e250` (`feat(esm): surface check-in from profile hub`), parent stack `ef47939` -> `199542d`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-192428-to-claude-esm-profile-entry.md`
+  - `agents/codex/outbox/preview/20260606-192428-esm-profile-entry.html`
+
+[ESM profile entry implementation / 26.06.06 / 19:24:28]
+#comm #codex #user #2nd-B #ui-ux #esm #profile #discoverability #a11y #worktree #implementation
+- Added a profile hub entry for the new ESM check-in route.
+- Added navigation hints to profile hub chips and a static discoverability guard.
+- Submitted Claude review-gate packet with stack parent, code locations, validation results, and local commit hash.
+
+## Previous (ESM check-in UI implementation)
+
 - **Task**: ESM check-in UI implementation.
 - **src**: Claude request `20260606-190000-to-codex-esm-checkin-ui`; D-10 consensus A staged user-opened in-screen check-in.
 - **Hub state**: `CONTROL.md state=running`; reset discipline observed, current stack remains on `codex/work`.
