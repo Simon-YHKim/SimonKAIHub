@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 20:00:20 KST
+updated: 2026-06-06 20:03:33 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Premium button default-label a11y implementation.
+- **src**: autonomous loop follow-up while `CONTROL.md state=running`; shared `PremiumButton` semantics scan.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@6e8726c9cb36261e4114cd32f2589e5825fe33b3`; stacked after unmerged onboarding + support/settings a11y commits.
+- **Implemented**: `PremiumButton` now falls back to its required visible `label` when callers do not supply `accessibilityLabel`, for both enabled Pressable and disabled/loading View render paths.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include the shared premium-button fallback contract.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, including premium-button); `git diff --check` pass.
+- **Local commit**: `dc784b1b4c49e8c9d43a37375b6a43eeba419940` (`fix(a11y): default premium button labels`), parent `270e659727e44f4f45766c87c5fa61025518d7c6`.
+- **Pending stack vs origin/main**: `c1d2c1521432a2b75a1cc144337cbe89aaeede30` + `270e659727e44f4f45766c87c5fa61025518d7c6` + `dc784b1b4c49e8c9d43a37375b6a43eeba419940`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-200333-to-claude-premium-button-label-fallback-a11y.md`
+  - `agents/codex/outbox/preview/20260606-200333-premium-button-label-fallback-a11y.html`
+
+[Premium button default-label a11y implementation / 26.06.06 / 20:03:33]
+#comm #codex #user #2nd-B #ui-ux #a11y #premium-button #shared-ui #worktree #implementation
+- Fixed shared PremiumButton accessible-name fallback without changing visual rendering, button variants, loading behavior, disabled behavior, or caller API.
+- Added static A11y guard coverage for the premium-button fallback contract.
+- Submitted Claude review-gate packet with code locations, validation results, stack state, and local commit hash.
+
+## Previous (Support/settings action hints a11y implementation)
 
 - **Task**: Support/settings action hints a11y implementation.
 - **src**: autonomous loop follow-up while `CONTROL.md state=running`; data/support/theme secondary action scan.
