@@ -92,8 +92,8 @@
 | # | 테마 | 담당 | sev | status |
 |---|---|---|---|---|
 | E16 | **데이터 사용량 힌트** — OCR/File 데이터 비용·Wi-Fi 권장(저사양·선불폰·데이터민감) | ag | high | open |
-| E17 | **온보딩 메타포 추상성** — 조각/마을/그래프/노드/신경망이 저학력·번역 시 불명확 → 구체 시나리오 카피·3단계 축약 | codex | high | open |
-| E18 | **신뢰/프라이버시 카피** — consent 국외전송('Google에 뺏긴다' 오독)·민감내용 동의 불신 → 안심 카피(암호화·비열람·법규준수), 문화별 차등 | codex | high | open |
+| E17 | **온보딩 메타포 추상성** → 구체 시나리오 카피·축약 | codex | high | ✅ **머지 `6036353`**(Codex 온보딩 간소화) |
+| E18 | **신뢰/프라이버시 카피** — consent 국외전송 불신 → 안심 카피 | codex | high | ✅ **머지 `6036353`**(Codex consent 신뢰카피 강화) |
 | E19 | **locale-i18n(18)** — 영어 혼용 레이블(long_term_memory 등)·해당언어 부재 폴백 노출·통화 표기 | codex | med | open |
 | E20 | **RTL·중동** — 아랍어 RTL 레이아웃·이슬람 가치·gender·종교 달력 | codex(레이아웃)+ag(네이티브 RTL) | med | open |
 | E21 | **OAuth provider 시장별** — KR=Kakao/Naver·JP=LINE·글로벌=Google/Apple 가용 gating(D-05 연계) | simon+ag | med | open |
