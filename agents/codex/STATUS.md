@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 07:00:03 KST
+updated: 2026-06-07 07:08:28 KST
 state: submitted
 ---
 
@@ -9,18 +9,20 @@ state: submitted
 
 ## Current (latest)
 
-- **Task**: format editor/schema preview i18n cleanup.
-- **src**: `/formats` edit handoff still had inline EN/KO form labels, hints, placeholders, buttons, tag a11y copy, and schema-preview labels inside `TemplateEditor` / `FormatSchemaView`.
+- **Task**: auth entry helper-copy i18n cleanup.
+- **src**: auth entry screens still had inline EN/KO helper/a11y copy for loading, language toggle, hero artwork alt text, input hints, password visibility, reset helper, manual links, and complete-profile button hints; sign-up language toggle also had a mismatched language label.
 - **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@6f55e01`.
-- **Implemented pending**: moved edit-form and schema-preview visible copy into `locales/en|ko/formats.json` under `editor.*` and `schemaView.*`; kept validation logic and layout behavior unchanged.
-- **Guard**: updated `FormatEditorLanguage` to require key-based editor/schema preview copy while still preventing schema/bucket/property jargon.
-- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`708 keys`, `21 namespaces`); `npm run check:lexicon` (`289 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
-- **Local commit**: `cb80c1f` (`fix(i18n): bundle format editor copy`).
-- **Pending stack vs origin/main**: `cb80c1f` only.
+- **Implemented pending**: moved auth helper/a11y copy into `locales/en|ko/auth.json`; fixed sign-up language-toggle label source; kept auth logic and provider gating unchanged.
+- **Guard**: added `AuthEntrySupplementalI18nCopy` and updated `Feedback`/`A11y` expectations to require key-based auth helper copy.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`739 keys`, `21 namespaces`); `npm run check:lexicon` (`289 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commits**: `cb80c1f` (`fix(i18n): bundle format editor copy`) + `15e494d` (`fix(i18n): bundle auth entry helper copy`).
+- **Pending stack vs origin/main**: `cb80c1f` + `15e494d`.
 - **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
-- **Antigravity QA**: PASS received for formats community-copy, sign-in hero-copy, wiki hero-copy, old-guidance-copy, premium-a11y-locale, rebased old-guidance/premium-a11y stack, pre-rebase premium feedback-defaults, rebased premium feedback-default + auth failure-toast stack, rebased add-format flow, and formats screen operational-copy. Format editor/schema-preview QA requested now.
+- **Antigravity QA**: PASS received for formats community-copy, sign-in hero-copy, wiki hero-copy, old-guidance-copy, premium-a11y-locale, rebased old-guidance/premium-a11y stack, pre-rebase premium feedback-defaults, rebased premium feedback-default + auth failure-toast stack, rebased add-format flow, formats screen operational-copy, and format editor/schema-preview. Auth entry helper-copy QA requested now.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-070828-to-claude-auth-entry-helper-copy.md`
+  - `agents/codex/outbox/20260607-070828-to-antigravity-auth-entry-helper-copy-qa.md`
   - `agents/codex/outbox/20260607-070003-to-claude-format-editor-copy.md`
   - `agents/codex/outbox/20260607-070003-to-antigravity-format-editor-copy-qa.md`
   - `agents/codex/outbox/20260607-065102-to-claude-formats-screen-copy.md`
@@ -44,6 +46,15 @@ state: submitted
   - `agents/codex/outbox/20260607-061608-to-antigravity-old-guidance-copy-qa.md`
   - `agents/codex/outbox/20260607-061215-to-claude-wiki-hero-copy.md`
   - `agents/codex/outbox/20260607-061215-to-antigravity-wiki-hero-copy-qa.md`
+
+[auth entry helper-copy i18n cleanup / 26.06.07 / 07:08:28]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #auth #i18n #a11y #copy #implementation
+- Completed auth entry helper-copy i18n cleanup.
+- Moved sign-in/sign-up/complete-profile loading, language-toggle, artwork alt, input hints, password visibility, reset helper, manual-link, and button hint copy into `auth` locale keys.
+- Fixed sign-up language-toggle accessibility label source so Korean UI no longer announces the English label.
+- Added `AuthEntrySupplementalI18nCopy` regression guard and updated Feedback/A11y checks for key-based auth helper copy.
+- Full validation passed, including Jest 95 suites / 848 tests.
+- Read Antigravity PASS for format editor/schema-preview QA (`20260606-221000-to-codex-format-editor-copy-qa.md`).
 
 [format editor/schema preview i18n cleanup / 26.06.07 / 07:00:03]
 #comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #formats #i18n #copy #implementation
