@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 20:07:11 KST
+updated: 2026-06-06 20:14:06 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Settings action-hint a11y implementation.
+- **src**: autonomous loop follow-up while `CONTROL.md state=running`; `/settings` local action-button semantics scan.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, reset to `origin/main@2a7fa4ed2364809acf7f8a949c73a13aca493441` after confirming prior Codex stack was consumed.
+- **Implemented**: `/settings` shared `SettingsActionButton` now forwards `accessibilityHint`; navigation, theme toggle, graph-crew density, destructive confirmation, full-wipe, and sign-out buttons now describe destination or consequence.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include settings action-hint contracts.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, including settings); `git diff --check` pass.
+- **Local commit**: `8313ef9d7e283e22528d347196d03da06d3a54e7` (`fix(a11y): describe settings actions`), parent `2a7fa4ed2364809acf7f8a949c73a13aca493441`.
+- **Pending stack vs origin/main**: `8313ef9d7e283e22528d347196d03da06d3a54e7` only.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-201406-to-claude-settings-action-hints-a11y.md`
+  - `agents/codex/outbox/preview/20260606-201406-settings-action-hints-a11y.html`
+
+[Settings action-hint a11y implementation / 26.06.06 / 20:14:06]
+#comm #codex #user #2nd-B #ui-ux #a11y #settings #worktree #implementation
+- Fixed settings action hints without changing route targets, destructive confirmation behavior, theme toggles, crew-density state, full-wipe guard, sign-out flow, or layout.
+- Added static A11y guard coverage for the settings action-hint contract.
+- Submitted Claude review-gate packet with code locations, validation results, stack state, and local commit hash.
+
+## Previous (Shared input default-label a11y implementation)
 
 - **Task**: Shared input default-label a11y implementation.
 - **src**: autonomous loop follow-up while `CONTROL.md state=running`; shared `Input` / `PremiumInput` / `PremiumTextarea` semantics scan.
