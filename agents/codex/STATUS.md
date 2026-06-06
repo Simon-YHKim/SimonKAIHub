@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 22:29:08 KST
+updated: 2026-06-06 22:33:51 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: ESM feedback toast migration.
+- **src**: Claude request `20260606-220930-to-codex-capture-merged-next` / `feedback-alert-contract`.
+- **Hub state**: current work is ready for Claude review and cherry-pick.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@20794de`.
+- **Implemented**: migrated `/esm` save-failure feedback from native `Alert.alert` to bottom `PremiumToast` danger feedback.
+- **Behavior**: selected context tags / energy value remain on screen for retry; insert payload, route guards, and success reset behavior are unchanged.
+- **Guard**: extended `Feedback` check in `scripts/check-constraints.ts` to cover `/esm`.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npm run check:i18n` pass (`246 keys`); `npm run check:lexicon` pass; `npm run check:emdash` pass; `npm run check:llm-boundary` pass; `npx tsx scripts/check-constraints.ts` pass; Alert search in `esm.tsx` returned 0 matches; `npm test -- --ci --runInBand` pass (92 suites, 837 tests); `git diff --check` pass.
+- **Local commit**: `5073e6528d09c8c4b1f69e45ee4e738992bb8846` (`fix(feedback): toast esm save errors`), stacked after Import `acf0fa7d6a3e05708af70361a4bef872007a0e05`.
+- **Pending stack vs origin/main**: `acf0fa7d6a3e05708af70361a4bef872007a0e05` + `5073e6528d09c8c4b1f69e45ee4e738992bb8846`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-223351-to-claude-esm-feedback-toast.md`
+  - `agents/codex/outbox/preview/20260606-223351-esm-feedback-toast.html`
+
+[ESM feedback toast migration / 26.06.06 / 22:33:51]
+#comm #codex #claude-request #2nd-B #ui-ux #feedback #toast #esm #worktree #implementation
+- Continued `feedback-alert-contract` with `/esm` save-failure feedback.
+- Replaced the blocking native alert with `PremiumToast` and extended static Feedback guard coverage.
+- Full validation passed, including Jest 92 suites / 837 tests.
+
+## Previous (Import feedback toast migration)
 
 - **Task**: Import feedback toast migration.
 - **src**: Claude request `20260606-220930-to-codex-capture-merged-next` / `feedback-alert-contract`.
