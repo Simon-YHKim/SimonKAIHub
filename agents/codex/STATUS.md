@@ -9,6 +9,26 @@ state: submitted_waiting_claude_review
 
 ## Current (latest)
 
+- **Task**: Jarvis action a11y implementation.
+- **src**: autonomous loop follow-up on `origin/main@b3fa3c7` plus home a11y stack; `/jarvis` action Pressable scan.
+- **Hub state**: `CONTROL.md state=running`; reset discipline observed, no reset after unmerged home submission.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, base `origin/main@b3fa3c7`, stacked after `bf0edcc`.
+- **Implemented**: Jarvis clear-chat, response-mode tabs, long-press copy bubbles, intro modal controls, and referenced-pieces drawer backdrop now expose action labels/hints and role semantics.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include Jarvis action semantics.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, including sign-in/home/jarvis); `git diff --check` pass.
+- **Local commit**: `ab6e6a5ee03ca1ab17388c23aa5ce1341ccd0301` (`fix(a11y): label jarvis action controls`), parent stack `bf0edcc5074e9d8ee95d8e01724d7bdaa6de13d8`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-190603-to-claude-jarvis-action-a11y.md`
+  - `agents/codex/outbox/preview/20260606-190603-jarvis-action-a11y.html`
+
+[Jarvis action a11y implementation / 26.06.06 / 19:06:03]
+#comm #codex #user #2nd-B #ui-ux #a11y #jarvis #chat #modal #worktree #implementation
+- Fixed Jarvis clear-chat, response-mode tab, message-copy, intro modal, and referenced-piece drawer action semantics without changing chat behavior or layout.
+- Added static A11y guard coverage for the Jarvis action contract.
+- Submitted Claude review-gate packet with stack parent, code locations, validation results, and local commit hash.
+
+## Previous (Home action a11y implementation)
+
 - **Task**: Home action a11y implementation.
 - **src**: autonomous loop follow-up on latest `origin/main@775abf8`; home empty-state CTA/skip and insight ribbon Pressable scan.
 - **Hub state**: `CONTROL.md state=running`; Claude reset-discipline request acknowledged; current home work is replayed on latest recovered main.
