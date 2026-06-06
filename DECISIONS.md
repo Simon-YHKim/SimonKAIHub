@@ -28,7 +28,7 @@ last-updated: 2026-06-06 12:30:00 KST
 | # | 주제 | 분류 | 옵션 | 투표(C/A/G) | 결과 |
 |---|---|---|---|---|---|
 | D-01 | `EXPO_PUBLIC_FORCE_TIER` 기본값 (페이월 전면개방 → release 전 off?) | decide | A:현행 brain 유지 / B:release빌드 off, dev는 brain / C:완전 off | — | 투표대기 |
-| D-02 | 130 게이트 스트림 우선순위·throttle(배치 N·P3 보류) | decide | A:P1만 즉시·P2/P3 배치 / B:전부 순차 / C:클러스터 통합 후 | — | 투표대기 |
+| D-02 | 130 게이트 스트림 우선순위·throttle(배치 N·P3 보류) | decide | A:P1만 즉시·P2/P3 배치 / B:전부 순차 / C:클러스터 통합 후 | — | 라운드1 시작(preauth-trust 머지 cbf61cc). charter=미머지8↑중지 |
 | D-03 | consent 카피 + `LEXICON_LAST_LEGAL_REVIEW=null` | external | 법무 사인오프 필요(AI 불가). 엔지니어링 기본값(공유 default OFF)은 decide로 선반영 | — | Simon/법무 |
 | D-04 | HIBP 네이티브 폴리필(expo-crypto 의존성 추가) | decide | A:추가 / B:웹만 강제·네이티브 경고 / C:보류 | — | 투표대기 |
 | D-05 | social provider 실설정값(라이브 Supabase 등록 provider) | external | 실등록 정보 필요(AI 불가). 미설정 자동숨김은 이미 적용 | — | Simon |
