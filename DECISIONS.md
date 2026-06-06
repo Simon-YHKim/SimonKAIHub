@@ -35,8 +35,8 @@ last-updated: 2026-06-06 12:30:00 KST
 | D-06 | 런타임 device 증명(AG 에뮬 스크린샷 매트릭스) | decide | Antigravity 자율 사이클로 수급 → Codex 100점 게이트 종료 | — | AG 루프 배정 |
 | D-07 | consent durable 큐(앱 재시작 후 재전송) | decide | A:durable 구현 / B:현행 in-memory 유지 / C:법무 후 | — | 투표대기 |
 | D-08 | 자기이해 방식 (질문지 vs 인터뷰 vs ESM) | decide | **하이브리드 3층 권고**(질문지 시드→인터뷰→ESM, SOKA 특성별 신뢰도) | 하이브리드 | ①persona 특성별 confidence 머지(19f3bd0). 다음 ②온보딩 시드화 ③ESM=D-10 |
-| D-09 | 수익화 가격·패키징 (KR+Global) | decide→Simon | Freemium+2~3티어. KR ₩4,900/9,900 · Global $4.99/9.99 · RevenueCat | AG:A | 구조 합의중(AG=A 3-tier). C·G 투표대기. 최종가격 Simon |
-| D-10 | ESM 층 도입 (알림인프라+신규테이블) | decide | A:도입(정확도 최대레버) / B:보류(공수) / C:phase2 | AG:A | AG=A(단계적·로컬알림 우선·AG 네이티브QA). C·G 대기 |
+| D-09 | 수익화 가격·패키징 (KR+Global) | decide→Simon | Freemium+3티어 | AG:A·Codex:A | ✅ **합의=A**(Free/Plus/Pro, enum 유지, Plus→cortex·Pro→brain). 구조 구현(entitlements, FORCE_TIER off 전 비활성). **가격·계약 Simon/§15** |
+| D-10 | ESM 층 도입 | decide | A:도입 / B:보류 / C:phase2 | AG:A·Codex:A | ✅ **합의=A 단계적**: ①in-screen 경량 check-in 먼저 ②알림 opt-in/snooze는 후속(AG 네이티브QA). KR 1일1회/사용자-오픈. ESM 스캐폴드 예정 |
 | D-11 | 마케팅 GTM (KR+Global) | decide→Simon | 포지셔닝"자기이해형 세컨브레인/쓸수록 보이는 나" · anti-creepy 신뢰 · 텍스트SNS채널 · ASO · 런치플레이북 | — | 설계완료(HTML). Grok X 보강 대기. 채널예산·런치일=Simon/§15 |
 
 ## 해결됨 (Resolved) — 최근
