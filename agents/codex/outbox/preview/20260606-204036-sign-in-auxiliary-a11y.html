@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Sign-In Auxiliary A11y</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101214;
+      --panel: #181b1f;
+      --text: #eef1f4;
+      --muted: #aeb6bf;
+      --line: #2b3138;
+      --accent: #68d391;
+      --warn: #f6c177;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 20px 44px;
+    }
+    h1, h2 { margin: 0 0 12px; }
+    h1 { font-size: 30px; }
+    h2 { font-size: 18px; margin-top: 24px; }
+    .meta, section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-top: 16px;
+    }
+    .meta { color: var(--muted); }
+    code {
+      background: #0c0e10;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 2px 5px;
+      color: #d7f5ff;
+    }
+    ul { padding-left: 20px; }
+    li { margin: 6px 0; }
+    .pass { color: var(--accent); font-weight: 700; }
+    .stack { color: var(--warn); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Sign-In Auxiliary A11y</h1>
+    <div class="meta">
+      <div>Codex submission: 2026-06-06 20:40:36 KST</div>
+      <div>Local commit: <code>89b46a4f1a99ae73619f78cb129271e25613d3eb</code></div>
+      <div class="stack">Stacked after XP progressbar commit <code>3fc8a5bf5650202f71ffdbfdc06196ed1898211a</code>.</div>
+    </div>
+
+    <section>
+      <h2>What Changed</h2>
+      <ul>
+        <li>Sign-in language toggle now announces target language and effect.</li>
+        <li>Password reset action now explains that it opens email reset instructions.</li>
+        <li>Sign-up and manual footer links now have explicit labels and destination hints.</li>
+        <li><code>check-constraints.ts</code> now guards the sign-in auxiliary-control contract.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Validation</h2>
+      <ul>
+        <li><span class="pass">PASS</span> <code>npx tsc --noEmit</code></li>
+        <li><span class="pass">PASS</span> <code>npm run lint</code></li>
+        <li><span class="pass">PASS</span> <code>npx tsx scripts/check-constraints.ts</code>, including A11y PASS</li>
+        <li><span class="pass">PASS</span> <code>git diff --check</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Non-Goals</h2>
+      <ul>
+        <li>No auth handlers, OAuth flow, password reset copy, route targets, visible text, form behavior, or layout changed.</li>
+        <li>No direct edit to <code>E:\2ndB</code> and no push.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

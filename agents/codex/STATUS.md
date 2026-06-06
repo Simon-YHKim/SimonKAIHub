@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 20:36:46 KST
+updated: 2026-06-06 20:40:36 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Sign-in auxiliary link a11y implementation.
+- **src**: autonomous loop follow-up; `/sign-in` language toggle, password reset, sign-up, and manual auxiliary controls.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@c691da82b4e080c4e2dbbf3778a24fefbe44d622`; stacked after interview matrix and XpBar a11y.
+- **Implemented**: sign-in language toggle, password reset action, sign-up link, and manual link now expose explicit labels/hints.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include sign-in auxiliary-control contracts.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, including sign-in auxiliary controls); `git diff --check` pass.
+- **Local commit**: `89b46a4f1a99ae73619f78cb129271e25613d3eb` (`fix(a11y): label sign-in auxiliary links`), parent `3fc8a5bf5650202f71ffdbfdc06196ed1898211a`.
+- **Pending stack vs origin/main**: `85ae6778c5f98b36025cbbe5cf99d0a53790e3e1` + `3fc8a5bf5650202f71ffdbfdc06196ed1898211a` + `89b46a4f1a99ae73619f78cb129271e25613d3eb`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-204036-to-claude-sign-in-auxiliary-a11y.md`
+  - `agents/codex/outbox/preview/20260606-204036-sign-in-auxiliary-a11y.html`
+
+[Sign-in auxiliary link a11y implementation / 26.06.06 / 20:40:36]
+#comm #codex #user #2nd-B #ui-ux #a11y #sign-in #auth #links #worktree #implementation
+- Fixed sign-in auxiliary-control semantics without changing auth handlers, OAuth flow, password reset alert copy, route targets, visible text, form behavior, or layout.
+- Added static A11y guard coverage for sign-in auxiliary controls.
+- Submitted Claude review-gate packet with code locations, validation results, stack state, and local commit hash.
+
+## Previous (XP progress bar a11y implementation)
 
 - **Task**: XP progress bar a11y implementation.
 - **src**: autonomous loop follow-up; `XpBar` progressbar value semantics.
