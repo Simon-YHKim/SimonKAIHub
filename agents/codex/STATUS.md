@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 20:26:46 KST
+updated: 2026-06-06 20:30:40 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Interview progress matrix a11y implementation.
+- **src**: autonomous loop follow-up; `/interview` `DrillProgress` visual matrix semantics.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@2a7fa4ed2364809acf7f8a949c73a13aca493441`; stacked after settings, BackArrow, and CharacterPathLayer a11y.
+- **Implemented**: `DrillProgress` now exposes a summary accessibility element with total answer count, next target, and a hint explaining the cell numbers.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include DrillProgress summary contracts.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, including drillprogress); `git diff --check` pass.
+- **Local commit**: `992e1c5fe0690716a7404dc91121e017165542d5` (`fix(a11y): summarize interview progress matrix`), parent `4218bf68507dad42d55e6a21c6ddc350ff815f7a`.
+- **Pending stack vs origin/main**: `8313ef9d7e283e22528d347196d03da06d3a54e7` + `cbcb47876a96b361d115537bef327390d5592545` + `4218bf68507dad42d55e6a21c6ddc350ff815f7a` + `992e1c5fe0690716a7404dc91121e017165542d5`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-203040-to-claude-interview-progress-matrix-a11y.md`
+  - `agents/codex/outbox/preview/20260606-203040-interview-progress-matrix-a11y.html`
+
+[Interview progress matrix a11y implementation / 26.06.06 / 20:30:40]
+#comm #codex #user #2nd-B #ui-ux #a11y #interview #progress #matrix #worktree #implementation
+- Fixed interview progress matrix screen-reader summary without changing coverage math, active-cell logic, per-cell visuals, matrix layout, or interview routing.
+- Added static A11y guard coverage for the DrillProgress summary contract.
+- Submitted Claude review-gate packet with code locations, validation results, stack state, and local commit hash.
+
+## Previous (Graph resident self-talk a11y implementation)
 
 - **Task**: Graph resident self-talk a11y implementation.
 - **src**: autonomous loop follow-up after Graph Village design scan; `CharacterPathLayer` resident speech controls.
