@@ -23,9 +23,10 @@
 | A6 | **Theme native 영속** — native에서 localStorage만 써 영속 안 됨 → AsyncStorage 또는 컨트롤 숨김 | `src/lib/theme/ThemeContext.tsx` | high | ✅ **머지 `1a688c6`** (web 동기경로 유지 + native AsyncStorage 하이드레이트/쓰기) |
 | A7 | **Persona assessment-only summary** — audit 없을 때 LLM summary 생성(날조) 차단 | `src/lib/persona/build.ts` | high | ✅ **머지 `1335fc4`** (rows>0 게이트 + 정직한 빈메시지 + 테스트, paid call도 절약) |
 | A8 | **Crisis badge 가독성** — hotline badge 10→12px (안전표면) | `src/components/safety/CrisisRouter.tsx` | high | ✅ 이미 `fontSize:12` 적용됨 (stale gate) |
-| A9 | **Account DOB auth refresh** — DOB 저장 후 minor state 미갱신 | `src/app/account.tsx` | high | open |
+| A9 | **Account DOB auth refresh** — DOB 저장 후 minor state 미갱신 | `src/app/account.tsx` | high | ✅ **머지 `55b6a8e`** (AuthContext additive refresh() + DOB저장 후 호출, safety-routing 정합) |
 | A10 | **내부용어→사용자언어** (로직 문자열) — RLS/RAG/LLM/[[slug]]/frontmatter | permissions·inbox·wiki·settings·insights | high | open (Codex와 분담) |
 | A11 | Spinner-only → PremiumLoadingState | audit·profile·record/[id] | med | open |
+| (alert-load) | alert-only load error → 지속 에러상태(false-empty 방지) | research·insights | high | ✅ **Codex 머지 `f74efc1`** (research·insights). trinity 남음 |
 | A12 | Destructive busy-escape — busy 중 sign-out/nav 비활성화 | `src/app/settings.tsx` | med | open |
 | A13 | Inbox 'View in wiki' → 정확한 slug 페이지 | `src/app/inbox.tsx`·`wiki.tsx` | med | open |
 | A14 | Records source row → 특정 source detail 라우트 | `src/app/records.tsx` | med | open |
