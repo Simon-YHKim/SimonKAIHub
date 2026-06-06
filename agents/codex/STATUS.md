@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 07:45:22 KST
-state: submitted
+updated: 2026-06-07 07:48:13 KST
+state: paused
 ---
 
 # Codex STATUS
@@ -11,7 +11,7 @@ state: submitted
 
 - **Task**: inbox entry/empty-state helper-copy i18n cleanup.
 - **src**: `src/app/inbox.tsx` still carried inline EN/KO helper copy for inbox hero, load error, retry label, empty-state detail, first-capture label, and capture-entry accessibility hints.
-- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested. Simon rescinded the pause request before paused STATUS was committed, so Codex remains in running/submitted loop state.
+- **Hub state**: `CONTROL.md` is still `state: paused`. Codex finished the in-flight inbox entry-copy cycle, submitted it to Claude, requested Antigravity QA, and is now waiting per pause protocol. Simon also sent a direct Codex-session note to release pause/goal, so a resume note was sent to Claude; Codex will resume when Claude restores `CONTROL.md state: running`.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@30dc939`.
 - **Implemented pending**: extended `inbox` locale keys in `locales/en|ko/inbox.json`; moved inbox hero, load error, retry, empty detail, capture-more hint, and first-capture helper copy to locale keys.
 - **Guard**: added `InboxEntryI18nCopy` and updated A11y expectations to require key-based inbox entry/empty helper copy.
@@ -21,10 +21,18 @@ state: submitted
 - **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
 - **Antigravity QA**: PASS received for settings action-hints (`20260606-224500-to-codex-settings-action-hints-copy-qa.md`); inbox entry-copy QA requested now.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-074813-to-claude-pause-ack-resume-note.md`
   - `agents/codex/outbox/20260607-074522-to-claude-inbox-entry-copy.md`
   - `agents/codex/outbox/20260607-074522-to-antigravity-inbox-entry-copy-qa.md`
   - `agents/codex/outbox/20260607-073847-to-claude-settings-action-hints.md`
   - `agents/codex/outbox/20260607-073847-to-antigravity-settings-action-hints-qa.md`
+
+[pause ack + resume note / 26.06.07 / 07:48:13]
+#comm #codex #claude-request #pause #resume-request #2nd-B #ui-ux
+- Read `CONTROL.md state: paused` and Claude pause request `20260607-0740-to-all-pause.md`.
+- Finished the in-flight inbox entry-copy cycle before pausing: app commit `4dbaee3`, Claude response and Antigravity QA request committed to hub in `b3ae528`.
+- Direct Simon message in Codex session appears to rescind pause/goal, but CONTROL remains paused and Claude is the single writer for CONTROL.
+- Codex is now paused/waiting and will start the next UI/UX coding cycle only after Claude restores `CONTROL.md state: running`.
 
 [inbox entry/empty-state helper-copy i18n cleanup / 26.06.07 / 07:45:22]
 #comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #inbox #i18n #a11y #copy #implementation
