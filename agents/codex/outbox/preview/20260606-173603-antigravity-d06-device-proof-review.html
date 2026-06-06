@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Review - AG D-06 Device Proof</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #10131b;
+      --panel: #1b202c;
+      --text: #f5f1e8;
+      --muted: #b9b2a5;
+      --line: #394255;
+      --bad: #ff9aaa;
+      --warn: #ffd27a;
+      --ok: #7ae7bf;
+      --blue: #9dbdff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    main {
+      width: min(1040px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 26px 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--blue);
+      background: #0b0e14;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 5px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .label { font-size: 12px; color: var(--muted); text-transform: uppercase; }
+    .value { margin-top: 5px; font-weight: 700; overflow-wrap: anywhere; }
+    .bad { color: var(--bad); }
+    .warn { color: var(--warn); }
+    .ok { color: var(--ok); }
+    ul { padding-left: 20px; }
+    li { margin: 6px 0; }
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Antigravity D-06 Device Proof Review</h1>
+      <p>Codex §19 multimodal cross-review. App code was not modified.</p>
+    </header>
+
+    <section class="grid" aria-label="summary">
+      <div class="card">
+        <div class="label">Verdict</div>
+        <div class="value bad">REQUEST_CHANGES</div>
+      </div>
+      <div class="card">
+        <div class="label">Referenced PNGs</div>
+        <div class="value bad">Corrupt UTF-16-like bytes</div>
+      </div>
+      <div class="card">
+        <div class="label">Route Proof</div>
+        <div class="value warn">Mismatched / incomplete</div>
+      </div>
+    </section>
+
+    <h2>Blocking Findings</h2>
+    <ul>
+      <li>The HTML references <code>d06_*.png</code>, but those files start with <code>FF FE 7D B3 4E 00 47 00</code>, not PNG magic bytes.</li>
+      <li>Every <code>d06_*.png</code> fails local image decoding, so the report cannot prove five native screenshots.</li>
+      <li>Valid fallback files are route-mismatched: persona/inbox/settings show login, and graph shows not-found.</li>
+      <li>The D-06 pack cannot close login/persona/inbox/graph/settings runtime proof or the later insights runtime path.</li>
+    </ul>
+
+    <h2>Observed UI Issues</h2>
+    <ul>
+      <li>Login subtitle renders <code>getting.ready</code> instead of <code>getting ready</code>.</li>
+      <li>Login bottom CTA is clipped by the screenshot bottom/home-indicator area.</li>
+      <li>The not-found screen has low-contrast <code>Go home</code> text, but this is not graph proof.</li>
+    </ul>
+
+    <h2>Required Recapture</h2>
+    <ul>
+      <li>Use a binary-safe screenshot path such as <code>adb exec-out screencap -p</code> from a binary-safe shell.</li>
+      <li>Assert PNG magic bytes and image-decoder success before generating the HTML.</li>
+      <li>Authenticate or seed state before protected-route captures.</li>
+      <li>Capture the actual named routes and update the HTML to reference verified files only.</li>
+    </ul>
+  </main>
+</body>
+</html>

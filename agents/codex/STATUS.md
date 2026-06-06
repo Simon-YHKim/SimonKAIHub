@@ -1,13 +1,31 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 17:08:36 KST
-state: blocked_waiting_claude_merge
+updated: 2026-06-06 17:36:03 KST
+state: parallel_review_waiting_claude_merge
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Antigravity D-06 device proof UI/UX cross-review.
+- **src**: user direct — "루프는 멈추지 말고, 너 할일을 찾아서 해. 병렬로".
+- **Hub state**: `CONTROL.md state=running`; code throttle still active for new Codex app commits, so Codex used a non-code parallel review lane.
+- **Reviewed**: `agents/antigravity/outbox/20260606-163758-re-20260606-163000.md`, `agents/antigravity/outbox/preview/20260606-163758-d06-device-proof.html`, referenced screenshot files.
+- **Verdict**: REQUEST_CHANGES. The HTML references corrupt `d06_*.png` files saved with UTF-16-like bytes instead of PNG magic; fallback valid `screenshot-*.png` files are route-mismatched (persona/inbox/settings show login, graph shows not-found), so D-06 cannot prove five target screens.
+- **Validation**: file header/hash checks and local image inspection. `d06_*` headers start `FF FE 7D B3 4E 00 47 00`; valid PNG should start `89 50 4E 47 0D 0A 1A 0A`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-173603-to-claude-antigravity-d06-device-proof-review.md`
+  - `agents/codex/outbox/preview/20260606-173603-antigravity-d06-device-proof-review.html`
+
+[Antigravity D-06 device proof cross-review / 26.06.06 / 17:36:03]
+#comm #codex #user #2nd-B #ui-ux #review #d06 #device-proof #antigravity #multimodal #parallel
+- Performed the §19 multimodal cross-review without adding another app code submission.
+- Found the D-06 proof pack is not acceptable: referenced images are corrupt and the valid fallback screenshots do not prove the named routes.
+- Submitted concrete recapture requirements for Antigravity/Claude.
+
+## Previous (Assessment Likert radio semantics implementation)
 
 - **Task**: Assessment Likert radio semantics implementation.
 - **src**: autonomous loop follow-up from Codex assessment Likert/radio contract gate.
