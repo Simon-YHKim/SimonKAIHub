@@ -25,7 +25,7 @@
 | A8 | **Crisis badge 가독성** — hotline badge 10→12px (안전표면) | `src/components/safety/CrisisRouter.tsx` | high | ✅ 이미 `fontSize:12` 적용됨 (stale gate) |
 | A9 | **Account DOB auth refresh** — DOB 저장 후 minor state 미갱신 | `src/app/account.tsx` | high | ✅ **머지 `55b6a8e`** (AuthContext additive refresh() + DOB저장 후 호출, safety-routing 정합) |
 | A10 | **내부용어→사용자언어** (로직 문자열) — RLS/RAG/LLM/[[slug]]/frontmatter | permissions·inbox·wiki·settings·insights | high | open (Codex와 분담) |
-| A11 | Spinner-only → PremiumLoadingState | audit·profile·record/[id] | med | open |
+| A11 | Spinner-only → PremiumLoadingState | audit·profile·record/[id] | med | ✅ **머지 `0dfa75a`** (라우트 로딩 3화면, profile 인라인 spinner는 적정 유지) |
 | (alert-load) | alert-only load error → 지속 에러상태(false-empty 방지) | research·insights | high | ✅ **Codex 머지 `f74efc1`** (research·insights). trinity 남음 |
 | A12 | Destructive busy-escape — busy 중 sign-out/nav 비활성화 | `src/app/settings.tsx` | med | ✅ **머지 `db31d6f`** (Sign out busy 가드 + 지속 배너 screen-reader 알림) |
 | A13 | Inbox 'View in wiki' → 정확한 slug 페이지 | `src/app/inbox.tsx`·`wiki.tsx` | med | open |
@@ -44,7 +44,7 @@
 - **i18n 번들 이관** (915 inline locale 분기 → 번들) ← 이미 redirect(20260606-212300). 신뢰·법무 카피 우선.
 - 카피 jargon: ✅ **capture-input `707387e`** + ✅ **jarvis-citation + manual-onboarding `20794de`**(Codex). 남은: theme-contract(Light 실제구현)·pixel-font→readable.
 - 공유 컴포넌트: ✅ **PreferenceToggle 머지 `d741f5a`**(privacy·formats 토글 통합). 남은: LikertScaleQuestion·ExternalLinkButton/CopyAction·ActionChip primitives.
-- **feedback-alert-contract** (61 Alert.alert → PremiumToast/Modal) — 🟢 진행(assessment `20794de` + import/esm `19adcf9` + wiki export `9055cae`), 나머지 화면 계속.
+- **feedback-alert-contract** (61 Alert.alert → PremiumToast/Modal) — 🟢 진행(assessment `20794de` + import/esm `19adcf9` + wiki export `9055cae` + wiki action/sign-in `a9d19ad`), 나머지 화면 계속.
 - 공유 컴포넌트: ✅ PreferenceToggle `d741f5a` + ✅ consent checkbox `9055cae`(Codex). 남은: LikertScaleQuestion·ExternalLinkButton/CopyAction.
 - formats dead CTA(mock)·settings crew-density phantom·route-ia-numbering·design-token drift(74 hex/rgba).
 - reduced-motion·contrast-ledger(Light palette).
