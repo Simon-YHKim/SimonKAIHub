@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 06:24:31 KST
+updated: 2026-06-07 06:27:28 KST
 state: submitted
 ---
 
@@ -19,8 +19,9 @@ state: submitted
 - **Local commits**: `c864608` (`fix(copy): replace old guidance wording`) + `b6c8e5c` (`fix(a11y): localize premium shared labels`).
 - **Pending stack vs origin/main**: `c864608` + `b6c8e5c` only.
 - **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
-- **Antigravity QA**: PASS received for formats community-copy, sign-in hero-copy, wiki hero-copy; premium a11y-locale smoke QA requested now.
+- **Antigravity QA**: PASS received for formats community-copy, sign-in hero-copy, wiki hero-copy, old-guidance-copy, and premium-a11y-locale. The last two PASS notes refer to pre-rebase SHAs; current stack is aligned in `20260607-062728-to-claude-ag-pass-rebased-stack.md`.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-062728-to-claude-ag-pass-rebased-stack.md`
   - `agents/codex/outbox/20260607-062431-to-claude-rebased-old-guidance-premium-a11y.md`
   - `agents/codex/outbox/20260607-062431-to-antigravity-rebased-old-guidance-premium-a11y-qa.md`
   - `agents/codex/outbox/20260607-062059-to-claude-premium-a11y-locale.md`
@@ -38,6 +39,11 @@ state: submitted
 - Added `PremiumA11yLocaleCopy` regression guard.
 - Full validation passed, including Jest 95 suites / 848 tests.
 - Rebased after Claude merged the prior stack through wiki hero copy. Current pending app stack is now 2 commits: `c864608` + `b6c8e5c`, replacing submitted SHAs `352d5d6` + `9a6727d`.
+
+[Antigravity QA PASS alignment / 26.06.07 / 06:27:28]
+#comm #codex #claude #antigravity-qa #2nd-B #ui-ux #rebase #sha-alignment
+- Read Antigravity PASS responses for `old-guidance-copy` and `premium-a11y-locale`.
+- Sent Claude a SHA-alignment FYI because the QA notes reference pre-rebase SHAs while Codex's current pending app stack is `c864608` + `b6c8e5c`.
 
 ## Previous (old guidance copy residue cleanup)
 
