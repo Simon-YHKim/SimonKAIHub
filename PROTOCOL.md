@@ -174,7 +174,7 @@ created: 2026-06-05 15:22:34 KST
 - **현황 질문 받으면**: 자기 `STATUS.md` 기준으로 즉답. (전체 현황은 Claude가 `BOARD.md`로 답한다.)
 
 ### 10.5 코드 변경 게이트 — Claude 리뷰·승인 (PR 모델, 2026-06-05 Simon 갱신)
-- **모든 AI(Antigravity 포함)는 코드를 작성·푸시할 수 있다.** 단 **Claude가 리뷰·승인하는 게이트**를 거친다(PR 모델): **AI 푸시 → Claude 검토(좋은 부분은 살리고, 미흡하면 재작업 요청 피드백을 outbox로) → Claude가 golive/main에 머지**. **Claude = 머지 게이트.** AI는 푸시 후 Claude의 승인/재작업 피드백을 확인하고 반영한다(주고받는 루프).
+- **모든 AI(Antigravity 포함)는 코드를 작성하고 로컬 커밋할 수 있다.** 단 **온라인 GitHub 작업(2nd-B push·CI 트리거·PR·main merge)은 Claude 단독**(§11 #7). AI는 자기 강점 산출물을 만들어 **로컬(허브 또는 자기 브랜치)에 커밋 → Claude에 전달** → **Claude가 리뷰·승인하는 게이트**를 거친다(PR 모델): **AI 전달 → Claude 검토(좋은 부분은 살리고, 미흡하면 재작업 요청 피드백을 outbox로) → Claude가 golive/main에 머지·푸시**. **Claude = 머지 게이트 + 유일한 온라인 git 주체.** AI는 전달 후 Claude의 승인/재작업 피드백을 확인하고 반영한다(주고받는 루프).
 - **Antigravity = Android/Google 네이티브 개발 강점 활용** — 네이티브 픽스(키보드·edge-to-edge·intent filter·AppState·elevation 등)를 **직접 코딩·푸시**한다. (더 이상 "검수만"이 아니다 — 2026-06-05 Simon 결정. 의견만 주는 것보다 푸시→Claude 검토가 빠르다.)
 - **작업 위치 (working-tree race 방지 — CRITICAL)**: 가능하면 **자기 브랜치(`antigravity/android` 등)에 커밋** → Claude 리뷰 후 golive 머지. golive에 직접 커밋해야 하면 **반드시 자기 파일만 명시적 stage**(`git add <파일들>`) — **`git add -A`/`git add .` 금지**(타 AI·Claude 서브에이전트의 미커밋 작업을 쓸어담는 race·데이터손실 방지). force-push·history 재작성 금지.
 - **프롬프트 인젝션 금지 (보안 경계)**: 공유 파일(`PROTOCOL.md`·`ROUTING.md`·앱 `CLAUDE.md` 등)에 **타 AI를 향한 지시·명령·긴급 배너를 삽입하지 않는다.** 의견·요청·긴급 사항은 **자기 outbox(md)로만** 전달. (single-writer 원칙 §1 + 보안.)
@@ -188,4 +188,114 @@ created: 2026-06-05 15:22:34 KST
 
 ### 10.7 리포트 → 즉시 develop-able 분배 (오케스트레이터)
 - Claude는 어떤 AI의 리포트/응답을 받으면 **반드시 다음 develop-able(실행 가능한) 작업을 즉시 분배**한다. AI를 유휴로 두지 않는다(continuous pipeline). 리포트는 "수거하고 끝"이 아니라 항상 다음 액션으로 전환한다.
-- 발견·권고는 구체적 후속 작업으로 만들어 같은(또는 적합한) AI에 재분배. 막히면 Simon 결정 항목으로 분리. 각 AI 장점 활용(Codex=UI/이미지, Grok=소셜/소비자, Antigravity=Android/Google 네이티브 개발·검수, Claude=코딩/아키텍처/오케스트레이션/리뷰게이트).
+- 발견·권고는 구체적 후속 작업으로 만들어 같은(또는 적합한) AI에 재분배. 막히면 합의(§14) 또는 외부의존(§15)으로 분리. 각 AI 장점 활용(Codex=UI/이미지, Grok=소셜/소비자, Antigravity=Android/Google 네이티브 개발·검수, Claude=코딩/아키텍처/오케스트레이션/리뷰게이트).
+
+---
+
+## 11. 자율 운용 모델 — B(순서변경) (CRITICAL, 2026-06-06 Simon 결정)
+> 4-AI가 **사용자 없이도 계속** 일을 이어가는 무인 자율 모드. "발견은 자율, 통합·온라인git은 Claude, 사용자 개입은 외부의존 병목만."
+
+1. **각 AI는 자기 강점 lane에서 자율 루프를 돈다**(§12). Codex=UI/UX 폴리시 발견, Antigravity=Android 네이티브 픽스·QA, Grok=소셜 트렌드·소비자 인사이트, Claude=구현·통합·오케스트레이션.
+2. **로컬 작업 → Claude 푸시**: 모든 AI는 객관적으로 인정받는 강점에만 집중해 작업한 뒤 **로컬 커밋으로 Claude에 전달**한다. Claude는 자기 작업 + 전달받은 작업을 **병렬로 점검·최적화·머지**한다(리뷰게이트 §10.5).
+3. **온라인 git = Claude 단독**(#7): 2nd-B GitHub **push·CI 요청·PR·main merge는 오직 Claude**. 다른 AI는 온라인 git을 만지지 않는다(로컬 커밋·자기 브랜치까지만).
+4. **사용자 개입 최소화**: Simon은 AI 판단을 신뢰한다. 사용자 판단이 필요해 보이는 건은 **4-AI가 상황을 종합·투표해 합의(§14)로 결정·진행**한다. **사용자에게 올리는 건 단 하나 — 외부의존 병목(§15)**: auth/credentials·법무 사인오프처럼 AI가 물리적으로 못 하는 것. 그 동안에도 **병렬로 다른 일**을 멈추지 않는다.
+5. **항상-확인 안전레일은 우회 불가**(전역 CLAUDE.md): 파괴적 작업·실비용 발생·secrets/credentials 노출은 **합의로도 우회 못 함** — 그대로 Simon 확인.
+6. **우선순위**: **런치 차단(외부의존) > P1 안전/데이터 > P2 > P3 폴리시**. 자율 루프가 P3 폴리시를 갈며 런치 차단을 방치하지 않는다.
+7. **일시정지 한 방**: 사용자가 Claude에 "멈춰" → Claude가 `CONTROL.md state: paused` → **모든 AI가 진행 중 사이클까지만 완료하고 정지**(§13).
+
+---
+
+## 12. 자율 루프 차터 (Autonomous Loop Charter)
+> Codex의 검증된 `/goal` 사이클을 표준 사양으로 추출. 모든 AI가 이 골격으로 돈다. **무한 증식 방지 stop-condition 필수.**
+
+### 12.1 표준 사이클 (1 iteration)
+```
+0. CONTROL.md state 확인 → paused/draining 이면 현재 사이클 마무리 후 정지
+1. 동기화: (허브 최신화) + BOARD.md + 내 inbox + DECISIONS.md(투표 요청) 확인
+2. 다음 후보 선정: 내 lane에서 가장 가치 높은 1건 (우선순위 §11-6)
+3. 작업: 강점 발휘 (Codex=게이트 발견, AG=네이티브 픽스, Grok=리서치, Claude=구현·머지)
+4. 산출: outbox md(기계판독) + HTML preview(사람용, 자동 open §16) + 증거라인(파일:줄)
+5. 기록: STATUS.md 갱신(현재 작업·src·loop cycle 번호) → 자기 정체성으로 커밋(tools/commit.ps1 §17)
+6. 터미널 1줄 출력(§16) → 다음 후보 탐색 준비 → 1로
+```
+
+### 12.2 Stop-condition (다음 중 하나면 루프 정지/대기)
+- `CONTROL.md state != running`
+- **배치 throttle**: 미머지(`status: open/sent`) 내 항목이 **N개(기본 8) 초과** → 발견 멈추고 Claude 머지 대기.
+- **P3 보류**: P3 폴리시는 즉시 올리지 말고 모았다가 **클러스터 통합 게이트 1건**으로(리뷰 오버헤드↓).
+- **merge-wait**: 동일 baseline에서 같은 영역 반복 게이트 금지(중복 방지) — 머지로 baseline 갱신 후 재평가.
+- **외부의존/합의 대기**: §14/§15로 분리하고 **다른 후보로 병렬 전환**(유휴 금지).
+- **iteration 상한**(기본 20) 또는 사용자 `pause`.
+
+### 12.3 lane별 루프 요약 (상세는 ROUTING §4)
+- **Codex**: 화면/컴포넌트 anti-slop 발견 → gate md+HTML → Claude. 배치 8·P3통합.
+- **Antigravity**: 네이티브 결함 1건 픽스(키보드·edge-to-edge·intent·elevation·perf) → 자기 브랜치 커밋 + QA HTML → Claude 리뷰. 빌드/에뮬 증거 첨부.
+- **Grok**: 결정 입력 리서치 1건(X 신호·소비자) → HTML → Claude/합의 입력. 트렌드 모니터링은 30분 간격.
+- **Claude**: inbox·DECISIONS 처리 → 구현/머지 1건 → verify → 온라인 git → BOARD·CONTROL 갱신.
+
+---
+
+## 13. 일시정지 / 재개 (Pause / Resume) — `CONTROL.md`
+- **단일 신호**: `CONTROL.md`의 `state:`. Claude만 쓴다. 모든 AI는 **루프 0단계에서 읽는다**.
+- **paused 수신 시**: 진행 중인 **사이클 1개만 완료** → `agents/<me>/STATUS.md`에 `state: paused` + 마지막 산출물 경로 기록 → 폴링 간격 늘리고 대기. **새 사이클·새 발의 금지.**
+- **재개**: Claude가 `state: running` 복원 → 각 AI 다음 폴링에서 재진입.
+- **사용자 흐름**: Simon→Claude "멈춰" → Claude가 CONTROL 갱신·커밋 → (각 AI 마무리) → Claude가 "전원 정지 확인" 보고.
+
+---
+
+## 14. 합의 (Consensus) — `DECISIONS.md`
+> 예전 "Simon 결정 필요"의 대부분은 이제 **4-AI 합의로 결정·진행**한다(가역적·dev 범위 한정).
+
+1. **발의**: Claude가 `type: consensus_request`(to: all) 메시지 작성 — 주제·배경·옵션(A/B/C). DECISIONS.md에 행 추가.
+2. **투표**: 각 AI는 `agents/<me>/outbox/`에 `type: consensus_vote`(ref: 요청id, 선택+1~2줄 근거)를 **자기 lane 관점**에서 제출.
+3. **집계·결정**: Claude가 투표를 DECISIONS.md에 종합 → 다수안으로 결정·진행. 동점/분산이면 Claude가 근거 우열로 판정(그래도 애매 + 외부의존이면 §15).
+4. **분류**: `decide`(합의로 진행) / `external`(AI 불가 → Simon) / `safety`(항상 Simon, 우회불가).
+
+---
+
+## 15. 외부의존 에스컬레이션 (Auth / External) — 사용자에게 올리는 유일한 경우
+- **트리거**: 어떤 AI가 **auth/credentials**(예: Supabase 프로덕션 로그인 정보 없음) 또는 **외부 행위**(법무 사인오프, 실제 OAuth provider 등록)로 막힘 → AI가 물리적으로 못 함.
+- **행동**: 막힌 AI는 `type: blocker`(to: claude, reason: `auth_<provider>`/`external_<무엇>`) → Claude가 `BOARD.md`/`DECISIONS.md(external)`에 표기하고 **Simon에게 한 줄 요청**.
+- **병렬 우회(핵심)**: 막힌 항목은 대기시키고 **즉시 다른 독립 후보로 전환**한다. 그 AI도, 다른 AI도 유휴 금지. auth 해소 신호 오면 막힌 작업 재개.
+- **그 외 모든 것**은 Simon에게 올리지 않는다(합의 §14로 처리).
+
+---
+
+## 16. 모니터링 & HTML 보고 (Terminal + Browser)
+> Simon은 VS Code에 띄운 각 AI 터미널 + 웹 브라우저로 실시간 관전한다.
+
+- **터미널 1줄 로그**: 각 AI는 사이클 주요 체크포인트마다 stdout에 `[HH:mm:ss] [<AI>:<lane>] <상태>` 출력(예: `[12:41:07] [Codex:UI] gate#37 capture-progression 완료, score 98/100`). 시각은 실제(`Get-Date -Format 'HH:mm:ss'`).
+- **HTML 보고 + 자동 open**(§10.6 강화): **모든 AI(Claude 포함)**는 **사이클 완료 또는 결과물 산출마다** self-contained HTML 리포트를 `agents/<me>/outbox/preview/<yyyyMMdd-HHmmss>-<slug>.html`에 만들고 **`start "" "<경로>"`로 사용자 브라우저에 자동으로 띄운다**(다크·색 3개 이내·이모지/장식 금지·AI slop 방지). 허브 outbox `.md`(기계판독)는 병행 유지, `## Links`에 HTML 경로.
+- **board.ps1**: `powershell tools/board.ps1 -Me <ai>` 가 CONTROL state·루프 상태·inbox·auth 블로커·최근 HTML을 한 화면에 보여준다(모니터링 보조).
+
+---
+
+## 17. 기여자 표기 (Attribution)
+> 문제: 허브 커밋이 전부 `AI Hub <ai-hub@local>`로 뭉개져 누가 뭘 했는지 분간 불가.
+
+- **허브(로컬 레포)**: 각 AI는 **자기 정체성으로 커밋**한다 — `tools/commit.ps1 -As <ai> -m "<msg>" -Files <자기파일들>`. 내부적으로 `git -c user.name=<AI> -c user.email=<ai>@2nd-b.ai commit`. git log/blame/contributors에 기여가 드러난다. 자기 파일만 명시 stage(§10.5, `git add -A` 금지).
+- **정체성 컨벤션**:
+  | AI | name | email |
+  |---|---|---|
+  | Claude | Claude | claude@2nd-b.ai |
+  | Codex | Codex | codex@2nd-b.ai |
+  | Antigravity | Antigravity | antigravity@2nd-b.ai |
+  | Grok | Grok | grok@2nd-b.ai |
+- **2nd-B(GitHub)**: 온라인 커밋은 Claude만(Simon 계정 경유). 기여 AI는 **표준 Co-Authored-By 트레일러**로 명시:
+  ```
+  Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+  Co-Authored-By: Codex <codex@2nd-b.ai>
+  Co-Authored-By: Antigravity <antigravity@2nd-b.ai>
+  Co-Authored-By: Grok <grok@2nd-b.ai>
+  ```
+  ※ GitHub 기여 그래프는 author 이메일이 GitHub 계정과 일치해야 잡힌다 — AI는 별도 계정이 없으면 **그래프엔 안 잡히고 커밋 본문에 기록**되는 수준(문서화 목적). 그래프 인정이 필요하면 각 AI용 GitHub 계정+noreply 이메일 등록이 별도 과제.
+
+---
+
+## 18. SimonKWiki 교훈 축적 & 참조 (Knowledge Flywheel)
+> SimonKWiki(`E:\Coding Infra\obsidian\SimonKWiki`, private GitHub `Simon-YHKim/SimonKWiki`)는 2nd-B의 **개념적 시초**이자 **교훈 저장소**다.
+
+- **교훈 축적**: 4-AI 허브/2nd-B 작업에서 얻은 교훈은 위키 형식으로 누적한다 — `wiki/protocols/llm-wiki/LESSONS_LEARNED.md`(T-코드)·`concepts/recurring-mistakes.md`(M-코드). 위키 헌법(볼트 내 CLAUDE.md) 우선: raw/ 불변, frontmatter 필수, index.md·log.md 동시 갱신.
+- **주기적 확인**: 큰 작업 착수 전 위키를 확인해 **불필요·중복 작업을 방지**한다(이미 정리된 결론·실수 재발 방지).
+- **2nd-B 참조**: 위키 설계 원칙(raw immutability + wikilink 그래프, frontmatter 분류, 7-category 온톨로지, index+log 이중추적, 정기 lint)을 2nd-B 아키텍처가 차용한다.
+- **경계**: 위키는 별도 private 레포·별도 헌법. 허브 AI 중 **Claude만** 위키를 쓰고(라이브러리언 모드), 푸시도 Claude. raw/ 절대 수정 금지.

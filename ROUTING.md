@@ -59,3 +59,31 @@
 7. Claude: findings 반영 → BOARD done → 사용자 보고
 
 > **Grok 끼는 지점**: 새 기능/디자인/문구를 **추가·변경할지 결정하는 단계**(위 1~2 사이)에서 Claude→Grok에 "X·글로벌 소비자 반응" 리서치를 요청 → 그 인사이트로 Codex 디자인·Claude 구현 방향을 잡는다. 즉 Grok은 **만들기 전 의사결정 입력**.
+
+---
+
+## 4. 자율 작업 영역 (Autonomous Lane Loops) — PROTOCOL §12
+
+> 무인 자율 모드에서 각 AI가 **스스로 다음 후보를 찾아 도는** 루프. CONTROL.md `running` 동안만, charter stop-condition(§12.2) 준수.
+
+### 🟦 Claude — 통합 루프 (integration loop)
+- **사이클**: inbox·DECISIONS 처리 → 우선순위 최상위 1건 구현/머지 → `npm run verify` → 온라인 git(2nd-B push·PR·merge) → BOARD·CONTROL·DECISIONS 갱신 → 사이클 HTML 보고.
+- **역할 고유**: 유일한 온라인 git 주체 + 머지 게이트 + 합의 집계자 + Simon 대면.
+- **stop**: 사용자 pause / 미머지 백로그 없음(소비 완료) / 외부의존만 남음.
+
+### 🟨 Codex — anti-slop 발견 루프
+- **사이클**: 화면/컴포넌트 1개 anti-slop 점검 → gate md + HTML preview(증거 파일:줄) → Claude.
+- **charter**: 미머지 게이트 **8개 초과 시 발견 중지**(머지 대기). **P3는 통합 게이트 1건으로 모아서**. 동일 baseline 중복 영역 금지.
+- **Codex↔AG 피드백**: AG가 QA에서 UI/디자인 결함을 올리면 Codex로 재라우팅(경유 Claude).
+
+### 🟩 Antigravity — 네이티브 픽스·QA 루프
+- **사이클**: 네이티브 결함 1건(키보드·edge-to-edge·intent filter·AppState·elevation·perf/크래시) **직접 코딩** → 자기 브랜치(`antigravity/*`) 커밋 + 빌드/에뮬(`Pixel_9_Pro_XL`) 증거 + QA HTML → Claude 리뷰게이트.
+- **2026-06-05 변경**: "검수만"이 아니라 **네이티브 개발 직접 수행**(§10.5). 코드는 Claude 리뷰 후 머지.
+- **CLI**: 첫 OAuth 전엔 `gemini -y` 폴백, 인증 후 `agy --dangerously-skip-permissions`.
+
+### 🟪 Grok — 트렌드·결정입력 루프
+- **사이클**: (a) 대기 중 합의/결정에 필요한 소비자·X 리서치 1건 → HTML → 합의(§14) 입력, (b) 유휴 시 30분 간격 2nd-B 도메인(r/introvert·자기기록 앱) X 트렌드 모니터링 → 변화 감지 시 `type: fyi`.
+- **결정입력 타이밍**: Codex 디자인 스펙 작성 후 + Claude 구현 착수 전, 또는 합의 주제 발생 시.
+- **금지**: 코딩·디자인·QA·git merge. 인사이트만.
+
+> **공통**: 막히면 유휴 말고 §15 병렬 우회. 모든 사이클 산출은 HTML 자동 open(§16) + 자기 정체성 커밋(§17).

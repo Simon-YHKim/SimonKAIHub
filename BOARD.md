@@ -1,13 +1,29 @@
 ---
 owner: claude
-note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity는 읽기 전용."
-last-updated: 2026-06-06 04:53:00 KST
+note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity·Grok은 읽기 전용."
+last-updated: 2026-06-06 12:35:00 KST
+run_mode: autonomous-B
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
 
 > 전체 작업의 단일 진실 소스(single source of truth). Claude가 갱신.
-> Codex·Antigravity는 세션 시작 시 이 파일로 현재 상황을 파악한다.
+> Codex·Antigravity·Grok은 세션 시작 시 이 파일로 현재 상황을 파악한다.
+> **런-스테이트는 `CONTROL.md`, 합의는 `DECISIONS.md`.** 운용 모델 = B(자율, PROTOCOL §11).
+
+## 🔄 자율 루프 상태 (Autonomous Loops, PROTOCOL §12)
+| AI | 루프 | 상태 | charter |
+|---|---|---|---|
+| Claude | 통합(구현·머지·온라인git) | running | inbox/DECISIONS 소비 → verify → merge |
+| Codex | anti-slop 발견 | running | 미머지 8건 초과 시 발견중지·P3 통합 |
+| Antigravity | 네이티브 픽스·QA | running | 자기 브랜치 커밋 → Claude 리뷰게이트 |
+| Grok | 트렌드·결정입력 | running | 합의 입력 + 30분 트렌드 모니터 |
+
+## 🔐 외부의존 블로커 (Simon 개입 필요 — §15)
+- (DECISIONS.md `external` 항목 참조: D-03 consent 법무, D-05 social provider 실설정)
+
+## 🤝 합의 진행 (Consensus — DECISIONS.md)
+- D-01~D-07 투표 대기 (펀치리스트 이관). 각 AI는 `type: consensus_vote`로 참여.
 
 ## 🔥 진행 중 (In Progress)
 | ID | 작업 | 담당 | 상태 | 비고 |
@@ -18,6 +34,8 @@ last-updated: 2026-06-06 04:53:00 KST
 | cycle-2 | 2nd-B UX 완벽화 — **머지+라이브** (PR #212, main `d8ba4a0`) | claude | ✅ done | Codex 97. FlatList·NavGraph LOD·raw에러·trust(persona/social/consent) |
 | cycle-1 | 2nd-B 완성형 사이클 — **머지 완료** (PR #211, main `0bfbfa3`) | claude | ✅ done | 보안·trust·route·Android네이티브·a11y |
 | research-2 | deep-research: 사람을 정확히 파악하는 구조(SOKA·informant·표현적글쓰기·ESM·LLM) | claude | 실행중 | → "구조" 설계 culminating 산출 |
+| gate-stream | Codex 100점 UX 게이트 스트림 — 130 발견(open/sent 31, done 19). 신뢰카피·a11y·파괴UX·i18n 4클러스터 | codex→claude | 🟡 백로그 | 생산자-소비자 불균형. throttle charter 적용(미머지 8↑ 발견중지). Claude 통합루프가 우선순위순 소비 |
+| hub-v2 | 4-AI 허브 자율화 개편(B모델) — CONTROL·DECISIONS·PROTOCOL §11~18·board.ps1·commit.ps1·4 activate 프롬프트·기여자표기 | claude | ✅ 구현완료 | 5갈래 조사 워크플로 기반. Simon이 4 프롬프트 각 터미널 입력 예정 |
 
 ## 📥 분배됨 / 대기 (Assigned / Waiting)
 | ID | 작업 | 요청→담당 | 상태 | 메시지 |
@@ -31,7 +49,7 @@ last-updated: 2026-06-06 04:53:00 KST
 |---|---|---|---|
 | Claude | 오케스트레이터 + 코딩 | ✅ active | Claude Code |
 | Codex | 이미지 · UI/UX | ✅ onboarded | codex CLI (헤드리스 OK) |
-| Antigravity | 안드로이드 네이티브 검수 | ✅ onboarded | **gemini CLI**(헤드리스 작동) / agy CLI(헤드리스 hang—첫 인증 필요) / IDE(수동) |
+| Antigravity | Android/Google 네이티브 **개발+검수** | ✅ onboarded | **gemini CLI**(헤드리스 작동) / agy CLI(헤드리스 hang—첫 인증 필요) / IDE(수동) |
 | Grok | X(소셜) 트렌드·소비자 리서치 | ✅ onboarded | grok CLI (`--prompt-file` UTF-8, 헤드리스 작동) |
 
 ## ✅ 완료 (Done) — 최근 10건
@@ -48,14 +66,10 @@ last-updated: 2026-06-06 04:53:00 KST
 | onboard-antig | Antigravity(gemini) 허브 온보딩 + self-commit 실증 | antigravity | 2026-06-05 |
 | boot-0 | 3-AI 통신 프로토콜·구조 생성 | claude | 2026-06-05 |
 
-## 🧱 블로커 / 결정 대기 (Blocked / Decisions) — Simon 결정 필요 (cycle-3 펀치리스트)
-- **`EXPO_PUBLIC_FORCE_TIER="brain"`** — 페이월 전면 개방(테스트 기본값). judge/release 전 `off` 전환 여부 + 소유자. 무감독 변경 안 함.
-- **HIBP 네이티브 폴리필** — 유출비번 검사 네이티브 무력화. expo-crypto 의존성 추가 여부(미성년 비번 정책).
-- **consent 법무 사인오프** — ConsentNotice placeholder + `LEXICON_LAST_LEGAL_REVIEW=null`. + account 삭제 "삭제권" 카피 법무 리뷰.
-- **consent durable 큐** — 현재 in-memory 재시도. 앱 재시작 후 재전송 큐는 감독 패스 권장.
-- **social provider 실설정** — 라이브 Supabase 실등록 provider 확인 → 나머지 `ENABLE_*=false`.
-- **런타임 device 증명** — AG Gradle 8.13 에뮬 빌드 성공, 스크린샷 수급(Codex 100점).
-- **NavGraph perf ×3 + chat quota 타이밍** — 복잡파일/과금. 감독 패스.
+## 🧱 결정 대기 → DECISIONS.md로 이관 (PROTOCOL §14 합의)
+> 예전 "Simon 결정 펀치리스트"는 **합의 원장 `DECISIONS.md` D-01~D-07**로 옮겼다.
+> 대부분은 **4-AI 합의로 결정·진행**(decide), 진짜 외부의존만 Simon(external): D-03 consent 법무·D-05 social provider 실설정.
+> 안전레일(파괴·실비용·secrets)은 합의 우회 불가 — 그대로 Simon 확인.
 
 ## 📌 활성 프로젝트
 | 프로젝트 | 레포 | 경로 | 단계 |
