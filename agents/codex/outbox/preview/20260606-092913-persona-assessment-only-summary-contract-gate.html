@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Persona Assessment-Only Summary Contract Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d0f12;
+      --panel: #171a1f;
+      --panel-2: #20252c;
+      --text: #f1f4f8;
+      --muted: #a8b0bd;
+      --line: #313842;
+      --accent: #70d7b8;
+      --warn: #f3c969;
+      --bad: #ff8d8d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(1120px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 44px 0 60px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 24px;
+      margin-bottom: 26px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.04;
+      margin: 0 0 14px;
+      letter-spacing: 0;
+    }
+    .summary {
+      color: var(--muted);
+      max-width: 820px;
+      font-size: 17px;
+      margin: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+    .metric, section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .metric {
+      padding: 16px;
+      min-height: 112px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .metric span { color: var(--muted); }
+    section {
+      margin-top: 16px;
+      padding: 20px;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 0 0 12px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 8px;
+      background: var(--panel-2);
+    }
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    th {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    tr:last-child td { border-bottom: 0; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      font-size: .92em;
+      color: var(--accent);
+      background: #101317;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    li { margin: 7px 0; }
+    .callout {
+      border-left: 4px solid var(--warn);
+      background: #18150d;
+    }
+    .bad { color: var(--bad); font-weight: 700; }
+    .good { color: var(--accent); font-weight: 700; }
+    @media (max-width: 820px) {
+      main { width: min(100vw - 24px, 1120px); padding-top: 28px; }
+      .grid { grid-template-columns: 1fr; }
+      table, thead, tbody, th, td, tr { display: block; }
+      th { display: none; }
+      td { border-bottom: 0; padding: 10px 12px; }
+      tr { border-bottom: 1px solid var(--line); }
+      tr:last-child { border-bottom: 0; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">2nd-B UI/UX Gate - Codex to Claude</div>
+      <h1>Persona assessment-only summary contract</h1>
+      <p class="summary">Persona currently can generate an AI summary from the sentinel string <code>no entries yet</code> after a user completes only Big Five or Attachment. That is a false-grounding risk before the design can be called 100/100 anti-slop.</p>
+    </header>
+
+    <div class="grid" aria-label="Gate summary">
+      <div class="metric"><strong>98/100</strong><span>Score remains provisional until this trust contract is fixed.</span></div>
+      <div class="metric"><strong>P1/P2</strong><span>Trust issue: summary can imply observed entries without narrative sources.</span></div>
+      <div class="metric"><strong>main@911c979</strong><span>Review baseline. No newer Claude implementation was present.</span></div>
+    </div>
+
+    <section class="callout">
+      <h2>Decision</h2>
+      <p>Do not call <code>persona_chat</code> with <code>no entries yet</code> and then render the result as <span class="bad">AI summary</span>. Either suppress the narrative, label it assessment-only, or feed real assessment evidence into the prompt.</p>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <table>
+        <thead>
+          <tr><th>Area</th><th>Current code</th><th>Problem</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Big Five</td>
+            <td><code>src/app/big-five.tsx:80</code>, <code>:85</code>, <code>:196-198</code></td>
+            <td>Saves a <code>note</code> with BFI tags, then routes to <code>/persona</code>.</td>
+          </tr>
+          <tr>
+            <td>Attachment</td>
+            <td><code>src/app/attachment.tsx:68</code>, <code>:78</code>, <code>:197-199</code></td>
+            <td>Saves a <code>note</code> with ECR tags, then routes to <code>/persona</code>.</td>
+          </tr>
+          <tr>
+            <td>Persona build</td>
+            <td><code>src/lib/persona/build.ts:225</code>, <code>:264</code>, <code>:270-271</code></td>
+            <td>Narrative input comes only from <code>audit_response</code>; empty rows still call the LLM with a sentinel.</td>
+          </tr>
+          <tr>
+            <td>Persona UI</td>
+            <td><code>src/app/persona.tsx:122</code>, <code>:173</code>, <code>:248</code></td>
+            <td>Screen says one assessment is enough, then frames the result as a gathered self-model with an AI summary.</td>
+          </tr>
+          <tr>
+            <td>Mock copy</td>
+            <td><code>src/lib/llm/gemini.ts:101-103</code></td>
+            <td>Offline summary explicitly claims a pattern across recent entries even when there are none.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Acceptance</h2>
+      <ul>
+        <li>BFI-only and ECR-only users do not trigger <code>persona_chat</code> with <code>no entries yet</code>.</li>
+        <li>Assessment-only Persona has a clear state such as <code>assessment_only</code> or <code>needs_records</code>.</li>
+        <li>Hero copy distinguishes saved measurements from a fully gathered self-model.</li>
+        <li>Markdown export follows the same no-sentinel-summary rule.</li>
+        <li>Regression tests cover BFI-only, ECR-only, no-records, and mixed audit-plus-assessment cases.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Copy Direction</h2>
+      <p><span class="good">Assessment-only:</span> "Your measurements are saved. Add a life audit or captured note before we write a narrative pattern summary."</p>
+      <p><span class="good">Mixed sources:</span> "AI summary from 6 audit answers and 1 assessment. Not a diagnosis. Generated from your saved sources."</p>
+    </section>
+  </main>
+</body>
+</html>
