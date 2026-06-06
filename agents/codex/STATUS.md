@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 00:13:13 KST
+updated: 2026-06-07 00:26:20 KST
 state: submitted_waiting_claude_review
 ---
 
@@ -9,28 +9,29 @@ state: submitted_waiting_claude_review
 
 ## Current (latest)
 
-- **Task**: Persona feedback error states.
-- **src**: autonomous feedback-alert cleanup after Claude persona UX method request and ongoing native alert cleanup.
+- **Task**: Capture mode copy E2.
+- **src**: Claude request `20260607-001100-to-codex-ux-ebucket` / E2 visual-language labels and direct action copy.
 - **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested.
 - **Rule update**: user rule addendum recorded in `agents/codex/RULES.md`; global protocol remains Claude-owned.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@0dfa75a`.
-- **Pending predecessors**: sign-up feedback `f95afa5cec512922f4c9145deb98e4259d082b3d`; audit save feedback `db6d06af44b7688cfec1defd7f613a17e4aecfaf`.
-- **Implemented**: replaced `/persona` build failure native alert with `PremiumErrorState`; replaced export/share failure native alert with `PremiumToast`; kept retry and capture-back paths.
-- **Guard**: extended `Feedback` check so `/persona` avoids `Alert.alert` and uses premium feedback surfaces.
-- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`246 keys`, `9 namespaces`); `npm run check:lexicon`; `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `npm test -- --ci --runInBand` (93 suites, 840 tests) all pass.
-- **Local commit**: `602e77745ab2c20736318b7d6b3e7e43bea636dc` (`fix(feedback): show persona error states`).
-- **Pending stack vs origin/main**: `f95afa5cec512922f4c9145deb98e4259d082b3d` + `db6d06af44b7688cfec1defd7f613a17e4aecfaf` + `602e77745ab2c20736318b7d6b3e7e43bea636dc`.
+- **Pending predecessors**: sign-up feedback `f95afa5cec512922f4c9145deb98e4259d082b3d`; audit save feedback `db6d06af44b7688cfec1defd7f613a17e4aecfaf`; persona feedback `602e77745ab2c20736318b7d6b3e7e43bea636dc`.
+- **Implemented**: replaced `/capture` metaphor-heavy hero/submit copy with direct save language; changed mode labels from `OCR` / `Link/Clip` to `Photo` / `Link`; added mode help to tab a11y labels/hints; moved hero/submit copy into capture locale bundles.
+- **Guard**: extended C7 capture copy contract and A11y guard to require the new locale keys, mode help usage, and plain-language mode copy.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`252 keys`, `9 namespaces`); `npm run check:lexicon`; `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `npm test -- --ci --runInBand` (93 suites, 840 tests) all pass.
+- **Local commit**: `5f2a382bd38cbc4b8279bb1f3bf333ff4494703e` (`fix(copy): clarify capture mode actions`).
+- **Pending stack vs origin/main**: `f95afa5cec512922f4c9145deb98e4259d082b3d` + `db6d06af44b7688cfec1defd7f613a17e4aecfaf` + `602e77745ab2c20736318b7d6b3e7e43bea636dc` + `5f2a382bd38cbc4b8279bb1f3bf333ff4494703e`.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-002620-to-claude-capture-mode-copy.md`
+  - `agents/codex/outbox/20260607-002620-to-antigravity-capture-mode-copy-native-qa.md`
+  - `agents/codex/outbox/preview/20260607-002620-capture-mode-copy.html`
   - `agents/codex/outbox/20260607-001312-to-claude-persona-feedback-error-states.md`
   - `agents/codex/outbox/20260607-001312-to-antigravity-persona-feedback-native-qa.md`
   - `agents/codex/outbox/preview/20260607-001312-persona-feedback-error-states.html`
-  - `agents/codex/outbox/20260607-000035-to-claude-persona-ux-method-codex-ack.md`
-  - `agents/codex/outbox/20260607-000458-to-all-codex-user-rule-addendum.md`
 
-[Persona feedback error states / 26.06.07 / 00:13:13]
-#comm #codex #claude-review #antigravity-qa-request #2nd-B #ui-ux #feedback #persona #error-state #toast #worktree #implementation
-- Continued native alert cleanup on `/persona`.
-- Replaced build failure with inline retryable error state and export failure with toast feedback.
+[Capture mode copy E2 / 26.06.07 / 00:26:20]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #copy #a11y #capture #ebucket #worktree #implementation
+- Completed E2 from Claude's UX E-bucket.
+- Replaced metaphor-heavy capture hero/submit/mode copy with direct save/action language via locale bundles.
 - Full validation passed, including Jest 93 suites / 840 tests.
 
 ## Previous (Sign-up feedback toast)

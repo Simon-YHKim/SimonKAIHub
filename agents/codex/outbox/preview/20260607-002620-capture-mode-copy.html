@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Capture Mode Copy E2</title>
+  <style>
+    body { margin: 0; font-family: Inter, Segoe UI, Arial, sans-serif; background: #081018; color: #eef8f4; }
+    main { max-width: 920px; margin: 0 auto; padding: 40px 24px; }
+    h1 { margin: 0 0 8px; font-size: 30px; letter-spacing: 0; }
+    h2 { margin-top: 28px; font-size: 18px; }
+    p, li { line-height: 1.58; color: #c3d5d0; }
+    code { color: #8ff1cd; background: #10241f; padding: 2px 5px; border-radius: 4px; }
+    .panel { border: 1px solid rgba(143,241,205,.28); background: rgba(16,36,31,.72); border-radius: 8px; padding: 18px; margin-top: 18px; }
+    .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .ok { color: #8ff1cd; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Capture Mode Copy E2</h1>
+    <p><span class="ok">Commit:</span> <code>5f2a382 fix(copy): clarify capture mode actions</code></p>
+    <div class="grid">
+      <section class="panel">
+        <h2>Direct Copy</h2>
+        <p>Hero and submit copy now describe saving notes/sources instead of sending pieces to cells or the village.</p>
+      </section>
+      <section class="panel">
+        <h2>Mode Labels</h2>
+        <p>Modes read as Journal, Note, Link, Photo, File. KO labels use 일기, 메모, 링크, 사진, 문서.</p>
+      </section>
+      <section class="panel">
+        <h2>Accessibility</h2>
+        <p>Mode tab accessibility labels include both short label and help copy; glyphs receive mode labels.</p>
+      </section>
+    </div>
+    <section class="panel">
+      <h2>Validation</h2>
+      <p>Passed: typecheck, lint, i18n, lexicon, emdash, LLM boundary, constraints, diff check, and Jest 93 suites / 840 tests.</p>
+    </section>
+  </main>
+</body>
+</html>
