@@ -17,13 +17,13 @@ live_head: 2nd-B main ffb263d
 |---|---|---|---|
 | Claude | 통합(구현·머지·온라인git) + **제안 큐(§25)** | running | 백로그 트리아지 → PROPOSAL_QUEUE 소진 → verify → merge |
 | Codex | anti-slop 발견 | running | 미머지 8건 초과 시 발견중지·P3 통합 |
-| Antigravity | 네이티브 픽스·QA | ⚠️ **정체(idle/frozen 의심)** | 03:22 기준 신규 native 제출 0(stale 2커밋만 6+사이클). E4 터치증명·E8 모션잔여·E16 데이터힌트·E20 RTL 미착수 → **Simon 터미널 재킥 필요** |
+| Antigravity | 네이티브 픽스·QA | running(**QA 리뷰 모드**) | 정정: frozen 아님 — Codex 커밋을 지속 QA 리뷰 중(07:20 settings-nav 등, §20-24 peer리뷰 실현). 단 **고유 native 작업(E4 device 터치증명·E16 데이터힌트·E20 RTL·§19 graph perf)은 미착수** — 리뷰만 하고 device-only 작업은 정체 |
 | Grok | 트렌드·결정입력 | running | **X/소셜 GTM 리서치로 재배치(20260607-0322)** — 경쟁앱 소셜반응·바이럴훅·획득채널·표현민감도. advisory(검증 전 직접반영 X) |
 
 ## 🔐 외부의존 블로커 (Simon 개입 필요 — §15)
 - (DECISIONS.md `external` 항목 참조: D-03 consent 법무, D-05 social provider 실설정)
 - **🔴 수익화 결정 5건 (페르소나 시뮬 65 simon 항목)** — PROPOSAL_QUEUE 'Simon 수익화 결정' 블록: M1 가격투명성(요금제화면+가격확정)·M2 무료티어 관대함·M3 결제수단/PG(Stripe만으론 KR/저소득 배제)·M4 구독모델/피로·M5 신뢰인증. 승인 후 Claude가 티어게이팅·요금제·결제 구현. (권고안 HTML: `agents/claude/outbox/preview/20260607-0149-monetization-recommendation.html`, deep-research wuz03uq9o로 실증 보강 중)
-- **🟡 AG 터미널 재킥** — Antigravity가 6+사이클 정체(신규 native 제출 없음). inbox 안내(20260606-220900·20260607-005800)로는 행동 변화 없음 → Simon이 AG 터미널을 한 번 봐주셔야 native QA(E4/E16/E20) 재개.
+- **🟡 AG device-native 작업 정체(정정)** — AG는 frozen 아님(Codex 커밋 QA 리뷰는 지속). 다만 **device/에뮬이 필요한 고유 작업**(E4 터치 증명·E16 데이터힌트·E20 RTL·§19 graph perf)은 미착수 — 이건 에뮬 띄운 AG 터미널이 있어야만 가능. Simon이 원할 때 AG에 device QA를 켜주면 됨(현재는 리뷰만으로도 협업엔 기여 중).
 
 ## 🤝 합의 진행 (Consensus — DECISIONS.md)
 - D-01~D-07 투표 대기 (펀치리스트 이관). 각 AI는 `type: consensus_vote`로 참여.
