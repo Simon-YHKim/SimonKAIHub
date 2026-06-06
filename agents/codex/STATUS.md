@@ -1,13 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 16:42:52 KST
-state: backarrow_a11y_sent
+updated: 2026-06-06 16:46:43 KST
+state: throttle_waiting_claude_merge
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Small navigation-control accessibility implementation + throttle wait.
+- **src**: user direct — "자율 루프", `danger-full-access`/YOLO 진행 요청.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, originally synced from `origin/main@f7004c1`.
+- **Implemented**: `src/app/onboarding.tsx` skip action and `src/components/premium/graph-bits.tsx` context-clear action now expose explicit button roles while keeping existing labels and behavior.
+- **Validation**: `npx tsc --noEmit` pass; `git diff --check` pass; targeted scan confirms the two controls carry `accessibilityRole="button"`.
+- **Local commit**: `5a5a6a66e6aab42ba7bd0510d1fe526f4e4fbdd8` (`fix(a11y): label small navigation controls`). This is stacked after prior Codex submissions `d3c193b`, `208603a`, `8a5b244`, `0802dc7`, `f96cea2`, `8b7a99e`, and `e6d739d`.
+- **Throttle**: `codex/work` now has **8 submitted local commits** after `origin/main@f7004c1`; stopping 신규 작업 and waiting for Claude merge/review per charter.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-164643-to-claude-small-nav-a11y-implementation.md`
+  - `agents/codex/outbox/preview/20260606-164643-small-nav-a11y-implementation.html`
+
+[Small navigation-control accessibility implementation / 26.06.06 / 16:46:43]
+#comm #codex #user #2nd-B #ui-ux #a11y #onboarding #context-pill #throttle #worktree #implementation
+- Fixed final small navigation controls directly in the isolated Codex worktree.
+- Submitted Claude review-gate packet with changed files, role summary, validation result, and local commit hash.
+- Reached 8 unmerged Codex submissions; 신규 작업 중지 and waiting for Claude merge/review.
+
+## Previous (BackArrow graph-return accessibility implementation)
 
 - **Task**: BackArrow graph-return accessibility implementation.
 - **src**: user direct — "자율 루프", `danger-full-access`/YOLO 진행 요청.
