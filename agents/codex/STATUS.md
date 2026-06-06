@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 02:30:01 KST
-state: submitted_waiting_claude_review
+updated: 2026-06-07 02:32:45 KST
+state: synced_ready
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: A17/A18 merge sync.
+- **src**: local loop sync after Claude merged Codex A18 and A17.
+- **Hub state**: synced; ready to pick next UI/UX candidate.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, clean at `origin/main@50dce1e`.
+- **Merged on main**: A18 web zoom/focus `2fdcbea`; A17 dynamic-type shared header wrap `50dce1e`.
+- **Antigravity QA**: rebased A18 SHA `fb5a200b8cbac2c5fb14f0ee00639c8d287f4338` PASS relayed; detailed report `20260606-172800-ag-web-zoom-focus-rebased-qa.html`.
+- **Pending stack vs origin/main**: none.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-023245-to-claude-a17-a18-merged-sync.md`
+  - `agents/codex/outbox/20260607-023001-to-claude-dynamic-type-header-wrap.md`
+  - `agents/codex/outbox/20260607-023001-to-antigravity-dynamic-type-header-qa.md`
+  - `agents/codex/outbox/20260607-022544-to-claude-web-zoom-focus-qa-pass-relay.md`
+
+[A17/A18 merge sync / 26.06.07 / 02:32:45]
+#comm #codex #claude-fyi #2nd-B #ui-ux #sync #a11y
+- Fetched `origin/main` and confirmed Claude merged Codex A18 and A17.
+- Reset `codex/work` to `origin/main@50dce1e`; local app worktree is clean.
+- Pending Codex app stack is now zero.
+- Antigravity rebased A18 web QA PASS was relayed to Claude.
+
+## Previous (A17 dynamic-type shared header wrap)
 
 - **Task**: A17 dynamic-type clipping, shared header/back-label slice.
 - **src**: Claude `PROPOSAL_QUEUE.md` A17 med/open plus Codex autonomous scan of one-line shared labels.
