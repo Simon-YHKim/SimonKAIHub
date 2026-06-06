@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 00:44:54 KST
+updated: 2026-06-07 00:50:04 KST
 state: submitted_waiting_claude_review
 ---
 
@@ -9,18 +9,21 @@ state: submitted_waiting_claude_review
 
 ## Current (latest)
 
-- **Task**: Likert accessibility E7.
-- **src**: Claude request `20260607-001100-to-codex-ux-ebucket` / E7 Big Five and Attachment Likert accessibility for older users.
+- **Task**: Wiki export discoverability E5.
+- **src**: Claude request `20260607-001100-to-codex-ux-ebucket` / E5 promote wiki export from utility action and add example copy.
 - **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested.
 - **Rule update**: user rule addendum recorded in `agents/codex/RULES.md`; global protocol remains Claude-owned.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@31887a1`.
-- **Pending predecessors**: none; Claude/main consumed prior Codex stack through auth hero and AG E8.
-- **Implemented**: strengthened shared `LikertChoiceGroup` used by `/big-five` and `/attachment` with wrap-safe rows, 44px minimum width, 48px minimum height, 16px numeric labels, larger horizontal hit slop, and selected/select accessibility hints.
-- **Guard**: extended A11y constraint to require Likert radio hints plus 44/48/16 target/text contract.
-- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`252 keys`, `9 namespaces`); `npm run check:lexicon`; `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `npm test -- --ci --runInBand` (93 suites, 840 tests) all pass.
-- **Local commit**: `291a2d722874c663306cbecf4ed746291c25bcfb` (`fix(a11y): improve likert choice targets`), rebased from submitted SHA `b7e5e65ce26bcac2b6d113fc517cf11c2912f10f`.
-- **Pending stack vs origin/main**: `291a2d722874c663306cbecf4ed746291c25bcfb` only.
+- **Pending predecessors**: Likert accessibility `291a2d722874c663306cbecf4ed746291c25bcfb`.
+- **Implemented**: promoted `/wiki` export into a primary copy-ready action with purpose and example copy; moved graph detail/back into the remaining utility row; moved export helper copy into locale bundles.
+- **Guard**: extended A11y constraint to require the new export action locale usage, primary variant, hint, and helper copy.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`257 keys`, `9 namespaces`); `npm run check:lexicon`; `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `npm test -- --ci --runInBand` (94 suites, 846 tests) all pass.
+- **Local commit**: `07d3bedc42b79f2e4689d6085859905fe1f60c07` (`fix(ux): promote wiki export action`).
+- **Pending stack vs origin/main**: `291a2d722874c663306cbecf4ed746291c25bcfb` + `07d3bedc42b79f2e4689d6085859905fe1f60c07`.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-005004-to-claude-wiki-export-discoverability.md`
+  - `agents/codex/outbox/20260607-005004-to-antigravity-wiki-export-native-qa.md`
+  - `agents/codex/outbox/preview/20260607-005004-wiki-export-discoverability.html`
   - `agents/codex/outbox/20260607-004138-to-claude-likert-accessibility.md`
   - `agents/codex/outbox/20260607-004454-to-claude-likert-accessibility-sha-update.md`
   - `agents/codex/outbox/20260607-004138-to-antigravity-likert-accessibility-native-qa.md`
@@ -35,11 +38,19 @@ state: submitted_waiting_claude_review
   - `agents/codex/outbox/20260607-001312-to-antigravity-persona-feedback-native-qa.md`
   - `agents/codex/outbox/preview/20260607-001312-persona-feedback-error-states.html`
 
-[Likert accessibility E7 / 26.06.07 / 00:41:38]
-#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #a11y #likert #assessment #ebucket #worktree #implementation
-- Completed E7 from Claude's UX E-bucket.
-- Improved shared Likert targets and screen-reader hints across Big Five and Attachment.
-- Full validation passed, including Jest 93 suites / 840 tests.
+[Wiki export discoverability E5 / 26.06.07 / 00:50:04]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #copy #discoverability #wiki #export #ebucket #worktree #implementation
+- Completed E5 from Claude's UX E-bucket.
+- Promoted wiki export into a primary action with plain purpose and use-case copy.
+- Full validation passed, including Jest 94 suites / 846 tests.
+
+## Previous (Likert accessibility E7)
+
+- **Local commit**: `291a2d722874c663306cbecf4ed746291c25bcfb` (`fix(a11y): improve likert choice targets`), rebased from submitted SHA `b7e5e65ce26bcac2b6d113fc517cf11c2912f10f`.
+- **Implemented**: strengthened shared `LikertChoiceGroup` for Big Five and Attachment with wrap-safe 44/48/16 target/text contract and selected/select hints.
+- **Native QA**: Antigravity batch2 reported PASS for Likert, auth hero, and capture copy.
+- **Validation**: full suite passed, including Jest 93 suites / 840 tests.
+- **Outputs**: `agents/codex/outbox/20260607-004138-to-claude-likert-accessibility.md`; `agents/codex/outbox/20260607-004454-to-claude-likert-accessibility-sha-update.md`; `agents/codex/outbox/20260607-004138-to-antigravity-likert-accessibility-native-qa.md`; `agents/codex/outbox/preview/20260607-004138-likert-accessibility.html`.
 
 ## Previous (Auth hero accessibility E3)
 
