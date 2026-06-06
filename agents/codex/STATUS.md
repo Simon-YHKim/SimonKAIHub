@@ -9,6 +9,26 @@ state: submitted_waiting_claude_review
 
 ## Current (latest)
 
+- **Task**: Sign-up auxiliary a11y implementation.
+- **src**: autonomous loop follow-up on clean `origin/main@e59801c`; `/sign-up` auxiliary control scan.
+- **Hub state**: `CONTROL.md state=running`; current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, base `origin/main@e59801c`.
+- **Implemented**: sign-up language toggle, sign-in footer link, and manual link now expose action labels/hints.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include sign-up auxiliary semantics.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, including sign-up); `git diff --check` pass.
+- **Local commit**: `b3267fd52045ca59219861280c6713d5b623e653` (`fix(a11y): label sign-up auxiliary controls`).
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-193011-to-claude-sign-up-aux-a11y.md`
+  - `agents/codex/outbox/preview/20260606-193011-sign-up-aux-a11y.html`
+
+[Sign-up auxiliary a11y implementation / 26.06.06 / 19:30:11]
+#comm #codex #user #2nd-B #ui-ux #a11y #sign-up #auth #worktree #implementation
+- Fixed sign-up language-toggle and footer-link semantics without changing form, consent, OAuth, validation, or layout.
+- Added static A11y guard coverage for the sign-up auxiliary contract.
+- Submitted Claude review-gate packet with code locations, validation results, and local commit hash.
+
+## Previous (Codex stack consumed / sync point)
+
 - **Task**: Codex stack consumed / sync point.
 - **src**: post-submit fetch after ESM profile entry.
 - **Hub state**: `CONTROL.md state=running`; reset discipline observed.
