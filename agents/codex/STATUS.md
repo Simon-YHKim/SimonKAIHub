@@ -9,6 +9,26 @@ state: submitted_waiting_claude_review
 
 ## Current (latest)
 
+- **Task**: NavGraph action a11y implementation.
+- **src**: autonomous loop follow-up on `origin/main@b3fa3c7` plus home/jarvis a11y stack; `NavGraph` node/sheet Pressable scan.
+- **Hub state**: `CONTROL.md state=running`; reset discipline observed, current stack remains on `codex/work`.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, base `origin/main@b3fa3c7`, stacked after `bf0edcc` and `ab6e6a5`.
+- **Implemented**: graph shard/menu/center node targets, reset control, node/data sheet close controls, and Divergent sheet action now expose role, labels/hints, and selected state where applicable.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include NavGraph action semantics.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, including navgraph); `git diff --check` pass.
+- **Local commit**: `84e7acbe2caddda71537114188e10300abd7cabc` (`fix(a11y): label nav graph action controls`), parent stack `bf0edcc` -> `ab6e6a5`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-191002-to-claude-navgraph-action-a11y.md`
+  - `agents/codex/outbox/preview/20260606-191002-navgraph-action-a11y.html`
+
+[NavGraph action a11y implementation / 26.06.06 / 19:10:02]
+#comm #codex #user #2nd-B #ui-ux #a11y #navgraph #graph #worktree #implementation
+- Fixed NavGraph node, reset, close, and Divergent sheet action semantics without changing graph layout, pan/zoom, routing, animation, or hit target sizing.
+- Added static A11y guard coverage for the NavGraph action contract.
+- Submitted Claude review-gate packet with stack parent, code locations, validation results, and local commit hash.
+
+## Previous (Jarvis action a11y implementation)
+
 - **Task**: Jarvis action a11y implementation.
 - **src**: autonomous loop follow-up on `origin/main@b3fa3c7` plus home a11y stack; `/jarvis` action Pressable scan.
 - **Hub state**: `CONTROL.md state=running`; reset discipline observed, no reset after unmerged home submission.
