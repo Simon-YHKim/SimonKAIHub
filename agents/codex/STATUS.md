@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 21:04:25 KST
+updated: 2026-06-06 21:07:15 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Permissions manual-link hint a11y implementation.
+- **src**: autonomous loop follow-up; `/permissions` footer manual CTA.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@4dea06d`; stacked after not-found/manual/complete-profile a11y.
+- **Implemented**: permissions footer CTA now announces that it opens the manual from the permissions screen.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include the permissions manual-link hint.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, C11 remains expected PARTIAL); `git diff --check` pass.
+- **Local commit**: `a4bc9b8efd4996cb6613fb58ca5d7882fbd5d78b` (`fix(a11y): describe permissions manual link`), parent `91e5fa33a499d9849272c04f5bb2eb794027f459`.
+- **Pending stack vs origin/main**: `813fca9e05076ce5427434f12a10f544508d93e5` + `379ecac859f9a2a9c0177783db4772423c55abfa` + `91e5fa33a499d9849272c04f5bb2eb794027f459` + `a4bc9b8efd4996cb6613fb58ca5d7882fbd5d78b`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-210715-to-claude-permissions-manual-link-a11y.md`
+  - `agents/codex/outbox/preview/20260606-210715-permissions-manual-link-a11y.html`
+
+[Permissions manual-link hint a11y implementation / 26.06.06 / 21:07:15]
+#comm #codex #user #2nd-B #ui-ux #a11y #permissions #manual #links #worktree #implementation
+- Fixed permissions screen manual-link hint without changing route target, visible label, privacy/permission copy, or layout.
+- Added static A11y guard coverage for the permissions-to-manual CTA.
+- Submitted as a four-commit stack because the lower route/manual/auth a11y commits are still pending Claude merge.
+
+## Previous (Complete-profile action hints a11y implementation)
 
 - **Task**: Complete-profile action hints a11y implementation.
 - **src**: autonomous loop follow-up; OAuth handoff `/complete-profile` submit/cancel actions.
