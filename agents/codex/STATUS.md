@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 06:46:51 KST
+updated: 2026-06-07 06:51:02 KST
 state: submitted
 ---
 
@@ -9,18 +9,20 @@ state: submitted
 
 ## Current (latest)
 
-- **Task**: add-format flow i18n copy cleanup.
-- **src**: `/formats` add-format flow still had inline EN/KO title, helper, placeholder, error, preview, and action copy, plus visible old “AI” helper/button wording.
+- **Task**: formats screen operational-copy i18n cleanup.
+- **src**: Main `/formats` screen still had inline EN/KO operational copy for loading/error states, headings, empty states, guide links, toasts, delete confirmation, and guide modal labels; empty state still said “AI-proposed format.”
 - **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@a4c7868`.
-- **Implemented pending**: added `formats.add.*` EN/KO keys; updated `AddFormatFlow` to use `useTranslation("formats")`; replaced visible AI wording with SecondB/filing-guide copy.
-- **Guard**: added `AddFormatFlowI18nCopy`.
-- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`629 keys`, `21 namespaces`); `npm run check:lexicon` (`289 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
-- **Local commits**: `ed00a38` (`fix(i18n): bundle add format flow copy`).
-- **Pending stack vs origin/main**: `ed00a38`.
+- **Implemented pending**: moved `/formats` loading/error/list/action/toast/delete/guide modal copy into `locales/en|ko/formats.json`; replaced AI-proposed empty-state wording with SecondB copy.
+- **Guard**: added `FormatsOperationalI18nCopy` and updated A11y modal-label checks.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`662 keys`, `21 namespaces`); `npm run check:lexicon` (`289 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commits**: `ed00a38` (`fix(i18n): bundle add format flow copy`) + `eea360b` (`fix(i18n): bundle formats screen copy`).
+- **Pending stack vs origin/main**: `ed00a38` + `eea360b`.
 - **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
-- **Antigravity QA**: PASS received for formats community-copy, sign-in hero-copy, wiki hero-copy, old-guidance-copy, premium-a11y-locale, rebased old-guidance/premium-a11y stack, pre-rebase premium feedback-defaults, and rebased premium feedback-default + auth failure-toast stack. Rebased add-format flow QA requested now.
+- **Antigravity QA**: PASS received for formats community-copy, sign-in hero-copy, wiki hero-copy, old-guidance-copy, premium-a11y-locale, rebased old-guidance/premium-a11y stack, pre-rebase premium feedback-defaults, and rebased premium feedback-default + auth failure-toast stack. Rebased add-format flow QA requested; formats screen copy QA requested now.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-065102-to-claude-formats-screen-copy.md`
+  - `agents/codex/outbox/20260607-065102-to-antigravity-formats-screen-copy-qa.md`
   - `agents/codex/outbox/20260607-064651-to-claude-rebased-add-format-flow-copy.md`
   - `agents/codex/outbox/20260607-064651-to-antigravity-rebased-add-format-flow-copy-qa.md`
   - `agents/codex/outbox/20260607-064409-to-claude-add-format-flow-copy.md`
@@ -90,6 +92,14 @@ state: submitted
 - Rebased add-format flow cleanup onto `origin/main@a4c7868`.
 - Current pending app stack is now only `ed00a38`, replacing submitted SHA `69ed1fc`.
 - Full post-rebase validation passed, including Jest 95 suites / 848 tests.
+
+[formats screen operational-copy cleanup / 26.06.07 / 06:51:02]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #formats #i18n #copy #implementation
+- Completed `/formats` screen operational-copy i18n cleanup.
+- Moved loading/error/list/action/toast/delete/guide modal copy into `formats` locale keys.
+- Replaced visible “AI-proposed format” empty-state copy with SecondB wording.
+- Added `FormatsOperationalI18nCopy` regression guard and updated A11y modal-label checks.
+- Full validation passed, including Jest 95 suites / 848 tests.
 
 ## Previous (old guidance copy residue cleanup)
 
