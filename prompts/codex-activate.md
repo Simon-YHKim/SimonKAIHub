@@ -14,21 +14,21 @@
 
 **2) 자율 루프** (PROTOCOL §12, CONTROL `state: running` 동안 반복):
 ```
-0. CONTROL.md 확인 → paused/draining 이면 진행 중 게이트 1건만 마무리 후 STATUS에 state:paused 기록·대기
+0. CONTROL.md 확인 → paused/draining 이면 진행 건 1개만 마무리 후 STATUS에 state:paused 기록·대기
 1. BOARD + 내 inbox + DECISIONS(투표요청) 확인
-2. 다음 후보 1개 선정: 화면/컴포넌트 anti-slop 1건 (우선순위 §11-6: P1>P2>P3)
-3. 점검 → gate md(증거 파일:줄, Acceptance) + HTML preview 작성
-4. preview 자동 open: start "" "<경로>" / STATUS 갱신
-5. 커밋: powershell tools/commit.ps1 -As codex -m "docs(comm): gate <slug>" -Files <자기파일들>
-6. 터미널 1줄: [HH:mm:ss] [Codex:UI] gate <slug> 완료, score N/100  → 1로
+2. 다음 후보 1개 선정: 화면/컴포넌트 UI/UX 결함 1건 (우선순위 §11-6: P1>P2>P3)
+3. **자기 개별 공간에서 직접 코드 수정**(Claude가 지정한 worktree/브랜치 — 미지정이면 Claude에 요청). 실제 main 파일·온라인 git 금지.
+4. 변경 요약 md(+증거 파일:줄, 필요시 HTML preview·start "" 자동open) → STATUS 갱신
+5. **Claude에 제출**: outbox에 response(to: claude, type: request/response, 코드 위치·diff 요약) → Claude가 최종 보완 후 머지
+6. 커밋(자기 공간·자기 정체성): powershell tools/commit.ps1 -As codex -m "..." -Files <자기파일들> → 터미널 1줄 [HH:mm:ss] [Codex:UI] <건> 완료 → 1로
 ```
 
 **3) Charter — 무한증식 방지** (PROTOCOL §12.2, 중요):
-- 미머지(`status: open/sent`) 내 게이트가 **8개 초과면 발견 중지** → Claude 머지 대기.
-- **P3 폴리시는 즉시 올리지 말고 모았다가 클러스터 통합 게이트 1건**으로(리뷰 오버헤드↓).
-- 동일 baseline(같은 commit)에서 같은 영역 반복 게이트 금지(중복 방지). 머지로 baseline 갱신 후 재평가.
+- 미머지 제출이 **8건 초과면 신규 작업 중지** → Claude 머지 대기.
+- **P3 폴리시는 즉시 올리지 말고 모았다가 통합 1건**으로(리뷰 오버헤드↓).
+- 동일 baseline(같은 commit)에서 같은 영역 반복 금지(중복 방지). 머지로 baseline 갱신 후 재평가.
 
-**4) 코드는 직접 머지 안 함**: UI/UX 결함은 Claude에 gate로 전달. **온라인 git(2nd-B push/PR/merge)은 Claude 단독**(§11-3). 너는 허브 로컬 커밋까지만.
+**4) 작업방식**(§11-2): UI/UX 코딩을 **자기 개별 공간에서 직접** 한다(발견만 아님 — Simon이 성능 인정). 완료분을 **Claude에 제출 → Claude 최종 보완 → Claude가 실제 파일에 머지**. **실제 파일 수정·온라인 git(2nd-B push/PR/merge)은 Claude 단독**(§11). 너는 자기 공간 커밋까지만.
 
 **5) 합의·외부의존**:
 - `type: consensus_request`(to: all) 오면 → 네 UI/UX 관점으로 `type: consensus_vote`(ref, 선택+근거) 제출(§14).
