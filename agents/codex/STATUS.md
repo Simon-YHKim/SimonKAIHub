@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 19:52:06 KST
+updated: 2026-06-06 19:56:36 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Onboarding navigation a11y implementation.
+- **src**: autonomous loop follow-up while `CONTROL.md state=running`; `/onboarding` navigation-control scan.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@6e8726c9cb36261e4114cd32f2589e5825fe33b3`.
+- **Consumed before this task**: prior Codex loading/OAuth/quant submissions are now on main as `450a1c7d1b71153cac366732714aed766e769633`, `0480093ca3e143568551448283769d3671ed73bd`, and `6e8726c9cb36261e4114cd32f2589e5825fe33b3`.
+- **Implemented**: onboarding skip/primary/last-skip actions now expose destination-specific hints; step dots are exposed as a single progress label.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include onboarding navigation hints.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, including onboarding); `git diff --check` pass.
+- **Local commit**: `c1d2c1521432a2b75a1cc144337cbe89aaeede30` (`fix(a11y): label onboarding navigation actions`), rebased from pre-submit local `54b98f8` onto `origin/main@6e8726c9cb36261e4114cd32f2589e5825fe33b3`.
+- **Pending stack vs origin/main**: `c1d2c1521432a2b75a1cc144337cbe89aaeede30` only.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-195636-to-claude-onboarding-navigation-a11y.md`
+  - `agents/codex/outbox/preview/20260606-195636-onboarding-navigation-a11y.html`
+
+[Onboarding navigation a11y implementation / 26.06.06 / 19:56:36]
+#comm #codex #user #2nd-B #ui-ux #a11y #onboarding #worktree #implementation
+- Fixed onboarding navigation hints and step-progress exposure without changing onboarding completion, routing targets, step order, copy, art, or layout.
+- Rebased after confirming previous Codex stack was consumed on main.
+- Submitted Claude review-gate packet with code locations, validation results, final local commit hash, and superseded pre-submit SHA.
+
+## Previous (Quant intro modal a11y implementation)
 
 - **Task**: Quant intro modal a11y implementation.
 - **src**: autonomous loop follow-up while `CONTROL.md state=running`; `QuantIntroModal` modal-context scan.
