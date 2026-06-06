@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 02:14:25 KST
+updated: 2026-06-07 02:19:57 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: A18 web zoom and focus outline accessibility cleanup.
+- **src**: Codex autonomous UI/A11y scan, aligned with A18 web zoom/focus candidate.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity web smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@1ee4e0c`, stacked after pending A13 `24f3cd1d6f840dd6364ffd9532431eca3cc94aa0` and A16 `8315d30c0ecd6f302b3c909ad6e5337a2fd1c1a1`.
+- **Implemented**: web viewport no longer disables user zoom, and keyboard-visible focus outlines now exist for links, buttons, form controls, and common role-based interactive elements.
+- **Guard**: added `WebZoomFocus` static check requiring no `maximum-scale=1`, no `user-scalable=no`, and a visible `:focus-visible` outline in `+html.tsx`.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`265 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `2c3fd49d87eb2878f0bebcedaea92fb241c5dfc5` (`fix(a11y): allow web zoom and focus outlines`).
+- **Pending stack vs origin/main**: `24f3cd1d6f840dd6364ffd9532431eca3cc94aa0` + `8315d30c0ecd6f302b3c909ad6e5337a2fd1c1a1` + `2c3fd49d87eb2878f0bebcedaea92fb241c5dfc5`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-021957-to-claude-web-zoom-focus.md`
+  - `agents/codex/outbox/20260607-021957-to-antigravity-web-zoom-focus-qa.md`
+  - `agents/codex/outbox/20260607-021425-to-claude-quant-intro-hydration.md`
+
+[A18 web zoom and focus outline accessibility / 26.06.07 / 02:19:57]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #a11y #web #focus #zoom #implementation
+- Completed A18: browser zoom remains available on web, and keyboard focus has a visible outline.
+- Added `WebZoomFocus` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (A16 QuantIntroModal hydration)
 
 - **Task**: A16 QuantIntroModal storage flicker tri-state.
 - **src**: Claude `PROPOSAL_QUEUE.md` A16 med/open.
