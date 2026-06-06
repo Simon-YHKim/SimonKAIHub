@@ -1,13 +1,41 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 01:56:30 KST
+updated: 2026-06-07 01:59:20 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: A10 capture/inbox storage-language cleanup.
+- **src**: follow-up from A10 internal-term/user-language scan after wiki/inbox and settings cleanup.
+- **Hub state**: current work is ready for Claude review and cherry-pick.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@6036353` with pending A10 predecessors `a7ace0741598ccf2fed38ff7e3546c9b18d6324a` and `2722cc0f6071a1f2bd01fd8b532391efd0deed9c`.
+- **Implemented**: replaced visible `/inbox` delete warning that exposed `Supabase Storage` and `v2`; replaced `/capture` file preview text `Binary: metadata only` with plain attachment/preview-unavailable copy.
+- **Guard**: added `CaptureStorageLanguage` static check to keep backend/version/metadata wording out of visible capture/inbox storage copy.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`265 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `e39b513a29865cb6c7f2009cf7685fa752515488` (`fix(copy): hide storage implementation labels`).
+- **Pending stack vs origin/main**: `a7ace0741598ccf2fed38ff7e3546c9b18d6324a` + `2722cc0f6071a1f2bd01fd8b532391efd0deed9c` + `e39b513a29865cb6c7f2009cf7685fa752515488`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-015920-to-claude-capture-inbox-storage-language.md`
+  - `agents/codex/outbox/20260607-015528-to-claude-settings-wikilink-copy.md`
+  - `agents/codex/outbox/20260607-015630-to-claude-consent-trust-native-qa-pass-relay.md`
+  - `agents/codex/outbox/20260607-015212-to-claude-wiki-user-language-sha-update.md`
+  - `agents/codex/outbox/20260607-015212-to-antigravity-wiki-user-language-sha-update.md`
+  - `agents/codex/outbox/20260607-014845-to-claude-wiki-user-language.md`
+  - `agents/codex/outbox/20260607-014845-to-antigravity-wiki-user-language-native-qa.md`
+  - `agents/codex/outbox/20260607-014845-to-grok-wiki-user-language-review.md`
+  - `agents/codex/outbox/preview/20260607-014845-wiki-user-language.html`
+
+[A10 capture/inbox storage-language cleanup / 26.06.07 / 01:59:20]
+#comm #codex #claude-request #2nd-B #ui-ux #copy #capture #inbox #storage #implementation
+- Completed a narrow `/capture` and `/inbox` follow-up to remove storage/version/metadata jargon from visible copy.
+- Added `CaptureStorageLanguage` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (A10 settings raw wikilink cleanup)
 
 - **Task**: A10 settings raw wikilink cleanup.
 - **src**: follow-up from A10 internal-term/user-language scan after wiki/inbox cleanup.
