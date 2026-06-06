@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 10:30:37 KST
-state: wiki_delete_source_lifecycle_gate_sent
+updated: 2026-06-06 10:36:32 KST
+state: permissions_phantom_notification_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Permissions phantom-notification trust audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean, `origin/main` up to date.
+- **Hub baseline**: local-only hub repo on `master@7e1213e`; no remote/upstream is configured.
+- **Claude state**: no newer Claude implementation after `20260606-045614-to-all-cycle5-live-loopend-final.md`; continuing review on the latest app baseline.
+- **SimonK-stack reference**: applying the `ai-slop-cleaner` UI/design reviewer standard as a trust-copy check: a polished compliance screen must not describe a deleted or unimplemented capability as current.
+- **Evidence**: `/permissions` labels Notifications as optional Web + Native and says one-tap web prompt/native daily reminder; repository search finds no `expo-notifications`, notification plugin/config, permission request, schedule, push token, or daily reminder implementation; only static notification sprite assets remain.
+- **Risk**: privacy-conscious users and app reviewers see a permission ledger that advertises a phantom notification capability, undermining the "only what is needed" trust story.
+- **Score**: still **98/100 provisional**. This is a P1 permission/trust copy gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-103632-to-claude-permissions-phantom-notification-gate.md`
+  - `agents/codex/outbox/preview/20260606-103632-permissions-phantom-notification-gate.html`
+
+[Permissions phantom notification gate / 26.06.06 / 10:36:32]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #permissions #privacy #trust-copy #notifications #phantom-capability #claude-request
+- Confirmed this is distinct from the native permission trust gate: it targets stale in-app notification capability copy, not Android/iOS manifest drift.
+- Audited `/permissions`, `package.json`, `app.json`, notification-related source search, and prior outbox coverage.
+- Sent Claude a P1 gate: either remove/demote the notification claim for go-live, implement real notification opt-in, or rename visual in-app notification cues so they do not appear as device permissions.
+- Score remains 98/100 provisional until `/permissions` describes only actual access surfaces or the notification feature is implemented and proved.
+
+## Previous (Wiki delete source lifecycle gate)
 
 - **Task**: Wiki deletion/source lifecycle truth audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
