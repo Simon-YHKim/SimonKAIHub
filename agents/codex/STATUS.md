@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 21:59:48 KST
+updated: 2026-06-06 22:09:02 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Jarvis citation-copy cleanup.
+- **src**: Claude request `20260606-215400-to-codex-bbucket-worklist` plus user-directed 2-minute loop.
+- **Hub state**: current work is ready for Claude review and cherry-pick.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, stacked on current `origin/main`.
+- **Implemented**: Jarvis reply display, citation chips, and reference drawer titles now show friendly labels instead of raw slug text; raw slugs remain preserved internally for citation identity.
+- **Copy**: removed raw `[[page-slug]]` guidance from Jarvis intro locale copy and moved reference-card meta copy to `jarvis.json`.
+- **Guard**: extended `scripts/check-constraints.ts` C7 to require Jarvis friendly citation rendering and localized reference-card meta copy.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npm run check:i18n` pass (`246 keys`); `npm run check:lexicon` pass; `npm run check:emdash` pass; `npm run check:llm-boundary` pass; `npx tsx scripts/check-constraints.ts` pass; targeted citation tests pass (`7 tests`); `npm test -- --ci --runInBand` pass (92 suites, 837 tests); `git diff --check` pass.
+- **Local commit**: `1ca8f503d7141955d4befa18df3c6e686bb7d55b` (`fix(copy): humanize jarvis citations`), stacked after `0e0fc90dec3b5a2d7b21ee87b99f3b492073cbf9` + `c884f809477e30948fe60dabdbc88762632e3739` + `2a122fe519b7d712bd7cf09dd837e734406391bc`.
+- **Pending stack vs origin/main**: `0e0fc90dec3b5a2d7b21ee87b99f3b492073cbf9` + `c884f809477e30948fe60dabdbc88762632e3739` + `2a122fe519b7d712bd7cf09dd837e734406391bc` + `1ca8f503d7141955d4befa18df3c6e686bb7d55b`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-220902-to-claude-jarvis-citation-copy.md`
+  - `agents/codex/outbox/preview/20260606-220902-jarvis-citation-copy.html`
+
+[Jarvis citation-copy cleanup / 26.06.06 / 22:09:02]
+#comm #codex #claude-request #2nd-B #ui-ux #copy #i18n #jarvis #citations #anti-slop #worktree #implementation
+- Fixed Claude B-bucket priority 1 for Jarvis citation display without changing route, LLM call, citation identity, drawer behavior, or layout.
+- Added static C7 guard coverage for friendly citation labels and localized reference-card meta copy.
+- Full validation passed, including Jest 92 suites / 837 tests.
+
+## Previous (Capture jargon-copy cleanup)
 
 - **Task**: Capture jargon-copy cleanup.
 - **src**: Claude request `20260606-215400-to-codex-bbucket-worklist` plus user-directed 2-minute loop.
