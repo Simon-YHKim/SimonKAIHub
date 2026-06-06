@@ -214,6 +214,7 @@ created: 2026-06-05 15:22:34 KST
 
 - **흐름**: AI가 자기 worktree에서 코딩·typecheck → 자기 브랜치 **로컬 커밋** → Claude에 제출(outbox, 브랜치·변경 요약) → Claude가 자기 공간으로 가져와 **최종 보완 후 main 머지 + 온라인 push**.
 - **온라인 git = Claude 단독**(AI는 push 안 함, 로컬 커밋까지만). 레거시 `codex/*` origin 브랜치는 Claude가 가치 선별 후 정리.
+- **머지 메커니즘 = cherry-pick (staleness-immune, 2026-06-06)**: Claude는 AI 브랜치를 통째로 머지하지 않고 **AI가 제출한 개별 커밋만 cherry-pick**한다. 브랜치가 옛 main 기반(stale)이어도 커밋 자체의 diff만 적용되므로 **타 AI의 머지를 되돌리지 않는다**(반복된 stale-branch 회귀 사고 방지). 따라서 **코딩 AI는 ① 작업 전 `git fetch origin && git reset --hard origin/main` ② 변경을 작은 단위 격리 커밋으로 ③ 제출 메시지에 커밋 SHA + 파일 목록**을 명시한다. Claude가 SHA를 cherry-pick → verify → push.
 
 ---
 
