@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 06:31:35 KST
+updated: 2026-06-07 06:36:25 KST
 state: submitted
 ---
 
@@ -9,18 +9,20 @@ state: submitted
 
 ## Current (latest)
 
-- **Task**: premium feedback default-copy locale cleanup.
-- **src**: Shared premium loading/error primitives had Korean fallback labels, so an EN surface could leak mixed-language UI if a caller omitted `message` or `retryLabel`.
+- **Task**: auth failure-toast i18n cleanup.
+- **src**: Sign-in, sign-up, OAuth provider start failure, Naver start failure, and complete-profile save failure toasts still had inline EN/KO copy in launch-critical auth entry paths.
 - **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@dc0d5ef`.
-- **Implemented pending**: added `common.actions.retry` and `common.states.loading`; moved `PremiumLoadingState` and `PremiumErrorState` default labels to common locale keys.
-- **Guard**: extended `PremiumA11yLocaleCopy` to require key-based premium feedback fallback copy and reject hardcoded Korean defaults.
-- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`612 keys`, `21 namespaces`); `npm run check:lexicon` (`289 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
-- **Local commits**: `c864608` (`fix(copy): replace old guidance wording`) + `b6c8e5c` (`fix(a11y): localize premium shared labels`) + `661404c` (`fix(i18n): localize premium feedback defaults`).
-- **Pending stack vs origin/main**: `c864608` + `b6c8e5c` + `661404c`.
+- **Implemented pending**: moved auth failure toast strings into `locales/en|ko/auth.json`; updated sign-in, sign-up, and complete-profile to use auth locale keys.
+- **Guard**: added `AuthFailureToastI18nCopy` and updated `Feedback` to expect key-based auth failure toasts.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`617 keys`, `21 namespaces`); `npm run check:lexicon` (`289 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commits**: `c864608` (`fix(copy): replace old guidance wording`) + `b6c8e5c` (`fix(a11y): localize premium shared labels`) + `661404c` (`fix(i18n): localize premium feedback defaults`) + `6a55967` (`fix(i18n): bundle auth failure toasts`).
+- **Pending stack vs origin/main**: `c864608` + `b6c8e5c` + `661404c` + `6a55967`.
 - **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
-- **Antigravity QA**: PASS received for formats community-copy, sign-in hero-copy, wiki hero-copy, old-guidance-copy, and premium-a11y-locale. Premium feedback-default QA requested now.
+- **Antigravity QA**: PASS received for formats community-copy, sign-in hero-copy, wiki hero-copy, old-guidance-copy, premium-a11y-locale, and rebased old-guidance/premium-a11y stack. Premium feedback-default and auth failure-toast QA requested.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-063625-to-claude-auth-failure-toasts.md`
+  - `agents/codex/outbox/20260607-063625-to-antigravity-auth-failure-toasts-qa.md`
   - `agents/codex/outbox/20260607-063135-to-claude-premium-feedback-defaults.md`
   - `agents/codex/outbox/20260607-063135-to-antigravity-premium-feedback-defaults-qa.md`
   - `agents/codex/outbox/20260607-062728-to-claude-ag-pass-rebased-stack.md`
@@ -52,6 +54,13 @@ state: submitted
 - Completed a shared premium feedback default-copy cleanup.
 - Added common retry/loading locale keys and moved shared loading/error fallbacks to `useTranslation("common")`.
 - Extended the static premium locale guard to keep these defaults key-based.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+[auth failure-toast i18n cleanup / 26.06.07 / 06:36:25]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #auth #i18n #feedback #implementation
+- Completed a narrow auth failure-toast i18n cleanup.
+- Moved sign-in, sign-up, OAuth/Naver start, and complete-profile save failure toast copy into auth locale keys.
+- Added `AuthFailureToastI18nCopy` regression guard and updated `Feedback` to expect key-based auth failure toasts.
 - Full validation passed, including Jest 95 suites / 848 tests.
 
 ## Previous (old guidance copy residue cleanup)
