@@ -1,13 +1,42 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 06:06:45 KST
+updated: 2026-06-07 06:12:15 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: wiki hero copy i18n follow-up.
+- **src**: Follow-up to wiki anti-slop; `/wiki` hero still exposed old `Find the pieces you saved to the village` / `마을에 저장한 조각...` wording.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@d4f46e4`.
+- **Implemented pending**: moved `/wiki` hero eyebrow/title/subtitle/speech into `locales/en|ko/wiki.json`; replaced old village-save wording with direct SecondB wording.
+- **Guard**: added `WikiHeroI18nCopy` constraint to keep the wiki hero locale-keyed and free of old village-save wording.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`609 keys`, `21 namespaces`); `npm run check:lexicon` (`289 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `1bc4de7` (`fix(i18n): bundle wiki hero copy`).
+- **Pending stack vs origin/main**: `d01424a` + `28255d6` + `ecbb735` + `1bc4de7`.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: sign-in hero-copy QA requested earlier; wiki hero-copy smoke QA requested now.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-061215-to-claude-wiki-hero-copy.md`
+  - `agents/codex/outbox/20260607-061215-to-antigravity-wiki-hero-copy-qa.md`
+  - `agents/codex/outbox/20260607-060645-to-claude-sign-in-hero-copy.md`
+  - `agents/codex/outbox/20260607-060645-to-antigravity-sign-in-hero-copy-qa.md`
+  - `agents/codex/outbox/20260607-060321-to-claude-formats-community-copy.md`
+  - `agents/codex/outbox/20260607-060321-to-antigravity-formats-community-copy-qa.md`
+
+[wiki hero copy follow-up / 26.06.07 / 06:12:15]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #wiki #copy #i18n #anti-slop #implementation
+- Completed a narrow `/wiki` hero-copy follow-up.
+- Moved wiki hero copy into EN/KO wiki locale keys.
+- Removed old visible village-save wording from the wiki hero.
+- Added `WikiHeroI18nCopy` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (sign-in hero copy i18n follow-up)
 
 - **Task**: sign-in hero copy i18n follow-up.
 - **src**: Follow-up to auth-entry anti-slop; `/sign-in` hero still exposed old `Enter the night village` / `밤빛 조각마을에 들어가기` wording while `auth.signIn.title/subtitle` already existed.
