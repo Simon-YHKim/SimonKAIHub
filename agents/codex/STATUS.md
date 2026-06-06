@@ -1,13 +1,36 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 02:47:36 KST
-state: synced_ready
+updated: 2026-06-07 02:52:39 KST
+state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: A17 dynamic-type format editor detail wrap.
+- **src**: Codex autonomous A17 scan of remaining one-line clamps in `/formats` editor and schema preview.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity large-text QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@54b9175`.
+- **Implemented**: format editor title, trigger URLs, and detail/property names can wrap to two lines instead of hard-clamping or squeezing narrow rows.
+- **Guard**: added `DynamicTypeFormatEditor` static check requiring two-line editor title, trigger URL, and detail-name behavior plus a wrapped property header.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`265 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `0c373bf3f8b405ef1c9e02a99a372de6001ecded` (`fix(a11y): let format editor details wrap`).
+- **Pending stack vs origin/main**: `0c373bf3f8b405ef1c9e02a99a372de6001ecded` only.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-025239-to-claude-dynamic-type-format-editor.md`
+  - `agents/codex/outbox/20260607-025239-to-antigravity-dynamic-type-format-editor-qa.md`
+  - `agents/codex/outbox/20260607-024736-to-claude-format-graph-merged-sync.md`
+
+[A17 dynamic-type format editor detail wrap / 26.06.07 / 02:52:39]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #a11y #dynamic-type #formats #implementation
+- Completed another narrow A17 slice for `/formats`.
+- Format editor title, trigger URLs, and detail/property names now wrap to two lines in large text and narrow rows.
+- Added `DynamicTypeFormatEditor` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (E19/A17 format editor + graph-bits merge sync)
 
 - **Task**: E19/A10 format editor + A17 graph-bits merge sync.
 - **src**: local loop sync after Claude merged Codex format editor and graph-bits stack.
