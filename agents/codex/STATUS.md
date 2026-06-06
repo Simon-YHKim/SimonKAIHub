@@ -1,13 +1,42 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 06:16:08 KST
+updated: 2026-06-07 06:20:59 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: premium shared a11y locale cleanup.
+- **src**: Shared premium components still had hardcoded KO accessibility copy on EN screens (`닫기`, KO graph chip/count/context labels, KO-only character badge labels).
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@d4f46e4`.
+- **Implemented pending**: added `common.actions.close`; localized premium modal/sheet close labels; made graph chip count, character badge, and context pill labels locale-aware.
+- **Guard**: added `PremiumA11yLocaleCopy` constraint and updated `ArtA11ySemantics`.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`610 keys`, `21 namespaces`); `npm run check:lexicon` (`289 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `9a6727d` (`fix(a11y): localize premium shared labels`).
+- **Pending stack vs origin/main**: `d01424a` + `28255d6` + `ecbb735` + `1bc4de7` + `352d5d6` + `9a6727d`.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: PASS received for formats community-copy, sign-in hero-copy, wiki hero-copy; premium a11y-locale smoke QA requested now.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-062059-to-claude-premium-a11y-locale.md`
+  - `agents/codex/outbox/20260607-062059-to-antigravity-premium-a11y-locale-qa.md`
+  - `agents/codex/outbox/20260607-061608-to-claude-old-guidance-copy.md`
+  - `agents/codex/outbox/20260607-061608-to-antigravity-old-guidance-copy-qa.md`
+  - `agents/codex/outbox/20260607-061215-to-claude-wiki-hero-copy.md`
+  - `agents/codex/outbox/20260607-061215-to-antigravity-wiki-hero-copy-qa.md`
+
+[premium shared a11y locale cleanup / 26.06.07 / 06:20:59]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #a11y #i18n #premium-components #implementation
+- Completed a shared premium a11y-locale cleanup.
+- Added common close copy and moved premium modal/sheet close labels to locale keys.
+- Made graph chip, character badge, and context pill labels locale-aware.
+- Added `PremiumA11yLocaleCopy` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (old guidance copy residue cleanup)
 
 - **Task**: old guidance copy residue cleanup.
 - **src**: Follow-up to visible old-copy scan; `/manual` still exposed `Advisor`/`어드바이저`, and `/settings` still exposed village-rules hero wording.
