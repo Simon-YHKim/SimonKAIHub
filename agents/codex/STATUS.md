@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 01:28:56 KST
+updated: 2026-06-07 01:32:25 KST
 state: submitted_waiting_claude_review
 ---
 
@@ -11,19 +11,20 @@ state: submitted_waiting_claude_review
 
 - **Task**: E17 onboarding concrete intro.
 - **src**: Claude `PROPOSAL_QUEUE.md` E17 high/open, persona-expanded finding that the first-run onboarding is too metaphor-heavy for low-literacy and translation contexts.
-- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested; SHA update sent after rebasing onto latest main.
 - **Rule update**: user-provided `AGENTS.md` operating profile reconfirmed in Codex-owned `agents/codex/RULES.md`; global protocol remains Claude-owned.
-- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@e53e49d`.
-- **Pending predecessors**: E9 tier icon asset map `b223464a929999251c7112c635121a7e4bb87c36`, already submitted and AG PASS relayed.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@958445e`.
+- **Pending predecessors**: none. E9 tier icon asset map is now on main as `ae974b9`.
 - **Implemented**: reduced `/onboarding` from five metaphor-heavy steps to three concrete user-action steps, removed village/node/road/piece copy from the onboarding narrative, and added visible `1 / 3` progress text next to the existing accessible dot indicator.
 - **Native QA**: requested from Antigravity for Android narrow-width, large-font, routing, screen-reader, and art-surface smoke.
 - **Guard**: added `Onboarding` static check requiring concrete 3-step flow, visible progress text, and absence of the old metaphor copy.
-- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`261 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass after rebase onto `origin/main@e53e49d`.
-- **Local commit**: `291d9406540da7b36871e2a7f599189f4d7632c9` (`fix(ux): simplify onboarding intro`).
-- **Pending stack vs origin/main**: `b223464a929999251c7112c635121a7e4bb87c36` + `291d9406540da7b36871e2a7f599189f4d7632c9`.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`261 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all passed before rebase. Rebase moved the same E17 diff onto `origin/main@958445e`.
+- **Local commit**: `9cc7a9888f4891c1b37a3e9f1f4e309c8a245262` (`fix(ux): simplify onboarding intro`), rebased from submitted SHA `291d9406540da7b36871e2a7f599189f4d7632c9`.
+- **Pending stack vs origin/main**: `9cc7a9888f4891c1b37a3e9f1f4e309c8a245262` only.
 - **Latest outputs**:
   - `agents/codex/outbox/20260607-012856-to-claude-onboarding-concrete-intro.md`
   - `agents/codex/outbox/20260607-012856-to-antigravity-onboarding-native-qa.md`
+  - `agents/codex/outbox/20260607-013225-to-claude-onboarding-concrete-intro-sha-update.md`
   - `agents/codex/outbox/preview/20260607-012856-onboarding-concrete-intro.html`
   - `agents/codex/outbox/20260607-011851-to-claude-tier-icons-asset-map.md`
   - `agents/codex/outbox/20260607-011851-to-antigravity-tier-icons-asset-smoke-qa.md`
@@ -44,6 +45,7 @@ state: submitted_waiting_claude_review
 - Reframed the first-run path as save note -> answer from records -> save first note.
 - Added visible progress text and a static regression guard.
 - Full validation passed, including Jest 95 suites / 848 tests.
+- Rebased onto `origin/main@958445e`; current review SHA is `9cc7a9888f4891c1b37a3e9f1f4e309c8a245262`.
 
 ## Previous (E9 tier icon asset map)
 
