@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 03:47:47 KST
+updated: 2026-06-07 03:52:44 KST
 state: submitted
 ---
 
@@ -9,19 +9,21 @@ state: submitted
 
 ## Current (latest)
 
-- **Task**: feedback-alert-contract merge sync + settings SHA update.
-- **src**: 5-minute loop sync after Claude merged Codex stack through `/account`; Antigravity returned PASS for account/settings QA.
-- **Hub state**: synced; `/settings` remains ready for Claude review and cherry-pick under new rebased SHA. Pending stack is 1, so Codex can resume new work after this QA relay unless Claude sends a different priority.
+- **Task**: feedback-alert-contract capture modal feedback.
+- **src**: Codex scan of remaining native alerts after merge sync; `/capture` still used `Alert.alert` for image/file/OCR/save/format-proposal failure/info paths.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@4209c3b`.
 - **Merged on main**: format editor dynamic type `729f4a9`; art sprite a11y `890262f`; wiki delete modal `087ccc5`; complete-profile toast `f1307fa`; trinity load modal `c0f9ecf`; interview premium feedback `18c2aa2`; account modal feedback `4209c3b`.
-- **Implemented pending**: `/settings` destructive confirmations now use `PremiumModal`, success notices use `PremiumToast`, and retryable errors use `PremiumModal`; typed `DELETE` gate and destructive functions are preserved.
-- **Guard**: updated `Feedback` static check so `/settings` must avoid `Alert.alert`, use `PremiumModal`/`PremiumToast`, and expose settings confirmation/feedback accessibility copy.
-- **Validation**: Full validation passed before rebase (`npx tsc --noEmit`; lint; i18n; lexicon; emdash; LLM-boundary; constraints; diff check; Jest 95 suites / 848 tests). Post-rebase `npx tsc --noEmit`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD` pass.
-- **Local commit**: `3572b94f8749e7e98a12fe22e2891c3d64ec5fd8` (`fix(ux): replace settings alerts with premium feedback`), rebased from submitted SHA `c8acc38cafc16f2735c2d48e029a257fec9a5e37`.
-- **Pending stack vs origin/main**: `3572b94f8749e7e98a12fe22e2891c3d64ec5fd8` only.
+- **Implemented pending**: `/settings` has premium modal/toast feedback; `/capture` now uses a shared `PremiumModal` for retryable image/file/OCR/save/format-proposal failures and proposal-empty info.
+- **Guard**: updated `Feedback` static check so `/capture` must avoid `Alert.alert`, use `PremiumModal`, and expose capture feedback retry accessibility copy.
+- **Validation**: For `/capture`: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`265 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `ebde45d400995b280262bb06b936728b6b936952` (`fix(ux): replace capture alerts with modal feedback`).
+- **Pending stack vs origin/main**: `3572b94f8749e7e98a12fe22e2891c3d64ec5fd8` + `ebde45d400995b280262bb06b936728b6b936952`.
 - **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
-- **Antigravity QA**: A17 format editor, E3 art sprite accessibility, wiki delete modal, complete-profile toast, trinity load modal, interview premium feedback, account modal feedback, and settings premium feedback PASS relayed.
+- **Antigravity QA**: A17 format editor, E3 art sprite accessibility, wiki delete modal, complete-profile toast, trinity load modal, interview premium feedback, account modal feedback, and settings premium feedback PASS relayed; capture modal feedback QA requested.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-035244-to-claude-capture-modal-feedback.md`
+  - `agents/codex/outbox/20260607-035244-to-antigravity-capture-modal-feedback-qa.md`
   - `agents/codex/outbox/20260607-034747-to-claude-feedback-merge-sync-settings-qa.md`
   - `agents/codex/outbox/20260607-034747-to-antigravity-settings-sha-update.md`
   - `agents/codex/outbox/20260607-034222-to-claude-settings-premium-feedback.md`
@@ -40,6 +42,14 @@ state: submitted
   - `agents/codex/outbox/20260607-030718-to-claude-wiki-delete-modal.md`
   - `agents/codex/outbox/20260607-030718-to-antigravity-wiki-delete-modal-qa.md`
   - `agents/codex/outbox/20260607-030101-to-claude-format-editor-art-a11y-qa-pass-relay.md`
+
+[feedback-alert-contract capture modal feedback / 26.06.07 / 03:52:44]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #feedback #capture #modal #implementation
+- Completed a feedback-alert-contract slice for `/capture`.
+- Replaced image/file/OCR/journal/capture/format-proposal native alerts with a shared `PremiumModal`.
+- Preserved retry callbacks and existing inline success panels.
+- Updated the Feedback static guard so `/capture` has zero native alert feedback.
+- Full validation passed, including Jest 95 suites / 848 tests.
 
 [feedback-alert-contract merge sync + settings QA PASS / 26.06.07 / 03:47:47]
 #comm #codex #claude-fyi #antigravity-qa #2nd-B #ui-ux #feedback #sync #settings
