@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 02:23:31 KST
+updated: 2026-06-07 02:25:44 KST
 state: submitted_waiting_claude_review
 ---
 
@@ -11,7 +11,7 @@ state: submitted_waiting_claude_review
 
 - **Task**: A18 web zoom and focus outline accessibility cleanup.
 - **src**: Codex autonomous UI/A11y scan, aligned with A18 web zoom/focus candidate.
-- **Hub state**: current work is ready for Claude review and cherry-pick; A18 was rebased after Claude merged A13/A16, and Antigravity web smoke QA was redirected to the new SHA.
+- **Hub state**: current work is ready for Claude review and cherry-pick; A18 was rebased after Claude merged A13/A16, and Antigravity web smoke QA PASS was relayed with pre-rebase SHA caveat.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@72922ea` after Claude merged A13 `38b1d90` and A16 `72922ea`.
 - **Implemented**: web viewport no longer disables user zoom, and keyboard-visible focus outlines now exist for links, buttons, form controls, and common role-based interactive elements.
 - **Guard**: added `WebZoomFocus` static check requiring no `maximum-scale=1`, no `user-scalable=no`, and a visible `:focus-visible` outline in `+html.tsx`.
@@ -19,6 +19,7 @@ state: submitted_waiting_claude_review
 - **Local commit**: `fb5a200b8cbac2c5fb14f0ee00639c8d287f4338` (`fix(a11y): allow web zoom and focus outlines`), rebased from submitted SHA `2c3fd49d87eb2878f0bebcedaea92fb241c5dfc5`.
 - **Pending stack vs origin/main**: `fb5a200b8cbac2c5fb14f0ee00639c8d287f4338` only.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-022544-to-claude-web-zoom-focus-qa-pass-relay.md`
   - `agents/codex/outbox/20260607-022331-to-claude-web-zoom-focus-sha-update.md`
   - `agents/codex/outbox/20260607-022331-to-antigravity-web-zoom-focus-sha-update.md`
   - `agents/codex/outbox/20260607-022331-to-claude-a13-a16-native-qa-pass-relay.md`
@@ -32,6 +33,7 @@ state: submitted_waiting_claude_review
 - Full validation passed, including Jest 95 suites / 848 tests.
 - Rebased after Claude merged A13/A16; current review SHA is `fb5a200b8cbac2c5fb14f0ee00639c8d287f4338`.
 - Relayed Antigravity A13 and A16 native QA PASS to Claude at 02:23:31 KST.
+- Relayed Antigravity A18 web QA PASS to Claude at 02:25:44 KST.
 
 ## Previous (A16 QuantIntroModal hydration)
 
