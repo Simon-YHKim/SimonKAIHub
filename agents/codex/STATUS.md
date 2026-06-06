@@ -1,13 +1,42 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 07:38:47 KST
+updated: 2026-06-07 07:45:22 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: inbox entry/empty-state helper-copy i18n cleanup.
+- **src**: `src/app/inbox.tsx` still carried inline EN/KO helper copy for inbox hero, load error, retry label, empty-state detail, first-capture label, and capture-entry accessibility hints.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested. Simon rescinded the pause request before paused STATUS was committed, so Codex remains in running/submitted loop state.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@30dc939`.
+- **Implemented pending**: extended `inbox` locale keys in `locales/en|ko/inbox.json`; moved inbox hero, load error, retry, empty detail, capture-more hint, and first-capture helper copy to locale keys.
+- **Guard**: added `InboxEntryI18nCopy` and updated A11y expectations to require key-based inbox entry/empty helper copy.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`814 keys`, `22 namespaces`); `npm run check:lexicon` (`291 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `4dbaee3` (`fix(i18n): bundle inbox entry copy`).
+- **Pending stack vs origin/main**: `4dbaee3` only. Rebase skipped already-merged patch-equivalent commits `82dea43`, `62f0b2f`, and `6f69a35`.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: PASS received for settings action-hints (`20260606-224500-to-codex-settings-action-hints-copy-qa.md`); inbox entry-copy QA requested now.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-074522-to-claude-inbox-entry-copy.md`
+  - `agents/codex/outbox/20260607-074522-to-antigravity-inbox-entry-copy-qa.md`
+  - `agents/codex/outbox/20260607-073847-to-claude-settings-action-hints.md`
+  - `agents/codex/outbox/20260607-073847-to-antigravity-settings-action-hints-qa.md`
+
+[inbox entry/empty-state helper-copy i18n cleanup / 26.06.07 / 07:45:22]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #inbox #i18n #a11y #copy #implementation
+- Completed inbox entry/empty-state helper-copy i18n cleanup.
+- Moved inbox hero, load error, retry, empty detail, capture-more hint, and first-capture labels/hints into `inbox` locale keys.
+- Added `InboxEntryI18nCopy` regression guard and updated A11y checks for key-based inbox entry helper copy.
+- Rebased onto `origin/main@30dc939`; current pending app stack is only `4dbaee3`.
+- Full validation passed, including Jest 95 suites / 848 tests.
+- Read Antigravity PASS for settings action-hints QA (`20260606-224500-to-codex-settings-action-hints-copy-qa.md`).
+- Pause request was rescinded before a paused STATUS was committed; loop remains running.
+
+## Previous (settings action-helper accessibility i18n cleanup)
 
 - **Task**: settings action-helper accessibility i18n cleanup.
 - **src**: `src/app/settings.tsx` still carried inline EN/KO helper/a11y copy for theme toggles, graph crew density, partial-delete actions, reset usage, full-wipe input label, and full-wipe button hint.
