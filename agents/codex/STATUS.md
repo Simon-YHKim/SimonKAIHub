@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 03:31:22 KST
+updated: 2026-06-07 03:36:28 KST
 state: submitted
 ---
 
@@ -9,18 +9,20 @@ state: submitted
 
 ## Current (latest)
 
-- **Task**: feedback-alert-contract interview premium feedback.
-- **src**: Claude/Grok B-bucket feedback-alert-contract follow-up; Codex scan found `/interview` still used native `Alert.alert` for next-question failure, save success, and save failure.
+- **Task**: feedback-alert-contract account modal feedback.
+- **src**: Claude/Grok B-bucket feedback-alert-contract follow-up; Codex scan found `/account` still used native `Alert.alert` for DOB save retry, account deletion confirmation, and deletion failure.
 - **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
-- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@54b9175`, stacked after five pending Codex commits.
-- **Implemented**: `/interview` next-question and save-failure retry flows now use `PremiumModal`; save success uses `PremiumToast` before navigating to Persona.
-- **Guard**: updated `Feedback` static check so `/interview` must avoid `Alert.alert`, use `PremiumModal`/`PremiumToast`, and keep retry accessibility copy.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@54b9175`, stacked after six pending Codex commits.
+- **Implemented**: `/account` DOB save retry, account deletion final confirmation, and deletion failure now use `PremiumModal`; destructive deletion function and truthful partial-failure copy are preserved.
+- **Guard**: updated `Feedback` static check so `/account` must avoid `Alert.alert`, use `PremiumModal`, and expose account feedback/deletion confirmation accessibility copy.
 - **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`265 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
-- **Local commit**: `7ec04ed2d7c9ea64205744e2b6279a368e61bca4` (`fix(ux): replace interview alerts with premium feedback`).
-- **Pending stack vs origin/main**: `0c373bf3f8b405ef1c9e02a99a372de6001ecded` + `af00a306432f801ac86562c1c366f76b4b2ce43f` + `5252d6985ce6c4de82023019939fb73ae88b6b8b` + `519e80085517e1a2a23c16312e5976ad497bced8` + `2f6f9fdd59e6ccdd761a8fcb47d0686590bbfcbb` + `7ec04ed2d7c9ea64205744e2b6279a368e61bca4`.
+- **Local commit**: `dc8dbc3af3f920db457292ee259a9d6ff3c5b7ad` (`fix(ux): replace account alerts with modal feedback`).
+- **Pending stack vs origin/main**: `0c373bf3f8b405ef1c9e02a99a372de6001ecded` + `af00a306432f801ac86562c1c366f76b4b2ce43f` + `5252d6985ce6c4de82023019939fb73ae88b6b8b` + `519e80085517e1a2a23c16312e5976ad497bced8` + `2f6f9fdd59e6ccdd761a8fcb47d0686590bbfcbb` + `7ec04ed2d7c9ea64205744e2b6279a368e61bca4` + `dc8dbc3af3f920db457292ee259a9d6ff3c5b7ad`.
 - **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
-- **Antigravity QA**: A17 format editor, E3 art sprite accessibility, wiki delete modal, and complete-profile toast PASS relayed; trinity load modal and interview feedback QA requested.
+- **Antigravity QA**: A17 format editor, E3 art sprite accessibility, wiki delete modal, and complete-profile toast PASS relayed; trinity load modal, interview feedback, and account modal feedback QA requested.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-033628-to-claude-account-modal-feedback.md`
+  - `agents/codex/outbox/20260607-033628-to-antigravity-account-modal-feedback-qa.md`
   - `agents/codex/outbox/20260607-033122-to-claude-interview-premium-feedback.md`
   - `agents/codex/outbox/20260607-033122-to-antigravity-interview-premium-feedback-qa.md`
   - `agents/codex/outbox/20260607-032417-to-claude-trinity-load-modal.md`
@@ -32,6 +34,14 @@ state: submitted
   - `agents/codex/outbox/20260607-030718-to-claude-wiki-delete-modal.md`
   - `agents/codex/outbox/20260607-030718-to-antigravity-wiki-delete-modal-qa.md`
   - `agents/codex/outbox/20260607-030101-to-claude-format-editor-art-a11y-qa-pass-relay.md`
+
+[feedback-alert-contract account modal feedback / 26.06.07 / 03:36:28]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #feedback #account #modal #destructive-confirmation #implementation
+- Completed a narrow feedback-alert-contract slice for `/account`.
+- Replaced DOB save retry, account deletion confirmation, and deletion failure native alerts with `PremiumModal`.
+- Preserved typed DELETE gate, destructive function call, and truthful partial-deletion failure copy.
+- Updated the Feedback static guard so `/account` has zero native alert feedback in these paths.
+- Full validation passed, including Jest 95 suites / 848 tests.
 
 [feedback-alert-contract interview premium feedback / 26.06.07 / 03:31:22]
 #comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #feedback #interview #modal #toast #implementation
