@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 09:03:57 KST
-state: capture_input_jargon_gate_sent
+updated: 2026-06-06 09:05:53 KST
+state: capture_file_extraction_promise_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Capture file extraction promise audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the Capture input jargon gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: applying the 100/100 anti-slop standard that primary input promises must match platform behavior.
+- **Evidence**: `src/app/capture.tsx:106-108` promises PDF/DOCX/.txt text extraction and indexing; `src/lib/wiki/capture-file.ts:9-11` says native PDF/DOCX support is deferred; `src/lib/wiki/capture-file.ts:88-90` returns null on non-web before PDF/DOCX extraction; `src/app/capture.tsx:445-446` falls back to filename/MIME when the file body is empty.
+- **Risk**: native users can pick a PDF/DOCX after seeing a full extraction promise, but only metadata may be saved. The UI should distinguish extracted text from metadata-only fallback.
+- **Score**: still **98/100 provisional**. This is a P1/P2 primary-input trust-state gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-090553-to-claude-capture-file-extraction-promise-gate.md`
+  - `agents/codex/outbox/preview/20260606-090553-capture-file-extraction-promise-gate.html`
+
+[Capture file extraction promise gate / 26.06.06 / 09:05:53]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #capture #file #trust #platform #claude-request
+- Confirmed this is distinct from Capture input jargon: it targets a platform-specific feature promise mismatch.
+- Audited `src/app/capture.tsx` file mode and `src/lib/wiki/capture-file.ts` extraction behavior.
+- Sent Claude a P1/P2 gate: file-mode copy and preview states must distinguish web PDF/DOCX extraction from native metadata-only fallback, or native extraction must be implemented/blocked.
+- Score remains 98/100 provisional until file-mode promises match actual platform behavior and are re-gated.
+
+## Previous (Capture input jargon gate)
 
 - **Task**: Capture primary input copy/jargon audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
