@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 22:40:42 KST
+updated: 2026-06-06 22:45:23 KST
 state: submitted_waiting_claude_review
 ---
 
@@ -12,16 +12,17 @@ state: submitted_waiting_claude_review
 - **Task**: Insights load error-state migration.
 - **src**: Claude request `20260606-220930-to-codex-capture-merged-next` / `feedback-alert-contract`.
 - **Hub state**: current work is ready for Claude review and cherry-pick.
-- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@20794de`.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@1a688c6`.
 - **Implemented**: migrated `/insights` load-failure feedback from blocking native `Alert.alert` to inline `PremiumErrorState` with retry.
 - **Copy**: removed user-facing `LLM call` / `AI 호출` wording from the insights hero subtitle.
 - **Behavior**: insights query, aggregation, empty state, refresh path, auth guard, and route behavior are unchanged.
 - **Guard**: extended `Feedback` check in `scripts/check-constraints.ts` to cover `/insights` and prevent reintroduced native alert or LLM-call copy there.
-- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npm run check:i18n` pass (`246 keys`); `npm run check:lexicon` pass; `npm run check:emdash` pass; `npm run check:llm-boundary` pass; `npx tsx scripts/check-constraints.ts` pass; Alert/LLM-copy search in `insights.tsx` returned 0 matches; `npm test -- --ci --runInBand` pass (92 suites, 837 tests); `git diff --check` pass.
-- **Local commit**: `022cb95408d3fa0af5d717aaad8a8217bb8f2eaf` (`fix(feedback): show insights load error state`), stacked after Import `acf0fa7d6a3e05708af70361a4bef872007a0e05` and ESM `5073e6528d09c8c4b1f69e45ee4e738992bb8846`.
-- **Pending stack vs origin/main**: `acf0fa7d6a3e05708af70361a4bef872007a0e05` + `5073e6528d09c8c4b1f69e45ee4e738992bb8846` + `022cb95408d3fa0af5d717aaad8a8217bb8f2eaf`.
+- **Validation**: `npx tsc --noEmit` pass after rebase; earlier full validation remains `npm run lint` pass; `npm run check:i18n` pass (`246 keys`); `npm run check:lexicon` pass; `npm run check:emdash` pass; `npm run check:llm-boundary` pass; `npx tsx scripts/check-constraints.ts` pass; Alert/LLM-copy search in `insights.tsx` returned 0 matches; `npm test -- --ci --runInBand` pass (92 suites, 837 tests); `git diff --check` pass.
+- **Local commit**: `c52fbfb85e3bf44cc9cabf94e4f78c192bb461cc` (`fix(feedback): show insights load error state`), rebased from submitted SHA `022cb95408d3fa0af5d717aaad8a8217bb8f2eaf` after Import/ESM were consumed on main.
+- **Pending stack vs origin/main**: `c52fbfb85e3bf44cc9cabf94e4f78c192bb461cc` only.
 - **Latest outputs**:
   - `agents/codex/outbox/20260606-224042-to-claude-insights-error-state.md`
+  - `agents/codex/outbox/20260606-224523-to-claude-insights-sha-update.md`
   - `agents/codex/outbox/preview/20260606-224042-insights-error-state.html`
 
 [Insights load error-state migration / 26.06.06 / 22:40:42]
