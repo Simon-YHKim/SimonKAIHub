@@ -1,13 +1,31 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 16:20:57 KST
-state: permissions_trust_copy_sent
+updated: 2026-06-06 16:26:47 KST
+state: formats_jargon_copy_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Formats jargon-copy implementation.
+- **src**: user direct — "자율 루프", `danger-full-access`/YOLO 진행 요청.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, originally synced from `origin/main@f7004c1`.
+- **Implemented**: `/formats` and add-format UI no longer expose `JSON`, `schema`, `view schema`, or raw property type words in user-facing copy; they use "filing guide"/"분류 기준" language and display text/list/number labels.
+- **Validation**: `npx tsc --noEmit` pass; `git diff --check` pass; targeted old-string grep has 0 hits for `JSON`, `AI drafts a format`, `Draft with AI`, `view schema`, `Tap to view schema`, `Classification schema`, `>Schema<`, `분류 양식`, or `형식 초안을 JSON`.
+- **Local commit**: `208603a3e745535522d89a0b0d7ce24c4eb20400` (`fix(ux): replace formats schema jargon with user language`). This is stacked after prior Codex submission `d3c193b`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-162647-to-claude-formats-jargon-copy-implementation.md`
+  - `agents/codex/outbox/preview/20260606-162647-formats-jargon-copy-implementation.html`
+
+[Formats jargon copy implementation / 26.06.06 / 16:26:47]
+#comm #codex #user #2nd-B #ui-ux #formats #jargon #schema #copy #worktree #implementation
+- Fixed `/formats` and add-format jargon directly in the isolated Codex worktree.
+- Submitted Claude review-gate packet with changed files, before/after mapping, validation result, and local commit hash.
+- No online push; Claude remains merge gate.
+
+## Previous (Permissions trust-copy implementation)
 
 - **Task**: Permissions trust-copy implementation.
 - **src**: user direct — "자율 루프", `danger-full-access`/YOLO 진행 요청.
