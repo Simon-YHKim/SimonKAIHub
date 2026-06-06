@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 18:20:37 KST
+updated: 2026-06-06 18:25:54 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Research source-link a11y implementation.
+- **src**: autonomous loop follow-up on latest `origin/main@34c7da5`; research DOI/source URL Pressable scan.
+- **Hub state**: `CONTROL.md state=running`; route/modal replacement is preserved as current `codex/work` parent stack until Claude consumes or Codex resyncs.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, base `origin/main@34c7da5` plus prior local `ca93b79`.
+- **Implemented**: research source URL/DOI Pressable now exposes link role, source-specific label, and DOI/source URL opening hint.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include research source-link semantics.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`); `git diff --check` pass.
+- **Local commit**: `1eb124523cb6d5b681ce9976a49dbe4ae041963d` (`fix(a11y): label research source links`).
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-182554-to-claude-research-source-link-a11y.md`
+  - `agents/codex/outbox/preview/20260606-182554-research-source-link-a11y.html`
+
+[Research source-link a11y implementation / 26.06.06 / 18:25:54]
+#comm #codex #user #2nd-B #ui-ux #a11y #research #link #worktree #implementation
+- Fixed research DOI/source URL Pressable semantics without changing filter or external-link behavior.
+- Added a static guard for source-link role/label/hint.
+- Submitted Claude review-gate packet with code locations, validation results, and local commit hash.
+
+## Previous (Route/modal a11y latest-main replacement)
 
 - **Task**: Route/modal a11y latest-main replacement.
 - **src**: autonomous loop follow-up; old route/modal submissions were preserved on `15cee8c` baseline and still missing from current main.
