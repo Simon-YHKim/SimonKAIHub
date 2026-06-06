@@ -203,6 +203,18 @@ created: 2026-06-05 15:22:34 KST
 6. **우선순위**: **런치 차단(외부의존) > P1 안전/데이터 > P2 > P3 폴리시**. 자율 루프가 P3 폴리시를 갈며 런치 차단을 방치하지 않는다.
 7. **일시정지 한 방**: 사용자가 Claude에 "멈춰" → Claude가 `CONTROL.md state: paused` → **모든 AI가 진행 중 사이클까지만 완료하고 정지**(§13).
 
+### 11.1 개별 공간(worktree) 맵 (2026-06-06 Simon 결정 — A안)
+> 코딩 AI는 **자기 worktree**에서만 수정한다(working-tree race 방지). node_modules는 main에서 **정션 공유**(디스크 0). 빌드 산출(android/·.expo)은 worktree별 격리.
+
+| AI | 개별 공간 (cwd) | 브랜치 | 비고 |
+|---|---|---|---|
+| Claude | `E:\2ndB` (main) | main + `claude/*` | 메인 코더 + 유일한 실제파일/온라인git 주체 |
+| Codex | `E:\Coding Infra\_worktrees\2ndB-codex` | `codex/work` | UI/UX 코딩 |
+| Antigravity | `E:\Coding Infra\_worktrees\2ndB-antigravity` | `antigravity/work` | Android 네이티브 코딩 |
+
+- **흐름**: AI가 자기 worktree에서 코딩·typecheck → 자기 브랜치 **로컬 커밋** → Claude에 제출(outbox, 브랜치·변경 요약) → Claude가 자기 공간으로 가져와 **최종 보완 후 main 머지 + 온라인 push**.
+- **온라인 git = Claude 단독**(AI는 push 안 함, 로컬 커밋까지만). 레거시 `codex/*` origin 브랜치는 Claude가 가치 선별 후 정리.
+
 ---
 
 ## 12. 자율 루프 차터 (Autonomous Loop Charter)

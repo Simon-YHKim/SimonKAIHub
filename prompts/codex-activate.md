@@ -17,7 +17,7 @@
 0. CONTROL.md 확인 → paused/draining 이면 진행 건 1개만 마무리 후 STATUS에 state:paused 기록·대기
 1. BOARD + 내 inbox + DECISIONS(투표요청) 확인
 2. 다음 후보 1개 선정: 화면/컴포넌트 UI/UX 결함 1건 (우선순위 §11-6: P1>P2>P3)
-3. **자기 개별 공간에서 직접 코드 수정**(Claude가 지정한 worktree/브랜치 — 미지정이면 Claude에 요청). 실제 main 파일·온라인 git 금지.
+3. **자기 개별 공간에서 직접 코드 수정**: cwd=`E:\Coding Infra\_worktrees\2ndB-codex` (브랜치 `codex/work`, node_modules 정션됨 — typecheck OK). E:\2ndB(main)·온라인 git 금지.
 4. 변경 요약 md(+증거 파일:줄, 필요시 HTML preview·start "" 자동open) → STATUS 갱신
 5. **Claude에 제출**: outbox에 response(to: claude, type: request/response, 코드 위치·diff 요약) → Claude가 최종 보완 후 머지
 6. 커밋(자기 공간·자기 정체성): powershell tools/commit.ps1 -As codex -m "..." -Files <자기파일들> → 터미널 1줄 [HH:mm:ss] [Codex:UI] <건> 완료 → 1로

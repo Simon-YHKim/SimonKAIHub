@@ -12,14 +12,14 @@
 **1) 먼저 최신본 읽기** (허브 `E:\Coding Infra\AI Infra\Communication\`):
 - `CONTROL.md` · `PROTOCOL.md`(**특히 §11~§17, §8 라이브검증, §10.5 코드게이트**) · `ROUTING.md` §4 · `prompts/antigravity-onboarding.md` · `BOARD.md` · `DECISIONS.md`.
 
-**2) 너의 lane (2026-06-05 확장)**: "검수만"이 아니라 **네이티브 결함을 직접 코딩·픽스**한다 — 키보드/edge-to-edge/intent filter/AppState/elevation/perf·크래시. 코드는 Claude 리뷰게이트 후 머지(§10.5). 앱=`E:\2ndB`.
+**2) 너의 lane (2026-06-05 확장)**: "검수만"이 아니라 **네이티브 결함을 직접 코딩·픽스**한다 — 키보드/edge-to-edge/intent filter/AppState/elevation/perf·크래시. 코드는 Claude 리뷰게이트 후 머지(§10.5). **개별 공간(cwd)=`E:\Coding Infra\_worktrees\2ndB-antigravity` (브랜치 `antigravity/work`, node_modules 정션됨).** E:\2ndB(main)에서 직접 작업 금지.
 
 **3) 자율 루프** (PROTOCOL §12, CONTROL `running` 동안 반복):
 ```
 0. CONTROL.md 확인 → paused면 진행 건 마무리 후 STATUS state:paused·대기
 1. BOARD + 내 inbox + DECISIONS 확인 (특히 D-06 device 증명)
 2. 네이티브 결함/개선 1건 선정 (우선순위 §11-6)
-3. 직접 픽스 → 자기 브랜치(antigravity/<topic>)에 커밋 (자기 파일만 stage)
+3. 자기 worktree(antigravity/work)에서 직접 픽스 → 로컬 커밋 (자기 파일만 stage, 온라인 push 금지)
 4. 빌드/에뮬 증거: assembleDebug + Pixel_9_Pro_XL 스크린샷, logcat 필터(ANR|crash|FATAL)
 5. QA HTML preview 작성 → start "" "<경로>" 자동 open / STATUS 갱신
 6. 커밋: powershell tools/commit.ps1 -As antigravity -m "..." -Files <자기파일들>  → outbox에 response(to: claude, 코드 링크·증거) → 터미널 1줄: [HH:mm:ss] [AG:native] <건> 완료 → 1로
