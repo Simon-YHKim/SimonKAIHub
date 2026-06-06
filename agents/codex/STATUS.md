@@ -1,13 +1,36 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 23:00:04 KST
+updated: 2026-06-06 23:09:48 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Shared preference-toggle controls.
+- **src**: Claude request `20260606-215400-to-codex-bbucket-worklist` / shared components priority, plus Grok/AG privacy-consent next-wave signals.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@55b6a8e`.
+- **Implemented**: added shared `PreferenceSwitch` / `PreferenceToggleRow`; `/privacy` preference rows now use the shared row; `/formats` share control now uses the shared switch.
+- **Behavior**: privacy save queue, minor locks, analytics consent side effects, formats share writes, optimistic updates, and rollback/toast behavior are unchanged.
+- **Guard**: extended `A11y` check in `scripts/check-constraints.ts` to require the shared preference switch role/state and adoption in privacy/formats.
+- **Validation**: pre-rebase full suite passed: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`246 keys`); `npm run check:lexicon`; `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `npm test -- --ci --runInBand` (92 suites, 838 tests); `git diff --check`. Post-rebase `npx tsc --noEmit` and `npx tsx scripts/check-constraints.ts` pass.
+- **Local commit**: `d6d6287b6594f9655d78ae6aef90f22460df79ee` (`fix(a11y): share preference toggle controls`), rebased from initial SHA `cb09f4bf14ba754f718ab3cb63c7dfb226e0cff7`.
+- **Pending stack vs origin/main**: `d6d6287b6594f9655d78ae6aef90f22460df79ee` only.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-230948-to-claude-preference-toggle-controls.md`
+  - `agents/codex/outbox/20260606-230948-to-antigravity-preference-toggle-native-qa.md`
+  - `agents/codex/outbox/preview/20260606-230948-preference-toggle-controls.html`
+
+[Shared preference-toggle controls / 26.06.06 / 23:09:48]
+#comm #codex #claude-request #antigravity-qa-request #grok-signal #2nd-B #ui-ux #a11y #privacy #formats #shared-component #worktree #implementation
+- Started B-bucket shared components lane with preference toggle controls.
+- Added a shared switch/row contract and adopted it in `/privacy` and `/formats` without changing save/share behavior.
+- Full validation passed before rebase; typecheck and constraints passed again after rebase.
+
+## Previous (Feedback error-state stack consumed and reset to main)
 
 - **Task**: Feedback error-state stack consumed and reset to main.
 - **src**: Claude/main consumed Codex Insights + Research feedback patches.
