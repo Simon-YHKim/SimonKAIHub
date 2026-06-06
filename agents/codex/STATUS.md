@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 01:21:07 KST
+updated: 2026-06-07 01:28:56 KST
 state: submitted_waiting_claude_review
 ---
 
@@ -9,19 +9,22 @@ state: submitted_waiting_claude_review
 
 ## Current (latest)
 
-- **Task**: E9 tier icon asset map.
-- **src**: Claude request `20260607-001100-to-codex-ux-ebucket` / E9 asset consistency, non-destructive tier icon slice.
-- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native smoke QA PASS relayed to Claude.
+- **Task**: E17 onboarding concrete intro.
+- **src**: Claude `PROPOSAL_QUEUE.md` E17 high/open, persona-expanded finding that the first-run onboarding is too metaphor-heavy for low-literacy and translation contexts.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested.
 - **Rule update**: user-provided `AGENTS.md` operating profile reconfirmed in Codex-owned `agents/codex/RULES.md`; global protocol remains Claude-owned.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@e53e49d`.
-- **Pending predecessors**: none. E1 capture progressive modes is already represented on main as `019671c`.
-- **Implemented**: mapped all 13 production tier icon PNGs into code, moved tier icon IDs/source-kind mapping into a pure contract, and added Jest coverage comparing folder assets with code IDs.
-- **Native QA**: Antigravity reported PASS for app boot, missing-asset absence, source-kind mapping stability, companion surface, and graph overlay regression smoke.
-- **Guard**: extended constraints to require the four previously missing icon files and source-kind mappings.
+- **Pending predecessors**: E9 tier icon asset map `b223464a929999251c7112c635121a7e4bb87c36`, already submitted and AG PASS relayed.
+- **Implemented**: reduced `/onboarding` from five metaphor-heavy steps to three concrete user-action steps, removed village/node/road/piece copy from the onboarding narrative, and added visible `1 / 3` progress text next to the existing accessible dot indicator.
+- **Native QA**: requested from Antigravity for Android narrow-width, large-font, routing, screen-reader, and art-surface smoke.
+- **Guard**: added `Onboarding` static check requiring concrete 3-step flow, visible progress text, and absence of the old metaphor copy.
 - **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`261 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass after rebase onto `origin/main@e53e49d`.
-- **Local commit**: `b223464a929999251c7112c635121a7e4bb87c36` (`fix(assets): map all production tier icons`).
-- **Pending stack vs origin/main**: `b223464a929999251c7112c635121a7e4bb87c36` only.
+- **Local commit**: `291d9406540da7b36871e2a7f599189f4d7632c9` (`fix(ux): simplify onboarding intro`).
+- **Pending stack vs origin/main**: `b223464a929999251c7112c635121a7e4bb87c36` + `291d9406540da7b36871e2a7f599189f4d7632c9`.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-012856-to-claude-onboarding-concrete-intro.md`
+  - `agents/codex/outbox/20260607-012856-to-antigravity-onboarding-native-qa.md`
+  - `agents/codex/outbox/preview/20260607-012856-onboarding-concrete-intro.html`
   - `agents/codex/outbox/20260607-011851-to-claude-tier-icons-asset-map.md`
   - `agents/codex/outbox/20260607-011851-to-antigravity-tier-icons-asset-smoke-qa.md`
   - `agents/codex/outbox/20260607-012107-to-claude-tier-icons-native-qa-pass-relay.md`
@@ -34,6 +37,21 @@ state: submitted_waiting_claude_review
   - `agents/codex/outbox/20260607-005305-to-claude-wiki-export-native-qa-pass-relay.md`
   - `agents/codex/outbox/20260607-004138-to-claude-likert-accessibility.md`
   - `agents/codex/outbox/20260607-004454-to-claude-likert-accessibility-sha-update.md`
+
+[E17 onboarding concrete intro / 26.06.07 / 01:28:56]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #onboarding #copy #ebucket #worktree #implementation
+- Completed the E17 onboarding metaphor abstraction fix.
+- Reframed the first-run path as save note -> answer from records -> save first note.
+- Added visible progress text and a static regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (E9 tier icon asset map)
+
+- **Local commit**: `b223464a929999251c7112c635121a7e4bb87c36` (`fix(assets): map all production tier icons`).
+- **Implemented**: mapped all 13 production tier icon PNGs into code, moved tier icon IDs/source-kind mapping into a pure contract, and added Jest coverage comparing folder assets with code IDs.
+- **Native QA**: Antigravity reported PASS for app boot, missing-asset absence, source-kind mapping stability, companion surface, and graph overlay regression smoke.
+- **Validation**: full suite passed, including Jest 95 suites / 848 tests.
+- **Outputs**: `agents/codex/outbox/20260607-011851-to-claude-tier-icons-asset-map.md`; `agents/codex/outbox/20260607-012107-to-claude-tier-icons-native-qa-pass-relay.md`; `agents/codex/outbox/preview/20260607-011851-tier-icons-asset-map.html`.
 
 [E9 tier icon asset map / 26.06.07 / 01:18:51]
 #comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #assets #tier-icons #ebucket #worktree #implementation
