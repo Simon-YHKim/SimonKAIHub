@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 21:49:53 KST
+updated: 2026-06-06 21:55:27 KST
 state: submitted_waiting_claude_review
 ---
 
@@ -9,17 +9,26 @@ state: submitted_waiting_claude_review
 
 ## Current (latest)
 
-- **Task**: Capture alert-copy i18n bundle implementation.
+- **Task**: Capture mode/track copy i18n bundle implementation.
 - **src**: Claude request `20260606-212300-to-codex-redirect-i18n` plus user-directed 2-minute loop.
 - **Hub state**: current work is ready for Claude review and cherry-pick.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@a73c8d9`.
-- **Implemented**: `/capture` image/OCR/file/journal/capture/proposed-format alert copy, retry/dismiss labels, format-saved messages, and saved-title fallback moved from inline `locale === "ko" ? ... : ...` branches into `locales/en|ko/capture.json`.
-- **Guard**: extended `scripts/check-constraints.ts` C7 to require the capture alert bundle keys and reject the covered inline English alert literals in `src/app/capture.tsx`.
-- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npm run check:i18n` pass; `npm run check:lexicon` pass; `npm run check:emdash` pass; `npm run check:llm-boundary` pass; `npx tsx scripts/check-constraints.ts` pass; `npm test -- --ci --runInBand` pass (92 suites, 836 tests); `git diff --check` pass.
-- **Local commit**: `0e0fc90dec3b5a2d7b21ee87b99f3b492073cbf9` (`fix(i18n): bundle capture alert copy`).
+- **Implemented**: `/capture` mode tab labels, mode help text, wiki-track labels, track selector label/eyebrow, capture-mode tablist label, and manage-format link copy moved into `locales/en|ko/capture.json`.
+- **Guard**: extended `scripts/check-constraints.ts` C7 to require both capture alert and mode/track bundle keys and reject covered inline English copy in `src/app/capture.tsx`.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npm run check:i18n` pass (`242 keys`); `npm run check:lexicon` pass; `npm run check:emdash` pass; `npm run check:llm-boundary` pass; `npx tsx scripts/check-constraints.ts` pass; `npm test -- --ci --runInBand` pass (92 suites, 836 tests); `git diff --check` pass.
+- **Local commit**: `c884f809477e30948fe60dabdbc88762632e3739` (`fix(i18n): bundle capture mode copy`), stacked after `0e0fc90dec3b5a2d7b21ee87b99f3b492073cbf9`.
+- **Pending stack vs origin/main**: `0e0fc90dec3b5a2d7b21ee87b99f3b492073cbf9` + `c884f809477e30948fe60dabdbc88762632e3739`.
 - **Latest outputs**:
-  - `agents/codex/outbox/20260606-214953-to-claude-capture-alert-copy-i18n.md`
-  - `agents/codex/outbox/preview/20260606-214953-capture-alert-copy-i18n.html`
+  - `agents/codex/outbox/20260606-215527-to-claude-capture-mode-copy-i18n.md`
+  - `agents/codex/outbox/preview/20260606-215527-capture-mode-copy-i18n.html`
+
+[Capture mode/track copy i18n bundle implementation / 26.06.06 / 21:55:27]
+#comm #codex #claude-request #2nd-B #ui-ux #i18n #capture #mode-tabs #track-tabs #copy-contract #worktree #implementation
+- Fixed the second capture i18n cluster without changing mode ids, track ids, selected states, reset-on-mode-change behavior, layout, or routes.
+- Added static C7 guard coverage for mode/track locale bundle keys and inline-copy regression.
+- Full validation passed, including Jest 92 suites / 836 tests.
+
+## Previous (Capture alert-copy i18n bundle implementation)
 
 [Capture alert-copy i18n bundle implementation / 26.06.06 / 21:49:53]
 #comm #codex #claude-request #2nd-B #ui-ux #i18n #capture #copy-contract #worktree #implementation
