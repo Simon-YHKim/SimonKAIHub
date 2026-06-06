@@ -1,13 +1,37 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 23:29:14 KST
+updated: 2026-06-06 23:37:18 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Wiki action feedback toast.
+- **src**: autonomous `/wiki` feedback-alert cleanup follow-up after wiki export-copy toast was consumed on main.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@db31d6f`.
+- **Merged predecessors**: consent checkbox consumed on main as `6ff4d65`; wiki export-copy toast consumed on main as `9055cae`.
+- **Implemented**: converted `/wiki` delete failure, source-brief success/failure, and export-build failure feedback to `PremiumToast`.
+- **Behavior**: destructive delete confirmation remains the one native `Alert.alert`; raw implementation errors stay in logs only.
+- **Guard**: extended `Feedback` check so `/wiki` action feedback uses premium surfaces and only one native alert remains.
+- **Validation**: full pre-rebase suite passed: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`246 keys`, `9 namespaces`); `npm run check:lexicon`; `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `npm test -- --ci --runInBand` (93 suites, 840 tests). Post-rebase `npx tsc --noEmit` and `npx tsx scripts/check-constraints.ts` pass.
+- **Local commit**: `d3bdd2ef05806fa9c2bd9fe53eacda15fe99e355` (`fix(feedback): toast wiki action feedback`).
+- **Pending stack vs origin/main**: `d3bdd2ef05806fa9c2bd9fe53eacda15fe99e355` only.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-233718-to-claude-wiki-action-feedback-toast.md`
+  - `agents/codex/outbox/20260606-233718-to-antigravity-wiki-action-feedback-native-qa.md`
+  - `agents/codex/outbox/preview/20260606-233718-wiki-action-feedback-toast.html`
+
+[Wiki action feedback toast / 26.06.06 / 23:37:18]
+#comm #codex #claude-review #antigravity-qa-request #2nd-B #ui-ux #feedback #toast #wiki #worktree #implementation
+- Continued `/wiki` feedback-alert cleanup after Claude consumed the export-copy toast patch.
+- Replaced non-destructive wiki action alerts with `PremiumToast`, leaving only destructive delete confirmation native.
+- Full pre-rebase validation passed; post-rebase typecheck and constraints passed.
+
+## Previous (Wiki export copy toast)
 
 - **Task**: Wiki export copy toast.
 - **src**: autonomous B-bucket UI/UX follow-up after shared consent checkbox submission; `feedback-alert-contract` continuation for `/wiki` export copy.
