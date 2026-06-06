@@ -22,6 +22,7 @@ live_head: 2nd-B main 0dfa75a
 
 ## 🔐 외부의존 블로커 (Simon 개입 필요 — §15)
 - (DECISIONS.md `external` 항목 참조: D-03 consent 법무, D-05 social provider 실설정)
+- **🔴 수익화 결정 5건 (페르소나 시뮬 65 simon 항목)** — PROPOSAL_QUEUE 'Simon 수익화 결정' 블록: M1 가격투명성(요금제화면+가격확정)·M2 무료티어 관대함·M3 결제수단/PG(Stripe만으론 KR/저소득 배제)·M4 구독모델/피로·M5 신뢰인증. 승인 후 Claude가 티어게이팅·요금제·결제 구현.
 
 ## 🤝 합의 진행 (Consensus — DECISIONS.md)
 - D-01~D-07 투표 대기 (펀치리스트 이관). 각 AI는 `type: consensus_vote`로 참여.

@@ -84,3 +84,25 @@
 | E9 | **자산 일관성 15건** — 네이밍 혼재·버전접미사(v1/v3/final/candidate)·스타일 혼합·미사용 정규화 | codex+claude | med | open |
 | E10 | settings 전체삭제 확인 — typed 'DELETE'는 의도된 안전마찰 → 제거 대신 카피 명확화만(전체wipe는 typed 유지) | claude review | low | open |
 | E11 | 미래기능 비전 7건 — 협업/공유·이미지 스튜디오 등 → '곧 옴'/숨김 | simon | — | open |
+
+### E (확장) — 소득구간 × 문화/국가 (페르소나 시뮬 w7nuzgtiy, 190발견)
+> 전체: `agents/claude/persona-ux-findings-expand-20260607.json`. 차원: income 98·culture 92. 유형: non-intuitive 54·trust-privacy 39·pricing-payment 32·cultural-fit 24·locale-i18n 18·overload 13. 담당: codex 94·**simon 65**·claude 16·ag 15.
+
+| # | 테마 | 담당 | sev | status |
+|---|---|---|---|---|
+| E16 | **데이터 사용량 힌트** — OCR/File 데이터 비용·Wi-Fi 권장(저사양·선불폰·데이터민감) | ag | high | open |
+| E17 | **온보딩 메타포 추상성** — 조각/마을/그래프/노드/신경망이 저학력·번역 시 불명확 → 구체 시나리오 카피·3단계 축약 | codex | high | open |
+| E18 | **신뢰/프라이버시 카피** — consent 국외전송('Google에 뺏긴다' 오독)·민감내용 동의 불신 → 안심 카피(암호화·비열람·법규준수), 문화별 차등 | codex | high | open |
+| E19 | **locale-i18n(18)** — 영어 혼용 레이블(long_term_memory 등)·해당언어 부재 폴백 노출·통화 표기 | codex | med | open |
+| E20 | **RTL·중동** — 아랍어 RTL 레이아웃·이슬람 가치·gender·종교 달력 | codex(레이아웃)+ag(네이티브 RTL) | med | open |
+| E21 | **OAuth provider 시장별** — KR=Kakao/Naver·JP=LINE·글로벌=Google/Apple 가용 gating(D-05 연계) | simon+ag | med | open |
+| E22 | **cultural-fit(24)** — 자기성찰/저널링 수용성·톤(존댓말/겸손/관계중심)·종교/가족/집단주의 카피 적응 | codex | med | open |
+
+### 🔴 Simon 수익화 결정 필요 (65 simon 항목 통합 — §15 external·business)
+> 시뮬이 드러낸 **수익화 시스템의 구체 갭**(Simon 수익화 고도화 목표 직결). 가격·결제는 비즈니스+실비용이라 **Claude 단독 결정 불가 → Simon 승인 후 구현**.
+- **M1 가격 투명성**: soma/cortex/brain 가격·요금제 화면이 어디에도 없음 → `account.tsx`에 PricingCard/요금제 섹션. **가격(KRW/USD) 확정 필요**.
+- **M2 무료티어 관대함**: journal 2개 제한이 핵심가치(패턴/AI) 경험 전 차단 → empty state만 봄. 무료 1회 AI 맛보기 or 한도 재설계. **티어 정책 결정**.
+- **M3 결제수단/PG**: Stripe(신용카드)만으론 저소득·KR·글로벌 배제 → 토스/카카오페이/휴대폰결제/UPI/Pix/모바일머니 + 원타임/소액/선불 옵션. **PG 선택**.
+- **M4 구독 모델·피로**: 단일 구독부터(soma)·업셀 피로 방지·티어 트레이드업·광고지원 여부(저소득 수용성). **모델 결정**.
+- **M5 신뢰 인증**: SOC2/암호화 등 신뢰 시그널(법무·인증 실행). 카피는 Codex(E18), 인증은 Simon.
+> 결정되면 Claude가 티어 게이팅·요금제 화면·결제 플로우 구현. 그 전엔 무료티어 한도 도달 시 **막다른길 제거**(행동경로 안내)만 저위험 선제 가능.
