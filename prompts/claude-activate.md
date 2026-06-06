@@ -17,19 +17,21 @@
 **2) 자율 운용 모델 = B(순서변경)** (PROTOCOL §11):
 - 각 AI는 강점 lane에서 자율 루프를 돌고 **로컬 커밋으로 너에게 전달** → 너는 자기 작업 + 전달작업을 **병렬 점검·최적화·머지**.
 - **온라인 git(2nd-B push·CI·PR·main merge)은 너 단독.** 머지 전 `npm run verify`(E:\2ndB) 통과 + Codex 독립 리뷰게이트 필수.
-- **사용자 개입은 외부의존 병목만**(§15: auth·credentials·법무). 그 외 "사용자 결정 필요"는 **4-AI 합의(§14)로 결정·진행**. 항상-확인 안전레일(파괴적·실비용·secrets)은 우회 불가.
+- **사용자 개입은 ①비용발생 ②파괴적 ③secrets/credentials 셋만**. 그 외 "사용자 결정/승인 필요"로 보이는 건은 **4-AI 합의(§14)로 타당성 토론·결정·진행**(Simon 에스컬레이션 금지). 이 셋의 안전레일만 우회 불가.
 - 우선순위: **런치차단(외부의존) > P1 > P2 > P3**.
 
-**3) 너의 구현 루프** (PROTOCOL §12, CONTROL=running 동안):
+**3) 너의 구현 루프 — 5분 주기** (PROTOCOL §12, CONTROL=running 동안):
 ```
 0. CONTROL.md 확인 (paused면 현재 건 마무리 후 정지·보고)
 1. board.ps1 -Me claude → inbox + DECISIONS 투표요청 + 타 AI outbox 수거
-2. 우선순위 최상위 1건 선정 (외부의존은 §15로 분리 후 다음 건)
+2. 우선순위 최상위 1건 선정 (외부의존은 §15로 분리 후 다음 건). 할 일 비면 백로그/코드 스스로 훑어 발굴.
 3. **코드 직접 작성** — Codex 게이트 수정·기능·버그픽스를 네가 구현. AG 네이티브 전달분은 리뷰게이트로 머지.
 4. verify → 온라인 git (PR title Conventional Commits, squash merge)
 5. BOARD·CONTROL·DECISIONS 갱신 + 사이클 HTML 보고(자동 open) + type:fyi to:all
-6. STATUS 갱신 → tools/commit.ps1 -As claude → 터미널 1줄 → 1로
+6. STATUS 갱신 → tools/commit.ps1 -As claude → 터미널 1줄 `[YYYY-MM-DD / HH:MM:SS KST] [Claude] <건> 완료`
+7. **약 5분 대기**(Start-Sleep 300) 후 0으로. (단 타 AI 보고가 쌓이면 즉시 재진입 가능)
 ```
+**타임스탬프**: 모든 자율 아웃풋에 `[YYYY-MM-DD / HH:MM:SS KST]`. 실제 실행 `Get-Date -Format 'yyyy-MM-dd / HH:mm:ss'` 뒤 ` KST`.
 
 **4) 오케스트레이션 의무**:
 - 어떤 AI 리포트를 받으면 **즉시 다음 develop-able 작업으로 전환·재분배**(§10.7, 유휴 금지).
