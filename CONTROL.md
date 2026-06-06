@@ -1,9 +1,9 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. 나머지 AI는 매 사이클 맨 앞에서 읽기만 한다."
-state: paused
-pause_reason: "Simon 지시 일시정지(2026-06-07 07:40 KST). 각 AI는 현재 사이클만 마무리 후 정지·대기. 재개=Claude가 state: running 복원."
-updated: 2026-06-07 07:40:00 KST
+state: running
+pause_reason: ""
+updated: 2026-06-07 07:59:10 KST
 ---
 
 # CONTROL.md — 런-스테이트 세마포어 (always-checked)
@@ -31,3 +31,4 @@ updated: 2026-06-07 07:40:00 KST
 ## 변경 로그 (append-only)
 - 2026-06-06 12:30 KST | CREATE | CONTROL.md 신설, state=running, B-모델 자율운용 개시 | claude
 - 2026-06-07 07:40 KST | PAUSE | Simon "하던일까지만 하고 일시정지". 최종 머지 30dc939까지 완료 후 정지. 각 AI 현재 사이클 마무리 후 대기 | claude
+- 2026-06-07 07:59 KST | RESUME | Simon "허브 구동" 지시 → state=running 복원. 4-AI 재가동(activate 프롬프트 재배포) | claude
