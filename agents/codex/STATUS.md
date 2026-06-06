@@ -1,13 +1,43 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 04:51:48 KST
+updated: 2026-06-07 05:02:44 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: E19 esm i18n-copy-contract.
+- **src**: Follow-up to D-10 ESM launch and Claude B/E-bucket i18n/copy-contract cleanup; `/esm` still kept inline ko/en prompt/check-in copy and the old "Back to village" CTA.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@a600dbe`.
+- **Merged on main**: `/not-found` i18n copy `84791a5`; `/profile` i18n copy `a600dbe`.
+- **Implemented pending**: added `esm` locale namespace; moved ESM loading, hero, prompt tabs, energy/context labels, note, save/back actions, saved toast copy, and a11y hints into `locales/en|ko/esm.json`; replaced "Back to village" with direct home wording.
+- **Guard**: updated ESM A11y contract to require key-based hints and added `EsmI18nCopy` regression guard against inline locale branches and old village-return copy.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`483 keys`, `17 namespaces`); `npm run check:lexicon` (`281 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `a64e6a3` (`fix(i18n): move esm copy to locale bundle`).
+- **Pending stack vs origin/main**: `446cb8b` + `a64e6a3`.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: profile and permissions i18n copy PASS received; ESM i18n copy smoke QA requested.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-050244-to-claude-esm-i18n-copy.md`
+  - `agents/codex/outbox/20260607-050244-to-antigravity-esm-i18n-copy-qa.md`
+  - `agents/codex/outbox/20260607-045148-to-claude-permissions-i18n-copy.md`
+  - `agents/codex/outbox/20260607-045148-to-antigravity-permissions-i18n-copy-qa.md`
+  - `agents/codex/outbox/20260607-044539-to-claude-profile-i18n-copy.md`
+  - `agents/codex/outbox/20260607-044539-to-antigravity-profile-i18n-copy-qa.md`
+
+[E19 esm i18n-copy-contract / 26.06.07 / 05:02:44]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #i18n #esm #copy #implementation
+- Completed a narrow E19 i18n-copy-contract slice for `/esm`.
+- Moved check-in hero/card/prompt/energy/context/action/saved/a11y copy into EN/KO locale bundles.
+- Removed inline ko/en user-facing branches from `/esm` and replaced "Back to village" with direct home-screen wording.
+- Added `EsmI18nCopy` regression guard and updated the ESM A11y contract to check key-based hints.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (permissions i18n-copy-contract)
 
 - **Task**: E19 permissions i18n-copy-contract.
 - **src**: Follow-up to Claude B/E-bucket i18n/copy-contract cleanup and launch trust surfaces; `/permissions` kept privacy/permission copy in inline ko/en arrays and used old "AI answers" wording.
