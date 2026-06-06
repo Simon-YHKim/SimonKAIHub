@@ -1,13 +1,37 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 23:37:18 KST
+updated: 2026-06-06 23:43:20 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Sign-in feedback toast.
+- **src**: autonomous auth/onboarding feedback-alert cleanup after Antigravity passed wiki export/action feedback QA.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@db31d6f`.
+- **Pending predecessor**: wiki action feedback commit `d3bdd2ef05806fa9c2bd9fe53eacda15fe99e355`.
+- **Implemented**: replaced `/sign-in` sign-in/OAuth/Naver failure `Alert.alert` feedback with `PremiumToast`.
+- **Reset help**: replaced the forgot-password native alert with an inline reset-help card plus short info toast.
+- **Guard**: extended `Feedback` check so `/sign-in` avoids `Alert.alert`, uses `PremiumToast`, and keeps the reset-help card.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`246 keys`, `9 namespaces`); `npm run check:lexicon`; `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `npm test -- --ci --runInBand` (93 suites, 840 tests) all pass.
+- **Local commit**: `4eadb1f3e549c903bf4843dc5f1f4102e049303a` (`fix(feedback): toast sign-in feedback`).
+- **Pending stack vs origin/main**: `d3bdd2ef05806fa9c2bd9fe53eacda15fe99e355` + `4eadb1f3e549c903bf4843dc5f1f4102e049303a`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-234320-to-claude-sign-in-feedback-toast.md`
+  - `agents/codex/outbox/20260606-234320-to-antigravity-sign-in-feedback-native-qa.md`
+  - `agents/codex/outbox/preview/20260606-234320-sign-in-feedback-toast.html`
+
+[Sign-in feedback toast / 26.06.06 / 23:43:20]
+#comm #codex #claude-review #antigravity-qa-request #2nd-B #ui-ux #feedback #toast #auth #sign-in #worktree #implementation
+- Continued feedback-alert cleanup in the unauthenticated entry screen.
+- Replaced sign-in/OAuth error alerts with `PremiumToast` and moved reset instructions inline.
+- Full validation passed, including Jest 93 suites / 840 tests.
+
+## Previous (Wiki action feedback toast)
 
 - **Task**: Wiki action feedback toast.
 - **src**: autonomous `/wiki` feedback-alert cleanup follow-up after wiki export-copy toast was consumed on main.
