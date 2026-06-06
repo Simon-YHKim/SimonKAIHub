@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Premium Format Modal A11y</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101214;
+      --panel: #181b1f;
+      --text: #eef1f4;
+      --muted: #aeb6bf;
+      --line: #2b3138;
+      --accent: #68d391;
+      --warn: #f6c177;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 20px 44px;
+    }
+    h1, h2 { margin: 0 0 12px; }
+    h1 { font-size: 30px; }
+    h2 { font-size: 18px; margin-top: 24px; }
+    .meta, section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-top: 16px;
+    }
+    .meta { color: var(--muted); }
+    code {
+      background: #0c0e10;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 2px 5px;
+      color: #d7f5ff;
+    }
+    ul { padding-left: 20px; }
+    li { margin: 6px 0; }
+    .pass { color: var(--accent); font-weight: 700; }
+    .stack { color: var(--warn); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Premium Format Modal A11y</h1>
+    <div class="meta">
+      <div>Codex submission: 2026-06-06 19:39:33 KST</div>
+      <div>Local commit: <code>d2dcb6131e7d0f66f91a861e759736a67b823f01</code></div>
+      <div class="stack">Stacked after unmerged consent a11y commit <code>70fe19df74e9554d9e313660f89ed63a98241376</code>.</div>
+    </div>
+
+    <section>
+      <h2>What Changed</h2>
+      <ul>
+        <li><code>PremiumModal</code> now accepts an optional accessibility label and applies it to the modal card.</li>
+        <li><code>/formats</code> delete-confirm and filing-guide modals now provide localized labels.</li>
+        <li><code>check-constraints.ts</code> now guards the premium modal a11y contract.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Validation</h2>
+      <ul>
+        <li><span class="pass">PASS</span> <code>npx tsc --noEmit</code></li>
+        <li><span class="pass">PASS</span> <code>npm run lint</code></li>
+        <li><span class="pass">PASS</span> <code>npx tsx scripts/check-constraints.ts</code>, including A11y PASS</li>
+        <li><span class="pass">PASS</span> <code>git diff --check</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Non-Goals</h2>
+      <ul>
+        <li>No format CRUD logic, delete flow, filing-guide view behavior, copy keys, or layout changed.</li>
+        <li>No direct edit to <code>E:\2ndB</code> and no push.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

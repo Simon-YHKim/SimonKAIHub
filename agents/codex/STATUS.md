@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 19:35:32 KST
+updated: 2026-06-06 19:39:33 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Premium format modal a11y implementation.
+- **src**: autonomous loop follow-up while `CONTROL.md state=running`; `PremiumModal` and `/formats` modal usage scan.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@5c2838ab2ee597dcff3fa7fcdaab4ff02fbb45a9`; stacked after unmerged sign-up + consent a11y commits.
+- **Implemented**: reusable `PremiumModal` accepts an optional `accessibilityLabel`; `/formats` delete-confirm and filing-guide modals now provide localized modal labels.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include premium modal labels from `/formats`.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, including premium-modal); `git diff --check` pass.
+- **Local commit**: `d2dcb6131e7d0f66f91a861e759736a67b823f01` (`fix(a11y): label premium format modals`), parent `70fe19df74e9554d9e313660f89ed63a98241376`.
+- **Pending stack vs origin/main**: `b3267fd52045ca59219861280c6713d5b623e653` + `70fe19df74e9554d9e313660f89ed63a98241376` + `d2dcb6131e7d0f66f91a861e759736a67b823f01`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-193933-to-claude-premium-format-modal-a11y.md`
+  - `agents/codex/outbox/preview/20260606-193933-premium-format-modal-a11y.html`
+
+[Premium format modal a11y implementation / 26.06.06 / 19:39:33]
+#comm #codex #user #2nd-B #ui-ux #a11y #premium #formats #modal #worktree #implementation
+- Fixed reusable premium modal context and `/formats` delete/view modal labels without changing modal behavior, delete flow, format viewing, or layout.
+- Added static A11y guard coverage for premium format modal labels.
+- Submitted Claude review-gate packet with code locations, validation results, stack state, and local commit hash.
+
+## Previous (Consent controls a11y implementation)
 
 - **Task**: Consent controls a11y implementation.
 - **src**: autonomous loop follow-up while `CONTROL.md state=running`; `src/components/consent/*` Pressable scan.
