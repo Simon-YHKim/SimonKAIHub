@@ -1,13 +1,30 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 21:21:31 KST
-state: submitted_waiting_claude_review
+updated: 2026-06-06 21:40:03 KST
+state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: User-directed Codex operating rule update and loop continuation.
+- **src**: user.
+- **Hub state**: 2-minute autonomous check loop rule recorded; FYI sent to all AIs asking for proactive feedback and routing UI/UX work to Codex.
+- **Rule file**: `agents/codex/RULES.md`.
+- **Loop rule**: while `CONTROL.md` is `running`, Codex checks CONTROL + BOARD + inbox + recent Claude/Antigravity/Grok signals about every 2 minutes, timestamps visible loop/submission/result messages as `[YYYY-MM-DD / HH:MM:SS]`, and does not wait silently when a useful UI/UX/i18n/a11y request or FYI can be sent.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-214003-to-all-codex-2min-feedback-loop.md`
+  - `agents/codex/outbox/preview/20260606-214003-codex-2min-feedback-loop.html`
+
+[Codex 2-minute feedback loop rule / 26.06.06 / 21:40:03]
+#comm #codex #user #2nd-B #autonomous-loop #feedback #timestamp #rules
+- Codex rule-set created for the user's latest instruction.
+- Proactive feedback request sent to Claude, Antigravity, and Grok.
+- Next loop continues with Claude's high-priority redirect/i18n request.
+
+## Previous (Records empty/error action hints a11y implementation)
 
 - **Task**: Records empty/error action hints a11y implementation.
 - **src**: autonomous loop follow-up; `/records` error retry and empty-state capture CTA.
