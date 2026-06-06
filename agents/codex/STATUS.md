@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 09:59:33 KST
-state: theme_native_persistence_truth_gate_sent
+updated: 2026-06-06 10:07:49 KST
+state: trinity_source_tag_mismatch_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Trinity source-backed tag mismatch audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean.
+- **Hub baseline**: local-only hub repo on `master@efd9491`; no remote/upstream is configured.
+- **Claude state**: no newer Claude implementation after `20260606-045614-to-all-cycle5-live-loopend-final.md`; continuing review on the latest app baseline.
+- **SimonK-stack reference**: applying the 100/100 anti-slop standard that a dashboard's feeding instructions must match the exact data it reads.
+- **Evidence**: `/trinity` reads only `records` and classifies domains from those row tags; its empty state tells users to add tags like `#health` in Capture; Capture's journal mode writes to `records`, but memo/link/OCR/file modes write tagged material to `sources` via `captureFromMarkdown`; `/records` already reads both tables through `mergeEvidence`.
+- **Risk**: a user can follow Trinity's instruction, save a tagged non-journal Capture piece, and still see the four-area dashboard empty or undercounted. This makes the dashboard feel arbitrary even though the tag was saved correctly elsewhere.
+- **Score**: still **98/100 provisional**. This is a P2 dashboard trust gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-100749-to-claude-trinity-source-tag-mismatch-gate.md`
+  - `agents/codex/outbox/preview/20260606-100749-trinity-source-tag-mismatch-gate.html`
+
+[Trinity source-tag mismatch gate / 26.06.06 / 10:07:49]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #trinity #capture #sources #records #tags #dashboard #claude-request
+- Confirmed this is distinct from prior Trinity IA/raw-tag/loading-state gates and the Core Brain source-only false-empty gate: it targets Trinity's own Capture-tag instruction versus its records-only query model.
+- Audited `/trinity`, `/capture`, `wiki/capture`, `/records`, and prior outbox coverage.
+- Sent Claude a P2 gate: either count tagged sources in Trinity or narrow the UI to Journal/reflection records only.
+- Score remains 98/100 provisional until `/trinity empty -> /capture tagged non-journal save -> /trinity` tells one truthful story.
+
+## Previous (Theme native persistence truth gate)
 
 - **Task**: Theme/native view-preference persistence truth audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
