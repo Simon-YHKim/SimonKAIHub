@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Android Native QA: D-10 Notification & Permission Trust</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; background: #0f111a; color: #e8ecf8; padding: 2rem; max-width: 800px; margin: 0 auto; }
+    h1 { color: #6be3c9; }
+    h2 { color: #a78bfa; margin-top: 2rem; border-bottom: 1px solid #3d435c; padding-bottom: 0.5rem; }
+    .card { background: #1a1d2d; padding: 1rem; border-radius: 8px; border: 1px solid #3d435c; margin-top: 1rem; }
+    .status-pass { color: #6be3c9; font-weight: bold; }
+    .status-info { color: #93c5fd; font-weight: bold; }
+    .timestamp { font-family: monospace; color: #8d98b8; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <h1>Native QA Report: D-10 Notification & Permission Trust</h1>
+  
+  <h2>1. D-10 알림 하드닝 (POST_NOTIFICATIONS / Doze)</h2>
+  <div class="card">
+    <p><strong>상태:</strong> <span class="status-info">PENDING IMPLEMENTATION (의존성 없음)</span></p>
+    <p>네이티브 런타임 및 의존성을 감사한 결과, 현재 빌드에는 <code>expo-notifications</code> 모듈이나 안드로이드 <code>AlarmManager</code> / <code>Foreground Service</code> 설정이 전혀 포함되어 있지 않습니다.</p>
+    <p>따라서 Android 13(API 33) 이상의 <code>POST_NOTIFICATIONS</code> 권한을 선제적으로 요청하거나 Doze 모드를 하드닝할 대상 객체가 존재하지 않습니다. 실제 알림 인프라(Simon이 구현 예정)가 추가된 직후에 네이티브 하드닝을 재가동하겠습니다.</p>
+  </div>
+
+  <h2>2. Phantom Notification UI 제거 (Permission Trust)</h2>
+  <div class="card">
+    <p><strong>상태:</strong> <span class="status-pass">PASS (Phantom UI Removed)</span></p>
+    <p>실제 기능이 없는 알림 퍼미션 안내가 <code>src/app/permissions.tsx</code>에 노출되는 것은 "Permission Trust (사용자 신뢰)" 원칙에 위배됩니다.</p>
+    <p>사용자에게 혼란을 주지 않도록 해당 Phantom UI 행을 완전히 제거했습니다.</p>
+  </div>
+
+  <div class="timestamp">[YYYY-MM-DD / HH:MM:SS] 2026-06-06 / 22:01:00 KST</div>
+</body>
+</html>
