@@ -1,13 +1,36 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 23:19:26 KST
+updated: 2026-06-06 23:29:14 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Wiki export copy toast.
+- **src**: autonomous B-bucket UI/UX follow-up after shared consent checkbox submission; `feedback-alert-contract` continuation for `/wiki` export copy.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@d9e73db`.
+- **Implemented**: replaced `/wiki` export copy success/failure/unsupported clipboard native `Alert.alert` calls with bottom `PremiumToast` feedback.
+- **Copy**: removed `Claude / ChatGPT` from the wiki export helper and replaced it with vendor-neutral continuation copy.
+- **Guard**: extended `Feedback` check in `scripts/check-constraints.ts` to cover wiki export toast usage and prevent vendor-specific helper copy.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`246 keys`, `9 namespaces`); `npm run check:lexicon`; `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `npm test -- --ci --runInBand` (93 suites, 840 tests) all pass.
+- **Local commit**: `bc4bf77d04bf6e72c6a61bfb23f72862e30f40a7` (`fix(feedback): toast wiki export copy`), stacked after consent checkbox commit `d09a7a08f0a1b32313be96f84f4becf400943a52`.
+- **Pending stack vs origin/main**: `d09a7a08f0a1b32313be96f84f4becf400943a52` + `bc4bf77d04bf6e72c6a61bfb23f72862e30f40a7`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-232914-to-claude-wiki-export-copy-toast.md`
+  - `agents/codex/outbox/20260606-232914-to-antigravity-wiki-export-copy-native-qa.md`
+  - `agents/codex/outbox/preview/20260606-232914-wiki-export-copy-toast.html`
+
+[Wiki export copy toast / 26.06.06 / 23:29:14]
+#comm #codex #claude-review #antigravity-qa-request #2nd-B #ui-ux #feedback #toast #wiki #copy #worktree #implementation
+- Continued the feedback-alert cleanup lane with `/wiki` export copy.
+- Replaced blocking export-copy alerts with `PremiumToast` and removed vendor-specific helper copy.
+- Full validation passed, including Jest 93 suites / 840 tests.
+
+## Previous (Shared consent checkbox controls)
 
 - **Task**: Shared consent checkbox controls.
 - **src**: Claude request `20260606-215400-to-codex-bbucket-worklist` / shared components priority.
