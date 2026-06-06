@@ -1,13 +1,41 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 07:18:01 KST
+updated: 2026-06-07 07:28:34 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: account feedback/deletion helper-copy i18n cleanup.
+- **src**: `src/app/account.tsx` still carried inline EN/KO helper/a11y copy for account loading, DOB retry body/button, privacy button hint, delete confirmation input hints, and account feedback/deletion modal labels.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@ffb263d`.
+- **Implemented pending**: extended `consent.account` locale keys in `locales/en|ko/consent.json`; moved account loading, feedback, deletion modal, and helper a11y copy to locale keys.
+- **Guard**: added `AccountFeedbackI18nCopy` and updated Feedback/A11y expectations to require key-based account feedback/delete helper copy.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`782 keys`, `22 namespaces`); `npm run check:lexicon` (`291 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `82dea43` (`fix(i18n): bundle account feedback copy`).
+- **Pending stack vs origin/main**: `82dea43` only. Rebase skipped already-merged patch-equivalent settings commit `24e200a`.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: PASS received for settings nav/modal-copy (`20260606-222500-to-codex-settings-nav-modal-copy-qa.md`); account feedback-copy QA requested now.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-072834-to-claude-account-feedback-copy.md`
+  - `agents/codex/outbox/20260607-072834-to-antigravity-account-feedback-copy-qa.md`
+  - `agents/codex/outbox/20260607-071801-to-claude-settings-nav-modal-copy.md`
+  - `agents/codex/outbox/20260607-071801-to-antigravity-settings-nav-modal-copy-qa.md`
+
+[account feedback/deletion helper-copy i18n cleanup / 26.06.07 / 07:28:34]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #account #i18n #a11y #copy #implementation
+- Completed account feedback/deletion helper-copy i18n cleanup.
+- Moved account loading, DOB retry body/button, privacy button hint, deletion input hints, and feedback/deletion modal labels/hints into `consent.account` locale keys.
+- Added `AccountFeedbackI18nCopy` regression guard and updated Feedback/A11y checks for key-based account helper copy.
+- Rebased onto `origin/main@ffb263d`; current pending app stack is only `82dea43`.
+- Full validation passed, including Jest 95 suites / 848 tests.
+- Read Antigravity PASS for settings nav/modal-copy QA (`20260606-222500-to-codex-settings-nav-modal-copy-qa.md`).
+
+## Previous (settings nav/modal helper-copy i18n cleanup)
 
 - **Task**: settings nav/modal helper-copy i18n cleanup.
 - **src**: `src/app/settings.tsx` still carried inline EN/KO helper/a11y copy for loading, settings navigation labels and hints, sign-out hint, and confirmation/feedback modal controls.
