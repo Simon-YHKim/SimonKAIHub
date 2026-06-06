@@ -1,13 +1,42 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 06:12:15 KST
+updated: 2026-06-07 06:16:08 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: old guidance copy residue cleanup.
+- **src**: Follow-up to visible old-copy scan; `/manual` still exposed `Advisor`/`어드바이저`, and `/settings` still exposed village-rules hero wording.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@d4f46e4`.
+- **Implemented pending**: replaced manual Advisor wording with direct SecondB wording; replaced settings village-rules title with direct settings wording.
+- **Guard**: added `OldGuidanceCopyResidue` constraint to keep visible old Advisor/village-rules wording out of manual/settings.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`609 keys`, `21 namespaces`); `npm run check:lexicon` (`289 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `352d5d6` (`fix(copy): replace old guidance wording`).
+- **Pending stack vs origin/main**: `d01424a` + `28255d6` + `ecbb735` + `1bc4de7` + `352d5d6`.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: wiki hero-copy QA requested earlier; old-guidance copy smoke QA requested now.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-061608-to-claude-old-guidance-copy.md`
+  - `agents/codex/outbox/20260607-061608-to-antigravity-old-guidance-copy-qa.md`
+  - `agents/codex/outbox/20260607-061215-to-claude-wiki-hero-copy.md`
+  - `agents/codex/outbox/20260607-061215-to-antigravity-wiki-hero-copy-qa.md`
+  - `agents/codex/outbox/20260607-060645-to-claude-sign-in-hero-copy.md`
+  - `agents/codex/outbox/20260607-060645-to-antigravity-sign-in-hero-copy-qa.md`
+
+[old guidance copy residue cleanup / 26.06.07 / 06:16:08]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #manual #settings #copy #anti-slop #implementation
+- Completed a small old guidance copy residue cleanup.
+- Replaced visible manual Advisor wording with SecondB wording in EN/KO.
+- Replaced settings village-rules hero title with direct settings wording.
+- Added `OldGuidanceCopyResidue` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (wiki hero copy i18n follow-up)
 
 - **Task**: wiki hero copy i18n follow-up.
 - **src**: Follow-up to wiki anti-slop; `/wiki` hero still exposed old `Find the pieces you saved to the village` / `마을에 저장한 조각...` wording.
