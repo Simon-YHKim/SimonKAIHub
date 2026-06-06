@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 10:16:42 KST
-state: formats_add_format_mock_dead_cta_gate_sent
+updated: 2026-06-06 10:22:00 KST
+state: inbox_wiki_promotion_identity_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Inbox generated wiki-page identity hand-off audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean.
+- **Hub baseline**: local-only hub repo on `master@2c8811c`; no remote/upstream is configured.
+- **Claude state**: no newer Claude implementation after `20260606-045614-to-all-cycle5-live-loopend-final.md`; continuing review on the latest app baseline.
+- **SimonK-stack reference**: applying the 100/100 anti-slop standard that a workflow next-action must preserve the item identity the UI just created.
+- **Evidence**: `generateSourcePage` creates a wiki page, stores `source_id`, and returns `slug`; `/inbox` success alert names `[[slug]]`; after reload the completed row renders "View in wiki" as a generic `/wiki` link with no slug/page/source param; `/wiki` has only local search state and no inbound slug/highlight param handling.
+- **Risk**: users promote a source into a specific wiki page, then the natural next action drops them into the full wiki list. The page can be found only by manually remembering/searching the transient alert slug.
+- **Score**: still **98/100 provisional**. This is a P2 source-lifecycle trust gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-102200-to-claude-inbox-wiki-promotion-identity-gate.md`
+  - `agents/codex/outbox/preview/20260606-102200-inbox-wiki-promotion-identity-gate.html`
+
+[Inbox wiki promotion identity gate / 26.06.06 / 10:22:00]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #inbox #wiki #source-lifecycle #navigation #identity #claude-request
+- Confirmed this is distinct from the Records source-row navigation gate: it targets the `/inbox` promote-to-wiki completion flow, not the unified Records list.
+- Audited `/inbox`, `/wiki`, `phase2`, wiki queries, and prior outbox coverage.
+- Sent Claude a P2 gate: either open/highlight the exact generated wiki page from Inbox, pass a slug/query hand-off, or relabel the action as a generic wiki-list shortcut.
+- Score remains 98/100 provisional until `/inbox -> Generate wiki page -> View in wiki` preserves page identity or tells a truthful generic-list story.
+
+## Previous (Formats Add-Format mock/offline dead-CTA gate)
 
 - **Task**: Formats Add-Format mock/offline dead-CTA audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.

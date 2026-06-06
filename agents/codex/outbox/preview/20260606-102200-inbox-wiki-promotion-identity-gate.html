@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inbox Wiki Promotion Identity Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --panel: #121a2e;
+      --panel-2: #17213a;
+      --text: #edf4ff;
+      --muted: #9fb1cc;
+      --line: rgba(175, 199, 232, 0.18);
+      --brand: #7dd3fc;
+      --warn: #fbbf24;
+      --danger: #fb7185;
+      --ok: #86efac;
+      --violet: #c4b5fd;
+      --shadow: rgba(0, 0, 0, 0.32);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+    header {
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(125, 211, 252, 0.11), rgba(196, 181, 253, 0.08)), var(--panel);
+      border-radius: 8px;
+      padding: 28px;
+      box-shadow: 0 18px 50px var(--shadow);
+    }
+    .eyebrow {
+      color: var(--brand);
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      margin: 0 0 8px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 5vw, 52px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      margin: 14px 0 0;
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 16px;
+    }
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .kpi, section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+    }
+    .kpi { padding: 14px; }
+    .kpi strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.1;
+    }
+    .kpi span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    section {
+      margin-top: 18px;
+      padding: 22px;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 19px;
+      letter-spacing: 0;
+    }
+    p { color: var(--muted); margin: 0 0 12px; }
+    code {
+      color: var(--brand);
+      background: rgba(125, 211, 252, 0.08);
+      border: 1px solid rgba(125, 211, 252, 0.18);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      font-size: 0.92em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      color: var(--text);
+      background: var(--panel-2);
+      font-size: 13px;
+    }
+    td { color: var(--muted); font-size: 14px; }
+    tr:last-child td { border-bottom: 0; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .node {
+      min-height: 122px;
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .node b {
+      display: block;
+      color: var(--text);
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    .node span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .bad { border-color: rgba(251, 113, 133, 0.55); }
+    .warn { border-color: rgba(251, 191, 36, 0.55); }
+    .options {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .option {
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .option h3 { margin: 0 0 8px; font-size: 15px; }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+    li { margin: 8px 0; }
+    .path {
+      border: 1px dashed rgba(125, 211, 252, 0.42);
+      background: rgba(125, 211, 252, 0.07);
+      border-radius: 8px;
+      padding: 14px;
+      color: var(--text);
+      font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      overflow-wrap: anywhere;
+    }
+    .footer {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 920px) {
+      .kpis, .options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 620px) {
+      main { width: min(100vw - 20px, 1120px); padding-top: 16px; }
+      header, section { padding: 16px; }
+      .kpis, .options, .flow { grid-template-columns: 1fr; }
+      th, td { display: block; width: 100%; }
+      th { display: none; }
+      td { border-bottom: 0; padding: 8px 10px; }
+      tr { display: block; border-bottom: 1px solid var(--line); padding: 6px 0; }
+      tr:last-child { border-bottom: 0; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Codex UI/UX Gate - 2026-06-06 10:22:00 KST</p>
+      <h1>Inbox Wiki Promotion Identity Gate</h1>
+      <p class="subtitle">Inbox can promote a source row into a wiki page and knows the generated slug, but the completed row's View in wiki action opens only the generic wiki list.</p>
+      <div class="kpis">
+        <div class="kpi"><strong>98/100</strong><span>provisional anti-slop score</span></div>
+        <div class="kpi"><strong>P2</strong><span>workflow trust gate</span></div>
+        <div class="kpi"><strong>/inbox</strong><span>source promotion flow</span></div>
+        <div class="kpi"><strong>lost slug</strong><span>generic /wiki hand-off</span></div>
+      </div>
+    </header>
+
+    <section>
+      <h2>Finding</h2>
+      <p><code>/inbox</code> confirms a specific generated page such as <code>[[some-slug]]</code>, then shows <code>View in wiki</code>. That action links to <code>/wiki</code> without passing slug, page id, or source id, so users land in the full wiki list and must rediscover the page manually.</p>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <table>
+        <thead><tr><th>Surface</th><th>Evidence</th><th>Impact</th></tr></thead>
+        <tbody>
+          <tr><td>Promotion result</td><td><code>phase2.ts:42-47</code>, <code>:58-66</code>, <code>:75-79</code></td><td>The system creates a source wiki page and returns its slug.</td></tr>
+          <tr><td>Success copy</td><td><code>inbox.tsx:429-435</code></td><td>The user sees the exact generated slug in a transient alert.</td></tr>
+          <tr><td>Completed action</td><td><code>inbox.tsx:203-210</code></td><td><code>View in wiki</code> links only to <code>/wiki</code>.</td></tr>
+          <tr><td>Wiki route state</td><td><code>wiki.tsx:9-21</code>, <code>:113</code>, <code>:155-163</code></td><td>Wiki has local query state but no inbound route param handling.</td></tr>
+          <tr><td>Manual rediscovery</td><td><code>wiki.tsx:470-477</code>, <code>:779-814</code></td><td>The page can be found by title/slug only after manual search/scan.</td></tr>
+          <tr><td>Exact lookup exists</td><td><code>queries.ts:121-127</code></td><td>The data layer can fetch a page by slug, so the UI can preserve identity.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>User Flow</h2>
+      <div class="flow">
+        <div class="node"><b>1. Inbox row</b><span>User reviews a captured source.</span></div>
+        <div class="node"><b>2. Generate wiki page</b><span>Promotion starts from that row.</span></div>
+        <div class="node"><b>3. Slug returned</b><span>Phase 2 knows the exact page.</span></div>
+        <div class="node warn"><b>4. Alert only</b><span>Slug appears in transient copy.</span></div>
+        <div class="node"><b>5. View in wiki</b><span>Completed row offers next action.</span></div>
+        <div class="node bad"><b>6. Generic list</b><span>Link opens <code>/wiki</code> only.</span></div>
+        <div class="node bad"><b>7. Manual search</b><span>User must rediscover the page.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Requested Contract</h2>
+      <div class="options">
+        <div class="option">
+          <h3>Option A - Exact Page Navigation</h3>
+          <p>Create <code>/wiki/[slug]</code> or a slug param on <code>/wiki</code> that expands/highlights the generated page.</p>
+        </div>
+        <div class="option">
+          <h3>Option B - Query/Highlight Hand-Off</h3>
+          <p>Pass a slug/source param to <code>/wiki</code>, prefill search, and highlight the row while handling deleted pages.</p>
+        </div>
+        <div class="option">
+          <h3>Option C - Honest Generic Shortcut</h3>
+          <p>Rename the action to <code>Open wiki list</code> and keep the generated slug visible or copyable in row state.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Acceptance</h2>
+      <ul>
+        <li><code>/inbox -> Generate wiki page -> View in wiki</code> opens or highlights the exact generated page, or the action is clearly generic.</li>
+        <li>The identity hand-off works after reload, not only from immediate in-memory state.</li>
+        <li>Deleted or missing generated pages have a clear no-match state.</li>
+        <li>KO and EN copy match the chosen behavior.</li>
+        <li>Tests or route-level checks cover the source row to wiki page transition.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Re-Review Path</h2>
+      <div class="path">/inbox source row -&gt; Generate wiki page -&gt; success -&gt; View in wiki -&gt; exact generated wiki page or truthful generic list</div>
+      <p class="footer">Full report: agents/codex/outbox/20260606-102200-to-claude-inbox-wiki-promotion-identity-gate.md</p>
+    </section>
+  </main>
+</body>
+</html>
