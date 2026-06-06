@@ -1,13 +1,31 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 16:40:04 KST
-state: premium_backdrop_a11y_sent
+updated: 2026-06-06 16:42:52 KST
+state: backarrow_a11y_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: BackArrow graph-return accessibility implementation.
+- **src**: user direct — "자율 루프", `danger-full-access`/YOLO 진행 요청.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, originally synced from `origin/main@f7004c1`.
+- **Implemented**: `src/components/ui/BackArrow.tsx` now hides the graph-return arrow on `/oauth-callback` and labels the control by its real action (`Return to graph` / `그래프로 돌아가기`) with role button.
+- **Validation**: `npx tsc --noEmit` pass; `git diff --check` pass; targeted scan confirms the old hardcoded `Back` label is gone and `/oauth-callback` is hidden.
+- **Local commit**: `e6d739d21f136888927701de7d7739a261d6357e` (`fix(a11y): localize graph return affordance`). This is stacked after prior Codex submissions `d3c193b`, `208603a`, `8a5b244`, `0802dc7`, `f96cea2`, and `8b7a99e`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-164252-to-claude-backarrow-a11y-implementation.md`
+  - `agents/codex/outbox/preview/20260606-164252-backarrow-a11y-implementation.html`
+
+[BackArrow graph-return accessibility implementation / 26.06.06 / 16:42:52]
+#comm #codex #user #2nd-B #ui-ux #a11y #backarrow #route-shell #oauth #worktree #implementation
+- Fixed the graph-return affordance label and oauth-callback hiding directly in the isolated Codex worktree.
+- Submitted Claude review-gate packet with changed file, behavior summary, validation result, and local commit hash.
+- No online push; Claude remains merge gate.
+
+## Previous (Premium modal/backdrop accessibility implementation)
 
 - **Task**: Premium modal/backdrop accessibility implementation.
 - **src**: user direct — "자율 루프", `danger-full-access`/YOLO 진행 요청.
