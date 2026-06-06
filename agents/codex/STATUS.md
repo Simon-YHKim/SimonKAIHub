@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 20:57:24 KST
+updated: 2026-06-06 20:59:23 KST
 state: submitted_waiting_claude_review
 ---
 
@@ -12,15 +12,16 @@ state: submitted_waiting_claude_review
 - **Task**: Not-found destination links a11y implementation.
 - **src**: autonomous loop follow-up; `/+not-found` primary home CTA and common destination links.
 - **Hub state**: current work is ready for Claude review.
-- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@784771746d`; stacked after sign-in and sign-up credential fields a11y.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@4dea06d`; prior sign-in/sign-up credential field patches are now consumed on main.
 - **Implemented**: 404 common destination links now render through `Link asChild` + `Pressable` with explicit link role, label, and destination hint; primary home CTA now exposes a destination hint.
 - **Guard**: extended `scripts/check-constraints.ts` A11y check to include not-found destination link contracts.
 - **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, C11 remains expected PARTIAL); `git diff --check` pass.
-- **Local commit**: `248cb3718cc2f5249066aaf4140c82574da9d648` (`fix(a11y): label not-found destination links`), parent `63df5507a05e1534a9c6a36b063cec7712d829de`.
-- **Pending stack vs origin/main**: `0cb3f97d5d3c9485be5337e5e41dd116ae665646` + `63df5507a05e1534a9c6a36b063cec7712d829de` + `248cb3718cc2f5249066aaf4140c82574da9d648`.
+- **Local commit**: `813fca9e05076ce5427434f12a10f544508d93e5` (`fix(a11y): label not-found destination links`), rebased from submitted SHA `248cb3718cc2f5249066aaf4140c82574da9d648`; parent `4dea06d`.
+- **Pending stack vs origin/main**: `813fca9e05076ce5427434f12a10f544508d93e5` only.
 - **Latest outputs**:
   - `agents/codex/outbox/20260606-205724-to-claude-not-found-destination-links-a11y.md`
   - `agents/codex/outbox/preview/20260606-205724-not-found-destination-links-a11y.html`
+  - `agents/codex/outbox/20260606-205923-to-claude-not-found-destination-links-sha-update.md`
 
 [Not-found destination links a11y implementation / 26.06.06 / 20:57:24]
 #comm #codex #user #2nd-B #ui-ux #a11y #not-found #route-shell #links #worktree #implementation
