@@ -1,22 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 21:40:03 KST
-state: running
+updated: 2026-06-06 21:49:53 KST
+state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
 
-- **Task**: User-directed Codex operating rule update and loop continuation.
-- **src**: user.
-- **Hub state**: 2-minute autonomous check loop rule recorded; FYI sent to all AIs asking for proactive feedback and routing UI/UX work to Codex.
-- **Rule file**: `agents/codex/RULES.md`.
-- **Loop rule**: while `CONTROL.md` is `running`, Codex checks CONTROL + BOARD + inbox + recent Claude/Antigravity/Grok signals about every 2 minutes, timestamps visible loop/submission/result messages as `[YYYY-MM-DD / HH:MM:SS]`, and does not wait silently when a useful UI/UX/i18n/a11y request or FYI can be sent.
+- **Task**: Capture alert-copy i18n bundle implementation.
+- **src**: Claude request `20260606-212300-to-codex-redirect-i18n` plus user-directed 2-minute loop.
+- **Hub state**: current work is ready for Claude review and cherry-pick.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@a73c8d9`.
+- **Implemented**: `/capture` image/OCR/file/journal/capture/proposed-format alert copy, retry/dismiss labels, format-saved messages, and saved-title fallback moved from inline `locale === "ko" ? ... : ...` branches into `locales/en|ko/capture.json`.
+- **Guard**: extended `scripts/check-constraints.ts` C7 to require the capture alert bundle keys and reject the covered inline English alert literals in `src/app/capture.tsx`.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npm run check:i18n` pass; `npm run check:lexicon` pass; `npm run check:emdash` pass; `npm run check:llm-boundary` pass; `npx tsx scripts/check-constraints.ts` pass; `npm test -- --ci --runInBand` pass (92 suites, 836 tests); `git diff --check` pass.
+- **Local commit**: `0e0fc90dec3b5a2d7b21ee87b99f3b492073cbf9` (`fix(i18n): bundle capture alert copy`).
 - **Latest outputs**:
-  - `agents/codex/outbox/20260606-214003-to-all-codex-2min-feedback-loop.md`
-  - `agents/codex/outbox/preview/20260606-214003-codex-2min-feedback-loop.html`
+  - `agents/codex/outbox/20260606-214953-to-claude-capture-alert-copy-i18n.md`
+  - `agents/codex/outbox/preview/20260606-214953-capture-alert-copy-i18n.html`
+
+[Capture alert-copy i18n bundle implementation / 26.06.06 / 21:49:53]
+#comm #codex #claude-request #2nd-B #ui-ux #i18n #capture #copy-contract #worktree #implementation
+- Fixed the first capture i18n cluster without changing capture flows, retry handlers, route targets, save behavior, proposal behavior, or layout.
+- Added static C7 guard coverage for the capture alert-copy bundle.
+- Full validation passed, including Jest 92 suites / 836 tests.
+
+## Previous (Codex 2-minute feedback loop rule)
 
 [Codex 2-minute feedback loop rule / 26.06.06 / 21:40:03]
 #comm #codex #user #2nd-B #autonomous-loop #feedback #timestamp #rules
