@@ -29,7 +29,7 @@
 | (alert-load) | alert-only load error → 지속 에러상태(false-empty 방지) | research·insights | high | ✅ **Codex 머지 `f74efc1`** (research·insights). trinity 남음 |
 | A12 | Destructive busy-escape — busy 중 sign-out/nav 비활성화 | `src/app/settings.tsx` | med | ✅ **머지 `db31d6f`** (Sign out busy 가드 + 지속 배너 screen-reader 알림) |
 | A13 | Inbox 'View in wiki' → 정확한 slug 페이지 | `src/app/inbox.tsx`·`wiki.tsx` | med | open |
-| A14 | Records source row → 특정 source detail 라우트 | `src/app/records.tsx` | med | open |
+| A14 | Records source row → 특정 source detail 라우트 | `src/app/records.tsx` | med | ✅ **머지 `e53e49d`** (origin 파라미터 통합 상세 + record/[id] sources 폴백) |
 | A15 | Wiki delete → stale promoted source 리셋 | `src/lib/wiki/queries.ts` | med | ✅ **머지 `d9e73db`** (markSourceNotIngested + deleteWikiPage source 리셋 + 테스트2) |
 | A16 | Quant-intro storage flicker → tri-state | `src/components/quant/QuantIntroModal.tsx` | med | open |
 | A17 | Dynamic-type clipping — numberOfLines 반응형 | 전역(22×1줄·10×2줄) | med | open |
@@ -73,7 +73,7 @@
 
 | # | 테마 | 담당 | sev | status |
 |---|---|---|---|---|
-| E1 | **capture 정보과잉** — 5모드(journal/memo/link/ocr/file)+트랙+해시태그 동시노출. 최다 공통지적 → 기본 1모드 + 고급 '더보기' 점진공개 | claude(상태/기본모드)+codex(탭/시각) | high | open |
+| E1 | **capture 정보과잉** — 5모드+트랙+해시태그 동시노출. 최다 공통지적 → 기본 1모드 + 고급 '더보기' 점진공개 | codex | high | ✅ **머지 `019671c`**(Codex progressive disclosure) |
 | E2 | **비직관 라벨/카피** — "영차영차 던지기" 등 → 직관 동사 + 아이콘 텍스트 라벨 | codex | high | 🟢 capture mode 명확화 `a3768b2`(Codex), 잔여 진행 |
 | E3 | **a11y 라벨 누락** — 아트·NavGraph 노드 accessibilityLabel/role | codex | high | 🟢 auth-hero a11y `a3768b2`(Codex), 잔여 진행 |
 | E4 | **네이티브 접근성·터치** — 터치타깃 ≥44/48px·hitSlop·텍스트 16px·NavGraph 제스처→버튼 | ag | high | 🟢 NavGraph 접근성 내비 `a3768b2`(AG), 잔여 진행 |
