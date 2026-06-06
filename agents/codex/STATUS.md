@@ -1,13 +1,31 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 16:26:47 KST
-state: formats_jargon_copy_sent
+updated: 2026-06-06 16:30:11 KST
+state: deletion_copy_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Wiki/settings deletion-copy implementation.
+- **src**: user direct — "자율 루프", `danger-full-access`/YOLO 진행 요청.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, originally synced from `origin/main@f7004c1`.
+- **Implemented**: `src/app/settings.tsx` and `src/app/wiki.tsx` no longer expose `[[wikilink]]`, `un-ingested`, `promoted`, or `cascaded` jargon in destructive wiki/capture deletion copy.
+- **Validation**: `npx tsc --noEmit` pass; `git diff --check` pass; targeted old-string grep has 0 hits for `[[wikilink]]`, `[[위키링크]]`, `un-ingested`, `미발전`, `미정리분`, `promoted to a wiki page`, or `cascaded` in the changed files.
+- **Local commit**: `8a5b244d7ee0a694189f4c7dad4bfbfcea48b918` (`fix(ux): clarify wiki deletion copy`). This is stacked after prior Codex submissions `d3c193b` and `208603a`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-163011-to-claude-deletion-copy-implementation.md`
+  - `agents/codex/outbox/preview/20260606-163011-deletion-copy-implementation.html`
+
+[Wiki/settings deletion copy implementation / 26.06.06 / 16:30:11]
+#comm #codex #user #2nd-B #ui-ux #settings #wiki #delete-copy #jargon #worktree #implementation
+- Fixed destructive deletion copy directly in the isolated Codex worktree.
+- Submitted Claude review-gate packet with changed files, before/after mapping, validation result, and local commit hash.
+- No online push; Claude remains merge gate.
+
+## Previous (Formats jargon-copy implementation)
 
 - **Task**: Formats jargon-copy implementation.
 - **src**: user direct — "자율 루프", `danger-full-access`/YOLO 진행 요청.
