@@ -36,7 +36,8 @@
 | A18 | Web zoom/focus — user-scalable=no 제거 + focus-visible | viewport·Pressable | med | open |
 | A19 | Import analysis fallback 공개 | `src/app/import.tsx` | med | ✅ **머지 `fd7384f`** (degraded 플래그 + 결과뷰 공개 notice, raw 에러 비노출) |
 | A20 | Record detail assessment raw JSON → friendly | `src/app/record/[id].tsx`·`persona/evidence.ts` | med | ✅ **머지 `31887a1`** (summarizeAssessmentBody 헬퍼 MBTI/BFI/ECR + 테스트6, 저널텍스트 무영향) |
-| A21 | Retired-route helpers 잔여(/journal·/imagine·/mbti emit) | `src/lib/village-ui.ts`·`persona/evidence,self-portrait.ts` | med | open(부분) |
+| A21 | Retired-route helpers 잔여(/journal·/imagine·/mbti emit) | `src/lib/village-ui.ts`·`persona/evidence,self-portrait.ts` | med | ✅ 해결 확인 — 활성 emit 없음(village-ui CTA 통합·evidence 실목적지). 잔여는 주석/import뿐 |
+| E9 | 자산 일관성 — tier 아이콘 매핑·계약 | codex | med | ✅ **머지 `ae974b9`**(Codex TierIcon contract + 테스트). 잔여 자산 정규화 진행 |
 | A22 | **GTM/마케팅 docs** (Grok X신호) — docs/GTM.md + i18n trust signals + core 명칭 직관화 | docs·locales·DESIGN.md | high(마케팅) | open |
 | A23 | LOW: capture stale journal lock 제거, source emdash, post97 microtype | capture·ConsentNotice·NavGraph | low | open |
 
@@ -82,7 +83,7 @@
 | E7 | 평가도구 Likert 고령 접근성 — 세로배열·큰버튼·16px·끝점 라벨 | codex | med | ✅ **머지 `f710b50`**(Codex Likert 타깃 개선) |
 | E8 | **stiffness 31건** — 전환·press 피드백·로딩 등장 부드럽게(즉각 cut 제거), 부드러운 ease | ag(perf)+codex(스타일) | med | 🟢 withSpring→withTiming(bounce 제거) `a3768b2`(AG), 잔여 진행 |
 | E9 | **자산 일관성 15건** — 네이밍 혼재·버전접미사(v1/v3/final/candidate)·스타일 혼합·미사용 정규화 | codex+claude | med | open |
-| E10 | settings 전체삭제 확인 — typed 'DELETE'는 의도된 안전마찰 → 제거 대신 카피 명확화만(전체wipe는 typed 유지) | claude review | low | open |
+| E10 | settings 전체삭제 확인 — typed 'DELETE'는 의도된 안전마찰 → 제거 대신 카피 명확화만(전체wipe는 typed 유지) | claude review | low | ✅ **머지 `958445e`** (비가역 경고 + Input a11y, typed-DELETE 유지) |
 | E11 | 미래기능 비전 7건 — 협업/공유·이미지 스튜디오 등 → '곧 옴'/숨김 | simon | — | open |
 
 ### E (확장) — 소득구간 × 문화/국가 (페르소나 시뮬 w7nuzgtiy, 190발견)
