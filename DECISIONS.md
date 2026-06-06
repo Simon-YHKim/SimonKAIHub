@@ -37,7 +37,7 @@ last-updated: 2026-06-06 12:30:00 KST
 | D-08 | 자기이해 방식 (질문지 vs 인터뷰 vs ESM) | decide | **하이브리드 3층 권고**(질문지 시드→인터뷰→ESM, SOKA 특성별 신뢰도) | — | 리서치 완료, 권고확정. ①persona모델 구현예정 |
 | D-09 | 수익화 가격·패키징 (KR+Global) | decide→Simon | Freemium+2~3티어. KR ₩4,900/9,900 · Global $4.99/9.99 · RevenueCat | — | 설계완료(HTML). 최종가격 Simon |
 | D-10 | ESM 층 도입 (알림인프라+신규테이블) | decide | A:도입(정확도 최대레버) / B:보류(공수) / C:phase2 | — | go/no-go 대기 |
-| D-11 | 마케팅 GTM (KR+Global) | decide | marketing 워크플로+Grok 리서치 진행중 | — | 도착 후 |
+| D-11 | 마케팅 GTM (KR+Global) | decide→Simon | 포지셔닝"자기이해형 세컨브레인/쓸수록 보이는 나" · anti-creepy 신뢰 · 텍스트SNS채널 · ASO · 런치플레이북 | — | 설계완료(HTML). Grok X 보강 대기. 채널예산·런치일=Simon/§15 |
 
 ## 해결됨 (Resolved) — 최근
 - (없음 — 신설)
