@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 21:18:43 KST
+updated: 2026-06-06 21:21:31 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Records empty/error action hints a11y implementation.
+- **src**: autonomous loop follow-up; `/records` error retry and empty-state capture CTA.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@3ef1715`; stacked after capture recovery, wiki utility, and account control a11y.
+- **Implemented**: records retry CTA now describes reload effect; empty-state capture CTA now describes opening capture to save today's piece.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include records error/empty CTA hints.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, C11 remains expected PARTIAL); `git diff --check` pass.
+- **Local commit**: `6f187662e354a9c37f55c7ba8886fadbe831f956` (`fix(a11y): describe records empty actions`), parent `f4274169cd1dd1c8f2532c15a849eff23b855f19`.
+- **Pending stack vs origin/main**: `804b40900f9e5241537f671a668522cab931eb11` + `18c457a8103f753f6e1168708ce423f7e1a83e3e` + `f4274169cd1dd1c8f2532c15a849eff23b855f19` + `6f187662e354a9c37f55c7ba8886fadbe831f956`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-212131-to-claude-records-empty-actions-a11y.md`
+  - `agents/codex/outbox/preview/20260606-212131-records-empty-actions-a11y.html`
+
+[Records empty/error action hints a11y implementation / 26.06.06 / 21:21:31]
+#comm #codex #user #2nd-B #ui-ux #a11y #records #empty-state #retry #capture #worktree #implementation
+- Fixed records error/empty action hints without changing reload behavior, capture route, empty/error state conditions, visible labels, list rendering, or layout.
+- Added static A11y guard coverage for records retry and empty capture CTAs.
+- Submitted as a four-commit stack because lower inbox/wiki/account a11y commits are still pending Claude merge.
+
+## Previous (Account control effects a11y implementation)
 
 - **Task**: Account control effects a11y implementation.
 - **src**: autonomous loop follow-up; `/account` DOB save, privacy navigation, account deletion confirmation input/button.
