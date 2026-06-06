@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 00:04:58 KST
+updated: 2026-06-07 00:13:13 KST
 state: submitted_waiting_claude_review
 ---
 
@@ -9,31 +9,29 @@ state: submitted_waiting_claude_review
 
 ## Current (latest)
 
-- **Task**: Audit save feedback toast.
-- **src**: autonomous feedback-alert cleanup after main advanced with `PremiumLoadingState`.
-- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested. Also sent sign-up SHA update after rebase.
+- **Task**: Persona feedback error states.
+- **src**: autonomous feedback-alert cleanup after Claude persona UX method request and ongoing native alert cleanup.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested.
 - **Rule update**: user rule addendum recorded in `agents/codex/RULES.md`; global protocol remains Claude-owned.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@0dfa75a`.
-- **Pending predecessor**: sign-up feedback rebased to `f95afa5cec512922f4c9145deb98e4259d082b3d`.
-- **Implemented**: replaced `/audit` save-failure `Alert.alert` retry dialog with `PremiumToast`; typed answer remains visible and retry remains the existing submit action.
-- **Rebase note**: resolved conflict by preserving main's `PremiumLoadingState` import/use and Codex's `PremiumToast` feedback.
-- **Guard**: extended `Feedback` check so `/audit` avoids `Alert.alert` and uses premium feedback.
-- **Validation**: full pre-rebase suite passed: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`246 keys`, `9 namespaces`); `npm run check:lexicon`; `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `npm test -- --ci --runInBand` (93 suites, 840 tests). Post-rebase `npx tsc --noEmit`, `npx tsx scripts/check-constraints.ts`, and `git diff --check HEAD~1 HEAD` pass.
-- **Local commit**: `db6d06af44b7688cfec1defd7f613a17e4aecfaf` (`fix(feedback): toast audit save errors`).
-- **Pending stack vs origin/main**: `f95afa5cec512922f4c9145deb98e4259d082b3d` + `db6d06af44b7688cfec1defd7f613a17e4aecfaf`.
+- **Pending predecessors**: sign-up feedback `f95afa5cec512922f4c9145deb98e4259d082b3d`; audit save feedback `db6d06af44b7688cfec1defd7f613a17e4aecfaf`.
+- **Implemented**: replaced `/persona` build failure native alert with `PremiumErrorState`; replaced export/share failure native alert with `PremiumToast`; kept retry and capture-back paths.
+- **Guard**: extended `Feedback` check so `/persona` avoids `Alert.alert` and uses premium feedback surfaces.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`246 keys`, `9 namespaces`); `npm run check:lexicon`; `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `npm test -- --ci --runInBand` (93 suites, 840 tests) all pass.
+- **Local commit**: `602e77745ab2c20736318b7d6b3e7e43bea636dc` (`fix(feedback): show persona error states`).
+- **Pending stack vs origin/main**: `f95afa5cec512922f4c9145deb98e4259d082b3d` + `db6d06af44b7688cfec1defd7f613a17e4aecfaf` + `602e77745ab2c20736318b7d6b3e7e43bea636dc`.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-001312-to-claude-persona-feedback-error-states.md`
+  - `agents/codex/outbox/20260607-001312-to-antigravity-persona-feedback-native-qa.md`
+  - `agents/codex/outbox/preview/20260607-001312-persona-feedback-error-states.html`
   - `agents/codex/outbox/20260607-000035-to-claude-persona-ux-method-codex-ack.md`
   - `agents/codex/outbox/20260607-000458-to-all-codex-user-rule-addendum.md`
-  - `agents/codex/outbox/20260606-235805-to-claude-sign-up-sha-update.md`
-  - `agents/codex/outbox/20260606-235805-to-claude-audit-save-feedback-toast.md`
-  - `agents/codex/outbox/20260606-235805-to-antigravity-audit-save-feedback-native-qa.md`
-  - `agents/codex/outbox/preview/20260606-235805-audit-save-feedback-toast.html`
 
-[Audit save feedback toast / 26.06.06 / 23:58:05]
-#comm #codex #claude-review #antigravity-qa-request #2nd-B #ui-ux #feedback #toast #audit #worktree #implementation #rebase
-- Continued feedback-alert cleanup with `/audit` save failures.
-- Resolved rebase conflict by combining main's branded loading state with Codex's toast feedback.
-- Full pre-rebase validation passed; post-rebase typecheck, constraints, and diff check passed.
+[Persona feedback error states / 26.06.07 / 00:13:13]
+#comm #codex #claude-review #antigravity-qa-request #2nd-B #ui-ux #feedback #persona #error-state #toast #worktree #implementation
+- Continued native alert cleanup on `/persona`.
+- Replaced build failure with inline retryable error state and export failure with toast feedback.
+- Full validation passed, including Jest 93 suites / 840 tests.
 
 ## Previous (Sign-up feedback toast)
 
