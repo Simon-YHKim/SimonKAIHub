@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 06:51:02 KST
+updated: 2026-06-07 07:00:03 KST
 state: submitted
 ---
 
@@ -9,18 +9,20 @@ state: submitted
 
 ## Current (latest)
 
-- **Task**: formats screen operational-copy i18n cleanup.
-- **src**: Main `/formats` screen still had inline EN/KO operational copy for loading/error states, headings, empty states, guide links, toasts, delete confirmation, and guide modal labels; empty state still said “AI-proposed format.”
+- **Task**: format editor/schema preview i18n cleanup.
+- **src**: `/formats` edit handoff still had inline EN/KO form labels, hints, placeholders, buttons, tag a11y copy, and schema-preview labels inside `TemplateEditor` / `FormatSchemaView`.
 - **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
-- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@a4c7868`.
-- **Implemented pending**: moved `/formats` loading/error/list/action/toast/delete/guide modal copy into `locales/en|ko/formats.json`; replaced AI-proposed empty-state wording with SecondB copy.
-- **Guard**: added `FormatsOperationalI18nCopy` and updated A11y modal-label checks.
-- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`662 keys`, `21 namespaces`); `npm run check:lexicon` (`289 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
-- **Local commits**: `ed00a38` (`fix(i18n): bundle add format flow copy`) + `eea360b` (`fix(i18n): bundle formats screen copy`).
-- **Pending stack vs origin/main**: `ed00a38` + `eea360b`.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@6f55e01`.
+- **Implemented pending**: moved edit-form and schema-preview visible copy into `locales/en|ko/formats.json` under `editor.*` and `schemaView.*`; kept validation logic and layout behavior unchanged.
+- **Guard**: updated `FormatEditorLanguage` to require key-based editor/schema preview copy while still preventing schema/bucket/property jargon.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`708 keys`, `21 namespaces`); `npm run check:lexicon` (`289 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `cb80c1f` (`fix(i18n): bundle format editor copy`).
+- **Pending stack vs origin/main**: `cb80c1f` only.
 - **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
-- **Antigravity QA**: PASS received for formats community-copy, sign-in hero-copy, wiki hero-copy, old-guidance-copy, premium-a11y-locale, rebased old-guidance/premium-a11y stack, pre-rebase premium feedback-defaults, and rebased premium feedback-default + auth failure-toast stack. Rebased add-format flow QA requested; formats screen copy QA requested now.
+- **Antigravity QA**: PASS received for formats community-copy, sign-in hero-copy, wiki hero-copy, old-guidance-copy, premium-a11y-locale, rebased old-guidance/premium-a11y stack, pre-rebase premium feedback-defaults, rebased premium feedback-default + auth failure-toast stack, rebased add-format flow, and formats screen operational-copy. Format editor/schema-preview QA requested now.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-070003-to-claude-format-editor-copy.md`
+  - `agents/codex/outbox/20260607-070003-to-antigravity-format-editor-copy-qa.md`
   - `agents/codex/outbox/20260607-065102-to-claude-formats-screen-copy.md`
   - `agents/codex/outbox/20260607-065102-to-antigravity-formats-screen-copy-qa.md`
   - `agents/codex/outbox/20260607-064651-to-claude-rebased-add-format-flow-copy.md`
@@ -42,6 +44,15 @@ state: submitted
   - `agents/codex/outbox/20260607-061608-to-antigravity-old-guidance-copy-qa.md`
   - `agents/codex/outbox/20260607-061215-to-claude-wiki-hero-copy.md`
   - `agents/codex/outbox/20260607-061215-to-antigravity-wiki-hero-copy-qa.md`
+
+[format editor/schema preview i18n cleanup / 26.06.07 / 07:00:03]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #formats #i18n #copy #implementation
+- Claude merged add-format flow and formats screen operational-copy through `origin/main@6f55e01`.
+- Rebased Codex worktree to `origin/main@6f55e01`; current pending stack is only `cb80c1f`.
+- Completed `/formats` edit-form and schema-preview i18n cleanup.
+- Moved editor labels, hints, placeholders, button text, tag a11y copy, and schema-preview labels/type names into `formats.editor.*` and `formats.schemaView.*`.
+- Updated `FormatEditorLanguage` regression guard for key-based editor/schema copy.
+- Full validation passed, including Jest 95 suites / 848 tests.
 
 [premium shared a11y locale cleanup / 26.06.07 / 06:20:59]
 #comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #a11y #i18n #premium-components #implementation
