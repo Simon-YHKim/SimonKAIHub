@@ -1,25 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 09:05:53 KST
-state: capture_file_extraction_promise_gate_sent
+updated: 2026-06-06 09:17:06 KST
+state: privacy_toggle_truth_contract_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
 
-- **Task**: Capture file extraction promise audit.
+- **Task**: Privacy toggle truth-contract audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
 - **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
-- **Claude state**: no newer Claude implementation after the Capture input jargon gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
-- **SimonK-stack reference**: applying the 100/100 anti-slop standard that primary input promises must match platform behavior.
-- **Evidence**: `src/app/capture.tsx:106-108` promises PDF/DOCX/.txt text extraction and indexing; `src/lib/wiki/capture-file.ts:9-11` says native PDF/DOCX support is deferred; `src/lib/wiki/capture-file.ts:88-90` returns null on non-web before PDF/DOCX extraction; `src/app/capture.tsx:445-446` falls back to filename/MIME when the file body is empty.
-- **Risk**: native users can pick a PDF/DOCX after seeing a full extraction promise, but only metadata may be saved. The UI should distinguish extracted text from metadata-only fallback.
-- **Score**: still **98/100 provisional**. This is a P1/P2 primary-input trust-state gate before 100.
+- **Claude state**: no newer Claude implementation after the Capture file extraction promise gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: applying the 100/100 anti-slop standard that trust controls must be truthful, enforced, or clearly unavailable.
+- **Evidence**: `/privacy` renders all eight `PRIVACY_PREF_KEYS` as switches, but static scan found runtime enforcement only for `external_analytics` through `setAnalyticsConsent` and the root auth gate. `llm_training`, `ads`, `sharing`, `recommendations`, `persona_export`, `persona_share`, and `long_term_memory` appear to persist only as prefs.
+- **Risk**: the privacy screen can tell users they control model training, sharing, recommendations, export/share, and memory while those switches do not actually govern feature behavior. That is a false-control trust issue, not a visual preference.
+- **Score**: still **98/100 provisional**. This is a P1/P2 privacy-trust gate before 100.
 - **Latest outputs**:
-  - `agents/codex/outbox/20260606-090553-to-claude-capture-file-extraction-promise-gate.md`
-  - `agents/codex/outbox/preview/20260606-090553-capture-file-extraction-promise-gate.html`
+  - `agents/codex/outbox/20260606-091706-to-claude-privacy-toggle-truth-contract-gate.md`
+  - `agents/codex/outbox/preview/20260606-091706-privacy-toggle-truth-contract-gate.html`
+
+[Privacy toggle truth contract gate / 26.06.06 / 09:17:06]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #privacy #trust #controls #claude-request
+- Confirmed this is distinct from PR #215 and the switch-label semantics gate: it targets whether each visible privacy switch actually controls the promised feature.
+- Audited `locales/en/consent.json`, `src/lib/privacy/prefs.ts`, `src/app/privacy.tsx`, `_layout.tsx`, and LLM/chat/export-related call paths.
+- Sent Claude a P1/P2 gate: every privacy preference must be enforced, disabled/unavailable, converted to a static disclosure, or removed until feature wiring exists.
+- Score remains 98/100 provisional until privacy controls are truthful and re-gated.
+
+## Previous (Capture file extraction promise gate)
 
 [Capture file extraction promise gate / 26.06.06 / 09:05:53]
 #comm #codex #user #2nd-B #ui-ux #ai-slop #goal #capture #file #trust #platform #claude-request
