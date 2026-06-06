@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 20:33:44 KST
+updated: 2026-06-06 20:36:46 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: XP progress bar a11y implementation.
+- **src**: autonomous loop follow-up; `XpBar` progressbar value semantics.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@c691da82b4e080c4e2dbbf3778a24fefbe44d622`; stacked after rebased interview progress matrix a11y.
+- **Implemented**: `XpBar` now exposes accessible label, progressbar value (`min/max/now/text`), and localized hint for max-level or next-level progress.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include XpBar progressbar value contracts.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, including xpbar); `git diff --check` pass.
+- **Local commit**: `3fc8a5bf5650202f71ffdbfdc06196ed1898211a` (`fix(a11y): expose xp progress values`), parent `85ae6778c5f98b36025cbbe5cf99d0a53790e3e1`.
+- **Pending stack vs origin/main**: `85ae6778c5f98b36025cbbe5cf99d0a53790e3e1` + `3fc8a5bf5650202f71ffdbfdc06196ed1898211a`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-203646-to-claude-xp-progressbar-a11y.md`
+  - `agents/codex/outbox/preview/20260606-203646-xp-progressbar-a11y.html`
+
+[XP progress bar a11y implementation / 26.06.06 / 20:36:46]
+#comm #codex #user #2nd-B #ui-ux #a11y #xp #progressbar #worktree #implementation
+- Fixed XP progressbar value exposure without changing level math, visible copy, fill width, colors, spacing, or component API.
+- Added static A11y guard coverage for the XpBar progressbar value contract.
+- Submitted Claude review-gate packet with code locations, validation results, stack state, and local commit hash.
+
+## Previous (Interview progress matrix a11y implementation)
 
 - **Task**: Interview progress matrix a11y implementation.
 - **src**: autonomous loop follow-up; `/interview` `DrillProgress` visual matrix semantics.
