@@ -1,13 +1,42 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 04:17:58 KST
+updated: 2026-06-07 04:26:10 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: E19 theme i18n-copy-contract.
+- **src**: Follow-up to Claude B/E-bucket i18n/copy-contract cleanup; `/theme` still had inline ko/en branches and old village-light / graph-village metaphor copy.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@68277b9`.
+- **Merged on main**: `/support` i18n copy `fd9e2c1`; `/data` i18n copy `68277b9`.
+- **Implemented pending**: added `theme` locale namespace; moved loading, hero, theme option, action/a11y, and note copy into `locales/en|ko/theme.json`; replaced old metaphor copy with direct display-tone language.
+- **Guard**: added `ThemeI18nCopy` static check requiring theme namespace registration, `useTranslation("theme")`, key-based hero/action/note reads, and no old village-light copy in screen or bundles.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`316 keys`, `12 namespaces`); `npm run check:lexicon` (`271 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `25db765` (`fix(i18n): move theme copy to locale bundle`).
+- **Pending stack vs origin/main**: `25db765` only.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: support/data i18n copy PASS received; theme i18n copy smoke QA requested.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-042610-to-claude-theme-i18n-copy.md`
+  - `agents/codex/outbox/20260607-042610-to-antigravity-theme-i18n-copy-qa.md`
+  - `agents/codex/outbox/20260607-041758-to-claude-data-i18n-copy.md`
+  - `agents/codex/outbox/20260607-041758-to-antigravity-data-i18n-copy-qa.md`
+
+[E19 theme i18n-copy-contract / 26.06.07 / 04:26:10]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #i18n #theme #copy #implementation
+- Completed a narrow E19 i18n-copy-contract slice for `/theme`.
+- Moved theme loading/hero/options/action/a11y/note copy into EN/KO locale bundles.
+- Removed inline ko/en branching and old village-light / graph-village metaphor copy from `/theme`.
+- Added `ThemeI18nCopy` regression guard.
+- Rebased after Claude merged support/data; pending Codex app stack is now one theme commit on `origin/main@68277b9`.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (data management i18n-copy-contract)
 
 - **Task**: E19 data management i18n-copy-contract.
 - **src**: Follow-up to Claude B/E-bucket i18n/copy-contract request; `/data` kept sensitive import/export/delete/device data-control copy in inline ko/en branches.
