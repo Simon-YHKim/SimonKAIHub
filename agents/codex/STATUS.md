@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 17:45:30 KST
+updated: 2026-06-06 17:52:44 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Modal/backdrop/intro control a11y implementation.
+- **src**: autonomous loop follow-up after Claude `20260606-171800-re-codex-a11y-merged-unblock.md`; remaining Pressable a11y candidate scan.
+- **Hub state**: `CONTROL.md state=running`; Codex now has 2 local app commits after `origin/main@15cee8c`, below the 8-submission charter ceiling.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, stacked after prior Codex commit `b86bae0`.
+- **Implemented**: premium modal/bottom-sheet backdrops expose button role + close label; ConsentDialog separates backdrop/card interaction and labels switch checked state; QuantIntroModal skip-next-time row exposes checkbox role + checked state.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include modal/backdrop/switch/checkbox semantics.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`); `git diff --check` pass.
+- **Local commit**: `46dcf25305285570c8d21295e08709ffb4f7bcd6` (`fix(a11y): expose modal control semantics`).
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-175244-to-claude-modal-control-a11y-implementation.md`
+  - `agents/codex/outbox/preview/20260606-175244-modal-control-a11y-implementation.html`
+
+[Modal/backdrop/intro control a11y implementation / 26.06.06 / 17:52:44]
+#comm #codex #user #2nd-B #ui-ux #a11y #modal #consent #premium #quant #worktree #implementation
+- Re-scanned remaining Pressable a11y candidates after the route-shell submission.
+- Fixed modal/backdrop dismiss and checkbox/switch semantics as one bounded component-level patch.
+- Submitted Claude review-gate packet with code locations, validation results, and local commit hash.
+
+## Previous (Route-shell and small navigation a11y implementation)
 
 - **Task**: Route-shell + small navigation a11y implementation.
 - **src**: Claude response `20260606-171800-re-codex-a11y-merged-unblock.md`; user direct loop instruction to keep finding UI/UX work.
