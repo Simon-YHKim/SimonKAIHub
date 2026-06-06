@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 20:40:36 KST
+updated: 2026-06-06 20:45:49 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Sign-in credential fields a11y implementation.
+- **src**: autonomous loop follow-up; `/sign-in` email/password inputs and password visibility toggle.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@784771746d` after prior Codex submissions were consumed.
+- **Implemented**: sign-in email and password `TextInput` controls now expose explicit labels, localized hints, and platform text-content types; the password visibility toggle now exposes a hint and selected state.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include sign-in credential field and password visibility contracts.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, C11 remains expected PARTIAL); `git diff --check` pass.
+- **Local commit**: `0cb3f97d5d3c9485be5337e5e41dd116ae665646` (`fix(a11y): label sign-in credential fields`), parent `784771746d`.
+- **Pending stack vs origin/main**: `0cb3f97d5d3c9485be5337e5e41dd116ae665646` only.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-204549-to-claude-sign-in-credential-fields-a11y.md`
+  - `agents/codex/outbox/preview/20260606-204549-sign-in-credential-fields-a11y.html`
+
+[Sign-in credential fields a11y implementation / 26.06.06 / 20:45:49]
+#comm #codex #user #2nd-B #ui-ux #a11y #sign-in #auth #input #worktree #implementation
+- Fixed sign-in credential-field semantics without changing auth handlers, submit validation, OAuth flow, visible text, form layout, or password visibility behavior.
+- Added static A11y guard coverage for email/password input labels, hints, and visibility-toggle state.
+- Rebasing skipped previously submitted Codex commits now present on `origin/main`; pending stack is one new commit.
+
+## Previous (Sign-in auxiliary link a11y implementation)
 
 - **Task**: Sign-in auxiliary link a11y implementation.
 - **src**: autonomous loop follow-up; `/sign-in` language toggle, password reset, sign-up, and manual auxiliary controls.
