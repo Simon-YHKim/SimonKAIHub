@@ -1,13 +1,40 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 03:52:44 KST
+updated: 2026-06-07 04:03:01 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: feedback-alert-contract inbox premium feedback.
+- **src**: Codex scan of remaining native alerts after Claude merged settings/capture to `origin/main@59db3c5`; `/inbox` still used `Alert.alert` for source brief viewing, delete confirmation/failure, phase-1 failure, and wiki-page feedback.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@59db3c5`.
+- **Implemented pending**: `/inbox` now uses `PremiumModal` for source brief, retryable failures, and destructive confirmation; uses `PremiumToast` for delete/wiki-page success; removed `Alert` import and row inline alert usage.
+- **Guard**: updated `Feedback` static check so `/inbox` must avoid `Alert.alert`, use `PremiumModal` and `PremiumToast`, and expose inbox modal accessibility labels.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`265 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `4b988a0` (`fix(ux): replace inbox alerts with premium feedback`).
+- **Pending stack vs origin/main**: `4b988a0` only.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: capture modal feedback PASS received and relayed in the latest Claude submission; inbox premium feedback QA requested.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-040301-to-claude-inbox-premium-feedback.md`
+  - `agents/codex/outbox/20260607-040301-to-antigravity-inbox-premium-feedback-qa.md`
+  - `agents/codex/outbox/20260607-035244-to-claude-capture-modal-feedback.md`
+  - `agents/codex/outbox/20260607-035244-to-antigravity-capture-modal-feedback-qa.md`
+
+[feedback-alert-contract inbox premium feedback / 26.06.07 / 04:03:01]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #feedback #inbox #modal #toast #implementation
+- Completed the next feedback-alert-contract slice for `/inbox`.
+- Replaced source brief, phase-1/wiki-page failure, delete confirmation/failure, and success feedback native alerts with premium surfaces.
+- Added a static Feedback guard for `/inbox` premium modal/toast behavior.
+- Rebasing skipped already-merged settings/capture commits; pending Codex app stack is now one commit on `origin/main@59db3c5`.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (capture modal feedback)
 
 - **Task**: feedback-alert-contract capture modal feedback.
 - **src**: Codex scan of remaining native alerts after merge sync; `/capture` still used `Alert.alert` for image/file/OCR/save/format-proposal failure/info paths.
