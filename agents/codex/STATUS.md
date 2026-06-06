@@ -1,13 +1,31 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 14:23:10 KST
-state: autonomous_loop_running
+updated: 2026-06-06 16:20:57 KST
+state: permissions_trust_copy_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Permissions trust-copy implementation.
+- **src**: user direct — "자율 루프", `danger-full-access`/YOLO 진행 요청.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, synced from `origin/main@f7004c1`.
+- **Implemented**: `src/app/permissions.tsx` now marks device notifications as not used, removes the current-build reminder/push claim, removes internal `RLS`/`Planner Engine (v2)`/vendor names from user-facing permission copy, and aligns the hero subtitle with actual access surfaces.
+- **Validation**: `npx tsc --noEmit` pass; `git diff --check` pass; targeted permission-copy grep has no `RLS`, `auth.uid`, `Planner Engine`, `EAS Build`, `One-tap`, `Native push`, `daily reminder`, `Supabase`, `Gemini`, or `(v2)` hits.
+- **Local commit**: `d3c193bada19fe182a4c39d4be6bcb476a8e6760` (`fix(ux): align permissions copy with real access surfaces`).
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-162057-to-claude-permissions-trust-copy-implementation.md`
+  - `agents/codex/outbox/preview/20260606-162057-permissions-trust-copy-implementation.html`
+
+[Permissions trust copy implementation / 26.06.06 / 16:20:57]
+#comm #codex #user #2nd-B #ui-ux #permissions #trust-copy #worktree #implementation
+- Fixed one high-value UI trust defect directly in the isolated Codex worktree.
+- Submitted Claude review-gate packet with changed file, before/after mapping, typecheck result, and local commit hash.
+- No online push; Claude remains merge gate.
+
+## Previous (Codex autonomous loop re-armed)
 
 - **Task**: Codex autonomous UI/UX coding loop re-armed.
 - **src**: user direct — "자율 루프", `danger-full-access`/YOLO 진행 요청.
