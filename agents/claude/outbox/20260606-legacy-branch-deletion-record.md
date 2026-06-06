@@ -1,0 +1,42 @@
+﻿# 레거시 codex/* 삭제 기록 (복구용 SHA) — 2026-06-06
+
+| branch | sha |
+|---|---|
+| codex/account-unused-locale | 2ea3ec83156113de86bda7752b33dbd625f9e5ec |
+| codex/age-persona-readability | c7f902d6425088686c40ff7c1f18f4d4d6d0e035 |
+| codex/align-character-village-scale | d235de63d78641665c615ba94f096b5ceacf94a4 |
+| codex/fix-birth-date-error-copy | 17ef0e1886c0e39d4f1c23b6a6091f043165e0bb |
+| codex/android-premium-ui-polish | 51c6885a4a469e8a95cac171f4e1a073c274bc02 |
+| codex/align-remaining-hero-metadata | 45c5ef1353c049f451ebd74b61ae1b6089596009 |
+| codex/align-village-ui-metadata | aa75caef3023bab47366ad840b7eddfac4dba859 |
+| codex/analyze-repository-structure | 7e51e79c4ce9d10a1db6510f9f3263a0f8bbc599 |
+| codex/final-tesseract-motion | 38554206463412aae35974ddb4b3b6a6e5651d89 |
+| codex/ground-workers-on-village | 8d06a8ceb0586308b80b78ace8a94c8f18ba9157 |
+| codex/guard-village-hero-metadata | ac865cc145d5044a8167bc49a55fd8b4faf45b52 |
+| codex/handoff-ui-qa-20260602 | 59c82adb60a221d0a8f76965fcf7e715d88f8023 |
+| codex/keep-speech-bubbles-top | 0d32181077c9380ac5800417b9c1d1bd62713730 |
+| codex/label-spacing-normalization | 473f2e28e4c5ed2b9b03749da924f5db06b20e00 |
+| codex/polish-format-schema-ui | d12d00ac352c4df458eafcbbc6f044947308c7d8 |
+| codex/polish-sign-in-surface | 2244200c289cfc0c8728f45cb2e523170c4a9d67 |
+| codex/polish-village-ui-flow | 86ce103da2569979ae9ee6c66718ca4179b65884 |
+| codex/premium-surface-tokens | 2910cd61ab31a4166d4d66f28db5c671afc9edb0 |
+| codex/premium-utility-surfaces | d3113d2e7d76db35a615f6339545e9e214545365 |
+| codex/public-ui-token-polish | ab891ab5574e7dd17e34e47f697aaa1911373aec |
+| codex/sharpen-worker-assets | 23fa704bd0392ca6016d44d948cc2d12a7ffde15 |
+| codex/sprint-1-capture-premium-icons | 6dcc1cfd534bc5fa7430db7827b52fe294cde5c6 |
+| codex/sprint-auth-redirect-guard-polish | 95a7912cafd778886006fea3444a3ccaa2e784cc |
+| codex/sprint-clear-lint-warnings | 7061f09c9a4e09f7dc015750398957e977f967e4 |
+| codex/sprint-formats-editor-polish | 948806b01947d9455e0394c3594ec5b261a96dad |
+| codex/sprint-ground-worker-sprites | 7c12f75aa2cd2438e8250b99000e882e1ecdc1d1 |
+| codex/sprint-grounded-characters | 1eaeac1872a4f4c893eeb306ccef7171aeba9511 |
+| codex/sprint-polish-premium-assets | e710ab86653d56580f99222a5c6d5409b6566c46 |
+| codex/sprint-remove-retired-appnav | 80c4baad0b791ac11293be095242da031e1de07a |
+| codex/sprint-remove-retired-mascot-placeholder | 08b5144f118447ebc6ce475159d3b04723d874d3 |
+| codex/sprint-scenehero-action-polish | 581308848a239feb05e03af7543e91e7a8517915 |
+| codex/sprint-scenehero-bubble-follows-owner | 682a5a7fe1c58003924d45431f0668710021c330 |
+| codex/sprint-scenehero-owner-patrol | 6ec35ea20165bca7fe277fd1c7bbcf3db54b8efa |
+| codex/sprint-tokenize-premium-colors | dd174cf55c5d2857373fc51cfd3e8ece7f43384d |
+| codex/sprint-unify-legacy-button-premium | 083b9ef4bdccbb3a9f641061ebd1d93166200ced |
+| codex/sprint-web-box-sizing | cd56d8936d17a42c18957b44b9584ab68abfe6aa |
+| codex/tighten-format-manager-controls | fc258dd1eb650dc6df22234f47aa89c13609e806 |
+| codex/update-age-gate-assets-14-plus | 4d4867a3bb33b255583fe565333cbb0515e562e5 |
