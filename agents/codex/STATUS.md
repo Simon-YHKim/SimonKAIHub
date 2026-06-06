@@ -1,13 +1,36 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 02:32:45 KST
-state: synced_ready
+updated: 2026-06-07 02:39:39 KST
+state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: E19/A10 formats editor filing-language cleanup.
+- **src**: Codex scan of remaining user-facing jargon in `/formats` editor and preview surfaces.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity EN/KO copy smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@50dce1e`.
+- **Implemented**: replaced visible `/formats` editor/preview labels like `Base kind`, `Wiki bucket`, `Wiki path`, `Triggers`, `AI properties`, and property-key copy with user-facing filing language.
+- **Guard**: added `FormatEditorLanguage` static check requiring `Source type`, `Filing area`, `Auto-match links`, `Saved folder`, `Details to save`, and no quoted schema/bucket/property labels in the visible editor/preview code.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`265 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `5d9d678132289f15fee03c2d82661931b8f78a87` (`fix(copy): clarify format editor filing labels`).
+- **Pending stack vs origin/main**: `5d9d678132289f15fee03c2d82661931b8f78a87` only.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-023939-to-claude-format-editor-language.md`
+  - `agents/codex/outbox/20260607-023939-to-antigravity-format-editor-language-qa.md`
+  - `agents/codex/outbox/20260607-023245-to-claude-a17-a18-merged-sync.md`
+
+[E19/A10 formats editor filing-language cleanup / 26.06.07 / 02:39:39]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #copy #formats #i18n #implementation
+- Completed a narrow `/formats` copy cleanup.
+- Replaced schema/bucket/property jargon with user-facing filing language in editor and preview.
+- Added `FormatEditorLanguage` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (A17/A18 merge sync)
 
 - **Task**: A17/A18 merge sync.
 - **src**: local loop sync after Claude merged Codex A18 and A17.
