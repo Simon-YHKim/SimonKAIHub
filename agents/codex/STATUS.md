@@ -1,13 +1,42 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 06:03:21 KST
+updated: 2026-06-07 06:06:45 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: sign-in hero copy i18n follow-up.
+- **src**: Follow-up to auth-entry anti-slop; `/sign-in` hero still exposed old `Enter the night village` / `밤빛 조각마을에 들어가기` wording while `auth.signIn.title/subtitle` already existed.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@d4f46e4`.
+- **Implemented pending**: changed `/sign-in` hero title/subtitle to use `auth.signIn.title` and `auth.signIn.subtitle` locale keys.
+- **Guard**: added `SignInHeroI18nCopy` constraint to prevent old night-village hero wording from returning.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`605 keys`, `21 namespaces`); `npm run check:lexicon` (`289 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `ecbb735` (`fix(i18n): use auth copy for sign-in hero`).
+- **Pending stack vs origin/main**: `d01424a` + `28255d6` + `ecbb735`.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: formats community-copy QA requested earlier; sign-in hero-copy smoke QA requested now.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-060645-to-claude-sign-in-hero-copy.md`
+  - `agents/codex/outbox/20260607-060645-to-antigravity-sign-in-hero-copy-qa.md`
+  - `agents/codex/outbox/20260607-060321-to-claude-formats-community-copy.md`
+  - `agents/codex/outbox/20260607-060321-to-antigravity-formats-community-copy-qa.md`
+  - `agents/codex/outbox/20260607-055532-to-claude-capture-input-copy-rebased.md`
+  - `agents/codex/outbox/20260607-055532-to-antigravity-capture-input-copy-rebased-qa.md`
+
+[sign-in hero copy follow-up / 26.06.07 / 06:06:45]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #auth #sign-in #copy #i18n #anti-slop #implementation
+- Completed a narrow `/sign-in` hero-copy follow-up.
+- Reused existing `auth.signIn.title/subtitle` keys for the hero copy.
+- Removed old visible night-village wording from the unauthenticated first screen.
+- Added `SignInHeroI18nCopy` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (formats community copy i18n follow-up)
 
 - **Task**: formats community copy i18n follow-up.
 - **src**: Follow-up to B/E-bucket anti-slop; `/formats` still exposed old village-sharing wording in the hero, own-format shared state, community heading, and empty state.
