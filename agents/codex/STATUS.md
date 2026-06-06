@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 01:32:25 KST
+updated: 2026-06-07 01:39:05 KST
 state: submitted_waiting_claude_review
 ---
 
@@ -9,19 +9,22 @@ state: submitted_waiting_claude_review
 
 ## Current (latest)
 
-- **Task**: E17 onboarding concrete intro.
-- **src**: Claude `PROPOSAL_QUEUE.md` E17 high/open, persona-expanded finding that the first-run onboarding is too metaphor-heavy for low-literacy and translation contexts.
-- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested; SHA update sent after rebasing onto latest main.
+- **Task**: E18 consent/privacy trust copy.
+- **src**: Claude `PROPOSAL_QUEUE.md` E18 high/open plus persona-expanded findings around overseas processing, sensitive-data consent anxiety, and Grok consent-control trust signals.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested.
 - **Rule update**: user-provided `AGENTS.md` operating profile reconfirmed in Codex-owned `agents/codex/RULES.md`; global protocol remains Claude-owned.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@958445e`.
-- **Pending predecessors**: none. E9 tier icon asset map is now on main as `ae974b9`.
-- **Implemented**: reduced `/onboarding` from five metaphor-heavy steps to three concrete user-action steps, removed village/node/road/piece copy from the onboarding narrative, and added visible `1 / 3` progress text next to the existing accessible dot indicator.
-- **Native QA**: requested from Antigravity for Android narrow-width, large-font, routing, screen-reader, and art-surface smoke.
-- **Guard**: added `Onboarding` static check requiring concrete 3-step flow, visible progress text, and absence of the old metaphor copy.
-- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`261 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all passed before rebase. Rebase moved the same E17 diff onto `origin/main@958445e`.
-- **Local commit**: `9cc7a9888f4891c1b37a3e9f1f4e309c8a245262` (`fix(ux): simplify onboarding intro`), rebased from submitted SHA `291d9406540da7b36871e2a7f599189f4d7632c9`.
-- **Pending stack vs origin/main**: `9cc7a9888f4891c1b37a3e9f1f4e309c8a245262` only.
+- **Pending predecessors**: E17 onboarding concrete intro `9cc7a9888f4891c1b37a3e9f1f4e309c8a245262`, already submitted and AG QA requested.
+- **Implemented**: added trust notes to `ConsentNotice` and `/privacy`; reframed EN/KO consent copy around encrypted private records, request-bound Gemini use, optional controls off by default, and external analytics as usage signals rather than entry text.
+- **Native QA**: requested from Antigravity for Android narrow-width, large-font, consent checkbox, and privacy-toggle layout smoke.
+- **Guard**: added `ConsentTrust` static check requiring trust notes, encrypted-service overseas framing, entry-text-safe analytics wording, and removal of the old ambiguous consent copy.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`265 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `d097e69346daa03866920b0b928e8bed633ef018` (`fix(copy): strengthen consent trust copy`).
+- **Pending stack vs origin/main**: `9cc7a9888f4891c1b37a3e9f1f4e309c8a245262` + `d097e69346daa03866920b0b928e8bed633ef018`.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-013905-to-claude-consent-trust-copy.md`
+  - `agents/codex/outbox/20260607-013905-to-antigravity-consent-trust-native-qa.md`
+  - `agents/codex/outbox/preview/20260607-013905-consent-trust-copy.html`
   - `agents/codex/outbox/20260607-012856-to-claude-onboarding-concrete-intro.md`
   - `agents/codex/outbox/20260607-012856-to-antigravity-onboarding-native-qa.md`
   - `agents/codex/outbox/20260607-013225-to-claude-onboarding-concrete-intro-sha-update.md`
@@ -38,6 +41,15 @@ state: submitted_waiting_claude_review
   - `agents/codex/outbox/20260607-005305-to-claude-wiki-export-native-qa-pass-relay.md`
   - `agents/codex/outbox/20260607-004138-to-claude-likert-accessibility.md`
   - `agents/codex/outbox/20260607-004454-to-claude-likert-accessibility-sha-update.md`
+
+[E18 consent/privacy trust copy / 26.06.07 / 01:39:05]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #consent #privacy #copy #ebucket #worktree #implementation
+- Completed a low-risk E18 trust-copy slice for consent and privacy surfaces.
+- Added visible trust notes to `ConsentNotice` and `/privacy`.
+- Reframed overseas/LLM/sensitive-data acknowledgements without asserting final legal policy.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (E17 onboarding concrete intro)
 
 [E17 onboarding concrete intro / 26.06.07 / 01:28:56]
 #comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #onboarding #copy #ebucket #worktree #implementation
