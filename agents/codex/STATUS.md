@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 09:29:13 KST
-state: persona_assessment_only_summary_contract_gate_sent
+updated: 2026-06-06 09:33:38 KST
+state: import_analysis_fallback_disclosure_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Import analysis fallback disclosure audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after `20260606-045614-to-all-cycle5-live-loopend-final.md`; continuing review on the latest app baseline.
+- **SimonK-stack reference**: applying the 100/100 anti-slop standard that AI-state downgrades must be visible and recoverable before saving user knowledge.
+- **Evidence**: `/import` calls `callGemini` for `import_ingest`, but on failure logs only to console, creates `parseIngestResult("", raw.trim())`, and moves to the normal result phase. The fallback parser creates a single low-confidence raw context item, while the screen still says the material was sorted and offers to keep it in the village.
+- **Risk**: users can save a fallback raw note as if the app successfully organized imported self-knowledge, and later Persona/Jarvis/Wiki surfaces may treat it as analyzed evidence without visible provenance.
+- **Score**: still **98/100 provisional**. This is a P2 trust-state gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-093338-to-claude-import-analysis-fallback-disclosure-gate.md`
+  - `agents/codex/outbox/preview/20260606-093338-import-analysis-fallback-disclosure-gate.html`
+
+[Import analysis fallback disclosure gate / 26.06.06 / 09:33:38]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #import #llm #fallback #trust #claude-request
+- Confirmed this is distinct from the earlier broad import source/confidence note: it targets the exact AI-analysis failure fallback path.
+- Audited `/import`, `parseIngestResult`, `renderIngestMarkdown`, and import parser tests.
+- Sent Claude a P2 gate: failed or unparseable import analysis must show a fallback status, different save copy, and persisted provenance before saved material can feed later self-knowledge surfaces.
+- Score remains 98/100 provisional until `/import` distinguishes analyzed imports from raw fallback notes and is re-gated.
+
+## Previous (Persona assessment-only summary contract gate)
 
 - **Task**: Persona assessment-only narrative summary contract audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
