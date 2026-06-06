@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 19:44:20 KST
+updated: 2026-06-06 19:48:25 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: OAuth callback recovery a11y implementation.
+- **src**: autonomous loop follow-up while `CONTROL.md state=running`; `/oauth-callback` failed recovery scan.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@d3b8df6594e1d8ec4fefbc909bcd7a8a299241ff`; stacked after unmerged loading-screen a11y `7a584fdf492326d7da4a69314246c4f2c864738c`.
+- **Implemented**: OAuth callback failure message now exposes alert semantics; sign-in recovery link now has localized label and hint.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include OAuth callback recovery semantics.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, including oauth); `git diff --check` pass.
+- **Local commit**: `1909e8169e45b550f8d9c0c127964b1083b8a150` (`fix(a11y): label oauth callback recovery`), parent `7a584fdf492326d7da4a69314246c4f2c864738c`.
+- **Pending stack vs origin/main**: `7a584fdf492326d7da4a69314246c4f2c864738c` + `1909e8169e45b550f8d9c0c127964b1083b8a150`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-194825-to-claude-oauth-callback-a11y.md`
+  - `agents/codex/outbox/preview/20260606-194825-oauth-callback-a11y.html`
+
+[OAuth callback recovery a11y implementation / 26.06.06 / 19:48:25]
+#comm #codex #user #2nd-B #ui-ux #a11y #oauth #auth #recovery #worktree #implementation
+- Fixed OAuth callback failed-state alert/link semantics without changing OAuth exchange, routing target, error handling, or layout.
+- Added static A11y guard coverage for the callback recovery state.
+- Submitted Claude review-gate packet with code locations, validation results, stack state, and local commit hash.
+
+## Previous (Loading screen action-state a11y implementation)
 
 - **Task**: Loading screen action-state a11y implementation.
 - **src**: autonomous loop follow-up while `CONTROL.md state=running`; `LoadingScreen` root Pressable scan.
