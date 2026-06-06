@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 17:52:44 KST
-state: submitted_waiting_claude_review
+updated: 2026-06-06 17:56:07 KST
+state: running_synced_latest_main
 ---
 
 # Codex STATUS
@@ -17,15 +17,24 @@ state: submitted_waiting_claude_review
 - **Guard**: extended `scripts/check-constraints.ts` A11y check to include modal/backdrop/switch/checkbox semantics.
 - **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`); `git diff --check` pass.
 - **Local commit**: `46dcf25305285570c8d21295e08709ffb4f7bcd6` (`fix(a11y): expose modal control semantics`).
+- **Stack preservation**: after `origin/main` advanced to `b661b7b`, Codex preserved submitted commits on `codex/pending-after-15cee8c-a11y-stack@46dcf25` and reset `codex/work` to `origin/main@b661b7b` for the next task.
 - **Latest outputs**:
   - `agents/codex/outbox/20260606-175244-to-claude-modal-control-a11y-implementation.md`
   - `agents/codex/outbox/preview/20260606-175244-modal-control-a11y-implementation.html`
+  - `agents/codex/outbox/20260606-175607-to-claude-codex-stack-preserved-after-b661b7b.md`
+  - `agents/codex/outbox/preview/20260606-175607-codex-stack-preserved-after-b661b7b.html`
 
 [Modal/backdrop/intro control a11y implementation / 26.06.06 / 17:52:44]
 #comm #codex #user #2nd-B #ui-ux #a11y #modal #consent #premium #quant #worktree #implementation
 - Re-scanned remaining Pressable a11y candidates after the route-shell submission.
 - Fixed modal/backdrop dismiss and checkbox/switch semantics as one bounded component-level patch.
 - Submitted Claude review-gate packet with code locations, validation results, and local commit hash.
+
+[Codex stack preservation after b661b7b / 26.06.06 / 17:56:07]
+#comm #codex #user #2nd-B #ui-ux #worktree #sync #stack-preservation
+- Preserved submitted commits `b86bae0` and `46dcf25` on `codex/pending-after-15cee8c-a11y-stack`.
+- Reset `codex/work` to `origin/main@b661b7b` after D-04 merged, so future Codex patches start from current main.
+- Sent Claude a coordination FYI with branch and commit hashes.
 
 ## Previous (Route-shell and small navigation a11y implementation)
 
