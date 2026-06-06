@@ -41,7 +41,7 @@
 
 ## B. dispatch-Codex (UI/UX·i18n·anti-slop·이미지)
 - **i18n 번들 이관** (915 inline locale 분기 → 번들) ← 이미 redirect(20260606-212300). 신뢰·법무 카피 우선.
-- 카피 jargon: capture-input(markdown/frontmatter)·jarvis-citation([[slug]])·manual-jargon·theme-contract(Light 실제구현)·pixel-font→readable.
+- 카피 jargon: ✅ **capture-input(markdown/frontmatter) 머지 `707387e`**(Codex trio: jargon+mode/alert i18n 번들). 남은: jarvis-citation([[slug]])·manual-jargon·theme-contract(Light 실제구현)·pixel-font→readable.
 - 공유 컴포넌트: SwitchRow/PreferenceToggle·LikertScaleQuestion·ExternalLinkButton/CopyAction·ActionChip primitives.
 - **feedback-alert-contract** (61 Alert.alert → PremiumToast/Modal).
 - formats dead CTA(mock)·settings crew-density phantom·route-ia-numbering·design-token drift(74 hex/rgba).
@@ -50,15 +50,14 @@
 - expo-image resizeMode→contentFit(6파일)·temp script 정리.
 - §19 그래프빌리지 비주얼 패스(AG perf 교차검증 대기).
 
-## C. dispatch-AG (Android/네이티브/perf/멀티모달 perf-side) — **AG 재가동 필요**
-- Android 키보드 증명(7화면)·FlatList 런타임 증명·NavGraph resume/drift 증명.
-- LivingAsset AppState guard+cold-start·OCR 권한/프리뷰 증명·native permission 감사.
-- D-10 알림 하드닝(POST_NOTIFICATIONS·Doze)·native permission trust.
-- §19 그래프빌리지 perf-side(프레임/OOM 측정).
+## C. dispatch-AG (Android/네이티브/perf/멀티모달 perf-side) — **동결해제, 생산 중**
+- ✅ **머지 `707387e`**: KeyboardAvoidingView(account·audit·data·settings·support)·CAMERA권한+LivingAsset AppState guard·phantom notification 행 제거.
+- 남은(device 증명 필요): Android 키보드 **에뮬 증명**(7화면)·FlatList 런타임 증명·NavGraph resume/drift 증명·OCR 권한/프리뷰 증명·D-10 알림 하드닝(POST_NOTIFICATIONS·Doze)·§19 그래프빌리지 perf-side(프레임/OOM).
+- ⚠️ **AG는 copy/i18n 중복생산 금지**(capture jargon은 Codex가 커버) — 네이티브 lane 고수.
 
 ## D. Simon / external (§15 안전레일 — 합의 우회 불가)
 - **consent legal readiness** — placeholder 법무카피→확정본+versioning (D-03).
 - **deployment env 진실** — FORCE_TIER/ENABLE_*/LLM_MODE 기본값 확정 (D-01).
 - **social provider 실설정** (D-05).
-- permissions phantom notification — expo-notifications 구현은 Simon, **행 제거는 Claude 가능**(A로 이관 가능).
+- ~~permissions phantom notification~~ — ✅ **AG가 행 제거 머지 `707387e`**(expo-notifications 미구현이므로 phantom 행 삭제가 정답). 해소됨.
 - go-live freeze 상태 명확화.

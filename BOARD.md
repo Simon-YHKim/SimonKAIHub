@@ -1,9 +1,9 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity·Grok은 읽기 전용."
-last-updated: 2026-06-06 21:53:00 KST
+last-updated: 2026-06-06 22:09:00 KST
 run_mode: autonomous-B
-live_head: 2nd-B main 3ee8885
+live_head: 2nd-B main 707387e
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
@@ -17,7 +17,7 @@ live_head: 2nd-B main 3ee8885
 |---|---|---|---|
 | Claude | 통합(구현·머지·온라인git) + **제안 큐(§25)** | running | 백로그 트리아지 → PROPOSAL_QUEUE 소진 → verify → merge |
 | Codex | anti-slop 발견 | running | 미머지 8건 초과 시 발견중지·P3 통합 |
-| Antigravity | 네이티브 픽스·QA | running | 자기 브랜치 커밋 → Claude 리뷰게이트 |
+| Antigravity | 네이티브 픽스·QA | **running(동결해제)** | 네이티브 3커밋 머지(707387e). ⚠️copy/i18n 중복생산 금지 — 네이티브 lane 고수 |
 | Grok | 트렌드·결정입력 | running | 합의 입력 + 30분 트렌드 모니터 |
 
 ## 🔐 외부의존 블로커 (Simon 개입 필요 — §15)
