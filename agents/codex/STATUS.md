@@ -1,13 +1,40 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 04:40:00 KST
+updated: 2026-06-07 04:45:39 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: E19 profile i18n-copy-contract.
+- **src**: Follow-up to Claude B/E-bucket i18n/copy-contract cleanup; `/profile` still kept inline ko/en hub labels and old Villager/village-mark wording.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@40bfb56`.
+- **Implemented pending**: added `profile` locale namespace; moved profile loading, hero, account fallback, section labels, chip labels, and accessibility hints into `locales/en|ko/profile.json`; replaced old village-mark fallback copy with direct profile-hub language.
+- **Guard**: added `ProfileI18nCopy` static check and updated the A11y contract to require key-based profile chip labels/hints.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`419 keys`, `15 namespaces`); `npm run check:lexicon` (`277 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `0750cec` (`fix(i18n): move profile copy to locale bundle`).
+- **Pending stack vs origin/main**: `7b10abe` + `0750cec`.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: not-found QA still pending; profile i18n copy smoke QA requested.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-044539-to-claude-profile-i18n-copy.md`
+  - `agents/codex/outbox/20260607-044539-to-antigravity-profile-i18n-copy-qa.md`
+  - `agents/codex/outbox/20260607-044000-to-claude-not-found-i18n-copy.md`
+  - `agents/codex/outbox/20260607-044000-to-antigravity-not-found-i18n-copy-qa.md`
+
+[E19 profile i18n-copy-contract / 26.06.07 / 04:45:39]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #i18n #profile #copy #implementation
+- Completed a narrow E19 i18n-copy-contract slice for `/profile`.
+- Moved profile hero/account/hub section/chip/a11y copy into EN/KO locale bundles.
+- Removed inline ko/en hub copy branches and old Villager/village-mark wording from the profile route.
+- Added `ProfileI18nCopy` regression guard and updated the A11y contract to check key-based profile chip hints.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (not-found i18n-copy-contract)
 
 - **Task**: E19 not-found i18n-copy-contract.
 - **src**: Follow-up to Claude B/E-bucket i18n/copy-contract cleanup and route-shell audit; `/+not-found` still kept inline ko/en copy and old village-center wording.
