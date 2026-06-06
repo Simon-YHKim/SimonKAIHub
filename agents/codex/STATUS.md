@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 03:01:01 KST
+updated: 2026-06-07 03:07:18 KST
 state: submitted
 ---
 
@@ -9,21 +9,29 @@ state: submitted
 
 ## Current (latest)
 
-- **Task**: E3 meaningful art sprite accessibility labels.
-- **src**: Claude E-bucket high-priority E3 a11y request plus Codex scan of meaningful vs decorative art semantics.
-- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity QA PASS relayed for current E3 and previous A17 format-editor slice.
-- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@54b9175`, stacked after pending A17 format editor dynamic-type `0c373bf3f8b405ef1c9e02a99a372de6001ecded`.
-- **Implemented**: `SecondBSprite` now exposes image semantics when a label is provided; the home mascot, Jarvis empty-state sprite, and premium character badge now provide meaningful labels while decorative island/worker art remains hidden.
-- **Guard**: added `ArtA11ySemantics` static check for meaningful sprite labels and decorative art hiding.
+- **Task**: feedback-alert-contract wiki delete modal.
+- **src**: Claude B-bucket feedback-alert-contract follow-up; Codex scan found `/wiki` still had an `Alert.alert` destructive confirmation.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity wiki-delete modal QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@54b9175`, stacked after pending A17 format-editor and E3 art-a11y commits.
+- **Implemented**: `/wiki` page deletion now opens `PremiumModal` with localized confirmation, explicit cancel/delete actions, disabled/loading state while deleting, success toast, and existing product-tone failure toast.
+- **Guard**: updated `Feedback` static check so `/wiki` must use `PremiumModal`/`PremiumToast` and have zero `Alert.alert` occurrences.
 - **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`265 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
-- **Local commit**: `af00a306432f801ac86562c1c366f76b4b2ce43f` (`fix(a11y): label meaningful art sprites`).
-- **Pending stack vs origin/main**: `0c373bf3f8b405ef1c9e02a99a372de6001ecded` + `af00a306432f801ac86562c1c366f76b4b2ce43f`.
-- **Antigravity QA**: E3 art sprite accessibility PASS (`20260606-180200-ag-art-sprite-a11y-qa.html`); A17 format editor dynamic-type PASS (`20260606-175600-ag-dynamic-type-format-editor-qa.html`).
+- **Local commit**: `5252d6985ce6c4de82023019939fb73ae88b6b8b` (`fix(ux): replace wiki delete alert with modal`).
+- **Pending stack vs origin/main**: `0c373bf3f8b405ef1c9e02a99a372de6001ecded` + `af00a306432f801ac86562c1c366f76b4b2ce43f` + `5252d6985ce6c4de82023019939fb73ae88b6b8b`.
+- **Antigravity QA**: A17 format editor and E3 art sprite accessibility PASS relayed; wiki delete modal QA requested.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-030718-to-claude-wiki-delete-modal.md`
+  - `agents/codex/outbox/20260607-030718-to-antigravity-wiki-delete-modal-qa.md`
   - `agents/codex/outbox/20260607-030101-to-claude-format-editor-art-a11y-qa-pass-relay.md`
   - `agents/codex/outbox/20260607-025847-to-claude-art-sprite-a11y.md`
-  - `agents/codex/outbox/20260607-025847-to-antigravity-art-sprite-a11y-qa.md`
-  - `agents/codex/outbox/20260607-025239-to-claude-dynamic-type-format-editor.md`
+
+[feedback-alert-contract wiki delete modal / 26.06.07 / 03:07:18]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #feedback #modal #wiki #implementation
+- Completed a narrow feedback-alert-contract slice for `/wiki`.
+- Replaced the native `Alert.alert` delete confirmation with `PremiumModal`.
+- Added loading/disabled state during deletion and success/failure toast feedback.
+- Updated the Feedback static guard so `/wiki` has zero `Alert.alert` usages.
+- Full validation passed, including Jest 95 suites / 848 tests.
 
 [A17/E3 Antigravity QA PASS relay / 26.06.07 / 03:01:01]
 #comm #codex #claude-fyi #antigravity-qa #2nd-B #ui-ux #a11y #dynamic-type
