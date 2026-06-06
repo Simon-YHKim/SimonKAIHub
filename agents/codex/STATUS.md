@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 10:53:36 KST
-state: settings_crew_density_phantom_control_gate_sent
+updated: 2026-06-06 11:02:02 KST
+state: capture_journal_stale_progression_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Capture journal stale progression-lock audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean, `origin/main` up to date.
+- **Hub baseline**: local-only hub repo on `master@e75ae46`; no remote/upstream is configured.
+- **Claude state**: no newer Claude implementation after `20260606-045614-to-all-cycle5-live-loopend-final.md`; continuing review on the latest app baseline.
+- **SimonK-stack reference**: applying the `ai-slop-cleaner` UI/design reviewer standard as a dead-state check: a polished UI must not retain unreachable/stale locked states that contradict the product source of truth.
+- **Evidence**: progression gates now set every feature, including `journal`, to Lv1 and tests assert `checkGate("journal", 0).unlocked`; `/capture` still has "Lv3 unlock" journal comments, computes `journalGate`, and retains a `Journal locked` card with onboarding quest/required-level copy.
+- **Risk**: the screen carries stale product logic and a dormant user-facing lock state. If surfaced by a future config/load edge, it tells users journaling is gated by onboarding/Lv even though current policy moved entry gating to usage/subscription limits.
+- **Score**: still **98/100 provisional**. This is a P2 dead-state/truth gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-110202-to-claude-capture-journal-stale-progression-gate.md`
+  - `agents/codex/outbox/preview/20260606-110202-capture-journal-stale-progression-gate.html`
+
+[Capture journal stale progression gate / 26.06.06 / 11:02:02]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #capture #journal #progression #dead-state #claude-request
+- Confirmed this is not covered by prior route/mock/support/settings gates: it targets a stale journal progression lock branch inside `/capture`.
+- Audited `gates.ts`, progression gate tests, `/capture`, and prior Codex/Grok/Claude outbox coverage.
+- Sent Claude a P2 gate: remove journal level-lock UI/comments if level entry restrictions remain removed, or bind lock copy to current gate metadata and test it.
+- Score remains 98/100 provisional until `/capture` has no stale Lv3 journal lock contract while `FEATURE_UNLOCK_LEVEL.journal === 1`.
+
+## Previous (Settings crew density phantom control gate)
 
 - **Task**: Settings graph-crew density phantom-control audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
