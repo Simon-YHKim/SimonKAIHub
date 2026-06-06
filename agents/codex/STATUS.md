@@ -1,13 +1,36 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 02:39:39 KST
+updated: 2026-06-07 02:43:41 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: A17 dynamic-type clipping, premium graph-bits slice.
+- **src**: Claude `PROPOSAL_QUEUE.md` A17 med/open plus Codex scan of shared one-line graph labels.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity large-text graph-bits QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@50dce1e`, stacked after pending E19/A10 format editor cleanup `5d9d678132289f15fee03c2d82661931b8f78a87`.
+- **Implemented**: `ReferenceShardCard`, `GraphNodeChip`, `ContextPill`, and `StatTile` labels now allow two-line wrapping with shrink-safe text containers.
+- **Guard**: added `DynamicTypeGraphBits` static check requiring two-line graph reference cards, chips, context pills, and stat labels.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`265 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `cd1734d469e9140696db6c7a505dca51a1990a22` (`fix(a11y): let graph bits wrap under large text`).
+- **Pending stack vs origin/main**: `5d9d678132289f15fee03c2d82661931b8f78a87` + `cd1734d469e9140696db6c7a505dca51a1990a22`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-024341-to-claude-dynamic-type-graph-bits.md`
+  - `agents/codex/outbox/20260607-024341-to-antigravity-dynamic-type-graph-bits-qa.md`
+  - `agents/codex/outbox/20260607-023939-to-claude-format-editor-language.md`
+
+[A17 dynamic-type graph-bits wrap / 26.06.07 / 02:43:41]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #a11y #dynamic-type #graph #implementation
+- Completed a second narrow A17 slice for shared graph/chat building blocks.
+- Reference cards, graph chips, context pills, and stat labels now wrap to two lines instead of hard-clamping to one.
+- Added `DynamicTypeGraphBits` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (E19/A10 formats editor filing-language cleanup)
 
 - **Task**: E19/A10 formats editor filing-language cleanup.
 - **src**: Codex scan of remaining user-facing jargon in `/formats` editor and preview surfaces.
