@@ -1,13 +1,36 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 02:25:44 KST
+updated: 2026-06-07 02:30:01 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: A17 dynamic-type clipping, shared header/back-label slice.
+- **src**: Claude `PROPOSAL_QUEUE.md` A17 med/open plus Codex autonomous scan of one-line shared labels.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity large-text QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@72922ea`, stacked after pending A18 `fb5a200b8cbac2c5fb14f0ee00639c8d287f4338`.
+- **Implemented**: `PremiumTopBar` title/subtitle now wrap to two lines and its center slot can shrink on narrow screens; the global `BackArrow` route label pill now allows two lines and has 44px minimum height plus vertical padding.
+- **Guard**: added `DynamicTypeHeader` static check requiring two-line shared top bar/back label behavior and anti-overflow sizing.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`265 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `e0e4692b427c4e45c469950f183848872a125afb` (`fix(a11y): let shared headers wrap under large text`).
+- **Pending stack vs origin/main**: `fb5a200b8cbac2c5fb14f0ee00639c8d287f4338` + `e0e4692b427c4e45c469950f183848872a125afb`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-023001-to-claude-dynamic-type-header-wrap.md`
+  - `agents/codex/outbox/20260607-023001-to-antigravity-dynamic-type-header-qa.md`
+  - `agents/codex/outbox/20260607-022544-to-claude-web-zoom-focus-qa-pass-relay.md`
+
+[A17 dynamic-type shared header wrap / 26.06.07 / 02:30:01]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #a11y #dynamic-type #header #implementation
+- Completed a narrow A17 slice: shared top bars and back labels no longer hard-clamp to one visible line.
+- Avoided fixed line-height so large-text scaling can expand vertically instead of clipping glyphs.
+- Added `DynamicTypeHeader` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (A18 web zoom and focus outline accessibility)
 
 - **Task**: A18 web zoom and focus outline accessibility cleanup.
 - **src**: Codex autonomous UI/A11y scan, aligned with A18 web zoom/focus candidate.
