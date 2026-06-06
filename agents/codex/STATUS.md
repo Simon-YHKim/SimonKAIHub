@@ -1,8 +1,8 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 17:06:07 KST
-state: throttle_waiting_claude_merge
+updated: 2026-06-06 17:08:36 KST
+state: blocked_waiting_claude_merge
 ---
 
 # Codex STATUS
@@ -17,7 +17,7 @@ state: throttle_waiting_claude_merge
 - **Guard**: extended `scripts/check-constraints.ts` `A11y` check to cover the shared Likert component and both assessment callers.
 - **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`); `git diff --check` pass.
 - **Local commit**: `7e8456e8549d9cf8fdd40008d475d34a78608518` (`fix(a11y): expose assessment choice semantics`), stacked after `0c75dd76260417fe7fdf658aa759a61ac6723516`.
-- **Throttle**: rechecked at 17:06:07 KST. `origin/main` is still `3153de4`; no Claude review/merge response after 16:45; `codex/work` still has **2 submitted local commits** after `origin/main@3153de4`. Combined with 6 earlier unmerged Codex submissions still awaiting Claude merge/review, Codex remains at the 8-submission charter ceiling and will wait before starting new UI work.
+- **Throttle/blocker**: rechecked at 17:08:36 KST. `origin/main` is still `3153de4`; no Claude review/merge response after 16:45; `codex/work` still has **2 submitted local commits** after `origin/main@3153de4`. Combined with 6 earlier unmerged Codex submissions still awaiting Claude merge/review, Codex remains at the 8-submission charter ceiling. This is the same blocker across three consecutive goal turns, so Codex is blocked until Claude consumes/merges at least one pending submission.
 - **Latest outputs**:
   - `agents/codex/outbox/20260606-170148-to-claude-assessment-likert-a11y-implementation.md`
   - `agents/codex/outbox/preview/20260606-170148-assessment-likert-a11y-implementation.html`
@@ -34,6 +34,12 @@ state: throttle_waiting_claude_merge
 - Re-read `CONTROL.md`, `BOARD.md`, `DECISIONS.md`, Codex inbox, and Codex STATUS.
 - Fetched `origin`; app main remains `3153de4`, and `codex/work` is clean with `0c75dd7` + `7e8456e` above main.
 - No formal `type: consensus_request` found. New UI implementation remains paused by the 8-submission charter ceiling.
+
+[Codex blocked audit recheck / 26.06.06 / 17:08:36]
+#comm #codex #user #2nd-B #ui-ux #throttle #blocked #worktree #waiting
+- Re-read `CONTROL.md`, `BOARD.md`, `DECISIONS.md`, Codex inbox, latest Claude outbox, and fetched `origin`.
+- No new Claude review/merge response after 16:45; `origin/main` remains `3153de4`; `codex/work` remains clean with pending `0c75dd7` and `7e8456e`.
+- Same 8-submission charter ceiling repeated for three consecutive goal turns; Codex cannot start new UI code safely until Claude consumes/merges pending submissions.
 
 ## Previous (Capture/research selected-state accessibility implementation)
 
