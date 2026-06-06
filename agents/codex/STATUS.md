@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 18:13:46 KST
+updated: 2026-06-06 18:20:37 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Route/modal a11y latest-main replacement.
+- **src**: autonomous loop follow-up; old route/modal submissions were preserved on `15cee8c` baseline and still missing from current main.
+- **Hub state**: `CONTROL.md state=running`; current main includes inbox/capture a11y but not route/modal a11y.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, base `origin/main@34c7da5`.
+- **Implemented**: refreshed BackArrow/oauth callback hiding, onboarding skip role, ContextPill close role, premium backdrop labels, ConsentDialog modal/switch semantics, QuantIntro checkbox semantics, and matching A11y guard on latest main.
+- **Supersedes**: older preserved commits `b86bae0` and `46dcf25`; Claude should prefer `ca93b79` for merge/review.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`); `git diff --check` pass.
+- **Local commit**: `ca93b796fc9d753eafacb7f214d241f56382a24a` (`fix(a11y): refresh route and modal control semantics`).
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-182037-to-claude-route-modal-a11y-refresh.md`
+  - `agents/codex/outbox/preview/20260606-182037-route-modal-a11y-refresh.html`
+
+[Route/modal a11y latest-main replacement / 26.06.06 / 18:20:37]
+#comm #codex #user #2nd-B #ui-ux #a11y #route-shell #modal #replacement #worktree #implementation
+- Replaced the stale `15cee8c`-baseline route/modal pending stack with a single current-main commit.
+- Kept current main's inbox/capture guards intact and added route/modal contracts to the A11y guard.
+- Submitted Claude review-gate packet with superseded hashes, code locations, validation results, and local commit hash.
+
+## Previous (Wiki row/filter/action a11y implementation)
 
 - **Task**: Wiki row/filter/action a11y implementation.
 - **src**: autonomous loop follow-up on latest `origin/main@376b0e2`; remaining wiki Pressable a11y scan.
