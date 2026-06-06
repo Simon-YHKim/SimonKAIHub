@@ -1,13 +1,44 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 05:42:11 KST
+updated: 2026-06-07 05:50:08 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: capture input/media/tag/feedback copy follow-up.
+- **src**: Follow-up to capture E2/B-bucket copy anti-slop; `/capture` still kept inline ko/en input labels/placeholders, image/file actions, tag helper/a11y copy, and feedback modal hints.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested. New app work paused at 8 pending Codex commits until Claude merges.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@a600dbe`.
+- **Merged on main**: `/not-found` i18n copy `84791a5`; `/profile` i18n copy `a600dbe`.
+- **Implemented pending**: moved capture link-detected, memo/OCR labels/placeholders, image/file actions/status copy, tag title/remove/add/helper copy, and feedback modal label/hints into `locales/en|ko/capture.json`; updated `HashtagAdder` to use `useTranslation("capture")`.
+- **Guard**: extended C7 capture copy, Feedback, A11y, and CaptureStorageLanguage constraints to require key-based input/media/tag/feedback copy.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`596 keys`, `20 namespaces`); `npm run check:lexicon` (`287 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `5048b98` (`fix(copy): bundle capture input copy`).
+- **Pending stack vs origin/main**: `446cb8b` + `a64e6a3` + `2ce98c8` + `776f642` + `67a96de` + `c9b65c9` + `e44727e` + `5048b98`.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: capture saved/journal copy PASS received; capture input copy smoke QA requested.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-055008-to-claude-capture-input-copy.md`
+  - `agents/codex/outbox/20260607-055008-to-antigravity-capture-input-copy-qa.md`
+  - `agents/codex/outbox/20260607-054211-to-claude-capture-saved-journal-copy.md`
+  - `agents/codex/outbox/20260607-054211-to-antigravity-capture-saved-journal-copy-qa.md`
+  - `agents/codex/outbox/20260607-053126-to-claude-record-detail-i18n-copy.md`
+  - `agents/codex/outbox/20260607-053126-to-antigravity-record-detail-i18n-copy-qa.md`
+
+[capture input/media/tag/feedback copy follow-up / 26.06.07 / 05:50:08]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #capture #copy #i18n #anti-slop #implementation
+- Completed a narrow capture input-copy follow-up for link, memo/OCR, image, file, tags, and feedback modal surfaces.
+- Moved remaining input/media/tag/feedback user-facing strings into EN/KO capture locale bundles.
+- Updated `HashtagAdder` to read from the capture namespace.
+- Extended copy/a11y/storage constraints to keep those surfaces key-based.
+- Full validation passed, including Jest 95 suites / 848 tests.
+- Pending stack is now 8 commits; Codex will stop new code work until Claude merges or reprioritizes.
+
+## Previous (capture saved/proposal/journal copy follow-up)
 
 - **Task**: capture saved/proposal/journal copy follow-up.
 - **src**: Follow-up to Claude E2/B-bucket capture copy anti-slop; `/capture` still kept inline ko/en saved-panel, proposed-format, Journal gate, prompt, field, conclusion, and Advisor copy, plus old village/AI wording in capture locale bundles.
