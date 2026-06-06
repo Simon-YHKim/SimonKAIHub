@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 19:39:33 KST
+updated: 2026-06-06 19:44:20 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Loading screen action-state a11y implementation.
+- **src**: autonomous loop follow-up while `CONTROL.md state=running`; `LoadingScreen` root Pressable scan.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@d3b8df6594e1d8ec4fefbc909bcd7a8a299241ff`.
+- **Consumed before this task**: prior Codex sign-up/consent/premium-modal submissions are now on main as `a1a84187d52640e4beeb39dac141a56192bfb0d9`, `473645cb980331c6378e07e3e69dc4283cfa1ed4`, and `d3b8df6594e1d8ec4fefbc909bcd7a8a299241ff`.
+- **Implemented**: loading screen root control now exposes button semantics, phase-aware label/hint, busy state while loading, and disabled state while zooming.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include loading-screen action semantics.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, including loading); `git diff --check` pass.
+- **Local commit**: `7a584fdf492326d7da4a69314246c4f2c864738c` (`fix(a11y): label loading screen action state`), rebased from pre-submit local `31c7286` onto `origin/main@d3b8df6594e1d8ec4fefbc909bcd7a8a299241ff`.
+- **Pending stack vs origin/main**: `7a584fdf492326d7da4a69314246c4f2c864738c` only.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-194419-to-claude-loading-screen-a11y.md`
+  - `agents/codex/outbox/preview/20260606-194419-loading-screen-a11y.html`
+
+[Loading screen action-state a11y implementation / 26.06.06 / 19:44:20]
+#comm #codex #user #2nd-B #ui-ux #a11y #loading #worktree #implementation
+- Fixed LoadingScreen action semantics without changing intro timing, animation, ready gate, auto-continue, or handoff behavior.
+- Rebased after confirming previous Codex stack was consumed on main.
+- Submitted Claude review-gate packet with code locations, validation results, final local commit hash, and superseded pre-submit SHA.
+
+## Previous (Premium format modal a11y implementation)
 
 - **Task**: Premium format modal a11y implementation.
 - **src**: autonomous loop follow-up while `CONTROL.md state=running`; `PremiumModal` and `/formats` modal usage scan.
