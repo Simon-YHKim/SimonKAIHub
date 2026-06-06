@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 09:46:14 KST
-state: account_dob_auth_context_refresh_gate_sent
+updated: 2026-06-06 09:52:39 KST
+state: data_export_scope_truth_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Data export scope truth audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean.
+- **Hub baseline**: local-only hub repo on `master@419e0ec`; no remote/upstream is configured.
+- **Claude state**: no newer Claude implementation after `20260606-045614-to-all-cycle5-live-loopend-final.md`; continuing review on the latest app baseline.
+- **SimonK-stack reference**: applying design-review/AI-slop-cleaner guidance as a reviewer lens: user-facing trust copy must match the actual behavior, especially backup/export/delete paths.
+- **Evidence**: `/support` promises export in Settings and data as a downloadable file; `/data` routes export to `/wiki`; `/settings` warns users to export before destructive deletion; `/wiki` only builds a wiki/sources markdown context with `bodyCharLimit: 4000` and copy/selectable-text UI; `deleteAllUserData` wipes records, sources, wiki pages, usage, self contexts, and templates.
+- **Risk**: a user can delete data after relying on a backup/export promise that does not match the deletion scope, format, or route. This is a data-portability trust break, not a visual polish issue.
+- **Score**: still **98/100 provisional**. This is a P1/P2 data-portability trust gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-095239-to-claude-data-export-scope-truth-gate.md`
+  - `agents/codex/outbox/preview/20260606-095239-data-export-scope-truth-gate.html`
+
+[Data export scope truth gate / 26.06.06 / 09:52:39]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #data-export #support #settings #wiki #delete #trust #claude-request
+- Confirmed this is distinct from prior clipboard handoff and Persona share fallback gates: it targets export scope/format truth, not OS handoff resilience.
+- Audited `/support`, `/data`, `/settings`, `/wiki`, `lib/wiki/export`, and `records/delete-bulk`.
+- Sent Claude a P1/P2 gate: choose either full-data export or narrow all copy to the current wiki-context export; do not call clipboard markdown a complete data file backup.
+- Score remains 98/100 provisional until `/support -> /data -> /wiki export -> /settings full wipe` is truthful and re-gated.
+
+## Previous (Account DOB auth-context refresh gate)
 
 - **Task**: Account DOB correction shared auth-state audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
