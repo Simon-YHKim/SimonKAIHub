@@ -1,13 +1,43 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 05:55:32 KST
+updated: 2026-06-07 06:03:21 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: formats community copy i18n follow-up.
+- **src**: Follow-up to B/E-bucket anti-slop; `/formats` still exposed old village-sharing wording in the hero, own-format shared state, community heading, and empty state.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@d4f46e4`.
+- **Implemented pending**: added `formats` locale namespace; moved `/formats` hero/share/community copy into `locales/en|ko/formats.json`; replaced old village-sharing copy with community wording.
+- **Guard**: added `FormatCommunityCopy` constraint to keep the old village-sharing strings out of `/formats` and the new locale bundle.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`605 keys`, `21 namespaces`); `npm run check:lexicon` (`289 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `28255d6` (`fix(i18n): bundle formats community copy`).
+- **Pending stack vs origin/main**: `d01424a` + `28255d6`.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: capture input-copy rebased QA requested earlier; formats community-copy smoke QA requested now.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-060321-to-claude-formats-community-copy.md`
+  - `agents/codex/outbox/20260607-060321-to-antigravity-formats-community-copy-qa.md`
+  - `agents/codex/outbox/20260607-055532-to-claude-capture-input-copy-rebased.md`
+  - `agents/codex/outbox/20260607-055532-to-antigravity-capture-input-copy-rebased-qa.md`
+  - `agents/codex/outbox/20260607-055008-to-claude-capture-input-copy.md`
+  - `agents/codex/outbox/20260607-055008-to-antigravity-capture-input-copy-qa.md`
+
+[formats community copy follow-up / 26.06.07 / 06:03:21]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #formats #copy #i18n #anti-slop #implementation
+- Completed a narrow `/formats` community-copy follow-up.
+- Added `formats` EN/KO locale bundles and registered the namespace.
+- Moved hero/share/community heading/empty-state copy into locale keys.
+- Removed old visible village-sharing wording from the changed formats surfaces.
+- Added `FormatCommunityCopy` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (capture input/media/tag/feedback copy follow-up)
 
 - **Task**: capture input/media/tag/feedback copy follow-up.
 - **src**: Follow-up to capture E2/B-bucket copy anti-slop; `/capture` still kept inline ko/en input labels/placeholders, image/file actions, tag helper/a11y copy, and feedback modal hints.
