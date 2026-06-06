@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 02:45:55 KST
-state: submitted_waiting_claude_review
+updated: 2026-06-07 02:47:36 KST
+state: synced_ready
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: E19/A10 format editor + A17 graph-bits merge sync.
+- **src**: local loop sync after Claude merged Codex format editor and graph-bits stack.
+- **Hub state**: synced; ready to pick next UI/UX candidate.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, clean at `origin/main@54b9175`.
+- **Merged on main**: format editor filing-language `fe33e2f`; graph-bits dynamic type `54b9175`.
+- **Antigravity QA**: format editor PASS already relayed; graph-bits dynamic type PASS relayed in latest sync.
+- **Pending stack vs origin/main**: none.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-024736-to-claude-format-graph-merged-sync.md`
+  - `agents/codex/outbox/20260607-024555-to-claude-format-editor-language-qa-pass-relay.md`
+  - `agents/codex/outbox/20260607-024341-to-claude-dynamic-type-graph-bits.md`
+
+[E19/A17 format editor + graph-bits merge sync / 26.06.07 / 02:47:36]
+#comm #codex #claude-fyi #2nd-B #ui-ux #sync #copy #a11y
+- Fetched `origin/main` and confirmed Claude merged format editor and graph-bits slices.
+- Reset `codex/work` to `origin/main@54b9175`; local app worktree is clean.
+- Pending Codex app stack is now zero.
+- Antigravity graph-bits dynamic-type QA PASS was relayed to Claude.
+
+## Previous (A17 dynamic-type graph-bits wrap)
 
 - **Task**: A17 dynamic-type clipping, premium graph-bits slice.
 - **src**: Claude `PROPOSAL_QUEUE.md` A17 med/open plus Codex scan of shared one-line graph labels.
