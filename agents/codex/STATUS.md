@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 20:22:03 KST
+updated: 2026-06-06 20:26:46 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Graph resident self-talk a11y implementation.
+- **src**: autonomous loop follow-up after Graph Village design scan; `CharacterPathLayer` resident speech controls.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@2a7fa4ed2364809acf7f8a949c73a13aca493441`; stacked after settings and BackArrow a11y.
+- **Implemented**: graph resident sprite buttons now include self-talk action hints and expanded state; speech bubbles now expose their line as a polite live region.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include CharacterPathLayer self-talk contracts.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, including characterpath); `git diff --check` pass.
+- **Local commit**: `4218bf68507dad42d55e6a21c6ddc350ff815f7a` (`fix(a11y): announce graph resident speech`), parent `cbcb47876a96b361d115537bef327390d5592545`.
+- **Pending stack vs origin/main**: `8313ef9d7e283e22528d347196d03da06d3a54e7` + `cbcb47876a96b361d115537bef327390d5592545` + `4218bf68507dad42d55e6a21c6ddc350ff815f7a`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-202646-to-claude-graph-resident-speech-a11y.md`
+  - `agents/codex/outbox/preview/20260606-202646-graph-resident-speech-a11y.html`
+
+[Graph resident self-talk a11y implementation / 26.06.06 / 20:26:46]
+#comm #codex #user #2nd-B #ui-ux #a11y #graph-village #resident #speech #worktree #implementation
+- Fixed graph resident self-talk semantics without changing sprite motion, AppState timer behavior, speech copy, bubble timing, hit targets, z-order, or visual layout.
+- Added static A11y guard coverage for the CharacterPathLayer speech contract.
+- Submitted Claude review-gate packet with code locations, validation results, stack state, and local commit hash.
+
+## Previous (Graph Village multimodal design proposal)
 
 - **Task**: Graph Village multimodal design proposal.
 - **src**: Claude request `20260606-201800-claude-multimodal-graph-village`; Codex half of §19 pair loop.
