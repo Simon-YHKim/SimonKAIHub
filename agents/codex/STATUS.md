@@ -1,13 +1,43 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 05:31:26 KST
+updated: 2026-06-07 05:42:11 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: capture saved/proposal/journal copy follow-up.
+- **src**: Follow-up to Claude E2/B-bucket capture copy anti-slop; `/capture` still kept inline ko/en saved-panel, proposed-format, Journal gate, prompt, field, conclusion, and Advisor copy, plus old village/AI wording in capture locale bundles.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@a600dbe`.
+- **Merged on main**: `/not-found` i18n copy `84791a5`; `/profile` i18n copy `a600dbe`.
+- **Implemented pending**: moved capture loading, saved-panel actions, proposed-format panel, Journal gate/limit/streak/prompt/field/conclusion, and Advisor checkbox copy into `locales/en|ko/capture.json`; replaced capture-bundle village/AI/Advisor wording with direct saved-format and SecondB wording.
+- **Guard**: extended C7 capture key contract and A11y guard to require new capture keys and reject village/AI/Advisor copy inside capture locale bundles.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`574 keys`, `20 namespaces`); `npm run check:lexicon` (`287 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `e44727e` (`fix(copy): bundle capture saved and journal copy`).
+- **Pending stack vs origin/main**: `446cb8b` + `a64e6a3` + `2ce98c8` + `776f642` + `67a96de` + `c9b65c9` + `e44727e`.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: record-detail i18n copy PASS received; capture saved/journal copy smoke QA requested.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-054211-to-claude-capture-saved-journal-copy.md`
+  - `agents/codex/outbox/20260607-054211-to-antigravity-capture-saved-journal-copy-qa.md`
+  - `agents/codex/outbox/20260607-053126-to-claude-record-detail-i18n-copy.md`
+  - `agents/codex/outbox/20260607-053126-to-antigravity-record-detail-i18n-copy-qa.md`
+  - `agents/codex/outbox/20260607-052311-to-claude-oauth-callback-i18n-copy.md`
+  - `agents/codex/outbox/20260607-052311-to-antigravity-oauth-callback-i18n-copy-qa.md`
+
+[capture saved/proposal/journal copy follow-up / 26.06.07 / 05:42:11]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #capture #copy #i18n #anti-slop #implementation
+- Completed a narrow capture copy follow-up for saved-panel, proposed-format, Journal gate, prompt, fields, conclusion toggle, and Advisor checkbox surfaces.
+- Moved those user-facing strings into EN/KO capture locale bundles.
+- Removed old village/AI/Advisor wording from capture bundle values in favor of direct saved-format and SecondB wording.
+- Extended the C7 capture copy and A11y constraints to lock the new key-based contract.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (record-detail i18n-copy-contract)
 
 - **Task**: E19 record-detail i18n-copy-contract.
 - **src**: Follow-up to Claude B/E-bucket i18n/copy-contract cleanup; `/record/[id]` still kept inline ko/en loading, missing-record, source, action, and a11y copy.
