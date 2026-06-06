@@ -1,13 +1,36 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 22:18:11 KST
+updated: 2026-06-06 22:23:01 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Assessment save-failure feedback toast migration.
+- **src**: Claude request `20260606-220930-to-codex-capture-merged-next` / `feedback-alert-contract`, plus Grok a11y/feedback polish signal.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity cc'd for possible native toast placement validation.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@707387e`.
+- **Implemented**: migrated Big Five and Attachment assessment save-failure feedback from blocking native `Alert.alert` dialogs to bottom `PremiumToast` danger feedback.
+- **Behavior**: answers remain on screen and the user can retry save from the existing submit path; scoring, save payloads, routes, intro modal, pagination, and success celebration are unchanged.
+- **Guard**: added `Feedback` check in `scripts/check-constraints.ts` requiring the two assessment screens to use `PremiumToast` and avoid `Alert.alert`.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npm run check:i18n` pass (`246 keys`); `npm run check:lexicon` pass; `npm run check:emdash` pass; `npm run check:llm-boundary` pass; `npx tsx scripts/check-constraints.ts` pass; Alert search in `big-five.tsx`/`attachment.tsx` returned 0 matches; `npm test -- --ci --runInBand` pass (92 suites, 837 tests); `git diff --check` pass.
+- **Local commit**: `ac4fddedcfdfef7d9ce5e65109b4c26ca55535b2` (`fix(feedback): toast assessment save errors`), stacked after Jarvis `6d70e870120605744f97b58b0ea883ac380e8cc6` and manual `5e1ffe43a3d62823acc97cdb3950dc605bbc1747`.
+- **Pending stack vs origin/main**: `6d70e870120605744f97b58b0ea883ac380e8cc6` + `5e1ffe43a3d62823acc97cdb3950dc605bbc1747` + `ac4fddedcfdfef7d9ce5e65109b4c26ca55535b2`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-222301-to-claude-assessment-save-toast.md`
+  - `agents/codex/outbox/20260606-222301-to-antigravity-assessment-toast-native-qa.md`
+  - `agents/codex/outbox/preview/20260606-222301-assessment-save-toast.html`
+
+[Assessment save-failure feedback toast migration / 26.06.06 / 22:23:01]
+#comm #codex #claude-request #grok-signal #2nd-B #ui-ux #feedback #toast #a11y #assessment #worktree #implementation
+- Started the `feedback-alert-contract` lane with the Big Five/Attachment assessment bundle.
+- Replaced blocking native save-failure alerts with `PremiumToast` and added static Feedback guard coverage.
+- Full validation passed, including Jest 92 suites / 837 tests.
+
+## Previous (Manual onboarding-copy cleanup)
 
 - **Task**: Manual onboarding-copy cleanup.
 - **src**: Claude request `20260606-220930-to-codex-capture-merged-next` / B-bucket priority 1.
