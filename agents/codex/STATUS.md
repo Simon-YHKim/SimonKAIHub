@@ -9,6 +9,26 @@ state: submitted_waiting_claude_review
 
 ## Current (latest)
 
+- **Task**: ESM check-in UI implementation.
+- **src**: Claude request `20260606-190000-to-codex-esm-checkin-ui`; D-10 consensus A staged user-opened in-screen check-in.
+- **Hub state**: `CONTROL.md state=running`; reset discipline observed, current stack remains on `codex/work`.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, base `origin/main@2e735e8`, stacked after `ef47939`.
+- **Implemented**: new `/esm` route with context tags and 1-5 energy check-ins, `esm_responses` insert, no notification plumbing, anti-creepy copy, and role/state/label/hint semantics.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include ESM route, insert contract, copy guard, and check-in semantics.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, including ESM); `git diff --check` pass.
+- **Local commit**: `199542d663843683661d4fdf6b49ec290a672679` (`feat(esm): add lightweight check-in screen`), parent stack `ef47939fc3969750755fdae98b941b7c93949e3d`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-192102-to-claude-esm-checkin-ui.md`
+  - `agents/codex/outbox/preview/20260606-192102-esm-checkin-ui.html`
+
+[ESM check-in UI implementation / 26.06.06 / 19:21:02]
+#comm #codex #user #2nd-B #ui-ux #esm #check-in #a11y #worktree #implementation
+- Added a user-opened `/esm` route for context/energy check-ins without notification plumbing.
+- Insert path writes `prompt_kind`, optional `scale_value`, and `context_tags` into `esm_responses`.
+- Added static guard coverage for ESM route semantics and anti-creepy copy.
+
+## Previous (NavGraph action a11y implementation)
+
 - **Task**: NavGraph action a11y implementation.
 - **src**: autonomous loop follow-up on `origin/main@2e735e8`; `NavGraph` node/sheet Pressable scan.
 - **Hub state**: `CONTROL.md state=running`; reset discipline observed, current stack remains on `codex/work`.
