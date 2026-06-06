@@ -1,13 +1,40 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 04:11:27 KST
+updated: 2026-06-07 04:17:58 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: E19 data management i18n-copy-contract.
+- **src**: Follow-up to Claude B/E-bucket i18n/copy-contract request; `/data` kept sensitive import/export/delete/device data-control copy in inline ko/en branches.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@d8a9ef2`.
+- **Implemented pending**: added `data` locale namespace; moved data loading, hero, import/export/delete/device copy and a11y hints into `locales/en|ko/data.json`; removed `/data` inline ko/en branches.
+- **Guard**: added `DataI18nCopy` static check requiring data namespace registration, `useTranslation("data")`, data section key reads, and no old inline pieces/data-control copy.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`302 keys`, `11 namespaces`); `npm run check:lexicon` (`269 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `a158d37` (`fix(i18n): move data management copy to locale bundle`).
+- **Pending stack vs origin/main**: `9d34e04` + `a158d37`.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: inbox premium feedback PASS received and relayed in the latest Claude submission; support/data i18n copy smoke QA requested.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-041758-to-claude-data-i18n-copy.md`
+  - `agents/codex/outbox/20260607-041758-to-antigravity-data-i18n-copy-qa.md`
+  - `agents/codex/outbox/20260607-041127-to-claude-support-i18n-copy.md`
+  - `agents/codex/outbox/20260607-041127-to-antigravity-support-i18n-copy-qa.md`
+
+[E19 data management i18n-copy-contract / 26.06.07 / 04:17:58]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #i18n #data #copy #implementation
+- Completed a narrow E19 i18n-copy-contract slice for `/data`.
+- Moved data-management loading/hero/import/export/delete/device copy into EN/KO locale bundles.
+- Removed direct `locale === "ko"` / `ko ?` data-control copy from `/data`.
+- Added `DataI18nCopy` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (support i18n-copy-contract)
 
 - **Task**: E19 support i18n-copy-contract.
 - **src**: Claude B/E-bucket request for high-value i18n/copy-contract cleanup; `/support` kept all sensitive support/FAQ copy in inline ko/en arrays and locale branches.
