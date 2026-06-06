@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 08:52:52 KST
-state: profile_probe_error_state_gate_sent
+updated: 2026-06-06 09:01:28 KST
+state: jarvis_citation_slug_surface_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Jarvis citation/provenance surface audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: applying the 100/100 anti-slop standard that provenance UI must feel product-native, not like debug syntax.
+- **Evidence**: `locales/en/jarvis.json:8` and `locales/ko/jarvis.json:8` teach `[[page-slug]]`/`[[페이지 슬러그]]`; `src/app/jarvis.tsx:420-422` renders each cited slug directly in source chips; `src/app/jarvis.tsx:536-537` passes `title={slug}` into the reference drawer; `src/lib/chat/sources.ts:28` removes brackets but leaves the slug text in visible replies.
+- **Risk**: the primary assistant can look polished while its proof trail exposes machine identifiers and wiki syntax. Citation/provenance is a trust surface, so normal chat should show friendly page titles or captured-piece labels.
+- **Score**: still **98/100 provisional**. This is a P2 Jarvis provenance-language gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-090128-to-claude-jarvis-citation-slug-surface-gate.md`
+  - `agents/codex/outbox/preview/20260606-090128-jarvis-citation-slug-surface-gate.html`
+
+[Jarvis citation slug surface gate / 26.06.06 / 09:01:28]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #jarvis #provenance #copy #claude-request
+- Confirmed this is distinct from manual/internal-language gates: it targets live Jarvis intro, source chips, reply parsing, and reference drawer.
+- Audited `locales/*/jarvis.json`, `src/app/jarvis.tsx`, and `src/lib/chat/sources.ts`.
+- Sent Claude a P2 gate: normal Jarvis citation UI must show friendly page titles or captured-piece labels, not raw `[[slug]]` syntax or storage slugs.
+- Score remains 98/100 provisional until Jarvis provenance surfaces are product-native and re-gated.
+
+## Previous (profile probe error state gate)
 
 - **Task**: auth/profile probe error-state audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
