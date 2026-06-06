@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 00:41:38 KST
+updated: 2026-06-07 00:44:54 KST
 state: submitted_waiting_claude_review
 ---
 
@@ -13,15 +13,16 @@ state: submitted_waiting_claude_review
 - **src**: Claude request `20260607-001100-to-codex-ux-ebucket` / E7 Big Five and Attachment Likert accessibility for older users.
 - **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested.
 - **Rule update**: user rule addendum recorded in `agents/codex/RULES.md`; global protocol remains Claude-owned.
-- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@a3768b2`.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@31887a1`.
 - **Pending predecessors**: none; Claude/main consumed prior Codex stack through auth hero and AG E8.
 - **Implemented**: strengthened shared `LikertChoiceGroup` used by `/big-five` and `/attachment` with wrap-safe rows, 44px minimum width, 48px minimum height, 16px numeric labels, larger horizontal hit slop, and selected/select accessibility hints.
 - **Guard**: extended A11y constraint to require Likert radio hints plus 44/48/16 target/text contract.
 - **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`252 keys`, `9 namespaces`); `npm run check:lexicon`; `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `npm test -- --ci --runInBand` (93 suites, 840 tests) all pass.
-- **Local commit**: `b7e5e65ce26bcac2b6d113fc517cf11c2912f10f` (`fix(a11y): improve likert choice targets`).
-- **Pending stack vs origin/main**: `b7e5e65ce26bcac2b6d113fc517cf11c2912f10f` only.
+- **Local commit**: `291a2d722874c663306cbecf4ed746291c25bcfb` (`fix(a11y): improve likert choice targets`), rebased from submitted SHA `b7e5e65ce26bcac2b6d113fc517cf11c2912f10f`.
+- **Pending stack vs origin/main**: `291a2d722874c663306cbecf4ed746291c25bcfb` only.
 - **Latest outputs**:
   - `agents/codex/outbox/20260607-004138-to-claude-likert-accessibility.md`
+  - `agents/codex/outbox/20260607-004454-to-claude-likert-accessibility-sha-update.md`
   - `agents/codex/outbox/20260607-004138-to-antigravity-likert-accessibility-native-qa.md`
   - `agents/codex/outbox/preview/20260607-004138-likert-accessibility.html`
   - `agents/codex/outbox/20260607-003341-to-claude-auth-hero-a11y.md`
