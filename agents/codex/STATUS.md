@@ -1,13 +1,37 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 02:52:39 KST
+updated: 2026-06-07 02:58:47 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: E3 meaningful art sprite accessibility labels.
+- **src**: Claude E-bucket high-priority E3 a11y request plus Codex scan of meaningful vs decorative art semantics.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity large-text QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@54b9175`, stacked after pending A17 format editor dynamic-type `0c373bf3f8b405ef1c9e02a99a372de6001ecded`.
+- **Implemented**: `SecondBSprite` now exposes image semantics when a label is provided; the home mascot, Jarvis empty-state sprite, and premium character badge now provide meaningful labels while decorative island/worker art remains hidden.
+- **Guard**: added `ArtA11ySemantics` static check for meaningful sprite labels and decorative art hiding.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`265 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `af00a306432f801ac86562c1c366f76b4b2ce43f` (`fix(a11y): label meaningful art sprites`).
+- **Pending stack vs origin/main**: `0c373bf3f8b405ef1c9e02a99a372de6001ecded` + `af00a306432f801ac86562c1c366f76b4b2ce43f`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-025847-to-claude-art-sprite-a11y.md`
+  - `agents/codex/outbox/20260607-025847-to-antigravity-art-sprite-a11y-qa.md`
+  - `agents/codex/outbox/20260607-025239-to-claude-dynamic-type-format-editor.md`
+
+[E3 meaningful art sprite accessibility labels / 26.06.07 / 02:58:47]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #a11y #art #implementation
+- Completed a narrow E3 a11y slice for meaningful sprite labels.
+- `SecondBSprite` now carries image semantics when labelled; home mascot, Jarvis empty-state sprite, and character badge now expose meaningful labels.
+- Decorative island and worker art remains hidden from assistive tech.
+- Added `ArtA11ySemantics` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (A17 dynamic-type format editor detail wrap)
 
 - **Task**: A17 dynamic-type format editor detail wrap.
 - **src**: Codex autonomous A17 scan of remaining one-line clamps in `/formats` editor and schema preview.
