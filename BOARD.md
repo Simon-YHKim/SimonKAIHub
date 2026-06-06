@@ -1,9 +1,9 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity·Grok은 읽기 전용."
-last-updated: 2026-06-07 03:13:00 KST
+last-updated: 2026-06-07 03:22:00 KST
 run_mode: autonomous-B
-live_head: 2nd-B main 087ccc5
+live_head: 2nd-B main f1307fa
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
@@ -17,12 +17,13 @@ live_head: 2nd-B main 087ccc5
 |---|---|---|---|
 | Claude | 통합(구현·머지·온라인git) + **제안 큐(§25)** | running | 백로그 트리아지 → PROPOSAL_QUEUE 소진 → verify → merge |
 | Codex | anti-slop 발견 | running | 미머지 8건 초과 시 발견중지·P3 통합 |
-| Antigravity | 네이티브 픽스·QA | **running(동결해제)** | 네이티브 3커밋 머지(707387e). ⚠️copy/i18n 중복생산 금지 — 네이티브 lane 고수 |
-| Grok | 트렌드·결정입력 | running | 합의 입력 + 30분 트렌드 모니터 |
+| Antigravity | 네이티브 픽스·QA | ⚠️ **정체(idle/frozen 의심)** | 03:22 기준 신규 native 제출 0(stale 2커밋만 6+사이클). E4 터치증명·E8 모션잔여·E16 데이터힌트·E20 RTL 미착수 → **Simon 터미널 재킥 필요** |
+| Grok | 트렌드·결정입력 | running | **X/소셜 GTM 리서치로 재배치(20260607-0322)** — 경쟁앱 소셜반응·바이럴훅·획득채널·표현민감도. advisory(검증 전 직접반영 X) |
 
 ## 🔐 외부의존 블로커 (Simon 개입 필요 — §15)
 - (DECISIONS.md `external` 항목 참조: D-03 consent 법무, D-05 social provider 실설정)
-- **🔴 수익화 결정 5건 (페르소나 시뮬 65 simon 항목)** — PROPOSAL_QUEUE 'Simon 수익화 결정' 블록: M1 가격투명성(요금제화면+가격확정)·M2 무료티어 관대함·M3 결제수단/PG(Stripe만으론 KR/저소득 배제)·M4 구독모델/피로·M5 신뢰인증. 승인 후 Claude가 티어게이팅·요금제·결제 구현.
+- **🔴 수익화 결정 5건 (페르소나 시뮬 65 simon 항목)** — PROPOSAL_QUEUE 'Simon 수익화 결정' 블록: M1 가격투명성(요금제화면+가격확정)·M2 무료티어 관대함·M3 결제수단/PG(Stripe만으론 KR/저소득 배제)·M4 구독모델/피로·M5 신뢰인증. 승인 후 Claude가 티어게이팅·요금제·결제 구현. (권고안 HTML: `agents/claude/outbox/preview/20260607-0149-monetization-recommendation.html`, deep-research wuz03uq9o로 실증 보강 중)
+- **🟡 AG 터미널 재킥** — Antigravity가 6+사이클 정체(신규 native 제출 없음). inbox 안내(20260606-220900·20260607-005800)로는 행동 변화 없음 → Simon이 AG 터미널을 한 번 봐주셔야 native QA(E4/E16/E20) 재개.
 
 ## 🤝 합의 진행 (Consensus — DECISIONS.md)
 - D-01~D-07 투표 대기 (펀치리스트 이관). 각 AI는 `type: consensus_vote`로 참여.
