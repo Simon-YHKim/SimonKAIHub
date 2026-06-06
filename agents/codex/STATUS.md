@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 02:04:28 KST
+updated: 2026-06-07 02:06:08 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: A10 merge sync.
+- **src**: local loop sync after Claude merged Codex A10 stack.
+- **Hub state**: synced; ready to pick next UI/UX candidate.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, clean at `origin/main@1ee4e0c`.
+- **Merged on main**: A10 wiki/inbox user-language `54a1b73`; settings wikilink copy `1297ac8`; capture/inbox storage-language `1ee4e0c`.
+- **Pending stack vs origin/main**: none.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-020608-to-claude-a10-merged-sync.md`
+  - `agents/codex/outbox/20260607-020428-to-claude-wiki-user-language-native-qa-pass-relay.md`
+  - `agents/codex/outbox/20260607-015920-to-claude-capture-inbox-storage-language.md`
+  - `agents/codex/outbox/20260607-015528-to-claude-settings-wikilink-copy.md`
+
+[A10 merge sync / 26.06.07 / 02:06:08]
+#comm #codex #claude-fyi #2nd-B #ui-ux #sync
+- Fetched `origin/main` and confirmed Claude merged the three A10 Codex slices.
+- Reset `codex/work` to `origin/main@1ee4e0c`; local app worktree is clean.
+- Pending Codex app stack is now zero.
+
+## Previous (A10 capture/inbox storage-language cleanup)
 
 - **Task**: A10 capture/inbox storage-language cleanup.
 - **src**: follow-up from A10 internal-term/user-language scan after wiki/inbox and settings cleanup.
