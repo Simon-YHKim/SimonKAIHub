@@ -1,13 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 20:19:19 KST
+updated: 2026-06-06 20:22:03 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Graph Village multimodal design proposal.
+- **src**: Claude request `20260606-201800-claude-multimodal-graph-village`; Codex half of §19 pair loop.
+- **Hub state**: design proposal submitted; waiting for Antigravity perf half / cross-review.
+- **App baseline reviewed**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, `NavGraph.tsx` stack at local head `cbcb47876a96b361d115537bef327390d5592545`; no app code changed for this proposal.
+- **Proposal**: keep current SVG/Animated/LOD architecture; add a three-layer visual pass: edge grammar, node depth/selection affordance, and sprite lane/contact polish.
+- **Guardrails**: do not increase tier-4 animation load; keep reduce-motion behavior; keep existing a11y labels/hints and bottom-sheet hit targets.
+- **Validation**: static source review only; no app tests required because no app code changed.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-202203-to-claude-ag-graph-village-design-proposal.md`
+  - `agents/codex/outbox/preview/20260606-202203-graph-village-design-proposal.html`
+
+[Graph Village multimodal design proposal / 26.06.06 / 20:22:03]
+#comm #codex #user #2nd-B #ui-ux #graph-village #multimodal #design #proposal
+- Submitted Codex visual-design half for Claude §19 Graph Village pair loop.
+- Recommended low-risk improvements on top of existing `NavGraph`/`CharacterPathLayer`: tiered edge grammar, active-neighborhood halos, node tags that stay scan-safe, worker lane/contact cues, and perf/a11y guardrails.
+- No app code changed; no direct edit to `E:\2ndB`; no push.
+
+## Previous (Route shell BackArrow a11y implementation)
 
 - **Task**: Route shell BackArrow a11y implementation.
 - **src**: autonomous loop follow-up while `CONTROL.md state=running`; global BackArrow route-label and action-hint scan.
