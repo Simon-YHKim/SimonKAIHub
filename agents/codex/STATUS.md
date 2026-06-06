@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 21:55:27 KST
+updated: 2026-06-06 21:59:48 KST
 state: submitted_waiting_claude_review
 ---
 
@@ -9,18 +9,26 @@ state: submitted_waiting_claude_review
 
 ## Current (latest)
 
-- **Task**: Capture mode/track copy i18n bundle implementation.
-- **src**: Claude request `20260606-212300-to-codex-redirect-i18n` plus user-directed 2-minute loop.
+- **Task**: Capture jargon-copy cleanup.
+- **src**: Claude request `20260606-215400-to-codex-bbucket-worklist` plus user-directed 2-minute loop.
 - **Hub state**: current work is ready for Claude review and cherry-pick.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@a73c8d9`.
-- **Implemented**: `/capture` mode tab labels, mode help text, wiki-track labels, track selector label/eyebrow, capture-mode tablist label, and manage-format link copy moved into `locales/en|ko/capture.json`.
-- **Guard**: extended `scripts/check-constraints.ts` C7 to require both capture alert and mode/track bundle keys and reject covered inline English copy in `src/app/capture.tsx`.
-- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npm run check:i18n` pass (`242 keys`); `npm run check:lexicon` pass; `npm run check:emdash` pass; `npm run check:llm-boundary` pass; `npx tsx scripts/check-constraints.ts` pass; `npm test -- --ci --runInBand` pass (92 suites, 836 tests); `git diff --check` pass.
-- **Local commit**: `c884f809477e30948fe60dabdbc88762632e3739` (`fix(i18n): bundle capture mode copy`), stacked after `0e0fc90dec3b5a2d7b21ee87b99f3b492073cbf9`.
-- **Pending stack vs origin/main**: `0e0fc90dec3b5a2d7b21ee87b99f3b492073cbf9` + `c884f809477e30948fe60dabdbc88762632e3739`.
+- **Implemented**: removed markdown/frontmatter/H1/Obsidian/Web Clipper and Korean equivalents from user-facing `locales/en|ko/capture.json`; moved link/saved-article field label/placeholder/helper copy through `t()` keys.
+- **Guard**: extended `scripts/check-constraints.ts` C7 to require capture bundle keys and reject covered jargon terms from capture locale values.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npm run check:i18n` pass (`245 keys`); `npm run check:lexicon` pass; `npm run check:emdash` pass; `npm run check:llm-boundary` pass; `npx tsx scripts/check-constraints.ts` pass; `rg` jargon search in capture locale bundles returned 0 matches; `npm test -- --ci --runInBand` pass (92 suites, 836 tests); `git diff --check` pass.
+- **Local commit**: `2a122fe519b7d712bd7cf09dd837e734406391bc` (`fix(copy): simplify capture jargon`), stacked after `0e0fc90dec3b5a2d7b21ee87b99f3b492073cbf9` + `c884f809477e30948fe60dabdbc88762632e3739`.
+- **Pending stack vs origin/main**: `0e0fc90dec3b5a2d7b21ee87b99f3b492073cbf9` + `c884f809477e30948fe60dabdbc88762632e3739` + `2a122fe519b7d712bd7cf09dd837e734406391bc`.
 - **Latest outputs**:
-  - `agents/codex/outbox/20260606-215527-to-claude-capture-mode-copy-i18n.md`
-  - `agents/codex/outbox/preview/20260606-215527-capture-mode-copy-i18n.html`
+  - `agents/codex/outbox/20260606-215948-to-claude-capture-jargon-copy.md`
+  - `agents/codex/outbox/preview/20260606-215948-capture-jargon-copy.html`
+
+[Capture jargon-copy cleanup / 26.06.06 / 21:59:48]
+#comm #codex #claude-request #2nd-B #ui-ux #copy #i18n #capture #jargon #anti-slop #worktree #implementation
+- Fixed Claude B-bucket priority 1 for capture user-facing copy without changing capture parsing, classification, save behavior, layout, routes, or mode state.
+- Added static C7 guard coverage so capture locale bundles cannot reintroduce the covered jargon terms.
+- Full validation passed, including Jest 92 suites / 836 tests.
+
+## Previous (Capture mode/track copy i18n bundle implementation)
 
 [Capture mode/track copy i18n bundle implementation / 26.06.06 / 21:55:27]
 #comm #codex #claude-request #2nd-B #ui-ux #i18n #capture #mode-tabs #track-tabs #copy-contract #worktree #implementation
