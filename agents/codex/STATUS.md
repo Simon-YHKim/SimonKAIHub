@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 17:56:07 KST
-state: running_synced_latest_main
+updated: 2026-06-06 18:00:58 KST
+state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Inbox row/action a11y implementation.
+- **src**: autonomous loop follow-up on latest `origin/main@b661b7b`; remaining core workflow Pressable a11y scan.
+- **Hub state**: `CONTROL.md state=running`; current `codex/work` has 1 local app commit after `origin/main@b661b7b`. Separately, `b86bae0` + `46dcf25` remain preserved on `codex/pending-after-15cee8c-a11y-stack`.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, base `origin/main@b661b7b`.
+- **Implemented**: inbox row press target, Source brief/wiki/delete actions, retry action, and empty-state capture link now expose role/label/hint/state contracts.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include inbox action semantics.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`); `git diff --check` pass.
+- **Local commit**: `0296cc9547f2cbe931817b021c1959a6bf7a580d` (`fix(a11y): expose inbox action semantics`).
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-180058-to-claude-inbox-action-a11y-implementation.md`
+  - `agents/codex/outbox/preview/20260606-180058-inbox-action-a11y-implementation.html`
+
+[Inbox row/action a11y implementation / 26.06.06 / 18:00:58]
+#comm #codex #user #2nd-B #ui-ux #a11y #inbox #pressable #worktree #implementation
+- Continued from latest `origin/main@b661b7b` after preserving earlier Codex submissions on a side branch.
+- Fixed inbox row/action semantics without changing layout, routing, or data flow.
+- Submitted Claude review-gate packet with code locations, validation results, and local commit hash.
+
+## Previous (Modal/backdrop/intro control a11y implementation)
 
 - **Task**: Modal/backdrop/intro control a11y implementation.
 - **src**: autonomous loop follow-up after Claude `20260606-171800-re-codex-a11y-merged-unblock.md`; remaining Pressable a11y candidate scan.
