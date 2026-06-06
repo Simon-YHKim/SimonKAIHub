@@ -34,7 +34,7 @@
 | A16 | Quant-intro storage flicker → tri-state | `src/components/quant/QuantIntroModal.tsx` | med | open |
 | A17 | Dynamic-type clipping — numberOfLines 반응형 | 전역(22×1줄·10×2줄) | med | open |
 | A18 | Web zoom/focus — user-scalable=no 제거 + focus-visible | viewport·Pressable | med | open |
-| A19 | Import analysis fallback 공개 | `src/app/import.tsx` | med | open |
+| A19 | Import analysis fallback 공개 | `src/app/import.tsx` | med | ✅ **머지 `fd7384f`** (degraded 플래그 + 결과뷰 공개 notice, raw 에러 비노출) |
 | A20 | Record detail assessment raw JSON → friendly | `src/app/record/[id].tsx`·`persona/evidence.ts` | med | ✅ **머지 `31887a1`** (summarizeAssessmentBody 헬퍼 MBTI/BFI/ECR + 테스트6, 저널텍스트 무영향) |
 | A21 | Retired-route helpers 잔여(/journal·/imagine·/mbti emit) | `src/lib/village-ui.ts`·`persona/evidence,self-portrait.ts` | med | open(부분) |
 | A22 | **GTM/마케팅 docs** (Grok X신호) — docs/GTM.md + i18n trust signals + core 명칭 직관화 | docs·locales·DESIGN.md | high(마케팅) | open |
@@ -77,9 +77,9 @@
 | E2 | **비직관 라벨/카피** — "영차영차 던지기" 등 → 직관 동사 + 아이콘 텍스트 라벨 | codex | high | 🟢 capture mode 명확화 `a3768b2`(Codex), 잔여 진행 |
 | E3 | **a11y 라벨 누락** — 아트·NavGraph 노드 accessibilityLabel/role | codex | high | 🟢 auth-hero a11y `a3768b2`(Codex), 잔여 진행 |
 | E4 | **네이티브 접근성·터치** — 터치타깃 ≥44/48px·hitSlop·텍스트 16px·NavGraph 제스처→버튼 | ag | high | 🟢 NavGraph 접근성 내비 `a3768b2`(AG), 잔여 진행 |
-| E5 | **hidden 발견성** — settings 진입점→NavGraph floating settings, wiki export 승격 | ag+codex | high | 🟢 NavGraph settings 버튼 `a3768b2`(AG), export 승격 잔여 |
+| E5 | **hidden 발견성** — settings 진입점→NavGraph floating settings, wiki export 승격 | ag+codex | high | ✅ NavGraph settings `a3768b2`(AG) + wiki export 승격 `f710b50`(Codex) |
 | E6 | **NavGraph 초보자 모드** — tier1-2 우선+가이드+노드 설명 | claude→ag | high | 🟢 AG가 접근성 내비로 일부 `a3768b2`. 초보자 단계공개 잔여 |
-| E7 | 평가도구 Likert 고령 접근성 — 세로배열·큰버튼·16px·끝점 라벨 | codex | med | open |
+| E7 | 평가도구 Likert 고령 접근성 — 세로배열·큰버튼·16px·끝점 라벨 | codex | med | ✅ **머지 `f710b50`**(Codex Likert 타깃 개선) |
 | E8 | **stiffness 31건** — 전환·press 피드백·로딩 등장 부드럽게(즉각 cut 제거), 부드러운 ease | ag(perf)+codex(스타일) | med | 🟢 withSpring→withTiming(bounce 제거) `a3768b2`(AG), 잔여 진행 |
 | E9 | **자산 일관성 15건** — 네이밍 혼재·버전접미사(v1/v3/final/candidate)·스타일 혼합·미사용 정규화 | codex+claude | med | open |
 | E10 | settings 전체삭제 확인 — typed 'DELETE'는 의도된 안전마찰 → 제거 대신 카피 명확화만(전체wipe는 typed 유지) | claude review | low | open |
