@@ -21,7 +21,7 @@
 | A4 | **Auth loading-aware guards** — signin/signup guest guard + complete-profile redirect가 loading 무시 → 잘못된 화면 flash | `src/app/(auth)/sign-in,sign-up,complete-profile.tsx` | high | ✅ **머지 `3ee8885`** (InlineLoader guard, sign-up guest guard 신설) |
 | A5 | **Data export scope 진실** — export 약속(파일) vs 실제(clipboard) 불일치 통일 | support·data·settings·wiki | high | open |
 | A6 | **Theme native 영속** — native에서 localStorage만 써 영속 안 됨 → AsyncStorage 또는 컨트롤 숨김 | `src/lib/theme/ThemeContext.tsx` | high | open |
-| A7 | **Persona assessment-only summary** — audit 없을 때 LLM summary 생성(날조) 차단 | `src/lib/persona/build.ts` | high | open |
+| A7 | **Persona assessment-only summary** — audit 없을 때 LLM summary 생성(날조) 차단 | `src/lib/persona/build.ts` | high | ✅ **머지 `1335fc4`** (rows>0 게이트 + 정직한 빈메시지 + 테스트, paid call도 절약) |
 | A8 | **Crisis badge 가독성** — hotline badge 10→12px (안전표면) | `src/components/safety/CrisisRouter.tsx` | high | ✅ 이미 `fontSize:12` 적용됨 (stale gate) |
 | A9 | **Account DOB auth refresh** — DOB 저장 후 minor state 미갱신 | `src/app/account.tsx` | high | open |
 | A10 | **내부용어→사용자언어** (로직 문자열) — RLS/RAG/LLM/[[slug]]/frontmatter | permissions·inbox·wiki·settings·insights | high | open (Codex와 분담) |
@@ -41,9 +41,9 @@
 
 ## B. dispatch-Codex (UI/UX·i18n·anti-slop·이미지)
 - **i18n 번들 이관** (915 inline locale 분기 → 번들) ← 이미 redirect(20260606-212300). 신뢰·법무 카피 우선.
-- 카피 jargon: ✅ **capture-input(markdown/frontmatter) 머지 `707387e`**(Codex trio: jargon+mode/alert i18n 번들). 남은: jarvis-citation([[slug]])·manual-jargon·theme-contract(Light 실제구현)·pixel-font→readable.
+- 카피 jargon: ✅ **capture-input `707387e`** + ✅ **jarvis-citation + manual-onboarding `20794de`**(Codex). 남은: theme-contract(Light 실제구현)·pixel-font→readable.
 - 공유 컴포넌트: SwitchRow/PreferenceToggle·LikertScaleQuestion·ExternalLinkButton/CopyAction·ActionChip primitives.
-- **feedback-alert-contract** (61 Alert.alert → PremiumToast/Modal).
+- **feedback-alert-contract** (61 Alert.alert → PremiumToast/Modal) — 🟢 착수(assessment save toast `20794de`), 나머지 화면 진행 중.
 - formats dead CTA(mock)·settings crew-density phantom·route-ia-numbering·design-token drift(74 hex/rgba).
 - reduced-motion·contrast-ledger(Light palette).
 - a11y P3 long-tail: image·modal-overlay·form-input·onboarding-dots·pressable-interaction.
