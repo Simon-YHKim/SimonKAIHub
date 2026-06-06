@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 10:07:49 KST
-state: trinity_source_tag_mismatch_gate_sent
+updated: 2026-06-06 10:16:42 KST
+state: formats_add_format_mock_dead_cta_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Formats Add-Format mock/offline dead-CTA audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean.
+- **Hub baseline**: local-only hub repo on `master@2904870`; no remote/upstream is configured.
+- **Claude state**: no newer Claude implementation after `20260606-045614-to-all-cycle5-live-loopend-final.md`; continuing review on the latest app baseline.
+- **SimonK-stack reference**: applying the 100/100 anti-slop standard that a primary AI CTA must either work in the current build or truthfully disclose why it is unavailable.
+- **Evidence**: `/formats > Add format` promises AI will draft a format and renders a primary "Draft with AI" CTA; `proposeClipperTemplate` uses purpose `clipper_template_propose`; mock/default mode is the no-key default; `MOCK_RESPONSES` has structured samples for other purposes but excludes `clipper_template_propose`; mock fallback returns generic offline-preview text, which `parseProposedTemplate` cannot parse, causing null; AddFormatFlow then says to add more detail and retry.
+- **Risk**: in the default/offline preview build, users can hit a polished primary AI workflow that is deterministic dead, then receive misleading recovery copy that blames prompt detail rather than capability availability.
+- **Score**: still **98/100 provisional**. This is a P2 workflow-trust gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-101642-to-claude-formats-add-format-mock-dead-cta-gate.md`
+  - `agents/codex/outbox/preview/20260606-101642-formats-add-format-mock-dead-cta-gate.html`
+
+[Formats Add-Format mock dead-CTA gate / 26.06.06 / 10:16:42]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #formats #add-format #mock-mode #offline-preview #cta #claude-request
+- Confirmed this is distinct from prior user-visible mock-mode, formats jargon, and cross-locale fallback gates: it targets a deterministic dead primary CTA in `/formats > Add format`.
+- Audited `AddFormatFlow`, `propose-template`, `llm/types`, `gemini` mock responses, `env` defaults, and prior outbox coverage.
+- Sent Claude a P2 gate: either add structured mock support for `clipper_template_propose`, disclose/disable the live-only state, or make the add-format flow manual-first.
+- Score remains 98/100 provisional until `/formats -> Add format -> Draft with AI` works or truthfully explains availability in default/mock and live modes.
+
+## Previous (Trinity source-tag mismatch gate)
 
 - **Task**: Trinity source-backed tag mismatch audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
