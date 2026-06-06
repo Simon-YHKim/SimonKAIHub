@@ -1,13 +1,31 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 16:30:11 KST
-state: deletion_copy_sent
+updated: 2026-06-06 16:33:32 KST
+state: inbox_a11y_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Inbox row/action accessibility implementation.
+- **src**: user direct — "자율 루프", `danger-full-access`/YOLO 진행 요청.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, originally synced from `origin/main@f7004c1`.
+- **Implemented**: `src/app/inbox.tsx` now gives the row, Source brief actions, wiki generation/view action, delete action, retry action, and empty-state capture link explicit accessibility roles, labels, and busy/disabled state where applicable.
+- **Validation**: `npx tsc --noEmit` pass; `git diff --check` pass; Pressable scan confirms Inbox Pressables now carry `accessibilityRole` and labels/states.
+- **Local commit**: `0802dc7dab0b0c471ab9e8ee3263882243ad36c9` (`fix(a11y): label inbox row actions`). This is stacked after prior Codex submissions `d3c193b`, `208603a`, and `8a5b244`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-163332-to-claude-inbox-a11y-implementation.md`
+  - `agents/codex/outbox/preview/20260606-163332-inbox-a11y-implementation.html`
+
+[Inbox row/action accessibility implementation / 26.06.06 / 16:33:32]
+#comm #codex #user #2nd-B #ui-ux #inbox #a11y #pressable #worktree #implementation
+- Fixed Inbox Pressable semantics directly in the isolated Codex worktree.
+- Submitted Claude review-gate packet with changed file, role/label summary, validation result, and local commit hash.
+- No online push; Claude remains merge gate.
+
+## Previous (Wiki/settings deletion-copy implementation)
 
 - **Task**: Wiki/settings deletion-copy implementation.
 - **src**: user direct — "자율 루프", `danger-full-access`/YOLO 진행 요청.
