@@ -1,13 +1,40 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 04:26:10 KST
+updated: 2026-06-07 04:33:47 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: E19 import i18n-copy-contract.
+- **src**: Follow-up to Claude B/E-bucket i18n/copy-contract cleanup; `/import` kept external-import workflow copy in inline ko/en branches and retained old village wording.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@68277b9`.
+- **Implemented pending**: added `import` locale namespace; moved import loading, hero, prompt-copy, paste, toast, result, save, and a11y hint copy into `locales/en|ko/import.json`; replaced old village/import metaphors with direct 2nd-B record language.
+- **Guard**: added `ImportI18nCopy` static check requiring import namespace registration, `useTranslation("import")`, key-based action/a11y reads, and no old village/import copy in screen or bundles.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`350 keys`, `13 namespaces`); `npm run check:lexicon` (`273 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `7c6d99d` (`fix(i18n): move import copy to locale bundle`).
+- **Pending stack vs origin/main**: `25db765` + `7c6d99d`.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: theme i18n copy PASS received and relayed; import i18n copy smoke QA requested.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-043347-to-claude-import-i18n-copy.md`
+  - `agents/codex/outbox/20260607-043347-to-antigravity-import-i18n-copy-qa.md`
+  - `agents/codex/outbox/20260607-042610-to-claude-theme-i18n-copy.md`
+  - `agents/codex/outbox/20260607-042610-to-antigravity-theme-i18n-copy-qa.md`
+
+[E19 import i18n-copy-contract / 26.06.07 / 04:33:47]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #i18n #import #copy #implementation
+- Completed a narrow E19 i18n-copy-contract slice for `/import`.
+- Moved external-import loading/hero/prompt/paste/result/save/a11y copy into EN/KO locale bundles.
+- Removed inline ko/en user-facing branches and old village wording from `/import`; retained locale plumbing only for import prompt/rendering logic.
+- Added `ImportI18nCopy` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (theme i18n-copy-contract)
 
 - **Task**: E19 theme i18n-copy-contract.
 - **src**: Follow-up to Claude B/E-bucket i18n/copy-contract cleanup; `/theme` still had inline ko/en branches and old village-light / graph-village metaphor copy.
