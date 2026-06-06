@@ -30,7 +30,7 @@
 | A12 | Destructive busy-escape — busy 중 sign-out/nav 비활성화 | `src/app/settings.tsx` | med | open |
 | A13 | Inbox 'View in wiki' → 정확한 slug 페이지 | `src/app/inbox.tsx`·`wiki.tsx` | med | open |
 | A14 | Records source row → 특정 source detail 라우트 | `src/app/records.tsx` | med | open |
-| A15 | Wiki delete → stale promoted source 리셋 | `src/lib/wiki/queries.ts` | med | open |
+| A15 | Wiki delete → stale promoted source 리셋 | `src/lib/wiki/queries.ts` | med | ✅ **머지 `d9e73db`** (markSourceNotIngested + deleteWikiPage source 리셋 + 테스트2) |
 | A16 | Quant-intro storage flicker → tri-state | `src/components/quant/QuantIntroModal.tsx` | med | open |
 | A17 | Dynamic-type clipping — numberOfLines 반응형 | 전역(22×1줄·10×2줄) | med | open |
 | A18 | Web zoom/focus — user-scalable=no 제거 + focus-visible | viewport·Pressable | med | open |
@@ -43,7 +43,7 @@
 ## B. dispatch-Codex (UI/UX·i18n·anti-slop·이미지)
 - **i18n 번들 이관** (915 inline locale 분기 → 번들) ← 이미 redirect(20260606-212300). 신뢰·법무 카피 우선.
 - 카피 jargon: ✅ **capture-input `707387e`** + ✅ **jarvis-citation + manual-onboarding `20794de`**(Codex). 남은: theme-contract(Light 실제구현)·pixel-font→readable.
-- 공유 컴포넌트: SwitchRow/PreferenceToggle·LikertScaleQuestion·ExternalLinkButton/CopyAction·ActionChip primitives.
+- 공유 컴포넌트: ✅ **PreferenceToggle 머지 `d741f5a`**(privacy·formats 토글 통합). 남은: LikertScaleQuestion·ExternalLinkButton/CopyAction·ActionChip primitives.
 - **feedback-alert-contract** (61 Alert.alert → PremiumToast/Modal) — 🟢 진행(assessment `20794de` + import/esm toast `19adcf9`), 나머지 화면 계속.
 - formats dead CTA(mock)·settings crew-density phantom·route-ia-numbering·design-token drift(74 hex/rgba).
 - reduced-motion·contrast-ledger(Light palette).
