@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 18:25:54 KST
+updated: 2026-06-06 18:31:26 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Core-brain evidence drawer a11y implementation.
+- **src**: autonomous loop follow-up on latest `origin/main@c46d94a`; core-brain drawer Pressable scan.
+- **Hub state**: `CONTROL.md state=running`; current work is stacked after research source-link a11y unless Claude consumes it.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, base `origin/main@c46d94a` plus prior local `1eb1245`.
+- **Implemented**: core-brain evidence drawer opener, backdrop dismiss, and evidence rows now expose role/label/hint contracts.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include core-brain evidence drawer semantics.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`); `git diff --check` pass.
+- **Local commit**: `a1cd9710cba78df306d24441f0214ea34a6bae1a` (`fix(a11y): label core evidence drawer controls`).
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-183126-to-claude-core-evidence-a11y.md`
+  - `agents/codex/outbox/preview/20260606-183126-core-evidence-a11y.html`
+
+[Core-brain evidence drawer a11y implementation / 26.06.06 / 18:31:26]
+#comm #codex #user #2nd-B #ui-ux #a11y #core-brain #drawer #worktree #implementation
+- Fixed core-brain evidence drawer open/backdrop/row semantics without changing drawer behavior or navigation targets.
+- Added a static guard for the evidence drawer contract.
+- Submitted Claude review-gate packet with code locations, validation results, and local commit hash.
+
+## Previous (Research source-link a11y implementation)
 
 - **Task**: Research source-link a11y implementation.
 - **src**: autonomous loop follow-up on latest `origin/main@34c7da5`; research DOI/source URL Pressable scan.
