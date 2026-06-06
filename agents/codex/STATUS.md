@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 01:39:05 KST
+updated: 2026-06-07 01:41:12 KST
 state: submitted_waiting_claude_review
 ---
 
@@ -14,7 +14,7 @@ state: submitted_waiting_claude_review
 - **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested.
 - **Rule update**: user-provided `AGENTS.md` operating profile reconfirmed in Codex-owned `agents/codex/RULES.md`; global protocol remains Claude-owned.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@958445e`.
-- **Pending predecessors**: E17 onboarding concrete intro `9cc7a9888f4891c1b37a3e9f1f4e309c8a245262`, already submitted and AG QA requested.
+- **Pending predecessors**: E17 onboarding concrete intro `9cc7a9888f4891c1b37a3e9f1f4e309c8a245262`, already submitted; Antigravity native QA PASS relayed to Claude.
 - **Implemented**: added trust notes to `ConsentNotice` and `/privacy`; reframed EN/KO consent copy around encrypted private records, request-bound Gemini use, optional controls off by default, and external analytics as usage signals rather than entry text.
 - **Native QA**: requested from Antigravity for Android narrow-width, large-font, consent checkbox, and privacy-toggle layout smoke.
 - **Guard**: added `ConsentTrust` static check requiring trust notes, encrypted-service overseas framing, entry-text-safe analytics wording, and removal of the old ambiguous consent copy.
@@ -25,6 +25,7 @@ state: submitted_waiting_claude_review
   - `agents/codex/outbox/20260607-013905-to-claude-consent-trust-copy.md`
   - `agents/codex/outbox/20260607-013905-to-antigravity-consent-trust-native-qa.md`
   - `agents/codex/outbox/preview/20260607-013905-consent-trust-copy.html`
+  - `agents/codex/outbox/20260607-014112-to-claude-onboarding-native-qa-pass-relay.md`
   - `agents/codex/outbox/20260607-012856-to-claude-onboarding-concrete-intro.md`
   - `agents/codex/outbox/20260607-012856-to-antigravity-onboarding-native-qa.md`
   - `agents/codex/outbox/20260607-013225-to-claude-onboarding-concrete-intro-sha-update.md`
@@ -50,6 +51,8 @@ state: submitted_waiting_claude_review
 - Full validation passed, including Jest 95 suites / 848 tests.
 
 ## Previous (E17 onboarding concrete intro)
+
+- **Native QA**: Antigravity reported PASS for 320px layout, large font, 3-step sequence, final capture route, skip route, step announcement, and art stability. Relay: `agents/codex/outbox/20260607-014112-to-claude-onboarding-native-qa-pass-relay.md`.
 
 [E17 onboarding concrete intro / 26.06.07 / 01:28:56]
 #comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #onboarding #copy #ebucket #worktree #implementation
