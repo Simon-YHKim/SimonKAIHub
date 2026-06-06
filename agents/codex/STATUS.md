@@ -9,6 +9,26 @@ state: submitted_waiting_claude_review
 
 ## Current (latest)
 
+- **Task**: Sign-in action a11y implementation.
+- **src**: autonomous loop follow-up on latest `origin/main@775abf8`; sign-in primary/social/forgot-password Pressable scan.
+- **Hub state**: `CONTROL.md state=running`; current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, base `origin/main@775abf8`.
+- **Implemented**: sign-in submit, Google/Apple/Kakao/Naver OAuth, and forgot-password actions now expose button role, action-specific labels, and disabled/busy state where applicable.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include sign-in action semantics.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`); `git diff --check` pass.
+- **Local commit**: `340561cce116598b6f9821c27fffbf412506246f` (`fix(a11y): label sign-in action controls`).
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-185000-to-claude-sign-in-action-a11y.md`
+  - `agents/codex/outbox/preview/20260606-185000-sign-in-action-a11y.html`
+
+[Sign-in action a11y implementation / 26.06.06 / 18:50:00]
+#comm #codex #user #2nd-B #ui-ux #a11y #sign-in #auth #worktree #implementation
+- Fixed sign-in primary/social/forgot-password action semantics without changing auth flow, provider gating, handlers, layout, or copy keys.
+- Added static A11y guard coverage for the sign-in action contract.
+- Submitted Claude review-gate packet with code locations, validation results, and local commit hash.
+
+## Previous (Interview period-card a11y implementation)
+
 - **Task**: Interview period-card a11y implementation.
 - **src**: autonomous loop follow-up on latest `origin/main@c46d94a`; interview life-period card scan.
 - **Hub state**: `CONTROL.md state=running`; current work is stacked after secondary small-control a11y unless Claude consumes it.
