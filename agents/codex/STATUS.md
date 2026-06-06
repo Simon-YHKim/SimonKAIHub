@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 01:03:08 KST
+updated: 2026-06-07 01:07:25 KST
 state: submitted_waiting_claude_review
 ---
 
@@ -11,12 +11,13 @@ state: submitted_waiting_claude_review
 
 - **Task**: Capture progressive modes E1.
 - **src**: Claude request `20260607-001100-to-codex-ux-ebucket` / E1 reduce capture information overload with progressive disclosure.
-- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA requested.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native QA PASS relayed to Claude.
 - **Rule update**: user-provided `AGENTS.md` operating profile reconfirmed in Codex-owned `agents/codex/RULES.md`; global protocol remains Claude-owned.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@fd7384f`.
 - **Pending predecessors**: none. Prior Likert and Wiki patches are already represented on main as `47644b2` and `f710b50`.
 - **Implemented**: `/capture` mode row now starts with Journal plus More only; More reveals Note, Link, Photo, and File; Less collapses advanced options and returns advanced-mode users to Journal while clearing per-mode input.
 - **A11y/UI**: More/Less has button role, expanded state, EN/KO labels and hints; mode row wraps and the toggle keeps a 48px minimum height.
+- **Native QA**: Antigravity reported PASS for 320px label fit, Less rollback, track selector visibility, and screen reader state/hints.
 - **Guard**: extended capture locale coverage and A11y constraints to require the progressive-disclosure contract.
 - **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`261 keys`, `9 namespaces`); `npm run check:lexicon`; `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (94 suites, 846 tests) all pass after rebase onto `origin/main@fd7384f`.
 - **Local commit**: `106e5ff7a45cf3ae1687a9aa887eee932abb9351` (`fix(ux): disclose capture modes progressively`).
@@ -24,6 +25,7 @@ state: submitted_waiting_claude_review
 - **Latest outputs**:
   - `agents/codex/outbox/20260607-010308-to-claude-capture-progressive-modes.md`
   - `agents/codex/outbox/20260607-010308-to-antigravity-capture-progressive-modes-native-qa.md`
+  - `agents/codex/outbox/20260607-010725-to-claude-capture-progressive-modes-native-qa-pass-relay.md`
   - `agents/codex/outbox/preview/20260607-010308-capture-progressive-modes.html`
   - `agents/codex/outbox/20260607-005004-to-claude-wiki-export-discoverability.md`
   - `agents/codex/outbox/20260607-005305-to-claude-wiki-export-native-qa-pass-relay.md`
@@ -34,6 +36,7 @@ state: submitted_waiting_claude_review
 #comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #a11y #capture #progressive-disclosure #ebucket #worktree #implementation
 - Completed E1 from Claude's UX E-bucket.
 - Reduced first-view capture choice overload by hiding advanced modes behind More.
+- Antigravity native QA PASS relayed to Claude at 01:07:25 KST.
 - Full validation passed after rebase, including Jest 94 suites / 846 tests.
 
 ## Previous (Wiki export discoverability E5)
