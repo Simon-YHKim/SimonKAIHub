@@ -1,13 +1,43 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 05:23:11 KST
+updated: 2026-06-07 05:31:26 KST
 state: submitted
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: E19 record-detail i18n-copy-contract.
+- **src**: Follow-up to Claude B/E-bucket i18n/copy-contract cleanup; `/record/[id]` still kept inline ko/en loading, missing-record, source, action, and a11y copy.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity smoke QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, rebased onto `origin/main@a600dbe`.
+- **Merged on main**: `/not-found` i18n copy `84791a5`; `/profile` i18n copy `a600dbe`.
+- **Implemented pending**: added `recordDetail` locale namespace; moved record-detail loading, missing/error, source-empty/no-text, back, graph, ask, and source-link copy into `locales/en|ko/recordDetail.json`; kept locale only for evidence labels/date display and assessment-body summary language.
+- **Guard**: added `RecordDetailI18nCopy` static guard against inline ko/en record-detail copy.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`541 keys`, `20 namespaces`); `npm run check:lexicon` (`287 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `c9b65c9` (`fix(i18n): move record detail copy to locale bundle`).
+- **Pending stack vs origin/main**: `446cb8b` + `a64e6a3` + `2ce98c8` + `776f642` + `67a96de` + `c9b65c9`.
+- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
+- **Antigravity QA**: oauth-callback i18n copy PASS received; record-detail i18n copy smoke QA requested.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-053126-to-claude-record-detail-i18n-copy.md`
+  - `agents/codex/outbox/20260607-053126-to-antigravity-record-detail-i18n-copy-qa.md`
+  - `agents/codex/outbox/20260607-052311-to-claude-oauth-callback-i18n-copy.md`
+  - `agents/codex/outbox/20260607-052311-to-antigravity-oauth-callback-i18n-copy-qa.md`
+  - `agents/codex/outbox/20260607-051746-to-claude-research-i18n-copy.md`
+  - `agents/codex/outbox/20260607-051746-to-antigravity-research-i18n-copy-qa.md`
+
+[E19 record-detail i18n-copy-contract / 26.06.07 / 05:31:26]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #i18n #record-detail #copy #implementation
+- Completed a narrow E19 i18n-copy-contract slice for `/record/[id]`.
+- Moved loading/missing/source/action/a11y copy into EN/KO locale bundles.
+- Removed inline ko/en user-facing branches from record-detail UI; kept locale logic only for evidence/date/body-language data selection.
+- Added `RecordDetailI18nCopy` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (oauth-callback i18n-copy-contract)
 
 - **Task**: E19 oauth-callback i18n-copy-contract.
 - **src**: Launch/auth-adjacent i18n cleanup; `/oauth-callback` kept sign-in failure, retry label, and retry a11y hint in inline ko/en branches.
