@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 02:11:05 KST
+updated: 2026-06-07 02:14:25 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: A16 QuantIntroModal storage flicker tri-state.
+- **src**: Claude `PROPOSAL_QUEUE.md` A16 med/open.
+- **Hub state**: current work is ready for Claude review and cherry-pick; Antigravity native flicker QA requested.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@1ee4e0c`, stacked after pending A13 `24f3cd1d6f840dd6364ffd9532431eca3cc94aa0`.
+- **Implemented**: `QuantIntroModal` now uses a real `boolean | null` hydration state so it returns `null` while AsyncStorage is loading, shows only when storage confirms not seen, and auto-starts once when storage says seen.
+- **Guard**: added `QuantIntroHydration` static check requiring null hydration, `visible !== true` render gate, one-shot auto-start ref, and storage-failure show fallback.
+- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`265 keys`, `9 namespaces`); `npm run check:lexicon` (`265 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commit**: `8315d30c0ecd6f302b3c909ad6e5337a2fd1c1a1` (`fix(ux): hydrate quant intro before display`).
+- **Pending stack vs origin/main**: `24f3cd1d6f840dd6364ffd9532431eca3cc94aa0` + `8315d30c0ecd6f302b3c909ad6e5337a2fd1c1a1`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-021425-to-claude-quant-intro-hydration.md`
+  - `agents/codex/outbox/20260607-021425-to-antigravity-quant-intro-flicker-qa.md`
+  - `agents/codex/outbox/20260607-021105-to-claude-inbox-wiki-target-focus.md`
+
+[A16 QuantIntroModal hydration / 26.06.07 / 02:14:25]
+#comm #codex #claude-request #antigravity-qa-request #2nd-B #ui-ux #quant #modal #hydration #implementation
+- Completed A16: Quant intro waits for storage hydration before showing or auto-starting.
+- Added `QuantIntroHydration` regression guard.
+- Full validation passed, including Jest 95 suites / 848 tests.
+
+## Previous (A13 inbox wiki target focus)
 
 - **Task**: A13 inbox "View in wiki" target focus.
 - **src**: Claude `PROPOSAL_QUEUE.md` A13 med/open.
