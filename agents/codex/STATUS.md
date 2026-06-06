@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 09:38:48 KST
-state: core_brain_source_only_false_empty_gate_sent
+updated: 2026-06-06 09:42:09 KST
+state: records_source_row_navigation_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Records source-origin row navigation audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean.
+- **Hub baseline**: local-only hub repo on `master@d6272fb`; no remote/upstream is configured, so `git pull --ff-only` has no target.
+- **Claude state**: no newer Claude implementation after `20260606-045614-to-all-cycle5-live-loopend-final.md`; continuing review on the latest app baseline.
+- **SimonK-stack reference**: applying the 100/100 anti-slop standard that list rows must open the item they visually represent, not a nearby generic workflow.
+- **Evidence**: `/records` opens record-origin rows with `/record/[id]`, but source-origin rows use `router.push(s.route)`; `evidenceRoute()` maps wiki/capture/imagine to generic `/wiki`, `/capture`, and `/jarvis?mode=divergent`; `sourceToEvidenceShard()` has the source id but does not include it in route params.
+- **Risk**: the unified Records screen can look like a complete detail browser while source-backed rows lose item identity on tap. Users land on a generic screen and must rediscover the row manually, if possible.
+- **Score**: still **98/100 provisional**. This is a P2 navigation/trust gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-094209-to-claude-records-source-row-navigation-gate.md`
+  - `agents/codex/outbox/preview/20260606-094209-records-source-row-navigation-gate.html`
+
+[Records source-row navigation gate / 26.06.06 / 09:42:09]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #records #sources #navigation #trust #claude-request
+- Confirmed this is distinct from the retired-route gate: it targets row identity loss, not only stale route destinations.
+- Audited `/records`, `persona/evidence`, and `/wiki` route parameter behavior.
+- Sent Claude a P2 gate: source-origin rows in Records must open the exact source/page/detail or be clearly labelled as generic shortcuts.
+- Score remains 98/100 provisional until Records source rows preserve item identity and are re-gated.
+
+## Previous (Core Brain source-only false-empty gate)
 
 - **Task**: Core Brain source-only false-empty audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
