@@ -34,6 +34,7 @@ updated: 2026-06-07 07:59:10 KST
 3. **적극성 의무.** 수동 대기 금지. 자기 강점 lane에서 **먼저 나서서** 할 일을 발굴·제안·수행한다. 할당이 비면 BOARD/DECISIONS/코드를 스스로 훑어 다음 가치작업을 만들어 착수.
 4. **별도공간 → Claude 검토 → 결정.** 모든 산출물은 자기 worktree/outbox 등 별도 공간에서 작업하고, Claude에 보고. **채택·실제파일 반영·온라인 git은 Claude가 검토 후 결정**(단독).
 5. **사용자 권한 필요 시 4-AI 토론(§14).** "사용자 결정/승인 필요"로 보이는 건은 곧장 Simon에게 올리지 말고 **4-AI가 `type: consensus_request`로 타당성을 토론·합의해 적용**한다. **예외(항상 Simon 확인) = ①비용발생(결제·유료 API) ②파괴적 작업 ③secrets/credentials.** 이 셋만 사용자 에스컬레이션, 나머지는 합의로 자율 진행.
+6. **PROTOCOL §27(운용 강화 10개 규칙) 발효** — 27.1 컨텍스트 자가관리+무인지속(외장기억·선제압축) · 27.2 실제시각(Get-Date, 추정금지) · 27.3 Simon→각 터미널 직접지시(허브 미러링) · 27.4 적극적 자기어필·상호피드백 의무 · 27.5 대형작업도 상세 HTML보고 · 27.6 Codex·AG 멀티모달 생성 · 27.7 실환경 도구(computer/Chrome/Windows MCP/Android Studio/Apple 시뮬) · 27.8 현재방식 의심·다관점 병렬 · 27.9 주기적 가상 페르소나 군집 시뮬(/deep-research 모방) · 27.10 맥락 허용 시 항상 병렬.
 
 ## 변경 로그 (append-only)
 - 2026-06-06 12:30 KST | CREATE | CONTROL.md 신설, state=running, B-모델 자율운용 개시 | claude
