@@ -9,6 +9,26 @@ state: submitted_waiting_claude_review
 
 ## Current (latest)
 
+- **Task**: Home action a11y implementation.
+- **src**: autonomous loop follow-up on latest `origin/main@775abf8`; home empty-state CTA/skip and insight ribbon Pressable scan.
+- **Hub state**: `CONTROL.md state=running`; current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, base `origin/main@775abf8`.
+- **Implemented**: home first-run CTA, look-around skip, and insight ribbon actions now expose button role, localized labels, and route/dismiss hints.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include home action semantics.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`); `git diff --check` pass.
+- **Local commit**: `45fc6f8269295202915e0b8c098fbbc606fd92a9` (`fix(a11y): label home action controls`).
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-185552-to-claude-home-action-a11y.md`
+  - `agents/codex/outbox/preview/20260606-185552-home-action-a11y.html`
+
+[Home action a11y implementation / 26.06.06 / 18:55:52]
+#comm #codex #user #2nd-B #ui-ux #a11y #home #graph #worktree #implementation
+- Fixed home first-run CTA, skip, and insight-ribbon action semantics without changing layout, graph behavior, dismissal, or route targets.
+- Added static A11y guard coverage for the home action contract.
+- Submitted Claude review-gate packet with code locations, validation results, and local commit hash.
+
+## Previous (Sign-in action a11y implementation)
+
 - **Task**: Sign-in action a11y implementation.
 - **src**: autonomous loop follow-up on latest `origin/main@775abf8`; sign-in primary/social/forgot-password Pressable scan.
 - **Hub state**: `CONTROL.md state=running`; current work is ready for Claude review.
