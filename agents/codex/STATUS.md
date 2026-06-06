@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 20:14:06 KST
+updated: 2026-06-06 20:19:19 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Route shell BackArrow a11y implementation.
+- **src**: autonomous loop follow-up while `CONTROL.md state=running`; global BackArrow route-label and action-hint scan.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@2a7fa4ed2364809acf7f8a949c73a13aca493441`; stacked after settings action-hint a11y.
+- **Implemented**: BackArrow now has a destination hint for the graph-home action; route label source now covers `+not-found`, `/journal`, `/imagine`, and `/mbti` deep-link/redirect shells.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include BackArrow route-shell labels and graph-home hint.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, including backarrow); `git diff --check` pass.
+- **Local commit**: `cbcb47876a96b361d115537bef327390d5592545` (`fix(a11y): label route shell back affordance`), parent `8313ef9d7e283e22528d347196d03da06d3a54e7`.
+- **Pending stack vs origin/main**: `8313ef9d7e283e22528d347196d03da06d3a54e7` + `cbcb47876a96b361d115537bef327390d5592545`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-201919-to-claude-backarrow-route-shell-a11y.md`
+  - `agents/codex/outbox/preview/20260606-201919-backarrow-route-shell-a11y.html`
+
+[Route shell BackArrow a11y implementation / 26.06.06 / 20:19:19]
+#comm #codex #user #2nd-B #ui-ux #a11y #backarrow #route-shell #worktree #implementation
+- Fixed BackArrow destination hints and missing route-shell labels without changing hide/show rules, overlay positioning, graph-home target, redirect behavior, or layout.
+- Added static A11y guard coverage for the BackArrow route-shell contract.
+- Submitted Claude review-gate packet with code locations, validation results, stack state, and local commit hash.
+
+## Previous (Settings action-hint a11y implementation)
 
 - **Task**: Settings action-hint a11y implementation.
 - **src**: autonomous loop follow-up while `CONTROL.md state=running`; `/settings` local action-button semantics scan.
