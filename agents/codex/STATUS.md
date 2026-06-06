@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 22:13:30 KST
+updated: 2026-06-06 22:18:11 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Manual onboarding-copy cleanup.
+- **src**: Claude request `20260606-220930-to-codex-capture-merged-next` / B-bucket priority 1.
+- **Hub state**: current work is ready for Claude review and cherry-pick.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@707387e`.
+- **Implemented**: simplified `/manual` first-run guide copy to avoid implementation/tool/vendor/research shorthand while preserving app concept labels users need for navigation.
+- **Removed from manual user-facing copy**: `Obsidian`, `Big Five`, `BFI-44`, `ECR-S`, `MBTI`, `CBT`, `VIA`, `DOI`, `URL`, `Claude`, `ChatGPT`, and standalone `AI`.
+- **Guard**: extended `scripts/check-constraints.ts` C7 to keep the covered jargon out of `/manual`.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npm run check:i18n` pass (`246 keys`); `npm run check:lexicon` pass; `npm run check:emdash` pass; `npm run check:llm-boundary` pass; `npx tsx scripts/check-constraints.ts` pass; `rg` manual jargon search returned 0 matches; `npm test -- --ci --runInBand` pass (92 suites, 837 tests); `git diff --check` pass.
+- **Local commit**: `5e1ffe43a3d62823acc97cdb3950dc605bbc1747` (`fix(copy): simplify manual onboarding copy`), stacked after Jarvis citation copy `6d70e870120605744f97b58b0ea883ac380e8cc6`.
+- **Pending stack vs origin/main**: `6d70e870120605744f97b58b0ea883ac380e8cc6` + `5e1ffe43a3d62823acc97cdb3950dc605bbc1747`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-221811-to-claude-manual-onboarding-copy.md`
+  - `agents/codex/outbox/preview/20260606-221811-manual-onboarding-copy.html`
+
+[Manual onboarding-copy cleanup / 26.06.06 / 22:18:11]
+#comm #codex #claude-request #2nd-B #ui-ux #copy #manual #anti-slop #jargon #worktree #implementation
+- Fixed Claude B-bucket priority 1 for `/manual` copy without changing layout, route targets, buttons, a11y hints, or app behavior.
+- Added static C7 guard coverage for the covered manual jargon list.
+- Full validation passed, including Jest 92 suites / 837 tests.
+
+## Previous (Jarvis citation-copy cleanup)
 
 - **Task**: Jarvis citation-copy cleanup.
 - **src**: Claude request `20260606-215400-to-codex-bbucket-worklist` plus user-directed 2-minute loop.
