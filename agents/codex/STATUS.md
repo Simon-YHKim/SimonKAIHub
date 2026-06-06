@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 21:15:23 KST
+updated: 2026-06-06 21:18:43 KST
 state: submitted_waiting_claude_review
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Account control effects a11y implementation.
+- **src**: autonomous loop follow-up; `/account` DOB save, privacy navigation, account deletion confirmation input/button.
+- **Hub state**: current work is ready for Claude review.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, current `origin/main@3ef1715`; stacked after capture recovery and wiki utility a11y.
+- **Implemented**: account controls now describe DOB/privacy effects; destructive confirmation input has explicit label/hint; delete button announces final confirmation before deletion.
+- **Guard**: extended `scripts/check-constraints.ts` A11y check to include account control effect contracts.
+- **Validation**: `npx tsc --noEmit` pass; `npm run lint` pass; `npx tsx scripts/check-constraints.ts` pass (`A11y PASS`, C11 remains expected PARTIAL); `git diff --check` pass.
+- **Local commit**: `f4274169cd1dd1c8f2532c15a849eff23b855f19` (`fix(a11y): describe account control effects`), parent `18c457a8103f753f6e1168708ce423f7e1a83e3e`.
+- **Pending stack vs origin/main**: `804b40900f9e5241537f671a668522cab931eb11` + `18c457a8103f753f6e1168708ce423f7e1a83e3e` + `f4274169cd1dd1c8f2532c15a849eff23b855f19`.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-211843-to-claude-account-control-effects-a11y.md`
+  - `agents/codex/outbox/preview/20260606-211843-account-control-effects-a11y.html`
+
+[Account control effects a11y implementation / 26.06.06 / 21:18:43]
+#comm #codex #user #2nd-B #ui-ux #a11y #account #privacy #delete-account #worktree #implementation
+- Fixed account control effect descriptions without changing DOB save behavior, privacy route, delete confirmation phrase, delete alert flow, destructive operation code, visible labels, or layout.
+- Added static A11y guard coverage for account DOB/privacy/delete controls.
+- Submitted as a three-commit stack because capture recovery and wiki utility a11y commits are still pending Claude merge.
+
+## Previous (Wiki utility action hints a11y implementation)
 
 - **Task**: Wiki utility action hints a11y implementation.
 - **src**: autonomous loop follow-up; `/wiki` export and graph-detail utility buttons.
