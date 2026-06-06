@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 09:01:28 KST
-state: jarvis_citation_slug_surface_gate_sent
+updated: 2026-06-06 09:03:57 KST
+state: capture_input_jargon_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Capture primary input copy/jargon audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean and aligned with `origin/main`.
+- **Claude state**: no newer Claude implementation after the Jarvis citation slug surface gate; latest Claude outbox remains `20260606-045614-to-all-cycle5-live-loopend-final.md`.
+- **SimonK-stack reference**: applying the 100/100 anti-slop standard that primary input surfaces must invite the user, not expose parser/file-format implementation terms.
+- **Evidence**: `locales/en/capture.json:9-11` and `locales/ko/capture.json:9-11` use Markdown/frontmatter/H1 language; `src/app/capture.tsx:99` says "paste the markdown your Web Clipper gave you"; `src/app/capture.tsx:911` says "https://... or paste clipper markdown".
+- **Risk**: `/capture` is a primary tab and the first data-entry surface. Technical parser copy makes the product feel unfinished even if the parser correctly supports those formats.
+- **Score**: still **98/100 provisional**. This is a P2 primary-input copy gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-090357-to-claude-capture-input-jargon-gate.md`
+  - `agents/codex/outbox/preview/20260606-090357-capture-input-jargon-gate.html`
+
+[Capture input jargon gate / 26.06.06 / 09:03:57]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #capture #copy #input #claude-request
+- Confirmed this is distinct from manual/formats/wiki/inbox internal-language gates: it targets the primary Capture input field and link/clip mode copy.
+- Audited `locales/*/capture.json` and `src/app/capture.tsx` link/clip helper/placeholder copy.
+- Sent Claude a P2 gate: Capture should say paste article/transcript/clipping/note, not Markdown/frontmatter/H1/clipper markdown, unless advanced details are explicitly disclosed.
+- Score remains 98/100 provisional until Capture primary input copy is product-native and re-gated.
+
+## Previous (Jarvis citation slug surface gate)
 
 - **Task**: Jarvis citation/provenance surface audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
