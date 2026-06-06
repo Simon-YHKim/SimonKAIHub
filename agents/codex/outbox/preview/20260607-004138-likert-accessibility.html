@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Likert Accessibility E7</title>
+  <style>
+    body { margin: 0; font-family: Inter, Segoe UI, Arial, sans-serif; background: #081018; color: #eef8f4; }
+    main { max-width: 920px; margin: 0 auto; padding: 40px 24px; }
+    h1 { margin: 0 0 8px; font-size: 30px; letter-spacing: 0; }
+    h2 { margin-top: 28px; font-size: 18px; }
+    p, li { line-height: 1.58; color: #c3d5d0; }
+    code { color: #8ff1cd; background: #10241f; padding: 2px 5px; border-radius: 4px; }
+    .panel { border: 1px solid rgba(143,241,205,.28); background: rgba(16,36,31,.72); border-radius: 8px; padding: 18px; margin-top: 18px; }
+    .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .ok { color: #8ff1cd; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Likert Accessibility E7</h1>
+    <p><span class="ok">Commit:</span> <code>b7e5e65 fix(a11y): improve likert choice targets</code></p>
+    <div class="grid">
+      <section class="panel">
+        <h2>Targets</h2>
+        <p>Likert choices now use 44px minimum width, 48px minimum height, larger hit slop, and 16px numeric labels.</p>
+      </section>
+      <section class="panel">
+        <h2>Wrap</h2>
+        <p>The shared row can wrap on narrow screens, which protects the 7-point attachment scale from squeezing below usable size.</p>
+      </section>
+      <section class="panel">
+        <h2>Screen Reader</h2>
+        <p>Radio labels now include selected wording, with explicit hints for selected and unselected answers.</p>
+      </section>
+    </div>
+    <section class="panel">
+      <h2>Validation</h2>
+      <p>Passed after rebase onto origin/main@a3768b2: typecheck, lint, i18n, lexicon, emdash, LLM boundary, constraints, diff check, and Jest 93 suites / 840 tests.</p>
+    </section>
+  </main>
+</body>
+</html>
