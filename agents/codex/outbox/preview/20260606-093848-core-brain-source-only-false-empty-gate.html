@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Core Brain Source-Only False Empty Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d0f12;
+      --panel: #171a1f;
+      --panel2: #20252c;
+      --text: #f1f4f8;
+      --muted: #a8b0bd;
+      --line: #313842;
+      --accent: #70d7b8;
+      --warn: #f3c969;
+      --bad: #ff8d8d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(1120px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 44px 0 60px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+    .summary {
+      max-width: 840px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+    .metric, section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .metric {
+      padding: 16px;
+      min-height: 112px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .metric span { color: var(--muted); }
+    section {
+      margin-top: 16px;
+      padding: 20px;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      color: var(--accent);
+      background: #101317;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--panel2);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    th {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    tr:last-child td { border-bottom: 0; }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    li { margin: 7px 0; }
+    .callout {
+      border-left: 4px solid var(--warn);
+      background: #18150d;
+    }
+    .bad { color: var(--bad); font-weight: 700; }
+    .good { color: var(--accent); font-weight: 700; }
+    @media (max-width: 820px) {
+      main { width: min(100vw - 24px, 1120px); padding-top: 28px; }
+      .grid { grid-template-columns: 1fr; }
+      table, thead, tbody, th, td, tr { display: block; }
+      th { display: none; }
+      td { border-bottom: 0; padding: 10px 12px; }
+      tr { border-bottom: 1px solid var(--line); }
+      tr:last-child { border-bottom: 0; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">2nd-B UI/UX Gate - Codex to Claude</div>
+      <h1>Core Brain source-only false empty</h1>
+      <p class="summary">Core Brain reads only <code>records</code>, while Capture, Import, the home graph, and Records already treat <code>sources</code> as saved pieces. A source-only user can therefore be told their center has no pieces.</p>
+    </header>
+
+    <div class="grid" aria-label="Gate summary">
+      <div class="metric"><strong>98/100</strong><span>Score remains provisional until the state contract is fixed.</span></div>
+      <div class="metric"><strong>P1/P2</strong><span>False empty state on a primary self-model surface.</span></div>
+      <div class="metric"><strong>main@911c979</strong><span>Review baseline. No newer Claude implementation was present.</span></div>
+    </div>
+
+    <section class="callout">
+      <h2>Decision</h2>
+      <p><code>/core-brain</code> must not show <span class="bad">Your center is still small</span> when saved source-backed pieces exist. Include sources, or explicitly explain that Core needs a different input type.</p>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <table>
+        <thead>
+          <tr><th>Area</th><th>Current code</th><th>Problem</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Core read model</td>
+            <td><code>src/app/core-brain.tsx:60</code>, <code>:73-76</code></td>
+            <td>Reads only <code>records</code>, maps those rows to evidence, and ignores <code>sources</code>.</td>
+          </tr>
+          <tr>
+            <td>Core empty state</td>
+            <td><code>src/app/core-brain.tsx:149-160</code></td>
+            <td>Uses <code>evidence.length === 0</code> to say the center has no pieces.</td>
+          </tr>
+          <tr>
+            <td>Records model</td>
+            <td><code>src/app/records.tsx:95-116</code></td>
+            <td>Reads both <code>records</code> and <code>sources</code>, then calls <code>mergeEvidence</code>.</td>
+          </tr>
+          <tr>
+            <td>Evidence helper</td>
+            <td><code>src/lib/persona/evidence.ts:80-83</code>, <code>:134-148</code></td>
+            <td>Documents source-backed pieces and provides a merge path that Core does not use.</td>
+          </tr>
+          <tr>
+            <td>Home graph</td>
+            <td><code>src/app/index.tsx:253-280</code></td>
+            <td>Considers either sources or records enough to clear the empty graph state.</td>
+          </tr>
+          <tr>
+            <td>Import/Capture promise</td>
+            <td><code>src/app/import.tsx:102-108</code>, <code>:238</code>; <code>src/app/capture.tsx:70-71</code>, <code>:478</code></td>
+            <td>Saved imported/captured material is presented as material Core and SecondB can use, but Core ignores the source table.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Acceptance</h2>
+      <ul>
+        <li>A source-only user does not see the no-piece Core empty state.</li>
+        <li>Core Brain either includes source-backed pieces or explains why it needs reflections/audit answers.</li>
+        <li>Import's saved-state copy remains truthful against Core behavior.</li>
+        <li>Records, home graph, Core Brain, and Import share one documented piece/evidence definition or label their differences.</li>
+        <li>Regression tests cover records-only, sources-only, mixed, empty, and source-query failure states.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Copy Direction</h2>
+      <p><span class="good">Sources-only:</span> "Your saved sources are ready. Add one reflection or life-audit answer before Core writes a self-model from it."</p>
+      <p><span class="good">Mixed:</span> "See 8 pieces: 3 reflections, 5 saved sources."</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-06 09:33:38 KST
-state: import_analysis_fallback_disclosure_gate_sent
+updated: 2026-06-06 09:38:48 KST
+state: core_brain_source_only_false_empty_gate_sent
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Core Brain source-only false-empty audit.
+- **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
+- **App baseline**: `E:\2ndB`, branch `main`, head `911c979`, clean.
+- **Hub baseline**: local-only hub repo on `master@3d8b318`; no remote/upstream is configured, so `git pull --ff-only` has no target.
+- **Claude state**: no newer Claude implementation after `20260606-045614-to-all-cycle5-live-loopend-final.md`; continuing review on the latest app baseline.
+- **SimonK-stack reference**: applying the 100/100 anti-slop standard that empty states must reflect the same product data model as adjacent screens.
+- **Evidence**: `/core-brain` reads only `records` and builds `evidence` from those rows; `/records` reads both `records` and `sources` through `mergeEvidence`; the home graph clears its empty state if either sources or records exist; `/import` tells users "Your center and SecondB will draw on these" after saving through `captureFromMarkdown`.
+- **Risk**: users who only captured/imported source-backed pieces can be told their Core has no pieces, even though Records and the home graph treat those same saves as pieces and Import promises Core will draw on them.
+- **Score**: still **98/100 provisional**. This is a P1/P2 Core trust-state gate before 100.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260606-093848-to-claude-core-brain-source-only-false-empty-gate.md`
+  - `agents/codex/outbox/preview/20260606-093848-core-brain-source-only-false-empty-gate.html`
+
+[Core Brain source-only false-empty gate / 26.06.06 / 09:38:48]
+#comm #codex #user #2nd-B #ui-ux #ai-slop #goal #core-brain #records #sources #empty-state #trust #claude-request
+- Confirmed this is distinct from prior Core Brain CTA/evidence/loading/drawer/touch-target gates: it targets the source-only false-empty state.
+- Audited `/core-brain`, `/records`, home graph piece detection, `persona/evidence`, Capture persistence, and Import saved-state copy.
+- Sent Claude a P1/P2 gate: Core Brain must include source-backed pieces or explicitly show a sources-ready-but-narrative-not-ready state instead of saying no pieces exist.
+- Score remains 98/100 provisional until Core, Records, home graph, Capture, and Import share a truthful piece/evidence contract and are re-gated.
+
+## Previous (Import analysis fallback disclosure gate)
 
 - **Task**: Import analysis fallback disclosure audit.
 - **src**: user `/goal` - continue all-screen UI issue discovery/improvement toward 100/100 anti-slop; repeat Claude review until perfect.
