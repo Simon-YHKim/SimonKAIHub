@@ -108,3 +108,25 @@
 - **M4 구독 모델·피로**: 단일 구독부터(soma)·업셀 피로 방지·티어 트레이드업·광고지원 여부(저소득 수용성). **모델 결정**.
 - **M5 신뢰 인증**: SOC2/암호화 등 신뢰 시그널(법무·인증 실행). 카피는 Codex(E18), 인증은 Simon.
 > 결정되면 Claude가 티어 게이팅·요금제 화면·결제 플로우 구현. 그 전엔 무료티어 한도 도달 시 **막다른길 제거**(행동경로 안내)만 저위험 선제 가능.
+
+---
+
+## F. 페르소나 시뮬 fresh (2026-06-07, 5페르소나 §27.9) — 24 고유 이슈
+> 전체 종합: `agents/claude/_psynth 미러` — 원본 워크플로 wgv1lgrwt. dedup 24건. 담당/우선순위 포함.
+
+| # | 이슈 | 빈도 | sev | 담당 | status |
+|---|---|---|---|---|---|
+| PF-A | 세컨비 모드토글 중복+죽은 컨트롤(하단 modeSwitch 무영향) `jarvis.tsx:305-376` | 3p | P0 | claude | open(jarvis refactor와 묶음) |
+| PF-F | 홈 인사이트 리본 가짜("기록 0개에도 알아챘어요", 코드 주석 자인) `index.tsx:101-130` | 1p(전원노출) | P0 | claude | 🔧 **수정 진행** |
+| PF-L | 한국어 위기어 부분일치 오탐(일상어 RED: "끝내고 싶"·"더 이상 살") `lexicon.ts:52-74`·`classifier.ts:30` | 1p | P0 | claude | open(안전 careful) |
+| PF-K | `GLOBAL_988` US전용 하드코딩(비US 무용) `classifier.ts:49,59` | 1p | P0 | claude(번호=Simon/§15 국가확정) | open |
+| PF-M | 비임상/비의료 상설 고지 부재 | 1p | P1 | claude(카피 합의·법무문구 Simon) | open |
+| PF-C | 가입 동의 게이트 로컬전용 경로 없음(llm/overseas 필수) `sign-up.tsx`·`ConsentNotice.tsx` | 3p | P1 | claude(정책 합의·법무 Simon) | open(D-12/consent 연계) |
+| PF-B | 비밀번호 셀프 재설정 부재(`resetPasswordForEmail` 미존재) `sign-in.tsx:146` | 2p | P1 | codex | open |
+| PF-I | 생년월일 영문 자유텍스트(피커 없음) 시니어 차단 `BirthDateField.tsx` | 1p | P1 | ag(피커)+claude | open |
+| PF-E | 첫 기록 막힘(firstRun journal 잠금) ⚠️검증상충(levels Lv3 vs gates Lv1) | 1p | P1 | codex(verify)→claude | open |
+| PF-G | 일기 내보내기 누락(export가 wiki만, journal/note 제외)+과약속 카피 `export.ts:163` | 1p | P1 | codex | open(M5 full-export 연계) |
+| PF-H | 일기저장 local-first 위반(supabase 라운드트립, 오프라인0) `records/create.ts` | 1p | P1 | simon(아키)→claude+codex | open |
+| PF-J | 무료한도 리셋 KST 자정 하드코딩(비KR 저녁 롤오버) `conversation.ts:109` | 1p | P1 | codex | open |
+| PF-D | 업그레이드 막다른길 CTA(체크아웃 없음)+첫날 5/5 노출 | 2p | P2 | claude(D-09 연계) | open |
+| PF-P3 | 묶음: N(PNG무게)·O(OCR리사이즈)·U(가입버튼 회색)·R·S·V·Q(DELETE)·T·W·X | — | P3 | claude/codex/ag/simon | open |
