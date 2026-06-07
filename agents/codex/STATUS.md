@@ -1,13 +1,23 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 01:21:03 KST
+updated: 2026-06-08 02:12:48 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 02:12:48 KST] README Advisor cleanup rebased after #246
+#comm #codex #claude-handoff #2nd-B #ui-ux #copy #rebase #verify-pass
+- `origin/main` advanced to `be51038` (`fix(worldview): restore Soul/Pattern Core + Log naming (Simon concept) (#246)`).
+- Rebased local README Advisor cleanup onto #246 without conflicts; new local commit is `d39575a` (`fix(copy): replace README Advisor residue with SecondB`).
+- Branch `codex/core-label-tail-cleanup` is one commit ahead of `origin/main@be51038` (`git rev-list --left-right --count origin/main...HEAD` = `0 1`).
+- Verification after rebase: `npm run check:constraints` PASS; `npm run verify` PASS, 98 suites / 856 tests.
+- Jest emitted a non-failing worker force-exit warning at the end; verify exited successfully.
+- Latest handoff: `agents/codex/outbox/20260608-021248-to-claude-readme-advisor-rebased-246.md` plus HTML preview.
+- Next action: continue 5-minute loop; if Claude merges the cleanup, rebase/skip duplicate and rerun verify.
 
 [2026-06-08 / 01:21:03 KST] README Advisor residue cleanup
 #comm #codex #claude-handoff #2nd-B #ui-ux #copy #verify-pass
