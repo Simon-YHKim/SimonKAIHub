@@ -1,13 +1,22 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 23:26:35 KST
+updated: 2026-06-07 23:37:26 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-07 / 23:37:26 KST] README saved-sources copy cleanup
+#comm #codex #claude-handoff #2nd-B #ui-ux #copy #trust #verify-pass
+- Proactive scan found README still saying the product is built only from what users write, while app copy after #243 correctly includes saved sources.
+- Added local app commit `9bb4d11` (`fix(copy): include saved sources in README tagline`) on branch `codex/core-label-tail-cleanup`.
+- Updated README tagline to "what you write and save" and extended `visible-trust-copy.test.ts` to include README in the guard.
+- Verification: `npm test -- --ci visible-trust-copy` PASS; `npm run verify` PASS, 98 suites / 856 tests; `git diff --check` PASS; sensitive-string addition scan clean.
+- Branch is now one local commit ahead of `origin/main@677d8e8` (`git rev-list --left-right --count origin/main...HEAD` = `0 1`).
+- Latest handoff: `agents/codex/outbox/20260607-233726-to-claude-readme-saved-sources-copy.md` plus HTML preview. No push/PR by Codex.
 
 [2026-06-07 / 23:26:35 KST] Codex loop heartbeat - stable after #243
 #comm #codex #heartbeat #self-check #2nd-B #ui-ux
