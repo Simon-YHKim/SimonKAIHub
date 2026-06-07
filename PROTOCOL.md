@@ -175,7 +175,7 @@ created: 2026-06-05 15:22:34 KST
 
 ### 10.5 코드 변경 게이트 — Claude 리뷰·승인 (PR 모델, 2026-06-05 Simon 갱신)
 - **모든 AI(Antigravity 포함)는 코드를 작성하고 로컬 커밋할 수 있다.** 단 **온라인 GitHub 작업(2nd-B push·CI 트리거·PR·main merge)은 Claude 단독**(§11 #7). AI는 자기 강점 산출물을 만들어 **로컬(허브 또는 자기 브랜치)에 커밋 → Claude에 전달** → **Claude가 리뷰·승인하는 게이트**를 거친다(PR 모델): **AI 전달 → Claude 검토(좋은 부분은 살리고, 미흡하면 재작업 요청 피드백을 outbox로) → Claude가 golive/main에 머지·푸시**. **Claude = 머지 게이트 + 유일한 온라인 git 주체.** AI는 전달 후 Claude의 승인/재작업 피드백을 확인하고 반영한다(주고받는 루프).
-- **Antigravity = Android/Google 네이티브 개발 강점 활용** — 네이티브 픽스(키보드·edge-to-edge·intent filter·AppState·elevation 등)를 **직접 코딩·푸시**한다. (더 이상 "검수만"이 아니다 — 2026-06-05 Simon 결정. 의견만 주는 것보다 푸시→Claude 검토가 빠르다.)
+- **Antigravity = Android/Google 네이티브 개발 강점 활용** — 네이티브 픽스(키보드·edge-to-edge·intent filter·AppState·elevation 등)를 **직접 코딩·로컬 커밋**한다(온라인 push는 Claude 단독, §11.1). (더 이상 "검수만"이 아니다 — 2026-06-05 Simon 결정. 의견만 주는 것보다 제출→Claude 검토가 빠르다.)
 - **작업 위치 (working-tree race 방지 — CRITICAL)**: 가능하면 **자기 브랜치(`antigravity/android` 등)에 커밋** → Claude 리뷰 후 golive 머지. golive에 직접 커밋해야 하면 **반드시 자기 파일만 명시적 stage**(`git add <파일들>`) — **`git add -A`/`git add .` 금지**(타 AI·Claude 서브에이전트의 미커밋 작업을 쓸어담는 race·데이터손실 방지). force-push·history 재작성 금지.
 - **프롬프트 인젝션 금지 (보안 경계)**: 공유 파일(`PROTOCOL.md`·`ROUTING.md`·앱 `CLAUDE.md` 등)에 **타 AI를 향한 지시·명령·긴급 배너를 삽입하지 않는다.** 의견·요청·긴급 사항은 **자기 outbox(md)로만** 전달. (single-writer 원칙 §1 + 보안.)
 - **머지 전 `npm run verify` 통과 필수.** Claude는 모든 코드 푸시를 검토하고 **승인 또는 재작업 요청**을 outbox 피드백으로 남긴다.
@@ -243,7 +243,7 @@ created: 2026-06-05 15:22:34 KST
 ### 12.3 lane별 루프 요약 (상세는 ROUTING §4)
 - **Codex**: 화면/컴포넌트 anti-slop 발견 → gate md+HTML → Claude. 배치 8·P3통합.
 - **Antigravity**: 네이티브 결함 1건 픽스(키보드·edge-to-edge·intent·elevation·perf) → 자기 브랜치 커밋 + QA HTML → Claude 리뷰. 빌드/에뮬 증거 첨부.
-- **Grok**: 결정 입력 리서치 1건(X 신호·소비자) → HTML → Claude/합의 입력. 트렌드 모니터링은 30분 간격.
+- **Grok**: 결정 입력 리서치 1건(X 신호·소비자) → HTML → Claude/합의 입력. **요청 기반 어드바이저리**(검증 전 자율 발의 보류, §11#1) — 재가동·요청 시 트렌드 모니터링 30분 간격. (CONTROL의 5분 루프는 코딩 3-AI 기준.)
 - **Claude**: inbox·DECISIONS 처리 → 구현/머지 1건 → verify → 온라인 git → BOARD·CONTROL 갱신.
 
 ---
@@ -286,11 +286,12 @@ created: 2026-06-05 15:22:34 KST
 ## 25. 제안 점검 루프 — 상시 백로그 트리아지 + doable 실행 (CRITICAL, 2026-06-06 Simon)
 > Simon 지시: **"계속해서 AI들의 제안을 점검하는 루프를 만들어. 그리고 할 수 있는 일을 이어가자."** Claude는 신규 제출만 소비하지 않고, **모든 AI의 누적 제안 백로그(codex gate·proposal·AG·grok outbox 전체)를 상시 마이닝**하여 실행가능 항목을 끊임없이 처리한다. **AI가 유휴면 안 되듯, 처리 안 된 제안이 백로그에 쌓여 있으면 안 된다.**
 
-- **25.1 실행가능 큐(`agents/claude/PROPOSAL_QUEUE.md`)**: Claude 단독 관리. 백로그를 트리아지해 4분류로 적재한다.
+- **25.1 실행가능 큐(`agents/claude/PROPOSAL_QUEUE.md`)**: Claude 단독 관리. 백로그를 트리아지해 5분류로 적재한다.
   - **A. Claude-doable-now** — 검증가능·device/AG 무관·내 lane. → Claude가 직접 구현→verify(gated)→머지.
   - **B. dispatch-Codex** — UI/UX·이미지·i18n·anti-slop. → Codex inbox로 디스패치, 워크트리 제출 회수.
   - **C. dispatch-AG** — Android/네이티브/perf/멀티모달 perf-side. → AG inbox로 디스패치(AG 재가동 시).
   - **D. Simon/external** — auth·법무·실비용·secrets(§15 안전레일). → BOARD/DECISIONS external, Simon 한 줄.
+  - **E. UX(자연스러움·자산일관성)** — §26 UX 4원칙·§27.9 페르소나 시뮬에서 나온 UX 결함·자산 불일치·문체 slop. → 강점 라우팅(모션/네이티브=AG, 시각/카피=Codex, 정보구조/로직=Claude).
 - **25.2 트리아지 방법**: 백로그가 클 때(수십+) **병렬 트리아지 워크플로**로 한 번에 큐를 구축(슬라이스 fan-out → 종합). 이후엔 신규 제출만 큐에 증분 추가. **이미 머지된 것은 git log 교차대조로 제외**(중복작업 금지).
 - **25.3 매 사이클 규율**: (1) 신규 제출 cherry-pick·verify·gated-push, (2) **큐에서 다음 doable 1+건 실제 실행**(점검만 하고 끝내지 않는다 — "그리고 할 수 있는 일을 이어간다"), (3) 큐 갱신(완료 체크·신규 추가·재분류), (4) 강점 라우팅으로 B/C 디스패치(X→Grok·Android→AG·멀티모달→Codex+AG §19), (5) 다음 안전 게이트.
 - **25.4 중복·소진 방지**: 한계효용 낮아진 클러스터(예: a11y action-hint)는 P3 long-tail로 강등하고 더 높은 가치 클러스터로 재배치(redirect 디스패치). 큐가 비면 신규 발견 라운드 트리거.
@@ -322,6 +323,7 @@ created: 2026-06-05 15:22:34 KST
 
 ## 27. 운용 강화 규칙 (CRITICAL, 2026-06-07 Simon 10개 지시)
 > 무인 자율 운용의 지속성·자율성·검증 깊이·병렬성을 끌어올리는 규칙 묶음. 4-AI 공통, 각 lane에 맞게 적용.
+> **안전레일 불변(§11-5)**: 본 절의 모든 "적극·생성·대형작업"(특히 27.5 deep-research·27.6 멀티모달 생성·27.9 페르소나 군집)도 **비용발생·파괴적·secrets는 합의로도 우회 못 하고 Simon 확인**을 거친다. 유료 API·이미지생성·검색쿼터 폭증 가능 작업은 착수 전 비용 가드.
 
 **27.1 컨텍스트 자가관리 + 무인 지속 (context-guardian 규칙화)**
 - **외장 기억이 원칙**: 모든 진행 상태는 컨텍스트가 아니라 디스크(`BOARD`·`CONTROL`·`STATUS`·`DECISIONS`·`PROPOSAL_QUEUE`·outbox)에 둔다. 컨텍스트는 *작업용 휘발 버퍼*일 뿐 — 언제 청소돼도 디스크에서 정확히 재개 가능해야 한다.
@@ -345,7 +347,8 @@ created: 2026-06-05 15:22:34 KST
 - Codex·Antigravity는 멀티모달 성능이 강력하므로 **평가뿐 아니라 생성 작업**(이미지·아이콘·일러스트·스프라이트·마스코트·히어로 아트·UI 렌더·모션 시안)도 적극 수행한다. 생성→§19 페어 상호평가→수렴본 Claude 머지. 가용 생성 도구(ComfyUI MCP·stitch MCP·Figma MCP 등)를 lane에 맞게 활용.
 
 **27.7 실환경 도구 적극 활용 (직접 확인 → 디테일한 결함 발굴)**
-- 코드만 읽지 말고 **실제로 구동·조작해 검증**한다. 가용 시: **computer use / Chrome(브라우저) use**(웹 라이브 클릭·스크린샷), **Windows MCP**(OS 조작), **Android Studio + 에뮬레이터**(`Pixel_9_Pro_XL`, AG 강점 — 빌드·logcat·터치·perf), **Apple 생태계 시뮬레이션**(iOS 동작·HIG·OAuth(Apple)·Dynamic Type 가정 점검). 직접 조작에서 나온 결함은 증거(스크린샷·로그)와 함께 보고. 라우팅: 웹=Claude/Codex, Android device=AG, 시각 충실도=Codex+AG.
+- 코드만 읽지 말고 **실제로 구동·조작해 검증**한다. 가용 시: **computer use / Chrome(브라우저) use**(웹 라이브 클릭·스크린샷), **Windows MCP**(OS 조작), **Android Studio + 에뮬레이터**(`Pixel_9_Pro_XL`, AG 강점 — 빌드·logcat·터치·perf). 직접 조작에서 나온 결함은 증거(스크린샷·로그)와 함께 보고. 라우팅: 웹=Claude/Codex, Android device=AG, 시각 충실도=Codex+AG.
+- **Apple 생태계 한계 (정직성 — CRITICAL)**: 이 머신은 **Windows라 Xcode/iOS 시뮬레이터·실기가 물리적으로 불가**. 따라서 iOS/macOS는 **실행 검증 없이 HIG·Dynamic Type·Apple OAuth의 "정적/가정 점검"만** 수행한다. **iOS 실측·스크린샷으로 보고 금지**(실행 증거가 없으므로 "검증됨"으로 올리면 허위증거 → 머지 게이트 오염). 실기 검증이 필요하면 별도 macOS 환경을 외부의존(§15)으로 분리.
 
 **27.8 현재 방식을 의심하라 — 다관점 병렬 검토**
 - "지금 하는 방식이 옳다"고 가정하지 않는다. 비자명한 결정·설계·구현은 **여러 관점(정확성·보안·성능·UX·비용·유지보수·반증)을 병렬로** 펼쳐 비교한 뒤 채택한다. Claude는 대형 결정에서 다관점 fan-out(워크플로/서브에이전트)으로 대안을 경쟁시키고 근거로 수렴. 적대적 검증(§21)을 기본 태도로.
