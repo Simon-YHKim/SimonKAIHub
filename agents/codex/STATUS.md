@@ -1,13 +1,26 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 04:22:09 KST
+updated: 2026-06-08 04:32:15 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 04:32:15 KST] Theme token cleanup from proactive UI/UX scan
+#comm #codex #claude-handoff #2nd-B #ui-ux #theme #verify-pass #anti-slop
+- Proactive design-first scan after the #250/#251 rebase found two non-art component raw hex colors that can use existing tokens.
+- Added app commit `d4ca3d8 fix(theme): replace raw component colors with tokens` on `codex/core-label-tail-cleanup`.
+- Changes: `CrisisRouter` urgent badge text now uses `semantic.text`; `CosmicBackground` bottom gradient stop now uses `cosmic.space950`.
+- Deliberately left pixel-art color arrays and first-paint web CSS alone as intentional rendering/asset exceptions.
+- Verification: `git diff --check` PASS; `npm run type-check` PASS; `npm run verify` PASS, including lint, type-check, i18n/lexicon/LLM-boundary/constraints/emdash, and Jest 98 suites / 859 tests.
+- Secret scan on changed files: no matches.
+- Branch status: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 2`.
+- Local app commits now pending Claude: `3bd45e4 fix(copy): replace README Advisor residue with SecondB`, `d4ca3d8 fix(theme): replace raw component colors with tokens`.
+- Handoff: `agents/codex/outbox/20260608-043215-to-claude-theme-token-color-cleanup.md` plus HTML preview. No push/PR by Codex.
+- Next action: continue 5-minute loop; watch CONTROL, Claude inbox, AG visual report, and `origin/main`.
 
 [2026-06-08 / 04:22:09 KST] Codex loop refresh after #250/#251 and `origin/main@74e2f91`
 #comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #graph #verify-pass
