@@ -1,9 +1,9 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity·Grok은 읽기 전용."
-last-updated: 2026-06-07 18:48:23 KST
+last-updated: 2026-06-07 22:20:33 KST
 run_mode: RUNNING (Simon /goal "완벽한 앱·사이클 유지" 2026-06-07 11:1x — Claude 통합루프 가동)
-live_head: 2nd-B main 271b9e9. **#241 코어버그**: Capture "Save piece" 버튼이 탭바에 가려 도달불가(scroll pad 32/86 < 탭바 110) → insets+TAB_BAR_HEIGHT 클리어, 에뮬 검증. 이번 세션 **26 PR 머지**: #216~#234(코히런스+M1+cycle2리뷰) + **네이티브 QA발 6**: #235(AG predictive/back) #236(.env.bak제거) #237(PF-I DOB마스크) #238(Codex 구체라벨) #239(test_*.js ignore) #240(2ndB→SecondB 브랜드, 에뮬검증). 인시던트0(전PR CI green별도확인; stray 2건 즉시제거·실시크릿0). **Android 에뮬레이터 네이티브 실행 성공**(콜드부트복구·gradle8.13빌드·adb reverse, 빌드막힘 메모리 outdated). **10화면 네이티브 투어=앱 견고**(브랜드버그1 수정·검증, 리뷰 위양성 실증debunk). 리포트 `agents/claude/native-qa-emulator-20260607.md`. 결정 D-09~D-15. 게이트=안전임상/법무/D-09실결제=Simon. 잔여=풀인터랙티브QA(adb폼)·#49 SceneHero·Codex레인
+live_head: 2nd-B main 677d8e8. 이번 세션 **28 PR 머지**. 네이티브 QA발: #241 Save버튼 탭바가림·#240 2ndB→SecondB·#242 EN브랜드정규화+privacy정직카피·#237 PF-I DOB마스크 + AG#235 + Codex#238/#243(카피코히런스 tail+회귀가드). **전 AI 기여 통합 완료**(AG·Codex). **15화면 네이티브 투어=앱 견고**, 실버그 전부 수정·에뮬검증. 위양성 다수 debunk(Stack.Screen·저대비CTA·#돈중복). 잔여: interview 40대+(콘텐츠)·KO 2nd-B→두번째뇌(Codex)·게이트(안전임상/법무/D-09실결제=Simon): #216~#234(코히런스+M1+cycle2리뷰) + **네이티브 QA발 6**: #235(AG predictive/back) #236(.env.bak제거) #237(PF-I DOB마스크) #238(Codex 구체라벨) #239(test_*.js ignore) #240(2ndB→SecondB 브랜드, 에뮬검증). 인시던트0(전PR CI green별도확인; stray 2건 즉시제거·실시크릿0). **Android 에뮬레이터 네이티브 실행 성공**(콜드부트복구·gradle8.13빌드·adb reverse, 빌드막힘 메모리 outdated). **10화면 네이티브 투어=앱 견고**(브랜드버그1 수정·검증, 리뷰 위양성 실증debunk). 리포트 `agents/claude/native-qa-emulator-20260607.md`. 결정 D-09~D-15. 게이트=안전임상/법무/D-09실결제=Simon. 잔여=풀인터랙티브QA(adb폼)·#49 SceneHero·Codex레인
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
