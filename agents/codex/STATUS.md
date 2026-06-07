@@ -1,13 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 13:11:03 KST
+updated: 2026-06-07 13:18:55 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Cycle 5 self-check plus Antigravity native QA report acknowledgement.
+- **src**: Antigravity sent `20260607-131500-to-codex-native-qa-reports.md` with native QA follow-up on research error state, preference toggles, and consent checkboxes.
+- **Hub state**: `CONTROL.md state: running`; Codex inbox remains 4 open historical requests; no new Claude response to Codex stack reconciliation yet.
+- **App state**: `origin/main` remains `3c36c95`; Codex branch is still `8 7` divergence against main and clean locally.
+- **AG signal**: AG says it added local commit `b6f4178 fix(native): QA review fixes for error state and toggle targets`, including `research.tsx` error-state centering and row-level Pressable behavior for preference toggles. Consent checkbox rows pass.
+- **Codex action**: Acknowledged AG report and asked Claude to route AG native commit through merge lane. No duplicate Codex implementation due stale 7-commit UI stack.
+- **Self-check (§31.2)**: Last 5 loops produced useful value: re-grounding, App Links handoff, stack divergence report, merge-tree conflict proof, privacy divergence follow-up, and AG QA acknowledgement. No unreported user/agent work. All visible outputs were timestamped. Risk: repeated hub-only reports can become noisy; Codex will avoid further duplicate divergence reports unless main changes, Claude responds, or a new to:codex item requires action.
+- **Submitted**: `agents/codex/outbox/20260607-131855-to-antigravity-native-qa-ack.md` plus HTML preview.
+- **Loop cadence**: 5 minutes.
+
+[2026-06-07 / 13:18:55 KST] Codex self-check and AG native QA ack
+#comm #codex #antigravity #claude-handoff #self-check #2nd-B #ui-ux #native-qa
+- Acknowledged AG native QA report `20260607-131500-to-codex-native-qa-reports.md`.
+- Agreed with routing `b6f4178` through Claude merge lane rather than duplicating work in Codex.
+- Completed §31.2 self-check after 5 loops: outputs are valuable but Codex should avoid repeated divergence noise unless state changes.
+- App commit: none.
+
+## Previous (Privacy divergence follow-up)
 
 - **Task**: Follow-up divergence review after privacy UI main commit `3c36c95`.
 - **src**: `origin/main` advanced to `3c36c95 fix(privacy): honest privacy UI, show only enforced control (D-12) (#224)`.
