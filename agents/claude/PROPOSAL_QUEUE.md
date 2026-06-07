@@ -17,7 +17,7 @@
 |---|---|---|---|---|
 | A1 | **Raw error → product-tone copy + recovery** (실패경로 11화면) | account·capture·wiki·inbox·interview·settings·records 실패 핸들러 | high | open |
 | A2 | **Privacy 토글 진실** — 8스위치 중 external_analytics만 enforce, 7개 phantom | `src/app/privacy.tsx` (+enforcement 코드) | high | open |
-| A3 | **Privacy failed-opt-out fail-closed** — #215가 실패세이브 revert 커버하는지 검증, 미흡 시 guard+test | `src/lib/privacy/analytics-consent-queue.ts` | high | open |
+| A3 | **Privacy failed-opt-out fail-closed** — #215가 실패세이브 revert 커버하는지 검증, 미흡 시 guard+test | `src/lib/privacy/analytics-consent-queue.ts` | high | ✅ **검증완료**(2026-06-07) — 코드 fail-closed(optOut 즉시 gate OFF, 실패 시 onError가 UI pref만 revert·gate 유지) + 테스트 커버("a failed opt-in never enables analytics", 모노토닉 opt-out). 커밋 `12bc27d`+`911c979`. 코드변경 불필요 |
 | A4 | **Auth loading-aware guards** — signin/signup guest guard + complete-profile redirect가 loading 무시 → 잘못된 화면 flash | `src/app/(auth)/sign-in,sign-up,complete-profile.tsx` | high | ✅ **머지 `3ee8885`** (InlineLoader guard, sign-up guest guard 신설) |
 | A5 | **Data export scope 진실** — export 약속(파일) vs 실제(clipboard) 불일치 통일 | support·data·settings·wiki | high | ✅ 점검완료 — data.tsx 이미 정직("텍스트로 모아 복사", 파일 거짓약속 없음) + wiki export 승격 `f710b50`(Codex). churn 회피 |
 | A6 | **Theme native 영속** — native에서 localStorage만 써 영속 안 됨 → AsyncStorage 또는 컨트롤 숨김 | `src/lib/theme/ThemeContext.tsx` | high | ✅ **머지 `1a688c6`** (web 동기경로 유지 + native AsyncStorage 하이드레이트/쓰기) |
