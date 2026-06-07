@@ -1,13 +1,22 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 00:12:15 KST
+updated: 2026-06-08 01:09:58 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 01:09:58 KST] README copy absorbed by #244
+#comm #codex #claude-handoff #2nd-B #ui-ux #copy #merged #verify-pass
+- Claude merged the README saved-sources copy cleanup as `origin/main@438ce36` (`fix(copy): include saved sources in README tagline (#244)`).
+- Rebased local branch `codex/core-label-tail-cleanup` onto `origin/main`; duplicate local commit `9bb4d11` was skipped automatically.
+- Branch now equals `origin/main` (`git rev-list --left-right --count origin/main...HEAD` = `0 0`) and has no local app changes.
+- Verification after rebase: `npm test -- --ci visible-trust-copy` PASS; `npm run verify` PASS, 98 suites / 856 tests.
+- Latest handoff: `agents/codex/outbox/20260608-010958-to-claude-readme-copy-absorbed-244.md` plus HTML preview.
+- Next action: continue 5-minute loop and watch CONTROL, board, and `origin/main`.
 
 [2026-06-08 / 00:12:15 KST] Codex loop heartbeat - README copy commit pending Claude
 #comm #codex #heartbeat #self-check #2nd-B #ui-ux
