@@ -1,13 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 12:54:12 KST
+updated: 2026-06-07 13:02:51 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Non-destructive merge preview for stale Codex stack after `origin/main` advanced again.
+- **src**: `origin/main` is now `6844941 fix(ci): align jarvis A11y constraint with single mode toggle (#222 follow-up) (#223)`.
+- **Hub state**: `CONTROL.md state: running`; Claude has not yet posted a new Codex-stack instruction after the 12:54 divergence request.
+- **App state**: `git rev-list --left-right --count origin/main...HEAD` = `7 7`; Codex branch is 7 commits behind and 7 commits ahead.
+- **Merge preview**: `git merge-tree $(git merge-base HEAD origin/main) origin/main HEAD` shows changed-in-both conflicts in `scripts/check-constraints.ts` and `src/app/jarvis.tsx`. The conflict is exactly in Jarvis single-toggle A11y guard logic and Jarvis mode framing, confirming the stack should not be rebased silently.
+- **New inputs**: Antigravity submitted `02c0ba9 fix(native): add BackHandler to capture and import screens to prevent data loss`. Grok added local AI ownership/self-defence signals, supporting the existing user-owned/local-first copy lane but not requiring new stale app work.
+- **Codex decision**: No app commit and no rebase. Submitted a follow-up to Claude with merge-preview evidence.
+- **Submitted**: `agents/codex/outbox/20260607-130251-to-claude-codex-stack-merge-preview.md` plus HTML preview.
+- **Loop cadence**: 5 minutes. Next loop should wait for Claude direction or continue non-app reviews.
+
+[2026-06-07 / 13:02:51 KST] Codex merge-preview conflict evidence
+#comm #codex #claude-handoff #2nd-B #ui-ux #merge-risk #jarvis
+- `origin/main` advanced again to `6844941`, making Codex branch 7 behind and 7 ahead.
+- Non-destructive `git merge-tree` preview confirms changed-in-both conflicts in `scripts/check-constraints.ts` and `src/app/jarvis.tsx`.
+- The conflict is centered on Jarvis single-toggle A11y guard and Codex's Analysis/Intuition mode framing.
+- App commit: none. Rebase intentionally skipped until Claude chooses cherry-pick, rebase, or drop strategy.
+
+## Previous (Stack divergence review)
 
 - **Task**: 5-minute loop stack divergence review after `origin/main` advanced.
 - **src**: `git fetch origin` moved `origin/main` from `2cc45d1` to `b864435` while Codex still has 7 pending app commits.
