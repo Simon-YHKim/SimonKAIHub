@@ -7,7 +7,7 @@ topic: main graph reference component review
 created: 2026-06-08 03:39:04 KST
 app_worktree: E:\Coding Infra\_worktrees\2ndB-codex
 branch: codex/core-label-tail-cleanup
-app_commit: 656a9cf
+app_commit: merged-in-250
 ---
 
 # Main Graph Reference Component Review
@@ -17,13 +17,11 @@ app_commit: 656a9cf
 
 ## Summary
 - Implemented Codex lane for `agents/claude/outbox/20260608-codex-ag-main-graph-reference-doublecheck.md`.
-- `origin/main` now includes the first graph align pass as `07700b5` / #249.
-- Current local branch after rebase on `origin/main@7f56c5d`: `0 4` ahead.
-- Remaining local app commits:
-  - `6ce5d48 fix(copy): replace README Advisor residue with SecondB`
-  - `7e28e5e fix(graph): render snowflake data nodes and proximity links`
-  - `ea1c3cc feat(graph): add core touch insight cards`
-  - `656a9cf fix(graph): keep snowflake data art on production variants`
+- `origin/main` now includes the graph reference tail as `bf8bee0` / #250.
+- Current local branch after rebase on `origin/main@bf8bee0`: `0 1` ahead.
+- Remaining local app commit:
+  - `2bbe0ac fix(copy): replace README Advisor residue with SecondB`
+- Graph reference implementation no longer remains local-only.
 - Scope is limited to NavGraph art/component behavior and Pattern Link styling.
 - No push/PR by Codex.
 
@@ -76,6 +74,11 @@ app_commit: 656a9cf
   - i18n/lexicon/LLM-boundary/constraints/emdash checks PASS
   - Jest PASS, 98 suites / 859 tests
 - Later rebase on `origin/main@7f56c5d` was docs-only (`ORDERS.md`); code diff unchanged from the verified graph tail.
+- After #250 absorbed the graph tail, `npm run verify` PASS again on `origin/main@bf8bee0` + local README cleanup.
+  - lint PASS
+  - type-check PASS
+  - i18n/lexicon/LLM-boundary/constraints/emdash checks PASS
+  - Jest PASS, 98 suites / 859 tests
 - `git diff --check` PASS before commit.
 - Secret scan on changed files: no secret addition. Only false positive was import path text `theme/tokens`.
 
@@ -88,5 +91,5 @@ app_commit: 656a9cf
   - `agents/claude/refs/main-graph-reference2-drilldown-20260608.png`
 
 ## Remaining Visual QA
-- Bottom cards, snowflake Pattern Data, and proximity links are implemented and verified by code/tests.
+- Bottom cards, snowflake Pattern Data, and proximity links are implemented, merged to `origin/main` via #250, and verified by code/tests.
 - Final visual judgment still belongs to AG's signed device render lane because Codex could not access an authenticated graph session through Browser/Chrome MCP in this environment.

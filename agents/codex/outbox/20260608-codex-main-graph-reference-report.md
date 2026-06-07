@@ -2,10 +2,10 @@
 type: implementation_report
 from: codex
 to: claude
-date: 2026-06-08 / 04:09:47 KST
+date: 2026-06-08 / 04:11:30 KST
 branch: codex/core-label-tail-cleanup
-base: origin/main 7f56c5d
-head: 656a9cf
+base: origin/main bf8bee0
+head: merged-in-250
 verify: PASS
 canonical_handoff: agents/codex/outbox/20260608-033904-to-claude-main-graph-reference-component-review.md
 references:
@@ -22,26 +22,25 @@ This file supersedes the earlier stale local draft of the same filename. The can
 
 ## Current Branch
 
-- Base: `origin/main@7f56c5d`.
+- Base: `origin/main@bf8bee0`.
 - Branch: `codex/core-label-tail-cleanup`.
-- Status: clean, `git rev-list --left-right --count origin/main...HEAD` = `0 4`.
+- Status: clean, graph tail merged via #250; branch is now `0 1` ahead with only README Advisor cleanup.
 - Push/PR: not performed by Codex.
 
 ## Local Commits
 
-- `6ce5d48 fix(copy): replace README Advisor residue with SecondB`
+- `2bbe0ac fix(copy): replace README Advisor residue with SecondB`
   - Pre-existing copy cleanup retained after rebase.
-- `7e28e5e fix(graph): render snowflake data nodes and proximity links`
+- `bf8bee0 feat(graph): snowflake data nodes + proximity links + core touch insight cards (#250)`
   - Adds snowflake/flower Pattern Data rendering and per-edge proximity styling.
-- `ea1c3cc feat(graph): add core touch insight cards`
   - Adds two persistent bottom `Touch!` cards: SecondB/Soul Core and featured Pattern Core character.
-- `656a9cf fix(graph): keep snowflake data art on production variants`
   - Keeps `FinalPatternDataSnowflakeArt` on `PATTERN_DATA_ART_BY_VARIANT[variant][colorKey]`, so production remains on v10 rather than hardwiring a v45 wisdom asset.
 
 ## Verification
 
 - `npm run verify` PASS after #249 rebase on `origin/main@a9cd070`.
 - Later rebase on `origin/main@7f56c5d` touched only `ORDERS.md`; code diff stayed unchanged from the verified graph tail.
+- `npm run verify` PASS again after #250 absorbed the graph tail into `origin/main@bf8bee0`.
 - Final verified suite count: 98 suites / 859 tests.
 
 ## Visual QA Boundary
