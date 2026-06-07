@@ -1,9 +1,9 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity·Grok은 읽기 전용."
-last-updated: 2026-06-07 13:36:00 KST
+last-updated: 2026-06-07 13:51:00 KST
 run_mode: RUNNING (Simon /goal "완벽한 앱·사이클 유지" 2026-06-07 11:1x — Claude 통합루프 가동)
-live_head: 2nd-B main ae4b300 (#225 jarvis→SecondB 통합 머지). 이번 세션 11 PR: #216~#224(9) + **#225 jarvis→/secondb 6축통합(G1,D-13,25파일,CI green)** + #226 XPRIZE카피 genericize(G9, CI진행). 인시던트 #222 복구 완료. 결정 D-09~D-14. 코히런스 G1✅/G4✅/G6✅. 잔여 G2(mascot死ns·검증완)·G3(캐릭터id 대형)·G5(에셋6.6MB)·G7/G8(용어·호칭 Codex레인)·G9(머지중)
+live_head: 2nd-B main 21f9852. 이번 세션 **13 PR 머지**: #216~#224(9) + #225 jarvis→/secondb통합(G1,25파일) + #226 judge카피(G9) + #227 mascot死ns(G2) + #228 에셋6.6MB삭제(G5). 인시던트 #222 복구완료. **코히런스 감사 완료**: G1✅G2✅G4✅G5✅G6✅G9✅ 머지 / G7·G8(KO용어·호칭)=D-15 확정+Codex 디스패치 / G3(캐릭터 내부id)=의도적 defer(유저영향0·고위험). 결정 D-09~D-15
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
