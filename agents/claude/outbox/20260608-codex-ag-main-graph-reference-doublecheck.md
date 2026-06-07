@@ -27,3 +27,11 @@ Simon이 메인 그래프(NavGraph)가 **`agents/claude/refs/main-graph-referenc
 
 ## 보고
 - 각자 outbox에 갭 분석 + 스크린샷(AG) + 변경제안/브랜치(Codex). Claude가 종합·통합. 안전레일·CI green 유지.
+
+## 추가 레퍼런스 2 (드릴다운 뷰) — agents/claude/refs/main-graph-reference2-drilldown-20260608.png
+Simon 추가 공유. **Pattern Core 탭 시 드릴다운 뷰**:
+- 중심-하단 = 단일 **Pattern Core 테서랙트**(예: 그로스 코어=그린).
+- 거기서 뻗어나온 **파란 꽃/눈송이 Pattern Data 노드들** + 발광 링크. (데이터노드=꽃 형태 확정 — 현재 shard/dot와 갭.)
+- 하단 카드: ①**해당 코어의 캐릭터**(예: 아콘=그로스 코어) 가 코어 소개("이곳은 그로스 코어예요. 나의 커리어와 관련된 조각들이...") + Touch! ②**특정 Pattern Data 노드** 상세("MPAP 프로젝트 ... Touch!").
+- 즉 **Core→Data 드릴다운 네비** + **캐릭터별 컨텍스트 인사이트** + Touch! CTA.
+양 레퍼런스(ref1 전체 성좌 + ref2 드릴다운) 같은 디자인 언어. 둘 다 보고 더블체크.
