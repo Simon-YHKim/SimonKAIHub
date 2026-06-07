@@ -138,7 +138,7 @@
 
 | # | 항목 | 규모 | 담당 | status |
 |---|---|---|---|---|
-| G1 | **jarvis→/secondb 6축 리네임** (route+리다이렉트 스텁+i18n ns+TabId+purpose+CI script check-constraints.ts+tests) DB영향0 | 중(~20파일) | claude(원자 PR) | open(focus PR) |
+| G1 | **jarvis→/secondb 6축 리네임** (route+리다이렉트 스텁+i18n ns+TabId+purpose+CI script check-constraints.ts+tests) DB영향0 | 중(~20파일) | claude(원자 PR) | ✅ **머지 #225** (25파일, route/스텁/ns/locale파일/TabId/purpose/role/CI경로, verify 847 green). 잔여 jarvis=스텁·내부변수명·주석(§1-F 선택) |
 | G2 | **mascot.json 死코드 삭제** (구 로스터, 소비처 0, NAMESPACES·tokens mascot색키 동반) | 소~중 | claude/codex | open |
 | G3 | **캐릭터 코드 id 통일** lulu/archi/gadi/lumi→lumen/archon/relia/iris (+PNG 파일명 결합, TODO(naming) 실행, 테스트 다수) | 대 | codex/ag(에셋)+claude | open(별 PR) |
 | G4 | **Iris(lumi) 로스터 누락** characters.ts 5인 vs 정본 6인(personas/village/monologues) + CompanionName 누락 | 소(결정후) | claude | ✅ **머지 #221 `c6f27a6`** (D-14=6 결정, characters/tokens/CompanionName/graph-bits/test) |
