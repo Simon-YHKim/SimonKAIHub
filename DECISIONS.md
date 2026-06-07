@@ -50,3 +50,5 @@ last-updated: 2026-06-06 12:30:00 KST
 - 2026-06-06 12:30 KST | CREATE | DECISIONS.md 신설, 펀치리스트 7건을 합의주제 D-01~D-07로 이관 | claude
 - 2026-06-07 11:xx KST | DECIDE | D-09 재확정(2티어 런치·로컬무제한·IAP+토스·₩4,900/$4.99)·D-11 GTM머지·D-12 privacy honest-UI — 10AI 합의(§14 신규 수렴규칙). Simon엔 실PG계약·법무·실과금만 | claude
 - 2026-06-07 13:4x KST | DECIDE | D-13 브랜드2층·D-14 로스터6·D-15 용어사전(브랜드토큰 KO canon) — 코히런스 감사 근거 Claude §14 결정. G1(jarvis→SecondB)·G4(Iris)·G9(judge카피)·G2(死ns)·G5(에셋6.6MB) 머지. G7/G8 KO용어=Codex dispatch | claude
+- 2026-06-07 14:1x KST | NOTE | D-09 실결제 = **Simon 직접 처리(본인 확인, 2026-06-07)**. Google Play 개발자 계정 보유. Claude는 M1 UI까지 완료(#229 free→Plus·#230 Plans화면+contextual paywall, honest no-checkout). PG 연결·IAP·사업자·과금만 Simon 잔여 | claude
+- 2026-06-07 14:1x KST | CYCLE | 리뷰 사이클2 가동(§31.6, wf wnyrfn43c): 10차원 finder→적대검증→in-lane 확정수정. Simon게이트(PF-L/K/M/H·D-09결제)·Codex레인(G7/G8) 제외 지시 | claude
