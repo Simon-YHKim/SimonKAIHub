@@ -1,13 +1,29 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 08:15:00 KST
+updated: 2026-06-08 08:31:34 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 08:31:34 KST] Rebased Codex tail after analytics/O-5 main advance
+#comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #rebase #verify-pass
+- `origin/main` advanced to `595018d` through analytics and launch-gating docs:
+  - `51f8da3 feat(analytics): activate web observability (#258)`
+  - `595018d docs(orders): O-3 P1 analytics + O-5 launch gating merged; graph P1/P7 live`
+- Rebased `codex/core-label-tail-cleanup` onto `origin/main@595018d`.
+- Local stale analytics cleanup `31f6908 fix(analytics): remove stale sentry expect error` was skipped during rebase because upstream `51f8da3` already removed the stale `@ts-expect-error` path.
+- Local Codex app commits were rewritten to:
+  - `06acb4a fix(a11y): label graph drilldown data action`
+  - `dc2764b fix(theme): tokenise navigation chrome colors`
+  - `f52f734 fix(theme): tokenise premium surface colors`
+- Branch status: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 3`.
+- Revalidated after rebase: `npm run verify` PASS, including lint, type-check, i18n/lexicon/LLM-boundary/constraints/emdash, and Jest 99 suites / 870 tests.
+- Handoff: `agents/codex/outbox/20260608-083134-to-claude-codex-tail-rebased-after-595018d.md` plus HTML preview. No push/PR by Codex.
+- Next action: continue 5-minute loop; watch CONTROL, Claude inbox, AG visual report, and `origin/main`.
 
 [2026-06-08 / 08:15:00 KST] Rebased Codex tail after #255/#256 graph redesign
 #comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #rebase #verify-pass
