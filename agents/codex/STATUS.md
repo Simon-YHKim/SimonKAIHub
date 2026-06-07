@@ -1,13 +1,43 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 12:18:15 KST
+updated: 2026-06-07 12:29:07 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: 5-minute autonomous UI/UX loop, self-initiated from Grok local-first and ownership signals: reinforce data-management ownership copy.
+- **src**: `src/app/data.tsx` and `locales/en|ko/data.json` explained import/export/delete, but did not yet state the practical trust promise: records remain portable, export produces a copy the user can take elsewhere, and SecondB reads records only when asked.
+- **Hub state**: `CONTROL.md state: running`. Working in `E:\Coding Infra\_worktrees\2ndB-codex` only; no 2nd-B online push/PR/merge.
+- **Inputs reread**: `CONTROL.md`, `BOARD.md`, Codex inbox, Antigravity latest native QA reports, Grok `20260607-121719-fyi-claude-local-first-vs-cloud-pkm.md`, plus 2nd-B `DESIGN.md`/`docs/CONSTRAINTS.md`/`CONTEXT.md` before coding.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@2cc45d1`.
+- **Implemented pending**: added a locale-backed `ownership` section to `/data`; changed the hero to `Keep your records portable` / `기록은 이동할 수 있어요`; clarified export as copy-ready text for backup, review, or another tool; added the line that SecondB only reads records when the user asks for help.
+- **Copy direction**: truthful portability, no overclaim that the current cloud account is fully local-first; portable copy + user-invited reading rather than lock-in or mysterious memory.
+- **Guard**: updated `DataI18nCopy` to require `ownership.body` and the new portable-record trust phrases in both locales.
+- **Validation**: locale JSON parse; `npx tsc --noEmit`; `npm run check:i18n` (`880 keys`, `25 namespaces`); `npx tsx scripts/check-constraints.ts`; `npm run lint`; `npm run check:lexicon` (`298 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `git diff --check`; `git diff --cached --check`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass. Expo web smoke: started on `http://localhost:8091`, `/data` returned HTTP 200; direct visual proof remains auth-gated without a local signed-in session.
+- **Local commits**: `8cadc96` (`fix(i18n): bundle inbox entry copy`) + `8caccb2` (`fix(i18n): bundle records screen copy`) + `7cebff7` (`fix(copy): align onboarding trust messaging`) + `cf4085f` (`fix(copy): reinforce consent trust framing`) + `cdee870` (`fix(copy): clarify secondb mode framing`) + `aa50c1b` (`fix(copy): reinforce data ownership framing`).
+- **Pending stack vs origin/main**: 6 commits. Charter gate is below the 8 unmerged-submission limit.
+- **Loop cadence**: 5 minutes. Next cycle should recheck Claude/AG/Grok outbox before selecting the next UI/UX or image/multimodal candidate.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-122907-to-claude-data-ownership-copy.md`
+  - `agents/codex/outbox/preview/20260607-122907-data-ownership-copy.html`
+  - `agents/codex/outbox/20260607-121815-to-claude-jarvis-mode-framing.md`
+  - `agents/codex/outbox/preview/20260607-121815-jarvis-mode-framing.html`
+  - `agents/codex/outbox/20260607-114549-to-claude-gtm-consent-trust-copy.md`
+
+[2026-06-07 / 12:29:07 KST] Data ownership copy reinforcement
+#comm #codex #grok-signal #2nd-B #ui-ux #copy #i18n #data #ownership #implementation
+- Completed self-initiated Codex loop item from Grok local-first vs cloud PKM signals.
+- Added a locale-backed ownership section to `/data`.
+- Reframed data management around portable records, copy-ready export, and SecondB reading records only when the user asks for help.
+- Updated `DataI18nCopy` regression guard to require the new ownership phrasing.
+- App commit: `aa50c1b fix(copy): reinforce data ownership framing`.
+- Full validation passed, including Jest 95 suites / 848 tests; Expo web `/data` returned HTTP 200, with visual proof limited by auth gating.
+
+## Previous (Jarvis mode framing cleanup)
 
 - **Task**: 5-minute autonomous UI/UX loop, self-initiated from Grok naming and monetization signals: clarify SecondB answer-mode framing in `/jarvis`.
 - **src**: `/jarvis`, graph node sheet, `/core-brain`, back labels, self-portrait nudges, evidence labels, mock imagine preview, and DESIGN comments still exposed or reinforced `Analytic` / `Divergent` / `공상` user-facing framing.
