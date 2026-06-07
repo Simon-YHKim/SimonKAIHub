@@ -139,13 +139,13 @@
 | # | 항목 | 규모 | 담당 | status |
 |---|---|---|---|---|
 | G1 | **jarvis→/secondb 6축 리네임** (route+리다이렉트 스텁+i18n ns+TabId+purpose+CI script check-constraints.ts+tests) DB영향0 | 중(~20파일) | claude(원자 PR) | ✅ **머지 #225** (25파일, route/스텁/ns/locale파일/TabId/purpose/role/CI경로, verify 847 green). 잔여 jarvis=스텁·내부변수명·주석(§1-F 선택) |
-| G2 | **mascot.json 死코드 삭제** (구 로스터, 소비처 0, NAMESPACES·tokens mascot색키 동반) | 소~중 | claude/codex | open |
+| G2 | **mascot.json 死코드 삭제** (구 로스터, 소비처 0, NAMESPACES·tokens mascot색키 동반) | 소~중 | claude/codex | ✅ **머지 #227 `448a771`** — mascot.json=worldview이전 로스터(Star Boss 등)·소비처 0 검증→en/ko 삭제+i18n index 언와이어. tokens.mascot 팔레트(9개 가드)는 별개·유지. verify 847 green |
 | G3 | **캐릭터 코드 id 통일** lulu/archi/gadi/lumi→lumen/archon/relia/iris (+PNG 파일명 결합, TODO(naming) 실행, 테스트 다수) | 대 | codex/ag(에셋)+claude | open(별 PR) |
 | G4 | **Iris(lumi) 로스터 누락** characters.ts 5인 vs 정본 6인(personas/village/monologues) + CompanionName 누락 | 소(결정후) | claude | ✅ **머지 #221 `c6f27a6`** (D-14=6 결정, characters/tokens/CompanionName/graph-bits/test) |
-| G5 | **죽은 에셋팩 7개 삭제** (~6.6MB 웹번들 동봉, src 참조 0) + 중복 워커폴더(workers/·workers-sharp/) + _clean/비-hq 변형 + vela 고아 | 중(binary rm) | claude/ag | open(grep 재확인 후) |
+| G5 | **죽은 에셋팩 7개 삭제** (~6.6MB 웹번들 동봉, src 참조 0) + 중복 워커폴더(workers/·workers-sharp/) + _clean/비-hq 변형 + vela 고아 | 중(binary rm) | claude/ag | ✅ **머지 #228 `21f9852`** — public/assets 11팩→4라이브. 전레포 grep+동적보간 스캔으로 7팩 死확정(참조는 docs/만): closeout-v3·refine·placeholder-v1·v1·v2·pattern-link·premium-closing. 1146파일/~6.6MB 제거, git복원가능. dist/·.tmp_hq_pack=gitignored(레포무관). workers/_clean/vela 변형도 동삭(packs 내부) |
 | G6 | **데드 함수 삭제** getCompanionSpritePath/CuePath(소비처 0 + 네이티브 깨짐 소지) `CompanionSprite.tsx:35,44` | 소 | claude | ✅ **머지 #220 `63fcb10`** (타입 보존, 함수만 제거) |
 | G-dec① | 앱명 2층 (앱=두번째뇌/2nd-Brain, AI주체=세컨비/SecondB) | — | claude | ✅ **결정 D-13**(§14, 2층 유지) |
-| G7 | **용어 사전 1종 확정** 캡처/담기/기록·pieces/records/entries·위키/지식그래프/서재/창고(6종)·journal/일기/저널·리서치/자료실 | 중(카피) | codex | open |
-| G8 | **AI 주체 호칭 통일** capture.json:77 "Lumen saved"↔SecondB, consent "비서"↔세컨비 → 화면당 주체 1인 | 소~중 | codex | open |
+| G7 | **용어 사전 1종 확정** 캡처/담기/기록·pieces/records/entries·위키/지식그래프/서재/창고(6종)·journal/일기/저널·리서치/자료실 | 중(카피) | codex | 🟢 **디스패치**(`outbox/20260607-g7g8-ko-terminology-dispatch.md`, D-15 ④) — Codex가 현행빈도 분석→min-churn canon 제안→§14 비준 후 적용 |
+| G8 | **AI 주체 호칭 통일** capture.json:77 "Lumen saved"↔SecondB, consent "비서"↔세컨비 → 화면당 주체 1인 | 소~중 | codex | 🟢 **D-15 확정+디스패치** — 정정: capture "Lumen"=knowledge섬 거주자(의도된 빌리지 디자인, 보존). 진짜 이슈=KO 호칭 3종혼재(세컨비/SecondB/비서) + 앱(두번째뇌)/AI(세컨비) 레이어. canon=세컨비(AI)·두번째뇌(앱)·비서주체금지. Codex 적용(위 dispatch A1/A2) |
 | G9 | XPRIZE judges/심사관 어휘 일반 빌드 노출 → judge 플래그 게이팅 `consent.json:4-5`·`auth.json:98` | 소 | claude | open |
 | G-dec | ⚠️ **결정**: ①앱명 2층(앱="두번째 뇌/2nd-Brain" vs AI주체="세컨비/SecondB") 의도적 분리 확정? ②로스터 5 vs 6(Iris) | — | 4-AI 합의(§14) | 🔴 |

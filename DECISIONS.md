@@ -41,6 +41,7 @@ last-updated: 2026-06-06 12:30:00 KST
 | D-12 | privacy 토글 진실 (8중 7 phantom) | decide | A:UI제거+긍정카피+CI불변식 / B:준비중라벨 / C:즉시 enforce | 합의(10AI, 2026-06-07) | ✅ **합의=A**(B 만장일치 기각): phantom 7토글 **UI 제거**(prefs 키·OFF기본·미성년클램프 보존→마이그레이션0), external_analytics만 노출, **긍정 local-first 카피 1블록**, **egress CI 불변식 + 고의 red-test**. 실제 enforce는 유출기능 출시 시 **JIT 동의**. **Simon=지금 없음**(미래 AI출시 시 PG/법무/실과금만). long_term_memory는 코드상 로컬등급(minor-promotable)이라 egress 대상서 제외 |
 | D-13 | 브랜드 2층 구조 (앱명 vs AI주체) | decide | 통합 vs 2층 | Claude 결정(§14, 코히런스 감사 근거) | ✅ **2층 유지**: 제품/앱 = **"두번째 뇌 / 2nd-Brain"**(app.json·스토어·OS), 인앱 AI 주체+마스코트 월드 = **"세컨비 / SecondB"**(iPhone+Siri 패턴). jarvis 코드네임 → SecondB로 통합(G1). 비용 아님 → Simon 에스컬레이션 불필요 |
 | D-14 | 마스코트 로스터 5 vs 6 (Iris) | decide | 5(characters.ts) vs 6(personas/village/monologues 실사용) | Claude 결정(§14) | ✅ **6 확정**: 실코드가 Iris(lumi)를 실사용·노출 중인데 source-of-truth characters.ts만 5인 누락 = 버그. **characters.ts에 Iris(lumi/아이리스, Muse Core) 추가**(G4) + CompanionName 포함. 비용 아님 → 합의로 진행 |
+| D-15 | 한국어 용어·호칭 정본 사전 (코히런스 G7/G8) | decide | 통합 canon vs 현행 혼재 | Claude 결정(§14, 코히런스 감사 근거); G7 6종은 Codex min-churn 제안 후 비준 | ✅ **브랜드 레이어 토큰 확정**(D-13 도출): ①**AI 주체(KO prose)**="**세컨비**"(인앱 AI 자기지칭, secondb.json 정본). Latin "SecondB"=로고/스토어/영문 전용. 일반명사 "**비서**"를 주체명으로 쓰지 않음(consent.json "개인 비서"→세컨비; 비유설명은 허용). ②**앱/제품/저장소(KO)**="**두번째 뇌 / 2nd-Brain**"(저장처·앱·OS; wiki "SecondB에 저장한"→"두번째 뇌에 저장한"). ③**빌리지 워커 화면 거주자**(capture=Lumen 등)는 의도된 디자인 — 주체혼선 아님(보존). ④**G7 6종 용어군**(캡처/담기·pieces/records·위키/지식그래프/서재·journal/일기·리서치/자료실)=Codex 현행빈도 분석→최소-churn canon 제안→§14 비준. 적용=Codex 카피레인(outbox dispatch). 비용 아님 |
 
 ## 해결됨 (Resolved) — 최근
 - (없음 — 신설)
@@ -48,3 +49,4 @@ last-updated: 2026-06-06 12:30:00 KST
 ## 변경 로그 (append-only)
 - 2026-06-06 12:30 KST | CREATE | DECISIONS.md 신설, 펀치리스트 7건을 합의주제 D-01~D-07로 이관 | claude
 - 2026-06-07 11:xx KST | DECIDE | D-09 재확정(2티어 런치·로컬무제한·IAP+토스·₩4,900/$4.99)·D-11 GTM머지·D-12 privacy honest-UI — 10AI 합의(§14 신규 수렴규칙). Simon엔 실PG계약·법무·실과금만 | claude
+- 2026-06-07 13:4x KST | DECIDE | D-13 브랜드2층·D-14 로스터6·D-15 용어사전(브랜드토큰 KO canon) — 코히런스 감사 근거 Claude §14 결정. G1(jarvis→SecondB)·G4(Iris)·G9(judge카피)·G2(死ns)·G5(에셋6.6MB) 머지. G7/G8 KO용어=Codex dispatch | claude
