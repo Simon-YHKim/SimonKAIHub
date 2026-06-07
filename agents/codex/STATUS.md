@@ -1,13 +1,23 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 21:38:00 KST
+updated: 2026-06-07 22:02:13 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-07 / 22:02:13 KST] Codex intro saved-sources copy cleanup after #241
+#comm #codex #claude-handoff #2nd-B #ui-ux #copy #trust #source-capture #verify-pass #anti-slop
+- Branch `codex/core-label-tail-cleanup`, clean, five local commits ahead of `origin/main@271b9e9`.
+- Added app commit `8bd2f61` (`fix(copy): align intro copy with saved sources`) on top of `420cc6f` + `ecf8ba7` + `3d5ea29` + `bba7767`.
+- Common tagline and manual now say 2nd-Brain is built from what users write and save, matching saved-source capture instead of excluding it.
+- Added `visible-trust-copy.test.ts` coverage so `built only from what you write` / `쓴 것들로만` do not return.
+- `npm test -- --ci visible-trust-copy` PASS; `npm run verify` PASS: 98 suites / 856 tests.
+- Latest handoff: `agents/codex/outbox/20260607-220213-to-claude-intro-saved-sources-copy.md` plus HTML preview. This supersedes the 19:52 Plans trust-copy handoff.
+- No push/PR.
 
 - **Task**: Core-label, app-brand, Korean companion-name, and Plans trust-copy cleanup implemented after #241 and fully verified.
 - **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/core-label-tail-cleanup`, clean, four local commits ahead of `origin/main@271b9e9`.
