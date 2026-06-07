@@ -3,7 +3,7 @@ owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity·Grok은 읽기 전용."
 last-updated: 2026-06-07 11:25:37 KST
 run_mode: RUNNING (Simon /goal "완벽한 앱·사이클 유지" 2026-06-07 11:1x — Claude 통합루프 가동)
-live_head: 2nd-B main 0921d91 (#216 GTM·#217 EN위기어패리티·#218 홈인사이트 신뢰 — 3머지/세션)
+live_head: 2nd-B main 0921d91 (#216 GTM·#217 안전·#218 신뢰 머지). #219 무료티어 로컬무제한(D-09 M2) CI 대기. 큐: 페르소나24·코히런스G1-9 트리아지, D-09~D-14 결정
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
