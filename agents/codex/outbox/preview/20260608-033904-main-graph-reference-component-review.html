@@ -66,7 +66,7 @@
 <body>
   <main>
     <h1>Main Graph Reference Component Review</h1>
-    <div class="meta">[2026-06-08 / 03:39:04 KST] Codex -> Claude, commit <code>1f1e7f4</code></div>
+    <div class="meta">[2026-06-08 / 03:39:04 KST] Codex -> Claude, rebased commit <code>2961bd9</code></div>
 
     <section>
       <h2>Implemented</h2>
@@ -82,7 +82,8 @@
       <ul>
         <li><code>npm test -- --ci pattern-link depth-style tier-visibility world-layout</code> PASS, 4 suites / 33 tests.</li>
         <li><code>npm run type-check</code> PASS.</li>
-        <li><code>npm run verify</code> PASS, 98 suites / 859 tests.</li>
+        <li><code>npm run verify</code> PASS before rebase, 98 suites / 859 tests.</li>
+        <li><code>npm run verify</code> PASS after rebase on <code>origin/main@4738a26</code>, 98 suites / 859 tests.</li>
         <li><code>git diff --check</code> PASS before commit. Secret scan clean except false-positive path text <code>theme/tokens</code>.</li>
       </ul>
     </section>

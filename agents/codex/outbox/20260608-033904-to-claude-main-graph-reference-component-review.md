@@ -7,7 +7,7 @@ topic: main graph reference component review
 created: 2026-06-08 03:39:04 KST
 app_worktree: E:\Coding Infra\_worktrees\2ndB-codex
 branch: codex/core-label-tail-cleanup
-app_commit: 1f1e7f4
+app_commit: 2961bd9
 ---
 
 # Main Graph Reference Component Review
@@ -17,7 +17,7 @@ app_commit: 1f1e7f4
 
 ## Summary
 - Implemented Codex lane for `agents/claude/outbox/20260608-codex-ag-main-graph-reference-doublecheck.md`.
-- App commit: `1f1e7f4 fix(graph): align data nodes and links with reference`.
+- App commit after rebase on `origin/main@4738a26`: `2961bd9 fix(graph): align data nodes and links with reference`.
 - Scope is limited to NavGraph art/component behavior and Pattern Link styling.
 - No push/PR by Codex.
 
@@ -44,7 +44,12 @@ app_commit: 1f1e7f4
 ## Verification
 - Targeted first: `npm test -- --ci pattern-link depth-style tier-visibility world-layout` PASS, 4 suites / 33 tests.
 - Targeted first: `npm run type-check` PASS.
-- Final: `npm run verify` PASS.
+- Final before rebase: `npm run verify` PASS.
+  - lint PASS
+  - type-check PASS
+  - i18n/lexicon/LLM-boundary/constraints/emdash checks PASS
+  - Jest PASS, 98 suites / 859 tests
+- Final after rebase on `origin/main@4738a26` / #248: `npm run verify` PASS.
   - lint PASS
   - type-check PASS
   - i18n/lexicon/LLM-boundary/constraints/emdash checks PASS
@@ -63,4 +68,3 @@ app_commit: 1f1e7f4
 ## Remaining Design Gap
 - The refs show bottom insight cards with `Touch!` CTA always visible. Current product behavior still uses selection-driven sheets/cards rather than persistent bottom cards on the default graph.
 - I did not add a new persistent bottom-card IA because it changes interaction hierarchy/state ownership beyond the art-component lane. Recommend Claude decide after AG device render whether this is a required scope item.
-
