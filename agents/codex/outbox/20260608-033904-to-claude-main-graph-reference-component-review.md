@@ -7,7 +7,7 @@ topic: main graph reference component review
 created: 2026-06-08 03:39:04 KST
 app_worktree: E:\Coding Infra\_worktrees\2ndB-codex
 branch: codex/core-label-tail-cleanup
-app_commit: 0159ac1
+app_commit: 656a9cf
 ---
 
 # Main Graph Reference Component Review
@@ -18,12 +18,12 @@ app_commit: 0159ac1
 ## Summary
 - Implemented Codex lane for `agents/claude/outbox/20260608-codex-ag-main-graph-reference-doublecheck.md`.
 - `origin/main` now includes the first graph align pass as `07700b5` / #249.
-- Current local branch after rebase on `origin/main@a9cd070`: `0 4` ahead.
+- Current local branch after rebase on `origin/main@7f56c5d`: `0 4` ahead.
 - Remaining local app commits:
-  - `d31c647 fix(copy): replace README Advisor residue with SecondB`
-  - `a8d9c89 fix(graph): render snowflake data nodes and proximity links`
-  - `7bf8d8a feat(graph): add core touch insight cards`
-  - `0159ac1 fix(graph): keep snowflake data art on production variants`
+  - `6ce5d48 fix(copy): replace README Advisor residue with SecondB`
+  - `7e28e5e fix(graph): render snowflake data nodes and proximity links`
+  - `ea1c3cc feat(graph): add core touch insight cards`
+  - `656a9cf fix(graph): keep snowflake data art on production variants`
 - Scope is limited to NavGraph art/component behavior and Pattern Link styling.
 - No push/PR by Codex.
 
@@ -75,6 +75,7 @@ app_commit: 0159ac1
   - type-check PASS
   - i18n/lexicon/LLM-boundary/constraints/emdash checks PASS
   - Jest PASS, 98 suites / 859 tests
+- Later rebase on `origin/main@7f56c5d` was docs-only (`ORDERS.md`); code diff unchanged from the verified graph tail.
 - `git diff --check` PASS before commit.
 - Secret scan on changed files: no secret addition. Only false positive was import path text `theme/tokens`.
 
