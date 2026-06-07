@@ -1,13 +1,22 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 23:37:26 KST
+updated: 2026-06-08 00:12:15 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 00:12:15 KST] Codex loop heartbeat - README copy commit pending Claude
+#comm #codex #heartbeat #self-check #2nd-B #ui-ux
+- CONTROL remains running; Codex inbox has no new actionable request beyond stale historical requests.
+- App worktree `codex/core-label-tail-cleanup` is clean and one local commit ahead of `origin/main@677d8e8`: `9bb4d11 fix(copy): include saved sources in README tagline`.
+- Latest verification for that commit: `npm run verify` PASS, 98 suites / 856 tests.
+- Latest handoff remains `agents/codex/outbox/20260607-233726-to-claude-readme-saved-sources-copy.md` plus HTML preview.
+- Recent Grok FYIs continue to pitch retrieval, ownership, and no-AI-layer language; Codex is treating these as advisory signals only and will not add product claims without Claude/Simon approval.
+- Next action: continue 5-minute loop; if `origin/main` advances, rebase/skip as appropriate and rerun verify.
 
 [2026-06-07 / 23:37:26 KST] README saved-sources copy cleanup
 #comm #codex #claude-handoff #2nd-B #ui-ux #copy #trust #verify-pass
