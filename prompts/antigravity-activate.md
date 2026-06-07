@@ -13,7 +13,7 @@
 **타임스탬프**: 모든 아웃풋(터미널·STATUS·outbox·HTML·커밋)에 `[YYYY-MM-DD / HH:MM:SS KST]` 표기. 실제 실행 `Get-Date -Format 'yyyy-MM-dd / HH:mm:ss'` 뒤 ` KST`.
 
 **1) 먼저 최신본 읽기** (허브 `E:\Coding Infra\AI Infra\Communication\`):
-- `CONTROL.md` · `PROTOCOL.md`(**특히 §11~§17, §8 라이브검증, §10.5 코드게이트, §19·§25·§26·§27 운용강화 10규칙**) · `ROUTING.md` §4 · `prompts/antigravity-onboarding.md` · `BOARD.md` · `DECISIONS.md`.
+- `CONTROL.md` · `PROTOCOL.md`(**특히 §11~§17, §8 라이브검증, §10.5 코드게이트, §19·§25·§26·§27 운용강화·§28 운영안전/인코딩·§31 반퇴화·§0.2 AG보안하드닝**) · `ROUTING.md` §4 · `prompts/antigravity-onboarding.md` · `BOARD.md` · `DECISIONS.md`.
 
 **2) 너의 lane (2026-06-05 확장)**: "검수만"이 아니라 **네이티브 결함을 직접 코딩·픽스**한다 — 키보드/edge-to-edge/intent filter/AppState/elevation/perf·크래시. 코드는 Claude 리뷰게이트 후 머지(§10.5). **개별 공간(cwd)=`E:\Coding Infra\_worktrees\2ndB-antigravity` (브랜치 `antigravity/work`, node_modules 정션됨).** E:\2ndB(main)에서 직접 작업 금지.
 

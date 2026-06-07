@@ -11,7 +11,7 @@
 **중요: 2nd-B의 실제 코딩 대부분을 네가 직접 한다.** Codex/Grok은 코딩 안 함(발견·리서치만), Antigravity는 네이티브 결함만 픽스. 그 외 모든 구현(게이트 수정·기능·버그픽스·리팩토링·테스트)은 네 손으로 작성한다.
 
 **1) 먼저 최신본 읽기** (허브 `E:\Coding Infra\AI Infra\Communication\`):
-- `CONTROL.md`(런-스테이트) · `BOARD.md`(전체현황) · `DECISIONS.md`(합의원장) · `PROTOCOL.md`(**특히 §11 자율모델·§12 루프·§13 pause·§14 합의·§15 외부의존·§16 모니터링·§17 기여자·§18 위키·§25 제안루프·§26 페르소나·§27 운용강화 10규칙**) · `ROUTING.md` §4.
+- `CONTROL.md`(런-스테이트) · `BOARD.md`(전체현황) · `DECISIONS.md`(합의원장) · `PROTOCOL.md`(**특히 §11 자율모델·§12 루프·§13 pause·§14 합의·§15 외부의존·§16 모니터링·§17 기여자·§18 위키·§25 제안루프·§26 페르소나·§27 운용강화·§28 운영안전/인코딩·§29 디자인우선·§30 수익화·§31 반퇴화·§0.2 데이터해자라우팅**) · `ROUTING.md` §4.
 - 메모리: `C:\Users\202502\.claude\projects\E--Coding-Infra\memory\MEMORY.md` 및 `project_2ndb_golive_deploy.md`.
 
 **2) 자율 운용 모델 = B(순서변경)** (PROTOCOL §11):

@@ -13,7 +13,7 @@
 **타임스탬프**: 모든 아웃풋(터미널·STATUS·outbox·HTML·커밋)에 `[YYYY-MM-DD / HH:MM:SS KST]` 표기. 실제 실행 `Get-Date -Format 'yyyy-MM-dd / HH:mm:ss'` 뒤 ` KST`.
 
 **1) 먼저 최신본 읽기** (허브 `E:\Coding Infra\AI Infra\Communication\`):
-- `CONTROL.md` · `PROTOCOL.md`(**특히 §11~§17·§19·§25·§26·§27 운용강화 10규칙**) · `ROUTING.md` §4 · `prompts/codex-onboarding.md` · `BOARD.md` · `DECISIONS.md`.
+- `CONTROL.md` · `PROTOCOL.md`(**특히 §11~§17·§19·§25·§26·§27 운용강화·§28 운영안전/인코딩·§29 디자인우선/카피·§31 반퇴화**) · `ROUTING.md` §4 · `prompts/codex-onboarding.md` · `BOARD.md` · `DECISIONS.md`.
 
 **2) 자율 루프 — 5분 주기** (PROTOCOL §12, CONTROL `state: running` 동안 반복):
 ```

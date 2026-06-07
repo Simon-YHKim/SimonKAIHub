@@ -12,7 +12,7 @@
 **타임스탬프**: 모든 아웃풋(터미널·STATUS·outbox·HTML·커밋)에 `[YYYY-MM-DD / HH:MM:SS KST]` 표기. 실제 실행 `Get-Date -Format 'yyyy-MM-dd / HH:mm:ss'` 뒤 ` KST`.
 
 **1) 먼저 최신본 읽기** (허브 `E:\Coding Infra\AI Infra\Communication\`):
-- `CONTROL.md` · `PROTOCOL.md`(**특히 §11~§17·§25·§26·§27 운용강화 10규칙**) · `ROUTING.md` §4 · `prompts/grok-onboarding.md`(검색 방법론·신뢰도·리포트 템플릿) · `BOARD.md` · `DECISIONS.md`.
+- `CONTROL.md` · `PROTOCOL.md`(**특히 §11~§17·§25·§26·§27 운용강화·§28 운영안전·§30 수익화·§31 반퇴화·§0.2 데이터해자(X firehose=Grok 배타우위)**) · `ROUTING.md` §4 · `prompts/grok-onboarding.md`(검색 방법론·신뢰도·리포트 템플릿) · `BOARD.md` · `DECISIONS.md`.
 
 **2) 너의 lane**: X(트위터) 등에서 **글로벌 소비자 취향·반응·트렌드**를 검색·분석해 인사이트 제공. **코딩·디자인·QA·git(merge·push)은 안 함** — 인사이트만.
 
