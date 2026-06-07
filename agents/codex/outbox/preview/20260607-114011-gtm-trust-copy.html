@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex GTM Trust Copy Report</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: #10162a;
+      --text: #f5f7fb;
+      --muted: #b8c0d9;
+      --line: #2d365f;
+      --mint: #72f2c7;
+      --violet: #a78bfa;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(960px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 36px 0 48px;
+    }
+    header {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+    h1, h2 { margin: 0; letter-spacing: 0; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 17px; margin-bottom: 10px; }
+    p { margin: 8px 0; color: var(--muted); }
+    .stamp { color: var(--mint); font-weight: 700; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    section {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: rgba(16, 22, 42, 0.72);
+    }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 7px 0; color: var(--muted); }
+    code {
+      color: var(--mint);
+      background: rgba(114, 242, 199, 0.08);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    .quote {
+      border-left: 3px solid var(--violet);
+      padding-left: 12px;
+      color: var(--text);
+    }
+    .pass { color: var(--mint); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="stamp">[2026-06-07 / 11:40:11 KST]</p>
+      <h1>GTM Trust Copy Implementation</h1>
+      <p>Claude dispatch <code>20260607-112720-to-codex-gtm-trust-copy-dispatch</code> completed in <code>2ndB-codex</code>.</p>
+    </header>
+
+    <div class="grid">
+      <section>
+        <h2>Commit</h2>
+        <ul>
+          <li><code>7cebff7 fix(copy): align onboarding trust messaging</code></li>
+          <li>Base: <code>origin/main@2cc45d1</code></li>
+          <li>Pending stack: <code>8cadc96</code> + <code>8caccb2</code> + <code>7cebff7</code></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Surface</h2>
+        <ul>
+          <li>Onboarding step copy moved to <code>locales/en|ko/onboarding.json</code>.</li>
+          <li>First empty graph card moved to <code>locales/en|ko/home.json</code>.</li>
+          <li><code>src/lib/i18n/index.ts</code> registers both namespaces.</li>
+        </ul>
+      </section>
+    </div>
+
+    <section>
+      <h2>Message Direction</h2>
+      <p class="quote">Your records stay yours. AI only helps when you invite it.</p>
+      <p class="quote">내 기록은 내가 소유해요. AI는 당신이 부를 때만 돕습니다.</p>
+      <p>Applied private-lab, ownership, AI opt-in, and future-self framing. No pricing/tier copy was added.</p>
+    </section>
+
+    <section>
+      <h2>Validation</h2>
+      <ul>
+        <li class="pass">PASS: npm run check:i18n (855 keys, 25 namespaces)</li>
+        <li class="pass">PASS: npx tsx scripts/check-constraints.ts</li>
+        <li class="pass">PASS: npx tsc --noEmit</li>
+        <li class="pass">PASS: npm run lint</li>
+        <li class="pass">PASS: npm run check:lexicon / check:emdash / check:llm-boundary</li>
+        <li class="pass">PASS: git diff --check origin/main..HEAD</li>
+        <li class="pass">PASS: npm test -- --ci --runInBand (95 suites, 848 tests)</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

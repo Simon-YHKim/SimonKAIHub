@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 11:24:50 KST
+updated: 2026-06-07 11:40:11 KST
 state: running
 ---
 
@@ -9,21 +9,32 @@ state: running
 
 ## Current (latest)
 
-- **Task**: records screen helper-copy i18n cleanup + autonomous loop resume.
-- **src**: `src/app/records.tsx` still carried inline EN/KO hero, search, filter, error, retry, empty, and first-capture helper/a11y copy.
-- **Hub state**: `CONTROL.md state: running`. First resume cycle completed §31.1 re-grounding by rereading activate, `PROTOCOL.md` §27/§28, and Codex `RULES.md`.
-- **Inbox**: `board.ps1 -Me codex` raw inbox showed 3 items; actionable inbox is 0 because 1 is EXAMPLE and 2 already have Codex `ref` responses.
-- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@30dc939`.
-- **Implemented pending**: added `records` locale namespace in `locales/en|ko/records.json`; registered it in `src/lib/i18n/index.ts`; moved records hero/search/filter/state helper copy to `t(...)` keys.
-- **Guard**: added `RecordsI18nCopy` and updated A11y expectations to require key-based records helper copy.
-- **Validation**: `npm run check:i18n` (`832 keys`, `23 namespaces`); `npx tsx scripts/check-constraints.ts`; `npx tsc --noEmit`; `npm run lint`; `npm run check:lexicon` (`293 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
-- **Local commits**: `4dbaee3` (`fix(i18n): bundle inbox entry copy`) + `f46ff95` (`fix(i18n): bundle records screen copy`).
-- **Pending stack vs origin/main**: 2 commits. Charter gate is below the 8 unmerged-submission limit.
-- **Loop cadence**: 5 minutes per latest activation prompt. Next cycle should check Claude/AG/Grok outbox before selecting a new UI/UX candidate.
+- **Task**: Claude high-priority GTM trust-copy dispatch: apply `docs/GTM.md` + Grok X/social signals to user-facing onboarding and empty-state copy.
+- **src**: Onboarding and first empty graph card still carried inline EN/KO visible and accessibility copy, making GTM trust messaging hard to govern.
+- **Hub state**: `CONTROL.md state: running`. Working in `E:\Coding Infra\_worktrees\2ndB-codex` only; no 2nd-B online push/PR/merge.
+- **Inputs reread**: `docs/GTM.md`, Grok `20260607-110730-re-x-trend-gtm.md`, Claude request `20260607-112720-to-codex-gtm-trust-copy-dispatch.md`, plus 2nd-B `DESIGN.md`/`docs/CONSTRAINTS.md`/`CONTEXT.md` before coding.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@2cc45d1`.
+- **Implemented pending**: added `onboarding` and `home` locale namespaces; moved onboarding loading/progress/step/action/a11y copy and the first empty graph card copy to locale bundles.
+- **Copy direction**: user ownership, private lab, local-first control, AI invited only by the user, and future-self morning clue. No price/tier copy and no creepy AI learns/remembers/understands phrasing.
+- **Guard**: updated `A11y` and `Onboarding` constraints to require key-based onboarding/home trust copy and locale-registered GTM phrases.
+- **Validation**: `npm run check:i18n` (`855 keys`, `25 namespaces`); `npx tsx scripts/check-constraints.ts`; `npx tsc --noEmit`; `npm run lint`; `npm run check:lexicon` (`298 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commits**: `8cadc96` (`fix(i18n): bundle inbox entry copy`) + `8caccb2` (`fix(i18n): bundle records screen copy`) + `7cebff7` (`fix(copy): align onboarding trust messaging`).
+- **Pending stack vs origin/main**: 3 commits. Charter gate is below the 8 unmerged-submission limit.
+- **Loop cadence**: 5 minutes. Next cycle should recheck Claude/AG/Grok outbox before selecting the next UI/UX or image/multimodal candidate.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-114011-to-claude-gtm-trust-copy.md`
   - `agents/codex/outbox/20260607-112450-to-claude-records-screen-copy.md`
   - `agents/codex/outbox/20260607-074813-to-claude-pause-ack-resume-note.md`
   - `agents/codex/outbox/20260607-074522-to-claude-inbox-entry-copy.md`
+
+[2026-06-07 / 11:40:11 KST] GTM trust-copy onboarding + empty-state implementation
+#comm #codex #claude-request #grok-signal #2nd-B #ui-ux #copy #i18n #trust #onboarding #empty-state #implementation
+- Completed Claude high-priority GTM copy dispatch from `20260607-112720-to-codex-gtm-trust-copy-dispatch.md`.
+- Added `onboarding` and `home` locale namespaces and registered both in `src/lib/i18n/index.ts`.
+- Rewrote onboarding and first empty graph card copy around user-owned records, private lab framing, AI opt-in, and future-self/morning clue hooks.
+- Updated constraints so the GTM copy stays in locale bundles and does not regress to inline EN/KO branches.
+- App commit: `7cebff7 fix(copy): align onboarding trust messaging` on `origin/main@2cc45d1`.
+- Full validation passed, including Jest 95 suites / 848 tests.
 
 [2026-06-07 / 11:24:50 KST] records screen helper-copy i18n cleanup
 #comm #codex #claude-request #2nd-B #ui-ux #records #i18n #a11y #copy #implementation #resume
