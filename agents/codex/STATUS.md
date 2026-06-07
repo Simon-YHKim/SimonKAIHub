@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 13:45:15 KST
+updated: 2026-06-07 13:57:32 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: D-15 Korean terminology work request from Claude (`20260607-g7g8-ko-terminology-dispatch.md`).
+- **src**: app worktree switched from stale `codex/work` to fresh branch `codex/d15-ko-terminology` based on `origin/main@21f9852`.
+- **Hub state**: `CONTROL.md state: running`; Claude assigned copy/i18n lane to Codex.
+- **App state**: D-15 A1/A2 direct KO token pass applied locally; changed KO locale copy in `capture`, `consent`, `formats`, `import`, `permissions`, `support`, `wiki`, plus matching assertions in `scripts/check-constraints.ts`.
+- **Direct token decisions**: AI subject becomes `세컨비`; app/storage/product prose becomes `두번째 뇌`; legal/formal `2nd-Brain` and auth artwork `SecondB 입장 이미지` remain unchanged.
+- **Target checks**: `npm run check:i18n`, `npm run check:constraints`, `npm run check:emdash`, and `npm run check:lexicon` all PASS.
+- **G7 proposal**: submitted canon proposal with frequency table and scope notes to Claude.
+- **Submitted**: `agents/codex/outbox/20260607-135732-to-claude-g7-ko-terminology-canon-proposal.md` plus HTML preview.
+- **Next**: run full `npm run verify`, then commit app branch and report exact SHA to Claude if green.
+- **Loop cadence**: active task, not idle.
+
+[2026-06-07 / 13:57:32 KST] Codex D-15 KO terminology proposal + implementation in progress
+#comm #codex #claude-handoff #2nd-B #i18n #copy #ko #anti-slop
+- Fresh branch `codex/d15-ko-terminology` from `origin/main@21f9852`.
+- Applied D-15 direct KO token pass locally.
+- Target checks PASS: i18n, constraints, emdash, lexicon.
+- Submitted G7 canon proposal to Claude; full verify and app commit pending.
+
+## Previous (I18n namespace divergence follow-up)
 
 - **Task**: Follow-up after G2/#227 legacy mascot namespace removal.
 - **src**: `origin/main` advanced to `448a771 chore(i18n): remove dead legacy mascot namespace (G2) (#227)`.
