@@ -128,7 +128,7 @@
 | PF-G | 일기 내보내기 누락(export가 wiki만, journal/note 제외)+과약속 카피 `export.ts:163` | 1p | P1 | codex | open(M5 full-export 연계) |
 | PF-H | 일기저장 local-first 위반(supabase 라운드트립, 오프라인0) `records/create.ts` | 1p | P1 | simon(아키)→claude+codex | open |
 | PF-J | 무료한도 리셋 KST 자정 하드코딩(비KR 저녁 롤오버) `conversation.ts:109` | 1p | P1 | codex | open |
-| PF-D | 업그레이드 막다른길 CTA(체크아웃 없음)+첫날 5/5 노출 | 2p | P2 | claude(D-09 연계) | 🟢 **1차 슬라이스 #229**(차단힌트 free→Plus/cortex 정정·폐기 soma 노출 제거·브랜드 티어명 Free/Plus/Pro). **잔여=Plans 화면 + secondb 한도→/plans 라우트** = 디자인-bearing 새 surface → **design-first 적용**(레퍼런스·톤 진단 후 빌드, cold-code 금지). 실결제=Simon PG(D-09 M3 Phase). honest "출시 알림"(M5) |
+| PF-D | 업그레이드 막다른길 CTA(체크아웃 없음)+첫날 5/5 노출 | 2p | P2 | claude(D-09 연계) | ✅ **해소** #229(힌트 free→Plus·브랜드명) + **#230 Plans화면+contextual 라우트**(secondb 한도→/plans, D-09 3티어 표시·현재티어 마킹·기존 디자인시스템 정합·plans i18n ns en/ko). honest M5=인앱 체크아웃 0(실결제=Simon PG/IAP+토스 D-09 M3), CTA=출시알림+무과금 고지. verify 847 green |
 | PF-P3 | 묶음: N(PNG무게)·O(OCR리사이즈)·U(가입버튼 회색)·R·S·V·Q(DELETE)·T·W·X | — | P3 | claude/codex/ag/simon | open |
 
 ---
