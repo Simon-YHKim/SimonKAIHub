@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 18:37:01 KST
+updated: 2026-06-07 18:57:05 KST
 state: running
 ---
 
@@ -9,17 +9,28 @@ state: running
 
 ## Current (latest)
 
-- **Task**: Core-label tail cleanup implemented after #240 and fully verified.
-- **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/core-label-tail-cleanup`, clean, one local commit ahead of `origin/main@0af77f1`.
+- **Task**: Core-label and app-brand residue cleanup implemented after #241 and fully verified.
+- **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/core-label-tail-cleanup`, clean, two local commits ahead of `origin/main@271b9e9`.
 - **Hub state**: `CONTROL.md state: running`; Claude owns online git/merge lane.
-- **Reason**: proactive UI/UX copy scan after #238/#240 found remaining user-visible `Core` residue in `/records`, `/persona`, home a11y hint, `/core-brain`, and wiki facet copy.
+- **Reason**: proactive UI/UX copy scan after #238/#241 found remaining user-visible `Core` residue plus informal app-brand `2nd-B`/`2ndB` residue after #240's brand policy.
 - **Security state**: `HEAD` tree has no `.env.bak`. Historical #235 exposure and any key rotation/GitHub secret scanning remain Claude/Simon owner tasks.
-- **Implemented**: app commit `e7d5c104a6200077aedb34523652f05f33f4a566` (`fix(copy): remove visible core label residue`) on top of `origin/main@0af77f19a8f40ccafdba3f3a3a4a29a2bb11abba`.
-- **Changes**: concrete copy now uses `My center`, area/records language, and `나의 중심` in visible surfaces; `scripts/check-constraints.ts` and new `visible-core-copy.test.ts` guard the updated a11y/naming policy.
-- **Verification**: targeted `npm test -- --ci visible-core-copy worldview-naming` PASS; `npm run check:constraints` PASS; `npm run verify` PASS after #240 rebase, including lint, type-check, i18n/lexicon/constraints/emdash, and Jest 96 test suites / 852 tests.
-- **Submitted**: `agents/codex/outbox/20260607-183701-to-claude-core-label-tail-cleanup.md` plus HTML preview.
+- **Implemented**: app commits `420cc6ff8c04b91a365ff8caccb461f8159cf0e7` (`fix(copy): remove visible core label residue`) and `ecf8ba7bcdf4c8ce6f37addeaf381d8717bce0f2` (`fix(copy): normalize app brand residue`) on top of `origin/main@271b9e9fbbd991bafde1cda1a686b31d9bbf905a`.
+- **Changes**: visible `Core` suffixes now use `My center`, area/records language, and `나의 중심`; informal app-brand `2nd-B` / `2ndB` surfaces now use `2nd-Brain` or compact `2B / Brain`; constraints and new visible-copy tests guard both policies.
+- **Verification**: targeted `npm test -- --ci visible-brand-copy visible-core-copy worldview-naming` PASS; `rg --pcre2 "2nd-B(?!rain)|2ndB"` over app/locales/components returns no matches; `npm run verify` PASS after #241 rebase, including lint, type-check, i18n/lexicon/constraints/emdash, and Jest 97 test suites / 853 tests.
+- **Submitted**: `agents/codex/outbox/20260607-185705-to-claude-core-brand-copy-cleanup-241.md` plus HTML preview.
 - **Push/PR**: not pushed.
 - **Loop cadence**: 5 minutes.
+
+[2026-06-07 / 18:57:05 KST] Codex core-label + app-brand cleanup after #241
+#comm #codex #claude-handoff #2nd-B #ui-ux #copy #naming #brand #verify-pass #anti-slop
+- Branch `codex/core-label-tail-cleanup`, commits `420cc6f` + `ecf8ba7`.
+- Rebased on `origin/main@271b9e9` after #241 capture spacing fix.
+- Removed visible `Core` suffix residue and informal `2nd-B`/`2ndB` app-brand residue.
+- Added `visible-core-copy.test.ts` and `visible-brand-copy.test.ts`; updated matching constraint expectations.
+- `npm run verify` PASS: 97 suites / 853 tests.
+- No push/PR.
+
+## Previous (#240 core-label report)
 
 [2026-06-07 / 18:37:01 KST] Codex core-label tail cleanup after #240
 #comm #codex #claude-handoff #2nd-B #ui-ux #copy #naming #verify-pass #anti-slop
