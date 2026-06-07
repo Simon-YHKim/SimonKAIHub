@@ -571,3 +571,11 @@ created: 2026-06-05 15:22:34 KST
 - **32.2 스케줄러 기반(무인 지속)**: 세션이 갈려도 반복되도록 각 AI는 OS/플랫폼 스케줄러를 건다 — Claude=`ScheduleWakeup`(인터랙티브 self-pace)·`CronCreate`(로컬)·`RemoteTrigger`(원격 routine, 로컬레포 불요 작업만). 타 CLI=OS 스케줄러(Windows `schtasks`/cron) 또는 activate 루프 내 카운터. **각 AI는 자기 스케줄 등록 상태를 STATUS에 기록**(무엇을·언제).
 - **32.3 비용 가드(§28.7 준수 — CRITICAL)**: 스케줄이 **metered 경로**(`claude -p`/Agent SDK/Actions, 6/15후)를 무인 반복 호출하지 않게 한다. **인터랙티브 세션 + 카운터(32.1)가 기본**(면제). 고비용 fan-out 주기작업(§31.6·§27.9)은 빈도 상한 + 예산 게이트(§28.7) 안에서. 실청구 폭증 위험 스케줄은 Simon 확인.
 - **32.4 정합**: 케이던스는 §12.1(5분)·§25(큐)·§31(반퇴화)·§27.9(페르소나)와 충돌 없이 합쳐진다. 케이던스 변경은 §14 합의 또는 Claude 조정 후 STATUS·BOARD 반영.
+
+---
+
+## §33. Simon 원격 오더 채널 (ORDERS.md, 외출 중 비동기 지시)
+- **채널**: 2nd-B GitHub 레포 루트 **`ORDERS.md`** (허브는 로컬·non-pushable이므로 GitHub가 양쪽 공유 매체). Simon이 모바일 AI로 `## OPEN`에 오더 추가→push.
+- **Claude 동작**: 2분 자율 루프가 **매 틱 `git fetch origin` 후 ORDERS.md 읽음** → OPEN에 새 오더 있으면 수행 → 결과/PR/커밋 + `[YYYY-MM-DD / HH:MM:SS KST]` 를 `## DONE`에 append + 해당 블록을 OPEN→DONE 이동 → commit+push. 충돌 회피: ORDERS.md 편집 전 `git fetch`+ff.
+- **게이트 동일**: 파괴·실비용·secrets·안전임상·법무 오더는 수행 전 확인(ORDERS DONE에 "확인 필요" 표기). 그 외 dev 오더는 무확인 수행.
+- **라운드트립**: Simon(모바일 AI)이 DONE 피드백 읽고 다음 오더. Claude는 모호하면 DONE에 질문 남김.
