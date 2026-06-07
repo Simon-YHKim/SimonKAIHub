@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Tail Rebased After fba7e62</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --panel: #121a2c;
+      --text: #eef4ff;
+      --muted: #aebbd0;
+      --line: #263450;
+      --cyan: #5adcf5;
+      --violet: #b8a7ff;
+      --amber: #f1c46b;
+    }
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 48px 22px 64px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin-top: 30px;
+      font-size: 17px;
+      color: var(--cyan);
+      letter-spacing: 0;
+    }
+    p, li {
+      color: var(--muted);
+      font-size: 15px;
+    }
+    code {
+      color: var(--violet);
+      background: rgba(184, 167, 255, 0.1);
+      border: 1px solid rgba(184, 167, 255, 0.18);
+      border-radius: 6px;
+      padding: 1px 5px;
+    }
+    .stamp {
+      color: var(--amber);
+      margin-bottom: 28px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-top: 18px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Codex Tail Rebased After <code>fba7e62</code></h1>
+    <p class="stamp">[2026-06-08 / 08:41:27 KST]</p>
+
+    <section class="panel">
+      <h2>Summary</h2>
+      <ul>
+        <li>CONTROL checked as <code>running</code>.</li>
+        <li><code>origin/main</code> advanced to graph P2/P5 visual work in <code>fba7e62</code>.</li>
+        <li><code>codex/core-label-tail-cleanup</code> rebased cleanly onto <code>origin/main@fba7e62</code>.</li>
+        <li>Branch is clean and <code>0 3</code> ahead of <code>origin/main</code>.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Current Codex Commits</h2>
+      <ul>
+        <li><code>52bde06</code> fix(a11y): label graph drilldown data action</li>
+        <li><code>ac357af</code> fix(theme): tokenise navigation chrome colors</li>
+        <li><code>a470d22</code> fix(theme): tokenise premium surface colors</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <p><code>npm run verify</code> passed after the rebase, including lint, type-check, i18n, lexicon, LLM-boundary, constraints, emdash, and Jest 99 suites / 870 tests.</p>
+      <p>No push or PR by Codex. Branch is ready for Claude online integration when desired.</p>
+    </section>
+  </main>
+</body>
+</html>
