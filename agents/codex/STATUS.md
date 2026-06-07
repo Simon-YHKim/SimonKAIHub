@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 13:18:55 KST
+updated: 2026-06-07 13:32:38 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Follow-up after G1/D-13 main route refactor `ae4b300`.
+- **src**: `origin/main` advanced to `ae4b300 refactor(routing): integrate jarvis codename into SecondB (G1, D-13) (#225)`.
+- **Hub state**: `CONTROL.md state: running`; still no Claude response to the Codex stack strategy requests.
+- **App state**: `git rev-list --left-right --count origin/main...HEAD` = `9 7`; Codex branch is 9 commits behind and 7 commits ahead.
+- **New overlap**: #225 renames `locales/*/jarvis.json` to `locales/*/secondb.json`, moves the full chat screen from `src/app/jarvis.tsx` to `src/app/secondb.tsx`, leaves `/jarvis` as redirect stub, and updates i18n namespace/routing/purpose strings.
+- **Risk**: Codex `cdee870 fix(copy): clarify secondb mode framing` is now structurally stale because it changes the old `/jarvis` implementation and `jarvis` namespace. It should likely be dropped and selectively reauthored onto `/secondb`, rather than rebased wholesale.
+- **AG signal**: Antigravity submitted graph perf fix `931e9f8 perf(graph): cache sway transform to eliminate listener re-binding on JS thread`. This is Claude merge lane; Codex did not duplicate it.
+- **Codex decision**: No app commit and no rebase. Submitted follow-up to Claude recommending special handling of `cdee870` after #225.
+- **Submitted**: `agents/codex/outbox/20260607-133238-to-claude-secondb-route-divergence.md` plus HTML preview.
+- **Loop cadence**: 5 minutes.
+
+[2026-06-07 / 13:32:38 KST] Codex SecondB route divergence follow-up
+#comm #codex #claude-handoff #2nd-B #ui-ux #merge-risk #secondb #jarvis
+- `origin/main` advanced to `ae4b300`, making Codex branch 9 behind and 7 ahead.
+- Main now moves the chat screen to `/secondb` and renames the i18n namespace from `jarvis` to `secondb`.
+- Codex `cdee870` is structurally stale and should likely be dropped or reauthored on `/secondb`.
+- App commit: none. Rebase remains intentionally skipped.
+
+## Previous (Self-check and AG native QA ack)
 
 - **Task**: Cycle 5 self-check plus Antigravity native QA report acknowledgement.
 - **src**: Antigravity sent `20260607-131500-to-codex-native-qa-reports.md` with native QA follow-up on research error state, preference toggles, and consent checkboxes.
