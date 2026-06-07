@@ -7,7 +7,7 @@ topic: main graph reference component review
 created: 2026-06-08 03:39:04 KST
 app_worktree: E:\Coding Infra\_worktrees\2ndB-codex
 branch: codex/core-label-tail-cleanup
-app_commit: 2961bd9
+app_commit: 0159ac1
 ---
 
 # Main Graph Reference Component Review
@@ -17,17 +17,28 @@ app_commit: 2961bd9
 
 ## Summary
 - Implemented Codex lane for `agents/claude/outbox/20260608-codex-ag-main-graph-reference-doublecheck.md`.
-- App commit after rebase on `origin/main@4738a26`: `2961bd9 fix(graph): align data nodes and links with reference`.
+- `origin/main` now includes the first graph align pass as `07700b5` / #249.
+- Current local branch after rebase on `origin/main@a9cd070`: `0 4` ahead.
+- Remaining local app commits:
+  - `d31c647 fix(copy): replace README Advisor residue with SecondB`
+  - `a8d9c89 fix(graph): render snowflake data nodes and proximity links`
+  - `7bf8d8a feat(graph): add core touch insight cards`
+  - `0159ac1 fix(graph): keep snowflake data art on production variants`
 - Scope is limited to NavGraph art/component behavior and Pattern Link styling.
 - No push/PR by Codex.
 
 ## What Changed
 - `src/components/graph/NavGraph.tsx`
   - Increased graph node drawing sizes so the live graph reads closer to Simon refs: Soul Core `112`, Pattern Core `58`, tier-3 `46`, Pattern Data `42`.
-  - Swapped real tier-4 saved-piece nodes from `FinalLogArtV49` to `FinalPatternDataArtV49`.
+  - Swapped real tier-4 saved-piece nodes from `FinalLogArtV49` to Pattern Data crystal art, then wrapped them with `FinalPatternDataSnowflakeArt`.
   - Tier-4 Pattern Data now keeps color-key classification via `resolvePatternDataColor`, using title/summary/tags/domain id.
   - Centered tier-4 hit/art wrappers on the new `DATA_NODE_SIZE`.
   - Rounded Pattern Link strokes and strengthened active/flow/highlight widths.
+  - Added proximity-derived edge styling per edge, so child tier, zoom bucket, active focus, ambient glow, and relation opacity affect Pattern Link strength.
+- `src/app/index.tsx`
+  - Added two persistent bottom `Touch!` insight cards when the empty-graph modal is not showing.
+  - First card opens SecondB from Soul Core context.
+  - Second card opens the featured Pattern Core character context, derived from the latest data-node village.
 - `src/lib/graph/pattern-link.ts`
   - Raised default link width/opacity/saturation range from thin ambient lines to thicker conduit-like links:
     - width `1..3` -> `2..5`
@@ -36,10 +47,15 @@ app_commit: 2961bd9
 - `src/lib/graph/__tests__/pattern-link.test.ts`
   - Updated regression expectations for the new Pattern Link bounds.
 
+- `src/components/art/SoulcoreFinalArt.tsx`
+  - Added `FinalPatternDataSnowflakeArt` as a snowflake/flower wrapper over the existing variant-aware Pattern Data art.
+  - Follow-up fix keeps the underlying image sourced from `PATTERN_DATA_ART_BY_VARIANT[variant][colorKey]`, so production stays on v10 rather than hardwiring v45 wisdom art.
+
 ## Reference Fit
 - Ref images read as crystal objects, not dot/log markers. Current live components already have v10 crystal core assets, so the main mismatch was size/readability plus tier-4 using logbook art.
 - This pass makes the saved data nodes visually align with the small blue/pattern-data crystal language in both Simon references.
 - The stronger rounded Pattern Link styling better matches the glowing conduit feel in the refs without wiring the unused standalone `PatternLink` tile component into the live SVG layer.
+- The bottom `Touch!` cards are now represented in the graph home surface, matching the reference structure while staying above the existing bottom tab bar.
 
 ## Verification
 - Targeted first: `npm test -- --ci pattern-link depth-style tier-visibility world-layout` PASS, 4 suites / 33 tests.
@@ -50,6 +66,11 @@ app_commit: 2961bd9
   - i18n/lexicon/LLM-boundary/constraints/emdash checks PASS
   - Jest PASS, 98 suites / 859 tests
 - Final after rebase on `origin/main@4738a26` / #248: `npm run verify` PASS.
+  - lint PASS
+  - type-check PASS
+  - i18n/lexicon/LLM-boundary/constraints/emdash checks PASS
+  - Jest PASS, 98 suites / 859 tests
+- Final after #249 and rebase on `origin/main@a9cd070`: `npm run verify` PASS.
   - lint PASS
   - type-check PASS
   - i18n/lexicon/LLM-boundary/constraints/emdash checks PASS
@@ -65,6 +86,6 @@ app_commit: 2961bd9
   - `agents/claude/refs/main-graph-reference-20260608.png`
   - `agents/claude/refs/main-graph-reference2-drilldown-20260608.png`
 
-## Remaining Design Gap
-- The refs show bottom insight cards with `Touch!` CTA always visible. Current product behavior still uses selection-driven sheets/cards rather than persistent bottom cards on the default graph.
-- I did not add a new persistent bottom-card IA because it changes interaction hierarchy/state ownership beyond the art-component lane. Recommend Claude decide after AG device render whether this is a required scope item.
+## Remaining Visual QA
+- Bottom cards, snowflake Pattern Data, and proximity links are implemented and verified by code/tests.
+- Final visual judgment still belongs to AG's signed device render lane because Codex could not access an authenticated graph session through Browser/Chrome MCP in this environment.

@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 03:44:44 KST
+updated: 2026-06-08 03:59:45 KST
 state: running
 ---
 
@@ -12,14 +12,16 @@ state: running
 [2026-06-08 / 03:39:04 KST] Main graph reference component review for Claude P0
 #comm #codex #claude-handoff #2nd-B #ui-ux #graph #art #verify-pass
 - Completed Codex lane for `agents/claude/outbox/20260608-codex-ag-main-graph-reference-doublecheck.md`.
-- Added app commit `2961bd9` (`fix(graph): align data nodes and links with reference`) on branch `codex/core-label-tail-cleanup`, rebased on `origin/main@4738a26`.
-- NavGraph now draws real tier-4 saved pieces as `FinalPatternDataArtV49` crystals instead of `FinalLogArtV49`, increases Soul/Pattern/Data node sizes, and strengthens rounded Pattern Link conduit styling.
+- `origin/main` now includes the first graph align pass as `07700b5` / #249; Codex branch was rebased on `origin/main@a9cd070`.
+- Current local graph tail commits: `a8d9c89` (`fix(graph): render snowflake data nodes and proximity links`), `7bf8d8a` (`feat(graph): add core touch insight cards`), `0159ac1` (`fix(graph): keep snowflake data art on production variants`).
+- NavGraph now draws real tier-4 saved pieces as `FinalPatternDataSnowflakeArt` crystals instead of `FinalLogArtV49`, increases Soul/Pattern/Data node sizes, and strengthens rounded Pattern Link conduit styling.
+- Snowflake Pattern Data wrappers and proximity-derived edge weights now better match the small blue flower/snowflake data nodes and conduit density in Simon refs.
+- Graph home now has two persistent bottom `Touch!` cards, one for SecondB/Soul Core and one for the featured Pattern Core character, above the bottom tab bar.
 - Updated `pattern-link` defaults and regression expectations for wider/brighter/saturated links.
-- Verification: targeted `npm test -- --ci pattern-link depth-style tier-visibility world-layout` PASS (4 suites / 33 tests); `npm run type-check` PASS; `npm run verify` PASS before and after rebase (98 suites / 859 tests); `git diff --check` PASS before commit.
+- Verification: targeted `npm test -- --ci pattern-link depth-style tier-visibility world-layout` PASS (4 suites / 33 tests); targeted graph/color tests PASS (5 suites / 44 tests); `npm run type-check` PASS; `npm run verify` PASS before and after #249 rebase (98 suites / 859 tests); `git diff --check` PASS.
 - Visual QA: Expo web built from Codex worktree on `http://localhost:19007`, but Browser MCP backends were unavailable and unauthenticated root redirects to `/sign-in`; AG signed-device render lane should complete final screenshot comparison.
-- Remaining design decision: persistent bottom insight cards with `Touch!` CTA are visible in refs but current product uses selection-driven sheets/cards; Codex did not add that broader IA/state change.
 - Latest handoff: `agents/codex/outbox/20260608-033904-to-claude-main-graph-reference-component-review.md` plus HTML preview. No push/PR by Codex.
-- Branch status after #248: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 2` (`2ce997d` README Advisor cleanup + `2961bd9` graph reference fix).
+- Branch status after #249: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 4` (`d31c647` README Advisor cleanup + `a8d9c89` + `7bf8d8a` + `0159ac1` graph reference tail).
 - Next action: continue 5-minute loop; watch CONTROL, Claude inbox, AG visual report, and `origin/main`.
 
 [2026-06-08 / 03:01:02 KST] Worldview concept coherence for Claude P1, revalidated after #247

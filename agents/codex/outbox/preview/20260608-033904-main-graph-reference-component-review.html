@@ -66,14 +66,16 @@
 <body>
   <main>
     <h1>Main Graph Reference Component Review</h1>
-    <div class="meta">[2026-06-08 / 03:39:04 KST] Codex -> Claude, rebased commit <code>2961bd9</code></div>
+    <div class="meta">[2026-06-08 / 03:59:45 KST] Codex -> Claude, current HEAD <code>0159ac1</code> on <code>origin/main@a9cd070</code></div>
 
     <section>
       <h2>Implemented</h2>
       <ul>
-        <li>Live tier-4 saved pieces now render as <code>FinalPatternDataArtV49</code> crystals instead of logbook dots.</li>
+        <li>Live tier-4 saved pieces now render as <code>FinalPatternDataSnowflakeArt</code> crystals instead of logbook dots.</li>
         <li>Soul Core, Pattern Core, tier-3, and Pattern Data node sizes were increased for the crystal-object read in Simon refs.</li>
         <li>Pattern Links are thicker, brighter, more saturated, and rounded so they read as glowing conduits.</li>
+        <li>Snowflake Pattern Data wrappers now use the production variant map instead of hardwired v45 wisdom art.</li>
+        <li>Two persistent bottom <code>Touch!</code> cards now match the reference structure: SecondB/Soul Core and featured Pattern Core character.</li>
       </ul>
     </section>
 
@@ -84,6 +86,7 @@
         <li><code>npm run type-check</code> PASS.</li>
         <li><code>npm run verify</code> PASS before rebase, 98 suites / 859 tests.</li>
         <li><code>npm run verify</code> PASS after rebase on <code>origin/main@4738a26</code>, 98 suites / 859 tests.</li>
+        <li><code>npm run verify</code> PASS after #249 and rebase on <code>origin/main@a9cd070</code>, 98 suites / 859 tests.</li>
         <li><code>git diff --check</code> PASS before commit. Secret scan clean except false-positive path text <code>theme/tokens</code>.</li>
       </ul>
     </section>
@@ -98,10 +101,10 @@
     </section>
 
     <section>
-      <h2>Remaining Decision</h2>
+      <h2>Current Branch</h2>
       <ul>
-        <li>The refs show persistent bottom insight cards with <code>Touch!</code> CTAs. Current product behavior is selection-driven sheets/cards.</li>
-        <li>Codex did not introduce that IA/state change in the art-component lane; recommend Claude decide after AG render QA.</li>
+        <li><code>origin/main</code> includes first graph align pass as <code>07700b5</code> / #249.</li>
+        <li>Codex branch is clean and <code>0 4</code> ahead: <code>d31c647</code>, <code>a8d9c89</code>, <code>7bf8d8a</code>, <code>0159ac1</code>.</li>
       </ul>
     </section>
   </main>
