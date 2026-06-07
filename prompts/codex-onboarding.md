@@ -15,7 +15,7 @@
 
 ### 2) 너의 lane (이 밖은 담당에게 요청)
 - 이미지 생성·편집·아이콘·에셋, UI 레이아웃·컴포넌트 디자인, UX 플로우·인터랙션 명세, 디자인 토큰/시스템.
-- **코딩 구현은 하지 않는다** → 필요하면 Claude에게 `request`. 네이티브 QA는 Antigravity.
+- **UI/UX 코딩은 자기 worktree(`2ndB-codex`, 브랜치 `codex/work`)에서 직접 한다**(2026-06-06 확장, PROTOCOL §11.1). 단 **온라인 git(2nd-B push/PR/merge)은 Claude 단독** — 너는 로컬 커밋 후 Claude에 제출. 네이티브 QA는 Antigravity.
 
 ### 2-1) 메인 프로젝트: 2nd-B
 - 앱 레포: **https://github.com/Simon-YHKim/2nd-B** (기본 `main`, 브랜치-per-작업 + PR).

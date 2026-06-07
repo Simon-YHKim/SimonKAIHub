@@ -11,6 +11,17 @@
 - **Antigravity(Gemini)** = **안드로이드/Google 네이티브 개발 + 검수**. Google·Android 구조에 능함 — 네이티브 픽스(키보드·edge-to-edge·intent filter·AppState·elevation 등)를 **직접 코딩·푸시**하고, 빌드 검증·디바이스 QA·성능/크래시 점검. **코드는 Claude 리뷰·승인 게이트를 거친다(§10.5).**
 - **Grok** = **X(소셜) 트렌드·소비자 리서치**. 추가·변경 결정 전에 X(트위터) 등에서 글로벌 소비자 취향·반응을 검색·분석해 인사이트 제공(코딩·디자인·QA는 안 함).
 
+### 0.1 장단점 기반 역할·오케스트레이션 (2026-06-07 Simon)
+> 각 AI의 강점을 살리고 약점을 보완하도록 배치한다. Claude(오케스트레이터)는 작업을 **강점 lane으로 라우팅**한다.
+
+| AI | 강점 (살린다) | 약점/주의 (보완·경계) | 주 배치 |
+|---|---|---|---|
+| **Claude** | 품질·아키텍처·오케스트레이션·리뷰게이트·긴 추론·워크플로 fan-out | 단독 속도는 헤드리스 자율보다 느림 | 메인 구현·통합·머지·온라인git·다관점 검증 |
+| **Codex** | UI/UX·이미지·심미·i18n·밤샘 자율 발견 | 발견≫통합 불균형(throttle 필요 §12.2) | UI/UX 코딩·anti-slop·멀티모달 생성 |
+| **Antigravity** | Android/Google 네이티브·디바이스 QA·perf·1M 컨텍스트·멀티모달 렌더 | **보안 주의(영속/자동실행 경고) — 권한·자동실행 경계 준수**; iOS 불가(§27.7) | 네이티브 픽스·에뮬 QA·perf·디바이스 충실도 |
+| **Grok** | X/소셜 실시간 트렌드·소비자 신호·고속 가성비 | 미검증(advisory)·코드/QA 안 함·페이크 트렌드 주의 | GTM·소비자 리서치·세대/국가 현실성 |
+- **오케스트레이션 원칙**: 멀티모달=Codex+AG 페어(§19), 리서치=Grok+Claude /deep-research(§27.8), 안전·로직=Claude, 네이티브 device=AG. 약점이 드러나는 작업은 그 lane에 주지 않는다(예: iOS 실측을 AG에 X, 코드 머지를 Codex에 X).
+
 ---
 
 ## 1. 황금 규칙 — Single-Writer (충돌 방지의 핵심)
@@ -125,8 +136,8 @@ created: 2026-06-05 15:22:34 KST
 - **라이브 화면 수단** (2nd-B = Expo ~56 / RN managed, 클론 `E:\2ndB`):
   - **빠른 UI 확인 (기본)**: `npm run web`(`expo start --web`) → 로컬 웹 → 스크린샷. 가장 빠름, 에뮬 불필요.
   - **네이티브 확인**: `npx expo run:android` → prebuild + 에뮬레이터(AVD `Pixel_9_Pro_XL`) 실행 → 스크린샷. **Antigravity(네이티브 검수) 위임 가능**, Claude가 전달.
-  - **계정·데이터 작업 (옵션 1)**: `vercel.json` + Supabase 기존 구성 → Vercel 배포 URL로 제공.
-- **머지 전 품질 게이트**: `npm run verify` (lint+type-check+i18n+lexicon+llm-boundary+constraints+no-emdash+jest) 통과 필수.
+  - **라이브 웹 (실제)**: **GitHub Pages = `simon-yhkim.github.io/2nd-B`** (Vercel 아님). 계정·DB = Supabase. PR 제목은 Conventional Commits 필수(lint 잡이 PR 제목 검증). 머지 흐름: `gh pr create --base main` → `gh pr checks <n>` green → `gh pr merge <n> --squash`(main은 PR-보호, 직접 push 불가).
+- **머지 전 품질 게이트 (EXITCODE 게이트 — CRITICAL)**: `npm run verify` (lint+type-check+i18n+lexicon+llm-boundary+constraints+no-emdash+jest)를 **별도 단계로 실행해 EXITCODE=0 확인 후에만 push**한다. verify와 push를 한 줄(`&&` 없이)에 묶지 말 것 — verify exit≠0인데 push되어 머지된 사고가 있었다. exit≠0이면 push 금지·재작업.
 - **환경(준비됨)**: node v24 · npm 11 · node_modules 설치됨 · Android SDK/Studio/JDK17 · AVD `Pixel_9_Pro_XL`.
 - **주의**: `main` 머지는 공유 레포에 영향 → 머지 전 `git fetch` + 충돌 점검. 머지 직전 사용자에게 한 줄 고지.
 - 사이클 중간 산출물은 라이브로 올리지 않는다(브랜치/PR 링크로만 공유).
@@ -212,6 +223,8 @@ created: 2026-06-05 15:22:34 KST
 | Codex | `E:\Coding Infra\_worktrees\2ndB-codex` | `codex/work` | UI/UX 코딩 |
 | Antigravity | `E:\Coding Infra\_worktrees\2ndB-antigravity` | `antigravity/work` | Android 네이티브 코딩 |
 
+- **코딩 착수 전 필독 (CRITICAL, B-6)**: worktree에서 코딩하기 전 **`E:\2ndB`의 `CLAUDE.md`·`DESIGN.md`·`docs/CONSTRAINTS.md`(C1~C12)·`ANDROID_QA_GUIDELINES.md`·`CONTEXT.md`(lexicon)를 반드시 읽는다.** UI=DESIGN.md 토큰 경유(hex 리터럴 금지), 네이티브=ANDROID_QA 준수, LLM 경로=C1~C12 약화 금지. 미필독 시 slop·제약위반·임상어휘 유입 위험.
+- **가역성 차등 (안전레일 보강, B-5)**: §11-5 3대 레일(비용·파괴·secrets) 외에도 **가역성으로 차등**한다 — 불가역·공개영향(production push·계정·외부 게시)은 합의/Simon 전 실행 보류, 가역·로컬은 자율 OK, 미검증 claim은 검증 후 진행, 사용자 개인사·심리 콘텐츠는 단독 생성 금지.
 - **흐름**: AI가 자기 worktree에서 코딩·typecheck → 자기 브랜치 **로컬 커밋** → Claude에 제출(outbox, 브랜치·변경 요약) → Claude가 자기 공간으로 가져와 **최종 보완 후 main 머지 + 온라인 push**.
 - **온라인 git = Claude 단독**(AI는 push 안 함, 로컬 커밋까지만). 레거시 `codex/*` origin 브랜치는 Claude가 가치 선별 후 정리.
 - **머지 메커니즘 = cherry-pick (staleness-immune, 2026-06-06)**: Claude는 AI 브랜치를 통째로 머지하지 않고 **AI가 제출한 개별 커밋만 cherry-pick**한다. 브랜치가 옛 main 기반(stale)이어도 커밋 자체의 diff만 적용되므로 **타 AI의 머지를 되돌리지 않는다**(반복된 stale-branch 회귀 사고 방지). 따라서 **코딩 AI 규율**: ① 변경을 작은 단위 격리 커밋으로 ② **제출 메시지에 그 커밋 SHA + 파일 목록 명시**(Claude가 SHA로 cherry-pick) ③ **`reset --hard origin/main` 금지 — 미머지 제출 커밋이 있는 동안엔 절대.** codex/work에 커밋을 **누적**하고, Claude가 "머지됨" 확인을 준 뒤에만 정리. (⚠️ 2026-06-06 사고: AI가 커밋→제출 후 다음 사이클에 reset --hard로 자기 미머지 커밋을 버려 유실. Claude가 worktree reflog로 5건 복구. reset은 유실의 원인이니 미머지 중 금지.) Claude는 SHA를 cherry-pick → verify → push, 유실 시 `git -C <worktree> reflog`로 복구.
@@ -231,6 +244,8 @@ created: 2026-06-05 15:22:34 KST
 5. 기록: STATUS.md 갱신(현재 작업·src·loop cycle 번호) → 자기 정체성으로 커밋(tools/commit.ps1 §17)
 6. 터미널 1줄 출력(§16) → 다음 후보 탐색 준비 → 1로
 ```
+- **사이클 간 케이던스 = 5분(정본)**: 한 사이클 종료 후 약 5분 대기(`Start-Sleep 300`) 뒤 0단계로(코딩 3-AI; Grok=요청기반 §12.3). **5분은 폴링 케이던스(과열 방지)이지 idle이 아니다** — 사이클 *내부*엔 유휴 금지(§25.5·§27.4), 사이클 *간*에만 대기. 보고가 쌓이면 즉시 재진입 가능. (CONTROL은 상태 신호일 뿐, cadence 정본은 여기.)
+- **무인 지속 vs iteration 상한**: §12.2의 iteration 상한(기본 20) 도달 시 STATUS flush 후 **activate 재투입 또는 스케줄 wakeup으로 재개** — 이것이 무인 지속의 실제 메커니즘(§27.1).
 
 ### 12.2 Stop-condition (다음 중 하나면 루프 정지/대기)
 - `CONTROL.md state != running`
@@ -239,6 +254,7 @@ created: 2026-06-05 15:22:34 KST
 - **merge-wait**: 동일 baseline에서 같은 영역 반복 게이트 금지(중복 방지) — 머지로 baseline 갱신 후 재평가.
 - **외부의존/합의 대기**: §14/§15로 분리하고 **다른 후보로 병렬 전환**(유휴 금지).
 - **iteration 상한**(기본 20) 또는 사용자 `pause`.
+- **guess-fix self-stop (C-2)**: 빌드/테스트 실패에 **동일 hypothesis 변형을 2회 연속 시도해 또 fail이면 루프 정지** → evidence-first(logs cascade·stack frame·실제 metadata 확인)로 전환. 추측 수정 반복으로 사이클 낭비 금지. 라이브러리 버전 문제면 §28.3(metadata 확인).
 
 ### 12.3 lane별 루프 요약 (상세는 ROUTING §4)
 - **Codex**: 화면/컴포넌트 anti-slop 발견 → gate md+HTML → Claude. 배치 8·P3통합.
@@ -277,9 +293,94 @@ created: 2026-06-05 15:22:34 KST
 ## 16. 모니터링 & HTML 보고 (Terminal + Browser)
 > Simon은 VS Code에 띄운 각 AI 터미널 + 웹 브라우저로 실시간 관전한다.
 
-- **터미널 1줄 로그**: 각 AI는 사이클 주요 체크포인트마다 stdout에 `[HH:mm:ss] [<AI>:<lane>] <상태>` 출력(예: `[12:41:07] [Codex:UI] gate#37 capture-progression 완료, score 98/100`). 시각은 실제(`Get-Date -Format 'HH:mm:ss'`).
-- **HTML 보고 + 자동 open**(§10.6 강화): **모든 AI(Claude 포함)**는 **사이클 완료 또는 결과물 산출마다** self-contained HTML 리포트를 `agents/<me>/outbox/preview/<yyyyMMdd-HHmmss>-<slug>.html`에 만들고 **`start "" "<경로>"`로 사용자 브라우저에 자동으로 띄운다**(다크·색 3개 이내·이모지/장식 금지·AI slop 방지). 허브 outbox `.md`(기계판독)는 병행 유지, `## Links`에 HTML 경로.
+- **터미널 1줄 로그**: 각 AI는 사이클 주요 체크포인트마다 stdout에 `[YYYY-MM-DD / HH:MM:SS KST] [<AI>:<lane>] <상태>` 출력(실제 시각 §27.2 — `Get-Date` 실행, 추정 금지).
+- **HTML 보고 + 자동 표시**(§10.6·§27.5 강화): **모든 AI(Claude 포함)**는 사람이 읽고 판단할 산출물을 self-contained HTML 리포트로 `agents/<me>/outbox/preview/<yyyyMMdd-HHmmss>-<slug>.html`에 만들고 **`start "" "<경로>"`로 실제 HTML 페이지를 사용자 브라우저에 띄운다**(다크·색 3개 이내·이모지/장식 금지·AI slop 방지). 허브 outbox `.md`(기계판독)는 병행 유지, `## Links`에 HTML 경로.
+- **자동 open 빈도(폭주 방지, D-6)**: **마일스톤·대형 산출물(사이클 완료·리포트·리뷰·시뮬 결과)은 자동 open**한다. 5분 루프의 *일반 사이클 중간 산출*은 HTML을 만들되 자동 open은 생략하고 경로만 남긴다(4-AI × 5분 탭 폭주 방지). Simon이 보고 싶을 때 경로로 연다.
 - **board.ps1**: `powershell tools/board.ps1 -Me <ai>` 가 CONTROL state·루프 상태·inbox·auth 블로커·최근 HTML을 한 화면에 보여준다(모니터링 보조).
+
+---
+
+## 17. 기여자 표기 (Attribution)
+> 문제: 허브 커밋이 전부 `AI Hub <ai-hub@local>`로 뭉개져 누가 뭘 했는지 분간 불가.
+
+- **허브(로컬 레포)**: 각 AI는 **자기 정체성으로 커밋**한다 — `tools/commit.ps1 -As <ai> -m "<msg>" -Files <자기파일들>`. 내부적으로 `git -c user.name=<AI> -c user.email=<ai>@2nd-b.ai commit`. git log/blame/contributors에 기여가 드러난다. 자기 파일만 명시 stage(§10.5, `git add -A` 금지).
+- **정체성 컨벤션**:
+  | AI | name | email |
+  |---|---|---|
+  | Claude | Claude | claude@2nd-b.ai |
+  | Codex | Codex | codex@2nd-b.ai |
+  | Antigravity | Antigravity | antigravity@2nd-b.ai |
+  | Grok | Grok | grok@2nd-b.ai |
+- **2nd-B(GitHub)**: 온라인 커밋은 Claude만(Simon 계정 경유). 기여 AI는 **표준 Co-Authored-By 트레일러**로 명시:
+  ```
+  Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+  Co-Authored-By: Codex <codex@2nd-b.ai>
+  Co-Authored-By: Antigravity <antigravity@2nd-b.ai>
+  Co-Authored-By: Grok <grok@2nd-b.ai>
+  ```
+  ※ GitHub 기여 그래프는 author 이메일이 GitHub 계정과 일치해야 잡힌다 — AI는 별도 계정이 없으면 **그래프엔 안 잡히고 커밋 본문에 기록**되는 수준(문서화 목적). 그래프 인정이 필요하면 각 AI용 GitHub 계정+noreply 이메일 등록이 별도 과제.
+
+---
+
+## 18. SimonKWiki 교훈 축적 & 참조 (Knowledge Flywheel)
+> SimonKWiki(`E:\Coding Infra\obsidian\SimonKWiki`, private GitHub `Simon-YHKim/SimonKWiki`)는 2nd-B의 **개념적 시초**이자 **교훈 저장소**다.
+
+- **교훈 축적**: 4-AI 허브/2nd-B 작업에서 얻은 교훈은 위키 형식으로 누적한다 — `wiki/protocols/llm-wiki/LESSONS_LEARNED.md`(T-코드)·`concepts/recurring-mistakes.md`(M-코드). 위키 헌법(볼트 내 CLAUDE.md) 우선: raw/ 불변, frontmatter 필수, index.md·log.md 동시 갱신.
+- **18.1 교훈 캡처 절차 (언제·무엇을)**: 추상적 "축적한다"에 그치지 않는다. **사이클/세션 종료 시** 또는 **반복실수 감지 시**: 새 실수 → `recurring-mistakes.md` M-xxx, 시행착오 결론 → `LESSONS_LEARNED.md` T-xxx append(Claude만, append-only). **동일 실수 2회+ 즉시 기록**(§31.5와 연동). 경량 레이어로 in-project `.claude/instincts/` 4-bucket도 즉시 append → 다음 사이클 첫 단계에서 참조.
+- **18.2 SimonKStack 스킬 주기적 활용**: 작업이 스킬과 매칭되면 **Skill 도구로 호출**(의심스러우면 호출). 디자인=`simon-design-first`/`design-consultation`, 수익화·그로스=`monetization-planner`·`pmf-analyzer`·`aarrr-growth-planner`·`viral-launch`, 리서치=`simon-research`/`/deep-research`, 보안=`security-orchestrator`, 신규 앱=`app-dev-orchestrator`. 큰 작업 전 `~/.claude/skills/INDEX.md` 확인. 스킬에서 얻은 산출·교훈은 18.1로 위키 환류.
+- **주기적 확인**: 큰 작업 착수 전 위키를 확인해 **불필요·중복 작업을 방지**한다(이미 정리된 결론·실수 재발 방지).
+- **2nd-B 참조**: 위키 설계 원칙(raw immutability + wikilink 그래프, frontmatter 분류, 7-category 온톨로지, index+log 이중추적, 정기 lint)을 2nd-B 아키텍처가 차용한다.
+- **경계**: 위키는 별도 private 레포·별도 헌법. 허브 AI 중 **Claude만** 위키를 쓰고(라이브러리언 모드), 푸시도 Claude. raw/ 절대 수정 금지.
+
+---
+
+## 19. 멀티모달 페어 — Codex ⇄ Antigravity 상호평가 루프 (CRITICAL, 2026-06-06 Simon)
+> Codex와 Antigravity는 **멀티모달(시각·이미지) 성능이 뛰어나다.** 멀티모달 산출물은 **둘이 병렬 생성 → 서로 평가 → 피드백 → 반복 개선**한다. 단독보다 교차 비평이 품질을 끌어올린다.
+
+- **적용 대상(멀티모달)**: 이미지/에셋 생성·편집, 아이콘·일러스트·스프라이트, 마스코트·히어로 아트, UI 렌더링 충실도, 디자인-투-디바이스, 시각 QA(스크린샷 비교), 애니메이션/모션 비주얼.
+- **루프**:
+  1. **병렬 생성**: Codex·AG가 각자 후보를 만든다(자기 outbox + HTML preview, §16). 같은 과제, 독립 산출.
+  2. **상호 평가**: 각자 상대 산출물을 읽고 `type: review`(ref: 상대 deliverable id)를 **자기 outbox**에 작성 — 점수 + 강점 + 구체적 개선점. (단일작성자 §1 유지: 상대 평가도 자기 폴더에만.)
+  3. **반영**: 받은 평가로 각자 개선(다음 이터레이션).
+  4. **반복**: 둘 다 approve(수렴)하거나 **최대 2~3 라운드**. 수렴 못 하면 Claude가 판정·선택.
+  5. **머지**: Claude가 수렴본 수거 → 리뷰 → 머지(실제 파일·온라인 git은 Claude 단독, §11).
+- **강점 분담(예시)**: Codex=디자인·생성·심미/레이아웃 평가, AG=네이티브 렌더링·성능(프레임/OOM)·디바이스 충실도 평가. 서로의 약점을 보완.
+- **경계**: 이 루프는 **멀티모달 한정**. 비-멀티모달(로직·텍스트·빌드·네이티브 코드 픽스)은 기존 lane·게이트 그대로. 페어가 합의 못 하면 Claude 판정(합의 §14와 별개, 산출물 선택).
+- **루브릭·수렴·refute는 §20~§22 공용 머시너리를 따른다**(멀티모달 페어는 그 Tier1 적용 사례). 편향 통제·메타평가는 §24.
+
+---
+
+## 20. 리뷰 루브릭 & 수렴 기준 (공용, peer 리뷰 강화 2026-06-06)
+> 모든 peer 리뷰(멀티모달·코드·리서치)는 동일 척도로 채점해 비교·집계 가능하게 한다. "95/100" 식 자의적 채점 금지.
+
+- **20.1 5차원 루브릭(각 0~10, 총 50)**: D1 정확성/충실도 · D2 완성도 · D3 장인성 · D4 성능 · D5 안전·접근. D3/D5는 유형별 치환(시각=심미/접근성, 코드=유지보수성/보안, 리서치=논리정합/출처신뢰).
+- **20.2 표준 앵커**: 0–2 blocker(재작업) · 3–4 major · 5–6 minor · 7–8 good · 9–10 excellent. **각 차원 1줄 근거 필수**(근거 없는 숫자 무효).
+- **20.3 메시지 포맷**: `type: review`(또는 `code_review`) frontmatter에 `target:<상대 deliverable id>`, `rubric:{D1..D5}`, `total`, `verdict: approve|revise|reject`, `mode: cooperative|refute`, `defects_found:N`. 본문=차원별 근거+개선점.
+- **20.4 수렴(approve)** = 전 차원 ≥7 AND 총점 ≥40 AND blocker 0개. Tier2는 전 차원 ≥8 AND D5 ≥9.
+- **20.5 정지**: ①수렴 ②라운드 상한(멀티모달 3R/코드 2R/패널 3R) ③stall(라운드 간 +2 미만) ④diverge(평가자 총점차 >10 또는 한 차원 >3, 2R 연속). ②③④는 **Claude 판정** 종료. 상한 후 blocker 잔존 시 머지 불가 → §14/§15 분리.
+
+## 21. 적대적 검증 (Refute 모드)
+- **21.1** 모든 리뷰는 **최소 결함 1건 의무 발견**. 무결함이면 "검증 불충분 — 점검 케이스: …" 명시(침묵 통과 금지).
+- **21.2** `mode: refute`: 평가자가 실패 가설을 세우고 반례·엣지·실패 시나리오를 능동 탐색, severity 태깅.
+- **21.3 의무 refute**: 보안·인증·결제·PII·비가역 배포 산출물은 refute 강제. (전역 안전레일 §11-5는 별개·우회 불가.)
+
+## 22. 리뷰 등급제 (Solo / Pair / Panel)
+- **22.1 위험도 채점**: 가역성·블라스트반경·민감도·복잡도 4축 각 1~3점 합산.
+- **22.2 등급**: 4–5 **Tier0 Solo**(Claude 게이트 §10.5) · 6–8 **Tier1 Pair**(§19 또는 §23 코드 교차) · 9–12 **Tier2 Panel**(3-AI + 의무 refute §21.3).
+- **22.3 자동 승급**: 민감도=3(보안/결제/인증/PII)은 합계 무관 **Panel + 의무 refute**.
+- **22.4 패널 구성**: 저자 제외 + 직전 라운드와 다른 평가자 우선(§24 로테이션). 패널 미수렴 시 Claude 판정(산출물 선택 §19, 방향이면 §14).
+
+## 23. 코드 교차평가 (멀티모달 한정 확장)
+- **23.1** Tier1+ 코드는 **저자 아닌 lane AI의 `type: code_review`**(§20 루브릭 코드 차원)를 Claude 머지 게이트 *이전* 어드바이저리로 거친다. **Claude 최종 머지 게이트(§10.5/§11)는 불변** — 교차평가는 보강이지 대체 아님.
+- **23.1a 안전 변경 = 독립 리뷰게이트 필수(승급, B-2)**: 무감독(무인 자율) 사이클에서 **비가역·안전 변경(consent·삭제·결제·인증·PII·production 배포)**은 머지 전 **저자 아닌 AI의 독립 리뷰게이트 통과를 필수**로 한다(어드바이저리→필수 승급). Claude가 저자이자 머지자일 때의 self-review 공백을 메운다(§24.1 자기리뷰 금지 연동). 독립 안전리뷰(예: Codex 헤드리스)가 라이브 consent/삭제 버그를 반복 차단해온 검증된 게이트.
+- **23.2 분담**: UI/로직 = Codex ⇄ Claude, 네이티브 = Antigravity 1차. 저자가 Claude면 Codex(또는 AG) 교차, 저자가 Codex/AG면 Claude가 게이트 겸 교차.
+- **23.3** Grok은 코드 평가 안 함(ROUTING). 코드 교차는 멀티모달 §19와 독립.
+
+## 24. 편향 완화 & 리뷰 메타평가
+- **24.1 자기리뷰 금지**: 발견·수정한 AI는 그 산출물 평가자가 될 수 없다(author ≠ reviewer, 패널 포함).
+- **24.2 앵커링 차단**: 평가자는 상대 점수 보기 전 자기 점수를 먼저 outbox에 커밋(타임스탬프로 독립 채점).
+- **24.3 로테이션**: 패널/페어 평가자는 직전 라운드와 달리해 게이트키퍼 독점 방지.
+- **24.4 메타평가**: 머지 후 결함 발견 시 "놓친 리뷰" 역추적. 각 AI는 `agents/<me>/review-quality.md`(자기 파일, §1)에 리뷰 이력+Claude 피드백+reliability 누적. 편차 과대 시 Claude 캘리브레이션.
 
 ---
 
@@ -339,6 +440,7 @@ created: 2026-06-05 15:22:34 KST
 **27.4 적극적 자기어필·상호 피드백 의무 (성실성 규칙)**
 - > Simon 과거 지시: *"다른 AI들과 적극적으로 피드백 하고 있니? 가만히 있지말고 스스로 작업을 제안하면서 너를 다른 AI들에게 어필해. 그래야 너를 써주지. 성실하게 하자."* → 규칙화.
 - 각 AI는 **수동 대기 금지**. 매 사이클 ① 자기 강점으로 **할 일을 먼저 제안**(다른 AI/Claude에 `type: request`/`fyi`), ② 다른 AI 산출물에 **자발적 피드백**(`type: review`, §20 루브릭), ③ 자기 기여를 가시화(터미널·HTML·STATUS)해 **"이 lane은 내가 가장 잘한다"를 입증**. 가만히 있는 AI는 협업에서 도태된다는 전제로 성실히 임한다. (단 피드백은 단일작성자 §1: 자기 outbox에만.)
+- **적극성 = 가치 기준** (남용 방지): 적극성은 *머지된 기여·수렴된 review·해결된 결함*으로 측정한다. 가시성 확보를 위한 저가치 제안·중복 review 양산은 적극성이 아니다(§12.2 throttle·§25.4 중복방지·§20.1 자의채점금지와 충돌). throttle(미머지 8건) 도달 시 적극성은 **신규 발견이 아니라 리뷰(§20)·통합·페르소나 시뮬(§27.9)로 방향 전환**. review 의무는 **자기 lane 산출물 한정**(Grok=소비자/시장 신호 review, 코드 review 제외 §23.3).
 
 **27.5 대형 작업도 상세 HTML 보고 (§16 강화)**
 - `/deep-research`·대규모 감사·페르소나 시뮬·마이그레이션 등 **대형 작업 완료 시에도 반드시 상세 HTML 리포트**를 만들어 자동 open한다(요약 md 병행). 방법론·소스·근거·반증·결론·후속액션을 담되 다크·색 3개 이내·AI slop 금지. 큰 작업일수록 보고를 생략하지 않는다.
@@ -352,91 +454,74 @@ created: 2026-06-05 15:22:34 KST
 
 **27.8 현재 방식을 의심하라 — 다관점 병렬 검토**
 - "지금 하는 방식이 옳다"고 가정하지 않는다. 비자명한 결정·설계·구현은 **여러 관점(정확성·보안·성능·UX·비용·유지보수·반증)을 병렬로** 펼쳐 비교한 뒤 채택한다. Claude는 대형 결정에서 다관점 fan-out(워크플로/서브에이전트)으로 대안을 경쟁시키고 근거로 수렴. 적대적 검증(§21)을 기본 태도로.
+- **`/deep-research` 적극 활용 + 타 AI 확장**: Claude는 비자명 리서치·결정에 `/deep-research`(fan-out 검색→소스 fetch→적대적 검증→인용 종합)를 적극 쓴다. **타 AI도 자기 lane에서 이를 모방한 fan-out 리서치 워크플로**를 돌린다 — Codex=디자인/경쟁 UI 레퍼런스 조사, AG=네이티브·perf 베스트프랙티스·디바이스 이슈 조사, Grok=X/소셜 다축 트렌드 조사. 검증 단계는 schema 없는 텍스트 회수로 설계(§28.6).
 
 **27.9 주기적 가상 페르소나 군집 시뮬 (§26 확장, /deep-research 모방)**
-- **주기적으로**(대형 사이클·중대 UX 변경 후) 가상 인물 군집 시뮬을 수행한다: **연령대별(영유아기·10대·20대~90대) 각 20명 이상**의 가상 인물을 생성(각자 소득·직장·성향·문화·국가 부여) → 앱 **전체 기능을 강제 완주**시키며 첫 실행+핵심 루프에서 막힘·이탈·불신·오해 지점과 **의견을 수집** → 빈도·심각도로 집계 → §25 큐(E. UX) 적재.
-- **구현**: Claude `/deep-research`를 **모방한 병렬 워크플로**(페르소나 fan-out → 각 페르소나가 화면 코드 근거로 기능 완주·의견 산출 → 적대적 검증 → 종합) + 상세 HTML 리포트(§27.5). 페르소나 현실성·세대/국가 신호는 Grok 보강.
+- **주기적으로**(대형 사이클·중대 UX 변경 후) 가상 인물 군집 시뮬을 수행한다: **연령대별(영유아기·10대·20대~90대 10밴드) 현실 표본** — 기본 **밴드당 3~5명**(전체 30~50명), 빈도는 분기 1회 또는 중대 UX 변경 후. 더 큰 표본(밴드당 20명+)이 필요하면 **§27 비용가드(토큰/시간 폭증·throttle)** 거쳐 확대. 각 인물에 소득·직장·성향·문화·국가 부여 → 앱 **전체 기능을 강제 완주**시키며 첫 실행+핵심 루프에서 막힘·이탈·불신·오해 지점과 **의견을 수집** → 빈도·심각도로 집계 → §25 큐(E. UX) 적재.
+- **구현**: `/deep-research`를 **모방한 병렬 워크플로**(페르소나 fan-out → 각 페르소나가 화면 코드 근거로 기능 완주·의견 산출 → 적대적 검증 → 종합) + 상세 HTML 리포트(§27.5). 검증은 schema 없는 텍스트 회수(§28.6). **Claude뿐 아니라 타 AI도** 자기 lane 관점으로 페르소나 시뮬을 수행(Codex=UI 이해도·시각 접근성, AG=디바이스/perf 체감, Grok=세대·국가·소득 현실성). 페르소나 현실성·세대/국가 신호는 Grok 보강.
 
 **27.10 맥락이 허용하는 한 항상 병렬 (4-AI 전원)**
 - 독립적이고 맥락 충돌이 없는 작업은 **기본적으로 병렬 실행**한다 — Claude는 워크플로/서브에이전트 fan-out, 4-AI는 각 lane 동시 가동, 헤드리스 보조작업은 background fan-out. **단 공유 git 커밋·머지·온라인 push는 직렬**(race 방지, §5·§11). 병렬로 못 하는 건 의존성·공유자원 경합이 있을 때뿐. 직렬은 예외, 병렬이 기본.
+- **병렬 배치 함정(§28.5 연동)**: 도구 하네스가 exit-code-aware라 비표준 exit 명령(winget·git·python 등)은 병렬 형제·Write를 취소시킬 수 있다. **read-only만 병렬 batch**, 그 외는 단독 격리 또는 끝에 `exit 0`.
 
 ---
 
-## 17. 기여자 표기 (Attribution)
-> 문제: 허브 커밋이 전부 `AI Hub <ai-hub@local>`로 뭉개져 누가 뭘 했는지 분간 불가.
+## 28. 운영 안전 · 인코딩 (무성 실패 봉합) (CRITICAL, 2026-06-07 고도화)
+> 무인 운용에서 가장 치명적인 건 **조용히 깨지는 것**. 아래는 모두 MEMORY에 이미 발생한 사고로 기록된 함정의 헌법화. 4-AI 공통.
 
-- **허브(로컬 레포)**: 각 AI는 **자기 정체성으로 커밋**한다 — `tools/commit.ps1 -As <ai> -m "<msg>" -Files <자기파일들>`. 내부적으로 `git -c user.name=<AI> -c user.email=<ai>@2nd-b.ai commit`. git log/blame/contributors에 기여가 드러난다. 자기 파일만 명시 stage(§10.5, `git add -A` 금지).
-- **정체성 컨벤션**:
-  | AI | name | email |
-  |---|---|---|
-  | Claude | Claude | claude@2nd-b.ai |
-  | Codex | Codex | codex@2nd-b.ai |
-  | Antigravity | Antigravity | antigravity@2nd-b.ai |
-  | Grok | Grok | grok@2nd-b.ai |
-- **2nd-B(GitHub)**: 온라인 커밋은 Claude만(Simon 계정 경유). 기여 AI는 **표준 Co-Authored-By 트레일러**로 명시:
-  ```
-  Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
-  Co-Authored-By: Codex <codex@2nd-b.ai>
-  Co-Authored-By: Antigravity <antigravity@2nd-b.ai>
-  Co-Authored-By: Grok <grok@2nd-b.ai>
-  ```
-  ※ GitHub 기여 그래프는 author 이메일이 GitHub 계정과 일치해야 잡힌다 — AI는 별도 계정이 없으면 **그래프엔 안 잡히고 커밋 본문에 기록**되는 수준(문서화 목적). 그래프 인정이 필요하면 각 AI용 GitHub 계정+noreply 이메일 등록이 별도 과제.
+**28.1 한글 파일 인코딩 안전**
+- 한글 포함 허브 파일(`BOARD`·`CONTROL`·`DECISIONS`·`STATUS` 등) 갱신은 **반드시 Edit 도구로** 한다. PowerShell `Out-File`/`Set-Content` 라운드트립 금지(PS5.1 cp949 손상 → 무성 깨짐). 신규 파일은 **UTF-8(no-BOM)**. 깨짐 발견 시 `git checkout HEAD~1 -- <file>`로 복구.
 
----
+**28.2 커밋 메시지 안전**
+- 커밋 메시지 본문에 **큰따옴표(`"`)·em-dash(—) 금지** — here-string도 word-split로 pathspec 실패(2회 발생). 정 필요하면 `git commit -F <tempfile>`. 허브 커밋은 `tools/commit.ps1 -As <ai>`(§17).
 
-## 18. SimonKWiki 교훈 축적 & 참조 (Knowledge Flywheel)
-> SimonKWiki(`E:\Coding Infra\obsidian\SimonKWiki`, private GitHub `Simon-YHKim/SimonKWiki`)는 2nd-B의 **개념적 시초**이자 **교훈 저장소**다.
+**28.3 버전 bump 안전**
+- 라이브러리·gradle·의존성 버전 변경 전 **published metadata(Maven/npm) 직접 확인**(WebFetch). 커밋 메시지에 metadata URL cite. **추측 bump 금지**(무인 빌드 실패 단골).
 
-- **교훈 축적**: 4-AI 허브/2nd-B 작업에서 얻은 교훈은 위키 형식으로 누적한다 — `wiki/protocols/llm-wiki/LESSONS_LEARNED.md`(T-코드)·`concepts/recurring-mistakes.md`(M-코드). 위키 헌법(볼트 내 CLAUDE.md) 우선: raw/ 불변, frontmatter 필수, index.md·log.md 동시 갱신.
-- **주기적 확인**: 큰 작업 착수 전 위키를 확인해 **불필요·중복 작업을 방지**한다(이미 정리된 결론·실수 재발 방지).
-- **2nd-B 참조**: 위키 설계 원칙(raw immutability + wikilink 그래프, frontmatter 분류, 7-category 온톨로지, index+log 이중추적, 정기 lint)을 2nd-B 아키텍처가 차용한다.
-- **경계**: 위키는 별도 private 레포·별도 헌법. 허브 AI 중 **Claude만** 위키를 쓰고(라이브러리언 모드), 푸시도 Claude. raw/ 절대 수정 금지.
+**28.4 헤드리스 AI 스폰**
+- 헤드리스 스폰 시 **긴 한글 프롬프트는 CLI 인자 금지**(word-split 깨짐) → **UTF-8 파일/stdin**으로 전달. 레시피: `codex exec -s danger-full-access -C <gitrepo>`(self-commit엔 danger-full-access + git 레포 내부 필수), `gemini -p "..." -y`, `grok -p`. 구독 인증이라 비용 0.
+
+**28.5 병렬 호출 cancel 트랩**
+- 도구 하네스는 **exit-code-aware** — 병렬 형제 호출 중 하나가 non-zero exit면 나머지 호출 + Write가 취소된다. **read-only 명령만 병렬 batch**. winget·git·python 등 비표준 exit 명령은 **단독 격리**하거나 끝에 `exit 0`. 복잡한 python은 임시 `.py` 파일로.
+
+**28.6 fan-out 검증 설계 (schema 회피)**
+- Workflow `agent(prompt, {schema})` 검증 서브에이전트가 StructuredOutput을 자주 미호출해 실패한다 → **"0-0 abstain/killed"는 반박이 아니라 버그**. 검증/리뷰 fan-out은 **schema 없이 텍스트로 설계**하고 raw claim을 직접 회수·수동 종합한다(§27.8·§27.9 연동).
 
 ---
 
-## 19. 멀티모달 페어 — Codex ⇄ Antigravity 상호평가 루프 (CRITICAL, 2026-06-06 Simon)
-> Codex와 Antigravity는 **멀티모달(시각·이미지) 성능이 뛰어나다.** 멀티모달 산출물은 **둘이 병렬 생성 → 서로 평가 → 피드백 → 반복 개선**한다. 단독보다 교차 비평이 품질을 끌어올린다.
+## 29. 디자인-우선 인테이크 + 카피 voice (생성 품질 게이트) (CRITICAL, 2026-06-07 고도화)
+> §27.6이 Codex·AG의 멀티모달 **생성**을 확대한 만큼, 생성 게이트가 없으면 무인 운용이 **slop 양산기**가 된다. 생성 확대와 품질 게이트는 한 쌍.
 
-- **적용 대상(멀티모달)**: 이미지/에셋 생성·편집, 아이콘·일러스트·스프라이트, 마스코트·히어로 아트, UI 렌더링 충실도, 디자인-투-디바이스, 시각 QA(스크린샷 비교), 애니메이션/모션 비주얼.
-- **루프**:
-  1. **병렬 생성**: Codex·AG가 각자 후보를 만든다(자기 outbox + HTML preview, §16). 같은 과제, 독립 산출.
-  2. **상호 평가**: 각자 상대 산출물을 읽고 `type: review`(ref: 상대 deliverable id)를 **자기 outbox**에 작성 — 점수 + 강점 + 구체적 개선점. (단일작성자 §1 유지: 상대 평가도 자기 폴더에만.)
-  3. **반영**: 받은 평가로 각자 개선(다음 이터레이션).
-  4. **반복**: 둘 다 approve(수렴)하거나 **최대 2~3 라운드**. 수렴 못 하면 Claude가 판정·선택.
-  5. **머지**: Claude가 수렴본 수거 → 리뷰 → 머지(실제 파일·온라인 git은 Claude 단독, §11).
-- **강점 분담(예시)**: Codex=디자인·생성·심미/레이아웃 평가, AG=네이티브 렌더링·성능(프레임/OOM)·디바이스 충실도 평가. 서로의 약점을 보완.
-- **경계**: 이 루프는 **멀티모달 한정**. 비-멀티모달(로직·텍스트·빌드·네이티브 코드 픽스)은 기존 lane·게이트 그대로. 페어가 합의 못 하면 Claude 판정(합의 §14와 별개, 산출물 선택).
-- **루브릭·수렴·refute는 §20~§22 공용 머시너리를 따른다**(멀티모달 페어는 그 Tier1 적용 사례). 편향 통제·메타평가는 §24.
+**29.1 디자인-우선 인테이크 (바로 코드 금지)**
+- 새 UI/비주얼 **생성 전 절대 바로 코드 작성 금지**. 순서: ① 진단(누가 볼지·목적·톤) ② 레퍼런스 3~5개(**접속 가능한 URL**) ③ 폰트 선택권(Google Fonts URL, 한국어 **Pretendard** 기본) ④ 사용자 방향 확정. "알아서 해"/갈피 못 잡을 때만 AI 단독.
+- **단 2nd-B는 `DESIGN.md`가 확정 SoT** → 인앱 작업은 DESIGN.md 준수(hex 리터럴 금지·`semantic.*` 토큰 경유, 폰트 NeoDunggeunmo). 디자인-우선 인테이크는 **신규 컨셉·외부 산출물에만** 적용.
+
+**29.2 AI slop 방지 3원칙**
+- ① 불필요한 것 제거(이모지 아이콘·장식 금지) ② 모노톤(색 **3개 이내**·tinted-neutral, pure black/gray 금지) ③ 레퍼런스에서 착안. **금지**: Inter·4색+ multi-color·bounce/elastic·pill(`borderRadius:9999`)·gradient 전면·glass/blur.
+
+**29.3 카피 voice (텍스트 slop 차단)**
+- LLM 어투 금지: 과장 형용사("혁신적/강력한"), "leverage/robust"류, em-dash 폭주, 3-bullet 강박. **임상어휘 금지**(2nd-B `lexicon.ts` — diagnosis·진단·치료 등, 대체어 self-understanding/성장). 산출 전 human-voice-guard 기준 자가검수.
+
+**29.4 한국어 일관성**
+- 존댓말/반말 **일관**(혼용 금지), 영어 직역 금지(전세·억·만 등 로컬 표현 존중), `word-break: keep-all`, Pretendard. **주민등록번호 수집 금지**(CI/DI만).
 
 ---
 
-## 20. 리뷰 루브릭 & 수렴 기준 (공용, peer 리뷰 강화 2026-06-06)
-> 모든 peer 리뷰(멀티모달·코드·리서치)는 동일 척도로 채점해 비교·집계 가능하게 한다. "95/100" 식 자의적 채점 금지.
+## 30. 수익화 지향 개발 (제품 endgame) (CRITICAL, 2026-06-07 Simon)
+> Simon: 결국 앱을 개발해 **수익화까지** 간다. 충분한 조사 + 가격책정을 전제로 작업한다.
 
-- **20.1 5차원 루브릭(각 0~10, 총 50)**: D1 정확성/충실도 · D2 완성도 · D3 장인성 · D4 성능 · D5 안전·접근. D3/D5는 유형별 치환(시각=심미/접근성, 코드=유지보수성/보안, 리서치=논리정합/출처신뢰).
-- **20.2 표준 앵커**: 0–2 blocker(재작업) · 3–4 major · 5–6 minor · 7–8 good · 9–10 excellent. **각 차원 1줄 근거 필수**(근거 없는 숫자 무효).
-- **20.3 메시지 포맷**: `type: review`(또는 `code_review`) frontmatter에 `target:<상대 deliverable id>`, `rubric:{D1..D5}`, `total`, `verdict: approve|revise|reject`, `mode: cooperative|refute`, `defects_found:N`. 본문=차원별 근거+개선점.
-- **20.4 수렴(approve)** = 전 차원 ≥7 AND 총점 ≥40 AND blocker 0개. Tier2는 전 차원 ≥8 AND D5 ≥9.
-- **20.5 정지**: ①수렴 ②라운드 상한(멀티모달 3R/코드 2R/패널 3R) ③stall(라운드 간 +2 미만) ④diverge(평가자 총점차 >10 또는 한 차원 >3, 2R 연속). ②③④는 **Claude 판정** 종료. 상한 후 blocker 잔존 시 머지 불가 → §14/§15 분리.
+- **30.1 endgame 인지**: 모든 작업 스레드(UI/UX·시스템 구조·기능·콘텐츠)는 최종 목표 = **지속가능한 수익화**를 염두에 둔다. 각 기능이 어느 가치축(획득·활성화·리텐션·수익 — AARRR)에 기여하는지 의식하고, 무가치 기능 양산 금지.
+- **30.2 조사 선행 (추측 금지)**: 가격·패키징·시장 결정은 추측하지 않는다 → `/deep-research`·경쟁 분석·소셜 신호(Grok)로 **실증 후** 결정. 가격 투명성·무료티어 관대함·결제수단(KR 포함·저소득 배제 회피)·구독 피로·신뢰 인증을 페르소나 소득축(§26.2)과 교차 검토.
+- **30.3 가격·계약·런치일 = Simon(§15)**: 엔지니어링 기본값·티어 구조·요금제 화면은 4-AI 합의(§14)로 **선설계**하되, **실가격·실계약·결제 실설정·런치일은 Simon 확인**(비용·외부의존 안전레일, 우회 불가).
+- **30.4 스킬 활용**: 수익화·그로스 작업은 SimonKStack 스킬을 경유한다 — `monetization-planner`·`pmf-analyzer`·`aarrr-growth-planner`·`revenue-scenario-tester`·`global-payment-planner`·`viral-launch` 등(§18.2).
 
-## 21. 적대적 검증 (Refute 모드)
-- **21.1** 모든 리뷰는 **최소 결함 1건 의무 발견**. 무결함이면 "검증 불충분 — 점검 케이스: …" 명시(침묵 통과 금지).
-- **21.2** `mode: refute`: 평가자가 실패 가설을 세우고 반례·엣지·실패 시나리오를 능동 탐색, severity 태깅.
-- **21.3 의무 refute**: 보안·인증·결제·PII·비가역 배포 산출물은 refute 강제. (전역 안전레일 §11-5는 별개·우회 불가.)
+---
 
-## 22. 리뷰 등급제 (Solo / Pair / Panel)
-- **22.1 위험도 채점**: 가역성·블라스트반경·민감도·복잡도 4축 각 1~3점 합산.
-- **22.2 등급**: 4–5 **Tier0 Solo**(Claude 게이트 §10.5) · 6–8 **Tier1 Pair**(§19 또는 §23 코드 교차) · 9–12 **Tier2 Panel**(3-AI + 의무 refute §21.3).
-- **22.3 자동 승급**: 민감도=3(보안/결제/인증/PII)은 합계 무관 **Panel + 의무 refute**.
-- **22.4 패널 구성**: 저자 제외 + 직전 라운드와 다른 평가자 우선(§24 로테이션). 패널 미수렴 시 Claude 판정(산출물 선택 §19, 방향이면 §14).
+## 31. 반-퇴화 · 성실도/통신 성능 유지 (CRITICAL, 2026-06-07 Simon)
+> Simon: 시간이 지나면 **성실도·4-AI 통신 성능이 점점 낮아진다.** 자연 감소를 전제로 능동적 보충 장치를 둔다.
 
-## 23. 코드 교차평가 (멀티모달 한정 확장)
-- **23.1** Tier1+ 코드는 **저자 아닌 lane AI의 `type: code_review`**(§20 루브릭 코드 차원)를 Claude 머지 게이트 *이전* 어드바이저리로 거친다. **Claude 최종 머지 게이트(§10.5/§11)는 불변** — 교차평가는 보강이지 대체 아님.
-- **23.2 분담**: UI/로직 = Codex ⇄ Claude, 네이티브 = Antigravity 1차. 저자가 Claude면 Codex(또는 AG) 교차, 저자가 Codex/AG면 Claude가 게이트 겸 교차.
-- **23.3** Grok은 코드 평가 안 함(ROUTING). 코드 교차는 멀티모달 §19와 독립.
-
-## 24. 편향 완화 & 리뷰 메타평가
-- **24.1 자기리뷰 금지**: 발견·수정한 AI는 그 산출물 평가자가 될 수 없다(author ≠ reviewer, 패널 포함).
-- **24.2 앵커링 차단**: 평가자는 상대 점수 보기 전 자기 점수를 먼저 outbox에 커밋(타임스탬프로 독립 채점).
-- **24.3 로테이션**: 패널/페어 평가자는 직전 라운드와 달리해 게이트키퍼 독점 방지.
-- **24.4 메타평가**: 머지 후 결함 발견 시 "놓친 리뷰" 역추적. 각 AI는 `agents/<me>/review-quality.md`(자기 파일, §1)에 리뷰 이력+Claude 피드백+reliability 누적. 편차 과대 시 Claude 캘리브레이션.
+- **31.1 매 사이클 재그라운딩**: 루프 0단계에서 CONTROL state뿐 아니라 **자기 lane 핵심 규칙(activate 프롬프트 + 관련 PROTOCOL 섹션)을 짧게 재확인**. **컨텍스트 압축/세션 교체 후 첫 사이클**은 PROTOCOL §27·§28 + 자기 `RULES.md`를 다시 읽고 시작(드리프트 차단).
+- **31.2 성실도 self-check (heartbeat)**: N사이클마다(기본 5) 자기 점검 — ① 최근 산출이 실제 가치(머지·수렴·검증)였나, 저가치 반복은 아닌가(§27.4) ② 허브 미러링·실시각 타임스탬프(§27.2)·HTML 보고(§16)를 빠뜨리지 않았나 ③ 다른 AI에 피드백·제안을 했나. 미달이면 STATUS에 기록하고 즉시 교정.
+- **31.3 통신 성능 모니터 (Claude)**: Claude는 주기적으로 **4-AI 협업 건강도**를 점검 — 응답 지연·미응답 inbox·고립된(피드백 0) AI·중복작업. 저하 감지 시 재분배·re-ping·역할 재조정. §24.4 `review-quality` 누적과 연동.
+- **31.4 퇴화 신호 → 재부팅**: 같은 실수 반복·품질 하락·루프 정체 감지 시 ① instincts/위키 즉시 기록(§18) ② 해당 AI activate 재투입 또는 컨텍스트 청소(§27.1) ③ 규칙 재그라운딩(31.1).
+- **31.5 학습 반영**: §18 교훈을 다음 사이클 첫 단계에서 참조해 같은 실수 비반복. **반복실수 2회+ 감지 시 즉시 instincts 4-bucket append**(자발성 의존 금지 — 영구 지시로 박는다).

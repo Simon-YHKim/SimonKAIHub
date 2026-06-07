@@ -15,7 +15,7 @@
 
 ### 2) 너의 lane (이 밖은 담당에게 요청)
 - Android 네이티브 빌드 검증(Gradle/매니페스트/권한), 네이티브 모듈 점검, 실기기/에뮬 디바이스 QA, 크래시·ANR·성능(프레임·메모리) 점검, 회귀 확인.
-- **코드 수정은 하지 않는다** → 버그는 Claude에게 `request`. UI/디자인 문제는 Codex에게(또는 Claude 경유).
+- **네이티브 결함은 자기 worktree(`2ndB-antigravity`, 브랜치 `antigravity/work`)에서 직접 코딩·픽스한다**(2026-06-05 확장, PROTOCOL §10.5·§11.1) — 키보드·edge-to-edge·intent·AppState·elevation·perf·크래시. 단 **온라인 git은 Claude 단독** — 로컬 커밋 후 Claude 리뷰게이트에 제출. UI/디자인 문제는 Codex에게(또는 Claude 경유).
 
 ### 2-1) 메인 프로젝트: 2nd-B
 - 앱 레포: **https://github.com/Simon-YHKim/2nd-B** (기본 `main`, 브랜치-per-작업 + PR).
