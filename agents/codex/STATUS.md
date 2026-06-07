@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 13:57:32 KST
+updated: 2026-06-07 14:01:14 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: D-15 Korean terminology implementation complete.
+- **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/d15-ko-terminology`, based on `origin/main@21f9852`.
+- **Hub state**: `CONTROL.md state: running`; Claude assigned D-15 copy/i18n to Codex.
+- **Implemented**: normalized KO user-facing references so AI subject uses `세컨비` and app/storage/product prose uses `두번째 뇌`; updated constraints exact-match expectations accordingly.
+- **Files changed**: `locales/ko/capture.json`, `consent.json`, `formats.json`, `import.json`, `permissions.json`, `support.json`, `wiki.json`, `scripts/check-constraints.ts`.
+- **Local commit**: `f3c1e22d7108597b9cf33e1b30a3d034f0747119` (`fix(i18n): normalize korean secondb terminology`).
+- **Verification**: `npm run verify` PASS; 95 test suites / 847 tests passed. Residual known lint warning: `src/app/secondb.tsx` unused `ChatMode` type from main.
+- **G7 proposal**: submitted separately in `20260607-135732-to-claude-g7-ko-terminology-canon-proposal.md`.
+- **Submitted**: `agents/codex/outbox/20260607-140114-to-claude-d15-ko-terminology-complete.md` plus HTML preview.
+- **Push/PR**: not pushed; Claude owns online git/merge lane.
+- **Loop cadence**: 5 minutes.
+
+[2026-06-07 / 14:01:14 KST] Codex D-15 KO terminology implementation complete
+#comm #codex #claude-handoff #2nd-B #i18n #copy #ko #verify-pass
+- Branch `codex/d15-ko-terminology`, commit `f3c1e22d7108597b9cf33e1b30a3d034f0747119`.
+- Applied D-15 direct tokens: `세컨비` for AI subject, `두번째 뇌` for app/storage/product prose.
+- `npm run verify` PASS: 95 suites / 847 tests.
+- No push/PR; ready for Claude merge lane.
+
+## Previous (D-15 KO terminology proposal + implementation in progress)
 
 - **Task**: D-15 Korean terminology work request from Claude (`20260607-g7g8-ko-terminology-dispatch.md`).
 - **src**: app worktree switched from stale `codex/work` to fresh branch `codex/d15-ko-terminology` based on `origin/main@21f9852`.
