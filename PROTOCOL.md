@@ -217,7 +217,7 @@ created: 2026-06-05 15:22:34 KST
 2. **개별 공간 → 제출 → Claude 보완 → 머지** (CRITICAL 작업방식): 코딩 AI(Codex·AG)는 **자기 개별 공간**(격리된 worktree/브랜치)에서 수정한다 → 완료 시 **Claude에 제출** → **Claude가 최종 보완**(검토·다듬기·정합) → **Claude가 실제 파일에 머지**. **실제 파일 수정과 온라인 git은 Claude 단독.** Claude는 자기 구현 + 제출분을 **병렬로 점검·보완·머지**한다(리뷰게이트 §10.5).
 3. **온라인 git = Claude 단독**(#7): 2nd-B GitHub **push·CI 요청·PR·main merge는 오직 Claude**. 다른 AI는 온라인 git을 만지지 않는다(로컬 커밋·자기 브랜치까지만).
 4. **사용자 개입 최소화**: Simon은 AI 판단을 신뢰한다. 사용자 판단이 필요해 보이는 건은 **4-AI가 상황을 종합·투표해 합의(§14)로 결정·진행**한다. **사용자에게 올리는 건 단 하나 — 외부의존 병목(§15)**: auth/credentials·법무 사인오프처럼 AI가 물리적으로 못 하는 것. 그 동안에도 **병렬로 다른 일**을 멈추지 않는다.
-5. **항상-확인 안전레일은 우회 불가**(전역 CLAUDE.md): 파괴적 작업·실비용 발생·secrets/credentials 노출은 **합의로도 우회 못 함** — 그대로 Simon 확인.
+5. **항상-확인 안전레일은 우회 불가**(전역 CLAUDE.md): 파괴적 작업·실비용 발생·secrets/credentials 노출은 **합의로도 우회 못 함** — 그대로 Simon 확인. **실비용에는 무인 자율의 누적·헤드리스 비용도 포함** — metered 경로(§28.7: `claude -p`/Agent SDK/Actions)는 예산 게이트 + kill-switch로 강제, 초과 시 CONTROL 자동 pause.
 6. **우선순위**: **런치 차단(외부의존) > P1 안전/데이터 > P2 > P3 폴리시**. 자율 루프가 P3 폴리시를 갈며 런치 차단을 방치하지 않는다.
 7. **일시정지 한 방**: 사용자가 Claude에 "멈춰" → Claude가 `CONTROL.md state: paused` → **모든 AI가 진행 중 사이클까지만 완료하고 정지**(§13).
 
@@ -487,12 +487,20 @@ created: 2026-06-05 15:22:34 KST
 
 **28.4 헤드리스 AI 스폰**
 - 헤드리스 스폰 시 **긴 한글 프롬프트는 CLI 인자 금지**(word-split 깨짐) → **UTF-8 파일/stdin**으로 전달. 레시피: `codex exec -s danger-full-access -C <gitrepo>`(self-commit엔 danger-full-access + git 레포 내부 필수), `gemini -p "..." -y`, `grok -p`. 구독 인증이라 비용 0.
+- **⚠️ Gemini CLI 무료 폐기 2026-06-18(Google)**: 그 날까지 `gemini -p -y` 헤드리스 현행 유지, **이후 Antigravity 헤드리스 경로는 대안 필요**(인터랙티브 gemini / `agy` 인증 후 / 또는 라우팅 변경). Anthropic 변경(§28.7)과는 **별개 벤더 이슈**.
 
 **28.5 병렬 호출 cancel 트랩**
 - 도구 하네스는 **exit-code-aware** — 병렬 형제 호출 중 하나가 non-zero exit면 나머지 호출 + Write가 취소된다. **read-only 명령만 병렬 batch**. winget·git·python 등 비표준 exit 명령은 **단독 격리**하거나 끝에 `exit 0`. 복잡한 python은 임시 `.py` 파일로.
 
 **28.6 fan-out 검증 설계 (schema 회피)**
 - Workflow `agent(prompt, {schema})` 검증 서브에이전트가 StructuredOutput을 자주 미호출해 실패한다 → **"0-0 abstain/killed"는 반박이 아니라 버그**. 검증/리뷰 fan-out은 **schema 없이 텍스트로 설계**하고 raw claim을 직접 회수·수동 종합한다(§27.8·§27.9 연동).
+
+**28.7 헤드리스 비용 경계 & kill-switch (2026-06-07 Simon, 검증 기반)**
+> **검증된 사실**(Anthropic 공지, 2026-05-14 발표): 2026-06-15부로 **`claude -p`(헤드리스)·Agent SDK·Claude Code GitHub Actions·SDK로 구독 인증하는 3rd-party 앱** 4개 표면이 구독 한도에서 분리 → 별도 월 $크레딧(API 정가, 롤오버 없음; Pro ~$20 / Max5x ~$100 / Max20x ~$200). **인터랙티브 Claude Code(터미널/IDE TUI)는 명시적으로 면제** — 기존 구독 한도 유지.
+- **우리 허브의 노출 = 사실상 없음(현 수준 유지)**: ① **다른 AI 호출**은 Bash로 **타사 CLI**(`codex exec`/`gemini -p`/`grok -p`) 실행 = OpenAI/Google/xAI 소관, **Anthropic 변경과 무관**. ② **Claude 오케스트레이터는 인터랙티브 세션** + 워크플로 fan-out(세션 내 = 인터랙티브 귀속) → **면제**. ③ 허브에 `claude -p`/Agent SDK/GitHub Actions **사용 0건**(검증). → **6/15 이후에도 현행 유지, 별도 조치 불필요.**
+- **경계(드리프트 방지)**: 무인 자율에 **`claude -p`·Agent SDK·Claude Code GitHub Actions를 신규 도입 금지**. 도입해야 하면 그 경로는 **metered** → 예산 게이트 + Simon 승인(§11-5). (인터랙티브 + ScheduleWakeup/`Start-Sleep` 패턴은 면제이므로 그대로 사용.)
+- **kill-switch(예산 폭주 대비, 기존 세마포어 재활용)**: 어떤 경로로든 비용 폭주·예산 초과가 감지되면 Claude가 `CONTROL.md state: paused` + `reason: budget`을 자동 기록 → 전 AI 다음 루프에서 정지(§13). 재개는 Simon 승인. **무인 워크플로 fan-out엔 `budget.total` 상한 권장**(상한 없으면 1000-에이전트 캡까지 폭주 가능).
+- **날짜 체크포인트**: 2026-06-14(America/Los_Angeles)에 ① Anthropic 공지 재확인(범위 변동 시 위 판단 갱신) ② Gemini CLI 6/18 폐기(§28.4) 대비 Antigravity 헤드리스 경로 전환. 그 전까지는 **현 수준 그대로**.
 
 ---
 
