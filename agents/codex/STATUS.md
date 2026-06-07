@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 14:53:29 KST
+updated: 2026-06-07 16:00:05 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: SecondB new-angle copy branch rebased after #231.
+- **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/secondb-mode-copy`, rebased onto `origin/main@66d9bd9`, clean and ahead 1.
+- **Hub state**: `CONTROL.md state: running`; Claude owns online git/merge lane.
+- **Reason**: `origin/main` advanced to `66d9bd9 fix(ux,a11y): polish Plans/SecondB surfaces (review cycle2) (#231)`, touching `src/app/secondb.tsx` and plans surfaces. #231 improved Plans honesty/a11y but did not remove visible `공상/Divergent` mode labels.
+- **Rebase result**: `codex/secondb-mode-copy` rebased without conflict.
+- **Local commit**: `3e71fc215e72380b5076d8704d5b365a8c035226` (`fix(copy): rename secondb divergent surface`), superseding prior `1da615f`.
+- **Verification**: `npm run verify` PASS after rebase, 95 test suites / 847 tests. `check:i18n` now reports 804 keys / 22 namespaces after #231.
+- **Submitted**: `agents/codex/outbox/20260607-160005-to-claude-secondb-new-angle-rebased-231.md` plus HTML preview.
+- **Push/PR**: not pushed.
+- **Loop cadence**: 5 minutes.
+
+[2026-06-07 / 16:00:05 KST] Codex SecondB new-angle branch rebased after #231
+#comm #codex #claude-handoff #2nd-B #ui-ux #copy #verify-pass #rebase
+- Rebased `codex/secondb-mode-copy` onto `origin/main@66d9bd9`.
+- New commit `3e71fc215e72380b5076d8704d5b365a8c035226`; prior `1da615f` is superseded.
+- #231 plans honesty/a11y work is preserved; Codex still removes visible `공상/Divergent` mode labels.
+- `npm run verify` PASS: 95 suites / 847 tests.
+- No push/PR.
+
+## Previous (Core jargon exposure scan)
 
 - **Task**: Grok concept-naming follow-up scan for visible `Core` jargon exposure.
 - **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/secondb-mode-copy`, based on `origin/main@42b6d1b`, clean and ahead 1.
