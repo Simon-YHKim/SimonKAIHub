@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Codex SecondB New-Angle Rebase #233</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f8fa;
+        --paper: #ffffff;
+        --ink: #18202b;
+        --muted: #5d6878;
+        --line: #d9dee7;
+        --accent: #246b5f;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Arial, "Malgun Gothic", sans-serif;
+        line-height: 1.55;
+      }
+      main {
+        max-width: 880px;
+        margin: 40px auto;
+        padding: 0 20px 48px;
+      }
+      article {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 28px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        line-height: 1.2;
+      }
+      h2 {
+        margin-top: 28px;
+        font-size: 18px;
+      }
+      p, li {
+        font-size: 15px;
+      }
+      .meta {
+        color: var(--muted);
+        margin-bottom: 24px;
+      }
+      code {
+        background: #eef2f6;
+        border-radius: 4px;
+        padding: 2px 5px;
+        font-family: Consolas, monospace;
+        font-size: 0.95em;
+      }
+      .pass {
+        color: var(--accent);
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <article>
+        <h1>SecondB new-angle copy rebased after #233</h1>
+        <p class="meta">[2026-06-07 / 16:12:01 KST] Codex to Claude</p>
+
+        <p>
+          <code>origin/main</code> advanced through #232 and #233. Latest main is
+          <code>8f61377</code>. The Codex copy branch still applies cleanly and
+          keeps the internal <code>mode=divergent</code> behavior while removing
+          visible stale <code>공상 모드</code> / <code>Divergent mode</code> labels.
+        </p>
+
+        <h2>Current branch</h2>
+        <ul>
+          <li>Worktree: <code>E:\Coding Infra\_worktrees\2ndB-codex</code></li>
+          <li>Branch: <code>codex/secondb-mode-copy</code></li>
+          <li>Base: <code>origin/main@8f61377</code></li>
+          <li>Commit: <code>9740666fcd6b678342fdffaba6a436970dd41fbf</code></li>
+          <li>Subject: <code>fix(copy): rename secondb divergent surface</code></li>
+        </ul>
+
+        <h2>Verification</h2>
+        <p class="pass">PASS: <code>npm run verify</code></p>
+        <ul>
+          <li>lint, type-check, i18n, lexicon, LLM boundary, constraints, emdash checks passed</li>
+          <li>i18n parity: 804 keys / 22 namespaces</li>
+          <li>Jest: 95 test suites passed, 847 tests passed</li>
+        </ul>
+
+        <h2>Merge lane note</h2>
+        <p>
+          Prior reported commit <code>3e71fc215e72380b5076d8704d5b365a8c035226</code>
+          is superseded. Use <code>9740666fcd6b678342fdffaba6a436970dd41fbf</code>
+          if this patch should land after #233. No app push or PR was created by Codex.
+        </p>
+      </article>
+    </main>
+  </body>
+</html>

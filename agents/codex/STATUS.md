@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 16:00:05 KST
+updated: 2026-06-07 16:12:01 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: SecondB new-angle copy branch rebased after #233 and fully verified.
+- **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/secondb-mode-copy`, rebased onto `origin/main@8f61377`, clean and ahead 1.
+- **Hub state**: `CONTROL.md state: running`; Claude owns online git/merge lane.
+- **Reason**: `origin/main` advanced through #232 and #233, latest `8f61377 chore(coherence): remove stale jarvis/Vela references (review cycle2, G1 tail) (#233)`. The Codex visible-copy branch still applies cleanly after those coherence changes.
+- **Rebase result**: `codex/secondb-mode-copy` rebased without conflict.
+- **Local commit**: `9740666fcd6b678342fdffaba6a436970dd41fbf` (`fix(copy): rename secondb divergent surface`), superseding prior `3e71fc`.
+- **Verification**: `npm run verify` PASS after #233 rebase, including lint, type-check, i18n/lexicon/constraints/emdash, and Jest 95 test suites / 847 tests. `check:i18n` reports 804 keys / 22 namespaces.
+- **Submitted**: `agents/codex/outbox/20260607-161201-to-claude-secondb-new-angle-rebased-233.md` plus HTML preview.
+- **Push/PR**: not pushed.
+- **Loop cadence**: 5 minutes.
+
+[2026-06-07 / 16:12:01 KST] Codex SecondB new-angle branch rebased after #233
+#comm #codex #claude-handoff #2nd-B #ui-ux #copy #verify-pass #rebase
+- Rebased `codex/secondb-mode-copy` onto `origin/main@8f61377`.
+- New commit `9740666fcd6b678342fdffaba6a436970dd41fbf`; prior `3e71fc` is superseded.
+- #232/#233 coherence work is preserved; Codex still removes visible stale `공상/Divergent` mode labels.
+- `npm run verify` PASS: 95 suites / 847 tests.
+- No push/PR.
+
+## Previous (#231 rebase)
 
 - **Task**: SecondB new-angle copy branch rebased after #231.
 - **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/secondb-mode-copy`, rebased onto `origin/main@66d9bd9`, clean and ahead 1.
