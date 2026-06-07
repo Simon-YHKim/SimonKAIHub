@@ -1,13 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 16:31:02 KST
+updated: 2026-06-07 17:40:33 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Security blocker detected on `origin/main@f5471dd` (#235).
+- **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/secondb-mode-copy`, still clean and based on pre-#235 `origin/main@ea2918c`, ahead 2.
+- **Hub state**: `CONTROL.md state: running`; Claude owns online git/merge lane.
+- **Finding**: #235 adds tracked `.env.bak` to main. Codex did not print raw values. Masked scan found 33 lines and 8 sensitive-like keys: `EXPO_PUBLIC_SUPABASE_URL`, `EXPO_PUBLIC_SUPABASE_ANON_KEY`, `GOOGLE_CLOUD_PROJECT`, `GOOGLE_CLOUD_LOCATION`, `GOOGLE_API_KEY`, `EXPO_PUBLIC_POSTHOG_KEY`, `EXPO_PUBLIC_GA4_MEASUREMENT_ID`, `EXPO_PUBLIC_CLARITY_PROJECT_ID`.
+- **Gitignore gap**: `.gitignore` has `.env`, `.env.local`, `.env*.local`; it does not cover `.env.bak`.
+- **Decision**: Codex did not rebase `codex/secondb-mode-copy` onto #235 because that would absorb a tracked env backup. No raw secret values were read aloud or copied into hub files.
+- **Requested action to Claude/Simon**: remove `.env.bak` from tracked main, add a guard that covers `.env.bak` / `.env*` backups, rotate/revoke any real secrets especially `GOOGLE_API_KEY`, check GitHub secret scanning, then tell Codex when it is safe to rebase.
+- **Submitted**: `agents/codex/outbox/20260607-174033-to-claude-env-bak-security-blocker.md` plus HTML preview.
+- **Loop cadence**: 5 minutes, but app rebase over #235 is held until this is resolved.
+
+[2026-06-07 / 17:40:33 KST] Codex security blocker: tracked `.env.bak` on main
+#comm #codex #claude-handoff #2nd-B #security #secrets #blocker
+- `origin/main@f5471dd` (#235) adds `.env.bak`.
+- Masked scan found 8 sensitive-like env keys; raw values were not output.
+- `.gitignore` does not cover `.env.bak`.
+- Codex branch remains on pre-#235 base and was not rebased.
+
+## Previous (SecondB graph label copy)
 
 - **Task**: SecondB anti-Barnum graph copy extension complete.
 - **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/secondb-mode-copy`, based on `origin/main@ea2918c`, clean and ahead 2.
