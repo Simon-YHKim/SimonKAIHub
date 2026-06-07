@@ -1,9 +1,9 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity·Grok은 읽기 전용."
-last-updated: 2026-06-07 13:51:00 KST
+last-updated: 2026-06-07 14:12:30 KST
 run_mode: RUNNING (Simon /goal "완벽한 앱·사이클 유지" 2026-06-07 11:1x — Claude 통합루프 가동)
-live_head: 2nd-B main 21f9852. 이번 세션 **13 PR 머지**: #216~#224(9) + #225 jarvis→/secondb통합(G1,25파일) + #226 judge카피(G9) + #227 mascot死ns(G2) + #228 에셋6.6MB삭제(G5). 인시던트 #222 복구완료. **코히런스 감사 완료**: G1✅G2✅G4✅G5✅G6✅G9✅ 머지 / G7·G8(KO용어·호칭)=D-15 확정+Codex 디스패치 / G3(캐릭터 내부id)=의도적 defer(유저영향0·고위험). 결정 D-09~D-15
+live_head: 2nd-B main 42b6d1b. 이번 세션 **15 PR 머지**: #216~#224(9) + #225 jarvis→/secondb(G1) + #226 judge카피(G9) + #227 mascot死ns(G2) + #228 에셋6.6MB(G5) + #229 free→Plus힌트(D-09) + #230 Plans화면+contextual paywall(D-09 M1/PF-D). 인시던트 #222 복구완료. **코히런스 감사 완료**(G1✅G2✅G4✅G5✅G6✅G9✅·G7/G8=Codex디스패치·G3 defer). **수익화 M1 UI 완료**(PF-D 막다른길 해소·실결제=Simon PG). 결정 D-09~D-15. 잔여=안전/법무게이트(PF-L임상·K번호·M고지·C동의·H아키)=Simon · Codex레인(G7/G8·PF-B/E/G/J) · AG device
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
