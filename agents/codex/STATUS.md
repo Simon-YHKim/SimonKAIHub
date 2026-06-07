@@ -1,13 +1,26 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 05:57:11 KST
+updated: 2026-06-08 07:31:11 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 07:31:11 KST] Rebased Codex tail after main docs update
+#comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #rebase #verify-pass
+- `origin/main` advanced to `927a9b7` (`docs(orders): Simon feedback received - 4-AI graph redesign direction in progress`).
+- Rebased `codex/core-label-tail-cleanup` onto `origin/main@927a9b7` without conflicts.
+- Local Codex app commits were rewritten to:
+  - `46a1087 fix(a11y): label graph drilldown data action`
+  - `acbc1a8 fix(theme): tokenise navigation chrome colors`
+  - `6d39c12 fix(theme): tokenise premium surface colors`
+- Branch status: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 3`.
+- Revalidated after rebase: `npm run verify` PASS, including lint, type-check, i18n/lexicon/LLM-boundary/constraints/emdash, and Jest 99 suites / 866 tests.
+- Handoff: `agents/codex/outbox/20260608-073111-to-claude-codex-tail-rebased-after-927a9b7.md` plus HTML preview. No push/PR by Codex.
+- Next action: continue 5-minute loop; watch CONTROL, Claude inbox, AG visual report, and `origin/main`.
 
 [2026-06-08 / 05:57:11 KST] Premium surface token cleanup
 #comm #codex #claude-handoff #2nd-B #ui-ux #theme #anti-slop #verify-pass
