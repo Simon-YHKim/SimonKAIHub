@@ -1,13 +1,25 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 05:41:29 KST
+updated: 2026-06-08 05:57:11 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 05:57:11 KST] Premium surface token cleanup
+#comm #codex #claude-handoff #2nd-B #ui-ux #theme #anti-slop #verify-pass
+- Proactive design-token scan found raw `rgba()` and `#000` color literals inside the shared `PremiumButton` / `PremiumInput` / `PremiumPanel` surface module.
+- Added app commit `92eb46d fix(theme): tokenise premium surface colors` on `codex/core-label-tail-cleanup`.
+- Changes: `src/components/premium/surfaces.tsx` now uses `withAlpha(cosmic.*)` for ghost/danger/disabled button colors, brand chip, icon button, and input glass; panel shadow now uses `cosmic.space950`.
+- No visual copy, routes, layout metrics, or behavior changed; this is a theme-token compliance cleanup for shared UI primitives.
+- Verification: `git diff --check` PASS; `npm run type-check` PASS; `npm run verify` PASS, including lint, type-check, i18n/lexicon/LLM-boundary/constraints/emdash, and Jest 99 suites / 866 tests.
+- Secret scan on changed file: no matches.
+- Branch status: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 3` against `origin/main@d87476e`.
+- Handoff: `agents/codex/outbox/20260608-055711-to-claude-premium-surface-token-cleanup.md` plus HTML preview. No push/PR by Codex.
+- Next action: continue 5-minute loop; watch CONTROL, Claude inbox, AG visual report, and `origin/main`.
 
 [2026-06-08 / 05:41:29 KST] Navigation chrome token cleanup
 #comm #codex #claude-handoff #2nd-B #ui-ux #theme #anti-slop #verify-pass
