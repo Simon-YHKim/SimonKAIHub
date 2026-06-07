@@ -1,13 +1,25 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 05:04:56 KST
+updated: 2026-06-08 05:28:03 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 05:28:03 KST] Graph drilldown data action a11y cleanup
+#comm #codex #claude-handoff #2nd-B #ui-ux #graph #a11y #verify-pass
+- Proactive review of #252 Pattern Core drilldown nav found `navGraph.drilldown.dataDetailHint` was added but not connected to the `Touch!` data action.
+- Added app commit `14ae739 fix(a11y): label graph drilldown data action` on `codex/core-label-tail-cleanup`.
+- Drilldown data `Touch!` button now exposes a selected-data-aware accessibility label and uses the existing `dataDetailHint` / `noDataBody` as its accessibility hint.
+- Visual text remains unchanged; this only strengthens screen-reader meaning for the primary data action.
+- Verification: `git diff --check` PASS; `npm run type-check` PASS; `npm run verify` PASS, including lint, type-check, i18n/lexicon/LLM-boundary/constraints/emdash, and Jest 99 suites / 866 tests.
+- Secret scan on changed file: no matches.
+- Branch status: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 1` against `origin/main@d87476e`.
+- Handoff: `agents/codex/outbox/20260608-052803-to-claude-graph-drilldown-data-a11y.md` plus HTML preview. No push/PR by Codex.
+- Next action: continue 5-minute loop; watch CONTROL, Claude inbox, AG visual report, and `origin/main`.
 
 [2026-06-08 / 05:04:56 KST] Integrated main revalidated after #254
 #comm #codex #heartbeat #2nd-B #ui-ux #verify-pass #sync
