@@ -1,31 +1,38 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 07:48:13 KST
-state: paused
+updated: 2026-06-07 11:24:50 KST
+state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
 
-- **Task**: inbox entry/empty-state helper-copy i18n cleanup.
-- **src**: `src/app/inbox.tsx` still carried inline EN/KO helper copy for inbox hero, load error, retry label, empty-state detail, first-capture label, and capture-entry accessibility hints.
-- **Hub state**: `CONTROL.md` is still `state: paused`. Codex finished the in-flight inbox entry-copy cycle, submitted it to Claude, requested Antigravity QA, and is now waiting per pause protocol. Simon also sent a direct Codex-session note to release pause/goal, so a resume note was sent to Claude; Codex will resume when Claude restores `CONTROL.md state: running`.
+- **Task**: records screen helper-copy i18n cleanup + autonomous loop resume.
+- **src**: `src/app/records.tsx` still carried inline EN/KO hero, search, filter, error, retry, empty, and first-capture helper/a11y copy.
+- **Hub state**: `CONTROL.md state: running`. First resume cycle completed §31.1 re-grounding by rereading activate, `PROTOCOL.md` §27/§28, and Codex `RULES.md`.
+- **Inbox**: `board.ps1 -Me codex` raw inbox showed 3 items; actionable inbox is 0 because 1 is EXAMPLE and 2 already have Codex `ref` responses.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@30dc939`.
-- **Implemented pending**: extended `inbox` locale keys in `locales/en|ko/inbox.json`; moved inbox hero, load error, retry, empty detail, capture-more hint, and first-capture helper copy to locale keys.
-- **Guard**: added `InboxEntryI18nCopy` and updated A11y expectations to require key-based inbox entry/empty helper copy.
-- **Validation**: `npx tsc --noEmit`; `npm run lint`; `npm run check:i18n` (`814 keys`, `22 namespaces`); `npm run check:lexicon` (`291 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `npx tsx scripts/check-constraints.ts`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
-- **Local commit**: `4dbaee3` (`fix(i18n): bundle inbox entry copy`).
-- **Pending stack vs origin/main**: `4dbaee3` only. Rebase skipped already-merged patch-equivalent commits `82dea43`, `62f0b2f`, and `6f69a35`.
-- **Loop cadence**: Simon updated autonomous peer/inbox check cadence to 5 minutes.
-- **Antigravity QA**: PASS received for settings action-hints (`20260606-224500-to-codex-settings-action-hints-copy-qa.md`); inbox entry-copy QA requested now.
+- **Implemented pending**: added `records` locale namespace in `locales/en|ko/records.json`; registered it in `src/lib/i18n/index.ts`; moved records hero/search/filter/state helper copy to `t(...)` keys.
+- **Guard**: added `RecordsI18nCopy` and updated A11y expectations to require key-based records helper copy.
+- **Validation**: `npm run check:i18n` (`832 keys`, `23 namespaces`); `npx tsx scripts/check-constraints.ts`; `npx tsc --noEmit`; `npm run lint`; `npm run check:lexicon` (`293 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
+- **Local commits**: `4dbaee3` (`fix(i18n): bundle inbox entry copy`) + `f46ff95` (`fix(i18n): bundle records screen copy`).
+- **Pending stack vs origin/main**: 2 commits. Charter gate is below the 8 unmerged-submission limit.
+- **Loop cadence**: 5 minutes per latest activation prompt. Next cycle should check Claude/AG/Grok outbox before selecting a new UI/UX candidate.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-112450-to-claude-records-screen-copy.md`
   - `agents/codex/outbox/20260607-074813-to-claude-pause-ack-resume-note.md`
   - `agents/codex/outbox/20260607-074522-to-claude-inbox-entry-copy.md`
-  - `agents/codex/outbox/20260607-074522-to-antigravity-inbox-entry-copy-qa.md`
-  - `agents/codex/outbox/20260607-073847-to-claude-settings-action-hints.md`
-  - `agents/codex/outbox/20260607-073847-to-antigravity-settings-action-hints-qa.md`
+
+[2026-06-07 / 11:24:50 KST] records screen helper-copy i18n cleanup
+#comm #codex #claude-request #2nd-B #ui-ux #records #i18n #a11y #copy #implementation #resume
+- Completed first running-cycle re-grounding and confirmed `CONTROL.md state: running`.
+- Read activate prompt, `PROTOCOL.md` §27/§28, Codex `RULES.md`, `ROUTING.md`, `BOARD.md`, `DECISIONS.md`, and 2nd-B `DESIGN.md`/`docs/CONSTRAINTS.md`/`CONTEXT.md` before coding.
+- Moved records hero, search, filter, load error, retry, empty, and first-capture helper/a11y copy into a new `records` locale namespace.
+- Added `RecordsI18nCopy` regression guard and updated the A11y guard to require key-based records helper copy.
+- Full validation passed, including Jest 95 suites / 848 tests.
+- Current pending app stack is `4dbaee3` + `f46ff95` on `origin/main@30dc939`.
 
 [pause ack + resume note / 26.06.07 / 07:48:13]
 #comm #codex #claude-request #pause #resume-request #2nd-B #ui-ux
