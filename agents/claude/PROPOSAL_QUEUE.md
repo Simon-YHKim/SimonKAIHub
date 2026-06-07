@@ -15,7 +15,7 @@
 ## A. Claude-doable-now (검증가능·device무관·내 lane)
 | # | 테마 | 파일 | value | status |
 |---|---|---|---|---|
-| A1 | **Raw error → product-tone copy + recovery** (실패경로 11화면) | account·capture·wiki·inbox·interview·settings·records 실패 핸들러 | high | open |
+| A1 | **Raw error → product-tone copy + recovery** (실패경로 11화면) | account·capture·wiki·inbox·interview·settings·records 실패 핸들러 | high | ✅ **검증완료**(2026-06-07) — raw error 노출 0(console.warn만)·Alert.alert 0(Codex alert-contract 소진)·실패 핸들러가 product-tone i18n + retry 복구 콜백(`showFeedback(title,msg,()=>retry)`). 코드변경 불필요 |
 | A2 | **Privacy 토글 진실** — 8스위치 중 external_analytics만 enforce, 7개 phantom | `src/app/privacy.tsx` (+enforcement 코드) | high | open |
 | A3 | **Privacy failed-opt-out fail-closed** — #215가 실패세이브 revert 커버하는지 검증, 미흡 시 guard+test | `src/lib/privacy/analytics-consent-queue.ts` | high | ✅ **검증완료**(2026-06-07) — 코드 fail-closed(optOut 즉시 gate OFF, 실패 시 onError가 UI pref만 revert·gate 유지) + 테스트 커버("a failed opt-in never enables analytics", 모노토닉 opt-out). 커밋 `12bc27d`+`911c979`. 코드변경 불필요 |
 | A4 | **Auth loading-aware guards** — signin/signup guest guard + complete-profile redirect가 loading 무시 → 잘못된 화면 flash | `src/app/(auth)/sign-in,sign-up,complete-profile.tsx` | high | ✅ **머지 `3ee8885`** (InlineLoader guard, sign-up guest guard 신설) |
