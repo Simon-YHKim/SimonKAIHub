@@ -33,3 +33,10 @@
 
 ## 게이트
 - 안전(위기탐지 임상)·법무·D-09 실결제=Simon. 풀앱 인증은 test@example.com 세션 활용 중(프로덕션 DB-admin 회피).
+
+## 2차 투어 추가 (privacy/account/data/theme/import/core-brain/esm/interview/big-five/trinity)
+- ✅ 대부분 견고: privacy(D-12 honest-UI 라이브)·data(클립보드 정직)·theme·big-five(정식인용)·esm(정직)·core-brain "My center"(Codex라벨)·trinity(EN/KO 태그)
+- 🟢 수정·머지: **#242** EN "2nd-B"→"2nd-Brain" 정규화(6곳+check-constraints) + account "Privacy and consent" 카피 정직화(phantom 토글 시사 제거, D-12 정합). KO "2nd-B"→두번째뇌는 Codex KO레인.
+- ⏸️ **follow-up(콘텐츠 작업)**: interview 생애구간이 childhood/teens/twenties/thirties/current뿐 — **40대+ 부재**(중장년 포용성 갭, §20 페르소나 ~90대). probe.ts LifePeriod + audit/questions.ts에 구간별 질문 콘텐츠 필요 → 즉석생성 부적절, 콘텐츠 설계 디스패치.
+- 위양성 재확인: trinity "#돈 중복"=저해상도 한글 오독(소스는 finance/재정/money/돈/budget/savings 전부 distinct). 저해상도 한글 판독은 소스 교차확인 필수.
+- 탭바 Save 가림(#241)은 capture(탭) 한정 — import(비탭)는 버튼 정상.
