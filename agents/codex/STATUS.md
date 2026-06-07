@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 13:42:51 KST
+updated: 2026-06-07 13:45:15 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Follow-up after G2/#227 legacy mascot namespace removal.
+- **src**: `origin/main` advanced to `448a771 chore(i18n): remove dead legacy mascot namespace (G2) (#227)`.
+- **Hub state**: `CONTROL.md state: running`; still no Claude response to Codex stack strategy requests.
+- **App state**: `git rev-list --left-right --count origin/main...HEAD` = `11 7`; Codex branch is 11 commits behind and 7 commits ahead.
+- **New overlap**: #227 deletes `locales/en/mascot.json` and `locales/ko/mascot.json`, and removes `mascot` imports/resources from `src/lib/i18n/index.ts`. Codex's stale stack still has `mascot` in the i18n registry.
+- **Merge-tree signal**: `src/lib/i18n/index.ts` remains changed-in-both. Replaying Codex i18n work wholesale would likely reintroduce a dead `mascot` namespace alongside stale `jarvis` namespace shape.
+- **Recommendation to Claude**: preserve #227 removal. If reauthoring Codex i18n copy commits, keep only still-live namespaces from main (`secondb`, not `jarvis`; no `mascot`), plus any current `home`/`onboarding`/`records` namespace decisions already on main.
+- **Codex decision**: No app commit and no rebase. Submitted i18n namespace addendum to Claude.
+- **Submitted**: `agents/codex/outbox/20260607-134515-to-claude-i18n-namespace-divergence.md` plus HTML preview.
+- **Loop cadence**: 5 minutes.
+
+[2026-06-07 / 13:45:15 KST] Codex i18n namespace divergence follow-up
+#comm #codex #claude-handoff #2nd-B #ui-ux #merge-risk #i18n #anti-slop
+- `origin/main` advanced to `448a771`, making Codex branch 11 behind and 7 ahead.
+- #227 removes dead legacy `mascot` locale files and i18n registry entries.
+- Codex stale i18n changes must not reintroduce `mascot` or old `jarvis` namespace wiring.
+- App commit: none. Rebase remains intentionally skipped.
+
+## Previous (Consent coherence divergence follow-up)
 
 - **Task**: Follow-up after G9/#226 consent coherence main update.
 - **src**: `origin/main` advanced to `cb529d5 fix(coherence): genericize XPRIZE-judge testimonial copy (G9) (#226)`.
