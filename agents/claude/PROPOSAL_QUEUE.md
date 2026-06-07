@@ -116,8 +116,8 @@
 
 | # | 이슈 | 빈도 | sev | 담당 | status |
 |---|---|---|---|---|---|
-| PF-A | 세컨비 모드토글 중복+죽은 컨트롤(하단 modeSwitch 무영향) `jarvis.tsx:305-376` | 3p | P0 | claude | open(jarvis refactor와 묶음) |
-| PF-F | 홈 인사이트 리본 가짜("기록 0개에도 알아챘어요", 코드 주석 자인) `index.tsx:101-130` | 1p(전원노출) | P0 | claude | 🔧 **수정 진행** |
+| PF-A | 세컨비 모드토글 중복+죽은 컨트롤(하단 modeSwitch 무영향) `jarvis.tsx:305-376` | 3p | P0 | claude | ✅ **머지 #222** (chatMode 단일화·죽은 토글·스타일 제거) |
+| PF-F | 홈 인사이트 리본 가짜("기록 0개에도 알아챘어요", 코드 주석 자인) `index.tsx:101-130` | 1p(전원노출) | P0 | claude | ✅ **머지 #218 `0921d91`** (hasAnyPiece 게이트 + 정직 초대문구) |
 | PF-L | 한국어 위기어 부분일치 오탐(일상어 RED: "끝내고 싶"·"더 이상 살") `lexicon.ts:52-74`·`classifier.ts:30` | 1p | P0 | claude | open(안전 careful) |
 | PF-K | `GLOBAL_988` US전용 하드코딩(비US 무용) `classifier.ts:49,59` | 1p | P0 | claude(번호=Simon/§15 국가확정) | open |
 | PF-M | 비임상/비의료 상설 고지 부재 | 1p | P1 | claude(카피 합의·법무문구 Simon) | open |
@@ -141,9 +141,10 @@
 | G1 | **jarvis→/secondb 6축 리네임** (route+리다이렉트 스텁+i18n ns+TabId+purpose+CI script check-constraints.ts+tests) DB영향0 | 중(~20파일) | claude(원자 PR) | open(focus PR) |
 | G2 | **mascot.json 死코드 삭제** (구 로스터, 소비처 0, NAMESPACES·tokens mascot색키 동반) | 소~중 | claude/codex | open |
 | G3 | **캐릭터 코드 id 통일** lulu/archi/gadi/lumi→lumen/archon/relia/iris (+PNG 파일명 결합, TODO(naming) 실행, 테스트 다수) | 대 | codex/ag(에셋)+claude | open(별 PR) |
-| G4 | **Iris(lumi) 로스터 누락** characters.ts 5인 vs 정본 6인(personas/village/monologues) + CompanionName 누락 ⚠️**5 vs 6 결정 필요** | 소(결정후) | claude | 🔴 결정(합의) |
+| G4 | **Iris(lumi) 로스터 누락** characters.ts 5인 vs 정본 6인(personas/village/monologues) + CompanionName 누락 | 소(결정후) | claude | ✅ **머지 #221 `c6f27a6`** (D-14=6 결정, characters/tokens/CompanionName/graph-bits/test) |
 | G5 | **죽은 에셋팩 7개 삭제** (~6.6MB 웹번들 동봉, src 참조 0) + 중복 워커폴더(workers/·workers-sharp/) + _clean/비-hq 변형 + vela 고아 | 중(binary rm) | claude/ag | open(grep 재확인 후) |
-| G6 | **데드 함수 삭제** getCompanionSpritePath/CuePath(소비처 0 + 네이티브 깨짐 소지) `CompanionSprite.tsx:35,44` | 소 | claude | open(safe) |
+| G6 | **데드 함수 삭제** getCompanionSpritePath/CuePath(소비처 0 + 네이티브 깨짐 소지) `CompanionSprite.tsx:35,44` | 소 | claude | ✅ **머지 #220 `63fcb10`** (타입 보존, 함수만 제거) |
+| G-dec① | 앱명 2층 (앱=두번째뇌/2nd-Brain, AI주체=세컨비/SecondB) | — | claude | ✅ **결정 D-13**(§14, 2층 유지) |
 | G7 | **용어 사전 1종 확정** 캡처/담기/기록·pieces/records/entries·위키/지식그래프/서재/창고(6종)·journal/일기/저널·리서치/자료실 | 중(카피) | codex | open |
 | G8 | **AI 주체 호칭 통일** capture.json:77 "Lumen saved"↔SecondB, consent "비서"↔세컨비 → 화면당 주체 1인 | 소~중 | codex | open |
 | G9 | XPRIZE judges/심사관 어휘 일반 빌드 노출 → judge 플래그 게이팅 `consent.json:4-5`·`auth.json:98` | 소 | claude | open |
