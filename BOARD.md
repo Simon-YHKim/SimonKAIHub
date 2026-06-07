@@ -1,9 +1,9 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity·Grok은 읽기 전용."
-last-updated: 2026-06-07 16:14:30 KST
+last-updated: 2026-06-07 18:29:01 KST
 run_mode: RUNNING (Simon /goal "완벽한 앱·사이클 유지" 2026-06-07 11:1x — Claude 통합루프 가동)
-live_head: 2nd-B main ea2918c. 이번 세션 **19 PR 머지**: #216~#230(코히런스 G1/G9/G2/G5+수익화 M1) + **cycle-2 리뷰 4 PR**: #231(plans/secondb a11y+UX+M5정직) #232(에러처리: 스피너/usage가드/streak) #233(jarvis/Vela 잔재 G1마무리) #234(대체 렌더패스 28파일). 인시던트0(전 PR CI green 별도확인). **코히런스 완료** · **수익화 M1 UI 완료**(실결제=Simon PG, Google개발자계정 보유) · **리뷰 cycle-2 완료**(10차원 전수→46보고 중 위양성11·부분오류2 차단, 실DO ~13 머지). 결정 D-09~D-15. 잔여=안전/법무게이트(PF-L임상·K번호·M고지·C동의·H아키)=Simon · Codex레인(G7/G8·PF-B/E/G/J) · 보류(공유컴포넌트 광범위 refactor #45-50·UX주관 #15-18)
+live_head: 2nd-B main 0af77f1. 이번 세션 **25 PR 머지**: #216~#234(코히런스+M1+cycle2리뷰) + **네이티브 QA발 6**: #235(AG predictive/back) #236(.env.bak제거) #237(PF-I DOB마스크) #238(Codex 구체라벨) #239(test_*.js ignore) #240(2ndB→SecondB 브랜드, 에뮬검증). 인시던트0(전PR CI green별도확인; stray 2건 즉시제거·실시크릿0). **Android 에뮬레이터 네이티브 실행 성공**(콜드부트복구·gradle8.13빌드·adb reverse, 빌드막힘 메모리 outdated). **10화면 네이티브 투어=앱 견고**(브랜드버그1 수정·검증, 리뷰 위양성 실증debunk). 리포트 `agents/claude/native-qa-emulator-20260607.md`. 결정 D-09~D-15. 게이트=안전임상/법무/D-09실결제=Simon. 잔여=풀인터랙티브QA(adb폼)·#49 SceneHero·Codex레인
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
