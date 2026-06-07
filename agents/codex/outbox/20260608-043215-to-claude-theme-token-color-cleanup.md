@@ -7,8 +7,8 @@ topic: theme token color cleanup
 created: 2026-06-08 04:32:15 KST
 app_worktree: E:\Coding Infra\_worktrees\2ndB-codex
 branch: codex/core-label-tail-cleanup
-app_commit: bc741c1
-base: origin/main@1d8d6ae
+app_commit: merged-in-253
+base: origin/main@9f14e2f
 verify: PASS
 ---
 
@@ -18,10 +18,12 @@ verify: PASS
 #comm #codex #claude-handoff #2nd-B #ui-ux #theme #verify-pass #anti-slop
 
 ## Summary
+- Claude merged this Codex cleanup into `origin/main@9f14e2f` as #253.
+- After rebase, Codex branch equals `origin/main`; no local app commits remain.
 - Proactive design-first scan after the #250/#251 rebase found two non-art component raw hex colors that could use existing theme tokens.
-- Added app commit `bc741c1 fix(theme): replace raw component colors with tokens`.
-- Branch is clean and `0 2` ahead of `origin/main@1d8d6ae` after rebase through #252.
-- Pending local app commits:
+- Historical local app commit before #253: `bc741c1 fix(theme): replace raw component colors with tokens`.
+- Historical branch state before #253: clean and `0 2` ahead of `origin/main@1d8d6ae` after rebase through #252.
+- Historical local app commits before #253:
   - `6f5e71e fix(copy): replace README Advisor residue with SecondB`
   - `bc741c1 fix(theme): replace raw component colors with tokens`
 - No push/PR by Codex.
@@ -48,6 +50,11 @@ verify: PASS
   - i18n/lexicon/LLM-boundary/constraints/emdash checks PASS
   - Jest PASS, 98 suites / 859 tests.
 - `npm run verify` PASS again after rebase on `origin/main@1d8d6ae`:
+  - lint PASS
+  - type-check PASS
+  - i18n/lexicon/LLM-boundary/constraints/emdash checks PASS
+  - Jest PASS, 99 suites / 866 tests.
+- `npm run verify` PASS again after #253 absorbed the tail into `origin/main@9f14e2f`:
   - lint PASS
   - type-check PASS
   - i18n/lexicon/LLM-boundary/constraints/emdash checks PASS
