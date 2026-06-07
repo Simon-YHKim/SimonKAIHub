@@ -118,7 +118,7 @@
 |---|---|---|---|---|---|
 | PF-A | 세컨비 모드토글 중복+죽은 컨트롤(하단 modeSwitch 무영향) `jarvis.tsx:305-376` | 3p | P0 | claude | ✅ **머지 #222** (chatMode 단일화·죽은 토글·스타일 제거) |
 | PF-F | 홈 인사이트 리본 가짜("기록 0개에도 알아챘어요", 코드 주석 자인) `index.tsx:101-130` | 1p(전원노출) | P0 | claude | ✅ **머지 #218 `0921d91`** (hasAnyPiece 게이트 + 정직 초대문구) |
-| PF-L | 한국어 위기어 부분일치 오탐(일상어 RED: "끝내고 싶"·"더 이상 살") `lexicon.ts:52-74`·`classifier.ts:30` | 1p | P0 | claude | open(안전 careful) |
+| PF-L | 한국어 위기어 부분일치 오탐(일상어 RED: "끝내고 싶"·"더 이상 살") `lexicon.ts:52-74`·`classifier.ts:30` | 1p | P0 | claude | 🔬 **분석완료→safety게이트(Simon/임상 사인오프 필요)**. classifier KO=bare `includes()`. 오탐 실예: "이 일을 **끝내고 싶**어"(작업종료), "더 이상 **살** 게 없어"(구매)/"더 이상 **살**이 안 빠져"(체중) → RED. **보수적 제안(recall 무손실)**: ①"더 이상 살"→위기의미는 항상 완전형이므로 "더 이상 살고 싶지 않/살 이유 없/살 의미 없/살아갈" 4형으로 교체(구매·체중 살 오탐 제거, true-pos 보존). ②"끝내고 싶"은 위기의미가 bare로도 성립→narrow 시 누락위험, **건드리지 말 것**(현행 over-detection 유지가 안전). **위기탐지 약화=인명리스크라 단독 ship 금지**, proxy-parity 미러(gemini-proxy) 동반. FP/TP 양방향 테스트 필수. Na et al. 2020 근거라 임상검토 권장 |
 | PF-K | `GLOBAL_988` US전용 하드코딩(비US 무용) `classifier.ts:49,59` | 1p | P0 | claude(번호=Simon/§15 국가확정) | open |
 | PF-M | 비임상/비의료 상설 고지 부재 | 1p | P1 | claude(카피 합의·법무문구 Simon) | open |
 | PF-C | 가입 동의 게이트 로컬전용 경로 없음(llm/overseas 필수) `sign-up.tsx`·`ConsentNotice.tsx` | 3p | P1 | claude(정책 합의·법무 Simon) | open(D-12/consent 연계) |
@@ -128,7 +128,7 @@
 | PF-G | 일기 내보내기 누락(export가 wiki만, journal/note 제외)+과약속 카피 `export.ts:163` | 1p | P1 | codex | open(M5 full-export 연계) |
 | PF-H | 일기저장 local-first 위반(supabase 라운드트립, 오프라인0) `records/create.ts` | 1p | P1 | simon(아키)→claude+codex | open |
 | PF-J | 무료한도 리셋 KST 자정 하드코딩(비KR 저녁 롤오버) `conversation.ts:109` | 1p | P1 | codex | open |
-| PF-D | 업그레이드 막다른길 CTA(체크아웃 없음)+첫날 5/5 노출 | 2p | P2 | claude(D-09 연계) | open |
+| PF-D | 업그레이드 막다른길 CTA(체크아웃 없음)+첫날 5/5 노출 | 2p | P2 | claude(D-09 연계) | 🟢 **1차 슬라이스 #229**(차단힌트 free→Plus/cortex 정정·폐기 soma 노출 제거·브랜드 티어명 Free/Plus/Pro). **잔여=Plans 화면 + secondb 한도→/plans 라우트** = 디자인-bearing 새 surface → **design-first 적용**(레퍼런스·톤 진단 후 빌드, cold-code 금지). 실결제=Simon PG(D-09 M3 Phase). honest "출시 알림"(M5) |
 | PF-P3 | 묶음: N(PNG무게)·O(OCR리사이즈)·U(가입버튼 회색)·R·S·V·Q(DELETE)·T·W·X | — | P3 | claude/codex/ag/simon | open |
 
 ---
