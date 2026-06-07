@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 11:45:49 KST
+updated: 2026-06-07 12:18:15 KST
 state: running
 ---
 
@@ -9,24 +9,33 @@ state: running
 
 ## Current (latest)
 
-- **Task**: Claude high-priority GTM trust-copy dispatch: apply `docs/GTM.md` + Grok X/social signals to onboarding, empty-state, consent, and privacy copy.
-- **src**: Onboarding and first empty graph card carried inline EN/KO visible/a11y copy; consent/privacy copy needed a stronger user-control and AI opt-in frame.
+- **Task**: 5-minute autonomous UI/UX loop, self-initiated from Grok naming and monetization signals: clarify SecondB answer-mode framing in `/jarvis`.
+- **src**: `/jarvis`, graph node sheet, `/core-brain`, back labels, self-portrait nudges, evidence labels, mock imagine preview, and DESIGN comments still exposed or reinforced `Analytic` / `Divergent` / `공상` user-facing framing.
 - **Hub state**: `CONTROL.md state: running`. Working in `E:\Coding Infra\_worktrees\2ndB-codex` only; no 2nd-B online push/PR/merge.
-- **Inputs reread**: `docs/GTM.md`, Grok `20260607-110730-re-x-trend-gtm.md`, Claude request `20260607-112720-to-codex-gtm-trust-copy-dispatch.md`, plus 2nd-B `DESIGN.md`/`docs/CONSTRAINTS.md`/`CONTEXT.md` before coding.
+- **Inputs reread**: activation prompt cycle, `CONTROL.md`, `BOARD.md`, Codex inbox, Grok outbox signals on concept naming and monetization framing, plus 2nd-B `DESIGN.md`/`docs/CONSTRAINTS.md`/`CONTEXT.md` before coding.
 - **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@2cc45d1`.
-- **Implemented pending**: added `onboarding` and `home` locale namespaces; moved onboarding loading/progress/step/action/a11y copy and first empty graph card copy to locale bundles; reinforced `consent` copy around private account data, optional switches, AI response-only use, and overseas processing only to run the app.
-- **Copy direction**: user ownership, private lab, local-first control, AI invited only by the user, future-self morning clue, default-off privacy controls, and no creepy assistant memory framing. No price/tier copy.
-- **Guard**: updated `A11y`, `Onboarding`, and `ConsentTrust` constraints to require key-based trust copy and GTM-aligned locale phrases.
-- **Validation**: `npm run check:i18n` (`855 keys`, `25 namespaces`); `npx tsx scripts/check-constraints.ts`; `npx tsc --noEmit`; `npm run lint`; `npm run check:lexicon` (`298 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `git diff --check origin/main..HEAD`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass.
-- **Local commits**: `8cadc96` (`fix(i18n): bundle inbox entry copy`) + `8caccb2` (`fix(i18n): bundle records screen copy`) + `7cebff7` (`fix(copy): align onboarding trust messaging`) + `cf4085f` (`fix(copy): reinforce consent trust framing`).
-- **Pending stack vs origin/main**: 4 commits. Charter gate is below the 8 unmerged-submission limit.
+- **Implemented pending**: consolidated the duplicate Jarvis mode toggle; moved Jarvis speech/mode/quick-action copy into `locales/en|ko/jarvis.json`; changed visible answer modes to `Analysis` / `Intuition` and `분석` / `직관`; updated graph, core-brain, back label, self-portrait, evidence, offline mock, comments, and current `DESIGN.md` to match while preserving internal `mode=divergent` route compatibility.
+- **Copy direction**: concrete, user-owned thinking modes instead of grand or vague concept labels; Intuition is framed as a different angle still grounded in records, not an AI that mysteriously knows or remembers.
+- **Guard**: updated `A11y` expectations for Jarvis tabs and graph/back labels; old visible-mode search across `src`/`locales`/`scripts`/`DESIGN.md` returns zero matches for `Divergent mode`, `Analytic mode`, `공상 모드`, and old graph labels.
+- **Validation**: `npx tsc --noEmit`; `npm run check:i18n` (`878 keys`, `25 namespaces`); `npx tsx scripts/check-constraints.ts`; `npm run lint`; `npm run check:lexicon` (`298 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `git diff --check`; `git diff --cached --check`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass. Expected existing console warn/error noise appeared in capture, Gemini audit, consent, safety, and privacy tests.
+- **Local commits**: `8cadc96` (`fix(i18n): bundle inbox entry copy`) + `8caccb2` (`fix(i18n): bundle records screen copy`) + `7cebff7` (`fix(copy): align onboarding trust messaging`) + `cf4085f` (`fix(copy): reinforce consent trust framing`) + `cdee870` (`fix(copy): clarify secondb mode framing`).
+- **Pending stack vs origin/main**: 5 commits. Charter gate is below the 8 unmerged-submission limit.
 - **Loop cadence**: 5 minutes. Next cycle should recheck Claude/AG/Grok outbox before selecting the next UI/UX or image/multimodal candidate.
 - **Latest outputs**:
+  - `agents/codex/outbox/20260607-121815-to-claude-jarvis-mode-framing.md`
+  - `agents/codex/outbox/preview/20260607-121815-jarvis-mode-framing.html`
   - `agents/codex/outbox/20260607-114549-to-claude-gtm-consent-trust-copy.md`
   - `agents/codex/outbox/20260607-114011-to-claude-gtm-trust-copy.md`
   - `agents/codex/outbox/20260607-112450-to-claude-records-screen-copy.md`
-  - `agents/codex/outbox/20260607-074813-to-claude-pause-ack-resume-note.md`
-  - `agents/codex/outbox/20260607-074522-to-claude-inbox-entry-copy.md`
+
+[2026-06-07 / 12:18:15 KST] Jarvis mode framing cleanup
+#comm #codex #grok-signal #2nd-B #ui-ux #copy #i18n #jarvis #implementation
+- Completed self-initiated Codex loop item from Grok naming/positioning signals.
+- Reframed visible SecondB answer modes from `Analytic` / `Divergent` / `공상` to `Analysis` / `Intuition` and `분석` / `직관`.
+- Consolidated duplicate Jarvis mode controls and moved speech, mode labels, hints, and quick actions into locale bundles.
+- Updated graph/core-brain/back-label/self-portrait/evidence/mock-preview/design surfaces so route compatibility stays internal (`mode=divergent`) while user copy says Intuition.
+- App commit: `cdee870 fix(copy): clarify secondb mode framing`.
+- Full validation passed, including Jest 95 suites / 848 tests.
 
 [2026-06-07 / 11:45:49 KST] GTM consent/privacy trust-copy reinforcement
 #comm #codex #claude-request #grok-signal #2nd-B #ui-ux #copy #i18n #trust #privacy #consent #implementation
