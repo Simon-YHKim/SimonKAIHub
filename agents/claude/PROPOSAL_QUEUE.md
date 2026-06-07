@@ -16,7 +16,7 @@
 | # | 테마 | 파일 | value | status |
 |---|---|---|---|---|
 | A1 | **Raw error → product-tone copy + recovery** (실패경로 11화면) | account·capture·wiki·inbox·interview·settings·records 실패 핸들러 | high | ✅ **검증완료**(2026-06-07) — raw error 노출 0(console.warn만)·Alert.alert 0(Codex alert-contract 소진)·실패 핸들러가 product-tone i18n + retry 복구 콜백(`showFeedback(title,msg,()=>retry)`). 코드변경 불필요 |
-| A2 | **Privacy 토글 진실** — 8스위치 중 external_analytics만 enforce, 7개 phantom | `src/app/privacy.tsx` (+enforcement 코드) | high | open |
+| A2 | **Privacy 토글 진실** — 8스위치 중 external_analytics만 enforce, 7개 phantom | `src/app/privacy.tsx` (+enforcement 코드) | high | 🔬 **조사완료(2026-06-07)→D로 이관**. 전수 grep 확인: enforce=`external_analytics`만(_layout/analytics/consent-queue). **phantom 7=ads·sharing·recommendations·llm_training·persona_export·persona_share·long_term_memory**(저장만, 동작 게이트 0). 전부 OFF 기본이라 데이터 유출은 아니나 **작동하는 척 = 거짓 약속**. 특히 **llm_training·sharing은 법적 무게** → 무단 프로덕션 변경 금지, **Simon/§15 정책 결정(D-12)** 필요 |
 | A3 | **Privacy failed-opt-out fail-closed** — #215가 실패세이브 revert 커버하는지 검증, 미흡 시 guard+test | `src/lib/privacy/analytics-consent-queue.ts` | high | ✅ **검증완료**(2026-06-07) — 코드 fail-closed(optOut 즉시 gate OFF, 실패 시 onError가 UI pref만 revert·gate 유지) + 테스트 커버("a failed opt-in never enables analytics", 모노토닉 opt-out). 커밋 `12bc27d`+`911c979`. 코드변경 불필요 |
 | A4 | **Auth loading-aware guards** — signin/signup guest guard + complete-profile redirect가 loading 무시 → 잘못된 화면 flash | `src/app/(auth)/sign-in,sign-up,complete-profile.tsx` | high | ✅ **머지 `3ee8885`** (InlineLoader guard, sign-up guest guard 신설) |
 | A5 | **Data export scope 진실** — export 약속(파일) vs 실제(clipboard) 불일치 통일 | support·data·settings·wiki | high | ✅ 점검완료 — data.tsx 이미 정직("텍스트로 모아 복사", 파일 거짓약속 없음) + wiki export 승격 `f710b50`(Codex). churn 회피 |
@@ -63,6 +63,7 @@
 - **deployment env 진실** — FORCE_TIER/ENABLE_*/LLM_MODE 기본값 확정 (D-01).
 - **social provider 실설정** (D-05).
 - ~~permissions phantom notification~~ — ✅ **AG가 행 제거 머지 `707387e`**(expo-notifications 미구현이므로 phantom 행 삭제가 정답). 해소됨.
+- **D-12 privacy 토글 진실 (A2 조사발) — 🔴 신뢰·법적 리스크**: 8토글 중 7개 phantom(enforce 0). **결정 필요**: 각 토글을 ①실제 enforce(해당 기능 존재 시) ②미구현이면 honest-UI(숨김 또는 "곧 제공"/"해당없음" 표기) ③`llm_training`·`sharing`은 **법무 검토 후** 표현 확정(약속 vs 실제 일치). 권고: 최소한 **법적 무게 토글(llm_training·sharing)은 즉시 honest-UI로**(현재 거짓약속). enforce 가능한 것(persona_export→export 게이트 등)은 Claude 구현 가능. 정책·법무 = Simon/§15.
 - go-live freeze 상태 명확화.
 
 ---
