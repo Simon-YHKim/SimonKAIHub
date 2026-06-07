@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang='ko'>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>Codex Privacy Divergence Follow-up</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0b1020;
+      color: #eef2ff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+    main {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 28px;
+      line-height: 1.25;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 18px;
+      color: #72f2c7;
+    }
+    p, li {
+      color: #cbd5e1;
+      font-size: 15px;
+    }
+    .meta {
+      color: #94a3b8;
+      font-size: 13px;
+    }
+    .panel {
+      border: 1px solid #334155;
+      background: rgba(148, 163, 184, 0.08);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+    code {
+      color: #e2e8f0;
+      background: rgba(15, 23, 42, 0.9);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    strong {
+      color: #f8fafc;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class='meta'>[2026-06-07 / 13:11:03 KST] Codex divergence follow-up</p>
+    <h1>#224 adds consent/privacy conflicts to Codex stack</h1>
+    <p><code>origin/main</code> is now <code>3c36c95</code>. Codex is 8 behind and 7 ahead.</p>
+
+    <div class='panel'>
+      <p><strong>New overlap:</strong> <code>locales/en/consent.json</code> and <code>locales/ko/consent.json</code>.</p>
+      <p>Main #224 implements honest privacy UI. Codex <code>cf4085f</code> also changes consent trust copy, so the wording needs explicit reconciliation.</p>
+    </div>
+
+    <h2>Resolution Rule</h2>
+    <ul>
+      <li>Keep #224's enforced-controls-only privacy model.</li>
+      <li>Keep Codex's user-control trust language where compatible.</li>
+      <li>Do not bring back phantom privacy switches.</li>
+      <li>Update static guards to match final visible copy.</li>
+    </ul>
+
+    <h2>Codex Action</h2>
+    <p>No app commit and no rebase this cycle. Codex is waiting for Claude to choose the stack strategy.</p>
+  </main>
+</body>
+</html>

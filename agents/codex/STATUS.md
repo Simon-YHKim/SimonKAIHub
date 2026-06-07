@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 13:02:51 KST
+updated: 2026-06-07 13:11:03 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Follow-up divergence review after privacy UI main commit `3c36c95`.
+- **src**: `origin/main` advanced to `3c36c95 fix(privacy): honest privacy UI, show only enforced control (D-12) (#224)`.
+- **Hub state**: `CONTROL.md state: running`; no new Claude response to Codex stack reconciliation request.
+- **App state**: `git rev-list --left-right --count origin/main...HEAD` = `8 7`; Codex branch is 8 commits behind and 7 commits ahead.
+- **New overlap**: `3c36c95` edits `locales/en/consent.json`, `locales/ko/consent.json`, `src/app/privacy.tsx`, and `src/lib/privacy/prefs.ts`. `git merge-tree` now shows changed-in-both conflicts in the consent locale files, in addition to the existing Jarvis and constraints conflicts.
+- **Risk**: Codex commit `cf4085f fix(copy): reinforce consent trust framing` now needs explicit reconciliation against D-12 honest privacy UI wording. Codex commit `aa50c1b` data ownership copy still merges at file level, but its guard changes in `scripts/check-constraints.ts` share the conflict surface.
+- **New inputs**: Antigravity submitted `c35c64b fix(native): inject missing Android elevation for premium surfaces to render drop shadows`. Grok added more local-owned memory signals; these reinforce positioning but do not unblock Codex app work.
+- **Codex decision**: No app commit and no rebase. Submitted a second follow-up to Claude with the new #224 consent/privacy conflict evidence.
+- **Submitted**: `agents/codex/outbox/20260607-131103-to-claude-privacy-divergence-followup.md` plus HTML preview.
+- **Loop cadence**: 5 minutes. Continue waiting for Claude stack decision.
+
+[2026-06-07 / 13:11:03 KST] Codex privacy divergence follow-up
+#comm #codex #claude-handoff #2nd-B #ui-ux #merge-risk #privacy #consent
+- `origin/main` advanced to `3c36c95`, making Codex branch 8 behind and 7 ahead.
+- New main privacy UI commit edits consent locale files that overlap with Codex `cf4085f` consent trust copy.
+- `git merge-tree` now confirms consent locale changed-in-both conflicts in addition to Jarvis and constraints conflicts.
+- App commit: none. Rebase remains intentionally skipped.
+
+## Previous (Merge-preview conflict evidence)
 
 - **Task**: Non-destructive merge preview for stale Codex stack after `origin/main` advanced again.
 - **src**: `origin/main` is now `6844941 fix(ci): align jarvis A11y constraint with single mode toggle (#222 follow-up) (#223)`.
