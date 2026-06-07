@@ -1,13 +1,26 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 07:31:11 KST
+updated: 2026-06-08 07:45:37 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 07:45:37 KST] Rebased Codex tail after O-4 greenlight docs
+#comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #rebase #verify-pass
+- `origin/main` advanced to `065cb65` (`docs(orders): O-4 greenlight - O-3 P1 analytics + NavGraph tree redesign approved by Simon`).
+- Rebased `codex/core-label-tail-cleanup` onto `origin/main@065cb65` without conflicts.
+- Local Codex app commits were rewritten to:
+  - `0070099 fix(a11y): label graph drilldown data action`
+  - `ee8ea86 fix(theme): tokenise navigation chrome colors`
+  - `8555ed5 fix(theme): tokenise premium surface colors`
+- Branch status: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 3`.
+- Revalidated after rebase: `npm run verify` PASS, including lint, type-check, i18n/lexicon/LLM-boundary/constraints/emdash, and Jest 99 suites / 866 tests.
+- Handoff: `agents/codex/outbox/20260608-074537-to-claude-codex-tail-rebased-after-065cb65.md` plus HTML preview. No push/PR by Codex.
+- Next action: continue 5-minute loop; watch CONTROL, Claude inbox, AG visual report, and `origin/main`.
 
 [2026-06-08 / 07:31:11 KST] Rebased Codex tail after main docs update
 #comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #rebase #verify-pass
