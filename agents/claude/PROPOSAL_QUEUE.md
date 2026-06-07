@@ -130,3 +130,21 @@
 | PF-J | 무료한도 리셋 KST 자정 하드코딩(비KR 저녁 롤오버) `conversation.ts:109` | 1p | P1 | codex | open |
 | PF-D | 업그레이드 막다른길 CTA(체크아웃 없음)+첫날 5/5 노출 | 2p | P2 | claude(D-09 연계) | open |
 | PF-P3 | 묶음: N(PNG무게)·O(OCR리사이즈)·U(가입버튼 회색)·R·S·V·Q(DELETE)·T·W·X | — | P3 | claude/codex/ag/simon | open |
+
+---
+
+## G. 코히런스/에셋 감사 (2026-06-07, wxo3meke6) — jarvis 통합 + 네이밍/카피/에셋
+> 완전 맵: `agents/claude/coherence-asset-audit-20260607.md`. 사용자 노출 표시명은 이미 SecondB/세컨비 통일됨(테스트 차단). 불일치는 개발자층(코드 id·파일명·죽은 에셋·i18n 드리프트)에 집중.
+
+| # | 항목 | 규모 | 담당 | status |
+|---|---|---|---|---|
+| G1 | **jarvis→/secondb 6축 리네임** (route+리다이렉트 스텁+i18n ns+TabId+purpose+CI script check-constraints.ts+tests) DB영향0 | 중(~20파일) | claude(원자 PR) | open(focus PR) |
+| G2 | **mascot.json 死코드 삭제** (구 로스터, 소비처 0, NAMESPACES·tokens mascot색키 동반) | 소~중 | claude/codex | open |
+| G3 | **캐릭터 코드 id 통일** lulu/archi/gadi/lumi→lumen/archon/relia/iris (+PNG 파일명 결합, TODO(naming) 실행, 테스트 다수) | 대 | codex/ag(에셋)+claude | open(별 PR) |
+| G4 | **Iris(lumi) 로스터 누락** characters.ts 5인 vs 정본 6인(personas/village/monologues) + CompanionName 누락 ⚠️**5 vs 6 결정 필요** | 소(결정후) | claude | 🔴 결정(합의) |
+| G5 | **죽은 에셋팩 7개 삭제** (~6.6MB 웹번들 동봉, src 참조 0) + 중복 워커폴더(workers/·workers-sharp/) + _clean/비-hq 변형 + vela 고아 | 중(binary rm) | claude/ag | open(grep 재확인 후) |
+| G6 | **데드 함수 삭제** getCompanionSpritePath/CuePath(소비처 0 + 네이티브 깨짐 소지) `CompanionSprite.tsx:35,44` | 소 | claude | open(safe) |
+| G7 | **용어 사전 1종 확정** 캡처/담기/기록·pieces/records/entries·위키/지식그래프/서재/창고(6종)·journal/일기/저널·리서치/자료실 | 중(카피) | codex | open |
+| G8 | **AI 주체 호칭 통일** capture.json:77 "Lumen saved"↔SecondB, consent "비서"↔세컨비 → 화면당 주체 1인 | 소~중 | codex | open |
+| G9 | XPRIZE judges/심사관 어휘 일반 빌드 노출 → judge 플래그 게이팅 `consent.json:4-5`·`auth.json:98` | 소 | claude | open |
+| G-dec | ⚠️ **결정**: ①앱명 2층(앱="두번째 뇌/2nd-Brain" vs AI주체="세컨비/SecondB") 의도적 분리 확정? ②로스터 5 vs 6(Iris) | — | 4-AI 합의(§14) | 🔴 |
