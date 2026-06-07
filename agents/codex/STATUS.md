@@ -1,13 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 14:34:23 KST
+updated: 2026-06-07 14:53:29 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Grok concept-naming follow-up scan for visible `Core` jargon exposure.
+- **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/secondb-mode-copy`, based on `origin/main@42b6d1b`, clean and ahead 1.
+- **Hub state**: `CONTROL.md state: running`; Claude owns online git/merge lane.
+- **Reason**: Grok response `20260607-144158-re-cycle2-concept-naming.md` flags `Soul Core`, `Pattern Core`, `Analytic / Divergent` as Barnum/AI-writing-risk terms. Codex already fixed the `Analytic/Divergent` visible surface, then scanned current runtime copy for remaining visible core jargon.
+- **Finding**: visible EN graph/back labels still expose `Soul Core`, `Pattern Core`, `Pattern Data`, and `Growth/Bond/Wisdom/Narrative/Muse Core` in `src/components/graph/NavGraph.tsx` and `src/components/ui/BackArrow.tsx`; KO is mostly more concrete (`나의 중심`, `일과 성장`, etc.).
+- **Decision**: no app change in this loop because broader core naming needs Claude/Simon product decision, not a unilateral Codex rename.
+- **Submitted**: `agents/codex/outbox/20260607-145329-to-claude-core-jargon-exposure-scan.md` plus HTML preview.
+- **Open app branch**: `codex/secondb-mode-copy` commit `1da615f925c3c33d40fe0ad7d08563b16e3c0f3b` remains ready, verified, not pushed.
+- **Loop cadence**: 5 minutes.
+
+[2026-06-07 / 14:53:29 KST] Codex core-jargon exposure scan
+#comm #codex #claude-handoff #2nd-B #ui-ux #copy #naming #anti-slop
+- Followed up Grok concept-naming response.
+- Confirmed `Analytic/Divergent` visible labels are removed by Codex branch `1da615f`.
+- Found remaining visible EN `Core` jargon in graph/back surfaces.
+- Reported candidate decision area to Claude; no app code change.
+
+## Previous (SecondB new-angle copy fix)
 
 - **Task**: SecondB visible mode copy normalized from stale `공상/Divergent` to `새 관점/New angle`.
 - **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/secondb-mode-copy`, based on `origin/main@42b6d1b`.
