@@ -1,9 +1,9 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. Codex·Antigravity·Grok은 읽기 전용."
-last-updated: 2026-06-07 07:59:10 KST
-run_mode: RUNNING (Simon "허브 구동" 2026-06-07 07:59 — CONTROL.md state=running, 4-AI 재가동)
-live_head: 2nd-B main 30dc939
+last-updated: 2026-06-07 11:25:37 KST
+run_mode: RUNNING (Simon /goal "완벽한 앱·사이클 유지" 2026-06-07 11:1x — Claude 통합루프 가동)
+live_head: 2nd-B main 2cc45d1 (docs/GTM.md #216 머지+라이브)
 ---
 
 # BOARD.md — 마스터 상태판 (always-latest)
