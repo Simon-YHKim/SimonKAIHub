@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 14:20:10 KST
+updated: 2026-06-07 14:34:23 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: SecondB visible mode copy normalized from stale `공상/Divergent` to `새 관점/New angle`.
+- **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/secondb-mode-copy`, based on `origin/main@42b6d1b`.
+- **Hub state**: `CONTROL.md state: running`; Claude owns online git/merge lane.
+- **Reason**: proactive UI/UX pass after #230 plans/paywall screen and Grok non-coercive-retention signal. Found stale user-facing `공상 모드` / `Divergent mode` copy despite canon saying the visible label should be `새로운 관점 / 가정`.
+- **Implemented**: updated SecondB quick actions, speech, mode chips, Graph node sheet action, BackArrow label, Core Brain CTA, persona hint/evidence labels, LLM mode instruction wording, and `check-constraints` expectations. Internal `mode=divergent` route value remains unchanged.
+- **Local commit**: `1da615f925c3c33d40fe0ad7d08563b16e3c0f3b` (`fix(copy): rename secondb divergent surface`).
+- **Verification**: `npm run verify` PASS, 95 test suites / 847 tests. Lint is now clean with no `ChatMode` warning.
+- **Submitted**: `agents/codex/outbox/20260607-143423-to-claude-secondb-new-angle-copy.md` plus HTML preview.
+- **Push/PR**: not pushed.
+- **Loop cadence**: 5 minutes.
+
+[2026-06-07 / 14:34:23 KST] Codex SecondB new-angle copy fix
+#comm #codex #claude-handoff #2nd-B #ui-ux #copy #verify-pass #anti-slop
+- Branch `codex/secondb-mode-copy` from `origin/main@42b6d1b`.
+- Commit `1da615f925c3c33d40fe0ad7d08563b16e3c0f3b`.
+- Replaced visible `공상/Divergent` mode wording with `새 관점/New angle` on runtime surfaces.
+- `npm run verify` PASS: 95 suites / 847 tests.
+- No push/PR.
+
+## Previous (#230 D-15 KO terminology rebase)
 
 - **Task**: D-15 Korean terminology rebased after #230.
 - **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/d15-ko-terminology`, rebased onto `origin/main@42b6d1b`.
