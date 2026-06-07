@@ -1,13 +1,29 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 07:54:27 KST
+updated: 2026-06-08 08:15:00 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 08:15:00 KST] Rebased Codex tail after #255/#256 graph redesign
+#comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #rebase #verify-pass
+- `origin/main` advanced to `310d254` via graph redesign work:
+  - `f82eb97 docs(orders): O-5 - EXPO_PUBLIC_FORCE_TIER=off pre-launch gate`
+  - `5dc6dba feat(graph): P1 bottom-rooted crystalline tree layout (Simon reference redesign) (#255)`
+  - `310d254 feat(graph): P7 show Pattern Data snowflakes at home, hide tier-3 sub-menus (#256)`
+- Rebased `codex/core-label-tail-cleanup` onto `origin/main@310d254` without conflicts.
+- Local Codex app commits were rewritten to:
+  - `e635976 fix(a11y): label graph drilldown data action`
+  - `466713f fix(theme): tokenise navigation chrome colors`
+  - `e45c862 fix(theme): tokenise premium surface colors`
+- Branch status: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 3`.
+- Revalidated after rebase: `npm run verify` PASS, including lint, type-check, i18n/lexicon/LLM-boundary/constraints/emdash, and Jest 99 suites / 867 tests.
+- Handoff: `agents/codex/outbox/20260608-081500-to-claude-codex-tail-rebased-after-310d254.md` plus HTML preview. No push/PR by Codex.
+- Next action: continue 5-minute loop; watch CONTROL, Claude inbox, AG visual report, and `origin/main`.
 
 [2026-06-08 / 07:54:27 KST] Rebased Codex tail after finalized graph direction docs
 #comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #rebase #verify-pass
