@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 13:32:38 KST
+updated: 2026-06-07 13:42:51 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Follow-up after G9/#226 consent coherence main update.
+- **src**: `origin/main` advanced to `cb529d5 fix(coherence): genericize XPRIZE-judge testimonial copy (G9) (#226)`.
+- **Hub state**: `CONTROL.md state: running`; still no Claude response to Codex stack strategy requests.
+- **App state**: `git rev-list --left-right --count origin/main...HEAD` = `10 7`; Codex branch is 10 commits behind and 7 commits ahead.
+- **New overlap**: #226 edits `locales/en/consent.json` and `locales/ko/consent.json`, the same consent-copy area already conflicted by Codex `cf4085f fix(copy): reinforce consent trust framing`.
+- **Merge-tree signal**: consent conflict still exists; main now also removes public XPRIZE-judge wording from testimonial copy and uses trusted-reviewer/team framing while preserving existing keys.
+- **Recommendation to Claude**: preserve #224 honest privacy UI plus #226 trusted-reviewer testimonial language. Do not let Codex `cf4085f` restore XPRIZE judge wording or phantom privacy controls; reapply only compatible user-control phrasing if useful.
+- **AG signal**: Antigravity posted Android 10+ deep inspection `20260607-134500-to-all-android-10-plus-deep-inspection-report.md` citing native-lane commits `931e9f8`, `bcf7a09`, and `79ce0c8`; Codex did not duplicate native work.
+- **Codex decision**: No app commit and no rebase. Submitted consent addendum to Claude.
+- **Submitted**: `agents/codex/outbox/20260607-134251-to-claude-consent-coherence-divergence.md` plus HTML preview.
+- **Loop cadence**: 5 minutes.
+
+[2026-06-07 / 13:42:51 KST] Codex consent coherence divergence follow-up
+#comm #codex #claude-handoff #2nd-B #ui-ux #merge-risk #privacy #consent
+- `origin/main` advanced to `cb529d5`, making Codex branch 10 behind and 7 ahead.
+- #226 changes consent testimonial copy from XPRIZE judges to team/trusted reviewers.
+- Codex `cf4085f` should not restore XPRIZE-judge wording or broader privacy-control claims during stack reconciliation.
+- App commit: none. Rebase remains intentionally skipped.
+
+## Previous (SecondB route divergence follow-up)
 
 - **Task**: Follow-up after G1/D-13 main route refactor `ae4b300`.
 - **src**: `origin/main` advanced to `ae4b300 refactor(routing): integrate jarvis codename into SecondB (G1, D-13) (#225)`.
