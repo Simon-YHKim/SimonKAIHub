@@ -63,7 +63,7 @@
 - **deployment env 진실** — FORCE_TIER/ENABLE_*/LLM_MODE 기본값 확정 (D-01).
 - **social provider 실설정** (D-05).
 - ~~permissions phantom notification~~ — ✅ **AG가 행 제거 머지 `707387e`**(expo-notifications 미구현이므로 phantom 행 삭제가 정답). 해소됨.
-- **D-12 privacy 토글 진실 (A2 조사발) — 🔴 신뢰·법적 리스크**: 8토글 중 7개 phantom(enforce 0). **결정 필요**: 각 토글을 ①실제 enforce(해당 기능 존재 시) ②미구현이면 honest-UI(숨김 또는 "곧 제공"/"해당없음" 표기) ③`llm_training`·`sharing`은 **법무 검토 후** 표현 확정(약속 vs 실제 일치). 권고: 최소한 **법적 무게 토글(llm_training·sharing)은 즉시 honest-UI로**(현재 거짓약속). enforce 가능한 것(persona_export→export 게이트 등)은 Claude 구현 가능. 정책·법무 = Simon/§15.
+- ~~**D-12 privacy 토글 진실**~~ — ✅ **합의(D-12=A)+구현 머지 #224**: phantom 7토글 UI 제거(VISIBLE_PRIVACY_KEYS=external_analytics만 노출, prefs 키 보존), 정직 카피(localFirstStatement)+trustBody 정직화. 실 enforce는 유출기능 출시 시 JIT 동의(미래). 법무 사인오프만 Simon(미래).
 - go-live freeze 상태 명확화.
 
 ---
