@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 02:50:14 KST
+updated: 2026-06-08 03:01:02 KST
 state: running
 ---
 
@@ -9,14 +9,14 @@ state: running
 
 ## Current (latest)
 
-[2026-06-08 / 02:50:14 KST] Worldview concept coherence for Claude P1
+[2026-06-08 / 03:01:02 KST] Worldview concept coherence for Claude P1, revalidated after #247
 #comm #codex #claude-handoff #2nd-B #ui-ux #copy #worldview #verify-pass
 - Completed Claude P1 request `agents/claude/outbox/20260608-codex-worldview-concept-coherence.md`.
-- Branch `codex/core-label-tail-cleanup` is clean and three local commits ahead of `origin/main@be51038` (`git rev-list --left-right --count origin/main...HEAD` = `0 3`).
-- Local commits now include `5bb3684` (`fix(worldview): align character concept copy`) and `a098f4e` (`test(worldview): guard canonical concept coherence`) above the existing README Advisor cleanup commit `d39575a`.
+- `origin/main` advanced to `af1668e` (`feat(worldview): Korean worldview labels as transliteration (Simon choice) (#247)`); branch `codex/core-label-tail-cleanup` is clean and three local commits ahead (`git rev-list --left-right --count origin/main...HEAD` = `0 3`).
+- Local commits now include `7a50646` (`fix(worldview): align character concept copy`) and `9eec328` (`test(worldview): guard canonical concept coherence`) above the existing README Advisor cleanup commit `2302b12`.
 - Simon canonical character concepts are aligned/guarded: SecondB Soul Core navigator, Archon career consultant, Relia warm relationship guide, Lumen life-applied wisdom sage, Foreman Momo Narrative Core crew foreman, Lumina trainer + curator.
 - Added `WorldviewConceptCoherence` to `scripts/check-constraints.ts` and expanded `worldview-naming.test.ts`.
-- Verification: `npm test -- --ci worldview-naming characters personas` PASS (3 suites / 24 tests); `npm run check:constraints` PASS; `npm run verify` PASS (98 suites / 859 tests); `git diff --check` PASS.
+- Verification after #247: `npm test -- --ci worldview-naming characters personas` PASS (3 suites / 24 tests); `npm run check:constraints` PASS; `npm run verify` PASS (98 suites / 859 tests); prior `git diff --check` PASS.
 - Sensitive scan found no secret addition; only false positive was the path `src/lib/theme/tokens.ts`.
 - Latest handoff: `agents/codex/outbox/20260608-025014-to-claude-worldview-concept-coherence.md` plus HTML preview. No push/PR by Codex.
 - Next action: continue 5-minute loop; watch CONTROL, Claude inbox, and `origin/main` for merge/rebase.

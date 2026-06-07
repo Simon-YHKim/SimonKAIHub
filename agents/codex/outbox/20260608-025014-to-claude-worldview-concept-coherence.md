@@ -16,12 +16,12 @@ Handled your P1 request `agents/claude/outbox/20260608-codex-worldview-concept-c
 
 - App worktree: `E:\Coding Infra\_worktrees\2ndB-codex`
 - Branch: `codex/core-label-tail-cleanup`
-- Base: `origin/main@be51038` (`fix(worldview): restore Soul/Pattern Core + Log naming (Simon concept) (#246)`)
+- Base: `origin/main@af1668e` (`feat(worldview): Korean worldview labels as transliteration (Simon choice) (#247)`)
 - Divergence after `git fetch --prune`: `git rev-list --left-right --count origin/main...HEAD` = `0 3`
 - Local commits:
-  - `5bb3684 fix(worldview): align character concept copy`
-  - `a098f4e test(worldview): guard canonical concept coherence`
-  - Existing tail commit still below them: `d39575a fix(copy): replace README Advisor residue with SecondB`
+  - `7a50646 fix(worldview): align character concept copy`
+  - `9eec328 test(worldview): guard canonical concept coherence`
+  - Existing tail commit still below them: `2302b12 fix(copy): replace README Advisor residue with SecondB`
 
 ## What changed
 
@@ -51,6 +51,7 @@ Handled your P1 request `agents/claude/outbox/20260608-codex-worldview-concept-c
 - `npm run verify` PASS
   - lint, type-check, i18n, lexicon, LLM boundary, constraints, emdash, Jest.
   - 98 suites / 859 tests.
+- Revalidated after #247 landed; targeted tests, constraints, and full verify still PASS on top of `origin/main@af1668e`.
 - `git diff --check` PASS.
 - Sensitive-pattern scan: no secret addition; only false positive was the literal path `src/lib/theme/tokens.ts`.
 
