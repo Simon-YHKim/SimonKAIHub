@@ -1,13 +1,41 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 12:29:07 KST
+updated: 2026-06-07 12:37:52 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Antigravity Android native modal QA follow-up: harden direct React Native `<Modal>` rendering.
+- **src**: Direct RN modals did not consistently opt into Android hardware acceleration or edge-to-edge status bar translucency, leaving modal animations/drawers vulnerable to choppy rendering or status-bar seams on Android.
+- **Hub state**: `CONTROL.md state: running`. Working in `E:\Coding Infra\_worktrees\2ndB-codex` only; no 2nd-B online push/PR/merge.
+- **Inputs reread**: `CONTROL.md`, `BOARD.md`, Codex inbox, Antigravity `20260607-122900-to-claude-native-modal-qa.md`, plus 2nd-B `DESIGN.md`/`docs/CONSTRAINTS.md`/`CONTEXT.md` before coding.
+- **App baseline**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/work`, based on `origin/main@2cc45d1`; `git fetch origin` run before coding.
+- **Implemented pending**: added `hardwareAccelerated` and `statusBarTranslucent` to direct modal surfaces in `core-brain`, `jarvis`, `ConsentDialog`, `PremiumModal`, `QuantIntroModal`, `QuantSaveCelebration`, and `CrisisRouter`.
+- **Guard**: added `AndroidModalNativeProps` to `scripts/check-constraints.ts`, checking all direct RN modal files for Android hardware acceleration and status-bar translucency.
+- **Validation**: `npx tsc --noEmit`; `npx tsx scripts/check-constraints.ts` including `AndroidModalNativeProps PASS`; `npm run lint`; `npm run check:i18n` (`880 keys`, `25 namespaces`); `npm run check:lexicon` (`298 files`); `npm run check:emdash`; `npm run check:llm-boundary`; `git diff --check`; `git diff --cached --check`; `npm test -- --ci --runInBand` (95 suites, 848 tests) all pass. Android device rendering remains AG/Claude device-lane proof.
+- **Local commits**: `8cadc96` + `8caccb2` + `7cebff7` + `cf4085f` + `cdee870` + `aa50c1b` + `495b147` (`fix(android): harden modal native rendering`).
+- **Pending stack vs origin/main**: 7 commits. Charter gate is below the 8 unmerged-submission limit; next implementation cycle should check whether Claude has cherry-picked/merged before adding more app commits.
+- **Loop cadence**: 5 minutes. Next cycle should recheck Claude/AG/Grok outbox before selecting the next UI/UX or image/multimodal candidate.
+- **Latest outputs**:
+  - `agents/codex/outbox/20260607-123752-to-claude-android-modal-native-props.md`
+  - `agents/codex/outbox/preview/20260607-123752-android-modal-native-props.html`
+  - `agents/codex/outbox/20260607-122907-to-claude-data-ownership-copy.md`
+  - `agents/codex/outbox/preview/20260607-122907-data-ownership-copy.html`
+  - `agents/codex/outbox/20260607-121815-to-claude-jarvis-mode-framing.md`
+
+[2026-06-07 / 12:37:52 KST] Android modal native rendering hardening
+#comm #codex #antigravity-signal #2nd-B #ui-ux #android #modal #implementation
+- Completed Codex follow-up for Antigravity native modal QA.
+- Added `hardwareAccelerated` and `statusBarTranslucent` to all direct React Native modal surfaces.
+- Added `AndroidModalNativeProps` regression guard.
+- App commit: `495b147 fix(android): harden modal native rendering`.
+- Full validation passed, including Jest 95 suites / 848 tests. Device-level visual proof remains for AG/Claude.
+
+## Previous (Data ownership copy reinforcement)
 
 - **Task**: 5-minute autonomous UI/UX loop, self-initiated from Grok local-first and ownership signals: reinforce data-management ownership copy.
 - **src**: `src/app/data.tsx` and `locales/en|ko/data.json` explained import/export/delete, but did not yet state the practical trust promise: records remain portable, export produces a copy the user can take elsewhere, and SecondB reads records only when asked.
