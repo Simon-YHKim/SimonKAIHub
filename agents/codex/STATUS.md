@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 18:57:05 KST
+updated: 2026-06-07 19:36:16 KST
 state: running
 ---
 
@@ -9,17 +9,25 @@ state: running
 
 ## Current (latest)
 
-- **Task**: Core-label and app-brand residue cleanup implemented after #241 and fully verified.
-- **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/core-label-tail-cleanup`, clean, two local commits ahead of `origin/main@271b9e9`.
+- **Task**: Core-label, app-brand, and Korean companion-name residue cleanup implemented after #241 and fully verified.
+- **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/core-label-tail-cleanup`, clean, three local commits ahead of `origin/main@271b9e9`.
 - **Hub state**: `CONTROL.md state: running`; Claude owns online git/merge lane.
-- **Reason**: proactive UI/UX copy scan after #238/#241 found remaining user-visible `Core` residue plus informal app-brand `2nd-B`/`2ndB` residue after #240's brand policy.
+- **Reason**: proactive UI/UX copy scan after #238/#241 found remaining user-visible `Core` residue, informal app-brand `2nd-B`/`2ndB` residue after #240's brand policy, and Korean AI companion naming mixed as `세컨비` / `세컨드비` / `SecondB`.
 - **Security state**: `HEAD` tree has no `.env.bak`. Historical #235 exposure and any key rotation/GitHub secret scanning remain Claude/Simon owner tasks.
-- **Implemented**: app commits `420cc6ff8c04b91a365ff8caccb461f8159cf0e7` (`fix(copy): remove visible core label residue`) and `ecf8ba7bcdf4c8ce6f37addeaf381d8717bce0f2` (`fix(copy): normalize app brand residue`) on top of `origin/main@271b9e9fbbd991bafde1cda1a686b31d9bbf905a`.
-- **Changes**: visible `Core` suffixes now use `My center`, area/records language, and `나의 중심`; informal app-brand `2nd-B` / `2ndB` surfaces now use `2nd-Brain` or compact `2B / Brain`; constraints and new visible-copy tests guard both policies.
-- **Verification**: targeted `npm test -- --ci visible-brand-copy visible-core-copy worldview-naming` PASS; `rg --pcre2 "2nd-B(?!rain)|2ndB"` over app/locales/components returns no matches; `npm run verify` PASS after #241 rebase, including lint, type-check, i18n/lexicon/constraints/emdash, and Jest 97 test suites / 853 tests.
-- **Submitted**: `agents/codex/outbox/20260607-185705-to-claude-core-brand-copy-cleanup-241.md` plus HTML preview.
+- **Implemented**: app commits `420cc6ff8c04b91a365ff8caccb461f8159cf0e7` (`fix(copy): remove visible core label residue`), `ecf8ba7bcdf4c8ce6f37addeaf381d8717bce0f2` (`fix(copy): normalize app brand residue`), and `3d5ea29` (`fix(copy): normalize Korean companion name`) on top of `origin/main@271b9e9fbbd991bafde1cda1a686b31d9bbf905a`.
+- **Changes**: visible `Core` suffixes now use `My center`, area/records language, and `나의 중심`; informal app-brand `2nd-B` / `2ndB` surfaces now use `2nd-Brain` or compact `2B / Brain`; Korean user-facing companion copy now uses `세컨비` while storage/product copy keeps `2nd-Brain`; constraints and visible-copy tests guard all three policies.
+- **Verification**: targeted `npm test -- --ci visible-brand-copy` PASS; `rg "\bSecondB\b" locales\ko` and `rg "세컨드비" src\app src\components locales` return no matches; `npm run verify` PASS, including lint, type-check, i18n/lexicon/constraints/emdash, and Jest 97 test suites / 854 tests.
+- **Submitted**: `agents/codex/outbox/20260607-193616-to-claude-korean-companion-name-cleanup.md` plus HTML preview.
 - **Push/PR**: not pushed.
 - **Loop cadence**: 5 minutes.
+
+[2026-06-07 / 19:36:16 KST] Codex Korean companion-name cleanup after #241
+#comm #codex #claude-handoff #2nd-B #ui-ux #copy #i18n #naming #brand #verify-pass #anti-slop
+- Branch `codex/core-label-tail-cleanup`, commits `420cc6f` + `ecf8ba7` + `3d5ea29`.
+- Added third commit `3d5ea29` to normalize KO user-facing AI companion name to `세컨비`.
+- Updated KO locale strings, home/wiki/SecondB accessibility labels, `check-constraints`, and `visible-brand-copy.test.ts`.
+- `npm run verify` PASS: 97 suites / 854 tests.
+- No push/PR.
 
 [2026-06-07 / 18:57:05 KST] Codex core-label + app-brand cleanup after #241
 #comm #codex #claude-handoff #2nd-B #ui-ux #copy #naming #brand #verify-pass #anti-slop
