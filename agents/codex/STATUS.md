@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 12:37:52 KST
+updated: 2026-06-07 12:44:31 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: Re-grounding cycle after activation prompt; throttle-aware hub report for App Links verification.
+- **src**: User restarted Codex with `codex-activate.md`; first cycle required §31.1 re-grounding with PROTOCOL §27/§28, then CONTROL/BOARD/inbox, 2nd-B design constraints, and new agent reports.
+- **Hub state**: `CONTROL.md state: running`; `board.ps1 -Me codex` shows 4 open Codex inbox requests. Working only in `E:\Coding Infra\_worktrees\2ndB-codex`.
+- **Inputs reread**: `prompts/codex-activate.md`, PROTOCOL §27/§28/§29/§31, Codex `RULES.md`, `CONTROL.md`, `BOARD.md`, `DECISIONS.md`, Codex inbox, 2nd-B `DESIGN.md`/`docs/CONSTRAINTS.md`/`CONTEXT.md`.
+- **App baseline**: `codex/work` clean; `git fetch origin` run; pending stack vs `origin/main` is 7 commits: `8cadc96`, `8caccb2`, `7cebff7`, `cf4085f`, `cdee870`, `aa50c1b`, `495b147`.
+- **New signals**: Antigravity confirmed PASS for Codex native UI/A11y fixes on research error state, preference toggles, and consent checkbox rows. Antigravity also flagged App Links / Universal Links verification-file absence risk.
+- **Codex check**: In the current Codex worktree at `origin/main@2cc45d1` plus pending stack, `app.json` contains only the custom `secondbrain` scheme and no HTTPS `autoVerify` App Links intent filter; `public/.well-known` is absent. BOARD references Claude live head `0921d91`, so the App Links concern likely belongs to a later Claude-side head not visible in this worktree baseline.
+- **Decision**: No new app commit this cycle. With 7 pending Codex app commits, adding a placeholder verification-file commit would push the stack to the charter threshold and could be wrong without actual Android package/signing SHA256 and Apple Team ID/bundle ID confirmation.
+- **Submitted**: `agents/codex/outbox/20260607-124431-to-claude-applinks-throttle-handoff.md` plus HTML preview.
+- **Loop cadence**: 5 minutes. Next cycle should recheck whether Claude has merged/cherry-picked the 7 pending commits before starting any new 2nd-B code changes.
+
+[2026-06-07 / 12:44:31 KST] Codex autonomous loop re-grounding and App Links handoff
+#comm #codex #claude-handoff #antigravity-signal #2nd-B #ui-ux #applinks #throttle
+- Codex autonomous loop active: inbox 4 open, pending gate 7 app commits.
+- Re-read activation, PROTOCOL §27/§28/§29/§31, Codex RULES, hub state, and 2nd-B DESIGN/CONSTRAINTS/CONTEXT.
+- Reviewed Antigravity PASS for prior native UI/A11y work and the new App Links verification-file risk.
+- Did not add a new app commit because release identifiers/domain verification need Claude/live-head coordination and Codex is already at 7 pending app commits.
+- Submitted a Claude handoff recommending no placeholder `.well-known` files until actual package, signing SHA256, Team ID, bundle ID, and deployment path are confirmed.
+
+## Previous (Android modal native rendering hardening)
 
 - **Task**: Antigravity Android native modal QA follow-up: harden direct React Native `<Modal>` rendering.
 - **src**: Direct RN modals did not consistently opt into Android hardware acceleration or edge-to-edge status bar translucency, leaving modal animations/drawers vulnerable to choppy rendering or status-bar seams on Android.
