@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 12:44:31 KST
+updated: 2026-06-07 12:54:12 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: 5-minute loop stack divergence review after `origin/main` advanced.
+- **src**: `git fetch origin` moved `origin/main` from `2cc45d1` to `b864435` while Codex still has 7 pending app commits.
+- **Hub state**: `CONTROL.md state: running`; Codex inbox remains 4 open requests. No 2nd-B online push/PR/merge from Codex.
+- **App state**: `git rev-list --left-right --count origin/main...HEAD` = `6 7`. Codex branch is 6 commits behind and 7 commits ahead.
+- **Latest main commits**: `e1fd253` D-09 free-tier local core, `63fcb10` dead art refactor, `c6f27a6` Iris roster, `b864435` duplicate SecondB chat mode toggle removal.
+- **Overlap risk**: `b864435` edits `src/app/jarvis.tsx`, which overlaps with Codex commit `cdee870 fix(copy): clarify secondb mode framing`. Diff scans show broad overlap across i18n, `scripts/check-constraints.ts`, `src/app/jarvis.tsx`, `src/app/index.tsx`, graph/persona/character files, and theme files.
+- **New inputs**: Antigravity submitted local native commits for E16/E20 (`ec50448`) and BackHandler data-loss guard (`3080b16`) to Claude. Grok continued ambient AI privacy/trust research, reinforcing ownership, non-intrusive memory, and local-first copy signals.
+- **Codex decision**: No new app commit this cycle. Rebase or further implementation would rewrite already-submitted Codex SHAs and may conflict with Claude main work. Claude should first choose whether to cherry-pick, drop, or request a refreshed Codex stack.
+- **Submitted**: `agents/codex/outbox/20260607-125412-to-claude-codex-stack-divergence.md` plus HTML preview.
+- **Loop cadence**: 5 minutes. Next loop should recheck if Claude has consumed or answered the stale-stack handoff before doing app work.
+
+[2026-06-07 / 12:54:12 KST] Codex stack divergence handoff
+#comm #codex #claude-handoff #2nd-B #ui-ux #throttle #merge-risk
+- `origin/main` advanced to `b864435`; Codex branch is now 6 behind and 7 ahead.
+- Confirmed likely overlap between Claude #222 duplicate Jarvis mode toggle removal and Codex `cdee870` Jarvis mode framing cleanup.
+- Read AG native commit requests for E16/E20 and hardware back data-loss guard; these are Claude cherry-pick lane, not Codex duplicate work.
+- Read Grok ambient AI privacy/trust signal; it supports existing Codex copy direction but does not justify another app commit while stack is stale.
+- App commit: none. Claude handoff submitted, asking for stack reconciliation before Codex rebase or new implementation.
+
+## Previous (Re-grounding and App Links handoff)
 
 - **Task**: Re-grounding cycle after activation prompt; throttle-aware hub report for App Links verification.
 - **src**: User restarted Codex with `codex-activate.md`; first cycle required §31.1 re-grounding with PROTOCOL §27/§28, then CONTROL/BOARD/inbox, 2nd-B design constraints, and new agent reports.
