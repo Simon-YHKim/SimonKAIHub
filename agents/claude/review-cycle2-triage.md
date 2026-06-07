@@ -11,11 +11,14 @@
 - **#9~#12 "i18n 우회 하드코딩"** (TIER_DISPLAY·secondb inline ternary·QUICK_ACTIONS):
   - **수용된 패턴.** 코드베이스는 inline locale 삼항(`locale==="ko"?…:…`)을 정식 채택(en+ko 양쪽 존재라 유저버그 아님). 티어명 Free/Plus/Pro는 **브랜드 고유명사**(SecondB처럼 라틴 유지 정상). 결함 아님. (대규모 i18n 번들 이관은 별도 B-section Codex 선호항목이지 버그 아님.)
 
-## ✅ DO — 실제 in-lane 결함 (수정) — PR로 처리
-- **PR1 #231(머지대기)**: #13 한도시 send 비활성 · #29/#30 44px 터치타깃 · #19 plans notify 거짓약속 제거(M5 정직) · #31/#32/#33 plans a11y role+현재상태+44px
-- **PR2(에러)**: #35 wiki handleRefresh try/finally(에러시 스피너 영구) · #37 usage `data as number` malformed시 throw(fail-safe) · #40 capture 빈 catch→stale 상태 리셋
-- **PR3(코히런스)**: #43 NavGraph `bubbleAction?:"jarvis"` 죽은 타입 제거 · #41/#42 NavGraph jarvis 주석 정정 · #44 signature.ts Vela 주석 정정 (G1 잔재 + Vela 마무리)
-- **PR4(에셋)**: #20 workers/ · #21 workers-sharp/ · #23 soulcore 미사용 사이즈변형 · #24 v4-tesseract app_128/app_96/@4x — 0참조 repo-wide 재확인 완료, git 복원가능
+## ✅ DO — 실제 in-lane 결함 (전부 머지) — 4 PR
+- **PR1 ✅#231**: #13 한도시 send 비활성 · #29/#30 44px 터치타깃 · #19 plans notify 거짓약속 제거(M5 정직) · #31/#32/#33 plans a11y role+현재상태+44px
+- **PR2 ✅#232**: #35 wiki handleRefresh try/finally(에러시 스피너 영구) · #37 usage `data as number`→malformed시 throw(fail-safe, 한도우회 차단) · #40 capture 빈 catch→로그+stale 방지
+- **PR3 ✅#233**: #43 NavGraph `bubbleAction?:"jarvis"` 죽은 타입 제거(할당0 type-check 확인) · #41/#42 NavGraph jarvis 주석 · #44 signature.ts Vela 주석 (G1 잔재 + Vela 마무리)
+- **PR4 #234(CI중)**: #20 workers/ · #21 workers-sharp/ 대체된 렌더패스 28파일 삭제(redraw-v1만 사용·manifest 미카탈로그)
+
+## 🔬 심층검증 수정 (finder 부분오류 2차 포착)
+- **#23/#24 (soulcore/v4 사이즈변형) → DEBUNK→HOLD**. finder는 "_96/_128/preview 미사용 삭제"라 했으나, 참조패턴 확인 결과 **tier2 `_128`·tier3 `_96`은 실사용**(SoulcoreFinalArt 반응형). 또 死변형의 유일 "참조"는 각 팩 **manifest.json/integrated_asset_manifest.json**(생성형 카탈로그, 절대 빌드경로) = **의도된 멀티사이즈 세트**이지 우발 고아 아님. 맹목 적용 시 ①살아있는 _128/_96 삭제로 이미지 깨짐 ②manifest 불일치. → 보류. (이게 verify-공유-전제 실패의 2번째 사례.)
 
 ## ⏸️ HELD — 실재하나 보류 (사유 명시)
 - **#22** cosmic-pixel-v3 비-idle SVG (archon_build 등): 0참조이나 주석상 "not yet mounted" = **의도된 미래 애니메이션 예약셋**. 우발 debris 아님 → 보존(YAGNI 삭제는 의도 손실).
