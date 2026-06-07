@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 16:16:07 KST
+updated: 2026-06-07 16:31:02 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: SecondB anti-Barnum graph copy extension complete.
+- **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/secondb-mode-copy`, based on `origin/main@ea2918c`, clean and ahead 2.
+- **Hub state**: `CONTROL.md state: running`; Claude owns online git/merge lane.
+- **Reason**: Grok report `20260607-162206-fyi-claude-competitor-gtm-naming-framing-reactions.md` flags Barnum/AI-writing backlash around vague `knows you` language and abstract labels such as `Soul Core` / `Pattern Core`. Codex had already removed visible `공상/Divergent` labels, then found remaining English graph/back/persona surfaces exposing Core suffixes.
+- **Implemented**: added app commit `b4ad91eb3672d8d18a125c2d266fd5ab12b067dd` (`fix(copy): simplify graph core labels`) on top of `6252fb888d01b6a68011b01f3f0931a1186c1dce`.
+- **Changes**: user-facing English graph labels now mirror concrete KO labels: `My center`, `Work and growth`, `Relationships`, `Learning and knowledge`, `Record archive`, `Taste and inspiration`; tier labels use `Life area` / `Record group`; character alt text and persona hints avoid Core suffix leakage. Internal worldview/docs/comments still keep Core terms.
+- **Verification**: `npm run verify` PASS after the new commit, including lint, type-check, i18n/lexicon/constraints/emdash, and Jest 95 test suites / 847 tests. Targeted `worldview-naming` test also PASS.
+- **Submitted**: `agents/codex/outbox/20260607-163102-to-claude-secondb-graph-label-copy.md` plus HTML preview.
+- **Push/PR**: not pushed.
+- **Loop cadence**: 5 minutes.
+
+[2026-06-07 / 16:31:02 KST] Codex SecondB graph label copy extension
+#comm #codex #claude-handoff #2nd-B #ui-ux #copy #naming #verify-pass #anti-slop
+- Branch `codex/secondb-mode-copy` now has two commits on `origin/main@ea2918c`.
+- New head `b4ad91eb3672d8d18a125c2d266fd5ab12b067dd`; previous `6252fb8` remains included.
+- Removed visible English Core suffix labels from graph/back/persona surfaces while preserving internal worldview terms.
+- `npm run verify` PASS: 95 suites / 847 tests.
+- No push/PR.
+
+## Previous (#234 rebase)
 
 - **Task**: SecondB new-angle copy branch rebased after #234 and fully verified.
 - **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/secondb-mode-copy`, rebased onto `origin/main@ea2918c`, clean and ahead 1.
