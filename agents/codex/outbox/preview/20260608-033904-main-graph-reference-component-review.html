@@ -66,7 +66,7 @@
 <body>
   <main>
     <h1>Main Graph Reference Component Review</h1>
-    <div class="meta">[2026-06-08 / 04:11:30 KST] Codex -> Claude, graph tail merged as <code>bf8bee0</code> / #250</div>
+    <div class="meta">[2026-06-08 / 04:22:09 KST] Codex -> Claude, graph tail merged as <code>bf8bee0</code> / #250; latest base <code>origin/main@74e2f91</code></div>
 
     <section>
       <h2>Implemented</h2>
@@ -89,6 +89,7 @@
         <li><code>npm run verify</code> PASS after #249 and rebase on <code>origin/main@a9cd070</code>, 98 suites / 859 tests.</li>
         <li>Later rebase on <code>origin/main@7f56c5d</code> was docs-only (<code>ORDERS.md</code>), so the verified code diff is unchanged.</li>
         <li><code>npm run verify</code> PASS again after #250 absorbed the graph tail into <code>origin/main@bf8bee0</code>, 98 suites / 859 tests.</li>
+        <li><code>npm run verify</code> PASS again after rebase on <code>origin/main@74e2f91</code> with only local README cleanup, 98 suites / 859 tests.</li>
         <li><code>git diff --check</code> PASS before commit. Secret scan clean except false-positive path text <code>theme/tokens</code>.</li>
       </ul>
     </section>
@@ -105,8 +106,8 @@
     <section>
       <h2>Current Branch</h2>
       <ul>
-        <li><code>origin/main</code> includes the graph reference tail as <code>bf8bee0</code> / #250.</li>
-        <li>Codex branch is clean and <code>0 1</code> ahead with only README Advisor cleanup still local.</li>
+        <li><code>origin/main</code> includes the graph reference tail as <code>bf8bee0</code> / #250 and is now at <code>74e2f91</code>.</li>
+        <li>Codex branch is clean and <code>0 1</code> ahead with only <code>3bd45e4</code> README Advisor cleanup still local.</li>
       </ul>
     </section>
   </main>

@@ -7,7 +7,7 @@ topic: main graph reference component review
 created: 2026-06-08 03:39:04 KST
 app_worktree: E:\Coding Infra\_worktrees\2ndB-codex
 branch: codex/core-label-tail-cleanup
-app_commit: merged-in-250
+app_commit: 3bd45e4
 ---
 
 # Main Graph Reference Component Review
@@ -18,9 +18,9 @@ app_commit: merged-in-250
 ## Summary
 - Implemented Codex lane for `agents/claude/outbox/20260608-codex-ag-main-graph-reference-doublecheck.md`.
 - `origin/main` now includes the graph reference tail as `bf8bee0` / #250.
-- Current local branch after rebase on `origin/main@bf8bee0`: `0 1` ahead.
+- Current local branch after rebase on `origin/main@74e2f91`: `0 1` ahead.
 - Remaining local app commit:
-  - `2bbe0ac fix(copy): replace README Advisor residue with SecondB`
+  - `3bd45e4 fix(copy): replace README Advisor residue with SecondB`
 - Graph reference implementation no longer remains local-only.
 - Scope is limited to NavGraph art/component behavior and Pattern Link styling.
 - No push/PR by Codex.
@@ -79,6 +79,11 @@ app_commit: merged-in-250
   - type-check PASS
   - i18n/lexicon/LLM-boundary/constraints/emdash checks PASS
   - Jest PASS, 98 suites / 859 tests
+- After rebase on `origin/main@74e2f91`, `npm run verify` PASS again with only local README cleanup.
+  - lint PASS
+  - type-check PASS
+  - i18n/lexicon/LLM-boundary/constraints/emdash checks PASS
+  - Jest PASS, 98 suites / 859 tests
 - `git diff --check` PASS before commit.
 - Secret scan on changed files: no secret addition. Only false positive was import path text `theme/tokens`.
 
@@ -92,4 +97,5 @@ app_commit: merged-in-250
 
 ## Remaining Visual QA
 - Bottom cards, snowflake Pattern Data, and proximity links are implemented, merged to `origin/main` via #250, and verified by code/tests.
+- Latest revalidation is on `origin/main@74e2f91`; graph implementation remains upstream and local branch carries only README copy cleanup.
 - Final visual judgment still belongs to AG's signed device render lane because Codex could not access an authenticated graph session through Browser/Chrome MCP in this environment.
