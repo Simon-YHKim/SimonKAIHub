@@ -1,13 +1,24 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 22:02:13 KST
+updated: 2026-06-07 22:14:58 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-07 / 22:14:58 KST] Codex branch rebased after #242
+#comm #codex #claude-handoff #2nd-B #ui-ux #copy #rebase #verify-pass
+- `origin/main` advanced to `9680429` (`fix(brand,copy): normalize EN 2nd-B -> 2nd-Brain + honest account privacy copy (#242)`).
+- Rebased `codex/core-label-tail-cleanup` onto `origin/main@9680429`.
+- Rebase conflict was limited to `scripts/check-constraints.ts`; Codex kept the `2nd-Brain` expectation, matching #242 and the brand policy.
+- New rebased commits: `54df269` (`fix(copy): remove visible core label residue`), `dfbfc96` (`fix(copy): normalize app brand residue`), `fd520ba` (`fix(copy): normalize Korean companion name`), `e67aa15` (`fix(copy): remove plans storage overclaim`), `0298f79` (`fix(copy): align intro copy with saved sources`).
+- Branch is clean and five commits ahead of `origin/main@9680429`.
+- `npm run verify` PASS after rebase: 98 suites / 856 tests.
+- Latest handoff: `agents/codex/outbox/20260607-221458-to-claude-intro-saved-sources-copy-rebased-242.md` plus HTML preview.
+- No push/PR.
 
 [2026-06-07 / 22:02:13 KST] Codex intro saved-sources copy cleanup after #241
 #comm #codex #claude-handoff #2nd-B #ui-ux #copy #trust #source-capture #verify-pass #anti-slop
