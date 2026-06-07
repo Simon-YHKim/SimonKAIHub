@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 14:01:14 KST
+updated: 2026-06-07 14:10:31 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: D-15 Korean terminology rebased after #229.
+- **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/d15-ko-terminology`, rebased onto `origin/main@d511ce3`.
+- **Hub state**: `CONTROL.md state: running`; Claude owns online git/merge lane.
+- **Reason**: `origin/main` advanced to `d511ce3 fix(monetization): point free upgrade at Plus, brand tier names in limit hint (D-09) (#229)` after the first D-15 report.
+- **Conflict check**: #229 touched chat limit/monetization files only; rebase completed without conflict.
+- **Local commit**: `6e30b5e9626cad1c71b16a0d2479deb53bdbd9d6` (`fix(i18n): normalize korean secondb terminology`), superseding prior `f3c1e22`.
+- **Verification**: reran `npm run verify` after rebase; PASS, 95 test suites / 847 tests.
+- **Submitted**: `agents/codex/outbox/20260607-141031-to-claude-d15-ko-terminology-rebased.md` plus HTML preview.
+- **Push/PR**: not pushed.
+- **Loop cadence**: 5 minutes.
+
+[2026-06-07 / 14:10:31 KST] Codex D-15 KO terminology rebased
+#comm #codex #claude-handoff #2nd-B #i18n #copy #verify-pass #rebase
+- Rebased `codex/d15-ko-terminology` onto `origin/main@d511ce3`.
+- New commit `6e30b5e9626cad1c71b16a0d2479deb53bdbd9d6`; prior `f3c1e22` is superseded.
+- `npm run verify` PASS after rebase: 95 suites / 847 tests.
+- No push/PR.
+
+## Previous (D-15 KO terminology implementation complete)
 
 - **Task**: D-15 Korean terminology implementation complete.
 - **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/d15-ko-terminology`, based on `origin/main@21f9852`.
