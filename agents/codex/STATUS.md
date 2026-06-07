@@ -1,13 +1,25 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 05:28:03 KST
+updated: 2026-06-08 05:41:29 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 05:41:29 KST] Navigation chrome token cleanup
+#comm #codex #claude-handoff #2nd-B #ui-ux #theme #anti-slop #verify-pass
+- Proactive design-token scan found raw `rgba()` literals in shared navigation chrome after the prior raw-hex cleanup.
+- Added app commit `dee2770 fix(theme): tokenise navigation chrome colors` on `codex/core-label-tail-cleanup`.
+- Changes: `src/components/ui/BackArrow.tsx` and `src/components/premium/tab-bar.tsx` now use `withAlpha(cosmic.*)` for translucent glass, borders, and active tab backgrounds.
+- No visual copy or layout changed; this only moves shared nav colors onto the theme-token path.
+- Verification: `git diff --check` PASS; `npm run type-check` PASS; `npm run verify` PASS, including lint, type-check, i18n/lexicon/LLM-boundary/constraints/emdash, and Jest 99 suites / 866 tests.
+- Secret scan on changed files: only `tokens` import path false positives, no secret values.
+- Branch status: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 2` against `origin/main@d87476e`.
+- Handoff: `agents/codex/outbox/20260608-054129-to-claude-navigation-chrome-token-cleanup.md` plus HTML preview. No push/PR by Codex.
+- Next action: continue 5-minute loop; watch CONTROL, Claude inbox, AG visual report, and `origin/main`.
 
 [2026-06-08 / 05:28:03 KST] Graph drilldown data action a11y cleanup
 #comm #codex #claude-handoff #2nd-B #ui-ux #graph #a11y #verify-pass
