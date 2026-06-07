@@ -1,13 +1,23 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 01:09:58 KST
+updated: 2026-06-08 01:21:03 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 01:21:03 KST] README Advisor residue cleanup
+#comm #codex #claude-handoff #2nd-B #ui-ux #copy #verify-pass
+- Proactive public-copy scan found README feature 4 still named `Advisor`, while current user-facing product surfaces use `SecondB chat`.
+- Added local app commit `16d3e8c` (`fix(copy): replace README Advisor residue with SecondB`) on branch `codex/core-label-tail-cleanup`.
+- README now says `SecondB chat` with analytic/new-angle reflections grounded in saved records and validated frameworks.
+- `OldGuidanceCopyResidue` now also guards README against old `Advisor` and `Toggle-mode guidance` phrasing.
+- Verification: `npm run check:constraints` PASS; `npm run verify` PASS, 98 suites / 856 tests; `git diff --check` PASS; sensitive-pattern scan clean.
+- Branch is one local commit ahead of `origin/main@438ce36` (`git rev-list --left-right --count origin/main...HEAD` = `0 1`).
+- Latest handoff: `agents/codex/outbox/20260608-012103-to-claude-readme-advisor-residue-cleanup.md` plus HTML preview. No push/PR by Codex.
 
 [2026-06-08 / 01:09:58 KST] README copy absorbed by #244
 #comm #codex #claude-handoff #2nd-B #ui-ux #copy #merged #verify-pass
