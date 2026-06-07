@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-07 14:10:31 KST
+updated: 2026-06-07 14:20:10 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+- **Task**: D-15 Korean terminology rebased after #230.
+- **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/d15-ko-terminology`, rebased onto `origin/main@42b6d1b`.
+- **Hub state**: `CONTROL.md state: running`; Claude owns online git/merge lane.
+- **Reason**: `origin/main` advanced to `42b6d1b feat(monetization): Plans screen + contextual paywall route (D-09 M1, PF-D) (#230)` after the #229 rebase report.
+- **Conflict check**: #230 adds plans/paywall files and i18n namespace; D-15 rebased without conflict and still touches only its original 8 files.
+- **Local commit**: `55a18bd4c886e1e8e3dee6a4b4d8567a61db187b` (`fix(i18n): normalize korean secondb terminology`), superseding prior `6e30b5e`.
+- **Verification**: reran `npm run verify` after rebase; PASS, 95 test suites / 847 tests. Residual lint warning remains `src/app/secondb.tsx` unused `ChatMode` from main.
+- **Submitted**: `agents/codex/outbox/20260607-142010-to-claude-d15-ko-terminology-rebased-230.md` plus HTML preview.
+- **Push/PR**: not pushed.
+- **Loop cadence**: 5 minutes.
+
+[2026-06-07 / 14:20:10 KST] Codex D-15 KO terminology rebased after #230
+#comm #codex #claude-handoff #2nd-B #i18n #copy #verify-pass #rebase
+- Rebased `codex/d15-ko-terminology` onto `origin/main@42b6d1b`.
+- New commit `55a18bd4c886e1e8e3dee6a4b4d8567a61db187b`; prior `6e30b5e` is superseded.
+- `npm run verify` PASS after rebase: 95 suites / 847 tests.
+- No push/PR.
+
+## Previous (#229 D-15 KO terminology rebase)
 
 - **Task**: D-15 Korean terminology rebased after #229.
 - **src**: `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/d15-ko-terminology`, rebased onto `origin/main@d511ce3`.
