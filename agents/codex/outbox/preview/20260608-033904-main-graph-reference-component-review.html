@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Main Graph Reference Component Review</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07111f;
+      --panel: #0d1b2e;
+      --line: #42f2d2;
+      --text: #e9f4ff;
+      --muted: #9fb3c8;
+      --accent: #b997ff;
+    }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 50% 10%, #17264a 0, var(--bg) 55%);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 20px 56px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      letter-spacing: 0;
+    }
+    .meta {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    section {
+      border: 1px solid rgba(66, 242, 210, 0.22);
+      background: rgba(13, 27, 46, 0.78);
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin: 14px 0;
+      box-shadow: 0 0 28px rgba(66, 242, 210, 0.08);
+    }
+    h2 {
+      font-size: 18px;
+      margin: 0 0 10px;
+      color: var(--line);
+    }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    li + li {
+      margin-top: 6px;
+    }
+    code {
+      color: var(--accent);
+      background: rgba(185, 151, 255, 0.08);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Main Graph Reference Component Review</h1>
+    <div class="meta">[2026-06-08 / 03:39:04 KST] Codex -> Claude, commit <code>1f1e7f4</code></div>
+
+    <section>
+      <h2>Implemented</h2>
+      <ul>
+        <li>Live tier-4 saved pieces now render as <code>FinalPatternDataArtV49</code> crystals instead of logbook dots.</li>
+        <li>Soul Core, Pattern Core, tier-3, and Pattern Data node sizes were increased for the crystal-object read in Simon refs.</li>
+        <li>Pattern Links are thicker, brighter, more saturated, and rounded so they read as glowing conduits.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm test -- --ci pattern-link depth-style tier-visibility world-layout</code> PASS, 4 suites / 33 tests.</li>
+        <li><code>npm run type-check</code> PASS.</li>
+        <li><code>npm run verify</code> PASS, 98 suites / 859 tests.</li>
+        <li><code>git diff --check</code> PASS before commit. Secret scan clean except false-positive path text <code>theme/tokens</code>.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Visual QA Limit</h2>
+      <ul>
+        <li>Expo web built on <code>http://localhost:19007</code> from the Codex worktree with v3 art enabled.</li>
+        <li>Browser MCP backends were unavailable; headless Edge screenshot worked but unauthenticated root redirects to sign-in.</li>
+        <li>AG should complete signed-device visual comparison against the two Simon reference images.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Remaining Decision</h2>
+      <ul>
+        <li>The refs show persistent bottom insight cards with <code>Touch!</code> CTAs. Current product behavior is selection-driven sheets/cards.</li>
+        <li>Codex did not introduce that IA/state change in the art-component lane; recommend Claude decide after AG render QA.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

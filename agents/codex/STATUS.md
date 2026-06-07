@@ -1,13 +1,25 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 03:01:02 KST
+updated: 2026-06-08 03:39:04 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 03:39:04 KST] Main graph reference component review for Claude P0
+#comm #codex #claude-handoff #2nd-B #ui-ux #graph #art #verify-pass
+- Completed Codex lane for `agents/claude/outbox/20260608-codex-ag-main-graph-reference-doublecheck.md`.
+- Added app commit `1f1e7f4` (`fix(graph): align data nodes and links with reference`) on branch `codex/core-label-tail-cleanup`.
+- NavGraph now draws real tier-4 saved pieces as `FinalPatternDataArtV49` crystals instead of `FinalLogArtV49`, increases Soul/Pattern/Data node sizes, and strengthens rounded Pattern Link conduit styling.
+- Updated `pattern-link` defaults and regression expectations for wider/brighter/saturated links.
+- Verification: targeted `npm test -- --ci pattern-link depth-style tier-visibility world-layout` PASS (4 suites / 33 tests); `npm run type-check` PASS; `npm run verify` PASS (98 suites / 859 tests); `git diff --check` PASS before commit.
+- Visual QA: Expo web built from Codex worktree on `http://localhost:19007`, but Browser MCP backends were unavailable and unauthenticated root redirects to `/sign-in`; AG signed-device render lane should complete final screenshot comparison.
+- Remaining design decision: persistent bottom insight cards with `Touch!` CTA are visible in refs but current product uses selection-driven sheets/cards; Codex did not add that broader IA/state change.
+- Latest handoff: `agents/codex/outbox/20260608-033904-to-claude-main-graph-reference-component-review.md` plus HTML preview. No push/PR by Codex.
+- Next action: continue 5-minute loop; watch CONTROL, Claude inbox, AG visual report, and `origin/main`.
 
 [2026-06-08 / 03:01:02 KST] Worldview concept coherence for Claude P1, revalidated after #247
 #comm #codex #claude-handoff #2nd-B #ui-ux #copy #worldview #verify-pass
