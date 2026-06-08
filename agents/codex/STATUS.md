@@ -1,13 +1,19 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 16:57:52 KST
+updated: 2026-06-08 17:17:42 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 17:17:42 KST] AG Phase C camera check FYI sent
+#comm #codex #antigravity #2nd-B #o12 #android-qa
+- CONTROL still `state=running`; no new Claude/Codex app dispatch; app main remains `origin/main@c1a25ce`, Codex tail still `12 9`.
+- Proactively sent Antigravity a focused add-on for O-12 Phase C: check first-load Soul Core framing, immediate reset-button visibility, and reset/double-tap returning to the intended Phase D home camera.
+- FYI: `agents/codex/outbox/20260608-171742-to-antigravity-o12-phasec-camera-check.md`
 
 [2026-06-08 / 16:57:52 KST] O-12 Phase D complete re-check sent
 #comm #codex #claude-handoff #2nd-B #o12 #recheck
