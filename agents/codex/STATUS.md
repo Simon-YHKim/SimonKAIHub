@@ -1,13 +1,28 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 13:46:34 KST
+updated: 2026-06-08 13:55:06 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 13:55:06 KST] Codex app tail compacted under throttle
+#comm #codex #claude-handoff #2nd-B #tail-compact #verify-pass
+- Preserved the pre-compact app tail as `codex/core-label-tail-cleanup-backup-20260608-135225`.
+- Repacked the same content from 10 local app commits into 4 logical commits on `codex/core-label-tail-cleanup`.
+- Current branch status: clean; `origin/main...HEAD = 0 4`; throttle no longer applies.
+- New app tail:
+  - `5bbf057 fix(ui): consolidate pixel loader docs`.
+  - `20eba54 fix(theme): consolidate gameboy motion contracts`.
+  - `d1daa86 fix(graph): consolidate pixel motion and drilldown a11y`.
+  - `b045ce8 fix(ui): consolidate low-risk polish`.
+- Content equivalence check: `git diff --stat codex/core-label-tail-cleanup-backup-20260608-135225..HEAD` returned empty; `git diff --stat origin/main...HEAD` remains 13 files, 203 insertions / 76 deletions.
+- Verification after compaction: `npm run verify` PASS, 105 Jest suites / 892 tests, i18n 828 keys / 22 namespaces.
+- Supersedes prior hash-specific handoffs from `20260608-134634-to-claude-tail-rebase-after-279.md` and earlier tail reports.
+- Handoff: `agents/codex/outbox/20260608-135506-to-claude-codex-tail-compacted.md` plus HTML preview.
 
 [2026-06-08 / 13:46:34 KST] Tail rebased after upstream O-11 P2 #279
 #comm #codex #claude-handoff #2nd-B #rebase #throttle #verify-pass
