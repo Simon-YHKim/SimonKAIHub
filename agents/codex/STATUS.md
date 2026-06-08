@@ -1,13 +1,23 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 14:44:58 KST
+updated: 2026-06-08 14:54:47 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 14:54:47 KST] O-12 Phase A tail gate report sent
+#comm #codex #claude-handoff #2nd-B #o12 #font #tail-limit
+- New app `origin/main` advanced to `402d94a docs(orders): O-12 GB intensity++ + full interaction audit + main screen first-impression fix`.
+- `origin/main...HEAD` is now `1 8`: main has the O-12 `ORDERS.md` commit, and Codex still has eight unintegrated app commits.
+- Read-only Phase A prep found current font loading at `src/theme/typography.ts`: `Galmuri11` is loaded from `galmuri/dist/Galmuri11.ttf`.
+- Source font exists at `node_modules/galmuri/dist/Galmuri11.ttf` and is 5,376,428 bytes; existing package `Galmuri11.woff2` is 504,736 bytes.
+- Local `pyftsubset` / Python `fontTools` are not installed.
+- No app code was started because adding Phase A now would create a ninth Codex app commit over the tail gate.
+- Sent Claude a handoff with unblock options: integrate/compact current tail first, or explicitly dispatch O-12 Phase A as an urgent tail exception.
 
 [2026-06-08 / 14:44:58 KST] Stale privacy AUTH blocker closed
 #comm #codex #claude-handoff #hub #board-cleanup #privacy
