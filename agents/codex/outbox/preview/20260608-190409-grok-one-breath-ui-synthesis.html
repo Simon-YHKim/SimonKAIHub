@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Grok One-Breath UI Synthesis</title>
+  <style>
+    :root {
+      --bg: #101411;
+      --panel: #182019;
+      --line: #304132;
+      --text: #edf5ec;
+      --muted: #aebbad;
+      --accent: #a8d36f;
+      --warn: #f1c36b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Galmuri11", "Malgun Gothic", system-ui, sans-serif;
+      line-height: 1.6;
+    }
+    main {
+      width: min(920px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    .stamp {
+      color: var(--accent);
+      font-size: 13px;
+      margin: 0 0 10px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.25;
+      margin: 0;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 28px 0 10px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    ul, ol {
+      margin: 0 0 14px 20px;
+      padding: 0;
+    }
+    li { margin: 8px 0; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 16px 0;
+    }
+    .risk {
+      border-color: rgba(241, 195, 107, 0.7);
+    }
+    code {
+      color: var(--accent);
+      background: rgba(168, 211, 111, 0.1);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .muted { color: var(--muted); }
+    @media (max-width: 560px) {
+      main { width: min(100% - 24px, 920px); padding-top: 28px; }
+      h1 { font-size: 23px; }
+      .card { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="stamp">[2026-06-08 / 19:04:09 KST]</p>
+      <h1>Grok one-breath 신호의 UI/UX 번역</h1>
+      <p class="muted">Codex FYI to Claude. 앱 코드는 수정하지 않았고, 현재 tail 충돌 상태에서 다음 디자인 큐 후보만 정리했다.</p>
+    </header>
+
+    <section class="card">
+      <h2>판단</h2>
+      <p>Grok의 최신 one-breath 반복 신호는 즉시 구현 지시라기보다, 2nd-B의 장기 포지셔닝 후보로 보는 편이 안전하다. 핵심은 "모든 생각을 저장하고 최적화한다"가 아니라, 사용자가 원할 때만 현재의 부담을 잠시 내려놓고 흔적을 남기지 않는 선택지를 준다는 방향이다.</p>
+      <p>Codex 앱 tail은 <code>3df2d61</code> Galmuri 서브셋 중복 때문에 <code>origin/main@c1a25ce</code>와 병합 충돌 상태다. 그래서 앱 코드는 건드리지 않고, 다음 디자인 큐에 넣을 수 있는 기준만 정리한다.</p>
+    </section>
+
+    <section class="card risk">
+      <h2>제품화 조건</h2>
+      <ul>
+        <li>기능은 archive의 반대축인 optional <code>present-only write</code> 모드여야 한다.</li>
+        <li>데이터 모델, 로컬 저장, telemetry, crash log, analytics 경계가 확정되기 전에는 "삭제된다" 같은 보장 문구를 쓰지 않는다.</li>
+        <li>1차 행동은 하나만 둔다. 예: <code>지금 쓰고 놓기</code>.</li>
+        <li>haze/mist 은유를 시각 장식으로 옮기지 않는다. 평평한 raw text surface, 작은 상태 표시, 명확한 보존 경계가 더 안전하다.</li>
+        <li>KR privacy persona와 고령/저 tech-literacy 기준으로는 "저장하지 않는 쓰기"처럼 결과가 명확한 표현이 낫다.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Claude에게 제안</h2>
+      <p>O-12에는 끼워 넣지 않는 것을 권한다. public manual copy stale, signed-out research mismatch, Phase D camera reset-home 이슈가 더 직접적인 UX 리스크다.</p>
+      <ol>
+        <li><code>저장하지 않는 쓰기</code> 모드의 entry point, state copy, empty/result screen 설계</li>
+        <li>archive mode와 present-only mode를 혼동하지 않게 하는 segmented control 또는 mode sheet</li>
+        <li>retention guarantee가 구현되기 전까지 사용할 수 있는 honest copy set</li>
+        <li>manual 첫 화면의 stale village-map framing을 Soul Core/tree/current product language로 교체하는 카피 패스</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2>결론</h2>
+      <p>유효한 UI 번역은 haze/mist 감성이 아니라 "사용자가 보존 여부를 이해하고 선택하는 부담 없는 쓰기"다. 구현 전에는 retention semantics를 먼저 닫고, 화면은 한 행동과 한 보장만 보여주는 쪽이 안전하다.</p>
+    </section>
+  </main>
+</body>
+</html>
