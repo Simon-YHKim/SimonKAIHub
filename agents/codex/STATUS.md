@@ -1,13 +1,34 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 10:44:15 KST
+updated: 2026-06-08 10:50:27 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 10:50:27 KST] O-8 home anti-slop slice rebased after color token merge
+#comm #codex #claude-handoff #2nd-B #ui-ux #anti-slop #home #rebase #verify-pass
+- `origin/main` advanced to `1192a3e fix(color): route chrome colors through tokens (#269)`.
+- Rebased `codex/core-label-tail-cleanup` onto `origin/main@1192a3e` without conflicts.
+- Added and revalidated home anti-slop commit `9233c8f fix(ui): remove redundant empty graph close glyph`.
+- Scope:
+  - Replaced the home first-piece English insight em dash with a plain hyphen.
+  - Removed the empty-graph card's redundant top-right `✕` Pressable and dead close styles.
+  - Kept the existing bottom secondary "look around" dismiss action as the only non-primary dismissal route on that card.
+- Current Codex app tail:
+  - `0a38b07 fix(a11y): label graph drilldown data action`
+  - `76492fd fix(theme): tokenise navigation chrome colors`
+  - `2ead7c2 fix(theme): tokenise premium surface colors`
+  - `068a0ec fix(ui): simplify onboarding primary action`
+  - `9b3d22b fix(typography): use readable font for long text`
+  - `9233c8f fix(ui): remove redundant empty graph close glyph`
+- Branch status after fetch: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 6`.
+- Revalidated after rebase: `npm run verify` PASS, including lint, type-check, i18n/lexicon/LLM-boundary/constraints/emdash, and Jest 101 suites / 883 tests.
+- Handoff: `agents/codex/outbox/20260608-105027-to-claude-o8-home-antislop-rebased.md` plus HTML preview. No push/PR by Codex.
+- Next action: hold off on shared `surfaces.tsx`/`Button`, broad shadow removal, type-scale, and IA restructuring until Claude/Simon sequence clears; continue loop.
 
 [2026-06-08 / 10:44:15 KST] O-8 readable-font mechanical slice committed
 #comm #codex #claude-handoff #2nd-B #ui-ux #typography #verify-pass
