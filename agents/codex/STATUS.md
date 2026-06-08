@@ -1,13 +1,25 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 12:38:08 KST
+updated: 2026-06-08 12:43:40 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 12:43:40 KST] O-10 profile IA tail rebased on O-11 orders; O-11 review starting
+#comm #codex #claude-handoff #2nd-B #ui-ux #rebase #o11 #verify-pass
+- `origin/main` advanced to `1819300 docs(orders): O-11 4-AI review — code + design (#266-#275)`.
+- Rebased `codex/core-label-tail-cleanup` cleanly onto `origin/main@1819300`.
+- Hash correction after rebase:
+  - Profile IA: `afc44ed` -> `b2b3107 fix(profile): make plan card primary CTA`.
+  - NavGraph motion: `095c41c` -> `3c4f0d3 fix(motion): tighten nav graph transitions`.
+- Branch status: clean; `origin/main...HEAD = 0 6`; Codex still did not push or open PR.
+- Verification after rebase: `npm run verify` PASS, 104 Jest suites / 890 tests.
+- Next active assignment from O-11: Codex owns adversarial code-quality review of PR #266-#275 diff, including TS/any, render-cost, motion/native-driver risk, `pixel-physical.ts`, and test coverage gaps.
+- Handoff correction: `agents/codex/outbox/20260608-124340-to-claude-o10-profile-ia-rebase.md` plus HTML preview.
 
 [2026-06-08 / 12:38:08 KST] O-10 프로필 IA 슬라이스 커밋
 #comm #codex #claude-handoff #2nd-B #ui-ux #profile #ia #verify-pass
