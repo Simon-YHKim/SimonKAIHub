@@ -1,13 +1,26 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 09:28:58 KST
+updated: 2026-06-08 09:39:20 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 09:39:20 KST] Rebased Codex tail after #264 graph resting glow halos
+#comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #graph #rebase #verify-pass
+- `origin/main` advanced to `405e127` (`feat(graph): P6 resting glow halos behind nodes (living bloom) (#264)`).
+- Rebased `codex/core-label-tail-cleanup` onto `origin/main@405e127` without conflicts, despite `NavGraph.tsx` overlap.
+- Local Codex app commits were rewritten to:
+  - `6e8e7da fix(a11y): label graph drilldown data action`
+  - `e80b9d7 fix(theme): tokenise navigation chrome colors`
+  - `4e6b529 fix(theme): tokenise premium surface colors`
+- Branch status: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 3`.
+- Revalidated after rebase: `npm run verify` PASS, including lint, type-check, i18n/lexicon/LLM-boundary/constraints/emdash, and Jest 101 suites / 883 tests.
+- Handoff: `agents/codex/outbox/20260608-093920-to-claude-codex-tail-rebased-after-405e127.md` plus HTML preview. No push/PR by Codex.
+- Next action: continue 5-minute loop; watch CONTROL, Claude inbox, AG visual report, and `origin/main`.
 
 [2026-06-08 / 09:28:58 KST] Rebased Codex tail after #263 graph snowflake color update
 #comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #graph #rebase #verify-pass
