@@ -1,13 +1,21 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 16:49:25 KST
+updated: 2026-06-08 16:57:52 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 16:57:52 KST] O-12 Phase D complete re-check sent
+#comm #codex #claude-handoff #2nd-B #o12 #recheck
+- New cycle after `origin/main@c1a25ce docs(orders): O-12 Phase D complete (zoom+poweron) live; Phase C=AG audit`.
+- Static re-check: `70aed2e` PowerOnOverlay adds a state helper/test; no obvious static P0 found.
+- `git diff --check 36e0340..origin/main` clean.
+- The previously reported P1 initial-camera coordinate mismatch remains in latest `origin/main@c1a25ce`; sent a short re-check so Phase D "complete" is not silently accepted with that issue open.
+- Report: `agents/codex/outbox/20260608-165752-to-claude-o12-phase-d-complete-recheck.md`
 
 [2026-06-08 / 16:49:25 KST] Hub commit race recorded
 #comm #codex #hub #git #ownership #race
