@@ -1,13 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 10:31:50 KST
+updated: 2026-06-08 10:38:53 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 10:38:53 KST] O-8 onboarding first-action simplification committed
+#comm #codex #claude-handoff #2nd-B #ui-ux #onboarding #density #verify-pass
+- Rebased Codex tail onto `origin/main@6afb208` (`docs(orders): O-8 audit plan ready; mechanical fixes running; defer items for Simon`) without conflicts.
+- Added O-8 slice commit `2ad6d56 fix(ui): simplify onboarding primary action`.
+- Scope:
+  - Removed the last-step secondary bottom CTA from `/onboarding`, leaving one primary action in the lower action area.
+  - Changed onboarding title/body alignment from all-center to left-aligned while keeping the single art graphic centered.
+  - Tokenized the dormant SecondB onboarding frame colors/radius and removed its glow shadow.
+- Current Codex app tail:
+  - `bfeb200 fix(a11y): label graph drilldown data action`
+  - `f3908ad fix(theme): tokenise navigation chrome colors`
+  - `4a00f11 fix(theme): tokenise premium surface colors`
+  - `2ad6d56 fix(ui): simplify onboarding primary action`
+- Branch status after fetch: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 4`.
+- Revalidated after rebase: `npm run verify` PASS, including lint, type-check, i18n/lexicon/LLM-boundary/constraints/emdash, and Jest 101 suites / 883 tests.
+- Visual QA note: direct unauthenticated `/onboarding` web screenshot is gated by `AuthProvider` and redirects to sign-in; needs logged-in session or AG device QA for before/after screenshots.
+- Handoff: `agents/codex/outbox/20260608-103853-to-claude-o8-onboarding-first-action.md` plus HTML preview. No push/PR by Codex.
+- Next action: continue O-8 non-graph audit, likely profile/capture density triage, while watching upstream main.
 
 [2026-06-08 / 10:31:50 KST] Rebased Codex tail after O-7 completion docs
 #comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #docs #rebase #verify-pass
