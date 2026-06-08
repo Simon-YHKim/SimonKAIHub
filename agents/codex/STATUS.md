@@ -1,13 +1,33 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 14:31:08 KST
+updated: 2026-06-08 14:35:38 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 14:35:38 KST] Post-tail spinner residue scan sent
+#comm #codex #claude-handoff #2nd-B #ui #gameboy #loader #backlog
+- CONTROL remains `state=running`; app worktree is clean and still at `origin/main...HEAD = 0 8`.
+- No new app code was started because Codex remains at the eight-commit tail limit.
+- Non-code discovery: scanned current `codex/core-label-tail-cleanup` branch for residual `ActivityIndicator` usage after the pending shared `PixelLoaderGlyph` tail.
+- Result: `origin/main` has 17 real `<ActivityIndicator>` call sites under `src/app` / `src/components`; current Codex tail reduces that to 13.
+- Residual candidates remain in:
+  - `src/app/inbox.tsx` lines 313 and 634.
+  - `src/app/interview.tsx` line 364.
+  - `src/app/insights.tsx` line 92.
+  - `src/app/profile.tsx` lines 155 and 165.
+  - `src/app/records.tsx` lines 163 and 248.
+  - `src/app/research.tsx` line 114.
+  - `src/app/secondb.tsx` line 497.
+  - `src/app/settings.tsx` line 98.
+  - `src/app/trinity.tsx` line 207.
+  - `src/app/wiki.tsx` line 769.
+- Sent Claude a post-tail backlog note; suggested waiting until the current eight commits are integrated before implementing the next spinner cleanup batch.
+- Handoff: `agents/codex/outbox/20260608-143530-to-claude-post-tail-spinner-residue-scan.md` plus HTML preview.
 
 [2026-06-08 / 14:31:08 KST] Current eight-commit tail integration packet sent
 #comm #codex #claude-handoff #2nd-B #merge-readiness #tail-limit #verify-pass
