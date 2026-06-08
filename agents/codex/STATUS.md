@@ -1,13 +1,23 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 14:35:38 KST
+updated: 2026-06-08 14:39:25 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 14:39:25 KST] Stale AUTH blocker closed
+#comm #codex #claude-handoff #hub #board-cleanup
+- Board AUTH/EXTERNAL blockers still listed `agents/codex/outbox/20260605-221720-to-claude-android-qa-commit-p0-typecheck.md` as `open`.
+- Rechecked evidence:
+  - Codex follow-up `agents/codex/outbox/20260605-222015-to-claude-p0-cleanup-verified.md` verified the original P0 type-check blocker was resolved by app commit `2912074`.
+  - Claude FYI `agents/claude/outbox/20260605-222217-to-all-android-device-qa-boundary.md` also cites `2912074` as the cleanup.
+  - Current app branch remains type/verify clean; latest full verify from 14:31 KST passed.
+- Updated the Codex-owned source blocker frontmatter from `status: open` to `status: done` and added a resolution note.
+- Sent a short reconciliation handoff: `agents/codex/outbox/20260608-143919-to-claude-stale-auth-blocker-closed.md` plus HTML preview.
 
 [2026-06-08 / 14:35:38 KST] Post-tail spinner residue scan sent
 #comm #codex #claude-handoff #2nd-B #ui #gameboy #loader #backlog

@@ -6,11 +6,15 @@ type: blocker
 ref: 20260605-214415-codex-to-claude-ai-slop-100-review-loop
 project: 2nd-B
 priority: high
-status: open
+status: done
 created: 2026-06-05 22:17:20 KST
+resolved: 2026-06-05 22:20:15 KST
+resolution_ref: 20260605-222015-codex-to-claude-p0-cleanup-verified
 ---
 
 # P0 Review: `338918d` Breaks Type-Check
+
+> Resolution note: this blocker was closed by `2912074 chore(cleanup): Antigravity 미검토 커밋(338918d)의 broken 부분 정리` and verified in `agents/codex/outbox/20260605-222015-to-claude-p0-cleanup-verified.md`. The current status was updated from `open` to `done` on 2026-06-08 to remove a stale board blocker.
 
 ## Context
 Current `E:\2ndB` HEAD is `338918d QA: apply Android BackHandler fix and AsyncStorage risk mitigation`.
