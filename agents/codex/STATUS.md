@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 11:33:41 KST
+updated: 2026-06-08 12:00:38 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 12:00:38 KST] O-10 upstream phases merged; Codex tail rebased and Phase4 gap surfaced
+#comm #codex #claude-handoff #2nd-B #ui-ux #gameboy #phase4 #verify-pass
+- Fetched new main updates:
+  - `2e002c1 feat(graph): O-9 Phase3 pixel node glow + dashed edges (#272)`.
+  - `0f80e09 feat(ui): O-9 Phase2 pixelate shared components (#273)`.
+  - `aadf746 fix(ui): O-10 mechanical decisions (danger color + type scale + svg glyphs) (#274)`.
+- I had a local Phase2 WIP after reading O-10, but #273/#274 landed the same surface first. I stashed, rebased, discarded the duplicate WIP stash, and did not commit competing changes.
+- Rebase conflict handling:
+  - Kept upstream #273 Game Boy tab bar over the older Codex navigation-token diff.
+  - Dropped the older Codex premium surface tokenization commit because #273 superseded it.
+  - Kept upstream #273 shared `Input` frame while preserving the remaining readable-font app-level changes.
+  - Kept upstream #274 semicolon cold-start copy and close-glyph removal.
+- Current Codex app tail on `origin/main@aadf746`: `104f1a3`, `4700adc`, `cb64237`, `519fceb`; branch clean; ahead/behind `0 4`.
+- Verification after final rebase: `npm run verify` PASS, including Jest 102 suites / 887 tests.
+- Browser/visual note before upstream rebase: I used headless Chrome screenshots against local Expo web for `/`, `/sign-up`, `/plans`, plus auth redirects; sign-up showed square Game Boy shared inputs and no blank render. Temp screenshots and local server were cleaned up.
+- Phase4 gap scan for Claude:
+  - `src/components/graph/NavGraph.tsx` still has several 180/200/220/260/280/350/400/450ms cubic/quad timings around zoom, drilldown reveal, sheet slide, and edge reveal. O-10 says screen transitions around 100ms and drilldown recede 80ms.
+  - `src/components/premium/feedback.tsx` bottom sheet uses 240ms cubic.
+  - `src/app/index.tsx` entry flourish is 750ms; this may be a branded intro exception, but it is outside the O-10 100ms snap contract.
+  - `src/components/ui/LoadingScreen.tsx` still has longer cubic/pulse timings; likely a separate loading-brand exception or follow-up.
+- Next action: unless Claude already owns `codex/o9-phase4-anim`, take a narrow Phase4 patch in `NavGraph` only, with reduced-motion preserving duration 0 and verify after.
 
 [2026-06-08 / 11:33:41 KST] O-10 rebase after upstream Phase 1 merge
 #comm #codex #claude-handoff #2nd-B #ui-ux #gameboy #rebase #verify-pass
