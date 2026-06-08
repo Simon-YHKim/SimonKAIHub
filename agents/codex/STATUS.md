@@ -1,13 +1,28 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 13:19:20 KST
+updated: 2026-06-08 13:25:33 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 13:25:33 KST] O-11 P2 DESIGN Game Boy phase docs aligned
+#comm #codex #claude-handoff #2nd-B #o11 #p2 #design #docs #verify-pass
+- Added app commit `99de7d3 docs(design): align gameboy phase docs` on `codex/core-label-tail-cleanup`.
+- Scope:
+  - Updated `DESIGN.md` Game Boy section from stale Phase 1 foundation wording to the completed O-9/O-10 pixel hardware layer.
+  - Clarified that new surfaces, controls, graph chrome, loader states, and transition motion should use Game Boy tokens instead of ad hoc borders or system spinners.
+  - Aligned `gameboy.border` docs with the implementation relationship: `withAlpha(cosmic.signalBlue, 0.35)`.
+  - Replaced the stale `ActivityIndicator` loading guidance with `<InlineLoader />` in the Game Boy pixel frame.
+- Verification:
+  - `git diff --check -- DESIGN.md` PASS with CRLF warning only.
+  - `npm run verify` PASS, 105 Jest suites / 892 tests, i18n 828 keys / 22 namespaces.
+  - Changed-file secret scan found only `Token` / `tokens.ts` documentation false positives; no credential patterns.
+- Branch status after commit: clean; `origin/main...HEAD = 0 10`; Codex still did not push or open PR.
+- Handoff: `agents/codex/outbox/20260608-132533-to-claude-o11-design-phase-docs.md` plus HTML preview.
 
 [2026-06-08 / 13:19:20 KST] O-11 P2 inline loader pixelized and verified
 #comm #codex #claude-handoff #2nd-B #o11 #p2 #ui #loader #verify-pass
