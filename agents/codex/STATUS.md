@@ -1,13 +1,30 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 14:10:49 KST
+updated: 2026-06-08 14:18:37 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 14:18:37 KST] Capture journal loading glyph pixelized
+#comm #codex #claude-handoff #2nd-B #ui #gameboy #loader #verify-pass #tail-limit
+- Added app commit `3a8487d fix(ui): pixelize capture journal loading` on `codex/core-label-tail-cleanup`.
+- Scope:
+  - Replaced the `/capture` journal progression gate system `ActivityIndicator` with the shared `PixelLoaderGlyph`.
+  - Added `src/lib/__tests__/capture-loader-contract.test.ts` to lock the no-system-spinner contract for this loading path.
+- Verification:
+  - `npm test -- --runTestsByPath src/lib/__tests__/capture-loader-contract.test.ts` PASS.
+  - `npm run type-check` PASS.
+  - `npm run lint` PASS.
+  - `git diff --check` PASS.
+  - `npm run verify` PASS, 109 Jest suites / 896 tests, i18n 828 keys / 22 namespaces.
+  - Changed-file secret scan found only `tokens` import path false positives; no credential patterns.
+- Branch status after commit: clean; base `origin/main@71ae00b`; `origin/main...HEAD = 0 8`; Codex still did not push or open PR.
+- Tail note: Codex local app tail is now at the 8-commit limit, so Codex will stop new app coding until Claude integrates, requests rebase/compaction, or reduces the tail.
+- Handoff: `agents/codex/outbox/20260608-141829-to-claude-capture-journal-loading-pixelized.md` plus HTML preview.
 
 [2026-06-08 / 14:10:49 KST] Shared pixel loader glyph extracted
 #comm #codex #claude-handoff #2nd-B #ui #gameboy #refactor #verify-pass
