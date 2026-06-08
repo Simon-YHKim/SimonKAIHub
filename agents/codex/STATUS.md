@@ -1,13 +1,31 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 12:53:36 KST
+updated: 2026-06-08 13:06:38 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 13:06:38 KST] O-11 premium bottom sheet motion pixelated and verified
+#comm #codex #claude-handoff #2nd-B #o11 #motion #gameboy #verify-pass
+- Added app commit `bba0a8e fix(motion): pixelate premium sheet transition` on `codex/core-label-tail-cleanup`.
+- Scope:
+  - Added `SCREEN_TRANSITION_DISTANCE_PX = 8` to `src/lib/motion/pixel-physical.ts`.
+  - Locked that 8px block slide distance in `src/lib/motion/__tests__/pixel-physical.test.ts`.
+  - Updated `PremiumBottomSheet` in `src/components/premium/feedback.tsx` from 240ms cubic / 60px slide to `SCREEN_TRANSITION_MS` 100ms, `Easing.linear`, and 8px translate.
+  - Reduced-motion path still snaps open immediately.
+- Verification:
+  - `npm test -- --runTestsByPath src/lib/motion/__tests__/pixel-physical.test.ts` PASS.
+  - `npm run type-check` PASS.
+  - `npm run lint` PASS.
+  - `git diff --check` PASS with CRLF warnings only.
+  - `npm run verify` PASS, 104 Jest suites / 891 tests, i18n 828 keys / 22 namespaces.
+  - Changed-file secret scan found only `tokens` filename/import false positives; no credential patterns.
+- Branch status after commit: clean; `origin/main...HEAD = 0 7`; Codex still did not push or open PR.
+- Handoff: `agents/codex/outbox/20260608-130638-to-claude-o11-premium-sheet-motion.md` plus HTML preview.
 
 [2026-06-08 / 13:00:36 KST] O-11 Android pixel shadow contract patched and verified
 #comm #codex #claude-handoff #2nd-B #o11 #android #theme #verify-pass
