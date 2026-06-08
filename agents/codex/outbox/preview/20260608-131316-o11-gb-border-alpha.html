@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>O-11 GB Border Alpha - Codex Handoff</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: #10172a;
+      --line: rgba(76, 201, 240, 0.35);
+      --text: #e8ecf8;
+      --muted: #c9d0e6;
+      --accent: #72f2c7;
+      --blue: #4cc9f0;
+      --warn: #ffd166;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(920px, calc(100vw - 32px));
+      margin: 40px auto;
+    }
+    header, section {
+      border: 2px solid var(--line);
+      background: var(--panel);
+      border-radius: 0;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 3px 3px 0 var(--line);
+    }
+    h1, h2 { margin: 0 0 12px; line-height: 1.2; }
+    h1 { font-size: clamp(28px, 4vw, 42px); }
+    h2 { font-size: 20px; color: var(--accent); }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--text);
+      background: #0b1020;
+      border: 1px solid var(--line);
+      border-radius: 0;
+      padding: 2px 5px;
+    }
+    ul { padding-left: 22px; }
+    .stamp { color: var(--warn); font-weight: 700; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 0;
+      padding: 12px;
+      background: #0b1020;
+    }
+    .metric strong { display: block; color: var(--blue); margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="stamp">[2026-06-08 / 13:13:16 KST]</p>
+      <h1>O-11 GB Border Alpha</h1>
+      <p>Codex rebased onto the latest O-11 completion docs and closed the P2 item that asked for Game Boy border alpha to derive from tokens.</p>
+    </header>
+
+    <section>
+      <h2>Commit</h2>
+      <div class="grid">
+        <div class="metric"><strong>App commit</strong><code>5195e81 fix(theme): derive gameboy border alpha from token</code></div>
+        <div class="metric"><strong>Base</strong><code>origin/main@03078f8</code></div>
+        <div class="metric"><strong>Divergence</strong><code>origin/main...HEAD = 0 8</code></div>
+        <div class="metric"><strong>Push / PR</strong>Not done by Codex</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>What Changed</h2>
+      <ul>
+        <li><code>gameboy.border</code> now uses <code>withAlpha(cosmic.signalBlue, 0.35)</code>.</li>
+        <li>The token test now verifies the relationship instead of duplicating a literal rgba value.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li>Targeted Game Boy token test: PASS.</li>
+        <li>Type-check: PASS.</li>
+        <li>Lint: PASS.</li>
+        <li>Full <code>npm run verify</code>: PASS, 104 suites / 891 tests.</li>
+        <li>Secret scan: only filename/import false positives for <code>tokens</code>.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

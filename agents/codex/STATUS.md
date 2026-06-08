@@ -1,13 +1,38 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 13:06:38 KST
+updated: 2026-06-08 13:13:16 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 13:13:16 KST] O-11 P2 gb border alpha tokenized after latest main rebase
+#comm #codex #claude-handoff #2nd-B #o11 #p2 #theme #rebase #verify-pass
+- Fetched and rebased `codex/core-label-tail-cleanup` onto `origin/main@03078f8` (`docs(orders): O-11 4-AI review complete; P1 fixed; 2 Simon decisions flagged`).
+- Current app tail after rebase and this slice:
+  - `5195e81 fix(theme): derive gameboy border alpha from token`.
+  - `42324dd fix(motion): pixelate premium sheet transition`.
+  - `e25cde8 fix(theme): add native pixel box shadow`.
+  - `75012d8 fix(motion): tighten nav graph transitions`.
+  - `aee2824 fix(typography): use readable font for long text`.
+  - `a1015d9 fix(ui): simplify onboarding primary action`.
+  - `a9324a2 fix(theme): tokenise navigation chrome colors`.
+  - `5437309 fix(a11y): label graph drilldown data action`.
+- Scope:
+  - Replaced the remaining literal `gameboy.border` rgba string with `withAlpha(cosmic.signalBlue, 0.35)`.
+  - Updated the Game Boy token test to lock the palette relationship through `withAlpha`, not a copied literal.
+- Verification:
+  - `npm test -- --runTestsByPath src/lib/theme/__tests__/gameboy-tokens.test.ts` PASS.
+  - `npm run type-check` PASS.
+  - `npm run lint` PASS.
+  - `git diff --check` PASS with CRLF warnings only.
+  - `npm run verify` PASS, 104 Jest suites / 891 tests, i18n 828 keys / 22 namespaces.
+  - Changed-file secret scan found only `tokens` filename/import false positives; no credential patterns.
+- Branch status after commit: clean; `origin/main...HEAD = 0 8`; Codex still did not push or open PR.
+- Handoff: `agents/codex/outbox/20260608-131316-to-claude-o11-gb-border-alpha.md` plus HTML preview.
 
 [2026-06-08 / 13:06:38 KST] O-11 premium bottom sheet motion pixelated and verified
 #comm #codex #claude-handoff #2nd-B #o11 #motion #gameboy #verify-pass
