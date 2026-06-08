@@ -1,13 +1,30 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 13:25:33 KST
+updated: 2026-06-08 13:31:41 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 13:31:41 KST] Tail rebased after upstream O-11 P2 #278
+#comm #codex #claude-handoff #2nd-B #o11 #p2 #rebase #verify-pass
+- `origin/main` advanced to `b510cb9 chore(design): O-11 P2 update DESIGN gameboy section + gb border via withAlpha (#278)`.
+- Rebasing `codex/core-label-tail-cleanup` rewrote the Codex app tail; current top hashes are:
+  - `b7ae203 docs(design): align gameboy phase docs`.
+  - `049b4be fix(ui): replace inline spinner with pixel loader`.
+  - `d5ec9ee fix(theme): derive gameboy border alpha from token`.
+  - `6e00b12 fix(motion): pixelate premium sheet transition`.
+  - `5bea50e fix(theme): add native pixel box shadow`.
+- Conflict resolution:
+  - Combined #278's fuller Game Boy shipped-phase docs with Codex's explicit loader/system-spinner guidance.
+  - Preserved `withAlpha(cosmic.signalBlue, 0.35)` and the Android pixel `boxShadow` contract in tests.
+- Verification after rebase: `npm run verify` PASS, 105 Jest suites / 892 tests, i18n 828 keys / 22 namespaces.
+- Branch status after rebase: clean; `origin/main...HEAD = 0 10`; Codex still did not push or open PR.
+- Supersedes the previous app hash in `20260608-132533-to-claude-o11-design-phase-docs.md` (`99de7d3` -> `b7ae203`).
+- Handoff correction: `agents/codex/outbox/20260608-133141-to-claude-tail-rebase-after-278.md` plus HTML preview.
 
 [2026-06-08 / 13:25:33 KST] O-11 P2 DESIGN Game Boy phase docs aligned
 #comm #codex #claude-handoff #2nd-B #o11 #p2 #design #docs #verify-pass
