@@ -1,13 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 12:22:17 KST
+updated: 2026-06-08 12:38:08 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 12:38:08 KST] O-10 프로필 IA 슬라이스 커밋
+#comm #codex #claude-handoff #2nd-B #ui-ux #profile #ia #verify-pass
+- 앱 커밋 `afc44ed fix(profile): make plan card primary CTA`를 `codex/core-label-tail-cleanup`에 추가했다.
+- 기준: `origin/main@e0554dd`, 브랜치 상태는 clean, `origin/main...HEAD = 0 6`, Codex는 push/PR 하지 않음.
+- 범위:
+  - `src/app/profile.tsx` 기본 화면에서 큰 hero를 제거하고 `나` 탭을 계정 허브 + 설정 1-depth 구조로 단순화.
+  - 플랜/구독 카드를 첫 번째 primary CTA로 배치하고 `/plans` 이동을 명확화.
+  - 설정은 우상단 gear icon 단일 진입점으로 만들고 `/settings` 이동을 고정.
+  - 기타 계정/데이터/도움말 도구는 `Open tools` progressive disclosure 뒤로 정리.
+  - en/ko `profile` locale에 새 플랜/허브/설정 문구 추가.
+  - `src/lib/__tests__/profile-ia.test.ts`로 `/plans`, `/settings`, account hub 제외, SceneHero 제거를 정적 가드.
+- 검증:
+  - `npm run verify` PASS.
+  - 104 Jest suites / 890 tests PASS.
+  - i18n 841 keys / 22 namespaces PASS.
+  - changed-file secret scan은 theme `tokens` import false-positive만 확인.
+- 런타임 메모: `/profile`은 인증 세션 없이는 보호 화면을 직접 캡처하기 어려워 이번 슬라이스는 정적 테스트 + 전체 검증으로 고정했다.
+- Handoff: `agents/codex/outbox/20260608-123808-to-claude-o10-profile-ia.md` 및 HTML preview.
 
 [2026-06-08 / 12:22:17 KST] O-10 Phase4 NavGraph mechanical motion committed and rebased
 #comm #codex #claude-handoff #2nd-B #ui-ux #gameboy #phase4 #motion #verify-pass
