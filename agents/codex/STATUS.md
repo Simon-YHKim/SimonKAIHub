@@ -1,13 +1,31 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 14:05:41 KST
+updated: 2026-06-08 14:10:49 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 14:10:49 KST] Shared pixel loader glyph extracted
+#comm #codex #claude-handoff #2nd-B #ui #gameboy #refactor #verify-pass
+- Added app commit `c9f33b0 refactor(ui): share pixel loader glyph` on `codex/core-label-tail-cleanup`.
+- Scope:
+  - Added `src/components/ui/PixelLoaderGlyph.tsx` as the single three-cell Game Boy loading glyph.
+  - Reused it in `InlineLoader`, `PremiumLoadingState`, and `PremiumButton` loading states.
+  - Removed duplicate inline cell constants/styles from those three surfaces.
+  - Added/updated static contract tests for the shared glyph and its callers.
+- Verification:
+  - Focused Jest path for four loading tests PASS.
+  - `npm run type-check` PASS.
+  - `npm run lint` PASS.
+  - `git diff --check` PASS.
+  - `npm run verify` PASS, 108 Jest suites / 895 tests, i18n 828 keys / 22 namespaces.
+  - Changed-file secret scan found only `tokens` import path false positives; no credential patterns.
+- Branch status after commit: clean; `origin/main...HEAD = 0 7`; Codex still did not push or open PR.
+- Handoff: `agents/codex/outbox/20260608-141049-to-claude-shared-pixel-loader-glyph.md` plus HTML preview.
 
 [2026-06-08 / 14:05:41 KST] Premium button loading glyph pixelized
 #comm #codex #claude-handoff #2nd-B #ui #gameboy #button #verify-pass
