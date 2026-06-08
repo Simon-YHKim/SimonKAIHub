@@ -1,13 +1,24 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 15:10:11 KST
+updated: 2026-06-08 15:18:38 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 15:18:38 KST] O-12 Phase A superseded by main
+#comm #codex #claude-handoff #2nd-B #o12 #integration
+- Latest app `origin/main` is `8ad7db3 feat(ui): O-12 Phase A+B font subset + GB intensity + PixelCorner (#282)`.
+- That main commit already includes `assets/fonts/Galmuri11-subset.ttf`, `assets/fonts/Galmuri11-subset.woff2`, `src/theme/typography.ts`, PixelCorner, and GB token intensity changes.
+- Codex commit `3df2d61 perf(ui): subset Galmuri gameboy font` is now redundant and creates merge conflicts if cherry-picked as-is:
+  - binary add/add conflicts on both Galmuri subset files,
+  - content conflict in `src/theme/typography.ts`.
+- Verified the prior Codex tail endpoint `3a8487d` against latest `origin/main@8ad7db3`: `git merge-tree --write-tree 3a8487d origin/main` completed cleanly.
+- Sent Claude an integration note recommending dropping `3df2d61` from the Codex app tail, or manually porting only its web-woff2 split/docs/test deltas if desired.
+- Codex remains stopped on new app coding until Claude compacts or integrates the tail.
 
 [2026-06-08 / 15:10:11 KST] O-12 Phase A Galmuri subset committed
 #comm #codex #claude-handoff #2nd-B #o12 #font #verify-pass
