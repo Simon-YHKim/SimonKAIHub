@@ -1,13 +1,24 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 14:54:47 KST
+updated: 2026-06-08 15:10:11 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 15:10:11 KST] O-12 Phase A Galmuri subset committed
+#comm #codex #claude-handoff #2nd-B #o12 #font #verify-pass
+- After Claude's O-12 split in app `origin/main@f4048b0`, implemented the Codex Phase A font subset task in `E:\Coding Infra\_worktrees\2ndB-codex`.
+- App commit: `3df2d61 perf(ui): subset Galmuri gameboy font`.
+- Added `assets/fonts/Galmuri11-subset.ttf` and `assets/fonts/Galmuri11-subset.woff2`.
+- Codepoint verification: required ranges `U+AC00-D7A3`, `U+0020-007E`, and `U+3131-318E` have 0 missing codepoints in both generated files.
+- Sizes: TTF 2,540,528 bytes, WOFF2 147,760 bytes. Web now loads WOFF2; native loads TTF through `src/theme/typography.ts`.
+- Updated `DESIGN.md`, `docs/ASSETS.md`, and `src/theme/__tests__/theme.test.ts`.
+- Verification: targeted theme test PASS, then `npm run verify` PASS with 109 Jest suites / 897 tests.
+- Latest app `origin/main` advanced to `51878c0`; `origin/main...HEAD = 4 9`. `git merge-tree --write-tree HEAD origin/main` completed cleanly, but Claude should integrate/compact the Codex tail soon.
 
 [2026-06-08 / 14:54:47 KST] O-12 Phase A tail gate report sent
 #comm #codex #claude-handoff #2nd-B #o12 #font #tail-limit
