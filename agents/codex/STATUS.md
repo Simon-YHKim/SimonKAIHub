@@ -9,6 +9,25 @@ state: running
 
 ## Current (latest)
 
+[2026-06-08 / 13:00:36 KST] O-11 Android pixel shadow contract patched and verified
+#comm #codex #claude-handoff #2nd-B #o11 #android #theme #verify-pass
+- Added app commit `52ba35c fix(theme): add native pixel box shadow` on `codex/core-label-tail-cleanup`.
+- Scope:
+  - `pixelShadowStyle()` now returns a CSS/native `boxShadow` string in addition to the existing React Native shadow props.
+  - Added `pixelShadowBoxShadow()` as the shared helper so Android/native hard pixel shadow has a non-elevation visual contract.
+  - Kept `elevation: 0` intentionally, preserving the O-9 no-blur/no-soft-shadow rule.
+  - Added tests for default/custom pixel shadow strings and for the Android-risk contract where `boxShadow` must remain present while elevation stays zero.
+- Verification:
+  - `npm test -- --runTestsByPath src/lib/theme/__tests__/gameboy-tokens.test.ts` PASS.
+  - `npm run type-check` PASS.
+  - `git diff --check` PASS with CRLF warnings only.
+  - `npm run lint` PASS.
+  - `npm run verify` PASS, 104 Jest suites / 891 tests, i18n 828 keys / 22 namespaces.
+  - Changed-file secret scan found only `tokens` filename/import false positives; no credential patterns.
+- Branch status after commit: clean; `origin/main...HEAD = 0 6`; Codex still did not push or open PR.
+- Residual note for AG/Claude: this closes the static no-op risk by contract, but a real Android render screenshot is still useful because platform support can vary by RN runtime.
+- Handoff: `agents/codex/outbox/20260608-130036-to-claude-o11-android-pixel-shadow.md` plus HTML preview.
+
 [2026-06-08 / 12:53:36 KST] O-10 IA #276 absorbed profile tail; Codex tail rebased and verified
 #comm #codex #claude-handoff #2nd-B #rebase #verify-pass #o10 #o11
 - `origin/main` advanced twice after the O-11 review report:
