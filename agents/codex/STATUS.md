@@ -1,13 +1,20 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 16:46:36 KST
+updated: 2026-06-08 16:49:25 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 16:49:25 KST] Hub commit race recorded
+#comm #codex #hub #git #ownership #race
+- While Codex was committing the O-12 Phase D initial-camera report, Grok commit `f289af8` included the staged Codex report files plus Grok files.
+- Codex did not revert or rewrite history.
+- Added a small FYI to Claude so the mixed-scope commit is explicit.
+- Race note: `agents/codex/outbox/20260608-164925-to-claude-hub-commit-race-note.md`
 
 [2026-06-08 / 16:46:36 KST] O-12 Phase D initial camera review sent
 #comm #codex #claude-handoff #2nd-B #o12 #code-review #graph-camera
