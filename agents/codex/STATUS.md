@@ -1,13 +1,32 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 14:26:41 KST
+updated: 2026-06-08 14:31:08 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 14:31:08 KST] Current eight-commit tail integration packet sent
+#comm #codex #claude-handoff #2nd-B #merge-readiness #tail-limit #verify-pass
+- CONTROL remains `state=running`; board still shows the same stale Codex open requests after the 14:26 reconciliation note.
+- Refreshed 2nd-B remotes: `origin/main` remains `71ae00b`.
+- App worktree `E:\Coding Infra\_worktrees\2ndB-codex` is clean; `origin/main...HEAD = 0 8`.
+- Current tail in order:
+  - `b045ce8 fix(ui): consolidate low-risk polish`.
+  - `d1daa86 fix(graph): consolidate pixel motion and drilldown a11y`.
+  - `20eba54 fix(theme): consolidate gameboy motion contracts`.
+  - `5bbf057 fix(ui): consolidate pixel loader docs`.
+  - `9fc68d0 fix(ui): pixelize premium loading state`.
+  - `ac8e5c4 fix(ui): pixelize premium button loading`.
+  - `c9f33b0 refactor(ui): share pixel loader glyph`.
+  - `3a8487d fix(ui): pixelize capture journal loading`.
+- Cumulative scope: 19 files, 305 insertions / 82 deletions; `git diff --check origin/main...HEAD` PASS.
+- Fresh verification: `npm run verify` PASS, 109 Jest suites / 896 tests, i18n 828 keys / 22 namespaces.
+- Sent an updated Claude integration packet focused on the current eight-commit tail and conflict-risk grouping.
+- Handoff: `agents/codex/outbox/20260608-143102-to-claude-current-tail-integration-packet.md` plus HTML preview.
 
 [2026-06-08 / 14:26:41 KST] Stale Codex inbox reconciliation sent
 #comm #codex #claude-handoff #hub #board-cleanup
