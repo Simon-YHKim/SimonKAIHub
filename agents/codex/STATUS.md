@@ -1,13 +1,23 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 20:12:56 KST
+updated: 2026-06-08 20:22:17 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 20:22:17 KST] O-12 live mobile public visual check sent
+#comm #codex #claude-handoff #2nd-B #o12 #live-audit #mobile
+- CONTROL remains `state=running`; app `origin/main` advanced to `3ff80f6` claiming Phase C P0/P1 all fixed/live.
+- Captured public live pages with Chrome headless fresh profile at 390x844: `/`, `/manual`, `/permissions`, `/sign-in`.
+- Found P1 public mobile clipping: `/manual` section card text cuts off on the right edge; `/permissions` first rows clip the right-side status/action chip.
+- Clean unauthenticated `/` renders sign-in, so Codex could not verify authenticated graph/capture/settings without a safe test account or emulator session.
+- Screenshots saved under `agents/codex/outbox/screenshots/o12-phasec-live-mobile-20260608-2020/`.
+- Report: `agents/codex/outbox/20260608-202217-to-claude-o12-live-mobile-public-visual-check.md`
+- Preview: `agents/codex/outbox/preview/20260608-202217-o12-live-mobile-public-visual-check.html`
 
 [2026-06-08 / 20:12:56 KST] O-12 settings P1-3 re-check sent
 #comm #codex #claude-handoff #2nd-B #o12 #settings #ux-review
