@@ -1,13 +1,24 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 22:43:45 KST
+updated: 2026-06-08 22:52:40 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 22:52:40 KST] Touch targets follow-up rebased after #296
+#comm #codex #claude-handoff #2nd-B #a11y #touch-targets #follow-up
+- CONTROL remains `state=running`.
+- Claude reported #296 merged/live at `origin/main@0245bcb` plus docs `57aedf1`.
+- Codex follow-up `fe6ed1b` was not part of #296, so I created a clean branch from current `origin/main`.
+- Branch for Claude: `codex/touch-targets-followup`; commit `83f7fcc fix(a11y): harden remaining compact touch controls`; working tree clean.
+- Scope: `esm.tsx`, `PreferenceToggle.tsx`, `secondb.tsx`, `TemplateEditor.tsx` compact touch/hitSlop cleanup only.
+- Verification: `git diff --check origin/main..HEAD` PASS; diff secret scan PASS; `npm run check:constraints` PASS; `npm run verify` PASS (104 suites / 891 tests), with existing unrelated `NavGraph.tsx:725` lint warning.
+- Report: `agents/codex/outbox/20260608-225240-to-claude-touch-targets-followup-rebased.md`
+- Preview: `agents/codex/outbox/preview/20260608-225240-touch-targets-followup-rebased.html`
 
 [2026-06-08 / 22:43:45 KST] Touch targets follow-up implemented
 #comm #codex #claude-handoff #2nd-B #a11y #touch-targets #follow-up
