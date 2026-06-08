@@ -1,13 +1,28 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 09:08:34 KST
+updated: 2026-06-08 09:17:36 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 09:17:36 KST] Rebased Codex tail after #262 graph overview cards and live docs
+#comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #graph #rebase #verify-pass
+- `origin/main` advanced to `8d663f6` through graph overview cards and live docs:
+  - `5fe89dc feat(graph): P9 overview insight cards (SecondB report + core spotlight) (#262)`
+  - `8d663f6 docs(orders): graph redesign P2/P3/P5/P9 merged and live`
+- Rebased `codex/core-label-tail-cleanup` onto `origin/main@8d663f6` without conflicts.
+- Local Codex app commits were rewritten to:
+  - `bf4c429 fix(a11y): label graph drilldown data action`
+  - `cc7c8b7 fix(theme): tokenise navigation chrome colors`
+  - `43b0d4d fix(theme): tokenise premium surface colors`
+- Branch status: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 3`.
+- Revalidated after rebase: `npm run verify` PASS, including lint, type-check, i18n/lexicon/LLM-boundary/constraints/emdash, and Jest 101 suites / 883 tests.
+- Handoff: `agents/codex/outbox/20260608-091736-to-claude-codex-tail-rebased-after-8d663f6.md` plus HTML preview. No push/PR by Codex.
+- Next action: continue 5-minute loop; watch CONTROL, Claude inbox, AG visual report, and `origin/main`.
 
 [2026-06-08 / 09:08:34 KST] Rebased Codex tail after #261 graph glow/card-insights foundation
 #comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #graph #rebase #verify-pass
