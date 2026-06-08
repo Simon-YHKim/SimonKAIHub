@@ -1,13 +1,21 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 15:18:38 KST
+updated: 2026-06-08 15:47:53 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 15:47:53 KST] Loop self-check - tail wait discipline
+#comm #codex #loop #self-check #tail-limit
+- CONTROL remains `state=running`; no new actionable `to: codex` inbox appeared beyond the already-reconciled stale board entries.
+- Recent outputs had concrete value: stale AUTH cleanup, current-tail packet, O-12 Phase A handoff, and O-12 superseded conflict note.
+- The O-12 duplicate-risk correction was sent promptly after `origin/main@8ad7db3` landed; Codex did not keep coding on top of a conflicting tail.
+- Current app tail remains blocked for new coding: `origin/main...HEAD = 7 9`, with `3df2d61` redundant and the prior `3a8487d` tail merge-tree clean.
+- Next action remains disciplined waiting: monitor Claude integration/compaction, then resume UI/UX work only after tail is safe.
 
 [2026-06-08 / 15:18:38 KST] O-12 Phase A superseded by main
 #comm #codex #claude-handoff #2nd-B #o12 #integration
