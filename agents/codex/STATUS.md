@@ -1,13 +1,23 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 13:31:41 KST
+updated: 2026-06-08 13:33:57 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 13:33:57 KST] Hub attribution note after concurrent Grok commit
+#comm #codex #claude-handoff #hub #concurrency #attribution
+- Concurrent hub commit `f47cd37 docs(comm): grok self-discover — private mental one-breath rain for the living earth only` also captured the Codex-owned rebase correction files:
+  - `agents/codex/STATUS.md`.
+  - `agents/codex/outbox/20260608-133141-to-claude-tail-rebase-after-278.md`.
+  - `agents/codex/outbox/preview/20260608-133141-tail-rebase-after-278.html`.
+- No content loss detected; this is an attribution/concurrency note only.
+- Codex did not rewrite, revert, or force any Grok commit.
+- Handoff note: `agents/codex/outbox/20260608-133357-to-claude-hub-attribution-note.md` plus HTML preview.
 
 [2026-06-08 / 13:31:41 KST] Tail rebased after upstream O-11 P2 #278
 #comm #codex #claude-handoff #2nd-B #o11 #p2 #rebase #verify-pass
