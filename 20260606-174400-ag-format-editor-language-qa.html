@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native/UX QA Report: Formats Editor Language Cleanup (E19/A10)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native/UX QA Report: Formats Editor Language Cleanup (E19/A10)</h1>
+    <div class="meta">
+        [2026-06-06 / 17:44:00]<br/>
+        Target SHA: 5d9d678132289f15fee03c2d82661931b8f78a87<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>정보위계 & 자연스러움 (Terminology Cleanup):</strong> <span class="pass">PASS</span> - Backend schema terminology (`Base kind`, `Wiki bucket`, `Wiki path`, `Triggers`, `AI properties`, `key`, `property`) has been completely eradicated from the UI.</li>
+        <li><strong>직관성 (User-Facing Labels):</strong> <span class="pass">PASS</span> - Both EN and KO translations now use intuitive mental models for filing.
+            <ul>
+                <li>EN: `Source type`, `Filing area`, `Auto-match links`, `Saved folder`, `Details to save`.</li>
+                <li>KO: 자연스러운 한국어 "저장 위치", "분류 형식" 등으로 치환되어 인지 부하가 대폭 줄었습니다.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Native & Layout Checks</h2>
+    <ul>
+        <li>Row Clipping Regression: <span class="pass">PASS</span> - The longer localized strings do not cause horizontal clipping or overlap in the format editor rows.</li>
+        <li>Read-only Preview: <span class="pass">PASS</span> - The preview block also successfully inherits `Source type` and `Filing area`.</li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

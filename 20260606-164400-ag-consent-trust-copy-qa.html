@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Consent / Privacy Trust Copy E18</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Consent / Privacy Trust Copy (E18)</h1>
+    <div class="meta">
+        [2026-06-06 / 16:44:00]<br/>
+        Target SHA: d097e69346daa03866920b0b928e8bed633ef018<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>직관성 (Clarity of Action):</strong> <span class="pass">PASS</span> - New trust note correctly grounds the user before sensitive actions. "Agree to all" toggle maintains its clear grouping behavior.</li>
+        <li><strong>정보위계 (No-Overload):</strong> <span class="pass">PASS</span> - In a 320px narrow viewport, the longer KO/EN copy for overseas processing and external analytics wraps gracefully without causing horizontal scrolling or overlapping controls.</li>
+    </ul>
+
+    <h2>Native & Accessibility Checks</h2>
+    <ul>
+        <li>Large Font Accessibility: <span class="pass">PASS</span> - The trust note card expands vertically to accommodate large fonts, preserving the tap area of checkboxes/toggles below it.</li>
+        <li>Touch Targets: <span class="pass">PASS</span> - Checkboxes remain easily tappable independently.</li>
+        <li>Readability: <span class="pass">PASS</span> - KO strings display correctly without awkward tracking or casing issues.</li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

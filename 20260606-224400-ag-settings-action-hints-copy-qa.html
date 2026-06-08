@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Settings Action Hints Copy (E19)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Settings Action Hints Copy (E19)</h1>
+    <div class="meta">
+        [2026-06-06 / 22:44:00]<br/>
+        Target SHA: 6f69a35<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>현지화 렌더링 무결성 (i18n Localization Integrity & A11y):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>설정 화면 내 테마 선택 버튼, 크루 밀도(Crew density) 옵션, 부분 삭제/초기화/전체 삭제(Full wipe) 버튼들에 할당된 보이스오버(VoiceOver) 접근성 힌트가 혼용 버그 없이 깨끗한 EN/KO 렌더링을 보장합니다.</li>
+                <li>전체 삭제(Full-wipe) 확인을 위한 인풋 라벨 역시 요구되는 `DELETE` 구문을 정확히 낭독합니다.</li>
+            </ul>
+        </li>
+        <li><strong>파괴적 플로우 레이아웃 방어 (Destructive Flow Constraints):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>가장 길고 복잡한 한국어(KO) 파괴적 액션(Destructive action) 섹션의 경고 문구들이 320px 최협소 모바일 환경에서 뷰포트를 벗어나거나 버튼을 짓누르는 현상 없이 완벽한 레이아웃을 사수했습니다.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

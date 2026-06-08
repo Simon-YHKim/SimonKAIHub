@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Dynamic Type Graph-bits (A17)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Dynamic Type Graph-bits (A17)</h1>
+    <div class="meta">
+        [2026-06-06 / 17:48:00]<br/>
+        Target SHA: cd1734d469e9140696db6c7a505dca51a1990a22<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>정보위계 (No Overlaps or Clipping):</strong> <span class="pass">PASS</span> - In Large System Text mode on narrow viewports:
+            <ul>
+                <li>`Reference Shard Cards`: Both title and meta text elegantly wrap to two lines without horizontal truncation or ellipsis clipping.</li>
+                <li>`Graph Node Chips`: Long labels wrap vertically, ensuring the numerical count badge is never pushed out of bounds or hidden.</li>
+                <li>`Context Pills`: The labels wrap gracefully and do not overlap the right-aligned 'Close (X)' control.</li>
+            </ul>
+        </li>
+        <li><strong>자연스러움 (Stat Tiles Alignment):</strong> <span class="pass">PASS</span> - Stat tile labels expand to multi-line while perfectly maintaining their vertical and horizontal center alignment.</li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

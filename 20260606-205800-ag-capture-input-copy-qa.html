@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Capture Input & Feedback Copy (E19)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Capture Input & Feedback Copy (E19)</h1>
+    <div class="meta">
+        [2026-06-06 / 20:58:00]<br/>
+        Target SHA: 5048b98<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>자연스러움 (Text Fields & State Interpolation):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>입력(`/capture`) 화면의 다양한 인풋 모드(Link, Memo, OCR, File)에서 렌더링 되는 헬퍼 텍스트, 라벨, 플레이스홀더가 번역 키(Key) 노출이나 혼용(Mixed-language) 없이 완벽히 전환됩니다.</li>
+                <li>`HashtagAdder` 등에서 태그명이나 파일의 상태(detected-link kind, extracted/attached)를 포함하는 텍스트 보간(Interpolation)이 한국어 어순에 맞춰 부드럽게 렌더링 됩니다.</li>
+            </ul>
+        </li>
+        <li><strong>레이아웃 안정성 (Component Constraints):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>첨부 파일명이나 태그 리스트가 극단적으로 길어질 경우, 폭 320px 뷰포트에서 깨짐 없이 말줄임(Ellipsis) 혹은 줄바꿈(Word-wrap) 되어 컨테이너를 보호합니다.</li>
+            </ul>
+        </li>
+        <li><strong>접근성 및 플로우 유지 (A11y & Action Handlers):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>태그 추가/삭제 버튼에 부착된 스크린 리더 힌트(VoiceOver)가 특정 태그명을 제대로 파싱하여 두 언어로 모두 명확하게 낭독합니다. (예: "태그 삭제: #기록")</li>
+                <li>피드백 모달(Feedback modal)의 재시도(Retry) 버튼 액션 라우팅과 OCR 이미지 미리보기/추출 액션이 기존과 동일하게 완벽 작동합니다.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

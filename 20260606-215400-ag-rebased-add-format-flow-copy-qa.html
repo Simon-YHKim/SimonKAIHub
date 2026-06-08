@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Rebased Add Format Flow Copy (E19)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Rebased Add Format Flow Copy (E19)</h1>
+    <div class="meta">
+        [2026-06-06 / 21:54:00]<br/>
+        Target SHA: ed00a38<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>리베이스 정합성 (Rebase Integrity):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>메인 브랜치가 `origin/main@a4c7868`로 급격하게 뛰어오른 리베이스 환경 위에서도, 조금 전 검증을 마쳤던 포맷 생성(`/formats`) 플로우 전역의 다국어 텍스트와 레이아웃이 전혀 망가지지 않고 생존해 있습니다.</li>
+            </ul>
+        </li>
+        <li><strong>로케일 폴백 및 렌더링 유지 방어:</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>"AI 도우미" 메타포가 지워지고 SecondB 톤앤매너로 자리 잡은 영어/한국어(EN/KO) 번역들이 버튼, 모달, 플레이스홀더, 실패 토스트 전반에서 완벽히 유지됩니다.</li>
+                <li>생성 취소, 폼 저장, 스키마 렌더링을 비롯한 인터랙션 라우팅 플로우 역시 손상 없이 보존되었습니다.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

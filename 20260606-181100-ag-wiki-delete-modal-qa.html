@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Wiki Delete Modal (Feedback-Alert-Contract)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Wiki Delete Modal (Feedback-Alert-Contract)</h1>
+    <div class="meta">
+        [2026-06-06 / 18:11:00]<br/>
+        Target SHA: 5252d6985ce6c4de82023019939fb73ae88b6b8b<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>자연스러움 & 자산 일관성 (Premium UI Consistency):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>기존의 딱딱한 OS 네이티브 Alert 창(Native Alert) 대신, 앱의 프리미엄 디자인 테마와 일관성(Consistency)을 유지하는 부드럽고 세련된 커스텀 Modal이 성공적으로 호출됩니다.</li>
+                <li>파괴적 작업(Destructive action) 시의 애니메이션과 경고 톤앤매너가 매우 자연스럽습니다.</li>
+            </ul>
+        </li>
+        <li><strong>직관성 (State Management & Feedback):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>취소(Cancel) 버튼 클릭 시 데이터 삭제 없이 안전하게 Modal만 닫힙니다.</li>
+                <li>삭제(Delete) 버튼 클릭 시 즉시 로딩/비활성화(Disabled) 상태로 전환되어 치명적인 중복 전송(Double-submit)을 원천 차단합니다.</li>
+                <li>삭제 완료 시 백그라운드의 리스트가 부드럽게 갱신(Refresh)되며 성공 토스트(Toast) 메시지가 명확하게 노출됩니다. 에러 발생 시에도 날것의 에러 텍스트(Raw error copy)가 아닌 친절한 안내 문구가 표시됩니다.</li>
+            </ul>
+        </li>
+        <li><strong>접근성 (Modal Accessibility Focus):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>Modal이 열렸을 때 스크린 리더가 이를 "삭제 확인 창"으로 정확히 낭독(Announce)합니다.</li>
+                <li>Modal이 떠 있는 동안 백그라운드의 리스트 항목들이 스크린 리더 포커스(Focus)를 받지 않도록(Trap) 안전하게 차단되어 정보 위계를 명확히 지켰습니다.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

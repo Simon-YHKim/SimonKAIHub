@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Dynamic Type Format Editor (A17)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Dynamic Type Format Editor (A17)</h1>
+    <div class="meta">
+        [2026-06-06 / 17:56:00]<br/>
+        Target SHA: 0c373bf3f8b405ef1c9e02a99a372de6001ecded<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>접근성 (Large System Text & 320px Width):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>`/formats` 에디터의 메인 타이틀이 큰 시스템 폰트 환경에서도 컷팅되지 않고 두 줄로 안전하게 랩핑(Wrap) 됩니다.</li>
+                <li>`Schema preview` 내 트리거 URL 값들 또한 중간에 잘려 나가는 현상(Truncation) 없이 길이에 맞춰 아래로 확장되어 핵심 링크 텍스트의 가시성이 보장됩니다.</li>
+            </ul>
+        </li>
+        <li><strong>정보위계 (Component Overlap):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>프로퍼티(Detail/Property) 이름이 길어져 다중 라인으로 확장되어도, 우측에 위치한 `Required` 배지 및 삭제(Remove) 액션 버튼을 덮어버리지 않고 유기적으로 레이아웃 텐션을 유지합니다.</li>
+                <li>Property 헤더 로우 또한 좁은 모바일 화면에서 아이템들이 상하로 깔끔하게 떨어지도록 Flex Wrap이 잘 적용되어 있습니다.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

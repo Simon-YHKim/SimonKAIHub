@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native/Web QA Report: Web Zoom & Focus (A18 - Rebased)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native/Web QA Report: Web Zoom & Focus (A18 - Rebased)</h1>
+    <div class="meta">
+        [2026-06-06 / 17:28:00]<br/>
+        Target SHA: fb5a200b8cbac2c5fb14f0ee00639c8d287f4338 (Rebased)<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>접근성 (Zoom Unblocked):</strong> <span class="pass">PASS</span> - Rebased commit successfully maintains the unblocked browser zoom.</li>
+        <li><strong>직관성 (Keyboard Nav):</strong> <span class="pass">PASS</span> - Tab focus state remains perfectly visible on the rebased layout.</li>
+    </ul>
+
+    <h2>Native & Layout Checks</h2>
+    <ul>
+        <li>Scroll & Layout Regression: <span class="pass">PASS</span> - Narrow scrolling views have no overflow.</li>
+        <li>NavGraph Surface Sanity: <span class="pass">PASS</span> - NavGraph frame integrity holds firm.</li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Rebased QA completed successfully.</p>
+</body>
+</html>

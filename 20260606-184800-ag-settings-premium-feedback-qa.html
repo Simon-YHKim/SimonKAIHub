@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Settings Premium Feedback (Feedback-Alert-Contract)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Settings Premium Feedback (Feedback-Alert-Contract)</h1>
+    <div class="meta">
+        [2026-06-06 / 18:48:00]<br/>
+        Target SHA: c8acc38cafc16f2735c2d48e029a257fec9a5e37<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>자연스러움 & 자산 일관성 (Premium Consistency):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>설정(`/settings`) 페이지 전반에서 호출되던 모든 종류의 구형 네이티브 Alert(파괴적 확인창, 성공 알림창, 에러 재시도창 등)가 일괄 소거되었습니다.</li>
+                <li>성공(Success) 시 기분 좋은 토스트(Toast) 알림이 발생하며, 파괴적 확인이나 에러 등의 중대 이벤트는 앱 무드에 맞는 세련된 커스텀 모달(Modal)로 교체되었습니다. 어떠한 경우에도 로우 에러 코드(Raw error)가 뜨지 않습니다.</li>
+            </ul>
+        </li>
+        <li><strong>직관성 & 파괴적 작업 방어 (Safeguards & Recovery):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>부분 삭제(Destructive Delete) 버튼 터치 시 즉시 삭제되지 않고 명확한 경고를 담은 커스텀 컨펌 모달이 노출됩니다.</li>
+                <li>오류 발생 시 나타나는 에러 모달에서 `Try again` 버튼을 터치하면 기존 상태를 유지한 채 재시도 로직이 완벽하게 구동됩니다.</li>
+                <li>`Full wipe (전체 데이터 초기화)`: 가장 치명적인 이 작업은 여전히 `DELETE` 타이핑 방어 로직을 완벽히 요구합니다. 성공 시 하단 토스트 팝업 직후 캡처(Capture) 화면으로 자연스럽게 리다이렉트 됩니다.</li>
+            </ul>
+        </li>
+        <li><strong>정보위계 및 레이아웃 (Mobile Responsiveness):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>320px 너비의 모바일 디바이스에서 확인했을 때, 모달이나 토스트가 백그라운드의 세팅 스위치나 리스트 UI를 가리거나 버튼 텍스트가 짓눌리는 일 없이 충분한 여백으로 안전하게 렌더링 됩니다.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

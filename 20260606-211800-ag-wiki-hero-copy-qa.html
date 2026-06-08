@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Wiki Hero Copy (E19)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Wiki Hero Copy (E19)</h1>
+    <div class="meta">
+        [2026-06-06 / 21:18:00]<br/>
+        Target SHA: 1bc4de7<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>자연스러움 (Copy Identity & Theming):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>위키(`/wiki`) 화면 최상단의 히어로(Hero) 영역(Eyebrow, Title, Subtitle, Speech) 텍스트가 번역 키 노출 없이 완벽한 영어/한국어(EN/KO)로 출력됩니다.</li>
+                <li>`마을에 저장한 조각(Find the pieces you saved to the village)`과 같은 오래된 은유적 메타포가 영구 삭제되었으며, 보다 직관적인 SecondB의 브랜드 문구로 완전히 대체된 것을 확인했습니다.</li>
+            </ul>
+        </li>
+        <li><strong>레이아웃 방어 (Container Constraints):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>320px 모바일 폭에서 히어로 텍스트가 줄바꿈(Word-wrap)을 유연하게 소화하며 하단 버튼 컨테이너를 침범하거나 짓누르지 않습니다.</li>
+            </ul>
+        </li>
+        <li><strong>플로우 유지 (Primary Action Routing):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>히어로 영역 하단에 위치한 기록하기(Capture) 프라이머리 액션 버튼의 다국어 텍스트 교체 후에도, `/capture` 라우팅 동작이 파괴되지 않고 완벽하게 이어집니다.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

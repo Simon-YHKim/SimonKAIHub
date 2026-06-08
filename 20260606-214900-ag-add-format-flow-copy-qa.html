@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Add Format Flow Copy (E19)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Add Format Flow Copy (E19)</h1>
+    <div class="meta">
+        [2026-06-06 / 21:49:00]<br/>
+        Target SHA: 69ed1fc<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>자연스러움 (Copy Clean-up & Localization):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>포맷 생성(`/formats`) 플로우 내의 타이틀, 헬퍼 텍스트, 플레이스홀더, 드래프트 생성 버튼, 프리뷰 상단 영역(eyebrow), 그리고 추가/취소/재시도 버튼들이 번역 키 노출 없이 선택된 언어(EN/KO)에 맞게 완벽히 출력됩니다.</li>
+                <li>오래된 은유적 표현인 "AI 도우미(AI helper)" 등의 워딩이 말끔히 척결되고, 직관적인 "SecondB 가이드(Filing guide)" 카피로 완전히 교체되었습니다.</li>
+                <li>드래프트 생성 실패, 필터링에 의한 제안 없음, 저장 실패 등의 에러 메시지들 또한 모달 창에서 영어/한국어 혼용 없이 자연스러운 어투로 렌더링 됩니다.</li>
+            </ul>
+        </li>
+        <li><strong>플로우 유지 (Mechanics & Interactions):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>다국어 텍스트가 적용된 이후에도 포맷 스키마를 렌더링하고 미리보기(Preview) 하는 고유 동작이 조금도 손상되지 않았습니다.</li>
+                <li>생성 취소(Cancel) 및 저장(Save) 액션의 상태 머신 라우팅 플로우가 완벽하게 동작합니다.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

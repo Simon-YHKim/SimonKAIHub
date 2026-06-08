@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Research i18n Copy (E19)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Research i18n Copy (E19)</h1>
+    <div class="meta">
+        [2026-06-06 / 20:23:00]<br/>
+        Target SHA: 776f642<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>자연스러움 (Copy Identity & DB Fallback):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>연구 문헌(`/research`) 화면의 모든 정적 카피(Hero, 필터, 로딩, 에러)가 EN/KO 언어 변환 시 하드코딩 흔적이나 번역 키(Key) 에러 없이 깔끔하게 전환됩니다.</li>
+                <li>DB에서 불러오는 `summary_en`, `summary_ko` 컬럼과의 조화가 매끄럽게 이루어지며, 다국어 텍스트의 혼용(Mixed-language)이 완전히 방어되었습니다.</li>
+            </ul>
+        </li>
+        <li><strong>레이아웃 안정성 (Extreme Width Word-wrap):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>폭 320px 모바일 화면에서 긴 문헌 제목(Source title), 저자 목록(Authors), 요약(Summary), 그리고 긴 DOI/URL 링크 라인들이 플렉스 컨테이너를 탈출하지 않고 예쁘게 워드랩(Word-wrap) 됩니다.</li>
+                <li>프레임워크 필터 칩(Framework filter chips) 역시 텍스트 길이에 맞춰 유려하게 줄바꿈(Flex-wrap) 됨을 확인했습니다.</li>
+            </ul>
+        </li>
+        <li><strong>기능 및 접근성 (A11y & Core Flow):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>프레임워크 필터링 토글 액션(선택 및 전체(All) 해제)이 버그 없이 동작하며, 선택(Selected) 상태가 보이스오버(VoiceOver)를 통해 정확히 낭독됩니다.</li>
+                <li>외부 브라우저로 연결되는 DOI/URL 링크가 올바른 타깃을 호출하며, 낭독기 힌트가 두 언어에서 모두 직관적인 구어체로 제공됩니다.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

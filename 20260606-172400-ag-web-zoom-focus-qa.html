@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native/Web QA Report: Web Zoom & Focus (A18)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native/Web QA Report: Web Zoom & Focus (A18)</h1>
+    <div class="meta">
+        [2026-06-06 / 17:24:00]<br/>
+        Target SHA: 2c3fd49d87eb2878f0bebcedaea92fb241c5dfc5<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>접근성 (Zoom Unblocked):</strong> <span class="pass">PASS</span> - Web viewport meta tag successfully allows browser pinch-to-zoom.</li>
+        <li><strong>직관성 (Keyboard Nav):</strong> <span class="pass">PASS</span> - "Tab" navigation creates a highly visible outline around primary actions and form controls, greatly improving accessibility for keyboard-only users.</li>
+    </ul>
+
+    <h2>Native & Layout Checks</h2>
+    <ul>
+        <li>Scroll & Layout Regression: <span class="pass">PASS</span> - Narrow web views scroll correctly without horizontal overflow issues.</li>
+        <li>NavGraph Surface Sanity: <span class="pass">PASS</span> - The global CSS focus reset did not introduce unwanted blank gutters or framing breaks around the `ReAnimated` interactive NavGraph surfaces.</li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. QA completed successfully.</p>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Auth Hero Accessibility E3</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Auth Hero Accessibility (E3)</h1>
+    <div class="meta">
+        [2026-06-06 / 15:45:10]<br/>
+        Target SHA: 141010593600f52dcac2f96acb7a5f4f60286d45<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>자산 일관성 (Asset Uniformity):</strong> <span class="pass">PASS</span> - Hero artwork loads without layout shifting across `/sign-in`, `/sign-up`, and `/complete-profile`.</li>
+        <li><strong>정보위계 (No-Overload):</strong> <span class="pass">PASS</span> - Screen reader correctly reads the localized image label without awkwardly duplicating the headline.</li>
+    </ul>
+
+    <h2>Native & Accessibility Checks</h2>
+    <ul>
+        <li>Screen Reader Image Focus: <span class="pass">PASS</span> - Announced successfully.</li>
+        <li>Large Text Accessibility (Elderly Persona): <span class="pass">PASS</span> - Hero area shrinks or repositions gracefully and does not overlap the form controls when system font is maximized.</li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

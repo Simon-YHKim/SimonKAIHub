@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Permissions i18n Copy (E19)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Permissions i18n Copy (E19)</h1>
+    <div class="meta">
+        [2026-06-06 / 19:58:00]<br/>
+        Target SHA: 446cb8b<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>자연스러움 (Locale & Copy Cleanup):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>권한 제어(`/permissions`) 화면 접속 시 노출되는 Hero 텍스트, 권한 상태 표시(Pills), 플랫폼 안내, 보안 원칙, 그리고 수동 제어(Manual CTA) 버튼 등 모든 구역이 EN/KO 언어 설정 변경 시 즉각적이고 자연스럽게 스위칭됩니다.</li>
+                <li>오래된 문구였던 "AI answers" 표현이 완전히 제거되고, 앱의 목적성을 명확히 하는 "SecondB replies" 기반의 번역으로 일괄 교체되었음을 확인했습니다.</li>
+            </ul>
+        </li>
+        <li><strong>레이아웃 안정성 (Narrow Layout Word-wrap):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>긴 설명이 포함된 각 권한(Permission) 안내 카드와 보안 원칙 본문이 모바일 320px 뷰포트에서 잘리거나 레이아웃 밖으로 튀어나가지 않고 안정적으로 줄바꿈(Word-wrap) 됩니다.</li>
+            </ul>
+        </li>
+        <li><strong>접근성 (A11y Labels):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>수동 제어(Manual CTA) 버튼 및 주요 상태 표시줄에 달린 보이스오버(VoiceOver) 접근성 힌트가 두 가지 언어에서 모두 명확하고 문맥에 맞는 구어체로 낭독됨을 테스트했습니다.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

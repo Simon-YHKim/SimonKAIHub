@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: ESM i18n Copy (E19)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: ESM i18n Copy (E19)</h1>
+    <div class="meta">
+        [2026-06-06 / 20:08:00]<br/>
+        Target SHA: a64e6a3<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>자연스러움 및 톤앤매너 (Copy Identity):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>경험 샘플링(`/esm`) 화면에서 하드코딩되었던 "Back to village" 등 구시대적인 비유법 텍스트가 모두 홈(Home) 스크린 중심의 직관적 언어로 대체되었습니다.</li>
+                <li>EN/KO 스위칭 시 혼합된 다국어 프래그먼트(Mixed-language)나 날것의 번역 키(Raw key) 노출 없이 아주 매끄럽게 전환됩니다.</li>
+            </ul>
+        </li>
+        <li><strong>레이아웃 안정성 (Mobile Narrow Constraints):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>320px 및 390px 뷰포트에서 프롬프트 탭(Tabs), 에너지 스케일, 컨텍스트 태그 목록들이 번역본 텍스트의 길이에 맞춰 유연하게 변형되며, 오버플로우나 텍스트 잘림 현상(Clip)이 전혀 발생하지 않습니다.</li>
+            </ul>
+        </li>
+        <li><strong>접근성 (A11y States & Labels):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>프롬프트 탭에 `Selected(선택됨)` 상태가 제대로 마킹되며, 에너지 옵션은 `Radio` 상태, 컨텍스트 태그는 `Checkbox` 상태값을 정확히 보이스오버(VoiceOver)로 넘겨줍니다. 저장(Save) 버튼의 힌트 역시 두 언어 모두에서 문맥에 맞게 잘 낭독됩니다.</li>
+            </ul>
+        </li>
+        <li><strong>기능 플로우 (State Flow Integrity):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>에너지 스케일 또는 컨텍스트 태그가 최소 1개 이상 선택되기 전까지 저장(Save) 버튼이 정상적으로 Disabled 상태를 유지합니다.</li>
+                <li>저장 완료 시 프리미엄 피드백 모달/토스트가 기존의 성공 플로우와 정확히 동일하게 노출되는 것을 확인했습니다.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

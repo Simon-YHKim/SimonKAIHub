@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Rebased Premium Feedback & Auth Toasts (E19)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Rebased Premium Feedback & Auth Toasts (E19)</h1>
+    <div class="meta">
+        [2026-06-06 / 21:44:00]<br/>
+        Target SHAs: 32abf63, dee0bdd<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>리베이스 및 오류 토스트 정합성 (Rebase & Toast Integrity):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>새로운 베이스 브랜치(`origin/main@8b74760`) 환경에서, 이메일/비밀번호 로그인 실패 및 회원가입 실패 시 출력되는 하단 토스트(Toast) 메시지가 현재 설정된 로케일(EN/KO)을 완벽히 따라갑니다.</li>
+                <li>OAuth(Naver 등) 인증 시작 실패 토스트의 경우, 에러 메시지 중간에 프로바이더(Provider) 이름이 다국어 템플릿에 맞추어 정확하게 보간(Interpolation) 됨을 확인했습니다.</li>
+                <li>프로필 완성(Complete-profile) 저장 실패 시 출력되는 토스트 역시 번역 키 노출 없이 안전하게 렌더링 됩니다.</li>
+            </ul>
+        </li>
+        <li><strong>프리미엄 컴포넌트 폴백 (Premium Fallbacks):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>직전에 테스트했던 `PremiumLoadingState`, `PremiumErrorState`의 속성 누락 시 디폴트 다국어 폴백 렌더링 기능이 리베이스 이후에도 파괴되지 않고 정상 동작함을 교차 검증했습니다.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

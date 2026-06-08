@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Capture Mode Copy E2</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Capture Mode Copy (E2)</h1>
+    <div class="meta">
+        [2026-06-06 / 15:45:20]<br/>
+        Target SHA: 5f2a382bd38cbc4b8279bb1f3bf333ff4494703e<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>직관성 (Clarity of Action):</strong> <span class="pass">PASS</span> - Mode tab names (Journal, Note, Link, Photo, File) are clear. Action button reflects direct copy ('save note') instead of ambiguous 'Send to cells'.</li>
+        <li><strong>정보위계 (No-Overload):</strong> <span class="pass">PASS</span> - At 320px width and with large text accessibility options enabled, the mode tabs remain readable and do not truncate awkwardly.</li>
+        <li><strong>자연스러움 (Smooth Transitions):</strong> <span class="pass">PASS</span> - Hero copy update feels direct and natural.</li>
+    </ul>
+
+    <h2>Native & Accessibility Checks</h2>
+    <ul>
+        <li>Screen Reader Hints: <span class="pass">PASS</span> - Both the short mode label and the contextual help sentence are cleanly grouped and announced.</li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

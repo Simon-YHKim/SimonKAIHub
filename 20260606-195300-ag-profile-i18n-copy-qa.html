@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Profile i18n Copy (E19)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Profile i18n Copy (E19)</h1>
+    <div class="meta">
+        [2026-06-06 / 19:53:00]<br/>
+        Target SHA: 0750cec<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>자연스러움 (Locale & Copy Cleanup):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>프로필(`/profile`) 화면 진입 시 Hero 텍스트, 계정 폴백 메시지, 허브 섹션 라벨 및 칩(Chip) 텍스트 전체가 EN/KO 언어 설정에 맞춰 번역 키 누락 없이 완벽하게 변환됩니다.</li>
+                <li>오래되고 낡은 개념인 "Villager", "village-mark" 같은 표현들이 흔적도 없이 사라졌고, 명확하고 직관적인 프로필 허브(Hub) 중심의 언어로 대체되었습니다.</li>
+            </ul>
+        </li>
+        <li><strong>레이아웃 안정성 (Narrow Layout Flex-wrap):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>프로필 화면에 나열된 허브 칩(Hub chips)들이 320px 모바일 화면 폭을 초과할 때, 강제로 잘리거나 짓눌리지 않고 아래 줄로 유려하게 플렉스 랩(Flex-wrap) 되는 것을 교차 검증했습니다.</li>
+            </ul>
+        </li>
+        <li><strong>접근성 (A11y Labels):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>각종 칩(Chip) 컴포넌트에 달린 스크린 리더 힌트(VoiceOver)가 한국어와 영어 두 로케일 모두 기계음 느낌 없이 매우 자연스러운 문맥으로 읽힙니다.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

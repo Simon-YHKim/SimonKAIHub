@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Format Editor & Schema View Copy (E19)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Format Editor & Schema View Copy (E19)</h1>
+    <div class="meta">
+        [2026-06-06 / 22:09:00]<br/>
+        Target SHA: cb80c1f<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>자연스러움 및 접근성 (i18n Localization & A11y):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>포맷 편집기(`TemplateEditor`) 화면에서 라벨, 힌트, 플레이스홀더 텍스트가 번역 키 누출 없이 사용자의 로케일(EN/KO)을 완벽히 추종하여 렌더링 됩니다.</li>
+                <li>`FormatSchemaView`의 타입(type) 라벨과 칩, 태그 삭제 버튼에 바인딩된 접근성(VoiceOver) 힌트 텍스트들이 혼용 낭독 버그 없이 완벽한 다국어 호환성을 보입니다.</li>
+            </ul>
+        </li>
+        <li><strong>플로우 유지 및 레이아웃 방어 (Mechanics & Layout Constraints):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>항목 수정/저장/취소, 항목 추가/삭제 등 에디터의 고유한 폼(Form) 상태 라우팅 플로우가 변경 이후에도 손상되지 않고 정상 동작함을 확인했습니다.</li>
+                <li>320px 모바일 폭 뷰포트에서 에디터의 인풋 행(row)과 스키마 프리뷰의 칩/타이포그래피들이 화면 바깥으로 튀어나가거나 겹치지 않고 매우 안정적으로 랩핑(Wrapping) 됩니다.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

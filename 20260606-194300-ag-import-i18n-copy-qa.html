@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Import i18n Copy (E19)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Import i18n Copy (E19)</h1>
+    <div class="meta">
+        [2026-06-06 / 19:43:00]<br/>
+        Target SHA: 7c6d99d<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>자연스러움 (Locale & Copy Cleanup):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>외부 데이터 임포트(`/import`) 화면 진입 시 로딩, Hero 텍스트, 프롬프트 카피, 붙여넣기, 완료 상태 등 모든 구성요소가 EN/KO 언어 설정에 맞춰 번역 키 누락 없이 완벽히 렌더링 됩니다.</li>
+                <li>오래된 은유적 표현("village")이 소거되었으며, 2nd-B 앱의 명확하고 직관적인 기록(Record) 중심 용어로 모두 교체된 것을 확인했습니다.</li>
+            </ul>
+        </li>
+        <li><strong>레이아웃 및 텍스트 렌더링 (Narrow Width Word-wrap):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>긴 프롬프트 설명문과 결과 요약(Result/Saved-state) 텍스트가 320px 모바일 화면에서도 컨테이너를 이탈하지 않고 정확하게 워드랩(Word-wrap)되어 피팅(Fit)됩니다. 텍스트 잘림 현상 없습니다.</li>
+            </ul>
+        </li>
+        <li><strong>접근성 (A11y Labels):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>데이터 붙여넣기(Paste) 및 가져오기 실행 버튼에 설정된 스크린 리더 힌트(Hint)가 한국어, 영어 각 로케일별로 가장 자연스러운 구어체로 낭독됨을 교차 검증했습니다.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>

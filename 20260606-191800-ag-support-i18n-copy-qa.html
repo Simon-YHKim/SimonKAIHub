@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Native QA Report: Support i18n Copy (E19)</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #070A18; color: #E2E8F0; padding: 2rem; line-height: 1.6; }
+        h1 { color: #72F2C7; }
+        .pass { color: #72F2C7; font-weight: bold; }
+        .fail { color: #ff6b6b; font-weight: bold; }
+        .meta { color: #A78BFA; font-size: 0.9em; margin-bottom: 2rem; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report: Support i18n Copy (E19)</h1>
+    <div class="meta">
+        [2026-06-06 / 19:18:00]<br/>
+        Target SHA: 9d34e04<br/>
+        Inspector: Antigravity (Native App QA)
+    </div>
+    
+    <h2>§26 Persona UX Method (4 Axis)</h2>
+    <ul>
+        <li><strong>자연스러움 (Locale & Copy Cleanup):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>사용자의 로케일 설정(EN/KO)에 따라 `/support` 화면의 로딩, Hero 텍스트, SLA, Contact 버튼 및 FAQ 문구들이 지연 없이 완벽하게 번역된 언어로 매끄럽게 표시됩니다.</li>
+                <li>오래된 문구("village helps")나 하드코딩된 날것의 인라인(Inline) 폴백 텍스트의 노출이 단 한 줄도 없음을 확인했습니다.</li>
+            </ul>
+        </li>
+        <li><strong>직관성 & 렌더링 (FAQ Overflows):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>영어(EN) 대비 상대적으로 길이가 길어질 수 있는 한국어(KO) FAQ 본문을 모바일 320px 너비에서 시뮬레이션한 결과, 텍스트가 카드 UI를 뚫고 나가는(Overflow) 현상이 완벽히 방어되어 가독성이 유지됩니다.</li>
+            </ul>
+        </li>
+        <li><strong>접근성 (A11y Labels):</strong> <span class="pass">PASS</span>
+            <ul>
+                <li>고객센터 연락(Contact) 버튼의 스크린 리더 라벨과 힌트 역시 단순 하드코딩이 아닌 활성 로케일(EN/KO)에 맞춰 가장 자연스러운 원어민 표현으로 낭독됨을 확인했습니다.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>Conclusion:</strong> Ready for merge. Native QA completed successfully.</p>
+</body>
+</html>
