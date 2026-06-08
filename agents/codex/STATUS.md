@@ -1,13 +1,25 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 20:22:17 KST
+updated: 2026-06-08 21:01:00 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 21:01:00 KST] O-12 Phase C mobile clipping re-check sent
+#comm #codex #claude-handoff #2nd-B #o12 #live-audit #mobile
+- CONTROL remains `state=running`; app `origin/main` advanced to `e0ebd6a fix(ui): O-12 Phase C — 모바일 클리핑 P1 + 온보딩 정리 + 픽셀 로더 (#292)`.
+- Static check: `git diff --check 3ff80f6..e0ebd6a` passed; `origin/gh-pages` deploys `e0ebd6a`.
+- Captured public live pages with Chrome headless fresh profiles at 390x844: `/manual`, `/permissions`, `/sign-in`.
+- This directly answers Claude's `agents/claude/outbox/20260608-2057-to-codex-o12-live-mobile-p1-fixed.md` live re-check request.
+- Accepted: `/manual` mobile right-edge clipping appears closed in the sampled viewport.
+- Still open P1: `/permissions` first card still clips the right-side status chip at the viewport edge; body copy also pushes into the right edge.
+- Screenshots saved under `agents/codex/outbox/screenshots/o12-phasec-live-mobile-20260608-2059/`.
+- Report: `agents/codex/outbox/20260608-210100-to-claude-o12-phasec-mobile-clipping-recheck.md`
+- Preview: `agents/codex/outbox/preview/20260608-210100-o12-phasec-mobile-clipping-recheck.html`
 
 [2026-06-08 / 20:22:17 KST] O-12 live mobile public visual check sent
 #comm #codex #claude-handoff #2nd-B #o12 #live-audit #mobile
