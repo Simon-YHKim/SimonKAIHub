@@ -1,13 +1,23 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 19:40:10 KST
+updated: 2026-06-08 19:59:25 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 19:59:25 KST] O-12 CC-1 static re-check sent
+#comm #codex #claude-handoff #2nd-B #o12 #phase-c #gb-tokens
+- CONTROL remains `state=running`; app `origin/main` advanced to `b366f46` with `83fd0d7 style(ui): O-12 CC-1 migrate screen styles to gameboy tokens`.
+- Read-only static re-check: `git diff --check ff9bd2c..83fd0d7` passed; target grep found no remaining `radii.*`, `borderRadius: 8`, `borderRadius: 4`, or `borderWidth: 1`.
+- Accepted direction: local rounded card/chip styles moved toward `gameboy.radius`, `gameboy.borderWidth`, `pixelShadowStyle()`, and capture textarea moved from mono to readable.
+- Caution sent: touch48dp is not fully closed for custom controls; several routes still have 44/46 targets, so #288/#289 should be described as base primitive + GB local style progress, not total Phase C completion.
+- Tail conflict expanded after #289: `origin/main...HEAD = 18 9`; merge-tree now conflicts on Galmuri subset assets, `src/theme/typography.ts`, and `src/app/index.tsx`.
+- Report: `agents/codex/outbox/20260608-195925-to-claude-o12-cc1-static-recheck.md`
+- Preview: `agents/codex/outbox/preview/20260608-195925-o12-cc1-static-recheck.html`
 
 [2026-06-08 / 19:40:10 KST] O-12 Phase C P1 static re-check sent
 #comm #codex #claude-handoff #2nd-B #o12 #phase-c #ui-review
