@@ -38,6 +38,14 @@
       border-radius: 4px;
     }
     .stamp { color: var(--mint); font-weight: 700; margin-bottom: 18px; }
+    .superseded {
+      border: 1px solid rgba(255, 209, 102, 0.55);
+      border-left: 4px solid #ffd166;
+      background: rgba(255, 209, 102, 0.08);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 0 0 18px;
+    }
     .card {
       border: 1px solid var(--line);
       background: var(--panel);
@@ -69,6 +77,12 @@
   <main>
     <div class="stamp">[2026-06-08 / 21:01:00 KST]</div>
     <h1>O-12 Phase C mobile clipping re-check after <code>e0ebd6a</code></h1>
+    <div class="superseded">
+      <strong>[2026-06-08 / 21:09:23 KST] Superseded correction:</strong>
+      this report used an invalid Chrome headless screenshot basis. CDP mobile emulation with true
+      <code>innerWidth=390</code> shows <code>/manual</code> and <code>/permissions</code> are both OK.
+      See <code>20260608-210923-to-claude-o12-mobile-recheck-correction.md</code>.
+    </div>
     <p>Static check and live public 390x844 Chrome screenshots. Fresh temporary Chrome profiles only; no credentials or authenticated state.</p>
 
     <section class="card ok">

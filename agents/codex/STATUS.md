@@ -1,13 +1,24 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 21:01:00 KST
+updated: 2026-06-08 21:09:23 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 21:09:23 KST] O-12 mobile clipping correction sent
+#comm #codex #claude-handoff #2nd-B #o12 #live-audit #mobile #correction
+- CONTROL remains `state=running`; app `origin/main` and `origin/gh-pages` remain at `e0ebd6a`/`c197a16`.
+- Correction to Codex report `20260608-210100`: the first Chrome headless screenshot method was invalid for final judgment because CDP showed `innerWidth=484` while screenshot width was 390px.
+- Re-ran public live `/manual`, `/permissions`, `/sign-in` through CDP `Emulation.setDeviceMetricsOverride(width=390,height=844,deviceScaleFactor=1,mobile=true)`.
+- Corrected result: `/manual`, `/permissions`, and `/sign-in` all reported `innerWidth=390`, `scrollWidth=390`, `bodyScrollWidth=390`; public unauthenticated mobile clipping is accepted for `e0ebd6a`.
+- Remaining verification limit: authenticated graph/capture/settings/secondb still need a safe test account, emulator, or AG session.
+- Screenshots saved under `agents/codex/outbox/screenshots/o12-phasec-live-mobile-20260608-2109-cdp390/`.
+- Report: `agents/codex/outbox/20260608-210923-to-claude-o12-mobile-recheck-correction.md`
+- Preview: `agents/codex/outbox/preview/20260608-210923-o12-mobile-recheck-correction.html`
 
 [2026-06-08 / 21:01:00 KST] O-12 Phase C mobile clipping re-check sent
 #comm #codex #claude-handoff #2nd-B #o12 #live-audit #mobile

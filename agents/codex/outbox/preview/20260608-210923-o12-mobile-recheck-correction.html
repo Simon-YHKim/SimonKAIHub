@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>O-12 mobile re-check correction</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1024;
+      --panel: #111935;
+      --ink: #eef3ff;
+      --muted: #aab6d7;
+      --mint: #72f2c7;
+      --amber: #ffd166;
+      --line: rgba(238, 243, 255, 0.18);
+    }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    main { max-width: 980px; margin: 0 auto; padding: 32px 18px 48px; }
+    h1 { font-size: 28px; margin: 0 0 8px; }
+    h2 { font-size: 18px; margin: 26px 0 10px; color: var(--mint); }
+    p, li { color: var(--muted); }
+    code, pre {
+      color: var(--mint);
+      background: rgba(114, 242, 199, 0.08);
+      border-radius: 6px;
+    }
+    code { padding: 1px 5px; }
+    pre { padding: 12px; overflow: auto; }
+    .stamp { color: var(--mint); font-weight: 700; margin-bottom: 18px; }
+    .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 14px 0;
+    }
+    .correction { border-left: 4px solid var(--amber); }
+    .ok { border-left: 4px solid var(--mint); }
+    .shotgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+    figure { margin: 0; }
+    img {
+      display: block;
+      width: 100%;
+      max-width: 390px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #070b18;
+    }
+    figcaption { color: var(--muted); font-size: 13px; margin-top: 6px; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="stamp">[2026-06-08 / 21:09:23 KST]</div>
+    <h1>Correction: O-12 Live Mobile Re-Check</h1>
+    <section class="card correction">
+      <h2>Why This Supersedes The Previous Report</h2>
+      <p>The earlier Chrome headless pass used a 390px screenshot, but CDP showed the CSS viewport was actually 484px wide. That can crop the rendered page and create a false right-edge clipping signal.</p>
+    </section>
+    <section class="card ok">
+      <h2>Corrected Result</h2>
+      <p>CDP mobile emulation forced a true 390x844 CSS viewport. <code>/manual</code>, <code>/permissions</code>, and <code>/sign-in</code> all reported <code>innerWidth=390</code> and <code>scrollWidth=390</code>. Public unauthenticated mobile clipping is accepted for <code>e0ebd6a</code>.</p>
+      <pre>{
+  "width": 390,
+  "height": 844,
+  "deviceScaleFactor": 1,
+  "mobile": true
+}</pre>
+    </section>
+    <section class="card">
+      <h2>Evidence</h2>
+      <div class="shotgrid">
+        <figure>
+          <img src="../screenshots/o12-phasec-live-mobile-20260608-2109-cdp390/20260608-2109-manual-cdp390x844.png" alt="/manual CDP 390x844 screenshot" />
+          <figcaption>/manual true 390 CSS px: OK</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/o12-phasec-live-mobile-20260608-2109-cdp390/20260608-2109-permissions-cdp390x844.png" alt="/permissions CDP 390x844 screenshot" />
+          <figcaption>/permissions true 390 CSS px: OK</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/o12-phasec-live-mobile-20260608-2109-cdp390/20260608-2109-sign-in-cdp390x844.png" alt="/sign-in CDP 390x844 screenshot" />
+          <figcaption>/sign-in true 390 CSS px: OK unauth control</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
+
