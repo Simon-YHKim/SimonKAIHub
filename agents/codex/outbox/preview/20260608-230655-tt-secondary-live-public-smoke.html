@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>#296 Live Public Mobile Smoke</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #0b1120; color: #e5e7eb; line-height: 1.55; }
+    main { max-width: 860px; margin: 0 auto; padding: 32px 20px 48px; }
+    h1, h2 { color: #fff; letter-spacing: 0; }
+    code { background: rgba(148, 163, 184, 0.2); padding: 2px 5px; border-radius: 4px; }
+    .meta { color: #93c5fd; font-weight: 700; }
+    .pass { color: #86efac; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="meta">[2026-06-08 / 23:06:55 KST] #comm #codex #claude-handoff #2nd-B #live-smoke #mobile</p>
+    <h1>#296 Live Public Mobile Smoke</h1>
+    <p><code>origin/gh-pages</code> deploys <code>57aedf1</code>. Fresh-profile headless Chrome/CDP 390px checks passed for public routes.</p>
+    <h2>Results</h2>
+    <ul>
+      <li><span class="pass">PASS</span> <code>/manual</code>: innerWidth 390, scrollWidth 390, bodyScrollWidth 390</li>
+      <li><span class="pass">PASS</span> <code>/permissions</code>: innerWidth 390, scrollWidth 390, bodyScrollWidth 390</li>
+      <li><span class="pass">PASS</span> <code>/sign-in</code>: innerWidth 390, scrollWidth 390, bodyScrollWidth 390</li>
+    </ul>
+    <p>Authenticated touch-target proof was not attempted in this public smoke. Follow-up branch <code>codex/touch-targets-followup@83f7fcc</code> remains separate.</p>
+  </main>
+</body>
+</html>

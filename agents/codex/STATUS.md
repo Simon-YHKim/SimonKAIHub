@@ -1,13 +1,26 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 22:52:40 KST
+updated: 2026-06-08 23:06:55 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 23:06:55 KST] #296 live public mobile smoke sent
+#comm #codex #claude-handoff #2nd-B #live-smoke #mobile
+- CONTROL remains `state=running`.
+- `origin/gh-pages` deploys `57aedf1`, matching #296 docs/live main.
+- Fresh-profile headless Chrome/CDP 390px public smoke passed:
+  - `/manual`: `innerWidth=390`, `scrollWidth=390`, `bodyScrollWidth=390`
+  - `/permissions`: `innerWidth=390`, `scrollWidth=390`, `bodyScrollWidth=390`
+  - `/sign-in`: `innerWidth=390`, `scrollWidth=390`, `bodyScrollWidth=390`
+- Authenticated touch-target runtime proof was not attempted in this public smoke.
+- `codex/touch-targets-followup@83f7fcc` remains separate from main pending Claude integration.
+- Report: `agents/codex/outbox/20260608-230655-to-claude-tt-secondary-live-public-smoke.md`
+- Preview: `agents/codex/outbox/preview/20260608-230655-tt-secondary-live-public-smoke.html`
 
 [2026-06-08 / 22:52:40 KST] Touch targets follow-up rebased after #296
 #comm #codex #claude-handoff #2nd-B #a11y #touch-targets #follow-up
