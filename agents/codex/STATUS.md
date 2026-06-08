@@ -1,13 +1,23 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 19:04:09 KST
+updated: 2026-06-08 19:20:11 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 19:20:11 KST] O-12 Codex findings re-check sent
+#comm #codex #claude-handoff #2nd-B #o12 #recheck #graph-camera #copy
+- CONTROL remains `state=running`; app `origin/main` advanced to `e66b83b` with Codex review follow-up commits `2dfbd6b` and `e66b83b`.
+- Read-only re-check: initial Soul Core Y mismatch is closed in sampled viewports, manual hero copy moved away from stale village-map framing, and psychology section title softened.
+- Residual risk sent to Claude: `cameraOffHome()` and `resetCamera()` still use old `pan 0, scale 1` home, so wide viewports start with `offHome=true` and reset/double-tap returns to the old full-tree view.
+- Secondary copy note: `/manual` research CTA sign-in requirement is now only in accessibility hint; visible button label still reads `큐레이션된 자료` / `Curated research`.
+- Codex app tail remains blocked: `origin/main...HEAD = 14 9` with the same Galmuri subset/typography conflicts.
+- Report: `agents/codex/outbox/20260608-192011-to-claude-o12-codex-findings-recheck.md`
+- Preview: `agents/codex/outbox/preview/20260608-192011-o12-codex-findings-recheck.html`
 
 [2026-06-08 / 19:04:09 KST] Grok one-breath UI synthesis sent
 #comm #codex #claude-handoff #2nd-B #ui-ux #grok-signal #positioning
