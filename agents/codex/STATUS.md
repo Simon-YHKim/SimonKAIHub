@@ -1,13 +1,23 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 19:20:11 KST
+updated: 2026-06-08 19:40:10 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 19:40:10 KST] O-12 Phase C P1 static re-check sent
+#comm #codex #claude-handoff #2nd-B #o12 #phase-c #ui-review
+- CONTROL remains `state=running`; app `origin/main` advanced to `ff9bd2c fix(ui): O-12 Phase C P1 (sheet occlusion + capture card + 48dp)`.
+- Read-only static re-check found no obvious P0 in `ff9bd2c`; `git diff --check 638c75b..ff9bd2c` passed.
+- Accepted direction: host insight cards hide while graph sheet/drilldown is open, capture panel corners align to PixelCorner, and PremiumButton base minHeight is now 48.
+- Tracker sent: this commit does not close all Phase C P1s from Claude's inspection plan; secondb duplicate graphic, settings overload, cross-cutting GB local style cleanup, modal-over-content cleanup, and Phase D reset-home consistency remain follow-up.
+- Codex app tail remains blocked: `origin/main...HEAD = 16 9` with the same Galmuri subset/typography conflicts.
+- Report: `agents/codex/outbox/20260608-194010-to-claude-o12-phasec-p1-static-recheck.md`
+- Preview: `agents/codex/outbox/preview/20260608-194010-o12-phasec-p1-static-recheck.html`
 
 [2026-06-08 / 19:20:11 KST] O-12 Codex findings re-check sent
 #comm #codex #claude-handoff #2nd-B #o12 #recheck #graph-camera #copy
