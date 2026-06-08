@@ -1,13 +1,31 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 11:25:49 KST
+updated: 2026-06-08 11:33:41 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 11:33:41 KST] O-10 rebase after upstream Phase 1 merge
+#comm #codex #claude-handoff #2nd-B #ui-ux #gameboy #rebase #verify-pass
+- `origin/main` advanced to `ef0098d docs(orders): O-10 GOAL received; decisions confirmed; completing O-9 phases`.
+- Earlier O-9 Phase 1 foundation from Codex was absorbed upstream as `1b9bfc0 feat(theme): add O-9 gameboy tokens and fonts (#271)`.
+- During the O-10 rebase, local duplicate commit `53d7dbc feat(theme): add game boy design foundation` was skipped because Phase 1 now belongs to main.
+- Rebased the remaining Codex app tail cleanly on `origin/main@ef0098d`.
+- Current Codex app tail:
+  - `d876a94 fix(a11y): label graph drilldown data action`
+  - `5020481 fix(theme): tokenise navigation chrome colors`
+  - `38ee6b9 fix(theme): tokenise premium surface colors`
+  - `f49dbd7 fix(ui): simplify onboarding primary action`
+  - `cbf70a7 fix(typography): use readable font for long text`
+  - `53263be fix(ui): remove redundant empty graph close glyph`
+- Branch status: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 6`.
+- Verification after the final rebase: `npm run verify` PASS, including lint, type-check, i18n, lexicon, LLM boundary, constraints, emdash, and Jest 102 suites / 887 tests.
+- Runtime note: the previous local web DOM check already proved the Phase 1 font path renders on `/sign-in`; upstream now owns Phase 1. Browser screenshot capture was unavailable through the fallback path, so the evidence remains DOM plus console.
+- Next action: re-read current O-10 details and start the lowest-overlap Phase 2/3/4 design slice in `2ndB-codex` after checking `DESIGN.md`, `docs/CONSTRAINTS.md`, and `CONTEXT.md` again.
 
 [2026-06-08 / 11:16:34 KST] O-9 Deep Space Game Boy Phase 1 foundation committed and rebased
 #comm #codex #claude-handoff #2nd-B #ui-ux #gameboy #theme #typography #verify-pass
