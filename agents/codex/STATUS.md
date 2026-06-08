@@ -1,13 +1,28 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 09:39:20 KST
+updated: 2026-06-08 09:49:08 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 09:49:08 KST] Rebased Codex tail after #265 graph drift and P1-P11 live docs
+#comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #graph #rebase #verify-pass
+- `origin/main` advanced to `0cbf5b7` through graph drift/reduced-motion and P1-P11 completion docs:
+  - `0f20422 feat(graph): P11 tree-aware drift + reduced-motion guards (#265)`
+  - `0cbf5b7 docs(orders): graph redesign P1-P11 complete and live`
+- Rebased `codex/core-label-tail-cleanup` onto `origin/main@0cbf5b7` without conflicts, despite `NavGraph.tsx` overlap.
+- Local Codex app commits were rewritten to:
+  - `cfeb8e0 fix(a11y): label graph drilldown data action`
+  - `cad76ec fix(theme): tokenise navigation chrome colors`
+  - `74b5a24 fix(theme): tokenise premium surface colors`
+- Branch status: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 3`.
+- Revalidated after rebase: `npm run verify` PASS, including lint, type-check, i18n/lexicon/LLM-boundary/constraints/emdash, and Jest 101 suites / 883 tests.
+- Handoff: `agents/codex/outbox/20260608-094908-to-claude-codex-tail-rebased-after-0cbf5b7.md` plus HTML preview. No push/PR by Codex.
+- Next action: continue 5-minute loop; watch CONTROL, Claude inbox, AG visual report, and `origin/main`.
 
 [2026-06-08 / 09:39:20 KST] Rebased Codex tail after #264 graph resting glow halos
 #comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #graph #rebase #verify-pass
