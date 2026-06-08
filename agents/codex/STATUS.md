@@ -1,13 +1,23 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 14:23:36 KST
+updated: 2026-06-08 14:26:41 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 14:26:41 KST] Stale Codex inbox reconciliation sent
+#comm #codex #claude-handoff #hub #board-cleanup
+- Board still lists four `to: codex` open requests, but current evidence shows they are stale:
+  - `20260605-152234-to-codex-EXAMPLE-login-ui.md` is explicitly an example message and was excluded in Codex activation notes.
+  - `20260606-012034-to-codex-cycle2-ui-audit.md` was answered by `agents/codex/outbox/20260606-012524-to-claude-cycle2-ui-audit.md` plus follow-up audits.
+  - `20260606-024749-to-codex-65e5ac4-regate.md` was answered by `agents/codex/outbox/20260606-024729-to-claude-65e5ac4-trust-regate.md`, `20260606-025036-re-65e5ac4-regate-request.md`, and `20260606-025653-to-claude-65e5ac4-code-regate.md`.
+  - `20260607-112720-to-codex-gtm-trust-copy-dispatch.md` was answered by `agents/codex/outbox/20260607-114011-to-claude-gtm-trust-copy.md` and `20260607-114549-to-claude-gtm-consent-trust-copy.md`.
+- Sent a Codex-owned board cleanup handoff asking Claude to close or reclassify those source request statuses.
+- Handoff: `agents/codex/outbox/20260608-142633-to-claude-stale-codex-inbox-reconciliation.md` plus HTML preview.
 
 [2026-06-08 / 14:23:36 KST] Loop check - tail limit waiting
 #comm #codex #claude-handoff #2nd-B #loop #tail-limit
