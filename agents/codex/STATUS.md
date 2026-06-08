@@ -1,13 +1,39 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 10:50:27 KST
+updated: 2026-06-08 11:16:34 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 11:16:34 KST] O-9 Deep Space Game Boy Phase 1 foundation committed and rebased
+#comm #codex #claude-handoff #2nd-B #ui-ux #gameboy #theme #typography #verify-pass
+- Re-grounded after compaction per PROTOCOL 31.1: `CONTROL.md state=running`, activate prompt, PROTOCOL 27/28/31, BOARD, inbox.
+- Re-read the required 2nd-B context before coding: `DESIGN.md`, `docs/CONSTRAINTS.md`, `CONTEXT.md`, plus O-9 in `ORDERS.md`.
+- Added app commit `53d7dbc feat(theme): add game boy design foundation` on `codex/core-label-tail-cleanup`.
+- Scope:
+  - Added `src/lib/theme/gameboy-tokens.ts` and tests for O-9 palette mapping, 8px grid, 2px border, 0 radius, no-blur 3px offset shadow, scanline/dot matrix opacity, and CSS var aliases.
+  - Bundled `Galmuri11-Regular.ttf` and `PressStart2P-Regular.ttf`; updated `src/theme/typography.ts`, `src/app/+html.tsx`, and `src/components/ui/Text.tsx`.
+  - Pixel chrome now defaults to `Galmuri11`; `PressStart2P` is available for English-only retro labels; body/subtle shared `Text` variants use `fontFamilies.readable`.
+  - Added O-9 Deep Space Game Boy contract to `DESIGN.md` and font disclosure to `docs/ASSETS.md`.
+- Rebased after `origin/main` advanced to `1bb56aa` (`docs(orders): O-9 gameboy restyle received; reconcile with O-8; Phase1 starting`) and `a3cc3f8` (#270 shadow/glow removal).
+- Rebase conflict resolution: preserved Claude/#270 no-shadow outcome in `src/components/premium/surfaces.tsx`; kept tokenized colors from the Codex premium surface commit.
+- Current Codex app tail:
+  - `eaed19a fix(a11y): label graph drilldown data action`
+  - `a13a8ab fix(theme): tokenise navigation chrome colors`
+  - `ac8da80 fix(theme): tokenise premium surface colors`
+  - `486f050 fix(ui): simplify onboarding primary action`
+  - `7a20a63 fix(typography): use readable font for long text`
+  - `b4ec06f fix(ui): remove redundant empty graph close glyph`
+  - `53d7dbc feat(theme): add game boy design foundation`
+- Branch status: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 7`.
+- Verification: `npm run verify` PASS after final rebase, including lint, type-check, i18n, lexicon, LLM boundary, constraints, emdash, and Jest 102 suites / 886 tests.
+- Pre-commit/rebase checks: `git diff --check` PASS with CRLF warnings only; secret scan had false-positive token matches only, no credential patterns.
+- Handoff: `agents/codex/outbox/20260608-111634-to-claude-o9-gameboy-foundation.md` plus HTML preview. No push/PR by Codex.
+- Next action: continue O-9 Phase 2 in shared primitives only after Claude sequencing: `PremiumButton` / card surfaces / `Input` / tab states, then run browser visual QA.
 
 [2026-06-08 / 10:50:27 KST] O-8 home anti-slop slice rebased after color token merge
 #comm #codex #claude-handoff #2nd-B #ui-ux #anti-slop #home #rebase #verify-pass
