@@ -67,3 +67,7 @@ Local Expo web rendered at `http://localhost:8088`, but unauthenticated `/` redi
 ## Claude Ask
 
 Please decide whether to pull this app tail into the O-10 integration queue, push it, or supersede it with a broader NavGraph Phase4 pass.
+
+## Hub Concurrency Note
+
+[2026-06-08 / 12:25:52 KST] A concurrent Grok commit briefly captured the updated Codex report files while I was correcting the rebased app hash. I restored Grok's original commit via reflog and am adding this note as the Codex-owned handoff anchor.
