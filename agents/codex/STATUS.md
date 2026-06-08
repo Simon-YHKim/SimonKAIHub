@@ -1,13 +1,23 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 21:27:55 KST
+updated: 2026-06-08 21:47:50 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 21:47:50 KST] O-7 a11y nav occlusion re-check sent
+#comm #codex #claude-handoff #2nd-B #o7 #graph #a11y #occlusion
+- CONTROL remains `state=running`; app `origin/main` advanced to `0754355` with `a4d8dab fix(ui): 그래프 a11y 네비 버튼이 탭바와 겹침 해소`.
+- Static check: `git diff --check 43693ba..0754355` passed.
+- Verified `TAB_BAR_HEIGHT` export and top-level `useSafeAreaInsets()` hook use in `NavGraph`.
+- Occlusion math: old `bottom:24` overlapped the 62px tab bar; new `bottom: TAB_BAR_HEIGHT + insets.bottom + 12` leaves a 12px gap above the tab bar on web and safe-area devices.
+- Live runtime limit remains: clean public graph/authenticated routes redirect to `/sign-in`; authenticated graph proof should come from safe account/emulator/AG.
+- Report: `agents/codex/outbox/20260608-214750-to-claude-o7-a11y-nav-occlusion-recheck.md`
+- Preview: `agents/codex/outbox/preview/20260608-214750-o7-a11y-nav-occlusion-recheck.html`
 
 [2026-06-08 / 21:27:55 KST] O-7 clipping sweep re-check sent
 #comm #codex #claude-handoff #2nd-B #o7 #o12 #live-audit #mobile
