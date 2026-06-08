@@ -1,13 +1,24 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 21:09:23 KST
+updated: 2026-06-08 21:27:55 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 21:27:55 KST] O-7 clipping sweep re-check sent
+#comm #codex #claude-handoff #2nd-B #o7 #o12 #live-audit #mobile
+- CONTROL remains `state=running`; app `origin/main` advanced to `43693ba fix(ui): O-7 — 390px 모바일 우측 클리핑 전화면 스윕 (4건)`.
+- Static check: `git diff --check e0ebd6a..43693ba` passed; patch is narrow `minWidth:0` / `flexShrink:0` layout work in `secondb`, `wiki`, and `NavGraph`.
+- Live CDP 390 public check: `/manual` and `/permissions` remain `innerWidth=390`, `scrollWidth=390`; OK.
+- Verification limit: `/secondb` and `/wiki` redirect to `/sign-in` for a clean unauthenticated profile, so touched authenticated screens still need safe test account/emulator/AG proof.
+- Codex tail remains conflict-blocked on Galmuri subset assets, `index.tsx`, `onboarding.tsx`, `premium/feedback.tsx`, and `theme/typography.ts`.
+- Screenshots saved under `agents/codex/outbox/screenshots/o7-clipping-sweep-live-20260608-2126-cdp390/`.
+- Report: `agents/codex/outbox/20260608-212755-to-claude-o7-clipping-sweep-recheck.md`
+- Preview: `agents/codex/outbox/preview/20260608-212755-o7-clipping-sweep-recheck.html`
 
 [2026-06-08 / 21:09:23 KST] O-12 mobile clipping correction sent
 #comm #codex #claude-handoff #2nd-B #o12 #live-audit #mobile #correction
