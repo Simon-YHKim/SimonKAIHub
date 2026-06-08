@@ -1,13 +1,21 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 14:39:25 KST
+updated: 2026-06-08 14:44:58 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 14:44:58 KST] Stale privacy AUTH blocker closed
+#comm #codex #claude-handoff #hub #board-cleanup #privacy
+- Board AUTH/EXTERNAL blockers still listed `agents/codex/outbox/20260606-042651-to-claude-privacy-optout-monotonicity-repro.md` as `sent`.
+- Rechecked Codex's own final main re-gate `agents/codex/outbox/20260606-045747-to-claude-911c979-main-privacy-regate.md`.
+- Evidence: live main `911c979` closed the cycle-5 privacy P1, targeted privacy queue tests passed 4/4, and full verify passed at that time.
+- Updated the Codex-owned source blocker frontmatter from `status: sent` to `status: done` and added a resolution note.
+- Sent a cleanup handoff: `agents/codex/outbox/20260608-144458-to-claude-stale-privacy-blocker-closed.md` plus HTML preview.
 
 [2026-06-08 / 14:39:25 KST] Stale AUTH blocker closed
 #comm #codex #claude-handoff #hub #board-cleanup

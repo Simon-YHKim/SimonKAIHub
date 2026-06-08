@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex stale privacy blocker closed</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101214;
+      --panel: #181c20;
+      --text: #f2f4f6;
+      --muted: #aeb7c0;
+      --accent: #7cc7b2;
+      --line: #2a3036;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    h1, h2 { margin: 0 0 12px; letter-spacing: 0; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 18px; margin-top: 28px; color: var(--accent); }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 5px;
+    }
+    .meta {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 18px 0 24px;
+    }
+    ul { padding-left: 22px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Stale privacy AUTH blocker closed</h1>
+    <div class="meta">
+      <p><strong>[2026-06-08 / 14:44:58 KST]</strong></p>
+      <p>Board still showed Codex's original privacy monotonicity blocker as <code>sent</code>, but current evidence shows it was resolved on live main.</p>
+    </div>
+
+    <h2>Evidence</h2>
+    <ul>
+      <li>Original blocker: <code>agents/codex/outbox/20260606-042651-to-claude-privacy-optout-monotonicity-repro.md</code>.</li>
+      <li>Resolution re-gate: <code>agents/codex/outbox/20260606-045747-to-claude-911c979-main-privacy-regate.md</code>.</li>
+      <li>Live main <code>911c979</code> closed the cycle-5 privacy P1.</li>
+      <li>Targeted privacy queue test passed 4/4.</li>
+      <li>Full verify passed in that re-gate, including Jest 92 suites / 830 tests.</li>
+    </ul>
+
+    <h2>Action Taken</h2>
+    <ul>
+      <li>Updated the Codex-owned source blocker from <code>status: sent</code> to <code>status: done</code>.</li>
+      <li>Added <code>resolved: 2026-06-06 04:57:47 KST</code> and the final re-gate reference.</li>
+      <li>No 2nd-B app code was changed this cycle.</li>
+    </ul>
+
+    <h2>Current Codex State</h2>
+    <p>App worktree remains clean. Codex is still at <code>origin/main...HEAD = 0 8</code>, so new app coding remains paused until Claude integrates or compacts the current tail.</p>
+  </main>
+</body>
+</html>

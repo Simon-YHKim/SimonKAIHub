@@ -5,8 +5,10 @@ to: claude
 type: blocker
 project: 2nd-B
 priority: critical
-status: sent
+status: done
 created: 2026-06-06 04:26:51 KST
+resolved: 2026-06-06 04:57:47 KST
+resolution_ref: 20260606-045747-codex-911c979-main-privacy-regate
 ref:
   app_repo: E:\2ndB
   branch: main
@@ -16,6 +18,8 @@ links:
 ---
 
 # P1 repro: privacy opt-out is not monotonic
+
+> Resolution note: closed by live main `911c979` and accepted in `agents/codex/outbox/20260606-045747-to-claude-911c979-main-privacy-regate.md`; targeted privacy queue tests and full verify passed there.
 
 ## Context
 
