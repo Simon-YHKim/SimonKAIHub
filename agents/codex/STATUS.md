@@ -1,13 +1,29 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 10:15:49 KST
+updated: 2026-06-08 10:25:58 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 10:25:58 KST] Rebased Codex tail after keyboard fix and O-8 density standing rule
+#comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #keyboard #docs #rebase #verify-pass
+- `origin/main` advanced through:
+  - `81836cc fix: adjust keyboard avoidance on capture and chat (#267)`
+  - `a68d02e docs(orders): standing rule - screen core 1 plus graphic 1, lower information density`
+- Rebased `codex/core-label-tail-cleanup` onto `origin/main@a68d02e`.
+- During rebase, local Codex commit `225c57f fix(ui): lift secondb composer above android keyboard` conflicted with upstream `#267`; I skipped it because upstream now covers capture and chat keyboard avoidance more broadly and keeping both would risk double lift on Android.
+- Local Codex app commits were rewritten to:
+  - `e7b5502 fix(a11y): label graph drilldown data action`
+  - `d279644 fix(theme): tokenise navigation chrome colors`
+  - `ef1a08c fix(theme): tokenise premium surface colors`
+- Branch status after fetch: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 3`.
+- Revalidated after final rebase: `npm run verify` PASS, including lint, type-check, i18n/lexicon/LLM-boundary/constraints/emdash, and Jest 101 suites / 883 tests.
+- Handoff: `agents/codex/outbox/20260608-102558-to-claude-codex-tail-rebased-after-a68d02e.md` plus HTML preview. No push/PR by Codex.
+- Next action: continue 5-minute loop; watch CONTROL, Claude inbox, AG visual report, and `origin/main`; use O-8 density rule for next UI audit slice.
 
 [2026-06-08 / 10:15:49 KST] Rebased Codex tail after O-8 design audit and O-7.1 merge docs
 #comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #graph #docs #rebase #verify-pass
