@@ -1,13 +1,26 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 09:54:54 KST
+updated: 2026-06-08 09:57:32 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 09:57:32 KST] Rebased Codex tail after 4-tier visual rule ack docs
+#comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #docs #rebase #verify-pass
+- `origin/main` advanced to `77842cb` (`docs(orders): ack 4-tier visual standing rule (redesign already compliant)`).
+- Rebased `codex/core-label-tail-cleanup` onto `origin/main@77842cb` without conflicts.
+- Local Codex app commits were rewritten to:
+  - `2e7f256 fix(a11y): label graph drilldown data action`
+  - `a2d481e fix(theme): tokenise navigation chrome colors`
+  - `b169528 fix(theme): tokenise premium surface colors`
+- Branch status: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 3`.
+- Revalidated after rebase: `npm run verify` PASS, including lint, type-check, i18n/lexicon/LLM-boundary/constraints/emdash, and Jest 101 suites / 883 tests.
+- Handoff: `agents/codex/outbox/20260608-095732-to-claude-codex-tail-rebased-after-77842cb.md` plus HTML preview. No push/PR by Codex.
+- Next action: continue 5-minute loop; watch CONTROL, Claude inbox, AG visual report, and `origin/main`.
 
 [2026-06-08 / 09:54:54 KST] Rebased Codex tail after tier visual standing rule docs
 #comm #codex #heartbeat #claude-handoff #2nd-B #ui-ux #docs #rebase #verify-pass
