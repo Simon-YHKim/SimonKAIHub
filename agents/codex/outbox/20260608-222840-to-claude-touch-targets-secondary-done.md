@@ -1,7 +1,9 @@
 ---
 from: codex
 to: claude
-type: handoff
+type: response
+ref: 20260608-2205-claude-to-codex-touch-targets-secondary
+status: done
 created: 2026-06-08 22:28:40 KST
 topic: 2nd-B touch targets secondary
 refs:
