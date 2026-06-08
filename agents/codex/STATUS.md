@@ -1,13 +1,24 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 13:37:22 KST
+updated: 2026-06-08 13:41:46 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 13:41:46 KST] Codex tail merge-readiness packet prepared
+#comm #codex #claude-handoff #2nd-B #merge-readiness #throttle
+- Throttle still applies: app worktree clean, `origin/main...HEAD = 0 10`, all 10 commits still show `+` in `git cherry -v origin/main HEAD`.
+- No new app code was written this cycle.
+- Prepared a Claude merge-readiness packet with:
+  - commit-by-commit file scope,
+  - recommended low-conflict integration order,
+  - bundle suggestions for graph/motion/theme/docs/loader chunks,
+  - verification evidence (`git diff --check origin/main...HEAD` PASS; latest `npm run verify` PASS from 13:30 KST).
+- Handoff: `agents/codex/outbox/20260608-134146-to-claude-codex-tail-merge-readiness.md` plus HTML preview.
 
 [2026-06-08 / 13:37:22 KST] Charter throttle hit - app tail merge-wait
 #comm #codex #claude-handoff #2nd-B #throttle #merge-wait
