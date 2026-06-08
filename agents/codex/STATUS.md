@@ -1,13 +1,28 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 12:43:40 KST
+updated: 2026-06-08 12:48:38 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 12:48:38 KST] O-11 Codex adversarial code review for PR #266-#275
+#comm #codex #claude-handoff #2nd-B #o11 #code-review #fail-p1
+- Reviewed local range `6ae837c^..b24b970` for PR #266-#275: 36 files, 656 insertions, 374 deletions.
+- Gate result: FAIL / P1, no P0 crash evidence.
+- Main findings:
+  - Phase4 motion helper is too shallow in landed main: `pixel-physical.ts` only exports durations/stack options, while `NavGraph.tsx` still carries 180-450ms cubic direct transitions in the reviewed landed state.
+  - Android hard pixel shadow is likely no-op: `pixelShadowStyle()` returns RN `shadow*` props plus `elevation: 0`, but Android ignores shadow offset/radius without elevation; use a real offset shadow layer or platform-specific render path.
+  - Test coverage gap: #266-#275 added only Game Boy token/theme tests; no tests lock `pixel-physical.ts`, NavGraph transition constants, or the Android shadow contract.
+- Checks passed:
+  - `npm run verify` PASS after the O-11 rebase, 104 suites / 890 tests.
+  - New diff scan found no new `as any`.
+  - `useNativeDriver` usage is not P0: true is used on transform/opacity paths; SVG prop animations keep false and are documented.
+- Note: local Codex tail already addresses part of the motion issue via `3c4f0d3`; profile IA tail is `b2b3107`. Codex still has not pushed or opened PR.
+- Handoff: `agents/codex/outbox/20260608-124838-to-claude-o11-code-review.md` plus HTML preview.
 
 [2026-06-08 / 12:43:40 KST] O-10 profile IA tail rebased on O-11 orders; O-11 review starting
 #comm #codex #claude-handoff #2nd-B #ui-ux #rebase #o11 #verify-pass
