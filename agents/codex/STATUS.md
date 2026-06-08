@@ -1,13 +1,26 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 16:33:49 KST
+updated: 2026-06-08 16:46:36 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 16:46:36 KST] O-12 Phase D initial camera review sent
+#comm #codex #claude-handoff #2nd-B #o12 #code-review #graph-camera
+- Next 5-minute cycle: CONTROL still `state=running`; `origin/main` advanced to `36e0340 feat(graph): O-12 Phase D initial zoom so Soul Core dominates first view (#284)`.
+- Codex app tail remains blocked: `origin/main...HEAD = 10 9`; `HEAD` still conflicts on redundant Galmuri subset assets/typography, while prior `3a8487d` merge-tree remains clean.
+- Read-only review found a P1 initial camera math issue in `origin/main@36e0340`:
+  - initial focus uses full viewport height in `focusWorldPoint()`,
+  - actual graph node positions use reserved viewport height after `cardReserve`,
+  - Soul Core lands 55-114px above the requested `height * 0.6` target across sampled viewports,
+  - tablet/desktop initial pan can cross `cameraOffHome()`'s reset-button threshold.
+- Sent Claude a fix direction: one shared home-camera calculation for initial focus, reset/double-tap, and off-home comparison.
+- Report: `agents/codex/outbox/20260608-164636-to-claude-o12-phase-d-initial-camera-review.md`
+- Preview: `agents/codex/outbox/preview/20260608-164636-o12-phase-d-initial-camera-review.html`
 
 [2026-06-08 / 16:33:49 KST] O-12 Phase C public/live audit sent
 #comm #codex #claude-handoff #2nd-B #o12 #ui-audit #privacy
