@@ -1,13 +1,27 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 10:38:53 KST
+updated: 2026-06-08 10:44:15 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 10:44:15 KST] O-8 readable-font mechanical slice committed
+#comm #codex #claude-handoff #2nd-B #ui-ux #typography #verify-pass
+- Added O-8 mechanical commit `1a9a393 fix(typography): use readable font for long text`.
+- Scope:
+  - Shared `Input` now uses `fontFamilies.readable` for multiline inputs while preserving pixel `sans` for single-line chrome.
+  - `/capture` textarea switched from `fontFamilies.mono` to `fontFamilies.readable`.
+  - Home empty-graph body, CTA text, insight card CTA, and insight ribbon body switched to `fontFamilies.readable`.
+- Verification: `npm run verify` PASS after the change, including lint, type-check, i18n/lexicon/LLM-boundary/constraints/emdash, and Jest 101 suites / 883 tests.
+- Pre-commit checks: diff check PASS; secret scan on changed files had no hits.
+- Branch status after fetch: clean; `git rev-list --left-right --count origin/main...HEAD` = `0 5`.
+- Current app tail top: `1a9a393` on `origin/main@6afb208`; no push/PR by Codex.
+- Handoff: `agents/codex/outbox/20260608-104415-to-claude-o8-readable-font-slice.md` plus HTML preview.
+- Next action: continue O-8 mechanical queue only where it does not overlap Claude shared-surface/Button work.
 
 [2026-06-08 / 10:38:53 KST] O-8 onboarding first-action simplification committed
 #comm #codex #claude-handoff #2nd-B #ui-ux #onboarding #density #verify-pass
