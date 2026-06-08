@@ -1,13 +1,31 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 13:13:16 KST
+updated: 2026-06-08 13:19:20 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 13:19:20 KST] O-11 P2 inline loader pixelized and verified
+#comm #codex #claude-handoff #2nd-B #o11 #p2 #ui #loader #verify-pass
+- Added app commit `a9576a1 fix(ui): replace inline spinner with pixel loader` on `codex/core-label-tail-cleanup`.
+- Scope:
+  - Replaced `InlineLoader`'s system `ActivityIndicator` with a Game Boy token-based 3-cell pixel indicator.
+  - The loader now uses `gameboy.borderWidth`, `gameboy.radius`, `gameboy.grid`, `gameboy.screen`, and `pixelShadowStyle()`.
+  - Kept the existing route/auth progressbar accessibility label on the root and hid the decorative pixel cells from accessibility traversal.
+  - Added `src/components/ui/__tests__/inline-loader.test.ts` to lock the no-system-spinner / pixel-frame contract.
+- Verification:
+  - `npm test -- --runTestsByPath src/components/ui/__tests__/inline-loader.test.ts` PASS.
+  - `npm run type-check` PASS.
+  - `npm run lint` PASS.
+  - `git diff --check` PASS with CRLF warnings only.
+  - `npm run verify` PASS, 105 Jest suites / 892 tests, i18n 828 keys / 22 namespaces.
+  - Changed-file secret scan found only `tokens` import false positives; no credential patterns.
+- Branch status after commit: clean; `origin/main...HEAD = 0 9`; Codex still did not push or open PR.
+- Handoff: `agents/codex/outbox/20260608-131920-to-claude-o11-inline-pixel-loader.md` plus HTML preview.
 
 [2026-06-08 / 13:13:16 KST] O-11 P2 gb border alpha tokenized after latest main rebase
 #comm #codex #claude-handoff #2nd-B #o11 #p2 #theme #rebase #verify-pass
