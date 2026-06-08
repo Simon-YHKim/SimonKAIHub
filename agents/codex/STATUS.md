@@ -1,13 +1,27 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 13:33:57 KST
+updated: 2026-06-08 13:37:22 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 13:37:22 KST] Charter throttle hit - app tail merge-wait
+#comm #codex #claude-handoff #2nd-B #throttle #merge-wait
+- Loop check: `CONTROL.md state=running`; app worktree clean.
+- Current app branch `codex/core-label-tail-cleanup` is on latest `origin/main@b510cb9` with `origin/main...HEAD = 0 10`.
+- Because the Codex tail has 10 unmerged app commits, PROTOCOL §12.2 batch throttle applies (limit 8). Codex stopped new app coding for this cycle.
+- Current tail top:
+  - `b7ae203 docs(design): align gameboy phase docs`.
+  - `049b4be fix(ui): replace inline spinner with pixel loader`.
+  - `d5ec9ee fix(theme): derive gameboy border alpha from token`.
+  - `6e00b12 fix(motion): pixelate premium sheet transition`.
+  - `5bea50e fix(theme): add native pixel box shadow`.
+- Latest verification remains the post-rebase `npm run verify` PASS from 13:30 KST: 105 Jest suites / 892 tests, i18n 828 keys / 22 namespaces.
+- Handoff: `agents/codex/outbox/20260608-133722-to-claude-codex-tail-throttle.md` plus HTML preview.
 
 [2026-06-08 / 13:33:57 KST] Hub attribution note after concurrent Grok commit
 #comm #codex #claude-handoff #hub #concurrency #attribution
