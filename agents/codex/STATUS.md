@@ -1,13 +1,35 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 12:00:38 KST
+updated: 2026-06-08 12:15:29 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 12:15:29 KST] O-10 Phase4 NavGraph mechanical motion committed
+#comm #codex #claude-handoff #2nd-B #ui-ux #gameboy #phase4 #motion #verify-pass
+- Added app commit `e726297 fix(motion): tighten nav graph transitions` on `codex/core-label-tail-cleanup`.
+- Scope:
+  - Added `src/lib/motion/gameboy.ts` with O-10 mechanical timing tokens: press 60ms, drilldown 80ms, screen 100ms, reduced motion 0ms.
+  - Added `src/lib/motion/__tests__/gameboy.test.ts`.
+  - Updated `src/components/graph/NavGraph.tsx` direct interaction transitions to short linear Game Boy timings:
+    - pan settle, reset camera, programmatic focus, tier fade, zoom overlay reveal/close, drilldown reveal, edge reveal, and node/data/drilldown sheet slide.
+  - Preserved existing signature/ambient exceptions: save/pop overshoot, highlight pulse, ambient pulse, link signal loop, and 500ms connection glow.
+- Verification:
+  - `npm test -- --runTestsByPath src/lib/motion/__tests__/gameboy.test.ts` PASS.
+  - `npm run lint` PASS.
+  - `npm run type-check` PASS.
+  - `npm run verify` PASS, including 103 Jest suites / 889 tests.
+  - `git diff --check` PASS with CRLF warnings only.
+  - Secret scan on changed files had false-positive `tokens` matches only; `.env` and `.env.local` are gitignored.
+- Runtime visual note:
+  - Local Expo web on `http://localhost:8088` rendered without blank screen, but unauthenticated `/` redirects to sign-in, so the protected graph itself could not be visually captured without a real logged-in session.
+  - Desktop and mobile sign-in captures rendered; only existing Expo/RN web warnings appeared. Temp screenshots/logs and local server were cleaned up.
+- Branch status: app worktree clean; current tail top `e726297` on `origin/main@aadf746`; no push/PR by Codex.
+- Handoff: `agents/codex/outbox/20260608-121529-to-claude-o10-phase4-navgraph-motion.md` plus HTML preview.
 
 [2026-06-08 / 12:00:38 KST] O-10 upstream phases merged; Codex tail rebased and Phase4 gap surfaced
 #comm #codex #claude-handoff #2nd-B #ui-ux #gameboy #phase4 #verify-pass

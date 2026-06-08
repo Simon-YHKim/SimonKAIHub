@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>O-10 Phase4 NavGraph Motion Handoff</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #09111f;
+      --panel: #101b31;
+      --line: rgba(114, 242, 199, 0.28);
+      --text: #eef3ff;
+      --muted: #a9b7d0;
+      --mint: #72f2c7;
+      --blue: #4cc9f0;
+      --amber: #ffd166;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(76, 201, 240, 0.18), transparent 34%), var(--bg);
+      color: var(--text);
+      font: 15px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(980px, calc(100vw - 32px));
+      margin: 32px auto;
+    }
+    header, section {
+      border: 1px solid var(--line);
+      background: rgba(16, 27, 49, 0.92);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 3px 3px 0 rgba(76, 201, 240, 0.18);
+    }
+    h1, h2 { margin: 0 0 10px; line-height: 1.2; }
+    h1 { font-size: 24px; color: var(--mint); }
+    h2 { font-size: 17px; color: var(--blue); }
+    p { margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 20px; }
+    code {
+      color: var(--amber);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .meta {
+      color: var(--muted);
+      display: grid;
+      gap: 4px;
+    }
+    .stamp { color: var(--mint); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="stamp">[2026-06-08 / 12:15:29 KST]</div>
+      <h1>O-10 Phase4 NavGraph Mechanical Motion</h1>
+      <div class="meta">
+        <div>to: claude</div>
+        <div>from: codex</div>
+        <div>commit: <code>e726297 fix(motion): tighten nav graph transitions</code></div>
+        <div>branch: <code>codex/core-label-tail-cleanup</code></div>
+      </div>
+    </header>
+
+    <section>
+      <h2>Scope</h2>
+      <ul>
+        <li>Added testable Game Boy motion tokens: 60ms press, 80ms drilldown, 100ms screen, 0ms reduced motion.</li>
+        <li>Updated NavGraph pan settle, reset, focus, tier fade, overlay reveal, drilldown reveal, edge reveal, and sheet slides to short linear timing.</li>
+        <li>Preserved signature and ambient exceptions: pop/spawn overshoot, highlight pulse, ambient pulse, link signal loop, and 500ms connection glow.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm test -- --runTestsByPath src/lib/motion/__tests__/gameboy.test.ts</code> PASS.</li>
+        <li><code>npm run lint</code> PASS.</li>
+        <li><code>npm run type-check</code> PASS.</li>
+        <li><code>npm run verify</code> PASS, 103 Jest suites and 889 tests.</li>
+        <li>Secret scan found false-positive <code>tokens</code> matches only; env files are ignored.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Runtime Note</h2>
+      <p>Local Expo web rendered at <code>http://localhost:8088</code>, but unauthenticated <code>/</code> redirects to sign-in. Desktop and mobile sign-in captures rendered; the protected graph surface needs a real logged-in session or dev auth bypass for visual proof.</p>
+      <p>Temp screenshots/logs and the local server were cleaned up.</p>
+    </section>
+
+    <section>
+      <h2>Ask</h2>
+      <p>Please decide whether to pull this app tail into the O-10 integration queue, push it, or supersede it with a broader Phase4 pass.</p>
+    </section>
+  </main>
+</body>
+</html>
