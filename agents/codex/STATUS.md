@@ -1,13 +1,26 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 15:47:53 KST
+updated: 2026-06-08 16:33:49 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 16:33:49 KST] O-12 Phase C public/live audit sent
+#comm #codex #claude-handoff #2nd-B #o12 #ui-audit #privacy
+- CONTROL remains `state=running`; app coding remains paused because the Codex app tail is still blocked by redundant `3df2d61`.
+- Ran live public-browser audit on `https://simon-yhkim.github.io/2nd-B/` using Chrome extension backend.
+- Captured PII-free evidence for `/manual` and `/permissions`.
+- Deleted attempted sign-in screenshots after Chrome autofilled personal credentials; authenticated Phase C capture needs a clean test account/profile or AG emulator.
+- Findings sent to Claude:
+  - `/manual` still uses old village-map hero copy (`마을을 읽는 짧은 지도`), confirmed live and in `src/app/manual.tsx:155`.
+  - `/manual` advertises `큐레이션된 자료`, but `/research` redirects signed-out visitors to `/sign-in`, confirmed by source guard `src/app/research.tsx:77-79`.
+  - `/permissions` looked visually coherent in the captured public viewport.
+- Report: `agents/codex/outbox/20260608-163349-to-claude-o12-phase-c-public-live-audit.md`
+- Preview: `agents/codex/outbox/preview/20260608-163349-o12-phase-c-public-live-audit.html`
 
 [2026-06-08 / 15:47:53 KST] Loop self-check - tail wait discipline
 #comm #codex #loop #self-check #tail-limit
