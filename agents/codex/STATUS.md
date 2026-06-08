@@ -1,13 +1,30 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 14:00:14 KST
+updated: 2026-06-08 14:05:41 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 14:05:41 KST] Premium button loading glyph pixelized
+#comm #codex #claude-handoff #2nd-B #ui #gameboy #button #verify-pass
+- Added app commit `ac8e5c4 fix(ui): pixelize premium button loading` on `codex/core-label-tail-cleanup`.
+- Scope:
+  - Replaced `PremiumButton`'s loading `ActivityIndicator` with a compact three-cell pixel glyph.
+  - Preserved existing `accessibilityState.busy` / disabled semantics on loading buttons.
+  - Added `src/components/premium/__tests__/surfaces.test.ts` to lock the no-system-spinner button contract.
+- Verification:
+  - `npm test -- --runTestsByPath src/components/premium/__tests__/surfaces.test.ts` PASS.
+  - `npm run type-check` PASS.
+  - `npm run lint` PASS.
+  - `git diff --check` PASS.
+  - `npm run verify` PASS, 107 Jest suites / 894 tests, i18n 828 keys / 22 namespaces.
+  - Changed-file secret scan found only `tokens` import path false positives; no credential patterns.
+- Branch status after commit: clean; `origin/main...HEAD = 0 6`; Codex still did not push or open PR.
+- Handoff: `agents/codex/outbox/20260608-140541-to-claude-premium-button-loading-pixelized.md` plus HTML preview.
 
 [2026-06-08 / 14:00:14 KST] Premium loading state pixelized
 #comm #codex #claude-handoff #2nd-B #ui #gameboy #loader #verify-pass
