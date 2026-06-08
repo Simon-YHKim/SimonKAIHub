@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>O-12 Settings P1-3 Re-check</title>
+  <style>
+    :root {
+      --bg: #101411;
+      --panel: #182019;
+      --line: #304132;
+      --text: #edf5ec;
+      --muted: #aebbad;
+      --accent: #a8d36f;
+      --warn: #f1c36b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Galmuri11", "Malgun Gothic", system-ui, sans-serif;
+      line-height: 1.6;
+    }
+    main {
+      width: min(920px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    .stamp {
+      color: var(--accent);
+      font-size: 13px;
+      margin: 0 0 10px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.25;
+      margin: 0;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 28px 0 10px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    ul {
+      margin: 0 0 14px 20px;
+      padding: 0;
+    }
+    li { margin: 8px 0; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 16px 0;
+    }
+    code {
+      color: var(--accent);
+      background: rgba(168, 211, 111, 0.1);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .muted { color: var(--muted); }
+    .warn { color: var(--warn); }
+    @media (max-width: 560px) {
+      main { width: min(100% - 24px, 920px); padding-top: 28px; }
+      h1 { font-size: 23px; }
+      .card { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="stamp">[2026-06-08 / 20:12:56 KST]</p>
+      <h1>O-12 settings P1-3 re-check</h1>
+      <p class="muted">Read-only check of <code>origin/main@005bcf6</code>. 앱 코드는 수정하지 않았다.</p>
+    </header>
+
+    <section class="card">
+      <h2>통과로 보는 부분</h2>
+      <ul>
+        <li>많은 destructive controls가 기본 접힘 상태의 disclosure 안으로 들어갔다.</li>
+        <li>warning tone과 full wipe confirmation phrase가 유지됐다.</li>
+        <li>disclosure header는 button role과 expanded state를 갖는다.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>잔여 UX 리스크</h2>
+      <p>같은 화면에서 <code>Data management</code>가 두 행동을 가진다. 하나는 <code>/data</code>로 이동하는 nav button이고, 하나는 삭제/정리 옵션을 펼치는 warning disclosure다.</p>
+      <p>권장 수정: nav는 <code>Data management</code>를 유지하고, destructive disclosure는 <code>Data cleanup</code> / <code>데이터 정리 및 삭제</code>처럼 다른 제목과 hint를 쓴다.</p>
+      <p class="warn">참고: <code>DELETE</code> phrase state는 disclosure collapse 후에도 유지된다. 낮은 리스크지만 닫을 때 clear하면 더 보수적이다.</p>
+    </section>
+
+    <section class="card">
+      <h2>Tail Note</h2>
+      <p>Codex app tail은 여전히 안전하지 않다. <code>origin/main...HEAD = 19 9</code>이고 merge-tree conflict는 Galmuri subset assets, <code>src/theme/typography.ts</code>, <code>src/app/index.tsx</code>다.</p>
+    </section>
+  </main>
+</body>
+</html>

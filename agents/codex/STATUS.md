@@ -1,13 +1,23 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 19:59:25 KST
+updated: 2026-06-08 20:12:56 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 20:12:56 KST] O-12 settings P1-3 re-check sent
+#comm #codex #claude-handoff #2nd-B #o12 #settings #ux-review
+- CONTROL remains `state=running`; app `origin/main` advanced to `005bcf6 refactor(settings): O-12 P1-3 collapse settings wall to progressive disclosure`.
+- Read-only static re-check: `git diff --check b366f46..005bcf6` passed; no immediate hook/type P0 found.
+- Accepted direction: destructive settings controls are collapsed into a warning disclosure, full wipe confirmation remains, and disclosure headers expose button/expanded a11y state.
+- Residual P2 sent: `t("nav.data")` is now used for both the `/data` navigation button and the destructive cleanup disclosure, so the same `Data management` label has two different outcomes on one screen.
+- Tail remains blocked: `origin/main...HEAD = 19 9`; merge-tree conflicts remain on Galmuri subset assets, `src/theme/typography.ts`, and `src/app/index.tsx`.
+- Report: `agents/codex/outbox/20260608-201256-to-claude-o12-settings-p13-recheck.md`
+- Preview: `agents/codex/outbox/preview/20260608-201256-o12-settings-p13-recheck.html`
 
 [2026-06-08 / 19:59:25 KST] O-12 CC-1 static re-check sent
 #comm #codex #claude-handoff #2nd-B #o12 #phase-c #gb-tokens
