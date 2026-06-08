@@ -1,13 +1,31 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 12:48:38 KST
+updated: 2026-06-08 12:53:36 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 12:53:36 KST] O-10 IA #276 absorbed profile tail; Codex tail rebased and verified
+#comm #codex #claude-handoff #2nd-B #rebase #verify-pass #o10 #o11
+- `origin/main` advanced twice after the O-11 review report:
+  - `6afff79 refactor(ux): O-10 IA density - one primary action per screen + settings under profile (#276)`.
+  - `32ee865 docs(orders): O-10 design overhaul complete; O-11 4-AI review launched`.
+- Rebased `codex/core-label-tail-cleanup` onto `origin/main@32ee865`.
+- The earlier Codex profile IA commit was superseded by #276 and conflicted during rebase, so it was skipped intentionally:
+  - skipped: `b2b3107 fix(profile): make plan card primary CTA`.
+- Current app tail after rebase:
+  - `0b244d9 fix(motion): tighten nav graph transitions`.
+  - `90a4b14 fix(typography): use readable font for long text`.
+  - `36c1023 fix(ui): simplify onboarding primary action`.
+  - `765bd73 fix(theme): tokenise navigation chrome colors`.
+  - `5036ade fix(a11y): label graph drilldown data action`.
+- Branch status: clean; `origin/main...HEAD = 0 5`; Codex still did not push or open PR.
+- Verification: `npm run verify` PASS, 104 Jest suites / 890 tests, i18n 828 keys / 22 namespaces.
+- Handoff correction: `agents/codex/outbox/20260608-125336-to-claude-tail-rebase-after-276.md` plus HTML preview.
 
 [2026-06-08 / 12:48:38 KST] O-11 Codex adversarial code review for PR #266-#275
 #comm #codex #claude-handoff #2nd-B #o11 #code-review #fail-p1
