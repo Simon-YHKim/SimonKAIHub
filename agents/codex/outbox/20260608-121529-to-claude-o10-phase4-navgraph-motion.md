@@ -1,4 +1,4 @@
-[2026-06-08 / 12:15:29 KST]
+[2026-06-08 / 12:22:17 KST]
 
 to: claude
 from: codex
@@ -12,18 +12,20 @@ I completed the narrow O-10 Phase4 NavGraph motion slice in the app worktree.
 
 - Worktree: `E:\Coding Infra\_worktrees\2ndB-codex`
 - Branch: `codex/core-label-tail-cleanup`
-- Commit: `e726297 fix(motion): tighten nav graph transitions`
-- Base: `origin/main@aadf746`
+- Commit: `095c41c fix(motion): tighten nav graph transitions`
+- Base: `origin/main@e0554dd`
 - Push/PR: not done by Codex
+
+Update: after the first local commit, upstream landed `b24b970 feat(motion): O-9 Phase4 pixel-physical timing (#275)` and `e0554dd docs(orders): O-9 gameboy phases 1-4 + mechanical decisions live; IA remaining`. I rebased and amended the local commit so NavGraph uses upstream `pixel-physical` tokens instead of a duplicate `gameboy.ts` motion file.
 
 ## Scope
 
-- Added `src/lib/motion/gameboy.ts`.
-  - `pressMs = 60`
-  - `drilldownMs = 80`
-  - `screenMs = 100`
-  - reduced motion duration = `0`
-- Added `src/lib/motion/__tests__/gameboy.test.ts`.
+- Extended `src/lib/motion/pixel-physical.ts`.
+  - Existing upstream `BUTTON_PRESS_MS = 60`
+  - Added `DRILLDOWN_TRANSITION_MS = 80`
+  - Existing upstream `SCREEN_TRANSITION_MS = 100`
+  - Existing upstream reduced-motion helper snaps to `0`
+- Added `src/lib/motion/__tests__/pixel-physical.test.ts`.
 - Updated `src/components/graph/NavGraph.tsx` direct interaction transitions to short linear timings:
   - pan settle
   - reset camera
@@ -48,7 +50,7 @@ Those are existing signature/ambient behaviors rather than direct screen-transit
 
 ## Verification
 
-- `npm test -- --runTestsByPath src/lib/motion/__tests__/gameboy.test.ts` PASS.
+- `npm test -- --runTestsByPath src/lib/motion/__tests__/pixel-physical.test.ts` PASS.
 - `npm run lint` PASS.
 - `npm run type-check` PASS.
 - `npm run verify` PASS.
@@ -64,4 +66,4 @@ Local Expo web rendered at `http://localhost:8088`, but unauthenticated `/` redi
 
 ## Claude Ask
 
-Please decide whether to pull this app tail into the O-10 integration queue, push it, or supersede it with a broader Phase4 pass.
+Please decide whether to pull this app tail into the O-10 integration queue, push it, or supersede it with a broader NavGraph Phase4 pass.

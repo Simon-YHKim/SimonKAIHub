@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 12:15:29 KST
+updated: 2026-06-08 12:22:17 KST
 state: running
 ---
 
@@ -9,17 +9,21 @@ state: running
 
 ## Current (latest)
 
-[2026-06-08 / 12:15:29 KST] O-10 Phase4 NavGraph mechanical motion committed
+[2026-06-08 / 12:22:17 KST] O-10 Phase4 NavGraph mechanical motion committed and rebased
 #comm #codex #claude-handoff #2nd-B #ui-ux #gameboy #phase4 #motion #verify-pass
-- Added app commit `e726297 fix(motion): tighten nav graph transitions` on `codex/core-label-tail-cleanup`.
+- Added app commit `095c41c fix(motion): tighten nav graph transitions` on `codex/core-label-tail-cleanup`.
+- Rebased after upstream landed:
+  - `b24b970 feat(motion): O-9 Phase4 pixel-physical timing (#275)`.
+  - `e0554dd docs(orders): O-9 gameboy phases 1-4 + mechanical decisions live; IA remaining`.
+- The first local hash `e726297` was amended after rebase so NavGraph uses upstream `src/lib/motion/pixel-physical.ts` instead of a duplicate motion file.
 - Scope:
-  - Added `src/lib/motion/gameboy.ts` with O-10 mechanical timing tokens: press 60ms, drilldown 80ms, screen 100ms, reduced motion 0ms.
-  - Added `src/lib/motion/__tests__/gameboy.test.ts`.
+  - Extended `src/lib/motion/pixel-physical.ts` with `DRILLDOWN_TRANSITION_MS = 80`.
+  - Added `src/lib/motion/__tests__/pixel-physical.test.ts`.
   - Updated `src/components/graph/NavGraph.tsx` direct interaction transitions to short linear Game Boy timings:
     - pan settle, reset camera, programmatic focus, tier fade, zoom overlay reveal/close, drilldown reveal, edge reveal, and node/data/drilldown sheet slide.
   - Preserved existing signature/ambient exceptions: save/pop overshoot, highlight pulse, ambient pulse, link signal loop, and 500ms connection glow.
 - Verification:
-  - `npm test -- --runTestsByPath src/lib/motion/__tests__/gameboy.test.ts` PASS.
+  - `npm test -- --runTestsByPath src/lib/motion/__tests__/pixel-physical.test.ts` PASS.
   - `npm run lint` PASS.
   - `npm run type-check` PASS.
   - `npm run verify` PASS, including 103 Jest suites / 889 tests.
@@ -28,7 +32,7 @@ state: running
 - Runtime visual note:
   - Local Expo web on `http://localhost:8088` rendered without blank screen, but unauthenticated `/` redirects to sign-in, so the protected graph itself could not be visually captured without a real logged-in session.
   - Desktop and mobile sign-in captures rendered; only existing Expo/RN web warnings appeared. Temp screenshots/logs and local server were cleaned up.
-- Branch status: app worktree clean; current tail top `e726297` on `origin/main@aadf746`; no push/PR by Codex.
+- Branch status: app worktree clean; current tail top `095c41c` on `origin/main@e0554dd`; `origin/main...HEAD = 0 5`; no push/PR by Codex.
 - Handoff: `agents/codex/outbox/20260608-121529-to-claude-o10-phase4-navgraph-motion.md` plus HTML preview.
 
 [2026-06-08 / 12:00:38 KST] O-10 upstream phases merged; Codex tail rebased and Phase4 gap surfaced

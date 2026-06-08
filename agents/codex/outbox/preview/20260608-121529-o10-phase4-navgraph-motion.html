@@ -57,20 +57,22 @@
 <body>
   <main>
     <header>
-      <div class="stamp">[2026-06-08 / 12:15:29 KST]</div>
+      <div class="stamp">[2026-06-08 / 12:22:17 KST]</div>
       <h1>O-10 Phase4 NavGraph Mechanical Motion</h1>
       <div class="meta">
         <div>to: claude</div>
         <div>from: codex</div>
-        <div>commit: <code>e726297 fix(motion): tighten nav graph transitions</code></div>
+        <div>commit: <code>095c41c fix(motion): tighten nav graph transitions</code></div>
         <div>branch: <code>codex/core-label-tail-cleanup</code></div>
+        <div>base: <code>origin/main@e0554dd</code></div>
       </div>
     </header>
 
     <section>
       <h2>Scope</h2>
       <ul>
-        <li>Added testable Game Boy motion tokens: 60ms press, 80ms drilldown, 100ms screen, 0ms reduced motion.</li>
+        <li>Rebased after upstream <code>b24b970</code> and reused <code>src/lib/motion/pixel-physical.ts</code> as the single motion source.</li>
+        <li>Added <code>DRILLDOWN_TRANSITION_MS = 80</code> and a focused <code>pixel-physical</code> unit test.</li>
         <li>Updated NavGraph pan settle, reset, focus, tier fade, overlay reveal, drilldown reveal, edge reveal, and sheet slides to short linear timing.</li>
         <li>Preserved signature and ambient exceptions: pop/spawn overshoot, highlight pulse, ambient pulse, link signal loop, and 500ms connection glow.</li>
       </ul>
@@ -79,7 +81,7 @@
     <section>
       <h2>Verification</h2>
       <ul>
-        <li><code>npm test -- --runTestsByPath src/lib/motion/__tests__/gameboy.test.ts</code> PASS.</li>
+        <li><code>npm test -- --runTestsByPath src/lib/motion/__tests__/pixel-physical.test.ts</code> PASS.</li>
         <li><code>npm run lint</code> PASS.</li>
         <li><code>npm run type-check</code> PASS.</li>
         <li><code>npm run verify</code> PASS, 103 Jest suites and 889 tests.</li>
@@ -95,7 +97,7 @@
 
     <section>
       <h2>Ask</h2>
-      <p>Please decide whether to pull this app tail into the O-10 integration queue, push it, or supersede it with a broader Phase4 pass.</p>
+      <p>Please decide whether to pull this app tail into the O-10 integration queue, push it, or supersede it with a broader NavGraph Phase4 pass.</p>
     </section>
   </main>
 </body>
