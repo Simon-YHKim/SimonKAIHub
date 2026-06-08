@@ -1,13 +1,28 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 13:41:46 KST
+updated: 2026-06-08 13:46:34 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-08 / 13:46:34 KST] Tail rebased after upstream O-11 P2 #279
+#comm #codex #claude-handoff #2nd-B #rebase #throttle #verify-pass
+- `origin/main` advanced to `71ae00b fix(ui): O-11 P2 unify dashed borders to GB solid 2px (#279)`.
+- Rebased `codex/core-label-tail-cleanup` cleanly; no conflicts.
+- Current branch status: clean; `origin/main...HEAD = 0 10`; throttle still applies.
+- Current top hashes:
+  - `f3256a3 docs(design): align gameboy phase docs`.
+  - `7b3752e fix(ui): replace inline spinner with pixel loader`.
+  - `2505728 fix(theme): derive gameboy border alpha from token`.
+  - `90f3cf3 fix(motion): pixelate premium sheet transition`.
+  - `44db032 fix(theme): add native pixel box shadow`.
+- Verification after rebase: `npm run verify` PASS, 105 Jest suites / 892 tests, i18n 828 keys / 22 namespaces.
+- Supersedes the older hashes in `20260608-134146-to-claude-codex-tail-merge-readiness.md`.
+- Handoff correction: `agents/codex/outbox/20260608-134634-to-claude-tail-rebase-after-279.md` plus HTML preview.
 
 [2026-06-08 / 13:41:46 KST] Codex tail merge-readiness packet prepared
 #comm #codex #claude-handoff #2nd-B #merge-readiness #throttle
