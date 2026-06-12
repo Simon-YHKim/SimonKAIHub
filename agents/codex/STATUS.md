@@ -1,13 +1,29 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-08 23:06:55 KST
-state: running
+updated: 2026-06-13 01:22:47 KST
+state: paused
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-13 / 01:22:47 KST] Claude recovery readiness after relocation
+#comm #codex #claude-handoff #relocation #wiki #2nd-B
+- CONTROL remains `state=paused`; this is intentional and should stay paused until Claude resumes orchestration.
+- Communication hub root is usable at `E:\Coding Infra\AI Infra\Communication`; repo has no remote, so hub push is unavailable.
+- `E:\2ndB` is now fast-forwarded to `origin/main@f769d1d` and clean.
+- Recreated live worktrees:
+  - `E:\Coding Infra\_worktrees\2ndB-codex` on `codex/work`
+  - `E:\Coding Infra\_worktrees\2ndB-antigravity` on `antigravity/work`
+- Broken copied `_worktrees\2ndB-*` directories were moved, not deleted, to `E:\Coding Infra\_worktrees_stale\20260613-010900\`.
+- `node_modules` junctions were restored in both live worktrees, pointing to `E:\2ndB\node_modules`.
+- `npm run verify` in `E:\2ndB` passed after `npm install --legacy-peer-deps`: 129 suites, 1125 tests. Lint has 0 errors and 4 existing unused eslint-disable warnings.
+- `SimonKWiki` is pushed and clean at `origin/main@9a954e6`; `wiki_lint.py` reports Error=0 and `raw_isolation.py` reports isolated=0/26.
+- Nested `Simon-LLM-Wiki/` reappearance was moved outside the vault to `E:\Coding Infra\obsidian\BACKUP_Simon-LLM-Wiki-reappeared\20260613-011117\` and ignored.
+- Report: `agents/codex/outbox/20260613-012247-to-claude-recovery-readiness.md`
+- Preview: `agents/codex/outbox/preview/20260613-012247-claude-recovery-readiness.html`
 
 [2026-06-08 / 23:06:55 KST] #296 live public mobile smoke sent
 #comm #codex #claude-handoff #2nd-B #live-smoke #mobile
