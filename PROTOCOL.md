@@ -254,6 +254,18 @@ created: 2026-06-05 15:22:34 KST
 - **사이클 간 케이던스 = 5분(정본)**: 한 사이클 종료 후 약 5분 대기(`Start-Sleep 300`) 뒤 0단계로(코딩 3-AI; Grok=요청기반 §12.3). **5분은 폴링 케이던스(과열 방지)이지 idle이 아니다** — 사이클 *내부*엔 유휴 금지(§25.5·§27.4), 사이클 *간*에만 대기. 보고가 쌓이면 즉시 재진입 가능. (CONTROL은 상태 신호일 뿐, cadence 정본은 여기.)
 - **무인 지속 vs iteration 상한**: §12.2의 iteration 상한(기본 20) 도달 시 STATUS flush 후 **activate 재투입 또는 스케줄 wakeup으로 재개** — 이것이 무인 지속의 실제 메커니즘(§27.1).
 
+### 12.1a 측정 기반 루프 규칙 (2026-06-13)
+> YouTube "루프 엔지니어링" 인사이트를 허브 헌법에 반영. **측정 없는 진화는 금지**한다.
+
+- **baseline first**: 프롬프트·규칙·검사기·UX 게이트를 바꾸기 전에 현재 점수를 먼저 기록한다. 예: `npm run verify`, `wiki_lint.py`, `board.ps1`, CDP scrollWidth, 고정 페르소나 케이스.
+- **one-change loop**: 한 사이클에 하나의 의미 있는 변경만 채택한다. 여러 규칙을 동시에 바꾸면 무엇이 좋아졌는지 알 수 없으므로 대형 변경은 독립 커밋/독립 근거로 쪼갠다.
+- **golden set**: 반복 작업에는 고정 시험지를 둔다. 2nd-B=`npm run verify`+constraints+필요 시 live/CDP, SimonKWiki=`wiki_lint.py`+`raw_isolation.py`, Hub=`board.ps1`+frontmatter/status 검사. 시험지가 바뀌면 점수 비교로 쓰지 않는다.
+- **separate judge**: 제안자와 채점자는 가능하면 분리한다. 자기 산출물 자기 채점만으로 `done` 선언 금지. 분리 불가 시 적어도 같은 기준표와 원시 로그를 outbox에 남긴다.
+- **merge only on measured gain**: 점수 상승, 회귀 없음, 또는 명확한 위험 감소가 증명될 때만 규칙화한다. "좋아 보임"은 채택 근거가 아니다.
+- **failure ledger**: 실패한 접근은 버리지 말고 outbox/STATUS 또는 Wiki 교훈에 남긴다. 같은 실패안을 재제안하려면 새 증거·새 baseline이 필요하다.
+- **subtractive cycle**: 추가형 개선 3회마다 한 번은 삭제형 개선을 검토한다. 오래된 규칙·중복 게이트·효과 없는 체크를 제거해도 점수가 떨어지지 않으면 제거한다.
+- **E2E human-on-loop**: 정적 테스트가 green이어도 실제 사용자 흐름을 끝까지 조작하는 QA는 별도 증거가 필요하다. AI가 직접 실행하지 못한 표면은 "검증됨"이 아니라 "proof gap"으로 기록한다.
+
 ### 12.2 Stop-condition (다음 중 하나면 루프 정지/대기)
 - `CONTROL.md state != running`
 - **배치 throttle**: 미머지(`status: open/sent`) 내 항목이 **N개(기본 8) 초과** → 발견 멈추고 Claude 머지 대기.
@@ -342,6 +354,7 @@ created: 2026-06-05 15:22:34 KST
 > SimonKWiki(`E:\Coding Infra\obsidian\SimonKWiki`, private GitHub `Simon-YHKim/SimonKWiki`)는 2nd-B의 **개념적 시초**이자 **교훈 저장소**다.
 
 - **교훈 축적**: 4-AI 허브/2nd-B 작업에서 얻은 교훈은 위키 형식으로 누적한다 — `wiki/protocols/llm-wiki/LESSONS_LEARNED.md`(T-코드)·`concepts/recurring-mistakes.md`(M-코드). 위키 헌법(볼트 내 CLAUDE.md) 우선: raw/ 불변, frontmatter 필수, index.md·log.md 동시 갱신.
+- **18.0 Intake gate (2026-06-13)**: raw content 공유는 자동 ingest 트리거지만, "전부 저장"이 아니라 **선별→컴파일**이다. ①반복 사용 ②의사결정 영향 ③업무/프로젝트 연결 중 2개 이상이면 위키 반영, 1개 이하면 보류/로그. 5분 안에 요약·출처·관련 프로젝트를 붙일 수 없는 자료는 쌓아두지 않는다. 고객 개인정보·인사·계약 원문·credentials처럼 AI에게 넘기면 안 되는 자료는 같은 vault에 넣지 않는다.
 - **18.1 교훈 캡처 절차 (언제·무엇을)**: 추상적 "축적한다"에 그치지 않는다. **사이클/세션 종료 시** 또는 **반복실수 감지 시**: 새 실수 → `recurring-mistakes.md` M-xxx, 시행착오 결론 → `LESSONS_LEARNED.md` T-xxx append(Claude만, append-only). **동일 실수 2회+ 즉시 기록**(§31.5와 연동). 경량 레이어로 in-project `.claude/instincts/` 4-bucket도 즉시 append → 다음 사이클 첫 단계에서 참조.
 - **18.2 SimonKStack 스킬 주기적 활용**: 작업이 스킬과 매칭되면 **Skill 도구로 호출**(의심스러우면 호출). 디자인=`simon-design-first`/`design-consultation`, 수익화·그로스=`monetization-planner`·`pmf-analyzer`·`aarrr-growth-planner`·`viral-launch`, 리서치=`simon-research`/`/deep-research`, 보안=`security-orchestrator`, 신규 앱=`app-dev-orchestrator`. 큰 작업 전 `~/.claude/skills/INDEX.md` 확인. 스킬에서 얻은 산출·교훈은 18.1로 위키 환류.
 - **주기적 확인**: 큰 작업 착수 전 위키를 확인해 **불필요·중복 작업을 방지**한다(이미 정리된 결론·실수 재발 방지).

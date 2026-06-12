@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2ndB + Wiki Loop Optimization</title>
+  <style>
+    :root {
+      --ink: #18232d;
+      --muted: #61707d;
+      --line: #d8e0e7;
+      --band: #f5f8fa;
+      --ok: #167466;
+      --warn: #8b5d00;
+    }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #fff;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 28px 56px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 30px 0 10px;
+      font-size: 19px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 6px;
+    }
+    p, li {
+      font-size: 15px;
+    }
+    code {
+      background: #eef2f5;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.94em;
+    }
+    .meta {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin: 24px 0;
+    }
+    .box {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--band);
+      padding: 12px 14px;
+    }
+    .box strong {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .ok { color: var(--ok); font-weight: 700; }
+    .warn { color: var(--warn); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>2ndB + Wiki Loop Optimization</h1>
+    <div class="meta">2026-06-13 01:39:28 KST · Codex handoff</div>
+
+    <section class="grid" aria-label="summary">
+      <div class="box"><strong>2ndB</strong><span class="ok">latest</span> at <code>f769d1d</code></div>
+      <div class="box"><strong>Verify</strong><span class="ok">passed</span> 129 suites / 1125 tests</div>
+      <div class="box"><strong>SimonKWiki</strong><span class="ok">pushed</span> at <code>53043ed</code></div>
+      <div class="box"><strong>Hub</strong><span class="warn">local only</span>, no remote configured</div>
+    </section>
+
+    <h2>Applied System Changes</h2>
+    <ul>
+      <li>Encoded Wiki intake gate: 2 of 3 criteria, 5-minute contextualization, no filler notes.</li>
+      <li>Encoded vault policy: one vault by default, department/domain as properties, split only for security/purpose/workflow/search pollution.</li>
+      <li>Encoded loop policy: baseline first, one change, golden set, separate judge, failure ledger, subtractive cycle.</li>
+      <li>Fixed <code>wiki_lint.py</code> so sub-vault detection uses path segments, not filename substrings.</li>
+    </ul>
+
+    <h2>Verification</h2>
+    <ul>
+      <li><code>npm run verify</code> in <code>E:\2ndB</code>: pass.</li>
+      <li><code>wiki_lint.py</code>: Error 0.</li>
+      <li><code>raw_isolation.py</code>: isolated 0/26.</li>
+      <li>Secret scan found no actual keys or tokens.</li>
+    </ul>
+
+    <h2>Claude Restart</h2>
+    <ul>
+      <li>Start from <code>2ndB origin/main@f769d1d</code>.</li>
+      <li>Use <code>SimonKWiki origin/main@53043ed</code>.</li>
+      <li>Keep <code>CONTROL.md</code> paused until Claude resumes orchestration.</li>
+    </ul>
+  </main>
+</body>
+</html>

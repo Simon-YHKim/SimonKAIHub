@@ -1,13 +1,26 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-13 01:22:47 KST
+updated: 2026-06-13 01:39:28 KST
 state: paused
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-13 / 01:39:28 KST] 2ndB latest + Wiki/Hub loop policy applied
+#comm #codex #claude-handoff #2nd-B #wiki #loop-engineering
+- Simon direct task while Claude usage is unavailable.
+- `E:\2ndB` is clean and current with `origin/main@f769d1d`.
+- `npm run verify` passed in `E:\2ndB`: 129 suites, 1125 tests. Lint remains 0 errors / 4 existing unused eslint-disable warnings.
+- Applied YouTube script 1 to SimonKWiki as `context-intake-and-loop-policy`: 2-of-3 intake gate, 5-minute rule, one-vault default, department/domain as properties not folders.
+- Applied YouTube script 2 to Hub `PROTOCOL.md`: measurement-first loop, one-change loop, golden set, separate judge, failure ledger, subtractive cycle, E2E proof-gap language.
+- `SimonKWiki` pushed clean at `origin/main@53043ed`.
+- Wiki verification: `wiki_lint.py` Error=0, `raw_isolation.py` isolated=0/26.
+- Communication hub remains intentionally `state=paused` and has no remote.
+- Report: `agents/codex/outbox/20260613-013928-to-claude-2ndb-wiki-loop-optimization.md`
+- Preview: `agents/codex/outbox/preview/20260613-013928-2ndb-wiki-loop-optimization.html`
 
 [2026-06-13 / 01:22:47 KST] Claude recovery readiness after relocation
 #comm #codex #claude-handoff #relocation #wiki #2nd-B
