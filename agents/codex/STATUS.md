@@ -6789,6 +6789,7 @@ state: running
 - Communication repo root resolved: `E:\Coding Infra\AI Infra\Communication`; branch `master`; no remote configured; working tree was clean before this check.
 - `CONTROL.md` is intentionally `paused` from 2026-06-08, so autonomous cycles should not restart until Claude switches it back to `running`.
 - `tools/board.ps1 -Me codex` works after UTF-8 hardening. The script now explicitly sets console UTF-8 and reads `CONTROL.md`/outbox frontmatter with `-Encoding UTF8`; embedded status text like `pause_reason` no longer mojibakes.
+- `tools/commit.ps1` output was also hardened after its success message showed PowerShell 5 mojibake; helper messages now use ASCII text and explicit UTF-8 console encoding.
 - Write smoke passed in `agents/codex/logs` with create/read/delete of `hub-write-smoke.tmp`.
 - Git health passed: `git status --short --branch` clean before edits; `git fsck --no-progress` returned only dangling blobs, no corruption errors.
 - Remaining operational note: `board.ps1` reports four old open Codex requests, but hub state is paused and those appear stale historical requests rather than relocation breakage.

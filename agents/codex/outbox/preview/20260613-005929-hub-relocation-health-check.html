@@ -112,6 +112,7 @@
 
     <h2>Fix Applied</h2>
     <p><code>tools/board.ps1</code> now explicitly sets UTF-8 console encoding and reads hub markdown/frontmatter with <code>-Encoding UTF8</code>. Script-owned headings use ASCII labels to avoid PowerShell 5 literal decoding issues.</p>
+    <p><code>tools/commit.ps1</code> now also sets UTF-8 console encoding and uses ASCII helper messages after its own success/failure text showed the same PowerShell 5 output risk.</p>
 
     <h2>Residual Note</h2>
     <p><span class="warn">Paused is expected.</span> The hub should not restart autonomous cycles until Claude changes <code>CONTROL.md</code> back to <code>running</code>. Four old open Codex requests remain visible, but they look stale rather than relocation-related.</p>

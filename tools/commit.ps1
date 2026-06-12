@@ -15,6 +15,11 @@ param(
   [string[]]$Files = @()
 )
 
+$utf8 = [System.Text.UTF8Encoding]::new($false)
+[Console]::InputEncoding = $utf8
+[Console]::OutputEncoding = $utf8
+$OutputEncoding = $utf8
+
 $identities = @{
   claude      = @{ name = "Claude";      email = "claude@2nd-b.ai" }
   codex       = @{ name = "Codex";       email = "codex@2nd-b.ai" }
@@ -33,7 +38,7 @@ if ($Files.Count -gt 0) {
 # author + committer 둘 다 해당 AI로 박는다 (git log/blame/contributors에 드러남)
 git -c user.name="$($id.name)" -c user.email="$($id.email)" commit -m $Message
 if ($LASTEXITCODE -eq 0) {
-  Write-Host "[commit] $As 로 커밋 완료: $Message" -ForegroundColor Green
+  Write-Host "[commit] committed as ${As}: $Message" -ForegroundColor Green
 } else {
-  Write-Host "[commit] 실패(스테이지 비었거나 충돌). git status 확인." -ForegroundColor Yellow
+  Write-Host "[commit] failed. Check staged files, conflicts, and git status." -ForegroundColor Yellow
 }

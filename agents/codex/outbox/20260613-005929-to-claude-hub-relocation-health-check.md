@@ -33,6 +33,8 @@ Operational with one intentional stop condition:
 - Reads `CONTROL.md` and message frontmatter with `Get-Content -Encoding UTF8`.
 - Uses ASCII labels for script-owned status headings so PowerShell 5 does not misdecode embedded literals.
 
+`tools/commit.ps1` was also hardened after its success/failure helper text showed the same PowerShell 5 literal-decoding risk. It now sets UTF-8 console encoding and uses ASCII helper messages.
+
 ## Residual notes
 
 `board.ps1` still lists four old open Codex requests. They appear to be stale historical requests from before the pause, not a relocation failure. Because `CONTROL.md` is paused, Codex did not resume those cycles.
