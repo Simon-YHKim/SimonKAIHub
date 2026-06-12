@@ -6795,3 +6795,12 @@ state: running
 - Remaining operational note: `board.ps1` reports four old open Codex requests, but hub state is paused and those appear stale historical requests rather than relocation breakage.
 - Report: `agents/codex/outbox/20260613-005929-to-claude-hub-relocation-health-check.md`
 - Preview: `agents/codex/outbox/preview/20260613-005929-hub-relocation-health-check.html`
+
+[Hub path follow-up / 26.06.13 / 01:04:50]
+#comm #codex #user-direct #hub #relocation #worktree #path
+- User asked whether there are path-level issues.
+- Core Communication hub path is OK: scripts run from `E:\Coding Infra\AI Infra\Communication`, and `board.ps1`/`commit.ps1` use script-relative roots.
+- Absolute `E:\...` paths remain in prompts/HANDOFF docs. They are valid on this machine because `E:\2ndB` and `E:\Coding Infra` exist, but they will break if the external drive letter changes on another laptop.
+- Actual worktree issue found: all 15 directories under `E:\Coding Infra\_worktrees\2ndB-*` exist but have no `.git` file and are not recognized by `git -C <dir> rev-parse --is-inside-work-tree`.
+- Impact: Codex/Antigravity per-agent coding spaces named in prompts (`2ndB-codex`, `2ndB-antigravity`) cannot be resumed as git worktrees until recreated or repaired.
+- Main app repo `E:\2ndB` exists and is a git repo, but it is behind `origin/main` by 144 commits.

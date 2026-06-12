@@ -38,3 +38,16 @@ Operational with one intentional stop condition:
 ## Residual notes
 
 `board.ps1` still lists four old open Codex requests. They appear to be stale historical requests from before the pause, not a relocation failure. Because `CONTROL.md` is paused, Codex did not resume those cycles.
+
+## Path follow-up
+
+Simon asked whether there are path-level issues. Core Communication hub paths are OK: the hub root is present, scripts use script-relative roots, and `E:\2ndB` exists.
+
+One operational path/worktree issue remains outside the core hub:
+
+- All 15 directories under `E:\Coding Infra\_worktrees\2ndB-*` exist but have no `.git` file.
+- `git -C E:\Coding Infra\_worktrees\2ndB-codex status` and `git -C E:\Coding Infra\_worktrees\2ndB-antigravity status` fail with "not a git repository".
+- The branches `codex/work` and `antigravity/work` still exist in `E:\2ndB`, so the safer repair is to recreate worktrees from the main repo rather than treating the copied directories as live git worktrees.
+- `E:\2ndB` itself is present and has remote `origin`, but is currently behind `origin/main` by 144 commits.
+
+Also, prompts/HANDOFF docs still contain absolute paths such as `E:\Coding Infra`, `E:\2ndB`, and Claude memory paths under `C:\Users\202502`. They are valid on this machine, but will break if a different laptop assigns the external drive a different letter or uses a different Windows user profile.

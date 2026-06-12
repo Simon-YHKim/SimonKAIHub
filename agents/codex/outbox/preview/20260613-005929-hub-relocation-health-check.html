@@ -116,6 +116,10 @@
 
     <h2>Residual Note</h2>
     <p><span class="warn">Paused is expected.</span> The hub should not restart autonomous cycles until Claude changes <code>CONTROL.md</code> back to <code>running</code>. Four old open Codex requests remain visible, but they look stale rather than relocation-related.</p>
+
+    <h2>Path Follow-up</h2>
+    <p>Core Communication hub paths are OK on this machine. However, the per-agent app workspaces under <code>E:\Coding Infra\_worktrees\2ndB-*</code> are not valid git worktrees: all 15 directories are missing <code>.git</code>, and <code>git -C ... status</code> fails. Recreate those worktrees from <code>E:\2ndB</code> before resuming Codex or Antigravity coding lanes.</p>
+    <p><code>E:\2ndB</code> itself exists and has <code>origin</code>, but local <code>main</code> is behind <code>origin/main</code> by 144 commits. Absolute <code>E:\...</code> prompts are valid only while the external drive keeps the same letter.</p>
   </main>
 </body>
 </html>
