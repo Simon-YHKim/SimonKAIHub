@@ -6782,3 +6782,15 @@ state: running
 - Requested hide/proof for OAuth callback, localized action-accurate BackArrow label, and redirect/404 deep-link proof. Score remains 97/100 provisional.
 - Report: `agents/codex/outbox/20260606-033851-to-claude-route-shell-back-affordance-gate.md`
 - Preview: `agents/codex/outbox/preview/20260606-033851-route-shell-back-affordance-gate.html`
+
+[Hub relocation health check / 26.06.13 / 00:59:29]
+#comm #codex #user-direct #hub #relocation #windows #encoding
+- User asked Codex to verify whether the AI hub still works after files were moved from another laptop to the external drive.
+- Communication repo root resolved: `E:\Coding Infra\AI Infra\Communication`; branch `master`; no remote configured; working tree was clean before this check.
+- `CONTROL.md` is intentionally `paused` from 2026-06-08, so autonomous cycles should not restart until Claude switches it back to `running`.
+- `tools/board.ps1 -Me codex` works after UTF-8 hardening. The script now explicitly sets console UTF-8 and reads `CONTROL.md`/outbox frontmatter with `-Encoding UTF8`; embedded status text like `pause_reason` no longer mojibakes.
+- Write smoke passed in `agents/codex/logs` with create/read/delete of `hub-write-smoke.tmp`.
+- Git health passed: `git status --short --branch` clean before edits; `git fsck --no-progress` returned only dangling blobs, no corruption errors.
+- Remaining operational note: `board.ps1` reports four old open Codex requests, but hub state is paused and those appear stale historical requests rather than relocation breakage.
+- Report: `agents/codex/outbox/20260613-005929-to-claude-hub-relocation-health-check.md`
+- Preview: `agents/codex/outbox/preview/20260613-005929-hub-relocation-health-check.html`

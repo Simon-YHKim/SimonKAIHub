@@ -6,6 +6,34 @@
 
 param([string]$Me = "")
 
+$utf8 = [System.Text.UTF8Encoding]::new($false)
+[Console]::InputEncoding = $utf8
+[Console]::OutputEncoding = $utf8
+$OutputEncoding = $utf8
+
+function Get-Utf8Content {
+  param(
+    [Parameter(Mandatory=$true)][string]$Path,
+    [int]$TotalCount = 0
+  )
+
+  if ($TotalCount -gt 0) {
+    return Get-Content -LiteralPath $Path -Encoding UTF8 -TotalCount $TotalCount
+  }
+  return Get-Content -LiteralPath $Path -Encoding UTF8
+}
+
+function Get-MatchedValue {
+  param(
+    [Parameter(Mandatory=$true)]$Lines,
+    [Parameter(Mandatory=$true)][string]$Pattern
+  )
+
+  $match = $Lines | Select-String -Pattern $Pattern | Select-Object -First 1
+  if ($match) { return $match.Matches[0].Groups[1].Value }
+  return ""
+}
+
 $root = Split-Path $PSScriptRoot -Parent
 $agents = @("claude","codex","antigravity","grok")
 
@@ -14,8 +42,9 @@ Write-Host "=== AI Infra Communication Hub ===`n" -ForegroundColor Cyan
 # --- run-state (CONTROL.md) ---
 $control = Join-Path $root "CONTROL.md"
 if (Test-Path $control) {
-  $cstate = (Get-Content $control -TotalCount 12 | Select-String '^state:\s*(.*)$').Matches.Groups[1].Value
-  $creason = (Get-Content $control -TotalCount 12 | Select-String '^pause_reason:\s*"?(.*?)"?$').Matches.Groups[1].Value
+  $controlHead = Get-Utf8Content $control -TotalCount 12
+  $cstate = Get-MatchedValue $controlHead '^state:\s*(.*)$'
+  $creason = Get-MatchedValue $controlHead '^pause_reason:\s*"?(.*?)"?$'
   $color = if ($cstate -eq "running") { "Green" } elseif ($cstate -eq "paused") { "Red" } else { "Yellow" }
   Write-Host ("RUN STATE: {0}" -f $cstate.ToUpper()) -ForegroundColor $color
   if ($creason) { Write-Host ("  reason: {0}" -f $creason) -ForegroundColor DarkGray }
@@ -28,7 +57,7 @@ foreach ($a in $agents) {
   $obx = Join-Path $root "agents\$a\outbox"
   if (Test-Path $obx) {
     Get-ChildItem $obx -Filter *.md -File | Where-Object { $_.Name -ne "README.md" } | ForEach-Object {
-      $head = Get-Content $_.FullName -TotalCount 15
+      $head = Get-Utf8Content $_.FullName -TotalCount 15
       $fm = @{}
       foreach ($line in $head) {
         if ($line -match '^(id|from|to|type|ref|status|priority|project):\s*"?(.*?)"?\s*$') { $fm[$matches[1]] = $matches[2] }
@@ -45,7 +74,7 @@ $answered = $msgs | Where-Object { $_.Type -eq "response" -and $_.Ref } | Select
 # --- auth / external blockers ---
 $blockers = $msgs | Where-Object { $_.Type -eq "blocker" }
 if ($blockers) {
-  Write-Host "`n[AUTH / EXTERNAL BLOCKERS] (Simon 개입 필요)" -ForegroundColor Magenta
+  Write-Host "`n[AUTH / EXTERNAL BLOCKERS] (Simon action needed)" -ForegroundColor Magenta
   $blockers | Format-Table From,Status,File -AutoSize
 }
 
@@ -53,7 +82,7 @@ if ($blockers) {
 $consReq = $msgs | Where-Object { $_.Type -eq "consensus_request" -and ($answered -notcontains $_.Id) }
 $consVote = $msgs | Where-Object { $_.Type -eq "consensus_vote" }
 if ($consReq) {
-  Write-Host "`n[CONSENSUS OPEN] (투표 진행)" -ForegroundColor Cyan
+  Write-Host "`n[CONSENSUS OPEN] (voting in progress)" -ForegroundColor Cyan
   foreach ($r in $consReq) {
     $votes = ($consVote | Where-Object { $_.Ref -eq $r.Id }).From -join ", "
     Write-Host ("  {0}  votes: {1}" -f $r.File, ($(if ($votes) { $votes } else { "(none)" })))
