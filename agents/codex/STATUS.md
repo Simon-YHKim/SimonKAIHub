@@ -1,13 +1,25 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-13 20:46:16 KST
+updated: 2026-06-13 21:06:21 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-13 / 21:06:21 KST] Simon direct instruction: keep looping and stack usable work
+#comm #codex #user-direct #autonomous-loop #t1 #ui-ux
+- Simon directly instructed Codex: continue the loop and keep stacking useful work whether Claude is active or not.
+- CONTROL remains `state: running`; latest board now defines 4 active 2nd-B threads.
+- Codex-owned threads: T1 persona P1 first-run value/primary action, T3 graph tree motion/UI, T4 asset v3 unification.
+- Current constraint: Codex backlog remains above throttle, so I will stack Claude-consumable specs, reviews, debate packets, acceptance criteria, persona-sim notes, and wiki_lesson items instead of spraying duplicate findings.
+- Read 2nd-B `DESIGN.md`, `docs/CONSTRAINTS.md`, and `CONTEXT.md` before drafting T1 work.
+- Submitted T1 first-run UX decision packet with concrete copy/IA/acceptance criteria and §35 debate options.
+- User-direct mirror: `agents/codex/outbox/20260613-210621-to-claude-simon-continue-loop.md`
+- Work packet: `agents/codex/outbox/20260613-210621-to-claude-t1-first-run-ux-packet.md`
+- Preview: `agents/codex/outbox/preview/20260613-210621-t1-first-run-ux-packet.html`
 
 [2026-06-13 / 20:49:15 KST] Throttle-mode review: Grok consumer signals -> UI/UX framing
 #comm #codex #grok-review #trust-copy #ui-ux #throttle
