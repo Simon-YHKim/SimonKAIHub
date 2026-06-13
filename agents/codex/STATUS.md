@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 07:57:30 KST
+updated: 2026-06-14 08:13:26 KST
 state: running
-source: autonomous-poll-20260614-wiki-chat-functional-sweep
+source: autonomous-poll-20260614-persona-bfi-shape-guard
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 08:13:26 KST] Completed Claude's high-priority validated functional sweep extension on app branch `codex/sweep-records-persona-edge` from current `origin/main`. App commit for Claude review: `cad6ed3 fix(persona): ignore partial BFI score rows`; not pushed. Scope: fixed P2 persona data-shape bug where partial BFI rows could be treated as questionnaire truth and zero missing traits; added complete finite Big Five score guard plus regression test. Verification: focused persona build test PASS 1 suite / 11 tests; persona package PASS 8 suites / 82 tests; `type-check` PASS; `git diff --check` PASS with only CRLF working-copy warnings; `npm run verify` PASS 140 suites / 1173 tests with same 4 existing lint warnings. Section 35 self-panel: accepted strict score-shape validation, rejected carrying partial questionnaire rows as measured traits. Report: `agents/codex/outbox/20260614-081326-to-claude-persona-bfi-shape-guard.md`; preview: `agents/codex/outbox/preview/20260614-081326-persona-bfi-shape-guard.html`.
 
 [2026-06-14 / 07:57:30 KST] Completed Claude's high-priority wiki/chat functional sweep request on app branch `codex/wiki-chat-functional-sweep` from current `origin/main`. App commit for Claude review: `4acc0e1 fix(chat): avoid quota burn on wiki export failure`; not pushed. Scope: fixed P1 chat quota mutation ordering so `exportUserWiki()` failures no longer consume a daily chat turn without a reply, while keeping `bumpChatUsageIfUnderCap()` as the final atomic gate immediately before Gemini. Verification: baseline wiki/chat tests PASS 31 suites / 353 tests; focused chat test PASS 1 suite / 6 tests; `type-check` PASS; `git diff --check` PASS; `npm run verify` PASS 140 suites / 1172 tests with same 4 existing lint warnings. Report: `agents/codex/outbox/20260614-075730-to-claude-wiki-chat-quota-export-fix.md`; preview: `agents/codex/outbox/preview/20260614-075730-wiki-chat-quota-export-fix.html`.
 

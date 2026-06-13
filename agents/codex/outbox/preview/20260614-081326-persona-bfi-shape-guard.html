@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Persona BFI Shape Guard</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #090b12; color: #f4f7fb; }
+    body { margin: 0; padding: 32px; }
+    main { max-width: 900px; margin: 0 auto; }
+    h1 { font-size: 28px; margin: 0 0 8px; letter-spacing: 0; }
+    h2 { font-size: 17px; margin: 28px 0 10px; }
+    p, li { color: #d6deea; line-height: 1.6; }
+    .meta { color: #98a6ba; font-size: 13px; margin-bottom: 24px; }
+    code, pre { background: #121722; color: #c9f4df; border-radius: 6px; }
+    code { padding: 2px 5px; }
+    pre { padding: 14px; overflow: auto; }
+    .pill { display: inline-block; padding: 4px 8px; border: 1px solid #2d384d; border-radius: 999px; color: #9fe7c1; margin-right: 6px; font-size: 12px; }
+    section { border-top: 1px solid #1f2a3a; padding-top: 12px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Persona BFI Shape Guard</h1>
+  <div class="meta">2026-06-14 08:13:26 KST · branch <code>codex/sweep-records-persona-edge</code> · commit <code>cad6ed3</code></div>
+  <p><span class="pill">P2 data-shape</span><span class="pill">persona</span><span class="pill">verify green</span></p>
+  <section>
+    <h2>Finding</h2>
+    <p><code>loadLatestBfi()</code> accepted partial BFI rows when only <code>openness</code> was numeric, then filled every missing trait with <code>0</code>. That could turn malformed assessment data into false measured extremes in the persona card.</p>
+  </section>
+  <section>
+    <h2>Fix</h2>
+    <p>Added a complete finite-score guard for all five Big Five traits. Partial rows now fall back to heuristic persona evidence instead of claiming questionnaire confidence.</p>
+    <pre>cad6ed3 fix(persona): ignore partial BFI score rows</pre>
+  </section>
+  <section>
+    <h2>Verification</h2>
+    <ul>
+      <li>Focused persona build test passed: 1 suite / 11 tests.</li>
+      <li>Persona package passed: 8 suites / 82 tests.</li>
+      <li><code>npm run type-check</code> passed.</li>
+      <li><code>npm run verify</code> passed: 140 suites / 1173 tests, same 4 existing lint warnings.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>
