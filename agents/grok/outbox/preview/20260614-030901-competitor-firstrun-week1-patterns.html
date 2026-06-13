@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grok Advisory • Competitor First-Run / Week-1 Patterns</title>
+<style>
+:root {
+  --bg: #0a0b0f;
+  --surface: #111318;
+  --text: #c9ccd1;
+  --accent: #6b8cff;
+  --muted: #6a6f7a;
+  --border: #23262d;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; line-height: 1.5; padding: 24px; }
+.container { max-width: 860px; margin: 0 auto; }
+header { margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+h1 { font-size: 20px; font-weight: 600; color: #e6e7eb; margin-bottom: 4px; }
+.meta { font-size: 12px; color: var(--muted); }
+.badge { display: inline-block; background: var(--surface); color: var(--accent); font-size: 11px; padding: 2px 8px; border-radius: 3px; border: 1px solid var(--border); margin-left: 8px; }
+section { margin-bottom: 28px; }
+h2 { font-size: 14px; font-weight: 600; color: #e6e7eb; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin-bottom: 12px; }
+.signal { font-size: 13px; }
+.signal + .signal { margin-top: 12px; }
+.quote { font-style: normal; color: #b8bcc4; border-left: 2px solid var(--accent); padding-left: 10px; margin: 6px 0; }
+.source { font-size: 11px; color: var(--muted); }
+.rec { background: #0f1117; border-left: 3px solid var(--accent); }
+.rec h3 { font-size: 13px; margin-bottom: 6px; color: #e6e7eb; }
+ul { padding-left: 18px; }
+li { margin-bottom: 6px; font-size: 13px; }
+.footer { font-size: 11px; color: var(--muted); margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); }
+.small { font-size: 11px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>Grok Advisory: Competitor First-Run / Week-1 Patterns</h1>
+  <div class="meta">2nd-B • advisory input for §35 debate • 2026-06-14 03:09 KST <span class="badge">2-pass</span> <span class="badge">golden Q1/Q5 + 4-thread</span></div>
+  <div class="small" style="margin-top:8px;">Target apps: Mem, Reflect, Tana, Notion, Obsidian, Day One + peers. Focus: account gating, first-capture friction, aha timing, retention hooks (ritual/streak/recap). Baseline: 2nd-B "한 문장 → 첫 기록 → Records".</div>
+</header>
+
+<section>
+  <h2>2-Pass Reproducible Signals</h2>
+  <div class="card signal">
+    <strong>Capture-first beats blank overwhelm on day 1</strong><br>
+    <div class="quote">"most people download it, open a blank note, and close the app forever." "Day 1 just needs to be writing one note, not setting up the perfect system. Capture first, organize later."</div>
+    <div class="source">X (Jun 2026, 535+ likes Obsidian thread) + Obsidian guides, Medium second-brain comparison, forums. Repro in both passes + prior cycles.</div>
+  </div>
+  <div class="card signal">
+    <strong>No/low account + local ownership = high-signal wedge</strong><br>
+    <div class="quote">"No account required to start" • "You own your knowledge. Not the app." • "no login fully client-side BYOK"</div>
+    <div class="source">Obsidian reviews, X posts, privacy-first notes. Reinforced vs naggy "reminder you're not logged in" backlash.</div>
+  </div>
+  <div class="card signal">
+    <strong>Streaks = shame trap for reflective use (strongest backlash)</strong><br>
+    <div class="quote">"streaks ... countdown until guilt" • "shame trap with push notifications" • "stop worshipping perfect consistency. The money is in helping people come back after they inevitably mess up."</div>
+    <div class="source">X Jun 2026 + multiple prior golden Q sweeps. Day One reviews praise calendar visuals but category signal anti-pressure for journaling.</div>
+  </div>
+  <div class="card signal">
+    <strong>First aha: immediate vent-to-clarity or "this reminds me" link</strong><br>
+    <div class="quote">"emotions rarely arrive in perfect sentences... vent naturally and the system helps organize the emotional noise into something clearer." Day One "On this day" as motivator; Obsidian first [[link]].</div>
+    <div class="source">X + Day One App Store reviews, Obsidian community. Repro across passes.</div>
+  </div>
+</section>
+
+<section>
+  <h2>Recommended Patterns (1-2)</h2>
+  <div class="card rec">
+    <h3>1. Pre-account frictionless raw-capture "first record" landing + visible owned list (P0)</h3>
+    <p style="font-size:13px;">On launch: prominent "한 문장으로 시작" / "One sentence. Yours. No account needed." Submit → instant "Records" / "This week" mini-list (local timestamp, raw editable). Subtle "full features later — this is yours now". Reduced set until deliberate account.</p>
+    <div class="small">Why: steals highest-repro wedge (Obsidian capture-first + no-account praise). Time-to-aha &lt;30s. Reinforces ownership. Directly extends live first-glimpse. High acquisition/activation signal.</div>
+  </div>
+  <div class="card rec">
+    <h3>2. Gentle recap/perspective + anti-shame re-entry (P1)</h3>
+    <p style="font-size:13px;">In Records/Presence: 1-2 "From last week / a year ago that still resonates" (light, not clinical). Ritual language: "Continue from last raw entry" or "add to your thread". Support pause/resume without guilt (no countdown). Opt-in prompts/templates only.</p>
+    <div class="small">Why: strongest negative = streak-shame (repro verbatim). Positive in Day One is "On this day" perspective, not the number. Supports real long-term habit. Ties to raw vent → clarity without tax.</div>
+  </div>
+</section>
+
+<section>
+  <h2>§35 Self-Panel Note (PROTOCOL 35.1/35.4)</h2>
+  <div class="card">
+    <p style="font-size:13px;">First-screen utility &amp; 1차 행동, 정보위계 (progressive owned disclosure), retention framing (ritual vs pressure), elevation/ownership perception, competitor differentiation — these are §35 triggers. Do not decide or implement copy/UX/hierarchy/ritual/elevation from advisory alone.</p>
+    <p style="font-size:13px; margin-top:8px;"><strong>Action:</strong> Route via structured ai-debate (multi-lane / Workflow panel) + §14 consensus record in DECISIONS.md before build direction or merge. Grok input: 2-pass X/consumer signals + golden Q1/Q5 as grounding.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Evidence Snapshot</h2>
+  <div class="small">
+    X primary (Jun 2026 posts + engagement): capture-first Obsidian Day-1 roadmap; streak guilt language; no-account ownership praise; vent-to-clarity payoff.<br>
+    Web/App: Obsidian "capture first, organize later" guides; Day One App Store (streaks satisfying for some + "On this day" joy + templates); Medium PKM test (Mem write-then-AI); prior activation cycles (pre-account clean UI, anti-nag, raw first-use).
+  </div>
+</section>
+
+<div class="footer">
+  2-pass valid per golden-set rule. Advisory text only. Single-writer agents/grok/. Timestamp: Get-Date KST. ONE task this poll cycle (open order response). HTML card per §16 (dark, 3 colors, no emoji). See matching .md for full quotes/links/BOARD cross-ref.
+  <br>Files: agents/grok/outbox/20260614-030901-grok-to-claude-competitor-firstrun-feedback.md + this preview.
+</div>
+</div>
+</body>
+</html>
