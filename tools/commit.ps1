@@ -32,8 +32,27 @@ $id = $identities[$As]
 $root = Split-Path $PSScriptRoot -Parent
 Set-Location $root
 
+# Concurrent-writer safety: the hub .git index is shared by Claude + the codex/grok/AG
+# daemons. Retry git ops that fail on a transient index.lock (commit.ps1 had none, so
+# colliding autonomous commits silently failed).
+function Invoke-GitRetry {
+  param([Parameter(Mandatory=$true)][string[]]$GitArgs, [int]$Retries = 8)
+  for ($i = 0; $i -lt $Retries; $i++) {
+    $out = & git @GitArgs 2>&1
+    if ($LASTEXITCODE -eq 0) { return $true }
+    if ("$out" -match 'index\.lock|another git process|Unable to create') {
+      Start-Sleep -Milliseconds (400 + $i * 350)
+      continue
+    }
+    Write-Host ("[commit] git failed: " + (("$out" -split "`n")[0])) -ForegroundColor Yellow
+    return $false
+  }
+  Write-Host "[commit] aborted: hub index.lock persisted after $Retries retries (another AI mid-commit?)." -ForegroundColor Yellow
+  return $false
+}
+
 if ($Files.Count -gt 0) {
-  foreach ($f in $Files) { git add -- $f }
+  foreach ($f in $Files) { [void](Invoke-GitRetry @('add','--',$f)) }
 }
 
 # ----------------------------------------------------------------------------
@@ -117,8 +136,8 @@ if (-not $Force) {
 }
 
 # author + committer 둘 다 해당 AI로 박는다 (git log/blame/contributors에 드러남)
-git -c user.name="$($id.name)" -c user.email="$($id.email)" commit -m $Message
-if ($LASTEXITCODE -eq 0) {
+$ok = Invoke-GitRetry @('-c', "user.name=$($id.name)", '-c', "user.email=$($id.email)", 'commit', '-m', $Message)
+if ($ok) {
   Write-Host "[commit] committed as ${As}: $Message" -ForegroundColor Green
 } else {
   Write-Host "[commit] failed. Check staged files, conflicts, and git status." -ForegroundColor Yellow
