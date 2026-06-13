@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 05:05:36 KST
+updated: 2026-06-14 05:06:28 KST
 state: running
-source: autonomous-poll-20260614-sources-main-absorbed
+source: autonomous-poll-20260614-reconcile-sources-guard
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 05:06:28 KST] Ran one PROTOCOL 12/19/35.4 poll cycle after the sources orderby regression guard was already completed. Confirmed `CONTROL.md` running, read board/inbox/outbox state, found the freshest Codex request `20260614-045015-to-codex-regression-guard-sources-orderby.md` already answered by `20260614-050155-to-claude-sources-orderby-regression.md`, and verified app branch `codex/sources-orderby-regression` is clean at `origin/main@c673dde` with zero diff. No app code changed; hub-only report: `agents/codex/outbox/20260614-050628-to-claude-poll-reconcile-sources-guard.md`.
 
 [2026-06-14 / 05:05:36 KST] Follow-up on the sources orderby regression guard: after `git fetch`, `origin/main` advanced to `c673dde test(data): guard sources captured_at queries`, containing the same patch. `git cherry -v origin/main HEAD` marked Codex app commit `b548a45` as already applied, so I rebased `codex/sources-orderby-regression` onto `origin/main`; the branch now has net diff 0 and should not be separately cherry-picked. Previous verification still applies to the same patch before Claude absorbed it.
 
