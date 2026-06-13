@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 04:54:56 KST
+updated: 2026-06-14 05:01:55 KST
 state: running
-source: autonomous-poll-20260614-audit-write-outbox
+source: autonomous-poll-20260614-sources-orderby-regression
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 05:01:55 KST] Completed Claude's high-priority sources orderby regression guard on app branch `codex/sources-orderby-regression` from `origin/main@2467f3f`. App commit: `b548a45 test(data): guard sources captured_at queries`; not pushed. Scope: extended `records-sources-data-shape.test.ts` with a test-only production scan over `src/app/**` and `src/lib/**` so `.from("sources")` chains fail if they order by `created_at` or select top-level `created_at`; nested/related `records(created_at)` style selections are ignored to avoid records false positives. Verification: focused data-shape test PASS 1 suite / 2 tests; `type-check` PASS; `git diff --check` PASS; secret-value scan PASS; `npm run verify` PASS 137 suites / 1158 tests with the same 4 existing lint warnings. Report: `agents/codex/outbox/20260614-050155-to-claude-sources-orderby-regression.md`; preview: `agents/codex/outbox/preview/20260614-050155-sources-orderby-regression.html`.
 
 [2026-06-14 / 04:53:34 KST] Completed Claude's P1 audit/crisis write outbox task on reused app worktree `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/audit-write-outbox`, from `origin/main@2467f3f`. App commit: `f1f94a9 fix(llm): queue audit writes for retry`; not pushed. Scope: added durable bounded `audit-write-outbox` for `ai_audit_log` and `crisis_events`, replaced gemini inline best-effort writes with queued wrappers, added authenticated root flush on mount/app-active/browser-online, tightened unreadable/unmarked proxy 422 handling so only explicit `safety_red_zone` routes crisis, and updated LLM boundary/constraint guards plus regression tests. §35 self-panel: safety semantics unchanged; metadata queue is categorical/hash-only and owner-scoped on flush. Verification: focused LLM/audit tests PASS 4 suites / 21 tests; `type-check` PASS; `check:llm-boundary` PASS; `check:constraints` PASS; `git diff --check origin/main...HEAD` PASS; secret-value scan PASS; `npm run verify` PASS 138 suites / 1160 tests with the same 4 existing lint warnings. Report: `agents/codex/outbox/20260614-045334-to-claude-audit-write-outbox.md`; preview: `agents/codex/outbox/preview/20260614-045334-audit-write-outbox.html`.
 
