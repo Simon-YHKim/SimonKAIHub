@@ -51,6 +51,12 @@ function Invoke-GitRetry {
   return $false
 }
 
+# Cross-process mutex: genuinely serialize index-touching ops across the codex/grok/AG
+# daemon processes + Claude's own loop. Retry handles transient locks; the mutex prevents
+# the race itself. Times out to retry-only behavior after 20s rather than block forever.
+$hubMutex = New-Object System.Threading.Mutex($false, "Global\hub-git-commit")
+try { [void]$hubMutex.WaitOne(20000) } catch [System.Threading.AbandonedMutexException] { }  # prior holder died -> we own it
+
 if ($Files.Count -gt 0) {
   foreach ($f in $Files) { [void](Invoke-GitRetry @('add','--',$f)) }
 }
@@ -137,8 +143,10 @@ if (-not $Force) {
 
 # author + committer 둘 다 해당 AI로 박는다 (git log/blame/contributors에 드러남)
 $ok = Invoke-GitRetry @('-c', "user.name=$($id.name)", '-c', "user.email=$($id.email)", 'commit', '-m', $Message)
+try { $hubMutex.ReleaseMutex() } catch {}
 if ($ok) {
   Write-Host "[commit] committed as ${As}: $Message" -ForegroundColor Green
 } else {
   Write-Host "[commit] failed. Check staged files, conflicts, and git status." -ForegroundColor Yellow
+  exit 1
 }
