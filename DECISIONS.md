@@ -52,6 +52,17 @@ last-updated: 2026-06-06 12:30:00 KST
 - **후속**: ① Stage 13.7 신설(skill-gen-agent edit) + Related-skills 5종 추가 ② `persona-simulation:33`·`i18n-localizer:32` **허위 연동광고**(없는 stage 참조) 수정 ③ offline-first·a11y 비-consumer/고대역폭 기본 EXCLUDE ④ CLAUDE.md §20 게이트 1줄(+AGENTS/GEMINI 동기 §18) ⑤ 첫 검증=2nd-B kickoff dry-run.
 - **메타**: `/ai-debate` 스킬(§35) **첫 dogfood**(3입장 패널 + 별도심판, wf `wzp1guqgt`) — 토론 시스템 작동 실증.
 
+### D-17 — Lever B: 계정 전(pre-account) raw-capture 활성화 레버 (§35 허브 outbox 라운드, 2026-06-14)
+- **안건**: week-1 활성화를 위해 "계정 생성 전에 한 문장 캡처 → 즉시 소유 리스트"(Lever B)를 도입할까? 도입한다면 어떻게 안전하게?
+- **입장**:
+  - **Grok(시장)**: 강 PRO. 무계정/no-gate raw-capture = PKM/저널 카테고리 최강 week-1 wedge(Obsidian "no account, capture first"; 강제 signup/nag = 즉시 이탈·delete 백래시). time-to-aha <30s. KR: 실행우선+저압 리추얼, 소셜로그인(Kakao/Apple)은 **첫 가치 이후 opt-in**.
+  - **Codex(실현/안전)**: 가능하되 **device-local pending으로만**. 계정 전엔 LLM·Supabase·Storage·OCR·Records/vault 주장 **일절 금지**, 로컬 결정론 `classifyInput`만(위기 핫라인), 동의+DOB+프로필 완료 후 **명시적 import 시트**→`createRecord()`. C10/C3/C9/honesty 코드근거로 경계 확인(`_layout.tsx:222-230` 등). 정직 카피 "이 기기에 임시 저장, 아직 계정에 없음".
+  - **Claude(제품·심판)**: 두 입장은 충돌이 아니라 **정합** — Codex의 minimal-safe 설계가 Grok의 시장 wedge를 안전하게 구현하는 바로 그 방법.
+- **판정**: **APPROVE — Lever B를 Codex minimal-safe 설계로 채택**(scoped 활성화 실험). P0 허용=plain-text 1건 pre-account pending + local-only 정직 카피 + 프로필 후 명시 import. P0 금지=계정 전 LLM/clipper/OCR/source-storage/graph/wiki/Records 주장. P1 후속=가치 후 소셜 sign-in CTA + KR 저압 카피.
+- **소수의견/리스크(보존)**: 잠재적 미성년의 평문을 동의 전 **기기 로컬**에 임시 저장하는 새 데이터-핸들링 패턴. Codex가 로컬-only·미성년 import 차단·delete/export로 완화했으나, 심리 앱의 미성년/동의/프라이버시 표현은 법적 판단 영역.
+- **후속/게이트**: 설계 방향은 AI 합의로 확정(빌드 청사진 = Codex position 문서). **단 BUILD/ship 착수는 §11-5 게이트 = Simon 확인 필수**(동의·미성년 데이터 핸들링·프라이버시 카피 = 법무 영역). Simon GO 시 Codex가 `src/lib/capture/preauth-pending.ts` 신설로 구현, Claude 머지 게이트, AG 에뮬 QA.
+- **메타**: §35 **허브 outbox 라운드** 방식(Workflow 아닌 실 AI 비동기 입장 → Claude 종합). 닫힌 루프로 Grok·Codex 입장 수거 → 판정.
+
 ## 해결됨 (Resolved) — 최근
 - (없음 — 신설)
 
