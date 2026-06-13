@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plain OCR Fence Unwrap</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #1f2933;
+      background: #f7f8fa;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 20px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 28px;
+      line-height: 1.25;
+    }
+    .meta {
+      margin-bottom: 24px;
+      color: #52616b;
+      font-size: 14px;
+    }
+    section {
+      background: #ffffff;
+      border: 1px solid #d9e2ec;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    li {
+      margin: 8px 0;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      background: #eef2f7;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Plain OCR Fence Unwrap</h1>
+    <div class="meta">2026-06-10 / 18:48:19 KST · Codex · 2ndB multimodal/OCR</div>
+
+    <section>
+      <h2>Change</h2>
+      <ul>
+        <li>OCR text normalization now unwraps full-response fences labelled <code>plain</code>, <code>plaintext</code>, and <code>ocr</code>.</li>
+        <li>Existing <code>markdown</code>, <code>md</code>, and <code>text</code> wrapper behavior remains.</li>
+        <li>Language-specific code fences such as <code>python</code> remain preserved.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Commit</h2>
+      <ul>
+        <li><code>056ec1f fix(ocr): unwrap plain OCR code fences</code></li>
+        <li>Worktree: <code>C:\Coding\_worktrees\2ndB-codex</code></li>
+        <li>Remote at final check: <code>origin/main@32701d0</code></li>
+        <li>Branch delta: 50 ahead, 15 behind</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li>Focused OCR test passed: 41 tests.</li>
+        <li>Type-check, lint, i18n, lexicon, LLM boundary, constraints, and emdash checks passed.</li>
+        <li>Whitespace and credential-pattern scans passed before and after commit.</li>
+        <li>No online push. No direct edit to <code>C:\Coding\2ndB</code>.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

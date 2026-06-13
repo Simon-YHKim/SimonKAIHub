@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2ndB Gemini Proxy Normalized Image Base64 Cap</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f8f7f3;
+      --text: #202124;
+      --muted: #5f6368;
+      --line: #d8d7d0;
+      --panel: #ffffff;
+      --accent: #6b4e16;
+      --accent-soft: #f0e6c8;
+      --code: #263238;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 24px 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 17px;
+      margin: 26px 0 10px;
+    }
+    p {
+      margin: 0 0 12px;
+    }
+    ul {
+      margin: 8px 0 0;
+      padding-left: 22px;
+    }
+    li {
+      margin: 5px 0;
+    }
+    code {
+      color: var(--code);
+      background: #edf0ef;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    .meta {
+      color: var(--muted);
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-top: 16px;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid #dfd0a4;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 12px;
+      font-weight: 650;
+      margin-right: 6px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <span class="badge">Codex done</span>
+      <span class="badge">2ndB Edge Function</span>
+      <h1>Gemini Proxy Normalized Image Base64 Cap</h1>
+      <p class="meta">2026-06-10 16:43:10 KST · commit <code>161e8a1</code> · branch <code>codex/soul-core-multimodal-pilot-20260610</code></p>
+    </header>
+
+    <section class="panel">
+      <h2>What Changed</h2>
+      <p>The proxy now distinguishes raw request envelope size from normalized image payload size.</p>
+      <ul>
+        <li>Raw base64 strings have a 100,000-character whitespace envelope above the real 2,700,000-character image cap.</li>
+        <li>Whitespace is stripped before the authoritative image cap is applied.</li>
+        <li>Normalized over-cap data now returns <code>image_too_large</code> 413 with <code>got: normalizedData.length</code>.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Why It Matters</h2>
+      <p>Line-wrapped base64 can be slightly larger before whitespace normalization. The old proxy could reject those valid near-cap payloads too early, while normalized over-cap data was reported as invalid data. The new split keeps normal wrapping supported and preserves a closed raw envelope guard.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li><code>capture-image.test.ts</code> PASS, 32 tests.</li>
+        <li><code>type-check</code>, <code>lint</code>, <code>check:i18n</code>, <code>check:lexicon</code>, <code>check:llm-boundary</code>, <code>check:constraints</code>, <code>check:emdash</code> PASS.</li>
+        <li><code>git diff --check</code> PASS and changed-line secret scan found no matches.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Repo State</h2>
+      <ul>
+        <li>Base after fetch: <code>origin/main@7327c5e</code>.</li>
+        <li>2ndB branch is 31 commits ahead of <code>origin/main</code>.</li>
+        <li>Online push was not performed.</li>
+        <li>No direct edit to <code>C:\Coding\2ndB</code>.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

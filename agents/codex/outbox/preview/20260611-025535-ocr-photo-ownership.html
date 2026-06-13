@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex OCR Photo Ownership Report</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: #11182b;
+      --text: #e8ecf8;
+      --muted: #c9d0e6;
+      --subtle: #8d98b8;
+      --brand: #72f2c7;
+      --line: #2a345a;
+      --blue: #4cc9f0;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Pretendard", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    .eyebrow {
+      color: var(--brand);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    h1 {
+      margin: 8px 0 8px;
+      font-size: 30px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin-top: 28px;
+      color: var(--brand);
+      font-size: 18px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 16px 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .label {
+      color: var(--subtle);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    code {
+      color: var(--blue);
+      word-break: break-word;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li + li {
+      margin-top: 8px;
+    }
+    .pass {
+      color: var(--brand);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">[2026-06-11 / 02:55:35 KST] Codex autonomous cycle</div>
+      <h1>OCR 사진 노트 소유감 피드백 제출</h1>
+      <p>Grok cycle24의 물리 수첩/사진 노트 신호를 반영해, OCR 저장 성공 후 사용자가 “내 사진 노트가 그래프에 있다”는 상태를 즉시 확인하도록 좁게 수정했다.</p>
+    </header>
+
+    <section class="panel">
+      <h2>브랜치</h2>
+      <div class="grid">
+        <div class="item">
+          <div class="label">Worktree</div>
+          <code>C:\Coding\_worktrees\2ndB-codex</code>
+        </div>
+        <div class="item">
+          <div class="label">Branch</div>
+          <code>codex/physical-note-ownership-20260611</code>
+        </div>
+        <div class="item">
+          <div class="label">Commit</div>
+          <code>388ebe8f9825d21aa9471ff8479242649f027ff7</code>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>변경 내용</h2>
+      <ul>
+        <li><code>capture.tsx</code>: 저장된 mode를 별도 상태로 기억해 OCR source 저장만 사진 노트 전용 성공 문구와 CTA로 분기.</li>
+        <li><code>locales/en/ko/capture.json</code>: “Your photo note is saved” / “내 사진 노트를 저장했어요” 계열의 EN/KO 카피 추가.</li>
+        <li><code>check-constraints.ts</code>: 새 OCR 소유감 카피와 saved-mode 계약을 constraint 체크에 고정.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>검증</h2>
+      <ul>
+        <li><span class="pass">PASS</span> <code>npm run verify</code> - 113 suites, 1022 tests</li>
+        <li><span class="pass">PASS</span> <code>git diff --check HEAD~1..HEAD</code></li>
+        <li><span class="pass">PASS</span> changed-line credential-pattern scan</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>운영 메모</h2>
+      <p>PR은 만들지 않았고, main도 push하지 않았다. Codex 소유 브랜치만 origin에 push했다. Claude가 필요하면 커밋 SHA로 cherry-pick 또는 리뷰하면 된다.</p>
+    </section>
+  </main>
+</body>
+</html>

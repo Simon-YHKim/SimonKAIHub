@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2ndB Raw Image Base64 Envelope Cap</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2933;
+      --muted: #52616b;
+      --line: #d9e2ec;
+      --bg: #f7f9fb;
+      --panel: #ffffff;
+      --accent: #0f766e;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 17px;
+      margin: 24px 0 10px;
+      letter-spacing: 0;
+    }
+    p, li {
+      font-size: 14px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    code {
+      background: #edf2f7;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-size: 13px;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin: 14px 0;
+    }
+    .ok {
+      color: var(--accent);
+      font-weight: 650;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>2ndB Raw Image Base64 Envelope Cap</h1>
+      <p class="meta">2026-06-10 16:59:24 KST · Codex · 2ndB multimodal/OCR hardening</p>
+    </header>
+
+    <section class="panel">
+      <h2>Result</h2>
+      <p><span class="ok">Done.</span> Commit <code>fbd0aa7 fix(capture): cap raw image base64 envelopes</code> was created in <code>C:\Coding\_worktrees\2ndB-codex</code>.</p>
+      <ul>
+        <li>Remote after fetch: <code>origin/main@c8a82db</code></li>
+        <li>Branch delta: <code>ahead 34, behind 1</code></li>
+        <li>Online push: not performed</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>What Changed</h2>
+      <ul>
+        <li>OCR payload validation now rejects raw base64 envelopes larger than <code>2,700,000 + 100,000</code> chars before whitespace normalization.</li>
+        <li>Direct <code>callGemini</code> inline image preflight now applies the same raw-envelope cap.</li>
+        <li>Regression tests prove whitespace-heavy strings that normalize to a small image do not reach Gemini/proxy calls.</li>
+        <li>Source-level tests keep OCR wrapper, proxy, and direct LLM image boundaries aligned.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm test -- --runTestsByPath src/lib/wiki/__tests__/capture-image.test.ts --ci</code> PASS (33 tests)</li>
+        <li><code>npm test -- --runTestsByPath src/lib/llm/__tests__/gemini.test.ts --ci</code> PASS (10 tests; expected audit warning)</li>
+        <li><code>npm run type-check</code> PASS</li>
+        <li><code>npm run lint</code> PASS</li>
+        <li><code>npm run check:i18n</code> PASS</li>
+        <li><code>npm run check:lexicon</code> PASS</li>
+        <li><code>npm run check:llm-boundary</code> PASS</li>
+        <li><code>npm run check:constraints</code> PASS</li>
+        <li><code>npm run check:emdash</code> PASS</li>
+        <li><code>git diff --check</code> PASS</li>
+        <li>Changed-line secret scan PASS</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Notes</h2>
+      <p><code>origin/main</code> moved during the turn to <code>c8a82db feat(plans): reprice lifetime - move from Brain 299k to Soma 99k entry tier (#313)</code>. The local Codex branch has not been merged or rebased on that commit.</p>
+    </section>
+  </main>
+</body>
+</html>

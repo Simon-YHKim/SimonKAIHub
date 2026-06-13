@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>2ndB OCR Truncated Image Data Guard</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #18222d;
+        --muted: #5a6875;
+        --line: #d9e1e8;
+        --panel: #f7fafb;
+        --accent: #0f766e;
+        --ok: #137333;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: var(--ink);
+        background: #ffffff;
+      }
+      main {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 40px 24px 56px;
+      }
+      header {
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 20px;
+        margin-bottom: 24px;
+      }
+      h1 {
+        margin: 10px 0;
+        font-size: 30px;
+        line-height: 1.18;
+        letter-spacing: 0;
+      }
+      h2 {
+        margin: 28px 0 10px;
+        font-size: 18px;
+        line-height: 1.3;
+        letter-spacing: 0;
+      }
+      p {
+        margin: 0 0 12px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .status {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        border-radius: 999px;
+        padding: 4px 10px;
+        background: #e7f4ef;
+        color: var(--ok);
+        font-weight: 700;
+        font-size: 13px;
+      }
+      .meta {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 10px;
+        margin-top: 18px;
+      }
+      .item {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 12px;
+        background: var(--panel);
+      }
+      .label {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+      code {
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 13px;
+      }
+      ul {
+        margin: 0;
+        padding-left: 20px;
+        line-height: 1.65;
+      }
+      li + li {
+        margin-top: 4px;
+      }
+      .checks {
+        columns: 2 300px;
+      }
+      .checks li {
+        break-inside: avoid;
+      }
+      .note {
+        border-left: 4px solid var(--accent);
+        background: #eef7f6;
+        padding: 12px 14px;
+        margin: 16px 0 0;
+        color: var(--ink);
+      }
+      @media (max-width: 640px) {
+        main {
+          padding: 28px 16px 44px;
+        }
+        h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <span class="status">Done</span>
+        <h1>OCR Truncated Image Data Guard</h1>
+        <p>
+          OCR signature validation now rejects tiny payloads that contain only image magic bytes, keeping damaged data out of the Gemini/proxy path.
+        </p>
+        <div class="meta">
+          <div class="item">
+            <span class="label">Time</span>
+            <code>2026-06-10 / 14:42:05 KST</code>
+          </div>
+          <div class="item">
+            <span class="label">Branch</span>
+            <code>codex/soul-core-multimodal-pilot-20260610</code>
+          </div>
+          <div class="item">
+            <span class="label">Base</span>
+            <code>origin/main@72f3251</code>
+          </div>
+          <div class="item">
+            <span class="label">Commit</span>
+            <code>30f9a3b fix(capture): reject truncated OCR image data</code>
+          </div>
+        </div>
+      </header>
+
+      <section>
+        <h2>Behavior</h2>
+        <ul>
+          <li>Image signature sniffing now requires at least 12 decoded header bytes.</li>
+          <li>Bare JPEG/PNG magic-byte fragments are treated as damaged OCR image data.</li>
+          <li>Valid-path OCR guard fixtures use longer image-like headers.</li>
+          <li>The existing localized invalid-data feedback path is reused.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Verification</h2>
+        <ul class="checks">
+          <li>Jest OCR guard tests: PASS, 18 cases</li>
+          <li><code>npm run type-check</code>: PASS</li>
+          <li><code>npm run lint</code>: PASS</li>
+          <li><code>npm run check:i18n</code>: PASS</li>
+          <li><code>npm run check:lexicon</code>: PASS</li>
+          <li><code>npm run check:llm-boundary</code>: PASS</li>
+          <li><code>npm run check:emdash</code>: PASS</li>
+          <li><code>git diff --check</code>: PASS</li>
+          <li>Changed-line secret scan: PASS</li>
+        </ul>
+        <p class="note">No online push was performed. No direct edit was made to <code>C:\Coding\2ndB</code>.</p>
+      </section>
+    </main>
+  </body>
+</html>

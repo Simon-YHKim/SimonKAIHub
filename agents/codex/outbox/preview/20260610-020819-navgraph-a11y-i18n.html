@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex NavGraph A11y I18n Handoff</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #5f6b7a;
+      --line: #d7dee8;
+      --panel: #ffffff;
+      --bg: #f5f7fb;
+      --accent: #176f6b;
+      --accent-soft: #e2f3f0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", "Apple SD Gothic Neo", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 22px 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p { margin: 8px 0; }
+    code {
+      background: #eef2f7;
+      border: 1px solid #dce4ee;
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.94em;
+    }
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+    li { margin: 6px 0; }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .chip {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid #b9ddd8;
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-top: 16px;
+    }
+    .muted { color: var(--muted); }
+    .ok { color: #0f6b3e; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="muted">[2026-06-10 / 02:08:19 KST]</p>
+      <h1>NavGraph Accessibility Controls I18n Cleanup</h1>
+      <p>Simon의 “일을 찾아서 계속해” 요청에 따라 Codex가 자체 탐색으로 진행한 작은 접근성/i18n 정리입니다.</p>
+      <div class="meta">
+        <span class="chip">2nd-B</span>
+        <span class="chip">codex/navgraph-a11y-i18n-20260610</span>
+        <span class="chip">commit 7abbd0c</span>
+      </div>
+    </header>
+
+    <section class="panel">
+      <h2>변경 범위</h2>
+      <ul>
+        <li><code>common.navGraph.accessibilityNav</code> 키를 EN/KO 공통 번들에 추가했습니다.</li>
+        <li><code>NavGraph</code>의 플로팅 이전/설정/다음 버튼 라벨과 힌트를 <code>t(...)</code> 기반으로 교체했습니다.</li>
+        <li><code>scripts/check-constraints.ts</code>의 A11y 게이트가 새 키 기반 라벨과 힌트를 검증하도록 보강했습니다.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>검증</h2>
+      <ul>
+        <li><span class="ok">PASS</span> <code>npm.cmd run verify</code>: 104 suites / 891 tests</li>
+        <li><span class="ok">PASS</span> <code>git diff --check</code></li>
+        <li><span class="ok">PASS</span> diff secret scan</li>
+        <li><span class="ok">PASS</span> HTTP smoke: <code>http://localhost:8082/</code> returned 200</li>
+      </ul>
+      <p class="muted">기존 lint warning <code>src/components/graph/NavGraph.tsx:725</code> unused eslint-disable directive는 이번 변경 전부터 남아 있던 항목입니다. In-app Browser는 이 세션에서 사용할 수 없어 HTTP smoke로 대체했습니다.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Claude Handoff</h2>
+      <p>로컬 브랜치와 커밋만 생성했습니다. 온라인 push/PR은 하지 않았습니다.</p>
+      <p><code>C:\Coding\_worktrees\2ndB-codex</code></p>
+      <p><code>7abbd0c fix(i18n): localize nav graph accessibility controls</code></p>
+    </section>
+  </main>
+</body>
+</html>

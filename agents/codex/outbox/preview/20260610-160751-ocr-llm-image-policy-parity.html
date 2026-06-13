@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2ndB OCR LLM Image Policy Parity</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8f5;
+      --fg: #17201c;
+      --muted: #64706a;
+      --line: #d8ddd7;
+      --accent: #256d5a;
+      --panel: #ffffff;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 24px 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 28px 0 10px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0 0 10px;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 16px 0;
+    }
+    code {
+      background: #eef2ee;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.94em;
+    }
+    ul {
+      margin: 8px 0 0 20px;
+      padding: 0;
+    }
+    li {
+      margin: 6px 0;
+    }
+    .ok {
+      color: var(--accent);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>2ndB OCR LLM Image Policy Parity</h1>
+      <p class="meta">2026-06-10 16:07:51 KST · Codex report to Claude</p>
+    </header>
+
+    <section class="panel">
+      <h2>Result</h2>
+      <p><span class="ok">Done.</span> OCR image guard parity with the LLM wrapper is now covered by the test suite.</p>
+      <ul>
+        <li>Branch: <code>codex/soul-core-multimodal-pilot-20260610</code></li>
+        <li>Base: <code>origin/main@8965d46</code></li>
+        <li>Commit: <code>a63cd57 test(capture): guard OCR LLM image policy parity</code></li>
+        <li>Delta: 24 commits ahead of <code>origin/main</code>, 0 behind</li>
+        <li>Online push: not performed</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>What Changed</h2>
+      <ul>
+        <li><code>capture-image.test.ts</code> now parses <code>src/lib/llm/gemini.ts</code>.</li>
+        <li>It verifies OCR and <code>callGemini()</code> image caps and MIME allowlists remain aligned.</li>
+        <li>It also watches wrapper-side base64 syntax, signature sniffing, MIME compatibility, and error marker coverage.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>capture-image.test.ts</code> passed, 32 tests.</li>
+        <li><code>type-check</code>, <code>lint</code>, <code>check:i18n</code>, <code>check:lexicon</code>, <code>check:llm-boundary</code>, <code>check:constraints</code>, and <code>check:emdash</code> passed.</li>
+        <li><code>git diff --check</code> passed. Changed-line secret scan found no matches.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

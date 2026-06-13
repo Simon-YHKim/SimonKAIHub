@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Loop Heartbeat - Merge-Wait</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2523;
+      --muted: #5d6864;
+      --line: #d8ded8;
+      --panel: #f7f8f4;
+      --accent: #2d6f5d;
+      --warn: #8a5a1f;
+      --bg: #fbfbf7;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Pretendard", "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      font-weight: 720;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 17px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0 0 12px;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 22px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin: 16px 0 4px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 14px;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .value {
+      font-size: 16px;
+      font-weight: 680;
+    }
+    .ok {
+      color: var(--accent);
+    }
+    .warn {
+      color: var(--warn);
+    }
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+    code {
+      font-family: "Cascadia Code", "Consolas", monospace;
+      font-size: 0.94em;
+      background: #eef2ec;
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Codex Loop Heartbeat</h1>
+    <p class="meta">[2026-06-11 / 01:29:52 KST] 1회 자율 루프 결과. 새 루프 생성, 시작, 편집, 스케줄링 없음.</p>
+
+    <section class="grid" aria-label="status summary">
+      <div class="card">
+        <div class="label">CONTROL</div>
+        <div class="value ok">running</div>
+      </div>
+      <div class="card">
+        <div class="label">이번 작업</div>
+        <div class="value">merge-wait heartbeat</div>
+      </div>
+      <div class="card">
+        <div class="label">앱 파일 변경</div>
+        <div class="value warn">없음</div>
+      </div>
+    </section>
+
+    <h2>판단</h2>
+    <p>Codex inbox의 유일한 open 요청은 예시 로그인 UI 메시지라 실제 작업에서 제외했습니다. 현재 유효한 Codex 작업은 54커밋 멀티모달 브랜치 분할 대기 상태이며, Claude가 구체 split target을 지정하기 전 새 앱 수정을 늘리면 중복 제출 위험이 큽니다.</p>
+
+    <h2>근거</h2>
+    <ul>
+      <li><code>origin/main</code>: <code>5a6b328</code></li>
+      <li><code>origin/codex/soul-core-multimodal-pilot-20260610</code>: <code>7c9db8a</code>, <code>27 behind / 54 ahead</code></li>
+      <li>현재 branch: <code>codex/native-p2-a11y-keyboard-20260610</code>, <code>11 behind / 1 ahead</code></li>
+      <li>AI availability: Codex, Claude, Grok 모두 CLI 응답 확인</li>
+      <li>허브에는 기존의 unrelated <code>agents/grok/STATUS.md</code> 수정이 있어 Codex-owned 파일만 갱신</li>
+    </ul>
+
+    <h2>다음 안전 액션</h2>
+    <p>Claude가 분할 대상을 고르면 Codex는 capture/OCR UI+a11y slice를 우선 처리하는 것이 가장 안전합니다. 사진 또는 텍스트 import 직후 사용자가 소유권과 저장 상태를 즉시 이해할 수 있게 하는 쪽이 현재 Codex lane의 최고 가치입니다.</p>
+
+    <h2>검증</h2>
+    <ul>
+      <li><code>tools/board.ps1 -Me codex</code></li>
+      <li>필수 hub 파일 및 PROTOCOL 섹션 재확인</li>
+      <li>Codex inbox, STATUS, 최근 outbox, hub git status, worktree status 확인</li>
+      <li>앱 코드 변경이 없어 앱 테스트는 실행하지 않음</li>
+    </ul>
+  </main>
+</body>
+</html>

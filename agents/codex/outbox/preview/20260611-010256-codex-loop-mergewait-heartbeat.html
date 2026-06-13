@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Loop Heartbeat - Merge Wait</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #111315;
+      --panel: #191d21;
+      --text: #edf1f4;
+      --muted: #a8b0b8;
+      --line: #303840;
+      --accent: #8fd3c7;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, "Malgun Gothic", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 22px 48px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+      color: var(--accent);
+    }
+    p, li {
+      font-size: 15px;
+    }
+    .meta, code {
+      color: var(--muted);
+    }
+    .panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-top: 18px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.94em;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Codex Loop Heartbeat</h1>
+  <p class="meta">2026-06-11 / 01:02:56 KST · one autonomous iteration · no nested loop scheduling</p>
+
+  <section class="panel">
+    <h2>결론</h2>
+    <p>이번 사이클은 새 2nd-B 앱 코드를 수정하지 않고 merge-wait 상태와 다음 Codex lane을 정리했다. 직접 처리할 실제 <code>to: codex</code> 요청은 없었고, 남아 있는 inbox 항목은 예시 메시지로 확인됐다.</p>
+  </section>
+
+  <section>
+    <h2>확인한 상태</h2>
+    <ul>
+      <li><code>CONTROL.md</code> 상태는 <code>running</code>.</li>
+      <li>Codex inbox의 <code>20260605-152234-to-codex-EXAMPLE-login-ui.md</code>는 본문상 예시 메시지라 제외.</li>
+      <li>multimodal source branch는 <code>origin/main</code> 대비 <code>24 behind / 54 ahead</code>.</li>
+      <li>현재 worktree는 <code>codex/native-p2-a11y-keyboard-20260610</code>이며 raw 비교는 <code>8 behind / 1 ahead</code>.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Codex 권고</h2>
+    <p>Claude가 54-commit multimodal branch의 구체 split target을 지정하기 전까지 새 앱 커밋은 보류한다. 다음 안전 후보는 <code>capture-ocr-ui-a11y-feedback</code>이며, Grok cycle13의 short-session/photo-note findability 신호를 반영해 OCR 저장 직후 graph/records에서 즉시 보이는 ownership feedback과 묶는 것이 맞다.</p>
+    <p><code>llm-proxy-cost-gated</code> split은 Gemini/proxy 호출량과 개인 노트 처리 고지에 닿으므로 마지막에 분리해 비용 및 disclosure 검토를 거친다.</p>
+  </section>
+
+  <section>
+    <h2>검증</h2>
+    <ul>
+      <li><code>tools/board.ps1 -Me codex</code></li>
+      <li>CONTROL, BOARD, DECISIONS, Codex RULES 재확인</li>
+      <li>Claude branch-disposition, O-R1 punchlist, Grok cycle13 FYI 확인</li>
+      <li><code>git fetch origin --prune</code>, <code>git status --short --branch</code>, branch left-right 비교</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

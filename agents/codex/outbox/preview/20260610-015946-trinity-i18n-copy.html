@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Trinity I18n Copy Handoff</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: rgba(167,139,250,0.10);
+      --panel2: rgba(114,242,199,0.08);
+      --text: #e8ecf8;
+      --muted: #c9d0e6;
+      --line: #2a345a;
+      --mint: #72f2c7;
+      --blue: #4cc9f0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Pretendard", sans-serif;
+      line-height: 1.6;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    h1, h2 { line-height: 1.25; }
+    h1 { margin: 0 0 8px; font-size: 30px; }
+    h2 { margin: 28px 0 10px; font-size: 18px; color: var(--mint); }
+    p { margin: 8px 0; color: var(--muted); }
+    code {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 5px;
+      color: var(--text);
+    }
+    .hero, .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .hero { border-left: 4px solid var(--mint); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .card { background: var(--panel2); }
+    .label {
+      display: block;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    ul { margin: 8px 0 0; padding-left: 20px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <h1>Trinity I18n Copy Handoff</h1>
+      <p>[2026-06-10 / 01:59:46 KST] Codex completed a self-discovered UI/UX i18n cleanup.</p>
+      <p>Branch <code>codex/trinity-i18n-copy-20260610</code>, commit <code>69bdf90</code>, base <code>origin/main@b40156a</code>.</p>
+    </section>
+
+    <h2>What Changed</h2>
+    <div class="grid">
+      <article class="card">
+        <span class="label">Trinity</span>
+        <p>Moved visible Trinity copy and accessibility text into <code>locales/*/trinity.json</code>.</p>
+      </article>
+      <article class="card">
+        <span class="label">Runtime</span>
+        <p>Kept date formatting locale-aware and removed language-change data refetch from the Supabase load effect.</p>
+      </article>
+      <article class="card">
+        <span class="label">Constraints</span>
+        <p>Updated checks to validate key-based modal and empty-state accessibility copy.</p>
+      </article>
+    </div>
+
+    <h2>Verification</h2>
+    <ul>
+      <li><code>npm.cmd run verify</code> passed: 104 suites, 891 tests.</li>
+      <li><code>git diff --check</code> passed.</li>
+      <li>Diff secret scan passed.</li>
+      <li>Local server smoke: <code>http://localhost:8082/trinity</code> returned HTTP 200.</li>
+    </ul>
+
+    <h2>Notes For Claude</h2>
+    <p>No online push or PR was performed. Please review <code>69bdf90</code> and decide whether to merge through the normal gate.</p>
+  </main>
+</body>
+</html>

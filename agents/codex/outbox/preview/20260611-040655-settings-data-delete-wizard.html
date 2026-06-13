@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Settings Data-Delete Wizard</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: #11182b;
+      --panel-2: #16213a;
+      --text: #e8ecf8;
+      --muted: #c9d0e6;
+      --subtle: #8d98b8;
+      --mint: #72f2c7;
+      --warn: #ffd166;
+      --danger: #ff7a90;
+      --line: #2a345a;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 18px 48px;
+    }
+    h1, h2 {
+      margin: 0;
+      line-height: 1.2;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    h2 {
+      margin-top: 28px;
+      font-size: 18px;
+      color: var(--mint);
+    }
+    p {
+      color: var(--muted);
+    }
+    .meta {
+      color: var(--subtle);
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    .panel {
+      border: 2px solid var(--line);
+      background: var(--panel);
+      padding: 18px;
+      margin-top: 18px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .choice {
+      border: 2px solid var(--line);
+      background: var(--panel-2);
+      padding: 14px;
+      min-height: 96px;
+    }
+    .choice strong {
+      color: var(--text);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .choice.selected {
+      border-color: var(--mint);
+    }
+    .choice.full {
+      border-color: var(--danger);
+    }
+    code {
+      color: var(--mint);
+      background: #0c1222;
+      padding: 2px 5px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin: 7px 0;
+      color: var(--muted);
+    }
+    .status {
+      color: var(--mint);
+      font-weight: 700;
+    }
+    .warn {
+      color: var(--warn);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Settings Data-Delete Wizard</h1>
+    <div class="meta">[2026-06-11 / 04:06:55 KST] Codex autonomous loop result</div>
+
+    <section class="panel">
+      <h2>Outcome</h2>
+      <p>
+        Codex changed the settings danger zone so destructive data actions are gated by a
+        one-area-at-a-time selector instead of showing every delete button at once.
+      </p>
+      <div class="grid">
+        <div class="choice selected"><strong>Records</strong>Journals, notes, and audit responses.</div>
+        <div class="choice"><strong>Assessments</strong>Saved reference results only.</div>
+        <div class="choice"><strong>Wiki and captures</strong>Wiki pages, un-ingested captures, and usage counters.</div>
+        <div class="choice full"><strong>Full wipe</strong>Still isolated behind typed <code>DELETE</code>.</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Submission</h2>
+      <ul>
+        <li>Branch: <code>codex/settings-data-delete-wizard-20260611</code></li>
+        <li>Commit: <code>64fea6b6d260a3f86e411c5993214dc0672e379a</code></li>
+        <li>Message: <code>fix(settings): gate data deletion by category</code></li>
+        <li>Base: <code>origin/main@ad5059f</code></li>
+        <li>PR not created; main not pushed.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li><span class="status">PASS</span> <code>npm run verify</code> - 114 suites, 1030 tests.</li>
+        <li><span class="status">PASS</span> rebase-after-verify <code>npm run check:constraints</code>.</li>
+        <li><span class="status">PASS</span> Expo web export generated 44 routes including <code>/settings</code>.</li>
+        <li><span class="status">PASS</span> <code>git diff --check HEAD~1..HEAD</code>.</li>
+        <li><span class="status">PASS</span> changed-line credential-pattern scan.</li>
+      </ul>
+      <p class="warn">
+        Browser limitation: the in-app Browser MCP was not available here, and settings is auth-protected
+        without credentials. Verification used static export instead of an interactive screenshot.
+      </p>
+    </section>
+  </main>
+</body>
+</html>

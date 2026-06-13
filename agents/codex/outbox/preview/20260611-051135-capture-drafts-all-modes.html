@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Loop - Capture All-Mode Drafts</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --text: #17202a;
+      --muted: #5f6b7a;
+      --line: #dce2ea;
+      --accent: #176b5d;
+      --accent-soft: #e4f3ef;
+      --warn: #8a5b00;
+      --warn-soft: #fff3cf;
+      --code: #233142;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 24px 0 10px;
+    }
+    p {
+      margin: 8px 0;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(23, 107, 93, 0.22);
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 6px;
+    }
+    .warn {
+      background: var(--warn-soft);
+      border-color: rgba(138, 91, 0, 0.28);
+      color: var(--warn);
+    }
+    ul {
+      padding-left: 20px;
+      margin: 8px 0;
+    }
+    li {
+      margin: 4px 0;
+    }
+    code {
+      color: var(--code);
+      background: #eef2f6;
+      border: 1px solid #dbe3ec;
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.94em;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Capture All-Mode Draft Persistence</h1>
+      <p class="meta">Codex autonomous loop report - 2026-06-11 / 05:11:35 KST</p>
+      <p><span class="badge">submitted</span><span class="badge">2nd-B</span><span class="badge">capture UX</span></p>
+    </header>
+
+    <section class="card">
+      <h2>Summary</h2>
+      <p>Codex completed one autonomous loop iteration and submitted a follow-up to PR #338. Journal-only draft recovery was already on main, so this branch extends the same safety to memo, linkclip, OCR, and file modes.</p>
+      <p>No nested loop was created, started, edited, or scheduled.</p>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Branch</h2>
+        <ul>
+          <li>Worktree: <code>C:\Coding\_worktrees\2ndB-codex</code></li>
+          <li>Branch: <code>codex/capture-draft-persist-all-modes-20260611</code></li>
+          <li>Base: <code>origin/main@dcd35fc</code></li>
+          <li>Commit: <code>1403a3c fix(capture): preserve drafts across capture modes</code></li>
+          <li>Remote: <code>origin/codex/capture-draft-persist-all-modes-20260611@1403a3c</code></li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Changed Files</h2>
+        <ul>
+          <li><code>src/app/capture.tsx</code></li>
+          <li><code>src/lib/capture/draft.ts</code></li>
+          <li><code>src/lib/capture/__tests__/draft.test.ts</code></li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="card">
+      <h2>Behavior</h2>
+      <ul>
+        <li>User-scoped draft state now stores per-mode text drafts plus the last active mode.</li>
+        <li>Mode tabs preserve the current mode before restoring the target mode draft.</li>
+        <li>OCR approval state is restored only when OCR text exists.</li>
+        <li>Picked images, file objects, base64 payloads, and other large transient data stay out of storage.</li>
+        <li>Successful saves clear only the submitted mode draft.</li>
+        <li>Journal helper APIs remain compatible and can read the legacy v1 journal key.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Verification</h2>
+      <ul>
+        <li>PASS: targeted draft Jest, 5 tests</li>
+        <li>PASS: <code>npm run type-check</code></li>
+        <li>PASS: <code>npm run lint</code></li>
+        <li>PASS: full Jest, 115 suites and 1043 tests</li>
+        <li>PASS: Expo web export to <code>.expo-codex-web-check</code></li>
+        <li>PASS: <code>git diff --check</code></li>
+        <li>PASS: changed-file credential-pattern scan</li>
+      </ul>
+      <p><span class="badge warn">note</span><code>npm run verify</code> still stops at the existing broad A11y constraint gate. This patch did not add new controls, and the targeted/type/lint/full-test/web-export checks pass.</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SimonK Stack 전수 감사 리포트 · 2026-06-10</title>
+<style>
+  :root{
+    --bg:#15161c; --surface:#1d1f27; --surface2:#23252f; --line:#2e313d;
+    --text:#e6e7ee; --muted:#9a9cab; --faint:#6e7081;
+    --accent:#7c83ff; --ok:#54c79a; --warn:#e0a955; --crit:#e0697a;
+    --mono:'SFMono-Regular',Consolas,'Liberation Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Pretendard','Pretendard Variable',-apple-system,system-ui,sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.65;
+    -webkit-font-smoothing:antialiased; padding:48px 24px;
+  }
+  .wrap{max-width:920px;margin:0 auto}
+  header{border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:32px}
+  .eyebrow{color:var(--accent);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+  h1{font-size:28px;font-weight:700;margin:8px 0 6px;letter-spacing:-.02em}
+  .sub{color:var(--muted);font-size:15px}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0}
+  .stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
+  .stat .n{font-size:26px;font-weight:700;letter-spacing:-.02em}
+  .stat .l{color:var(--muted);font-size:12.5px;margin-top:2px}
+  h2{font-size:18px;font-weight:700;margin:38px 0 14px;letter-spacing:-.01em;display:flex;align-items:center;gap:9px}
+  h2 .dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-bottom:12px}
+  .card h3{font-size:15px;font-weight:650;margin-bottom:4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .card p{color:var(--muted);font-size:13.5px;margin-top:4px}
+  .tag{font-size:11px;font-weight:600;padding:2px 8px;border-radius:5px;letter-spacing:.02em}
+  .t-ok{background:rgba(84,199,154,.14);color:var(--ok)}
+  .t-warn{background:rgba(224,169,85,.14);color:var(--warn)}
+  .t-crit{background:rgba(224,105,122,.14);color:var(--crit)}
+  .t-p1{background:rgba(124,131,255,.14);color:var(--accent)}
+  .t-p2{background:var(--surface2);color:var(--faint)}
+  code{font-family:var(--mono);font-size:12px;background:var(--surface2);padding:1px 6px;border-radius:4px;color:#c5c8e0}
+  .repo-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .repo-row:last-child{border:none}
+  .repo-row .name{font-weight:600}
+  .repo-row .meta{color:var(--muted);font-size:12.5px;font-family:var(--mono)}
+  ul.clean{list-style:none}
+  ul.clean li{padding:7px 0 7px 20px;position:relative;font-size:13.5px;color:var(--muted);border-bottom:1px solid var(--line)}
+  ul.clean li:last-child{border:none}
+  ul.clean li::before{content:'';position:absolute;left:2px;top:14px;width:6px;height:6px;border-radius:50%;background:var(--faint)}
+  ul.clean li.todo::before{background:var(--warn)}
+  ul.clean li b{color:var(--text);font-weight:600}
+  .footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);color:var(--faint);font-size:12px;font-family:var(--mono)}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:640px){.grid{grid-template-columns:repeat(2,1fr)}.split{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Full Audit &amp; Remediation</div>
+    <h1>SimonK Stack 전수 감사 리포트</h1>
+    <div class="sub">AI Hub · SimonK-stack · 설치 스킬 · SimonKWiki · 2nd-B &nbsp;·&nbsp; 2026-06-10 KST</div>
+  </header>
+
+  <div class="grid">
+    <div class="stat"><div class="n">12,673</div><div class="l">감사 파일 수</div></div>
+    <div class="stat"><div class="n">31</div><div class="l">감사·수정 에이전트</div></div>
+    <div class="stat"><div class="n">17 <span style="font-size:14px;color:var(--muted)">/ 54</span></div><div class="l">확정 P1 / 전체 발견</div></div>
+    <div class="stat"><div class="n" style="color:var(--ok)">0</div><div class="l">시크릿 유출</div></div>
+  </div>
+
+  <p style="color:var(--muted);font-size:14px">
+    7개 도메인 병렬 감사 → P0/P1 17건 독립 검증(<b style="color:var(--ok)">REAL 17 / FALSE 0</b>) → 2파(波)에 걸쳐 수정 적용.
+    로컬 영역(Hub)은 커밋만, 원격 영역(Stack·Wiki)은 push+SHA 검증, <b style="color:var(--text)">2nd-B는 격리 worktree → PR #299</b>(머지 보류)로 처리해 동시 작업 중인 CLI 세션과의 충돌을 차단했습니다.
+  </p>
+
+  <h2><span class="dot"></span>도메인별 결과</h2>
+  <div class="card">
+    <div class="repo-row"><span class="name">AI Hub <span class="tag t-ok">로컬 커밋 3</span></span><span class="meta">4496b4b (push 없음 — 로컬 전용)</span></div>
+    <div class="repo-row"><span class="name">SimonK-stack <span class="tag t-ok">push ✓</span></span><span class="meta">origin/main 0ea68e2</span></div>
+    <div class="repo-row"><span class="name">SimonKWiki <span class="tag t-ok">push ✓ PRIVATE</span></span><span class="meta">origin/main 0718b59</span></div>
+    <div class="repo-row"><span class="name">설치 스킬 (~/.claude) <span class="tag t-ok">파일 수정</span></span><span class="meta">git 아님 — 직접 반영</span></div>
+    <div class="repo-row"><span class="name">2nd-B <span class="tag t-warn">PR #299 OPEN · 13 커밋</span></span><span class="meta">verify 910 tests green · 머지 보류</span></div>
+  </div>
+
+  <h2><span class="dot" style="background:var(--crit)"></span>가장 중요했던 3건</h2>
+  <div class="card">
+    <h3><span class="tag t-crit">P1</span> Grok 퇴화 루프 — 98MB STATUS</h3>
+    <p>self-discover 줄 52,330개(단일 타임스탬프 26,112회 자기복제). STATUS 98MB + outbox 733건을 <code>archive/</code>로 격리(<code>.gitignore</code> 추가), 슬림 stub + <code>state: excluded</code>로 교체. 허브 모니터링 면 복구.</p>
+  </div>
+  <div class="card">
+    <h3><span class="tag t-crit">P1</span> 2nd-B 안전 경로 비대칭 (C9)</h3>
+    <p>프록시 EN 위기용어가 substring 매칭이라 <code>"spending it"</code> 같은 무해 입력이 422 차단. 프록시를 클라이언트와 동일한 word-boundary 매칭으로 포팅(PR #299). <b style="color:var(--warn)">단 클라이언트 <code>safety_red_zone</code> 폴백 부재는 후속 과제</b> — raw 에러 노출 가능.</p>
+  </div>
+  <div class="card">
+    <h3><span class="tag t-crit">P1</span> 배포 게이트 우회 구멍</h3>
+    <p><code>web-deploy.yml</code>이 스테일 브랜치 푸시에도 프로덕션 Pages를 <code>force_orphan</code> 배포. 트리거를 <code>main</code> + <code>workflow_dispatch</code>로 제한(PR #299).</p>
+  </div>
+
+  <h2><span class="dot"></span>처리한 P1 (17건)</h2>
+  <div class="split">
+    <div class="card" style="margin:0">
+      <h3 style="font-size:13.5px;color:var(--accent)">AI Hub · 5</h3>
+      <ul class="clean">
+        <li>CONTROL roster <code>[claude,codex]</code> 갱신 + 케이던스 10분 정본 정렬</li>
+        <li>AG STATUS 옛 <code>E:\</code> 경로 정정 + frontmatter 표준화</li>
+        <li>묵은 open request 82건 → divergence 6건 트리아지 close</li>
+        <li>grok loop-rules 2분 → superseded 고지</li>
+        <li>board.ps1 견고화 (null가드·UTF8·id 폴백)</li>
+      </ul>
+    </div>
+    <div class="card" style="margin:0">
+      <h3 style="font-size:13.5px;color:var(--accent)">Stack + 설치 스킬 · 4</h3>
+      <ul class="clean">
+        <li>INDEX 누락 44개 등재 + 카운트 132 통일</li>
+        <li>CLAUDE.md 경로·스킬수·graphify 섹션 현행화</li>
+        <li>connect-chrome zombie 제거 + merged 브랜치 2개 삭제</li>
+        <li>simonk external 경로 3건 정정 · INDEX 151개 재생성 · instincts 백필</li>
+      </ul>
+    </div>
+    <div class="card" style="margin:0">
+      <h3 style="font-size:13.5px;color:var(--accent)">SimonKWiki · 2</h3>
+      <ul class="clean">
+        <li>frontmatter 필수 6키 42개 백필 (raw 무접촉)</li>
+        <li>죽은 sources 링크 5건 → <code>Output/reports/</code> 재지향</li>
+      </ul>
+    </div>
+    <div class="card" style="margin:0">
+      <h3 style="font-size:13.5px;color:var(--accent)">2nd-B (PR #299) · 6</h3>
+      <ul class="clean">
+        <li>배포 트리거 정리 + CI에 em dash 게이트 동기화</li>
+        <li><code>assets/pixy/~</code> 지뢰(중첩 .git 클론) 제거</li>
+        <li>C12 폰트 라이선스 레지스트리 + DESIGN SoT 이중선언 정리</li>
+        <li>ORDERS/마스코트명/마이그레이션 범위 문서 정정</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2><span class="dot" style="background:var(--warn)"></span>Simon 결정 필요 — 펀치리스트</h2>
+  <div class="card">
+    <ul class="clean">
+      <li class="todo"><b>keepass vault 복원</b> — <code>C:\Coding\암호.kdbx</code> 외장하드에서 복사 <span style="color:var(--faint)">(퇴근 후 진행 예정)</span></li>
+      <li class="todo"><b>L1 — Analysis Lexicon CI 배선 보류</b> — <code>diagnose</code> 강제 시 정당한 가드레일 프롬프트(<code>"Never diagnose"</code>) 3곳이 CI를 깸. allowlist 추가 / 강제 제외 / 부정문맥 인지 중 택1 필요</li>
+      <li class="todo"><b>클라이언트 422 폴백</b> — 프록시 단독 적중 위기 입력 시 위기 라우팅 UX 부재 (C9 후속)</li>
+      <li class="todo"><b>에셋 처분</b> — <code>assets/generated</code> 42MB 고아 6세대 (현재 .gitignore 보호만, 처분 홀드)</li>
+      <li class="todo"><b>raw/simonk-system README</b> — 재배치 완료됐으나 README 서사가 stale (raw 불변이라 미접촉)</li>
+    </ul>
+  </div>
+
+  <h2><span class="dot" style="background:var(--ok)"></span>클린 판정</h2>
+  <div class="card">
+    <p style="color:var(--ok)">✓ 진성 시크릿 유출 0건 — 5개 영역 + 2nd-B 전체 git 히스토리 스캔 (anon key 공개 결정 재확인, 매치는 전부 만료 토큰·테스트 픽스처·문서 예시)</p>
+    <p style="color:var(--ok)">✓ raw/ 불변성 유지 — 위키 작업 후 <code>git status -- raw/</code> = 0건</p>
+    <p style="color:var(--ok)">✓ 2nd-B C1·C3·C9 LLM 경계 — 래퍼 우회 호출 0건 · 금지어휘 위반 0건</p>
+  </div>
+
+  <div class="footer">
+    생성: Cowork-Claude (Fable 5) · 2026-06-10 / 10:09 KST<br>
+    감사 wf_706af36b · 수정 wf_68bef469 · 2차 wf_cac0ba65 · PR https://github.com/Simon-YHKim/2nd-B/pull/299
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLM Inline Image Preflight</title>
+  <style>
+    :root {
+      --bg: #f7f8fa;
+      --panel: #ffffff;
+      --ink: #17202a;
+      --muted: #52616f;
+      --line: #d8e0e7;
+      --ok: #0d6f52;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.2;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 18px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .meta {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+      line-height: 1.6;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      background: #edf3f7;
+      border-radius: 4px;
+      padding: 2px 5px;
+    }
+    .ok {
+      color: var(--ok);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>LLM Inline Image Preflight</h1>
+    <section class="panel meta">
+      <div><strong>Time:</strong> 2026-06-10 / 15:43:05 KST</div>
+      <div><strong>Branch:</strong> <code>codex/soul-core-multimodal-pilot-20260610</code></div>
+      <div><strong>Base:</strong> <code>origin/main@8965d46</code></div>
+      <div><strong>Commit:</strong> <code>f6b9584 fix(llm): preflight inline image payloads</code></div>
+    </section>
+
+    <h2>What Changed</h2>
+    <section class="panel">
+      <ul>
+        <li><code>callGemini()</code> now validates inline image payloads before proxy or direct SDK egress.</li>
+        <li>The guard covers MIME allowlist, size cap, base64 syntax, image signatures, and MIME/signature compatibility.</li>
+        <li>Crisis routing remains ahead of image validation.</li>
+      </ul>
+    </section>
+
+    <h2>Verification</h2>
+    <section class="panel">
+      <ul>
+        <li><span class="ok">PASS</span> <code>npm test -- --runTestsByPath src/lib/llm/__tests__/gemini.test.ts --ci</code> (9 tests)</li>
+        <li><span class="ok">PASS</span> <code>npm run type-check</code></li>
+        <li><span class="ok">PASS</span> <code>npm run lint</code></li>
+        <li><span class="ok">PASS</span> <code>npm run check:llm-boundary</code></li>
+        <li><span class="ok">PASS</span> <code>npm run check:constraints</code></li>
+        <li><span class="ok">PASS</span> <code>npm run check:i18n</code></li>
+        <li><span class="ok">PASS</span> <code>npm run check:lexicon</code></li>
+        <li><span class="ok">PASS</span> <code>npm run check:emdash</code></li>
+        <li><span class="ok">PASS</span> <code>git diff --check</code> and changed-line secret scan</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

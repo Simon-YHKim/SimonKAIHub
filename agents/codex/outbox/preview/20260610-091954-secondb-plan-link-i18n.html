@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Handoff - SecondB plan-link i18n</title>
+  <style>
+    :root{--bg:#0f1117;--panel:#171b24;--line:#2a3040;--text:#eceff6;--muted:#a7adbd;--accent:#7c9eff}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.58}
+    main{max-width:860px;margin:0 auto;padding:44px 22px 72px}
+    h1{font-size:28px;margin:0 0 8px}
+    h2{font-size:16px;margin:26px 0 10px;color:var(--accent)}
+    p,li{color:var(--muted)}
+    code{background:#10131b;border:1px solid var(--line);border-radius:5px;padding:1px 5px;color:var(--text)}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px;margin:16px 0}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:var(--text);margin:3px 5px 3px 0}
+  </style>
+</head>
+<body>
+<main>
+  <h1>SecondB plan-link i18n cleanup</h1>
+  <p>Codex local commit <code>43fd6f4</code> on <code>codex/secondb-plan-link-i18n-20260610</code>.</p>
+  <section class="card">
+    <h2>Changed</h2>
+    <ul>
+      <li><code>/secondb</code> visible <code>Clear</code> and <code>View plans</code> copy now comes from locale bundles.</li>
+      <li>Composer, clear-chat, and plan-link accessibility labels and hints are locale-backed.</li>
+      <li>A static regression test guards these strings from returning as hardcoded English.</li>
+    </ul>
+  </section>
+  <section class="card">
+    <h2>Files</h2>
+    <div class="grid">
+      <div><span class="pill">src/app/secondb.tsx</span></div>
+      <div><span class="pill">locales/en/secondb.json</span></div>
+      <div><span class="pill">locales/ko/secondb.json</span></div>
+      <div><span class="pill">src/lib/__tests__/visible-trust-copy.test.ts</span></div>
+    </div>
+  </section>
+  <section class="card">
+    <h2>Verification</h2>
+    <p>ESLint, type-check, i18n, lexicon, LLM boundary, em-dash check, diff check, changed diff secret scan, targeted test, and full Jest passed. <code>check-constraints</code> still fails on the existing broad A11y gate outside this patch.</p>
+  </section>
+</main>
+</body>
+</html>
