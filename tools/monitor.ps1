@@ -69,7 +69,18 @@ function Render {
       $state = $rawState; if(-not $state){ $state = "-" }
       if($state.Length -gt 8){ $state = $state.Substring(0,8) }
       $upd = Get-Front $head 'updated'
-      if($upd){ $age = Get-Age $upd; $stale = (Get-AgeDays $upd) -gt 1 } else { $noStamp = $true }
+      # Effective activity = most recent of the frontmatter 'updated:' stamp and the file's
+      # actual mtime. A STATUS rewritten without refreshing 'updated:' (or with no frontmatter
+      # at all, e.g. a bare status file) still reflects REAL freshness instead of "-"/stale.
+      $best = (Get-Item $sf).LastWriteTime
+      if($upd){ try { $ut=[datetime]::Parse((($upd -replace 'KST','' -replace '/','' -replace '\s+',' ').Trim())); if($ut -gt $best){ $best=$ut } } catch {} }
+      $d = (Get-Date) - $best
+      if($d.TotalMinutes -lt 1){ $age = ("{0:n0}s ago" -f $d.TotalSeconds) }
+      elseif($d.TotalHours -lt 1){ $age = ("{0:n0}m ago" -f $d.TotalMinutes) }
+      elseif($d.TotalDays -lt 1){ $age = ("{0:n0}h ago" -f $d.TotalHours) }
+      else { $age = ("{0:n0}d ago" -f $d.TotalDays) }
+      $stale = ($d.TotalDays -gt 1)
+      $noStamp = (-not $upd)
       $idx = -1
       for($i=0;$i -lt $lines.Count;$i++){ if($lines[$i] -match '^\[\d{4}-\d{2}-\d{2}'){ $idx = $i; break } }
       if($idx -ge 0){
@@ -83,7 +94,7 @@ function Render {
     $runlike = ($rawState -match '^\s*running')
     if($runlike -and ($controlState -eq 'paused')){
       $state = "stale-run?"
-    } elseif($runlike -and ($stale -or $noStamp)){
+    } elseif($runlike -and $stale){
       $state = "STALE"
     }
     if($act.Length -gt 42){ $act = $act.Substring(0,41) + "~" }
