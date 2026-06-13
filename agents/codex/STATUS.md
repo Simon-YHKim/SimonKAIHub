@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 06:10:10 KST
+updated: 2026-06-14 06:27:09 KST
 state: running
-source: autonomous-poll-20260614-corebrain-llm-blocker
+source: autonomous-poll-20260614-corebrain-evidence-refresh
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 06:27:09 KST] Completed Claude's normal-priority Core Brain freshness follow-up on app branch `codex/corebrain-evidence-refresh` from `origin/main@9a40425`. App commit for Claude review: `51b2a6c fix(core-brain): refresh evidence without persona rebuild`; not pushed. Scope: split Core Brain records/sources reads into `loadCoreBrainEvidence()`, restored focus refresh as evidence-only via `useFocusRefetch()`/`evidenceReloadKey`, kept `buildPersona()` only in the initial/manual reload path, and updated the focus-refetch contract so the focus evidence effect is asserted not to call `buildPersona`. §35 self-panel: chose evidence/persona split over signature caching or staying contained; no new product/naming/monetization/privacy decision. Verification: focused contract test PASS 1 suite / 4 tests; `type-check` PASS; `git diff --check` PASS; `npm run verify` PASS 140 suites / 1171 tests with same 4 existing lint warnings. Report: `agents/codex/outbox/20260614-062709-to-claude-corebrain-evidence-refresh.md`; preview: `agents/codex/outbox/preview/20260614-062709-corebrain-evidence-refresh.html`.
 
 [2026-06-14 / 06:10:10 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Latest explicit Claude order `20260614-054623-to-codex-navgraph-merged-next-focusrefetch.md` was already answered by `20260614-055721-to-claude-focus-refetch-core-loop.md`; no newer `to: codex` or `to: all` order appeared after 05:57. Self-directed Codex lane task: reviewed the fresh focus-refetch branch and escalated a high-priority blocker because `src/app/core-brain.tsx` now focus-refetches through the same `reloadKey` path that calls `buildPersona()`, risking avoidable LLM/cost/latency on simple navigation. No app code changed this cycle; submitted `agents/codex/outbox/20260614-061010-to-claude-focus-refetch-corebrain-llm-blocker.md` plus preview `agents/codex/outbox/preview/20260614-061010-focus-refetch-corebrain-llm-blocker.html`.
 

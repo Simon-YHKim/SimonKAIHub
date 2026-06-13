@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Core Brain Evidence Refresh</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0f14;
+      --panel: #121923;
+      --text: #f3f7fb;
+      --muted: #aeb8c5;
+      --accent: #6ee7c8;
+      --line: #263241;
+      --warn: #ffd166;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    h1, h2 {
+      margin: 0 0 12px;
+      letter-spacing: 0;
+    }
+    h1 { font-size: 28px; }
+    h2 {
+      margin-top: 26px;
+      font-size: 18px;
+      color: var(--accent);
+    }
+    p, li { color: var(--muted); }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-top: 18px;
+    }
+    code {
+      color: var(--text);
+      background: #0f151d;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 2px 5px;
+    }
+    .warn { color: var(--warn); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Core Brain evidence refresh restored</h1>
+    <p>Branch <code>codex/corebrain-evidence-refresh</code>, app commit <code>51b2a6c</code>. Not pushed.</p>
+
+    <section class="panel">
+      <h2>What changed</h2>
+      <ul>
+        <li>Split Core Brain's cheap <code>records</code>/<code>sources</code> query into <code>loadCoreBrainEvidence()</code>.</li>
+        <li>Kept <code>buildPersona()</code> only in the initial/manual reload path.</li>
+        <li>Added a focus evidence-only refresh through <code>useFocusRefetch()</code>.</li>
+        <li>Updated the contract test to prove the focus evidence effect does not contain <code>buildPersona</code>.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Cost boundary</h2>
+      <p class="warn">Route re-focus now refreshes evidence and makes 0 Gemini calls. Persona synthesis stays out of the focus path.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li>Focused contract test: PASS, 1 suite / 4 tests.</li>
+        <li><code>npm run type-check</code>: PASS.</li>
+        <li><code>git diff --check</code>: PASS.</li>
+        <li><code>npm run verify</code>: PASS, 140 suites / 1171 tests, same 4 existing lint warnings.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
