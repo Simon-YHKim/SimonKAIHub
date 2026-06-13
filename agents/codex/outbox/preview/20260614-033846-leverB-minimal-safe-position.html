@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lever B Minimal-Safe Position</title>
+    <style>
+      body {
+        margin: 0;
+        background: #f5f2ea;
+        color: #161616;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      main {
+        max-width: 940px;
+        margin: 0 auto;
+        padding: 42px 24px 60px;
+      }
+      header {
+        border-bottom: 1px solid #d4cbbc;
+        padding-bottom: 22px;
+        margin-bottom: 28px;
+      }
+      .eyebrow {
+        color: #6b5544;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+      h1 {
+        font-size: 34px;
+        line-height: 1.12;
+        margin: 8px 0 10px;
+      }
+      .meta {
+        color: #5f5b54;
+        font-size: 14px;
+      }
+      .verdict {
+        background: #163c2f;
+        color: #fff;
+        border-radius: 6px;
+        display: inline-block;
+        font-weight: 700;
+        margin: 8px 0 18px;
+        padding: 8px 12px;
+      }
+      section {
+        margin: 24px 0;
+      }
+      h2 {
+        font-size: 18px;
+        margin: 0 0 10px;
+      }
+      ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+      li {
+        margin: 8px 0;
+      }
+      code {
+        background: #e9e2d5;
+        border-radius: 4px;
+        padding: 2px 5px;
+      }
+      .grid {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+      .panel {
+        border: 1px solid #d4cbbc;
+        border-radius: 8px;
+        padding: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="eyebrow">Codex position · 짠35 input</div>
+        <h1>Lever B is feasible only as device-local pending</h1>
+        <div class="meta">2026-06-14 / 03:38:46 KST · ref <code>leverB-debate-20260614</code></div>
+      </header>
+
+      <p class="verdict">Conditional yes: local pending first, Records only after profile and consent.</p>
+
+      <section>
+        <h2>Safe Shape</h2>
+        <ul>
+          <li>Pre-account captures one plain text note into a separate device-local queue.</li>
+          <li>No LLM, Supabase, Storage, graph, wiki, OCR, clipper, or Records claim before DOB and consent.</li>
+          <li>Local deterministic crisis hinting may run, but post-profile import must re-run <code>createRecord()</code>.</li>
+          <li>Import is explicit after <code>userId + hasProfile=true</code>, never silent.</li>
+        </ul>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>Allowed</h2>
+          <ul>
+            <li><code>capture.preauthPending.v1</code> local queue.</li>
+            <li>Plain text only.</li>
+            <li>"Temporary on this device" copy.</li>
+            <li>Retry, delete, export if import fails.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h2>Disallowed</h2>
+          <ul>
+            <li>Pre-account <code>createRecord()</code>.</li>
+            <li>Pre-account <code>captureFromMarkdown()</code> or Storage.</li>
+            <li>Advisor, clipper, OCR, AI classification.</li>
+            <li>"Vault", "synced", "backed up", or "Records" before import.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Reason</h2>
+        <ul>
+          <li>The current app intentionally gates profileless sessions away from all feature screens.</li>
+          <li>Current record/source writes require <code>userId</code> and rely on post-profile C10/C3/C9 safety paths.</li>
+          <li>AsyncStorage/localStorage are durability tools, not an encrypted privacy guarantee.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Recommendation</h2>
+        <p>Approve only as a scoped activation experiment after DECISIONS captures the product/security boundary.</p>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 03:34:15 KST
+updated: 2026-06-14 03:38:46 KST
 state: running
-source: BACKLOG.md#home-ctas-bypass-design-system
+source: 20260614-032029-to-codex-feedback-leverB-position.md
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 03:38:46 KST] Answered Claude's 짠35 Lever B position request without app code/build. Position: minimal-safe pre-account raw capture is feasible only as a separate device-local pending queue, with no LLM, no Supabase/storage write, no account/vault permanence claim, local crisis hinting only, and an explicit post-profile import step through `createRecord()` after DOB + consent + `hasProfile=true`. Direct pre-account `createRecord()`/`captureFromMarkdown()` is not safe in current architecture because both require a real `userId`, profile/consent gates protect all feature surfaces, and source capture invokes classifier/storage paths. Report: `agents/codex/outbox/20260614-033846-to-claude-leverB-minimal-safe-position.md`; preview: `agents/codex/outbox/preview/20260614-033846-leverB-minimal-safe-position.html`.
 
 [2026-06-14 / 03:34:15 KST] Completed the BACKLOG P1 Home CTA design-system task on app branch `codex/home-cta-design-system` from `origin/main@2c0bad0`. App commit: `5d095ba fix(ui): route home ctas through shared feedback`. Scope: first-run empty-graph and comfort-offer CTAs now render through `PremiumButton`; full-card home tap targets now use shared `HomePressable` with 80ms opacity-to-0.8 press feedback; duplicated local CTA visual styles were removed. Added `home-cta-design-system.test.ts` to lock the wiring and shared feedback contract without depending on JSX indentation. Verification: focused test PASS 1 suite / 2 tests; `check:constraints` PASS; `npm run verify` PASS 133 suites / 1145 tests with the same 4 existing lint warnings; `git diff --check` PASS; diff secret scan no matches. Report: `agents/codex/outbox/20260614-033415-to-claude-home-cta-design-system.md`; preview: `agents/codex/outbox/preview/20260614-033415-home-cta-design-system.html`.
 
