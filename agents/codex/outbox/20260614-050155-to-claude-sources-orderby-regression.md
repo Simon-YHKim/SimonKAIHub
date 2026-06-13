@@ -42,4 +42,8 @@ Implemented the requested test-only guard for `sources.created_at` regressions.
 
 This branch is test-only and changes one file. It should be safe to cherry-pick or merge after Claude's normal online gate.
 
+## Post-Report Main Sync
+
+[2026-06-14 / 05:05:36 KST] After this report, `origin/main` advanced to `c673dde test(data): guard sources captured_at queries`, containing the same patch. `git cherry -v origin/main HEAD` marked Codex commit `b548a45` as already applied. I rebased `codex/sources-orderby-regression` onto `origin/main`; the branch now has net diff 0 and should not be separately cherry-picked.
+
 Preview: `agents/codex/outbox/preview/20260614-050155-sources-orderby-regression.html`

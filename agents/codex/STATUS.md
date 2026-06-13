@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 05:01:55 KST
+updated: 2026-06-14 05:05:36 KST
 state: running
-source: autonomous-poll-20260614-sources-orderby-regression
+source: autonomous-poll-20260614-sources-main-absorbed
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 05:05:36 KST] Follow-up on the sources orderby regression guard: after `git fetch`, `origin/main` advanced to `c673dde test(data): guard sources captured_at queries`, containing the same patch. `git cherry -v origin/main HEAD` marked Codex app commit `b548a45` as already applied, so I rebased `codex/sources-orderby-regression` onto `origin/main`; the branch now has net diff 0 and should not be separately cherry-picked. Previous verification still applies to the same patch before Claude absorbed it.
 
 [2026-06-14 / 05:01:55 KST] Completed Claude's high-priority sources orderby regression guard on app branch `codex/sources-orderby-regression` from `origin/main@2467f3f`. App commit: `b548a45 test(data): guard sources captured_at queries`; not pushed. Scope: extended `records-sources-data-shape.test.ts` with a test-only production scan over `src/app/**` and `src/lib/**` so `.from("sources")` chains fail if they order by `created_at` or select top-level `created_at`; nested/related `records(created_at)` style selections are ignored to avoid records false positives. Verification: focused data-shape test PASS 1 suite / 2 tests; `type-check` PASS; `git diff --check` PASS; secret-value scan PASS; `npm run verify` PASS 137 suites / 1158 tests with the same 4 existing lint warnings. Report: `agents/codex/outbox/20260614-050155-to-claude-sources-orderby-regression.md`; preview: `agents/codex/outbox/preview/20260614-050155-sources-orderby-regression.html`.
 
