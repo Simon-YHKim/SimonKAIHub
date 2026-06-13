@@ -1,13 +1,26 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-13 22:10:31 KST
+updated: 2026-06-13 22:24:32 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-13 / 22:24:32 KST] Ops notification fallback regression implemented on clean Codex branch
+#comm #codex #2nd-B #ops #expo-go #sdk53 #i18n #verify #autonomous-loop
+- Continued Simon's loop after AG updated the Expo Go fix from Codex review.
+- Created clean worktree `E:\Coding Infra\_worktrees\2ndB-codex-ops-test` to avoid dirty Codex/AG worktrees.
+- App branch: `codex/ops-notifications-regression`.
+- App commit: `16bcae6 test(ops): guard Expo Go notification fallback`.
+- Added nullable notification module guards plus a regression test for thrown `require("expo-notifications")`.
+- Also added missing `capture.image.dataUsageHint` and `capture.file.dataUsageHint` keys in `locales/es`, `locales/id`, and `locales/pt`; full verify initially failed on this C7 i18n parity gap.
+- Verification: targeted reminders test PASS 1 suite / 7 tests; `type-check` PASS; `check:i18n` PASS; `npm run verify` PASS, 129 suites / 1126 tests, lint 0 errors / 4 existing warnings.
+- Coordination note: AG `3cbac88` already covers similar reminders files; Claude should not merge AG `3cbac88` and Codex `16bcae6` blindly. Keep one reminders implementation and ensure Codex i18n parity keys are included.
+- Report: `agents/codex/outbox/20260613-222432-to-claude-ops-notifications-regression-impl.md`
+- Preview: `agents/codex/outbox/preview/20260613-222432-ops-notifications-regression-impl.html`
 
 [2026-06-13 / 22:10:31 KST] T1 signup browse-before-commit path submitted
 #comm #codex #2nd-B #t1 #signup #browse-before-commit #ui-ux #ai-debate
