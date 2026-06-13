@@ -1,8 +1,8 @@
 ---
 name: ai-safety-eval
 description: "사용자가 만드는 AI 제품/기능의 안전·가드레일을 설계·점검할 때 사용. 트리거: \"AI 안전\", \"가드레일\", \"콘텐츠 필터\", \"탈옥 방어\", \"프롬프트 인젝션\", \"환각 줄이기\", \"PII 마스킹\", \"AI 편향 점검\", \"jailbreak\", \"guardrail\", \"content moderation\", \"hallucination\", /ai-safety-eval. 입력/출력 가드레일 → 콘텐츠 모더레이션 → PII·로깅·감사 → 탈옥/인젝션 레드팀 → 편향·공정성 → 환각 완화(근거·불확실성·휴먼인루프) → 규제(개인정보·연령) 7개 레이어를 위험도별 대응 표로 점검하고, 레드팀 테스트 스위트 + 가드레일 설정 템플릿을 산출한다. 대상은 사용자가 만드는 AI 기능이지 이 플러그인 자체가 아니다."
-allowed-tools: Read, Write, WebSearch, WebFetch, AskUserQuestion
-version: 1.0.0
+allowed-tools: Read, Write, WebSearch, WebFetch, AskUserQuestion, Bash
+version: 1.1.0
 author: simon-stack
 ---
 
@@ -45,6 +45,8 @@ LLM 호출 **전** 단계. 순서대로 통과시켜야 한다.
 3. **레이트·길이 제한**: 토큰 폭탄·반복 공격 차단.
 
 > 참고: 2nd-Brain 레포는 이 패턴을 C9(`classifyInput()` runs before any LLM call, 레드존 단락)로 강제한다. 같은 구조를 권장한다.
+
+> **결정론 + 모델 이중 레이어 (필수 구조)**: L1 입력과 L2 출력 가드레일은 모두 (1) 결정론 게이트(정규식/lexicon — 모델 불필요)와 (2) 모델 보조 분류기 두 겹으로 동작한다. **결정론이 최종 차단권을 가진다(fail-closed)**: 모델이 "안전"이라 해도 결정론 block/crisis 는 유지되고, 모델은 위험도를 **올리기만** 한다(merge_max_severity, OR 결합). 따라서 모델 미연결 상태에서도 block/crisis 게이트는 실제로 작동한다. 모델은 재현율을 더하는 보조일 뿐이다. 구현 참조: `scripts/classify.mjs`(결정론 분류 + `callModel()` 교체 지점), 명세: `templates/guardrail-config.json` 의 `deterministic_classifier`.
 
 ## 3. L2 출력 가드레일 / L3 콘텐츠 모더레이션
 
@@ -90,6 +92,8 @@ LLM 호출 **전** 단계. 순서대로 통과시켜야 한다.
 
 통과 기준: 각 카테고리 공격 셋에 대해 **차단/안전응답 비율**을 기록. 회귀 방지를 위해 CI에 스냅샷.
 
+`templates/redteam-suite.md` 는 9개 카테고리(RT-1~9: 직접탈옥·간접인젝션·인코딩우회·프롬프트추출·PII유출·도구남용·유해콘텐츠·위기우회·편향)별 케이스와 측정 방법, 결정론 must-catch 여부를 담는다. 결정론 게이트는 `scripts/classify.mjs` 로 모델 없이 단독 실행해 block/crisis must-catch 100% 를 회귀 기준으로 고정한다.
+
 ## 6. L6 편향·공정성
 
 - **평가 셋 구성**: 동일 프롬프트의 보호속성(성별·연령·지역·인종 등)만 바꾼 변형 쌍을 만들어 응답 차이 측정.
@@ -120,8 +124,9 @@ LLM 호출 **전** 단계. 순서대로 통과시켜야 한다.
 2. **레이어 선별** — 해당 위험 표면만 §2~§8에서 선택.
 3. **정책 파일 1개** — 차단/위기/완화 임계값을 단일 소스로(예: `moderation-policy.json`). `templates/guardrail-config.json` 복사 후 수정.
 4. **레드팀 스위트** — `templates/redteam-suite.md`를 제품에 맞게 채우고 실행, 통과율 기록.
-5. **감사·로깅 스키마** — §4 표대로 정의, PII 마스킹 위치 명시.
-6. **CI 게이트** — 정책 파일 lint + 레드팀 스냅샷을 파이프라인에 고정.
+5. **위기 놓침 게이트** — `templates/crisis-fn-eval.jsonl` 에 놓치면 안 되는 위기 케이스를 추가하고 `node scripts/crisis_fn_gate.mjs --set templates/crisis-fn-eval.jsonl` 로 측정. **must_not_miss recall < 1.0 이면 빌드 실패.** 위양성은 별도 보고(대조 케이스로 통제).
+6. **감사·로깅 스키마** — §4 표대로 정의, PII 마스킹 위치 명시.
+7. **CI 게이트** — 정책 파일 JSON lint + `crisis_fn_gate.mjs`(exit 1=놓침) + 레드팀 스냅샷을 파이프라인에 고정.
 7. **위험도별 대응 표 + 미해결 위험** 요약 반환.
 
 ## 10. 출력 형식
@@ -143,9 +148,13 @@ LLM 호출 **전** 단계. 순서대로 통과시켜야 한다.
 
 ## 12. 관련 자산
 
+- **스크립트** (의존성 0, Node 18+ — 결정론 부분은 모델 없이 작동):
+  - `scripts/classify.mjs` — 결정론 분류기(정규식/lexicon 게이트) + 모델 보조(`callModel()` 교체 지점). 라이브러리(`classify()`)·CLI 양용. exit 0=allow/soften/warn, 3=crisis, 4=block.
+  - `scripts/crisis_fn_gate.mjs` — 위기 false-negative 게이트. must_not_miss recall 측정, 놓침 시 exit 1(빌드 실패). FP 별도 보고.
 - **템플릿**:
-  - `templates/redteam-suite.md` — 6개 공격 카테고리 테스트 표 + 통과 기준
-  - `templates/guardrail-config.json` — 위험도별 정책 단일 소스 스켈레톤
+  - `templates/redteam-suite.md` — 9개 공격 카테고리(탈옥·인젝션·인코딩·프롬프트추출·PII·도구남용·유해·위기우회·편향) 케이스 표 + 측정 방법
+  - `templates/guardrail-config.json` — 위험도별 정책 단일 소스. block/crisis 에 결정론 분류기 명세(정규식·임계·KO/EN 위기 신호) 포함
+  - `templates/crisis-fn-eval.jsonl` — 위기 놓침 평가셋(KO/EN/혼용/인코딩 우회 + 대조 케이스)
 - **스킬 연계**:
   - `security-orchestrator` / `cso` — 제품 전반 보안 감사
   - `authz-designer` — 도구·데이터 접근권한(에이전트 인젝션 방어와 연계)
@@ -154,7 +163,8 @@ LLM 호출 **전** 단계. 순서대로 통과시켜야 한다.
 
 ## 13. Roadmap
 
-- v1.0 (현재): 7-레이어 점검 + 위험도 표 + 레드팀/정책 템플릿
-- v1.1: 레드팀 스위트 자동 실행 러너(스냅샷 회귀)
-- v1.2: 편향 평가 셋 생성기(보호속성 변형 쌍 자동 생성)
-- v1.3: vendor 데이터정책 fetch 캐시 + 규제 변경 알림
+- v1.0: 7-레이어 점검 + 위험도 표 + 레드팀/정책 템플릿
+- v1.1 (현재): 결정론 분류기(`classify.mjs`, 정규식/lexicon, KO/EN 위기 신호) + 위기 놓침 게이트(`crisis_fn_gate.mjs`, recall<1.0 빌드 실패) + 위기 FN 평가셋 + 레드팀 9카테고리 확충 + 결정론·모델 이중 레이어 명시
+- v1.2: 레드팀 스위트 자동 실행 러너(전 카테고리 스냅샷 회귀)
+- v1.3: 편향 평가 셋 생성기(보호속성 변형 쌍 자동 생성)
+- v1.4: vendor 데이터정책 fetch 캐시 + 규제 변경 알림
