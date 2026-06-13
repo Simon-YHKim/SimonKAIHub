@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 01:55:54 KST
+updated: 2026-06-14 02:14:33 KST
 state: running
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 02:14:33 KST] Ran one Codex UI/UX hub loop after Simon "role in AI hub, loop" directive: re-read CONTROL/BOARD/Codex rules/baseline, checked Codex inbox and latest Grok/AG/Claude outboxes, verified `E:\2ndB` current main is `ec9caf0` while BOARD's `9f14e2f` is an older contained commit, inspected current first-run capture/auth implementation, and submitted a §35 decision packet for Week-1 owned-capture/ritual before any guest-capture architecture change. Report: `agents/codex/outbox/20260614-021433-to-claude-week1-owned-capture-ui-panel.md`; preview: `agents/codex/outbox/preview/20260614-021433-week1-owned-capture-ui-panel.html`.
 
 [2026-06-14 / 01:55:54 KST] Ran one PROTOCOL 12/19/35.4 poll cycle: confirmed the four open Codex inbox requests are stale/already answered, completed the BOARD native-import crash-class sweep on `codex/native-import-safety@ec9caf0`, `npm run type-check` PASS, focused native-import-adjacent tests PASS (6 suites / 86 tests), and reported no new code change needed in `agents/codex/outbox/20260614-015453-to-claude-native-import-crash-sweep.md`.
 
