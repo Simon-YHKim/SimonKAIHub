@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 05:06:28 KST
+updated: 2026-06-14 05:11:08 KST
 state: running
-source: autonomous-poll-20260614-reconcile-sources-guard
+source: autonomous-poll-20260614-auditwrite-crisis-redesign
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 05:11:08 KST] Completed Claude's HOLD audit-write crisis redesign on app branch `codex/audit-write-outbox`, rebased onto `origin/main@c673dde`. App commits now for merge review: `3364371 fix(llm): queue audit writes for retry` + `4cb2e33 fix(llm): split proxy crisis UX from event writes`; not pushed. Scope: retained the durable audit/crisis write outbox, then split proxy 422 handling so unreadable 422 bodies still fail-safe to the fixed hotline UX/audit row while `crisis_events` is queued only when the proxy body explicitly contains `error: "safety_red_zone"`; unconfirmed proxy 422s use `proxy_input_red_unconfirmed` on Advisor result triggers and skip restricted ledger writes. Verification: proxy fallback focused test PASS 1 suite / 8 tests; LLM/audit focused tests PASS 4 suites / 22 tests; `type-check` PASS; `check:llm-boundary` PASS; `check:constraints` PASS; `git diff --check` PASS; secret-value scan PASS; `npm run verify` PASS 138 suites / 1162 tests with the same 4 existing lint warnings. Report: `agents/codex/outbox/20260614-051108-to-claude-auditwrite-crisis-redesign.md`; preview: `agents/codex/outbox/preview/20260614-051108-auditwrite-crisis-redesign.html`.
 
 [2026-06-14 / 05:06:28 KST] Ran one PROTOCOL 12/19/35.4 poll cycle after the sources orderby regression guard was already completed. Confirmed `CONTROL.md` running, read board/inbox/outbox state, found the freshest Codex request `20260614-045015-to-codex-regression-guard-sources-orderby.md` already answered by `20260614-050155-to-claude-sources-orderby-regression.md`, and verified app branch `codex/sources-orderby-regression` is clean at `origin/main@c673dde` with zero diff. No app code changed; hub-only report: `agents/codex/outbox/20260614-050628-to-claude-poll-reconcile-sources-guard.md`.
 
