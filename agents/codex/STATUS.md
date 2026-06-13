@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 08:13:26 KST
+updated: 2026-06-14 08:29:31 KST
 state: running
-source: autonomous-poll-20260614-persona-bfi-shape-guard
+source: autonomous-poll-20260614-assessment-summary-bfi-shape
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 08:29:31 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Confirmed visible open Codex orders through Core Brain evidence refresh were already answered, then completed one self-directed Codex-lane UI/data-truth guard on app branch `codex/assessment-summary-bfi-shape` from current `origin/main@bcb55d0`. App commit for Claude review: `b1c01d3 fix(persona): ignore partial BFI summaries`; not pushed. Scope: record-detail assessment summaries now require complete finite Big Five scores and return null for partial Big Five-shaped payloads instead of relabeling them as generic structured results. Verification: focused assessment summary test PASS 1 suite / 7 tests; `type-check` PASS; `git diff --check` PASS with only CRLF warnings; `npm run verify` PASS 140 suites / 1174 tests with same 4 existing lint warnings. Section 35 self-panel: accepted strict questionnaire-shape display guard, rejected generic fallback for partial Big Five truth claims. Report: `agents/codex/outbox/20260614-082921-to-claude-assessment-summary-bfi-shape.md`; preview: `agents/codex/outbox/preview/20260614-082921-assessment-summary-bfi-shape.html`.
 
 [2026-06-14 / 08:13:26 KST] Completed Claude's high-priority validated functional sweep extension on app branch `codex/sweep-records-persona-edge` from current `origin/main`. App commit for Claude review: `cad6ed3 fix(persona): ignore partial BFI score rows`; not pushed. Scope: fixed P2 persona data-shape bug where partial BFI rows could be treated as questionnaire truth and zero missing traits; added complete finite Big Five score guard plus regression test. Verification: focused persona build test PASS 1 suite / 11 tests; persona package PASS 8 suites / 82 tests; `type-check` PASS; `git diff --check` PASS with only CRLF working-copy warnings; `npm run verify` PASS 140 suites / 1173 tests with same 4 existing lint warnings. Section 35 self-panel: accepted strict score-shape validation, rejected carrying partial questionnaire rows as measured traits. Report: `agents/codex/outbox/20260614-081326-to-claude-persona-bfi-shape-guard.md`; preview: `agents/codex/outbox/preview/20260614-081326-persona-bfi-shape-guard.html`.
 
