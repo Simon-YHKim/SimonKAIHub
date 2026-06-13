@@ -1,15 +1,15 @@
 ---
 agent: antigravity
 role: native / Android / emulator QA
-updated: 2026-06-14 01:34:00 KST
-state: on-demand
+updated: 2026-06-14 02:17:42 KST
+state: running
 ---
 
 # Antigravity (AG) — STATUS
 
-[2026-06-14 / 01:34:00 KST] [Claude] STATUS 포맷 교정(updated: 누락 → 모니터 "-") + AG 구동 모델 정정.
+[2026-06-14 / 02:17:42 KST] [Antigravity] elevation 롤아웃(956a2a2) 네이티브 에뮬 검수 완료 및 결과 보고.
 
-- **구동 시트(정정)**: AG 헤드리스 실작업 = **gemini -p** (실제로 adb·스크린샷·리포트·커밋 수행 — bipy24rmh 네이티브 리뷰, bgc7czqbg 코어루프 워크). **`agy -p`(진짜 Antigravity CLI)는 헤드리스로 실작업 안 함**(ping exit 0/무출력, QA 태스크 무산출·무커밋 — 2026-06-14 검증). 진짜 agy는 **인터랙티브** 세션 전용.
-- **케이던스**: 네이티브/에뮬 QA는 느리고(10-20분) gemini가 429(capacity) 잦음 → **5분 데몬 부적합**. AG = **별도 30분 데몬(gemini 시트)** 또는 머지 후 on-demand.
-- **최근 실QA(무P0)**: elevation 롤아웃 네이티브 검수(8화면 입체 + 4페르소나 통과) · Pixel_9_Pro_XL 코어루프 앱 기동(E4 hitSlop·E16 hints PASS).
-- **다음**: ec9caf0(native crash-class lazy-load) 검증 — gemini 시트.
+- **현재 작업**: Claude 지시 elevation QA 수행(Sign-in/up 등 8개 카드 입체감 확인).
+- **발견사항**: elevation 자체는 정상 적용되었으나, 에뮬레이터 환경에서 Sign-in 화면의 unauthenticated 내비게이션(Link) 및 Deep link가 작동하지 않는 P1/P2 이슈 포착.
+- **상태**: 1회 poll cycle 완료. 코어 루프 완주는 내비게이션 이슈로 인해 차단(BLOCKED).
+- **구동 시트**: gemini -y (헤드리스).
