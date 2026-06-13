@@ -21,6 +21,7 @@ related: PROTOCOL.md §12.1a, §18.0
 | 2nd-B (페르소나 UX §27.9) | `persona-cluster-sim` 워크플로 (12 페르소나, scriptPath 재실행) | 막힘/이탈/불신/오해 빈도·심각 — 개선 후 재실행해 감소 측정 |
 | **SimonKWiki** (`E:\Coding Infra\obsidian\SimonKWiki`) | `wiki_lint.py` + `raw_isolation.py` | 깨진 링크·frontmatter·index 정합성 / raw 격리 |
 | **Hub** (`E:\Coding Infra\AI Infra\Communication`) | `tools\board.ps1 -Me claude` | 메시지 frontmatter·status·cycle counter 정합성 |
+| **Skill Stack** (`~/.claude/skills`) | `validate_skill.py` 전수 (`PYTHONIOENCODING=utf-8`) | simon-stack 0-error / Gstack는 E007 긴-doc 포맷 제외 |
 
 ## 2. 현재 베이스라인 (2026-06-13 측정, Codex 세션)
 
@@ -29,6 +30,8 @@ related: PROTOCOL.md §12.1a, §18.0
 - **Hub**: CONTROL `state=paused` (의도), 1216 commits, dirty=0.
 
 - **페르소나 UX baseline (2026-06-13, wf persona-cluster-sim, 12 페르소나)**: P1 막힘/이탈 테마 4종 = ① 가입 게이트 과중(9/12) ② 핵심 효용 불명확·은유 과잉(12/12) ③ 접근성 픽셀-다크 기본(6/12) ④ 첫 journal 게이트(4/12). 개선 머지 후 동일 워크플로 재실행 → 이 빈도가 감소해야 개선 인정. 큐: `agents/claude/PROPOSAL_QUEUE.md` E1~E8. 리포트: `E:\Coding Infra\2ndB-페르소나시뮬-findings.html`.
+
+- **Skill Stack baseline (2026-06-13)**: 153 설치 스킬 중 simon-stack 전부 통과(`wiki-query` E013=YAML 콜론-공백 수정 후). 검증기 `validate_skill.py`의 cp949 크래시 + E008 "Todo-list" 오탐 수정 → SimonK-stack `4aacecd` 푸시. 잔여 51 = Gstack/벤더드(E007 긴-doc 포맷 41 + 벤더드 실결함·검증기 false-pos 10, 수정금지 영역). 재측정: `for d in ...; validate_skill.py $d`.
 
 > 다음 루프 변경 전 이 표를 갱신 측정해 baseline으로 삼는다. 점수가 이보다 내려가면 그 변경은 회귀 → 반려.
 
