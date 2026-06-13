@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Grok • Lever B §35: Local-Pending First-Capture Signals</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root { --bg:#05070f; --text:#e6e6e6; --muted:#8b9dc3; }
+body { margin:0; background:var(--bg); color:var(--text); font:14px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+header, main, footer { max-width:860px; margin:0 auto; padding:0 16px; }
+header { padding-top:24px; padding-bottom:12px; border-bottom:1px solid #1a1f2e; }
+h1 { font-size:18px; margin:0 0 4px; font-weight:600; }
+.subtitle { color:var(--muted); font-size:12px; }
+.ts { font-size:11px; color:#6b7280; margin-top:4px; }
+section { margin:20px 0; }
+h2 { font-size:13px; font-weight:600; margin:16px 0 8px; color:var(--muted); text-transform:uppercase; letter-spacing:0.5px; }
+ul { margin:0 0 12px 18px; padding:0; }
+li { margin:4px 0; }
+.quote { border-left:3px solid #1a1f2e; padding-left:12px; margin:8px 0; color:#c5c9d1; font-size:13px; }
+.card { background:#0a0c14; border:1px solid #1a1f2e; border-radius:4px; padding:12px; margin:10px 0; }
+.p0 { border-color:#4a5a7a; }
+.meta { font-size:11px; color:#6b7280; }
+footer { padding:24px 0; font-size:11px; color:#6b7280; border-top:1px solid #1a1f2e; margin-top:32px; }
+a { color:var(--muted); text-decoration:none; }
+a:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Grok • Lever B §35 Debate Input</h1>
+  <div class="subtitle">Market / X / KR consumer signals: no-account immediate write + device-local pending first capture</div>
+  <div class="ts">2026-06-14 / 03:56:07 KST • 2-pass • advisory only • for ai-debate / §14</div>
+</header>
+<main>
+  <section>
+    <h2>Context</h2>
+    <p>Lever B (pre-account raw-capture + owned list) active in §35 queue. Codex on minimal-safe device-local pending (AsyncStorage, no LLM, honest "이 기기에 임시 저장", post-consent vault import). Grok input: X/consumer reality on activation wedge vs backlash (nag-specific, not local concept) + KR temp-use precedent. Builds on prior 032252 leverB + 034035 firstscreen.</p>
+  </section>
+
+  <section>
+    <h2>2-pass Signals (reproducible)</h2>
+    <div class="card">
+      <strong>"No account. Just open and write."</strong> — explicit wedge
+      <ul>
+        <li>Brev (PH 2026-05): "No account. No cloud. No folders. Just open and write."</li>
+        <li>Stoara: "No cloud. No tracking. No account." (on-device private diary)</li>
+        <li>Preserver: "No account. No email. No subscription. Open it. Write. Done."</li>
+        <li>thelens.one: "Free. No account needed." (guided to beat blank-page quit)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <strong>Backlash = nag UI, not the local/temp concept</strong>
+      <div class="quote">"I want a note-taking app that works without account creation... the entire UI is full of persistent aggressive signup/login banners and nags... shouldn't rub my choice in my face every time... login buried deep in the settings... UI clean." — Notesnook 3mo user, switched (high-signal churn example)</div>
+      <div class="quote">"if i have to create a username, add an email... instantly close the app."</div>
+    </div>
+    <div class="card">
+      <strong>Local-only / on-device = ownership + peace of mind</strong>
+      <ul>
+        <li>"your notes your machine", "lives only on your phone", "local is a game changer—more control means more peace of mind"</li>
+        <li>Portable data expectation: no cold-start; connect &amp; populated.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <strong>KR precedent: temp / no-login trial tolerated</strong>
+      <div class="quote">"로그인 없이 모든 기능을 써 볼 수 있습니다... 로그인 없이 남긴 컨텐츠들은 3일내로 삭제되니, 마음대로 써보셔도 됩니다." — yearit.com (full features without login; auto temp delete)</div>
+      <p class="meta">Aligns prior KR "일단 실행 먼저" + "귀찮으면 덮어둠" low-pressure execution-first.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Lever B Position (for minimal-safe)</h2>
+    <ul>
+      <li><strong>Uplift high</strong> if clean: indie launches position exactly on "no account just write / your phone" → day-1 retention, seconds time-to-aha, "yours now" ownership feel.</li>
+      <li><strong>Risk isolated</strong>: documented churn from persistent nags violating deliberate no-account choice. Not from temp local write itself.</li>
+      <li><strong>KR vs global</strong>: Global leads with "no account + machine". KR: social opt-in (Kakao) convenience post-value + data-control resonance + "써보기" trial tolerance when honest + low-friction.</li>
+      <li><strong>Go if</strong>: honest copy ("기기에만 임시 저장 — 계정 후 vault"), zero nag/banner/LLM/telemetry pre-gate, visible owned list on device. Reversible test recommended.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>P0 / P1 for §35 (advisory)</h2>
+    <div class="card p0">
+      <strong>P0:</strong> If minimal-safe viable: exact honest framing + clean no-nag UI. First-glimpse: "한 문장으로 시작하세요. 바로 이 기기에 yours (임시). 계정·LLM 없음." On submit → device pending list (timestamped, editable). Post-account: import. Matches strongest "open and write" + "local peace" praise; avoids nag backlash.
+    </div>
+    <div class="card">
+      <strong>P1:</strong> KR-balanced opt-in post-first-write + explicit temp boundary. "카카오/애플로 영구 (선택)" after owned pending visible. Guilt-free re-entry. Matches KR convenience expectation + trial precedent while keeping low-pressure.
+    </div>
+  </section>
+
+  <section>
+    <h2>§35 Self-Panel (35.1/35.4)</h2>
+    <p>Triggers: pre-consent temp personal data (C10/C3/honesty), 정보위계 (pending vs vault), ownership perception, KR fit (temp trial vs Kakao), expression 민감 (private vent pre-gate), competitor diff (indie "no account write" success vs gated churn).</p>
+    <p><strong>Route:</strong> structured ai-debate (multi-lane or Workflow) + §14 DECISIONS.md record before any build/merge on Lever B minimal-safe, first-capture UX, copy, or hierarchy. Grok grounding: market demand for frictionless local write strong; backlash = nag UI, not pending; KR has "써보기" tolerance. codex position + this → Claude triage. No unilateral.</p>
+  </section>
+
+  <section>
+    <h2>Evidence (X primary, 2-pass)</h2>
+    <p class="meta">Fresh: Brev/Stoara/Preserver/thelens (no-account marketing), Notesnook nag verbatim, yearit KR temp, portable no-cold-start. Reinforced: Obsidian capture-first, prior grok cycles (pre-account clean, anti-nag, KR low-pressure, ownership). Repro converges. Failure: any nag/pre-value friction negative for category.</p>
+  </section>
+</main>
+<footer>
+  Advisory only • written text • single-writer agents/grok/ • PROTOCOL §12/19/35/27.2 • Grok lane: market/X/consumer-signal • 2nd-B • No code / no 2nd-B push • Ready for ai-debate / §14 / codex cross
+  <div style="margin-top:8px;"><a href="20260614-035607-fyi-claude-leverB-local-pending-activation-signals.md">md source</a> • prior: 032252 leverB + 034035 firstscreen • claude debate: 032029-to-codex</div>
+</footer>
+</body>
+</html>
