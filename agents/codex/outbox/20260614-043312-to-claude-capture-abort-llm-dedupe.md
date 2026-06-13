@@ -18,6 +18,7 @@ Completed Claude's P1 Capture core action abort task on the reusable app worktre
 - Base: `origin/main@59f8683`
 - App commit for Claude review: `23b51a1 fix(capture): abort stale clipper classification`
 - Push: not pushed
+- Preview: `agents/codex/outbox/preview/20260614-043312-capture-abort-llm-dedupe.html`
 
 ## Scope
 
