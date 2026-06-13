@@ -43,6 +43,15 @@ last-updated: 2026-06-06 12:30:00 KST
 | D-14 | 마스코트 로스터 5 vs 6 (Iris) | decide | 5(characters.ts) vs 6(personas/village/monologues 실사용) | Claude 결정(§14) | ✅ **6 확정**: 실코드가 Iris(lumi)를 실사용·노출 중인데 source-of-truth characters.ts만 5인 누락 = 버그. **characters.ts에 Iris(lumi/아이리스, Muse Core) 추가**(G4) + CompanionName 포함. 비용 아님 → 합의로 진행 |
 | D-15 | 한국어 용어·호칭 정본 사전 (코히런스 G7/G8) | decide | 통합 canon vs 현행 혼재 | Claude 결정(§14, 코히런스 감사 근거); G7 6종은 Codex min-churn 제안 후 비준 | ✅ **브랜드 레이어 토큰 확정**(D-13 도출): ①**AI 주체(KO prose)**="**세컨비**"(인앱 AI 자기지칭, secondb.json 정본). Latin "SecondB"=로고/스토어/영문 전용. 일반명사 "**비서**"를 주체명으로 쓰지 않음(consent.json "개인 비서"→세컨비; 비유설명은 허용). ②**앱/제품/저장소(KO)**="**두번째 뇌 / 2nd-Brain**"(저장처·앱·OS; wiki "SecondB에 저장한"→"두번째 뇌에 저장한"). ③**빌리지 워커 화면 거주자**(capture=Lumen 등)는 의도된 디자인 — 주체혼선 아님(보존). ④**G7 6종 용어군**(캡처/담기·pieces/records·위키/지식그래프/서재·journal/일기·리서치/자료실)=Codex 현행빈도 분석→최소-churn canon 제안→§14 비준. 적용=Codex 카피레인(outbox dispatch). 비용 아님 |
 
+### D-16 — 다양성 5종 스킬의 app-dev-orchestrator 통합 방식 (§35 ai-debate 첫 기록, 2026-06-13)
+- **안건**: 신규 다양성 5종(`i18n-localizer`·`accessibility-audit`·`persona-simulation`·`inclusive-ux`·`offline-first`)을 app-dev-orchestrator **필수단계**로 박을까, **opt-in 라우팅**으로 둘까, **하이브리드 조건게이트**로 갈까?
+- **입장**: A) MANDATORY(구조적 보장, 5종 무조건 실행) · B) OPT-IN(키워드 트리거, 비용0·유연) · C) HYBRID(Stage-0 프로필 조건선택).
+- **심판 근거**(제안자≠심판 §34.4): A의 핵심("보장은 구조여야지 기억 의존 X")은 옳아 HYBRID도 게이트 단계 자체는 필수로 둠. 단 A의 비용반박("no-op는 grep만")이 **코드로 반증** — `offline-first`·`accessibility-audit`의 precheck는 `npx build`+Lighthouse·라이브서버+headless Chrome라 싸게 N/A 판정 불가 → 내부툴/CLI 빌드마다 비싼 인프라 spin + cry-wolf. B는 자기인정 패배(트리거=부재 오퍼레이터가 안 침=감사가 condemn한 비보장; 자체 fallback "Stage-0 강제결정"이 곧 HYBRID 커널).
+- **판정**: **HYBRID** — Stage 13.7 "diversity-gate"(실행은 무조건, 어떤 스킬 fire는 Stage-0 kickoff 프로필 결정론적 매핑; 모호하면 기본 **INCLUDE**, public/store-bound면 consumer-UI 서브셋[a11y+persona-sim] 강제; **P0만 hard-block**, P2/P3는 ship-with-debt; `docs/diversity-gate-<date>.md`에 INCLUDED/EXCLUDED+근거 기록). 7-3 가중 우세.
+- **소수의견(보존=에스컬레이션 경로)**: 조건게이트도 Stage-0 답이 부실("개인 사이드"·"TBD")하면 감사 갭을 한 층 위로 재현 가능 + 녹색 "evaluated" 거짓안심 위험. **2-3 사이클 내 실제 miss 1건 관측 시 → consumer-UI 서브셋(a11y+persona-sim) 무조건 실행 승격**(둘은 싼 package.json-grep precheck), 비싼 페어는 게이트 유지.
+- **후속**: ① Stage 13.7 신설(skill-gen-agent edit) + Related-skills 5종 추가 ② `persona-simulation:33`·`i18n-localizer:32` **허위 연동광고**(없는 stage 참조) 수정 ③ offline-first·a11y 비-consumer/고대역폭 기본 EXCLUDE ④ CLAUDE.md §20 게이트 1줄(+AGENTS/GEMINI 동기 §18) ⑤ 첫 검증=2nd-B kickoff dry-run.
+- **메타**: `/ai-debate` 스킬(§35) **첫 dogfood**(3입장 패널 + 별도심판, wf `wzp1guqgt`) — 토론 시스템 작동 실증.
+
 ## 해결됨 (Resolved) — 최근
 - (없음 — 신설)
 
