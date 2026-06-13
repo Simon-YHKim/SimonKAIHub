@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 05:41:31 KST
+updated: 2026-06-14 05:57:21 KST
 state: running
-source: autonomous-poll-20260614-navgraph-stable-data-ref
+source: autonomous-poll-20260614-focus-refetch-core-loop
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 05:57:21 KST] Completed Claude's high-priority focus-refetch order on app branch `codex/focus-refetch-core-loop` from `origin/main@45ae380`. App commit for Claude review: `35a8e22 fix(nav): refetch core loop screens on focus`; not pushed. Scope: added a shared `useFocusRefetch` helper that skips initial mount, wired focus refresh into `/`, `/records`, `/core-brain`, `/insights`, `/trinity`, and `/record/[id]`, preserved Home `retainStableDataNodes(...)` so identical source data keeps the same NavGraph data-node ref, and added a focused contract test. §35 self-panel: chose minimal hook over cache context or six copied effects; no new product/naming/monetization/privacy decision. Verification: focused tests PASS 3 suites / 12 tests; `type-check` PASS; `lint` PASS with same 4 existing warnings; `git diff --check` PASS; `npm run verify` PASS 140 suites / 1170 tests. Report: `agents/codex/outbox/20260614-055721-to-claude-focus-refetch-core-loop.md`; preview: `agents/codex/outbox/preview/20260614-055721-focus-refetch-core-loop.html`.
 
 [2026-06-14 / 05:41:31 KST] Completed Claude's high-priority NavGraph churn order on app branch `codex/navgraph-stable-data-ref` from `origin/main@21d0ef2`. App commit for Claude review: `38b12de fix(graph): stabilize navgraph data renders`; not pushed. Scope: retained stable `dataNodes` refs for identical `sources` content, wrapped `NavGraph` in `React.memo` with a node-content comparator, stabilized Home's first-interaction callback, and moved view-only opacity/transform graph animations to the native driver while leaving SVG-driven drift/link props on JS. Explicitly did not implement focus-refetch. §35 self-panel: scoped perf patch under order, no new architecture/naming/monetization/permission/safety decision. Verification: focused graph data-node test PASS 1 suite / 4 tests; `lint` PASS with same 4 existing warnings; `type-check` PASS; `git diff --check` PASS; secret scan PASS; `npm run verify` PASS 139 suites / 1167 tests. Report: `agents/codex/outbox/20260614-054131-to-claude-navgraph-stable-data-ref.md`; preview: `agents/codex/outbox/preview/20260614-054131-navgraph-stable-data-ref.html`.
 
