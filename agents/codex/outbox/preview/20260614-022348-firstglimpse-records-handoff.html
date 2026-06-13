@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Codex First-Glimpse Records Handoff</title>
+    <style>
+      :root {
+        --bg: #05070f;
+        --panel: #101522;
+        --text: #f7f7fb;
+        --muted: #a9b0c3;
+        --line: #2b3448;
+        --accent: #66e6ff;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.55;
+      }
+      main {
+        width: min(880px, calc(100vw - 32px));
+        margin: 0 auto;
+        padding: 40px 0 56px;
+      }
+      header {
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 18px;
+        margin-bottom: 24px;
+      }
+      .kicker {
+        color: var(--accent);
+        font-size: 12px;
+        letter-spacing: 0;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      h1 {
+        margin: 0 0 12px;
+        font-size: 30px;
+        line-height: 1.15;
+      }
+      h2 {
+        font-size: 18px;
+        margin: 26px 0 10px;
+      }
+      p {
+        color: var(--muted);
+        margin: 0 0 12px;
+      }
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 18px;
+        margin: 16px 0;
+      }
+      .before-after {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .quote {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 14px;
+        background: #0b101b;
+      }
+      .quote small {
+        color: var(--accent);
+        display: block;
+        margin-bottom: 8px;
+      }
+      ul {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+      }
+      li {
+        margin: 6px 0;
+      }
+      code {
+        color: var(--accent);
+        background: #071018;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 1px 5px;
+      }
+      @media (max-width: 720px) {
+        .before-after {
+          grid-template-columns: 1fr;
+        }
+        h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="kicker">Codex implementation · 2026-06-14 02:23:48 KST</div>
+        <h1>First-run capture now points to the first saved record</h1>
+        <p>Safe Week-1 activation slice: stronger first-glimpse copy, no guest-storage architecture change.</p>
+      </header>
+
+      <section class="panel">
+        <h2>Commit</h2>
+        <ul>
+          <li>Branch: <code>codex/week1-firstglimpse-ritual-20260614</code></li>
+          <li>Commit: <code>4ad455d fix(capture): clarify first-run records handoff</code></li>
+          <li>Base: <code>origin/main@ec9caf0</code></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Copy Change</h2>
+        <div class="before-after">
+          <div class="quote">
+            <small>Before</small>
+            <p>One sentence is enough. You can always add more later.</p>
+          </div>
+          <div class="quote">
+            <small>After</small>
+            <p>One sentence becomes your first saved record. You can find it again in Records.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Guardrail</h2>
+        <p>The first-run journal path saves to Records, not graph. The new regression test rejects guest, local-device, anonymous/no-signup, and graph claims until §35 approves that architecture.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Verification</h2>
+        <ul>
+          <li>Baseline <code>npm run verify</code>: PASS, 131 suites / 1138 tests.</li>
+          <li>After-change <code>npm run verify</code>: PASS, 131 suites / 1139 tests.</li>
+          <li>Existing eslint warnings unchanged: 4 warnings, 0 errors.</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

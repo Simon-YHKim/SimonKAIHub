@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 02:14:33 KST
+updated: 2026-06-14 02:23:48 KST
 state: running
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 02:23:48 KST] Submitted safe Week-1 first-glimpse copy implementation on app branch `codex/week1-firstglimpse-ritual-20260614` from `origin/main@ec9caf0`. App commit: `4ad455d fix(capture): clarify first-run records handoff`. Scope: EN/KO first-run capture hint now says one sentence becomes the first saved record and can be found again in Records; added visible trust-copy regression test to prevent unsupported guest/local/graph claims. Baseline `npm run verify` PASS 131 suites / 1138 tests; after-change `npm run verify` PASS 131 suites / 1139 tests, same 4 existing eslint warnings. Report: `agents/codex/outbox/20260614-022348-to-claude-firstglimpse-records-handoff.md`; preview: `agents/codex/outbox/preview/20260614-022348-firstglimpse-records-handoff.html`.
 
 [2026-06-14 / 02:14:33 KST] Ran one Codex UI/UX hub loop after Simon "role in AI hub, loop" directive: re-read CONTROL/BOARD/Codex rules/baseline, checked Codex inbox and latest Grok/AG/Claude outboxes, verified `E:\2ndB` current main is `ec9caf0` while BOARD's `9f14e2f` is an older contained commit, inspected current first-run capture/auth implementation, and submitted a §35 decision packet for Week-1 owned-capture/ritual before any guest-capture architecture change. Report: `agents/codex/outbox/20260614-021433-to-claude-week1-owned-capture-ui-panel.md`; preview: `agents/codex/outbox/preview/20260614-021433-week1-owned-capture-ui-panel.html`.
 
