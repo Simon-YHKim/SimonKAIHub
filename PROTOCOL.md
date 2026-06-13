@@ -166,15 +166,19 @@ created: 2026-06-05 15:22:34 KST
 > 이 절은 4-AI가 같은 머신에서 **동시·병렬·자동**으로 돌 때의 운영 규칙이다.
 
 ### 10.1 권한·실행 모드 (자동승인)
-각 AI는 헤드리스/대화형 모두 **자동승인 모드**로 가동한다. CLI별 등가 플래그:
+각 AI는 헤드리스/대화형 모두 **최고 모델 · 최고 effort · 최고 권한(자동승인)**으로 가동한다 (2026-06-13 Simon: "각 AI가 지원하는 최고 모델·최고 effort·최고 권한으로"). CLI별:
 
-| AI | 자동승인 플래그 |
-|---|---|
-| Claude | `bypassPermissions` (대화형, 사용자와 직접 소통) |
-| Codex | `-s danger-full-access` |
-| Gemini(Antigravity) | `-y` / `--approval-mode yolo` |
-| Grok | `--always-approve` |
-| Antigravity(agy) | `--dangerously-skip-permissions` (1회 OAuth 인증 후) |
+| AI | 최고 모델 (최신·최상위) | 최고 effort | 최고 권한(자동승인) 플래그 |
+|---|---|---|---|
+| Claude | Fable 5 / Opus 4.8 (1M) — `/model` 최상위 | `/effort` ultracode(xhigh) · ultrathink | `bypassPermissions` (대화형) |
+| Codex | 최신 최상위(예: GPT-5-Codex) — `/model` 또는 `-m` | `-c model_reasoning_effort="high"` | `-s danger-full-access` (또는 `--full-auto`) |
+| Gemini(Antigravity) | 최신 최상위 Gemini(예: Gemini 3 Pro) — `-m` | 최대 thinking budget | `-y` / `--approval-mode yolo` |
+| Antigravity(agy) | 최상위 모델(IDE 설정) | 최대 | `--dangerously-skip-permissions` (1회 OAuth 후) |
+| Grok | 최신 최상위(예: Grok 4) — `--model` | 최대 reasoning | `--always-approve` |
+
+- **모델은 시점마다 변동** → 하드코딩하지 말고 **항상 각 CLI의 최신·최상위 모델을 선택**(전역 CLAUDE.md "최신·최강 기본"). 위 예시는 2026-06 기준.
+- **effort/추론은 최대**로 — 깊은 추론·fan-out·다관점(§27.8)을 아끼지 않는다(비용 안전레일 §11-5·§28.7 준수 — metered 경로만 예산 게이트).
+- **권한은 최대(yolo/danger-full-access/dangerously-skip)** 로 무확인 자율 — **단 §11-5 안전레일(① 파괴적 ② 실비용 ③ secrets/credentials)은 권한 레벨과 무관하게 항상 Simon 확인**(우회 불가). 즉 "dev 작업은 최대 권한 무확인, 그 3가지만 확인".
 
 - **예외 — 자동승인이어도 항상 사용자 확인**: ① 파괴적 작업(force-push·`reset --hard`·DROP·대량 삭제) ② 비용 발생(결제·API 폭증) ③ secrets/credentials 수정·전송.
 - 대화형으로 띄울 때 필요한 OS 권한(Windows cmd/PowerShell · 화면제어(computer use) · Chrome · Android Studio/에뮬 등)은 **세션 초반 1회 일괄** 사용자에게 요청한다.
@@ -592,3 +596,43 @@ created: 2026-06-05 15:22:34 KST
 - **Claude 동작**: 2분 자율 루프가 **매 틱 `git fetch origin` 후 ORDERS.md 읽음** → OPEN에 새 오더 있으면 수행 → 결과/PR/커밋 + `[YYYY-MM-DD / HH:MM:SS KST]` 를 `## DONE`에 append + 해당 블록을 OPEN→DONE 이동 → commit+push. 충돌 회피: ORDERS.md 편집 전 `git fetch`+ff.
 - **게이트 동일**: 파괴·실비용·secrets·안전임상·법무 오더는 수행 전 확인(ORDERS DONE에 "확인 필요" 표기). 그 외 dev 오더는 무확인 수행.
 - **라운드트립**: Simon(모바일 AI)이 DONE 피드백 읽고 다음 오더. Claude는 모호하면 DONE에 질문 남김.
+
+---
+
+## 34. 4-AI 대칭화 — wiki 기여 · 측정루프 전파 · 머지우회 · 교차채점 (CRITICAL, 2026-06-13 Simon)
+> 진단(`AI-Hub-보완점-진단.html`): wiki·측정루프가 Claude에 편중돼 비-Claude AI가 잘 못 쓴다. **다른 AI들도 wiki에 기여하고, golden set으로 측정하며, Claude 머지 병목에 질식하지 않게** 대칭화한다. (안전레일 §11-5·머지게이트 §10.5·single-writer §1은 불변 — 쓰기는 여전히 lane 소유자/Claude.)
+
+**34.1 wiki 기여 경로 (Claude 독점 완화 — G1)**
+- 모든 AI는 교훈·재사용가치 발견 시 `type: wiki_lesson`(to: claude) 메시지를 **자기 outbox**에 쓴다 — 한 줄 요약·핵심 3·출처/작성일·연결 프로젝트(§18.0 intake 2-of-3 충족분만). Claude(라이브러리언)가 배치로 위키에 ingest(쓰기·raw 불변·index/log 갱신은 §18대로 Claude 단독).
+- **비-Claude AI 루프 0단계에 "관련 wiki 페이지 읽기" 추가**(큰 작업 전, 중복·재발 방지 §18). 읽기 전용 — Codex=디자인/UX 교훈, AG=네이티브 함정, Grok=소비자/시장 교훈 페이지.
+
+**34.2 측정정책·golden set 전파 (§12.1a를 4-AI 공통으로 — G2)**
+- §12.1a("측정 없는 진화 금지")는 Claude만이 아니라 **전 AI 공통 의무**. 각 AI는 자기 lane golden set으로 baseline→one-change→재측정→**측정 상승/무회귀일 때만 채택**, 실패는 `loop-baseline.md` 실패원장에 기록(제안자≠채점자 §34.4).
+- **lane별 golden set (고정 시험지)**:
+
+| AI | golden set |
+|---|---|
+| Claude | `npm run verify` + constraints + 필요 시 live/CDP scrollWidth |
+| Codex | worktree에서 `npm run verify`(또는 lint+type-check) + lexicon 스캔 + 시각 회귀(스크린샷 diff) |
+| Antigravity | `npx expo run:android` 빌드 green + 에뮬(`Pixel_9_Pro_XL`) 스모크(부팅·핵심화면) + perf(프레임/메모리) 수치 |
+| Grok | 고정 리서치 질문셋(같은 키워드·소스) + 신호 재현성(2회 동일 결론) |
+- 각 AI activate·RULES에 자기 golden set을 명시한다. 점수표 정본 = 허브 `loop-baseline.md`.
+
+**34.3 머지 병목 자동 우회 (throttle 시 방향전환 — G3)**
+- Codex·AG는 미머지 8건(§12.2) 도달 시 **발견을 멈추고** → ① 교차채점 리뷰(§34.4/§20) ② 페르소나 시뮬(§27.9) ③ wiki 기여(§34.1) ④ golden-set 재측정 — 으로 전환. 유휴·중복발견 금지.
+- **Claude 머지 SLA**: 제출분 미머지가 길어지면(기본 일 1회 sweep) 일괄 cherry-pick(§11.1). 물리적으로 막히면 BOARD에 사유 표기.
+
+**34.4 separate-judge 교차채점 상시화 (§23 어드바이저리→루틴 — G2)**
+- 측정정책 "제안자≠채점자"를 구조로 못박는다: Claude UI 산출=**Codex** 1차 채점, 네이티브=**AG**, 리서치/소비자=**Grok**, Codex/AG 산출=**Claude + 상대 lane**. 자기리뷰 금지(§24.1) 실효화, 루브릭 §20. (Claude 머지 최종 게이트 §10.5는 불변 — 교차채점은 보강.)
+
+**34.5 per-AI 규칙 ↔ PROTOCOL 동기화 (드리프트 차단 — G4)**
+- 각 AI의 `RULES.md`/loop 규칙 **상단에 sync 헤더**: "정본=PROTOCOL.md, 충돌 시 PROTOCOL 우선 · last-sync: YYYY-MM-DD". PROTOCOL 갱신 시 Claude가 각 activate/RULES를 동기화(§31.1 보강). 컨텍스트 압축·세션 교체 후 첫 사이클에 자기 RULES + PROTOCOL §12.1a·§34 재독.
+
+**34.6 Grok 루프 정합 (모순 해소 — G5)**
+- 단일 정의: Grok = **요청기반 advisory + 5분 모니터링 루프**(가치 신호 발견 시 능동 fyi). 자율 *발의*(코딩·결정)는 보류, *모니터링·리서치*는 능동. §34.2 golden set 충족 유효 인사이트 **N건(기본 5) 채택 시** 자율 트렌드 루프로 승격(§14 합의). `agents/grok/autonomous-loop-rules.md`와 본 절·§12.3을 일치시킨다.
+
+**34.7 Antigravity 자립 + 헤드리스 대안 (G4·G7)**
+- AG도 `agents/antigravity/RULES.md` + loop 규칙을 보유(Codex·Grok과 대칭). 헤드리스 경로: **Gemini CLI 무료 폐기(2026-06-18, §28.4) 대비** — ① 인터랙티브 Gemini ② `agy`(OAuth 후 `--dangerously-skip-permissions`) ③ 불가 시 AG lane 일부를 Claude·Codex로 재라우팅. 각 AI는 STATUS에 현재 헤드리스 실행 수단을 명시한다.
+
+**34.8 자립성 원칙 (Claude 단일의존 완화 — G6)**
+- Claude 부재 시에도 비-Claude AI는 **발견·드래프트·리뷰·wiki_lesson·페르소나 의견을 자기 outbox 큐에 계속 적재**(외장기억 §27.1)하고, Claude 재가동 시 일괄 통합·머지된다. 통합·온라인git·합의 타이브레이크만 Claude 의존(불변), 나머지 생산은 멈추지 않는다.

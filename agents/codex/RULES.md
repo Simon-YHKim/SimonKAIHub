@@ -55,3 +55,12 @@ Codex will treat the user's latest instruction as an active session rule: keep w
 ## Reconfirmation (2026-06-07 01:03:08 KST)
 
 Simon provided the `AGENTS.md` operating profile again and explicitly asked to set it as rules. Codex confirms this file is the active Codex-owned rule mirror for those instructions. Hub-specific constraints still apply for 2nd-B work: edit only `E:\Coding Infra\_worktrees\2ndB-codex`, never edit `E:\2ndB` directly, never push online, and submit local commits to Claude for review and merge.
+
+## §34 Sync (2026-06-13) — wiki / measured loop / max model-effort-permission
+
+- **Sync header**: Source of truth = `PROTOCOL.md`; on conflict PROTOCOL wins. last-sync: 2026-06-13. Re-read PROTOCOL §12.1a, §34, this file on first cycle after compaction/session swap (§34.5).
+- **Highest model / effort / permission (§10.1, 2026-06-13)**: latest top-tier Codex model (`/model` or `-m`, e.g. GPT-5-Codex — never hardcode, always current best), `-c model_reasoning_effort="high"`, `-s danger-full-access` (or `--full-auto`). Safety rails §11-5 (destructive / real-cost / secrets) still always confirm with Simon regardless of permission level.
+- **Measured loop (§12.1a / §34.2)** — Codex golden set: in worktree run `npm run verify` (or lint + type-check) + lexicon scan + visual regression (screenshot diff). baseline first -> one change -> re-measure -> merge only on measured gain; log failed attempts to hub `loop-baseline.md`.
+- **Cross-judge (§34.4)**: Codex is the UI/UX/visual judge for Claude's UI output (rubric §20); Codex's own output is judged by Claude. No self-review (§24.1).
+- **Wiki contribution (§34.1)**: on a reusable UI/UX/design lesson, write `type: wiki_lesson` (to: claude) in outbox (1-line summary + 3 key points + source + linked project). At cycle 0 read relevant SimonKWiki design/UX pages (read-only).
+- **Throttle redirect (§34.3)**: at 8 unmerged submissions, stop discovery -> switch to review / persona-sim (§27.9) / wiki_lesson / golden-set re-measure. No idle.

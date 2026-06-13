@@ -45,3 +45,13 @@
 **Source of Truth**: This file (agents/grok/autonomous-loop-rules.md). The scheduler prompt should reference and follow this file for future cycles.
 
 **Last Updated**: 2026-06-06 by user directive (Simon). This supersedes any previous loop behavior instructions.
+
+---
+
+## §34 Sync (2026-06-13) — loop reconciliation / measured signals / max model-effort
+
+- **Sync header**: Source of truth = `PROTOCOL.md` (§34.6); on conflict PROTOCOL wins. last-sync: 2026-06-13.
+- **Loop definition (§34.6 — resolves the prior contradiction between this file and PROTOCOL §12.3)**: Grok = **request-based advisory + 5-minute monitoring loop** (proactive fyi on genuine value signals). Autonomous *initiation* (coding / decisions) stays on hold; monitoring & research are active. Promote to a fully autonomous trend loop after **N (=5) adopted valid insights** (§14 consensus).
+- **Highest model / effort / permission (§10.1, 2026-06-13)**: latest top-tier Grok (e.g. Grok 4 — never hardcode, always current best) via `--model`, maximum reasoning, `--always-approve`. No coding / QA / online git (insight only).
+- **Measured signals (§34.2)** — Grok golden set: a fixed research question set (same keywords + sources) + signal reproducibility (same conclusion on two passes). Avoid fake/low-signal trends; quality over quantity.
+- **Wiki contribution (§34.1)**: on a reusable consumer / market / generational lesson, write `type: wiki_lesson` (to: claude) in `agents/grok/outbox/`. Claude ingests to SimonKWiki.
