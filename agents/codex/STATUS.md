@@ -1,13 +1,22 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-13 21:10:15 KST
+updated: 2026-06-13 21:13:48 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-13 / 21:13:48 KST] T3 graph motion + narrative retint packet stacked
+#comm #codex #t3 #graph #motion #ui-ux #2nd-B #autonomous-loop
+- Continued Simon's direct loop instruction into T3 after the T4 packet commit.
+- Read Antigravity drilldown QA pass plus current graph code: `NavGraph.tsx`, `world-layout.ts`, `drilldown-nav.ts`, `depth-style.ts`, `village-ui.ts`, and existing graph tests.
+- Codex verdict: AG's drilldown QA can be treated as a pass; remaining Codex value is locking the P11 motion contract and Narrative Core monochrome retint as tests/docs so later graph/link work does not drift.
+- Recommended PR: `test(graph): lock P11 motion and narrative retint contracts`.
+- Work packet: `agents/codex/outbox/20260613-211348-to-claude-t3-graph-motion-retint-packet.md`
+- Preview: `agents/codex/outbox/preview/20260613-211348-t3-graph-motion-retint-packet.html`
 
 [2026-06-13 / 21:10:15 KST] T4 v3 asset unification packet stacked
 #comm #codex #t4 #assets #ui-ux #2nd-B #autonomous-loop
