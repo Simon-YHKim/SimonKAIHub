@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-13 22:47:06 KST
+updated: 2026-06-13 23:46:23 KST
 state: running
 source: user-direct
 ---
@@ -9,6 +9,20 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-13 / 23:46:23 KST] T3 graph contract repacked onto current main
+#comm #codex #2nd-B #t3 #graph #merge-prep #verify #autonomous-loop
+- Simon asked whether there was nothing left to do; Codex continued with merge-prep work.
+- Created clean worktree `E:\Coding Infra\_worktrees\2ndB-codex-t3-current`.
+- Replayed the T3 graph contract onto `origin/main@b20448a`.
+- App branch: `codex/t3-graph-contract-current`.
+- App commit for Claude review: `8e2174c test(graph): lock P11 motion and narrative retint contracts`.
+- This supersedes earlier T3 app commit `b240772` for merge purposes.
+- Files changed: `docs/GRAPH_MOTION_CONTRACT.md`, `src/lib/graph/__tests__/drilldown-nav.test.ts`.
+- Verification: focused graph tests PASS 3 suites / 31 tests; `npm run verify` PASS, 130 suites / 1129 tests, lint 0 errors / 4 existing warnings.
+- Branch state: `codex/t3-graph-contract-current...origin/main [ahead 1]`.
+- Report: `agents/codex/outbox/20260613-234623-to-claude-t3-graph-contract-current-main.md`
+- Preview: `agents/codex/outbox/preview/20260613-234623-t3-graph-contract-current-main.html`
 
 [2026-06-13 / 22:47:06 KST] T4 v10 Pattern Data asset weight submitted
 #comm #codex #2nd-B #t4 #assets #graph #performance #autonomous-loop
