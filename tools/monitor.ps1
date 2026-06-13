@@ -56,6 +56,25 @@ function Render {
     Write-Host ("RUN STATE: {0}" -f $st.ToUpper()) -ForegroundColor $col
     if($rs){ Write-Host ("  reason: {0}" -f $rs.Substring(0,[Math]::Min(68,$rs.Length))) -ForegroundColor DarkGray }
   }
+  # Autonomous daemon heartbeat (tools/hub-daemon.log) -- is the poll loop alive + what is it doing now?
+  $dlog = Join-Path $root "tools\hub-daemon.log"
+  if(Test-Path $dlog){
+    $dlast = Get-Content $dlog -Encoding UTF8 -Tail 1
+    $dts = ""; if($dlast -match '^\[([^\]]+) KST\]'){ $dts = $matches[1] }
+    $dage = if($dts){ Get-Age $dts } else { "?" }
+    $dmsg = ($dlast -replace '^\[[^\]]*\]\s*','').Trim()
+    $dcol = if($dage -match 's ago|m ago'){'Green'}else{'DarkGray'}
+    Write-Host ("DAEMON  {0,-10}{1}" -f $dage,$dmsg) -ForegroundColor $dcol
+  } else {
+    Write-Host "DAEMON  (not running -- launch tools/hub-daemon.ps1)" -ForegroundColor DarkGray
+  }
+  # 2nd-B live app HEAD (the GitHub Pages live target)
+  $appdir = "E:\2ndB"
+  if(Test-Path $appdir){
+    $ahead = git -C $appdir rev-parse --short HEAD 2>$null
+    $asub  = git -C $appdir log -1 --format='%s' 2>$null
+    if($ahead){ Write-Host ("2nd-B   {0,-10}{1}" -f $ahead,$(if($asub){$asub.Substring(0,[Math]::Min(56,$asub.Length))}else{""})) -ForegroundColor Cyan }
+  }
   Write-Host ("-" * 78) -ForegroundColor DarkGray
 
   Write-Host ("{0,-12}{1,-11}{2,-11}{3}" -f "AI","state","updated","last activity") -ForegroundColor White
@@ -116,8 +135,9 @@ function Render {
       Get-ChildItem $obx -Filter *.md -File -ErrorAction SilentlyContinue | ForEach-Object {
         $h = Get-Content $_.FullName -Encoding UTF8 -TotalCount 15
         $fm = @{}
-        foreach($l in $h){ if($l -match '^(from|to|type|ref|status|id):\s*"?(.*?)"?\s*$'){ $fm[$matches[1]] = $matches[2] } }
-        $msgs += [pscustomobject]@{ To=$fm.to; Type=$fm.type; Status=$fm.status; Ref=$fm.ref; Id=$fm.id }
+        foreach($l in $h){ if($l -match '^(from|to|type|ref|status|id|priority):\s*"?(.*?)"?\s*$'){ $fm[$matches[1]] = $matches[2] } }
+        $subj = $_.BaseName -replace '^\d{8}-\d{6}-(to-[a-z]+-)?',''
+        $msgs += [pscustomobject]@{ From=$fm.from; To=$fm.to; Type=$fm.type; Status=$fm.status; Ref=$fm.ref; Id=$fm.id; Pri=$fm.priority; Subj=$subj }
       }
     }
   }
@@ -130,10 +150,22 @@ function Render {
   $blk  = ($msgs | Where-Object { $_.Type -eq 'blocker' }).Count
   $cons = ($msgs | Where-Object { $_.Type -eq 'consensus_request' -and ($answered -notcontains $_.Id) }).Count
   Write-Host ("inbox  {0}    blockers:{1}    consensus open:{2}" -f $inboxStr,$blk,$cons) -ForegroundColor $(if($blk -gt 0){'Magenta'}else{'Gray'})
+  # open requests detail (top 6) -- who owes what, at what priority
+  $open = $msgs | Where-Object { $_.Type -eq 'request' -and $_.Status -eq 'open' -and ($answered -notcontains $_.Id) } | Select-Object -First 6
+  foreach($o in $open){
+    $os = if($o.Subj){ $o.Subj } else { "" }
+    Write-Host ("   -> {0,-11}[{1,-4}] {2}" -f $o.To,$o.Pri,$os.Substring(0,[Math]::Min(46,$os.Length))) -ForegroundColor DarkCyan
+  }
+  # blocker detail
+  $blocks = $msgs | Where-Object { $_.Type -eq 'blocker' } | Select-Object -First 4
+  foreach($b in $blocks){
+    $bs = if($b.Subj){ $b.Subj } else { "" }
+    Write-Host ("   !! blocker <- {0}: {1}" -f $b.From,$bs.Substring(0,[Math]::Min(44,$bs.Length))) -ForegroundColor Magenta
+  }
   Write-Host ("-" * 78) -ForegroundColor DarkGray
 
   Write-Host "recent hub commits:" -ForegroundColor DarkCyan
-  $log = git -C $root log -6 --format='%cd|%an|%s' --date=format:'%m-%d %H:%M' 2>$null
+  $log = git -C $root log -8 --format='%cd|%an|%s' --date=format:'%m-%d %H:%M' 2>$null
   if($log){
     $log | ForEach-Object {
       $p = $_.Split('|',3)
