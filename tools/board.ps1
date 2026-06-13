@@ -60,9 +60,18 @@ foreach ($a in $agents) {
       $head = Get-Utf8Content $_.FullName -TotalCount 15
       $fm = @{}
       foreach ($line in $head) {
-        if ($line -match '^(id|from|to|type|ref|status|priority|project):\s*"?(.*?)"?\s*$') { $fm[$matches[1]] = $matches[2] }
+        if ($line -match '^(id|from|to|type|ref|status|priority|project|created|date):\s*"?(.*?)"?\s*$') { $fm[$matches[1]] = $matches[2] }
       }
-      $msgs += [pscustomobject]@{ File=$_.Name; From=$fm.from; To=$fm.to; Type=$fm.type; Status=$fm.status; Ref=$fm.ref; Id=$fm.id; Priority=$fm.priority }
+      # created date: prefer 'created'/'date' frontmatter, else parse YYYYMMDD-HHMMSS prefix from filename
+      $createdRaw = if ($fm.created) { $fm.created } elseif ($fm.date) { $fm.date } else { "" }
+      $createdDt = $null
+      if ($createdRaw -match '(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?') {
+        $sec = if ($matches[6]) { $matches[6] } else { "00" }
+        try { $createdDt = [datetime]("{0}-{1}-{2} {3}:{4}:{5}" -f $matches[1],$matches[2],$matches[3],$matches[4],$matches[5],$sec) } catch { $createdDt = $null }
+      } elseif ($_.Name -match '^(\d{4})(\d{2})(\d{2})-(\d{2})(\d{2})(\d{2})') {
+        try { $createdDt = [datetime]("{0}-{1}-{2} {3}:{4}:{5}" -f $matches[1],$matches[2],$matches[3],$matches[4],$matches[5],$matches[6]) } catch { $createdDt = $null }
+      }
+      $msgs += [pscustomobject]@{ File=$_.Name; From=$fm.from; To=$fm.to; Type=$fm.type; Status=$fm.status; Ref=$fm.ref; Id=$fm.id; Priority=$fm.priority; Created=$createdDt }
     }
   }
 }
@@ -70,6 +79,18 @@ foreach ($a in $agents) {
 Write-Host ("Total messages: {0}" -f $msgs.Count) -ForegroundColor Yellow
 
 $answered = $msgs | Where-Object { $_.Type -eq "response" -and $_.Ref } | Select-Object -ExpandProperty Ref
+
+# statuses that mean a message is closed / no longer needs action
+$closedStatus = @("done","resolved","closed","ingested","merged","merged_observed","superseded","completed","done_with_concerns")
+
+function Get-AgeString {
+  param($Created)
+  if (-not $Created) { return "?" }
+  $span = (Get-Date) - $Created
+  if ($span.TotalDays -ge 1) { return ("{0}d" -f [int]$span.TotalDays) }
+  if ($span.TotalHours -ge 1) { return ("{0}h" -f [int]$span.TotalHours) }
+  return ("{0}m" -f [int]$span.TotalMinutes)
+}
 
 # --- auth / external blockers ---
 $blockers = $msgs | Where-Object { $_.Type -eq "blocker" }
@@ -89,11 +110,36 @@ if ($consReq) {
   }
 }
 
+# --- wiki lessons pending ingest (Claude is the librarian; PROTOCOL.md s607) ---
+if ($Me -eq "claude") {
+  $actionableTypes = @("wiki_lesson","action_request","work_request")
+  $pending = $msgs | Where-Object {
+    ($_.To -eq "claude" -or $_.To -eq "all") -and
+    ($actionableTypes -contains $_.Type) -and
+    ($closedStatus -notcontains $_.Status) -and
+    ($answered -notcontains $_.Id)
+  } | Sort-Object Created
+  if ($pending) {
+    Write-Host "`n[WIKI LESSONS PENDING INGEST] (to:claude, not yet ingested/closed)" -ForegroundColor Yellow
+    $pending |
+      Select-Object @{N='Age';E={Get-AgeString $_.Created}},
+                    @{N='Created';E={ if ($_.Created) { $_.Created.ToString('MM-dd HH:mm') } else { '?' } }},
+                    From, Type, Status, File |
+      Format-Table -AutoSize
+  }
+}
+
 # --- inbox for -Me ---
 if ($Me) {
   Write-Host ("`n=== inbox for {0} (open, unanswered requests) ===" -f $Me) -ForegroundColor Green
-  $inbox = $msgs | Where-Object { ($_.To -eq $Me -or $_.To -eq "all") -and $_.Type -eq "request" -and $_.Status -eq "open" -and ($answered -notcontains $_.Id) }
-  if ($inbox) { $inbox | Format-Table From,Priority,Type,File -AutoSize } else { Write-Host "(empty)" }
+  $inbox = $msgs | Where-Object { ($_.To -eq $Me -or $_.To -eq "all") -and $_.Type -eq "request" -and $_.Status -eq "open" -and ($answered -notcontains $_.Id) } | Sort-Object Created
+  if ($inbox) {
+    $inbox |
+      Select-Object @{N='Age';E={Get-AgeString $_.Created}},
+                    @{N='Created';E={ if ($_.Created) { $_.Created.ToString('MM-dd HH:mm') } else { '?' } }},
+                    From, Priority, Type, File |
+      Format-Table -AutoSize
+  } else { Write-Host "(empty)" }
 }
 
 # --- recent HTML reports (browser previews) ---

@@ -282,7 +282,7 @@ created: 2026-06-05 15:22:34 KST
 ### 12.3 lane별 루프 요약 (상세는 ROUTING §4)
 - **Codex**: 화면/컴포넌트 anti-slop 발견 → gate md+HTML → Claude. 배치 8·P3통합.
 - **Antigravity**: 네이티브 결함 1건 픽스(키보드·edge-to-edge·intent·elevation·perf) → 자기 브랜치 커밋 + QA HTML → Claude 리뷰. 빌드/에뮬 증거 첨부.
-- **Grok**: 결정 입력 리서치 1건(X 신호·소비자) → HTML → Claude/합의 입력. **요청 기반 어드바이저리**(검증 전 자율 발의 보류, §11#1) — 재가동·요청 시 트렌드 모니터링 30분 간격. (CONTROL의 5분 루프는 코딩 3-AI 기준.)
+- **Grok**: 결정 입력 리서치 1건(X 신호·소비자) → HTML → Claude/합의 입력. **요청 기반 어드바이저리**(검증 전 자율 발의 보류, §11#1) — 재가동·요청 시 트렌드 모니터링 **5분 간격**(정본 §12.1·§34.6과 일치). (CONTROL의 5분 루프 = 코딩 3-AI + Grok 모니터링 공통 케이던스.)
 - **Claude**: inbox·DECISIONS 처리 → 구현/머지 1건 → verify → 온라인 git → BOARD·CONTROL 갱신.
 
 ---
@@ -513,6 +513,7 @@ created: 2026-06-05 15:22:34 KST
 
 **28.4 헤드리스 AI 스폰**
 - 헤드리스 스폰 시 **긴 한글 프롬프트는 CLI 인자 금지**(word-split 깨짐) → **UTF-8 파일/stdin**으로 전달. 레시피: `codex exec -s danger-full-access -C <gitrepo>`(self-commit엔 danger-full-access + git 레포 내부 필수), `gemini -p "..." -y`, `grok -p`. 구독 인증이라 비용 0.
+- **⚠️ codex 헤드리스 caveat (non-git dir + stdin EOF)**: **non-git 디렉터리에서 codex를 비대화형으로 스폰**할 때는 ① `--skip-git-repo-check`를 반드시 붙이고(git 레포 밖이면 codex가 거부) ② **프롬프트를 파일에서 파이프로 먹여 stdin이 EOF에 도달**하게 한다 — 프롬프트를 bare CLI 인자로 주면 codex가 stdin을 계속 읽으며 **멈춘다(hang)**. 정본 레시피: `Get-Content $pf -Raw | codex exec -s danger-full-access --skip-git-repo-check -` (마지막 `-` = stdin에서 읽기). git 레포 내부에서 self-commit이 필요하면 `--skip-git-repo-check` 대신 `-C <gitrepo>`(위 줄).
 - **⚠️ Gemini CLI 무료 폐기 2026-06-18(Google)**: 그 날까지 `gemini -p -y` 헤드리스 현행 유지, **이후 Antigravity 헤드리스 경로는 대안 필요**(인터랙티브 gemini / `agy` 인증 후 / 또는 라우팅 변경). Anthropic 변경(§28.7)과는 **별개 벤더 이슈**.
 
 **28.5 병렬 호출 cancel 트랩**
@@ -630,6 +631,7 @@ created: 2026-06-05 15:22:34 KST
 
 **34.6 Grok 루프 정합 (모순 해소 — G5)**
 - 단일 정의: Grok = **요청기반 advisory + 5분 모니터링 루프**(가치 신호 발견 시 능동 fyi). 자율 *발의*(코딩·결정)는 보류, *모니터링·리서치*는 능동. §34.2 golden set 충족 유효 인사이트 **N건(기본 5) 채택 시** 자율 트렌드 루프로 승격(§14 합의). `agents/grok/autonomous-loop-rules.md`와 본 절·§12.3을 일치시킨다.
+- **간격 정합 (모순 봉합, 정본=5분)**: 과거 §12.3은 30분, grok rules 헤더는 2분, 본 절 sync는 5분으로 **3중 모순**이었다 → **5분이 정본**(§12.1 표준 케이던스와 일치). §12.3을 5분으로 교정 완료. **`agents/grok/autonomous-loop-rules.md`의 rules 헤더(2분 표기)도 반드시 5분으로 맞춰야** 한다(§34.5 sync 헤더 규칙 적용 — 정본=PROTOCOL, 충돌 시 PROTOCOL 우선).
 
 **34.7 Antigravity 자립 + 헤드리스 대안 (G4·G7)**
 - AG도 `agents/antigravity/RULES.md` + loop 규칙을 보유(Codex·Grok과 대칭). 헤드리스 경로: **Gemini CLI 무료 폐기(2026-06-18, §28.4) 대비** — ① 인터랙티브 Gemini ② `agy`(OAuth 후 `--dangerously-skip-permissions`) ③ 불가 시 AG lane 일부를 Claude·Codex로 재라우팅. 각 AI는 STATUS에 현재 헤드리스 실행 수단을 명시한다.

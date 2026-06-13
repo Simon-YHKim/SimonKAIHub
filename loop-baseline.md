@@ -21,6 +21,7 @@ related: PROTOCOL.md §12.1a, §18.0
 | 2nd-B (페르소나 UX §27.9) | `persona-cluster-sim` 워크플로 (12 페르소나, scriptPath 재실행) | 막힘/이탈/불신/오해 빈도·심각 — 개선 후 재실행해 감소 측정 |
 | **SimonKWiki** (`E:\Coding Infra\obsidian\SimonKWiki`) | `wiki_lint.py` + `raw_isolation.py` | 깨진 링크·frontmatter·index 정합성 / raw 격리 |
 | **Hub** (`E:\Coding Infra\AI Infra\Communication`) | `tools\board.ps1 -Me claude` | 메시지 frontmatter·status·cycle counter 정합성 |
+| **Grok 리서치** (lane golden set §34.2) | `agents/grok/golden-set.md` 고정 질문셋 Q1–Q7 + 고정 소스 2-pass | 신호 재현성(2회 동일 결론)·유효 인사이트 N=5 채택 카운트·실패 lead는 §4 원장 |
 | **Skill Stack** (`~/.claude/skills`) | `validate_skill.py` 전수 (`PYTHONIOENCODING=utf-8`) | simon-stack 0-error / Gstack는 E007 긴-doc 포맷 제외 |
 
 ## 2. 현재 베이스라인 (2026-06-13 측정, Codex 세션)

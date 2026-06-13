@@ -32,6 +32,11 @@ function Get-Age([string]$stamp){
     return ("{0:n0}d ago" -f $d.TotalDays)
   } catch { return "?" }
 }
+function Get-AgeDays([string]$stamp){
+  # Total days since stamp; 0 on parse failure so an unparseable stamp is not flagged stale.
+  $s = ($stamp -replace 'KST','' -replace '/','' -replace '\s+',' ').Trim()
+  try { return ((Get-Date) - [datetime]::Parse($s)).TotalDays } catch { return 0 }
+}
 
 function Render {
   $now = Get-Date -Format 'yyyy-MM-dd / HH:mm:ss'
@@ -41,9 +46,11 @@ function Render {
   Write-Host $bar -ForegroundColor Cyan
 
   $control = Join-Path $root "CONTROL.md"
+  $controlState = ""
   if(Test-Path $control){
     $ch = Get-Content $control -Encoding UTF8 -TotalCount 12
     $st = Get-Front $ch 'state'
+    $controlState = $st
     $rs = Get-Front $ch 'pause_reason'
     $col = if($st -eq 'running'){'Green'}elseif($st -eq 'paused'){'Red'}else{'Yellow'}
     Write-Host ("RUN STATE: {0}" -f $st.ToUpper()) -ForegroundColor $col
@@ -51,16 +58,18 @@ function Render {
   }
   Write-Host ("-" * 78) -ForegroundColor DarkGray
 
-  Write-Host ("{0,-12}{1,-9}{2,-11}{3}" -f "AI","state","updated","last activity") -ForegroundColor White
+  Write-Host ("{0,-12}{1,-11}{2,-11}{3}" -f "AI","state","updated","last activity") -ForegroundColor White
   foreach($a in $agents){
     $sf = Join-Path $root ("agents\" + $a + "\STATUS.md")
-    $state = "-"; $age = "-"; $act = ""
+    $state = "-"; $age = "-"; $act = ""; $rawState = ""; $stale = $false; $noStamp = $false
     if(Test-Path $sf){
       $lines = Get-Content $sf -Encoding UTF8
       $head = $lines | Select-Object -First 8
-      $state = Get-Front $head 'state'; if(-not $state){ $state = "-" }
+      $rawState = Get-Front $head 'state'
+      $state = $rawState; if(-not $state){ $state = "-" }
       if($state.Length -gt 8){ $state = $state.Substring(0,8) }
-      $upd = Get-Front $head 'updated'; if($upd){ $age = Get-Age $upd }
+      $upd = Get-Front $head 'updated'
+      if($upd){ $age = Get-Age $upd; $stale = (Get-AgeDays $upd) -gt 1 } else { $noStamp = $true }
       $idx = -1
       for($i=0;$i -lt $lines.Count;$i++){ if($lines[$i] -match '^\[\d{4}-\d{2}-\d{2}'){ $idx = $i; break } }
       if($idx -ge 0){
@@ -68,9 +77,23 @@ function Render {
         if(-not $act -and ($idx+1) -lt $lines.Count){ $act = $lines[$idx+1].Trim() }
       }
     }
+    # Reconcile STATUS against the hub CONTROL semaphore. A STATUS that still says
+    # running while CONTROL is paused (or has not been touched in >1 day) is stale,
+    # not live -- never paint it as actively running.
+    $runlike = ($rawState -match '^\s*running')
+    if($runlike -and ($controlState -eq 'paused')){
+      $state = "stale-run?"
+    } elseif($runlike -and ($stale -or $noStamp)){
+      $state = "STALE"
+    }
     if($act.Length -gt 42){ $act = $act.Substring(0,41) + "~" }
-    $rowcol = if(($age -match 's ago|m ago') -and ($state -ne 'paused')){'Green'}elseif($state -eq 'paused'){'DarkGray'}else{'Gray'}
-    Write-Host ("{0,-12}{1,-9}{2,-11}{3}" -f $a,$state,$age,$act) -ForegroundColor $rowcol
+    $live = ($age -match 's ago|m ago') -and -not $stale
+    $rowcol =
+      if($state -eq 'stale-run?' -or $state -eq 'STALE'){'Yellow'}
+      elseif($state -eq 'paused' -or $rawState -match '^\s*paused'){'DarkGray'}
+      elseif($live -and ($controlState -ne 'paused')){'Green'}
+      else{'Gray'}
+    Write-Host ("{0,-12}{1,-11}{2,-11}{3}" -f $a,$state,$age,$act) -ForegroundColor $rowcol
   }
   Write-Host ("-" * 78) -ForegroundColor DarkGray
 

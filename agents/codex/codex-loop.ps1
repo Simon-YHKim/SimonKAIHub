@@ -7,7 +7,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$Root = "E:\Coding"
+$Root = Split-Path (Split-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) -Parent) -Parent
 $Hub = Join-Path $Root "AI Infra\Communication"
 $LogDir = Join-Path $Hub "agents\codex\logs"
 $PidFile = Join-Path $LogDir "codex-loop.pid"
@@ -73,11 +73,11 @@ Run exactly one autonomous Codex loop iteration, then stop. Do not create, start
 
 Required operating rules:
 - Respond in Korean.
-- Read and obey E:\Coding\AGENTS.md plus E:\Coding\AI Infra\Communication\agents\codex\RULES.md.
-- Re-ground on E:\Coding\AI Infra\Communication\CONTROL.md, PROTOCOL.md sections 11, 12, 25, 26, 27, 31, 32, BOARD.md, DECISIONS.md, and your Codex inbox via tools\board.ps1 -Me codex.
+- Read and obey $Root\AGENTS.md plus $Root\AI Infra\Communication\agents\codex\RULES.md.
+- Re-ground on $Root\AI Infra\Communication\CONTROL.md, PROTOCOL.md sections 11, 12, 25, 26, 27, 31, 32, BOARD.md, DECISIONS.md, and your Codex inbox via tools\board.ps1 -Me codex.
 - If CONTROL state is not running, write a short STATUS update only and stop.
 - Prefer actionable to:codex requests. If none, choose the highest-value Codex-lane task: UI/UX, accessibility, visual consistency, i18n copy, or anti-slop.
-- Work only in Codex-owned spaces. For 2nd-B code use E:\Coding\_worktrees\2ndB-codex, never edit E:\Coding\2ndB directly.
+- Work only in Codex-owned spaces. For 2nd-B code use $Root\_worktrees\2ndB-codex, never edit $Root\2ndB directly.
 - Keep scope to one task. Run appropriate verification. Commit with Conventional Commits. You may push only your own branch, never main, and never create or merge PRs.
 - Record every user-direct or autonomous task in the hub: agents/codex/STATUS.md, agents/codex/outbox/*.md, and a self-contained HTML summary under agents/codex/outbox/preview/.
 - Commit hub changes with tools\commit.ps1 -As codex and only Codex-owned files.
