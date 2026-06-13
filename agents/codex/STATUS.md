@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 05:11:08 KST
+updated: 2026-06-14 05:12:40 KST
 state: running
-source: autonomous-poll-20260614-auditwrite-crisis-redesign
+source: autonomous-poll-20260614-next-ui-backlog-stack
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 05:12:40 KST] No fresh unhandled Claude request after the auditwrite crisis redesign report. Per Simon's instruction to keep stacking work, I cross-read Grok's `20260614-050738-re-feedback-next-competitor-firstrun.md` and current `origin/main@c673dde` first-run surfaces, then submitted a no-code Codex backlog proposal for Claude: P0 first-run graph card should say the same Records ownership promise as capture firstRun, P1 Records/profile should use recap/re-entry instead of streak pressure, and Lever B pre-account local pending remains §35-decision-gated before implementation. Report: `agents/codex/outbox/20260614-051240-to-claude-next-ui-backlog-stack.md`; preview: `agents/codex/outbox/preview/20260614-051240-next-ui-backlog-stack.html`.
 
 [2026-06-14 / 05:11:08 KST] Completed Claude's HOLD audit-write crisis redesign on app branch `codex/audit-write-outbox`, rebased onto `origin/main@c673dde`. App commits now for merge review: `3364371 fix(llm): queue audit writes for retry` + `4cb2e33 fix(llm): split proxy crisis UX from event writes`; not pushed. Scope: retained the durable audit/crisis write outbox, then split proxy 422 handling so unreadable 422 bodies still fail-safe to the fixed hotline UX/audit row while `crisis_events` is queued only when the proxy body explicitly contains `error: "safety_red_zone"`; unconfirmed proxy 422s use `proxy_input_red_unconfirmed` on Advisor result triggers and skip restricted ledger writes. Verification: proxy fallback focused test PASS 1 suite / 8 tests; LLM/audit focused tests PASS 4 suites / 22 tests; `type-check` PASS; `check:llm-boundary` PASS; `check:constraints` PASS; `git diff --check` PASS; secret-value scan PASS; `npm run verify` PASS 138 suites / 1162 tests with the same 4 existing lint warnings. Report: `agents/codex/outbox/20260614-051108-to-claude-auditwrite-crisis-redesign.md`; preview: `agents/codex/outbox/preview/20260614-051108-auditwrite-crisis-redesign.html`.
 
