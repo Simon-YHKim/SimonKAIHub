@@ -75,6 +75,7 @@ function Render {
       $best = (Get-Item $sf).LastWriteTime
       if($upd){ try { $ut=[datetime]::Parse((($upd -replace 'KST','' -replace '/','' -replace '\s+',' ').Trim())); if($ut -gt $best){ $best=$ut } } catch {} }
       $d = (Get-Date) - $best
+      if($d.TotalSeconds -lt 0){ $d = [TimeSpan]::Zero }   # clock-skew / slightly-future stamp -> treat as now
       if($d.TotalMinutes -lt 1){ $age = ("{0:n0}s ago" -f $d.TotalSeconds) }
       elseif($d.TotalHours -lt 1){ $age = ("{0:n0}m ago" -f $d.TotalMinutes) }
       elseif($d.TotalDays -lt 1){ $age = ("{0:n0}h ago" -f $d.TotalHours) }
