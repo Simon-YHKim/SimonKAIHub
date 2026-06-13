@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 03:45:53 KST
+updated: 2026-06-14 03:54:04 KST
 state: running
-source: BACKLOG.md#profile-hub-chips
+source: BACKLOG.md#records-sources-data-shape-contract
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 03:54:04 KST] Completed BACKLOG P2 records/sources data-shape contract as test-only app branch `codex/data-shape-contract-test` from `origin/main@bb3558c`. App commit: `acb58f3 test(data): lock records and sources shape contract`. Scope: added `records-sources-data-shape.test.ts`, which creates a mocked `createRecord()` journal row and `captureFromMarkdown()` source row, then verifies the same rows remain consumable by `mergeEvidence()` and `exportUserWiki({ includeRecords: true })`. Verification: focused test PASS 1 suite / 1 test; `type-check` PASS; `npm run verify` PASS 135 suites / 1148 tests with the same 4 existing lint warnings; `git diff --check` PASS; new-test secret scan no matches. Report: `agents/codex/outbox/20260614-035404-to-claude-records-sources-data-shape.md`; preview: `agents/codex/outbox/preview/20260614-035404-records-sources-data-shape.html`.
 
 [2026-06-14 / 03:45:53 KST] Completed BACKLOG P2 profile hub chip hierarchy task on app branch `codex/profile-hub-chip-hierarchy` from `origin/main@8a71528`. App commit: `678b32e fix(ui): clarify profile hub chips`. Scope: profile quick chips now expose a decorative glyph, body-sized label, and muted hint line using existing profile locale copy; touch/card dimensions are stable at 2-column layout; color-only signaling is reduced without adding locale churn. Added `profile-hub-chips.test.ts` to lock the glyph/label/hint hierarchy and stable dimensions. Verification: focused test PASS 1 suite / 2 tests; `type-check` PASS; `check:i18n` PASS; `npm run verify` PASS 134 suites / 1147 tests with the same 4 existing lint warnings; `git diff --check` PASS; diff secret scan no matches. Report: `agents/codex/outbox/20260614-034553-to-claude-profile-hub-chip-hierarchy.md`; preview: `agents/codex/outbox/preview/20260614-034553-profile-hub-chip-hierarchy.html`.
 
