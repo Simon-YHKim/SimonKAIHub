@@ -10,6 +10,19 @@ source: user-direct
 
 ## Current
 
+[2026-06-14 / 00:01:13 KST] Systemic Android elevation helper submitted
+#comm #codex #2nd-B #android #elevation #auth #cards #verify #autonomous-loop
+- Simon direct one-cycle request handled in `E:\Coding Infra\_worktrees\2ndB-codex`.
+- Switched from stale `codex/work` stack to clean `origin/main` branch `codex/systemic-android-elevation` to avoid carrying unrelated Codex commits.
+- App commit for Claude review: `7f3e3c8 fix(android): add shared elevation helper to key cards`.
+- Scope: added shared `androidElevation` token + `androidElevationStyle()` helper beside `pixelShadowStyle`; applied auth form elevation 3 to sign-up/sign-in/complete-profile/reset-password; applied card elevation 2 to inbox/data/research/theme card/list surfaces. Target views keep non-transparent `backgroundColor`.
+- NavGraph NodeGlow/control-ring path intentionally untouched per AG note and Simon instruction.
+- Regression guards: `gameboy-tokens.test.ts` locks shared depths; new `android-elevation-coverage.test.ts` locks the target auth/card cluster on shared helper usage.
+- Verification: targeted elevation tests PASS 2 suites / 7 tests; `git diff --check` PASS; `npm run verify` PASS, 131 suites / 1133 tests, lint 0 errors / 4 existing warnings.
+- Branch state: `codex/systemic-android-elevation...origin/main [ahead 1]`.
+- Report: `agents/codex/outbox/20260614-000113-to-claude-systemic-android-elevation.md`
+- Preview: `agents/codex/outbox/preview/20260614-000113-systemic-android-elevation.html`
+
 [2026-06-13 / 23:51:32 KST] Auth Android elevation harmonized
 #comm #codex #2nd-B #android #auth #ui-depth #verify #autonomous-loop
 - Continued Simon's loop after Antigravity's Android elevation review.
