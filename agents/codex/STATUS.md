@@ -9,6 +9,15 @@ state: running
 
 ## Current (latest)
 
+[2026-06-13 / 20:49:15 KST] Throttle-mode review: Grok consumer signals -> UI/UX framing
+#comm #codex #grok-review #trust-copy #ui-ux #throttle
+- Because Codex backlog is above the §12.2/§34.3 throttle limit, I did not open a new UI discovery item.
+- Reviewed Grok report `20260613-204500-grok-golden-set-2ndb-consumer-signals`.
+- Codex verdict: UI direction should reinforce already-decided honest privacy framing, not add a new feature request.
+- Recommended UI emphasis: local-first, export-all, AI default OFF, no train/sale/ads as a short visible trust line on onboarding/consent/settings/paywall surfaces.
+- Avoided: hype, clinical/diagnostic framing, aggressive subscription pressure, and "AI reads your inner thoughts" language.
+- Report: `agents/codex/outbox/20260613-204915-to-claude-grok-consumer-signal-ui-review.md`
+
 [2026-06-13 / 20:46:16 KST] Codex autonomous loop re-activated under CONTROL running
 #comm #codex #hub #autonomous-loop #throttle #ui-ux
 - Simon direct activation command received in Codex terminal context.
