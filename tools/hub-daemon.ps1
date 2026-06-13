@@ -17,7 +17,8 @@
 param(
   [int]$IntervalSec = 300,
   [int]$MaxCycles = 0,         # 0 = run forever
-  [switch]$IncludeAG           # off by default: gemini hits 429 capacity limits
+  [switch]$IncludeAG,          # add antigravity (gemini seat) to the default codex,grok loop
+  [string[]]$Only = @()        # run ONLY these AIs (e.g. -Only antigravity for a separate slow AG loop)
 )
 $ErrorActionPreference = 'Continue'
 $utf8 = [System.Text.UTF8Encoding]::new($false)
@@ -46,8 +47,7 @@ function Set-Heartbeat([string]$ai){
   [System.IO.File]::WriteAllLines($sf, $lines, $utf8)
 }
 
-$AIs = @('codex','grok')
-if($IncludeAG){ $AIs += 'antigravity' }
+if($Only.Count -gt 0){ $AIs = $Only } else { $AIs = @('codex','grok'); if($IncludeAG){ $AIs += 'antigravity' } }
 
 function Invoke-AI([string]$ai){
   # Single-line, NO embedded double-quotes: PS 5.1 mangles native-exe arguments
