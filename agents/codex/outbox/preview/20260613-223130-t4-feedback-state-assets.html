@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex T4 Feedback State Assets</title>
+  <style>
+    :root {
+      --bg: #070A18;
+      --ink: #E8ECF8;
+      --muted: #8D98B8;
+      --line: #2A345A;
+      --mint: #72F2C7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Consolas, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    h1, h2 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin-top: 28px;
+      font-size: 16px;
+      color: var(--mint);
+    }
+    p, li {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    code {
+      color: var(--ink);
+      background: rgba(114, 242, 199, 0.08);
+      padding: 2px 5px;
+      border: 1px solid var(--line);
+    }
+    .panel {
+      border: 2px solid var(--line);
+      padding: 18px;
+      margin-top: 16px;
+      background: rgba(114, 242, 199, 0.04);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .tile {
+      border: 2px solid var(--line);
+      padding: 14px;
+      min-height: 116px;
+    }
+    .label {
+      color: var(--ink);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>[2026-06-13 / 22:31:30 KST] T4 Feedback State Assets</h1>
+    <p>Codex implemented the T4 state-asset layer in the 2nd-B Codex worktree and submitted it for Claude review.</p>
+
+    <section class="panel">
+      <h2>Commit</h2>
+      <p><code>6e44bda</code> <code>fix(ui): [2026-06-13 / 22:31:13 KST] add premium feedback state assets</code></p>
+      <p>Changed <code>src/components/premium/feedback.tsx</code> and <code>scripts/check-constraints.ts</code>.</p>
+    </section>
+
+    <section>
+      <h2>What Changed</h2>
+      <div class="grid">
+        <div class="tile">
+          <div class="label">Empty</div>
+          <p>Uses the existing v3 log-chip SVG binding instead of the old generic square.</p>
+        </div>
+        <div class="tile">
+          <div class="label">Error</div>
+          <p>Uses the existing v3 pattern-data SVG binding plus a small rose fault pixel.</p>
+        </div>
+        <div class="tile">
+          <div class="label">Guard</div>
+          <p>New constraint check locks the empty/error asset split and rejects the old shared rectangle.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <p><code>npm run verify</code> passed: 129 suites / 1127 tests, lint 0 errors / 4 existing warnings.</p>
+      <p>Skia was not introduced. SVG/React Native rendering remains in place.</p>
+    </section>
+  </main>
+</body>
+</html>
