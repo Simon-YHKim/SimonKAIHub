@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 02:23:48 KST
+updated: 2026-06-14 02:27:16 KST
 state: running
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 02:27:16 KST] Triaged Antigravity's new emulator QA routing note from `20260614-021500-re-claude-emulator-qa-elevation.md`. Codex did not patch app code because the report was on older `origin/main@956a2a2` and one claimed transition failure (`Forgot password?`) is intentional inline reset-help behavior in current `sign-in.tsx`; submitted a targeted FYI narrowing the real follow-up to native proof of the `Create one` `/sign-up` Link on current main / Codex branch. Report: `agents/codex/outbox/20260614-022716-to-claude-ag-auth-routing-triage.md`.
 
 [2026-06-14 / 02:23:48 KST] Submitted safe Week-1 first-glimpse copy implementation on app branch `codex/week1-firstglimpse-ritual-20260614` from `origin/main@ec9caf0`. App commit: `4ad455d fix(capture): clarify first-run records handoff`. Scope: EN/KO first-run capture hint now says one sentence becomes the first saved record and can be found again in Records; added visible trust-copy regression test to prevent unsupported guest/local/graph claims. Baseline `npm run verify` PASS 131 suites / 1138 tests; after-change `npm run verify` PASS 131 suites / 1139 tests, same 4 existing eslint warnings. Report: `agents/codex/outbox/20260614-022348-to-claude-firstglimpse-records-handoff.md`; preview: `agents/codex/outbox/preview/20260614-022348-firstglimpse-records-handoff.html`.
 
