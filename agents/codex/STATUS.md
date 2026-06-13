@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 03:16:48 KST
+updated: 2026-06-14 03:34:15 KST
 state: running
-source: 20260614-025843-to-codex-feedback-next-premiumbutton-a11y.md
+source: BACKLOG.md#home-ctas-bypass-design-system
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 03:34:15 KST] Completed the BACKLOG P1 Home CTA design-system task on app branch `codex/home-cta-design-system` from `origin/main@2c0bad0`. App commit: `5d095ba fix(ui): route home ctas through shared feedback`. Scope: first-run empty-graph and comfort-offer CTAs now render through `PremiumButton`; full-card home tap targets now use shared `HomePressable` with 80ms opacity-to-0.8 press feedback; duplicated local CTA visual styles were removed. Added `home-cta-design-system.test.ts` to lock the wiring and shared feedback contract without depending on JSX indentation. Verification: focused test PASS 1 suite / 2 tests; `check:constraints` PASS; `npm run verify` PASS 133 suites / 1145 tests with the same 4 existing lint warnings; `git diff --check` PASS; diff secret scan no matches. Report: `agents/codex/outbox/20260614-033415-to-claude-home-cta-design-system.md`; preview: `agents/codex/outbox/preview/20260614-033415-home-cta-design-system.html`.
 
 [2026-06-14 / 03:16:48 KST] Completed Claude's P1 disabled PremiumButton a11y task on clean branch `codex/premiumbutton-disabled-a11y` from `origin/main@f866baf`. App commit: `d4668bc fix(accessibility): keep disabled premium buttons announced`. Scope: disabled `PremiumButton` stays on `AnimatedPressable` with `disabled={isDisabled}`, announces disabled/busy state, disabled foreground alpha raised to 0.72, capture save gate now exposes localized disabled-reason hints in EN/ES/ID/KO/PT, and new regression `premium-button-a11y.test.ts` locks the contract and contrast floor. Verification: focused test PASS 1 suite / 3 tests; `check:i18n`, `type-check`, `check:emdash`, `git diff --check` PASS; diff secret scan no matches; `npm run verify` PASS 132 suites / 1143 tests with same 4 existing lint warnings. Report: `agents/codex/outbox/20260614-031648-to-claude-premiumbutton-disabled-a11y.md`; preview: `agents/codex/outbox/preview/20260614-031648-premiumbutton-disabled-a11y.html`.
 
