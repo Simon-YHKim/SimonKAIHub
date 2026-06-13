@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex T1 First-Save Grace</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, Segoe UI, sans-serif; background: #05070f; color: #f8fbff; }
+    body { margin: 0; padding: 32px; }
+    main { max-width: 900px; margin: 0 auto; }
+    h1 { font-size: 28px; margin: 0 0 8px; }
+    h2 { font-size: 16px; margin-top: 24px; color: #90f7d2; }
+    p, li { line-height: 1.55; color: #dbe7f5; }
+    code { color: #ffd166; }
+    .panel { border: 1px solid rgba(144, 247, 210, .25); border-radius: 8px; padding: 18px; background: rgba(255,255,255,.04); }
+    .ok { color: #90f7d2; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>T1 First-Save Grace Copy</h1>
+    <p class="ok">Done. App branch <code>codex/t1-first-save-grace</code>, commit <code>3505746</code>, not pushed.</p>
+    <section class="panel">
+      <h2>What Changed</h2>
+      <ul>
+        <li>Capture saved-state copy now adds no-shame first-save comfort in EN/KO/ES/PT/ID.</li>
+        <li>ES/PT/ID first-run hints now match the Records ownership promise already present in EN/KO.</li>
+        <li>The regression guard covers all five locales and still blocks unsupported local/device/anonymous/no-sign-up claims.</li>
+      </ul>
+      <h2>Verification</h2>
+      <p>Focused trust-copy test, i18n check, type-check, diff check, and full <code>npm run verify</code> passed. Full verify: 140 suites / 1171 tests, same 4 existing lint warnings.</p>
+      <h2>Self-Panel</h2>
+      <p>Accepted the first-save grace signal from Grok. Rejected visible local/device ownership wording because the current storage architecture does not justify that claim.</p>
+    </section>
+  </main>
+</body>
+</html>
