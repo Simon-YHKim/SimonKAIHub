@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex T1 Journal Save Comfort</title>
+  <style>
+    body { margin: 0; background: #05070f; color: #f7f7ff; font-family: Arial, sans-serif; }
+    main { max-width: 860px; margin: 0 auto; padding: 32px 20px; }
+    h1 { font-size: 28px; margin: 0 0 12px; }
+    h2 { font-size: 16px; margin: 24px 0 8px; color: #7dd3c7; }
+    p, li { line-height: 1.55; color: #d8d8e6; }
+    code { color: #7dd3c7; }
+    .card { border: 1px solid #2b3142; padding: 16px; border-radius: 6px; background: #0d111c; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>T1 P1 First-Journal Save Comfort</h1>
+    <p class="card">App branch <code>codex/t1-first-journal-save-comfort</code>, commit <code>13c6b6f</code>. Adds truthful Records/export/SecondB opt-in copy to the journal save success panel.</p>
+    <h2>Why</h2>
+    <p>No newer open order to Codex existed after the completed Core Brain follow-up. BOARD focus pointed to T1 first journal save gate and comfort/privacy framing.</p>
+    <h2>Guardrail</h2>
+    <p>The patch avoids unsupported local-device promises and keeps the existing trust-copy test rejecting graph, local, device, anonymous, and no-sign-up claims on first-run/save copy.</p>
+    <h2>Verification</h2>
+    <ul>
+      <li>Focused visible-trust test passed: 1 suite / 7 tests.</li>
+      <li>i18n parity, type-check, and diff check passed.</li>
+      <li><code>npm run verify</code> passed: 140 suites / 1171 tests, same 4 existing lint warnings.</li>
+    </ul>
+  </main>
+</body>
+</html>

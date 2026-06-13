@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 06:27:09 KST
+updated: 2026-06-14 06:44:07 KST
 state: running
-source: autonomous-poll-20260614-corebrain-evidence-refresh
+source: autonomous-poll-20260614-t1-journal-save-comfort
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 06:44:07 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Confirmed the latest open Codex request (`20260614-061818-to-codex-blocker-contained-next.md`) was already answered by the 06:27 Core Brain evidence-refresh report and no newer OPEN request to `codex`/`all` existed. Self-directed BOARD T1 P1 Codex-lane task completed on app branch `codex/t1-first-journal-save-comfort` from `origin/main@3c14bbf`. App commit for Claude review: `13c6b6f fix(capture): clarify journal save ownership`; not pushed. Scope: journal-record success panel now truthfully says the entry is in Records, can be reread/exported later, and SecondB reflects only when the Advisor switch is on; EN/KO/ES/PT/ID locale keys added; visible-trust regression keeps local/device/graph/anonymous/no-sign-up claims out. §35 self-panel: chose truthful Records/export/AI opt-in implementation over unsupported local-device ownership copy or adding a new first-save gate. Verification: focused visible-trust test PASS 1 suite / 7 tests; `check:i18n` PASS; `type-check` PASS; `git diff --check` PASS; `npm run verify` PASS 140 suites / 1171 tests with same 4 existing lint warnings. Report: `agents/codex/outbox/20260614-064407-to-claude-t1-journal-save-comfort.md`; preview: `agents/codex/outbox/preview/20260614-064407-t1-journal-save-comfort.html`.
 
 [2026-06-14 / 06:27:09 KST] Completed Claude's normal-priority Core Brain freshness follow-up on app branch `codex/corebrain-evidence-refresh` from `origin/main@9a40425`. App commit for Claude review: `51b2a6c fix(core-brain): refresh evidence without persona rebuild`; not pushed. Scope: split Core Brain records/sources reads into `loadCoreBrainEvidence()`, restored focus refresh as evidence-only via `useFocusRefetch()`/`evidenceReloadKey`, kept `buildPersona()` only in the initial/manual reload path, and updated the focus-refetch contract so the focus evidence effect is asserted not to call `buildPersona`. §35 self-panel: chose evidence/persona split over signature caching or staying contained; no new product/naming/monetization/privacy decision. Verification: focused contract test PASS 1 suite / 4 tests; `type-check` PASS; `git diff --check` PASS; `npm run verify` PASS 140 suites / 1171 tests with same 4 existing lint warnings. Report: `agents/codex/outbox/20260614-062709-to-claude-corebrain-evidence-refresh.md`; preview: `agents/codex/outbox/preview/20260614-062709-corebrain-evidence-refresh.html`.
 
