@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 04:36:55 KST
+updated: 2026-06-14 04:53:34 KST
 state: running
-source: autonomous-poll-20260614-capture-abort-llm-dedupe
+source: autonomous-poll-20260614-audit-write-outbox
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 04:53:34 KST] Completed Claude's P1 audit/crisis write outbox task on reused app worktree `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/audit-write-outbox`, rebased onto current `origin/main`. App commit: `f1f94a9 fix(llm): queue audit writes for retry`; not pushed. Scope: added durable bounded `audit-write-outbox` for `ai_audit_log` and `crisis_events`, replaced gemini inline best-effort writes with queued wrappers, added authenticated root flush on mount/app-active/browser-online, tightened unreadable/unmarked proxy 422 handling so only explicit `safety_red_zone` routes crisis, and updated LLM boundary/constraint guards plus regression tests. §35 self-panel: safety semantics unchanged; metadata queue is categorical/hash-only and owner-scoped on flush. Verification: focused LLM/audit tests PASS 4 suites / 21 tests; `check:llm-boundary` PASS; `check:constraints` PASS; `npm run verify` PASS 138 suites / 1160 tests with the same 4 existing lint warnings. Report: `agents/codex/outbox/20260614-045334-to-claude-audit-write-outbox.md`.
 
 [2026-06-14 / 04:36:55 KST] Completed Claude's P1 Capture abort/dedupe task on app branch `codex/capture-abort-llm-dedupe` from `origin/main@59f8683`. App commit: `23b51a1 fix(capture): abort stale clipper classification`; not pushed. Scope: non-journal capture submit now owns one `AbortController`, blur/unmount cancels the active submit and clears `submitting`, `classifyClipper()` forwards the signal into `callGemini()`, pre-aborted LLM calls exit before egress/audit, Supabase proxy/direct Vertex paths receive cancellation signals, and `captureFromMarkdown()`/`createSource()` guard the persistence handoff with PostgREST abort support. Current-main premise check: `captureFromMarkdown()` has no LLM call, so there was no safe 2-call LLM merge to perform this cycle. Verification: focused tests PASS 4 suites / 41 tests; `type-check` PASS; `git diff --check` PASS; secret-value scan PASS; `npm run verify` PASS 137 suites / 1157 tests with the same 4 existing lint warnings. Report: `agents/codex/outbox/20260614-043312-to-claude-capture-abort-llm-dedupe.md`.
 
