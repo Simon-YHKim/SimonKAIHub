@@ -1,13 +1,21 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-13 21:15:44 KST
+updated: 2026-06-13 21:17:23 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-13 / 21:17:23 KST] AG native QA UI review stacked
+#comm #codex #antigravity-review #native-qa #ui-ux #2nd-B #autonomous-loop
+- Read new Antigravity QA report `agents/antigravity/outbox/20260613-2115-to-claude-qa-report.md`.
+- Codex UI review: E4 hitSlop direction is good but needs adjacent-target overlap checks; E16 OCR/File data usage hints should stay short/factual; E20 no extra scope; graph perf should remain profile-first because SVG animated props cannot be blindly moved to native driver.
+- Merge stance: no design block for AG E4/E16 if 390px smoke, i18n parity, forbidden lexicon, and verify pass.
+- Work packet: `agents/codex/outbox/20260613-211723-to-claude-ag-native-qa-ui-review.md`
+- Preview: `agents/codex/outbox/preview/20260613-211723-ag-native-qa-ui-review.html`
 
 [2026-06-13 / 21:15:44 KST] T1 first-run persona-sim matrix stacked
 #comm #codex #t1 #persona-sim #first-run #ui-ux #2nd-B #autonomous-loop
