@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Antigravity Native QA Report - 2026-06-14</title>
+    <style>
+        body { background-color: #070a18; color: # moonWhite; font-family: sans-serif; padding: 20px; }
+        h1, h2 { color: #00ffcc; }
+        .card { background: #1a1d2e; border: 1px solid #30364d; padding: 15px; margin-bottom: 20px; border-radius: 8px; }
+        .p0 { border-left: 5px solid #ff4444; }
+        .p1 { border-left: 5px solid #ffbb33; }
+        .p2 { border-left: 5px solid #00ccff; }
+        .success { color: #00ffcc; }
+        .warning { color: #ffbb33; }
+        .error { color: #ff4444; }
+        pre { background: #000; padding: 10px; border-radius: 4px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>Native QA Report (Antigravity)</h1>
+    <p>Timestamp: 2026-06-14 02:15 KST</p>
+    <p>Target: 2nd-B main (956a2a2)</p>
+
+    <div class="card">
+        <h2>1. Systemic Elevation Rollout Verification</h2>
+        <p class="success">✅ <b>Status: PASSED (Code & Unit Test)</b></p>
+        <p>Implementation of <code>androidElevationStyle</code> confirmed in:</p>
+        <ul>
+            <li>Sign-in / Sign-up / Complete-profile / Reset-password</li>
+            <li>Data / Inbox / Research / Theme</li>
+        </ul>
+        <p>Unit Test Result: <code>android-elevation-coverage.test.ts</code> <b>PASS</b></p>
+        <p>Visual: Elevation shadows are rendered on the Sign-in form card (Elevation 3).</p>
+    </div>
+
+    <div class="card p1">
+        <h2>2. Navigation Issue (Unauthenticated Flow)</h2>
+        <p class="warning">⚠️ <b>Severity: P1/P2 (Interaction/Routing)</b></p>
+        <p><b>Issue:</b> Navigating from Sign-in to Sign-up or Reset-password via <code>&lt;Link&gt;</code> (taps) failed to trigger screen transition in the emulator. Deep linking (<code>secondbrain://sign-up</code>) also failed to navigate, staying on the Sign-in screen.</p>
+        <p><b>Evidence:</b>
+            <ul>
+                <li>Tap at <code>[895, 2138]</code> (Create one) -> No navigation.</li>
+                <li>Deep link intent delivered -> No navigation.</li>
+                <li>Logcat shows <code>Channel is unrecoverably broken</code> after some time, suggesting a possible hang or crash in the navigation controller.</li>
+            </ul>
+        </p>
+    </div>
+
+    <div class="card">
+        <h2>3. Core Loop Progress</h2>
+        <p class="error">❌ <b>Status: BLOCKED</b></p>
+        <p>The core loop test (Capture -> Inbox -> Wiki -> Graph -> Chat) was blocked due to the inability to bypass or complete the sign-in flow in this session.</p>
+    </div>
+
+    <div class="card">
+        <h2>4. System Environment</h2>
+        <pre>
+- Emulator: Pixel_9_Pro_XL (API 35)
+- Build: successful (1m 20s)
+- USE_VERTEX: false
+        </pre>
+    </div>
+</body>
+</html>
