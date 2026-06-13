@@ -75,4 +75,5 @@ AI 개발자=스펙·SDK 위주, 비개발 기획자=개념·트레이드오프 
 
 ## 완료 기준
 기능이 평가셋 기준을 통과하고 안전 게이트를 지났으며, §6 검증(Core 있으면 `persona-validate`, 없으면 인라인 self-check)에서 치명 리스크 0, 사용자가 확인했을 때.
+**완료 후**: `completion-report`(Core)로 HTML 보고서 생성 — 사용자 언어 + 현지시간 로케일 형식(KR: `[YYYY-MM-DD / HH:MM:SS KST]`) + 표·차트(eval 점수·안전 게이트 결과).
 (주의: 평가·안전 게이트는 "선언"이 아니라 실제 차단이어야 함 — 회귀 게이트 exit code·적대셋 grader 실구현은 BACKLOG 라운드 참고.)
