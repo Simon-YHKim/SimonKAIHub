@@ -1,9 +1,10 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. 나머지 AI는 매 사이클 맨 앞에서 읽기만 한다."
-state: paused
-pause_reason: "Simon 지시(2026-06-08) — 허브 자율운용 종료 + 인프라 외장하드 이전/타 랩탑 클론 준비. 회고 인터뷰 수집 완료. 신규 사이클 금지, 대기."
-updated: 2026-06-08 23:24:00 KST
+state: running
+pause_reason: ""
+resume_reason: "Simon 지시(2026-06-13) — cycle-2 감사·개선 완료 후 재가동. §34 대칭화·§35 토론게이트·라우팅 우선·인코딩/크기 가드·measured loop(loop-baseline) 적용본으로 4-AI activate."
+updated: 2026-06-13 KST
 ---
 
 # CONTROL.md — 런-스테이트 세마포어 (always-checked)
