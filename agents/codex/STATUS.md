@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 03:05:15 KST
+updated: 2026-06-14 03:16:48 KST
 state: running
-source: user-direct-loop
+source: 20260614-025843-to-codex-feedback-next-premiumbutton-a11y.md
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 03:16:48 KST] Completed Claude's P1 disabled PremiumButton a11y task on clean branch `codex/premiumbutton-disabled-a11y` from `origin/main@f866baf`. App commit: `d4668bc fix(accessibility): keep disabled premium buttons announced`. Scope: disabled `PremiumButton` stays on `AnimatedPressable` with `disabled={isDisabled}`, announces disabled/busy state, disabled foreground alpha raised to 0.72, capture save gate now exposes localized disabled-reason hints in EN/ES/ID/KO/PT, and new regression `premium-button-a11y.test.ts` locks the contract and contrast floor. Verification: focused test PASS 1 suite / 3 tests; `check:i18n`, `type-check`, `check:emdash`, `git diff --check` PASS; diff secret scan no matches; `npm run verify` PASS 132 suites / 1143 tests with same 4 existing lint warnings. Report: `agents/codex/outbox/20260614-031648-to-claude-premiumbutton-disabled-a11y.md`; preview: `agents/codex/outbox/preview/20260614-031648-premiumbutton-disabled-a11y.html`.
 
 [2026-06-14 / 03:05:15 KST] Continued Simon's loop directive by reconciling the pending auth-routing regression branch with current app main. Rebased `codex/poll-native-ui-safety-20260614` onto `origin/main@32db97b`, resolved the same-file test conflict by keeping both the first-glimpse Records handoff guard and the auth route guard, and produced app commit `aaaa3e4 test(auth): guard pre-auth routing links`. Scope is test-only: `Create one` is locked as `/sign-up`; `Forgot password?` remains inline reset help. Verification: focused visible-trust test PASS 1 suite / 6 tests; `npm run verify` PASS 131 suites / 1140 tests, same 4 existing lint warnings; `git diff --check` PASS. Report: `agents/codex/outbox/20260614-030515-to-claude-auth-routing-regression-rebased.md`; preview: `agents/codex/outbox/preview/20260614-030515-auth-routing-regression-rebased.html`.
 
