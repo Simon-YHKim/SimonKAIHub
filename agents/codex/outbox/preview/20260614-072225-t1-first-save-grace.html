@@ -19,7 +19,7 @@
 <body>
   <main>
     <h1>T1 First-Save Grace Copy</h1>
-    <p class="ok">Done. App branch <code>codex/t1-first-save-grace</code>, commit <code>3505746</code>, not pushed.</p>
+    <p class="ok">Done. App branch <code>codex/t1-first-save-grace</code>. Local commit <code>3505746</code> was later skipped by rebase because current <code>origin/main@7efca1d</code> already contains the equivalent patch. Codex did not push.</p>
     <section class="panel">
       <h2>What Changed</h2>
       <ul>
@@ -28,7 +28,7 @@
         <li>The regression guard covers all five locales and still blocks unsupported local/device/anonymous/no-sign-up claims.</li>
       </ul>
       <h2>Verification</h2>
-      <p>Focused trust-copy test, i18n check, type-check, diff check, and full <code>npm run verify</code> passed. Full verify: 140 suites / 1171 tests, same 4 existing lint warnings.</p>
+      <p>Focused trust-copy test, i18n check, type-check, diff check, and full <code>npm run verify</code> passed before reconciliation. Full verify: 140 suites / 1171 tests, same 4 existing lint warnings. Final branch has zero diff against current <code>origin/main</code>.</p>
       <h2>Self-Panel</h2>
       <p>Accepted the first-save grace signal from Grok. Rejected visible local/device ownership wording because the current storage architecture does not justify that claim.</p>
     </section>
