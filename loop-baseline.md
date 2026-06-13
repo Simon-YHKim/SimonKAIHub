@@ -18,6 +18,7 @@ related: PROTOCOL.md §12.1a, §18.0
 | **2nd-B** (`E:\2ndB`) | `npm run verify` | lint + typecheck + jest (suites/tests/통과) |
 | 2nd-B (UI/회귀) | `npm run web` + 스크린샷 / `npx expo run:android`(에뮬) + CDP `scrollWidth` | 가로스크롤·렌더·E2E 흐름 (정적 green ≠ E2E 통과) |
 | 2nd-B (제약) | constraints / i18n / lexicon 스캔 | 금지어·번역누락·하드코딩 |
+| 2nd-B (페르소나 UX §27.9) | `persona-cluster-sim` 워크플로 (12 페르소나, scriptPath 재실행) | 막힘/이탈/불신/오해 빈도·심각 — 개선 후 재실행해 감소 측정 |
 | **SimonKWiki** (`E:\Coding Infra\obsidian\SimonKWiki`) | `wiki_lint.py` + `raw_isolation.py` | 깨진 링크·frontmatter·index 정합성 / raw 격리 |
 | **Hub** (`E:\Coding Infra\AI Infra\Communication`) | `tools\board.ps1 -Me claude` | 메시지 frontmatter·status·cycle counter 정합성 |
 
@@ -26,6 +27,8 @@ related: PROTOCOL.md §12.1a, §18.0
 - **2nd-B `npm run verify`**: 129 suites / **1125 tests PASS**. lint = 0 errors / 4 existing unused-eslint-disable warnings. HEAD `f769d1d` (#367) == origin/main.
 - **SimonKWiki `wiki_lint.py`**: Error=0 (E1=0, E2=0, W2/W3/W4/FM=0). `raw_isolation.py`: isolated=0/26. HEAD `53043ed`.
 - **Hub**: CONTROL `state=paused` (의도), 1216 commits, dirty=0.
+
+- **페르소나 UX baseline (2026-06-13, wf persona-cluster-sim, 12 페르소나)**: P1 막힘/이탈 테마 4종 = ① 가입 게이트 과중(9/12) ② 핵심 효용 불명확·은유 과잉(12/12) ③ 접근성 픽셀-다크 기본(6/12) ④ 첫 journal 게이트(4/12). 개선 머지 후 동일 워크플로 재실행 → 이 빈도가 감소해야 개선 인정. 큐: `agents/claude/PROPOSAL_QUEUE.md` E1~E8. 리포트: `E:\Coding Infra\2ndB-페르소나시뮬-findings.html`.
 
 > 다음 루프 변경 전 이 표를 갱신 측정해 baseline으로 삼는다. 점수가 이보다 내려가면 그 변경은 회귀 → 반려.
 

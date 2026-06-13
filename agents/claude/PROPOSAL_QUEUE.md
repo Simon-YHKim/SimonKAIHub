@@ -149,3 +149,21 @@
 | G8 | **AI 주체 호칭 통일** capture.json:77 "Lumen saved"↔SecondB, consent "비서"↔세컨비 → 화면당 주체 1인 | 소~중 | codex | 🟢 **D-15 확정+디스패치** — 정정: capture "Lumen"=knowledge섬 거주자(의도된 빌리지 디자인, 보존). 진짜 이슈=KO 호칭 3종혼재(세컨비/SecondB/비서) + 앱(두번째뇌)/AI(세컨비) 레이어. canon=세컨비(AI)·두번째뇌(앱)·비서주체금지. Codex 적용(위 dispatch A1/A2) |
 | G9 | XPRIZE judges/심사관 어휘 일반 빌드 노출 → judge 플래그 게이팅 `consent.json:4-5`·`auth.json:98` | 소 | claude | open |
 | G-dec | ⚠️ **결정**: ①앱명 2층(앱="두번째 뇌/2nd-Brain" vs AI주체="세컨비/SecondB") 의도적 분리 확정? ②로스터 5 vs 6(Iris) | — | 4-AI 합의(§14) | 🔴 |
+
+---
+
+## E. 페르소나 군집 시뮬 findings (2026-06-13, wf persona-cluster-sim) — UX 4축 §26·§27.9
+> 12 페르소나(유아보호자~90대 × 직업 × 자산 × KR/US/JP/SEA/EU)가 실제 화면코드 워크스루. 전체 리포트: `E:\Coding Infra\2ndB-페르소나시뮬-findings.html`. 빈도 = 언급 페르소나 수(/12). 라우팅 §34.4.
+
+| # | 테마 (빈도·심각) | 라우팅 | status |
+|---|---|---|---|
+| E1 | **가입 게이트 과중** — 가입 전 "둘러보기/체험" 추가 + DOB·동의를 저장/AI 사용 직전으로 지연 (9/12·P1) | claude(로직) | open |
+| E2 | **첫 화면 효용 1줄 + 1차 행동 명확화** — 은유 전 평이한 효용 문장 + "여기 눌러 첫 기록" CTA (12/12·P1) | codex(카피·UI) | open |
+| E3 | **접근성 기본값** — readable 폰트/대비 진입(또는 강한 1회 선택) + comfortOffer 영구 dismiss 제거·설정 재노출 + sign-in 라벨 대비/크기 (6/12·P1) | codex + AG(대비검증) | open |
+| E4 | **첫 journal 저장 게이트 해제** — 온보딩 약속("한 문장 저장")과 정합, totalXp=0에서도 첫 저장 허용 (4/12·P1) | claude(게이트) | open |
+| E5 | **프라이버시 1줄 고지** — 가입·capture·온보딩에 기기우선·"AI로 전송"·데이터 위치 + 청소년 "부모 열람 여부" (5/12·P2) | claude + codex | open (A2/D-12 연동) |
+| E6 | **무료한도/결제 honesty** — 무료 AI 한도(2/일) 상향 검토 + paywall 정직 카피 (5/12·P2) | claude | open (실결제=Simon §30) |
+| E7 | **영어 카피 현지화 + 네이밍 통일** — present/past me·Touch!·we noticed 재작성 (3/12·P2) | codex | open (G7/G8 연동) |
+| E8 | **데이터 권리 원클릭 + 기대-결과 정합** — export/delete 통합, journal→그래프 반영 카피 (2/12·P2) | claude | open |
+
+> **반복(§27.9)**: 개선 머지 후 동일 12-페르소나 워크플로 재실행으로 막힘/이탈 감소 측정(golden set, `loop-baseline.md`). 스크립트: `workflows/scripts/persona-cluster-sim-2ndb-*.js`.
