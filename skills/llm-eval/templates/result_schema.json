@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "llm-eval run result",
+  "description": "run_eval 산출물 + gate 입력. runs/ 에 append 하여 변경별 점수를 추적한다.",
+  "type": "object",
+  "required": ["run_id", "git_sha", "model", "set_scores", "n_cases"],
+  "properties": {
+    "run_id": { "type": "string", "description": "ISO 타임스탬프 + 라벨 (예: 2026-06-13T10:00Z-prompt-v3)" },
+    "git_sha": { "type": "string", "description": "이 run 시점의 git short sha" },
+    "model": { "type": "string", "description": "피평가 모델 식별자 (예: gemini-2.x, claude-sonnet-4-6)" },
+    "set_scores": {
+      "type": "object",
+      "description": "set 이름 → 지표. adversarial 은 pass_rate, 그 외는 accuracy 등.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "accuracy": { "type": "number", "minimum": 0, "maximum": 1 },
+          "pass_rate": { "type": "number", "minimum": 0, "maximum": 1 },
+          "f1": { "type": "number", "minimum": 0, "maximum": 1 },
+          "json_valid_rate": { "type": "number", "minimum": 0, "maximum": 1 },
+          "judge_mean": { "type": "number", "description": "LLM-judge 평균 (1~5)" },
+          "n": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "n_cases": { "type": "integer", "minimum": 0 },
+    "regressions": {
+      "type": "array",
+      "description": "baseline 대비 통과→실패로 전환된 케이스 (gate 가 채움)",
+      "items": { "type": "object", "properties": { "id": { "type": "string" }, "set": { "type": "string" }, "from": {}, "to": {} } }
+    },
+    "failures": {
+      "type": "array",
+      "items": { "type": "object", "properties": { "id": { "type": "string" }, "set": { "type": "string" } } }
+    }
+  }
+}

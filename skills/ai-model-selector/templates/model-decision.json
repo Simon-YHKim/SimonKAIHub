@@ -1,0 +1,37 @@
+{
+  "$schema_note": "사용자 제품(앱)의 기능별 모델 라우팅 맵. ai-model-selector 가 채운다. 모델 ID/가격은 vendor 공식 페이지 확인 후 채울 것 — 미확인 값은 \"verify\" 로 둔다.",
+  "product": "<제품명>",
+  "axis": "<VISION.md 기준 어느 축인지(해당 시)>",
+  "governance": {
+    "handles_pii": false,
+    "region_constraint": null,
+    "on_prem_required": false,
+    "no_train_required": true,
+    "audit_logging": "<ai_audit_log 같은 호출 로깅 패턴 적용 여부>"
+  },
+  "budget": {
+    "monthly_cap_usd": null,
+    "expected_calls_per_month": null,
+    "guard": "paid-api-guard"
+  },
+  "features": [
+    {
+      "id": "<기능 id>",
+      "task_type": "reasoning|coding|chat|bulk_classify|long_context|vision|image_gen|speech|embedding",
+      "latency": "sync|batch",
+      "primary":   { "name": "Claude Opus 4.8",  "id": "claude-opus-4-8",  "hosting": "api", "price_in": "verify", "price_out": "verify" },
+      "secondary": { "name": "Gemini 2.x Pro",   "id": "gemini-2.x-pro",   "hosting": "api", "price_in": "verify", "price_out": "verify" },
+      "fallback":  { "name": "Claude Haiku 4.5",  "id": "claude-haiku-4-5", "hosting": "api", "price_in": "verify", "price_out": "verify" },
+      "rationale": "<이 제품 작업에서의 eval 결과 기반 사유>"
+    }
+  ],
+  "robustness": {
+    "routing": "쉬운 요청 소형(Haiku/Flash) → 어려운 요청만 대형으로 escalate",
+    "fallback_chain": ["primary", "secondary", "fallback"],
+    "caching": {
+      "prompt_cache": "시스템/few-shot 프롬프트 캐싱으로 입력 토큰비 절감",
+      "response_cache": "동일 입력 응답 캐시로 중복 호출 제거"
+    },
+    "rate_limit": "지수 백오프 + 큐잉 + 일/월 예산 상한 가드"
+  }
+}

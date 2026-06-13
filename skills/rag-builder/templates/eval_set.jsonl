@@ -1,0 +1,3 @@
+{"q": "설치는 어떻게 하나요?", "expected": "npm install 로 설치한다", "relevant_chunk_ids": ["abc123", "def456"]}
+{"q": "기본 포트 번호는?", "expected": "3000", "relevant_chunk_ids": ["ghi789"]}
+{"q": "지원하지 않는 기능을 물어보는 함정 질문", "expected": "문서에서 찾지 못했습니다.", "relevant_chunk_ids": []}

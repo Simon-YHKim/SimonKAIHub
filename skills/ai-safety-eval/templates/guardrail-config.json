@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "description": "가드레일 정책 단일 소스. 런타임 분류와 CI 스캔이 이 파일 하나를 본다. 임계값을 코드 상수로 흩뿌리지 말 것. 사용자 환경에 맞게 수정.",
+  "input_guardrail": {
+    "normalize": ["nfkc", "strip_zero_width", "homoglyph_fold", "decode_then_reclassify"],
+    "rate_limit": { "max_tokens_per_request": 8000, "max_requests_per_min": 30 },
+    "classify_before_llm": true,
+    "short_circuit_on": ["crisis", "block"]
+  },
+  "risk_tiers": {
+    "block": {
+      "categories": ["csae", "weapons_synthesis", "credential_theft", "explosives"],
+      "input_action": "reject_with_safe_message",
+      "output_action": "discard_and_safe_message",
+      "audit": true
+    },
+    "crisis": {
+      "categories": ["self_harm", "suicide_signal"],
+      "input_action": "route_to_crisis_resources",
+      "output_action": "replace_with_crisis_resources",
+      "expose_model_text": false,
+      "audit": true
+    },
+    "soften": {
+      "categories": ["mild_profanity", "sensitive_topic"],
+      "input_action": "allow",
+      "output_action": "rewrite_to_policy_tone",
+      "audit": false
+    },
+    "warn": {
+      "categories": ["medical_advice", "financial_advice", "legal_advice"],
+      "input_action": "allow",
+      "output_action": "attach_disclaimer_and_cite",
+      "audit": false
+    },
+    "allow": {
+      "categories": ["general"],
+      "input_action": "allow",
+      "output_action": "allow",
+      "audit": false
+    }
+  },
+  "output_guardrail": {
+    "deterministic_final_gate": true,
+    "pii_scan": ["email", "phone", "national_id", "card_number", "address"],
+    "on_pii_detected": "mask",
+    "prompt_leak_filter": true
+  },
+  "pii_logging": {
+    "minimize_collection": true,
+    "mask_before_log": true,
+    "audit_log_fields": ["ts", "route", "model", "input_class", "output_action", "pii_masked", "latency_ms"],
+    "audit_log_mode": "append_only",
+    "retention_days": 30,
+    "delete_on_consent_withdrawal": true,
+    "never_log_plaintext": ["api_key", "secret", "raw_pii"]
+  },
+  "agent_tools": {
+    "allowlist_only": true,
+    "human_approval_required": ["delete", "transfer_funds", "send_email", "external_post"],
+    "treat_external_content_as_data_only": true
+  },
+  "regulation": {
+    "age_gating": true,
+    "under_14_requires_verifiable_guardian_consent": true,
+    "ai_disclosure": true,
+    "high_risk_auto_decision_human_in_loop": true,
+    "vendor_training_opt_out_verified": false,
+    "vendor_data_region": "TODO",
+    "last_vendor_policy_checked": "TODO-YYYY-MM-DD"
+  }
+}
