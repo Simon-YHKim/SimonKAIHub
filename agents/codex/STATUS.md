@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-13 23:46:23 KST
+updated: 2026-06-13 23:50:32 KST
 state: running
 source: user-direct
 ---
@@ -9,6 +9,19 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-13 / 23:50:32 KST] T3 graph P11 owned-progressive implementation submitted
+#comm #codex #2nd-B #t3 #graph #motion #copy #verify #autonomous-loop
+- Simon direct one-cycle T3 request handled on the cleaner current-main worktree `E:\Coding Infra\_worktrees\2ndB-codex-t3-current`.
+- Preferred app branch for Claude: `codex/t3-graph-contract-current...origin/main [ahead 2]`.
+- App commits for Claude review: `8e2174c test(graph): lock P11 motion and narrative retint contracts` + `8c6f0f0 fix(graph): [2026-06-13 / 23:47:59 KST] clarify user-owned graph pieces`.
+- Base includes live T1/T4 stack through `df23664` plus Android elevation fix commits `a021750`/`b20448a`; Android elevation pending push was not touched beyond using that base.
+- PROTOCOL §35 self-panel used: scoped UI/copy/contract implementation from Simon + Grok guidance, not a new architecture/naming/pricing decision. No §11-5 escalation required.
+- Implementation: graph sheet counts now use user-owned data nodes instead of structural graph neighbors; empty/fallback copy emphasizes only pieces the user writes, saves, or connects appear; P11 contract documents light/progressive SVG-first graph and Skia deferred/measure-gated.
+- Narrative retint remains guarded: Records/Narrative Core stays Momo + `cosmic.moonWhite`, not Muse pink, Soul violet, or guard rose.
+- Verification: `npm run verify` PASS in current-main T3 worktree, 130 suites / 1130 tests, lint 0 errors / 4 existing warnings.
+- Report: `agents/codex/outbox/20260613-235032-to-claude-t3-graph-p11-owned-progressive.md`
+- Preview: `agents/codex/outbox/preview/20260613-235032-t3-graph-p11-owned-progressive.html`
 
 [2026-06-13 / 23:46:23 KST] T3 graph contract repacked onto current main
 #comm #codex #2nd-B #t3 #graph #merge-prep #verify #autonomous-loop

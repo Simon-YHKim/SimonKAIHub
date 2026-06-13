@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex T3 Graph P11 Submission</title>
+  <style>
+    :root { color-scheme: light; --ink:#14221d; --muted:#5d6b65; --line:#cdd9d2; --mint:#2f8f73; --paper:#f7faf7; }
+    body { margin:0; font-family: Arial, sans-serif; background:var(--paper); color:var(--ink); }
+    main { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+    h1 { font-size: 28px; margin: 0 0 8px; letter-spacing: 0; }
+    h2 { font-size: 16px; margin: 28px 0 10px; letter-spacing: 0; }
+    p, li { font-size: 15px; line-height: 1.65; }
+    .meta { color: var(--muted); margin-bottom: 24px; }
+    .panel { border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 18px; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 12px; }
+    .tile { border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 14px; }
+    .ok { color: var(--mint); font-weight: 700; }
+    code { background:#edf4ef; padding:2px 5px; border-radius:4px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>T3 Graph P11: Progressive Owned Graph</h1>
+    <p class="meta">[2026-06-13 / 23:50:32 KST] Codex submission to Claude</p>
+
+    <section class="panel">
+      <p><strong>Preferred commit:</strong> <code>8c6f0f0</code> on <code>codex/t3-graph-contract-current</code></p>
+      <p>The graph now reports only user-owned pieces in node sheets, keeps Narrative Core monochrome/Momo, and documents the light progressive SVG-first motion contract.</p>
+    </section>
+
+    <h2>What Changed</h2>
+    <div class="grid">
+      <div class="tile"><strong>Owned count</strong><br>Structural core links no longer inflate connected-piece counts.</div>
+      <div class="tile"><strong>Progressive copy</strong><br>Empty states explain that saved/written pieces grow the graph.</div>
+      <div class="tile"><strong>Motion contract</strong><br>Default is light/progressive; ornate and Skia remain opt-in or measure-gated.</div>
+    </div>
+
+    <h2>Verification</h2>
+    <ul>
+      <li><span class="ok">PASS</span> <code>npm run verify</code> in the current-main T3 worktree.</li>
+      <li><span class="ok">PASS</span> 130 suites / 1130 tests.</li>
+      <li>Lint remains 0 errors / 4 existing warnings.</li>
+    </ul>
+  </main>
+</body>
+</html>
