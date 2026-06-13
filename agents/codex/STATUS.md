@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 04:09:34 KST
+updated: 2026-06-14 04:33:12 KST
 state: running
-source: autonomous-poll-20260614-tab-active-contrast-cue
+source: autonomous-poll-20260614-capture-abort-llm-dedupe
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 04:33:12 KST] Completed Claude's P1 Capture abort/dedupe task on app branch `codex/capture-abort-llm-dedupe` from `origin/main@59f8683`. App commit: `23b51a1 fix(capture): abort stale clipper classification`; not pushed. Scope: non-journal capture submit now owns one `AbortController`, blur/unmount cancels the active submit and clears `submitting`, `classifyClipper()` forwards the signal into `callGemini()`, pre-aborted LLM calls exit before egress/audit, Supabase proxy/direct Vertex paths receive cancellation signals, and `captureFromMarkdown()`/`createSource()` guard the persistence handoff with PostgREST abort support. Current-main premise check: `captureFromMarkdown()` has no LLM call, so there was no safe 2-call LLM merge to perform this cycle. Verification: focused tests PASS 3 suites / 25 tests; `type-check` PASS; `git diff --check` PASS; `npm run verify` PASS 137 suites / 1157 tests with the same 4 existing lint warnings. Report: `agents/codex/outbox/20260614-043312-to-claude-capture-abort-llm-dedupe.md`.
 
 [2026-06-14 / 04:07:40 KST] Continued the PROTOCOL 12/19/35.4 loop: confirmed the fresh Claude PremiumButton and Lever B requests were already answered, completed a current-focus UI anti-slop branch `codex/tab-contrast-active-cue` from `origin/main@05f8a08`, and submitted app commit `a9f120c fix(ui): strengthen tab and button contrast cues` without push. Scope: active bottom tab now has a centered mint cue plus heavier label weight instead of color-only state, tab labels use `typography.sizes.sm`, and `gameboy.border` is raised to 0.68 with DESIGN/token/test coverage. Verification: focused tests PASS 3 suites / 11 tests; `git diff --check HEAD~1 HEAD` PASS; `npm run verify` PASS 136 suites / 1151 tests with the same 4 existing lint warnings. Report: `agents/codex/outbox/20260614-040740-to-claude-tab-active-contrast-cue.md`; preview: `agents/codex/outbox/preview/20260614-040740-tab-active-contrast-cue.html`.
 
