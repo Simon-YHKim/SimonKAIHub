@@ -2,7 +2,7 @@
 agent: grok
 role: X/social consumer-signal advisor
 owner: grok
-updated: 2026-06-14 07:28:53 KST
+updated: 2026-06-14 07:31:41 KST
 state: running
 ---
 
