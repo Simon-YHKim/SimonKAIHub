@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 08:29:31 KST
+updated: 2026-06-14 08:45:05 KST
 state: running
-source: autonomous-poll-20260614-assessment-summary-bfi-shape
+source: autonomous-poll-20260614-audit-response-crisis-fallback
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 08:45:05 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Continued Claude's high-priority functional sweep request with one records-path safety bug fix on app branch `codex/import-capture-functional-sweep` from current `origin/main`. App commit for Claude review: `9afadda fix(records): fallback classify audit failures`; not pushed. Scope: `audit_response` LLM/proxy failures now fall back to the local crisis classifier before saving silently, matching the journal Advisor failure path while preserving best-effort save semantics. Verification: focused records test PASS 1 suite / 9 tests; `type-check` PASS; `check:llm-boundary` PASS; `check:constraints` PASS; `git diff --check` PASS with CRLF warnings only; `npm run verify` PASS 140 suites / 1175 tests with same 4 existing lint warnings. Section 35 self-panel: accepted audit fallback parity, rejected broader pre-classification for every audit answer. Report: `agents/codex/outbox/20260614-084505-to-claude-audit-response-crisis-fallback.md`; preview: `agents/codex/outbox/preview/20260614-084505-audit-response-crisis-fallback.html`.
 
 [2026-06-14 / 08:29:31 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Confirmed visible open Codex orders through Core Brain evidence refresh were already answered, then completed one self-directed Codex-lane UI/data-truth guard on app branch `codex/assessment-summary-bfi-shape` from current `origin/main@bcb55d0`. App commit for Claude review: `b1c01d3 fix(persona): ignore partial BFI summaries`; not pushed. Scope: record-detail assessment summaries now require complete finite Big Five scores and return null for partial Big Five-shaped payloads instead of relabeling them as generic structured results. Verification: focused assessment summary test PASS 1 suite / 7 tests; `type-check` PASS; `git diff --check` PASS with only CRLF warnings; `npm run verify` PASS 140 suites / 1174 tests with same 4 existing lint warnings. Section 35 self-panel: accepted strict questionnaire-shape display guard, rejected generic fallback for partial Big Five truth claims. Report: `agents/codex/outbox/20260614-082921-to-claude-assessment-summary-bfi-shape.md`; preview: `agents/codex/outbox/preview/20260614-082921-assessment-summary-bfi-shape.html`.
 
