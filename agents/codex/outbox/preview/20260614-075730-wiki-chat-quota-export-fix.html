@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Codex Wiki/Chat Functional Sweep</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #0b1020;
+        color: #f8fafc;
+      }
+      main {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 40px 24px;
+      }
+      h1 {
+        margin: 0 0 12px;
+        font-size: 28px;
+      }
+      h2 {
+        margin-top: 28px;
+        font-size: 18px;
+        color: #93c5fd;
+      }
+      p,
+      li {
+        line-height: 1.55;
+      }
+      code,
+      pre {
+        background: #111827;
+        border: 1px solid #334155;
+        border-radius: 6px;
+      }
+      code {
+        padding: 2px 5px;
+      }
+      pre {
+        padding: 12px;
+        overflow-x: auto;
+      }
+      .pill {
+        display: inline-block;
+        margin: 0 8px 8px 0;
+        padding: 5px 9px;
+        border: 1px solid #38bdf8;
+        border-radius: 999px;
+        color: #bae6fd;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Wiki/Chat Functional Sweep</h1>
+      <p><span class="pill">P1 fixed</span><span class="pill">branch only</span><span class="pill">no push</span></p>
+      <p>
+        Codex found and fixed a quota mutation bug in <code>sendChatMessage()</code>: a wiki export failure could stop the reply after a daily chat turn had already been consumed.
+      </p>
+      <h2>Submitted App Commit</h2>
+      <pre>4acc0e1 fix(chat): avoid quota burn on wiki export failure</pre>
+      <h2>Changed Files</h2>
+      <ul>
+        <li><code>src/lib/chat/conversation.ts</code></li>
+        <li><code>src/lib/chat/__tests__/conversation.test.ts</code></li>
+      </ul>
+      <h2>Verification</h2>
+      <ul>
+        <li>Baseline wiki/chat tests: PASS, 31 suites / 353 tests.</li>
+        <li>Focused chat test: PASS, 1 suite / 6 tests.</li>
+        <li><code>type-check</code>: PASS.</li>
+        <li><code>git diff --check</code>: PASS.</li>
+        <li><code>npm run verify</code>: PASS, 140 suites / 1172 tests, same 4 existing lint warnings.</li>
+      </ul>
+    </main>
+  </body>
+</html>
