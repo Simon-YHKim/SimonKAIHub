@@ -12,7 +12,8 @@
 param(
   [Parameter(Mandatory=$true)][ValidateSet("claude","codex","antigravity","grok")][string]$As,
   [Parameter(Mandatory=$true)][string]$Message,
-  [string[]]$Files = @()
+  [string[]]$Files = @(),
+  [Alias("SkipGuard")][switch]$Force
 )
 
 $utf8 = [System.Text.UTF8Encoding]::new($false)
@@ -33,6 +34,86 @@ Set-Location $root
 
 if ($Files.Count -gt 0) {
   foreach ($f in $Files) { git add -- $f }
+}
+
+# ----------------------------------------------------------------------------
+# PRE-COMMIT GUARD (recurrence prevention for incidents #2 and #3)
+#   #2  cp949 / U+FFFD corruption -- a file saved via Out-File default cp949
+#       (or otherwise mojibaked) silently lands in git and breaks all readers.
+#   #3  unbounded STATUS bloat   -- agents/*/STATUS.md grows without bound and
+#       eventually wrecks the hub (must stay small; rotate to a gitignored log).
+# Default ON. Bypass for legitimately large/binary-ish files with -Force.
+# ----------------------------------------------------------------------------
+$SizeLimitBytes = 256 * 1024   # 256 KB threshold for committed .md files
+$TextExtForEnc  = @(".md", ".json", ".ps1", ".sh")
+
+function Get-StagedFiles {
+  # Files actually about to be committed = current staged index.
+  $out = git diff --cached --name-only --diff-filter=ACMR
+  if (-not $out) { return @() }
+  return @($out | Where-Object { $_ -and $_.Trim() -ne "" })
+}
+
+function Test-FileEncoding([string]$path) {
+  # Returns the offending reason string, or $null if clean.
+  # (a) explicit U+FFFD replacement-char byte sequence EF BF BD
+  # (b) strict UTF-8 decode failure (throws on invalid bytes)
+  $bytes = [System.IO.File]::ReadAllBytes($path)
+  for ($i = 0; $i -le $bytes.Length - 3; $i++) {
+    if ($bytes[$i] -eq 0xEF -and $bytes[$i+1] -eq 0xBF -and $bytes[$i+2] -eq 0xBD) {
+      return "U+FFFD replacement char (EF BF BD) at byte offset $i"
+    }
+  }
+  try {
+    $strict = [System.Text.UTF8Encoding]::new($false, $true)  # throwOnInvalidBytes = true
+    [void]$strict.GetString($bytes)
+  } catch {
+    return "not valid UTF-8 (strict decode failed: $($_.Exception.Message))"
+  }
+  return $null
+}
+
+if (-not $Force) {
+  $staged = Get-StagedFiles
+  if ($staged.Count -gt 0) {
+    $problems = @()
+    foreach ($rel in $staged) {
+      $abs = Join-Path $root $rel
+      if (-not (Test-Path -LiteralPath $abs)) { continue }  # deletes etc.
+      $ext = [System.IO.Path]::GetExtension($rel).ToLowerInvariant()
+
+      # (a) ENCODING guard for text-ish files
+      if ($TextExtForEnc -contains $ext) {
+        $reason = Test-FileEncoding $abs
+        if ($reason) {
+          $problems += "  [ENC]  ${rel}: $reason"
+        }
+      }
+
+      # (b) SIZE guard for committed .md files (STATUS.md and any markdown)
+      if ($ext -eq ".md") {
+        $len = (Get-Item -LiteralPath $abs).Length
+        if ($len -gt $SizeLimitBytes) {
+          $kb = [math]::Round($len / 1KB, 1)
+          $problems += "  [SIZE] ${rel}: ${kb} KB exceeds $([int]($SizeLimitBytes/1KB)) KB"
+        }
+      }
+    }
+
+    if ($problems.Count -gt 0) {
+      Write-Host ""
+      Write-Host "[commit] PRE-COMMIT GUARD 차단 -- 커밋을 중단합니다." -ForegroundColor Red
+      foreach ($p in $problems) { Write-Host $p -ForegroundColor Red }
+      Write-Host ""
+      Write-Host "조치:" -ForegroundColor Yellow
+      Write-Host "  [ENC]  cp949/Out-File 손상 가능성. 해당 파일을 Edit/Write로 UTF-8(no BOM) 재저장하세요." -ForegroundColor Yellow
+      Write-Host "  [SIZE] STATUS.md 등은 작게 유지. 내용을 잘라내거나 .gitignore된 *.log 로 회전하세요." -ForegroundColor Yellow
+      Write-Host "  정당한 대용량/예외 파일이면 -Force (별칭 -SkipGuard) 로 가드를 건너뛸 수 있습니다." -ForegroundColor Yellow
+      exit 1
+    }
+  }
+} else {
+  Write-Host "[commit] PRE-COMMIT GUARD 건너뜀 (-Force)." -ForegroundColor DarkYellow
 }
 
 # author + committer 둘 다 해당 AI로 박는다 (git log/blame/contributors에 드러남)
