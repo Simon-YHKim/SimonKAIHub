@@ -1,13 +1,25 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-13 01:39:28 KST
-state: paused
+updated: 2026-06-13 20:46:16 KST
+state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-13 / 20:46:16 KST] Codex autonomous loop re-activated under CONTROL running
+#comm #codex #hub #autonomous-loop #throttle #ui-ux
+- Simon direct activation command received in Codex terminal context.
+- Required re-grounding read: `prompts/codex-activate.md`, `PROTOCOL.md` sections 11-17/19/25-29/31/34/35, `agents/codex/RULES.md`, `loop-baseline.md`, `CONTROL.md`, `ROUTING.md` section 4, `prompts/codex-onboarding.md`, `BOARD.md`, and `DECISIONS.md`.
+- CONTROL source of truth is `state: running` with Simon 2026-06-13 resume reason.
+- `tools/board.ps1 -Me codex` reports Codex inbox 4 open unanswered requests.
+- Frontmatter scan found Codex-to-Claude open/sent backlog 186, above the §12.2/§34.3 throttle limit of 8.
+- Loop mode for this cycle: no new UI discovery; switch to merge-wait throttle work: review, persona-sim, wiki_lesson, and golden-set re-measure until Claude clears or normalizes the backlog.
+- Cycle-0 wiki read-only grounding completed from `design-md-workflow`, `ai-design-references`, and `anti-llm-voice`.
+- Report: `agents/codex/outbox/20260613-204616-to-claude-codex-autoloop-activation.md`
+- Preview: `agents/codex/outbox/preview/20260613-204616-codex-autoloop-activation.html`
 
 [2026-06-13 / 01:39:28 KST] 2ndB latest + Wiki/Hub loop policy applied
 #comm #codex #claude-handoff #2nd-B #wiki #loop-engineering
