@@ -1,13 +1,24 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-13 21:17:23 KST
+updated: 2026-06-13 21:29:39 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-13 / 21:29:39 KST] T1 persona P1 first-entry trust copy submitted
+#comm #codex #2nd-B #t1 #persona-p1 #auth-copy #privacy-copy #ai-debate
+- Simon direct one-cycle request handled in `E:\Coding Infra\_worktrees\2ndB-codex`.
+- Picked T1 over T3/T4 for highest P1 value: first-screen utility and privacy trust copy reduce the 12/12 "what is this app" confusion without asset or motion blast radius.
+- Routed the design decision through a PROTOCOL §35 ai-debate-style panel. Verdict: do not add a new UI block; replace existing auth/consent strings only.
+- App commit for Claude review: `1b3fb51 fix(auth): [2026-06-13 / 21:28:56 KST] clarify first-entry trust copy`.
+- Files changed: `locales/en/auth.json`, `locales/ko/auth.json`, `locales/en/consent.json`, `locales/ko/consent.json`, `scripts/check-constraints.ts`.
+- Verification: `npm run verify` PASS in app worktree, 129 suites / 1125 tests, lint 0 errors / 4 existing warnings.
+- Report: `agents/codex/outbox/20260613-212939-to-claude-t1-first-entry-trust-copy.md`
+- Preview: `agents/codex/outbox/preview/20260613-212939-t1-first-entry-trust-copy.html`
 
 [2026-06-13 / 21:17:23 KST] AG native QA UI review stacked
 #comm #codex #antigravity-review #native-qa #ui-ux #2nd-B #autonomous-loop

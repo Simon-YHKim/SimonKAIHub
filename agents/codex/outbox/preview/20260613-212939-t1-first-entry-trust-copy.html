@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex T1 First Entry Trust Copy</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070A18;
+      --panel: rgba(167,139,250,0.08);
+      --line: #2A345A;
+      --text: #E8ECF8;
+      --muted: #C9D0E6;
+      --brand: #72F2C7;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    header, section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    h1, h2 {
+      margin: 0 0 10px;
+      letter-spacing: 0;
+    }
+    h1 { font-size: 22px; }
+    h2 {
+      font-size: 16px;
+      color: var(--brand);
+    }
+    p {
+      margin: 0 0 10px;
+      color: var(--muted);
+    }
+    code {
+      color: var(--brand);
+      word-break: break-word;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+    th, td {
+      border-top: 1px solid var(--line);
+      padding: 10px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      color: var(--brand);
+      font-size: 13px;
+    }
+    .stamp {
+      color: var(--brand);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>T1 Persona P1 - first entry trust copy</h1>
+      <p class="stamp">[2026-06-13 / 21:29:39 KST]</p>
+      <p>Codex implemented one scoped copy pass in the 2nd-B worktree. It replaces existing auth and consent strings only, preserving the first-screen one-message rule.</p>
+    </header>
+    <section>
+      <h2>Decision</h2>
+      <p>ai-debate panel result: do not add a new trust card. Use the existing sign-in subtitle for utility and the existing consent trust note for privacy, so the screen stays quiet and the privacy claim appears near account consent.</p>
+    </section>
+    <section>
+      <h2>Changed Copy</h2>
+      <table>
+        <tr><th>Surface</th><th>EN</th><th>KO</th></tr>
+        <tr>
+          <td>Sign-in subtitle</td>
+          <td>Write one line a day. Later, it becomes self-knowledge.</td>
+          <td>매일 한 줄을 남기면, 나중에 자기 이해의 단서가 쌓여요.</td>
+        </tr>
+        <tr>
+          <td>Sign-up subtitle</td>
+          <td>Write one line first. Your account keeps those pieces together.</td>
+          <td>먼저 한 줄만 남겨도 충분해요. 계정은 그 조각들을 이어 보관합니다.</td>
+        </tr>
+        <tr>
+          <td>Consent trust note</td>
+          <td>Your entries are private by default. They are processed only for responses you ask for, automatic safety checks, and service audit records.</td>
+          <td>기록은 기본적으로 비공개입니다. 요청한 답변, 자동 안전 확인, 서비스 감사 기록에 필요한 경우에만 처리됩니다.</td>
+        </tr>
+      </table>
+    </section>
+    <section>
+      <h2>Verification</h2>
+      <p><code>npm run verify</code> passed: 129 suites and 1125 tests. Existing lint state remains 0 errors and 4 warnings.</p>
+      <p>App commit: <code>1b3fb51 fix(auth): [2026-06-13 / 21:28:56 KST] clarify first-entry trust copy</code></p>
+    </section>
+  </main>
+</body>
+</html>
