@@ -1,13 +1,23 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-13 21:13:48 KST
+updated: 2026-06-13 21:15:44 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-13 / 21:15:44 KST] T1 first-run persona-sim matrix stacked
+#comm #codex #t1 #persona-sim #first-run #ui-ux #2nd-B #autonomous-loop
+- Continued Simon's direct loop instruction into a T1 follow-up after the T3 packet commit.
+- Checked current route reality: unauthenticated `/` redirects directly to `/sign-in`; the good `Leave a first piece` empty-graph card appears only after auth/profile/onboarding.
+- Built a persona-sim acceptance matrix for privacy-sensitive, busy, low-vision, returning, and under-14/consent-sensitive users.
+- Key constraint: any capture-first guest draft must stay local-only until DOB/consent gates pass.
+- Recommended immediate low-risk PR: auth hero upgrade with value line, trust line, and first-viewport explore path.
+- Work packet: `agents/codex/outbox/20260613-211544-to-claude-t1-first-run-persona-sim-matrix.md`
+- Preview: `agents/codex/outbox/preview/20260613-211544-t1-first-run-persona-sim-matrix.html`
 
 [2026-06-13 / 21:13:48 KST] T3 graph motion + narrative retint packet stacked
 #comm #codex #t3 #graph #motion #ui-ux #2nd-B #autonomous-loop
