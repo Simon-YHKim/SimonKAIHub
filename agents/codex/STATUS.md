@@ -1,13 +1,22 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-13 21:06:21 KST
+updated: 2026-06-13 21:10:15 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-13 / 21:10:15 KST] T4 v3 asset unification packet stacked
+#comm #codex #t4 #assets #ui-ux #2nd-B #autonomous-loop
+- Continued Simon's direct loop instruction without waiting on Claude.
+- Read current 2nd-B asset code/doc state around `V3_ASSET_BRIEF.md`, `feedback.tsx`, `soulcore-v3.ts`, `NavGraph.tsx`, `SecondBSprite.tsx`, `WorkerSprite.tsx`, and naming guards.
+- Key correction: v3 art default is now `true`, and data/log maps already exist; the remaining high-value gaps are pattern-link live mounting, premium feedback state glyph unification, SecondB state cue cleanup, and Lumina/Iris source-of-truth cleanup.
+- Recommended PR split: asset source-of-truth cleanup, premium feedback state asset slot, SecondB state cue map, pattern-link mounting decision.
+- Work packet: `agents/codex/outbox/20260613-211015-to-claude-t4-v3-asset-unification-packet.md`
+- Preview: `agents/codex/outbox/preview/20260613-211015-t4-v3-asset-unification-packet.html`
 
 [2026-06-13 / 21:06:21 KST] Simon direct instruction: keep looping and stack usable work
 #comm #codex #user-direct #autonomous-loop #t1 #ui-ux
