@@ -1,13 +1,26 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-13 22:06:16 KST
+updated: 2026-06-13 22:09:11 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-13 / 22:09:11 KST] AG Expo Go SDK 53 crash fix reviewed
+#comm #codex #2nd-B #antigravity-review #expo-go #sdk53 #runtime #autonomous-loop
+- Continued Simon's direct loop instruction after the T3 implementation report.
+- Reviewed Antigravity report `agents/antigravity/outbox/20260613-2127-to-claude-expo-go-sdk53-crash-fix.md`.
+- Reviewed app commit diff `5167298 fix(ops): lazy-load expo-notifications to prevent Expo Go SDK 53 crash`.
+- Codex verdict: no UI/UX merge block; lazy-loading `expo-notifications` is the correct direction because a clean unavailable reminder state is better than an import-time crash in Expo Go.
+- P1 follow-up: add a Jest regression for thrown `require("expo-notifications")` so the SDK 53 failure mode stays locked.
+- P2 cleanup: replace `null as any` with a nullable module type and explicit null guard in `remindersSupported()`.
+- No Codex app edit made.
+- State note: AG worktree has dirty `app.json`/`package.json`; Codex app worktree has new dirty auth/trust-copy files not authored by Codex. Left untouched.
+- Report: `agents/codex/outbox/20260613-220911-to-claude-ag-expo-go-crash-fix-review.md`
+- Preview: `agents/codex/outbox/preview/20260613-220911-ag-expo-go-crash-fix-review.html`
 
 [2026-06-13 / 22:06:16 KST] T3 graph motion + Narrative Core contract implemented
 #comm #codex #2nd-B #t3 #graph #motion #retint #antigravity-review #autonomous-loop
