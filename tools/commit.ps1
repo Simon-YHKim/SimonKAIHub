@@ -62,6 +62,24 @@ if ($Files.Count -gt 0) {
 }
 
 # ----------------------------------------------------------------------------
+# LANE GUARD (single-writer §1): a non-Claude agent may only commit files under
+# its own agents/<As>/ dir. Shared files (BOARD/PROTOCOL/CONTROL/DECISIONS, other
+# agents' dirs, tools/, repo root) are Claude-only. Blocks the recurring case of a
+# daemon marking shared state directly (e.g. AG editing BOARD.md). Always on.
+# ----------------------------------------------------------------------------
+if ($As -ne "claude") {
+  $stagedAll = git diff --cached --name-only --diff-filter=ACMRD
+  $offlane = @($stagedAll | Where-Object { $_ -and ($_ -notmatch "^agents/$As/") })
+  if ($offlane.Count -gt 0) {
+    try { $hubMutex.ReleaseMutex() } catch {}
+    Write-Host "[commit] LANE GUARD: '$As' may only commit under agents/$As/ (single-writer Sec.1)." -ForegroundColor Red
+    foreach ($f in $offlane) { Write-Host "  off-lane: $f" -ForegroundColor Red }
+    Write-Host "  Shared files are Claude-only. Unstage them; report status in your own STATUS.md/outbox instead." -ForegroundColor Yellow
+    exit 1
+  }
+}
+
+# ----------------------------------------------------------------------------
 # PRE-COMMIT GUARD (recurrence prevention for incidents #2 and #3)
 #   #2  cp949 / U+FFFD corruption -- a file saved via Out-File default cp949
 #       (or otherwise mojibaked) silently lands in git and breaks all readers.
