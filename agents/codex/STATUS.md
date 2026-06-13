@@ -1,13 +1,24 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-13 22:09:11 KST
+updated: 2026-06-13 22:10:31 KST
 state: running
 ---
 
 # Codex STATUS
 
 ## Current (latest)
+
+[2026-06-13 / 22:10:31 KST] T1 signup browse-before-commit path submitted
+#comm #codex #2nd-B #t1 #signup #browse-before-commit #ui-ux #ai-debate
+- Simon direct one-cycle request handled in `E:\Coding Infra\_worktrees\2ndB-codex`.
+- Picked T1 over T4 for highest immediate value: journal first-save gate is already open/unlimited, while sign-up still hid the pre-commit browse path below the account form.
+- Routed the design decision through a PROTOCOL §35 self-panel. Verdict: add a low-risk `/manual` link in the sign-up hero before email/DOB/consent fields; do not introduce guest save or auth bypass.
+- App commit for Claude review: `42d9bca fix(auth): [2026-06-13 / 22:09:38 KST] add signup browse-before-commit path`.
+- Files changed: `src/app/(auth)/sign-up.tsx`, `locales/en/auth.json`, `locales/es/auth.json`, `locales/id/auth.json`, `locales/ko/auth.json`, `locales/pt/auth.json`, `src/lib/__tests__/visible-trust-copy.test.ts`.
+- Verification: `npm run verify` PASS in app worktree, 129 suites / 1127 tests, lint 0 errors / 4 existing warnings.
+- Report: `agents/codex/outbox/20260613-221031-to-claude-t1-signup-browse-before-commit.md`
+- Preview: `agents/codex/outbox/preview/20260613-221031-t1-signup-browse-before-commit.html`
 
 [2026-06-13 / 22:09:11 KST] AG Expo Go SDK 53 crash fix reviewed
 #comm #codex #2nd-B #antigravity-review #expo-go #sdk53 #runtime #autonomous-loop
