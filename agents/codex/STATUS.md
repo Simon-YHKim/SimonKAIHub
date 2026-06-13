@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-13 22:31:30 KST
+updated: 2026-06-13 22:47:06 KST
 state: running
 source: user-direct
 ---
@@ -10,19 +10,20 @@ source: user-direct
 
 ## Current
 
-[2026-06-13 / 22:31:30 KST] T4 premium feedback state assets submitted
-#comm #codex #2nd-B #t4 #assets #feedback #ui-ux #autonomous-loop
+[2026-06-13 / 22:47:06 KST] T4 v10 Pattern Data asset weight submitted
+#comm #codex #2nd-B #t4 #assets #graph #performance #autonomous-loop
 - Simon direct one-cycle request handled in `E:\Coding Infra\_worktrees\2ndB-codex`.
-- Picked T4 over T3 because T3 already has a submitted P11 motion/narrative-retint contract, while `feedback.tsx` still had same-rectangle empty/error state art.
-- PROTOCOL §35 self-panel used for design choice: keep SVG/React Native render path, do not migrate to Skia, and add a narrow state-asset layer using existing v3 SVG bindings.
-- App commit for Claude review: `6e44bda fix(ui): [2026-06-13 / 22:31:13 KST] add premium feedback state assets`.
-- Files changed in app worktree: `src/components/premium/feedback.tsx`, `scripts/check-constraints.ts`.
-- Implementation: `PremiumEmptyState` now renders a v3 log-chip state asset, `PremiumErrorState` renders a v3 pattern-data state asset with a rose fault pixel, and the old stale `Gadi` safety comment is removed in favor of system-only rose semantics.
-- Regression guard: new `PremiumFeedbackStateAssets` constraint keeps empty/error states from reverting to the old shared rectangle.
-- Verification: `npm run verify` PASS in app worktree, 129 suites / 1127 tests, lint 0 errors / 4 existing warnings.
-- Branch note: app worktree is `codex/work...origin/main [ahead 4, behind 2]`; `origin/main` is `79c1cf4`. Claude should reconcile the existing Codex stack before merge.
-- Report: `agents/codex/outbox/20260613-223130-to-claude-t4-feedback-state-assets.md`
-- Preview: `agents/codex/outbox/preview/20260613-223130-t4-feedback-state-assets.html`
+- Picked T4 asset weight over T3 because the Android runtime smoke identified a concrete low-end performance and bundle-size regression: 9 v10 Pattern Data color PNGs at about 15.07 MiB.
+- PROTOCOL §35 self-panel used: this is a scoped performance/asset-weight fix, not a new architecture or naming decision, so no 4-AI escalation required.
+- App commit for Claude review: `62505c1 fix(assets): [2026-06-13 / 22:46:19 KST] replace v10 pattern data PNGs`.
+- Files changed in app worktree: `src/components/art/SoulcoreFinalArt.tsx`, `src/components/art/__tests__/tesseract-v10-asset-weight.test.ts`, `public/assets/tesseract-v10/README.md`, `public/assets/tesseract-v10/manifest.json`, and deleted `public/assets/tesseract-v10/pattern_data_*.png`.
+- Implementation: v10 Pattern Data now renders through one recolorable `react-native-svg` crystal renderer while v45/v49 preview variants keep their existing static PNGs.
+- Asset reduction: removed 15,799,390 bytes / 15.07 MiB from the v10 Pattern Data set.
+- Regression guard: `tesseract-v10-asset-weight.test.ts` fails if `pattern_data_*.png` files or v10 static PNG requires return.
+- Verification: targeted test PASS, `npm run type-check` PASS, `npm run verify` PASS in app worktree, 130 suites / 1129 tests, lint 0 errors / 4 existing warnings.
+- Branch note: app worktree is `codex/work...origin/main [ahead 5, behind 3]`; `origin/main` is `d419889`. Claude should cherry-pick `62505c1` or reconcile the existing Codex stack before merge.
+- Report: `agents/codex/outbox/20260613-224706-to-claude-t4-v10-pattern-data-asset-weight.md`
+- Preview: `agents/codex/outbox/preview/20260613-224706-t4-v10-pattern-data-asset-weight.html`
 
 ## Operating Notes
 
