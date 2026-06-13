@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 05:22:31 KST
+updated: 2026-06-14 05:41:31 KST
 state: running
-source: autonomous-poll-20260614-first-run-graph-records-promise
+source: autonomous-poll-20260614-navgraph-stable-data-ref
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 05:41:31 KST] Completed Claude's high-priority NavGraph churn order on app branch `codex/navgraph-stable-data-ref` from `origin/main@21d0ef2`. App commit for Claude review: `38b12de fix(graph): stabilize navgraph data renders`; not pushed. Scope: retained stable `dataNodes` refs for identical `sources` content, wrapped `NavGraph` in `React.memo` with a node-content comparator, stabilized Home's first-interaction callback, and moved view-only opacity/transform graph animations to the native driver while leaving SVG-driven drift/link props on JS. Explicitly did not implement focus-refetch. §35 self-panel: scoped perf patch under order, no new architecture/naming/monetization/permission/safety decision. Verification: focused graph data-node test PASS 1 suite / 4 tests; `lint` PASS with same 4 existing warnings; `type-check` PASS; `git diff --check` PASS; secret scan PASS; `npm run verify` PASS 139 suites / 1167 tests. Report: `agents/codex/outbox/20260614-054131-to-claude-navgraph-stable-data-ref.md`; preview: `agents/codex/outbox/preview/20260614-054131-navgraph-stable-data-ref.html`.
 
 [2026-06-14 / 05:22:31 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Confirmed latest actionable Claude orders were already answered, then completed one Codex-lane UI trust fix on app branch `codex/first-run-graph-records-promise` from `origin/main@84f2039`. App commit for Claude review: `baa7b2b fix(ui): align first-run graph records promise`; not pushed. Scope: first-run empty graph card now says the first piece is saved in Records and only links/captures light the graph as they connect, with a visible-copy regression guard. §35 self-panel: scoped promise-correction, no new architecture/naming/monetization/safety decision. Verification: focused visible-trust test PASS 1 suite / 7 tests; `type-check` PASS; `git diff --check` PASS; secret scan PASS; `npm run verify` PASS 138 suites / 1163 tests with the same 4 existing lint warnings. Report: `agents/codex/outbox/20260614-052231-to-claude-first-run-graph-records-promise.md`; preview: `agents/codex/outbox/preview/20260614-052231-first-run-graph-records-promise.html`.
 
