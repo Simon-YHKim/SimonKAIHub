@@ -12,7 +12,6 @@
     "./skills/ai-safety-eval/",
     "./skills/gcloud-helper/",
     "./skills/llm-eval/",
-    "./skills/model-router/",
     "./skills/prompt-engineering/",
     "./skills/rag-builder/",
     "./skills/skaihub/"
