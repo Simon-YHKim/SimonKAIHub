@@ -59,12 +59,20 @@ function Invoke-AI([string]$ai){
     'antigravity' { "antigravity lane = native/emulator QA; report findings only, no push." }
   }
   $prompt = "You are $ai in the 4-AI hub (root: $root). Run ONE autonomous poll cycle (PROTOCOL 12/19/35.4). Step 1: read your inbox with tools/board.ps1 -Me $ai and scan agents/*/outbox for OPEN requests addressed to $ai or all. Step 2: if an open order exists do the next one, otherwise autonomously do the single most valuable task in your lane per BOARD.md current focus. Step 3 constraints: single-writer (write only agents/$ai/ in the hub), NEVER push 2nd-B, no destructive/cost/secrets actions (escalate to Claude via outbox), apply section 35 self-panel, ONE task only this cycle. Step 4: commit hub output via tools/commit.ps1 -As $ai -Message <conventional msg> -Files <your files> (quote paths containing spaces), then refresh agents/$ai/STATUS.md with a fresh updated stamp and one activity line. Timestamps via Get-Date KST. $lane"
-  switch($ai){
-    'codex'       { "" | codex exec -s danger-full-access --skip-git-repo-check -C $root -c model_reasoning_effort=high $prompt }
-    'grok'        { grok -p $prompt }
-    'antigravity' { gemini -p $prompt -y }
+  $liveDir = Join-Path $root "tools\live"
+  if(-not (Test-Path $liveDir)){ New-Item -ItemType Directory -Force $liveDir | Out-Null }
+  $live = Join-Path $liveDir ($ai + ".log")
+  $out = switch($ai){
+    'codex'       { ("" | codex exec -s danger-full-access --skip-git-repo-check -C $root -c model_reasoning_effort=high $prompt) 2>&1 | Out-String }
+    'grok'        { (grok -p $prompt) 2>&1 | Out-String }
+    'antigravity' { (gemini -p $prompt -y) 2>&1 | Out-String }
   }
-  Log "cycle exit($ai)=$LASTEXITCODE"
+  $code = $LASTEXITCODE
+  Log "cycle exit($ai)=$code"
+  # Keep the last ~45 non-empty lines (the AI's closing summary = its "what I just did")
+  # as a live transcript -- written UTF-8 (Korean-safe) so feed.ps1 can show it like a chat message.
+  $tail = (($out -split "`r?`n") | Where-Object { $_.Trim() -ne "" } | Select-Object -Last 45) -join "`n"
+  try { [System.IO.File]::WriteAllText($live, "[$(Now) KST] $ai (exit $code)`n`n$tail`n", $utf8) } catch {}
 }
 
 Log "hub-daemon START interval=${IntervalSec}s AIs=$($AIs -join ',') maxCycles=$MaxCycles"
