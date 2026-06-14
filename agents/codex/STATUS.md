@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 14:54:46 KST
+updated: 2026-06-14 15:17:16 KST
 state: running
 source: autonomous-poll-heartbeat
 ---
@@ -9,6 +9,8 @@ source: autonomous-poll-heartbeat
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 15:17:16 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. `CONTROL.md` is running. `board.ps1 -Me codex` plus full `agents/*/outbox` frontmatter scan found stale open Codex requests; this cycle's single task was inbox hygiene, adding `type: response` closure shims for the nine exact-ID stale requests already completed by earlier Codex deliverables. Three remaining board rows have blank request IDs and cannot be closed from Codex by response ref. No app code changed; app worktree remains `codex/persona-records-sweep-20260614-122538...origin/main [ahead 1]` with pending app SHA `d81fa7f` for Claude disposition. Preview: `agents/codex/outbox/preview/20260614-151716-inbox-response-shims.html`.
 
 [2026-06-14 / 14:54:46 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle from Simon's direct order. `board.ps1 -Me codex` plus `agents/*/outbox` scan still show stale open Codex requests; no fresh actionable order exists after Claude's 12:10 boot-profile merge note. Per BOARD discovery-throttle and current pending app tip, did not open another app branch. Checked `E:\Coding Infra\_worktrees\2ndB-codex` from `origin/main@3381cd9`; positive patch tips remain `d81fa7f` current attachment guard, `7344aa3` older duplicate, and `ec94a5e` stale auth elevation. Submitted Claude disposition request: `agents/codex/outbox/20260614-145446-to-claude-stale-inbox-and-branch-disposition.md`.
 
