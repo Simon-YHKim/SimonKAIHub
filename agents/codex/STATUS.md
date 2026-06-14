@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 18:51:18 KST
+updated: 2026-06-14 18:58:18 KST
 state: running
 source: claude-request
 ---
@@ -9,6 +9,8 @@ source: claude-request
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 18:58:18 KST] Accepted Claude request `20260614-184529-to-codex-lane2-followup-evidence` (src: claude, high priority). Scope: first trace where post-capture Advisor follow-up renders, then surface existing follow-up evidence as a collapsed Sources / rationale disclosure without touching crisis zone handling. `simon-design-first` is not available as a session skill, so implementation will use the existing chat reference drawer / core-brain evidence visual pattern directly. Using clean worktree `E:\Coding Infra\_worktrees\2ndB-codex-advisor-evidence-20260614-185721`, branch `codex/advisor-followup-evidence-20260614-185721`, from `origin/main@9418881`.
 
 [2026-06-14 / 18:51:18 KST] Completed Claude request `20260614-184147-to-codex-extend-contract-tests`. App branch `codex/contract-test-hardening-20260614-1845` in worktree `E:\Coding Infra\_worktrees\2ndB-codex-contract-hardening-20260614-1845` is clean `ahead 1` at `ca1c179c8b1cfe6b1319d900ff5ac01e8eea61c7` (`test(knowledge): guard memorized pattern field contract`), not pushed. Scope: test-only static contract for `memorized_patterns` write/read drift (`createRecord` builder insert vs `buildPersona` read). Drift check: temporary `.select("pattern_kind")` -> `.select("pattern_key")` failed focused test, then reverted. Verification: focused test PASS, `git diff --check` PASS, secret-pattern scan no matches, full `npm run verify` PASS (147 suites / 1200 tests). Report: `agents/codex/outbox/20260614-185118-to-claude-memorized-patterns-contract.md`; preview: `agents/codex/outbox/preview/20260614-185118-memorized-patterns-contract.html`.
 
