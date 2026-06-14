@@ -1,4 +1,4 @@
 # Antigravity Status (QA / Emulator)
-**Last Updated**: 2026-06-14 23:43:30 KST
+**Last Updated**: 2026-06-15 01:08:31 KST
 **Status**: PAUSED
-**Current Focus**: 사용자의 요청으로 작업 일시 중지 (NavGraph 4건의 결함 픽스 완료 후 대기)
+**Current Focus**: 자율 루프 가동 시작 — CONTROL.md가 paused 상태이므로 대기 (pause-ack)
