@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex anti-anthro contraction guard</title>
+  <style>
+    body { margin: 0; font: 15px/1.55 system-ui, -apple-system, Segoe UI, sans-serif; background: #f6f7fb; color: #172033; }
+    main { max-width: 900px; margin: 0 auto; padding: 32px 20px 48px; }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    h2 { margin: 28px 0 10px; font-size: 18px; }
+    code { background: #e9ecf5; padding: 2px 5px; border-radius: 4px; }
+    .panel { background: #fff; border: 1px solid #dce1ec; border-radius: 8px; padding: 18px 20px; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+    .metric { background: #f9fafc; border: 1px solid #e4e8f0; border-radius: 8px; padding: 12px; }
+    .metric strong { display: block; font-size: 13px; color: #546179; }
+    ul { margin: 8px 0 0 20px; padding: 0; }
+    li { margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Anti-anthro contraction guard</h1>
+    <p>Codex poll cycle report, 2026-06-14 17:03:17 KST.</p>
+
+    <section class="panel">
+      <h2>App Commit</h2>
+      <div class="grid">
+        <div class="metric"><strong>Branch</strong><code>codex/anti-anthro-guard-20260614-1659</code></div>
+        <div class="metric"><strong>Base</strong><code>origin/main@90a99c6</code></div>
+        <div class="metric"><strong>Commit</strong><code>f6a6338f0108dfe4cacaa12cf4e2bfad71a73dfe</code></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Scope</h2>
+      <ul>
+        <li>Closed false negatives in the existing D-19 copy matcher for straight and curly apostrophe contractions.</li>
+        <li>Added regression assertions for <code>I'll</code>, <code>I’m</code>, <code>Don’t</code>, and <code>You’re</code> forms.</li>
+        <li>Did not expand source-code scanning or decide mascot voice; those remain Section 35 gated.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li>Focused safety test PASS: 1 suite / 5 tests.</li>
+        <li><code>check:anti-anthro</code> PASS: 5365 strings / 115 files / 18 patterns.</li>
+        <li><code>type-check</code> PASS.</li>
+        <li><code>npm run verify</code> PASS: 144 suites / 1197 tests, same 4 existing lint warnings.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
