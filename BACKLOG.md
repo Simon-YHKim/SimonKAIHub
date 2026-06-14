@@ -63,3 +63,15 @@
 
 ## Dismissed / unconfirmed (merge-gate verdicts)
 - `[-]` **AG: Sign-in unauthenticated nav (Link) + deep link broken (P1/P2)** — DISMISSED as false positive (2026-06-14, Claude framework-aware). `_layout.tsx:249` renders the full Stack for `!userId` (unauth nav to /manual + /sign-up is allowed by design); Links use standard `Link asChild`+Pressable wiring. AG's headless-gemini emulator interaction is unreliable (tap-miss) and deep-links to genuinely auth-gated routes bouncing to /sign-in is the intended auth model, not a bug. Re-open only if a real interactive emulator session reproduces a dead /manual link.
+
+---
+
+## 2026-06-14 허브 개선 패스 (landed — Simon "허브 전부 개선·업데이트")
+> 역할분석(wf w4gxhs3bw, 15갭) + 미성년 enablement(wf wvx2pd0f6) 산출을 **허브 거버넌스**에 반영. 2nd-B 제품코드는 별도 라이브-머지 사이클(범위 외).
+- `[x]` **DECISIONS 원장 스튜어드(#14)** — frontmatter 06-06→06-14, Resolved 인덱스 신설, 만료투표 D-01/02/07 표기, D-18~20 enablement 안건 큐.
+- `[x]` **release-gate.ps1(#3)** — author-독립 머지 GO/NO-GO + 롤백 SHA 기록(§8/§11.1). #222류 자기인증 머지사고 방지.
+- `[x]` **RUNBOOK.md + INCIDENTS.md(#5)** — FAIL→복구 룩업표 + 인시던트 원장. monitor/hub-health의 신호에 'responder' 연결.
+- `[x]` **PROTOCOL §35.6**(코어레인 독립반론, Claude 최종권 불변) · **§31.8**(좌석 용량게이트) · **§36**(미성년 ENABLEMENT 학습자 면허).
+- `[x]` **ROUTING §1.5** 좌석 재정의 — Gemini 감사·심판 / Grok 와치독 / Codex 테스트저자·verify:safety / Claude 최소화(SPOF 회피).
+- `[x]` **HUB-STARTUP.html** 모델·effort 정확화(fable-5 max 등) + 역할 갱신 + release-gate 도구 카드 + 신규자산 푸터.
+- `[ ]` **후속(미착수·리스크 플래그)**: hub-daemon.ps1 per-AI timeout/Set-Heartbeat/liveness(P0 — **라이브 데몬이라 별도 검증 후**) · 3 root config(CLAUDE/AGENTS/GEMINI) §18 동기화 · §36 enablement **빌드=Simon 법무 게이트** · DPIA(K12) 작성 · export 경로(GDPR Art.20).

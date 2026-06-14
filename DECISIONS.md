@@ -1,7 +1,8 @@
 ---
 owner: claude
 note: "이 파일은 Claude만 작성한다. 다른 AI는 의견을 자기 outbox(type: consensus_vote)로 제출하고, Claude가 여기에 종합한다."
-last-updated: 2026-06-06 12:30:00 KST
+last-updated: 2026-06-14 KST
+last-sync: 2026-06-14
 ---
 
 # DECISIONS.md — 합의 원장 (Consensus Ledger)
@@ -63,8 +64,13 @@ last-updated: 2026-06-06 12:30:00 KST
 - **후속/게이트**: 설계 방향은 AI 합의로 확정(빌드 청사진 = Codex position 문서). **단 BUILD/ship 착수는 §11-5 게이트 = Simon 확인 필수**(동의·미성년 데이터 핸들링·프라이버시 카피 = 법무 영역). Simon GO 시 Codex가 `src/lib/capture/preauth-pending.ts` 신설로 구현, Claude 머지 게이트, AG 에뮬 QA.
 - **메타**: §35 **허브 outbox 라운드** 방식(Workflow 아닌 실 AI 비동기 입장 → Claude 종합). 닫힌 루프로 Grok·Codex 입장 수거 → 판정.
 
-## 해결됨 (Resolved) — 최근
-- (없음 — 신설)
+## 해결됨 (Resolved) — 인덱스 (2026-06-14 원장 정리)
+> 상세 근거는 위 Open 표의 각 행에 보존. 아래는 상태 인덱스(스튜어드 위생, BACKLOG #14).
+- **설계·합의 완결**: D-04(HIBP 폴리필·머지) · D-08①(persona confidence 머지) · D-10(ESM A·1단계 라이브) · D-11(GTM 머지) · D-12(privacy honest-UI A) · D-13(브랜드 2층) · D-14(로스터 6) · D-15(브랜드 토큰 KO canon) · D-16(다양성 HYBRID) · D-17(Lever B 설계승인).
+- **설계 완결 · 실행만 Simon 게이트(§11-5)**: D-09(2티어 런치 — 실 PG계약·IAP·과금만 Simon) · D-17 build(동의·미성년 데이터핸들링·법무 = Simon GO 후 빌드).
+- **외부의존 대기(external, §15)**: D-03(consent 카피 법무 사인오프) · D-05(social provider 실등록).
+- **만료/재소집 필요(lapsed vote, 06-06 이후 정지)**: D-01(`EXPO_PUBLIC_FORCE_TIER` — D-09 2티어 결정으로 **대체 후보**, 확인 후 종료) · D-02(130 게이트 우선순위 — gate-stream 완료로 **흡수**) · D-07(consent durable 큐 — 실 eng 결정, **재소집 필요**).
+- **배정 완료**: D-06(device 증명 — AG 루프).
 
 ## 변경 로그 (append-only)
 - 2026-06-06 12:30 KST | CREATE | DECISIONS.md 신설, 펀치리스트 7건을 합의주제 D-01~D-07로 이관 | claude
@@ -72,3 +78,5 @@ last-updated: 2026-06-06 12:30:00 KST
 - 2026-06-07 13:4x KST | DECIDE | D-13 브랜드2층·D-14 로스터6·D-15 용어사전(브랜드토큰 KO canon) — 코히런스 감사 근거 Claude §14 결정. G1(jarvis→SecondB)·G4(Iris)·G9(judge카피)·G2(死ns)·G5(에셋6.6MB) 머지. G7/G8 KO용어=Codex dispatch | claude
 - 2026-06-07 14:1x KST | NOTE | D-09 실결제 = **Simon 직접 처리(본인 확인, 2026-06-07)**. Google Play 개발자 계정 보유. Claude는 M1 UI까지 완료(#229 free→Plus·#230 Plans화면+contextual paywall, honest no-checkout). PG 연결·IAP·사업자·과금만 Simon 잔여 | claude
 - 2026-06-07 14:1x KST | CYCLE | 리뷰 사이클2 가동(§31.6, wf wnyrfn43c): 10차원 finder→적대검증→in-lane 확정수정. Simon게이트(PF-L/K/M/H·D-09결제)·Codex레인(G7/G8) 제외 지시 | claude
+- 2026-06-14 KST | STEWARD | 원장 위생(BACKLOG #14): frontmatter last-updated 06-06→06-14, Resolved 인덱스 신설(D-04/08~17 분류), 만료투표 D-01(대체후보)/D-02(흡수)/D-07(재소집) 표기. 신규 결정 없음 — 상태 동기화만 | claude
+- 2026-06-14 KST | QUEUE | 미성년 ENABLEMENT 설계 합의안건 큐(§36·§35 토론 필수): **D-18** 학습자면허 인지강제 미성년 default-on(enablement-default) · **D-19** 2nd-B=scaffolded reflection(≠companion bot, CSM 2025.11 긴장 해소) · **D-20** `recommendations` 미성년 ON+투명성(F1, 프라이버시 기본값 준가역). 설계 정본 = `Output/minor-ai-literacy-enablement-20260614.html`. 빌드 착수는 Simon 법무 게이트 | claude
