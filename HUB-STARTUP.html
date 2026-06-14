@@ -47,7 +47,7 @@
 <div class="wrap">
   <header>
     <h1>AI Hub 시작 키트</h1>
-    <p class="sub">Claude Code 재시작 후 4-AI 허브를 처음부터 복붙으로 가동 · 정상 가동 점검용 · 생성 2026-06-14 KST</p>
+    <p class="sub">Claude Code 재시작 후 4-AI 허브를 처음부터 복붙으로 가동 · 정상 가동 점검용 · 업데이트 2026-06-14 KST</p>
   </header>
 
   <div class="note">
@@ -81,7 +81,7 @@ Write-Host "[hub] 3 daemons launched (codex, grok, antigravity) @ 10min"</pre><b
   <div class="step">3단계 · 모니터링</div>
   <div class="card">
     <h3><span class="tag t-watch">MONITOR</span>실시간 대시보드 (5초 갱신)</h3>
-    <p class="desc">각 AI의 state · 활동시각 · WORKING/idle · 프로세스 수 · <b>pend&gt;CL(Claude 미처리 커밋 수, ≥3이면 RED 알람)</b> · 에뮬레이터 상태 · 데몬 수 · 최근 커밋. <b>전용 터미널 1개</b>에서 켜 두세요.</p>
+    <p class="desc">각 AI의 state · 활동시각 · WORKING/idle · 프로세스 수 · <b>cyc(각 AI 누적 사이클 수 — 데몬AI는 완료 사이클, Claude는 BOARD r-라운드)</b> · <b>pend&gt;CL(Claude 미처리 커밋 수, ≥3이면 RED 알람)</b> · 에뮬레이터 상태 · 데몬 수 · 최근 커밋. <b>전용 터미널 1개</b>에서 켜 두세요.</p>
     <div class="cmdrow"><pre class="cmd" id="c-mon">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\monitor.ps1"</pre><button class="copy" data-t="c-mon">복사</button></div>
   </div>
   <div class="card">
