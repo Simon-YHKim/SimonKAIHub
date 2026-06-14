@@ -216,12 +216,19 @@ function Render {
       # daemon killed mid-cycle leaves a dangling "-> poll" with no "exit(" and would falsely
       # read WORKING forever -- so a dead daemon is always no-daemon regardless of the log tail.
       if($dAIs -contains $a){
-        $lastPoll = -1; $lastExit = -1
+        $lastPoll = -1; $lastExit = -1; $lastExitCode = 0; $lastTimeout = -1
         for($i=0;$i -lt $dlogLines.Count;$i++){
           if($dlogLines[$i] -match ("->\s+" + $a + "\s+poll")){ $lastPoll = $i }
-          if($dlogLines[$i] -match ("exit\(" + $a + "\)")){ $lastExit = $i }
+          if($dlogLines[$i] -match ("exit\(" + $a + "\)=(-?\d+)")){ $lastExit = $i; $lastExitCode = [int]$matches[1] }
+          if($dlogLines[$i] -match ("TIMEOUT\(" + $a + "\)")){ $lastTimeout = $i }
         }
-        if($lastPoll -ge 0 -and $lastPoll -gt $lastExit){ $nowState = "WORKING" } else { $nowState = "idle" }
+        # A non-zero last exit (bad model id, untrusted folder, CLI error) means the daemon is
+        # spinning but the AI is PRODUCING NOTHING -- show ERR so a fresh-looking-but-broken AI
+        # is not mistaken for healthy, and a stale one is explained ("fresh growing by hours").
+        if($lastPoll -ge 0 -and $lastPoll -gt $lastExit -and $lastPoll -gt $lastTimeout){ $nowState = "WORKING" }
+        elseif($lastTimeout -gt $lastExit){ $nowState = "TIMEOUT" }
+        elseif($lastExitCode -ne 0){ $nowState = "ERR" }
+        else { $nowState = "idle" }
       } else {
         $nowState = "no-daemon"
       }
@@ -242,6 +249,7 @@ function Render {
     $rowcol =
       if($pendN -ge $PENDING_ALARM){'Red'}
       elseif($nowState -eq 'WORKING'){'Green'}
+      elseif($nowState -eq 'ERR' -or $nowState -eq 'TIMEOUT'){'Red'}
       elseif($state -eq 'stale-run?' -or $state -eq 'STALE' -or $nowState -eq 'no-daemon'){'Yellow'}
       elseif($state -eq 'paused' -or $rawState -match '^\s*paused'){'DarkGray'}
       elseif($live){'Gray'}

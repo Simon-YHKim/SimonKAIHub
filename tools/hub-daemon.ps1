@@ -65,7 +65,12 @@ if($Only.Count -gt 0){ $AIs = $Only } else { $AIs = @('codex','grok'); if($Inclu
 # resets it. Without this the AG daemon burned a spawn every 10min for 8h producing nothing.
 $quotaSkip    = @{}   # ai -> cycles still to skip
 $quotaStrikes = @{}   # ai -> consecutive quota failures
-foreach($a in $AIs){ $quotaSkip[$a] = 0; $quotaStrikes[$a] = 0 }
+# Persistent NON-quota failure backoff: a misconfigured AI (bad model id, untrusted-folder
+# refusal, missing/erroring CLI) exits non-zero EVERY cycle and would otherwise spin silently
+# for hours producing nothing (the "fresh growing by hours" symptom). Back off + log LOUD.
+$failSkip     = @{}   # ai -> cycles still to skip after repeated hard failures
+$failStrikes  = @{}   # ai -> consecutive non-quota, non-zero exits
+foreach($a in $AIs){ $quotaSkip[$a] = 0; $quotaStrikes[$a] = 0; $failSkip[$a] = 0; $failStrikes[$a] = 0 }
 
 # Count OPEN request orders addressed to this AI (lightweight frontmatter scan). Used to decide
 # whether a drain (extra task this cycle) is warranted -- no open orders => no busywork.
@@ -119,7 +124,7 @@ function Invoke-AI([string]$ai){
     switch($ai){
       'codex'       { $o = ("" | codex exec -s danger-full-access --skip-git-repo-check -C $root -m $cm -c "model_reasoning_effort=$ce" $prompt) 2>&1 | Out-String }
       'grok'        { $env:GROK_MODEL = $gm; $env:GROK_REASONING_EFFORT = $ge; $o = (grok -m $gm -p $prompt) 2>&1 | Out-String }
-      'antigravity' { $o = (gemini -m $am -p $prompt -y) 2>&1 | Out-String }
+      'antigravity' { $env:GEMINI_CLI_TRUST_WORKSPACE = 'true'; $o = (gemini -m $am -p $prompt -y) 2>&1 | Out-String }
     }
     [pscustomobject]@{ Out = $o; Code = $LASTEXITCODE }
   }
@@ -178,6 +183,12 @@ while($true){
       Log "cycle $cycle -> $ai SKIP (quota backoff, $($quotaSkip[$ai]) cycles left)"
       continue
     }
+    # Hard-failure backoff: stop hammering an AI that is failing every cycle (bad config).
+    if($failSkip[$ai] -gt 0){
+      $failSkip[$ai]--
+      Log "cycle $cycle -> $ai SKIP (hard-failure backoff, $($failSkip[$ai]) cycles left -- fix models.json / CLI auth / trusted-folder then restart)"
+      continue
+    }
     # Anti-idle drain: do the first task, then keep going while OPEN orders remain for this AI,
     # up to MaxTasksPerCycle. With no open orders this is exactly one self-directed task (no busywork).
     $task = 0
@@ -194,6 +205,21 @@ while($true){
         break
       } else {
         $quotaStrikes[$ai] = 0
+        # Non-quota hard failure (bad model id, untrusted folder, missing/erroring CLI). After
+        # 4 in a row, back off with a LOUD log instead of spinning silently for hours.
+        if((-not $res) -or ($res.Code -ne 0)){
+          $failStrikes[$ai]++
+          if($failStrikes[$ai] -ge 4){
+            $skip = [Math]::Min(36, [Math]::Pow(2, $failStrikes[$ai] - 3))
+            $failSkip[$ai] = [int]$skip
+            Log "cycle $cycle $ai HARD-FAIL x$($failStrikes[$ai]) (exit $(if($res){$res.Code}else{'spawn'})) -> backing off $([int]$skip) cycles. FIX CONFIG (models.json / CLI auth / GEMINI_CLI_TRUST_WORKSPACE) then restart daemon."
+          } else {
+            Log "cycle $cycle $ai fail strike $($failStrikes[$ai]) (exit $(if($res){$res.Code}else{'spawn'}))"
+          }
+          break
+        } else {
+          $failStrikes[$ai] = 0
+        }
       }
       if($task -lt $MaxTasksPerCycle){
         $remaining = 0
