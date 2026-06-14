@@ -85,7 +85,7 @@ if ($Html) {
     $errCell = if ($_.Err -gt 0) { "<td style='color:#c98b8b'>$($_.Err)</td>" } else { "<td>$($_.Err)</td>" }
     "<tr><td><b>$($_.AI)</b></td><td class='mono'>$($_.Model)</td><td>$($_.Cycles)</td><td style='color:#5bbf8a'>$($_.OK)</td>$errCell<td style='color:#e0b24a'>$($_.Quota)</td><td>$($_.Commits)</td><td>$($_.Reports)</td><td class='mut'>$($_.LastActive)</td><td style='color:$stColor'>$($_.State)</td></tr>"
   }) -join "`n"
-  $html = @"
+  $doc = @"
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AI Hub Usage</title><style>
 :root{--bg:#16161c;--card:#1d1d25;--line:#2c2c38;--tx:#e7e7ee;--mut:#a0a0b2}
@@ -105,7 +105,7 @@ Tokens 미표시: codex/grok/gemini는 구독 CLI + Claude 인터랙티브라 pe
 "@
   $outDir = Join-Path $root 'Output'
   $outFile = Join-Path $outDir ("hub-usage-" + (Get-Date -Format 'yyyyMMdd-HHmmss') + ".html")
-  Set-Content -LiteralPath $outFile -Value $html -Encoding utf8
+  Set-Content -LiteralPath $outFile -Value $doc -Encoding utf8
   Write-Host "  HTML -> $outFile" -ForegroundColor Green
   try { Start-Process $outFile } catch {}
 }
