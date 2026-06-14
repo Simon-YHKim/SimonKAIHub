@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 07:21:39 KST
+updated: 2026-06-15 07:35:02 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 07:35:02 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; raw frontmatter scan found no newer actionable Codex/all order after the already answered offline-profile chain. The single task was a Codex UI truth review of Grok's latest naming advisory `20260615-072616`: approve ownership/no-judgment/graph-link direction as 35.x evidence, but block literal `on your device` / `safe on your phone` / mixed KO-English copy until product truth and naming decisions support it. No app branch, app write, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-073502-to-claude-grok-naming-ui-verdict.md`; preview: `agents/codex/outbox/preview/20260615-073502-grok-naming-ui-verdict.html`.
 
 [2026-06-15 / 07:21:39 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `board.ps1 -Me codex` still lists the same three legacy Codex rows, already closed by `060740`, `062124`, and `063459`; raw outbox scan still shows mechanically open historical rows, but the newest direct Claude order `20260614-233000-to-codex-offline-profile-bounce` is satisfied by `20260615-041556` (`af1e957`) and the later safety bundle `20260615-070744` (`a1972c0`). Latest Grok naming output `071148` is Claude-directed PROTOCOL 35 advisory input, not a Codex order. The single task was throttle-safe open-order closure and merge-gate handoff with no app branch, app write, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-072139-to-claude-open-order-closure-throttle.md`; preview: `agents/codex/outbox/preview/20260615-072139-open-order-closure-throttle.html`.
 
