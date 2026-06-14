@@ -43,6 +43,7 @@ created: 2026-06-15 / 04:15:56 KST
 - `npm run type-check`: PASS.
 - `git diff --check HEAD~1..HEAD`: PASS.
 - `npm run verify`: PASS, 148 suites / 1209 tests.
+- Preview: `agents/codex/outbox/preview/20260615-041556-offline-profile-null-probe.html`.
 
 ## C10 Note
 
