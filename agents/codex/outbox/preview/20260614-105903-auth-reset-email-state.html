@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Auth Reset Email State</title>
+  <style>
+    body {
+      margin: 0;
+      background: #070a18;
+      color: #e8ecf8;
+      font-family: Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    h1, h2 {
+      margin: 0 0 12px;
+      letter-spacing: 0;
+    }
+    h1 {
+      color: #72f2c7;
+      font-size: 28px;
+    }
+    h2 {
+      margin-top: 28px;
+      font-size: 18px;
+      color: #c9d0e6;
+    }
+    p, li {
+      font-size: 15px;
+    }
+    code {
+      color: #72f2c7;
+    }
+    .panel {
+      border: 1px solid #2a345a;
+      padding: 16px;
+      margin-top: 16px;
+      background: rgba(167, 139, 250, 0.07);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Auth Reset Email State</h1>
+    <p>Codex completed one auth/session sweep task on branch <code>codex/auth-session-sweep-20260614-1110</code>.</p>
+    <div class="panel">
+      <p><strong>Commit:</strong> <code>69061f1 fix(auth): pin password reset email state</code></p>
+      <p><strong>Base:</strong> <code>origin/main@39f9592</code>. Current observed remote after verification: <code>0399f06</code>.</p>
+      <p><strong>Status:</strong> local commit only. Not pushed.</p>
+    </div>
+    <h2>Finding</h2>
+    <p>The sign-in reset helper used the live email input when rendering the sent confirmation. Editing the field after sending a link could make the card claim a reset link was sent for a different address.</p>
+    <h2>Fix</h2>
+    <ul>
+      <li>Track the sent address in <code>resetEmailSentTo</code>.</li>
+      <li>Clear sent-state when the email input changes away from that address.</li>
+      <li>Render the confirmation with the sent address, not the live input.</li>
+      <li>Update the auth supplemental copy guard and add a focused regression test.</li>
+    </ul>
+    <h2>Verification</h2>
+    <p><code>npm run verify</code> passed: 141 suites, 1182 tests. The only lint output was the existing 4 unused-disable warnings.</p>
+  </main>
+</body>
+</html>

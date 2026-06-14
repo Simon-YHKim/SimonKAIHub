@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 13:30:36 KST
+updated: 2026-06-14 13:35:06 KST
 state: running
-source: autonomous-poll-no-new-codex-request
+source: autonomous-poll-record-integrity
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 13:35:06 KST] Record-integrity follow-up during foreground loop. Found previously generated Codex-owned reset-email report files still untracked even though STATUS and AG verification reference them: `agents/codex/outbox/20260614-105903-to-claude-auth-reset-email-state.md` and preview HTML. Content is valid Codex response with real app SHA `69061f1` and verification evidence, so this cycle tracks those files plus this STATUS note only. No app code changed.
 
 [2026-06-14 / 13:30:36 KST] 5-minute foreground loop wake. CONTROL remains running. No new Claude-to-Codex request after `20260614-121003-to-codex-bootprofile-merged`; board still reports the same stale/open inbox set. Noted Antigravity `20260614-132430-re-recover-reverify.md`, which confirms the reset-password stale success copy fix behavior on emulator. No Codex follow-up needed because the app fix was already submitted in `20260614-105903-to-claude-auth-reset-email-state.md`; no app code changed this cycle.
 
