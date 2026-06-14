@@ -1,10 +1,10 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. 나머지 AI는 매 사이클 맨 앞에서 읽기만 한다."
-state: paused
-pause_reason: "Simon 지시(2026-06-14) — 하던 작업 + 타AI 푸시분 랜딩 후 휴식. 데몬 정지됨. 이번 세션: 7 PR 머지(#379-385), mascot 재보이스+copy-law CI(#382), iOS 시뮬 빌드, 허브 자기피드백 watchdog+usage 모니터, 프로필 오프라인 신원 픽스(#385)."
-resume_reason: "재개 시: codex inbox에 directed task 1건 대기(20260614-233000 offline complete-profile bounce, C10-aware). AG는 Gemini quota 회복 후. mascot counsel(SB243/systemHint) + iOS Appetize는 외부 의존."
-updated: 2026-06-14 KST
+state: running
+pause_reason: ""
+resume_reason: "RESUMED 2026-06-15 Simon '정상 가동' 지시. Claude 라이브 ScheduleWakeup 루프가 §33 ORDERS 폴러+분배자 역할 인계(hub-daemon 죽음, no PID). 원격 오더 채널=2nd-B ORDERS.md ## OPEN. AG=agy-pty ConPTY 래퍼로 헤드리스 부활."
+updated: 2026-06-15 KST
 ---
 
 # CONTROL.md — 런-스테이트 세마포어 (always-checked)
@@ -25,10 +25,10 @@ updated: 2026-06-14 KST
 3. 재개: Claude가 `state: running` 복원 → 각 AI 재진입.
 
 ## 현재 지시(broadcast) — Claude가 갱신
-- **⏸ PAUSED (2026-06-08)**: 허브 자율운용 종료. 모든 AI는 진행 중 사이클 1개만 마무리 후 STATUS에 pause-ack 기록하고 **대기**. 신규 사이클·self-discover 금지.
-- 회고 인터뷰(`agents/*/outbox/*hub-retro*`) 수집 완료 → 교훈은 SimonKWiki로 이관됨.
-- 인프라(E:\2ndB, E:\Coding Infra)가 외장하드로 이전되어 다른 랩탑에서 재구동될 예정. 재개 시 Claude가 `state: running` 복원 + 새 환경 경로 확인 후 재배포.
-- (이전 모델) B(순서변경): 발견 자율, 통합·온라인git Claude 단독, 사용자 개입은 비용/파괴적/secrets만.
+- **▶ RUNNING (2026-06-15)**: Simon "정상 가동" 지시로 재개. 각 AI는 자율 루프 재개(5분 §12.1, charter 한도 내). pause-ack 중이던 좌석은 다음 틱에 running 감지 후 작업 복귀.
+- **원격 오더 채널 LIVE (§33)**: Simon이 모바일로 2nd-B `ORDERS.md`의 `## OPEN`에 오더 push → **Claude 라이브 루프가 매 사이클 git fetch 후 읽고, 담당 AI에 분배·수행 후 `## DONE`에 피드백 + commit/push**. hub-daemon이 죽어 Claude 인터랙티브 루프가 §33 폴러를 인계한다.
+- **분배 라우팅(ROUTING.md)**: Claude=오케스트레이션·코딩·통합·git, Codex=UI/UX+구현, AG(agy-pty 헤드리스 부활)=네이티브/에뮬 QA, Grok=X·소비자 리서치. Claude가 오더 분해→담당 헤드리스 spawn→통합 보고.
+- 게이트(§11-5): 파괴·실비용·secrets·안전임상·법무 오더만 수행 전 Simon 확인. 그 외 dev 오더 무확인 수행.
 
 ### 운용 규칙 = PROTOCOL 헌법 참조 (레이어 분리, 2026-06-07 B-7)
 > **상시 규칙은 헌법(PROTOCOL)에 산다. CONTROL은 런-스테이트 신호일 뿐.** 아래는 포인터 — 본문은 PROTOCOL을 따른다.
@@ -44,3 +44,4 @@ updated: 2026-06-14 KST
 - 2026-06-07 07:40 KST | PAUSE | Simon "하던일까지만 하고 일시정지". 최종 머지 30dc939까지 완료 후 정지. 각 AI 현재 사이클 마무리 후 대기 | claude
 - 2026-06-07 07:59 KST | RESUME | Simon "허브 구동" 지시 → state=running 복원. 4-AI 재가동(activate 프롬프트 재배포) | claude
 - 2026-06-08 23:24 KST | PAUSE | Simon "다른 AI 가동 중단 + 인프라 이전 준비". 회고 인터뷰 수집 후 정지. 외장하드 이전/타 랩탑 클론 예정. 재개는 새 환경에서 Claude가 경로 확인 후 | claude
+- 2026-06-15 03:25 KST | RESUME | Simon "정상 가동 시키자" → state=running 복원. Claude 라이브 ScheduleWakeup 루프가 §33 ORDERS 폴러+분배자 인계(hub-daemon no PID). 원격 오더 파이프라인 LIVE. AG=agy-pty ConPTY 헤드리스 부활 | claude
