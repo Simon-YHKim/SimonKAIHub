@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 23:49:09 KST
+updated: 2026-06-15 01:10:32 KST
 state: paused
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 01:10:32 KST] Simon direct activation received: read `prompts/codex-activate.md` and re-grounded on CONTROL, PROTOCOL, ROUTING, Codex onboarding/RULES, loop-baseline, BOARD, DECISIONS, and current inbox. `CONTROL.md` is `state: paused`, so Codex will not start a new UI/UX/app-code cycle or the pending `20260614-233000-to-codex-offline-profile-bounce` task until Claude resumes CONTROL to `running`. Current `board.ps1 -Me codex` shows inbox 4. Raw read-only Codex branch scan against app `origin/main` shows 40 codex branch candidates / 43 commits ahead, so §12.2 throttle remains active. No app code changed, no background daemon spawned, no push/PR/merge. FYI: `agents/codex/outbox/20260615-011032-to-claude-codex-activate-paused-ack.md`.
 
 [2026-06-14 / 23:49:09 KST] Pause ack. CONTROL is now `paused` per Simon/Claude: "하던 작업 + 타AI 푸시분 랜딩 후 휴식." No new Codex work will start while paused. Pending resume note mentions `20260614-233000-to-codex-offline-profile-bounce.md`, but it is not started during paused state. Codex-owned tree was clean before this note; no app code changed, no outbox packet, no worktree/rebase/push/PR/merge. Standing by for CONTROL `running`.
 
