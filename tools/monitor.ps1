@@ -14,6 +14,10 @@ $utf8 = [System.Text.UTF8Encoding]::new($false)
 $OutputEncoding = $utf8
 $root   = Split-Path $PSScriptRoot -Parent
 $agents = @("claude","codex","antigravity","grok")
+# Per-AI commit identity (commit.ps1). Git-author time is an AUTOMATIC freshness signal that
+# does not depend on STATUS.md discipline -- Claude works via commits/BOARD, not a daemon that
+# rewrites its own STATUS each cycle, so STATUS alone made the orchestrator look idle for hours.
+$agentEmail = @{ claude='claude@2nd-b.ai'; codex='codex@2nd-b.ai'; antigravity='antigravity@2nd-b.ai'; grok='grok@2nd-b.ai' }
 
 function Get-Front([string[]]$lines,[string]$key){
   $pat = "^" + $key + ':\s*"?(.*?)"?\s*$'
@@ -36,6 +40,14 @@ function Get-AgeDays([string]$stamp){
   # Total days since stamp; 0 on parse failure so an unparseable stamp is not flagged stale.
   $s = ($stamp -replace 'KST','' -replace '/','' -replace '\s+',' ').Trim()
   try { return ((Get-Date) - [datetime]::Parse($s)).TotalDays } catch { return 0 }
+}
+function Get-GitLastByAuthor([string]$rootDir,[string]$email){
+  # Most recent commit (committer date) by this author email in the hub repo, as a freshness
+  # source independent of STATUS.md. Returns $null if no commit / parse fails.
+  if(-not $email){ return $null }
+  $iso = git -C $rootDir log -1 --author="$email" --format='%cI' 2>$null
+  if($iso){ try { return [datetime]::Parse($iso) } catch { return $null } }
+  return $null
 }
 
 function Render {
@@ -93,6 +105,8 @@ function Render {
       # at all, e.g. a bare status file) still reflects REAL freshness instead of "-"/stale.
       $best = (Get-Item $sf).LastWriteTime
       if($upd){ try { $ut=[datetime]::Parse((($upd -replace 'KST','' -replace '/','' -replace '\s+',' ').Trim())); if($ut -gt $best){ $best=$ut } } catch {} }
+      $gl = Get-GitLastByAuthor $root $agentEmail[$a]
+      if($gl -and $gl -gt $best){ $best = $gl }
       $d = (Get-Date) - $best
       if($d.TotalSeconds -lt 0){ $d = [TimeSpan]::Zero }   # clock-skew / slightly-future stamp -> treat as now
       if($d.TotalMinutes -lt 1){ $age = ("{0:n0}s ago" -f $d.TotalSeconds) }
@@ -147,7 +161,11 @@ function Render {
     $n = ($msgs | Where-Object { ($_.To -eq $me -or $_.To -eq 'all') -and $_.Type -eq 'request' -and $_.Status -eq 'open' -and ($answered -notcontains $_.Id) }).Count
     ("{0}:{1}" -f $me.Substring(0,[Math]::Min(2,$me.Length)), $n)
   }) -join "  "
-  $blk  = ($msgs | Where-Object { $_.Type -eq 'blocker' }).Count
+  # A blocker is OPEN only if not explicitly closed (status: closed/resolved/done) and not
+  # ref-answered by a later message. Stops long-resolved blockers (e.g. a June-5 typecheck note)
+  # from showing as live indefinitely -- the recurring "monitor shows stale state" complaint.
+  $openBlockers = @($msgs | Where-Object { $_.Type -eq 'blocker' -and ($_.Status -notmatch 'closed|resolved|done') -and ($answered -notcontains $_.Id) })
+  $blk  = $openBlockers.Count
   $cons = ($msgs | Where-Object { $_.Type -eq 'consensus_request' -and ($answered -notcontains $_.Id) }).Count
   Write-Host ("inbox  {0}    blockers:{1}    consensus open:{2}" -f $inboxStr,$blk,$cons) -ForegroundColor $(if($blk -gt 0){'Magenta'}else{'Gray'})
   # open requests detail (top 6) -- who owes what, at what priority
@@ -156,8 +174,8 @@ function Render {
     $os = if($o.Subj){ $o.Subj } else { "" }
     Write-Host ("   -> {0,-11}[{1,-4}] {2}" -f $o.To,$o.Pri,$os.Substring(0,[Math]::Min(46,$os.Length))) -ForegroundColor DarkCyan
   }
-  # blocker detail
-  $blocks = $msgs | Where-Object { $_.Type -eq 'blocker' } | Select-Object -First 4
+  # blocker detail (open only)
+  $blocks = $openBlockers | Select-Object -First 4
   foreach($b in $blocks){
     $bs = if($b.Subj){ $b.Subj } else { "" }
     Write-Host ("   !! blocker <- {0}: {1}" -f $b.From,$bs.Substring(0,[Math]::Min(44,$bs.Length))) -ForegroundColor Magenta

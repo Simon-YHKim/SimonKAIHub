@@ -1,17 +1,16 @@
 ---
 agent: claude
 role: orchestrator + coding + online-git + merge-gate
-updated: 2026-06-14 03:33:00 KST
+updated: 2026-06-14 10:03:09 KST
 state: running
 ---
 
 # Claude — STATUS
 
-[2026-06-14 / 03:33:00 KST] [Claude] 닫힌 루프 오케스트레이션 — AI 산출 수거→분석→머지→피드백+재배정. 이번 세션 2nd-B 4건 라이브.
+[2026-06-14 / 10:03:09 KST] [Claude] 닫힌 루프 r28~r29 — AI 산출 수거→framework-aware 검토→머지/HOLD→피드백+재배정. 2nd-B 24건 라이브(main dfd83bb). 모니터 하트비트 버그 수정 중.
 
-- **닫힌 루프**: AI 푸시/피드백 수신→framework-aware 분석→머지/조치→각 AI에 피드백+다음과제(BACKLOG 우선순위). 데몬 3개 10분 폴링(codex `baufwzxae`·grok `bswd703g0`·AG `b3cumcn8b`).
-- **이번 세션 라이브(origin/main 8a71528)**: ① first-glimpse 정직 카피(§35 Lever A) ② pre-auth 가드 테스트(AG 발견 코드화) ③ PremiumButton disabled a11y ④ 홈 CTA 디자인시스템+press 피드백. 전부 verify green(133 suites/1145).
-- **허브 견고화**: commit.ps1 retry+mutex+exit1, 데몬 분리(starvation 해소)/10분, monitor 디테일+feed.ps1 채팅뷰, 브랜치 파일 45→6 정리(무손실 복구기록).
-- **AG QA**: 라이브 빌드 재검수 PASS(P0/P1 0), Sign-in 위양성 self-correct 확인.
-- **다음 결정**: §35 **Lever B(계정 전 캡처) 토론** — Grok 시장입장(강 PRO, KR=소셜로그인 post-value) 뱅크 / Codex 안전-실현 입장 대기 → 종합 판정→DECISIONS.md→go면 빌드.
+- **이번 세션 라이브(origin/main dfd83bb)**: 24건 머지 — first-glimpse 정직카피·pre-auth 가드·P0 sources.captured_at(AG 발견)·audit crisis split·stale-screens P1·core-brain evidence-refresh·chat 쿼터 export·persona BFI 가드·import/capture size 가드 등. 정책/i18n 가드 3/3 PASS, `.order()` 데이터-셰이프 전수 클린(P0 클래스 박멸).
+- **닫힌 루프 가동**: r28 재배정(09:43)에 codex가 09:56 auth judge-handoff, grok이 09:51 week-1 retention feature-gap으로 즉시 반응. 데몬 3개 생존(codex/grok exit0, AG exit1=gemini 429).
+- **모니터 정확도 수정(10:0x)**: ① monitor.ps1에 git-author 시각 신선도 소스 추가(STATUS 규율 무관 자동 정확) ② blocker 카운팅이 status:closed/resolved + ref-응답 존중(stale blocker 미표시). claude STATUS 매 사이클 하트비트화.
+- **🔴 Simon 게이트 1건**: D-17 Lever B(계정 전 캡처) 빌드 — 설계 AI 합의 확정, §11-5 법무/동의/미성년 GO 대기.
 - **게이트(Simon)**: 수익화/법무/secrets/임상.

@@ -6,8 +6,11 @@ type: blocker
 ref: 20260614-054623-claude-to-codex-navgraph-focusrefetch
 project: 2nd-B
 priority: high
-status: open
+status: done
 created: 2026-06-14 06:10:10 KST
+resolved: 2026-06-14 10:03:09 KST
+resolution_ref: 20260614-062709-codex-to-claude-corebrain-evidence-refresh
+resolution_note: "Claude verified+merged 3c14bbf (evidence/persona split). Focus refresh is evidence-only; re-focus calls Gemini 0x; buildPersona stays on mount/manual. Guarded by focus-refetch-contract.test.ts."
 ---
 
 ## Context
