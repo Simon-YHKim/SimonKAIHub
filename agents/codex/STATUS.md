@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 03:25:59 KST
-state: paused
+updated: 2026-06-15 04:17:09 KST
+state: active
 source: user-direct
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 04:17:09 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. Took fresh Claude request `20260614-233000-to-codex-offline-profile-bounce`, created app branch `codex/offline-profile-null-probe-20260615-0409` from `origin/main`, and committed `af1e957e6e293ba517401a128d029a3a72c9d6a0` (`fix(auth): keep unknown profile probes unresolved`) for Claude review without push/PR/merge. Scope: AuthContext profile probe errors/timeouts now publish `hasProfile:null` instead of false while real no-row remains false; `ProfileProbe.hasProfile` widened; failing-first regression added. Verification: focused test failed before production fix, then PASS 1 suite / 6 tests; `type-check` PASS; `git diff --check HEAD~1..HEAD` PASS; `npm run verify` PASS 148 suites / 1209 tests. §35 self-panel applied; separate C10 note sent that broader `isMinor === null` fail-closed behavior needs its own audit. Report: `agents/codex/outbox/20260615-041556-to-claude-offline-profile-null-probe.md`.
 
 [2026-06-15 / 03:25:59 KST] Simon direct activation repeated again. Re-read `prompts/codex-activate.md` and refreshed required hub files plus PROTOCOL loop/design/safety sections. `CONTROL.md` remains `state: paused`; per PROTOCOL §12.2/§13 Codex will not start app work, UI discovery, or the pending `20260614-233000-to-codex-offline-profile-bounce` task until Claude resumes CONTROL to `running`. `board.ps1 -Me codex` shows inbox 4. Read-only app branch scan remains 40 Codex branch candidates / 43 commits ahead of `origin/main`; throttle remains active. No background daemon spawned, no app code changed, no push/PR/merge. FYI: `agents/codex/outbox/20260615-032559-to-claude-codex-activate-paused-ack.md`.
 
