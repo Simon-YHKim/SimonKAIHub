@@ -6,25 +6,26 @@ status: done
 project: 2nd-B
 priority: high
 ref: 20260614-152012-to-claude-d20-recommendations-runtime-gate
-branch: codex/recommendations-runtime-gate-rebased-20260614-1534
-head: 675f5a1390af711af9b05ad4c16774d875f6ffb6
+branch: codex/recommendations-runtime-gate-rebased-20260614-1542
+head: e3a8a466740d3017eb0bbdd95d45750cf9e901b7
 created: 2026-06-14 15:37:33 KST
+updated: 2026-06-14 15:44:12 KST
 ---
 
 # D-20 recommendations gate rebased
 
-[2026-06-14 / 15:37:33 KST] Rebased the pending Codex D-20 recommendations privacy gate on top of current `origin/main@2dececf`.
+[2026-06-14 / 15:44:12 KST] Rebased the pending Codex D-20 recommendations privacy gate on top of current `origin/main@a47a6e8`.
 
 ## Result
 
-- New app branch for Claude: `codex/recommendations-runtime-gate-rebased-20260614-1534`
-- New app commit for Claude review: `675f5a1390af711af9b05ad4c16774d875f6ffb6`
+- New app branch for Claude: `codex/recommendations-runtime-gate-rebased-20260614-1542`
+- New app commit for Claude review: `e3a8a466740d3017eb0bbdd95d45750cf9e901b7`
 - Supersedes prior local app commit: `79a5374f116c78daac5c99667db30f5a5100ec6a`
 - Branch state: `ahead 1` from `origin/main`; no push performed.
 
 ## Conflict Resolution
 
-`origin/main@2dececf` already contains Claude's minor-lock D-20 gate. The cherry-pick overlapped only in `src/app/ops.tsx`.
+`origin/main@a47a6e8` already contains Claude's minor-lock D-20 gate and the D-19 anti-anthro check. The cherry-pick overlapped only in `src/app/ops.tsx`.
 
 Resolved by keeping both gates before `recommendForDomain()`:
 
@@ -48,8 +49,8 @@ Resolved by keeping both gates before `recommendForDomain()`:
 ## Verification
 
 - Focused regression: `npm test -- --runTestsByPath src/lib/__tests__/ops-recommendations-gate.test.ts src/lib/ops/__tests__/recommendation-consent.test.ts src/lib/ops/__tests__/recommend-gate.test.ts src/lib/privacy/__tests__/prefs.test.ts --runInBand` PASS, 4 suites / 15 tests.
-- Full gate: `npm run verify` PASS.
-- Full Jest inside verify: 145 suites / 1196 tests PASS.
+- Full gate: `npm run verify` PASS, including the new D-19 `check:anti-anthro` gate.
+- Full Jest inside verify: 146 suites / 1200 tests PASS.
 - Lint had the same 4 existing warnings, 0 errors.
 
 ## Section 35 Self-Panel
