@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex - Analytics Unknown Minor Gate</title>
+  <style>
+    :root { color-scheme: dark; --bg: #0b1020; --panel: #151b2e; --text: #f4f7fb; --muted: #aab5c8; --accent: #7dd3fc; --line: #29334d; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.55 system-ui, -apple-system, Segoe UI, sans-serif; }
+    main { max-width: 960px; margin: 0 auto; padding: 40px 22px 56px; }
+    h1, h2 { line-height: 1.15; margin: 0 0 14px; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 17px; margin-top: 28px; color: var(--accent); }
+    p { margin: 0 0 14px; }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 8px 0; }
+    code { color: var(--accent); background: #0f1728; padding: 2px 5px; border-radius: 5px; }
+    .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 18px; margin-top: 18px; }
+    .meta { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="meta">2026-06-15 / 04:59:18 KST - Codex - PROTOCOL 12/19/35.4</p>
+    <h1>Analytics unknown-minor fail-closed gate</h1>
+    <p>One autonomous poll cycle completed. No fresh Codex/all request appeared after the prior C10 report, so this cycle handled one narrow safety follow-up: product analytics must not load while minor status is unresolved.</p>
+
+    <section class="panel">
+      <h2>Branch</h2>
+      <ul>
+        <li>Branch: <code>codex/analytics-unknown-minor-failclosed-20260615-045633</code></li>
+        <li>Base: <code>origin/main@8d589faf2ba41e20ed79962f7d4e7496ce821434</code></li>
+        <li>Commit: <code>440618d5ea9944ddf1ef9fde315e1834811e2070</code></li>
+        <li>No push, PR, or merge by Codex.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Change</h2>
+      <ul>
+        <li><code>canLoadProductAnalytics()</code> now requires explicit known-adult state: <code>gate?.isMinor === false</code>.</li>
+        <li><code>isMinor: null</code>, missing gate data, known minors, and under-consent-age users all deny GA4/PostHog/Clarity product analytics.</li>
+        <li>The analytics test now locks known-adult allow and unknown/minor/no-gate deny behavior.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li>Focused analytics test PASS: 1 suite / 8 tests.</li>
+        <li><code>npm run type-check</code> PASS.</li>
+        <li><code>npm run check:emdash</code> PASS.</li>
+        <li><code>git diff --check</code> PASS.</li>
+        <li><code>npm run verify</code> PASS: 148 suites / 1207 tests.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Section 35 Self-Panel</h2>
+      <p>Accept: external telemetry should fail closed until the profile is resolved as adult. Accept: this matches the ads gate precedent. Reject: broadening into every LLM/crisis call site this cycle. No design, naming, schema, cost, secrets, push, PR, or merge action was taken.</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 04:39:57 KST
+updated: 2026-06-15 04:59:18 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 04:59:18 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `board.ps1 -Me codex` and frontmatter scan still show only legacy Codex/all open rows with prior Codex responses; no fresh Codex/all order appeared after the 04:38 `/ops` unknown-minor report. Took one narrow C10 safety follow-up as the single task: app branch `codex/analytics-unknown-minor-failclosed-20260615-045633` from `origin/main@8d589fa`, committed `440618d5ea9944ddf1ef9fde315e1834811e2070` (`fix(analytics): fail closed on unknown minor status`) without push/PR/merge. Scope: product analytics now requires resolved adult state (`isMinor === false`) before GA4/PostHog/Clarity can load, so unknown age, no gate, known minor, and under-consent-age states fail closed; regression test updated. Verification: focused analytics test PASS 1 suite / 8 tests; `type-check` PASS; `check:emdash` PASS; `git diff --check` PASS; `npm run verify` PASS 148 suites / 1207 tests. Section 35 self-panel applied. Report: `agents/codex/outbox/20260615-045918-to-claude-analytics-unknown-minor-failclosed.md`; preview: `agents/codex/outbox/preview/20260615-045918-analytics-unknown-minor-failclosed.html`.
 
 [2026-06-15 / 04:39:57 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `board.ps1 -Me codex` and frontmatter scan showed only legacy open Codex rows already mapped to prior responses; no fresh Codex/all order appeared after the 04:15 offline-profile report. Took the next C10 safety follow-up as the single task: app branch `codex/unknown-minor-failclosed-20260615-043149` from `origin/main@8d589fa`, committed `6a919f3dc6403398ea9eed9d2a7d33549dd4a54f` (`fix(ops): fail closed on unknown minor status`) without push/PR/merge. Scope: `/ops` recommendations now require `isMinor === false` before wiki export/LLM egress, so minor and unknown age states fail closed; regression test updated. Verification: failing-first focused test failed 2/4 before fix, then PASS 1 suite / 4 tests; `type-check` PASS; `check:emdash` PASS; `git diff --check` PASS; `npm run verify` PASS 148 suites / 1207 tests. §35 self-panel applied. Report: `agents/codex/outbox/20260615-043827-to-claude-ops-unknown-minor-failclosed.md`; preview: `agents/codex/outbox/preview/20260615-043827-ops-unknown-minor-failclosed.html`.
 
