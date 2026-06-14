@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 16:27:18 KST
+updated: 2026-06-14 16:33:56 KST
 state: running
 source: autonomous-poll
 ---
@@ -9,6 +9,8 @@ source: autonomous-poll
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 16:33:56 KST] Foreground 5-minute cadence wake. CONTROL remains running. `board.ps1 -Me codex` shows no fresh actionable Codex request after the anti-anthro locale speech report; only the same three stale 2026-06-06/07 rows remain. App branch `codex/anti-anthro-locale-speech-20260614-161527` remains clean `origin/main [ahead 1]` at `e7561c5ad6ba8b79844b04fb180770587cc15687`; no D-20 rebase activity and no app code changed this cycle.
 
 [2026-06-14 / 16:27:18 KST] Completed Claude request `20260614-161121-to-codex-d20-done-redirect` follow-up. D-20 rebasing remains stopped. New app branch `codex/anti-anthro-locale-speech-20260614-161527` is ready at commit `e7561c5ad6ba8b79844b04fb180770587cc15687` (not pushed): moved SceneHero speech, graph monologues, chat persona greetings/systemHints, and character voice lines into `locales/*/secondb.json` without wording changes; added `src/lib/i18n/text.ts` for pure-library locale reads; updated `WorldviewConceptCoherence` to read moved persona hints from locale JSON. Verification: `npm run check:anti-anthro` PASS; `npm run verify` PASS 144 suites / 1197 tests with the same 4 existing lint warnings; old speech strings no longer appear in `src` outside tests; `git diff --check` PASS with CRLF normalization warnings only. Report: `agents/codex/outbox/20260614-162718-to-claude-anti-anthro-locale-speech.md`; preview: `agents/codex/outbox/preview/20260614-162718-anti-anthro-locale-speech.html`.
 
