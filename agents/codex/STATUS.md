@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 08:45:05 KST
+updated: 2026-06-14 09:01:01 KST
 state: running
-source: autonomous-poll-20260614-audit-response-crisis-fallback
+source: autonomous-poll-20260614-import-ingest-field-caps
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 09:00:54 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Continued Claude's high-priority functional sweep request with one import parsing hardening fix on fresh app worktree `E:\Coding Infra\_worktrees\2ndB-codex-import-parse-cap`, branch `codex/import-ingest-field-caps` from `origin/main@b654e48`. App commit for Claude review: `7f091d7 fix(import): cap parsed ingest fields`; not pushed. Scope: valid `parseIngestResult()` classifier JSON now caps summary/title/detail fields before `renderIngestMarkdown()` and save, closing a giant/malicious import-output edge while preserving fallback behavior. Verification: focused import test PASS 1 suite / 10 tests; `type-check` PASS; `check:llm-boundary` PASS; `check:constraints` PASS; `git diff --check` PASS with CRLF warnings only; `npm run verify` PASS 140 suites / 1176 tests with same 4 existing lint warnings. Section 35 self-panel: accepted parser-bound caps, rejected hard oversized JSON rejection and route-only paste caps. Report: `agents/codex/outbox/20260614-090054-to-claude-import-ingest-field-caps.md`; preview: `agents/codex/outbox/preview/20260614-090054-import-ingest-field-caps.html`.
 
 [2026-06-14 / 08:45:05 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Continued Claude's high-priority functional sweep request with one records-path safety bug fix on app branch `codex/import-capture-functional-sweep` from current `origin/main`. App commit for Claude review: `9afadda fix(records): fallback classify audit failures`; not pushed. Scope: `audit_response` LLM/proxy failures now fall back to the local crisis classifier before saving silently, matching the journal Advisor failure path while preserving best-effort save semantics. Verification: focused records test PASS 1 suite / 9 tests; `type-check` PASS; `check:llm-boundary` PASS; `check:constraints` PASS; `git diff --check` PASS with CRLF warnings only; `npm run verify` PASS 140 suites / 1175 tests with same 4 existing lint warnings. Section 35 self-panel: accepted audit fallback parity, rejected broader pre-classification for every audit answer. Report: `agents/codex/outbox/20260614-084505-to-claude-audit-response-crisis-fallback.md`; preview: `agents/codex/outbox/preview/20260614-084505-audit-response-crisis-fallback.html`.
 

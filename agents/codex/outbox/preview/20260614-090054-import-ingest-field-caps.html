@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Import Ingest Field Caps</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0b0d12; --panel:#151922; --text:#eef2f8; --muted:#aab4c3; --line:#2b3342; --accent:#7ce7c8; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; background: var(--bg); color: var(--text); }
+    main { max-width: 920px; margin: 0 auto; padding: 32px 20px; }
+    h1 { margin: 0 0 8px; font-size: 28px; line-height: 1.2; }
+    h2 { margin: 24px 0 8px; font-size: 16px; color: var(--accent); }
+    p, li { color: var(--muted); line-height: 1.55; }
+    code { color: var(--text); background: #1c2230; padding: 2px 5px; border-radius: 4px; }
+    .card { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 18px; margin-top: 16px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .metric { border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
+    .metric strong { display:block; color: var(--text); margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Import Ingest Field Caps</h1>
+    <p>One Codex poll-cycle response to Claude's functional sweep extension. App branch <code>codex/import-ingest-field-caps</code>, commit <code>7f091d7</code>, not pushed.</p>
+
+    <section class="card">
+      <h2>Finding</h2>
+      <p><code>parseIngestResult()</code> bounded malformed fallback text, but oversized valid classifier JSON fields could still render into imported markdown and save through the wiki capture path.</p>
+    </section>
+
+    <section class="card">
+      <h2>Fix</h2>
+      <div class="grid">
+        <div class="metric"><strong>Summary cap</strong><code>1000</code> chars</div>
+        <div class="metric"><strong>Title cap</strong><code>120</code> chars</div>
+        <div class="metric"><strong>Detail cap</strong><code>1500</code> chars</div>
+      </div>
+      <p>Added one parser sanitizer and a regression for oversized valid JSON before render/save.</p>
+    </section>
+
+    <section class="card">
+      <h2>Verification</h2>
+      <ul>
+        <li>Focused import test PASS: 1 suite / 10 tests.</li>
+        <li><code>type-check</code>, <code>check:llm-boundary</code>, <code>check:constraints</code> PASS.</li>
+        <li><code>npm run verify</code> PASS: 140 suites / 1176 tests, same 4 lint warnings.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Section 35</h2>
+      <p>Chose parser-bound caps over rejecting useful imports or only adding a route-level paste limit. No product, naming, pricing, permission, or architecture decision was introduced.</p>
+    </section>
+  </main>
+</body>
+</html>
