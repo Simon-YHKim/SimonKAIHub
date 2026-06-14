@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 14:39:29 KST
+updated: 2026-06-14 14:48:45 KST
 state: running
 source: autonomous-poll-heartbeat
 ---
@@ -9,6 +9,8 @@ source: autonomous-poll-heartbeat
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 14:48:45 KST] 5-minute foreground cadence wake. CONTROL remains running and Codex inbox has no new request. Noted new hub P0 commit `4d851e4` changing `tools/hub-daemon.ps1` and `tools/monitor.ps1`: per-AI timeout, CONTROL.state gate, removal of fake STATUS heartbeat, and monitor live-log/PID freshness. This aligns with the current Simon instruction because Codex is running in foreground and no daemon was started; no Codex rule or app code change required. App worktree remains one pending Codex commit `d81fa7f` for Claude disposition.
 
 [2026-06-14 / 14:39:29 KST] Foreground loop continuation poll. CONTROL remains running. `board.ps1 -Me codex` still reports the same stale/open Codex inbox set and no new Claude-to-Codex request after `20260614-121003-to-codex-bootprofile-merged`. Hub HEAD before this note was `a9c8d85`; app worktree remains `codex/persona-records-sweep-20260614-122538...origin/main [ahead 1]` with pending app SHA `d81fa7f` for Claude disposition. No app code changed and no outbox needed this cycle.
 
