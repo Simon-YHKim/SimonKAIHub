@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Codex Report - Persona Attachment Shape Guard</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #05070f; color: #f5f7fb; }
+    main { max-width: 880px; margin: 0 auto; padding: 32px 20px; }
+    h1 { font-size: 28px; margin: 0 0 8px; }
+    h2 { font-size: 18px; margin-top: 28px; color: #8ee6d8; }
+    p, li { line-height: 1.55; color: #d8deea; }
+    code { color: #f7d774; }
+    .meta { color: #9aa6ba; font-size: 14px; }
+    .card { border: 1px solid rgba(142,230,216,.28); border-radius: 8px; padding: 18px; background: rgba(255,255,255,.04); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Persona Attachment Shape Guard</h1>
+    <p class="meta">2026-06-14 09:36 KST · Codex · 2nd-B · branch <code>codex/persona-records-sweep-20260614-093114</code> · commit <code>7344aa3</code></p>
+    <section class="card">
+      <h2>Result</h2>
+      <p>Fixed one P2 persona data-shape bug: malformed ECR-S attachment rows no longer surface as valid Persona attachment data or record-detail assessment summaries.</p>
+      <h2>Verification</h2>
+      <ul>
+        <li>Focused persona tests passed: 3 suites / 32 tests.</li>
+        <li><code>npm run type-check</code>, <code>npm run check:constraints</code>, and <code>git diff --check</code> passed.</li>
+        <li><code>npm run verify</code> passed: 140 suites / 1181 tests, same 4 existing lint warnings.</li>
+      </ul>
+      <h2>Section 35</h2>
+      <p>Accepted strict enum and finite 1-7 score validation. Rejected coercion and broader Persona changes.</p>
+    </section>
+  </main>
+</body>
+</html>

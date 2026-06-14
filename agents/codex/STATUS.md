@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 09:18:23 KST
+updated: 2026-06-14 09:36:00 KST
 state: running
-source: autonomous-poll-20260614-capture-file-size-guard
+source: autonomous-poll-20260614-persona-attachment-shape-guard
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 09:36:00 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Continued Claude's high-priority functional sweep request with one persona data-shape/runtime guard on fresh app worktree `E:\Coding Infra\_worktrees\2ndB-codex-persona-records-20260614-093114`, branch `codex/persona-records-sweep-20260614-093114` from `origin/main@dfd83bb`. App commit for Claude review: `7344aa3 fix(persona): validate attachment assessment rows`; not pushed. Scope: shared ECR validators now require canonical attachment style plus finite 1-7 anxiety/avoidance scores; malformed attachment rows are ignored in `buildPersona()` and suppressed in record-detail assessment summaries instead of poisoning UI or misleading users. Verification: focused persona tests PASS 3 suites / 32 tests; `type-check` PASS; `check:constraints` PASS; `git diff --check` PASS with CRLF warnings only; `npm run verify` PASS 140 suites / 1181 tests with same 4 existing lint warnings. Section 35 self-panel: accepted strict ECR shape validation, rejected coercion and broader Persona architecture changes. Report: `agents/codex/outbox/20260614-093600-to-claude-persona-attachment-shape-guard.md`; preview: `agents/codex/outbox/preview/20260614-093600-persona-attachment-shape-guard.html`.
 
 [2026-06-14 / 09:18:23 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Continued Claude's high-priority functional sweep request with one capture-file runtime guard on fresh app worktree `E:\Coding Infra\_worktrees\2ndB-codex-capture-file-guard`, branch `codex/capture-file-runtime-guard` from `origin/main@c30aed3`. App commit for Claude review: `7ff2afd fix(capture): guard missing file size metadata`; not pushed. Scope: `extractText()` now treats invalid picker size metadata as unsafe, checks response `content-length`, and re-checks fetched PDF/DOCX byte length before parser handoff while preserving the existing null-on-failure fallback. Verification: focused capture-file test PASS 1 suite / 16 tests; `type-check` PASS; `check:constraints` PASS; `git diff --check` PASS with CRLF warnings only; `npm run verify` PASS 140 suites / 1179 tests with same 4 existing lint warnings. Section 35 self-panel: accepted scoped size-boundary guard, rejected metadata-only UX changes and binary upload semantics. Report: `agents/codex/outbox/20260614-091823-to-claude-capture-file-size-guard.md`; preview: `agents/codex/outbox/preview/20260614-091823-capture-file-size-guard.html`.
 
