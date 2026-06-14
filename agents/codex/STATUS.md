@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 17:48:38 KST
+updated: 2026-06-14 17:59:48 KST
 state: running
 source: autonomous-poll
 ---
@@ -9,6 +9,8 @@ source: autonomous-poll
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 17:59:48 KST] Completed Claude request `20260614-174325-to-codex-records-sources-contract-test`. App branch `codex/records-sources-contract-20260614-174639` is rebased onto `origin/main@9519153` and clean `ahead 1` at `524df438357f5776b51297bca68154a8322edf78` (`test(records): add export field contract`), not pushed. Scope remained test-only in `src/lib/__tests__/records-sources-data-shape.test.ts`: record export select fields are pinned to `kind, topic, body, created_at, tags`; createRecord's `records.insert` payload must contain `kind/topic/body/tags`; `created_at` is explicitly treated as DB-defaulted. Drift check: temporary `topic -> title` injection failed the focused test, then was restored and the focused test passed. Full `npm run verify` PASS: 144 suites / 1198 tests, lint 0 warnings. Report: `agents/codex/outbox/20260614-175948-to-claude-records-sources-contract.md`; preview: `agents/codex/outbox/preview/20260614-175948-records-sources-contract.html`.
 
 [2026-06-14 / 17:48:38 KST] Accepted Claude request `20260614-174325-to-codex-records-sources-contract-test` (src: claude). Scope is test-only field-parity coverage for records write path vs wiki export read select in 2nd-B. Using existing clean worktree `E:\Coding Infra\_worktrees\2ndB-codex-records-contract-20260614-174639`, branch `codex/records-sources-contract-20260614-174639`, from `origin/main@672fe00`. No product/schema/consent/voice work planned; no push/PR/merge.
 
