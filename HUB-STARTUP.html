@@ -151,12 +151,12 @@ Write-Host "[hub] 3 daemons launched (codex, grok, antigravity) @ 10min"</pre><b
     <div class="cmdrow" style="margin-top:7px"><pre class="cmd" id="c-daemon1">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\hub-daemon.ps1" -Only codex -IntervalSec 600</pre><button class="copy" data-t="c-daemon1">복사</button></div>
   </div>
 
-  <p class="mini" style="margin:14px 4px 10px;font-size:12px;color:var(--muted)"><b style="color:var(--text)">모드 B · 인-윈도우 루프</b> — 데몬 없이, <b>띄워둔 각 AI 창</b>에 아래를 붙여넣으면 그 창에서 5분 주기 자율 동작(activate 규칙을 직접 읽음). Claude는 <b>4단계 /loop</b>가 곧 인-윈도우 루프. 각 AI는 최고모델로 실행 — 정본 <code style="font-family:var(--mono);font-size:11px">MODELS.md</code>: <code style="font-family:var(--mono);font-size:11px">codex -m gpt-5.5</code> · <code style="font-family:var(--mono);font-size:11px">grok -m grok-4.3</code> · agy <code style="font-family:var(--mono);font-size:11px">"Gemini 3.1 Pro (High)"</code>.</p>
+  <p class="mini" style="margin:14px 4px 10px;font-size:12px;color:var(--muted)"><b style="color:var(--text)">모드 B · 인-윈도우 루프</b> — 데몬 없이, <b>띄워둔 각 AI 창</b>에 아래를 붙여넣으면 그 창에서 5분 주기 자율 동작(activate 규칙을 직접 읽음). Claude는 <b>4단계 /loop</b>가 곧 인-윈도우 루프. 각 AI는 <b style="color:var(--text)">최고모델·최대 effort</b>로 실행(데몬이 spawn 시 자동주입) — 정본 <code style="font-family:var(--mono);font-size:11px">MODELS.md</code>: Claude <code style="font-family:var(--mono);font-size:11px">fable-5 @max</code> · <code style="font-family:var(--mono);font-size:11px">codex -m gpt-5.5 (xhigh)</code> · <code style="font-family:var(--mono);font-size:11px">grok -m grok-4.3 (high)</code> · agy <code style="font-family:var(--mono);font-size:11px">"Gemini 3.1 Pro (High)"</code>.</p>
   <div class="grid grid3">
     <div class="card" style="margin:0">
       <div class="top">
         <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 7 3 12 8 17"/><polyline points="16 7 21 12 16 17"/></svg></span>
-        <div class="meta"><h3>Codex 루프</h3><p class="desc">이미지·UI/UX</p></div>
+        <div class="meta"><h3>Codex 루프</h3><p class="desc">이미지·UI/UX + 테스트저자</p></div>
         <span class="tgt" title="Codex 창에 붙여넣기"><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg></span><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 7 3 12 8 17"/><polyline points="16 7 21 12 16 17"/></svg></span></span>
       </div>
       <div class="cmdrow"><pre class="cmd" id="c-incodex">너는 4-AI 허브의 Codex(이미지·UI/UX)다. E:\Coding Infra\AI Infra\Communication\prompts\codex-activate.md 를 읽고 그대로 자율 루프(5분 주기)로 동작해. 한국어, 자동승인 -s danger-full-access. 백그라운드 데몬은 띄우지 마.</pre><button class="copy" data-t="c-incodex">복사</button></div>
@@ -164,7 +164,7 @@ Write-Host "[hub] 3 daemons launched (codex, grok, antigravity) @ 10min"</pre><b
     <div class="card" style="margin:0">
       <div class="top">
         <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5.5" y1="5.5" x2="18.5" y2="18.5"/><line x1="18.5" y1="5.5" x2="5.5" y2="18.5"/></svg></span>
-        <div class="meta"><h3>Grok 루프</h3><p class="desc">시장·소비자 advisory</p></div>
+        <div class="meta"><h3>Grok 루프</h3><p class="desc">시장 advisory + 허브 와치독</p></div>
         <span class="tgt" title="Grok 창에 붙여넣기"><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg></span><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5.5" y1="5.5" x2="18.5" y2="18.5"/><line x1="18.5" y1="5.5" x2="5.5" y2="18.5"/></svg></span></span>
       </div>
       <div class="cmdrow"><pre class="cmd" id="c-ingrok">너는 4-AI 허브의 Grok(시장·소비자 advisory)다. E:\Coding Infra\AI Infra\Communication\prompts\grok-activate.md 를 읽고 그대로 자율 루프(5분 주기)로 동작해. 한국어. 백그라운드 데몬은 띄우지 마.</pre><button class="copy" data-t="c-ingrok">복사</button></div>
@@ -172,7 +172,7 @@ Write-Host "[hub] 3 daemons launched (codex, grok, antigravity) @ 10min"</pre><b
     <div class="card" style="margin:0">
       <div class="top">
         <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3.2c.5 4.5 3.8 7.8 8.3 8.3-4.5.5-7.8 3.8-8.3 8.3-.5-4.5-3.8-7.8-8.3-8.3C8.2 11 11.5 7.7 12 3.2z"/></svg></span>
-        <div class="meta"><h3>Antigravity 루프</h3><p class="desc">네이티브·에뮬 QA</p></div>
+        <div class="meta"><h3>Antigravity 루프</h3><p class="desc">네이티브 QA + 전레포 감사</p></div>
         <span class="tgt" title="Antigravity 창에 붙여넣기"><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg></span><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3.2c.5 4.5 3.8 7.8 8.3 8.3-4.5.5-7.8 3.8-8.3 8.3-.5-4.5-3.8-7.8-8.3-8.3C8.2 11 11.5 7.7 12 3.2z"/></svg></span></span>
       </div>
       <div class="cmdrow"><pre class="cmd" id="c-inag">너는 4-AI 허브의 Antigravity(네이티브·에뮬 QA)다. E:\Coding Infra\AI Infra\Communication\prompts\antigravity-activate.md 를 읽고 그대로 자율 루프(5분 주기)로 동작해. 한국어. 백그라운드 데몬은 띄우지 마.</pre><button class="copy" data-t="c-inag">복사</button></div>
@@ -246,6 +246,14 @@ Write-Host "[hub] 3 daemons launched (codex, grok, antigravity) @ 10min"</pre><b
       </div>
       <div class="cmdrow"><pre class="cmd" id="c-check">Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" | Where-Object { $_.CommandLine -match 'hub-daemon\.ps1' } | ForEach-Object { if($_.CommandLine -match '-Only (\w+)'){ "daemon ALIVE: $($matches[1])  (PID $($_.ProcessId))" } }</pre><button class="copy" data-t="c-check">복사</button></div>
     </div>
+    <div class="card">
+      <div class="top">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>
+        <div class="meta"><h3>릴리즈 게이트</h3><p class="desc">2nd-B 머지 전 <b>GO/NO-GO</b> + 롤백 SHA 기록(§8).</p></div>
+        <span class="tgt" title="PowerShell"><span class="pill ps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><polyline points="6.5 9.5 9.5 12 6.5 14.5"/><line x1="11.5" y1="14.5" x2="15.5" y2="14.5"/></svg></span></span>
+      </div>
+      <div class="cmdrow"><pre class="cmd" id="c-relgate">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\release-gate.ps1"</pre><button class="copy" data-t="c-relgate">복사</button></div>
+    </div>
   </div>
 
   <div class="sec">정지 · PowerShell</div>
@@ -259,8 +267,9 @@ Write-Host "[hub] 3 daemons launched (codex, grok, antigravity) @ 10min"</pre><b
   </div>
 
   <footer>
-    머지게이트 = Claude · 데몬 10분 · 정본 <code>PROTOCOL.md</code><br>
-    <code>E:\Coding Infra\AI Infra\Communication\HUB-STARTUP.html</code>
+    머지게이트 = Claude · 데몬 10분 · 정본 <code>PROTOCOL.md</code> · 장애복구 <code>RUNBOOK.md</code> · 역할 <code>ROUTING.md</code> · 합의 <code>DECISIONS.md</code><br>
+    미성년 = enablement(§36, 제한 아님) · 좌석증설 전 용량게이트(§31.8) · 코어레인 독립반론(§35.6, Claude 최종권 불변)<br>
+    <code>E:\Coding Infra\AI Infra\Communication\HUB-STARTUP.html</code> · 업데이트 2026-06-14
   </footer>
 </div>
 
