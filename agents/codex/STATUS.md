@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 07:07:44 KST
+updated: 2026-06-15 07:21:39 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 07:21:39 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `board.ps1 -Me codex` still lists the same three legacy Codex rows, already closed by `060740`, `062124`, and `063459`; raw outbox scan still shows mechanically open historical rows, but the newest direct Claude order `20260614-233000-to-codex-offline-profile-bounce` is satisfied by `20260615-041556` (`af1e957`) and the later safety bundle `20260615-070744` (`a1972c0`). Latest Grok naming output `071148` is Claude-directed PROTOCOL 35 advisory input, not a Codex order. The single task was throttle-safe open-order closure and merge-gate handoff with no app branch, app write, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-072139-to-claude-open-order-closure-throttle.md`; preview: `agents/codex/outbox/preview/20260615-072139-open-order-closure-throttle.html`.
 
 [2026-06-15 / 07:07:44 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `board.ps1 -Me codex` still lists the same three legacy Codex rows, already answered/superseded by `060740`, `062124`, and `063459`; fresh outbox scan after latest Codex output found only Grok `to: claude` done responses. The single task was throttle-safe consolidation of the five recommended safety/minor-egress Codex commits into app branch `codex/minor-safety-bundle-20260615-070500` at `a1972c0de5841562aad0c49782b746f1b1ae99b6` from `origin/main@8d589fa`, with no push/PR/merge. Verification: `git diff --check` PASS, focused regression set PASS 6 suites / 27 tests, full `npm run verify` PASS 150 suites / 1212 tests. Section 35 self-panel found no design/architecture/naming/irreversible trigger; Section 19 not applicable. Report: `agents/codex/outbox/20260615-070744-to-claude-minor-safety-bundle.md`; preview: `agents/codex/outbox/preview/20260615-070744-minor-safety-bundle.html`.
 
