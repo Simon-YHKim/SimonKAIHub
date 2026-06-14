@@ -6,139 +6,221 @@
 <title>AI Hub 시작 키트 — 복붙 런치팩</title>
 <style>
   :root{
-    --bg:#0f0f14; --panel:#16161f; --panel2:#1c1c28; --line:#2a2a3a;
-    --text:#e7e7ef; --muted:#9a9ab0; --accent:#8b7cf0; --ok:#5fc98a; --warn:#e0b04a;
+    --bg:#0f0f16; --panel:#16161f; --panel2:#1c1c28; --line:#282838;
+    --text:#e7e7ef; --muted:#9696ad; --faint:#62627a;
+    --accent:#8b7cf0; --accent-dim:#2a2440; --ok:#5fc98a; --warn:#e0b04a; --stop:#e6898c;
     --mono:'Cascadia Code','Consolas',ui-monospace,monospace;
     --sans:'Pretendard','Segoe UI',system-ui,sans-serif;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6;
-       -webkit-font-smoothing:antialiased;padding:40px 20px}
-  .wrap{max-width:920px;margin:0 auto}
-  header{margin-bottom:8px}
-  h1{font-size:24px;font-weight:650;margin:0 0 4px;letter-spacing:-.02em}
-  .sub{color:var(--muted);font-size:14px;margin:0 0 28px}
-  .note{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--accent);
-        border-radius:8px;padding:12px 16px;margin:0 0 28px;font-size:13.5px;color:var(--muted)}
-  .note b{color:var(--text)}
-  .step{font-size:12px;color:var(--accent);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin:30px 0 10px}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 18px 14px;margin:0 0 14px}
-  .card h3{margin:0 0 4px;font-size:15.5px;font-weight:600}
-  .card .desc{margin:0 0 12px;font-size:13px;color:var(--muted)}
-  .cmdrow{position:relative;background:#0b0b10;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-  pre.cmd{margin:0;padding:14px 86px 14px 14px;font-family:var(--mono);font-size:12.5px;
-          color:#d6d6e6;white-space:pre-wrap;word-break:break-word;overflow-x:auto}
-  .copy{position:absolute;top:10px;right:10px;background:var(--accent);color:#0c0c12;border:0;
-        border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--sans)}
-  .copy:hover{filter:brightness(1.08)}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.55;
+       -webkit-font-smoothing:antialiased;padding:44px 20px 60px;
+       background-image:radial-gradient(900px 420px at 50% -120px,rgba(139,124,240,.10),transparent 70%)}
+  .wrap{max-width:980px;margin:0 auto}
+
+  /* header */
+  h1{font-size:25px;font-weight:660;margin:0 0 5px;letter-spacing:-.02em;display:flex;align-items:center;gap:11px}
+  h1 .logo{width:30px;height:30px;color:var(--accent)}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 26px}
+
+  /* stepper */
+  .stepper{display:flex;align-items:flex-start;gap:0;margin:0 0 34px;
+           background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 10px}
+  .stp{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;
+       text-decoration:none;color:inherit;position:relative;padding:4px 6px}
+  .stp .ico{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;
+            background:var(--accent-dim);color:var(--accent);border:1px solid var(--line);transition:.15s}
+  .stp .ico svg{width:21px;height:21px}
+  .stp:hover .ico{background:var(--accent);color:#0c0c12;transform:translateY(-2px)}
+  .stp .n{font-size:10.5px;font-weight:700;color:var(--accent);letter-spacing:.06em}
+  .stp .lab{font-size:12.5px;font-weight:600}
+  .stp .opt{font-size:10.5px;color:var(--faint)}
+  .stp:not(:last-child)::after{content:"";position:absolute;top:32px;right:-50%;width:100%;height:2px;
+        background:linear-gradient(90deg,var(--line),var(--line));z-index:0}
+  .stp .ico,.stp .n,.stp .lab,.stp .opt{position:relative;z-index:1}
+
+  /* section label */
+  .sec{font-size:11px;color:var(--faint);font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+       margin:32px 4px 12px;display:flex;align-items:center;gap:9px}
+  .sec::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  /* cards */
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:15px 16px;margin:0 0 12px}
+  .card .top{display:flex;align-items:center;gap:11px;margin:0 0 11px}
+  .card .badge{width:34px;height:34px;border-radius:9px;flex:none;display:grid;place-items:center;
+               background:var(--accent-dim);color:var(--accent)}
+  .card .badge svg{width:18px;height:18px}
+  .card h3{margin:0;font-size:14.5px;font-weight:620;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .card .desc{margin:1px 0 0;font-size:12px;color:var(--muted)}
+  .num{font-size:10px;font-weight:800;color:var(--accent);background:var(--accent-dim);
+       border:1px solid var(--line);border-radius:5px;padding:1px 6px;letter-spacing:.04em}
+
+  /* command row */
+  .cmdrow{position:relative;background:#0a0a10;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  pre.cmd{margin:0;padding:13px 84px 13px 13px;font-family:var(--mono);font-size:12px;
+          color:#cfcfe2;white-space:pre-wrap;word-break:break-word}
+  .copy{position:absolute;top:9px;right:9px;background:var(--accent);color:#0c0c12;border:0;
+        border-radius:7px;padding:6px 13px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:var(--sans)}
+  .copy:hover{filter:brightness(1.1)}
   .copy.done{background:var(--ok)}
-  .tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.03em;padding:2px 7px;border-radius:4px;
-       margin-right:8px;vertical-align:1px}
-  .t-daemon{background:#2a2440;color:#b6a9ff}
-  .t-watch{background:#1f3328;color:#8fdcab}
-  .t-loop{background:#332a1f;color:#e6c178}
-  .t-tool{background:#23303a;color:#8fc6e0}
-  .t-stop{background:#3a2326;color:#e6989a}
-  footer{margin-top:34px;color:#5a5a70;font-size:11.5px;text-align:center}
-  code{font-family:var(--mono);background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:12px;color:#cfcfe2}
+  .mini{margin-top:9px;font-size:11px;color:var(--faint)}
+  .mini code{font-family:var(--mono);background:var(--panel2);padding:1px 5px;border-radius:4px;color:#c2c2da}
+
+  /* grid for tools */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}.stepper{flex-wrap:wrap;gap:14px}
+        .stp:not(:last-child)::after{display:none}.stp{flex:1 1 40%}}
+
+  /* accents per kind */
+  .k-stop .badge{background:#3a2326;color:var(--stop)}
+  .k-ok .badge{background:#1f3328;color:var(--ok)}
+
+  details{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:0 16px;margin:0 0 12px}
+  details summary{cursor:pointer;padding:14px 0;font-size:13px;font-weight:600;color:var(--muted);
+                  list-style:none;display:flex;align-items:center;gap:9px}
+  details summary::-webkit-details-marker{display:none}
+  details summary .chev{margin-left:auto;color:var(--faint);transition:.2s}
+  details[open] summary .chev{transform:rotate(90deg)}
+  details .body{padding:0 0 16px}
+
+  footer{margin-top:36px;color:var(--faint);font-size:11px;text-align:center;line-height:1.7}
+  footer code{font-family:var(--mono)}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <h1>AI Hub 시작 키트</h1>
-    <p class="sub">Claude Code 재시작 후 4-AI 허브를 처음부터 복붙으로 가동 · 정상 가동 점검용 · 업데이트 2026-06-14 KST</p>
-  </header>
 
-  <div class="note">
-    <b>가동 순서</b>: ① 에뮬레이터(선택) → ② 데몬 가동(codex·grok·antigravity, 10분) → ③ 모니터 켜기 → ④ Claude에 루프 프롬프트 붙여넣기.<br>
-    <b>중요</b>: 데몬은 <code>Start-Process -WindowStyle Hidden</code>으로 띄워 <b>Claude Code 세션과 독립</b>적으로 살아있습니다. 단 <b>Claude 루프(④)는 새 Claude Code 세션에 프롬프트를 다시 붙여야</b> 시작됩니다. 명령은 모두 <b>PowerShell</b>에 붙여넣으세요.
-  </div>
+  <h1>
+    <svg class="logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.5"/><circle cx="5" cy="6" r="1.8"/><circle cx="19" cy="6" r="1.8"/><circle cx="5" cy="18" r="1.8"/><circle cx="19" cy="18" r="1.8"/><path d="M10 11 6.5 7.3M14 11l3.5-3.7M10 13l-3.5 3.7M14 13l3.5 3.7"/></svg>
+    AI Hub 시작 키트
+  </h1>
+  <p class="sub">Claude Code 재시작 후 4-AI 허브를 복붙으로 가동 · 명령은 모두 <b>PowerShell</b>(Claude 루프만 Claude Code) · 업데이트 2026-06-14 KST</p>
 
-  <div class="step">1단계 · 에뮬레이터 (네이티브 QA가 필요할 때만)</div>
-  <div class="card">
-    <h3><span class="tag t-tool">EMU</span>Android 에뮬레이터 부팅 (Pixel 9 Pro XL)</h3>
-    <p class="desc">AG 네이티브 QA / expo-smoke 크래시 스캔을 쓰려면 먼저 에뮬레이터가 떠 있어야 합니다. 이미 떠 있으면 건너뛰세요.</p>
+  <!-- STEPPER -->
+  <nav class="stepper">
+    <a class="stp" href="#s1"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><line x1="10" y1="18.5" x2="14" y2="18.5"/></svg></span><span class="n">1 · 선택</span><span class="lab">에뮬레이터</span><span class="opt">네이티브 QA 시</span></a>
+    <a class="stp" href="#s2"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 4 21 9 16 9"/></svg></span><span class="n">2 · 핵심</span><span class="lab">데몬 가동</span><span class="opt">codex·grok·AG</span></a>
+    <a class="stp" href="#s3"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="20" x2="6" y2="13"/><line x1="12" y1="20" x2="12" y2="8"/><line x1="18" y1="20" x2="18" y2="11"/></svg></span><span class="n">3 · 감시</span><span class="lab">모니터</span><span class="opt">전용 터미널</span></a>
+    <a class="stp" href="#s4"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 4 20 12 6 20 6 4"/></svg></span><span class="n">4 · 시작</span><span class="lab">Claude 루프</span><span class="opt">머지게이트</span></a>
+  </nav>
+
+  <div class="sec">가동 시퀀스</div>
+
+  <!-- 1 EMU -->
+  <div class="card" id="s1">
+    <div class="top">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><line x1="10" y1="18.5" x2="14" y2="18.5"/></svg></span>
+      <div><h3><span class="num">1</span> 에뮬레이터 부팅 <span style="color:var(--faint);font-weight:500;font-size:12px">Pixel 9 Pro XL</span></h3>
+      <p class="desc">네이티브 QA·크래시 스캔용. 이미 떠 있으면 건너뛰기.</p></div>
+    </div>
     <div class="cmdrow"><pre class="cmd" id="c-emu">cd "$env:LOCALAPPDATA\Android\Sdk\emulator"; .\emulator.exe -avd Pixel_9_Pro_XL -netdelay none -netspeed full</pre><button class="copy" data-t="c-emu">복사</button></div>
   </div>
 
-  <div class="step">2단계 · 데몬 가동 (핵심)</div>
-  <div class="card">
-    <h3><span class="tag t-daemon">DAEMON</span>3개 AI 데몬 한 번에 가동 (codex · grok · antigravity, 10분 주기)</h3>
-    <p class="desc">자가-throttling 데몬: 각 AI가 10분마다 자기 inbox를 읽고 한 작업을 수행+커밋. gemini(AG) 429 시 자동 지수 백오프. 숨김 창으로 백그라운드 실행.</p>
+  <!-- 2 DAEMON -->
+  <div class="card" id="s2">
+    <div class="top">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 4 21 9 16 9"/></svg></span>
+      <div><h3><span class="num">2</span> 데몬 3개 한 번에 <span style="color:var(--faint);font-weight:500;font-size:12px">10분 주기 · 백그라운드</span></h3>
+      <p class="desc">각 AI가 10분마다 inbox 읽고 한 작업 수행+커밋. 429 시 자동 백오프.</p></div>
+    </div>
     <div class="cmdrow"><pre class="cmd" id="c-daemon">$hub = "E:\Coding Infra\AI Infra\Communication"
 'codex','grok','antigravity' | ForEach-Object {
   Start-Process powershell -ArgumentList '-ExecutionPolicy','Bypass','-File',"$hub\tools\hub-daemon.ps1",'-Only',$_,'-IntervalSec','600' -WindowStyle Hidden
 }
 Write-Host "[hub] 3 daemons launched (codex, grok, antigravity) @ 10min"</pre><button class="copy" data-t="c-daemon">복사</button></div>
-  </div>
-  <div class="card">
-    <h3><span class="tag t-daemon">DAEMON</span>개별 가동 (디버깅용 · 한 AI만)</h3>
-    <p class="desc">특정 AI만 돌리거나 출력을 보면서 띄우고 싶을 때. <code>-Only</code> 값을 바꾸세요. <code>-MaxTasksPerCycle 2</code>를 더하면 사이클당 열린 오더를 2개까지 드레인(백로그 소진).</p>
-    <div class="cmdrow"><pre class="cmd" id="c-daemon1">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\hub-daemon.ps1" -Only codex -IntervalSec 600</pre><button class="copy" data-t="c-daemon1">복사</button></div>
+    <p class="mini">한 AI만 / 출력 보며 디버깅: <code>-Only</code> 변경 · <code>-MaxTasksPerCycle 2</code>로 백로그 드레인</p>
+    <div class="cmdrow" style="margin-top:7px"><pre class="cmd" id="c-daemon1">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\hub-daemon.ps1" -Only codex -IntervalSec 600</pre><button class="copy" data-t="c-daemon1">복사</button></div>
   </div>
 
-  <div class="step">3단계 · 모니터링</div>
-  <div class="card">
-    <h3><span class="tag t-watch">MONITOR</span>실시간 대시보드 (5초 갱신)</h3>
-    <p class="desc">각 AI의 state · 활동시각 · WORKING/idle · 프로세스 수 · <b>cyc(각 AI 누적 사이클 수 — 데몬AI는 완료 사이클, Claude는 BOARD r-라운드)</b> · <b>pend&gt;CL(Claude 미처리 커밋 수, ≥3이면 RED 알람)</b> · 에뮬레이터 상태 · 데몬 수 · 최근 커밋. <b>전용 터미널 1개</b>에서 켜 두세요.</p>
+  <!-- 3 MONITOR -->
+  <div class="card" id="s3">
+    <div class="top">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="20" x2="6" y2="13"/><line x1="12" y1="20" x2="12" y2="8"/><line x1="18" y1="20" x2="18" y2="11"/></svg></span>
+      <div><h3><span class="num">3</span> 실시간 모니터 <span style="color:var(--faint);font-weight:500;font-size:12px">5초 갱신 · 전용 터미널</span></h3>
+      <p class="desc">state · <b>cyc</b>(누적 사이클) · <b>pend&gt;CL</b>(미처리 ≥3 RED) · 에뮬 · 데몬 · 커밋.</p></div>
+    </div>
     <div class="cmdrow"><pre class="cmd" id="c-mon">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\monitor.ps1"</pre><button class="copy" data-t="c-mon">복사</button></div>
   </div>
-  <div class="card">
-    <h3><span class="tag t-watch">FEED</span>채팅뷰 — 각 AI가 지금 무슨 말/작업을 했나</h3>
-    <p class="desc">AI별 최신 실행 transcript를 채팅처럼 흐름으로 봄. 모니터가 "상태판"이면 feed는 "대화 로그".</p>
-    <div class="cmdrow"><pre class="cmd" id="c-feed">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\feed.ps1"</pre><button class="copy" data-t="c-feed">복사</button></div>
-  </div>
 
-  <div class="step">4단계 · Claude 오케스트레이터 루프 시작</div>
-  <div class="card">
-    <h3><span class="tag t-loop">CLAUDE</span>Claude Code에 붙여넣기 (자율 루프 + 머지게이트)</h3>
-    <p class="desc">이걸 <b>Claude Code 입력창</b>에 붙여넣으면 Claude가 10분마다 AI 산출을 수거→검토→2nd-B 머지→피드백+재배정합니다. (PowerShell 아님, Claude Code임)</p>
+  <!-- 4 CLAUDE -->
+  <div class="card" id="s4">
+    <div class="top">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 4 20 12 6 20 6 4"/></svg></span>
+      <div><h3><span class="num">4</span> Claude 루프 시작 <span style="color:var(--warn);font-weight:600;font-size:11.5px">← Claude Code 입력창</span></h3>
+      <p class="desc">10분마다 산출 수거 → 검토 → 2nd-B 머지 → 피드백·재배정.</p></div>
+    </div>
     <div class="cmdrow"><pre class="cmd" id="c-loop">/loop 나한테 판단 맡기지마. 난 너희들의 판단을 믿어. 그리고 우리의 주요 타겟은 2ndb의 디벨롭이야. 기능상 문제는 없는지, 에뮬레이터에 띄웠을때 문제는 없는지 계속 점검해. AI Hub를 활용 하면서.</pre><button class="copy" data-t="c-loop">복사</button></div>
   </div>
 
-  <div class="step">온디맨드 점검 도구</div>
-  <div class="card">
-    <h3><span class="tag t-tool">SMOKE</span>에뮬레이터 앱 크래시 스캔 (LLM 불필요)</h3>
-    <p class="desc">실행 중인 에뮬레이터의 <code>adb logcat</code>에서 2nd-B 앱의 FATAL/ANR/Hermes 크래시를 직접 스캔. PASS/CRASH 즉시 판정. <code>-Report</code>를 더하면 md 리포트 저장.</p>
-    <div class="cmdrow"><pre class="cmd" id="c-smoke">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\expo-smoke.ps1"</pre><button class="copy" data-t="c-smoke">복사</button></div>
-  </div>
-  <div class="card">
-    <h3><span class="tag t-tool">WIKI</span>교훈 수집 (SimonKWiki ingest 대기열)</h3>
-    <p class="desc">각 AI가 outbox에 남긴 <code>wiki_lesson</code>/retro/activation 교훈을 모아 Claude 리뷰용 다이제스트로. <code>-ListOnly</code>로 목록만 확인 가능.</p>
-    <div class="cmdrow"><pre class="cmd" id="c-wiki">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\wiki-ingest.ps1"</pre><button class="copy" data-t="c-wiki">복사</button></div>
+  <div class="sec">점검 도구</div>
+  <div class="grid">
+    <div class="card">
+      <div class="top">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+        <div><h3>채팅 피드</h3><p class="desc">각 AI 최신 transcript를 대화 흐름으로.</p></div>
+      </div>
+      <div class="cmdrow"><pre class="cmd" id="c-feed">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\feed.ps1"</pre><button class="copy" data-t="c-feed">복사</button></div>
+    </div>
+    <div class="card">
+      <div class="top">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg></span>
+        <div><h3>크래시 스캔</h3><p class="desc">logcat FATAL/ANR/Hermes 즉시 판정.</p></div>
+      </div>
+      <div class="cmdrow"><pre class="cmd" id="c-smoke">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\expo-smoke.ps1"</pre><button class="copy" data-t="c-smoke">복사</button></div>
+    </div>
+    <div class="card">
+      <div class="top">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A2 2 0 0 1 6 3h13v17H6a2 2 0 0 0-2 2z"/><line x1="9" y1="7.5" x2="15" y2="7.5"/></svg></span>
+        <div><h3>위키 교훈 수집</h3><p class="desc">outbox <code style="font-size:11px">wiki_lesson</code> 다이제스트.</p></div>
+      </div>
+      <div class="cmdrow"><pre class="cmd" id="c-wiki">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\wiki-ingest.ps1"</pre><button class="copy" data-t="c-wiki">복사</button></div>
+    </div>
+    <div class="card k-ok">
+      <div class="top">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 12 8 12 11 19 14 5 17 12 21 12"/></svg></span>
+        <div><h3>데몬 생존 확인</h3><p class="desc">지금 살아있는 데몬 + PID.</p></div>
+      </div>
+      <div class="cmdrow"><pre class="cmd" id="c-check">Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" | Where-Object { $_.CommandLine -match 'hub-daemon\.ps1' } | ForEach-Object { if($_.CommandLine -match '-Only (\w+)'){ "daemon ALIVE: $($matches[1])  (PID $($_.ProcessId))" } }</pre><button class="copy" data-t="c-check">복사</button></div>
+    </div>
   </div>
 
-  <div class="step">정지 / 상태 확인</div>
-  <div class="card">
-    <h3><span class="tag t-stop">CHECK</span>지금 살아있는 데몬 확인</h3>
-    <div class="cmdrow"><pre class="cmd" id="c-check">Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" | Where-Object { $_.CommandLine -match 'hub-daemon\.ps1' } | ForEach-Object { if($_.CommandLine -match '-Only (\w+)'){ "daemon ALIVE: $($matches[1])  (PID $($_.ProcessId))" } }</pre><button class="copy" data-t="c-check">복사</button></div>
-  </div>
-  <div class="card">
-    <h3><span class="tag t-stop">STOP</span>모든 데몬 정지</h3>
-    <p class="desc">재부팅 전이나 깨끗이 다시 시작할 때. (모니터/Claude는 별도 — 각 터미널에서 Ctrl+C)</p>
+  <div class="sec">정지</div>
+  <div class="card k-stop">
+    <div class="top">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18.4 6A8 8 0 1 1 5.6 6"/><line x1="12" y1="2.5" x2="12" y2="12"/></svg></span>
+      <div><h3>모든 데몬 정지</h3><p class="desc">재부팅·재시작 전. 모니터·Claude는 각 터미널 Ctrl+C.</p></div>
+    </div>
     <div class="cmdrow"><pre class="cmd" id="c-stop">Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" | Where-Object { $_.CommandLine -match 'hub-daemon\.ps1' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }; Write-Host "[hub] all daemons stopped"</pre><button class="copy" data-t="c-stop">복사</button></div>
   </div>
 
-  <div class="step">참고 · AI 수동 원샷 (데몬 없이 한 번만 직접 호출)</div>
-  <div class="card">
-    <h3><span class="tag t-tool">MANUAL</span>헤드리스 원샷 호출 레시피</h3>
-    <p class="desc">데몬을 안 쓰고 특정 AI에게 한 번만 일을 시킬 때. <code>PROMPT</code>를 실제 지시로 바꾸세요. (구독 인증이라 추가 과금 없음)</p>
-    <div class="cmdrow"><pre class="cmd" id="c-manual">$hub = "E:\Coding Infra\AI Infra\Communication"
+  <details>
+    <summary>
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+      참고 · 데몬 없이 AI 수동 원샷 호출
+      <svg class="chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+    </summary>
+    <div class="body">
+      <p class="mini" style="margin:0 0 9px"><code>PROMPT</code>을 실제 지시로 교체 · 구독 인증이라 추가 과금 없음</p>
+      <div class="cmdrow"><pre class="cmd" id="c-manual">$hub = "E:\Coding Infra\AI Infra\Communication"
 # Codex (코드/버그 스윕):
 "" | codex exec -s danger-full-access --skip-git-repo-check -C $hub -c model_reasoning_effort=high "PROMPT"
 # Grok (시장/소비자 advisory):
 grok -p "PROMPT"
 # Antigravity=gemini (네이티브/에뮬 QA):
 gemini -p "PROMPT" -y</pre><button class="copy" data-t="c-manual">복사</button></div>
-  </div>
+    </div>
+  </details>
 
-  <footer>2nd-B AI Hub · 머지게이트=Claude · 데몬 10분 · 정본 PROTOCOL.md · 이 파일 경로: E:\Coding Infra\AI Infra\Communication\HUB-STARTUP.html</footer>
+  <footer>
+    머지게이트 = Claude · 데몬 10분 · 정본 <code>PROTOCOL.md</code><br>
+    <code>E:\Coding Infra\AI Infra\Communication\HUB-STARTUP.html</code>
+  </footer>
 </div>
 
 <script>
   document.querySelectorAll('.copy').forEach(function(btn){
-    btn.addEventListener('click', function(){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
       var el = document.getElementById(btn.getAttribute('data-t'));
       var txt = el.innerText;
       function ok(){ var o=btn.textContent; btn.textContent='복사됨'; btn.classList.add('done'); setTimeout(function(){btn.textContent=o;btn.classList.remove('done');},1300); }
