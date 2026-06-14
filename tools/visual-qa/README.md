@@ -13,10 +13,33 @@ A screen is **FAIL** if its frame is black/empty **even when nothing crashed**. 
 cd "E:/Coding Infra/AI Infra/Communication/tools/visual-qa"
 npm install            # one-time: playwright + pngjs
 npx playwright install chromium   # one-time: the browser
-npm run shoot                      # default base = live GitHub Pages (current main)
+npm run shoot                      # default: Android-Chrome engine, live Pages (current main)
+node shoot.mjs --engine both       # Android-Chrome AND iPhone-Safari (WebKit + iPhone 15 viewport)
+node shoot.mjs --engine webkit     # iPhone-Safari only
 # or local expo web (run `npm run web` in E:/2ndB first):
 node shoot.mjs --base http://localhost:8081 --out ./shots-local
 ```
+
+`--engine webkit` uses Playwright **WebKit** = the real iOS Safari engine at an iPhone device
+descriptor, so it shows how 2nd-B WEB renders on an iPhone. One-time: `npx playwright install webkit`.
+
+## iPhone / iOS coverage (read this)
+- **iPhone WEB (Safari engine): covered here** via `--engine webkit`/`both`. Real Safari render, iPhone viewport.
+- **Native iOS app: NOT testable on this Windows box** (Windows cannot run the iOS Simulator). For
+  real native-iOS screens use an **EAS iOS build on Appetize.io** or a **physical iPhone** (TestFlight /
+  dev build). See memory `tool_2ndb_ios_eas_hermes_fix` for the EAS Hermes gotchas already solved.
+
+## Native Android: drive the live emulator, never let it park
+The live emulator parks on whatever screen it was left on ("same screen forever"). To actually
+*check* screens, navigate it and capture each:
+```bash
+adb exec-out screencap -p > now.png                 # what is it parked on right now
+adb shell wm size                                    # e.g. 1344x2992
+adb shell input tap <x> <y>                          # tap a tab / button (tab row y ~= 0.965*height)
+```
+Then Read the PNGs. Tab centers for the 4-tab bar = width * {0.125, 0.375, 0.625, 0.875}.
+AG (native lane) must SCRIPT this navigation through every key screen with a fresh per-screen
+shot + per-screen verdict -- not park on one screen and call it "PASS".
 
 Output: `shots/<screen>.png` + `shots/verdict.json`. Per screen it reports
 `meanLum` (mean luminance), `darkFrac` (fraction near-black), `textLen` (visible text),
