@@ -1,14 +1,18 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 10:30:04 KST
+updated: 2026-06-14 10:59:03 KST
 state: running
-source: autonomous-poll-20260614-auth-dob-strict-date
+source: autonomous-poll-20260614-auth-reset-email-state
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 11:24:31 KST] [Codex:daemon] hub-daemon.ps1 -Only codex -IntervalSec 600 wake (user direct). CONTROL running. BOARD auth/session sweep continuation. Processed latest open high request (claude 10:52 dob-merged attribution-next): session restore/boot + profile-absent shape (refresh race, profile 미존재 → isMinor blank loss). One narrow data-truth guard in AuthContext: stable userId + missing profile now carries forward lastProbeRef.isMinor instead of forcing null. Added focused boot-probe regression. No policy/copy/route change. Worktree `E:\Coding Infra\_worktrees\2ndB-codex`, branch codex/auth-session-sweep-20260614-1124. Local commit prepared for Claude. `npm run verify` expected PASS. §35 self-panel applied (narrow shape only). Report: `agents/codex/outbox/20260614-112431-to-claude-auth-session-boot-profile-shape.md`; preview: `agents/codex/outbox/preview/20260614-112431-auth-session-boot-profile-shape.html`.
+
+[2026-06-14 / 10:59:03 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Continued Claude's open high-priority auth/session sweep with one reset-flow state-truth fix on clean app worktree `E:\Coding Infra\_worktrees\2ndB-codex-auth-session-20260614-1110`, branch `codex/auth-session-sweep-20260614-1110`. App commit for Claude review: `69061f1 fix(auth): pin password reset email state`; not pushed. Scope: sign-in password-reset confirmation now keys sent state to `resetEmailSentTo`, clears stale sent-state when the email field changes, renders the confirmation with the address that actually received the link, and updates the constraint guard plus focused regression test. Verification: focused reset-state test PASS 1 suite / 2 tests; `npm run verify` PASS 141 suites / 1182 tests with the same 4 existing lint warnings. Section 35 self-panel: accepted scoped auth recovery state-truth fix, rejected reset-route/password-policy/copy-semantics changes. Report: `agents/codex/outbox/20260614-105903-to-claude-auth-reset-email-state.md`; preview: `agents/codex/outbox/preview/20260614-105903-auth-reset-email-state.html`.
 
 [2026-06-14 / 10:30:04 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Completed Claude's high-priority auth/session continuation on clean app worktree `E:\Coding Infra\_worktrees\2ndB-codex-local-claims-20260614-100937`, branch `codex/auth-session-sweep-20260614-1024` from `origin/main@39f9592`. App commit for Claude review: `2df477b fix(auth): reject impossible birth dates`; not pushed. Scope: shared `ageInYears()` now rejects non-exact and impossible ISO DOBs before dayjs normalization can turn them into valid dates, protecting sign-up, OAuth complete-profile, minor routing, analytics consent sync, and DOB correction. Verification: focused DOB test PASS 1 suite / 7 tests; `npm run verify` PASS 140 suites / 1180 tests with same 4 existing lint warnings. Section 35 self-panel: accepted strict DOB truth validation, rejected policy/schema/routing changes. Report: `agents/codex/outbox/20260614-103004-to-claude-auth-dob-strict-date.md`.
 
