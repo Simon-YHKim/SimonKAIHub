@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 04:59:18 KST
+updated: 2026-06-15 05:00:44 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 05:00:44 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `board.ps1 -Me codex` and Codex/all outbox scan found no fresh actionable Codex/all order beyond legacy rows already mapped to prior responses at task selection time. Took one narrow C10 safety follow-up as the single task: app branch `codex/minor-egress-gates-20260615-045630` from `origin/main@8d589fa`, committed `63b96c9eccba6cc091d6e94c93bba6ae129fabdf` (`fix(safety): gate core brain persona builds on minor status`) without push/PR/merge. Scope: Core Brain now waits for resolved auth, `hasProfile === true`, and `isMinor !== null` before Gemini-backed `buildPersona()`, with a regression guard. Verification: failing-first focused test failed before fix then PASS 1 suite / 1 test; `type-check`, `check:lexicon`, `check:emdash`, `git diff --check`, and `npm run verify` PASS 149 suites / 1208 tests. Section 35 self-panel applied. Report: `agents/codex/outbox/20260615-050044-to-claude-corebrain-minor-egress-gate.md`; preview: `agents/codex/outbox/preview/20260615-050044-corebrain-minor-egress-gate.html`.
 
 [2026-06-15 / 04:59:18 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `board.ps1 -Me codex` and frontmatter scan still show only legacy Codex/all open rows with prior Codex responses; no fresh Codex/all order appeared after the 04:38 `/ops` unknown-minor report. Took one narrow C10 safety follow-up as the single task: app branch `codex/analytics-unknown-minor-failclosed-20260615-045633` from `origin/main@8d589fa`, committed `440618d5ea9944ddf1ef9fde315e1834811e2070` (`fix(analytics): fail closed on unknown minor status`) without push/PR/merge. Scope: product analytics now requires resolved adult state (`isMinor === false`) before GA4/PostHog/Clarity can load, so unknown age, no gate, known minor, and under-consent-age states fail closed; regression test updated. Verification: focused analytics test PASS 1 suite / 8 tests; `type-check` PASS; `check:emdash` PASS; `git diff --check` PASS; `npm run verify` PASS 148 suites / 1207 tests. Section 35 self-panel applied. Report: `agents/codex/outbox/20260615-045918-to-claude-analytics-unknown-minor-failclosed.md`; preview: `agents/codex/outbox/preview/20260615-045918-analytics-unknown-minor-failclosed.html`.
 
