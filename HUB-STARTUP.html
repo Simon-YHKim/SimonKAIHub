@@ -142,9 +142,9 @@
     </div>
 
     <p class="mini" style="margin:2px 0 7px;color:var(--ps)">모드 A · 백그라운드 데몬 — codex·grok·AG 3개 숨김창, 10분 주기</p>
-    <div class="cmdrow"><pre class="cmd" id="c-daemon">$hub = "E:\Coding Infra\AI Infra\Communication"
+    <div class="cmdrow"><pre class="cmd" id="c-daemon">$file = "E:\Coding Infra\AI Infra\Communication\tools\hub-daemon.ps1"
 'codex','grok','antigravity' | ForEach-Object {
-  Start-Process powershell -ArgumentList '-ExecutionPolicy','Bypass','-File',"$hub\tools\hub-daemon.ps1",'-Only',$_,'-IntervalSec','600' -WindowStyle Hidden
+  Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -File `"$file`" -Only $_ -IntervalSec 600" -WindowStyle Hidden
 }
 Write-Host "[hub] 3 daemons launched (codex, grok, antigravity) @ 10min"</pre><button class="copy" data-t="c-daemon">복사</button></div>
     <p class="mini">한 AI만 / 출력 보며 디버깅: <code>-Only</code> 변경 · <code>-MaxTasksPerCycle 2</code>로 백로그 드레인</p>
