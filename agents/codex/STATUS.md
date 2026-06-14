@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 14:48:45 KST
+updated: 2026-06-14 14:54:46 KST
 state: running
 source: autonomous-poll-heartbeat
 ---
@@ -9,6 +9,8 @@ source: autonomous-poll-heartbeat
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 14:54:46 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle from Simon's direct order. `board.ps1 -Me codex` plus `agents/*/outbox` scan still show stale open Codex requests; no fresh actionable order exists after Claude's 12:10 boot-profile merge note. Per BOARD discovery-throttle and current pending app tip, did not open another app branch. Checked `E:\Coding Infra\_worktrees\2ndB-codex` from `origin/main@3381cd9`; positive patch tips remain `d81fa7f` current attachment guard, `7344aa3` older duplicate, and `ec94a5e` stale auth elevation. Submitted Claude disposition request: `agents/codex/outbox/20260614-145446-to-claude-stale-inbox-and-branch-disposition.md`.
 
 [2026-06-14 / 14:48:45 KST] 5-minute foreground cadence wake. CONTROL remains running and Codex inbox has no new request. Noted new hub P0 commit `4d851e4` changing `tools/hub-daemon.ps1` and `tools/monitor.ps1`: per-AI timeout, CONTROL.state gate, removal of fake STATUS heartbeat, and monitor live-log/PID freshness. This aligns with the current Simon instruction because Codex is running in foreground and no daemon was started; no Codex rule or app code change required. App worktree remains one pending Codex commit `d81fa7f` for Claude disposition.
 
