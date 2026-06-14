@@ -7,7 +7,7 @@
 <style>
   :root{
     --bg:#0f0f16; --panel:#16161f; --panel2:#1c1c28; --line:#282838;
-    --text:#e7e7ef; --muted:#9696ad; --faint:#62627a;
+    --text:#e7e7ef; --muted:#a2a2b8; --faint:#8e8eaa;
     --accent:#8b7cf0; --accent-dim:#2a2440; --ok:#5fc98a; --warn:#e0b04a; --stop:#e6898c;
     --ps:#7fb0e6; --ps-dim:#1b2735;
     --mono:'Cascadia Code','Consolas',ui-monospace,monospace;
@@ -71,7 +71,7 @@
 
   .cmdrow{position:relative;background:#0a0a10;border:1px solid var(--line);border-radius:9px;overflow:hidden}
   pre.cmd{margin:0;padding:13px 84px 13px 13px;font-family:var(--mono);font-size:12px;
-          color:#cfcfe2;white-space:pre-wrap;word-break:break-word}
+          color:#cfcfe2;white-space:pre-wrap;overflow-wrap:anywhere}
   .copy{position:absolute;top:9px;right:9px;background:var(--accent);color:#0c0c12;border:0;
         border-radius:7px;padding:6px 13px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:var(--sans)}
   .copy:hover{filter:brightness(1.1)}
@@ -80,19 +80,14 @@
   .mini code{font-family:var(--mono);background:var(--panel2);padding:1px 5px;border-radius:4px;color:#c2c2da}
 
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  @media(max-width:640px){.grid{grid-template-columns:1fr}.stepper{flex-wrap:wrap;gap:14px}
+  .grid3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:640px){.grid,.grid3{grid-template-columns:1fr}.stepper{flex-wrap:wrap;gap:14px}
         .stp:not(:last-child)::after{display:none}.stp{flex:1 1 40%}}
 
   .k-stop .badge{background:#3a2326;color:var(--stop)}
   .k-ok .badge{background:#1f3328;color:var(--ok)}
 
-  details{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:0 16px;margin:0 0 12px}
-  details summary{cursor:pointer;padding:14px 0;font-size:13px;font-weight:600;color:var(--muted);
-                  list-style:none;display:flex;align-items:center;gap:9px}
-  details summary::-webkit-details-marker{display:none}
-  details summary .chev{margin-left:auto;color:var(--faint);transition:.2s}
-  details[open] summary .chev{transform:rotate(90deg)}
-  details .body{padding:0 0 16px}
+  .copy:focus-visible,.stp:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:7px}
 
   footer{margin-top:36px;color:var(--faint);font-size:11px;text-align:center;line-height:1.7}
   footer code{font-family:var(--mono)}
@@ -112,9 +107,9 @@
     <span class="h">붙여넣는 곳</span>
     <span class="lg"><span class="pill ps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><polyline points="6.5 9.5 9.5 12 6.5 14.5"/><line x1="11.5" y1="14.5" x2="15.5" y2="14.5"/></svg></span><b>PowerShell</b></span>
     <span class="lg"><span class="pill cl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 2.5v19M2.5 12h19M5.4 5.4l13.2 13.2M18.6 5.4 5.4 18.6"/></svg></span><b>Claude Code</b></span>
-    <span class="lg"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 7 3 12 8 17"/><polyline points="16 7 21 12 16 17"/></svg></span>Codex</span>
-    <span class="lg"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5.5" y1="5.5" x2="18.5" y2="18.5"/><line x1="18.5" y1="5.5" x2="5.5" y2="18.5"/></svg></span>Grok</span>
-    <span class="lg"><span class="pill"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.5 5.2 4.3 9 9.5 9.5-5.2.5-9 4.3-9.5 9.5-.5-5.2-4.3-9-9.5-9.5C7.7 11 11.5 7.2 12 2z"/></svg></span>Antigravity</span>
+    <span class="lg"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 7 3 12 8 17"/><polyline points="16 7 21 12 16 17"/></svg></span><b>Codex</b></span>
+    <span class="lg"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5.5" y1="5.5" x2="18.5" y2="18.5"/><line x1="18.5" y1="5.5" x2="5.5" y2="18.5"/></svg></span><b>Grok</b></span>
+    <span class="lg"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3.2c.5 4.5 3.8 7.8 8.3 8.3-4.5.5-7.8 3.8-8.3 8.3-.5-4.5-3.8-7.8-8.3-8.3C8.2 11 11.5 7.7 12 3.2z"/></svg></span><b>Antigravity</b></span>
   </div>
 
   <!-- STEPPER -->
@@ -156,8 +151,8 @@ Write-Host "[hub] 3 daemons launched (codex, grok, antigravity) @ 10min"</pre><b
     <div class="cmdrow" style="margin-top:7px"><pre class="cmd" id="c-daemon1">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\hub-daemon.ps1" -Only codex -IntervalSec 600</pre><button class="copy" data-t="c-daemon1">복사</button></div>
   </div>
 
-  <p class="mini" style="margin:14px 4px 10px;font-size:12px;color:var(--muted)"><b style="color:var(--text)">모드 B · 인-윈도우 루프</b> — 데몬 없이, <b>띄워둔 각 AI 창</b>에 아래를 붙여넣으면 그 창에서 5분 주기 자율 동작(activate 규칙을 직접 읽음). Claude는 <b>4단계 /loop</b>가 곧 인-윈도우 루프.</p>
-  <div class="grid">
+  <p class="mini" style="margin:14px 4px 10px;font-size:12px;color:var(--muted)"><b style="color:var(--text)">모드 B · 인-윈도우 루프</b> — 데몬 없이, <b>띄워둔 각 AI 창</b>에 아래를 붙여넣으면 그 창에서 5분 주기 자율 동작(activate 규칙을 직접 읽음). Claude는 <b>4단계 /loop</b>가 곧 인-윈도우 루프. 각 AI는 최고모델로 실행 — 정본 <code style="font-family:var(--mono);font-size:11px">MODELS.md</code>: <code style="font-family:var(--mono);font-size:11px">codex -m gpt-5.5</code> · <code style="font-family:var(--mono);font-size:11px">grok -m grok-4.3</code> · agy <code style="font-family:var(--mono);font-size:11px">"Gemini 3.1 Pro (High)"</code>.</p>
+  <div class="grid grid3">
     <div class="card" style="margin:0">
       <div class="top">
         <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 7 3 12 8 17"/><polyline points="16 7 21 12 16 17"/></svg></span>
@@ -176,9 +171,9 @@ Write-Host "[hub] 3 daemons launched (codex, grok, antigravity) @ 10min"</pre><b
     </div>
     <div class="card" style="margin:0">
       <div class="top">
-        <span class="badge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.5 5.2 4.3 9 9.5 9.5-5.2.5-9 4.3-9.5 9.5-.5-5.2-4.3-9-9.5-9.5C7.7 11 11.5 7.2 12 2z"/></svg></span>
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3.2c.5 4.5 3.8 7.8 8.3 8.3-4.5.5-7.8 3.8-8.3 8.3-.5-4.5-3.8-7.8-8.3-8.3C8.2 11 11.5 7.7 12 3.2z"/></svg></span>
         <div class="meta"><h3>Antigravity 루프</h3><p class="desc">네이티브·에뮬 QA</p></div>
-        <span class="tgt" title="Antigravity 창에 붙여넣기"><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg></span><span class="pill"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.5 5.2 4.3 9 9.5 9.5-5.2.5-9 4.3-9.5 9.5-.5-5.2-4.3-9-9.5-9.5C7.7 11 11.5 7.2 12 2z"/></svg></span></span>
+        <span class="tgt" title="Antigravity 창에 붙여넣기"><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg></span><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3.2c.5 4.5 3.8 7.8 8.3 8.3-4.5.5-7.8 3.8-8.3 8.3-.5-4.5-3.8-7.8-8.3-8.3C8.2 11 11.5 7.7 12 3.2z"/></svg></span></span>
       </div>
       <div class="cmdrow"><pre class="cmd" id="c-inag">너는 4-AI 허브의 Antigravity(네이티브·에뮬 QA)다. E:\Coding Infra\AI Infra\Communication\prompts\antigravity-activate.md 를 읽고 그대로 자율 루프(5분 주기)로 동작해. 한국어. 백그라운드 데몬은 띄우지 마.</pre><button class="copy" data-t="c-inag">복사</button></div>
     </div>
@@ -262,6 +257,7 @@ Write-Host "[hub] 3 daemons launched (codex, grok, antigravity) @ 10min"</pre><b
   document.querySelectorAll('.copy').forEach(function(btn){
     btn.addEventListener('click', function(e){
       e.preventDefault();
+      if(btn.classList.contains('done')) return;
       var el = document.getElementById(btn.getAttribute('data-t'));
       var txt = el.innerText;
       function ok(){ var o=btn.textContent; btn.textContent='복사됨'; btn.classList.add('done'); setTimeout(function(){btn.textContent=o;btn.classList.remove('done');},1300); }

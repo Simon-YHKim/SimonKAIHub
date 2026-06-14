@@ -33,6 +33,19 @@ function Log([string]$m){
   Write-Host $line
   try { Add-Content -LiteralPath $daemonLog -Value $line -Encoding utf8 } catch {}
 }
+
+# ---- Best-model config (source of truth = tools/models.json, refreshed daily). ----
+# Each AI must always run the highest-benchmark model + max reasoning effort.
+# Falls back to safe inline defaults if the file is missing/unparseable, so the
+# daemon never dies just because models.json is absent.
+$modelsFile = Join-Path $PSScriptRoot "models.json"
+$Models = $null
+if(Test-Path $modelsFile){ try { $Models = Get-Content $modelsFile -Raw -Encoding UTF8 | ConvertFrom-Json } catch { $Models = $null } }
+function Get-ModelCfg([string]$ai,[string]$key,[string]$default){
+  try { $v = $Models.$ai.$key; if($v){ return [string]$v } } catch {}
+  return $default
+}
+
 # Guaranteed STATUS heartbeat: update updated:/state: in-place (UTF-8 no BOM).
 # The monitor's mtime fallback then shows the AI as fresh even if its own CLI
 # run forgot to touch STATUS. Sequential, so no concurrent writer.
@@ -93,10 +106,24 @@ function Invoke-AI([string]$ai){
   $liveDir = Join-Path $root "tools\live"
   if(-not (Test-Path $liveDir)){ New-Item -ItemType Directory -Force $liveDir | Out-Null }
   $live = Join-Path $liveDir ($ai + ".log")
+  # Inject the best model + max effort per AI from models.json (always-best, §MODELS.md).
   $out = switch($ai){
-    'codex'       { ("" | codex exec -s danger-full-access --skip-git-repo-check -C $root -c model_reasoning_effort=high $prompt) 2>&1 | Out-String }
-    'grok'        { (grok -p $prompt) 2>&1 | Out-String }
-    'antigravity' { (gemini -p $prompt -y) 2>&1 | Out-String }
+    'codex'       {
+      $cm = Get-ModelCfg 'codex' 'model' 'gpt-5.5'
+      $ce = Get-ModelCfg 'codex' 'effort' 'xhigh'
+      ("" | codex exec -s danger-full-access --skip-git-repo-check -C $root -m $cm -c "model_reasoning_effort=$ce" $prompt) 2>&1 | Out-String
+    }
+    'grok'        {
+      # grok reasoning_effort defaults to low; set via env (non-breaking across CLI builds) + pin model.
+      $gm = Get-ModelCfg 'grok' 'model' 'grok-4.3'
+      $ge = Get-ModelCfg 'grok' 'effort' 'high'
+      $env:GROK_MODEL = $gm; $env:GROK_REASONING_EFFORT = $ge
+      (grok -m $gm -p $prompt) 2>&1 | Out-String
+    }
+    'antigravity' {
+      $am = Get-ModelCfg 'antigravity' 'model' 'gemini-3.1-pro-preview'
+      (gemini -m $am -p $prompt -y) 2>&1 | Out-String
+    }
   }
   $code = $LASTEXITCODE
   # Detect quota/rate-limit exhaustion so the caller can back off instead of re-spawning.
