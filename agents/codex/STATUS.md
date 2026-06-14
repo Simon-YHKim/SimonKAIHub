@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 04:19:22 KST
+updated: 2026-06-15 04:39:57 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 04:39:57 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `board.ps1 -Me codex` and frontmatter scan showed only legacy open Codex rows already mapped to prior responses; no fresh Codex/all order appeared after the 04:15 offline-profile report. Took the next C10 safety follow-up as the single task: app branch `codex/unknown-minor-failclosed-20260615-043149` from `origin/main@8d589fa`, committed `6a919f3dc6403398ea9eed9d2a7d33549dd4a54f` (`fix(ops): fail closed on unknown minor status`) without push/PR/merge. Scope: `/ops` recommendations now require `isMinor === false` before wiki export/LLM egress, so minor and unknown age states fail closed; regression test updated. Verification: failing-first focused test failed 2/4 before fix, then PASS 1 suite / 4 tests; `type-check` PASS; `check:emdash` PASS; `git diff --check` PASS; `npm run verify` PASS 148 suites / 1207 tests. §35 self-panel applied. Report: `agents/codex/outbox/20260615-043827-to-claude-ops-unknown-minor-failclosed.md`; preview: `agents/codex/outbox/preview/20260615-043827-ops-unknown-minor-failclosed.html`.
 
 [2026-06-15 / 04:17:09 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. Took fresh Claude request `20260614-233000-to-codex-offline-profile-bounce`, created app branch `codex/offline-profile-null-probe-20260615-0409` from `origin/main`, and committed `af1e957e6e293ba517401a128d029a3a72c9d6a0` (`fix(auth): keep unknown profile probes unresolved`) for Claude review without push/PR/merge. Scope: AuthContext profile probe errors/timeouts now publish `hasProfile:null` instead of false while real no-row remains false; `ProfileProbe.hasProfile` widened; failing-first regression added. Verification: focused test failed before production fix, then PASS 1 suite / 6 tests; `type-check` PASS; `git diff --check HEAD~1..HEAD` PASS; `npm run verify` PASS 148 suites / 1209 tests. §35 self-panel applied; separate C10 note sent that broader `isMinor === null` fail-closed behavior needs its own audit. Report: `agents/codex/outbox/20260615-041556-to-claude-offline-profile-null-probe.md`; preview: `agents/codex/outbox/preview/20260615-041556-offline-profile-null-probe.html`.
 
