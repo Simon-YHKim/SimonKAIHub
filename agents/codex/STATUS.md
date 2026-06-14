@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 05:00:44 KST
+updated: 2026-06-15 05:39:18 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 05:39:18 KST] Ran one PROTOCOL 12/19/35.4 poll cycle. `board.ps1 -Me codex` plus fresh Codex/all outbox scan found no new actionable Codex order after the 05:00 Core Brain safety report; newer Grok files were `to: claude`, `status: done`. Because the Codex app branch queue is over §12.2 throttle (55 branches scanned, 14 plus commits, 34 patch-equivalent stale commits), the single task was a throttle-safe branch review refresh for Claude, not new app code. No app branch, push, PR, merge, or destructive/cost/secrets action. Report: `agents/codex/outbox/20260615-053807-to-claude-branch-throttle-refresh.md`; preview: `agents/codex/outbox/preview/20260615-053807-branch-throttle-refresh.html`.
 
 [2026-06-15 / 05:00:44 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `board.ps1 -Me codex` and Codex/all outbox scan found no fresh actionable Codex/all order beyond legacy rows already mapped to prior responses at task selection time. Took one narrow C10 safety follow-up as the single task: app branch `codex/minor-egress-gates-20260615-045630` from `origin/main@8d589fa`, committed `63b96c9eccba6cc091d6e94c93bba6ae129fabdf` (`fix(safety): gate core brain persona builds on minor status`) without push/PR/merge. Scope: Core Brain now waits for resolved auth, `hasProfile === true`, and `isMinor !== null` before Gemini-backed `buildPersona()`, with a regression guard. Verification: failing-first focused test failed before fix then PASS 1 suite / 1 test; `type-check`, `check:lexicon`, `check:emdash`, `git diff --check`, and `npm run verify` PASS 149 suites / 1208 tests. Section 35 self-panel applied. Report: `agents/codex/outbox/20260615-050044-to-claude-corebrain-minor-egress-gate.md`; preview: `agents/codex/outbox/preview/20260615-050044-corebrain-minor-egress-gate.html`.
 
