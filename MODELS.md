@@ -13,7 +13,7 @@
 |---|---|---|---|---|
 | **Claude** | `claude` | `claude-fable-5` | `max` | `/model fable` → `/effort max` (영속: env `CLAUDE_CODE_EFFORT_LEVEL=max`) |
 | **Codex** | `codex` | `gpt-5.5` | `xhigh` | `-m gpt-5.5 -c model_reasoning_effort="xhigh"` |
-| **Grok** | `grok` | `grok-4.3` | `high` | env `GROK_MODEL=grok-4.3` `GROK_REASONING_EFFORT=high` (+ `-m grok-4.3`) |
+| **Grok** | `grok` | `grok-build` | `high` | `-m grok-build` + env `GROK_MODEL=grok-build` (grok-4.3 not in this CLI build) |
 | **Antigravity** | `agy`/`gemini` | `gemini-3.1-pro-preview` | `high`(=max) | `-m gemini-3.1-pro-preview` / agy `"Gemini 3.1 Pro (High)"` |
 
 ---
@@ -29,9 +29,9 @@
 - GPT-5.5(2026-04-23) = OpenAI 최신 프런티어, Codex CLI 기본. **`gpt-5.5-codex` 변종 없음 → `-m gpt-5.5`**. `xhigh`가 최대 reasoning.
 - **주의**: 검증자 교정 — GPT-5.5 SWE-bench Verified ~82.6%(Claude Opus 4.8 88.6%보다 낮음). 그러나 *Codex 레인에서 쓸 수 있는 최고 OpenAI 모델*. gpt-5.6 루머(공식 id 미정) 주시.
 
-### Grok — `grok-4.3` @ high
-- Grok 4.3(2026-04-30) = Grok 라인 최상위, Artificial Analysis Intelligence Index 53(high). **reasoning_effort 기본 low → high 명시 필수**.
-- **주의**: 점(`.`) 모델 id(`grok-4.3`, `grok-4-3` 아님). reasoning_effort CLI 노출은 빌드마다 다름 → env(`GROK_MODEL`/`GROK_REASONING_EFFORT`)로 설정(superagent 빌드). 레거시 `grok-4`/`grok-4-0709`는 reasoning_effort 거부.
+### Grok — `grok-build` @ high
+- **2026-06-14 교정**: 설치된 grok CLI(grok.com 로그인)는 `grok models`에서 **grok-build(default) + grok-composer-2.5-fast만** 노출. `grok-4.3`은 이 빌드에 없어 매 spawn에서 거부(`Couldn't set model grok-4.3: Invalid params: unknown`)되어 **grok 데몬이 조용히 죽고 있었음**(monitor에서 3h stale). 정본 원칙(=그 CLI가 실제 호출 가능한 최고 모델)대로 **grok-build**로 핀.
+- **주의**: 미래 빌드가 grok-4.x를 노출하면 `grok models` 확인 후 재핀. reasoning_effort 노출은 빌드마다 다름 — `GROK_REASONING_EFFORT`는 grok-build가 무시할 수 있음(블로커는 effort가 아니라 모델 id였음).
 
 ### Antigravity — `gemini-3.1-pro-preview` @ high(=max)
 - Gemini 3.1 Pro(2026-02-19) = Google 종합 1위(SWE-bench Verified 80.6%, ARC-AGI-2 77.1%, 16개 중 13개 벤치 선두). **thinkingLevel HIGH가 최대이자 3.1 Pro 기본값**.

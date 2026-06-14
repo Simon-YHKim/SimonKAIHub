@@ -26,12 +26,12 @@
   },
   "grok": {
     "provider": "xAI",
-    "model": "grok-4.3",
+    "model": "grok-build",
     "effort": "high",
-    "spawn_flags": "-m grok-4.3",
-    "env": { "GROK_MODEL": "grok-4.3", "GROK_REASONING_EFFORT": "high" },
-    "benchmark_basis": "Grok 4.3 (2026-04-30) = top of Grok line, Artificial Analysis Intelligence Index 53 (high). reasoning_effort defaults to low, so high MUST be set to maximize thinking.",
-    "caveat": "Model id uses a dot (grok-4.3, not grok-4-3). reasoning_effort CLI exposure varies by build; set via env (GROK_MODEL/GROK_REASONING_EFFORT) for the superagent build. Legacy grok-4/grok-4-0709 reject reasoning_effort."
+    "spawn_flags": "-m grok-build",
+    "env": { "GROK_MODEL": "grok-build", "GROK_REASONING_EFFORT": "high" },
+    "benchmark_basis": "grok-build is the default + top model actually CALLABLE from the installed grok CLI (grok.com login). `grok models` (verified 2026-06-14) exposes only grok-build (default) + grok-composer-2.5-fast. grok-4.3 is NOT in this build and was rejected at spawn every cycle ('Couldn't set model grok-4.3: Invalid params: unknown'), silently killing the grok daemon. Policy = best model the CLI can actually call, so grok-build.",
+    "caveat": "Re-pin to a grok-4.x id only after `grok models` shows it. reasoning_effort exposure varies by build; GROK_REASONING_EFFORT may be ignored by grok-build (the model id, not effort, was the blocker)."
   },
   "antigravity": {
     "provider": "Google",
