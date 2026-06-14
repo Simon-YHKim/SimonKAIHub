@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Web Auth Screenshot Verdict</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --panel: #121a30;
+      --text: #edf3ff;
+      --muted: #aeb8cf;
+      --line: #2a3654;
+      --mint: #66f0cf;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 24px 56px;
+    }
+    h1, h2 {
+      margin: 0 0 14px;
+      letter-spacing: 0;
+    }
+    h1 {
+      font-size: 30px;
+    }
+    h2 {
+      font-size: 20px;
+      color: var(--mint);
+      margin-top: 30px;
+    }
+    p {
+      margin: 0 0 14px;
+    }
+    ul, ol {
+      margin: 0 0 18px 22px;
+      padding: 0;
+    }
+    li {
+      margin: 6px 0;
+    }
+    .meta, .muted {
+      color: var(--muted);
+    }
+    .panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 18px 0;
+    }
+    code {
+      color: var(--mint);
+      background: rgba(102, 240, 207, 0.08);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Web Auth Screenshot Content Verdict</h1>
+    <p class="meta">2026-06-14 / 19:22:32 KST · ref <code>20260614-191907-to-codex-web-screen-content-verdict</code></p>
+
+    <div class="panel">
+      <p>Codex directly inspected <code>sign-in.png</code>, <code>sign-up.png</code>, and <code>landing.png</code>. This is a findings-only visual/content report; no app code changed.</p>
+      <p>Section 35 self-panel: independent content judgment only. Brand localization is reported as a visible issue; any canonical naming decision remains gated by Claude/§35.</p>
+    </div>
+
+    <h2>sign-in.png: ISSUE</h2>
+    <p>Korean sign-in screen is mostly usable: primary login action is visible, fields are not truncated, and the auth hierarchy is clear.</p>
+    <ul>
+      <li>Visible brand string is <code>2ND-BRAIN</code>, while sign-up uses <code>2nd-Brain</code>.</li>
+      <li>The subtitle visually reads awkward around <code>자기 이해</code>; a particle near the text can look like punctuation.</li>
+      <li>Particles appear over the input/card region and make the form less clean.</li>
+    </ul>
+    <p>Fix: use one canonical localized brand treatment, smooth the subtitle to a natural Korean phrase, and keep particles out of text/form areas.</p>
+
+    <h2>sign-up.png: ISSUE</h2>
+    <p>This is the highest-priority problem screen.</p>
+    <ul>
+      <li>The consent heading wraps as <code>시작 전에 잠깐 확인해 주세</code> plus lone <code>요</code>, which looks broken.</li>
+      <li>No final signup/continue CTA is visible in the first viewport; the preview link is the most visible action before consent.</li>
+      <li>The hero body squeezes and splits <code>계정은</code> across lines.</li>
+      <li>All input borders appear bright cyan at once, creating noisy focus/default state.</li>
+      <li>Brand string differs from sign-in and remains English inside a Korean flow.</li>
+    </ul>
+    <p>The privacy/trust copy itself reads well: records are private, not sold, and Gemini is used only when requested.</p>
+    <p>Fix: reduce dense consent heading type, prevent the <code>주세요</code> split, reduce hero/image footprint, and keep the final consent CTA visible or sticky.</p>
+
+    <h2>landing.png: ISSUE, same as sign-in</h2>
+    <p>The capture is visually the same as sign-in. If unauthenticated <code>/</code> redirect to sign-in is intended, route behavior is acceptable and the content inherits sign-in issues. If a public landing page was expected, the landing content is missing.</p>
+
+    <h2>Priority</h2>
+    <ol>
+      <li>P1: sign-up first-viewport hierarchy and broken consent heading wrap.</li>
+      <li>P2: auth-screen brand consistency/localization.</li>
+      <li>P3: decorative particles over text and input areas.</li>
+    </ol>
+  </main>
+</body>
+</html>
