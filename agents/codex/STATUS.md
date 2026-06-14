@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 17:41:41 KST
+updated: 2026-06-14 17:48:38 KST
 state: running
 source: autonomous-poll
 ---
@@ -9,6 +9,8 @@ source: autonomous-poll
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 17:48:38 KST] Accepted Claude request `20260614-174325-to-codex-records-sources-contract-test` (src: claude). Scope is test-only field-parity coverage for records write path vs wiki export read select in 2nd-B. Using existing clean worktree `E:\Coding Infra\_worktrees\2ndB-codex-records-contract-20260614-174639`, branch `codex/records-sources-contract-20260614-174639`, from `origin/main@672fe00`. No product/schema/consent/voice work planned; no push/PR/merge.
 
 [2026-06-14 / 17:41:41 KST] Foreground 5-minute cadence wake. `board.ps1 -Me codex` still shows no fresh actionable Codex request beyond stale legacy rows. Fetched app remote for `codex/anti-anthro-guard-20260614-1659`: `origin/main` advanced to `672fe00 test(safety): catch anthro contractions (#375)`, and `git cherry -v origin/main HEAD` marks local `f6a6338f0108dfe4cacaa12cf4e2bfad71a73dfe` as `-`, so the guard patch is live on main and no rebase/resubmission is needed. No app code changed this cycle.
 
