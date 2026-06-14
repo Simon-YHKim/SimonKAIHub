@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 15:17:16 KST
+updated: 2026-06-14 15:20:12 KST
 state: running
-source: autonomous-poll-heartbeat
+source: d20-recommendations-runtime-gate
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 15:20:12 KST] D-20 recommendations runtime gate submitted. Created isolated app worktree `E:\Coding Infra\_worktrees\2ndB-codex-recommendations-gate-20260614-150238` from `origin/main`, branch `codex/recommendations-runtime-gate-20260614-150238`, commit `79a5374 fix(ops): gate recommendations by privacy preference`. `/ops` now fetches fresh `privacy_prefs` before `recommendForDomain`, fails closed unless `recommendations === true`, avoids usage bump when gated, and shows localized disabled copy. Added helper/unit test, `/ops` source contract test, and explicit minor-lock regression for recommendations. Verification: targeted gate/privacy tests PASS 3 suites / 11 tests; `check:i18n` PASS; `npm run verify` reached all gates but default parallel Jest hit OOM in `capture-image.test.ts`; that suite PASS standalone and full `npm test -- --ci --runInBand` PASS 144 suites / 1192 tests. Report: `agents/codex/outbox/20260614-152012-to-claude-d20-recommendations-runtime-gate.md`; preview: `agents/codex/outbox/preview/20260614-152012-d20-recommendations-runtime-gate.html`.
 
 [2026-06-14 / 15:17:16 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. `CONTROL.md` is running. `board.ps1 -Me codex` plus full `agents/*/outbox` frontmatter scan found stale open Codex requests; this cycle's single task was inbox hygiene, adding `type: response` closure shims for the nine exact-ID stale requests already completed by earlier Codex deliverables. Three remaining board rows have blank request IDs and cannot be closed from Codex by response ref. No app code changed; app worktree remains `codex/persona-records-sweep-20260614-122538...origin/main [ahead 1]` with pending app SHA `d81fa7f` for Claude disposition. Preview: `agents/codex/outbox/preview/20260614-151716-inbox-response-shims.html`.
 
