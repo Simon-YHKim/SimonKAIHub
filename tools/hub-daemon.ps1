@@ -33,7 +33,18 @@ function Now { Get-Date -Format 'yyyy-MM-dd HH:mm:ss' }
 function Log([string]$m){
   $line = "[$(Now) KST] $m"
   Write-Host $line
-  try { Add-Content -LiteralPath $daemonLog -Value $line -Encoding utf8 } catch {}
+  # Shared append: open with FileShare.ReadWrite so monitor/feed/hub-health can read the
+  # log WHILE we write it. Add-Content's default sharing locked readers out mid-append,
+  # which is what crashed the dashboards ("file in use by another process"). Retry a few
+  # times in case another daemon instance is appending the same instant.
+  for($i=0;$i -lt 4;$i++){
+    try {
+      $fs = [System.IO.File]::Open($daemonLog, [System.IO.FileMode]::Append, [System.IO.FileAccess]::Write, [System.IO.FileShare]::ReadWrite)
+      try { $sw = New-Object System.IO.StreamWriter($fs, $utf8); $sw.WriteLine($line); $sw.Flush(); $sw.Close() }
+      finally { $fs.Close() }
+      break
+    } catch { Start-Sleep -Milliseconds 50 }
+  }
 }
 
 # ---- Best-model config (source of truth = tools/models.json, refreshed daily). ----

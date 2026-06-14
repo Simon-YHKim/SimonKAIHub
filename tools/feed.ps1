@@ -14,6 +14,24 @@ $root = Split-Path $PSScriptRoot -Parent
 $colors = @{ claude='Cyan'; codex='Green'; grok='Magenta'; antigravity='Yellow'; 'AI Hub'='DarkGray' }
 function ColorOf($name){ if($colors.ContainsKey($name)){ return $colors[$name] }; return 'White' }
 
+# Read a log the daemon may be appending to RIGHT NOW. Plain Get-Content crashes with
+# "file in use by another process" mid-append; open with FileShare.ReadWrite + retry so
+# the feed never dies on that race.
+function Read-SharedLog([string]$path, [int]$tail = 0) {
+  if(-not (Test-Path -LiteralPath $path)){ return @() }
+  for($i=0; $i -lt 4; $i++){
+    try {
+      $fs = [System.IO.File]::Open($path, [System.IO.FileMode]::Open, [System.IO.FileAccess]::Read, [System.IO.FileShare]::ReadWrite)
+      try { $sr = New-Object System.IO.StreamReader($fs, [System.Text.UTF8Encoding]::new($false)); $text = $sr.ReadToEnd(); $sr.Close() }
+      finally { $fs.Close() }
+      $ls = @($text -split "`r?`n")
+      if($tail -gt 0 -and $ls.Count -gt $tail){ $ls = $ls[($ls.Count-$tail)..($ls.Count-1)] }
+      return @($ls)
+    } catch { Start-Sleep -Milliseconds 60 }
+  }
+  return @()
+}
+
 # AIs whose hub-daemon.ps1 loop is actually ALIVE right now (process check).
 function Get-LiveDaemonAIs {
   $ais = @()
@@ -33,7 +51,7 @@ function Get-Working {
   $dlog = Join-Path $root "tools\hub-daemon.log"
   $res = @()
   if(Test-Path $dlog){
-    $lines = @(Get-Content $dlog -Encoding UTF8 -Tail 80)
+    $lines = Read-SharedLog $dlog 80
     foreach($ai in @('codex','grok','antigravity')){
       if($live -notcontains $ai){ continue }
       $lastPoll = -1; $lastExit = -1

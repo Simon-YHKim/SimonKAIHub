@@ -29,6 +29,22 @@ function Check([string]$Area, [string]$Name, [scriptblock]$Test) {
 }
 
 # ---- helpers ----
+# Read a log the daemon may be appending to right now. Plain Get-Content throws
+# "file in use by another process" mid-append; open with FileShare.ReadWrite + retry.
+function Read-SharedLog([string]$path, [int]$tail = 0) {
+  if (-not (Test-Path -LiteralPath $path)) { return @() }
+  for ($i = 0; $i -lt 4; $i++) {
+    try {
+      $fs = [System.IO.File]::Open($path, [System.IO.FileMode]::Open, [System.IO.FileAccess]::Read, [System.IO.FileShare]::ReadWrite)
+      try { $sr = New-Object System.IO.StreamReader($fs, [System.Text.UTF8Encoding]::new($false)); $text = $sr.ReadToEnd(); $sr.Close() }
+      finally { $fs.Close() }
+      $ls = @($text -split "`r?`n")
+      if ($tail -gt 0 -and $ls.Count -gt $tail) { $ls = $ls[($ls.Count - $tail)..($ls.Count - 1)] }
+      return @($ls)
+    } catch { Start-Sleep -Milliseconds 60 }
+  }
+  return @()
+}
 function Test-Ps1Syntax([string]$path) {
   $tokens = $null; $perrs = $null
   try { [void][System.Management.Automation.Language.Parser]::ParseFile($path, [ref]$tokens, [ref]$perrs) }
@@ -277,7 +293,7 @@ Check 'Liveness' 'daemon heartbeat + process' {
   $dlog = Join-Path $toolsDir 'hub-daemon.log'
   $ageMsg = 'no daemon log'; $fresh = $false
   if (Test-Path $dlog) {
-    $last = Get-Content $dlog -Encoding UTF8 -Tail 40 | Where-Object { $_ -match '^\[' } | Select-Object -Last 1
+    $last = Read-SharedLog $dlog 40 | Where-Object { $_ -match '^\[' } | Select-Object -Last 1
     if ($last -match '^\[([^\]]+) KST\]') {
       try {
         $ts = [datetime]::Parse(($matches[1] -replace '/', '').Trim())

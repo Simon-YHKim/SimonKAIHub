@@ -26,6 +26,25 @@ $agentProc  = @{ claude=@('claude'); codex=@('Codex','codex'); antigravity=@('ge
 # the merge-gate is falling behind (Simon's rule: 3+ piled up => Claude likely not processing).
 $PENDING_ALARM = 3
 
+# Read a log the daemon may be appending to RIGHT NOW. Plain Get-Content crashes with
+# "file in use by another process" during the daemon's append window; open with
+# FileShare.ReadWrite + retry so the monitor never dies on that race (was: blank daemon
+# line + cyc=0 for every AI because the dlog read threw).
+function Read-SharedLog([string]$path, [int]$tail = 0) {
+  if(-not (Test-Path -LiteralPath $path)){ return @() }
+  for($i=0; $i -lt 4; $i++){
+    try {
+      $fs = [System.IO.File]::Open($path, [System.IO.FileMode]::Open, [System.IO.FileAccess]::Read, [System.IO.FileShare]::ReadWrite)
+      try { $sr = New-Object System.IO.StreamReader($fs, [System.Text.UTF8Encoding]::new($false)); $text = $sr.ReadToEnd(); $sr.Close() }
+      finally { $fs.Close() }
+      $lines = @($text -split "`r?`n")
+      if($tail -gt 0 -and $lines.Count -gt $tail){ $lines = $lines[($lines.Count-$tail)..($lines.Count-1)] }
+      return @($lines)
+    } catch { Start-Sleep -Milliseconds 60 }
+  }
+  return @()
+}
+
 function Get-Front([string[]]$lines,[string]$key){
   $pat = "^" + $key + ':\s*"?(.*?)"?\s*$'
   $m = $lines | Select-String -Pattern $pat | Select-Object -First 1
@@ -87,13 +106,13 @@ function Render {
   $dAIs = @($dAIs | Select-Object -Unique)
   $dlog = Join-Path $root "tools\hub-daemon.log"
   $dlogLines = @()
-  if(Test-Path $dlog){ $dlogLines = @(Get-Content $dlog -Encoding UTF8 -Tail 120) }
+  if(Test-Path $dlog){ $dlogLines = Read-SharedLog $dlog 120 }
   # ---- Per-AI cycle counts (how many loops each AI has run) ----
   # Daemon AIs (codex/antigravity/grok): count completed cycles = "exit(<ai>)=" in the FULL
   # shared daemon log (lifetime, survives restarts). Claude has no daemon, so a Claude
   # orchestration cycle = a BOARD r-round (unique r<N> tokens across Claude hub commit subjects).
   $dlogFull = @()
-  if(Test-Path $dlog){ $dlogFull = @(Get-Content $dlog -Encoding UTF8) }
+  if(Test-Path $dlog){ $dlogFull = Read-SharedLog $dlog 0 }
   $cycles = @{}
   foreach($a in $agents){
     if($a -eq 'claude'){
