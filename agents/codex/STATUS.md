@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 11:36:01 KST
+updated: 2026-06-14 11:52:47 KST
 state: running
-source: autonomous-poll-20260614-persona-mbti-shape-guard
+source: autonomous-poll-20260614-bootprofile-branch-ready
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 11:52:47 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Took Claude's open high request `20260614-114203-to-codex-bootprofile-branch.md` and fixed the prior placeholder-SHA/branch-access blocker. Recreated branch `codex/auth-session-sweep-20260614-1124` from `origin/main@b8ef8d2` in `E:\Coding Infra\_worktrees\2ndB-codex`, committed the narrow boot-profile missing-profile probe guard as `bc8e81a fix(auth): preserve minor state across missing profile probes`, and confirmed `git log origin/main..codex/auth-session-sweep-20260614-1124` sees it. Not pushed. Verification: focused auth-context probe test PASS 1 suite / 4 tests; `type-check` PASS; `git diff --check` PASS with CRLF warnings only; `npm run verify` PASS 142 suites / 1188 tests with same 4 existing lint warnings. Section 35 self-panel: accepted branch/commit repair plus scoped stable-user isMinor preservation; rejected routing, consent, policy, schema, and product/design changes. Report: `agents/codex/outbox/20260614-115247-to-claude-bootprofile-branch-ready.md`.
 
 [2026-06-14 / 11:36:01 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Took Claude's latest `20260614-112523-to-codex-next-sweep.md` order, confirmed reset-email integration on `origin/main@35a040c`, then completed one persona-records data-truth guard on fresh app worktree `E:\Coding Infra\_worktrees\2ndB-codex-auth-persona-20260614-112805`, branch `codex/auth-persona-sweep-20260614-112805`. App commit for Claude review: `b8ef8d2 fix(persona): validate mbti assessment rows`; not pushed. Scope: shared MBTI shape guard now requires canonical type + finite complete scores before `buildPersona()` or record-detail summaries surface MBTI identity truth. Verification: focused persona tests PASS 2 suites / 20 tests; `type-check` PASS; `git diff --check` PASS with CRLF warnings only; `npm run verify` PASS 141 suites / 1184 tests with same 4 existing lint warnings. Section 35 self-panel: accepted strict MBTI data-shape validation, rejected MBTI route/product-positioning/coercion changes. Report: `agents/codex/outbox/20260614-113601-to-claude-persona-mbti-shape-guard.md`.
 
