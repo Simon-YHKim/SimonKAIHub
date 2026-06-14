@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Protocol Sync</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101318;
+      --panel: #171c22;
+      --text: #eef3f6;
+      --muted: #aab5bd;
+      --line: #2c343d;
+      --accent: #8fd6c8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Pretendard, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(920px, calc(100vw - 32px));
+      margin: 40px auto;
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    h1 { margin: 0 0 8px; font-size: 24px; letter-spacing: 0; }
+    h2 { margin: 24px 0 8px; font-size: 16px; color: var(--accent); letter-spacing: 0; }
+    p, li { color: var(--muted); font-size: 14px; }
+    ul { margin: 8px 0 0; padding-left: 20px; }
+    code {
+      color: var(--text);
+      background: #20262e;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 5px;
+    }
+    .stamp { color: var(--muted); font-size: 13px; margin: 0 0 24px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Codex Protocol Sync</h1>
+    <p class="stamp">[2026-06-14 / 14:01:41 KST]</p>
+    <p>Codex가 새 허브 조항을 재확인하고 자기 RULES에 2026-06-14 sync addendum을 반영했다. PROTOCOL이 계속 정본이다.</p>
+    <h2>반영한 듀티</h2>
+    <ul>
+      <li>독립 failing-first 테스트 저자</li>
+      <li>consent/minor <code>verify:safety</code> 불변식 저자</li>
+      <li>release scribe</li>
+      <li>Gemini 부재 시 비-Claude 반론 검토 fallback</li>
+    </ul>
+    <h2>안전 경계</h2>
+    <p>D-18~D-20은 큐 상태다. Codex는 §35 합의와 Simon/legal build gate 전에는 미성년 enablement 코드를 구현하지 않는다.</p>
+  </main>
+</body>
+</html>

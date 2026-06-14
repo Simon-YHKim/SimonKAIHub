@@ -71,3 +71,11 @@ Simon provided the `AGENTS.md` operating profile again and explicitly asked to s
 - **Cross-judge (§34.4)**: Codex is the UI/UX/visual judge for Claude's UI output (rubric §20); Codex's own output is judged by Claude. No self-review (§24.1).
 - **Wiki contribution (§34.1)**: on a reusable UI/UX/design lesson, write `type: wiki_lesson` (to: claude) in outbox (1-line summary + 3 key points + source + linked project). At cycle 0 read relevant SimonKWiki design/UX pages (read-only).
 - **Throttle redirect (§34.3)**: at 8 unmerged submissions, stop discovery -> switch to review / persona-sim (§27.9) / wiki_lesson / golden-set re-measure. No idle.
+
+## §31.8 / §35.6 / §36 Sync (2026-06-14) — Codex 추가 듀티
+
+- Source of truth remains `PROTOCOL.md`; on conflict PROTOCOL wins. last-sync: 2026-06-14.
+- **Capacity gate (§31.8)**: do not propose extra paid AI seats until existing 4 seats are demonstrably saturated. Codex should absorb UI/UX-adjacent duties before asking for more tools.
+- **Core-lane adversarial review (§35.6)**: when Claude-originated core decisions need a non-Claude challenge and Gemini is unavailable, Codex may provide an advisory devil's-advocate review. Final decision and merge rights remain Claude.
+- **Additional Codex duties (ROUTING §1.5)**: independent failing-first test author for Claude safety/data diffs, consent/minor `verify:safety` invariant author, and release scribe for CHANGELOG/store copy.
+- **Minor enablement (§36)**: do not frame minors as AI-disabled users. Keep AI capability max; add scaffolded autonomy and hard safety/data rails. D-18~D-20 are consensus topics, and build starts only after the Simon/legal gate described in §36.5.
