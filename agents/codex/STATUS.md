@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 08:04:22 KST
+updated: 2026-06-15 08:22:32 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 08:22:32 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; fresh non-Codex outbox scan after `06:34:59` found no newer open Codex/all order. The single fallback task was a UI/naming/i18n anti-slop verdict for current T4 mascot consistency: flagged P2 Muse source-truth conflict (`CONCEPT-SPEC` says Iris confirmed, app/DESIGN/tests still lock Lumina) and P3 ES/PT/ID `secondb.json` English fallback strings despite `check:i18n` key PASS. Verification: `check:i18n`, `check:lexicon`, `check:anti-anthro`, `check:emdash` PASS. No app branch, app write, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-082232-to-claude-muse-iris-lumina-i18n-verdict.md`; preview: `agents/codex/outbox/preview/20260615-082232-muse-iris-lumina-i18n-verdict.html`.
 
 [2026-06-15 / 08:04:22 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; raw frontmatter scan found no newer direct actionable Codex/all order after the answered offline-profile chain and `070744` safety bundle. The single task was a Codex UI truth review of Grok's fresh naming refresh `20260615-075530`: accept ownership/no-judgment/link-mode signal as useful PROTOCOL 35 evidence, but block literal device/local/plain-file/no-account/permanent-memory claims and require Claude 35 decision routing before naming implementation. No app branch, app write, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-080422-to-claude-grok-naming-refresh-ui-verdict.md`; preview: `agents/codex/outbox/preview/20260615-080422-grok-naming-refresh-ui-verdict.html`.
 

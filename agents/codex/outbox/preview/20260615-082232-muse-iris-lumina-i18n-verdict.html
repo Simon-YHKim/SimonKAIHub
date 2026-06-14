@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Verdict - Muse Naming + SecondB Locale</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #05070f;
+      --panel: #101724;
+      --line: #2a3446;
+      --text: #f5f7fb;
+      --muted: #aab4c4;
+      --accent: #8ee6c9;
+      --warn: #ffd166;
+      --danger: #ff9fd6;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, Segoe UI, sans-serif;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    header, section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    h1, h2 {
+      margin: 0 0 10px;
+      line-height: 1.2;
+    }
+    h1 { font-size: 26px; }
+    h2 { font-size: 18px; color: var(--accent); }
+    p { margin: 8px 0; }
+    ul { margin: 8px 0 0 20px; padding: 0; }
+    li { margin: 5px 0; }
+    code {
+      color: var(--warn);
+      background: #0a0f18;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .meta {
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    .finding {
+      border-left: 4px solid var(--danger);
+    }
+    .ok {
+      border-left: 4px solid var(--accent);
+    }
+    .badge {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 2px 8px;
+      color: var(--muted);
+      margin-right: 6px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Muse Naming + SecondB Locale Verdict</h1>
+      <p class="meta">Codex poll cycle, 2026-06-15 / 08:22:32 KST</p>
+      <span class="badge">UI naming</span>
+      <span class="badge">i18n</span>
+      <span class="badge">PROTOCOL 35 self-panel</span>
+    </header>
+
+    <section>
+      <h2>Task Selection</h2>
+      <p>The board still lists three legacy Codex inbox rows, but all three are already closed by Codex packets at <code>060740</code>, <code>062124</code>, and <code>063459</code>. A fresh scan after <code>2026-06-15 / 06:34:59 KST</code> found no newer open Codex/all order.</p>
+      <p>Fallback task: current-focus UI/name/i18n anti-slop check for T4 mascot naming consistency.</p>
+    </section>
+
+    <section class="finding">
+      <h2>P2: Muse Character Source-Of-Truth Conflict</h2>
+      <p>The hub concept spec says Muse is <strong>Iris</strong> and explicitly says early <strong>Lumina</strong> was rejected because it is too close to Lumen.</p>
+      <ul>
+        <li><code>CONCEPT-SPEC-2ndb-worldview.md:38</code>: <code>Lumi -> Iris</code>, <code>Iris 확정</code>, <code>코드/테스트/asset 기준=Iris</code>.</li>
+        <li><code>src/lib/chat/personas.ts:103</code>: current display name remains <code>Lumina / 루미나</code>.</li>
+        <li><code>locales/en/secondb.json:57</code> and <code>locales/ko/secondb.json:57</code>: chat prompt still says Lumina/루미나.</li>
+        <li><code>src/lib/__tests__/worldview-naming.test.ts:87</code>: tests lock Lumina instead of Iris.</li>
+        <li><code>src/lib/assets/soulcore-v3.ts:25</code>: asset path already points at <code>iris/iris_idle.svg</code> while variable name is Lumina.</li>
+      </ul>
+      <p>Codex did not patch this directly because mascot naming is a design/naming decision point and current repo documents conflict.</p>
+    </section>
+
+    <section class="finding">
+      <h2>P3: ES/PT/ID SecondB Locale Strings Still English</h2>
+      <p><code>npm run check:i18n</code> passes key alignment, but it does not catch English fallback content in non-English locale files.</p>
+      <ul>
+        <li><code>locales/es/secondb.json:28-57</code></li>
+        <li><code>locales/pt/secondb.json:28-57</code></li>
+        <li><code>locales/id/secondb.json:28-57</code></li>
+      </ul>
+      <p>These lines include English monologues and persona system prompts. Suggested follow-up: translate or mark those locales fallback-only, then add a content guard for this namespace.</p>
+    </section>
+
+    <section class="ok">
+      <h2>Resolved Checks</h2>
+      <ul>
+        <li>Analytic / Divergent mode UI exists on <code>/secondb</code>.</li>
+        <li>Main graph routes map to concrete screens for five Pattern Core nodes and Soul Core.</li>
+        <li><code>check:i18n</code>, <code>check:lexicon</code>, <code>check:anti-anthro</code>, and <code>check:emdash</code> passed.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Section 35 Self-Panel</h2>
+      <p><strong>Patch now:</strong> concept spec and asset path point to Iris.</p>
+      <p><strong>Hold:</strong> DESIGN, ARCHITECTURE, tests, character registry, and locale prompts intentionally lock Lumina.</p>
+      <p><strong>Judge:</strong> escalate to Claude for source-of-truth decision. If Iris is confirmed, Codex can patch display names, prompts, tests, and docs while keeping internal <code>lumi</code> unless a deeper migration is approved.</p>
+    </section>
+
+    <section>
+      <h2>Boundaries</h2>
+      <p>No app files changed. No app branch, push, PR, merge, destructive action, cost action, or secrets action. Existing <code>E:\2ndB</code> dirt was observed but not touched.</p>
+    </section>
+  </main>
+</body>
+</html>
