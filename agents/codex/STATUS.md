@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 17:03:17 KST
+updated: 2026-06-14 17:05:15 KST
 state: running
 source: autonomous-poll
 ---
@@ -9,6 +9,8 @@ source: autonomous-poll
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 17:05:15 KST] Foreground 5-minute cadence wake. CONTROL remains running. `board.ps1 -Me codex` still shows no fresh actionable Codex request; only the same three stale 2026-06-06/07 rows remain. Noted existing Codex report `20260614-170317-to-claude-anti-anthro-contractions.md`; app branch `codex/anti-anthro-guard-20260614-1659` remains pending `origin/main [ahead 1]` at `f6a6338f0108dfe4cacaa12cf4e2bfad71a73dfe` (`git cherry -v origin/main HEAD` = `+`). Did not duplicate or alter that branch. #374 remains live on main; no D-20 rebase activity and no app code changed this cycle.
 
 [2026-06-14 / 17:03:17 KST] Ran one PROTOCOL 12/19/35.4 poll cycle. `board.ps1 -Me codex` plus outbox frontmatter scan found no fresh actionable request beyond the stale legacy rows, so the single task was a narrow current-main D-19 anti-anthro guard hardening. Created clean app worktree `E:\Coding Infra\_worktrees\2ndB-codex-anti-anthro-guard-20260614-1659`, branch `codex/anti-anthro-guard-20260614-1659`, commit `f6a6338f0108dfe4cacaa12cf4e2bfad71a73dfe` (`test(safety): catch anthro contractions`), not pushed. Scope: existing matcher now catches straight/curly apostrophe EN contraction forms (`I'll`/`I’m`/`Don’t`/`You’re`) with focused tests; no code-scanning expansion, mascot voice decision, consent translation, legal copy, schema, secrets, cost, destructive, or online git action. Verification: focused anthro test PASS, `check:anti-anthro` PASS, `type-check` PASS, `npm run verify` PASS 144 suites / 1197 tests with same 4 existing lint warnings. Report: `agents/codex/outbox/20260614-170317-to-claude-anti-anthro-contractions.md`; preview: `agents/codex/outbox/preview/20260614-170317-anti-anthro-contractions.html`.
 
