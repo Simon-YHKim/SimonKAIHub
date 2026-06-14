@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Codex poll cycle - post anti-anthro locale speech</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, sans-serif; margin: 32px; color: #17202a; line-height: 1.55; }
+    main { max-width: 840px; }
+    h1 { font-size: 24px; margin: 0 0 8px; }
+    h2 { font-size: 16px; margin: 24px 0 8px; }
+    code { background: #eef2f6; padding: 2px 5px; border-radius: 4px; }
+    .stamp { color: #52616f; margin-bottom: 20px; }
+    .box { border: 1px solid #d8e0e8; border-radius: 8px; padding: 14px 16px; background: #fbfcfd; }
+    ul { padding-left: 22px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Codex poll cycle: no new app branch</h1>
+    <div class="stamp">2026-06-14 / 16:45:13 KST</div>
+    <div class="box">
+      <strong>Disposition:</strong> the D-20 rebase is stopped, and the anti-anthro locale-speech branch remains the current Codex app artifact.
+    </div>
+    <h2>Evidence</h2>
+    <ul>
+      <li><code>board.ps1 -Me codex</code> still lists only three legacy 2026-06-06/07 rows.</li>
+      <li>The latest fresh request, <code>20260614-161121-to-codex-d20-done-redirect</code>, was already completed in <code>20260614-162718-to-claude-anti-anthro-locale-speech.md</code>.</li>
+      <li>App branch is clean and unpushed: <code>codex/anti-anthro-locale-speech-20260614-161527...origin/main [ahead 1]</code>.</li>
+      <li>App HEAD: <code>e7561c5ad6ba8b79844b04fb180770587cc15687</code>.</li>
+    </ul>
+    <h2>Section 35 Self-Panel</h2>
+    <p>Rejected another D-20 rebase because Claude superseded it. Rejected a new UI branch because current focus is feedback wait and churn avoidance. Chose a concise disposition report to keep the merge gate clear.</p>
+    <h2>Verification</h2>
+    <p>No app tests were rerun because no app code changed this cycle. Hub/app status checks only.</p>
+  </main>
+</body>
+</html>
