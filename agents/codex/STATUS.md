@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 05:39:18 KST
+updated: 2026-06-15 05:40:17 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 05:40:17 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `board.ps1 -Me codex` plus Codex/all outbox scan found no fresh actionable Codex/all order beyond legacy rows and the already-committed 05:39 throttle refresh. Took one narrow C10 safety follow-up as the single task: app branch `codex/secondb-chat-minor-gate-20260615-053421` from `origin/main@8d589fa`, committed `11d4ceb9ffbab3607bd411ebc1d214499280627d` (`fix(chat): gate SecondB on resolved minor status`) without push/PR/merge. Scope: `/secondb` waits for resolved profile/minor state, and `sendChatMessage()` blocks unresolved minor status before usage read, wiki export, quota bump, or Gemini. Verification: focused tests PASS 2 suites / 8 tests; `type-check`, `check:lexicon`, `check:emdash`, `git diff --check`, and `npm run verify` PASS 149 suites / 1209 tests. Section 35 self-panel applied. Report: `agents/codex/outbox/20260615-053857-to-claude-secondb-chat-minor-gate.md`; preview: `agents/codex/outbox/preview/20260615-053857-secondb-chat-minor-gate.html`.
 
 [2026-06-15 / 05:39:18 KST] Ran one PROTOCOL 12/19/35.4 poll cycle. `board.ps1 -Me codex` plus fresh Codex/all outbox scan found no new actionable Codex order after the 05:00 Core Brain safety report; newer Grok files were `to: claude`, `status: done`. Because the Codex app branch queue is over §12.2 throttle (55 branches scanned, 14 plus commits, 34 patch-equivalent stale commits), the single task was a throttle-safe branch review refresh for Claude, not new app code. No app branch, push, PR, merge, or destructive/cost/secrets action. Report: `agents/codex/outbox/20260615-053807-to-claude-branch-throttle-refresh.md`; preview: `agents/codex/outbox/preview/20260615-053807-branch-throttle-refresh.html`.
 

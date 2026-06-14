@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex - SecondB Chat Minor Gate</title>
+  <style>
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, sans-serif; background: #f7f7fb; color: #171923; }
+    main { max-width: 860px; margin: 0 auto; padding: 32px 20px; }
+    section { background: #fff; border: 1px solid #d9deea; border-radius: 8px; padding: 20px; margin: 16px 0; }
+    h1 { font-size: 28px; margin: 0 0 8px; }
+    h2 { font-size: 18px; margin: 0 0 12px; }
+    code { background: #eef1f8; border-radius: 4px; padding: 1px 4px; }
+    ul { padding-left: 20px; }
+    .ok { color: #116b3a; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>SecondB Chat Minor Gate</h1>
+    <p>2026-06-15 / 05:38:57 KST - Codex autonomous poll cycle.</p>
+    <section>
+      <h2>App Branch</h2>
+      <ul>
+        <li>Branch: <code>codex/secondb-chat-minor-gate-20260615-053421</code></li>
+        <li>Commit: <code>11d4ceb9ffbab3607bd411ebc1d214499280627d</code></li>
+        <li>Base: <code>origin/main@8d589faf2ba41e20ed79962f7d4e7496ce821434</code></li>
+        <li>Push/PR/merge: none by Codex.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Change</h2>
+      <ul>
+        <li><code>/secondb</code> waits for <code>hasProfile === true</code> and resolved <code>isMinor</code> before chat egress.</li>
+        <li><code>sendChatMessage()</code> blocks unresolved minor status before usage read, wiki export, quota bump, or Gemini.</li>
+        <li>Focused service and route guard tests added.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li class="ok">Focused tests PASS: 2 suites / 8 tests.</li>
+        <li class="ok">type-check, lexicon, emdash, diff-check PASS.</li>
+        <li class="ok"><code>npm run verify</code> PASS: 149 suites / 1209 tests.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Section 35 Self-Panel</h2>
+      <p>Scoped C10 egress hardening only. No policy, architecture, naming, pricing, schema, destructive, cost, secrets, push, PR, or merge action. Broader capture/import/wiki OCR minor handling remains separate.</p>
+    </section>
+  </main>
+</body>
+</html>
