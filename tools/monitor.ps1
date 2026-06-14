@@ -1,9 +1,10 @@
 # monitor.ps1 -- Live AI Hub dashboard for the user's VS Code terminal (read-only).
-# Shows CONTROL run-state, each AI's STATUS (state / last activity / age), inbox &
-# blocker counts, open consensus, and recent hub commits. Auto-refreshes so Simon can
-# watch the headless 4-AI loops live. ASCII-only source (PS 5.1 no-BOM safe).
+# Shows CONTROL run-state, each AI's STATUS (state / freshness / WORKING-now / live procs /
+# pending-for-Claude), daemon liveness, emulator status, inbox & blocker counts, open
+# consensus, recent hub commits. Auto-refreshes so Simon can watch the 4-AI loops live.
+# ASCII-only source (PS 5.1 no-BOM safe).
 #
-# Usage (in a VS Code terminal, cwd = hub root):
+# Usage (VS Code terminal, cwd = hub root):
 #   powershell -ExecutionPolicy Bypass -File "tools/monitor.ps1"          # live, 5s refresh
 #   powershell -ExecutionPolicy Bypass -File "tools/monitor.ps1" -Interval 3
 #   powershell -ExecutionPolicy Bypass -File "tools/monitor.ps1" -Once    # single render
@@ -18,6 +19,12 @@ $agents = @("claude","codex","antigravity","grok")
 # does not depend on STATUS.md discipline -- Claude works via commits/BOARD, not a daemon that
 # rewrites its own STATUS each cycle, so STATUS alone made the orchestrator look idle for hours.
 $agentEmail = @{ claude='claude@2nd-b.ai'; codex='codex@2nd-b.ai'; antigravity='antigravity@2nd-b.ai'; grok='grok@2nd-b.ai' }
+# CLI process names that represent a live "agent" for each AI (best-effort; codex spawns node
+# children, gemini is the AG seat). Used for the "procs" column = how many are running now.
+$agentProc  = @{ claude=@('claude'); codex=@('Codex','codex'); antigravity=@('gemini'); grok=@('grok') }
+# Pending-for-Claude alarm: when an AI has >= this many unprocessed outputs awaiting Claude,
+# the merge-gate is falling behind (Simon's rule: 3+ piled up => Claude likely not processing).
+$PENDING_ALARM = 3
 
 function Get-Front([string[]]$lines,[string]$key){
   $pat = "^" + $key + ':\s*"?(.*?)"?\s*$'
@@ -36,18 +43,18 @@ function Get-Age([string]$stamp){
     return ("{0:n0}d ago" -f $d.TotalDays)
   } catch { return "?" }
 }
-function Get-AgeDays([string]$stamp){
-  # Total days since stamp; 0 on parse failure so an unparseable stamp is not flagged stale.
-  $s = ($stamp -replace 'KST','' -replace '/','' -replace '\s+',' ').Trim()
-  try { return ((Get-Date) - [datetime]::Parse($s)).TotalDays } catch { return 0 }
-}
 function Get-GitLastByAuthor([string]$rootDir,[string]$email){
-  # Most recent commit (committer date) by this author email in the hub repo, as a freshness
-  # source independent of STATUS.md. Returns $null if no commit / parse fails.
   if(-not $email){ return $null }
   $iso = git -C $rootDir log -1 --author="$email" --format='%cI' 2>$null
   if($iso){ try { return [datetime]::Parse($iso) } catch { return $null } }
   return $null
+}
+function Get-ProcCount([string[]]$names){
+  $n = 0
+  foreach($nm in ($names | Select-Object -Unique)){
+    try { $n += @(Get-Process -Name $nm -ErrorAction SilentlyContinue).Count } catch {}
+  }
+  return $n
 }
 
 function Render {
@@ -68,80 +75,50 @@ function Render {
     Write-Host ("RUN STATE: {0}" -f $st.ToUpper()) -ForegroundColor $col
     if($rs){ Write-Host ("  reason: {0}" -f $rs.Substring(0,[Math]::Min(68,$rs.Length))) -ForegroundColor DarkGray }
   }
-  # Autonomous daemon heartbeat (tools/hub-daemon.log) -- is the poll loop alive + what is it doing now?
+
+  # ---- Daemon liveness: which hub-daemon.ps1 loops are alive + the shared log heartbeat ----
+  $dproc = @()
+  try {
+    $dproc = @(Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" -ErrorAction SilentlyContinue |
+      Where-Object { $_.CommandLine -match 'hub-daemon\.ps1' })
+  } catch {}
+  $dAIs = @()
+  foreach($dp in $dproc){ if($dp.CommandLine -match '-Only\s+(\w+)'){ $dAIs += $matches[1] } }
+  $dAIs = @($dAIs | Select-Object -Unique)
   $dlog = Join-Path $root "tools\hub-daemon.log"
-  if(Test-Path $dlog){
-    $dlast = Get-Content $dlog -Encoding UTF8 -Tail 1
+  $dlogLines = @()
+  if(Test-Path $dlog){ $dlogLines = @(Get-Content $dlog -Encoding UTF8 -Tail 120) }
+  if($dlogLines.Count -gt 0){
+    $dlast = $dlogLines[-1]
     $dts = ""; if($dlast -match '^\[([^\]]+) KST\]'){ $dts = $matches[1] }
     $dage = if($dts){ Get-Age $dts } else { "?" }
     $dmsg = ($dlast -replace '^\[[^\]]*\]\s*','').Trim()
-    $dcol = if($dage -match 's ago|m ago'){'Green'}else{'DarkGray'}
-    Write-Host ("DAEMON  {0,-10}{1}" -f $dage,$dmsg) -ForegroundColor $dcol
+    $dcol = if($dage -match 's ago|m ago'){'Green'}else{'Red'}
+    $daemonTag = if($dAIs.Count -gt 0){ ("loops: " + ($dAIs -join ' ') + " (" + $dAIs.Count + ")") } else { "loops: NONE" }
+    Write-Host ("DAEMON  {0,-10}{1,-40}{2}" -f $dage,($dmsg.Substring(0,[Math]::Min(38,$dmsg.Length))),$daemonTag) -ForegroundColor $dcol
   } else {
-    Write-Host "DAEMON  (not running -- launch tools/hub-daemon.ps1)" -ForegroundColor DarkGray
+    Write-Host "DAEMON  (no hub-daemon.log -- launch tools/hub-daemon.ps1)" -ForegroundColor DarkGray
   }
-  # 2nd-B live app HEAD (the GitHub Pages live target)
+
+  # ---- Emulator / device line (Q3 visibility) ----
+  $emuProc = 0; $adbProc = 0
+  try { $emuProc = @(Get-Process -Name 'qemu-system-x86_64','emulator' -ErrorAction SilentlyContinue).Count } catch {}
+  try { $adbProc = @(Get-Process -Name 'adb' -ErrorAction SilentlyContinue).Count } catch {}
   $appdir = "E:\2ndB"
+  $headStr = ""
   if(Test-Path $appdir){
     $ahead = git -C $appdir rev-parse --short HEAD 2>$null
     $asub  = git -C $appdir log -1 --format='%s' 2>$null
-    if($ahead){ Write-Host ("2nd-B   {0,-10}{1}" -f $ahead,$(if($asub){$asub.Substring(0,[Math]::Min(56,$asub.Length))}else{""})) -ForegroundColor Cyan }
+    if($ahead){ $headStr = ("2nd-B " + $ahead + "  " + $(if($asub){$asub.Substring(0,[Math]::Min(34,$asub.Length))}else{""})) }
+  }
+  if($emuProc -gt 0){
+    Write-Host ("EMULATOR running (qemu" + $(if($adbProc -gt 0){"+adb"}else{" no-adb"}) + ")   |  " + $headStr) -ForegroundColor Green
+  } else {
+    Write-Host ("EMULATOR down (no qemu)   |  " + $headStr) -ForegroundColor DarkGray
   }
   Write-Host ("-" * 78) -ForegroundColor DarkGray
 
-  Write-Host ("{0,-12}{1,-11}{2,-11}{3}" -f "AI","state","updated","last activity") -ForegroundColor White
-  foreach($a in $agents){
-    $sf = Join-Path $root ("agents\" + $a + "\STATUS.md")
-    $state = "-"; $age = "-"; $act = ""; $rawState = ""; $stale = $false; $noStamp = $false
-    if(Test-Path $sf){
-      $lines = Get-Content $sf -Encoding UTF8
-      $head = $lines | Select-Object -First 8
-      $rawState = Get-Front $head 'state'
-      $state = $rawState; if(-not $state){ $state = "-" }
-      if($state.Length -gt 8){ $state = $state.Substring(0,8) }
-      $upd = Get-Front $head 'updated'
-      # Effective activity = most recent of the frontmatter 'updated:' stamp and the file's
-      # actual mtime. A STATUS rewritten without refreshing 'updated:' (or with no frontmatter
-      # at all, e.g. a bare status file) still reflects REAL freshness instead of "-"/stale.
-      $best = (Get-Item $sf).LastWriteTime
-      if($upd){ try { $ut=[datetime]::Parse((($upd -replace 'KST','' -replace '/','' -replace '\s+',' ').Trim())); if($ut -gt $best){ $best=$ut } } catch {} }
-      $gl = Get-GitLastByAuthor $root $agentEmail[$a]
-      if($gl -and $gl -gt $best){ $best = $gl }
-      $d = (Get-Date) - $best
-      if($d.TotalSeconds -lt 0){ $d = [TimeSpan]::Zero }   # clock-skew / slightly-future stamp -> treat as now
-      if($d.TotalMinutes -lt 1){ $age = ("{0:n0}s ago" -f $d.TotalSeconds) }
-      elseif($d.TotalHours -lt 1){ $age = ("{0:n0}m ago" -f $d.TotalMinutes) }
-      elseif($d.TotalDays -lt 1){ $age = ("{0:n0}h ago" -f $d.TotalHours) }
-      else { $age = ("{0:n0}d ago" -f $d.TotalDays) }
-      $stale = ($d.TotalDays -gt 1)
-      $noStamp = (-not $upd)
-      $idx = -1
-      for($i=0;$i -lt $lines.Count;$i++){ if($lines[$i] -match '^\[\d{4}-\d{2}-\d{2}'){ $idx = $i; break } }
-      if($idx -ge 0){
-        $act = ($lines[$idx] -replace '^\[[^\]]*\]\s*','').Trim()
-        if(-not $act -and ($idx+1) -lt $lines.Count){ $act = $lines[$idx+1].Trim() }
-      }
-    }
-    # Reconcile STATUS against the hub CONTROL semaphore. A STATUS that still says
-    # running while CONTROL is paused (or has not been touched in >1 day) is stale,
-    # not live -- never paint it as actively running.
-    $runlike = ($rawState -match '^\s*running')
-    if($runlike -and ($controlState -eq 'paused')){
-      $state = "stale-run?"
-    } elseif($runlike -and $stale){
-      $state = "STALE"
-    }
-    if($act.Length -gt 42){ $act = $act.Substring(0,41) + "~" }
-    $live = ($age -match 's ago|m ago') -and -not $stale
-    $rowcol =
-      if($state -eq 'stale-run?' -or $state -eq 'STALE'){'Yellow'}
-      elseif($state -eq 'paused' -or $rawState -match '^\s*paused'){'DarkGray'}
-      elseif($live -and ($controlState -ne 'paused')){'Green'}
-      else{'Gray'}
-    Write-Host ("{0,-12}{1,-11}{2,-11}{3}" -f $a,$state,$age,$act) -ForegroundColor $rowcol
-  }
-  Write-Host ("-" * 78) -ForegroundColor DarkGray
-
+  # ---- Pre-scan all outbox messages once (used for pending/inbox/blockers) ----
   $msgs = @()
   foreach($a in $agents){
     $obx = Join-Path $root ("agents\" + $a + "\outbox")
@@ -155,26 +132,114 @@ function Render {
       }
     }
   }
-  $answered = $msgs | Where-Object { $_.Type -eq 'response' -and $_.Ref } | Select-Object -ExpandProperty Ref
+  $answered = $msgs | Where-Object { $_.Ref } | Select-Object -ExpandProperty Ref
+  # Pending-for-Claude per AI = hub commits by that AI SINCE Claude's last hub commit. Simon's
+  # rule: 3+ commits piled up means Claude (merge-gate) likely is not processing. This self-
+  # clears the instant Claude commits (merge+feedback), so a rising count = a real stall signal,
+  # not lifetime backlog (an outbox-status count over-counted because old reports stay open).
+  $claudeLastIso = git -C $root log -1 --author="claude@2nd-b.ai" --format='%cI' 2>$null
+  $claudeLast = $null
+  if($claudeLastIso){ try { $claudeLast = [datetime]::Parse($claudeLastIso) } catch {} }
+  $pending = @{}
+  foreach($a in $agents){
+    if($a -eq 'claude'){ $pending[$a] = 0; continue }
+    $cnt = if($claudeLast){
+      git -C $root rev-list --count --author="$($agentEmail[$a])" --since="$($claudeLast.ToString('yyyy-MM-dd HH:mm:ss'))" HEAD 2>$null
+    } else {
+      git -C $root rev-list --count --author="$($agentEmail[$a])" HEAD 2>$null
+    }
+    $pending[$a] = [int](@($cnt)[0])
+  }
+
+  # ---- Per-AI rows: state | fresh | WORKING-now | procs | pend>CL | activity ----
+  Write-Host ("{0,-11}{1,-9}{2,-9}{3,-9}{4,-6}{5,-8}{6}" -f "AI","state","fresh","now","procs","pend>CL","last activity") -ForegroundColor White
+  $alarms = @()
+  foreach($a in $agents){
+    $sf = Join-Path $root ("agents\" + $a + "\STATUS.md")
+    $state = "-"; $age = "-"; $act = ""; $rawState = ""; $stale = $false
+    if(Test-Path $sf){
+      $lines = Get-Content $sf -Encoding UTF8
+      $head = $lines | Select-Object -First 8
+      $rawState = Get-Front $head 'state'
+      $state = $rawState; if(-not $state){ $state = "-" }
+      if($state.Length -gt 8){ $state = $state.Substring(0,8) }
+      $upd = Get-Front $head 'updated'
+      $best = (Get-Item $sf).LastWriteTime
+      if($upd){ try { $ut=[datetime]::Parse((($upd -replace 'KST','' -replace '/','' -replace '\s+',' ').Trim())); if($ut -gt $best){ $best=$ut } } catch {} }
+      $gl = Get-GitLastByAuthor $root $agentEmail[$a]
+      if($gl -and $gl -gt $best){ $best = $gl }
+      $d = (Get-Date) - $best
+      if($d.TotalSeconds -lt 0){ $d = [TimeSpan]::Zero }
+      if($d.TotalMinutes -lt 1){ $age = ("{0:n0}s ago" -f $d.TotalSeconds) }
+      elseif($d.TotalHours -lt 1){ $age = ("{0:n0}m ago" -f $d.TotalMinutes) }
+      elseif($d.TotalDays -lt 1){ $age = ("{0:n0}h ago" -f $d.TotalHours) }
+      else { $age = ("{0:n0}d ago" -f $d.TotalDays) }
+      $stale = ($d.TotalDays -gt 1)
+      $idx = -1
+      for($i=0;$i -lt $lines.Count;$i++){ if($lines[$i] -match '^\[\d{4}-\d{2}-\d{2}'){ $idx = $i; break } }
+      if($idx -ge 0){
+        $act = ($lines[$idx] -replace '^\[[^\]]*\]\s*','').Trim()
+        if(-not $act -and ($idx+1) -lt $lines.Count){ $act = $lines[$idx+1].Trim() }
+      }
+    }
+    # WORKING-now: in the shared daemon log, is this AI's last "-> $a poll" more recent than its
+    # last "exit($a)="? If so a CLI run is in flight right now; else it's idle between cycles.
+    $nowState = "-"
+    if($a -ne 'claude'){
+      $lastPoll = -1; $lastExit = -1
+      for($i=0;$i -lt $dlogLines.Count;$i++){
+        if($dlogLines[$i] -match ("->\s+" + $a + "\s+poll")){ $lastPoll = $i }
+        if($dlogLines[$i] -match ("exit\(" + $a + "\)")){ $lastExit = $i }
+      }
+      if($lastPoll -ge 0 -and $lastPoll -gt $lastExit){ $nowState = "WORKING" }
+      elseif($dAIs -contains $a){ $nowState = "idle" }
+      else { $nowState = "no-daemon" }
+    } else {
+      $nowState = "loop"
+    }
+    $procN = Get-ProcCount $agentProc[$a]
+    $pendN = $pending[$a]
+    $pendStr = "$pendN"
+    if($pendN -ge $PENDING_ALARM){ $pendStr = "$pendN!!"; $alarms += "$a $pendN" }
+
+    $runlike = ($rawState -match '^\s*running')
+    if($runlike -and ($controlState -eq 'paused')){ $state = "stale-run?" }
+    elseif($runlike -and $stale){ $state = "STALE" }
+    if($act.Length -gt 30){ $act = $act.Substring(0,29) + "~" }
+    $live = ($age -match 's ago|m ago') -and -not $stale
+    $rowcol =
+      if($pendN -ge $PENDING_ALARM){'Red'}
+      elseif($nowState -eq 'WORKING'){'Green'}
+      elseif($state -eq 'stale-run?' -or $state -eq 'STALE' -or $nowState -eq 'no-daemon'){'Yellow'}
+      elseif($state -eq 'paused' -or $rawState -match '^\s*paused'){'DarkGray'}
+      elseif($live){'Gray'}
+      else{'Gray'}
+    Write-Host ("{0,-11}{1,-9}{2,-9}{3,-9}{4,-6}{5,-8}{6}" -f $a,$state,$age,$nowState,$procN,$pendStr,$act) -ForegroundColor $rowcol
+  }
+  Write-Host ("-" * 78) -ForegroundColor DarkGray
+
+  # ---- Backlog alarm line (Simon: 3+ unprocessed per AI => Claude behind) ----
+  if($alarms.Count -gt 0){
+    Write-Host ("!! BACKLOG ALARM -- Claude behind on: " + ($alarms -join ' , ') + "  (>= $PENDING_ALARM unprocessed; merge/ack now)") -ForegroundColor Red
+  } else {
+    Write-Host "backlog: clear (no AI >= $PENDING_ALARM unprocessed for Claude)" -ForegroundColor DarkGreen
+  }
+
+  # ---- Inbox / blockers / open requests ----
   $inboxStr = ($agents | ForEach-Object {
     $me = $_
     $n = ($msgs | Where-Object { ($_.To -eq $me -or $_.To -eq 'all') -and $_.Type -eq 'request' -and $_.Status -eq 'open' -and ($answered -notcontains $_.Id) }).Count
     ("{0}:{1}" -f $me.Substring(0,[Math]::Min(2,$me.Length)), $n)
   }) -join "  "
-  # A blocker is OPEN only if not explicitly closed (status: closed/resolved/done) and not
-  # ref-answered by a later message. Stops long-resolved blockers (e.g. a June-5 typecheck note)
-  # from showing as live indefinitely -- the recurring "monitor shows stale state" complaint.
   $openBlockers = @($msgs | Where-Object { $_.Type -eq 'blocker' -and ($_.Status -notmatch 'closed|resolved|done') -and ($answered -notcontains $_.Id) })
   $blk  = $openBlockers.Count
   $cons = ($msgs | Where-Object { $_.Type -eq 'consensus_request' -and ($answered -notcontains $_.Id) }).Count
   Write-Host ("inbox  {0}    blockers:{1}    consensus open:{2}" -f $inboxStr,$blk,$cons) -ForegroundColor $(if($blk -gt 0){'Magenta'}else{'Gray'})
-  # open requests detail (top 6) -- who owes what, at what priority
   $open = $msgs | Where-Object { $_.Type -eq 'request' -and $_.Status -eq 'open' -and ($answered -notcontains $_.Id) } | Select-Object -First 6
   foreach($o in $open){
     $os = if($o.Subj){ $o.Subj } else { "" }
     Write-Host ("   -> {0,-11}[{1,-4}] {2}" -f $o.To,$o.Pri,$os.Substring(0,[Math]::Min(46,$os.Length))) -ForegroundColor DarkCyan
   }
-  # blocker detail (open only)
   $blocks = $openBlockers | Select-Object -First 4
   foreach($b in $blocks){
     $bs = if($b.Subj){ $b.Subj } else { "" }
