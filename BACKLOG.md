@@ -74,4 +74,6 @@
 - `[x]` **PROTOCOL §35.6**(코어레인 독립반론, Claude 최종권 불변) · **§31.8**(좌석 용량게이트) · **§36**(미성년 ENABLEMENT 학습자 면허).
 - `[x]` **ROUTING §1.5** 좌석 재정의 — Gemini 감사·심판 / Grok 와치독 / Codex 테스트저자·verify:safety / Claude 최소화(SPOF 회피).
 - `[x]` **HUB-STARTUP.html** 모델·effort 정확화(fable-5 max 등) + 역할 갱신 + release-gate 도구 카드 + 신규자산 푸터.
-- `[ ]` **후속(미착수·리스크 플래그)**: hub-daemon.ps1 per-AI timeout/Set-Heartbeat/liveness(P0 — **라이브 데몬이라 별도 검증 후**) · 3 root config(CLAUDE/AGENTS/GEMINI) §18 동기화 · §36 enablement **빌드=Simon 법무 게이트** · DPIA(K12) 작성 · export 경로(GDPR Art.20).
+- `[x]` **hub-daemon.ps1 P0 3종 landed**: per-AI 타임아웃(Start-Job+Wait-Job 1200s) · CONTROL.state 게이트(§13) · 가짜 Set-Heartbeat 제거(monitor가 실 live-log mtime + PID-gated green). 3 데몬 재기동 검증. 커밋됨. + HUB-STARTUP 경로-공백 launch 버그 수정.
+- `[ ]` **🔴 P1 (D-20 발견, 라이브-머지 사이클): 2nd-B `recommendations` 런타임 ungated** — `ops.tsx:104-129 runRecommend`가 pref 미참조 → 미성년 포함 전원 실행, `0038` clamp는 읽는 게이트 없어 명목적. 픽스=runRecommend에 pref 게이트 배선(미성년 default OFF=clamp 값 사용)+미성년-lock 회귀테스트+승격은 ops_push promotable 패턴. 안전강화(더 보수적)지만 미성년 consent 경로 → **Claude 리뷰 게이트+live verify 경유**(자동 데몬 X). 법무 무관·즉시 가능.
+- `[ ]` **후속(미착수·리스크 플래그)**: 3 root config(CLAUDE/AGENTS/GEMINI) §18 동기화 · §36 enablement **빌드=Simon 법무 게이트** · **K12 아동 DPIA 작성(전 빌드 선결)** · export 경로(GDPR Art.20) · Lane 7/8 egress audit · anti-anthropomorphism CI 게이트(D-19) · counsel 사인오프(Art.5·SB243·Std12·韓 §13).

@@ -64,6 +64,29 @@ last-sync: 2026-06-14
 - **후속/게이트**: 설계 방향은 AI 합의로 확정(빌드 청사진 = Codex position 문서). **단 BUILD/ship 착수는 §11-5 게이트 = Simon 확인 필수**(동의·미성년 데이터 핸들링·프라이버시 카피 = 법무 영역). Simon GO 시 Codex가 `src/lib/capture/preauth-pending.ts` 신설로 구현, Claude 머지 게이트, AG 에뮬 QA.
 - **메타**: §35 **허브 outbox 라운드** 방식(Workflow 아닌 실 AI 비동기 입장 → Claude 종합). 닫힌 루프로 Grok·Codex 입장 수거 → 판정.
 
+### D-18 — 미성년 학습자면허 인지강제 default (§35 debate w1qg0xa22, 2026-06-14)
+- **안건**: 미성년 인지강제(scaffolded autonomy)를 default-ON(A) vs 8-13세 단순 OFF(B) vs 연령×리스크 하이브리드(C)?
+- **입장**: A) enablement-default(전원 L0 두꺼운 scaffold→입증행동으로 fade) · B) 8-13 단순 OFF(최저 법·엔지 비용) · C) 연령대 하이브리드.
+- **심판 근거(제안자≠심판 §34.4)**: C 만장 패자(소셜스코어링 ∥ 약한 DOB age-assurance가 *동시에* 불리 + 최고 유지비). B 본선 패자(최연소·저리터러시에 미션 OFF=ICO best-interests 역행, KR은 K1 가입하한으로 절약분 작음). A 원안의 persistent cross-session 스코어링은 최대 Art.5 신규노출 → 교체 대상.
+- **판정**: 합성 채택 — **A-default(보호 두께=상수 L0) × ephemeral/session-local fade(영속 행동 스코어 라벨 미저장) × value-first·content-trigger·1탭-skippable 인지강제 × persistent 스코어링은 counsel(Art.5) 게이트 뒤로**. confidence 0.72.
+- **소수의견(보존)**: B(8-13 단순 OFF=최저 리스크·최소 데이터처리·DPIA scope 최소). **Simon override 경로 유지** — Simon이 단순-OFF 택하면 본 판정 즉시 양보(권고이지 강제 아님).
+- **후속/게이트**: 빌드=§11-5 Simon 법무. 선결=K12 아동 DPIA. ② 우위 블록/언블록=EU AI Act Art.5(1)(c)/(b) counsel 사인오프. 빌드 전 Gemini-AG 14 vs 17세 이탈 A/B QA. 하드레일·역량상수 위반 0.
+
+### D-19 — 2nd-B = scaffolded reflection ≠ companion bot 포지셔닝 (§35 debate w1qg0xa22, 2026-06-14)
+- **안건**: scaffolded reflection 도구로 포지셔닝해 CSM/Stanford "18세 미만 companion 금지" 긴장 해소? 방어명제(A) vs companion-risk 인정+게이트(B) vs tutor/EdTech 재라벨(alt).
+- **심판 근거**: substance-over-form 만장일치(자기라벨은 법적 inert, 기능/설계가 범주 통제). copy-only A 만장 기각. alt 재라벨은 EU AI Act Annex III(3) 교육 고위험 자초로 노출 *증가* → 명사로 패배(단 falsifiable 불변식·감사물 수단은 흡수). B를 default로 두면 SB243/FTC 자진편입(admission against interest)+약한 DOB 위 게이트 역설(저리터러시 15세가 나이 거짓→isMinor=false→하드레일 동반해제).
+- **판정**: 합성 — **design-enforced/loop-carried/instrumented A**: 비-companion을 *선언이 아니라* CI-binding 불변식 + child-DPIA + dependency-safety 감사물로 입증. anti-anthropomorphism을 가이드라인→**CI 게이트**로 승격(마스코트·1인칭·long_term_memory 의인화 감사 선결). cadence급증+위기신호 동반 시 crisis-handoff 임계 하향 안전밸브(역량 캡 아님). confidence 0.70.
+- **소수의견(보존)**: companion-risk를 resolved label이 아닌 *살아있는 설계 제약*으로(skeptic/B). 진짜 affordance(마스코트·1인칭·long_term_memory) 실재·age-invariant, Lane 6 "캡 아님"이라 최연소에 소프트코치만 의존. counsel이 SB243/CSM를 "기능기반·반박불가"로 읽으면 최연소 한정 잠정 게이트가 유일 완전안전.
+- **후속/게이트**: 빌드=§11-5. 설계 후속(즉시 가능): 의인화 감사(④ 주장→사실) · anti-anthropomorphism CI 게이트 · DPIA에 non-companion conformance+dependency-safety 명문화. counsel 필수: CA SB243 정의·CSM/Stanford operative 정의·FTC 6(b)·EU Annex III·韓 AI기본법 §13.
+
+### D-20 — recommendations 미성년 기본 ON+투명성 (§35 debate w1qg0xa22, 2026-06-14)
+- **안건**: recommendations(계정 내 기록 기반 제안, egress 없음)를 미성년 기본 ON+투명성(A) vs 강제 OFF 유지(B) vs 명시 동의 후 ON(alt)?
+- **🔴 선결 코드 사실(버그)**: **`recommendations`는 런타임 dead key — 오늘 미성년 포함 전원에게 게이트 없이 실행됨**(`E:/2ndB` `ops.tsx:104-129 runRecommend`가 pref 미참조; `0038` 클램프는 읽는 게이트 없어 *명목적*). A/B 논쟁이 "뗄 보조바퀴 실재"라는 거짓전제 위였음. egress0은 참이나 프로파일링(GDPR Art.4(4)) 아님은 아님(층위 오류).
+- **심판 근거**: alt′가 ②가역성·③리터러시·④ICO Std12·⑤신뢰 전 축 지배. silent A=Std12 정면 최약. 강제 B=dead토글·법근거 없는 force-OFF(FTC §5/D-12 false-promise)·③=0.
+- **판정**: 합성 — **alt′ "유리상자 기본 OFF + 이해-획득 활성화"**: (0) recommendations를 runRecommend 게이트에 **먼저 배선**(ungated 갭 폐쇄=최시급 버그) (1) default OFF + 0038 클램프 유지 (2) 활성화=in-context 이해-게이트(온보딩 클릭스루 아님) + K5 불변 동의-원장 기록 + 서버검증 promotable 경로 (3) 사후 "왜 이걸?" 영구투명 + 원터치 OFF. confidence 0.62.
+- **소수의견(보존)**: 강제 OFF 유지(가장 보수적) — 순수 UK/EU 출시 시 legal 자인상 B만 무흠결. **alt′는 K12 DPIA 완료+counsel 승인 전까지 UK/EU 미성년에 B(OFF) 폴백**.
+- **후속/게이트**: 빌드=§11-5. **즉시 가능(법무 무관)**: recommendations 런타임 배선으로 ungated-today 갭 폐쇄(🔴 최시급, counsel 고지) · Lane 7/8 egress audit(Gemini-AG) · 승격 RPC=ops_push promotable 패턴+미성년 lock 회귀테스트. counsel: K12 DPIA·Std12 해당성·14세 이해-활성화 유효성(GDPR Art.8)·EU/UK scope.
+
 ## 해결됨 (Resolved) — 인덱스 (2026-06-14 원장 정리)
 > 상세 근거는 위 Open 표의 각 행에 보존. 아래는 상태 인덱스(스튜어드 위생, BACKLOG #14).
 - **설계·합의 완결**: D-04(HIBP 폴리필·머지) · D-08①(persona confidence 머지) · D-10(ESM A·1단계 라이브) · D-11(GTM 머지) · D-12(privacy honest-UI A) · D-13(브랜드 2층) · D-14(로스터 6) · D-15(브랜드 토큰 KO canon) · D-16(다양성 HYBRID) · D-17(Lever B 설계승인).
@@ -80,3 +103,4 @@ last-sync: 2026-06-14
 - 2026-06-07 14:1x KST | CYCLE | 리뷰 사이클2 가동(§31.6, wf wnyrfn43c): 10차원 finder→적대검증→in-lane 확정수정. Simon게이트(PF-L/K/M/H·D-09결제)·Codex레인(G7/G8) 제외 지시 | claude
 - 2026-06-14 KST | STEWARD | 원장 위생(BACKLOG #14): frontmatter last-updated 06-06→06-14, Resolved 인덱스 신설(D-04/08~17 분류), 만료투표 D-01(대체후보)/D-02(흡수)/D-07(재소집) 표기. 신규 결정 없음 — 상태 동기화만 | claude
 - 2026-06-14 KST | QUEUE | 미성년 ENABLEMENT 설계 합의안건 큐(§36·§35 토론 필수): **D-18** 학습자면허 인지강제 미성년 default-on(enablement-default) · **D-19** 2nd-B=scaffolded reflection(≠companion bot, CSM 2025.11 긴장 해소) · **D-20** `recommendations` 미성년 ON+투명성(F1, 프라이버시 기본값 준가역). 설계 정본 = `Output/minor-ai-literacy-enablement-20260614.html`. 빌드 착수는 Simon 법무 게이트 | claude
+- 2026-06-14 KST | DECIDE | **D-18/19/20 §35 토론 판정 기록**(debate w1qg0xa22, 21 agents·별도심판 제안자≠심판). D-18=A-default+ephemeral fade(persistent 스코어링은 Art.5 counsel 게이트 뒤) · D-19=design-enforced A(비-companion을 CI불변식+DPIA+의존안전 감사물로 입증, anti-anthro CI게이트) · D-20=alt′ 유리상자 OFF+이해게이트 활성화. **소수의견 3건 보존**, Simon override(D-18)·UK/EU OFF 폴백(D-20). **빌드 전원 §11-5 법무·K12 DPIA 게이트**. 🔴 D-20이 실버그 발견: 2nd-B `recommendations` 런타임 ungated(전원 실행, clamp 명목적) → codex 레인 즉시수정 대상(법무 무관) | claude
