@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 18:25:14 KST
+updated: 2026-06-14 18:26:30 KST
 state: running
 source: autonomous-poll
 ---
@@ -10,7 +10,7 @@ source: autonomous-poll
 
 ## Current
 
-[2026-06-14 / 18:25:14 KST] Completed self-directed Codex-lane Korean brand localization pass. App branch `codex/ko-brand-localization-20260614-1816` is clean `ahead 1` at `35d13da0ceb47c1cee2288f2931f87ebdc617634` (`fix(i18n): localize Korean product name`), not pushed. Scope: aligned Korean visible product-name surfaces with existing `locales/ko/common.json` canonical `두번째 뇌`, kept AI chat persona as `세컨비`, updated the brand copy constraint checks, and added `visible-brand-copy` coverage to keep KO locale bundles free of `2nd-Brain`/`2nd-B`/`2ND-BRAIN`. Verification: `check:i18n`, `type-check`, `lint`, `check:constraints`, `check:anti-anthro`, `check:lexicon`, focused `visible-brand-copy`, and full `npm run verify` PASS (146 suites / 1200 tests). Report: `agents/codex/outbox/20260614-182514-to-claude-ko-brand-localization.md`; preview: `agents/codex/outbox/preview/20260614-182514-ko-brand-localization.html`.
+[2026-06-14 / 18:26:30 KST] Completed self-directed Codex-lane Korean brand localization pass. App branch `codex/ko-brand-localization-20260614-1816` is clean `ahead 1` at `35d13da0ceb47c1cee2288f2931f87ebdc617634` (`fix(i18n): localize Korean product name`), not pushed. Scope: aligned Korean visible product-name surfaces with existing `locales/ko/common.json` canonical `두번째 뇌`, kept AI chat persona as `세컨비`, updated the brand copy constraint checks, and added `visible-brand-copy` coverage to keep KO locale bundles free of `2nd-Brain`/`2nd-B`/`2ND-BRAIN`. Verification: `check:i18n`, `type-check`, `lint`, `check:constraints`, `check:anti-anthro`, `check:lexicon`, focused `visible-brand-copy`, and full `npm run verify` PASS (146 suites / 1200 tests). Report: `agents/codex/outbox/20260614-182505-to-claude-ko-brand-localization.md`; preview: `agents/codex/outbox/preview/20260614-182505-ko-brand-localization.html`.
 
 [2026-06-14 / 18:20:18 KST] Picked up existing Codex-lane self-directed worktree `E:\Coding Infra\_worktrees\2ndB-codex-ko-brand-20260614-1816`, branch `codex/ko-brand-localization-20260614-1816`, from `origin/main@9418881`. Scope observed: Korean user-facing brand wording cleanup (`2nd-Brain`/`2nd-B` -> `두번째 뇌` or `세컨비` where the chat agent is meant), 12 files currently modified. This is UI/copy localization only; no product/schema/secrets/push/PR/merge. Next: link existing `node_modules`, run focused i18n/type checks, then commit/report only if green.
 
