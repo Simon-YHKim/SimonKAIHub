@@ -24,7 +24,7 @@
 **3) 너의 구현 루프 — 5분 주기** (PROTOCOL §12, CONTROL=running 동안):
 ```
 0. CONTROL.md 확인 (paused면 현재 건 마무리 후 정지·보고)
-1. board.ps1 -Me claude → inbox + DECISIONS 투표요청 + 타 AI outbox 수거
+1. board.ps1 -Me claude → inbox + DECISIONS 투표요청 + 타 AI outbox 수거 + **`E:\2ndB\ORDERS.md`의 `## OPEN` 확인**(Simon 모바일 원격오더, §33) — 새 `O-n` 블록 있으면 안전레일(파괴·실비용·secrets·임상·법무) 외 무확인 수행 → `## DONE`에 `[KST]` 피드백 + 해당 블록 OPEN→DONE 이동. (ORDERS.md만 본다 — ORDERS_REMOTE.md는 폐지)
 2. 우선순위 최상위 1건 선정 (외부의존은 §15로 분리 후 다음 건). 할 일 비면 백로그/코드 스스로 훑어 발굴.
 3. **코드 직접 작성** — Codex 게이트 수정·기능·버그픽스를 네가 구현. AG 네이티브 전달분은 리뷰게이트로 머지.
 4. verify → 온라인 git (PR title Conventional Commits, squash merge)
