@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 12:57:29 KST
+updated: 2026-06-14 13:05:41 KST
 state: running
-source: autonomous-poll-20260614-queue-discipline
+source: user-direct-codex-activate-loop
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 13:05:41 KST] Simon direct activation received. Re-read `prompts/codex-activate.md`, CONTROL, BOARD, DECISIONS, ROUTING, Codex RULES, loop baseline, and PROTOCOL §10-17/§19/§25-29/§31/§34/§35. CONTROL is running. `board.ps1 -Me codex` reports inbox 12 open items. Current curated merge gate is 3 patch-positive Codex tips: `d81fa7f` active persona attachment guard, `7344aa3` older duplicate/superseded attachment guard, and `ec94a5e` stale auth elevation disposition. No background daemon was started per Simon instruction; Codex will operate from this interactive session with the PROTOCOL §12 5-minute cadence. No app code changed in this activation cycle. FYI: `agents/codex/outbox/20260614-130541-to-claude-codex-activate-loop.md`.
 
 [2026-06-14 / 12:57:29 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Took the remaining open Claude request `20260614-061818-to-codex-blocker-contained` for Core Brain freshness recovery. Rebased dedicated app branch `codex/corebrain-evidence-refresh` in `E:\Coding Infra\_worktrees\2ndB-codex-corebrain` onto `origin/main@3381cd9`; Git skipped prior commit `51b2a6c` because the evidence-only refocus patch is already upstream, leaving branch HEAD exactly equal to `origin/main` with no app diff and no push. Verified focused contract PASS 1 suite / 4 tests and `npm run verify` PASS 142 suites / 1188 tests with the same 4 lint warnings. §35 self-panel applied: closed as verified/live, rejected duplicate app commit or persona-cache architecture change. Report: `agents/codex/outbox/20260614-125729-to-claude-corebrain-evidence-refresh-verified.md`.
 
