@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>QA Report: §19 Graph Performance & AGTM Parsing Fix</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; padding: 20px; color: #333; }
+    h1 { color: #2c3e50; }
+    h2 { color: #34495e; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.85em; font-weight: bold; }
+    .badge.success { background: #d4edda; color: #155724; }
+    .badge.warning { background: #fff3cd; color: #856404; }
+    pre { background: #f8f9fa; padding: 10px; border-radius: 4px; overflow-x: auto; }
+    code { font-family: ui-monospace, monospace; }
+  </style>
+</head>
+<body>
+  <h1>QA Report: §19 Graph Performance & AGTM Parsing Fix</h1>
+  <p><strong>작성자:</strong> Antigravity (Device-Native QA)<br>
+  <strong>작성일시:</strong> [2026-06-13 / 20:51:00 KST]</p>
+
+  <h2>1. 현상 파악 (Issue)</h2>
+  <ul>
+    <li>Android 기기/에뮬레이터에서 <code>NavGraph</code> 화면 진입 시 심각한 프레임 드롭 및 JS 스레드 병목 발생.</li>
+    <li><code>logcat</code>에서 <code>W skia : AGTM parsing failed flags.readFromStream(s) at 159</code> 에러가 1초에 수십~수백 번 지속적으로 스팸 발생하며, 이로 인해 대량의 GC(Garbage Collection)가 트리거됨.</li>
+  </ul>
+
+  <h2>2. 원인 분석 (Root Cause)</h2>
+  <ol>
+    <li><strong>JS Bridge 트래픽 vs Native Driver:</strong> <code>NavGraph.tsx</code>의 <code>driftLoops</code>(40개 노드), <code>linkSignals</code> 등은 SVG <code>&lt;Line&gt;</code>의 <code>x1/y1</code> 및 <code>strokeDashoffset</code>을 구동해야 하므로 <code>useNativeDriver: false</code>를 사용해야 합니다 (Claude의 설계 지침 일치). 이로 인해 매 프레임(~60fps) JS 브리지를 통해 수천 건의 업데이트가 발생합니다.</li>
+    <li><strong>레이아웃 스래싱 검증:</strong> 다행히 노드의 <code>left/top</code> 속성은 정적(static)으로 설정되고, <code>swayTransform</code>을 통해 <code>transform: [{translateX}, {translateY}]</code>만 애니메이션되므로 레이아웃 스래싱(Layout Thrashing)은 발생하지 않습니다.</li>
+    <li><strong>AGTM 메타데이터 충돌 (핵심 원인):</strong> JS 드라이버에 의해 노드가 매 프레임 Redraw될 때마다 <code>expo-image</code>가 렌더링을 갱신합니다. 이때 <code>public/assets/.../core_center_premium_hq.png</code> 등 프리미엄 섬 이미지들에 포함된 <strong>손상된 UltraHDR/Gainmap 메타데이터</strong>를 Android 14+의 Skia 하드웨어 컴포저가 파싱하려다 실패하여 에러를 뿜어냅니다. 이 Skia 경고 스팸과 실패 복구 과정이 막대한 GC 오버헤드를 유발하여 프레임률을 파괴했습니다.</li>
+  </ol>
+
+  <h2>3. 해결 조치 (Resolution)</h2>
+  <ul>
+    <li><span class="badge success">FIXED</span> <code>sharp</code> 라이브러리를 사용해 <code>graph/islands/</code> 폴더 내의 모든 <code>.png</code> 에셋(총 15개)에서 EXIF 및 AGTM 컬러 프로파일 메타데이터를 완전히 스트립(Strip) 처리했습니다.</li>
+    <li>이 조치로 인해 Skia의 AGTM 에러 스팸이 완벽히 사라졌으며, Graph Village의 애니메이션 루프가 부드럽게 작동합니다. GC 스래싱이 해소되어 기존의 JS 드라이버 부하 정도는 앱이 충분히 60fps로 소화할 수 있게 되었습니다.</li>
+  </ul>
+
+  <h2>4. 향후 권고 (Recommendation)</h2>
+  <p>향후 디자이너가 추가 섬 에셋(<code>_hq.png</code>)을 넘겨줄 때, Photoshop이나 디자인 툴에서 '웹용으로 저장(Save for Web)' 시 <strong>컬러 프로파일 포함 및 HDR 게인맵(Gainmap) 저장을 해제</strong>하도록 가이드라인에 명시할 것을 제안합니다.</p>
+</body>
+</html>
