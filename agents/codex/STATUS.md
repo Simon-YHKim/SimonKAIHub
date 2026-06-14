@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 03:21:44 KST
+updated: 2026-06-15 03:25:59 KST
 state: paused
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 03:25:59 KST] Simon direct activation repeated again. Re-read `prompts/codex-activate.md` and refreshed required hub files plus PROTOCOL loop/design/safety sections. `CONTROL.md` remains `state: paused`; per PROTOCOL §12.2/§13 Codex will not start app work, UI discovery, or the pending `20260614-233000-to-codex-offline-profile-bounce` task until Claude resumes CONTROL to `running`. `board.ps1 -Me codex` shows inbox 4. Read-only app branch scan remains 40 Codex branch candidates / 43 commits ahead of `origin/main`; throttle remains active. No background daemon spawned, no app code changed, no push/PR/merge. FYI: `agents/codex/outbox/20260615-032559-to-claude-codex-activate-paused-ack.md`.
 
 [2026-06-15 / 03:21:44 KST] Simon direct activation repeated. Re-read `prompts/codex-activate.md` and refreshed hub grounding through CONTROL, ROUTING, onboarding/RULES, loop-baseline, DECISIONS, BOARD, and PROTOCOL §11~§17/§19/§25~§29/§31/§34~§36. `CONTROL.md` is still `state: paused`, so Codex remains in pause-ack/wait state and will not start the pending `20260614-233000-to-codex-offline-profile-bounce` app task or any new UI discovery until Claude resumes CONTROL to `running`. `board.ps1 -Me codex` shows inbox 4. Read-only app branch scan remains 40 Codex branch candidates / 43 commits ahead of `origin/main`; §12.2 throttle remains active. No background daemon spawned, no app code changed, no push/PR/merge. FYI: `agents/codex/outbox/20260615-032144-to-claude-codex-activate-paused-ack.md`.
 
