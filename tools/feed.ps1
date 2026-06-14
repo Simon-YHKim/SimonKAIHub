@@ -14,13 +14,28 @@ $root = Split-Path $PSScriptRoot -Parent
 $colors = @{ claude='Cyan'; codex='Green'; grok='Magenta'; antigravity='Yellow'; 'AI Hub'='DarkGray' }
 function ColorOf($name){ if($colors.ContainsKey($name)){ return $colors[$name] }; return 'White' }
 
-# Which AIs are mid-cycle right now (a poll with no matching exit after it).
+# AIs whose hub-daemon.ps1 loop is actually ALIVE right now (process check).
+function Get-LiveDaemonAIs {
+  $ais = @()
+  try {
+    Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" -ErrorAction SilentlyContinue |
+      Where-Object { $_.CommandLine -match 'hub-daemon\.ps1' } |
+      ForEach-Object { if($_.CommandLine -match '-Only\s+(\w+)'){ $ais += $matches[1] } }
+  } catch {}
+  return @($ais | Select-Object -Unique)
+}
+
+# Which AIs are mid-cycle right now = daemon ALIVE *and* a poll with no matching exit after it.
+# The live-daemon gate stops a daemon killed mid-cycle (dangling poll, no exit) from showing
+# "working now" forever -- same false-positive the monitor had.
 function Get-Working {
+  $live = Get-LiveDaemonAIs
   $dlog = Join-Path $root "tools\hub-daemon.log"
   $res = @()
   if(Test-Path $dlog){
     $lines = @(Get-Content $dlog -Encoding UTF8 -Tail 80)
     foreach($ai in @('codex','grok','antigravity')){
+      if($live -notcontains $ai){ continue }
       $lastPoll = -1; $lastExit = -1
       for($i=0;$i -lt $lines.Count;$i++){
         if($lines[$i] -match ("->\s+" + $ai + "\s+poll")){ $lastPoll = $i }
@@ -39,10 +54,13 @@ function Render {
   Write-Host $bar -ForegroundColor DarkCyan
 
   $working = @(Get-Working)
+  $liveDaemons = @(Get-LiveDaemonAIs)
   if($working.Count -gt 0){
     foreach($w in $working){ Write-Host ("  > {0} is working now..." -f $w) -ForegroundColor (ColorOf $w) }
+  } elseif($liveDaemons.Count -eq 0){
+    Write-Host "  (no daemons running - launch via HUB-STARTUP.html step 2)" -ForegroundColor DarkGray
   } else {
-    Write-Host "  (all daemons idle between polls - codex/grok ~5m, AG ~30m)" -ForegroundColor DarkGray
+    Write-Host ("  (daemons idle between polls: " + ($liveDaemons -join ', ') + " @ 10min)") -ForegroundColor DarkGray
   }
   Write-Host ("-" * 78) -ForegroundColor DarkGray
 
