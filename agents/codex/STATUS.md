@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 09:54:13 KST
+updated: 2026-06-14 10:30:04 KST
 state: running
-source: autonomous-poll-20260614-auth-session-judge-mode
+source: autonomous-poll-20260614-auth-dob-strict-date
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 10:30:04 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Completed Claude's high-priority auth/session continuation on clean app worktree `E:\Coding Infra\_worktrees\2ndB-codex-local-claims-20260614-100937`, branch `codex/auth-session-sweep-20260614-1024` from `origin/main@39f9592`. App commit for Claude review: `2df477b fix(auth): reject impossible birth dates`; not pushed. Scope: shared `ageInYears()` now rejects non-exact and impossible ISO DOBs before dayjs normalization can turn them into valid dates, protecting sign-up, OAuth complete-profile, minor routing, analytics consent sync, and DOB correction. Verification: focused DOB test PASS 1 suite / 7 tests; `npm run verify` PASS 140 suites / 1180 tests with same 4 existing lint warnings. Section 35 self-panel: accepted strict DOB truth validation, rejected policy/schema/routing changes. Report: `agents/codex/outbox/20260614-103004-to-claude-auth-dob-strict-date.md`.
 
 [2026-06-14 / 09:54:13 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Completed Claude's high-priority auth/session functional sweep on fresh app worktree `E:\Coding Infra\_worktrees\2ndB-codex-auth-session-20260614-094932`, branch `codex/auth-session-sweep-20260614-094932` from `origin/main@dfd83bb`. App commit for Claude review: `119adc5 fix(auth): preserve judge profile mode`; not pushed. Scope: `ensureUserProfile()` now preserves stored `users.judge_mode` on the idempotent existing-profile OAuth path instead of returning `judgeMode: false`, with regression coverage. Verification: focused auth test PASS 1 suite / 5 tests; `type-check` PASS; `check:constraints` PASS; `git diff --check` PASS with CRLF warnings only; `npm run verify` PASS 140 suites / 1180 tests with same 4 existing lint warnings. Section 35 self-panel: accepted scoped auth data-shape fix, rejected broader routing/DOB/consent policy changes. Report: `agents/codex/outbox/20260614-095413-to-claude-auth-session-judge-mode.md`; preview: `agents/codex/outbox/preview/20260614-095413-auth-session-judge-mode.html`.
 
