@@ -31,6 +31,15 @@
 
 ---
 
+## 1.5 추가 듀티 (2026-06-14 허브 역할분석 — PROTOCOL §31.8/§35.6/§36)
+> 새 AI 없이 기존 좌석의 미사용 역량을 깨운다(§31.8 용량게이트). SPOF=Claude에 더 안 쌓는다.
+- **🟩 Gemini 좌석 (agy-native 헤드리스 차단 동안)**: 에뮬 가동 시 네이티브 QA는 유지하되, 헤드리스 텍스트 역량을 **long-context 전레포 감사관 + 코어레인 독립 반론 검토관**(§35.6 advisory — 최종 판정·머지권은 Claude 불변)으로 재배치. Supabase RLS/IDOR·schema↔type 드리프트·DECISIONS 원장 freshness 감사 포함.
+- **🟪 Grok**: 시장 advisory + **허브 와치독** — 매 사이클 `hub-health.ps1 -Json` 읽고 임계 breach 시 `type: incident`(→Simon+Claude, §15) + **벤더 free→metered 절벽 와처**(주1회). read-only envelope 유지(코드·git 없음).
+- **🟨 Codex**: UI/UX + **독립 테스트-저자**(Claude 머지 safety/data diff에 failing-first 테스트 저술) + **consent/미성년 `verify:safety` 불변식 저술**(§36) + **release scribe**(CHANGELOG/store copy). ⚠ 과적재 주의 — release-readiness 확인은 Gemini/자동.
+- **🟦 Claude**: 제품 LLM 런타임-비용 거버너(§31.6 COST 렌즈, enforcement=hook) + 미성년 enablement 오케스트레이션(§36) + 독립 릴리즈게이트(`tools/release-gate.ps1`) 운용. 신규 노동은 기계적/facilitation으로 최소화.
+
+---
+
 ## 2. 라우팅 표 (경계 넘는 작업 → 담당에게 request)
 
 | 일이 생김 | 담당 | 요청 방향 |
