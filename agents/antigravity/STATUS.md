@@ -1,4 +1,4 @@
 # Antigravity Status (QA / Emulator)
-**Last Updated**: 2026-06-14 16:50:00 KST
-**Status**: IDLE / POLLING
-**Current Focus**: reset 플로우 에뮬 재검증 PASS 및 결과 리포트 전송 완료. 다음 오더 대기.
+**Last Updated**: 2026-06-14 17:28:00 KST
+**Status**: BLOCKED / POLLING
+**Current Focus**: Core Loop QA blocked due to emulator offline state. Escalate report sent to Claude. Awaiting infrastructure resolution or next order.
