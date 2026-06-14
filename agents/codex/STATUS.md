@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 15:45:59 KST
+updated: 2026-06-14 15:54:21 KST
 state: running
 source: autonomous-poll
 ---
@@ -10,7 +10,7 @@ source: autonomous-poll
 
 ## Current
 
-[2026-06-14 / 15:45:59 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle from Simon's direct order. `board.ps1 -Me codex` plus `agents/*/outbox` scan found only stale/already-answered Codex requests, so the single task was D-20 merge-readiness in Codex lane. Rebased the pending recommendations privacy gate onto current app `origin/main@a47a6e8` by using branch `codex/recommendations-runtime-gate-rebased-20260614-1542`; resolved the `src/app/ops.tsx` overlap by keeping both Claude's minor-lock gate and Codex's fresh `privacy_prefs.recommendations` gate before `recommendForDomain()`. New local app commit for Claude review: `e3a8a466740d3017eb0bbdd95d45750cf9e901b7`; not pushed. Verification: focused recommendations/privacy tests PASS 4 suites / 15 tests; `npm run verify` PASS 146 suites / 1200 tests with the same 4 existing lint warnings and new D-19 anti-anthro check included. §35 self-panel applied; no product policy, consent UI, schema, pricing, destructive, cost, secrets, or online git actions. Report: `agents/codex/outbox/20260614-153733-to-claude-d20-recommendations-rebased.md`; preview: `agents/codex/outbox/preview/20260614-153733-d20-recommendations-rebased.html`.
+[2026-06-14 / 15:54:21 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle from Simon's direct order. `board.ps1 -Me codex` plus `agents/*/outbox` scan found only stale/already-answered Codex requests, so the single task was D-20 merge-readiness in Codex lane. Rebased the pending recommendations privacy gate onto current app `origin/main@bd1e4d3` by using branch `codex/recommendations-runtime-gate-rebased-20260614-1542`; resolved the `src/app/ops.tsx` overlap by keeping both Claude's minor-lock gate and Codex's fresh `privacy_prefs.recommendations` gate before `recommendForDomain()`. New local app commit for Claude review: `4a504a905e365fbd69f34ae270df60c9e62cb32b`; not pushed. Verification: focused recommendations/privacy tests PASS 4 suites / 15 tests; `npm run verify` PASS 146 suites / 1201 tests with the same 4 existing lint warnings and new D-19 anti-anthro check included. §35 self-panel applied; no product policy, consent UI, schema, pricing, destructive, cost, secrets, or online git actions. Report: `agents/codex/outbox/20260614-153733-to-claude-d20-recommendations-rebased.md`; preview: `agents/codex/outbox/preview/20260614-153733-d20-recommendations-rebased.html`.
 
 [2026-06-14 / 15:32:58 KST] Foreground 5-minute cadence wake. CONTROL remains running. `board.ps1 -Me codex` still shows only the same three stale Codex inbox rows from 2026-06-06/07 after closure-shim commit `d0b7e94`; no new `to: codex` or `to: all` request appeared. Latest Codex hub commit before this note is `9e49138`; D-20 app branch remains ready for Claude at `79a5374` with no new app changes this cycle.
 
