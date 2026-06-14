@@ -239,6 +239,7 @@ created: 2026-06-05 15:22:34 KST
 - **흐름**: AI가 자기 worktree에서 코딩·typecheck → 자기 브랜치 **로컬 커밋** → Claude에 제출(outbox, 브랜치·변경 요약) → Claude가 자기 공간으로 가져와 **최종 보완 후 main 머지 + 온라인 push**.
 - **온라인 git = Claude 단독**(AI는 push 안 함, 로컬 커밋까지만). 레거시 `codex/*` origin 브랜치는 Claude가 가치 선별 후 정리.
 - **머지 메커니즘 = cherry-pick (staleness-immune, 2026-06-06)**: Claude는 AI 브랜치를 통째로 머지하지 않고 **AI가 제출한 개별 커밋만 cherry-pick**한다. 브랜치가 옛 main 기반(stale)이어도 커밋 자체의 diff만 적용되므로 **타 AI의 머지를 되돌리지 않는다**(반복된 stale-branch 회귀 사고 방지). 따라서 **코딩 AI 규율**: ① 변경을 작은 단위 격리 커밋으로 ② **제출 메시지에 그 커밋 SHA + 파일 목록 명시**(Claude가 SHA로 cherry-pick) ③ **`reset --hard origin/main` 금지 — 미머지 제출 커밋이 있는 동안엔 절대.** codex/work에 커밋을 **누적**하고, Claude가 "머지됨" 확인을 준 뒤에만 정리. (⚠️ 2026-06-06 사고: AI가 커밋→제출 후 다음 사이클에 reset --hard로 자기 미머지 커밋을 버려 유실. Claude가 worktree reflog로 5건 복구. reset은 유실의 원인이니 미머지 중 금지.) Claude는 SHA를 cherry-pick → verify → push, 유실 시 `git -C <worktree> reflog`로 복구.
+  - **머지 적격성 강제 (2026-06-14, "SHA after commit" 사고 방지)**: 코딩 AI는 **리포트 전에 반드시 실제 commit + 브랜치 네이밍을 끝내고**, 제출 메시지에 **검증가능한 실 SHA**(플레이스홀더 `(local only, SHA after commit)`·`(SHA after commit)` 금지)를 박는다. Claude는 `git log origin/main..<branch>`로 그 SHA가 보여야 머지 적격으로 본다. **실 SHA 없는 리포트 = DRAFT 취급**(Claude는 머지 시도/HOLD 하지 않고 "commit+네이밍 후 재제출" 1줄 회신만; 안전 P0/P1이라도 접근 불가하면 막힘). ⚠️ 2026-06-14 사고: Codex boot-profile isMinor-preserve P2(미성년 consent)가 `(local only, SHA after commit)`로 와서 안전 픽스가 머지 못 됨. 브랜치 `auth-session-sweep-1124`가 ref로 존재하지 않았음.
 
 ---
 

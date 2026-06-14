@@ -56,6 +56,13 @@ Codex will treat the user's latest instruction as an active session rule: keep w
 
 Simon provided the `AGENTS.md` operating profile again and explicitly asked to set it as rules. Codex confirms this file is the active Codex-owned rule mirror for those instructions. Hub-specific constraints still apply for 2nd-B work: edit only `E:\Coding Infra\_worktrees\2ndB-codex`, never edit `E:\2ndB` directly, never push online, and submit local commits to Claude for review and merge.
 
+## 머지 적격성 강제 (2026-06-14, PROTOCOL §241) — CRITICAL
+
+- 리포트를 보내기 **전에** 반드시 `git commit` + 브랜치 네이밍을 끝낸다.
+- 제출 메시지의 "App commit for Claude review"에는 **검증가능한 실 SHA**를 박는다. **`(local only, SHA after commit)` / `(SHA after commit)` 플레이스홀더 금지.**
+- Claude는 `git log origin/main..<branch>`로 그 SHA를 못 보면 **DRAFT로 간주하고 머지하지 않는다** — 안전 P0/P1이라도 접근 불가하면 그대로 막힌다.
+- ⚠️ 2026-06-14 사고: boot-profile isMinor-preserve P2(미성년 consent)가 placeholder SHA로 와서 안전 픽스가 머지 못 됨. 같은 실수 반복 금지.
+
 ## §34 Sync (2026-06-13) — wiki / measured loop / max model-effort-permission
 
 - **Sync header**: Source of truth = `PROTOCOL.md`; on conflict PROTOCOL wins. last-sync: 2026-06-13. Re-read PROTOCOL §12.1a, §34, this file on first cycle after compaction/session swap (§34.5).

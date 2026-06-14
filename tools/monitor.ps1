@@ -88,6 +88,23 @@ function Render {
   $dlog = Join-Path $root "tools\hub-daemon.log"
   $dlogLines = @()
   if(Test-Path $dlog){ $dlogLines = @(Get-Content $dlog -Encoding UTF8 -Tail 120) }
+  # ---- Per-AI cycle counts (how many loops each AI has run) ----
+  # Daemon AIs (codex/antigravity/grok): count completed cycles = "exit(<ai>)=" in the FULL
+  # shared daemon log (lifetime, survives restarts). Claude has no daemon, so a Claude
+  # orchestration cycle = a BOARD r-round (unique r<N> tokens across Claude hub commit subjects).
+  $dlogFull = @()
+  if(Test-Path $dlog){ $dlogFull = @(Get-Content $dlog -Encoding UTF8) }
+  $cycles = @{}
+  foreach($a in $agents){
+    if($a -eq 'claude'){
+      $rs = @(git -C $root log --author="$($agentEmail['claude'])" --format='%s' 2>$null |
+              Select-String -Pattern '\br\d+\b' -AllMatches |
+              ForEach-Object { $_.Matches } | ForEach-Object { $_.Value } | Select-Object -Unique)
+      $cycles['claude'] = $rs.Count
+    } else {
+      $cycles[$a] = @($dlogFull | Select-String -Pattern ("exit\(" + $a + "\)")).Count
+    }
+  }
   if($dlogLines.Count -gt 0){
     $dlast = $dlogLines[-1]
     $dts = ""; if($dlast -match '^\[([^\]]+) KST\]'){ $dts = $matches[1] }
@@ -152,7 +169,7 @@ function Render {
   }
 
   # ---- Per-AI rows: state | fresh | WORKING-now | procs | pend>CL | activity ----
-  Write-Host ("{0,-11}{1,-9}{2,-9}{3,-9}{4,-6}{5,-8}{6}" -f "AI","state","fresh","now","procs","pend>CL","last activity") -ForegroundColor White
+  Write-Host ("{0,-11}{1,-9}{2,-9}{3,-9}{4,-6}{5,-6}{6,-8}{7}" -f "AI","state","fresh","now","procs","cyc","pend>CL","last activity") -ForegroundColor White
   $alarms = @()
   foreach($a in $agents){
     $sf = Join-Path $root ("agents\" + $a + "\STATUS.md")
@@ -203,6 +220,7 @@ function Render {
       $nowState = "loop"
     }
     $procN = Get-ProcCount $agentProc[$a]
+    $cycN = [int]$cycles[$a]
     $pendN = $pending[$a]
     $pendStr = "$pendN"
     if($pendN -ge $PENDING_ALARM){ $pendStr = "$pendN!!"; $alarms += "$a $pendN" }
@@ -219,7 +237,7 @@ function Render {
       elseif($state -eq 'paused' -or $rawState -match '^\s*paused'){'DarkGray'}
       elseif($live){'Gray'}
       else{'Gray'}
-    Write-Host ("{0,-11}{1,-9}{2,-9}{3,-9}{4,-6}{5,-8}{6}" -f $a,$state,$age,$nowState,$procN,$pendStr,$act) -ForegroundColor $rowcol
+    Write-Host ("{0,-11}{1,-9}{2,-9}{3,-9}{4,-6}{5,-6}{6,-8}{7}" -f $a,$state,$age,$nowState,$procN,$cycN,$pendStr,$act) -ForegroundColor $rowcol
   }
   Write-Host ("-" * 78) -ForegroundColor DarkGray
 
