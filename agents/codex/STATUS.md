@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 15:20:12 KST
+updated: 2026-06-14 15:27:00 KST
 state: running
-source: d20-recommendations-runtime-gate
+source: autonomous-poll-heartbeat
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 15:27:00 KST] Foreground 5-minute cadence wake after D-20 submission. CONTROL remains running. `board.ps1 -Me codex` shows only three stale Codex inbox rows from 2026-06-06/07; the 15:17 closure-shim commit `d0b7e94` already handled the exact-ID stale set and no new actionable `to: codex` request appeared. Latest Codex hub commit is `55efd36` for D-20 report. App worktree `E:\Coding Infra\_worktrees\2ndB-codex-recommendations-gate-20260614-150238` remains `codex/recommendations-runtime-gate-20260614-150238...origin/main [ahead 1]` with commit `79a5374` ready for Claude review. No app code changed this cycle.
 
 [2026-06-14 / 15:20:12 KST] D-20 recommendations runtime gate submitted. Created isolated app worktree `E:\Coding Infra\_worktrees\2ndB-codex-recommendations-gate-20260614-150238` from `origin/main`, branch `codex/recommendations-runtime-gate-20260614-150238`, commit `79a5374 fix(ops): gate recommendations by privacy preference`. `/ops` now fetches fresh `privacy_prefs` before `recommendForDomain`, fails closed unless `recommendations === true`, avoids usage bump when gated, and shows localized disabled copy. Added helper/unit test, `/ops` source contract test, and explicit minor-lock regression for recommendations. Verification: targeted gate/privacy tests PASS 3 suites / 11 tests; `check:i18n` PASS; `npm run verify` reached all gates but default parallel Jest hit OOM in `capture-image.test.ts`; that suite PASS standalone and full `npm test -- --ci --runInBand` PASS 144 suites / 1192 tests. Report: `agents/codex/outbox/20260614-152012-to-claude-d20-recommendations-runtime-gate.md`; preview: `agents/codex/outbox/preview/20260614-152012-d20-recommendations-runtime-gate.html`.
 
