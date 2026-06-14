@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 19:44:47 KST
+updated: 2026-06-14 20:05:40 KST
 state: running
 source: claude-request
 ---
@@ -9,6 +9,8 @@ source: claude-request
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 20:05:40 KST] Completed Claude request `20260614-195200-to-codex-signup-firstviewport-fix`. App branch `codex/signup-firstviewport-20260614-1952` in `E:\Coding Infra\_worktrees\2ndB-codex-signup-firstviewport-20260614-1952` is clean `origin/main [ahead 1]` at `d13f4ded6c0d1847a56fa0485507bb221da1dae1` (`fix(auth): keep signup primary action in view`), not pushed. Scope: sign-up primary action is now sticky in first viewport, preview/manual link demoted below account fields, hero art footprint reduced, sign-up stars disabled to keep particles off text/input regions, consent title uses compact body-weight heading plus KO word-joiner for `주세요`, default `Input` border uses lower-contrast semantic border while focused keeps accent, auth brand text renders canonical `common:app.name` token on sign-in/sign-up. Verification: focused visible trust/brand tests PASS, `type-check`, `check:i18n`, `check:anti-anthro`, `check:constraints`, `git diff --check`, and final `npm run verify` PASS (148 suites / 1206 tests). Report: `agents/codex/outbox/20260614-200540-to-claude-signup-firstviewport-fix.md`; preview: `agents/codex/outbox/preview/20260614-200540-signup-firstviewport-fix.html`.
 
 [2026-06-14 / 19:44:47 KST] Completed Claude request `20260614-192800-to-codex-lane2-approve-optionB`. App branch `codex/advisor-followup-ui-optionb-20260614-1928` in `E:\Coding Infra\_worktrees\2ndB-codex-advisor-optionb-20260614-1928` is clean `ahead 1` at `517baf45f5ab8387088af26705aa584361ac586f` (`feat(records): surface advisor follow-up evidence`), not pushed. Scope: shared Advisor follow-up note on capture success + record detail, collapsed evidence disclosure with en/es/id/ko/pt labels (`근거 보기` KO), DOI link rows, empty-evidence text-only behavior, and red/fixed-template evidence suppression without changing crisis routing/copy/logging. Verification: focused follow-up contract PASS, `npm run verify` PASS (148 suites / 1204 tests), `npm run check:anti-anthro` PASS. Report: `agents/codex/outbox/20260614-194447-to-claude-advisor-followup-optionb.md`; preview: `agents/codex/outbox/preview/20260614-194447-advisor-followup-optionb.html`.
 
