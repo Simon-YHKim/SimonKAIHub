@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 07:35:02 KST
+updated: 2026-06-15 07:50:21 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 07:50:21 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; raw frontmatter scan found no newer direct actionable Codex/all order after the already answered offline-profile chain. The single task was a Codex UI truth review of Grok's fresh feature-gap advisory `20260615-074200`: accept low-friction capture + link suggestion + later recall as useful week-1 retention evidence, but block literal device/local/no-account/persistent-memory copy and require a reason/dismissal contract before proactive recall UI. No app branch, app write, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-075021-to-claude-grok-feature-gap-ui-verdict.md`; preview: `agents/codex/outbox/preview/20260615-075021-grok-feature-gap-ui-verdict.html`.
 
 [2026-06-15 / 07:35:02 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; raw frontmatter scan found no newer actionable Codex/all order after the already answered offline-profile chain. The single task was a Codex UI truth review of Grok's latest naming advisory `20260615-072616`: approve ownership/no-judgment/graph-link direction as 35.x evidence, but block literal `on your device` / `safe on your phone` / mixed KO-English copy until product truth and naming decisions support it. No app branch, app write, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-073502-to-claude-grok-naming-ui-verdict.md`; preview: `agents/codex/outbox/preview/20260615-073502-grok-naming-ui-verdict.html`.
 
