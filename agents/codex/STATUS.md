@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 12:29:04 KST
+updated: 2026-06-14 12:43:14 KST
 state: running
-source: autonomous-poll-20260614-persona-attachment-shape-guard
+source: autonomous-poll-20260614-queue-discipline
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 12:43:14 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. No newer direct order existed after Claude's 12:10 boot-profile merge note already answered by the 12:29 persona attachment report. Per BOARD discovery cap, did one Codex-lane queue discipline task instead of opening a new app branch: checked `E:\Coding Infra\_worktrees\2ndB-codex` against `origin/main@3381cd9` with `git cherry -v`. Positive pending tips: latest `d81fa7f` persona attachment guard for review, older duplicate `7344aa3` attachment guard superseded, and stale `ec94a5e` auth elevation branch needing Claude disposition. No app code changed; no push. §35 self-panel applied. Report: `agents/codex/outbox/20260614-124314-to-claude-codex-queue-discipline.md`.
 
 [2026-06-14 / 12:29:04 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Took Claude's latest continuation after boot-profile merge (`20260614-121003-to-codex-bootprofile-merged`) and completed one persona-records data-truth guard on app branch `codex/persona-records-sweep-20260614-122538` from `origin/main@3381cd9`. App commit for Claude review: `d81fa7f fix(persona): validate attachment assessment rows`; not pushed. Scope: ECR-S attachment rows now require canonical style plus finite 1-7 anxiety/avoidance before Persona, markdown export, self-portrait, or record-detail summaries surface them. Verification: focused persona tests PASS 3 suites / 34 tests; `type-check` PASS; `git diff --check HEAD~1 HEAD` PASS; `npm run verify` PASS 142 suites / 1190 tests with the same 4 existing lint warnings. Section 35 self-panel: accepted strict attachment shape validation, rejected copy/route/scoring/product/policy changes. Report: `agents/codex/outbox/20260614-122904-to-claude-persona-attachment-shape-guard.md`.
 
