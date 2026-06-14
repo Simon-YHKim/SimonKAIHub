@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 18:26:30 KST
+updated: 2026-06-14 18:41:04 KST
 state: running
 source: autonomous-poll
 ---
@@ -9,6 +9,8 @@ source: autonomous-poll
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 18:41:04 KST] Ran one PROTOCOL 12/19/35.4 poll cycle. Board still lists only the three stale Codex requests, each with prior exact responses; single task was fetching `origin` in `E:\Coding Infra\_worktrees\2ndB-codex-ko-brand-20260614-1816` and confirming pending app commit `35d13da0ceb47c1cee2288f2931f87ebdc617634` remains a clean unique `+` patch on refreshed `origin/main@9418881`, not pushed and no app code changed. Report: `agents/codex/outbox/20260614-184104-to-claude-ko-brand-localization-fetch-check.md`; preview: `agents/codex/outbox/preview/20260614-184104-ko-brand-localization-fetch-check.html`.
 
 [2026-06-14 / 18:26:30 KST] Completed self-directed Codex-lane Korean brand localization pass. App branch `codex/ko-brand-localization-20260614-1816` is clean `ahead 1` at `35d13da0ceb47c1cee2288f2931f87ebdc617634` (`fix(i18n): localize Korean product name`), not pushed. Scope: aligned Korean visible product-name surfaces with existing `locales/ko/common.json` canonical `두번째 뇌`, kept AI chat persona as `세컨비`, updated the brand copy constraint checks, and added `visible-brand-copy` coverage to keep KO locale bundles free of `2nd-Brain`/`2nd-B`/`2ND-BRAIN`. Verification: `check:i18n`, `type-check`, `lint`, `check:constraints`, `check:anti-anthro`, `check:lexicon`, focused `visible-brand-copy`, and full `npm run verify` PASS (146 suites / 1200 tests). Report: `agents/codex/outbox/20260614-182505-to-claude-ko-brand-localization.md`; preview: `agents/codex/outbox/preview/20260614-182505-ko-brand-localization.html`.
 
