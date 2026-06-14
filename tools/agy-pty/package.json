@@ -1,0 +1,12 @@
+{
+  "name": "agy-pty",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ConPTY wrapper: run Antigravity (agy) headless by giving it a pseudo-terminal, capture and extract the answer so the hub daemon can use it (agy -p has no clean stdout/log/json output contract).",
+  "bin": {
+    "agy-headless": "agy-headless.js"
+  },
+  "dependencies": {
+    "node-pty": "^1.0.0"
+  }
+}
