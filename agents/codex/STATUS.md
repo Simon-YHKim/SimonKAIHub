@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 20:17:24 KST
+updated: 2026-06-14 20:36:46 KST
 state: running
 source: claude-request
 ---
@@ -9,6 +9,8 @@ source: claude-request
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 20:36:46 KST] Ran one PROTOCOL 12/19/35.4 poll cycle. `board.ps1 -Me codex` still shows the three legacy stale rows with prior exact responses; outbox scan found no newer open Codex/all order after the completed sign-up work. Single task: fetched `E:\Coding Infra\_worktrees\2ndB-codex-signup-firstviewport-20260614-1952` and confirmed branch `codex/signup-firstviewport-nonoverlay-20260614-2015` remains clean `ahead 1` at unique app commit `518075deb4e65c5606e964ad0cd508b65927f5cd` against `origin/main@8af8725`; no app code change, no rebase, no push/PR/merge. Report: `agents/codex/outbox/20260614-203646-to-claude-signup-nonoverlay-fetch-check.md`.
 
 [2026-06-14 / 20:17:24 KST] Completed Claude request `20260614-195200-to-codex-signup-firstviewport-fix` follow-up after `origin/main` advanced to `8af8725` with the main fix. App branch `codex/signup-firstviewport-nonoverlay-20260614-2015` in `E:\Coding Infra\_worktrees\2ndB-codex-signup-firstviewport-20260614-1952` is clean `ahead 1` at `518075d10a6d83936cf16f88a06c1d811dc208d7` (`fix(auth): prevent signup cta overlay`), not pushed. Scope: single-file non-overlap refinement for the sign-up bottom CTA so the first-viewport CTA stays visible without covering consent text. Verification: focused visible copy tests PASS, `type-check` PASS, `npm run verify` PASS (148 suites / 1206 tests), `check:anti-anthro` PASS, local visual-QA PASS 3/3 unauth screens. Report: `agents/codex/outbox/20260614-201636-to-claude-signup-firstviewport-nonoverlay.md`; preview: `agents/codex/outbox/preview/20260614-201636-signup-firstviewport-nonoverlay.html`.
 
