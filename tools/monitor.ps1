@@ -186,14 +186,19 @@ function Render {
     # last "exit($a)="? If so a CLI run is in flight right now; else it's idle between cycles.
     $nowState = "-"
     if($a -ne 'claude'){
-      $lastPoll = -1; $lastExit = -1
-      for($i=0;$i -lt $dlogLines.Count;$i++){
-        if($dlogLines[$i] -match ("->\s+" + $a + "\s+poll")){ $lastPoll = $i }
-        if($dlogLines[$i] -match ("exit\(" + $a + "\)")){ $lastExit = $i }
+      # WORKING/idle only mean something if this AI's daemon is actually ALIVE. Otherwise a
+      # daemon killed mid-cycle leaves a dangling "-> poll" with no "exit(" and would falsely
+      # read WORKING forever -- so a dead daemon is always no-daemon regardless of the log tail.
+      if($dAIs -contains $a){
+        $lastPoll = -1; $lastExit = -1
+        for($i=0;$i -lt $dlogLines.Count;$i++){
+          if($dlogLines[$i] -match ("->\s+" + $a + "\s+poll")){ $lastPoll = $i }
+          if($dlogLines[$i] -match ("exit\(" + $a + "\)")){ $lastExit = $i }
+        }
+        if($lastPoll -ge 0 -and $lastPoll -gt $lastExit){ $nowState = "WORKING" } else { $nowState = "idle" }
+      } else {
+        $nowState = "no-daemon"
       }
-      if($lastPoll -ge 0 -and $lastPoll -gt $lastExit){ $nowState = "WORKING" }
-      elseif($dAIs -contains $a){ $nowState = "idle" }
-      else { $nowState = "no-daemon" }
     } else {
       $nowState = "loop"
     }
