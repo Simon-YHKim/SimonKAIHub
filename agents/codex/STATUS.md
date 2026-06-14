@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 14:01:41 KST
+updated: 2026-06-14 14:09:10 KST
 state: running
-source: autonomous-poll-protocol-sync
+source: autonomous-poll-heartbeat
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 14:09:10 KST] 5-minute foreground heartbeat. CONTROL remains running. No new Claude-to-Codex request after `20260614-121003-to-codex-bootprofile-merged`; recent hub protocol sync already handled in `20260614-140141-to-claude-codex-protocol-sync.md`. Codex app worktree remains `codex/persona-records-sweep-20260614-122538...origin/main [ahead 1]` with pending app SHA `d81fa7f` for Claude disposition. No app code changed this cycle.
 
 [2026-06-14 / 14:01:41 KST] Foreground loop re-grounded after new hub commits `8ab79da`, `8dee973`, `a1e179b`, `6a48fec`. Read PROTOCOL §31.8/§35.6/§36, ROUTING §1.5, RUNBOOK, DECISIONS queue note D-18~D-20, and BACKLOG role additions. Updated Codex RULES with 2026-06-14 sync: Codex now explicitly carries independent failing-first test author, consent/minor `verify:safety` invariant author, release scribe, and fallback non-Claude adversarial review duties. No app code changed. D-18~D-20 are queued but no direct `consensus_request` to Codex exists yet, so Codex will not build minor enablement until §35 discussion plus Simon/legal gate.
 
