@@ -1,0 +1,11 @@
+{
+  "_comment": "Canonical key-screen list for 2nd-B visual QA. path = expo-router route under the base URL. waitText = a literal that MUST appear in the rendered DOM text (proves content, not just a non-black frame). auth=true screens need a seeded/logged-in session (web capture reaches only auth=false today; native/AG covers authed). Keep this in sync with the real route table.",
+  "screens": [
+    { "name": "sign-in",  "path": "/sign-in",  "auth": false, "waitText": "" },
+    { "name": "sign-up",  "path": "/sign-up",  "auth": false, "waitText": "" },
+    { "name": "landing",  "path": "/",         "auth": false, "waitText": "" },
+    { "name": "home",     "path": "/(tabs)",   "auth": true,  "waitText": "" },
+    { "name": "capture",  "path": "/capture",  "auth": true,  "waitText": "" },
+    { "name": "persona",  "path": "/persona",  "auth": true,  "waitText": "" }
+  ]
+}

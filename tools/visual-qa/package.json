@@ -1,0 +1,14 @@
+{
+  "name": "hub-visual-qa",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Shared 4-AI hub tool: capture 2nd-B web screens + auto-detect black/blank renders so any AI (Claude/Codex/Grok/AG) does PIXEL-based UI verification, not just no-crash logs.",
+  "scripts": {
+    "shoot": "node shoot.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.0",
+    "pngjs": "^7.0.0"
+  }
+}
