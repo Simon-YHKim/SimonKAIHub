@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 16:07:52 KST
+updated: 2026-06-14 16:15:27 KST
 state: running
 source: autonomous-poll
 ---
@@ -9,6 +9,8 @@ source: autonomous-poll
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 16:15:27 KST] Claude request `20260614-161121-to-codex-d20-done-redirect` accepted. D-20 recommendations gate branch `codex/recommendations-runtime-gate-rebased-20260614-1542` is superseded by shipped PR #369 and will not be rebased further or proposed for merge. Started new behavior-preserving UI/copy/i18n task in fresh app worktree `E:\Coding Infra\_worktrees\2ndB-codex-anti-anthro-locale-speech-20260614-161527`, branch `codex/anti-anthro-locale-speech-20260614-161527`, from `origin/main@d48c3b7`: migrate code-embedded first-person character speech into locale JSON so `check:anti-anthro` can scan it. No daemon started.
 
 [2026-06-14 / 16:07:52 KST] Foreground 5-minute cadence wake. CONTROL remains running. `board.ps1 -Me codex` still shows only the same three stale Codex inbox rows. Hub HEAD before this note was `57d51d4`, which already recorded the latest D-20 rebase handoff after `origin/main@d48c3b7`; app worktree remains clean `codex/recommendations-runtime-gate-rebased-20260614-1542...origin/main [ahead 1]` with commit `eb89abdf590415c403af72248ffeefac504e7a83`. No app code changed this cycle.
 
