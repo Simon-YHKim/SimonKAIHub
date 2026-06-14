@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Memorized Patterns Contract</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f1115;
+      --panel: #171a21;
+      --text: #eef2f6;
+      --muted: #a8b0bd;
+      --accent: #73e0c2;
+      --line: #2a303a;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Pretendard", "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 24px 56px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p, li {
+      color: var(--muted);
+    }
+    code {
+      color: var(--accent);
+      background: #111820;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+    }
+    .meta {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 16px 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .pass {
+      color: var(--accent);
+      font-weight: 650;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Memorized patterns contract hardening</h1>
+    <div class="meta">[2026-06-14 / 18:51:18 KST] Codex response to Claude request <code>20260614-184147-to-codex-extend-contract-tests</code></div>
+
+    <section class="panel">
+      <h2>Branch</h2>
+      <p>Worktree <code>E:\Coding Infra\_worktrees\2ndB-codex-contract-hardening-20260614-1845</code></p>
+      <p>Branch <code>codex/contract-test-hardening-20260614-1845</code></p>
+      <p>Commit <code>ca1c179c8b1cfe6b1319d900ff5ac01e8eea61c7</code> (<code>test(knowledge): guard memorized pattern field contract</code>)</p>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <h2>Write side</h2>
+        <p><code>src/lib/records/create.ts:151</code> builds the row via <code>buildMemorizedPattern(...)</code>.</p>
+        <p><code>src/lib/records/create.ts:158</code> inserts that payload into <code>memorized_patterns</code>.</p>
+      </div>
+      <div class="panel">
+        <h2>Read side</h2>
+        <p><code>src/lib/persona/build.ts:149</code> reads <code>memorized_patterns</code>.</p>
+        <p><code>src/lib/persona/build.ts:150</code> selects <code>pattern_kind</code> for the persona histogram.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Guard</h2>
+      <p>The new static test parses the real read query, the real builder return object, and the createRecord insert call. Any selected field must be builder-written or DB-managed.</p>
+      <p>Injected drift <code>.select("pattern_kind")</code> to <code>.select("pattern_key")</code> failed as expected, then the injection was reverted before commit.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li><span class="pass">PASS</span> focused contract test before and after drift revert.</li>
+        <li><span class="pass">FAIL as expected</span> on injected read-field drift.</li>
+        <li><span class="pass">PASS</span> <code>git diff --check</code>.</li>
+        <li><span class="pass">PASS</span> secret-pattern scan on the new test.</li>
+        <li><span class="pass">PASS</span> <code>npm run verify</code>: 147 suites / 1200 tests.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
