@@ -1,16 +1,16 @@
 ---
 agent: claude
 role: orchestrator + coding + online-git + merge-gate
-updated: 2026-06-14 10:33:42 KST
+updated: 2026-06-15 08:27:00 KST
 state: running
 ---
 
 # Claude — STATUS
 
-[2026-06-14 / 10:33:42 KST] [Claude] 허브 시스템 전수 감사 + 개선. 모니터/데몬 업그레이드, expo-smoke·wiki-ingest 신규, AG 죽은 gemini 데몬 정지. 2nd-B 25건 라이브(main 39f9592).
+[2026-06-15 / 08:27:00 KST] [Claude] 실행자 /loop 가동 — 원격 오더 파이프라인(ORDERS.md §33) 폴러+분배자. CONTROL=running.
 
-- **허브 진단(Simon 4문)**: ① 모니터 가시성 부족 ② 구조적 idle ③ 에뮬/expo 디버깅 실태 ④ context-reset/wiki/loop-learning 자동화 부재.
-- **발견된 문제**: AG(gemini)=429 QUOTA 8h 死인데 10분마다 헛spawn / 데몬 사이클당 1태스크+백오프無 / Codex 프로세스 누수(~10~22) / 모니터에 활성수·작업중·≥3적체 미표시 / wiki 교훈 12건 미ingest.
-- **개선(라이브)**: ① monitor.ps1 = procs·WORKING/idle·**pend>CL(Claude 마지막커밋 이후 AI커밋수)·≥3 RED 알람**·에뮬상태·데몬수 ② hub-daemon.ps1 = 429 백오프(지수, ~8h 캡)+기본10분+옵션 드레인 ③ **expo-smoke.ps1**(LLM無 adb logcat 크래시 스캔, 에뮬 PASS 확인) ④ **wiki-ingest.ps1**(교훈 수집→Claude ingest 다이제스트) ⑤ AG 죽은 데몬 정지.
-- **2nd-B 25건**: r29 auth judge-mode(39f9592) 등. 정책/i18n 3/3 PASS, `.order()` 데이터셰이프 전수 클린.
-- **게이트(Simon)**: 수익화/법무/secrets/임상. D-17 Lever B 빌드 GO 대기.
+- **원격 오더**: O-13 ✅(landing hero→nav 상태전환) · O-14 ✅(반응형 fitScale + 메뉴 2ndb IA + SPA 화면작동 3-state) · O-15 진행(허브 자가점검).
+- **O-15 자가점검(이번)**: #3 `.watchdog-state.json` BOM 제거 + hub-watchdog no-BOM 쓰기 → **hub-health FAIL=0** / #1 hub-daemon.ps1 lane(-Only) mutex dup-guard / #2 commit.ps1 STATUS 64KB 캡(codex 118KB→절단 directed) / #5 이 STATUS 현행화. INCIDENTS 5건 + RUNBOOK §6 룩업.
+- **2nd-B main**: 4749c96 (O-13/14 done 회신). 기능/UX/a11y QA 클린, #386·#387 머지.
+- **AI 좌석**: codex·grok active · AG=agy-pty 헤드리스 부활(인증 화면 QA는 테스트계정 게이트 대기).
+- **게이트(Simon)**: 파괴 · 비용 · secrets · 임상 · 법무.

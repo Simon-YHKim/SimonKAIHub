@@ -129,7 +129,7 @@ created: $(Now) KST
 
 (Auto-filed by tools/hub-watchdog.ps1. Re-files only after a ${CooldownMin}m cooldown if unresolved. Delete this note once handled.)
 "@
-    Set-Content -LiteralPath $file -Value $body -Encoding utf8
+    [System.IO.File]::WriteAllText($file, $body, (New-Object System.Text.UTF8Encoding $false))  # UTF-8 no-BOM (PS5.1 -Encoding utf8 adds BOM -> hub-health FAIL)
     $state[$iss.key] = $nowEpoch
     $filed += $iss.key
   }
@@ -137,7 +137,7 @@ created: $(Now) KST
 # clear resolved keys from state so they can re-fire fresh next time
 $resolved = @($state.Keys | Where-Object { $activeKeys -notcontains $_ })
 foreach ($k in $resolved) { $state.Remove($k) }
-($state | ConvertTo-Json) | Set-Content -LiteralPath $stateFile -Encoding utf8
+[System.IO.File]::WriteAllText($stateFile, ($state | ConvertTo-Json), (New-Object System.Text.UTF8Encoding $false))  # UTF-8 no-BOM (#3 fix)
 
 if (-not $Quiet) {
   Write-Host "[hub-watchdog $(Now) KST] issues=$($issues.Count)  filed=$($filed.Count)  resolved-cleared=$($resolved.Count)" -ForegroundColor $(if ($issues.Count) { 'Yellow' } else { 'Green' })

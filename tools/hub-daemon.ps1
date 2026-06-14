@@ -47,6 +47,21 @@ function Log([string]$m){
   }
 }
 
+# ---- O-15 #1: single-instance guard per lane (-Only) -- prevents duplicate daemons.
+# The 03:22+03:23 double-launch ran 2 daemons per AI -> cycle dup + git race. A named
+# mutex per lane: if another daemon for this lane already holds it, this one exits.
+$laneKey = if ($Only.Count) { ($Only | Sort-Object) -join '+' } else { 'default' }
+try {
+  $script:daemonMutex = New-Object System.Threading.Mutex($false, "Global\hubdaemon_$laneKey")
+  $owns = $false
+  try { $owns = $script:daemonMutex.WaitOne(0) }
+  catch [System.Threading.AbandonedMutexException] { $owns = $true }  # prior daemon died -> we own it now
+  if (-not $owns) {
+    Log "DUP-GUARD: a hub-daemon for lane '$laneKey' is already running. Exiting duplicate (PID $PID)."
+    exit 0
+  }
+} catch { Log "DUP-GUARD: mutex check failed ($($_.Exception.Message)); continuing." }
+
 # ---- Best-model config (source of truth = tools/models.json, refreshed daily). ----
 # Each AI must always run the highest-benchmark model + max reasoning effort.
 # Falls back to safe inline defaults if the file is missing/unparseable, so the

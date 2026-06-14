@@ -88,6 +88,7 @@ if ($As -ne "claude") {
 # Default ON. Bypass for legitimately large/binary-ish files with -Force.
 # ----------------------------------------------------------------------------
 $SizeLimitBytes = 256 * 1024   # 256 KB threshold for committed .md files
+$StatusLimitBytes = 64 * 1024  # O-15 #2: tighter cap for STATUS.md (rotate old detail to a gitignored *.log)
 $TextExtForEnc  = @(".md", ".json", ".ps1", ".sh")
 
 function Get-StagedFiles {
@@ -133,12 +134,15 @@ if (-not $Force) {
         }
       }
 
-      # (b) SIZE guard for committed .md files (STATUS.md and any markdown)
+      # (b) SIZE guard for committed .md files -- STATUS.md capped tighter (O-15 #2)
       if ($ext -eq ".md") {
         $len = (Get-Item -LiteralPath $abs).Length
-        if ($len -gt $SizeLimitBytes) {
+        $isStatus = [System.IO.Path]::GetFileName($rel) -ieq "STATUS.md"
+        $cap = if ($isStatus) { $StatusLimitBytes } else { $SizeLimitBytes }
+        if ($len -gt $cap) {
           $kb = [math]::Round($len / 1KB, 1)
-          $problems += "  [SIZE] ${rel}: ${kb} KB exceeds $([int]($SizeLimitBytes/1KB)) KB"
+          $extra = if ($isStatus) { " (STATUS cap -- rotate old detail to a gitignored *.log)" } else { "" }
+          $problems += "  [SIZE] ${rel}: ${kb} KB exceeds $([int]($cap/1KB)) KB$extra"
         }
       }
     }

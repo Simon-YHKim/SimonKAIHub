@@ -57,3 +57,9 @@ Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" |
 
 ## 5. 인시던트 기록
 복구 후 한 줄을 `INCIDENTS.md`(append-only)에 남긴다: `[YYYY-MM-DD / HH:MM:SS KST] | 신호 | 원인 | 복구 | 재발방지`. 반복 패턴은 SimonKWiki 교훈(§18)으로 승격.
+
+## 6. 반복 패턴 룩업 (O-15 — hub-health/와치독 FAIL → 복구)
+- **데몬 중복** (monitor `loops`에 각 AI 2개+): 후발 PID kill — `Get-CimInstance Win32_Process | ? { $_.CommandLine -match 'hub-daemon\.ps1' } | Sort CreationDate | Select -Skip 1 | % { Stop-Process $_.ProcessId -Force }`. 재발방지=hub-daemon.ps1 lane(-Only) named-mutex 가드(중복이면 자동 exit 0). 재기동은 HUB-STARTUP 모드A "이미 떠있으면 skip".
+- **STATUS.md 비대** (commit.ps1 `[SIZE] ... STATUS cap`): 해당 AI가 STATUS를 최신 N줄만 남기고 과거를 `agents/<ai>/*-status-archive.log`(gitignored)로 회전 후 재커밋. 캡=64KB(`commit.ps1 $StatusLimitBytes`).
+- **UTF-8 BOM** (hub-health `no-BOM integrity FAIL`): `$c=[IO.File]::ReadAllText($f); [IO.File]::WriteAllText($f,$c,(New-Object Text.UTF8Encoding $false))`. 쓰기 측은 `Set-Content -Encoding utf8`(PS5.1=BOM)을 `[IO.File]::WriteAllText(...,UTF8Encoding($false))`로 교정(hub-watchdog 적용 완료).
+- **frontmatter malformed** (hub-health WARN): 신규 메시지는 `to/from/type/ts` 필수키 준수. 기존은 비차단 — 점진 정리.
