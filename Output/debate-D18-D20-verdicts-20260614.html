@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§35 토론 판정 — D-18/19/20 미성년 enablement 기본값 (2026-06-14)</title>
+<style>
+  @font-face{font-family:'Pretendard';font-weight:45 920;font-display:swap;
+    src:url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/woff2/PretendardVariable.woff2') format('woff2-variations');}
+  :root{--bg:#f6f6fb;--surface:#fff;--ink:#1b1b24;--muted:#6b6b7a;--line:#e6e6ef;
+    --accent:#5a4bd4;--accent-soft:#efedfb;--win:#3f7a4f;--win-soft:#eaf4ec;--rail:#a23a4d;--rail-soft:#f7e9ec;--warn:#9a6b2f;--warn-soft:#f6efe3;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.62;padding:48px 20px;font-size:15px;letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto}
+  header{border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:26px}
+  .kicker{font-size:12.5px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px}
+  h1{font-size:25px;font-weight:780;letter-spacing:-.025em;line-height:1.25}
+  .sub{color:var(--muted);margin-top:9px;font-size:14px}
+  .bug{background:var(--rail-soft);border:1px solid var(--line);border-left:3px solid var(--rail);border-radius:12px;padding:16px 20px;margin:24px 0 30px;font-size:14px}
+  .bug b{color:var(--rail)}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:20px 22px;margin-bottom:16px;border-left:3px solid var(--accent)}
+  .card .id{font-size:12px;font-weight:780;color:var(--accent);letter-spacing:.03em}
+  .card h2{font-size:17.5px;font-weight:740;letter-spacing:-.02em;margin:3px 0 12px}
+  .card dl{display:grid;grid-template-columns:78px 1fr;gap:7px 14px;font-size:13.5px}
+  .card dt{color:var(--muted);font-weight:680;font-size:11.5px;padding-top:2px}
+  .card dd b{font-weight:700}
+  dd.verdict{color:var(--win);font-weight:600}
+  dd.minor{color:var(--warn)}
+  .conf{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;background:var(--accent-soft);color:var(--accent);margin-left:6px}
+  .gates{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:18px 22px;margin-top:8px;font-size:13.5px}
+  .gates h3{font-size:14px;font-weight:740;margin-bottom:10px}
+  .gates li{margin:5px 0 5px 18px}
+  .gates .g{color:var(--rail);font-weight:600}
+  code{font-family:'SFMono-Regular',Consolas,monospace;font-size:.87em;background:#f1f1f8;padding:.5px 4px;border-radius:4px}
+  footer{margin-top:38px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .copybtn{position:fixed;top:18px;right:18px;background:var(--ink);color:#fff;border:none;border-radius:9px;padding:9px 15px;font-size:12.5px;font-weight:640;font-family:inherit;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.12)}
+  .copybtn:hover{background:var(--accent)} .copybtn.ok{background:var(--win)}
+</style>
+</head>
+<body>
+<button class="copybtn" id="cp">Copy as Markdown</button>
+<div class="wrap">
+<header>
+  <div class="kicker">PROTOCOL §35 Structured Debate · DECISIONS D-18~20</div>
+  <h1>미성년 enablement 기본값 — 토론 판정</h1>
+  <div class="sub">3 안건 × (5입장 패널 → 교차검증 → 별도 심판) · 21 agents / ~1.48M tokens · debate w1qg0xa22 · 2026-06-14 KST · 빌드 착수는 §11-5 Simon 법무 게이트(토론은 <b>설계 기본값</b>만 확정)</div>
+</header>
+
+<div class="bug">
+  <b>🔴 토론이 발견한 실 프로덕션 버그 (D-20):</b> 2nd-B <code>recommendations</code>는 <b>런타임 dead key</b> — <code>ops.tsx:104-129 runRecommend</code>가 pref를 읽지 않아 <b>미성년 포함 전원에게 게이트 없이 실행</b> 중이다. <code>0038</code> clamp(미성년 false)는 그 값을 읽는 게이트가 없어 <b>명목적</b>. "미성년 OFF"가 아니라 "전원 ungated"가 현 상태. 픽스(게이트 배선)는 법무 무관·즉시 가능하지만 미성년 consent 경로라 <b>Claude 리뷰 게이트 + live verify</b>로 처리(자동 데몬 X). BACKLOG P1 등록.
+</div>
+
+<div class="card">
+  <span class="id">D-18</span>
+  <h2>학습자면허 인지강제 미성년 default<span class="conf">conf 0.72</span></h2>
+  <dl>
+    <dt>안건</dt><dd>인지강제(scaffolded autonomy) default-ON(A) vs 8-13세 단순 OFF(B) vs 연령×리스크 하이브리드(C)</dd>
+    <dt>판정</dt><dd class="verdict">합성 — A-default(보호 두께=상수 L0) × <b>ephemeral·session-local fade</b>(영속 행동 스코어 라벨 미저장) × value-first·content-trigger·1탭 skippable 인지강제. persistent 스코어링은 Art.5 counsel 게이트 뒤로.</dd>
+    <dt>패자</dt><dd>C 만장 패자(소셜스코어링 ∥ 약한 DOB age-assurance 동시 불리 + 최고 유지비). A 원안의 persistent 스코어링은 교체.</dd>
+    <dt>소수의견</dt><dd class="minor">B(8-13 단순 OFF=최저비용·DPIA scope 최소) 보존. <b>Simon override 경로 유지</b> — 단순 OFF 택하면 판정 즉시 양보(권고이지 강제 아님).</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <span class="id">D-19</span>
+  <h2>2nd-B = scaffolded reflection ≠ companion bot<span class="conf">conf 0.70</span></h2>
+  <dl>
+    <dt>안건</dt><dd>CSM/Stanford "18세 미만 companion 금지" 긴장 해소 — 방어명제(A) vs companion-risk 인정+게이트(B) vs tutor/EdTech 재라벨(alt)</dd>
+    <dt>판정</dt><dd class="verdict">합성 — <b>design-enforced A</b>: 비-companion을 *선언이 아니라* CI-binding 불변식 + 아동 DPIA + dependency-safety 감사물로 입증. anti-anthropomorphism을 가이드라인→<b>CI 게이트</b>로 승격(마스코트·1인칭·long_term_memory 의인화 감사 선결). 위기+cadence 동반 시 핸드오프 임계 하향 안전밸브.</dd>
+    <dt>패자</dt><dd>copy-only A 만장 기각(자기라벨 법적 inert). alt 재라벨은 EU AI Act Annex III(3) 교육 고위험 자초로 노출 *증가*.</dd>
+    <dt>소수의견</dt><dd class="minor">companion-risk를 *살아있는 설계 제약*으로(skeptic/B) — 진짜 affordance(마스코트·1인칭·memory) age-invariant 실재. counsel이 SB243/CSM을 "기능기반"으로 읽으면 최연소 잠정 게이트가 유일 완전안전.</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <span class="id">D-20</span>
+  <h2>recommendations 미성년 기본값<span class="conf">conf 0.62</span></h2>
+  <dl>
+    <dt>안건</dt><dd>기본 ON+투명성(A) vs 강제 OFF 유지(B) vs 명시 동의 후 ON(alt) — 단, 위 버그로 현재는 "전원 ungated"</dd>
+    <dt>판정</dt><dd class="verdict">합성 — <b>alt′ "유리상자 OFF + 이해-획득 활성화"</b>: ⓪ pref를 게이트에 먼저 배선(버그 폐쇄) → ① default OFF + clamp 유지 → ② 활성화=in-context 이해-게이트(온보딩 클릭스루 아님)+불변 동의-원장 기록+서버검증 승격 → ③ 사후 "왜 이걸?" 영구투명+원터치 OFF.</dd>
+    <dt>패자</dt><dd>silent A=ICO Std12 정면 최약. 강제 B=dead토글·법근거 없는 force-OFF(FTC §5).</dd>
+    <dt>소수의견</dt><dd class="minor">강제 OFF 유지 보존 — 순수 UK/EU 출시 시 B만 무흠결. <b>alt′는 K12 DPIA+counsel 전까지 UK/EU 미성년에 B(OFF) 폴백</b>.</dd>
+  </dl>
+</div>
+
+<div class="gates">
+  <h3>공통 게이트 (혼자 진행 금지)</h3>
+  <ul>
+    <li><span class="g">빌드 = §11-5 Simon 법무 사인오프</span> — 토론은 설계 기본값만 확정, 착수 아님.</li>
+    <li><span class="g">K12 아동 DPIA 작성</span> — 전 빌드 선결(EU/UK 노출 전 GDPR Art.35 법적 필수), 3 판정 모두 의존.</li>
+    <li><span class="g">counsel 1차확인</span> — EU AI Act Art.5(소셜스코어링/연령취약성)·CA SB243·ICO Std12/Std7·韓 AI기본법 §13·14세 자기-활성화 유효성(Art.8)·EU/UK scope. 판정의 규제-내구성이 여기 의존.</li>
+    <li>즉시 가능(법무 무관): D-20 recommendations 게이트 배선(버그) · 의인화 감사 · anti-anthropomorphism CI 게이트 · Lane 7/8 egress audit(Gemini-AG).</li>
+  </ul>
+</div>
+
+<footer>
+  <span>설계 정본 = <code>Output/minor-ai-literacy-enablement-20260614.html</code> · PROTOCOL §36 · DECISIONS D-18~20</span>
+  <span>debate w1qg0xa22 · 2026-06-14 KST</span>
+</footer>
+</div>
+<script>
+const md=`# §35 토론 판정 — D-18/19/20 미성년 enablement 기본값 (2026-06-14, debate w1qg0xa22)
+
+빌드 착수는 §11-5 Simon 법무 게이트. 토론은 설계 기본값만 확정.
+
+🔴 발견된 실버그(D-20): 2nd-B recommendations는 런타임 dead key — ops.tsx:104-129가 pref 미참조 → 미성년 포함 전원 ungated 실행. clamp 명목적. Claude 리뷰게이트+live verify로 픽스(자동 데몬 X).
+
+## D-18 학습자면허 인지강제 (conf 0.72)
+판정: 합성 A-default + ephemeral/session-local fade(영속 스코어 미저장) + value-first·skippable 인지강제. persistent 스코어링은 Art.5 counsel 뒤.
+패자: C 만장(소셜스코어링∥약한 DOB 동시불리). 소수: B 단순OFF 보존 + Simon override.
+
+## D-19 ≠ companion bot (conf 0.70)
+판정: 합성 design-enforced A — 비-companion을 CI불변식+DPIA+의존안전 감사물로 입증. anti-anthropomorphism CI게이트(마스코트·1인칭·memory 의인화 감사 선결). 위기 안전밸브.
+패자: copy-only A(라벨 inert), alt tutor재라벨(EU Annex III 고위험). 소수: companion-risk를 살아있는 제약으로.
+
+## D-20 recommendations (conf 0.62)
+판정: 합성 alt′ 유리상자 OFF+이해게이트 — 버그배선→default OFF+clamp유지→in-context 이해게이트+동의원장→사후투명+원터치OFF.
+패자: silent A(Std12 최약), 강제 B(dead토글). 소수: 강제OFF 보존, UK/EU는 DPIA 전까지 B 폴백.
+
+## 공통 게이트
+빌드=§11-5 Simon 법무 · K12 아동 DPIA(전 빌드 선결) · counsel(Art.5·SB243·Std12·韓§13·Art.8·EU/UK scope). 즉시가능: recommendations 게이트배선·의인화감사·anti-anthro CI·egress audit.
+`;
+document.getElementById('cp').addEventListener('click',function(){navigator.clipboard.writeText(md).then(()=>{this.textContent='✓ Copied';this.classList.add('ok');setTimeout(()=>{this.textContent='Copy as Markdown';this.classList.remove('ok')},1600)}.bind(this));});
+</script>
+</body>
+</html>
