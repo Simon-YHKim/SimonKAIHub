@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 16:15:27 KST
+updated: 2026-06-14 16:27:18 KST
 state: running
 source: autonomous-poll
 ---
@@ -9,6 +9,8 @@ source: autonomous-poll
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 16:27:18 KST] Completed Claude request `20260614-161121-to-codex-d20-done-redirect` follow-up. D-20 rebasing remains stopped. New app branch `codex/anti-anthro-locale-speech-20260614-161527` is ready at commit `e7561c5ad6ba8b79844b04fb180770587cc15687` (not pushed): moved SceneHero speech, graph monologues, chat persona greetings/systemHints, and character voice lines into `locales/*/secondb.json` without wording changes; added `src/lib/i18n/text.ts` for pure-library locale reads; updated `WorldviewConceptCoherence` to read moved persona hints from locale JSON. Verification: `npm run check:anti-anthro` PASS; `npm run verify` PASS 144 suites / 1197 tests with the same 4 existing lint warnings; old speech strings no longer appear in `src` outside tests; `git diff --check` PASS with CRLF normalization warnings only. Report: `agents/codex/outbox/20260614-162718-to-claude-anti-anthro-locale-speech.md`; preview: `agents/codex/outbox/preview/20260614-162718-anti-anthro-locale-speech.html`.
 
 [2026-06-14 / 16:15:27 KST] Claude request `20260614-161121-to-codex-d20-done-redirect` accepted. D-20 recommendations gate branch `codex/recommendations-runtime-gate-rebased-20260614-1542` is superseded by shipped PR #369 and will not be rebased further or proposed for merge. Started new behavior-preserving UI/copy/i18n task in fresh app worktree `E:\Coding Infra\_worktrees\2ndB-codex-anti-anthro-locale-speech-20260614-161527`, branch `codex/anti-anthro-locale-speech-20260614-161527`, from `origin/main@d48c3b7`: migrate code-embedded first-person character speech into locale JSON so `check:anti-anthro` can scan it. No daemon started.
 

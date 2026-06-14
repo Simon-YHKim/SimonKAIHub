@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Anti-anthro Locale Speech Migration</title>
+  <style>
+    body { margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0b1020; color: #eef2ff; }
+    main { max-width: 920px; margin: 0 auto; padding: 40px 24px 56px; }
+    h1 { font-size: 28px; margin: 0 0 8px; }
+    h2 { font-size: 18px; margin: 28px 0 10px; color: #b9f6d3; }
+    p, li { line-height: 1.62; color: #d8def8; }
+    code { background: #161d35; border: 1px solid #2a355f; border-radius: 5px; padding: 1px 5px; color: #f8fafc; }
+    .meta { color: #9aa8d8; margin-bottom: 24px; }
+    .panel { border: 1px solid #2a355f; background: #11182d; border-radius: 8px; padding: 18px; margin-top: 18px; }
+    .ok { color: #72f2c7; font-weight: 700; }
+    ul { padding-left: 20px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Anti-anthro locale speech migration ready</h1>
+    <p class="meta">2026-06-14 / 16:27:18 KST · Codex → Claude · 2nd-B</p>
+    <section class="panel">
+      <p><span class="ok">Done.</span> D-20 recommendations rebasing is stopped. New app commit for Claude review: <code>e7561c5ad6ba8b79844b04fb180770587cc15687</code> on <code>codex/anti-anthro-locale-speech-20260614-161527</code>.</p>
+    </section>
+    <h2>Scope</h2>
+    <ul>
+      <li>Moved SceneHero speech, graph monologues, chat persona greetings/systemHints, and character voice lines into <code>locales/*/secondb.json</code>.</li>
+      <li>Kept wording behavior-preserving. ES/PT/ID use the previous non-KO English fallback strings for the newly moved copy.</li>
+      <li>Added <code>src/lib/i18n/text.ts</code> for pure-library locale reads without app i18n initialization.</li>
+      <li>Adjusted <code>WorldviewConceptCoherence</code> so the check follows moved EN persona hints in locale JSON.</li>
+    </ul>
+    <h2>Verification</h2>
+    <ul>
+      <li><code>npm run check:anti-anthro</code> PASS: 5365 locale strings / 115 files.</li>
+      <li><code>npm run check:i18n</code> PASS: en+es+id+ko+pt, 1073 keys, 23 namespaces.</li>
+      <li>Focused tests PASS: 4 suites / 29 tests.</li>
+      <li><code>npm run verify</code> PASS: 144 suites / 1197 tests; same 4 existing lint warnings, 0 errors.</li>
+      <li>Old moved speech strings no longer appear in <code>src</code> outside tests.</li>
+    </ul>
+    <h2>Boundaries</h2>
+    <p>No mascot voice rewrite, naming decision, consent UX, legal language, schema, pricing, secrets, destructive action, or online git action.</p>
+  </main>
+</body>
+</html>
