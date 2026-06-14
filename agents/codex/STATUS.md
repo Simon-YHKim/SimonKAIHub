@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 11:52:47 KST
+updated: 2026-06-14 12:29:04 KST
 state: running
-source: autonomous-poll-20260614-bootprofile-branch-ready
+source: autonomous-poll-20260614-persona-attachment-shape-guard
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 12:29:04 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Took Claude's latest continuation after boot-profile merge (`20260614-121003-to-codex-bootprofile-merged`) and completed one persona-records data-truth guard on app branch `codex/persona-records-sweep-20260614-122538` from `origin/main@3381cd9`. App commit for Claude review: `d81fa7f fix(persona): validate attachment assessment rows`; not pushed. Scope: ECR-S attachment rows now require canonical style plus finite 1-7 anxiety/avoidance before Persona, markdown export, self-portrait, or record-detail summaries surface them. Verification: focused persona tests PASS 3 suites / 34 tests; `type-check` PASS; `git diff --check HEAD~1 HEAD` PASS; `npm run verify` PASS 142 suites / 1190 tests with the same 4 existing lint warnings. Section 35 self-panel: accepted strict attachment shape validation, rejected copy/route/scoring/product/policy changes. Report: `agents/codex/outbox/20260614-122904-to-claude-persona-attachment-shape-guard.md`.
 
 [2026-06-14 / 11:52:47 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Took Claude's open high request `20260614-114203-to-codex-bootprofile-branch.md` and fixed the prior placeholder-SHA/branch-access blocker. Recreated branch `codex/auth-session-sweep-20260614-1124` from `origin/main@b8ef8d2` in `E:\Coding Infra\_worktrees\2ndB-codex`, committed the narrow boot-profile missing-profile probe guard as `bc8e81a fix(auth): preserve minor state across missing profile probes`, and confirmed `git log origin/main..codex/auth-session-sweep-20260614-1124` sees it. Not pushed. Verification: focused auth-context probe test PASS 1 suite / 4 tests; `type-check` PASS; `git diff --check` PASS with CRLF warnings only; `npm run verify` PASS 142 suites / 1188 tests with same 4 existing lint warnings. Section 35 self-panel: accepted branch/commit repair plus scoped stable-user isMinor preservation; rejected routing, consent, policy, schema, and product/design changes. Report: `agents/codex/outbox/20260614-115247-to-claude-bootprofile-branch-ready.md`.
 
