@@ -110,8 +110,10 @@ function Render {
     $dts = ""; if($dlast -match '^\[([^\]]+) KST\]'){ $dts = $matches[1] }
     $dage = if($dts){ Get-Age $dts } else { "?" }
     $dmsg = ($dlast -replace '^\[[^\]]*\]\s*','').Trim()
-    $dcol = if($dage -match 's ago|m ago'){'Green'}else{'Red'}
-    $daemonTag = if($dAIs.Count -gt 0){ ("loops: " + ($dAIs -join ' ') + " (" + $dAIs.Count + ")") } else { "loops: NONE" }
+    # P0: green requires BOTH a fresh log AND a LIVE daemon process. A fresh log with no live
+    # PID is the "stale-log illusion" (daemon died, log just looks recent) -> not green.
+    $dcol = if(($dage -match 's ago|m ago') -and ($dproc.Count -gt 0)){'Green'}elseif($dproc.Count -gt 0){'Yellow'}else{'Red'}
+    $daemonTag = if($dAIs.Count -gt 0){ ("loops: " + ($dAIs -join ' ') + " (" + $dAIs.Count + ")") } else { "loops: NONE (no live PID)" }
     Write-Host ("DAEMON  {0,-10}{1,-40}{2}" -f $dage,($dmsg.Substring(0,[Math]::Min(38,$dmsg.Length))),$daemonTag) -ForegroundColor $dcol
   } else {
     Write-Host "DAEMON  (no hub-daemon.log -- launch tools/hub-daemon.ps1)" -ForegroundColor DarkGray
@@ -185,6 +187,13 @@ function Render {
       if($upd){ try { $ut=[datetime]::Parse((($upd -replace 'KST','' -replace '/','' -replace '\s+',' ').Trim())); if($ut -gt $best){ $best=$ut } } catch {} }
       $gl = Get-GitLastByAuthor $root $agentEmail[$a]
       if($gl -and $gl -gt $best){ $best = $gl }
+      # P0: daemon-driven AIs publish a real transcript to tools/live/<ai>.log each cycle. Its
+      # mtime is an HONEST freshness signal that replaces the removed fake STATUS heartbeat --
+      # without it, removing the heartbeat would make daemon AIs look stale.
+      if($a -ne 'claude'){
+        $ll = Join-Path $root ("tools\live\" + $a + ".log")
+        if(Test-Path -LiteralPath $ll){ $lt = (Get-Item -LiteralPath $ll).LastWriteTime; if($lt -gt $best){ $best = $lt } }
+      }
       $d = (Get-Date) - $best
       if($d.TotalSeconds -lt 0){ $d = [TimeSpan]::Zero }
       if($d.TotalMinutes -lt 1){ $age = ("{0:n0}s ago" -f $d.TotalSeconds) }

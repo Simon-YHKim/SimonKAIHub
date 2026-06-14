@@ -1,9 +1,10 @@
 # hub-daemon.ps1 -- Autonomous 4-AI hub driver (PROTOCOL section 12/19/35.4).
 # Makes Codex/Grok (and optionally Antigravity) keep investigating on their own:
-# each cycle it asks every AI to read its inbox + do the next task in its lane +
-# commit, then stamps a STATUS heartbeat so the monitor reflects REAL freshness
-# (this is the fix for "codex stale 59m" -- the AI not self-updating STATUS).
-# Claude stays the merge gate; AIs never push 2nd-B (branch/outbox only).
+# each cycle it asks every AI to read its inbox + do the next task in its lane + commit.
+# Freshness is REAL, not faked: each AI's tools/live/<ai>.log (real transcript+mtime) and its
+# git author time drive the monitor. The daemon runs cycles only while CONTROL.state==running
+# (section 13), and each CLI call is bounded by -PerAITimeoutSec so one hung CLI can't stall
+# the whole sequential loop. Claude stays the merge gate; AIs never push 2nd-B (branch/outbox only).
 #
 # Why sequential: the hub is a LOCAL-ONLY shared git tree. One git writer at a
 # time avoids .git index.lock races (commit.ps1 has no lock-retry). No fetch/pull
@@ -18,6 +19,7 @@ param(
   [int]$IntervalSec = 600,         # default 10min (Simon: all loops 10min)
   [int]$MaxCycles = 0,             # 0 = run forever
   [int]$MaxTasksPerCycle = 1,      # anti-idle: drain up to N OPEN orders per cycle before sleeping
+  [int]$PerAITimeoutSec = 1200,    # hard ceiling per CLI call; a hung CLI is killed + skipped (P0: hung CLI stalled the whole sequential loop forever)
   [switch]$IncludeAG,              # add antigravity (gemini seat) to the default codex,grok loop
   [string[]]$Only = @()            # run ONLY these AIs (e.g. -Only antigravity for a separate slow AG loop)
 )
@@ -46,20 +48,14 @@ function Get-ModelCfg([string]$ai,[string]$key,[string]$default){
   return $default
 }
 
-# Guaranteed STATUS heartbeat: update updated:/state: in-place (UTF-8 no BOM).
-# The monitor's mtime fallback then shows the AI as fresh even if its own CLI
-# run forgot to touch STATUS. Sequential, so no concurrent writer.
-function Set-Heartbeat([string]$ai){
-  $sf = Join-Path $root ("agents\" + $ai + "\STATUS.md")
-  if(-not (Test-Path -LiteralPath $sf)){ return }
-  $lines = @(Get-Content -LiteralPath $sf -Encoding UTF8)
-  $ts = Now
-  for($i=0;$i -lt $lines.Count;$i++){
-    if($lines[$i] -match '^\s*updated:'){ $lines[$i] = "updated: $ts KST" }
-    elseif($lines[$i] -match '^\s*state:'){ $lines[$i] = "state: running" }
-  }
-  [System.IO.File]::WriteAllLines($sf, $lines, $utf8)
-}
+# NOTE (P0 fix 2026-06-14): the old Set-Heartbeat rewrote each AI's STATUS.md to
+# force `state: running` + a fresh `updated:` stamp every cycle. That FAKED freshness
+# (STATUS looked fresh even when the CLI did nothing), VIOLATED single-writer (the daemon
+# wrote another AI's file), and MASKED a paused hub (forced running over a paused state).
+# Removed. Real freshness now comes from honest signals the monitor already reads:
+#   - tools/live/<ai>.log  (real transcript + real mtime, written by Invoke-AI below)
+#   - git last-commit-by-author  (Get-GitLastByAuthor in monitor.ps1)
+# and the daemon only runs cycles while CONTROL.state == running (gate in the loop).
 
 if($Only.Count -gt 0){ $AIs = $Only } else { $AIs = @('codex','grok'); if($IncludeAG){ $AIs += 'antigravity' } }
 
@@ -106,26 +102,42 @@ function Invoke-AI([string]$ai){
   $liveDir = Join-Path $root "tools\live"
   if(-not (Test-Path $liveDir)){ New-Item -ItemType Directory -Force $liveDir | Out-Null }
   $live = Join-Path $liveDir ($ai + ".log")
-  # Inject the best model + max effort per AI from models.json (always-best, §MODELS.md).
-  $out = switch($ai){
-    'codex'       {
-      $cm = Get-ModelCfg 'codex' 'model' 'gpt-5.5'
-      $ce = Get-ModelCfg 'codex' 'effort' 'xhigh'
-      ("" | codex exec -s danger-full-access --skip-git-repo-check -C $root -m $cm -c "model_reasoning_effort=$ce" $prompt) 2>&1 | Out-String
+  # Resolve best model + max effort per AI from models.json (always-best, §MODELS.md) IN THE
+  # PARENT (Get-ModelCfg reads $Models here), then pass the values into the job below.
+  $cm = Get-ModelCfg 'codex' 'model' 'gpt-5.5'
+  $ce = Get-ModelCfg 'codex' 'effort' 'xhigh'
+  $gm = Get-ModelCfg 'grok' 'model' 'grok-4.3'
+  $ge = Get-ModelCfg 'grok' 'effort' 'high'
+  $am = Get-ModelCfg 'antigravity' 'model' 'gemini-3.1-pro-preview'
+
+  # P0 timeout guard: run the CLI inside a background job bounded by Wait-Job -Timeout. A hung
+  # CLI (codex stdin-EOF hang, network stall) previously blocked the whole sequential loop
+  # forever; now it is killed after $PerAITimeoutSec and the loop continues.
+  $sb = {
+    param($ai,$root,$prompt,$cm,$ce,$gm,$ge,$am)
+    $o = ""
+    switch($ai){
+      'codex'       { $o = ("" | codex exec -s danger-full-access --skip-git-repo-check -C $root -m $cm -c "model_reasoning_effort=$ce" $prompt) 2>&1 | Out-String }
+      'grok'        { $env:GROK_MODEL = $gm; $env:GROK_REASONING_EFFORT = $ge; $o = (grok -m $gm -p $prompt) 2>&1 | Out-String }
+      'antigravity' { $o = (gemini -m $am -p $prompt -y) 2>&1 | Out-String }
     }
-    'grok'        {
-      # grok reasoning_effort defaults to low; set via env (non-breaking across CLI builds) + pin model.
-      $gm = Get-ModelCfg 'grok' 'model' 'grok-4.3'
-      $ge = Get-ModelCfg 'grok' 'effort' 'high'
-      $env:GROK_MODEL = $gm; $env:GROK_REASONING_EFFORT = $ge
-      (grok -m $gm -p $prompt) 2>&1 | Out-String
-    }
-    'antigravity' {
-      $am = Get-ModelCfg 'antigravity' 'model' 'gemini-3.1-pro-preview'
-      (gemini -m $am -p $prompt -y) 2>&1 | Out-String
-    }
+    [pscustomobject]@{ Out = $o; Code = $LASTEXITCODE }
   }
-  $code = $LASTEXITCODE
+  $job = Start-Job -ScriptBlock $sb -ArgumentList $ai,$root,$prompt,$cm,$ce,$gm,$ge,$am
+  $fin = Wait-Job $job -Timeout $PerAITimeoutSec
+  if(-not $fin){
+    Stop-Job $job -ErrorAction SilentlyContinue
+    Remove-Job $job -Force -ErrorAction SilentlyContinue
+    Log "cycle TIMEOUT($ai) after ${PerAITimeoutSec}s -- killed CLI, continuing"
+    try { [System.IO.File]::WriteAllText($live, "[$(Now) KST] $ai (TIMEOUT ${PerAITimeoutSec}s)`n", $utf8) } catch {}
+    return [pscustomobject]@{ Code = -1; Quota = $false; TimedOut = $true }
+  }
+  $rcv = Receive-Job $job 2>&1
+  Remove-Job $job -Force -ErrorAction SilentlyContinue
+  # Job results are deserialized, so match by property name (not [pscustomobject] type).
+  $obj  = $rcv | Where-Object { $_ -and ($_.PSObject.Properties.Name -contains 'Out') } | Select-Object -Last 1
+  $out  = if($obj){ [string]$obj.Out } else { ($rcv | Out-String) }
+  $code = if($obj){ [int]$obj.Code } else { 0 }
   # Detect quota/rate-limit exhaustion so the caller can back off instead of re-spawning.
   $quota = ($out -match 'QUOTA_EXHAUSTED|RESOURCE_EXHAUSTED|TerminalQuotaError|exhausted your capacity|"code":\s*429|429 ')
   Log "cycle exit($ai)=$code$(if($quota){' QUOTA'})"
@@ -133,12 +145,30 @@ function Invoke-AI([string]$ai){
   # as a live transcript -- written UTF-8 (Korean-safe) so feed.ps1 can show it like a chat message.
   $tail = (($out -split "`r?`n") | Where-Object { $_.Trim() -ne "" } | Select-Object -Last 45) -join "`n"
   try { [System.IO.File]::WriteAllText($live, "[$(Now) KST] $ai (exit $code$(if($quota){' QUOTA-EXHAUSTED'}))`n`n$tail`n", $utf8) } catch {}
-  return [pscustomobject]@{ Code = $code; Quota = [bool]$quota }
+  return [pscustomobject]@{ Code = $code; Quota = [bool]$quota; TimedOut = $false }
 }
 
-Log "hub-daemon START interval=${IntervalSec}s AIs=$($AIs -join ',') maxTasks=$MaxTasksPerCycle maxCycles=$MaxCycles"
+# CONTROL.md run-state (§13): the daemon must not spawn AIs while the hub is paused/draining.
+function Get-ControlState {
+  $cf = Join-Path $root "CONTROL.md"
+  if(-not (Test-Path -LiteralPath $cf)){ return 'running' }   # no semaphore -> assume running
+  $h = Get-Content -LiteralPath $cf -Encoding UTF8 -TotalCount 12
+  foreach($l in $h){ if($l -match '^\s*state:\s*"?(\w+)'){ return $matches[1].ToLower() } }
+  return 'running'
+}
+
+Log "hub-daemon START interval=${IntervalSec}s AIs=$($AIs -join ',') maxTasks=$MaxTasksPerCycle timeout=${PerAITimeoutSec}s maxCycles=$MaxCycles"
 $cycle = 0
 while($true){
+  # CONTROL.state gate (§13): only spawn AIs while running. paused/draining -> skip this cycle
+  # (no fake heartbeat, no new work) and re-check after the interval.
+  $cs = Get-ControlState
+  if($cs -ne 'running'){
+    Log "cycle skipped -- CONTROL.state=$cs (waiting; resumes when running)"
+    if($MaxCycles -gt 0){ break }
+    Start-Sleep -Seconds $IntervalSec
+    continue
+  }
   $cycle++
   Log "cycle $cycle BEGIN"
   foreach($ai in $AIs){
@@ -156,7 +186,6 @@ while($true){
       Log "cycle $cycle -> $ai poll (task $task/$MaxTasksPerCycle)"
       $res = $null
       try { $res = Invoke-AI $ai } catch { Log "cycle $cycle $ai ERROR: $($_.Exception.Message)" }
-      try { Set-Heartbeat $ai } catch { Log "cycle $cycle $ai heartbeat ERROR: $($_.Exception.Message)" }
       if($res -and $res.Quota){
         $quotaStrikes[$ai]++
         $skip = [Math]::Min(48, [Math]::Pow(2, $quotaStrikes[$ai]))
