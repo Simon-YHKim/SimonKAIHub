@@ -39,9 +39,11 @@
 
 ---
 
-## 갱신 절차 (일일 cloud schedule)
+## 갱신 절차 (일일 로컬 예약작업 — 제안+게이트)
 
-- 스케줄명 `model-benchmark-refresh` — 매일 ~09:00 KST cloud agent가 실행.
-- 동작: 제공사별(Anthropic/OpenAI/xAI/Google) 최신 최고모델·effort 플래그를 웹 재조사(병렬+적대적 검증) → 변동 시 `tools/models.json` + 이 표 갱신 → `commit.ps1 -As claude` → 변경 있으면 Simon에게 1줄 알림.
-- 수동 재조사: hub-upgrade-research workflow 재실행(`Workflow` 또는 저장된 스크립트).
-- **불변 원칙**: 항상 *그 CLI에서 실제 호출 가능한* 최고 벤치마크 모델 + 최대 effort. 비용 게이트(§11-5)는 인터랙티브 정액이라 해당 없음(헤드리스 `claude -p`만 과금).
+- **예약작업** `HubModelBenchmarkRefresh` (Windows Scheduled Task, 매일 09:00 KST) → `tools/refresh-models.ps1` 실행.
+  - cloud schedule이 아닌 **로컬 작업**인 이유: Anthropic 클라우드 에이전트는 로컬 `E:\...\models.json`을 못 건드림. 갱신은 로컬에서만 가능.
+- 동작: 웹 가능 헤드리스 AI(gemini→grok 폴백)로 제공사별 최신 최고모델·effort 재조사 → **`tools/models.json`을 자동 덮어쓰지 않고** `tools/models.proposed.json`에 제안 + `agents/claude/inbox`에 변동 노트 + `tools/models-refresh.log` 기록.
+  - **게이트(중요)**: 환각/오타 모델 id가 데몬 spawn을 깨뜨릴 수 있어 **Claude(또는 Simon)가 제안을 검토 후 적용**(`models.json` 반영 + 이 표 last_checked 갱신 + `commit.ps1 -As claude`). hub-health의 `models.json best-model contract` 체크로 무결성 확인.
+- 수동: `powershell -File tools/refresh-models.ps1` (즉시 제안) · 정밀 재조사는 hub-upgrade-research workflow 재실행.
+- **불변 원칙**: 항상 *그 CLI에서 실제 호출 가능한* 최고 벤치마크 모델 + 최대 effort. 비용 게이트(§11-5)는 구독 CLI라 해당 없음(헤드리스 `claude -p`만 과금).

@@ -19,3 +19,6 @@ desktop.ini
 *.tmp
 *.log
 .cache/
+tools/models.proposed.json
+tools/models.proposed.raw.txt
+tools/models-refresh.log
