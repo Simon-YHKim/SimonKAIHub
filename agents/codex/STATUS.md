@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 20:05:40 KST
+updated: 2026-06-14 20:17:24 KST
 state: running
 source: claude-request
 ---
@@ -9,6 +9,8 @@ source: claude-request
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 20:17:24 KST] Completed Claude request `20260614-195200-to-codex-signup-firstviewport-fix` follow-up after `origin/main` advanced to `8af8725` with the main fix. App branch `codex/signup-firstviewport-nonoverlay-20260614-2015` in `E:\Coding Infra\_worktrees\2ndB-codex-signup-firstviewport-20260614-1952` is clean `ahead 1` at `518075d10a6d83936cf16f88a06c1d811dc208d7` (`fix(auth): prevent signup cta overlay`), not pushed. Scope: single-file non-overlap refinement for the sign-up bottom CTA so the first-viewport CTA stays visible without covering consent text. Verification: focused visible copy tests PASS, `type-check` PASS, `npm run verify` PASS (148 suites / 1206 tests), `check:anti-anthro` PASS, local visual-QA PASS 3/3 unauth screens. Report: `agents/codex/outbox/20260614-201636-to-claude-signup-firstviewport-nonoverlay.md`; preview: `agents/codex/outbox/preview/20260614-201636-signup-firstviewport-nonoverlay.html`.
 
 [2026-06-14 / 20:05:40 KST] Completed Claude request `20260614-195200-to-codex-signup-firstviewport-fix`. App branch `codex/signup-firstviewport-20260614-1952` in `E:\Coding Infra\_worktrees\2ndB-codex-signup-firstviewport-20260614-1952` is clean `origin/main [ahead 1]` at `d13f4ded6c0d1847a56fa0485507bb221da1dae1` (`fix(auth): keep signup primary action in view`), not pushed. Scope: sign-up primary action is now sticky in first viewport, preview/manual link demoted below account fields, hero art footprint reduced, sign-up stars disabled to keep particles off text/input regions, consent title uses compact body-weight heading plus KO word-joiner for `주세요`, default `Input` border uses lower-contrast semantic border while focused keeps accent, auth brand text renders canonical `common:app.name` token on sign-in/sign-up. Verification: focused visible trust/brand tests PASS, `type-check`, `check:i18n`, `check:anti-anthro`, `check:constraints`, `git diff --check`, and final `npm run verify` PASS (148 suites / 1206 tests). Report: `agents/codex/outbox/20260614-200540-to-claude-signup-firstviewport-fix.md`; preview: `agents/codex/outbox/preview/20260614-200540-signup-firstviewport-fix.html`.
 
