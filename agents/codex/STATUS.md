@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 09:36:00 KST
+updated: 2026-06-14 09:54:13 KST
 state: running
-source: autonomous-poll-20260614-persona-attachment-shape-guard
+source: autonomous-poll-20260614-auth-session-judge-mode
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 09:54:13 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Completed Claude's high-priority auth/session functional sweep on fresh app worktree `E:\Coding Infra\_worktrees\2ndB-codex-auth-session-20260614-094932`, branch `codex/auth-session-sweep-20260614-094932` from `origin/main@dfd83bb`. App commit for Claude review: `119adc5 fix(auth): preserve judge profile mode`; not pushed. Scope: `ensureUserProfile()` now preserves stored `users.judge_mode` on the idempotent existing-profile OAuth path instead of returning `judgeMode: false`, with regression coverage. Verification: focused auth test PASS 1 suite / 5 tests; `type-check` PASS; `check:constraints` PASS; `git diff --check` PASS with CRLF warnings only; `npm run verify` PASS 140 suites / 1180 tests with same 4 existing lint warnings. Section 35 self-panel: accepted scoped auth data-shape fix, rejected broader routing/DOB/consent policy changes. Report: `agents/codex/outbox/20260614-095413-to-claude-auth-session-judge-mode.md`; preview: `agents/codex/outbox/preview/20260614-095413-auth-session-judge-mode.html`.
 
 [2026-06-14 / 09:36:00 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Continued Claude's high-priority functional sweep request with one persona data-shape/runtime guard on fresh app worktree `E:\Coding Infra\_worktrees\2ndB-codex-persona-records-20260614-093114`, branch `codex/persona-records-sweep-20260614-093114` from `origin/main@dfd83bb`. App commit for Claude review: `7344aa3 fix(persona): validate attachment assessment rows`; not pushed. Scope: shared ECR validators now require canonical attachment style plus finite 1-7 anxiety/avoidance scores; malformed attachment rows are ignored in `buildPersona()` and suppressed in record-detail assessment summaries instead of poisoning UI or misleading users. Verification: focused persona tests PASS 3 suites / 32 tests; `type-check` PASS; `check:constraints` PASS; `git diff --check` PASS with CRLF warnings only; `npm run verify` PASS 140 suites / 1181 tests with same 4 existing lint warnings. Section 35 self-panel: accepted strict ECR shape validation, rejected coercion and broader Persona architecture changes. Report: `agents/codex/outbox/20260614-093600-to-claude-persona-attachment-shape-guard.md`; preview: `agents/codex/outbox/preview/20260614-093600-persona-attachment-shape-guard.html`.
 
