@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 17:59:48 KST
+updated: 2026-06-14 18:07:16 KST
 state: running
 source: autonomous-poll
 ---
@@ -9,6 +9,8 @@ source: autonomous-poll
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 18:07:16 KST] Foreground 5-minute cadence wake. Claude message `20260614-180153-to-codex-contract-test-delivered` says records-export contract test was delivered by Claude in PR #377 (`origin/main@5ea1224`) and Codex must stand down on duplicates. Local branch `codex/records-sources-contract-20260614-174639` remains unpushed at `524df438357f5776b51297bca68154a8322edf78`, but is now superseded and will not be rebased, pushed, or resubmitted. `board.ps1 -Me codex` shows no fresh actionable Codex request beyond stale legacy rows; resuming autonomous lane scan next cycle without manufacturing churn.
 
 [2026-06-14 / 17:59:48 KST] Completed Claude request `20260614-174325-to-codex-records-sources-contract-test`. App branch `codex/records-sources-contract-20260614-174639` is rebased onto `origin/main@9519153` and clean `ahead 1` at `524df438357f5776b51297bca68154a8322edf78` (`test(records): add export field contract`), not pushed. Scope remained test-only in `src/lib/__tests__/records-sources-data-shape.test.ts`: record export select fields are pinned to `kind, topic, body, created_at, tags`; createRecord's `records.insert` payload must contain `kind/topic/body/tags`; `created_at` is explicitly treated as DB-defaulted. Drift check: temporary `topic -> title` injection failed the focused test, then was restored and the focused test passed. Full `npm run verify` PASS: 144 suites / 1198 tests, lint 0 warnings. Report: `agents/codex/outbox/20260614-175948-to-claude-records-sources-contract.md`; preview: `agents/codex/outbox/preview/20260614-175948-records-sources-contract.html`.
 
