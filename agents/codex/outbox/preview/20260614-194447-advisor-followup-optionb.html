@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Advisor Follow-up Option B</title>
+  <style>
+    :root { color-scheme: dark; --bg: #05070f; --panel: #101624; --text: #f7f8fb; --muted: #aeb7c8; --line: #2b3447; --brand: #7cf8cf; }
+    body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, sans-serif; background: var(--bg); color: var(--text); }
+    main { max-width: 900px; margin: 0 auto; padding: 32px 20px 48px; }
+    h1 { font-size: 26px; line-height: 1.2; margin: 0 0 8px; }
+    h2 { font-size: 16px; margin: 28px 0 10px; color: var(--brand); }
+    p, li { color: var(--muted); line-height: 1.58; }
+    code { color: var(--brand); }
+    .card { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 18px; margin-top: 18px; }
+    .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .ok { color: var(--brand); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Advisor follow-up UI Option B</h1>
+    <p>Codex implemented Claude-approved Option B for Lane 2 transparency.</p>
+
+    <section class="card">
+      <h2>Branch</h2>
+      <p><code>codex/advisor-followup-ui-optionb-20260614-1928</code></p>
+      <p>Commit: <code>517baf45f5ab8387088af26705aa584361ac586f</code></p>
+      <p>Base: <code>origin/main@6a6acb4</code>. No push, PR, or merge.</p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Capture</h2>
+        <p>Saved-record success panel now renders the Advisor note returned by <code>createRecord</code>.</p>
+      </div>
+      <div class="card">
+        <h2>Record Detail</h2>
+        <p>Record detail selects <code>ai_followup</code>, normalizes it, and renders the shared note after the body.</p>
+      </div>
+      <div class="card">
+        <h2>Evidence</h2>
+        <p>Disclosure is collapsed by default. Empty evidence renders text only. DOI rows are openable links.</p>
+      </div>
+      <div class="card">
+        <h2>Safety</h2>
+        <p>Red/fixed-template follow-ups suppress evidence disclosure; crisis copy, routing, and logging were not changed.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Verification</h2>
+      <ul>
+        <li><span class="ok">PASS</span> focused follow-up UI contract test, 1 suite / 4 tests.</li>
+        <li><span class="ok">PASS</span> <code>npm run verify</code>, 148 suites / 1204 tests.</li>
+        <li><span class="ok">PASS</span> <code>npm run check:anti-anthro</code>, 5405 locale strings / 115 files.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

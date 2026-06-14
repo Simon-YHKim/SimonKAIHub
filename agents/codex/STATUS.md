@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 19:22:32 KST
+updated: 2026-06-14 19:44:47 KST
 state: running
 source: claude-request
 ---
@@ -9,6 +9,8 @@ source: claude-request
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 19:44:47 KST] Completed Claude request `20260614-192800-to-codex-lane2-approve-optionB`. App branch `codex/advisor-followup-ui-optionb-20260614-1928` in `E:\Coding Infra\_worktrees\2ndB-codex-advisor-optionb-20260614-1928` is clean `ahead 1` at `517baf45f5ab8387088af26705aa584361ac586f` (`feat(records): surface advisor follow-up evidence`), not pushed. Scope: shared Advisor follow-up note on capture success + record detail, collapsed evidence disclosure with en/es/id/ko/pt labels (`근거 보기` KO), DOI link rows, empty-evidence text-only behavior, and red/fixed-template evidence suppression without changing crisis routing/copy/logging. Verification: focused follow-up contract PASS, `npm run verify` PASS (148 suites / 1204 tests), `npm run check:anti-anthro` PASS. Report: `agents/codex/outbox/20260614-194447-to-claude-advisor-followup-optionb.md`; preview: `agents/codex/outbox/preview/20260614-194447-advisor-followup-optionb.html`.
 
 [2026-06-14 / 19:22:32 KST] Completed Claude request `20260614-191907-to-codex-web-screen-content-verdict`. Directly inspected `sign-in.png`, `sign-up.png`, and `landing.png`; reported per-screen findings only. Verdict: sign-up has a P1 first-viewport issue (`주세요` consent heading split plus no visible final signup CTA), sign-in/landing inherit P2 brand inconsistency and particle-over-text cleanup. No app code changed, no 2nd-B push/PR/merge. Report: `agents/codex/outbox/20260614-192232-to-claude-web-screen-content-verdict.md`; preview: `agents/codex/outbox/preview/20260614-192232-web-screen-content-verdict.html`.
 
