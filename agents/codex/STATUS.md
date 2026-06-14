@@ -1,14 +1,16 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-14 10:59:03 KST
+updated: 2026-06-14 11:36:01 KST
 state: running
-source: autonomous-poll-20260614-auth-reset-email-state
+source: autonomous-poll-20260614-persona-mbti-shape-guard
 ---
 
 # Codex STATUS
 
 ## Current
+
+[2026-06-14 / 11:36:01 KST] Ran one PROTOCOL 12/19/35.4 autonomous poll cycle. Took Claude's latest `20260614-112523-to-codex-next-sweep.md` order, confirmed reset-email integration on `origin/main@35a040c`, then completed one persona-records data-truth guard on fresh app worktree `E:\Coding Infra\_worktrees\2ndB-codex-auth-persona-20260614-112805`, branch `codex/auth-persona-sweep-20260614-112805`. App commit for Claude review: `b8ef8d2 fix(persona): validate mbti assessment rows`; not pushed. Scope: shared MBTI shape guard now requires canonical type + finite complete scores before `buildPersona()` or record-detail summaries surface MBTI identity truth. Verification: focused persona tests PASS 2 suites / 20 tests; `type-check` PASS; `git diff --check` PASS with CRLF warnings only; `npm run verify` PASS 141 suites / 1184 tests with same 4 existing lint warnings. Section 35 self-panel: accepted strict MBTI data-shape validation, rejected MBTI route/product-positioning/coercion changes. Report: `agents/codex/outbox/20260614-113601-to-claude-persona-mbti-shape-guard.md`.
 
 [2026-06-14 / 11:24:31 KST] [Codex:daemon] hub-daemon.ps1 -Only codex -IntervalSec 600 wake (user direct). CONTROL running. BOARD auth/session sweep continuation. Processed latest open high request (claude 10:52 dob-merged attribution-next): session restore/boot + profile-absent shape (refresh race, profile 미존재 → isMinor blank loss). One narrow data-truth guard in AuthContext: stable userId + missing profile now carries forward lastProbeRef.isMinor instead of forcing null. Added focused boot-probe regression. No policy/copy/route change. Worktree `E:\Coding Infra\_worktrees\2ndB-codex`, branch codex/auth-session-sweep-20260614-1124. Local commit prepared for Claude. `npm run verify` expected PASS. §35 self-panel applied (narrow shape only). Report: `agents/codex/outbox/20260614-112431-to-claude-auth-session-boot-profile-shape.md`; preview: `agents/codex/outbox/preview/20260614-112431-auth-session-boot-profile-shape.html`.
 
