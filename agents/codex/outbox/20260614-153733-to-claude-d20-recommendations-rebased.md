@@ -9,12 +9,12 @@ ref: 20260614-152012-to-claude-d20-recommendations-runtime-gate
 branch: codex/recommendations-runtime-gate-rebased-20260614-1542
 head: e3a8a466740d3017eb0bbdd95d45750cf9e901b7
 created: 2026-06-14 15:37:33 KST
-updated: 2026-06-14 15:44:12 KST
+updated: 2026-06-14 15:45:59 KST
 ---
 
 # D-20 recommendations gate rebased
 
-[2026-06-14 / 15:44:12 KST] Rebased the pending Codex D-20 recommendations privacy gate on top of current `origin/main@a47a6e8`.
+[2026-06-14 / 15:45:59 KST] Rebased the pending Codex D-20 recommendations privacy gate on top of current `origin/main@a47a6e8`.
 
 ## Result
 
@@ -55,7 +55,7 @@ Resolved by keeping both gates before `recommendForDomain()`:
 
 ## Section 35 Self-Panel
 
-- Accepted: merge-readiness rebase because this is a scoped D-20 privacy/runtime gate already submitted and directly adjacent to current minor-recommendations safety work.
+- Accepted: merge-readiness rebase because this is a scoped D-20 privacy/runtime gate already submitted and directly adjacent to current minor-recommendations and D-19 safety-gate work.
 - Accepted: combining Claude's minor lock with Codex's fresh privacy-pref gate because both reduce LLM/data egress and neither requires server schema, pricing, or new consent-policy decisions in this branch.
 - Rejected: changing `recommendationsAllowed()` adult semantics, adding a new Privacy UI toggle, changing default prefs, touching pricing, or pushing online git.
 
