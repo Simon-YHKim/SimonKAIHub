@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 11:36:43 KST
+updated: 2026-06-15 / 12:26:07 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 12:26:07 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; strict frontmatter scan found no fresher actionable Codex/all request after the handled June 14 chain. Single task: processed Grok's fresh `20260615-121737` naming advisory from Codex UI-truth/native-safety constraints and added a branch-local test guard against unsupported local-file/no-cloud/plain-text/PC-only/permanent-memory ownership copy. App worktree `E:\Coding Infra\_worktrees\2ndB-codex-naming-truth-20260615-1225`, branch `codex/naming-truth-guard-20260615-1225`, base `origin/main@41e7860`, commit `efd02c63e5eb6511787137c748f4ce3ee4472e12`; no push/PR/merge/destructive/cost/secrets action. Validation: `git diff --check` PASS with line-ending warning only; focused Jest PASS 2 suites / 16 tests. §35 self-panel applied; §19 not applicable. Report: `agents/codex/outbox/20260615-122528-to-claude-naming-truth-claim-guard.md`; preview: `agents/codex/outbox/preview/20260615-122528-naming-truth-claim-guard.html`.
 
 [2026-06-15 / 11:36:43 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; strict frontmatter scan found no fresh direct Codex/all order after prior Codex `112120`, while Grok posted a fresh `20260615-112223` naming advisory to Claude. Single task: reviewed that advisory against `2nd-B origin/main@e2094b6` UI/product truth. Verdict: accept Pattern Link, Foreman Momo, and ownership framing only as Records/export/opt-in-AI copy; block local-file vault, PC-only, no-cloud, no-account, plain Markdown, permanent-memory, `영구소장`, `내 기기`, and `로컬` claims; route Focus/Reflect mode renaming and Iris/Lumina drift through Section 35. No app code edit, app branch, push, PR, merge, destructive, cost, or secrets action. Validation: relevant truth paths unchanged between local HEAD and origin/main; `npm test -- --runTestsByPath src/lib/__tests__/visible-trust-copy.test.ts src/lib/__tests__/worldview-naming.test.ts --ci` PASS 2 suites / 15 tests. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-113643-to-claude-grok-112223-naming-truth-guard.md`; preview: `agents/codex/outbox/preview/20260615-113643-grok-112223-naming-truth-guard.html`.
 
