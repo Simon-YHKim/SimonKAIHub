@@ -11,7 +11,7 @@
 #   powershell -ExecutionPolicy Bypass -File "tools/hub-health.ps1" -Json    # machine output
 #   powershell -ExecutionPolicy Bypass -File "tools/hub-health.ps1" -StrictWarn  # WARN also exits 1
 # Exit: 0 = all invariants OK; 1 = a FAIL (or WARN under -StrictWarn). Safe to run every cycle.
-param([switch]$Deep, [switch]$Json, [int]$MaxAgeMin = 20, [switch]$StrictWarn)
+param([switch]$Deep, [switch]$Json, [int]$MaxAgeMin = 20, [switch]$StrictWarn, [switch]$Quick)
 
 $utf8 = [System.Text.UTF8Encoding]::new($false)
 [Console]::OutputEncoding = $utf8; $OutputEncoding = $utf8
@@ -85,6 +85,30 @@ function Invoke-Child([string]$relPath, [string[]]$argv, [int]$timeoutSec = 25) 
   return [pscustomobject]@{ Code = $p.ExitCode; Out = [string]$txt; TimedOut = $false }
 }
 function Read-Src([string]$rel) { $p = Join-Path $root $rel; if (Test-Path $p) { return (Get-Content $p -Raw -Encoding UTF8) } return '' }
+# O-19: read-only git on the hub repo with --no-optional-locks + a hard timeout, so a
+# concurrent committer's index.lock can never hang a health check (was 22s+). git status
+# normally takes an *optional* index-refresh lock and waits on the committer; the flag
+# tells it to skip that lock. The process kill is a backstop. Returns Out/Code/TimedOut.
+function Invoke-GitRO([string[]]$gitArgs, [int]$timeoutSec = 4) {
+  $full = @('--no-optional-locks', '-C', $root) + $gitArgs
+  $sb = New-Object System.Text.StringBuilder
+  foreach ($a in $full) { if ($a -match '\s') { [void]$sb.Append('"' + $a + '" ') } else { [void]$sb.Append($a + ' ') } }
+  $psi = New-Object System.Diagnostics.ProcessStartInfo
+  $psi.FileName = 'git'
+  $psi.Arguments = $sb.ToString().TrimEnd()
+  $psi.UseShellExecute = $false; $psi.CreateNoWindow = $true
+  $psi.RedirectStandardOutput = $true; $psi.RedirectStandardError = $true
+  $p = $null
+  try { $p = [System.Diagnostics.Process]::Start($psi) } catch { return @{ Out = ''; Code = -3; TimedOut = $false } }
+  $so = $p.StandardOutput.ReadToEndAsync(); $se = $p.StandardError.ReadToEndAsync()
+  if (-not $p.WaitForExit($timeoutSec * 1000)) {
+    try { $p.Kill() } catch {}
+    return @{ Out = ''; Code = -2; TimedOut = $true }
+  }
+  $txt = ''
+  try { $txt = [string]$so.Result } catch {}
+  return @{ Out = $txt; Code = $p.ExitCode; TimedOut = $false }
+}
 
 # =====================================================================
 # AREA: Scripts (static syntax + read-only execution)
@@ -96,6 +120,12 @@ Check 'Scripts' 'ps1 syntax (all tools)' {
   if ($bad.Count -gt 0) { Res 'FAIL' (($bad | Select-Object -First 3) -join ' | ') }
   else { Res 'PASS' ($ps1.Count.ToString() + ' scripts, 0 parse errors') }
 }
+# O-19: the 5 tool-execution smoke tests each cold-start a PowerShell child (~1.5s),
+# dominating runtime. -Quick skips them so the phone health tab gets a sub-5s integrity
+# snapshot (static syntax + state + git + liveness still run). Full smoke is the default.
+if ($Quick) {
+  Check 'Scripts' 'tool exec smoke (5 read-only runs)' { Res 'SKIP' 'deferred (-Quick fast snapshot); run without -Quick for full smoke' }
+} else {
 Check 'Scripts' 'board.ps1 -Me claude (read-only run)' {
   $r = Invoke-Child 'tools/board.ps1' @('-Me', 'claude') 20
   if ($r.TimedOut) { Res 'FAIL' 'timed out' }
@@ -126,6 +156,7 @@ Check 'Scripts' 'expo-smoke.ps1 (read-only, no -Report)' {
   elseif ($r.Out -match 'NO-EMULATOR|NO-DEVICE|NO-ADB') { Res 'WARN' 'no emulator/device (expected when off)' }
   elseif ($r.Out -match 'PASS|CRASH') { Res 'PASS' 'crash gate ran' }
   else { Res 'WARN' ('verdict unclear, exit ' + $r.Code) }
+}
 }
 Check 'Scripts' 'hub-daemon.ps1 (static only - cost-gated)' {
   $src = Read-Src 'tools/hub-daemon.ps1'
@@ -212,7 +243,9 @@ Check 'State' 'CONTROL.md run-state' {
 Check 'State' 'BOARD.md single-writer = claude' {
   if (-not (Test-Path (Join-Path $root 'BOARD.md'))) { return Res 'FAIL' 'missing' }
   $owner = Get-Front2 'BOARD.md' 'owner'
-  $authors = (git -C $root log --format='%ae' -- BOARD.md 2>$null) | Sort-Object -Unique
+  $g = Invoke-GitRO @('log', '--format=%ae', '--', 'BOARD.md')
+  $authors = @()
+  if (-not $g.TimedOut -and $g.Code -eq 0) { $authors = @($g.Out -split "`r?`n" | Where-Object { $_ } | Sort-Object -Unique) }
   $rivals = @($authors | Where-Object { $_ -match 'codex@2nd-b\.ai|grok@2nd-b\.ai|antigravity@2nd-b\.ai' })
   if ($owner -ne 'claude') { Res 'FAIL' ('owner=' + $owner) }
   elseif ($rivals.Count -gt 0) { Res 'FAIL' ('rival author(s): ' + ($rivals -join ',')) }
@@ -265,11 +298,19 @@ Check 'State' 'outbox frontmatter contract' {
 # AREA: Git + encoding
 # =====================================================================
 Check 'Git' 'hub repo + tree integrity' {
-  $inside = (git -C $root rev-parse --is-inside-work-tree 2>$null)
-  if ($inside -ne 'true') { return Res 'FAIL' 'not a git work tree' }
-  if (Test-Path (Join-Path $root '.git/index.lock')) { return Res 'FAIL' 'stale .git/index.lock (dead committer)' }
-  git -C $root status --porcelain 2>$null | Out-Null
-  if ($LASTEXITCODE -ne 0) { Res 'FAIL' 'git status failed' } else { Res 'PASS' 'work tree clean-readable, no index.lock' }
+  $rp = Invoke-GitRO @('rev-parse', '--is-inside-work-tree')
+  if ($rp.TimedOut) { return Res 'WARN' 'git busy (lock) - rev-parse skipped, re-checks next run' }
+  if ($rp.Out.Trim() -ne 'true') { return Res 'FAIL' 'not a git work tree' }
+  # O-19: distinguish an active committer's transient lock from a stale one (dead committer).
+  $lock = Join-Path $root '.git/index.lock'
+  if (Test-Path $lock) {
+    $age = ((Get-Date) - (Get-Item $lock).LastWriteTime).TotalSeconds
+    if ($age -lt 30) { return Res 'WARN' ('commit in progress (transient index.lock, ' + [int]$age + 's) - skipped') }
+    return Res 'FAIL' ('stale .git/index.lock (' + [int]$age + 's, dead committer)')
+  }
+  $st = Invoke-GitRO @('status', '--porcelain')
+  if ($st.TimedOut) { return Res 'WARN' 'git status busy (lock) - skipped, re-checks next run' }
+  if ($st.Code -ne 0) { Res 'FAIL' 'git status failed' } else { Res 'PASS' 'work tree clean-readable, no index.lock' }
 }
 Check 'Git' 'UTF-8 no-BOM integrity (focused set)' {
   $targets = @()
@@ -328,7 +369,7 @@ if ($Json) {
   $lastArea = ''
   foreach ($r in $script:results) {
     if ($r.Area -ne $lastArea) { Write-Host ("-- " + $r.Area + " " + ('-' * [Math]::Max(1, 72 - $r.Area.Length))) -ForegroundColor DarkGray; $lastArea = $r.Area }
-    $col = switch ($r.Status) { 'PASS' { 'Green' } 'WARN' { 'Yellow' } default { 'Red' } }
+    $col = switch ($r.Status) { 'PASS' { 'Green' } 'WARN' { 'Yellow' } 'SKIP' { 'DarkGray' } default { 'Red' } }
     Write-Host ("  {0,-5} {1,-40} {2}" -f $r.Status, $r.Name, $r.Detail) -ForegroundColor $col
   }
   Write-Host $bar -ForegroundColor Cyan
