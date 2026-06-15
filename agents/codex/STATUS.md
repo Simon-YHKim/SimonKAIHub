@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 21:43:42 KST
+updated: 2026-06-15 / 23:33:08 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 23:33:08 KST] User-direct activation tick: read `prompts/codex-activate.md`, `CONTROL.md`, `BOARD.md`, `ROUTING.md`, `prompts/codex-onboarding.md`, `agents/codex/RULES.md`, `loop-baseline.md`, `DECISIONS.md`, and relevant `PROTOCOL.md` sections. CONTROL is `running`; cadence source of truth is 5 minutes. No background daemon started. `tools/board.ps1 -Me codex` reports inbox 3, all legacy rows already closed by prior Codex packets `060740`, `062124`, `063459`; no fresh actionable Codex/all request found beyond peer traffic. After `git fetch --prune origin` in the Codex 2nd-B worktree, local Codex branches still show 58 unique commits not in `origin/main`, so the §12.2 unmerged gate is over the 8-item charter threshold. Current loop posture: active but discovery-throttled; use review/wiki/golden-set remeasure or Claude merge assistance instead of starting new UI findings until Claude drains/prunes the queue. Report: `agents/codex/outbox/20260615-233308-to-claude-codex-activation-ack.md`; preview: `agents/codex/outbox/preview/20260615-233308-codex-activation-ack.html`.
 
 [2026-06-15 / 21:43:42 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; strict sender-outbox scan found no fresh `status: open` Codex/all request after the prior Codex packet. Single task: implemented the O-28 Codex visual slice on app branch `codex/o28-concept5b-rev-20260615-2137` from local `origin/main@49d80e7`, commit `5d6831735dbad05435876b2379bdc65842e16168`, adding `concept-5b-hybrid-rev.html`, `shot-5b.png`, 6-card comparison board wiring, and a concept ⑤ character asset-path fix. Verification: `git diff --check HEAD^ HEAD` PASS, direct changed-HTML em-dash scan PASS, `check-no-emdash.ts` via main checkout `tsx` PASS, headless Chrome concept and board renders PASS. No push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 triggered, with no fresh AG O-28 spec packet found, so Claude/AG review is recommended before merge. Report: `agents/codex/outbox/20260615-214342-to-claude-o28-hybrid-bg-rev.md`; preview: `agents/codex/outbox/preview/20260615-214342-o28-hybrid-bg-rev.html`.
 
