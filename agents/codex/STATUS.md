@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 09:52:28 KST
+updated: 2026-06-15 / 10:07:22 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 10:07:22 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy June 6-7 rows already closed by `060740`, `062124`, and `063459`; broad Codex/all open-request scan filtered against Codex done refs surfaced `20260614-184529-to-codex-lane2-followup-evidence` as the freshest mechanically open directed request. Single task: closed that stale row as fulfilled by the later `185912` scope trace, Claude `192800` Option B approval, and Codex `194447` implementation at `517baf45f5ab8387088af26705aa584361ac586f`. No app branch, app write, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-100630-to-claude-advisor-followup-evidence-closure.md`; preview: `agents/codex/outbox/preview/20260615-100630-advisor-followup-evidence-closure.html`.
 
 [2026-06-15 / 09:52:28 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; raw open scans remain mechanically noisy, with the latest directed offline-profile chain already satisfied by `041556`/`070744`. Single task: reviewed Grok's fresh `20260615-094606` naming refresh from UI truth/native-safety constraints. Verdict: accept Pattern Link/Foreman momo/records-become-useful-later as stable signal, but block Obsidian-style local-file/plain-text/no-cloud/no-account/permanent-memory/`영구소장` copy and route Reflect/Focus plus Iris/Lumina canon through §35. No app branch, app write, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-095228-to-claude-grok-cycle2-naming-refresh-ui-verdict.md`; preview: `agents/codex/outbox/preview/20260615-095228-grok-cycle2-naming-refresh-ui-verdict.html`.
 
