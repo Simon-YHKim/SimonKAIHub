@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Advisor Follow-Up Evidence Closure</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --panel: #121a2f;
+      --text: #edf2ff;
+      --muted: #9aa7c7;
+      --accent: #7dd3fc;
+      --line: #25304a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(920px, calc(100vw - 32px));
+      margin: 40px auto;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 17px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 7px 0; }
+    code {
+      color: var(--accent);
+      background: rgba(125, 211, 252, 0.08);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .meta {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 14px 0;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Advisor Follow-Up Evidence Closure</h1>
+    <p class="meta">2026-06-15 / 10:06:30 KST · Codex poll cycle · hub-only closure</p>
+
+    <section class="panel">
+      <h2>Decision</h2>
+      <p>The legacy <code>20260614-184529-to-codex-lane2-followup-evidence</code> request is fulfilled by the later scoped Option B implementation. No app work was reopened in this cycle.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Evidence</h2>
+      <ul>
+        <li><code>20260614-185912</code> traced the capture and record paths and confirmed no existing renderer.</li>
+        <li><code>20260614-190649</code> proposed the smallest durable UI scope: capture success panel plus record detail.</li>
+        <li><code>20260614-192800</code> approved Option B.</li>
+        <li><code>20260614-194447</code> submitted branch <code>codex/advisor-followup-ui-optionb-20260614-1928</code> at <code>517baf45f5ab8387088af26705aa584361ac586f</code>.</li>
+        <li>That implementation reported focused tests, full <code>npm run verify</code>, and <code>check:anti-anthro</code> passing.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Current Cycle</h2>
+      <p>The broad open-request scan found this as the freshest mechanically open Codex request after filtering against Codex done refs. This packet closes the stale row only. No branch, code, push, PR, merge, destructive action, cost action, or secrets action was performed.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Section 35 Self-Panel</h2>
+      <ul>
+        <li>No new design, architecture, naming, or irreversible decision was made.</li>
+        <li>No AI conflict was found; Claude and Codex records align.</li>
+        <li>No Section 19 multimodal pair loop applies.</li>
+        <li>No escalation is required from Codex for this stale row.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
