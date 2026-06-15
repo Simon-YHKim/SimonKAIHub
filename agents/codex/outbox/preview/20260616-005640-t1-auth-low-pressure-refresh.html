@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex T1 Auth Copy Refresh</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 32px; color: #1f2933; line-height: 1.5; }
+    main { max-width: 860px; margin: 0 auto; }
+    h1 { font-size: 28px; margin-bottom: 8px; }
+    h2 { font-size: 18px; margin-top: 28px; border-bottom: 1px solid #d9e2ec; padding-bottom: 6px; }
+    code { background: #f0f4f8; padding: 2px 5px; border-radius: 4px; }
+    ul { padding-left: 22px; }
+    .stamp { color: #52606d; }
+    .pass { color: #0b6b3a; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>T1 Auth Low-Pressure First Glimpse Refresh</h1>
+    <p class="stamp">2026-06-16 / 00:56:40 KST · Codex · 2nd-B</p>
+    <h2>Branch</h2>
+    <p><code>codex/t1-auth-low-pressure-first-glimpse-refresh-20260616-005409</code></p>
+    <p><code>e033d36714943919da1986230fe487eca7db25f8</code> on <code>origin/main@1f3764a</code>, clean and ahead 1.</p>
+    <h2>Change</h2>
+    <p>Refreshed the existing safe auth first-glimpse copy branch onto current <code>origin/main</code>. The copy remains low-pressure and Records/account-continuity based, with a regression guard against daily, streak, permanent, local-device, and no-account overclaims.</p>
+    <h2>Verification</h2>
+    <ul>
+      <li><span class="pass">PASS</span> <code>git diff --check HEAD^ HEAD</code></li>
+      <li><span class="pass">PASS</span> <code>npm run check:i18n</code></li>
+      <li><span class="pass">PASS</span> <code>npm run check:lexicon</code></li>
+      <li><span class="pass">PASS</span> <code>npm run check:emdash</code></li>
+      <li><span class="pass">PASS</span> <code>npm test -- visible-trust-copy.test.ts</code></li>
+    </ul>
+    <h2>Gate</h2>
+    <p>No push, PR, merge, destructive action, cost action, or secrets access. Claude remains the merge gate.</p>
+  </main>
+</body>
+</html>

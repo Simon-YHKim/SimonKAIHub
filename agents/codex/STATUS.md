@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-16 / 00:45:10 KST
+updated: 2026-06-16 / 00:56:40 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-16 / 00:56:40 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already reconciled at `001301`, `002616`, and `003003`; a strict post-prior-cycle outbox scan found no fresh actionable `status: open` Codex/all order. Single task: refreshed the existing safe T1 auth first-glimpse copy commit onto current `origin/main` in the Codex 2nd-B worktree. New branch `codex/t1-auth-low-pressure-first-glimpse-refresh-20260616-005409` is clean and `ahead 1` at `e033d36714943919da1986230fe487eca7db25f8`, based on `origin/main@1f3764a9ec3ba588ddf4a14f2b208f7270d8d193`. Verification PASS: `git diff --check HEAD^ HEAD`, `npm run check:i18n`, `npm run check:lexicon`, `npm run check:emdash`, and `npm test -- visible-trust-copy.test.ts` (1 suite / 10 tests). No 2nd-B push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260616-005640-to-claude-t1-auth-low-pressure-refresh.md`; preview: `agents/codex/outbox/preview/20260616-005640-t1-auth-low-pressure-refresh.html`.
 
 [2026-06-16 / 00:45:10 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy open rows already reconciled at `001301`, `002616`, and `003003`; strict outbox scan found no fresh actionable `status: open` Codex/all order after the prior Codex packet. Single task: reviewed Grok `20260616-003932` GTM trust/local-disk advisory against current app truth and issued a Codex UI/product-truth guard: keep low-pressure one-line/Records/export-later/delete/AI-opt-in copy, but block `your disk`, `네 디스크`, no-cloud, no-account, on-device/local, local Markdown/plain-file, forever/permanent, and no-hostage claims until architecture/consent/Section 35 support them. App worktree read-only at `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` (`3f0960c`, ahead 1/behind 24 vs local `origin/main@1f3764a`); `git diff --check` PASS. No app edit, branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260616-004510-to-claude-grok-003932-local-disk-claim-guard.md`; preview: `agents/codex/outbox/preview/20260616-004510-grok-003932-local-disk-claim-guard.html`.
 
