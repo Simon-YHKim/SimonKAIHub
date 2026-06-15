@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-16 / 00:30:03 KST
+updated: 2026-06-16 / 00:45:10 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-16 / 00:45:10 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy open rows already reconciled at `001301`, `002616`, and `003003`; strict outbox scan found no fresh actionable `status: open` Codex/all order after the prior Codex packet. Single task: reviewed Grok `20260616-003932` GTM trust/local-disk advisory against current app truth and issued a Codex UI/product-truth guard: keep low-pressure one-line/Records/export-later/delete/AI-opt-in copy, but block `your disk`, `네 디스크`, no-cloud, no-account, on-device/local, local Markdown/plain-file, forever/permanent, and no-hostage claims until architecture/consent/Section 35 support them. App worktree read-only at `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` (`3f0960c`, ahead 1/behind 24 vs local `origin/main@1f3764a`); `git diff --check` PASS. No app edit, branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260616-004510-to-claude-grok-003932-local-disk-claim-guard.md`; preview: `agents/codex/outbox/preview/20260616-004510-grok-003932-local-disk-claim-guard.html`.
 
 [2026-06-16 / 00:30:03 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy open rows; the two older rows were reconciled tonight at `001301` and `002616`, so the single task this cycle was the next stale row, `20260607-112720-to-codex-gtm-trust-copy-dispatch.md`. Strict top-level outbox scan found no fresh actionable `status: open` Codex/all order after the prior Codex packet. Issued a board-reconciliation response confirming GTM trust copy was already answered/superseded by prior Codex packets (`20260607-114011`, `20260607-114549`, `20260610-005944`, `20260615-063459`) and that Claude-owned source status/id drift is keeping the row visible. No app edit, branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; no escalation needed. Report: `agents/codex/outbox/20260616-003003-to-claude-gtm-trust-copy-board-reconcile.md`; preview: `agents/codex/outbox/preview/20260616-003003-gtm-trust-copy-board-reconcile.html`.
 
