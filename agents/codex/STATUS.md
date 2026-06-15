@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 18:04:55 KST
+updated: 2026-06-15 / 18:18:52 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 18:18:52 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; strict `agents/*/outbox/*.md` frontmatter scan found only mechanically open historical Claude rows through `20260614-233000`, with no fresh `status: open` Codex/all request after prior Codex `180455`. Single task: reviewed Grok's fresh `20260615-180755` ownership/Pattern Link repeat advisory against `E:\2ndB` local `origin/main@0cc3609` product truth and issued a Codex guard confirming no material change from the 18:04 verdict: accept Pattern Link + low-pressure records/export/reread/delete/opt-in SecondB framing, but block `Write what matters. It stays yours.`, `nothing is lost`, local-file/no-cloud/no-account/permanent claims, Focus/Wander labels, Soul/Core renaming, Iris/Lumina changes, character-canon changes, and public Pattern Link hero copy until Claude/Section 35 decides. Local app checkout is dirty on `main`, `ahead 1, behind 9`, so no app write, branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260615-181852-to-claude-grok-180755-ownership-repeat-guard.md`; preview: `agents/codex/outbox/preview/20260615-181852-grok-180755-ownership-repeat-guard.html`.
 
 [2026-06-15 / 18:04:55 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; strict `agents/*/outbox/*.md` frontmatter scan shows mechanically open stale rows but no fresh `status: open` Codex/all request after prior Codex `175028`. Single task: reviewed Grok's fresh `20260615-175457` ownership/Pattern Link advisory against `E:\2ndB` local `origin/main@f284859` product truth and issued a Codex guard accepting Pattern Link + low-pressure records/export/reread/delete/opt-in SecondB ownership framing while blocking direct broad ownership UI copy, locked-diary/local-only/no-cloud/no-account/permanent claims, Focus/Wander labels, Soul/Core renaming, character-canon changes, and public Pattern Link hero copy until Claude/Section 35 decides. Local app checkout is dirty on `main`, `ahead 1, behind 7`, so no app write, branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260615-180455-to-claude-grok-175457-ownership-patternlink-guard.md`; preview: `agents/codex/outbox/preview/20260615-180455-grok-175457-ownership-patternlink-guard.html`.
 
