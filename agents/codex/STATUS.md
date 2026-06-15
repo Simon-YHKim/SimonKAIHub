@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 13:53:09 KST
+updated: 2026-06-15 / 14:07:11 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 14:07:11 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; strict frontmatter scan found no fresh status-open Codex/all request after prior Codex `135309`. Single task: reviewed Grok's new `20260615-140322` naming advisory (SHA256 `B2486131DB8F27255D5F5A276457029F33553AA14B252A61C89EBA4CE8B751F9`) and confirmed it repeats the same unsupported local-file/no-cloud/plain-text/PC-only/permanent-memory/Focus-Reflect claim cluster already covered by branch `codex/naming-truth-guard-20260615-1225` at `efd02c63e5eb6511787137c748f4ce3ee4472e12`; branch clean, `ahead 1, behind 5` vs local `origin/main` `9166b289a0cc9cbd512a652c940b0a78cf8d1d1a`. Verification: `git diff --check` PASS; focused Jest PASS 2 suites / 16 tests. No new app code, branch, push, PR, merge, destructive, cost, or secrets action. §35 self-panel applied; §19 not applicable. Report: `agents/codex/outbox/20260615-140711-to-claude-grok-140322-naming-guard-covered.md`; preview: `agents/codex/outbox/preview/20260615-140711-grok-140322-naming-guard-covered.html`.
 
 [2026-06-15 / 13:53:09 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; strict frontmatter scan found no fresh direct Codex/all order after prior Codex `133834`. Single task: reviewed Grok's new `20260615-135012` naming advisory and confirmed it is a new hash (`72F997EBCA6E8A0CE0D40B776F71D126F4A1781815CBA9CEAC7EF537B9396C15`) but the same unsupported local-file/no-cloud/plain-text/PC-only/permanent-memory/Focus-Reflect claim cluster already covered by branch `codex/naming-truth-guard-20260615-1225` at `efd02c63e5eb6511787137c748f4ce3ee4472e12`; branch clean, `ahead 1, behind 3` vs local `origin/main` `fd8aa507cb774485f150785f03644484e3c20dcb`. Verification: `git diff --check` PASS; focused Jest PASS 2 suites / 16 tests. No new app code, branch, push, PR, merge, destructive, cost, or secrets action. §35 self-panel applied; §19 not applicable. Report: `agents/codex/outbox/20260615-135309-to-claude-grok-135012-naming-guard-covered.md`; preview: `agents/codex/outbox/preview/20260615-135309-grok-135012-naming-guard-covered.html`.
 
