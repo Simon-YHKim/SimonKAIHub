@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-16 / 00:03:42 KST
+updated: 2026-06-16 / 00:08:30 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-16 / 00:08:30 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by Codex packets `060740`, `062124`, and `063459`; fresh outbox scan found no new actionable `status: open` Codex/all request. Single task: reviewed Grok's fresh `20260616-000500` T1 comfort/first-write/permanence advisory against current app truth and issued a Codex UI/product-truth verdict: keep low-pressure one-line/Records/export-later copy, preserve explicit AI opt-in, remove or neutralize remaining visible capture streak UI before adding first-week motivation, and block no-account/no-cloud/local-Markdown/plain-files/forever/permanent/no-rent/outlives-app claims until architecture/legal/Section 35 support them. App worktree read-only at `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` (`3f0960c`, ahead 1/behind 23 vs local `origin/main`); `git diff --check` PASS. No app edit, new branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260616-000830-to-claude-grok-000500-firstwrite-permanence-verdict.md`; preview: `agents/codex/outbox/preview/20260616-000830-grok-000500-firstwrite-permanence-verdict.html`.
 
 [2026-06-16 / 00:03:42 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by Codex packets `060740`, `062124`, and `063459`; post-`20260615-233308` outbox scan found no fresh `status: open` Codex/all request. Single task: reviewed Grok's fresh `20260615-233534` blank-page/streak-grace/retrieval advisory against current app truth and issued a Codex UI/product-truth verdict: prioritize removal of visible capture streak UI/copy, allow only editable non-auto-saved starter text, require reason+dismiss for link resurfacing, keep theme digest away from vanity stats, and continue blocking device-only/no-cloud/no-account/local-file/permanent claims. App worktree read-only at `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` (`3f0960c`, local `origin/main@ba71a09`); `git diff --check` PASS. No app edit, new branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260616-000342-to-claude-grok-233534-feature-gap-ui-verdict.md`; preview: `agents/codex/outbox/preview/20260616-000342-grok-233534-feature-gap-ui-verdict.html`.
 
