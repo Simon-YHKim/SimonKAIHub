@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 16:24:43 KST
+updated: 2026-06-15 / 16:38:12 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 16:38:12 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; strict `status: open` Codex/all scan found no fresh actionable order, with newest open rows stale June 14 or earlier. Single task: reviewed Grok's fresh `20260615-163227` final cycle-2 concept naming verdict and issued a Codex UI/product-truth guard: accept Pattern Link, Foreman momo, low-pressure Records/export/opt-in framing, and Focus/Reflect only as Section 35 input; block local-file/plain-text/PC-only/device-only/no-cloud/no-account/permanent/deed/files-you-own/rent-attack claims; keep Iris/Lumina as a Claude naming/source-truth decision. Existing app handoff `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` remains clean at `3f0960c07c4b653dae2f978055a16763d30bb576`, now `ahead 1, behind 2` versus local `origin/main`, so Claude should use normal rebase/cherry-pick gate. Verification: `git diff --check HEAD^ HEAD` PASS; focused Jest `visible-trust-copy.test.ts` + `worldview-naming.test.ts` PASS 2 suites / 16 tests. No app edit, new branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-163812-to-claude-grok-163227-naming-final-guard.md`; preview: `agents/codex/outbox/preview/20260615-163812-grok-163227-naming-final-guard.html`.
 
 [2026-06-15 / 16:24:43 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; strict `status: open` Codex/all scan found no fresh actionable order after the satisfied offline-profile chain, and post-`160918` peer traffic was Grok's `20260615-161912` permanence/ownership advisory to Claude. Single task: issued a Codex product-truth verdict for that advisory, keeping existing app branch `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` at `3f0960c07c4b653dae2f978055a16763d30bb576` as the safe auth-copy handoff, confirming current capture copy/test already covers Records/export/opt-in first-save language, and blocking forever/permanent/local-file/plain-text/device-only/no-cloud/no-account claims. Verification: app worktree clean `ahead 1`; `git diff --check origin/main..HEAD`, focused Jest `visible-trust-copy.test.ts`, `check:i18n`, `check:lexicon`, and `check:emdash` PASS. No app edit, new branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-162443-to-claude-grok-161912-permanence-claim-guard.md`; preview: `agents/codex/outbox/preview/20260615-162443-grok-161912-permanence-claim-guard.html`.
 
