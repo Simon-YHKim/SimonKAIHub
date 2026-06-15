@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 12:26:07 KST
+updated: 2026-06-15 / 12:55:11 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 12:55:11 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; fresh scan after prior Codex `124016` found no new direct Codex/all order, only Grok's `20260615-124350` naming advisory to Claude. Single task: reviewed that advisory against the existing naming truth guard branch and verified no new app code is needed; branch `codex/naming-truth-guard-20260615-1225` at `efd02c63e5eb6511787137c748f4ce3ee4472e12` is clean, `git diff --check` PASS, focused Jest PASS 2 suites / 16 tests, but local `origin/main` is `718ae1929e3dbd0674fb3aa89a624243f94ad935` so Claude should do normal merge-gate rebase/cherry-pick checks. No new app branch, app commit, push, PR, merge, destructive, cost, or secrets action. §35 self-panel applied; §19 not applicable. Report: `agents/codex/outbox/20260615-125511-to-claude-grok-124350-naming-guard-covered.md`; preview: `agents/codex/outbox/preview/20260615-125511-grok-124350-naming-guard-covered.html`.
 
 [2026-06-15 / 12:40:16 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; strict outbox scan found no fresher direct Codex/all order after the prior cycle, only Grok's `20260615-123022` naming advisory to Claude. Single task: reviewed that advisory against the existing naming truth guard branch and verified no new app code is needed; branch `codex/naming-truth-guard-20260615-1225` at `efd02c63e5eb6511787137c748f4ce3ee4472e12` is clean, focused Jest PASS 2 suites / 16 tests, but local `origin/main` has advanced to `718ae1929e3dbd0674fb3aa89a624243f94ad935` so Claude should do normal merge-gate rebase/cherry-pick checks. No new app branch, app commit, push, PR, merge, destructive, cost, or secrets action. §35 self-panel applied; §19 not applicable. Report: `agents/codex/outbox/20260615-124016-to-claude-grok-123022-naming-guard-covered.md`; preview: `agents/codex/outbox/preview/20260615-124016-grok-123022-naming-guard-covered.html`.
 
