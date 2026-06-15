@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Guard - Grok 195746 Plain-Text Permanence</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #101318;
+      --muted: #5a6472;
+      --line: #d9e0e8;
+      --ok: #0f766e;
+      --warn: #9a3412;
+      --bg: #f7f9fb;
+      --panel: #ffffff;
+    }
+    body {
+      margin: 0;
+      font: 15px/1.55 system-ui, -apple-system, Segoe UI, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 18px 48px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    .meta {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 14px 0;
+    }
+    .grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+    li {
+      margin: 6px 0;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.92em;
+      background: #edf2f7;
+      border-radius: 4px;
+      padding: 1px 4px;
+    }
+    .keep {
+      border-left: 4px solid var(--ok);
+    }
+    .block {
+      border-left: 4px solid var(--warn);
+    }
+    .tag {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 2px 8px;
+      color: var(--muted);
+      font-size: 12px;
+      margin-right: 6px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Codex Product-Truth Guard</h1>
+    <div class="meta">2026-06-15 / 20:04:50 KST · ref: Grok 20260615-195746 · one PROTOCOL 12/19/35.4 cycle</div>
+
+    <section class="panel">
+      <span class="tag">Verdict</span>
+      Grok's ownership/permanence signal is useful, but the current app supports account-backed records plus exportable text bundles, not a plain local file vault.
+    </section>
+
+    <div class="grid">
+      <section class="panel keep">
+        <h2>Keep</h2>
+        <ul>
+          <li><code>Pattern Link</code> as the existing concept label.</li>
+          <li>Records, account-scoped access, export, delete, and opt-in AI framing.</li>
+          <li>"Portable text export" and "SecondB shows what it used" copy.</li>
+        </ul>
+      </section>
+
+      <section class="panel block">
+        <h2>Block</h2>
+        <ul>
+          <li><code>your files</code>, local folder, no-cloud, no-account, offline, forever, or 30-year permanence claims.</li>
+          <li><code>Local Core</code>, <code>My Pattern Link</code>, <code>Focus</code>, or <code>Reflect</code> renames without a §35 decision.</li>
+          <li>Momo as a public "companion"; keep archive foreman / records steward truth.</li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="panel">
+      <h2>Evidence</h2>
+      <ul>
+        <li><code>src/lib/wiki/storage.ts</code>: raw clipping Markdown uploads to private Supabase Storage <code>raw-clippings</code>.</li>
+        <li><code>src/lib/wiki/export.ts</code>: export composes a Markdown/text bundle, with records opt-in.</li>
+        <li><code>locales/*/permissions.json</code>: network is required for sign-in, saving records, and SecondB replies.</li>
+        <li><code>locales/*/data.json</code>: only lightweight preferences live on device; saved records are a different category.</li>
+        <li><code>src/app/secondb.tsx</code>: current mode UI is Analysis / New angle, backed by Analytic / Divergent.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Safe Copy</h2>
+      <ul>
+        <li>EN: Export your records as a portable text bundle whenever you need it.</li>
+        <li>KO: 필요할 때 언제든 내 기록을 하나의 텍스트 묶음으로 내보낼 수 있어요.</li>
+        <li>EN: Pattern Link connects the pieces you wrote or saved.</li>
+        <li>KO: 패턴 링크는 내가 쓰거나 저장한 조각들을 연결해 보여줘요.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Section 35</h2>
+      Naming/storage-posture adoption triggers §35. Codex made no app edit and recommends Claude route a real decision before adopting stronger local-first or permanence claims.
+    </section>
+  </main>
+</body>
+</html>

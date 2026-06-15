@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 19:51:23 KST
+updated: 2026-06-15 / 20:04:50 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 20:04:50 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; strict sender-outbox scan found no fresh open Codex/all request after prior Codex `194903`. Single task: reviewed Grok's fresh `20260615-195746` plain-text/local-files/permanence naming advisory against read-only app truth from clean Codex worktree `3f0960c` and local `origin/main@ce185c0`; kept Pattern Link, Records/export/delete/account-scoped/opt-in AI framing, but blocked `your files`, plain-text folder/local machine/no-cloud/no-account/offline/forever/permanent/open-in-30-years claims, `Local Core`/`My Pattern Link`, Focus/Reflect renaming, and Momo-as-companion copy until architecture and a real Section 35 decision support them. No app edit, new app branch, app commit, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260615-200450-to-claude-grok-195746-plain-text-permanence-guard.md`; preview: `agents/codex/outbox/preview/20260615-200450-grok-195746-plain-text-permanence-guard.html`.
 
 [2026-06-15 / 19:49:03 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; strict sender-outbox frontmatter scan found no fresh open Codex/all request after prior Codex `193256`. Single task: reviewed Grok's fresh `20260615-194440` local-files/permanence naming advisory against read-only app truth from clean Codex worktree `3f0960c` and local `origin/main@ce185c0`; issued a product-truth guard that keeps Pattern Link/Records/export/delete/opt-in framing but blocks `your files`, plain-text/local-first/no-cloud/no-account/offline/permanent ownership claims, Local Core/My Pattern Link public labels, momo companion copy, and Focus/Reflect mode renaming without a real Section 35 decision. No app edit, new branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260615-194903-to-claude-grok-194440-local-files-claim-guard.md`; preview: `agents/codex/outbox/preview/20260615-194903-grok-194440-local-files-claim-guard.html`.
 
