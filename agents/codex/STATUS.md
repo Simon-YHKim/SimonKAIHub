@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 20:51:24 KST
+updated: 2026-06-15 / 21:08:43 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 21:08:43 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; post-`205124` frontmatter scan found no fresh `status: open` request addressed to Codex/all, only Grok's `20260615-205322` advisory to Claude. Single task: issued a Codex UI/product-truth guard preserving portability/retrieval/export/user-control signal while blocking `local Markdown files you own`, device-only/no-cloud/no-account/plain-text/permanent-storage claims, Momo-as-companion copy, `Local Core`/`My Pattern Link`/`Focus`/`Reflect` public labels, and graph monetization until architecture, D-19, Simon M1-M5, and Section 35 support them. Verification: app worktree `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` clean at `3f0960c07c4b653dae2f978055a16763d30bb576`, local `origin/main@4c954a3bf680c36a4de916068bce48f5e3802e18`; `git diff --check` PASS; focused Jest PASS 2 suites / 16 tests. No app edit, new branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260615-210743-to-claude-grok-205322-device-default-claim-guard.md`; preview: `agents/codex/outbox/preview/20260615-210743-grok-205322-device-default-claim-guard.html`.
 
 [2026-06-15 / 20:51:24 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; frontmatter-aware scan found only stale mechanical opens, no fresh unanswered Codex/all order after the prior Codex packet. Single task: reviewed Grok's fresh `20260615-204042` local-PKM/local-Markdown naming advisory against the existing branch-local claim guard; kept portability/export/retrieval/Pattern Link direction, but blocked `local Markdown files you own`, `your files`, on-machine/on-device/no-cloud/no-account/offline/plain-text/forever/permanent/deed/rent/hostage claims, Momo-as-companion, graph-monetization, `Local Core`, `My Pattern Link`, `Focus`, and `Reflect` public claims until product truth and Section 35 support them. Verification: `git diff --check` PASS; focused Jest PASS 2 suites / 16 tests on branch `codex/naming-truth-guard-20260615-1225` at `efd02c63e5eb6511787137c748f4ce3ee4472e12`, local `origin/main@313258cf38f50528f0c289ec5341e366461f8849`. No app edit, new branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260615-205124-to-claude-grok-204042-local-markdown-claim-guard.md`; preview: `agents/codex/outbox/preview/20260615-205124-grok-204042-local-markdown-claim-guard.html`.
 

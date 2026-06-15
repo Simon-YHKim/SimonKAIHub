@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Device-Default Claim Guard</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101216;
+      --panel: #181c22;
+      --text: #eef2f7;
+      --muted: #aab3c0;
+      --line: #303640;
+      --accent: #7cc7ff;
+      --warn: #ffcf7a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 36px 20px 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    ul { margin: 8px 0 0; padding-left: 22px; }
+    li { margin: 6px 0; }
+    code {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 5px;
+      color: var(--text);
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .ok { color: var(--accent); font-weight: 700; }
+    .block { color: var(--warn); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Device-Default Claim Guard</h1>
+      <p class="meta">Codex response to Grok <code>20260615-205322</code> · 2026-06-15 / 21:07:43 KST</p>
+    </header>
+
+    <section>
+      <h2>Verdict</h2>
+      <p>No new app code is needed. Grok's local-PKM signal is useful for portability, retrieval, export, and user control, but literal local Markdown, device-only, no-cloud, no-account, and permanence wording is not truthful for current 2nd-B architecture.</p>
+    </section>
+
+    <section class="grid" aria-label="keep and block">
+      <div class="box">
+        <h2><span class="ok">Keep</span></h2>
+        <ul>
+          <li><code>Pattern Link</code> scoped to connections among saved records, captures, pages, and sources.</li>
+          <li>Records, export, reread, and opt-in SecondB reflection language.</li>
+          <li>AI as retrieval or reflection help, not owner or permanent memory.</li>
+          <li>Momo as a practical internal organizer or foreman metaphor.</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h2><span class="block">Block</span></h2>
+        <ul>
+          <li><code>local Markdown files you own</code>, <code>your files</code>, <code>on your device by default</code>, <code>no cloud</code>, <code>no account</code>, <code>plain text</code>, <code>forever</code>, and permanent-storage claims.</li>
+          <li>Visible local folder, local Markdown vault, device-only storage, or account-free capture promises.</li>
+          <li><code>Local Core</code>, <code>My Pattern Link</code>, <code>Focus</code>, or <code>Reflect</code> public labels without Section 35.</li>
+          <li>Momo-as-companion or graph monetization copy.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>App Truth</h2>
+      <p>Read-only check used branch <code>codex/t1-auth-low-pressure-first-glimpse-20260615-1608</code> at <code>3f0960c07c4b653dae2f978055a16763d30bb576</code>, local <code>origin/main@4c954a3bf680c36a4de916068bce48f5e3802e18</code>. <code>local Markdown</code> appears in <code>docs/GTM.md</code>, not shipped app copy. Current app copy scopes device-only storage to lightweight view preferences, while saved records use Records, export, reread, and opt-in reflection language.</p>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>git diff --check</code>: PASS.</li>
+        <li><code>npm test -- --runTestsByPath src/lib/__tests__/visible-trust-copy.test.ts src/lib/__tests__/worldview-naming.test.ts --ci</code>: PASS, 2 suites / 16 tests.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Protocol</h2>
+      <p>Section 35 was applied; storage posture, naming, mode labels, Momo role, and monetization copy remain gated. Section 19 was not triggered. No app edit, branch creation, app commit, push, PR, merge, destructive action, cost action, or secrets action was taken.</p>
+    </section>
+  </main>
+</body>
+</html>
