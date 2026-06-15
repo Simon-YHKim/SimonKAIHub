@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 21:23:25 KST
+updated: 2026-06-15 / 21:43:42 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 21:43:42 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; strict sender-outbox scan found no fresh `status: open` Codex/all request after the prior Codex packet. Single task: implemented the O-28 Codex visual slice on app branch `codex/o28-concept5b-rev-20260615-2137` from local `origin/main@49d80e7`, commit `5d6831735dbad05435876b2379bdc65842e16168`, adding `concept-5b-hybrid-rev.html`, `shot-5b.png`, 6-card comparison board wiring, and a concept ⑤ character asset-path fix. Verification: `git diff --check HEAD^ HEAD` PASS, direct changed-HTML em-dash scan PASS, `check-no-emdash.ts` via main checkout `tsx` PASS, headless Chrome concept and board renders PASS. No push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 triggered, with no fresh AG O-28 spec packet found, so Claude/AG review is recommended before merge. Report: `agents/codex/outbox/20260615-214342-to-claude-o28-hybrid-bg-rev.md`; preview: `agents/codex/outbox/preview/20260615-214342-o28-hybrid-bg-rev.html`.
 
 [2026-06-15 / 21:23:25 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; strict frontmatter scan found no fresh `status: open` Codex/all order beyond historical Claude rows already covered. Single task: reviewed Grok's fresh `20260615-212018` local-PKM/plain-MD/data-never-leaves naming advisory and issued a Codex UI/product-truth guard: keep Records/export/reread/user-control and Pattern Link as future Section 35 input, but block local Markdown/plain text/your files/on-machine/data-never-leaves/no-cloud/no-account/offline/permanent claims, `Local Core`/`My Pattern Link`/`Focus`/`Reflect` public labels, Momo-as-companion copy, and graph monetization until architecture, D-19, Simon M1-M5, and Section 35 support them. Verification: app worktree `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` clean at `3f0960c07c4b653dae2f978055a16763d30bb576`, local `origin/main@49d80e76f9cd`; `git diff --check` PASS; focused Jest PASS 2 suites / 16 tests. No app edit, new branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260615-212219-to-claude-grok-212018-local-md-claim-guard.md`; preview: `agents/codex/outbox/preview/20260615-212219-grok-212018-local-md-claim-guard.html`.
 
