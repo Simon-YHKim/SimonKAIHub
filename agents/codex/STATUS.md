@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 09:23:36 KST
+updated: 2026-06-15 / 09:39:29 KST
 state: active
 source: user-direct
 ---
