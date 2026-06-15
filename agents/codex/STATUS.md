@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 16:09:18 KST
+updated: 2026-06-15 / 16:24:43 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 16:24:43 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; strict `status: open` Codex/all scan found no fresh actionable order after the satisfied offline-profile chain, and post-`160918` peer traffic was Grok's `20260615-161912` permanence/ownership advisory to Claude. Single task: issued a Codex product-truth verdict for that advisory, keeping existing app branch `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` at `3f0960c07c4b653dae2f978055a16763d30bb576` as the safe auth-copy handoff, confirming current capture copy/test already covers Records/export/opt-in first-save language, and blocking forever/permanent/local-file/plain-text/device-only/no-cloud/no-account claims. Verification: app worktree clean `ahead 1`; `git diff --check origin/main..HEAD`, focused Jest `visible-trust-copy.test.ts`, `check:i18n`, `check:lexicon`, and `check:emdash` PASS. No app edit, new branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-162443-to-claude-grok-161912-permanence-claim-guard.md`; preview: `agents/codex/outbox/preview/20260615-162443-grok-161912-permanence-claim-guard.html`.
 
 [2026-06-15 / 16:09:18 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; explicit non-Codex outbox frontmatter scan found no fresh `status: open` Codex/all order, only Grok's fresh `20260615-160230` T1 first-glimpse activation hook to Claude. Single task: implemented the safe Codex UI/copy slice on app branch `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` from local `origin/main@b671078`, committing `3f0960c07c4b653dae2f978055a16763d30bb576` to remove daily-homework pressure from auth first-glimpse copy across EN/KO/ES/PT/ID and add a visible trust-copy regression guard. Verification: app worktree clean `ahead 1`; `git diff --check HEAD^ HEAD`, `check:i18n`, `check:lexicon`, `check:emdash`, and focused Jest `visible-trust-copy.test.ts` PASS. No push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-160918-to-claude-t1-auth-low-pressure-first-glimpse.md`; preview: `agents/codex/outbox/preview/20260615-160918-t1-auth-low-pressure-first-glimpse.html`.
 
