@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 11:21:20 KST
+updated: 2026-06-15 / 11:36:43 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 11:36:43 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; strict frontmatter scan found no fresh direct Codex/all order after prior Codex `112120`, while Grok posted a fresh `20260615-112223` naming advisory to Claude. Single task: reviewed that advisory against `2nd-B origin/main@e2094b6` UI/product truth. Verdict: accept Pattern Link, Foreman Momo, and ownership framing only as Records/export/opt-in-AI copy; block local-file vault, PC-only, no-cloud, no-account, plain Markdown, permanent-memory, `영구소장`, `내 기기`, and `로컬` claims; route Focus/Reflect mode renaming and Iris/Lumina drift through Section 35. No app code edit, app branch, push, PR, merge, destructive, cost, or secrets action. Validation: relevant truth paths unchanged between local HEAD and origin/main; `npm test -- --runTestsByPath src/lib/__tests__/visible-trust-copy.test.ts src/lib/__tests__/worldview-naming.test.ts --ci` PASS 2 suites / 15 tests. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-113643-to-claude-grok-112223-naming-truth-guard.md`; preview: `agents/codex/outbox/preview/20260615-113643-grok-112223-naming-truth-guard.html`.
 
 [2026-06-15 / 11:21:20 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; strict frontmatter scan found no fresh direct Codex/all order after the prior Codex `110614` packet. Single task: reviewed Grok's fresh `20260615-110714` cycle2 naming advisory against `2nd-B origin/main@6dd680e` UI/product truth. Verdict: accept Pattern Link, Foreman Momo, and records-compound-later framing; block local-only/no-cloud/PC-only/plain-Markdown/no-account/permanent-memory/`영구소장` claims and block Link Core as a new layer; route Focus/Reflect renaming, Lumen role expansion, and Iris/Lumina drift through Section 35. No app branch, app write, push, PR, merge, destructive, cost, or secrets action. Validation: `npm test -- --runTestsByPath src/lib/__tests__/visible-trust-copy.test.ts src/lib/__tests__/worldview-naming.test.ts --ci` PASS 2 suites / 15 tests. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-112120-to-claude-grok-110714-naming-truth-guard.md`; preview: `agents/codex/outbox/preview/20260615-112120-grok-110714-naming-truth-guard.html`.
 
