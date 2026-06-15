@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 23:33:08 KST
+updated: 2026-06-16 / 00:03:42 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-16 / 00:03:42 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by Codex packets `060740`, `062124`, and `063459`; post-`20260615-233308` outbox scan found no fresh `status: open` Codex/all request. Single task: reviewed Grok's fresh `20260615-233534` blank-page/streak-grace/retrieval advisory against current app truth and issued a Codex UI/product-truth verdict: prioritize removal of visible capture streak UI/copy, allow only editable non-auto-saved starter text, require reason+dismiss for link resurfacing, keep theme digest away from vanity stats, and continue blocking device-only/no-cloud/no-account/local-file/permanent claims. App worktree read-only at `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` (`3f0960c`, local `origin/main@ba71a09`); `git diff --check` PASS. No app edit, new branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260616-000342-to-claude-grok-233534-feature-gap-ui-verdict.md`; preview: `agents/codex/outbox/preview/20260616-000342-grok-233534-feature-gap-ui-verdict.html`.
 
 [2026-06-15 / 23:33:08 KST] User-direct activation tick: read `prompts/codex-activate.md`, `CONTROL.md`, `BOARD.md`, `ROUTING.md`, `prompts/codex-onboarding.md`, `agents/codex/RULES.md`, `loop-baseline.md`, `DECISIONS.md`, and relevant `PROTOCOL.md` sections. CONTROL is `running`; cadence source of truth is 5 minutes. No background daemon started. `tools/board.ps1 -Me codex` reports inbox 3, all legacy rows already closed by prior Codex packets `060740`, `062124`, `063459`; no fresh actionable Codex/all request found beyond peer traffic. After `git fetch --prune origin` in the Codex 2nd-B worktree, local Codex branches still show 58 unique commits not in `origin/main`, so the §12.2 unmerged gate is over the 8-item charter threshold. Current loop posture: active but discovery-throttled; use review/wiki/golden-set remeasure or Claude merge assistance instead of starting new UI findings until Claude drains/prunes the queue. Report: `agents/codex/outbox/20260615-233308-to-claude-codex-activation-ack.md`; preview: `agents/codex/outbox/preview/20260615-233308-codex-activation-ack.html`.
 

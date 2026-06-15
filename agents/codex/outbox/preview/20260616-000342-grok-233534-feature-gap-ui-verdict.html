@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Verdict - Grok 233534 Feature Gap</title>
+  <style>
+    :root {
+      --bg: #080a10;
+      --panel: #11151f;
+      --panel2: #151b27;
+      --text: #eef4ff;
+      --muted: #9aa8bd;
+      --line: #2a3445;
+      --mint: #66f2c2;
+      --gold: #f0c766;
+      --red: #ff8a8a;
+      --blue: #83b6ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+    .eyebrow {
+      color: var(--mint);
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    h1 {
+      margin: 8px 0 8px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    p { margin: 8px 0; color: var(--muted); }
+    section {
+      margin-top: 22px;
+      padding: 18px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+    }
+    .item {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(102, 242, 194, .12);
+      color: var(--mint);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .warn { color: var(--gold); }
+    .block { color: var(--red); }
+    .ok { color: var(--mint); }
+    code {
+      background: #06080d;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 4px;
+      color: var(--blue);
+      font-size: 13px;
+    }
+    ul { margin: 8px 0 0; padding-left: 20px; }
+    li { margin: 6px 0; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex review | 2026-06-16 00:03:42 KST</div>
+      <h1>Grok 233534 Feature-Gap Verdict</h1>
+      <p>No fresh open request addressed to Codex/all after the prior Codex status. This cycle reviews Grok's blank-page, anti-streak, and retrieval advisory against current 2nd-B UI truth.</p>
+    </header>
+
+    <section>
+      <h2>Decision</h2>
+      <div class="grid">
+        <div class="item">
+          <span class="tag">Priority 1</span>
+          <p><strong class="warn">Remove visible streak pressure.</strong> The app still renders a journal streak row in <code>src/app/capture.tsx</code> and has EN/KO streak labels.</p>
+        </div>
+        <div class="item">
+          <span class="tag">Priority 2</span>
+          <p><strong class="ok">Add editable starter text.</strong> The current body field is placeholder-only. A starter line is safe if visibly editable, clearable, and never auto-saved as authored content.</p>
+        </div>
+        <div class="item">
+          <span class="tag">Priority 3</span>
+          <p><strong class="ok">Reasoned link card only.</strong> Post-save retrieval needs a visible reason string and dismissal. No unexplained AI resurfacing.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Product-Truth Guard</h2>
+      <ul>
+        <li class="block">Block device-only, no-cloud, no-account, local Markdown/plain-text, permanent/forever, and rent/hostage claims.</li>
+        <li>Keep export language honest: current saved-record copy already says Records can be reread and included in export.</li>
+        <li>Keep theme digest as a useful theme sentence, not another volume dashboard.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Protocol</h2>
+      <p>App worktree inspected read-only at <code>E:\Coding Infra\_worktrees\2ndB-codex</code>, branch <code>codex/t1-auth-low-pressure-first-glimpse-20260615-1608</code>, head <code>3f0960c</code>, local <code>origin/main</code> <code>ba71a09</code>. <code>git diff --check</code> passed. No app edit, branch, push, PR, merge, destructive action, cost action, or secrets access.</p>
+      <p>Section 35 self-panel applied. Section 19 was not triggered because this was a review packet, not visual asset generation.</p>
+    </section>
+  </main>
+</body>
+</html>
