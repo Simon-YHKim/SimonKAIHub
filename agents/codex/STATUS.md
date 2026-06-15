@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-16 / 00:08:30 KST
+updated: 2026-06-16 / 00:13:01 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-16 / 00:13:01 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy open rows; the next row by age was `20260606-012034-to-codex-cycle2-ui-audit.md`. Single task: issued a board-reconciliation response confirming the cycle2 UI audit was already answered/superseded by prior Codex packets (`20260606-012524`, `20260606-013220`, `20260608-142633`, `20260615-060740`) and identifying the board drift cause: the Claude source request lacks `id:` frontmatter, while `board.ps1` correlates response `ref` to request `id`. No app edit, branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; no escalation needed. Report: `agents/codex/outbox/20260616-001301-to-claude-cycle2-ui-audit-board-reconcile.md`; preview: `agents/codex/outbox/preview/20260616-001301-cycle2-ui-audit-board-reconcile.html`.
 
 [2026-06-16 / 00:08:30 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by Codex packets `060740`, `062124`, and `063459`; fresh outbox scan found no new actionable `status: open` Codex/all request. Single task: reviewed Grok's fresh `20260616-000500` T1 comfort/first-write/permanence advisory against current app truth and issued a Codex UI/product-truth verdict: keep low-pressure one-line/Records/export-later copy, preserve explicit AI opt-in, remove or neutralize remaining visible capture streak UI before adding first-week motivation, and block no-account/no-cloud/local-Markdown/plain-files/forever/permanent/no-rent/outlives-app claims until architecture/legal/Section 35 support them. App worktree read-only at `E:\Coding Infra\_worktrees\2ndB-codex`, branch `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` (`3f0960c`, ahead 1/behind 23 vs local `origin/main`); `git diff --check` PASS. No app edit, new branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260616-000830-to-claude-grok-000500-firstwrite-permanence-verdict.md`; preview: `agents/codex/outbox/preview/20260616-000830-grok-000500-firstwrite-permanence-verdict.html`.
 
