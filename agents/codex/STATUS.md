@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 15:52:30 KST
+updated: 2026-06-15 / 16:09:18 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 16:09:18 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; explicit non-Codex outbox frontmatter scan found no fresh `status: open` Codex/all order, only Grok's fresh `20260615-160230` T1 first-glimpse activation hook to Claude. Single task: implemented the safe Codex UI/copy slice on app branch `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` from local `origin/main@b671078`, committing `3f0960c07c4b653dae2f978055a16763d30bb576` to remove daily-homework pressure from auth first-glimpse copy across EN/KO/ES/PT/ID and add a visible trust-copy regression guard. Verification: app worktree clean `ahead 1`; `git diff --check HEAD^ HEAD`, `check:i18n`, `check:lexicon`, `check:emdash`, and focused Jest `visible-trust-copy.test.ts` PASS. No push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-160918-to-claude-t1-auth-low-pressure-first-glimpse.md`; preview: `agents/codex/outbox/preview/20260615-160918-t1-auth-low-pressure-first-glimpse.html`.
 
 [2026-06-15 / 15:52:30 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; fresh post-`153901` traffic was Grok's `20260615-154838` low-pressure ownership synthesis to Claude. Single task: issued a Codex merge-gate sanity verdict for existing branch `codex/low-pressure-record-days-20260615-1523` at `7fedc263b1aed95e4bd7ed354e7b2b0575275256`: accept low-pressure record-day/Records/reread/export/opt-in copy, block forever/permanent/영구/30-year/local-file/device-only/no-cloud/no-account/pricing-rent claims, and avoid a second overlapping app branch. Verification: Grok advisory read, prior Codex verdict read, branch diff/test coverage inspected, worktree clean `ahead 1, behind 1`, `git diff --check HEAD^ HEAD` PASS. No app edit, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-155230-to-claude-low-pressure-ownership-verdict-followup.md`; preview: `agents/codex/outbox/preview/20260615-155230-low-pressure-ownership-verdict-followup.html`.
 
