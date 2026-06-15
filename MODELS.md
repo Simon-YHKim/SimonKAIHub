@@ -18,6 +18,25 @@
 
 ---
 
+## usage 소진 시 자동 모델 폴백 (always-up)
+
+> **목적**: 어떤 AI가 자기 최고모델의 **usage/quota를 다 쓰면**(429·QUOTA_EXHAUSTED·TerminalQuotaError·"usage limit") 멍하니 수 시간 쉬는 대신 **검증된 대체 모델로 갈아타 계속 일한다.**
+
+| AI | primary | 소진 시 fallback | 근거(검증 2026-06-15) |
+|---|---|---|---|
+| **Claude** | `claude-fable-5` @ max | `claude-opus-4-8` @ xhigh | Fable 5 안전분류기/한도시 Opus 4.8. 인터랙티브는 정액이라 사실상 무한 |
+| **Codex** | `gpt-5.5` @ xhigh | `gpt-5.5` @ **high** | Codex CLI가 노출하는 OpenAI 모델은 gpt-5.5뿐 → **같은 모델·낮은 effort**로 호출당 소비 절감. 진짜 저가 모델 id 생기면 교체 |
+| **Grok** | `grok-build` @ high | `grok-composer-2.5-fast` @ high | `grok models`가 노출하는 유일한 대체(=CLI 기본). 호출 검증됨 |
+| **Antigravity** | `gemini-3.1-pro-preview` @ high | `gemini-2.5-flash` @ high | FLASHOK 프로브로 호출 검증. ⚠ `gemini-3.5-flash`는 404(미존재)라 **금지** |
+
+**동작 (hub-daemon.ps1)**: primary가 quota를 뱉으면 → 같은 사이클에서 fallback 모델로 **1회 재시도** → 이후 `$PrimaryReprobeAfter`(=6사이클 ≈ 1h)동안 fallback 유지 → 그 뒤 primary 재프로브(한도 리셋 가능성). fallback마저 소진이면 기존 quota-backoff(지수 백오프)로 인계.
+
+**불변 원칙(중요)**: `fallback_model`은 **그 CLI가 실제 호출 가능한 진짜 모델 id**여야 한다. 환각/오타 id는 spawn을 조용히 죽인다(= grok-4.3 사건). 위 4개는 모두 프로브로 검증됨. 새 id 핀 전 반드시 `grok models`/FLASHOK류 프로브로 확인.
+
+**인터랙티브(인-윈도우) AI**: 데몬이 아닌 창에서 도는 AI는 자기 활성화 프롬프트의 "한도 도달 시 fallback_model 전환" 지침을 따른다(prompts/*-activate.md).
+
+---
+
 ## AI별 근거·주의 (검증됨)
 
 ### Claude — `claude-fable-5` @ max

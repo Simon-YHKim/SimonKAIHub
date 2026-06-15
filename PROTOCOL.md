@@ -327,6 +327,7 @@ created: 2026-06-05 15:22:34 KST
 ## 16. 모니터링 & HTML 보고 (Terminal + Browser)
 > Simon은 VS Code에 띄운 각 AI 터미널 + 웹 브라우저로 실시간 관전한다.
 
+- **HTML 보고 언어 = 항상 한국어 (정본, 2026-06-16 Simon)**: **모든 허브 AI(Claude·Codex·Grok·Antigravity)는 HTML 보고서의 본문·제목·캡션·표·버튼 라벨까지 전부 한국어로 작성한다.** 영어 혼용 금지(고유명사·코드·식별자·CLI 플래그·모델 id는 예외로 원문 유지). 파일명은 슬러그라 영어 가능하나, 사람이 읽는 화면 텍스트는 한국어. 이는 §0(응답 한국어)의 HTML 산출물 적용이며 모든 AI에 강제된다.
 - **터미널 1줄 로그**: 각 AI는 사이클 주요 체크포인트마다 stdout에 `[YYYY-MM-DD / HH:MM:SS KST] [<AI>:<lane>] <상태>` 출력(실제 시각 §27.2 — `Get-Date` 실행, 추정 금지).
 - **HTML 보고 + 자동 표시**(§10.6·§27.5 강화): **모든 AI(Claude 포함)**는 사람이 읽고 판단할 산출물을 self-contained HTML 리포트로 `agents/<me>/outbox/preview/<yyyyMMdd-HHmmss>-<slug>.html`에 만들고 **`start "" "<경로>"`로 실제 HTML 페이지를 사용자 브라우저에 띄운다**(다크·색 3개 이내·이모지/장식 금지·AI slop 방지). 허브 outbox `.md`(기계판독)는 병행 유지, `## Links`에 HTML 경로.
 - **자동 open 빈도(폭주 방지, D-6)**: **마일스톤·대형 산출물(사이클 완료·리포트·리뷰·시뮬 결과)은 자동 open**한다. 5분 루프의 *일반 사이클 중간 산출*은 HTML을 만들되 자동 open은 생략하고 경로만 남긴다(4-AI × 5분 탭 폭주 방지). Simon이 보고 싶을 때 경로로 연다.

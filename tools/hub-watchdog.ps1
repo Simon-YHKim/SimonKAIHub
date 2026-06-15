@@ -10,7 +10,7 @@
 # Run standalone, from a schedule, or once per daemon cycle (hub-daemon calls it -- see -FromDaemon):
 #   powershell -ExecutionPolicy Bypass -File tools/hub-watchdog.ps1            # check + file new issues
 #   powershell -ExecutionPolicy Bypass -File tools/hub-watchdog.ps1 -Quiet     # no console, just file
-param([switch]$Quiet, [switch]$FromDaemon, [int]$StaleMin = 35, [int]$CooldownMin = 120)
+param([switch]$Quiet, [switch]$FromDaemon, [switch]$NoAutoRestart, [int]$StaleMin = 35, [int]$CooldownMin = 120)
 
 $utf8 = [System.Text.UTF8Encoding]::new($false)
 [Console]::OutputEncoding = $utf8; $OutputEncoding = $utf8
@@ -60,10 +60,36 @@ if (Test-Path $ctrl) {
   }
 }
 
-# (2) daemon process not running (and run-state not paused)
+# (1.5) AUTO-RESTART dead daemons (self-healing, 2026-06-16 Simon "놀고 있는 놈들 일하게").
+# A dead daemon = idle workers for HOURS (root cause of the 9h-stale AG seat). When the hub is
+# RUNNING, revive any missing -Only lane right here. The hub-daemon per-lane mutex makes this
+# idempotent (an already-alive lane's relaunch just exits as a duplicate), so it is safe to run
+# every watchdog tick. Paused/draining => do NOT restart (respect the deliberate stop). Disable
+# entirely with -NoAutoRestart. Requires the watchdog to run from its SCHEDULED TASK (HubWatchdog,
+# 10min) so it fires even when the daemon-driven call path is dead.
+$restarted = @()
+if (-not $NoAutoRestart) {
+  $isRunning = -not ($cs -and ($cs -match '(?im)^\s*state\s*[:=]\s*(paused|draining)'))
+  if ($isRunning) {
+    $daemonScript = Join-Path $toolsDir 'hub-daemon.ps1'
+    foreach ($a in $daemonAIs) {
+      if ($aliveAIs -notcontains $a) {
+        try {
+          Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -File `"$daemonScript`" -Only $a -IntervalSec 600 -MaxTasksPerCycle 2" -WindowStyle Hidden
+          $restarted += $a
+          $aliveAIs += $a   # mutex dedups; next tick confirms it stayed up
+        } catch {}
+      }
+    }
+  }
+}
+
+# (2) daemon process not running. Auto-restarted lanes get an informational note instead of an alarm.
 foreach ($a in $daemonAIs) {
-  if ($aliveAIs -notcontains $a) {
-    $issues += @{ key="daemon-down-$a"; title="Daemon '$a' is not running"; detail="No hub-daemon.ps1 -Only $a process alive."; action="Relaunch: Start-Process powershell -ArgumentList '-ExecutionPolicy Bypass -File `"$toolsDir\hub-daemon.ps1`" -Only $a -IntervalSec 600' -WindowStyle Hidden (or use HUB-STARTUP.html)." }
+  if ($restarted -contains $a) {
+    $issues += @{ key="daemon-restarted-$a"; title="Daemon '$a' was down -- auto-restarted"; detail="hub-watchdog found no '$a' daemon and relaunched it (hub is running, drain mode)."; action="No action needed. If '$a' keeps needing restarts, tail hub-daemon.log to find why it dies." }
+  } elseif ($aliveAIs -notcontains $a) {
+    $issues += @{ key="daemon-down-$a"; title="Daemon '$a' is not running"; detail="No hub-daemon.ps1 -Only $a process alive (auto-restart skipped: hub paused or -NoAutoRestart)."; action="If intended, ignore. Else set CONTROL state=running, or relaunch via HUB-STARTUP.html." }
   }
 }
 

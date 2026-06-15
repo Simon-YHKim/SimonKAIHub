@@ -73,6 +73,20 @@ function Get-ModelCfg([string]$ai,[string]$key,[string]$default){
   try { $v = $Models.$ai.$key; if($v){ return [string]$v } } catch {}
   return $default
 }
+# Resolve an AI's (model, effort) for a tier: 'primary' = highest-benchmark model+effort;
+# 'fallback' = the cheaper model the AI switches to on usage/quota exhaustion (models.json
+# fallback_model/fallback_effort). Has=$false when a fallback tier was asked for but no
+# fallback_model is defined -> caller then just backs off (no model to switch to).
+function Get-AIModelTier([string]$ai,[string]$tier){
+  $defModel = switch($ai){ 'codex' {'gpt-5.5'} 'grok' {'grok-build'} 'antigravity' {'gemini-3.1-pro-preview'} default {''} }
+  $defEff   = switch($ai){ 'codex' {'xhigh'} 'grok' {'high'} 'antigravity' {'high'} default {'high'} }
+  if($tier -eq 'fallback'){
+    $fm = Get-ModelCfg $ai 'fallback_model' ''
+    if(-not $fm){ return [pscustomobject]@{ Model=''; Effort=''; Has=$false } }
+    return [pscustomobject]@{ Model=$fm; Effort=(Get-ModelCfg $ai 'fallback_effort' $defEff); Has=$true }
+  }
+  return [pscustomobject]@{ Model=(Get-ModelCfg $ai 'model' $defModel); Effort=(Get-ModelCfg $ai 'effort' $defEff); Has=$true }
+}
 
 # NOTE (P0 fix 2026-06-14): the old Set-Heartbeat rewrote each AI's STATUS.md to
 # force `state: running` + a fresh `updated:` stamp every cycle. That FAKED freshness
@@ -97,6 +111,14 @@ $quotaStrikes = @{}   # ai -> consecutive quota failures
 $failSkip     = @{}   # ai -> cycles still to skip after repeated hard failures
 $failStrikes  = @{}   # ai -> consecutive non-quota, non-zero exits
 foreach($a in $AIs){ $quotaSkip[$a] = 0; $quotaStrikes[$a] = 0; $failSkip[$a] = 0; $failStrikes[$a] = 0 }
+# Model-switch-on-quota state: each AI runs its PRIMARY (best) model until that model reports
+# usage/quota exhaustion; the daemon then switches it to fallback_model (models.json) for
+# $PrimaryReprobeAfter cycles before re-probing primary (the quota may have reset). This keeps
+# an AI producing on a cheaper model instead of idling through a multi-hour quota window.
+$activeTier  = @{}   # ai -> 'primary' | 'fallback'
+$tierReprobe = @{}   # ai -> cycles left on fallback before re-trying primary
+foreach($a in $AIs){ $activeTier[$a] = 'primary'; $tierReprobe[$a] = 0 }
+$PrimaryReprobeAfter = 6   # ~1h at the default 10min interval
 
 # Count OPEN request orders addressed to this AI (lightweight frontmatter scan). Used to decide
 # whether a drain (extra task this cycle) is warranted -- no open orders => no busywork.
@@ -120,7 +142,7 @@ function Count-OpenOrders([string]$ai){
   return $n
 }
 
-function Invoke-AI([string]$ai){
+function Invoke-AI([string]$ai,[string]$tier='primary'){
   # Single-line, NO embedded double-quotes: PS 5.1 mangles native-exe arguments
   # that contain " or span lines (this broke grok+codex in the first test).
   # Paths are plain text; the AI quotes them itself when it runs commands.
@@ -133,35 +155,34 @@ function Invoke-AI([string]$ai){
   $liveDir = Join-Path $root "tools\live"
   if(-not (Test-Path $liveDir)){ New-Item -ItemType Directory -Force $liveDir | Out-Null }
   $live = Join-Path $liveDir ($ai + ".log")
-  # Resolve best model + max effort per AI from models.json (always-best, §MODELS.md) IN THE
-  # PARENT (Get-ModelCfg reads $Models here), then pass the values into the job below.
-  $cm = Get-ModelCfg 'codex' 'model' 'gpt-5.5'
-  $ce = Get-ModelCfg 'codex' 'effort' 'xhigh'
-  $gm = Get-ModelCfg 'grok' 'model' 'grok-4.3'
-  $ge = Get-ModelCfg 'grok' 'effort' 'high'
-  $am = Get-ModelCfg 'antigravity' 'model' 'gemini-3.1-pro-preview'
+  # Resolve THIS AI's model+effort for the requested tier from models.json (always-best, §MODELS.md):
+  # 'primary' = highest-benchmark; 'fallback' = cheaper model used after usage/quota exhaustion.
+  # Resolved in the PARENT (Get-AIModelTier reads $Models here), then passed into the job below.
+  $mt    = Get-AIModelTier $ai $tier
+  $model = $mt.Model
+  $eff   = $mt.Effort
 
   # P0 timeout guard: run the CLI inside a background job bounded by Wait-Job -Timeout. A hung
   # CLI (codex stdin-EOF hang, network stall) previously blocked the whole sequential loop
   # forever; now it is killed after $PerAITimeoutSec and the loop continues.
   $sb = {
-    param($ai,$root,$prompt,$cm,$ce,$gm,$ge,$am)
+    param($ai,$root,$prompt,$model,$eff)
     $o = ""
     switch($ai){
-      'codex'       { $o = ("" | codex exec -s danger-full-access --skip-git-repo-check -C $root -m $cm -c "model_reasoning_effort=$ce" $prompt) 2>&1 | Out-String }
-      'grok'        { $env:GROK_MODEL = $gm; $env:GROK_REASONING_EFFORT = $ge; $o = (grok -m $gm -p $prompt) 2>&1 | Out-String }
-      'antigravity' { $env:GEMINI_CLI_TRUST_WORKSPACE = 'true'; $o = (gemini -m $am -p $prompt -y) 2>&1 | Out-String }
+      'codex'       { $o = ("" | codex exec -s danger-full-access --skip-git-repo-check -C $root -m $model -c "model_reasoning_effort=$eff" $prompt) 2>&1 | Out-String }
+      'grok'        { $env:GROK_MODEL = $model; $env:GROK_REASONING_EFFORT = $eff; $o = (grok -m $model -p $prompt) 2>&1 | Out-String }
+      'antigravity' { $env:GEMINI_CLI_TRUST_WORKSPACE = 'true'; $o = (gemini -m $model -p $prompt -y) 2>&1 | Out-String }
     }
     [pscustomobject]@{ Out = $o; Code = $LASTEXITCODE }
   }
-  $job = Start-Job -ScriptBlock $sb -ArgumentList $ai,$root,$prompt,$cm,$ce,$gm,$ge,$am
+  $job = Start-Job -ScriptBlock $sb -ArgumentList $ai,$root,$prompt,$model,$eff
   $fin = Wait-Job $job -Timeout $PerAITimeoutSec
   if(-not $fin){
     Stop-Job $job -ErrorAction SilentlyContinue
     Remove-Job $job -Force -ErrorAction SilentlyContinue
     Log "cycle TIMEOUT($ai) after ${PerAITimeoutSec}s -- killed CLI, continuing"
-    try { [System.IO.File]::WriteAllText($live, "[$(Now) KST] $ai (TIMEOUT ${PerAITimeoutSec}s)`n", $utf8) } catch {}
-    return [pscustomobject]@{ Code = -1; Quota = $false; TimedOut = $true }
+    try { [System.IO.File]::WriteAllText($live, "[$(Now) KST] $ai [$($tier):$model] (TIMEOUT ${PerAITimeoutSec}s)`n", $utf8) } catch {}
+    return [pscustomobject]@{ Code = -1; Quota = $false; TimedOut = $true; Model = $model; Tier = $tier }
   }
   $rcv = Receive-Job $job 2>&1
   Remove-Job $job -Force -ErrorAction SilentlyContinue
@@ -170,13 +191,13 @@ function Invoke-AI([string]$ai){
   $out  = if($obj){ [string]$obj.Out } else { ($rcv | Out-String) }
   $code = if($obj){ [int]$obj.Code } else { 0 }
   # Detect quota/rate-limit exhaustion so the caller can back off instead of re-spawning.
-  $quota = ($out -match 'QUOTA_EXHAUSTED|RESOURCE_EXHAUSTED|TerminalQuotaError|exhausted your capacity|"code":\s*429|429 ')
-  Log "cycle exit($ai)=$code$(if($quota){' QUOTA'})"
+  $quota = ($out -match 'QUOTA_EXHAUSTED|RESOURCE_EXHAUSTED|TerminalQuotaError|exhausted your capacity|usage limit|rate.?limit|"code":\s*429|429 ')
+  Log "cycle exit($ai/$tier=$model)=$code$(if($quota){' QUOTA'})"
   # Keep the last ~45 non-empty lines (the AI's closing summary = its "what I just did")
   # as a live transcript -- written UTF-8 (Korean-safe) so feed.ps1 can show it like a chat message.
   $tail = (($out -split "`r?`n") | Where-Object { $_.Trim() -ne "" } | Select-Object -Last 45) -join "`n"
-  try { [System.IO.File]::WriteAllText($live, "[$(Now) KST] $ai (exit $code$(if($quota){' QUOTA-EXHAUSTED'}))`n`n$tail`n", $utf8) } catch {}
-  return [pscustomobject]@{ Code = $code; Quota = [bool]$quota; TimedOut = $false }
+  try { [System.IO.File]::WriteAllText($live, "[$(Now) KST] $ai [$($tier):$model] (exit $code$(if($quota){' QUOTA-EXHAUSTED'}))`n`n$tail`n", $utf8) } catch {}
+  return [pscustomobject]@{ Code = $code; Quota = [bool]$quota; TimedOut = $false; Model = $model; Tier = $tier }
 }
 
 # CONTROL.md run-state (§13): the daemon must not spawn AIs while the hub is paused/draining.
@@ -215,14 +236,34 @@ while($true){
       Log "cycle $cycle -> $ai SKIP (hard-failure backoff, $($failSkip[$ai]) cycles left -- fix models.json / CLI auth / trusted-folder then restart)"
       continue
     }
+    # Model-switch re-probe: if this AI is on its fallback model, count down the window; when it
+    # elapses, flip back to primary so the next invoke re-tests the (possibly reset) primary quota.
+    if($activeTier[$ai] -eq 'fallback'){
+      if($tierReprobe[$ai] -gt 0){ $tierReprobe[$ai]-- }
+      if($tierReprobe[$ai] -le 0){ $activeTier[$ai] = 'primary'; Log "cycle $cycle -> $ai re-probe PRIMARY model (fallback window elapsed)" }
+    }
     # Anti-idle drain: do the first task, then keep going while OPEN orders remain for this AI,
     # up to MaxTasksPerCycle. With no open orders this is exactly one self-directed task (no busywork).
     $task = 0
     while($task -lt $MaxTasksPerCycle){
       $task++
-      Log "cycle $cycle -> $ai poll (task $task/$MaxTasksPerCycle)"
+      Log "cycle $cycle -> $ai poll (task $task/$MaxTasksPerCycle, model=$($activeTier[$ai]))"
       $res = $null
-      try { $res = Invoke-AI $ai } catch { Log "cycle $cycle $ai ERROR: $($_.Exception.Message)" }
+      try { $res = Invoke-AI $ai $activeTier[$ai] } catch { Log "cycle $cycle $ai ERROR: $($_.Exception.Message)" }
+      # MODEL-SWITCH-ON-QUOTA: primary model exhausted + a distinct fallback exists -> switch the
+      # AI to its fallback model and retry THIS cycle once. If the fallback is also exhausted (or
+      # none is defined) the existing quota-backoff below takes over.
+      if($res -and $res.Quota -and $activeTier[$ai] -eq 'primary'){
+        $fb = Get-AIModelTier $ai 'fallback'
+        $pr = Get-AIModelTier $ai 'primary'
+        if($fb.Has -and ($fb.Model -ne $pr.Model -or $fb.Effort -ne $pr.Effort)){
+          Log "cycle $cycle $ai QUOTA on primary $($pr.Model)@$($pr.Effort) -> SWITCH to fallback $($fb.Model)@$($fb.Effort), retrying this cycle"
+          $activeTier[$ai] = 'fallback'; $tierReprobe[$ai] = $PrimaryReprobeAfter
+          try { $res = Invoke-AI $ai 'fallback' } catch { Log "cycle $cycle $ai fallback ERROR: $($_.Exception.Message)" }
+        } else {
+          Log "cycle $cycle $ai QUOTA on primary but no distinct fallback_model in models.json -> backing off"
+        }
+      }
       if($res -and $res.Quota){
         $quotaStrikes[$ai]++
         $skip = [Math]::Min(48, [Math]::Pow(2, $quotaStrikes[$ai]))

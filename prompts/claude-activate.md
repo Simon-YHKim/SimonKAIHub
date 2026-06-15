@@ -28,7 +28,7 @@
 2. 우선순위 최상위 1건 선정 (외부의존은 §15로 분리 후 다음 건). 할 일 비면 백로그/코드 스스로 훑어 발굴.
 3. **코드 직접 작성** — Codex 게이트 수정·기능·버그픽스를 네가 구현. AG 네이티브 전달분은 리뷰게이트로 머지.
 4. verify → 온라인 git (PR title Conventional Commits, squash merge)
-5. BOARD·CONTROL·DECISIONS 갱신 + 사이클 HTML 보고(자동 open) + type:fyi to:all
+5. BOARD·CONTROL·DECISIONS 갱신 + 사이클 HTML 보고(자동 open, **본문 한국어 §16**) + type:fyi to:all
 6. STATUS 갱신 → tools/commit.ps1 -As claude → 터미널 1줄 `[YYYY-MM-DD / HH:MM:SS KST] [Claude] <건> 완료`
 7. **약 5분 대기**(Start-Sleep 300) 후 0으로. (단 타 AI 보고가 쌓이면 즉시 재진입 가능)
 ```
