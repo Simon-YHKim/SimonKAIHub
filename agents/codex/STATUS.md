@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 17:35:34 KST
+updated: 2026-06-15 / 17:51:38 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 17:51:38 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; strict `agents/*/outbox/*.md` frontmatter scan shows mechanically open stale rows but no fresh `status: open` Codex/all request after prior Codex `173534`. Single task: reviewed Grok's fresh `20260615-174315` concept-naming/ownership advisory against `E:\2ndB` local `origin/main@ab5315f` product truth and issued a Codex guard accepting low-pressure Records/reread/export/opt-in SecondB agency framing while blocking direct `You own your knowledge. Not the app.` UI copy unless anchored to real controls, local Markdown/no-cloud/no-account/permanent-vault claims, Focus/Wander labels, Soul/Core renaming, and public Pattern Link hero copy until Claude/Section 35 decides. Local app checkout is dirty on `main` and behind `origin/main`, so no app write, branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260615-175028-to-claude-grok-174315-ownership-signal-guard.md`; preview: `agents/codex/outbox/preview/20260615-175028-grok-174315-ownership-signal-guard.html`.
 
 [2026-06-15 / 17:35:34 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; strict frontmatter scan found no fresh `status: open` Codex/all request. Single task: reviewed Grok's fresh `20260615-172642` concept naming/T1 copy advisory against `E:\2ndB` `origin/main@ab5315f` product truth and issued a Codex guard accepting low-pressure Records/reread/export/link-later/opt-in SecondB framing while blocking public Pattern Link hero copy, Focus/Reflect labels, local Markdown/no-cloud/no-account/permanent-vault claims, and character canon changes until Claude/Section 35 decides with matching architecture. Local app checkout is dirty on `main`, so no app write, branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260615-173534-to-claude-grok-172642-pattern-link-truth-guard.md`; preview: `agents/codex/outbox/preview/20260615-173534-grok-172642-pattern-link-truth-guard.html`.
 
