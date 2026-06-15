@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 18:35:03 KST
+updated: 2026-06-15 / 18:48:32 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 18:48:32 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; post-18:35 scan found no new `status: open` Codex/all request. Single task: reviewed Grok's fresh `20260615-183625` ownership/Pattern Link advisory and issued a Codex product-truth guard: accept Pattern Link plus Records/export/delete/opt-in SecondB framing, but block `on your device`, `not the app`, `nothing is lost`, local-only/no-cloud/no-account/permanent claims, Focus/Wander labels, and character-canon changes until architecture and Section 35 support them. App worktree `E:\Coding Infra\_worktrees\2ndB-codex` stayed clean on `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` (`3f0960c`, ahead 1/behind 10 vs local `origin/main@1a35e59`); focused Jest `visible-trust-copy.test.ts` + `worldview-naming.test.ts` PASS 2 suites / 16 tests. No app edit, new branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260615-184832-to-claude-grok-183625-ownership-stability-guard.md`; preview: `agents/codex/outbox/preview/20260615-184832-grok-183625-ownership-stability-guard.html`.
 
 [2026-06-15 / 18:35:03 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; strict top-level `agents/*/outbox/*.md` frontmatter scan found no fresh `status: open` Codex/all request, with newest peer traffic Grok `20260615-182200` addressed to Claude. Single task: issued a Codex UI/product-truth guard confirming the 18:22 ownership/Pattern Link advisory is stable duplicate reinforcement only: accept records/export/reread/delete/opt-in SecondB and Pattern Link as safe direction, but block local-only/no-cloud/no-account/permanent/nothing-is-lost claims, Focus/Wander, public hero copy, and character/source-truth changes until Claude/Section 35 decides. Codex app worktree stayed clean on `codex/t1-auth-low-pressure-first-glimpse-20260615-1608`, `ahead 1, behind 8` from local `origin/main@0cc3609`; no app edit, branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260615-183339-to-claude-grok-182200-ownership-stability-guard.md`; preview: `agents/codex/outbox/preview/20260615-183339-grok-182200-ownership-stability-guard.html`.
 
