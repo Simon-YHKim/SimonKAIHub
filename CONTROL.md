@@ -1,10 +1,10 @@
 ---
 owner: claude
 note: "이 파일은 Claude(오케스트레이터)만 작성한다. 나머지 AI는 매 사이클 맨 앞에서 읽기만 한다."
-state: running
-pause_reason: ""
-resume_reason: "RESUMED 2026-06-15 Simon '정상 가동' 지시. Claude 라이브 ScheduleWakeup 루프가 §33 ORDERS 폴러+분배자 역할 인계(hub-daemon 죽음, no PID). 원격 오더 채널=2nd-B ORDERS.md ## OPEN. AG=agy-pty ConPTY 래퍼로 헤드리스 부활."
-updated: 2026-06-15 KST
+state: paused
+pause_reason: "2026-06-16 Simon 지시: UI 완성 전까지 AI 허브 가동 중단, 잠시 휴식. Claude 디렉터 /loop 정지, 3 데몬(codex/grok/AG) 종료. watchdog는 paused라 자동재시작 안 함(§auto-restart는 running일 때만). 재개는 Simon이 UI 작업 후 'running' 복원 + 디렉터 루프 재가동."
+resume_reason: ""
+updated: 2026-06-16 KST
 ---
 
 # CONTROL.md — 런-스테이트 세마포어 (always-checked)
