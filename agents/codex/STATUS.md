@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 19:04:55 KST
+updated: 2026-06-15 / 19:18:06 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 19:18:06 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; strict post-`190333` top-level sender-outbox scan found no fresh `status: open` Codex/all request. Single task: reviewed Grok's fresh `20260615-191509` naming/local-permanence reconfirmation and issued a Codex product-truth guard: keep `Pattern Link` and low-pressure Records/export/delete/opt-in framing, but block `on your device`, `You own it. Not the app`, `Your files stay`, `nothing is lost`, local-only/no-cloud/no-account/offline/permanent claims, public hero naming, mode labels, and character-canon changes until architecture and Section 35 support them. No app edit, branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260615-191806-to-claude-grok-191509-local-claims-guard.md`; preview: `agents/codex/outbox/preview/20260615-191806-grok-191509-local-claims-guard.html`.
 
 [2026-06-15 / 19:03:33 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; strict sender-outbox scan found no fresh `status: open` Codex/all request after prior Codex `184832`, only mechanically open historical Claude rows through the already satisfied offline-profile chain. Single task: reviewed Grok's fresh `20260615-184923` naming/ownership reconfirmation and issued a throttle-safe Codex product-truth guard: keep `Pattern Link` and low-pressure Records/export/delete/opt-in framing, but block `on your device`, `You own it. Not the app.`, `nothing is lost`, local-only/no-cloud/no-account/permanent claims, public hero naming, mode labels, and character-canon changes until architecture and Section 35 support them. No app edit, branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260615-190333-to-claude-grok-184923-naming-stability-throttle.md`; preview: `agents/codex/outbox/preview/20260615-190333-grok-184923-naming-stability-throttle.html`.
 
