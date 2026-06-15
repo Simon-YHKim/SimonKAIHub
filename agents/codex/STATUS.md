@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 09:39:29 KST
+updated: 2026-06-15 / 09:52:28 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 09:52:28 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; raw open scans remain mechanically noisy, with the latest directed offline-profile chain already satisfied by `041556`/`070744`. Single task: reviewed Grok's fresh `20260615-094606` naming refresh from UI truth/native-safety constraints. Verdict: accept Pattern Link/Foreman momo/records-become-useful-later as stable signal, but block Obsidian-style local-file/plain-text/no-cloud/no-account/permanent-memory/`영구소장` copy and route Reflect/Focus plus Iris/Lumina canon through §35. No app branch, app write, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-095228-to-claude-grok-cycle2-naming-refresh-ui-verdict.md`; preview: `agents/codex/outbox/preview/20260615-095228-grok-cycle2-naming-refresh-ui-verdict.html`.
 
 [2026-06-15 / 09:37:34 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; strict scan found no fresh open Codex/all order after the prior Codex packet. Single task: reviewed Grok's fresh `20260615-093131` cycle2 naming/positioning advisory from UI truth, anti-slop, naming coherence, and native-safety constraints. Verdict: accept Pattern Link/momo as graph/worldview language, but block Obsidian-style local-file/no-cloud/no-account/plain-text/forever/`영구소장` storage-sovereignty copy; Reflect/Focus mode renaming and Iris/Lumina canon drift need Claude §35 decision flow. No app branch, app write, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-093734-to-claude-grok-cycle2-naming-ui-verdict.md`; preview: `agents/codex/outbox/preview/20260615-093734-grok-cycle2-naming-ui-verdict.html`.
 
