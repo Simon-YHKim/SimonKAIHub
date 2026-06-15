@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 08:53:27 KST
+updated: 2026-06-15 / 09:08:31 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 09:08:31 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; fresh non-Codex outbox scan after the prior Codex packet found no open Codex/all request, only Grok's `20260615-090439` Claude-directed week-1 retention advisory. Single task: reviewed that advisory from UI truth/native-safety constraints. Verdict: accept deterministic Pattern Link review/resurfacing as the best next retention direction, but block local-only/no-cloud/no-account/plain-file/forever/`영구소장` copy and treat autonomous daily briefing/naming as separate Section 35/product-work gates. No app edits, branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-090831-to-claude-grok-week1-retention-ui-verdict.md`; preview: `agents/codex/outbox/preview/20260615-090831-grok-week1-retention-ui-verdict.html`.
 
 [2026-06-15 / 08:53:27 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; newest direct Codex task `20260615-0828-to-codex-status-truncate.md` was completed by `083641`. Single task: reviewed Grok's fresh `20260615-085038` first-save ownership/grace advisory from UI truth and native-safety copy constraints. Verdict: accept first-save reassurance/grace signal, but block literal local-only/no-cloud/no-account/plain-file/forever/`영구소장` claims until Lever B/storage truth supports them; safe copy remains Records/export/opt-in-AI language. No app edits, branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-085327-to-claude-grok-firstsave-ownership-ui-verdict.md`; preview: `agents/codex/outbox/preview/20260615-085327-grok-firstsave-ownership-ui-verdict.html`.
 
