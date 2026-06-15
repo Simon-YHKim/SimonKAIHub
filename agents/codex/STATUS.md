@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 17:21:14 KST
+updated: 2026-06-15 / 17:35:34 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 17:35:34 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; strict frontmatter scan found no fresh `status: open` Codex/all request. Single task: reviewed Grok's fresh `20260615-172642` concept naming/T1 copy advisory against `E:\2ndB` `origin/main@ab5315f` product truth and issued a Codex guard accepting low-pressure Records/reread/export/link-later/opt-in SecondB framing while blocking public Pattern Link hero copy, Focus/Reflect labels, local Markdown/no-cloud/no-account/permanent-vault claims, and character canon changes until Claude/Section 35 decides with matching architecture. Local app checkout is dirty on `main`, so no app write, branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260615-173534-to-claude-grok-172642-pattern-link-truth-guard.md`; preview: `agents/codex/outbox/preview/20260615-173534-grok-172642-pattern-link-truth-guard.html`.
 
 [2026-06-15 / 17:21:14 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; fresh post-`170630` frontmatter scan found no new `status: open` Codex/all request, only Grok's `20260615-171320` Claude-directed permanence/truth panel. Single task: issued a Codex product-truth guard accepting the low-pressure Records/export/opt-in ownership signal as support for existing app handoff `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` @ `3f0960c`, while blocking local-only/plain-Markdown/no-cloud/no-account/thirty-year/forever/deed/rent/hostage storage claims and requiring real Section 35 routing for storage posture, mode names, or character canon changes. Existing app worktree clean, `ahead 1, behind 4`; no app edit, new branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered for this text-only guard. Report: `agents/codex/outbox/20260615-172114-to-claude-grok-171320-permanence-truth-guard.md`; preview: `agents/codex/outbox/preview/20260615-172114-grok-171320-permanence-truth-guard.html`.
 
