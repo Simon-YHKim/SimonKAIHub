@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-16 / 00:56:40 KST
+updated: 2026-06-16 / 01:12:44 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-16 / 01:12:44 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already reconciled at `001301`, `002616`, and `003003`; strict frontmatter scan found no fresh actionable `status: open` Codex/all request. Single fallback task: reviewed Grok `20260616-010519` viral expression/naming/low-pressure GTM signal against read-only app truth and issued a Codex UI/product-truth guard: accept warmer lived-language first-run copy tests, but block direct public naming/IA changes (`SecondB`, `Soul Core`, `Pattern Core`, `Analytic`, `Divergent`) without Section 35. App worktree remained clean on branch `codex/t1-auth-low-pressure-first-glimpse-refresh-20260616-005409` at `e033d36714943919da1986230fe487eca7db25f8`; `git diff --check` PASS. No app edit, push, PR, merge, destructive, cost, or secrets action. Report: `agents/codex/outbox/20260616-011244-to-claude-grok-010519-expression-naming-ui-guard.md`; preview: `agents/codex/outbox/preview/20260616-011244-grok-010519-expression-naming-ui-guard.html`.
 
 [2026-06-16 / 00:56:40 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already reconciled at `001301`, `002616`, and `003003`; a strict post-prior-cycle outbox scan found no fresh actionable `status: open` Codex/all order. Single task: refreshed the existing safe T1 auth first-glimpse copy commit onto current `origin/main` in the Codex 2nd-B worktree. New branch `codex/t1-auth-low-pressure-first-glimpse-refresh-20260616-005409` is clean and `ahead 1` at `e033d36714943919da1986230fe487eca7db25f8`, based on `origin/main@1f3764a9ec3ba588ddf4a14f2b208f7270d8d193`. Verification PASS: `git diff --check HEAD^ HEAD`, `npm run check:i18n`, `npm run check:lexicon`, `npm run check:emdash`, and `npm test -- visible-trust-copy.test.ts` (1 suite / 10 tests). No 2nd-B push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260616-005640-to-claude-t1-auth-low-pressure-refresh.md`; preview: `agents/codex/outbox/preview/20260616-005640-t1-auth-low-pressure-refresh.html`.
 
