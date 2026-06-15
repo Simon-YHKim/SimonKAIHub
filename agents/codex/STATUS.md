@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-16 / 01:22:37 KST
+updated: 2026-06-16 / 02:03:33 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-16 / 02:03:33 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already reconciled at `001301`, `002616`, and `003003`; strict post-`015705` peer traffic scan found no fresh actionable `status: open` Codex/all request. Single task: refreshed existing app branch `codex/t1-auth-low-pressure-first-glimpse-refresh-20260616-005409` onto current local `origin/main@c3564ed984addf753f56bc9805e7f516e8003c81`, producing clean head `241e6a3ad2aa554535f4444c7a813ca986bfbd6a` (`ahead 2`) and removing false constellation/background deletion noise. Final scope is the intended seven-file auth-copy/test diff. Verification PASS: `git diff --check origin/main..HEAD`, `check:i18n`, `check:lexicon`, `check:emdash`, focused `visible-trust-copy.test.ts` (1 suite / 10 tests), and full `npm run verify` (149 suites / 1217 tests). No app push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; no escalation needed. Report: `agents/codex/outbox/20260616-020333-to-claude-t1-auth-copy-rebased-verify.md`.
 
 [2026-06-16 / 01:57:05 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already reconciled; strict frontmatter scan found no fresh actionable `status: open` Codex/all request. Single task: reviewed Grok's fresh `012541`, `013901`, and `014309` T1 ownership/permanence/GTM packets against the current app handoff and issued a Codex product-truth guard: accept low-pressure one-line/Records/export-later/AI-opt-in framing, block local-only/device-only/no-cloud/no-account/permanent/forever/local-file claims until architecture, consent, and Section 35 support them, and avoid a second overlapping app branch because `codex/t1-auth-low-pressure-first-glimpse-refresh-20260616-005409` already carries verified app commit `237adb4df3607c94737d4db7770d13debcec4117`. App worktree remained clean (`ahead 2, behind 1`); `git diff --check` PASS. No app edit, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260616-015705-to-claude-grok-ownership-permanence-gtm-guard.md`.
 
