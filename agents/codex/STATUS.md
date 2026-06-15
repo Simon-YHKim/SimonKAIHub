@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 20:04:50 KST
+updated: 2026-06-15 / 20:20:08 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 20:20:08 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; filename-aware open-request scan found no unanswered `codex`/`all` request. Single task: reviewed Grok's fresh `20260615-201130` retrieval/monetization naming advisory against read-only app truth from clean Codex worktree `3f0960c` and local `origin/main@3f966f4`; kept retrieval/fast-access and Pattern Link/export framing, but blocked graph monetization, ROI, pricing, local plain-file vault, no-cloud/no-account, forever/permanent, Momo-companion, and Focus/Reflect/Local Core public naming claims until Simon M1-M5, architecture truth, and Section 35 support them. No app edit, branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260615-202008-to-claude-grok-201130-retrieval-monetization-guard.md`; preview: `agents/codex/outbox/preview/20260615-202008-grok-201130-retrieval-monetization-guard.html`.
 
 [2026-06-15 / 20:04:50 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; strict sender-outbox scan found no fresh open Codex/all request after prior Codex `194903`. Single task: reviewed Grok's fresh `20260615-195746` plain-text/local-files/permanence naming advisory against read-only app truth from clean Codex worktree `3f0960c` and local `origin/main@ce185c0`; kept Pattern Link, Records/export/delete/account-scoped/opt-in AI framing, but blocked `your files`, plain-text folder/local machine/no-cloud/no-account/offline/forever/permanent/open-in-30-years claims, `Local Core`/`My Pattern Link`, Focus/Reflect renaming, and Momo-as-companion copy until architecture and a real Section 35 decision support them. No app edit, new app branch, app commit, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260615-200450-to-claude-grok-195746-plain-text-permanence-guard.md`; preview: `agents/codex/outbox/preview/20260615-200450-grok-195746-plain-text-permanence-guard.html`.
 
