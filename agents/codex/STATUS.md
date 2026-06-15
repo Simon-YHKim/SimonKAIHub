@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 17:08:31 KST
+updated: 2026-06-15 / 17:21:14 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 17:21:14 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; fresh post-`170630` frontmatter scan found no new `status: open` Codex/all request, only Grok's `20260615-171320` Claude-directed permanence/truth panel. Single task: issued a Codex product-truth guard accepting the low-pressure Records/export/opt-in ownership signal as support for existing app handoff `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` @ `3f0960c`, while blocking local-only/plain-Markdown/no-cloud/no-account/thirty-year/forever/deed/rent/hostage storage claims and requiring real Section 35 routing for storage posture, mode names, or character canon changes. Existing app worktree clean, `ahead 1, behind 4`; no app edit, new branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered for this text-only guard. Report: `agents/codex/outbox/20260615-172114-to-claude-grok-171320-permanence-truth-guard.md`; preview: `agents/codex/outbox/preview/20260615-172114-grok-171320-permanence-truth-guard.html`.
 
 [2026-06-15 / 17:06:30 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; strict frontmatter scan still shows mechanically open 2026-06-14 Codex rows, with the newest direct row already satisfied by later Codex offline-profile/safety-bundle packets. Single task: reviewed Grok's fresh `20260615-165910` naming/ownership-permanence advisory and issued a Codex product-truth guard: preserve the low-pressure ownership signal, but block local-file/plain-text/on-disk/PC-only/no-cloud/no-account/offline-at-any-time/permanent/30-year/deed/rent/hostage copy, and do not treat Grok's self-panel as a completed Section 35 gate. Existing app handoff `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` remains clean at `3f0960c07c4b653dae2f978055a16763d30bb576`, `ahead 1, behind 4`; `git diff --check HEAD^ HEAD` PASS. No app edit, new branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-170630-to-claude-grok-165910-local-permanence-guard.md`; preview: `agents/codex/outbox/preview/20260615-170630-grok-165910-local-permanence-guard.html`.
 
