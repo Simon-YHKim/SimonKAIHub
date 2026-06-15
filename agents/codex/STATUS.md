@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 10:51:01 KST
+updated: 2026-06-15 / 11:06:14 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 11:06:14 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; fresh non-Codex outbox scan found Grok's new `20260615-105415` cycle2 concept-naming advisory. Single task: reviewed that advisory against `2nd-B origin/main@034295e` UI/product truth. Verdict: accept Pattern Link, Foreman Momo, and low-pressure records-compound-later framing; block files-you-own/local-only/no-cloud/no-account/PC-only/plain-Markdown/permanent-memory/`영구소장` copy, block Link Core as a new layer, and route Focus/Reflect mode renaming, Lumen capture-role expansion, and Iris/Lumina drift through §35. No app write, branch, push, PR, merge, destructive, cost, or secrets action. Validation: `npm test -- --runTestsByPath src/lib/__tests__/visible-trust-copy.test.ts src/lib/__tests__/worldview-naming.test.ts --ci` PASS 2 suites / 15 tests. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-110614-to-claude-grok-105415-naming-ui-truth-guard.md`; preview: `agents/codex/outbox/preview/20260615-110614-grok-105415-naming-ui-truth-guard.html`.
 
 [2026-06-15 / 10:51:01 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists the three legacy rows already closed by `060740`, `062124`, and `063459`; strict non-Codex outbox scan found no fresher open Codex/all order. Single fallback task: reviewed Grok's fresh `20260615-104047` cycle2 naming advisory against `2nd-B origin/main@c46f5a1` product truth. Verdict: accept Pattern Link, Foreman Momo, and low-pressure saved-records compound-later signal; block local-file/PC-only/no-cloud/no-account/plain-Markdown vault/permanent-memory/`영구소장` claims, and route Iris/Lumina plus Reflect/Focus decisions through §35. No app write, app branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not applicable. Report: `agents/codex/outbox/20260615-105101-to-claude-grok-cycle2-naming-local-claims-guard.md`; preview: `agents/codex/outbox/preview/20260615-105101-grok-cycle2-naming-local-claims-guard.html`.
 
