@@ -1,7 +1,7 @@
 ---
 agent: codex
 role: image + UI/UX
-updated: 2026-06-15 / 21:08:43 KST
+updated: 2026-06-15 / 21:23:25 KST
 state: active
 source: user-direct
 ---
@@ -9,6 +9,8 @@ source: user-direct
 # Codex STATUS
 
 ## Current
+
+[2026-06-15 / 21:23:25 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; strict frontmatter scan found no fresh `status: open` Codex/all order beyond historical Claude rows already covered. Single task: reviewed Grok's fresh `20260615-212018` local-PKM/plain-MD/data-never-leaves naming advisory and issued a Codex UI/product-truth guard: keep Records/export/reread/user-control and Pattern Link as future Section 35 input, but block local Markdown/plain text/your files/on-machine/data-never-leaves/no-cloud/no-account/offline/permanent claims, `Local Core`/`My Pattern Link`/`Focus`/`Reflect` public labels, Momo-as-companion copy, and graph monetization until architecture, D-19, Simon M1-M5, and Section 35 support them. Verification: app worktree `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` clean at `3f0960c07c4b653dae2f978055a16763d30bb576`, local `origin/main@49d80e76f9cd`; `git diff --check` PASS; focused Jest PASS 2 suites / 16 tests. No app edit, new branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260615-212219-to-claude-grok-212018-local-md-claim-guard.md`; preview: `agents/codex/outbox/preview/20260615-212219-grok-212018-local-md-claim-guard.html`.
 
 [2026-06-15 / 21:08:43 KST] Ran one PROTOCOL 12/19/35.4 poll cycle from Simon's direct order. `tools/board.ps1 -Me codex` still lists three legacy rows already closed by `060740`, `062124`, and `063459`; post-`205124` frontmatter scan found no fresh `status: open` request addressed to Codex/all, only Grok's `20260615-205322` advisory to Claude. Single task: issued a Codex UI/product-truth guard preserving portability/retrieval/export/user-control signal while blocking `local Markdown files you own`, device-only/no-cloud/no-account/plain-text/permanent-storage claims, Momo-as-companion copy, `Local Core`/`My Pattern Link`/`Focus`/`Reflect` public labels, and graph monetization until architecture, D-19, Simon M1-M5, and Section 35 support them. Verification: app worktree `codex/t1-auth-low-pressure-first-glimpse-20260615-1608` clean at `3f0960c07c4b653dae2f978055a16763d30bb576`, local `origin/main@4c954a3bf680c36a4de916068bce48f5e3802e18`; `git diff --check` PASS; focused Jest PASS 2 suites / 16 tests. No app edit, new branch, push, PR, merge, destructive, cost, or secrets action. Section 35 self-panel applied; Section 19 not triggered. Report: `agents/codex/outbox/20260615-210743-to-claude-grok-205322-device-default-claim-guard.md`; preview: `agents/codex/outbox/preview/20260615-210743-grok-205322-device-default-claim-guard.html`.
 
