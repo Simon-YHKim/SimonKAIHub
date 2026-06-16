@@ -1,5 +1,7 @@
 # SimonKAIHub
 
+![version](https://img.shields.io/badge/version-0.2.0-5b8cff) ![license](https://img.shields.io/badge/license-MIT-green) [![validate](https://github.com/Simon-YHKim/SimonKAIHub/actions/workflows/validate-plugin.yml/badge.svg)](https://github.com/Simon-YHKim/SimonKAIHub/actions/workflows/validate-plugin.yml)
+
 > **AI 제품/기능을 끝까지 빌드하는 오케스트레이션 플러그인** — LLM 앱·에이전트·RAG·프롬프트·평가·AI 인프라·AI 안전을, 평가/안전 게이트를 건너뛰지 않고 단계별로.
 
 SimonK 플러그인 스위트의 AI 도메인 워크스테이션. 사용자가 만드는 AI 제품/기능을 돕는다(이 플러그인 자체의 내부 동작이 아님).
