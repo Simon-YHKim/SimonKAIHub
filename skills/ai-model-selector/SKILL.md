@@ -163,3 +163,10 @@ author: simon-stack
 - v1.0 (현재): 5단계 깔때기 + 작업유형 매트릭스 + Markdown/JSON 출력 + eval 가이드.
 - v1.1: vendor 가격/스펙 실시간 fetch 캐시(WebFetch) + 월비용 자동 추정기.
 - v1.2: 제품 라우팅 맵 → 앱 코드 어댑터 스캐폴드(프로바이더 추상화) 생성.
+
+## 완료 보고 (HTML) — 표준
+작업을 끝내면 **HTML 완료 보고서**를 생성한다 (SimonKCore `completion-report` 표준).
+- 첫 화면은 **심플 요약**(한눈 카드 한 줄) + 직관 그래픽/차트(인라인 SVG)·이미지.
+- 각 항목 옆 **[자세히] 버튼**(`<details>`)을 펼치면 상세 — 처음부터 쏟지 않는다(progressive disclosure).
+- 자체완결 1파일(인라인 CSS/SVG, 무JS) · 사용자 언어 · 현지시간 스탬프.
+- Core 있으면 `completion-report` 호출, 없으면 동일 형식으로 인라인 생성.

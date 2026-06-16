@@ -305,3 +305,10 @@ node ../llm-eval/scripts/gate.mjs --baseline runs/baseline.json --result runs/re
   - `authz-designer` — 권한별 문서 검색 차단(멀티테넌트)
   - `paid-api-guard` — 임베딩/LLM 외부 API 비용 가드
   - `analytics-integrator` — 검색 품질·만족도 이벤트 추적
+
+## 완료 보고 (HTML) — 표준
+작업을 끝내면 **HTML 완료 보고서**를 생성한다 (SimonKCore `completion-report` 표준).
+- 첫 화면은 **심플 요약**(한눈 카드 한 줄) + 직관 그래픽/차트(인라인 SVG)·이미지.
+- 각 항목 옆 **[자세히] 버튼**(`<details>`)을 펼치면 상세 — 처음부터 쏟지 않는다(progressive disclosure).
+- 자체완결 1파일(인라인 CSS/SVG, 무JS) · 사용자 언어 · 현지시간 스탬프.
+- Core 있으면 `completion-report` 호출, 없으면 동일 형식으로 인라인 생성.
