@@ -1,6 +1,7 @@
 ---
 name: llm-eval
-description: "사용자가 만드는 AI/LLM 기능의 품질을 측정·회귀 방지하는 평가 하네스를 설계한다. 트리거: \"AI 평가\", \"eval 셋 만들어\", \"LLM 회귀 테스트\", \"프롬프트 바꿨는데 안전한가\", \"레드팀\", \"red team\", \"LLM judge\", \"평가셋 설계\", /llm-eval. 산출물: (1) 평가셋 설계(골든셋·엣지·적대적), (2) task 유형별 지표 선택(정확도·의미유사·LLM-judge·룰), (3) CI 회귀 게이트(임계치+baseline diff), (4) 적대적/레드팀 스위트, (5) A/B·휴먼평가 루프, (6) 결과 추적 스키마. judge 편향·데이터 오염을 항상 경고. 모델 자체 학습이 아니라 \"앱의 LLM 출력\"을 평가하는 용도."
+description: >
+  Use when measuring quality and preventing regressions of the user's AI/LLM feature. 트리거: "AI 평가", "eval 셋 만들어", "LLM 회귀 테스트", "프롬프트 바꿨는데 안전한가", "레드팀", "red team", "LLM judge", /llm-eval. Produces an eval-set design (golden/edge/adversarial), task-appropriate metrics (accuracy / semantic-sim / LLM-judge / rule), a CI regression gate (threshold + baseline diff), an adversarial/red-team suite, an A/B + human-eval loop, and a result-tracking schema. Always warns about judge bias and data contamination. Evaluates the app's LLM output, not model training.
 allowed-tools: Read, Write, Edit, Bash, WebSearch, AskUserQuestion
 version: 1.1.0
 author: simon-stack

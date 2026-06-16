@@ -1,6 +1,7 @@
 ---
 name: rag-builder
-description: "사용자가 만드는 제품에 검색증강생성(RAG) 파이프라인을 설계·구축할 때 사용. 트리거: \"RAG 만들어\", \"문서 기반 챗봇\", \"벡터 검색\", \"지식베이스 Q&A\", \"내 문서로 답하는 봇\", \"PDF 질의응답\", \"document QA\", \"vector search\", \"retrieval augmented\", /rag-builder. 인제스천·청킹 → 임베딩 모델 선택 → 벡터스토어 선택(pgvector·Pinecone·Chroma·Qdrant 표) → 검색(하이브리드·리랭크) → 근거/인용 강제 → 평가(faithfulness·relevance·recall) → 실패모드 대응 7단계를 비용·레이턴시와 함께 산출한다. 이 스킬은 '사용자가 만드는 RAG 제품'을 돕는 것이지 플러그인 내부 동작이 아니다."
+description: >
+  Use when designing or building a retrieval-augmented-generation (RAG) pipeline in the user's product. 트리거: "RAG 만들어", "문서 기반 챗봇", "벡터 검색", "지식베이스 Q&A", "PDF 질의응답", "document QA", "vector search", /rag-builder. Produces a seven-stage design (ingestion/chunking, embedding choice, vector store selection [pgvector/Pinecone/Chroma/Qdrant], hybrid retrieval + rerank, grounded citations, eval [faithfulness/relevance/recall], failure-mode handling) with cost/latency. Helps the user's RAG product, not this plugin.
 allowed-tools: Read, Write, Edit, Bash, WebSearch, AskUserQuestion
 version: 1.1.0
 author: simon-stack

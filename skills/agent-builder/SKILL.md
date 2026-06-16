@@ -1,6 +1,7 @@
 ---
 name: agent-builder
-description: "사용자가 만드는 AI 제품/기능에 에이전트형(tool use / function calling) 시스템을 설계·구현할 때 쓴다. 트리거: \"AI 에이전트 만들어\", \"tool use\", \"function calling\", \"함수 호출 루프\", \"멀티에이전트\", \"agent loop\", \"tool 정의\", \"에이전트 설계\", /agent-builder. 산출물: (1) 도구/함수 스키마 정의, (2) 계획·실행 루프 설계, (3) 메모리/상태 관리, (4) 멀티에이전트 토폴로지(팬아웃·파이프라인·수퍼바이저), (5) 가드레일·종료조건·루프방지, (6) 관측성·비용상한. Claude(@anthropic-ai/sdk tool_use) 또는 Gemini(@google/genai function calling) 둘 다 커버. 이건 사용자 앱에 들어갈 에이전트를 만드는 스킬이지, Claude Code 내부 subagent 위임이 아니다 — 그건 agent-delegate[Core]."
+description: >
+  Use when designing or implementing an agent-style (tool use / function calling) system inside the user's AI product. 트리거: "AI 에이전트 만들어", "tool use", "function calling", "함수 호출 루프", "멀티에이전트", "agent loop", "tool 정의", /agent-builder. Produces tool/function schemas, a plan-execute loop, memory/state design, multi-agent topology (fan-out/pipeline/supervisor), guardrails with termination + loop-prevention, and observability/cost caps. Covers Claude tool_use and Gemini function calling. Not Claude Code subagent delegation — that is agent-delegate[Core].
 allowed-tools: Read, Write, Edit, Bash, AskUserQuestion
 version: 1.0.0
 author: simon-stack

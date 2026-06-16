@@ -2,9 +2,13 @@
 name: skaihub
 version: 0.1.0
 description: >
-  SimonKAIHub 오케스트레이터 — AI 제품/기능 빌드의 단일 진입점. 트리거 "AI 기능 만들어", "LLM 앱", "챗봇",
-  "RAG", "AI 에이전트", "프롬프트", "AI 평가", "어떤 모델 쓰지", "skaihub", 또는 /skaihub. 사용자 의도를 러프하게
-  진단한 뒤 적절한 AI 빌드 스킬로 라우팅하고, 산출물마다 사용자와 반복 디벨롭한다. 평가·안전 게이트를 건너뛰지 않는다.
+  Use when the user wants to build an AI product or feature and needs a single
+  entry point to diagnose intent and route to the right AI-build skill —
+  SimonKAIHub 오케스트레이터. 트리거 "AI 기능 만들어", "LLM 앱", "챗봇", "RAG",
+  "AI 에이전트", "프롬프트", "AI 평가", "어떤 모델 쓰지", "skaihub", 또는 /skaihub.
+  Produces an AskUserQuestion intent diagnosis, a routed sub-skill pipeline
+  (model selection → prompt → eval → safety, as needed), and per-step iterative
+  develop loops — never skipping the eval and safety gates before production.
 allowed-tools:
   - Read
   - Write

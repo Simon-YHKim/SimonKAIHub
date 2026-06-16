@@ -1,6 +1,7 @@
 ---
 name: ai-safety-eval
-description: "사용자가 만드는 AI 제품/기능의 안전·가드레일을 설계·점검할 때 사용. 트리거: \"AI 안전\", \"가드레일\", \"콘텐츠 필터\", \"탈옥 방어\", \"프롬프트 인젝션\", \"환각 줄이기\", \"PII 마스킹\", \"AI 편향 점검\", \"jailbreak\", \"guardrail\", \"content moderation\", \"hallucination\", /ai-safety-eval. 입력/출력 가드레일 → 콘텐츠 모더레이션 → PII·로깅·감사 → 탈옥/인젝션 레드팀 → 편향·공정성 → 환각 완화(근거·불확실성·휴먼인루프) → 규제(개인정보·연령) 7개 레이어를 위험도별 대응 표로 점검하고, 레드팀 테스트 스위트 + 가드레일 설정 템플릿을 산출한다. 대상은 사용자가 만드는 AI 기능이지 이 플러그인 자체가 아니다."
+description: >
+  Use when designing or auditing the safety and guardrails of the user's AI product. 트리거: "AI 안전", "가드레일", "콘텐츠 필터", "탈옥 방어", "프롬프트 인젝션", "환각 줄이기", "PII 마스킹", "jailbreak", "guardrail", "hallucination", /ai-safety-eval. Produces a risk-rated table across seven layers (input/output guardrails, moderation, PII/logging/audit, jailbreak/injection red-team, bias/fairness, hallucination mitigation, regulation) plus a red-team test suite and a guardrail config template. Targets the user's AI feature, not this plugin.
 allowed-tools: Read, Write, WebSearch, WebFetch, AskUserQuestion, Bash
 version: 1.1.0
 author: simon-stack

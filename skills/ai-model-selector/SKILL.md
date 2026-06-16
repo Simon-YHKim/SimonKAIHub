@@ -1,6 +1,7 @@
 ---
 name: ai-model-selector
-description: "사용자가 만드는 AI 제품·기능에 어떤 모델/프로바이더를 쓸지 결정할 때 사용. 트리거: \"어떤 모델 쓰지\", \"Claude vs Gemini vs GPT\", \"모델 고르기\", \"온디바이스 vs API\", \"self-host 할까\", \"which model should my app use\", \"on-device or API\", /ai-model-selector. 작업 적합성(추론·코딩·비전·음성)→비용·레이턴시·컨텍스트·모달리티→프라이버시·리전·온프레→API vs 오픈모델→라우팅·폴백·캐싱 전략 순으로 좁혀 1차/2차/저비용 후보를 API ID와 함께 추천한다. 이 스택 내부 라우팅을 정하는 model-router 와는 별개 — 이건 '사용자 제품'의 모델 결정이다."
+description: >
+  Use when deciding which model or provider the user's AI product should use. 트리거: "어떤 모델 쓰지", "Claude vs Gemini vs GPT", "모델 고르기", "온디바이스 vs API", "self-host 할까", "which model should my app use", /ai-model-selector. Produces a narrowed recommendation (primary / secondary / low-cost candidates with API model IDs) after weighing task fit, cost, latency, context, modality, privacy/region, and API-vs-open-model, plus a routing/fallback/caching strategy. Distinct from model-router (internal stack routing) — this is the product's model choice.
 allowed-tools: Read, WebSearch, WebFetch, AskUserQuestion
 version: 1.0.0
 author: simon-stack

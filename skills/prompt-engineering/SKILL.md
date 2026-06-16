@@ -1,6 +1,7 @@
 ---
 name: prompt-engineering
-description: "사용자가 만드는 AI 제품·기능의 프롬프트를 설계·개선할 때 사용. 트리거: \"프롬프트 만들어\", \"프롬프트 개선\", \"프롬프트 짜줘\", \"시스템 프롬프트\", \"structured output\", \"JSON으로 출력\", \"프롬프트 인젝션 방어\", \"탈옥 막아줘\", \"few-shot\", \"prompt engineering\", \"system prompt\", \"prompt injection\", /prompt-engineering. 산출물: (1) 작업 정의(입력·출력·성공조건), (2) 패턴 선택(zero/few-shot · CoT · role · structured/JSON schema), (3) 시스템 프롬프트 초안, (4) 인젝션·탈옥 방어층(구분자·권한분리·출력검증), (5) eval 셋과 반복 개선 루프(나쁜 예 수집→수정). Claude tool-use / structured output 관점 기본. 이건 사용자 제품의 프롬프트를 만드는 스킬이지, 이 플러그인 내부 동작이 아니다."
+description: >
+  Use when designing or improving prompts for the user's AI product. 트리거: "프롬프트 만들어", "프롬프트 개선", "시스템 프롬프트", "structured output", "JSON으로 출력", "프롬프트 인젝션 방어", "few-shot", "prompt injection", /prompt-engineering. Produces a task definition (input/output/success), a pattern choice (zero/few-shot, CoT, role, structured/JSON schema), a system-prompt draft, an injection/jailbreak defense layer (delimiters, privilege separation, output validation), and an eval set + iteration loop. Builds the product's prompts, not this plugin's behavior.
 allowed-tools: Read, Write, Edit, WebSearch, AskUserQuestion
 version: 1.0.0
 author: simon-stack
