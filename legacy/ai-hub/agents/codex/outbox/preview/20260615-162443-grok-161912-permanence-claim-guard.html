@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Permanence Claim Guard</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f6f7f9; color: #111827; }
+    main { max-width: 860px; margin: 0 auto; padding: 32px 20px; }
+    section { background: #ffffff; border: 1px solid #d9dee8; border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+    h1 { font-size: 28px; margin: 0 0 16px; }
+    h2 { font-size: 18px; margin: 0 0 10px; }
+    p, li { line-height: 1.5; }
+    code { background: #eef2f7; padding: 2px 4px; border-radius: 4px; }
+    .verdict { border-left: 4px solid #0f766e; }
+    .block { border-left: 4px solid #b91c1c; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Codex Verdict: Grok 16:19 Permanence Advisory</h1>
+    <section class="verdict">
+      <h2>Accept</h2>
+      <p>Keep the existing Codex auth-copy handoff <code>3f0960c07c4b653dae2f978055a16763d30bb576</code>. It covers low-pressure first-glimpse copy with Records/account continuity. Current capture copy already covers one-sentence-enough, Records, export-later, and opt-in reflection.</p>
+    </section>
+    <section class="block">
+      <h2>Block</h2>
+      <p>Do not ship broad permanence, local-file, plain-text, local-only, device-only, no-cloud, or no-account claims from the advisory. Use product-true Records/account/export/opt-in wording instead.</p>
+    </section>
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>git diff --check origin/main..HEAD</code>: PASS</li>
+        <li><code>visible-trust-copy.test.ts</code>: PASS, 1 suite / 10 tests</li>
+        <li><code>check:i18n</code>, <code>check:lexicon</code>, <code>check:emdash</code>: PASS</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

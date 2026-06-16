@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex UI Gate - Visual-only Progress State</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --panel: #151923;
+      --panel2: #10141c;
+      --text: #eef2f7;
+      --muted: #a9b2c3;
+      --line: #2b3342;
+      --warn: #ffd166;
+      --bad: #ff7272;
+      --good: #79e0aa;
+      --accent: #8db7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
+    header, section, .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    header {
+      padding: 26px;
+      background: linear-gradient(180deg, #171c27, #10141c);
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(26px, 4vw, 42px); line-height: 1.1; letter-spacing: 0; }
+    h2 { font-size: 20px; margin-bottom: 12px; }
+    h3 { font-size: 16px; margin-bottom: 8px; }
+    section { margin-top: 18px; padding: 18px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 10px;
+      color: var(--muted);
+      background: #0e121a;
+      font-size: 13px;
+    }
+    .score { color: var(--warn); border-color: #6a5523; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .card {
+      padding: 16px;
+      min-height: 168px;
+    }
+    .bad { border-color: #673238; }
+    .bad h3 { color: var(--bad); }
+    .good { border-color: #2f6547; }
+    .good h3 { color: var(--good); }
+    .path {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      color: var(--accent);
+      word-break: break-all;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 6px 0; }
+    .barDemo {
+      display: grid;
+      gap: 8px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .bar {
+      height: 10px;
+      border-radius: 999px;
+      background: #252d3a;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+    .fill {
+      width: 64%;
+      height: 100%;
+      background: var(--accent);
+    }
+    .semantic {
+      border-color: #2f6547;
+      background: rgba(121, 224, 170, 0.08);
+      padding: 10px;
+      border-radius: 8px;
+      color: var(--text);
+    }
+    code {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      background: #0b0f16;
+      border: 1px solid var(--line);
+      padding: 2px 5px;
+      border-radius: 5px;
+    }
+    .small { color: var(--muted); font-size: 13px; }
+    @media (max-width: 840px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="small">Codex -> Claude / 2026-06-06 07:28 KST</p>
+      <h1>Progress bars are still mostly visual-only</h1>
+      <p>평가, XP, 페르소나, 인사이트 막대가 화면에서는 좋아 보이지만, 값/역할/현재 상태 계약이 일관되지 않습니다. 100점 기준에서는 정량 상태도 비시각 사용자에게 같은 정보를 줘야 합니다.</p>
+      <div class="meta">
+        <span class="pill score">Score: 98/100 provisional</span>
+        <span class="pill">Priority: P2</span>
+        <span class="pill">Scope: XP / Quant / Audit / Persona / Insights</span>
+        <span class="pill">No app code changed by Codex</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Pattern</h2>
+      <div class="grid">
+        <div class="card bad">
+          <h3>Visual Width</h3>
+          <div class="barDemo">
+            <span>Score</span>
+            <div class="bar"><div class="fill"></div></div>
+          </div>
+          <p class="small">Looks clear in a screenshot, but the bar itself has no semantic value.</p>
+        </div>
+        <div class="card good">
+          <h3>Semantic State</h3>
+          <div class="semantic">
+            Trait openness: 64 out of 100. Above midpoint.
+          </div>
+          <p class="small">The value, scale, and meaning are available without relying on color or width.</p>
+        </div>
+        <div class="card">
+          <h3>Contract</h3>
+          <p>Width-driven bars need role/value/label or a documented reason they are purely decorative.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <div class="grid">
+        <div class="card bad">
+          <h3>XP Bar</h3>
+          <p class="path">src/components/progression/XpBar.tsx:21, 30-31</p>
+          <p>Has progressbar role but no <code>accessibilityValue</code> or full value contract.</p>
+        </div>
+        <div class="card bad">
+          <h3>Quant Pager</h3>
+          <p class="path">src/components/quant/QuantPager.tsx:55, 68-81</p>
+          <p>Answered progress is visible in text and width, but the bar has no semantic progress value.</p>
+        </div>
+        <div class="card bad">
+          <h3>Audit</h3>
+          <p class="path">src/app/audit.tsx:185-201</p>
+          <p>Question progress and dots are visual-only; current/done dot states rely on color/scale.</p>
+        </div>
+        <div class="card bad">
+          <h3>Persona</h3>
+          <p class="path">src/app/persona.tsx:219-236, 373-387</p>
+          <p>Trait and attachment bars have visible numbers, but no semantic grouping/value per bar.</p>
+        </div>
+        <div class="card bad">
+          <h3>Insights</h3>
+          <p class="path">src/app/insights.tsx:172-186</p>
+          <p>Weekly activity bars compare relative counts by width only.</p>
+        </div>
+        <div class="card good">
+          <h3>Partial Positive</h3>
+          <p class="path">src/components/ui/DrillProgress.tsx:57-94</p>
+          <p>Matrix and cells at least carry labels, showing the right direction for quantitative UI.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Required Fix</h2>
+      <ul>
+        <li>Add role/value/label semantics to XP and assessment progress controls.</li>
+        <li>Expose audit current question and completion state beyond dot color/scale.</li>
+        <li>Expose persona trait and attachment bars as metric + value + scale.</li>
+        <li>Expose insights weekly activity rows as week + count + relative comparison when the bar has meaning.</li>
+        <li>Add a static scan or exception ledger for width-driven bars without semantics.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

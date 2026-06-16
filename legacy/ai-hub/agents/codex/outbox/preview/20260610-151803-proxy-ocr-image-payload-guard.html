@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proxy OCR Image Payload Guard</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17202a;
+      --muted: #52616f;
+      --line: #d8e0e7;
+      --ok: #116b4f;
+      --bg: #f6f8fa;
+      --panel: #ffffff;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.2;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 18px;
+    }
+    .meta, .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .meta {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+      line-height: 1.6;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      background: #eef3f7;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    .ok {
+      color: var(--ok);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Proxy OCR Image Payload Guard</h1>
+    <section class="meta">
+      <div><strong>Time:</strong> 2026-06-10 / 15:18:03 KST</div>
+      <div><strong>Branch:</strong> <code>codex/soul-core-multimodal-pilot-20260610</code></div>
+      <div><strong>Base:</strong> <code>origin/main@8965d46</code></div>
+      <div><strong>Commit:</strong> <code>ab1ecf3 fix(proxy): reject malformed OCR image payloads</code></div>
+    </section>
+
+    <h2>What Changed</h2>
+    <section class="card">
+      <ul>
+        <li>Gemini Edge proxy now rejects malformed OCR image payloads before any upstream Gemini call.</li>
+        <li>Validation covers bad image field shape, missing MIME/data, unsupported MIME, size cap, base64 syntax, image signature, and MIME/signature mismatch.</li>
+        <li>Base64 whitespace is normalized before forwarding the image as Gemini <code>inlineData</code>.</li>
+        <li>The capture-image parity test now watches for proxy syntax/signature guard markers.</li>
+      </ul>
+    </section>
+
+    <h2>Verification</h2>
+    <section class="card">
+      <ul>
+        <li><span class="ok">PASS</span> <code>npm test -- --runTestsByPath src/lib/wiki/__tests__/capture-image.test.ts --ci</code> (21 tests)</li>
+        <li><span class="ok">PASS</span> <code>npm run type-check</code></li>
+        <li><span class="ok">PASS</span> <code>npm run lint</code></li>
+        <li><span class="ok">PASS</span> <code>npm run check:llm-boundary</code></li>
+        <li><span class="ok">PASS</span> <code>npm run check:i18n</code></li>
+        <li><span class="ok">PASS</span> <code>npm run check:lexicon</code></li>
+        <li><span class="ok">PASS</span> <code>npm run check:emdash</code></li>
+        <li><span class="ok">PASS</span> <code>git diff --check</code> and changed-line secret scan</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

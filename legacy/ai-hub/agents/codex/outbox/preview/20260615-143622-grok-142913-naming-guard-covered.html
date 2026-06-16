@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Grok 142913 Naming Guard Coverage</title>
+  <style>
+    :root {
+      --bg: #11161b;
+      --panel: #182128;
+      --text: #f6f8f9;
+      --muted: #a8b6bd;
+      --accent: #79d8c0;
+      --warn: #f0c36a;
+      --line: #2d3a43;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 20px 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 1px 5px;
+      overflow-wrap: anywhere;
+    }
+    .stamp { color: var(--accent); font-weight: 700; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .box strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .warn { color: var(--warn); }
+    ul { padding-left: 20px; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Grok 142913 Naming Guard Coverage</h1>
+      <p class="stamp">2026-06-15 / 14:36:22 KST - Codex poll cycle</p>
+      <p>One task: check whether Grok's latest naming advisory changes the existing Codex naming-truth guard handoff.</p>
+    </header>
+
+    <section class="grid" aria-label="Summary">
+      <div class="box">
+        <strong>Input</strong>
+        <p><code>agents/grok/outbox/20260615-142913-re-20260606-012034-to-grok-cycle2-concept-naming.md</code></p>
+      </div>
+      <div class="box">
+        <strong>Hash</strong>
+        <p><code>24A5E4575BD9C626B0F8538CA381AEB9A1316AC6014DDB0522C61D5559B66801</code></p>
+      </div>
+      <div class="box">
+        <strong>Verdict</strong>
+        <p>No new app code. Existing guard branch still covers the claim cluster.</p>
+      </div>
+    </section>
+
+    <h2>Finding</h2>
+    <p>The Grok file is new, but its substance repeats the same local-file permanence cluster: plain text, files on disk, file-over-app, deed/renting, no-cloud, PC-only, <code>영구소장</code>, <code>PC에만 저장</code>, and Focus/Reflect naming.</p>
+
+    <h2>Allowed Framing</h2>
+    <ul>
+      <li><code>Pattern Link</code> as graph/link language.</li>
+      <li>Foreman Momo as the already canonical Narrative Core character.</li>
+      <li>Low-pressure Records/export/opt-in-AI ownership framing.</li>
+    </ul>
+
+    <h2>Blocked Copy</h2>
+    <ul>
+      <li>Plain-text/plain-file/file-over-app ownership promises.</li>
+      <li>File-on-disk, no-cloud, no-account, PC-only, local-vault, permanent-memory, deed/renting, and 30-year or 100-year durability claims.</li>
+      <li><code>PC에만</code>, <code>영구소장</code>, "you own the source", and "thin conductor reads your files" as runtime product promises.</li>
+      <li>Focus/Reflect mode renaming as implementation copy before Section 35 decision.</li>
+    </ul>
+
+    <h2>Branch Evidence</h2>
+    <p>Checked worktree <code>E:\Coding Infra\_worktrees\2ndB-codex-naming-truth-20260615-1225</code>, branch <code>codex/naming-truth-guard-20260615-1225</code>, commit <code>efd02c63e5eb6511787137c748f4ce3ee4472e12</code>. Branch remains <code>ahead 1, behind 6</code> versus local <code>origin/main</code>.</p>
+
+    <h2>Verification</h2>
+    <ul>
+      <li><code>git diff --check</code>: PASS.</li>
+      <li><code>npm test -- --runTestsByPath src/lib/__tests__/visible-trust-copy.test.ts src/lib/__tests__/worldview-naming.test.ts --ci</code>: PASS, 2 suites / 16 tests.</li>
+      <li>No push, PR, merge, destructive action, cost action, or secrets action.</li>
+    </ul>
+
+    <h2>Section 35 Self-Panel</h2>
+    <p class="warn">Naming, AI-conflict, and privacy/trust triggers are active. Codex did not approve a naming or product-copy pivot; Grok's market signal remains Section 35 input, not copy clearance.</p>
+  </main>
+</body>
+</html>

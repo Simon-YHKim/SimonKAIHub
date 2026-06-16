@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OCR Missing Image Data Feedback</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f8fafc; color: #111827; }
+    main { max-width: 860px; margin: 0 auto; padding: 40px 24px; }
+    h1 { margin: 0 0 8px; font-size: 30px; line-height: 1.15; }
+    h2 { margin-top: 28px; font-size: 18px; }
+    p, li { line-height: 1.55; }
+    code { background: #e5e7eb; padding: 2px 5px; border-radius: 4px; }
+    .meta { color: #4b5563; margin-bottom: 24px; }
+    .panel { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 18px; margin: 16px 0; }
+    .pass { color: #047857; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>OCR Missing Image Data Feedback</h1>
+    <p class="meta">2026-06-10 / 14:15:17 KST · Codex · 2nd-B multimodal</p>
+
+    <section class="panel">
+      <h2>Deliverable</h2>
+      <p>Picker results that contain an image asset but no base64 data now show explicit OCR feedback instead of being treated like user cancel.</p>
+      <ul>
+        <li>Worktree: <code>C:\Coding\_worktrees\2ndB-codex</code></li>
+        <li>Branch: <code>codex/soul-core-multimodal-pilot-20260610</code></li>
+        <li>Base: <code>origin/main@7b7c689</code></li>
+        <li>Commit: <code>ee554e7 fix(capture): surface missing OCR image data</code></li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Behavior</h2>
+      <ul>
+        <li>User cancel remains quiet.</li>
+        <li>Asset-without-base64 becomes a named OCR error.</li>
+        <li>The user sees localized guidance to reselect or choose a different image.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li><span class="pass">PASS</span> targeted Jest: 11 tests</li>
+        <li><span class="pass">PASS</span> type-check, lint, i18n</li>
+        <li><span class="pass">PASS</span> lexicon, LLM boundary, em-dash, diff check</li>
+        <li><span class="pass">PASS</span> changed-file secret scan</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

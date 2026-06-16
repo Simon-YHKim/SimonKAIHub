@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shared Pixel Loader Glyph</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f6f7f1; color: #1f2a22; }
+    main { max-width: 860px; margin: 0 auto; padding: 32px 20px 48px; }
+    h1 { font-size: 28px; margin: 0 0 8px; }
+    h2 { font-size: 18px; margin: 28px 0 10px; }
+    p, li { line-height: 1.6; }
+    code { background: #e7eadf; padding: 2px 5px; border-radius: 4px; }
+    .stamp { color: #50604f; margin-bottom: 22px; }
+    .panel { border: 2px solid #2f5130; background: #fffef8; padding: 16px; border-radius: 8px; margin-top: 16px; }
+    .ok { color: #1f6f43; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Shared Pixel Loader Glyph</h1>
+    <div class="stamp">[2026-06-08 / 14:10:49 KST]</div>
+    <div class="panel">
+      <p><strong>Commit:</strong> <code>c9f33b0 refactor(ui): share pixel loader glyph</code></p>
+      <p><strong>Branch:</strong> <code>codex/core-label-tail-cleanup</code>, <code>origin/main...HEAD = 0 7</code></p>
+    </div>
+    <h2>Scope</h2>
+    <ul>
+      <li>Added <code>PixelLoaderGlyph</code> as the shared three-cell Game Boy loading primitive.</li>
+      <li>Reused it in <code>InlineLoader</code>, <code>PremiumLoadingState</code>, and <code>PremiumButton</code>.</li>
+      <li>Removed duplicate pixel-cell constants and styles from the three callers.</li>
+      <li>Added/updated static no-system-spinner contract tests.</li>
+    </ul>
+    <h2>Verification</h2>
+    <ul>
+      <li>Focused loading tests: <span class="ok">PASS</span>.</li>
+      <li>Type-check: <span class="ok">PASS</span>.</li>
+      <li>Lint: <span class="ok">PASS</span>.</li>
+      <li><code>git diff --check</code>: <span class="ok">PASS</span>.</li>
+      <li><code>npm run verify</code>: <span class="ok">PASS</span>, 108 suites / 895 tests.</li>
+    </ul>
+  </main>
+</body>
+</html>

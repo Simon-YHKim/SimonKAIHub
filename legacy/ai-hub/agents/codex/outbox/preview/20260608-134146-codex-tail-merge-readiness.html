@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Tail Merge Readiness</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070A18;
+      --panel: #11162A;
+      --text: #E8ECF8;
+      --muted: #C9D0E6;
+      --line: #2A345A;
+      --mint: #72F2C7;
+      --blue: #4CC9F0;
+      --amber: #FFD166;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, "Malgun Gothic", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    header {
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    .stamp {
+      color: var(--mint);
+      font-size: 14px;
+      margin: 0;
+    }
+    section {
+      background: var(--panel);
+      border: 2px solid var(--line);
+      padding: 18px;
+      margin: 14px 0;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: var(--blue);
+      letter-spacing: 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 8px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      color: var(--mint);
+      background: #0B1021;
+    }
+    ul, ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+    li + li {
+      margin-top: 8px;
+    }
+    code {
+      color: var(--mint);
+      background: #0B1021;
+      padding: 2px 5px;
+      border: 1px solid var(--line);
+    }
+    .warn { color: var(--amber); }
+    .muted { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Codex tail merge-readiness packet</h1>
+      <p class="stamp">[2026-06-08 / 13:41:46 KST] Codex handoff to Claude</p>
+    </header>
+
+    <section>
+      <h2>상태</h2>
+      <ul>
+        <li><code>CONTROL.md</code>: running</li>
+        <li>base: <code>origin/main@b510cb9</code></li>
+        <li>branch: <code>codex/core-label-tail-cleanup</code></li>
+        <li>app status: clean</li>
+        <li class="warn"><code>origin/main...HEAD = 0 10</code> - throttle 유지</li>
+        <li><code>git diff --check origin/main...HEAD</code> PASS</li>
+        <li><code>npm run verify</code> PASS at 13:30 KST, 105 suites / 892 tests</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Commit Scope</h2>
+      <table>
+        <thead>
+          <tr><th>Commit</th><th>Scope</th><th>Files</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>432b7ae</code></td><td>Graph a11y label</td><td><code>NavGraph.tsx</code></td></tr>
+          <tr><td><code>8fc7e6c</code></td><td>Nav chrome token cleanup</td><td><code>BackArrow.tsx</code></td></tr>
+          <tr><td><code>a831e10</code></td><td>Onboarding primary CTA clarity</td><td><code>onboarding.tsx</code></td></tr>
+          <tr><td><code>4b5bb48</code></td><td>Long-copy readability</td><td><code>capture.tsx</code>, <code>index.tsx</code></td></tr>
+          <tr><td><code>415d4a3</code></td><td>Graph pixel motion</td><td><code>NavGraph.tsx</code>, <code>pixel-physical.ts</code></td></tr>
+          <tr><td><code>5bea50e</code></td><td>Native pixel shadow contract</td><td><code>gameboy-tokens.ts</code>, tests</td></tr>
+          <tr><td><code>6e00b12</code></td><td>Premium sheet motion</td><td><code>feedback.tsx</code>, motion tests</td></tr>
+          <tr><td><code>d5ec9ee</code></td><td>Token-derived boxShadow test expectation</td><td><code>gameboy-tokens.test.ts</code></td></tr>
+          <tr><td><code>049b4be</code></td><td>Inline loader pixel frame</td><td><code>InlineLoader.tsx</code>, test</td></tr>
+          <tr><td><code>b7ae203</code></td><td>DESIGN docs alignment</td><td><code>DESIGN.md</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Suggested Integration Order</h2>
+      <ol>
+        <li>Low-risk independent UI polish: <code>8fc7e6c</code>, <code>a831e10</code>, <code>4b5bb48</code>.</li>
+        <li>Graph pair: <code>432b7ae</code> then <code>415d4a3</code>.</li>
+        <li>Motion/theme contracts: <code>5bea50e</code>, <code>6e00b12</code>, <code>d5ec9ee</code>.</li>
+        <li>Loader + docs: <code>049b4be</code>, <code>b7ae203</code>.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Claude Notes</h2>
+      <ul>
+        <li>#278 already landed the main <code>withAlpha</code> implementation and fuller Game Boy phase docs.</li>
+        <li><code>d5ec9ee</code> still removes a copied rgba literal from the pixel <code>boxShadow</code> test expectation.</li>
+        <li><code>b7ae203</code> is docs-only and preserves the explicit <code>&lt;InlineLoader /&gt;</code> no-system-spinner guidance.</li>
+        <li class="muted">Codex has not pushed, opened a PR, or merged.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

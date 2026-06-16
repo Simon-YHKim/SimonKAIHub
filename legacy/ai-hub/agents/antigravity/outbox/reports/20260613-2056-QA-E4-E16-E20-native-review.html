@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>QA Review: E4, E16, E20 (Device-Native UI/UX)</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; line-height: 1.6; max-width: 800px; margin: 40px auto; padding: 20px; color: #333; }
+    h1 { color: #1a73e8; border-bottom: 2px solid #e8eaed; padding-bottom: 10px; }
+    h2 { color: #202124; margin-top: 30px; }
+    .badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 0.85em; margin-left: 8px; }
+    .pass { background: #e6f4ea; color: #137333; }
+    .code { background: #f8f9fa; padding: 2px 6px; border-radius: 4px; font-family: monospace; }
+  </style>
+</head>
+<body>
+  <h1>네이티브 디바이스 QA 리뷰 보고서</h1>
+  <p><strong>점검 일자:</strong> 2026-06-13 KST</p>
+  <p><strong>에이전트:</strong> Antigravity (Device-Native QA 담당)</p>
+  <p><strong>점검 항목:</strong> E4 (터치증명), E16 (데이터힌트), E20 (RTL)</p>
+
+  <h2>1. E4: Device 터치증명 (Touch Target Proofing) <span class="badge pass">PASS</span></h2>
+  <p><strong>개요:</strong> 안드로이드 물리 디바이스 및 에뮬레이터에서 버튼 및 상호작용 가능한 텍스트의 터치 타겟(최소 44px) 확보 검증.</p>
+  <ul>
+    <li>Claude의 구현 내역: <code>hitSlop={{ top: 14, bottom: 14, left: 14, right: 14 }}</code> 및 <code>minHeight/minWidth: 44</code> 등 적용 완료.</li>
+    <li><strong>QA 결과:</strong> React Native 안드로이드에서 hitSlop은 부모의 <code>overflow: hidden</code>에 의해 잘리지 않는 한 정상적으로 터치 영역을 확장합니다. 모든 주요 상호작용 요소(인박스 항목, 캡처 모드 탭, 프리미엄 닫기 버튼 등)가 엄격하게 44px 이상으로 동작함을 코드 수준 및 에뮬레이터 렌더링을 통해 교차 검증했습니다.</li>
+  </ul>
+
+  <h2>2. E16: 데이터 사용량 힌트 (Data-usage Hints) <span class="badge pass">PASS</span></h2>
+  <p><strong>개요:</strong> OCR(이미지) 및 파일 분석 시 무거운 페이로드가 LLM으로 전송될 수 있음을 사용자에게 인지시키는 UI 힌트.</p>
+  <ul>
+    <li>Claude의 구현 내역: <code>capture.tsx</code> 내에 <code>t("image.dataUsageHint")</code> 및 <code>t("file.dataUsageHint")</code> 텍스트 렌더링.</li>
+    <li><strong>QA 결과:</strong> 해당 Text 컴포넌트는 명확한 대비(caption, textSubtle)를 유지하면서도 레이아웃 스래싱이나 줄바꿈 어색함 없이 캡처 모달의 안전 영역(Safe Area) 내에 올바르게 배치되어 있습니다. 시각적 정보 위계 원칙을 만족합니다.</li>
+  </ul>
+
+  <h2>3. E20: RTL(오른쪽에서 왼쪽으로) 레이아웃 지원 <span class="badge pass">PASS</span></h2>
+  <p><strong>개요:</strong> 글로벌 진출 시 다국어(RTL) 디바이스 환경에서의 레이아웃 깨짐 방지.</p>
+  <ul>
+    <li>Claude의 구현 내역: <code>replaceRtl.js</code>를 이용해 하드코딩된 Left/Right 패딩 및 마진을 Start/End 속성으로 스윕 처리.</li>
+    <li><strong>QA 결과:</strong> Flexbox 기반의 React Native UI에서 Start/End 속성 사용은 I18nManager에 의해 네이티브 차원에서 안전하게 방향이 전환됨을 보장합니다. 디바이스의 locale 변경 시 아이콘과 텍스트의 정렬이 의도된 대로 반전되며, 기존 LTR 렌더링에는 영향을 미치지 않습니다.</li>
+  </ul>
+
+  <h2>📝 결론</h2>
+  <p>Claude에 의해 구현된 위 세 가지 고유 네이티브 속성 작업은 모두 안드로이드 디바이스 표준을 만족하며 결함 없이 동작합니다. <strong>QA 통과.</strong></p>
+</body>
+</html>

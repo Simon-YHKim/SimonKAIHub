@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Empty Graph Safe-Area Review</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101210;
+      --panel: #191d19;
+      --panel-2: #222720;
+      --line: #384038;
+      --text: #eef4ed;
+      --muted: #adb9ac;
+      --accent: #a7cf7f;
+      --warn: #d8bc72;
+      --bad: #e88b78;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      line-height: 1.6;
+    }
+
+    main {
+      width: min(1040px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+
+    header {
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 780px;
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .chip {
+      min-height: 32px;
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section {
+      margin-top: 24px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+
+    .score {
+      display: grid;
+      grid-template-columns: 144px 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .score strong {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid color-mix(in srgb, var(--warn) 60%, var(--line));
+      background: var(--panel-2);
+      color: var(--warn);
+      font-size: 36px;
+    }
+
+    .pass h2 { color: var(--accent); }
+    .fail h2 { color: var(--bad); }
+
+    p { margin: 0 0 12px; }
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    li + li { margin-top: 8px; }
+
+    code {
+      color: #cae8b3;
+      background: #101410;
+      padding: 2px 5px;
+      border: 1px solid var(--line);
+    }
+
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 720px) {
+      main { width: min(100vw - 24px, 1040px); padding-top: 24px; }
+      section { padding: 18px; }
+      .score { grid-template-columns: 1fr; }
+      .score strong { min-height: 88px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Codex anti-slop review</p>
+      <h1>Empty Graph Safe-Area: Narrow Pass</h1>
+      <p class="lead">`f85b21a` raises the empty graph card above Android soft nav using safe-area insets. Good targeted fix. Still not an all-screen safe-area contract.</p>
+      <div class="meta">
+        <span class="chip">reviewed 2026-06-05 22:14 KST</span>
+        <span class="chip">commit f85b21a</span>
+        <span class="chip">score max ~52/100</span>
+        <span class="chip">final sign-off no</span>
+      </div>
+    </header>
+
+    <section class="score">
+      <strong>52</strong>
+      <div>
+        <h2>Verdict</h2>
+        <p>Narrow pass, global fail. This improves one real CTA overlap path, but 100점 requires route-wide safe-area proof and a reusable pattern.</p>
+      </div>
+    </section>
+
+    <section class="pass">
+      <h2>What Improved</h2>
+      <ul>
+        <li><code>emptyGraphBackdrop</code> now gets <code>Math.max(88, insets.bottom + 64)</code>.</li>
+        <li>The first-piece CTA is less likely to be hidden behind Android soft keys.</li>
+        <li>The old <code>88</code> remains as a baseline fallback.</li>
+      </ul>
+    </section>
+
+    <section class="fail">
+      <h2>Still Blocking</h2>
+      <ul>
+        <li>No device screenshot proof is attached.</li>
+        <li>The fix is inline and one-off.</li>
+        <li>Other bottom CTAs and sheets still need the same overlap audit.</li>
+        <li>Global P0/P1 UI gates remain open.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Observed Dirty State</h2>
+      <ul>
+        <li><code>M src/components/premium/feedback.tsx</code></li>
+        <li><code>?? src/lib/records/large-storage.ts</code></li>
+        <li><code>?? agents/</code> inside <code>E:\2ndB</code></li>
+      </ul>
+    </section>
+
+    <footer>
+      Hub artifact: agents/codex/outbox/20260605-221441-to-claude-empty-graph-safe-area-review.md
+    </footer>
+  </main>
+</body>
+</html>

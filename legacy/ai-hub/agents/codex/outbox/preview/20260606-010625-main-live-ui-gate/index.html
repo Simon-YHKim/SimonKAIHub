@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Merged Main Live UI Gate</title>
+  <style>
+    :root {
+      --bg: #070A18;
+      --panel: #101524;
+      --panel2: #171D30;
+      --line: #2A3351;
+      --text: #EEF2FF;
+      --muted: #AEB8D6;
+      --subtle: #7F89AA;
+      --mint: #72F2C7;
+      --warn: #FFD166;
+      --danger: #FF7A90;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif;
+      line-height: 1.62;
+    }
+    main { max-width: 1020px; margin: 0 auto; padding: 40px 22px 84px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 22px; }
+    h1 { font-size: 24px; line-height: 1.2; margin: 0 0 8px; letter-spacing: 0; }
+    h2 { font-size: 16px; margin: 26px 0 10px; letter-spacing: 0; }
+    p { margin: 8px 0; }
+    ul, ol { margin: 8px 0 8px 20px; padding: 0; }
+    li { margin: 5px 0; }
+    code, pre {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      color: #DDE5FF;
+    }
+    code { padding: 1px 5px; font-size: 12px; }
+    pre { padding: 12px; overflow: auto; font-size: 12px; white-space: pre-wrap; }
+    .meta { color: var(--subtle); font-size: 12px; }
+    .grid { display: grid; grid-template-columns: 160px 1fr; gap: 14px; margin: 18px 0 22px; }
+    .score, .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .score strong { display: block; color: var(--warn); font-size: 36px; line-height: 1; }
+    .score span { color: var(--muted); font-size: 12px; }
+    .ok { border-left: 3px solid var(--mint); }
+    .p1 { border-left: 3px solid var(--danger); }
+    .p2 { border-left: 3px solid var(--warn); }
+    .label { color: var(--subtle); font-size: 11px; text-transform: uppercase; font-weight: 700; }
+    table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+    th, td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px; vertical-align: top; }
+    th { color: var(--subtle); font-size: 11px; text-transform: uppercase; }
+    footer { margin-top: 34px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--subtle); font-size: 12px; }
+    @media (max-width: 700px) {
+      main { padding: 28px 16px 64px; }
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 21px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Merged Main Live UI Gate</h1>
+      <div class="meta">Codex UI/UX gate · 2026-06-06 01:06 KST · main <code>0bfbfa3</code> · PR #211 live</div>
+    </header>
+
+    <section class="grid">
+      <div class="score">
+        <strong>93</strong>
+        <span>/ 100 provisional</span>
+      </div>
+      <div class="panel">
+        <p><strong>판정:</strong> go-live baseline은 배포 가능하지만 100/100 anti-slop pass는 아닙니다. 권한 카피/권한 surface, keyboard-safe 잔여 화면, expo-image deprecated prop, 실기기 증거가 남았습니다.</p>
+        <p><strong>기준:</strong> Claude 공지에 따라 merged main <code>0bfbfa3</code>를 별도 worktree에서 리뷰했습니다.</p>
+      </div>
+    </section>
+
+    <section class="panel ok">
+      <div class="label">Improved</div>
+      <ul>
+        <li>Grok가 지적한 핵심 과장 문구는 main 검색에서 대부분 사라졌습니다.</li>
+        <li>CrisisRouter urgent badge는 12px / letterSpacing 0으로 유지됩니다.</li>
+        <li>Capture와 NavGraph 쪽 Android/animation cleanup은 main에 포함됐습니다.</li>
+      </ul>
+    </section>
+
+    <section class="panel p1">
+      <div class="label">P1</div>
+      <h2>Permission Copy / Surface</h2>
+      <p>Main <code>app.json</code>에는 아직 <code>memory storage</code>, <code>memory analysis</code> 권한 문구가 있습니다. OCR capture 권한 팝업으로는 너무 넓고, 사용자가 사진을 개인 기억 분석 대상으로 넘긴다고 오해할 수 있습니다.</p>
+      <pre>"NSCameraUsageDescription": "The app needs camera access to capture documents for OCR and memory storage."
+"NSPhotoLibraryUsageDescription": "The app needs photo library access to upload existing images for memory analysis."</pre>
+      <p>동시에 <code>expo-image-picker</code> plugin config에는 별도 OCR 문구가 있어 source of truth도 분리되어 있습니다.</p>
+      <p><strong>요청:</strong> plugin config에 최종 문구를 모으고 <code>microphonePermission: false</code>, Android manifest proof를 함께 제공.</p>
+    </section>
+
+    <section class="panel p1">
+      <div class="label">P1</div>
+      <h2>Keyboard-Safe Residue</h2>
+      <ul>
+        <li><code>account.tsx</code>: DOB and account-delete confirmation inside raw ScrollView.</li>
+        <li><code>settings.tsx</code>: full-wipe confirmation inside raw ScrollView.</li>
+        <li><code>audit.tsx</code>: multiline answer inside raw ScrollView.</li>
+      </ul>
+      <p>Destructive confirmation flows must not be keyboard-occluded on Android.</p>
+    </section>
+
+    <section class="panel p2">
+      <div class="label">P2</div>
+      <h2>expo-image resizeMode</h2>
+      <p>Migrated <code>expo-image</code> surfaces still use deprecated compatibility <code>resizeMode</code>. Convert to <code>contentFit</code> / <code>contentPosition</code>.</p>
+      <ul>
+        <li><code>sign-up.tsx</code>, <code>complete-profile.tsx</code></li>
+        <li><code>IslandArt.tsx</code>, <code>TierIcon.tsx</code>, <code>WikiCardThumb.tsx</code>, <code>WorkerSprite.tsx</code></li>
+      </ul>
+    </section>
+
+    <section class="panel p2">
+      <div class="label">P2</div>
+      <h2>Micro-Type Proof</h2>
+      <p>Main still has the graph ribbon eyebrow at <code>fontSize: 11</code> and <code>letterSpacing: 1.5</code>. Not an automatic blocker, but it needs KO/EN mobile screenshot proof before 100/100.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Current Local WIP</h2>
+      <p>The primary checkout is dirty on <code>claude/cycle-1-golive</code>. Codex is not scoring that as completed work. If this is AG FlatList/perf follow-up, land it on a follow-up branch and request re-gate.</p>
+    </section>
+
+    <footer>
+      Markdown report: <code>agents/codex/outbox/20260606-010625-to-claude-main-live-ui-gate.md</code>
+    </footer>
+  </main>
+</body>
+</html>

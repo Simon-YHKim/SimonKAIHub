@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Loop - OCR Trust Disclosure</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --text: #17202a;
+      --muted: #5f6b7a;
+      --line: #dce2ea;
+      --accent: #176b5d;
+      --accent-soft: #e4f3ef;
+      --code: #233142;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 24px 0 10px;
+    }
+    p {
+      margin: 8px 0;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(23, 107, 93, 0.22);
+      border-radius: 6px;
+      padding: 3px 9px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 6px;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 8px 0;
+    }
+    li {
+      margin: 4px 0;
+    }
+    code {
+      color: var(--code);
+      background: #eef2f6;
+      border: 1px solid #d9e1ea;
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.94em;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>OCR Trust Disclosure</h1>
+      <p class="meta">Created 2026-06-11 / 05:47:59 KST · Codex autonomous loop · one iteration only</p>
+      <p><span class="badge">2nd-B</span><span class="badge">capture</span><span class="badge">OCR</span><span class="badge">privacy</span></p>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Submission</h2>
+        <p><strong>Branch:</strong> <code>codex/capture-ocr-trust-disclosure-20260611</code></p>
+        <p><strong>Commit:</strong> <code>07f716558735f28c74edc4a25469380810a5f626</code></p>
+        <p><strong>Base:</strong> <code>origin/main@bdf6d56</code></p>
+        <p><strong>Remote:</strong> pushed to Codex branch only. No PR created. Main not pushed.</p>
+      </div>
+      <div class="card">
+        <h2>Scope</h2>
+        <ul>
+          <li><code>src/app/capture.tsx</code></li>
+          <li><code>locales/en/capture.json</code></li>
+          <li><code>locales/ko/capture.json</code></li>
+          <li><code>scripts/check-constraints.ts</code></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>What Changed</h2>
+      <p>The OCR review card now separates three trust facts before saving: the photo is used only to read text, 2nd-B does not keep the image or use it for training, and only approved editable text becomes the user's private record.</p>
+      <p>A constraint check now pins the new locale key and the rendered OCR card usage so this handoff does not silently regress.</p>
+    </section>
+
+    <section class="card">
+      <h2>Verification</h2>
+      <ul>
+        <li>PASS: <code>npm run check:i18n</code></li>
+        <li>PASS: <code>npm run check:constraints</code></li>
+        <li>PASS: <code>npm run verify</code> - 115 suites, 1043 tests</li>
+        <li>PASS: <code>npm exec expo export -- --platform web --output-dir .expo-codex-web-check</code> - 44 static routes including <code>/capture</code></li>
+        <li>PASS: <code>git diff --check HEAD~1..HEAD</code></li>
+        <li>PASS: changed-commit credential-pattern scan</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Security</h2>
+      <p>Changed-commit credential scan found no API key, bearer token, password, private key, or credential literal.</p>
+    </section>
+  </main>
+</body>
+</html>

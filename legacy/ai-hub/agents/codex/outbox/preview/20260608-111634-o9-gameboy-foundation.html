@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex O-9 Game Boy Foundation</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: #0d1530;
+      --ink: #e8ecf8;
+      --muted: #c9d0e6;
+      --subtle: #8d98b8;
+      --mint: #72f2c7;
+      --cyan: #4cc9f0;
+      --amber: #ffd166;
+      --line: rgba(76, 201, 240, 0.35);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", "Apple SD Gothic Neo", system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 20px 56px;
+    }
+    header {
+      border: 2px solid var(--line);
+      box-shadow: 3px 3px 0 var(--line);
+      padding: 20px;
+      background: var(--panel);
+    }
+    h1, h2 {
+      margin: 0;
+      letter-spacing: 0;
+    }
+    h1 { font-size: 28px; }
+    h2 { margin-top: 28px; font-size: 18px; color: var(--mint); }
+    .stamp { color: var(--subtle); margin-top: 8px; font-size: 13px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .card {
+      border: 2px solid var(--line);
+      padding: 14px;
+      background: rgba(13, 21, 48, 0.82);
+    }
+    .label {
+      color: var(--cyan);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    .value {
+      margin-top: 4px;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+    ul { padding-left: 20px; }
+    code {
+      color: var(--amber);
+      background: rgba(255, 209, 102, 0.08);
+      padding: 1px 4px;
+    }
+    .ok { color: var(--mint); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Codex O-9 Game Boy Foundation</h1>
+      <div class="stamp">[2026-06-08 / 11:16:34 KST] ready for Claude review</div>
+    </header>
+
+    <section class="grid">
+      <div class="card"><div class="label">Commit</div><div class="value">53d7dbc feat(theme): add game boy design foundation</div></div>
+      <div class="card"><div class="label">Base</div><div class="value">origin/main@1bb56aa</div></div>
+      <div class="card"><div class="label">Verify</div><div class="value ok">PASS - 102 suites / 886 tests</div></div>
+      <div class="card"><div class="label">Branch</div><div class="value">codex/core-label-tail-cleanup</div></div>
+    </section>
+
+    <h2>Scope</h2>
+    <ul>
+      <li>Added <code>gameboy-tokens.ts</code> with cosmic-backed O-9 palette, 8px grid, 2px border, 0 radius, no-blur pixel shadow, and motion constants.</li>
+      <li>Bundled <code>Galmuri11</code> and <code>PressStart2P</code>; documented font sources in <code>docs/ASSETS.md</code>.</li>
+      <li>Updated typography so pixel chrome uses Galmuri11, English-only retro labels can use PressStart2P, and long text stays readable.</li>
+      <li>Updated shared <code>Text</code> variant font routing and web base font.</li>
+      <li>Added the Deep Space Game Boy design contract to <code>DESIGN.md</code>.</li>
+    </ul>
+
+    <h2>Rebase</h2>
+    <p>Rebased onto Claude latest O-9 base after #270 removed dark-surface shadows. Conflict in <code>PremiumPanel</code> was resolved by preserving the no-shadow output and keeping Codex tokenized colors.</p>
+
+    <h2>Next</h2>
+    <p>Suggested next Codex slice: shared primitive pixelization for <code>PremiumButton</code>, cards/sheets, <code>Input</code>, and tabs, followed by browser visual QA once route surfaces change.</p>
+  </main>
+</body>
+</html>

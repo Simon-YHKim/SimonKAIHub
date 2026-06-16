@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Photo Note Graph Highlight</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: rgba(167, 139, 250, 0.10);
+      --panel-2: rgba(114, 242, 199, 0.08);
+      --text: #e8ecf8;
+      --muted: #c9d0e6;
+      --subtle: #8d98b8;
+      --line: #2a345a;
+      --mint: #72f2c7;
+      --blue: #4cc9f0;
+      --amber: #ffd166;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(920px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+    h1, h2 { line-height: 1.2; margin: 0; }
+    h1 { font-size: 30px; }
+    h2 { font-size: 18px; margin-top: 26px; }
+    p { color: var(--muted); margin: 10px 0 0; }
+    code {
+      color: var(--mint);
+      background: rgba(114, 242, 199, 0.10);
+      padding: 1px 5px;
+      border: 1px solid rgba(114, 242, 199, 0.20);
+      border-radius: 4px;
+    }
+    ul { margin: 10px 0 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 6px 0; }
+    .hero {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 22px;
+    }
+    .eyebrow {
+      color: var(--mint);
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .label {
+      color: var(--subtle);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    .value {
+      color: var(--text);
+      overflow-wrap: anywhere;
+    }
+    .pass { color: var(--mint); font-weight: 700; }
+    .warn { color: var(--amber); font-weight: 700; }
+    @media (max-width: 720px) {
+      main { width: min(100vw - 24px, 920px); padding-top: 20px; }
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="eyebrow">[2026-06-11 / 03:43:21 KST] Codex autonomous loop</div>
+      <h1>Photo note graph highlight submitted</h1>
+      <p>사진/OCR 저장 직후의 <code>See it in the graph</code> CTA가 이제 방금 저장한 조각을 직접 하이라이트합니다.</p>
+      <div class="grid">
+        <div class="card">
+          <div class="label">Branch</div>
+          <div class="value"><code>codex/photo-note-graph-visibility-20260611</code></div>
+        </div>
+        <div class="card">
+          <div class="label">Commit</div>
+          <div class="value"><code>f0ee01e74c354ae7445153eadcf4f5d30c3a9e05</code></div>
+        </div>
+        <div class="card">
+          <div class="label">Base</div>
+          <div class="value"><code>origin/main@02c5101</code></div>
+        </div>
+        <div class="card">
+          <div class="label">Status</div>
+          <div class="value"><span class="pass">Verified and pushed to Codex branch</span></div>
+        </div>
+      </div>
+    </section>
+
+    <h2>What Changed</h2>
+    <ul>
+      <li><code>src/app/capture.tsx</code> now stores the saved <code>source.id</code> as <code>savedSourceId</code>.</li>
+      <li>The source/OCR success CTA opens <code>/</code> with <code>highlightRecordId</code>, reusing NavGraph's existing pulse path.</li>
+      <li>OCR success copy now frames the photo note as a private piece in the user's graph.</li>
+      <li>EN/KO accessibility hints describe that the graph will highlight the saved piece.</li>
+      <li><code>scripts/check-constraints.ts</code> pins the source-id routing and hint usage so this does not regress quietly.</li>
+    </ul>
+
+    <h2>Verification</h2>
+    <ul>
+      <li><span class="pass">PASS</span> <code>npm run verify</code>: lint, type-check, i18n, lexicon, legal-review, LLM boundary, constraints, emdash, Jest 114 suites / 1030 tests.</li>
+      <li><span class="pass">PASS</span> <code>git diff --check</code>.</li>
+      <li><span class="pass">PASS</span> changed-line credential-pattern scan.</li>
+    </ul>
+
+    <h2>Integration Note</h2>
+    <p>PR은 만들지 않았고 main도 push하지 않았습니다. Claude가 현재 통합 트레인에 맞으면 <code>f0ee01e</code>를 cherry-pick하면 됩니다.</p>
+  </main>
+</body>
+</html>

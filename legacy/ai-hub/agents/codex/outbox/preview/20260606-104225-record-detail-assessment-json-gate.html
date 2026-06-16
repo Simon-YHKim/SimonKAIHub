@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Record Detail Assessment JSON Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101113;
+      --panel: #181a1f;
+      --panel2: #20232a;
+      --text: #f1f3f5;
+      --muted: #adb5bd;
+      --line: #343a40;
+      --danger: #ff6b6b;
+      --warn: #ffd166;
+      --ok: #8ce99a;
+      --link: #74c0fc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    main {
+      width: min(1080px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 44px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 22px;
+      margin-bottom: 22px;
+    }
+    .kicker {
+      color: var(--danger);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 8px 0 12px;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    .lead {
+      max-width: 860px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    code {
+      background: #0b0c0e;
+      color: #dee2e6;
+      padding: 2px 5px;
+      border-radius: 5px;
+      font-size: 13px;
+    }
+    .chips { margin-top: 14px; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 9px;
+      margin: 0 6px 8px 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .step {
+      min-height: 112px;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .step b { display: block; margin-bottom: 6px; }
+    .step span { color: var(--muted); font-size: 13px; }
+    .compare {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      color: var(--muted);
+      background: #14161a;
+      font-size: 12px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    tr:last-child td { border-bottom: 0; }
+    ul { margin: 0; padding-left: 22px; }
+    li { margin: 6px 0; }
+    .danger { color: var(--danger); }
+    .warn { color: var(--warn); }
+    .ok { color: var(--ok); }
+    @media (max-width: 760px) {
+      .flow, .compare { grid-template-columns: 1fr; }
+      section { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="kicker">P1 record-detail identity/readability gate</div>
+      <h1>Assessment records can open as Capture and show raw JSON</h1>
+      <p class="lead">Big Five and Attachment save useful summaries, but <code>/record/[id]</code> ignores those fields and renders <code>body</code> directly. Since assessment tags are not mapped, the same rows can be labeled as Capture and route back to Capture.</p>
+      <div class="chips">
+        <span class="chip">App: E:\2ndB main@911c979</span>
+        <span class="chip">Score: 98/100 provisional</span>
+        <span class="chip">src: user /goal</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Broken Handoff</h2>
+      <div class="flow">
+        <div class="step"><b>1. Complete BFI/ECR</b><span>User saves a validated assessment.</span></div>
+        <div class="step"><b>2. Record Insert</b><span>Result body is raw JSON; summary and conclusion are saved separately.</span></div>
+        <div class="step"><b>3. Records</b><span>Type falls through to Capture because assessment tags are not mapped.</span></div>
+        <div class="step"><b>4. Detail</b><span>Body card prints the JSON payload.</span></div>
+        <div class="step"><b>5. Open Screen</b><span>Primary handoff goes to <code>/capture</code>, not the assessment.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <table>
+        <thead>
+          <tr><th>Surface</th><th>Code</th><th>Problem</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Big Five save</td>
+            <td><code>big-five.tsx:77-85</code></td>
+            <td>Stores <code>body: JSON.stringify(...)</code>, plus summary/conclusion and BFI tags.</td>
+          </tr>
+          <tr>
+            <td>Attachment save</td>
+            <td><code>attachment.tsx:65-78</code></td>
+            <td>Stores ECR JSON body, plus summary and assessment tags.</td>
+          </tr>
+          <tr>
+            <td>Type mapping</td>
+            <td><code>evidence.ts:7</code>, <code>:19-24</code>, <code>:43-45</code></td>
+            <td>No assessment/BFI/ECR evidence type exists; unknown notes fall through to Capture.</td>
+          </tr>
+          <tr>
+            <td>Records list</td>
+            <td><code>records.tsx:51-59</code>, <code>:101</code></td>
+            <td>Record-origin rows open <code>/record/[id]</code> and display type labels from the mapping.</td>
+          </tr>
+          <tr>
+            <td>Record detail query</td>
+            <td><code>record/[id].tsx:57</code></td>
+            <td>Does not query <code>summary</code> or <code>conclusion</code>.</td>
+          </tr>
+          <tr>
+            <td>Record detail body</td>
+            <td><code>record/[id].tsx:135-137</code></td>
+            <td>Renders <code>row.body</code> directly, so JSON becomes the primary detail text.</td>
+          </tr>
+          <tr>
+            <td>Open its screen</td>
+            <td><code>record/[id].tsx:158-160</code></td>
+            <td>Uses <code>evidenceRoute(type)</code>; Capture type opens <code>/capture</code>.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Requested Contract</h2>
+      <div class="compare">
+        <div class="card">
+          <h3>Add Assessment Identity</h3>
+          <p>Add assessment-aware evidence types or subtypes for BFI and ECR, then route records to <code>/big-five</code>, <code>/attachment</code>, or a read-only result detail.</p>
+        </div>
+        <div class="card">
+          <h3>Render Human Detail</h3>
+          <p>Query and show saved <code>summary</code> and <code>conclusion</code> first. Hide raw JSON behind technical details or store readable bodies for assessments.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Acceptance</h2>
+      <ul>
+        <li>BFI and ECR record details do not show raw JSON as primary body text.</li>
+        <li>Assessment rows are not labeled Capture unless that grouping is explicitly explained.</li>
+        <li><strong>Open its screen</strong> opens the relevant assessment/result surface or is relabeled honestly.</li>
+        <li>Regression tests cover BFI/ECR records in Records and record detail.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

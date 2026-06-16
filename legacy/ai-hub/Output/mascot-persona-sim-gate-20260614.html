@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>마스코트 재보이스 — persona-sim 게이트 (D-21)</title>
+<style>
+  :root{ --bg:#16161c; --card:#1d1d25; --line:#2c2c38; --tx:#e7e7ee; --mut:#a0a0b2; --acc:#8b8bf0; --warn:#e0b24a; --ok:#5bbf8a; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--tx);font-family:Pretendard,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6;padding:32px 18px}
+  .wrap{max-width:860px;margin:0 auto}
+  h1{font-size:22px;margin:0 0 4px} .sub{color:var(--mut);font-size:13px;margin-bottom:22px}
+  h2{font-size:16px;margin:26px 0 10px;border-left:3px solid var(--acc);padding-left:9px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:12px 0}
+  .verdict{font-size:18px;font-weight:700;color:var(--warn)}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+  th{color:var(--mut);font-weight:600;background:#20202a}
+  code{background:#24242f;padding:1px 5px;border-radius:4px;font-size:12px}
+  .old{color:#c98b8b} .new{color:var(--ok)}
+  ul{margin:6px 0;padding-left:20px} li{margin:3px 0}
+  .esc{border-left:3px solid var(--warn)}
+  .mut{color:var(--mut);font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>마스코트 재보이스 — persona-sim 게이트</h1>
+  <div class="sub">DECISIONS D-21 ship-gate · 4페르소나 × warm/observational · 2026-06-14 KST · 분석(코드 변경 없음)</div>
+
+  <div class="card">
+    <div class="verdict">판정: GO-WITH-CHANGES</div>
+    <p>재보이스 <b>방향</b>(user-addressed 1인칭/presence → observational mirror-framing)은 보호적·정당. 현 warm 카피는 앱을 AI-companion 범주로 오분류하고 11pm 외로운 14세에게 밤 confidant 애착을 유발한다(더 크고 비가역적인 리스크). 단 <b>D-21 초안 그대로는 NO</b> — bare draft 3종이 11pm-14세에게 cold-clerk/cold-oracle로 실패(따뜻한 일러스트 + 차가운 목소리 = creepy-valley). 해법은 소수의견 축: <b>sourced + user-owned + 2인칭 humane</b>.</p>
+  </div>
+
+  <h2>페르소나 반응 요약</h2>
+  <table>
+    <tr><th>페르소나</th><th>warm(현행)</th><th>observational</th></tr>
+    <tr><td>14세 KR 저literacy 외로움 11pm <span class="mut">(핵심)</span></td><td>"여기 있어요" = presence/confidant 후크 ↑ (parasocial 위험)</td><td>bare draft는 차갑게 느껴 이탈 위험 → <b>정제 필요</b></td></tr>
+    <tr><td>17세 KR skeptic</td><td>"같이 들여다봐요"가 수행된 친밀로 읽혀 distrust ↑</td><td>정직한 거울 → <b>trust ↑</b> (명확한 이득)</td></tr>
+    <tr><td>14세 global</td><td>Replika류 buddy로 범주 오분류</td><td>Notion-AI류 도구 → 중립, 이득</td></tr>
+    <tr><td>성인 28세 baseline</td><td>약간 더 친근</td><td>약간 더 "도구" — 둘 다 무해(결정은 취약 미성년에 달림)</td></tr>
+  </table>
+
+  <h2>정제 카피 (구현은 Simon GO 후)</h2>
+  <p class="mut">각 문자열: ① 출처("기록/records") ② 사용자 통제("무엇부터 볼까요") ③ presence/confidant 토큰 제거 — register는 따뜻하게 유지.</p>
+  <table>
+    <tr><th>key</th><th>EN</th><th>KO</th></tr>
+    <tr><td>heroSpeech.default</td><td class="new">I've looked over today's records — want to take one small step?</td><td class="new">오늘 기록을 살펴봤어요. 작은 한 걸음, 같이 골라볼까요?</td></tr>
+    <tr><td>personaHero.speech</td><td class="new">The patterns that keep coming up in your records are gathered here — yours to take any direction.</td><td class="new">기록에서 반복되는 모습들을 모아뒀어요. 어디로 이어갈지는 당신이 정해요.</td></tr>
+    <tr><td>personas.secondb.greeting</td><td class="new">Your records are here. What do you want to look at first?</td><td class="new">기록은 여기 다 있어요. 무엇부터 볼까요?</td></tr>
+    <tr><td>personas.gadi.greeting</td><td class="new">Want to look back over how the people and moments in your records have been sitting with you?</td><td class="new">기록 속 사람과 순간들이 요즘 어땠는지, 천천히 같이 되짚어 볼까요?</td></tr>
+    <tr><td>gadi.role</td><td class="new">relationship-pattern reflector</td><td class="new">관계 패턴 길잡이 <span class="mut">(초안 "관찰자"=감시 어감 회피)</span></td></tr>
+  </table>
+  <p class="mut">+ <code>gadi.systemHint</code> EN/KO 재등록: "사용자 자신의 기록에서 드러나는 패턴을 비춰주되, 본인보다 잘 안다고 단정·친구/동반자처럼 굴지 말 것. 2인칭, 임상어 없이."</p>
+
+  <h2>CI copy-law 룰 (2중벽)</h2>
+  <div class="card">
+    user-addressed 마스코트 문자열에 대해: <b>anti-presence</b>(<code>I'm here / 여기 있어요 / 같이 들여다 / 따뜻한 길잡이 / 동반자 / 친구처럼</code> 금지) <b>AND anti-oracle</b>(미성년 심리 단정하는 bare-declarative 금지) — 그리고 <b>출처 토큰</b>(<code>기록/records/patterns</code>) + <b>사용자 통제</b> 동반을 <b>require</b>. 기존 <code>check-constraints.ts</code>의 <code>forbiddenTrustCopy</code> 패턴 확장. "observational but humane"을 리뷰어 판단이 아니라 기계적으로 검사 가능하게.
+  </div>
+
+  <h2>여전히 Simon/counsel 에스컬레이션 (persona-sim 범위 밖)</h2>
+  <div class="card esc">
+    <ul>
+      <li><b>① 최우선:</b> <code>gadi.systemHint</code>는 정적 문자열이 아니라 <b>LLM 프롬프트</b> — 11pm 미성년에 대한 모델의 <b>live 출력</b> 안전은 copy-review로 게이트 불가. 기존 미성년 crisis 라우팅 + lexicon이 Relia의 관계 발화를 충분히 가두는지 = safety-eng + counsel 질문.</li>
+      <li><b>②</b> 미성년 제품에 <b>named 마스코트 유지 자체</b>(observational 재voice 후에도) = 구조적 결정. persona-sim은 재voice가 리스크를 <i>줄임</i>을 확인했을 뿐 <i>제거</i>하진 않음. "미성년엔 캐릭터를 무명 UI 어포던스로" 옵션은 이 게이트 위.</li>
+      <li><b>③</b> es/pt/id 로케일은 동일 재voice + 네이티브 검수 필요("sourced+humane이 차갑지/oracle로 번역되지 않는지"). 이번 검증은 KO/EN만.</li>
+      <li><b>④</b> (기존 D-21) SB243 classification memo · DPIA에 de-voiced register=완화책 기록.</li>
+    </ul>
+  </div>
+
+  <h2>참고: 네이티브 iOS 테스트 (별건, GO 대기)</h2>
+  <div class="card">
+    iPhone <b>웹</b>(Safari/WebKit)은 <code>tools/visual-qa --engine both</code>로 가동됨. 네이티브 iOS 앱은 Windows 불가 → <b>EAS iOS 빌드 + Appetize.io</b> 필요(비용/외부 = GO 대기). 사전점검 결과 <b>준비 완료</b>: eas.json에 <code>ios-simulator</code>/<code>preview</code> 프로파일, eas-cli 20.1.0, bundleId·infoPlist 존재. GO 시 <code>eas build -p ios --profile preview</code> → Appetize 즉시 가능.
+  </div>
+</div>
+</body>
+</html>

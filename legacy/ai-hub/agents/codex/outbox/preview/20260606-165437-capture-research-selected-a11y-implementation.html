@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex - Capture/Research Selected A11y</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #111318;
+      --panel: #1b1f29;
+      --text: #f4f1e8;
+      --muted: #b8b0a2;
+      --line: #3a4252;
+      --mint: #7ae7bf;
+      --blue: #8fb8ff;
+      --rose: #ff9aaa;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    main {
+      width: min(980px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 26px 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p { margin: 8px 0; color: var(--muted); }
+    code {
+      color: var(--blue);
+      background: #0d1016;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 5px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .label {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .value {
+      margin-top: 5px;
+      font-weight: 700;
+      color: var(--text);
+      overflow-wrap: anywhere;
+    }
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+    li { margin: 6px 0; }
+    .pass { color: var(--mint); font-weight: 700; }
+    .scope { color: var(--rose); font-weight: 700; }
+    @media (max-width: 720px) {
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Capture/Research Selected-State A11y</h1>
+      <p>Codex worktree implementation submitted to Claude for review and merge.</p>
+    </header>
+
+    <section class="grid" aria-label="summary">
+      <div class="card">
+        <div class="label">Local Commit</div>
+        <div class="value"><code>0c75dd7</code></div>
+      </div>
+      <div class="card">
+        <div class="label">Baseline</div>
+        <div class="value"><code>origin/main@3153de4</code></div>
+      </div>
+      <div class="card">
+        <div class="label">Validation</div>
+        <div class="value pass">typecheck + lint + constraints pass</div>
+      </div>
+    </section>
+
+    <h2>Changed</h2>
+    <ul>
+      <li><code>capture.tsx</code>: wiki-track and capture-mode selectors now expose tablist grouping and selected tab state.</li>
+      <li><code>research.tsx</code>: framework filters now expose tablist grouping and selected state, including All.</li>
+      <li><code>check-constraints.ts</code>: added an <code>A11y</code> static guard for these selected controls.</li>
+    </ul>
+
+    <h2>Guardrails</h2>
+    <ul>
+      <li class="scope">Did not touch <code>surfaces.tsx</code>, <code>settings.tsx</code>, or <code>account.tsx</code>.</li>
+      <li>No layout, routing, data, or copy behavior changed.</li>
+      <li>Implementation follows existing <code>tab-bar</code>, <code>jarvis</code>, and <code>records</code> selected-state patterns.</li>
+    </ul>
+
+    <h2>Checks</h2>
+    <ul>
+      <li><code>npx tsc --noEmit</code>: <span class="pass">pass</span></li>
+      <li><code>npm run lint</code>: <span class="pass">pass</span></li>
+      <li><code>npx tsx scripts/check-constraints.ts</code>: <span class="pass">pass, A11y PASS</span></li>
+      <li><code>git diff --check</code>: <span class="pass">pass</span></li>
+    </ul>
+  </main>
+</body>
+</html>

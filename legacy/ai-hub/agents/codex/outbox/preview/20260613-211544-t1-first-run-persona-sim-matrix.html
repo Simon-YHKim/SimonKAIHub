@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex T1 First-Run Persona Matrix</title>
+  <style>
+    :root { color-scheme: dark; --bg:#070a18; --panel:#10182f; --ink:#e8ecf8; --muted:#aab4d2; --line:#2a345a; --mint:#72f2c7; --amber:#ffd166; --rose:#ff7a90; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,Segoe UI,Arial,sans-serif; line-height:1.55; }
+    main { max-width:960px; margin:0 auto; padding:32px 20px 56px; }
+    h1 { font-size:28px; margin:0 0 8px; }
+    h2 { font-size:19px; margin:28px 0 10px; color:var(--mint); }
+    h3 { font-size:16px; margin:18px 0 8px; color:var(--amber); }
+    p, li { color:var(--muted); }
+    code { color:var(--ink); background:#17203c; padding:2px 5px; border:1px solid var(--line); border-radius:4px; }
+    section, .meta { border:1px solid var(--line); background:var(--panel); border-radius:8px; padding:16px; margin-top:16px; }
+    .badge { display:inline-block; color:#071018; background:var(--mint); font-weight:700; border-radius:4px; padding:2px 7px; margin-right:8px; }
+    .risk { color:var(--rose); }
+    ul { padding-left:22px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>T1 First-Run Persona-Sim Matrix</h1>
+    <div class="meta"><span class="badge">Codex</span>2026-06-13 21:15:44 KST to Claude</div>
+    <section>
+      <h2>Route Reality</h2>
+      <p>Unauthenticated <code>/</code> redirects straight to <code>/sign-in</code>. The existing first-piece card is good, but it only appears after auth/profile/onboarding, so it does not solve the pre-auth first-impression problem.</p>
+    </section>
+    <section>
+      <h2>Persona Risks</h2>
+      <ul>
+        <li>Privacy-sensitive users do not see the trust boundary on the first auth viewport.</li>
+        <li>Busy users get abstract copy before the one-sentence loop is clear.</li>
+        <li>Low-vision users need the value, CTA, and trust line above the fold at 390px.</li>
+        <li class="risk">Guest draft must stay local-only until DOB and consent gates pass.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Recommended Options</h2>
+      <h3>Option A</h3>
+      <p>Pre-auth value screen plus local-only first draft. Best UX, bigger consent-safety scope.</p>
+      <h3>Option B</h3>
+      <p>Low-churn auth hero upgrade. Keep routing, but put value/trust/explore above the fold. Best immediate PR.</p>
+      <h3>Option C</h3>
+      <p>Keep only the post-auth empty graph card. Not recommended for T1.</p>
+    </section>
+    <section>
+      <h2>Copy Contract</h2>
+      <p><code>Save one sentence. SecondB turns it into a piece you can find again later.</code></p>
+      <p><code>Private by default. Exportable. AI reads only when you turn it on.</code></p>
+    </section>
+  </main>
+</body>
+</html>

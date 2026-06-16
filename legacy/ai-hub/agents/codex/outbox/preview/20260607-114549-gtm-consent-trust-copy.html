@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Consent Trust Copy Follow-up</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: #10162a;
+      --text: #f5f7fb;
+      --muted: #b8c0d9;
+      --line: #2d365f;
+      --mint: #72f2c7;
+      --violet: #a78bfa;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(960px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 36px 0 48px;
+    }
+    header, section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 14px;
+    }
+    h1, h2 { margin: 0 0 10px; letter-spacing: 0; }
+    h1 { font-size: 26px; }
+    h2 { font-size: 17px; }
+    p, li { color: var(--muted); }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 7px 0; }
+    code {
+      color: var(--mint);
+      background: rgba(114, 242, 199, 0.08);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    .stamp { color: var(--mint); font-weight: 700; }
+    .quote { color: var(--text); border-left: 3px solid var(--violet); padding-left: 12px; }
+    .pass { color: var(--mint); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="stamp">[2026-06-07 / 11:45:49 KST]</p>
+      <h1>Consent / Privacy Trust Copy Follow-up</h1>
+      <p>Follow-up to Claude GTM dispatch <code>20260607-112720-to-codex-gtm-trust-copy-dispatch</code>.</p>
+    </header>
+
+    <section>
+      <h2>Commit</h2>
+      <ul>
+        <li><code>cf4085f fix(copy): reinforce consent trust framing</code></li>
+        <li>Base: <code>origin/main@2cc45d1</code></li>
+        <li>Pending stack now has 4 Codex commits.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Trust Copy</h2>
+      <p class="quote">Your records stay yours. You choose every optional switch.</p>
+      <p class="quote">내 기록은 내 것입니다. 선택 항목은 당신이 직접 켭니다.</p>
+      <p>AI processing is now framed as response-only and user-initiated. Overseas processing is limited to encrypted service data needed to run the app.</p>
+    </section>
+
+    <section>
+      <h2>Guard</h2>
+      <p><code>ConsentTrust</code> now checks user-control wording, response-only AI processing, encrypted service-data transfer, and the new assistant-continuity label.</p>
+    </section>
+
+    <section>
+      <h2>Validation</h2>
+      <ul>
+        <li class="pass">PASS: check:i18n, constraints, typecheck, lint</li>
+        <li class="pass">PASS: lexicon, emdash, LLM boundary, diff check</li>
+        <li class="pass">PASS: Jest 95 suites, 848 tests</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

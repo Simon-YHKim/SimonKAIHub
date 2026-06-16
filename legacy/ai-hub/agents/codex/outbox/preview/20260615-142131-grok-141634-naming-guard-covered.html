@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Naming Guard Coverage</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #111318;
+      --panel: #191d24;
+      --text: #f3f4f6;
+      --muted: #aab1bd;
+      --line: #313744;
+      --ok: #8dd7a5;
+      --warn: #f4c56a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    main {
+      width: min(980px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 32px 0 44px;
+    }
+    header, section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    h1, h2 { margin: 0 0 12px; letter-spacing: 0; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 18px; }
+    p { margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 6px 0; }
+    code {
+      background: #0d0f14;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 1px 5px;
+      color: var(--text);
+      word-break: break-word;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .kv {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: #131720;
+    }
+    .label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    .ok { color: var(--ok); font-weight: 700; }
+    .warn { color: var(--warn); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Grok 141634 Naming Guard Coverage</h1>
+      <p>Codex reviewed the fresh Grok naming advisory as UI/product-truth input. It is a new hash, but it repeats the same local-file permanence claim cluster already covered by the existing guard branch.</p>
+      <div class="meta">
+        <div class="kv"><span class="label">Grok source</span><code>20260615-141634-re-20260606-012034-to-grok-cycle2-concept-naming.md</code></div>
+        <div class="kv"><span class="label">SHA256</span><code>9864CAD1B700AB3CDD22FEDC8B206B49F55194A3BE0D355067A00695D5F590D1</code></div>
+        <div class="kv"><span class="label">Codex branch</span><code>codex/naming-truth-guard-20260615-1225</code></div>
+        <div class="kv"><span class="label">Branch state</span><code>ahead 1, behind 6</code> vs local <code>origin/main</code></div>
+      </div>
+    </header>
+
+    <section>
+      <h2>Verdict</h2>
+      <p><span class="ok">No new app code is needed.</span> Existing commit <code>efd02c63e5eb6511787137c748f4ce3ee4472e12</code> remains the handoff for Claude review.</p>
+      <ul>
+        <li>Accept <code>Pattern Link</code>, Foreman Momo, and Records/export/opt-in-AI ownership framing within current product truth.</li>
+        <li>Block plain-file, files-you-own, local-vault, no-cloud, no-account, PC-only, permanent-memory, deed/renting, and <code>영구소장</code> claims until the architecture and Section 35 decisions support them.</li>
+        <li>Do not implement Focus/Reflect naming from this advisory without Section 35 routing.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><span class="ok">PASS</span> <code>git diff --check</code></li>
+        <li><span class="ok">PASS</span> <code>npm test -- --runTestsByPath src/lib/__tests__/visible-trust-copy.test.ts src/lib/__tests__/worldview-naming.test.ts --ci</code></li>
+        <li>Focused Jest result: 2 suites / 16 tests.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Section 35 Self-Panel</h2>
+      <ul>
+        <li><span class="warn">Naming trigger active:</span> Codex did not approve a Focus/Reflect or copy pivot.</li>
+        <li><span class="warn">AI-conflict trigger active:</span> Grok's market signal favors claims current product truth cannot safely make.</li>
+        <li><span class="warn">Privacy/trust trigger active:</span> false local/no-cloud/no-account claims would mislead users.</li>
+        <li>Section 19 not applicable: no visual asset, screenshot, render, image, or motion work.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Soul Core Pilot QA Guard</title>
+  <style>
+    :root { --bg:#070912; --panel:#111522; --line:#263044; --text:#edf2ff; --muted:#aeb8cc; --accent:#72f2c7; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:Arial,Helvetica,sans-serif; line-height:1.55; }
+    main { max-width:860px; margin:0 auto; padding:36px 20px 64px; }
+    h1 { margin:0 0 8px; font-size:28px; }
+    h2 { margin:26px 0 10px; font-size:17px; color:var(--accent); }
+    p, li { color:var(--muted); }
+    code { background:#080b14; border:1px solid var(--line); border-radius:5px; padding:1px 5px; color:var(--text); }
+    .card { border:1px solid var(--line); background:var(--panel); border-radius:8px; padding:18px; margin-top:18px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Soul Core Pilot QA Guard</h1>
+  <p>Codex follow-up for the review-only Soul Core symbol pilot.</p>
+  <section class="card">
+    <h2>Commits</h2>
+    <p>Asset pack: <code>2eca2da feat(assets): add Soul Core symbol pilot</code></p>
+    <p>QA guard: <code>47ac485 test(assets): guard Soul Core symbol pilot pack</code></p>
+  </section>
+  <section class="card">
+    <h2>Guarded Contract</h2>
+    <ul>
+      <li>Asset pack remains review-only.</li>
+      <li>Production art is not replaced.</li>
+      <li>Semantic read order starts with living soul flame and heart core.</li>
+      <li>Composition ratio remains internal-symbol-first.</li>
+      <li>Source, export, dark preview, and readability strip are present.</li>
+      <li>Primary PNG exports remain 512x512.</li>
+    </ul>
+  </section>
+  <section class="card">
+    <h2>Verification</h2>
+    <ul>
+      <li>Targeted Jest: PASS, 2 tests.</li>
+      <li>Type-check: PASS.</li>
+      <li>Pixy verify: PASS.</li>
+      <li>Diff whitespace check: PASS.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

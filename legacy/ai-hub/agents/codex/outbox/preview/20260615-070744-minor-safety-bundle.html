@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Minor Safety Bundle</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #151b22;
+      --text: #e8edf2;
+      --muted: #a8b3bf;
+      --accent: #73d6b6;
+      --line: #2a3440;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 36px 22px 48px;
+    }
+    h1, h2 {
+      margin: 0 0 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+    h1 { font-size: 28px; }
+    h2 { font-size: 18px; margin-top: 28px; }
+    p { margin: 0 0 14px; color: var(--muted); }
+    .panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 18px 0;
+    }
+    code {
+      color: var(--accent);
+      background: rgba(115, 214, 182, 0.08);
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--text); font-weight: 650; }
+    td { color: var(--muted); }
+    ul { margin: 8px 0 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 6px 0; }
+    .ok { color: var(--accent); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Codex Minor Safety Bundle</h1>
+    <p>2026-06-15 07:07:44 KST. One autonomous PROTOCOL 12/19/35.4 poll cycle.</p>
+
+    <section class="panel">
+      <h2>Single Task</h2>
+      <p>Consolidated five already-authored Codex safety/minor-egress commits into one clean branch off current <code>origin/main</code>, avoiding more discovery while Codex remains over branch throttle.</p>
+      <ul>
+        <li>Worktree: <code>E:\Coding Infra\_worktrees\2ndB-codex-minor-safety-bundle-20260615-070500</code></li>
+        <li>Branch: <code>codex/minor-safety-bundle-20260615-070500</code></li>
+        <li>Base: <code>origin/main@8d589fa</code></li>
+        <li>Head: <code>a1972c0de5841562aad0c49782b746f1b1ae99b6</code></li>
+        <li>No push, PR, merge, destructive action, real-cost action, or secrets action.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Bundle Commits</h2>
+      <table>
+        <thead><tr><th>New SHA</th><th>Source SHA</th><th>Scope</th></tr></thead>
+        <tbody>
+          <tr><td><code>be5aad6</code></td><td><code>af1e957</code></td><td>Auth profile probe errors/timeouts stay unresolved instead of false no-profile.</td></tr>
+          <tr><td><code>3bbe0cc</code></td><td><code>6a919f3</code></td><td><code>/ops</code> fails closed on unknown minor status.</td></tr>
+          <tr><td><code>4fba627</code></td><td><code>440618d</code></td><td>Product analytics fails closed on unknown minor status.</td></tr>
+          <tr><td><code>f9fd170</code></td><td><code>63b96c9</code></td><td>Core Brain persona build waits for resolved minor status.</td></tr>
+          <tr><td><code>a1972c0</code></td><td><code>11d4ceb</code></td><td>SecondB chat waits for resolved minor status before egress/quota/wiki paths.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li><span class="ok">PASS</span> <code>git diff --check origin/main...HEAD</code></li>
+        <li><span class="ok">PASS</span> focused regression set: 6 suites / 27 tests</li>
+        <li><span class="ok">PASS</span> <code>npm run verify</code>: 150 suites / 1212 tests</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Self-Panel</h2>
+      <p>No PROTOCOL 35.1 design, architecture, naming, pricing, permission model, DB, or irreversible decision trigger. PROTOCOL 19 does not apply because no multimodal artifact was produced. PROTOCOL 35.4 applied by consolidating the merge queue instead of starting new findings while throttled.</p>
+    </section>
+  </main>
+</body>
+</html>

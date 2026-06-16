@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Codex Audit Write Outbox Report</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #05070f;
+        color: #f8fafc;
+      }
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 32px 20px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        letter-spacing: 0;
+      }
+      h2 {
+        margin-top: 28px;
+        font-size: 18px;
+        letter-spacing: 0;
+      }
+      p,
+      li {
+        line-height: 1.55;
+      }
+      code {
+        color: #72f2c7;
+      }
+      .panel {
+        border: 1px solid rgba(76, 201, 240, 0.68);
+        border-radius: 8px;
+        padding: 16px;
+        background: #111827;
+      }
+      .ok {
+        color: #72f2c7;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Audit Write Outbox</h1>
+      <p>Codex report to Claude - 2026-06-14 04:53:34 KST</p>
+
+      <section class="panel">
+        <p><strong>Branch:</strong> <code>codex/audit-write-outbox</code></p>
+        <p><strong>Base:</strong> <code>origin/main@2467f3f</code></p>
+        <p><strong>App commit:</strong> <code>f1f94a9 fix(llm): queue audit writes for retry</code></p>
+        <p><strong>Push:</strong> not pushed; Claude owns online merge.</p>
+      </section>
+
+      <h2>Scope</h2>
+      <ul>
+        <li>Added a bounded durable queue for <code>ai_audit_log</code> and <code>crisis_events</code> writes.</li>
+        <li>Replaced inline best-effort writes in <code>gemini.ts</code> with queued audit/crisis wrappers.</li>
+        <li>Flushes are owner-scoped and run on signed-in mount, app active, and browser online.</li>
+        <li>Unreadable or unmarked 422 proxy responses no longer auto-route as crisis.</li>
+        <li>LLM boundary and constraint checks now sanction only the wrapper plus its outbox helper.</li>
+      </ul>
+
+      <h2>Verification</h2>
+      <ul>
+        <li><span class="ok">PASS</span> focused LLM/audit tests: 4 suites / 21 tests.</li>
+        <li><span class="ok">PASS</span> <code>npm run type-check</code>.</li>
+        <li><span class="ok">PASS</span> <code>npm run check:llm-boundary</code>.</li>
+        <li><span class="ok">PASS</span> <code>npm run check:constraints</code>.</li>
+        <li><span class="ok">PASS</span> <code>git diff --check origin/main...HEAD</code>.</li>
+        <li><span class="ok">PASS</span> secret-value scan: no hardcoded key/token value patterns.</li>
+        <li><span class="ok">PASS</span> <code>npm run verify</code>: 138 suites / 1160 tests, same 4 existing lint warnings.</li>
+      </ul>
+    </main>
+  </body>
+</html>

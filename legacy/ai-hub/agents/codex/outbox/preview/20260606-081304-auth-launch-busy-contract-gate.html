@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex UI Gate - Auth Launch Busy Contract</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --surface: #151923;
+      --surface2: #10141c;
+      --text: #eef2f7;
+      --muted: #a9b2c3;
+      --line: #2b3342;
+      --warn: #ffd166;
+      --bad: #ff7272;
+      --good: #79e0aa;
+      --accent: #8db7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.58 "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      letter-spacing: 0;
+    }
+    main {
+      width: min(1080px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+    header, section, .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+    header { padding: 24px; }
+    section { margin-top: 16px; padding: 18px; }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(25px, 3.8vw, 40px); line-height: 1.12; letter-spacing: 0; }
+    h2 { font-size: 19px; margin-bottom: 10px; }
+    h3 { font-size: 15px; margin-bottom: 8px; }
+    p { color: var(--muted); }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .tag {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 5px 9px;
+      color: var(--muted);
+      background: var(--surface2);
+      font-size: 13px;
+    }
+    .score { color: var(--warn); border-color: #6a5523; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .card {
+      padding: 15px;
+      min-height: 150px;
+    }
+    .bad { border-color: #673238; }
+    .bad h3 { color: var(--bad); }
+    .good { border-color: #2f6547; }
+    .good h3 { color: var(--good); }
+    .path {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      color: var(--accent);
+      overflow-wrap: anywhere;
+      word-break: keep-all;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 6px 0; }
+    code, pre {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 13px;
+    }
+    pre {
+      margin: 12px 0 0;
+      padding: 12px;
+      background: var(--surface2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--text);
+      overflow-x: auto;
+    }
+    .note {
+      border-left: 3px solid var(--warn);
+      padding-left: 12px;
+      color: var(--text);
+    }
+    @media (max-width: 760px) {
+      main { width: min(100% - 24px, 1080px); padding-top: 22px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Auth Launch Busy Contract</h1>
+      <p style="margin-top: 10px;">Email and OAuth launch paths do not share one pending state. Auth entry remains 98/100 provisional.</p>
+      <div class="meta">
+        <span class="tag score">Score: 98/100 provisional</span>
+        <span class="tag">Priority: P2</span>
+        <span class="tag">Baseline: 2ndB main@911c979</span>
+        <span class="tag">Created: 2026-06-06 08:13 KST</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Finding</h2>
+      <p class="note">Auth screens have `submitting` and `oauthSubmitting`, but the primary email submit path ignores `oauthSubmitting`. Naver also skips the pending flag before redirect.</p>
+      <div class="grid">
+        <div class="card bad">
+          <h3>Sign-In</h3>
+          <div class="path">src/app/(auth)/sign-in.tsx:131, 224-280</div>
+          <p>`canSubmit` checks only `!submitting`; social buttons check `oauthSubmitting || submitting`. Starting OAuth can leave email submit active.</p>
+        </div>
+        <div class="card bad">
+          <h3>Sign-Up</h3>
+          <div class="path">src/app/(auth)/sign-up.tsx:60-68, 257-304</div>
+          <p>The same mismatch exists on account creation, where consent-heavy email sign-up can still be available during an OAuth launch.</p>
+        </div>
+        <div class="card bad">
+          <h3>Naver</h3>
+          <div class="path">sign-in.tsx:96-107 / sign-up.tsx:143-154</div>
+          <p>Naver uses the same disabled prop in the button, but its handler never flips the shared `oauthSubmitting` state.</p>
+        </div>
+        <div class="card good">
+          <h3>Target Contract</h3>
+          <div class="path">one authLaunching state</div>
+          <p>Only one auth launch should be possible at a time, with provider-specific busy copy and disabled/busy state.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <pre>sign-in.tsx:66-91     Google/Apple/Kakao set oauthSubmitting.
+sign-in.tsx:96-107    Naver does not set oauthSubmitting.
+sign-in.tsx:131       canSubmit ignores oauthSubmitting.
+sign-up.tsx:60-68     canSubmit ignores oauthSubmitting.
+sign-up.tsx:143-154   Naver does not set oauthSubmitting.
+auth.ts:352-370       signInWithNaver assigns window.location.href synchronously.</pre>
+    </section>
+
+    <section>
+      <h2>Required Fix</h2>
+      <ul>
+        <li>Derive a single `authLaunching` contract across email, Google, Apple, Kakao, and Naver.</li>
+        <li>Disable email submit during any OAuth launch on both sign-in and sign-up.</li>
+        <li>Make Naver set or share the pending guard before assigning `window.location.href`.</li>
+        <li>Preserve provider identity in loading labels instead of changing every provider to the same `...`.</li>
+        <li>Add focused proof or tests for both auth screens.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Acceptance</h2>
+      <ul>
+        <li>With OAuth pending, email submit is disabled and announces disabled/busy.</li>
+        <li>With email submit pending, all providers are disabled.</li>
+        <li>Naver cannot be double-launched from repeated taps.</li>
+        <li>`npm run verify` passes after the contract is implemented.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

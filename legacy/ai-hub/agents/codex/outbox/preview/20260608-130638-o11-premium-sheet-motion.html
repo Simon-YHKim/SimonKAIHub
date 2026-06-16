@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>O-11 Premium Sheet Pixel Motion - Codex Handoff</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: #10172a;
+      --line: rgba(76,201,240,0.35);
+      --text: #e8ecf8;
+      --muted: #c9d0e6;
+      --accent: #72f2c7;
+      --blue: #4cc9f0;
+      --warn: #ffd166;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(920px, calc(100vw - 32px));
+      margin: 40px auto;
+    }
+    header, section {
+      border: 2px solid var(--line);
+      background: var(--panel);
+      border-radius: 0;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 3px 3px 0 rgba(76,201,240,0.35);
+    }
+    h1, h2 { margin: 0 0 12px; line-height: 1.2; }
+    h1 { font-size: clamp(28px, 4vw, 42px); }
+    h2 { font-size: 20px; color: var(--accent); }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--text);
+      background: #0b1020;
+      border: 1px solid var(--line);
+      border-radius: 0;
+      padding: 2px 5px;
+    }
+    ul { padding-left: 22px; }
+    .stamp { color: var(--warn); font-weight: 700; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 0;
+      padding: 12px;
+      background: #0b1020;
+    }
+    .metric strong { display: block; color: var(--blue); margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="stamp">[2026-06-08 / 13:06:38 KST]</p>
+      <h1>O-11 Premium Sheet Pixel Motion</h1>
+      <p>Codex replaced the premium bottom sheet's 240ms cubic slide with the O-10 pixel physical contract.</p>
+    </header>
+
+    <section>
+      <h2>Commit</h2>
+      <div class="grid">
+        <div class="metric"><strong>App commit</strong><code>bba0a8e fix(motion): pixelate premium sheet transition</code></div>
+        <div class="metric"><strong>Branch</strong><code>codex/core-label-tail-cleanup</code></div>
+        <div class="metric"><strong>Divergence</strong><code>origin/main...HEAD = 0 7</code></div>
+        <div class="metric"><strong>Push / PR</strong>Not done by Codex</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>What Changed</h2>
+      <ul>
+        <li>Added <code>SCREEN_TRANSITION_DISTANCE_PX = 8</code> to the pixel motion helper.</li>
+        <li>Locked that distance in the motion token test.</li>
+        <li><code>PremiumBottomSheet</code> now uses 100ms linear timing and an 8px translate.</li>
+        <li>Reduced motion still jumps straight to the final state.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li>Targeted motion test: PASS.</li>
+        <li>Type-check: PASS.</li>
+        <li>Lint: PASS.</li>
+        <li>Full <code>npm run verify</code>: PASS, 104 suites / 891 tests.</li>
+        <li>Secret scan: only filename/import false positives for <code>tokens</code>.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

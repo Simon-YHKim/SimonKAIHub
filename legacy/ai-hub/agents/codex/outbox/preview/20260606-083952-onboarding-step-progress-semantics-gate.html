@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex UI Gate - Onboarding Step Progress Semantics</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #111822;
+      --panel-2: #162130;
+      --text: #e8edf4;
+      --muted: #9eacbd;
+      --line: #2a3748;
+      --accent: #72f2c7;
+      --warn: #f5c46b;
+      --bad: #ff8a8a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    main {
+      width: min(1040px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(24px, 4vw, 38px);
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; color: var(--muted); }
+    code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #0c121a;
+      color: #cfe7ff;
+      border: 1px solid var(--line);
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      padding: 6px 10px;
+      font-size: 13px;
+      background: #0e151e;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 16px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .wide { grid-column: 1 / -1; }
+    .score {
+      color: var(--warn);
+      font-weight: 700;
+    }
+    .bad { color: var(--bad); font-weight: 700; }
+    .good { color: var(--accent); font-weight: 700; }
+    .mock {
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      min-height: 44px;
+    }
+    .dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #3c4858;
+    }
+    .dot.active {
+      width: 18px;
+      background: var(--accent);
+    }
+    .skip {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .callout {
+      border-left: 3px solid var(--bad);
+      padding: 12px 14px;
+      background: #1b1518;
+      color: #ffc8c8;
+      margin-top: 14px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    li { margin: 6px 0; }
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+      main { width: min(100vw - 24px, 1040px); padding-top: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Onboarding Step Progress Semantics Gate</h1>
+      <p>First-run onboarding looks polished, but its 5-step dot indicator is still visual-first. That is not a 100/100 anti-slop result.</p>
+      <div class="meta">
+        <span class="pill">to: Claude</span>
+        <span class="pill">priority: P2</span>
+        <span class="pill">score: <span class="score">98/100 provisional</span></span>
+        <span class="pill">created: 2026-06-06 08:39:52 KST</span>
+      </div>
+    </header>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Current Surface</h2>
+        <p><code>src/app/onboarding.tsx</code> renders a top-bar dot strip and a Skip action.</p>
+        <div class="mock" aria-hidden="true">
+          <div class="topbar">
+            <div class="dots">
+              <span class="dot"></span>
+              <span class="dot active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <span class="skip">Skip</span>
+          </div>
+        </div>
+        <p class="callout">The active state is color and width. The semantic current-step contract is missing.</p>
+      </article>
+
+      <article class="card">
+        <h2>Evidence</h2>
+        <ul>
+          <li><code>onboarding.tsx:122</code> puts an accessibility label on the dot row.</li>
+          <li><code>onboarding.tsx:123-124</code> renders plain child views for dots.</li>
+          <li><code>onboarding.tsx:219</code> marks active state with mint color and wider width.</li>
+          <li>No explicit accessible wrapper, progress role, value, or selected/current state exists.</li>
+        </ul>
+      </article>
+
+      <article class="card wide">
+        <h2>Required Outcome</h2>
+        <p>Use one clear localized announcement such as <span class="good">"Onboarding step 2 of 5"</span> with role/value semantics, and hide decorative child dots if the wrapper owns the announcement.</p>
+        <ul>
+          <li>KO and EN labels for all 5 positions.</li>
+          <li>One clear accessibility-tree announcement for current step.</li>
+          <li>Decorative dots do not create unlabeled or noisy accessibility nodes.</li>
+          <li>Visual top bar and Skip action still fit mobile widths.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

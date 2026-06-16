@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Persona Feedback Error States</title>
+  <style>
+    body { margin: 0; font-family: Inter, Segoe UI, Arial, sans-serif; background: #071018; color: #edf7f3; }
+    main { max-width: 920px; margin: 0 auto; padding: 40px 24px; }
+    h1 { margin: 0 0 8px; font-size: 30px; letter-spacing: 0; }
+    h2 { margin-top: 28px; font-size: 18px; }
+    p, li { line-height: 1.58; color: #bfd2cd; }
+    code { color: #92f2ce; background: #10241f; padding: 2px 5px; border-radius: 4px; }
+    .panel { border: 1px solid rgba(146,242,206,.28); background: rgba(16,36,31,.72); border-radius: 8px; padding: 18px; margin-top: 18px; }
+    .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .ok { color: #92f2ce; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Persona Feedback Error States</h1>
+    <p><span class="ok">Commit:</span> <code>602e777 fix(feedback): show persona error states</code></p>
+    <div class="grid">
+      <section class="panel">
+        <h2>Build Failure</h2>
+        <p>Native alert removed. Persona build failures now render <code>PremiumErrorState</code> with retry plus a secondary route back to capture.</p>
+      </section>
+      <section class="panel">
+        <h2>Export Failure</h2>
+        <p>Share/export failures now show a bottom <code>PremiumToast</code>, keeping the screen context visible.</p>
+      </section>
+      <section class="panel">
+        <h2>Regression Guard</h2>
+        <p>The <code>Feedback</code> constraint now covers <code>src/app/persona.tsx</code> and blocks native alert regressions.</p>
+      </section>
+    </div>
+    <section class="panel">
+      <h2>Validation</h2>
+      <p>Passed: typecheck, lint, i18n, lexicon, emdash, LLM boundary, constraints, diff check, and Jest 93 suites / 840 tests.</p>
+    </section>
+  </main>
+</body>
+</html>

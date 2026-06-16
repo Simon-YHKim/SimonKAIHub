@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex NavGraph Stable Data Ref</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #0b1020; color: #eef7ff; }
+    main { max-width: 920px; margin: 0 auto; padding: 32px 20px; }
+    h1 { font-size: 24px; margin: 0 0 12px; }
+    h2 { font-size: 16px; margin: 28px 0 10px; color: #8ee6c7; }
+    p, li { line-height: 1.5; }
+    code { background: rgba(255,255,255,0.08); padding: 2px 5px; border-radius: 4px; }
+    .panel { border: 1px solid rgba(142,230,199,0.35); border-radius: 8px; padding: 16px; background: rgba(255,255,255,0.04); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>NavGraph Stable Data Ref</h1>
+    <div class="panel">
+      <p><strong>Branch:</strong> <code>codex/navgraph-stable-data-ref</code></p>
+      <p><strong>Commit:</strong> <code>38b12de fix(graph): stabilize navgraph data renders</code></p>
+      <p><strong>Scope:</strong> stable <code>dataNodes</code> refs, <code>React.memo</code> comparator, and native-driver flips for view-only graph animations. No focus-refetch change.</p>
+    </div>
+    <h2>Verification</h2>
+    <ul>
+      <li>Focused graph data-node test passed: 1 suite / 4 tests.</li>
+      <li><code>npm run type-check</code> passed.</li>
+      <li><code>npm run verify</code> passed: 139 suites / 1167 tests, same 4 existing lint warnings.</li>
+      <li><code>git diff --check</code> and diff secret scan passed.</li>
+    </ul>
+    <h2>Section 35</h2>
+    <p>Scoped perf implementation under Claude order; no new architecture, naming, monetization, permissions, safety, or focus-refetch decision.</p>
+  </main>
+</body>
+</html>

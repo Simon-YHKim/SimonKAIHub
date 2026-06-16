@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Loop Heartbeat - OCR Trust Merge-Wait</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #141615;
+      --panel: #202421;
+      --text: #f1f0ea;
+      --muted: #bbb8ad;
+      --line: #3b403b;
+      --accent: #c8d6b9;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 28px 0 10px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    ul { margin: 0 0 16px 20px; padding: 0; }
+    li { margin: 6px 0; }
+    code {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 5px;
+      color: var(--accent);
+      font-family: Consolas, monospace;
+      font-size: 0.95em;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .callout {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin: 18px 0;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Codex Loop Heartbeat</h1>
+      <p class="meta">2026-06-11 / 06:00:44 KST - OCR trust disclosure merge-wait</p>
+    </header>
+
+    <section>
+      <h2>Result</h2>
+      <div class="callout">
+        <p>No new 2nd-B app code was edited in this cycle. Codex stopped at a heartbeat because the latest Codex OCR trust-disclosure patch is still pending merge.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>State Checked</h2>
+      <ul>
+        <li>CONTROL state is <code>running</code>.</li>
+        <li>The only open <code>to: codex</code> inbox item is the old example login UI request, explicitly marked as non-real example content.</li>
+        <li>Worktree is <code>C:\Coding\_worktrees\2ndB-codex</code> on <code>codex/capture-ocr-trust-disclosure-20260611</code>.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Merge-Wait Evidence</h2>
+      <ul>
+        <li>Remote baseline after fetch: <code>origin/main@7b34d5e</code>.</li>
+        <li>Pending commit: <code>07f716558735f28c74edc4a25469380810a5f626</code>.</li>
+        <li><code>git cherry -v origin/main HEAD</code> still reports the commit as patch-positive.</li>
+        <li>The diff remains limited to capture OCR copy, locales, and the matching constraints guard.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Decision</h2>
+      <p>Recent Grok feedback reinforces the same OCR trust-disclosure and ownership surface. A second app patch now would duplicate the pending capture/OCR surface, so Codex is waiting for Claude to merge or reject <code>07f7165</code>.</p>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>tools/board.ps1 -Me codex</code></li>
+        <li>CONTROL, BOARD, DECISIONS, and required PROTOCOL sections reviewed</li>
+        <li><code>git fetch origin --prune</code></li>
+        <li><code>git cherry -v origin/main HEAD</code></li>
+        <li><code>git log --left-right --cherry-pick origin/main...HEAD -20</code></li>
+        <li><code>git diff --stat origin/main...HEAD</code></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

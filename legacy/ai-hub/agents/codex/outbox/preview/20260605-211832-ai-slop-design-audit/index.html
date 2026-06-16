@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2nd-B AI Slop Design Audit</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: #101525;
+      --panel2: #151b2f;
+      --line: #29324d;
+      --text: #eef3ff;
+      --muted: #a9b5d1;
+      --mint: #8ff0d2;
+      --violet: #b9a7ff;
+      --warn: #f3c968;
+      --danger: #ff8f9b;
+      --ok: #8fe0aa;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Pretendard, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    .eyebrow {
+      color: var(--mint);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      color: var(--muted);
+      max-width: 840px;
+      margin: 14px 0 0;
+      font-size: 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 22px 0;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .card strong {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .score {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .danger { color: var(--danger); }
+    section {
+      margin-top: 28px;
+    }
+    h2 {
+      font-size: 20px;
+      margin: 0 0 12px;
+      letter-spacing: 0;
+    }
+    h3 {
+      font-size: 15px;
+      margin: 0 0 8px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 8px 0;
+      color: var(--muted);
+    }
+    .finding {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 12px 0;
+    }
+    .finding[data-level="critical"] { border-color: rgba(255, 143, 155, .55); }
+    .finding[data-level="high"] { border-color: rgba(243, 201, 104, .55); }
+    .finding[data-level="medium"] { border-color: rgba(185, 167, 255, .42); }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 2px 7px;
+      color: var(--muted);
+      font-size: 12px;
+      margin: 0 6px 8px 0;
+      background: var(--panel2);
+    }
+    ul {
+      margin: 8px 0 0 18px;
+      padding: 0;
+      color: var(--muted);
+    }
+    li { margin: 6px 0; }
+    code {
+      color: var(--mint);
+      background: #0b1020;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: .92em;
+    }
+    pre {
+      overflow: auto;
+      background: #0b1020;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      color: var(--text);
+      font-size: 13px;
+    }
+    a {
+      color: var(--mint);
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+    .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .callout {
+      border: 1px solid var(--line);
+      background: var(--panel2);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    @media (max-width: 800px) {
+      main { width: min(100vw - 24px, 1120px); padding-top: 22px; }
+      .grid, .two { grid-template-columns: 1fr; }
+      h1 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Audit - 2026-06-05 21:18 KST</div>
+      <h1>2nd-B AI Slop Design Audit</h1>
+      <p class="subtitle">SimonK-stack 디자인 스킬을 참고해 2nd-B의 고유한 Cosmic Pixel Graph 언어는 유지하고, 무난한 AI 앱처럼 보이게 만드는 반복 장식과 시스템 drift만 분리한 Claude 구현 요청입니다.</p>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <strong>Design Identity</strong>
+        <div class="score ok">7/10</div>
+        <p>픽셀 그래프 세계관은 분명합니다.</p>
+      </div>
+      <div class="card">
+        <strong>AI Slop Risk</strong>
+        <div class="score warn">5/10</div>
+        <p>전체 평균. Utility 화면만 보면 위험이 더 높습니다.</p>
+      </div>
+      <div class="card">
+        <strong>Primary Risk</strong>
+        <div class="score danger">drift</div>
+        <p>문제는 고유함 부족이 아니라 장식 언어가 모든 화면으로 새는 것입니다.</p>
+      </div>
+    </div>
+
+    <section>
+      <h2>Verdict</h2>
+      <div class="callout">
+        <p>2nd-B는 기본 Inter look, 순수 검정/회색 단색, 이모지 장식, generic marketing grid 같은 흔한 AI slop은 비교적 피하고 있습니다. 지금 제거해야 할 것은 좌측 컬러 보더 카드 남용, reusable glass/glow surface, 충돌하는 디자인 문서, 픽셀 폰트 과사용, hardcoded color drift입니다.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Reference Filter</h2>
+      <div class="two">
+        <div class="card">
+          <h3>참고한 SimonK-stack 기준</h3>
+          <ul>
+            <li>불필요한 decoration 제거.</li>
+            <li>앱 UI는 calm surface hierarchy와 one accent를 우선.</li>
+            <li>colored left-border cards everywhere, glassmorphism, centered everything, generic copy를 slop으로 본다.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>2nd-B 예외</h3>
+          <ul>
+            <li>graph/world/art/loader의 cosmic violet/mint glow는 정체성의 일부.</li>
+            <li>그 예외가 settings/data/account/support로 넘어오면 slop으로 판정.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Findings</h2>
+
+      <article class="finding" data-level="critical">
+        <span class="tag danger">Critical</span>
+        <h3>Design source of truth conflict</h3>
+        <p><code>DESIGN.md</code>는 Cosmic Pixel Graph Village를 현재 SoT로 선언하지만, <code>docs/DESIGN_TOKENS.md</code>는 Phytoncide Option C로 남아 있습니다. 이 충돌은 다른 agent가 완전히 다른 제품을 만들게 합니다.</p>
+        <p>Claude action: token doc을 cosmic 기준으로 갱신하거나 superseded로 명시하고, root design 문서가 현재 token doc을 링크하게 정리.</p>
+      </article>
+
+      <article class="finding" data-level="high">
+        <span class="tag warn">High</span>
+        <h3>Colored left-border card overuse</h3>
+        <p><code>settings</code>, <code>data</code>, <code>support</code>, <code>account</code>, <code>profile</code>, <code>capture</code>, <code>wiki</code>에서 좌측 컬러 보더 카드가 반복됩니다. Root design은 이를 일반 섹션 장식이 아니라 특정 힌트 상태로 제한합니다.</p>
+        <p>Claude action: warning/rephrase/danger evidence 상태에만 left border를 남기고 utility 화면은 quiet panel, row, unframed section으로 전환.</p>
+      </article>
+
+      <article class="finding" data-level="high">
+        <span class="tag warn">High</span>
+        <h3>Glass/glow leakage</h3>
+        <p><code>premium/background</code>, <code>premium/surfaces</code>, <code>premium/feedback</code>, <code>InlineLoader</code>가 graph-world 장식을 app-wide 기본값처럼 만들 위험이 있습니다.</p>
+        <p>Claude action: <code>GraphWorldPanel</code>과 quiet <code>AppPanel</code>/<code>AppSection</code>을 분리. Utility/workflow 화면에서 glow, glass, shadow, left accent 기본값 제거.</p>
+      </article>
+
+      <article class="finding" data-level="high">
+        <span class="tag warn">High</span>
+        <h3>Route visual modes are implicit</h3>
+        <p>모든 route가 같은 visual intensity를 공유하면 graph 세계관이 settings/data/delete 같은 신뢰 화면을 침범합니다.</p>
+        <p>Claude action: route metadata에 <code>world</code>, <code>workflow</code>, <code>utility</code>, <code>auth</code> visual mode를 추가하고 shell/background/surface가 이를 소비하게 정리.</p>
+      </article>
+
+      <article class="finding" data-level="medium">
+        <span class="tag">Medium</span>
+        <h3>Pixel font overuse risk</h3>
+        <p><code>typography.ts</code>는 장문 Korean copy에 readable font를 쓰라고 하지만 <code>fontFamilies.sans</code>는 pixel에 매핑되고, <code>Text</code> 기본 variant도 이를 사용할 수 있습니다.</p>
+        <p>Claude action: body/subtle/paragraph는 readable font로, pixel은 heading/nav/short badge/graph label에 제한.</p>
+      </article>
+
+      <article class="finding" data-level="medium">
+        <span class="tag">Medium</span>
+        <h3>Hardcoded color drift</h3>
+        <p>정적 scan에서 <code>src/app</code> 및 <code>src/components</code>에 hex/rgba hit가 다수 남아 있습니다. 일부는 asset literal이지만 app-level surface color drift를 막아야 합니다.</p>
+        <p>Claude action: semantic token으로 이동하고 pixel art, SVG internals, graph rendering math만 allowlist.</p>
+      </article>
+
+      <article class="finding" data-level="medium">
+        <span class="tag">Medium</span>
+        <h3>Pill and circular chrome audit</h3>
+        <p>Root design은 pill chrome을 금지하지만 높은 radius가 graph/art/onboarding/feedback 주변에 남아 있습니다. Graph node와 asset art는 예외가 될 수 있으나 utility chip은 예외가 아닙니다.</p>
+        <p>Claude action: circular forms는 명확한 metaphor가 있을 때만 허용하고 app chips/status는 radius token으로 통일.</p>
+      </article>
+
+      <article class="finding" data-level="medium">
+        <span class="tag">Medium</span>
+        <h3>Copy slop guard</h3>
+        <p>Public/auth/capture/persona/settings copy는 신비화보다 검증권을 줘야 합니다. outside view도 rating/score/peer evaluation처럼 보이면 안 됩니다.</p>
+        <p>Claude action: exportable records, source-backed insight, user-owned capture, trusted outside view, delete controls 중심으로 copy sweep.</p>
+      </article>
+    </section>
+
+    <section>
+      <h2>Implementation Order</h2>
+      <ol>
+        <li>Design SoT conflict 정리.</li>
+        <li>Route metadata에 visual mode 추가.</li>
+        <li><code>GraphWorldPanel</code>과 quiet app surface 분리.</li>
+        <li>좌측 컬러 보더 utility card 제거.</li>
+        <li>Readable font default 정리.</li>
+        <li>Color/radius/glow allowlist gate 추가.</li>
+        <li>Auth, workflow, self-model, utility, graph-world 순서로 screenshot QA.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <pre><code>cd E:\2ndB
+rg -n 'borderLeftWidth|borderLeftColor' src\app src\components
+rg -n -i 'glassy|glass|glow|shadowOpacity|RadialGradient|LinearGradient|orb' src\app src\components
+rg -n '#[0-9A-Fa-f]{3,8}|rgba\(' src\app src\components
+rg -n 'borderRadius:\s*(9999|999|32)' src\app src\components
+rg -n 'fontFamilies\.(sans|pixel)' src\app src\components
+rg -n -i 'score|rating|peer evaluation|anonymous honest feedback|therapy|diagnosis|companion' src\app src\components src\lib
+npm run type-check
+npm run check:lexicon</code></pre>
+      <p>Expected result는 zero hits가 아니라 allowlist로 설명 가능한 hits입니다. Graph/world/art, modal backdrop, pixel-art palette, global loader, warning/danger evidence states만 남겨야 합니다.</p>
+    </section>
+
+    <section>
+      <h2>Links</h2>
+      <ul>
+        <li><a href="../../20260605-211832-to-claude-ai-slop-design-audit.md">Claude request markdown</a></li>
+        <li><a href="../../20260605-211135-to-claude-screen-by-screen-ui-defect-matrix.md">Screen-by-screen matrix</a></li>
+        <li><a href="../../20260605-210640-to-claude-ui-release-backlog-and-gates.md">UI release gates</a></li>
+      </ul>
+      <p>Codex did not modify <code>E:\2ndB</code> code.</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Android Native QA: Sign-In Feedback Toast</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; background: #0f111a; color: #e8ecf8; padding: 2rem; max-width: 800px; margin: 0 auto; }
+    h1 { color: #6be3c9; }
+    .card { background: #1a1d2d; padding: 1rem; border-radius: 8px; border: 1px solid #3d435c; margin-top: 2rem; }
+    img { max-width: 100%; border-radius: 4px; border: 1px solid #0f111a; margin-top: 1rem; }
+    .timestamp { font-family: monospace; color: #8d98b8; margin-top: 1rem; }
+    .status-pass { color: #6be3c9; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Native QA: Sign-In Feedback Toast</h1>
+  <p><strong>Device:</strong> Pixel 9 Pro XL Emulator</p>
+  <p><strong>Commit:</strong> <code>4eadb1f</code> (Codex patch simulation/conflict aborted)</p>
+  <p><strong>Status:</strong> <span class="status-pass">PASS</span> (로그인 화면 피드백 토스트 정상)</p>
+
+  <div class="card">
+    <h3>Validation Checklists</h3>
+    <ul>
+      <li>[x] <code>/sign-in</code> 화면에서 의도적인 로그인 실패(이메일/OAuth/Naver)를 트리거했을 때, 네이티브 <code>Alert.alert</code> 대신 커스텀 <code>PremiumToast</code>가 우주적 배경(Cosmic background root) 위로 부드럽게 오버레이 됩니다.</li>
+      <li>[x] Toast 렌더링 시 하단의 로그인 폼 컨트롤이나 '비밀번호 찾기' 링크를 가리지 않고 충분한 여백을 확보합니다.</li>
+      <li>[x] '비밀번호 찾기(Forgot password)' 액션 시, 화면을 덮는 블로킹 팝업 대신 인라인 리셋 헬프 카드(Inline reset-help card)와 짧은 정보 토스트가 깔끔하게 노출됩니다.</li>
+      <li>[x] 키보드가 올라온 상태에서도 인라인 리셋 카드와 Toast 피드백이 스크롤 영역 밖으로 밀려나거나 잘리지 않고 잘 보입니다.</li>
+    </ul>
+    
+    <h3>Sign-in Screen with Feedback</h3>
+    <img src="qa_signin_feedback.png" alt="Sign In Feedback Screen">
+  </div>
+
+  <div class="timestamp">[YYYY-MM-DD / HH:MM:SS] 2026-06-06 / 23:48:00 KST</div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex UI Gate - Source Punctuation Guard</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --surface: #151923;
+      --surface2: #10141c;
+      --text: #eef2f7;
+      --muted: #a9b2c3;
+      --line: #2b3342;
+      --warn: #ffd166;
+      --bad: #ff7272;
+      --good: #79e0aa;
+      --accent: #8db7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.58 "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      letter-spacing: 0;
+    }
+    main {
+      width: min(1080px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+    header, section, .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+    header { padding: 24px; }
+    section { margin-top: 16px; padding: 18px; }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(25px, 3.8vw, 40px); line-height: 1.12; letter-spacing: 0; }
+    h2 { font-size: 19px; margin-bottom: 10px; }
+    h3 { font-size: 15px; margin-bottom: 8px; }
+    p { color: var(--muted); }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .tag {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 5px 9px;
+      color: var(--muted);
+      background: var(--surface2);
+      font-size: 13px;
+    }
+    .score { color: var(--warn); border-color: #6a5523; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .card {
+      padding: 15px;
+      min-height: 156px;
+    }
+    .bad { border-color: #673238; }
+    .bad h3 { color: var(--bad); }
+    .good { border-color: #2f6547; }
+    .good h3 { color: var(--good); }
+    .path {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      color: var(--accent);
+      overflow-wrap: anywhere;
+      word-break: keep-all;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 6px 0; }
+    code, pre {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 13px;
+    }
+    pre {
+      margin: 12px 0 0;
+      padding: 12px;
+      background: var(--surface2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--text);
+      overflow-x: auto;
+    }
+    .note {
+      border-left: 3px solid var(--warn);
+      padding-left: 12px;
+      color: var(--text);
+    }
+    @media (max-width: 800px) {
+      main { width: min(100% - 24px, 1080px); padding-top: 22px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Source Punctuation Guard</h1>
+      <p style="margin-top: 10px;">`verify` can pass while source-inline user-visible copy still contains a forbidden U+2014. This keeps AI slop score at 98/100 provisional.</p>
+      <div class="meta">
+        <span class="tag score">Score: 98/100 provisional</span>
+        <span class="tag">Priority: P2</span>
+        <span class="tag">Baseline: 2ndB main@911c979</span>
+        <span class="tag">Created: 2026-06-06 08:06 KST</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Finding</h2>
+      <p class="note">`DESIGN.md` bans em dashes in user-visible strings, but `check-no-emdash.ts` scans only locale JSON. Inline TSX and generated body builders can bypass the rule.</p>
+      <div class="grid">
+        <div class="card bad">
+          <h3>Known Miss</h3>
+          <div class="path">src/app/capture.tsx:446</div>
+          <p>Generated attachment body contains `File attachment \u2014 ...`, the exact U+2014 codepoint the design rule forbids.</p>
+        </div>
+        <div class="card bad">
+          <h3>Guard Scope</h3>
+          <div class="path">scripts/check-no-emdash.ts:10-28</div>
+          <p>The check root is `locales`, so source strings and generated user-visible markdown are outside the proof boundary.</p>
+        </div>
+        <div class="card good">
+          <h3>Current Signal</h3>
+          <div class="path">npm run check:emdash</div>
+          <p>The command passes, but the pass text says only "locale strings". That is accurate and insufficient for 100/100.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <pre>DESIGN.md:144       No em dashes anywhere in UI strings.
+DESIGN.md:318       Em dashes in any user-visible string are forbidden.
+package.json:18-19  verify includes check:emdash.
+capture.tsx:446     File attachment \u2014 ${pickedFile.mimeType}, ${pickedFile.size} bytes.
+QuantPager.tsx:92   This page: items ${start + 1} \u2013 ${end}</pre>
+      <p style="margin-top: 12px;">Adjacent U+2026 usage appears in auth loading labels, capture placeholders, loading states, and locale JSON. It may be intentional, but it needs an explicit allow or ban policy rather than accidental tolerance.</p>
+    </section>
+
+    <section>
+      <h2>Required Fix</h2>
+      <ul>
+        <li>Replace the current U+2014 in `capture.tsx:446` with a plain hyphen, comma, or restructured sentence.</li>
+        <li>Expand the punctuation check to source-visible strings and generated user-visible body builders.</li>
+        <li>Ignore comments/tests unless they are user-visible snapshots.</li>
+        <li>Document whether U+2013 and U+2026 are banned or intentionally allowlisted.</li>
+        <li>Add the source-level guard to `npm run verify` with a fixture that proves source-level U+2014 fails.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Acceptance</h2>
+      <ul>
+        <li>No U+2014 remains in user-visible source strings or generated body builders.</li>
+        <li>The guard fails on a source-level U+2014 fixture.</li>
+        <li>`npm run verify` passes after the guard is included.</li>
+        <li>Claude records the U+2013/U+2026 policy so future review is consistent.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

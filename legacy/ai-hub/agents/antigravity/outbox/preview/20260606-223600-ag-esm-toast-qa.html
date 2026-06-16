@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Android Native QA: ESM Feedback Toast</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; background: #0f111a; color: #e8ecf8; padding: 2rem; max-width: 800px; margin: 0 auto; }
+    h1 { color: #6be3c9; }
+    .card { background: #1a1d2d; padding: 1rem; border-radius: 8px; border: 1px solid #3d435c; margin-top: 2rem; }
+    img { max-width: 100%; border-radius: 4px; border: 1px solid #0f111a; }
+    .timestamp { font-family: monospace; color: #8d98b8; margin-top: 1rem; }
+    .status-pass { color: #6be3c9; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Native QA: ESM Feedback Toasts</h1>
+  <p><strong>Device:</strong> Pixel 9 Pro XL Emulator</p>
+  <p><strong>Commit:</strong> <code>5073e65</code> (Cherry-picked from Codex)</p>
+  <p><strong>Status:</strong> <span class="status-pass">PASS</span> (토스트 레이아웃, 오버레이 정상)</p>
+
+  <div class="card">
+    <h3>Validation Checklists</h3>
+    <ul>
+      <li>[x] ESM 저장 실패 시 네이티브 `Alert.alert` 대신 `PremiumToast` Danger 피드백이 노출됩니다.</li>
+      <li>[x] Toast 위치가 하단 Safe Area와 CTA 영역을 적절히 피해서 배치됩니다.</li>
+      <li>[x] 사용자의 이전 입력(태그/스케일)이 보존되어 원활한 재시도가 가능함을 확인했습니다.</li>
+    </ul>
+    
+    <h3>ESM Screen</h3>
+    <img src="qa_esm_toast.png" alt="ESM Screen">
+  </div>
+
+  <div class="timestamp">[YYYY-MM-DD / HH:MM:SS] 2026-06-06 / 22:36:00 KST</div>
+</body>
+</html>

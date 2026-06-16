@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>O-12 CC-1 Static Re-check</title>
+  <style>
+    :root {
+      --bg: #101411;
+      --panel: #182019;
+      --line: #304132;
+      --text: #edf5ec;
+      --muted: #aebbad;
+      --accent: #a8d36f;
+      --warn: #f1c36b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Galmuri11", "Malgun Gothic", system-ui, sans-serif;
+      line-height: 1.6;
+    }
+    main {
+      width: min(980px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    .stamp {
+      color: var(--accent);
+      font-size: 13px;
+      margin: 0 0 10px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.25;
+      margin: 0;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 28px 0 10px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    ul {
+      margin: 0 0 14px 20px;
+      padding: 0;
+    }
+    li { margin: 8px 0; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 16px 0;
+    }
+    code {
+      color: var(--accent);
+      background: rgba(168, 211, 111, 0.1);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .muted { color: var(--muted); }
+    .warn { color: var(--warn); }
+    @media (max-width: 560px) {
+      main { width: min(100% - 24px, 980px); padding-top: 28px; }
+      h1 { font-size: 23px; }
+      .card { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="stamp">[2026-06-08 / 19:59:25 KST]</p>
+      <h1>O-12 CC-1 static re-check</h1>
+      <p class="muted">Read-only check of <code>origin/main@b366f46</code>. 앱 코드는 수정하지 않았다.</p>
+    </header>
+
+    <section class="card">
+      <h2>통과로 보는 부분</h2>
+      <ul>
+        <li>대상 화면의 rounded local card/chip 스타일이 <code>gameboy.radius</code>, <code>gameboy.borderWidth</code>, <code>pixelShadowStyle()</code> 중심으로 정리됐다.</li>
+        <li>grep 기준 <code>radii.*</code>, <code>borderRadius: 8</code>, <code>borderRadius: 4</code>, <code>borderWidth: 1</code> 잔여는 없었다.</li>
+        <li>capture textarea는 readable font로 바뀌었고, chrome label과 body text 분리도 유지됐다.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>주의할 부분</h2>
+      <p><code>PremiumButton</code> base minHeight는 48로 올라갔지만, custom controls에는 44/46이 남아 있다. 최소 44px은 대체로 만족하지만, Claude plan의 touch48dp 완료로 쓰려면 별도 조정 또는 확인이 필요하다.</p>
+      <ul>
+        <li><code>index.tsx</code>: emptyGraphSkip, emptyGraphCta 44</li>
+        <li><code>capture.tsx</code>: secondaryDisclosure 44, tossBtn actual height proof needed</li>
+        <li><code>secondb.tsx</code>: compactHeader, limitLink 44</li>
+        <li><code>profile.tsx</code>: settingsButton 44x44, quickChip 44</li>
+        <li><code>graph-bits.tsx</code>: GraphNodeChip 44</li>
+        <li><code>surfaces.tsx</code>: iconBtn 44x44, Input 46</li>
+      </ul>
+      <p>Phase C residuals도 그대로 tracker에 남는다: modal-over-content, ActivityIndicator, settings declutter, Phase D reset-home consistency.</p>
+    </section>
+
+    <section class="card">
+      <h2>Tail Note</h2>
+      <p>Codex app tail conflict expanded after #289. Galmuri subset, <code>src/theme/typography.ts</code>에 더해 <code>src/app/index.tsx</code>도 merge-tree conflict가 난다. Claude가 tail을 정리하기 전까지 Codex는 app coding을 계속 보류해야 한다.</p>
+    </section>
+  </main>
+</body>
+</html>

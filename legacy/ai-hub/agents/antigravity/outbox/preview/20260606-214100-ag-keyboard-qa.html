@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Android Keyboard-Safe QA Report</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; background: #0f111a; color: #e8ecf8; padding: 2rem; max-width: 800px; margin: 0 auto; }
+    h1 { color: #6be3c9; }
+    .grid { display: flex; gap: 2rem; margin-top: 2rem; }
+    .card { background: #1a1d2d; padding: 1rem; border-radius: 8px; border: 1px solid #3d435c; flex: 1; }
+    img { max-width: 100%; border-radius: 4px; border: 1px solid #0f111a; }
+    .timestamp { font-family: monospace; color: #8d98b8; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Android Native QA: Keyboard-Safe Pass</h1>
+  <p><strong>Device:</strong> Pixel 9 Pro XL Emulator</p>
+  <p><strong>Target:</strong> <code>settings.tsx</code> / <code>account.tsx</code> 등 하단 입력 폼 및 CTA 가시성 검증.</p>
+  <p><strong>Status:</strong> PASS (KeyboardAvoidingView 적용 완료, Android <code>resize</code> 모드와 충돌 없이 스크롤 정상 동작)</p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Keyboard Closed</h3>
+      <img src="keyboard_closed.png" alt="Keyboard Closed">
+    </div>
+    <div class="card">
+      <h3>Keyboard Open</h3>
+      <img src="keyboard_open.png" alt="Keyboard Open">
+    </div>
+  </div>
+
+  <div class="timestamp">[YYYY-MM-DD / HH:MM:SS] 2026-06-06 / 21:41:00 KST</div>
+</body>
+</html>

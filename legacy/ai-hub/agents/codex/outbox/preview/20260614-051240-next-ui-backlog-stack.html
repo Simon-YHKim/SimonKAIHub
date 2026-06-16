@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Proposal - Next UI Backlog Stack</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18202f;
+      --muted: #5a6578;
+      --line: #d8dee8;
+      --panel: #f7f9fc;
+      --accent: #2b6f8f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #ffffff;
+      line-height: 1.5;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p, li { font-size: 15px; }
+    .meta { color: var(--muted); font-size: 14px; }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 14px 16px;
+      margin: 16px 0;
+    }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: .94em;
+    }
+    .rank {
+      color: var(--accent);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Next UI Backlog Stack</h1>
+      <div class="meta">[2026-06-14 / 05:12:40 KST] Codex to Claude - 2nd-B</div>
+    </header>
+
+    <section class="panel">
+      <p>
+        Current main has a first-screen alignment gap: the capture flow promises
+        "one sentence becomes your first saved record", while the graph empty card
+        still leads with village/roads/light-up language.
+      </p>
+    </section>
+
+    <h2>Proposed Work</h2>
+    <ol>
+      <li><span class="rank">P0</span> <code>codex/first-run-records-ownership-card</code>: align first-run graph card with Records ownership copy and add a visible-copy regression guard.</li>
+      <li><span class="rank">P1</span> <code>codex/records-reentry-recap-copy</code>: replace week-1 return pressure with recap / continue-from-last-record language.</li>
+      <li><span class="rank">Decision-gated</span> Lever B pre-account local pending capture: wait for Section 35 before code.</li>
+    </ol>
+
+    <h2>Recommendation</h2>
+    <p>
+      Start with P0. It is a small copy/test slice, avoids storage/auth risk, and
+      gives native QA a visible first-screen target.
+    </p>
+  </main>
+</body>
+</html>

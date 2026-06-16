@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Current Codex Tail Integration Packet</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101418;
+      --panel: #182028;
+      --ink: #e8f1f2;
+      --muted: #9fb1b5;
+      --line: #6ec6d9;
+      --accent: #f4d35e;
+      --ok: #9ad29a;
+      --warn: #ffd166;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    .meta {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    section {
+      border: 2px solid var(--line);
+      background: var(--panel);
+      padding: 18px;
+      margin: 16px 0;
+      border-radius: 4px;
+      box-shadow: 6px 6px 0 #0b0e11;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      border-bottom: 1px solid rgba(110, 198, 217, 0.3);
+      padding: 10px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      color: var(--accent);
+    }
+    code {
+      color: var(--accent);
+      word-break: break-word;
+    }
+    .ok {
+      color: var(--ok);
+      font-weight: 700;
+    }
+    .warn {
+      color: var(--warn);
+      font-weight: 700;
+    }
+    ul {
+      margin: 0;
+      padding-left: 22px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Current Codex Tail Integration Packet</h1>
+    <div class="meta">[2026-06-08 / 14:31:08 KST] Codex handoff to Claude</div>
+
+    <section>
+      <h2>State</h2>
+      <ul>
+        <li>Branch: <code>codex/core-label-tail-cleanup</code></li>
+        <li>Base: <code>origin/main@71ae00b</code></li>
+        <li>Worktree: <span class="ok">clean</span></li>
+        <li>Divergence: <code>origin/main...HEAD = 0 8</code></li>
+        <li>Scope: 19 files, 305 insertions / 82 deletions</li>
+        <li><code>git diff --check origin/main...HEAD</code>: <span class="ok">PASS</span></li>
+        <li><code>npm run verify</code>: <span class="ok">PASS</span>, 109 suites / 896 tests</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Tail Order</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Commit</th>
+            <th>Primary scope</th>
+            <th>Risk</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>b045ce8</code></td><td>Route polish: capture, home, onboarding, BackArrow</td><td>Medium</td></tr>
+          <tr><td><code>d1daa86</code></td><td>NavGraph pixel motion and drilldown a11y</td><td>Medium-high if graph work lands first</td></tr>
+          <tr><td><code>20eba54</code></td><td>Premium sheet motion and Game Boy token contracts</td><td>Medium</td></tr>
+          <tr><td><code>5bbf057</code></td><td>InlineLoader pixel docs and test</td><td>Low-medium</td></tr>
+          <tr><td><code>9fc68d0</code></td><td>Premium loading state pixel glyph</td><td>Medium</td></tr>
+          <tr><td><code>ac8e5c4</code></td><td>Premium button loading pixel glyph</td><td>Medium</td></tr>
+          <tr><td><code>c9f33b0</code></td><td>Shared PixelLoaderGlyph extraction</td><td>Medium, keep with loader group</td></tr>
+          <tr><td><code>3a8487d</code></td><td>Capture journal loading pixel glyph</td><td>Low-medium</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Recommended Grouping</h2>
+      <ul>
+        <li>Group A: <code>b045ce8</code> + <code>3a8487d</code> for route polish and capture loader.</li>
+        <li>Group B: <code>d1daa86</code> for graph motion and a11y.</li>
+        <li>Group C: <code>20eba54</code> for token and premium sheet contracts.</li>
+        <li>Group D: <code>5bbf057</code>, <code>9fc68d0</code>, <code>ac8e5c4</code>, <code>c9f33b0</code> for loader cleanup; keep together because the shared glyph commit deduplicates the intermediate work.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Conflict Watch</h2>
+      <ul>
+        <li><code>src/components/graph/NavGraph.tsx</code></li>
+        <li><code>src/components/premium/feedback.tsx</code></li>
+        <li><code>src/app/capture.tsx</code></li>
+        <li><code>DESIGN.md</code></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

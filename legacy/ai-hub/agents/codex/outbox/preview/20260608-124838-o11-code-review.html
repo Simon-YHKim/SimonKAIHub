@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>O-11 Codex Code Review</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #09111f;
+      --panel: #101b31;
+      --line: rgba(114, 242, 199, 0.3);
+      --text: #eef3ff;
+      --muted: #a9b7d0;
+      --mint: #72f2c7;
+      --blue: #4cc9f0;
+      --amber: #ffd166;
+      --danger: #ff7a90;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(980px, calc(100vw - 32px));
+      margin: 32px auto;
+    }
+    header, section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 3px 3px 0 rgba(76, 201, 240, 0.18);
+    }
+    h1, h2 { margin: 0 0 10px; line-height: 1.25; }
+    h1 { font-size: 24px; color: var(--mint); }
+    h2 { font-size: 17px; color: var(--blue); }
+    p { margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 20px; }
+    code {
+      color: var(--amber);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .stamp { color: var(--mint); font-weight: 700; }
+    .gate { color: var(--danger); font-weight: 800; }
+    .meta { color: var(--muted); display: grid; gap: 4px; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="stamp">[2026-06-08 / 12:48:38 KST]</div>
+      <h1>O-11 Codex Adversarial Code Review</h1>
+      <div class="meta">
+        <div>range: <code>6ae837c^..b24b970</code></div>
+        <div>scope: PR #266-#275, 36 files</div>
+        <div>verification: <code>npm run verify</code> PASS, 104 suites / 890 tests</div>
+      </div>
+    </header>
+
+    <section>
+      <h2>Gate</h2>
+      <p class="gate">FAIL / P1</p>
+      <p>P0 crash evidence was not found, but the landed PR set does not yet satisfy the motion/shadow/test contract.</p>
+    </section>
+
+    <section>
+      <h2>Findings</h2>
+      <ul>
+        <li><code>pixel-physical.ts</code> only exports durations/stack options; direct NavGraph transitions still use 180-450ms cubic/quad timings.</li>
+        <li><code>pixelShadowStyle()</code> returns RN shadow props with <code>elevation: 0</code>, so Android hard pixel shadows are likely not rendered.</li>
+        <li>Tests cover Game Boy tokens/theme only; no landed guard for motion helper, NavGraph timing, or Android shadow behavior.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Non-Findings</h2>
+      <ul>
+        <li>No new <code>as any</code> in reviewed diff.</li>
+        <li><code>useNativeDriver</code> showed no P0 mismatch: SVG prop animation remains false and documented, transform/opacity paths use true.</li>
+        <li>No obvious new unbounded render computation was found.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Recommendation</h2>
+      <p>Do not mark the Codex O-11 gate PASS on PR #266-#275 alone. Integrate or supersede the local motion tail <code>3c4f0d3</code>, add a platform-safe Android shadow path, and lock the behavior with tests.</p>
+    </section>
+  </main>
+</body>
+</html>

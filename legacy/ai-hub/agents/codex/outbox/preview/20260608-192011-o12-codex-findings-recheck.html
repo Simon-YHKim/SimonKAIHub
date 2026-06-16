@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>O-12 Codex Findings Re-check</title>
+  <style>
+    :root {
+      --bg: #101411;
+      --panel: #182019;
+      --line: #304132;
+      --text: #edf5ec;
+      --muted: #aebbad;
+      --accent: #a8d36f;
+      --warn: #f1c36b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Galmuri11", "Malgun Gothic", system-ui, sans-serif;
+      line-height: 1.6;
+    }
+    main {
+      width: min(980px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    .stamp {
+      color: var(--accent);
+      font-size: 13px;
+      margin: 0 0 10px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.25;
+      margin: 0;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 28px 0 10px;
+      letter-spacing: 0;
+    }
+    h3 {
+      font-size: 15px;
+      margin: 20px 0 8px;
+      letter-spacing: 0;
+      color: var(--warn);
+    }
+    p { margin: 0 0 12px; }
+    ul {
+      margin: 0 0 14px 20px;
+      padding: 0;
+    }
+    li { margin: 8px 0; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 16px 0;
+    }
+    code {
+      color: var(--accent);
+      background: rgba(168, 211, 111, 0.1);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 8px 6px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--muted); font-weight: 600; }
+    .muted { color: var(--muted); }
+    .warn { color: var(--warn); }
+    @media (max-width: 640px) {
+      main { width: min(100% - 24px, 980px); padding-top: 28px; }
+      h1 { font-size: 23px; }
+      .card { padding: 14px; }
+      table { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="stamp">[2026-06-08 / 19:20:11 KST]</p>
+      <h1>O-12 Codex findings re-check</h1>
+      <p class="muted">Read-only check of <code>origin/main@e66b83b</code>. 앱 코드는 수정하지 않았다.</p>
+    </header>
+
+    <section class="card">
+      <h2>닫힌 항목</h2>
+      <ul>
+        <li>초기 카메라의 root Y mismatch는 닫혔다. sampled viewports에서 Soul Core center가 <code>height * 0.6</code>에 맞는다.</li>
+        <li><code>/manual</code> hero title은 <code>내 중심을 읽는 짧은 지도</code>로 교체되었다.</li>
+        <li>psychology section title은 <code>연구 기반 자기 이해</code>로 부드러워졌다.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>잔여 리스크</h2>
+      <h3>P1/P2: wide viewport initial off-home</h3>
+      <p><code>cameraOffHome()</code>은 아직 <code>pan 0, scale 1</code>을 home으로 본다. Phase D initial home은 <code>scale 1.5</code>와 non-zero pan이므로, wide viewport에서는 reset 버튼이 첫 프레임부터 뜰 수 있다.</p>
+      <table>
+        <thead>
+          <tr><th>viewport</th><th>initial pan</th><th>dist</th><th>offHome</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>390x844</td><td>-97.5, -97.0</td><td>137.6</td><td>false</td></tr>
+          <tr><td>412x915</td><td>-103.0, -136.2</td><td>170.7</td><td>false</td></tr>
+          <tr><td>768x1024</td><td>-192.0, -200.7</td><td>277.7</td><td>false</td></tr>
+          <tr><td>1366x768</td><td>-341.5, -88.3</td><td>352.7</td><td class="warn">true</td></tr>
+          <tr><td>1440x900</td><td>-360.0, -127.3</td><td>381.8</td><td class="warn">true</td></tr>
+          <tr><td>1920x1080</td><td>-480.0, -233.8</td><td>533.9</td><td class="warn">true</td></tr>
+        </tbody>
+      </table>
+      <p>권장 방향은 initial camera, reset/double-tap, off-home comparison이 같은 home-camera 계산을 공유하는 것이다.</p>
+
+      <h3>P2: manual research CTA visible expectation</h3>
+      <p><code>2dfbd6b</code>는 sign-in required를 accessibility hint에만 추가했다. sighted signed-out 사용자가 보는 버튼 label은 여전히 <code>큐레이션된 자료</code> / <code>Curated research</code>라서 visible expectation은 완전히 닫히지 않았다.</p>
+    </section>
+
+    <section class="card">
+      <h2>결론</h2>
+      <p>초기 카메라 Y mismatch와 큰 카피 톤은 닫혔다. 남은 핵심은 Phase D home 정의의 일관성이다. 특히 wide desktop/tablet에서 reset affordance가 첫 화면부터 보일 수 있는 점을 AG Phase C device audit에도 남겨두는 것이 좋다.</p>
+    </section>
+  </main>
+</body>
+</html>

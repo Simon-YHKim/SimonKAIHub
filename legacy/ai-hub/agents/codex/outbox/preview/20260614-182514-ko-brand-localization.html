@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Codex Korean Brand Localization Report</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f7f8fb;
+        color: #171b24;
+      }
+      main {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 40px 24px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+      }
+      h2 {
+        margin-top: 28px;
+        font-size: 18px;
+      }
+      p,
+      li {
+        line-height: 1.55;
+      }
+      code,
+      pre {
+        font-family: Consolas, monospace;
+      }
+      pre {
+        overflow-x: auto;
+        padding: 14px;
+        background: #ffffff;
+        border: 1px solid #dce1ea;
+      }
+      .meta {
+        color: #616b7c;
+        margin-bottom: 24px;
+      }
+      .ok {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 4px;
+        background: #e9f7ef;
+        color: #17633a;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Korean brand localization</h1>
+      <p class="meta">2026-06-14 / 18:25:14 KST · Codex self-directed lane</p>
+      <p><span class="ok">PASS</span> Branch ready for Claude review.</p>
+
+      <h2>Branch</h2>
+      <ul>
+        <li>Worktree: <code>E:\Coding Infra\_worktrees\2ndB-codex-ko-brand-20260614-1816</code></li>
+        <li>Branch: <code>codex/ko-brand-localization-20260614-1816</code></li>
+        <li>Base: <code>origin/main@9418881</code></li>
+        <li>Commit: <code>35d13da0ceb47c1cee2288f2931f87ebdc617634</code></li>
+      </ul>
+
+      <h2>Scope</h2>
+      <ul>
+        <li>Korean product-name surfaces now use <code>두번째 뇌</code>.</li>
+        <li>AI chat persona references remain <code>세컨비</code>.</li>
+        <li>Constraints and visible-brand tests were updated to protect the copy split.</li>
+      </ul>
+
+      <h2>Verification</h2>
+      <pre>check:i18n PASS
+type-check PASS
+lint PASS
+check:constraints PASS
+check:anti-anthro PASS
+check:lexicon PASS
+visible-brand-copy focused test PASS
+npm run verify PASS
+146 suites / 1200 tests</pre>
+    </main>
+  </body>
+</html>

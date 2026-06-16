@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2nd-B Route + Mock UX Audit</title>
+  <style>
+    :root {
+      --bg: #090b12;
+      --panel: #121722;
+      --panel2: #0d111b;
+      --line: #263144;
+      --text: #eef3ff;
+      --muted: #9aa7bd;
+      --accent: #72f2c7;
+      --warn: #ffd166;
+      --bad: #ff6b7a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.55;
+      word-break: keep-all;
+    }
+    main { width: min(1120px, calc(100vw - 32px)); margin: 0 auto; padding: 40px 0 56px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 22px; margin-bottom: 24px; }
+    .kicker { color: var(--accent); font-size: 13px; font-weight: 700; margin: 0 0 10px; }
+    h1 { font-size: clamp(28px, 4vw, 52px); line-height: 1.05; margin: 0 0 14px; letter-spacing: 0; }
+    .summary { color: var(--muted); max-width: 850px; margin: 0; font-size: 16px; }
+    .score { display: grid; grid-template-columns: 180px 1fr; gap: 16px; margin: 24px 0; }
+    .box, section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .num { font-size: 46px; font-weight: 800; line-height: 1; color: var(--warn); margin: 0 0 8px; }
+    .label { color: var(--muted); font-size: 13px; margin: 0; }
+    h2 { margin: 0 0 14px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: 0; }
+    p { margin: 0 0 10px; }
+    code {
+      background: #0b101a;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      color: var(--accent);
+      font-size: 13px;
+    }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-bottom: 14px; }
+    .finding { border-left: 3px solid var(--bad); padding-left: 14px; }
+    .finding.p2 { border-left-color: var(--warn); }
+    table { width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 8px; }
+    th, td { border-bottom: 1px solid var(--line); padding: 10px 8px; vertical-align: top; text-align: left; }
+    th { color: var(--muted); font-size: 13px; background: var(--panel2); }
+    td:nth-child(2), th:nth-child(2) { text-align: right; width: 92px; }
+    tr:last-child td { border-bottom: 0; }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 7px 0; }
+    li::marker { color: var(--accent); }
+    .stack { display: grid; gap: 14px; }
+    @media (max-width: 760px) {
+      main { width: min(100vw - 20px, 1120px); padding-top: 24px; }
+      .score, .grid { grid-template-columns: 1fr; }
+      .num { font-size: 40px; }
+      th, td { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="kicker">Codex UI/UX Gate · route + mock audit</p>
+    <h1>Route entry and mock-mode UX audit</h1>
+    <p class="summary">이 보강 감사는 merged main <code>0bfbfa3</code>의 route 진입성과 공개/no-key build에서 사용자에게 노출될 수 있는 mock 문자열을 점검했습니다.</p>
+  </header>
+
+  <div class="score">
+    <div class="box">
+      <p class="num">86</p>
+      <p class="label">/100 provisional</p>
+    </div>
+    <section>
+      <h2>Verdict</h2>
+      <p>이전 88점에서 86점으로 낮춥니다. 빌드와 테스트는 통과하지만, 공개 build에서 <code>[MOCK]</code>, <code>stub</code>, <code>Gemini key</code>, <code>임시 응답</code> 같은 내부/개발용 언어가 사용자 화면에 나올 수 있습니다. 100점 기준에서는 직접 차단 요소입니다.</p>
+    </section>
+  </div>
+
+  <section>
+    <h2>P1 Findings</h2>
+    <div class="grid">
+      <div class="finding">
+        <h3>User-visible mock strings</h3>
+        <p><code>src/lib/env.ts:96-100</code>에서 no-key build는 mock mode로 갑니다. <code>src/lib/llm/gemini.ts:87-108</code>에는 사용자 응답에 <code>[MOCK]</code>가 포함됩니다.</p>
+      </div>
+      <div class="finding">
+        <h3>Wiki Phase 1 exposes mock model</h3>
+        <p><code>src/app/wiki.tsx:708-714</code>는 model을 <code>MOCK</code>으로 보여주고, <code>src/lib/wiki/phase1.ts:85-96</code>의 placeholder summary를 그대로 렌더링할 수 있습니다.</p>
+      </div>
+      <div class="finding">
+        <h3>Support FAQ placeholder</h3>
+        <p><code>src/app/support.tsx:68-72</code>에 “도움말 모음은 곧 준비할게요. / A help center is on the way.”가 남아 있습니다.</p>
+      </div>
+      <div class="finding">
+        <h3>Social auth proof gap</h3>
+        <p><code>sign-in.tsx:228-266</code>, <code>sign-up.tsx:263-288</code>에서 Google/Apple/Kakao 버튼은 항상 보입니다. Naver만 config-gated입니다. live proof가 없으면 primary auth broken-entry 리스크입니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Route Entry Matrix</h2>
+    <table>
+      <thead>
+        <tr><th>Route</th><th>Nav hits</th><th>Codex 판단</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>/mbti</code></td><td>0</td><td>숨은 route. 살릴 거면 Profile/Persona에 노출, 아니면 redirect/remove.</td></tr>
+        <tr><td><code>/imagine</code></td><td>0</td><td>redirect-only legacy absorber로는 OK. 사용자-facing route로 카운트하면 안 됨.</td></tr>
+        <tr><td><code>/oauth-callback</code></td><td>0</td><td>technical callback. OK.</td></tr>
+        <tr><td><code>/inbox</code></td><td>1</td><td>Profile에 묻혀 있음. capture refinement가 핵심이면 Capture/Wiki에도 entry 필요.</td></tr>
+        <tr><td><code>/insights</code></td><td>1</td><td>profile-only. 분석 핵심이면 더 강한 진입점 필요.</td></tr>
+        <tr><td><code>/trinity</code></td><td>1</td><td>profile-only. 컨셉상 남길지 명칭/역할 확정 필요.</td></tr>
+        <tr><td><code>/journal</code></td><td>1</td><td>redirect to Capture. legacy absorber로 OK.</td></tr>
+        <tr><td><code>/account</code>, <code>/data</code>, <code>/formats</code>, <code>/import</code>, <code>/permissions</code>, <code>/support</code>, <code>/theme</code></td><td>2 each</td><td>settings/profile hub 중심. 의도라면 acceptable.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Updated 100점 Blockers</h2>
+    <ul>
+      <li>Lumina/Iris source-of-truth mismatch.</li>
+      <li>User-visible <code>[MOCK]</code> / stub / Gemini-key copy.</li>
+      <li>Password reset, subscription screen, device reset, support FAQ placeholders.</li>
+      <li>Permission declaration vs <code>/permissions</code> copy mismatch.</li>
+      <li>Keyboard/list proof and FlatList follow-up not merged into main.</li>
+      <li><code>/mbti</code> hidden route or policy gap.</li>
+      <li>Social provider live proof or config gating.</li>
+      <li>BackArrow label coverage and small Korean microtype proof.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

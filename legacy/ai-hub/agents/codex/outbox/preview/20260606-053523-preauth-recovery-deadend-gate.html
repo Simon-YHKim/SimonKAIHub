@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Gate - Pre-auth Recovery Dead End</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d1117;
+      --panel: #151b23;
+      --panel2: #10161d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --line: #30363d;
+      --accent: #58a6ff;
+      --warn: #f2cc60;
+      --danger: #ff7b72;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(1080px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(26px, 4vw, 40px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+    h2 { margin: 0 0 10px; font-size: 17px; letter-spacing: 0; }
+    p { margin: 0 0 12px; color: var(--muted); }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: var(--panel2);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .pill strong { color: var(--text); }
+    .score { border-color: rgba(242, 204, 96, .45); color: var(--warn); }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .wide { grid-column: 1 / -1; }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 6px 0; }
+    code {
+      color: var(--text);
+      background: rgba(110, 118, 129, .18);
+      border-radius: 4px;
+      padding: 1px 4px;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .node {
+      border: 1px solid var(--line);
+      background: var(--panel2);
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 98px;
+      color: var(--muted);
+    }
+    .node b { display: block; color: var(--text); margin-bottom: 4px; }
+    .node.bad { border-color: rgba(255, 123, 114, .45); }
+    .option {
+      border-left: 3px solid var(--accent);
+      padding-left: 12px;
+      margin-top: 10px;
+    }
+    .option.warn { border-left-color: var(--warn); }
+    footer {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+    @media (max-width: 760px) {
+      main { width: min(100vw - 24px, 1080px); padding-top: 24px; }
+      .grid, .flow { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Pre-auth recovery dead-end gate</h1>
+      <p>Forgot password currently shows a static support email alert, while the actual support mail button is behind authentication. Locked-out users need a working recovery action.</p>
+      <div class="meta">
+        <span class="pill"><strong>Baseline</strong> main@911c979</span>
+        <span class="pill"><strong>Report</strong> 20260606-053523</span>
+        <span class="pill score"><strong>Score</strong> 98/100 provisional</span>
+        <span class="pill"><strong>Priority</strong> P1</span>
+      </div>
+    </header>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Current Recovery</h2>
+        <ul>
+          <li><code>sign-in.tsx:133-140</code>: Forgot password opens an alert.</li>
+          <li>The alert only displays <code>support@2nd-brain.app</code>.</li>
+          <li>No Supabase reset-password helper exists.</li>
+          <li>No recovery route or submitted state exists.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>Support Is Gated</h2>
+        <ul>
+          <li><code>support.tsx:64</code> redirects unauthenticated users to sign-in.</li>
+          <li><code>support.tsx:90-97</code> has the real mailto button.</li>
+          <li>Locked-out users cannot reach that button.</li>
+          <li>OAuth failure only returns to sign-in.</li>
+        </ul>
+      </article>
+
+      <article class="card wide">
+        <h2>Broken Flow</h2>
+        <div class="flow">
+          <div class="node"><b>User is locked out</b>Cannot sign in with password.</div>
+          <div class="node bad"><b>Forgot password</b>Alert with plain email address only.</div>
+          <div class="node bad"><b>Support route</b>Requires an authenticated session.</div>
+          <div class="node bad"><b>Outcome</b>No working in-app recovery action.</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Option A</h2>
+        <div class="option">
+          <p>Implement a real password reset request and redirect/update-password flow. Keep copy generic enough to avoid account enumeration.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Option B</h2>
+        <div class="option warn">
+          <p>Make support-led recovery real before auth: public support route, mailto fallback, copyable address, and safe subject/body.</p>
+        </div>
+      </article>
+
+      <article class="card wide">
+        <h2>Required Proof</h2>
+        <ul>
+          <li>Sign-in forgot-password default and submitted/fallback state.</li>
+          <li>Unauthenticated support or recovery page.</li>
+          <li>OAuth callback failure state with retry plus support/recovery.</li>
+          <li><code>npm run verify</code> after implementation.</li>
+        </ul>
+      </article>
+    </section>
+
+    <footer>
+      Full report: <code>agents/codex/outbox/20260606-053523-to-claude-preauth-recovery-deadend-gate.md</code>
+    </footer>
+  </main>
+</body>
+</html>

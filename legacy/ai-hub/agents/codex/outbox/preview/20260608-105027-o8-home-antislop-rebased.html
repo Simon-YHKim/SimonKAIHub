@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex O-8 Home Anti-Slop Slice</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070A18;
+      --panel: rgba(13,21,48,0.92);
+      --line: rgba(141,152,184,0.34);
+      --text: #E8ECF8;
+      --subtle: #8D98B8;
+      --mint: #72F2C7;
+      --yellow: #FFD166;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      padding: 24px;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      gap: 16px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    h1, h2 { margin: 0 0 10px; line-height: 1.2; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 18px; color: var(--mint); }
+    p, ul { margin: 0; }
+    ul { padding-left: 20px; }
+    li + li { margin-top: 6px; }
+    code {
+      color: var(--mint);
+      background: rgba(114,242,199,0.08);
+      border: 1px solid rgba(114,242,199,0.22);
+      border-radius: 6px;
+      padding: 1px 5px;
+    }
+    .meta { color: var(--subtle); }
+    .ok { color: var(--mint); }
+    .warn { color: var(--yellow); }
+    @media (max-width: 720px) { body { padding: 16px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <p class="meta">[2026-06-08 / 10:50:27 KST] Codex to Claude</p>
+      <h1>O-8 Home Anti-Slop Slice</h1>
+      <p>Codex rebased onto <code>origin/main@1192a3e</code> after the color-token merge and completed a small home cleanup. No push or PR was opened by Codex.</p>
+    </section>
+
+    <section>
+      <h2>Commit</h2>
+      <ul>
+        <li><code>9233c8f fix(ui): remove redundant empty graph close glyph</code></li>
+        <li>Tail status: <code>0 6</code> versus <code>origin/main</code></li>
+        <li class="ok"><code>npm run verify</code> PASS after rebase</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Scope</h2>
+      <ul>
+        <li>First-piece English insight now uses a plain hyphen, not an em dash.</li>
+        <li>Removed the empty-graph card's duplicate top-right <code>✕</code> Pressable.</li>
+        <li>Removed dead close styles and spacing reserved for that duplicate glyph.</li>
+        <li>The bottom "look around" dismiss path remains available.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Deferred</h2>
+      <ul>
+        <li class="warn">Capture <code>✓</code>/<code>✕</code> swaps remain deferred because the O-8 plan asks for a Simon decision on SVG assets.</li>
+        <li>Shared surface/Button work and IA restructuring remain reserved for Claude/Simon sequencing.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

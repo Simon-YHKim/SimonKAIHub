@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OCR Image Payload Guard</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f6f7f9; color: #111827; }
+    main { max-width: 860px; margin: 0 auto; padding: 40px 24px; }
+    h1 { margin: 0 0 8px; font-size: 30px; line-height: 1.15; }
+    h2 { margin-top: 28px; font-size: 18px; }
+    p, li { line-height: 1.55; }
+    code { background: #e5e7eb; padding: 2px 5px; border-radius: 4px; }
+    .meta { color: #4b5563; margin-bottom: 24px; }
+    .panel { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 18px; margin: 16px 0; }
+    .pass { color: #047857; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>OCR Image Payload Guard</h1>
+    <p class="meta">2026-06-10 / 13:46:30 KST · Codex · 2nd-B multimodal</p>
+
+    <section class="panel">
+      <h2>Deliverable</h2>
+      <p>Added a client-side 2.7MB base64 payload guard for capture OCR before <code>callGemini</code>, with localized oversized-image feedback and regression tests.</p>
+      <ul>
+        <li>Worktree: <code>C:\Coding\_worktrees\2ndB-codex</code></li>
+        <li>Branch: <code>codex/soul-core-multimodal-pilot-20260610</code></li>
+        <li>Base: <code>origin/main@7b502cd</code></li>
+        <li>Commit: <code>be93afd fix(capture): block oversized OCR image payloads</code></li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Behavior</h2>
+      <ul>
+        <li>Oversized OCR images are rejected locally and never reach Gemini/proxy.</li>
+        <li>At-limit payloads still use the existing multimodal OCR path.</li>
+        <li>The UI shows EN/KO "image too large" copy without a retry button for the same oversized image.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li><span class="pass">PASS</span> targeted Jest: 3 tests</li>
+        <li><span class="pass">PASS</span> type-check, i18n, lint</li>
+        <li><span class="pass">PASS</span> lexicon, LLM boundary, em-dash, diff check</li>
+        <li><span class="pass">PASS</span> changed-file secret scan</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

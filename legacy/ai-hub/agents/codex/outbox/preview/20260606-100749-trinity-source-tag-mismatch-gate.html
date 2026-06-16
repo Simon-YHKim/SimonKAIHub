@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trinity Source-Tag Mismatch Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080b13;
+      --panel: #101725;
+      --panel-2: #162033;
+      --text: #f5f7fb;
+      --muted: #aab6c9;
+      --subtle: #78879c;
+      --line: #29354a;
+      --accent: #72f2c7;
+      --cyan: #7dd3fc;
+      --warn: #fbbf24;
+      --danger: #fb7185;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 44px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 8px 0;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    .lead {
+      max-width: 830px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+    section, .card {
+      margin-top: 14px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 10px; color: var(--muted); }
+    code {
+      color: #dbeafe;
+      background: #1c2638;
+      border: 1px solid #31415a;
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-size: 13px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .span-4 { grid-column: span 4; }
+    .span-6 { grid-column: span 6; }
+    .kpi {
+      min-height: 84px;
+      margin-top: 0;
+      background: var(--panel-2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .kpi span { display: block; color: var(--subtle); font-size: 13px; }
+    .kpi strong { display: block; color: var(--text); font-size: 23px; }
+    .warn { color: var(--warn); }
+    .danger { color: var(--danger); }
+    .accent { color: var(--accent); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      margin-top: 12px;
+    }
+    th, td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      color: var(--text);
+      background: #182337;
+      font-size: 13px;
+    }
+    td { color: var(--muted); }
+    tr:last-child td { border-bottom: 0; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .step {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 78px;
+    }
+    .step b { display: block; color: var(--text); margin-bottom: 4px; }
+    .step span { color: var(--muted); font-size: 13px; }
+    ul { margin: 0; padding-left: 19px; color: var(--muted); }
+    li + li { margin-top: 6px; }
+    @media (max-width: 820px) {
+      main { width: min(100% - 20px, 1100px); padding-top: 22px; }
+      .grid, .flow { grid-template-columns: 1fr; }
+      .span-4, .span-6 { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex -> Claude · 2nd-B UI/UX Gate · 2026-06-06 10:07:49 KST</div>
+      <h1>Trinity Source-Tag Mismatch Gate</h1>
+      <p class="lead">Trinity tells users to add tags in Capture, but it only reads <code>records</code>. Non-journal Capture modes save tagged material into <code>sources</code>, so the dashboard can stay empty after the user follows the instruction.</p>
+    </header>
+
+    <div class="grid">
+      <section class="kpi span-4">
+        <div>
+          <span>Provisional score</span>
+          <strong>98/100</strong>
+        </div>
+        <span class="warn">P2</span>
+      </section>
+      <section class="kpi span-4">
+        <div>
+          <span>Broken contract</span>
+          <strong>Tag Guidance</strong>
+        </div>
+        <span class="danger">source gap</span>
+      </section>
+      <section class="kpi span-4">
+        <div>
+          <span>Review target</span>
+          <strong>Trinity</strong>
+        </div>
+        <span class="accent">dashboard</span>
+      </section>
+    </div>
+
+    <section>
+      <h2>Decision</h2>
+      <p>If Trinity tells users that Capture tags feed the four-area dashboard, tagged Capture saves must feed it. Otherwise the screen needs to say it tracks Journal/reflection records only.</p>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Area</th>
+            <th>Evidence</th>
+            <th>Problem</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Trinity query</td>
+            <td><code>trinity.tsx:127-133</code></td>
+            <td>Reads only <code>records</code> and never loads source-backed Capture pieces.</td>
+          </tr>
+          <tr>
+            <td>Empty guidance</td>
+            <td><code>trinity.tsx:201</code>, <code>:206</code></td>
+            <td>Shows "no tagged records" and tells users to add tags like <code>#health</code> in Capture.</td>
+          </tr>
+          <tr>
+            <td>Capture split</td>
+            <td><code>capture.tsx:68-71</code></td>
+            <td>Journal writes to records; memo/link/OCR/file write to sources.</td>
+          </tr>
+          <tr>
+            <td>Source tags</td>
+            <td><code>capture.tsx:477-483</code>, <code>wiki/capture.ts:76</code>, <code>:84-91</code></td>
+            <td>User tags are preserved in <code>sources</code>, but Trinity never reads them.</td>
+          </tr>
+          <tr>
+            <td>Precedent</td>
+            <td><code>records.tsx:96-116</code></td>
+            <td>Records already reads both tables and merges them, so the unified evidence model exists.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>User Flow Failure</h2>
+      <div class="flow">
+        <div class="step"><b>1. Trinity</b><span>Empty state asks for tags like #health.</span></div>
+        <div class="step"><b>2. Capture</b><span>User saves a memo/link/file with that tag.</span></div>
+        <div class="step"><b>3. Sources</b><span>Non-journal modes persist to sources.</span></div>
+        <div class="step"><b>4. Records</b><span>Records browser can see both tables.</span></div>
+        <div class="step"><b>5. Trinity</b><span>Dashboard still counts records only.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Requested Contract</h2>
+      <div class="grid">
+        <div class="card span-6">
+          <h2>Option A - Count Sources</h2>
+          <ul>
+            <li>Load <code>records</code> and <code>sources</code>.</li>
+            <li>Normalize tags from both tables into four domains.</li>
+            <li>Show the evidence mix when source rows contribute.</li>
+          </ul>
+        </div>
+        <div class="card span-6">
+          <h2>Option B - Narrow Copy</h2>
+          <ul>
+            <li>Say Trinity tracks Journal/reflection records only.</li>
+            <li>Route to Capture journal mode if supported.</li>
+            <li>Stop implying all Capture tags feed Trinity.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Re-review Path</h2>
+      <p><code>/trinity empty -> /capture memo/link/file with #health -> /records visibility -> /trinity counts</code></p>
+    </section>
+  </main>
+</body>
+</html>

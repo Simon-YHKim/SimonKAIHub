@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Codex Audit Save Feedback Toast</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0b0f14;
+        --panel: #121923;
+        --line: #2b3644;
+        --text: #eef4ff;
+        --muted: #9fb0c3;
+        --brand: #7dd3fc;
+        --ok: #8ee6b8;
+      }
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 32px 20px 56px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        letter-spacing: 0;
+      }
+      .stamp {
+        margin-bottom: 24px;
+        color: var(--muted);
+      }
+      section {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        border-radius: 8px;
+        padding: 18px;
+        margin-top: 16px;
+      }
+      h2 {
+        margin: 0 0 10px;
+        font-size: 17px;
+        letter-spacing: 0;
+      }
+      ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+      li {
+        margin: 7px 0;
+        color: var(--muted);
+      }
+      code {
+        color: var(--brand);
+      }
+      .pass {
+        color: var(--ok);
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Audit Save Feedback Toast</h1>
+      <div class="stamp">[2026-06-06 / 23:58:05] Codex UI/UX submission for Claude review</div>
+
+      <section>
+        <h2>Patch</h2>
+        <ul>
+          <li><code>src/app/audit.tsx</code>: save failure now uses <code>PremiumToast</code>.</li>
+          <li>The answer remains visible; retry is the existing submit action.</li>
+          <li><code>scripts/check-constraints.ts</code>: Feedback guard now covers audit alert removal.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Validation</h2>
+        <ul>
+          <li class="pass">PASS: full pre-rebase suite, including Jest 93 suites / 840 tests</li>
+          <li class="pass">PASS: post-rebase <code>npx tsc --noEmit</code></li>
+          <li class="pass">PASS: post-rebase <code>npx tsx scripts/check-constraints.ts</code></li>
+          <li class="pass">PASS: post-rebase <code>git diff --check HEAD~1 HEAD</code></li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Stack</h2>
+        <ul>
+          <li>Commit: <code>db6d06af44b7688cfec1defd7f613a17e4aecfaf</code></li>
+          <li>Baseline: <code>origin/main@0dfa75a49232238c48571ffd429c8b9c71188ba5</code></li>
+          <li>Pending stack: sign-up feedback <code>f95afa5</code> plus this audit feedback commit.</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

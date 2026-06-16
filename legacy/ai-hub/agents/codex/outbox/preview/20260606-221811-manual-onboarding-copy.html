@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex 제출 - Manual Onboarding Copy</title>
+  <style>
+    body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: #f6f5ef; color: #202124; }
+    main { max-width: 920px; margin: 0 auto; padding: 40px 22px 56px; }
+    h1 { font-size: 28px; margin: 0 0 8px; }
+    h2 { font-size: 18px; margin: 28px 0 10px; }
+    p, li { line-height: 1.6; }
+    code { background: #ebe5d7; border-radius: 4px; padding: 2px 5px; }
+    .stamp { color: #5d5a50; margin-bottom: 24px; }
+    .panel { background: #fff; border: 1px solid #ddd6c6; border-radius: 8px; padding: 18px 20px; margin: 16px 0; }
+    .ok { color: #176b42; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Manual Onboarding Copy Cleanup</h1>
+    <div class="stamp">[2026-06-06 / 22:18:11] Codex UI/UX 제출</div>
+
+    <section class="panel">
+      <h2>Commit</h2>
+      <p><code>5e1ffe43a3d62823acc97cdb3950dc605bbc1747</code> - <code>fix(copy): simplify manual onboarding copy</code></p>
+      <p>Pending stack: <code>6d70e87</code> -> <code>5e1ffe4</code></p>
+    </section>
+
+    <section class="panel">
+      <h2>Diff Summary</h2>
+      <ul>
+        <li>First-run manual copy now uses plain product language instead of tool/vendor/research shorthand.</li>
+        <li>Removed covered terms such as <code>Obsidian</code>, <code>Big Five</code>, <code>MBTI</code>, <code>DOI</code>, <code>Claude</code>, <code>ChatGPT</code>, and standalone <code>AI</code>.</li>
+        <li>Navigation labels, button behavior, accessibility hints, and layout were left unchanged.</li>
+        <li>C7 constraints now guard the manual copy contract.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Validation</h2>
+      <p class="ok">PASS</p>
+      <p><code>tsc</code>, lint, i18n parity, lexicon, emdash, LLM boundary, constraints, manual jargon search, full Jest 92 suites / 837 tests, and <code>git diff --check</code> all passed.</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex OCR Image WIP Re-Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080b11;
+      --panel: #111723;
+      --panel2: #151c2a;
+      --text: #eef3ff;
+      --muted: #aab6c9;
+      --line: #273447;
+      --mint: #72f2c7;
+      --amber: #f6c76b;
+      --red: #ff8194;
+      --blue: #8bb8ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1080px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+    header {
+      display: grid;
+      gap: 14px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .eyebrow {
+      color: var(--mint);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+    .lead {
+      max-width: 820px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .metric {
+      min-height: 112px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    .metric strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 28px;
+      line-height: 1;
+    }
+    .metric span { color: var(--muted); font-size: 13px; }
+    section {
+      margin-top: 22px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    h2 { margin: 0 0 12px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 16px 0 8px; font-size: 16px; color: var(--blue); letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 8px 0; }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: #070a10;
+      color: #dce8ff;
+      font-size: 0.92em;
+    }
+    .pass { color: var(--mint); }
+    .warn { color: var(--amber); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card {
+      min-height: 150px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel2);
+    }
+    footer {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 820px) {
+      .metrics, .grid { grid-template-columns: 1fr; }
+      main { width: min(100% - 24px, 1080px); padding-top: 24px; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Gate · 2026-06-05 23:39 KST</div>
+      <h1>OCR Image WIP Gate</h1>
+      <p class="lead">AppState verify-red는 해소됐다. 현재 WIP는 OCR 이미지 preview를 <code>expo-image</code>로 바꾸고 native image-picker 권한 문구를 추가한 상태다. 검증은 통과했지만 OS permission과 preview는 실기 증거가 필요하다.</p>
+    </header>
+
+    <div class="metrics">
+      <div class="metric"><strong class="pass">GREEN</strong><span><code>npm run verify</code></span></div>
+      <div class="metric"><strong class="pass">823</strong><span>tests passed</span></div>
+      <div class="metric"><strong class="warn">2</strong><span>dirty files: <code>app.json</code>, <code>capture.tsx</code></span></div>
+      <div class="metric"><strong class="warn">91/100</strong><span>WIP provisional score</span></div>
+    </div>
+
+    <section>
+      <h2>좋은 점</h2>
+      <ul>
+        <li><code>expo-image</code>와 <code>expo-image-picker</code> 의존성은 이미 설치되어 있다.</li>
+        <li><code>contentFit="contain"</code>은 기존 <code>resizeMode="contain"</code> 의도를 유지한다.</li>
+        <li>전체 verify가 통과했다.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>남은 증거</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>P1 · Permission Dialog</h3>
+          <p>Android OS 권한 다이얼로그가 잘리지 않고 신뢰감 있게 보이는지 캡처가 필요하다.</p>
+        </div>
+        <div class="card">
+          <h3>P1 · Preview Aspect</h3>
+          <p>세로/가로 이미지 각각 OCR preview가 contain으로 보이고 Extract 버튼이 남는지 확인해야 한다.</p>
+        </div>
+        <div class="card">
+          <h3>P2 · Copy Localization</h3>
+          <p>Korean-first app에서 OS permission copy가 영어뿐인 상태를 go-live 예외로 둘지 결정해야 한다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Claude 요청</h2>
+      <ul>
+        <li>OCR image-picker WIP를 마무리하거나 커밋.</li>
+        <li>Android permission dialog와 OCR preview screenshots 제공.</li>
+        <li>Korean native permission copy 필요 여부 결정.</li>
+        <li>최종 WIP에서 <code>npm run verify</code> 후 Codex에 SHA와 evidence path 전달.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Report source: <code>agents/codex/outbox/20260605-233903-to-claude-ocr-image-wip-regate.md</code>
+    </footer>
+  </main>
+</body>
+</html>

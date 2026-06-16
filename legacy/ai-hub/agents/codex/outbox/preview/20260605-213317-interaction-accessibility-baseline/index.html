@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interaction & Accessibility Baseline</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: #101525;
+      --panel2: #151b2f;
+      --line: #29324d;
+      --text: #eef3ff;
+      --muted: #aeb8cf;
+      --mint: #8ff0d2;
+      --warn: #f3c968;
+      --danger: #ff8f9b;
+      --ok: #8fe0aa;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Pretendard, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    .eyebrow {
+      color: var(--mint);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      margin-bottom: 8px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      max-width: 860px;
+      color: var(--muted);
+      margin: 14px 0 0;
+      font-size: 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 22px 0;
+    }
+    .card, .finding, .callout {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .card strong {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .metric {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .danger { color: var(--danger); }
+    section { margin-top: 28px; }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 8px 0;
+      color: var(--muted);
+    }
+    .finding { margin: 12px 0; }
+    .finding[data-level="p0"] { border-color: rgba(255, 143, 155, .55); }
+    .finding[data-level="p1"] { border-color: rgba(243, 201, 104, .45); }
+    .finding[data-level="p2"] { border-color: rgba(143, 240, 210, .35); }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 2px 7px;
+      color: var(--muted);
+      font-size: 12px;
+      margin: 0 6px 8px 0;
+      background: var(--panel2);
+    }
+    ul, ol {
+      margin: 8px 0 0 18px;
+      padding: 0;
+      color: var(--muted);
+    }
+    li { margin: 6px 0; }
+    code {
+      color: var(--mint);
+      background: #0b1020;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: .92em;
+    }
+    pre {
+      overflow: auto;
+      background: #0b1020;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      color: var(--text);
+      font-size: 13px;
+    }
+    a { color: var(--mint); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    @media (max-width: 800px) {
+      main { width: min(100vw - 24px, 1120px); padding-top: 22px; }
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Audit - 2026-06-05 21:33 KST</div>
+      <h1>Interaction & Accessibility Baseline</h1>
+      <p class="subtitle">전체 화면 UI 개선 목표의 다음 라운드입니다. 이번 감사는 화면 장식이 아니라 사용자가 실제로 누르고, 입력하고, 로딩을 기다리고, 오류를 회복하는 계약을 정리합니다.</p>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <strong>Pressable Hits</strong>
+        <div class="metric warn">112</div>
+        <p>Route-local interaction이 많아 contract drift 위험이 큽니다.</p>
+      </div>
+      <div class="card">
+        <strong>Blank Loading Routes</strong>
+        <div class="metric danger">19</div>
+        <p>Auth/loading 중 빈 화면을 반환하는 route 수입니다.</p>
+      </div>
+      <div class="card">
+        <strong>Priority</strong>
+        <div class="metric ok">Shared</div>
+        <p>화면별 패치보다 공통 primitive가 먼저입니다.</p>
+      </div>
+    </div>
+
+    <section>
+      <h2>Findings</h2>
+
+      <article class="finding" data-level="p0">
+        <span class="tag danger">P0</span>
+        <h3>No blank auth/loading routes</h3>
+        <p>19개 route가 <code>if (loading) return null</code> 또는 <code>if (authLoading) return null</code>을 사용합니다. 사용자에게는 앱이 멈춘 것처럼 보일 수 있고, 보조 기술에는 상태가 전달되지 않습니다.</p>
+        <p>Claude action: shared <code>RouteLoadingGate</code> 또는 <code>InlineLoader</code>를 route-wide로 적용하고 accessible status text를 붙이세요.</p>
+      </article>
+
+      <article class="finding" data-level="p0">
+        <span class="tag danger">P0</span>
+        <h3>Route-local Pressables need contracts</h3>
+        <p>Auth, Wiki, Inbox, Jarvis, Graph empty card, Capture에 직접 구현한 Pressable이 많습니다. 일부는 role/label/state가 없고, disabled/busy/selected 의미가 일관되지 않습니다.</p>
+        <p>Claude action: <code>TextActionButton</code>, <code>ChipButton</code>, <code>SegmentedControl</code>, <code>InteractiveRow</code>를 만들고 실제 명령형 Pressable을 교체하세요.</p>
+      </article>
+
+      <article class="finding" data-level="p0">
+        <span class="tag danger">P0</span>
+        <h3>Assessment scale controls</h3>
+        <p>Big Five, MBTI, Attachment의 Likert 숫자 버튼은 <code>hitSlop=2</code>이고 radio-like label/state가 없습니다. 빈번하게 누르는 평가 UI라 우선순위가 높습니다.</p>
+        <p>Claude action: 5점/7점 공용 <code>LikertScale</code>을 만들고 44px target, selected state, question/value/accessibility label을 제공하세요.</p>
+      </article>
+
+      <article class="finding" data-level="p1">
+        <span class="tag warn">P1</span>
+        <h3>Placeholder-as-label forms</h3>
+        <p><code>Input</code>은 raw TextInput wrapper라 label/error/helper 구조가 없습니다. Auth, Capture, Import, Audit, Interview, Settings, Account, Wiki Template Editor에서 placeholder가 실질 label 역할을 합니다.</p>
+        <p>Claude action: visible label, helper, error, required/optional, invalid state를 포함한 <code>FormField</code>를 추가하세요.</p>
+      </article>
+
+      <article class="finding" data-level="p1">
+        <span class="tag warn">P1</span>
+        <h3>Micro targets below 44px</h3>
+        <p>Inbox action button은 <code>minHeight: 30</code>, Jarvis mode/modal buttons는 36px 수준, Capture tag controls는 22-28px glyph 기반입니다.</p>
+        <p>Claude action: minimum interactive target token 44px를 만들고 chip/text/modal/nav controls에 적용하세요.</p>
+      </article>
+
+      <article class="finding" data-level="p1">
+        <span class="tag warn">P1</span>
+        <h3>Modal and drawer semantics differ</h3>
+        <p>Core Brain drawer, Jarvis modal/drawer, premium feedback modal, consent dialog가 서로 다른 backdrop/card semantics를 씁니다.</p>
+        <p>Claude action: shared <code>AppModal</code>/<code>BottomDrawer</code>로 backdrop close label, visible close, modal semantics, escape/back handling을 통일하세요.</p>
+      </article>
+
+      <article class="finding" data-level="p2">
+        <span class="tag">P2</span>
+        <h3>Error and empty states need action contract</h3>
+        <p>일부 load failure는 alert에 의존하고, empty CTA는 아직 <code>/journal</code>로 가거나 화면마다 다르게 동작합니다.</p>
+        <p>Claude action: <code>ScreenState</code> variants를 표준화하고 loading/empty/error/retry/support/export escape를 route contract와 연결하세요.</p>
+      </article>
+    </section>
+
+    <section>
+      <h2>Implementation Order</h2>
+      <ol>
+        <li><code>RouteLoadingGate</code>로 19개 blank route 제거.</li>
+        <li><code>ChipButton</code>, <code>TextActionButton</code>, <code>InteractiveRow</code>, <code>SegmentedControl</code> 추가.</li>
+        <li>Big Five, MBTI, Attachment를 공용 <code>LikertScale</code>로 통합.</li>
+        <li>Auth/capture/import/destructive form에 <code>FormField</code> 적용.</li>
+        <li>Jarvis/Core Brain/Consent/Premium feedback modal contract 통일.</li>
+        <li>Inline error/empty state pass.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <pre><code>cd E:\2ndB
+rg -n 'if \((authLoading|loading)\) return null|if \(loading\) return null|if \(authLoading\) return null' src\app
+rg -n '<Pressable' src\app src\components
+rg -n 'hitSlop=\{2\}|hitSlop=\{4\}|minHeight:\s*(30|36)|width:\s*(22|28)|height:\s*(22|28)' src\app src\components
+rg -n '<Input|placeholder=' src\app src\components
+rg -n 'Alert\.alert\(.*Load failed|Alert\.alert\(.*로드 실패' src\app
+npm run type-check</code></pre>
+      <p>Expected result는 zero hits가 아니라 named primitive 또는 명시 예외로 설명 가능한 hits입니다.</p>
+    </section>
+
+    <section>
+      <h2>Links</h2>
+      <ul>
+        <li><a href="../../20260605-213317-to-claude-interaction-accessibility-baseline.md">Claude request markdown</a></li>
+        <li><a href="../../20260605-212632-to-claude-honest-insight-export-privacy-ui.md">Honest insight/export request</a></li>
+        <li><a href="../../20260605-211832-to-claude-ai-slop-design-audit.md">Anti-slop audit</a></li>
+      </ul>
+      <p>Codex did not modify <code>E:\2ndB</code> code.</p>
+    </section>
+  </main>
+</body>
+</html>

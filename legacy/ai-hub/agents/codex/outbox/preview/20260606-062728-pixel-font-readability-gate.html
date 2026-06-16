@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Gate - Pixel Font Readability</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0f14;
+      --panel: #121923;
+      --panel-2: #172131;
+      --text: #edf4ff;
+      --muted: #a9b7c8;
+      --line: #2b3a4d;
+      --accent: #77d7b7;
+      --warn: #ffd27a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 20px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 8px 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; color: var(--muted); }
+    .score {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      color: var(--warn);
+      font-weight: 700;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .chip {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 72px;
+    }
+    .big { color: var(--text); font-size: 28px; font-weight: 800; }
+    .label { color: var(--muted); font-size: 13px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    section.full { grid-column: 1 / -1; }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    ul { margin: 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 8px 0; }
+    code {
+      color: #c7ddff;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 0.92em;
+    }
+    .p2 { color: var(--warn); font-weight: 700; }
+    @media (max-width: 760px) {
+      .grid, .metrics { grid-template-columns: 1fr; }
+      main { width: min(100% - 24px, 1080px); padding-top: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Gate · 2026-06-06 06:27:28 KST</div>
+      <h1>Pixel Font / Readability Contract Gate</h1>
+      <p>픽셀 폰트는 브랜드가 될 수 있지만, 법적 고지와 긴 도움말 본문까지 같은 질감으로 읽히면 가독성 계약이 무너진다.</p>
+      <div class="score">Score held: 98/100 provisional</div>
+    </header>
+
+    <div class="metrics">
+      <div class="chip"><div class="big">98</div><div class="label"><code>variant="body"</code> occurrences</div></div>
+      <div class="chip"><div class="big">2</div><div class="label"><code>fontFamilies.readable</code> occurrences</div></div>
+      <div class="chip"><div class="big">1</div><div class="label">global web pixel font override in <code>+html.tsx</code></div></div>
+    </div>
+
+    <div class="grid">
+      <section>
+        <h2><span class="p2">P2</span> Contract Contradiction</h2>
+        <ul>
+          <li><code>typography.ts</code> says long Korean paragraphs should not use the pixel face.</li>
+          <li><code>fontFamilies.sans</code> still resolves to the pixel font.</li>
+          <li>Shared <code>Text</code> applies that pixel-backed sans to body copy.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="p2">P2</span> High-Risk Copy</h2>
+        <ul>
+          <li>Consent, privacy, account, settings, manual, support, and permissions need readable body text.</li>
+          <li>Jarvis answers, source summaries, and generated panels also need fast scanning.</li>
+          <li>Keep pixel for short labels, badges, graph tags, and brand moments.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="p2">P2</span> Web Control Override</h2>
+        <ul>
+          <li><code>+html.tsx</code> forces button/input/textarea/select to the pixel font.</li>
+          <li>Capture/import/interview fields are private writing surfaces, not decorative labels.</li>
+          <li>Scope the override or prove readability at narrow width and zoom.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Required Proof</h2>
+        <ul>
+          <li>Typography ledger for pixel vs readable surfaces.</li>
+          <li>KO/EN screenshots for legal/help/settings and generated copy.</li>
+          <li>150% and 200% web zoom proof once zoom lock is fixed.</li>
+          <li>Regression guard for long-form body font usage.</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

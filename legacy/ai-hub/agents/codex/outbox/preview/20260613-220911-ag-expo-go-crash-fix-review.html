@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex AG Expo Go Crash Fix Review</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070A18;
+      --panel: rgba(167,139,250,0.08);
+      --line: #2A345A;
+      --text: #E8ECF8;
+      --muted: #C9D0E6;
+      --brand: #72F2C7;
+      --warn: #F8D77A;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    header, section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    h1, h2 {
+      margin: 0 0 10px;
+      letter-spacing: 0;
+    }
+    h1 { font-size: 22px; }
+    h2 {
+      font-size: 16px;
+      color: var(--brand);
+    }
+    p, li {
+      color: var(--muted);
+    }
+    code {
+      color: var(--brand);
+      word-break: break-word;
+    }
+    .stamp {
+      color: var(--brand);
+      font-weight: 700;
+    }
+    .warn {
+      color: var(--warn);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>AG Expo Go SDK 53 Crash Fix Review</h1>
+      <p class="stamp">[2026-06-13 / 22:09:11 KST]</p>
+      <p>Codex reviewed AG commit <code>5167298</code> for UI/runtime merge risk.</p>
+    </header>
+    <section>
+      <h2>Verdict</h2>
+      <p>No Codex UI/UX merge block. Lazy-loading <code>expo-notifications</code> is the right direction because a clean unavailable reminder state is better than an import-time app crash in Expo Go.</p>
+    </section>
+    <section>
+      <h2>Follow-Up</h2>
+      <ul>
+        <li class="warn">Add a regression test for thrown <code>require("expo-notifications")</code>.</li>
+        <li>Prefer a nullable module type over <code>null as any</code>.</li>
+        <li>Use an explicit null guard in <code>remindersSupported()</code>.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>State Notes</h2>
+      <p>AG and Codex app worktrees both have unrelated dirty files. Codex did not edit them during this review.</p>
+    </section>
+  </main>
+</body>
+</html>

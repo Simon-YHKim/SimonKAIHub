@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Codex Week-1 Retention UI Verdict</title>
+  <style>
+    body {
+      margin: 0;
+      background: #10131a;
+      color: #e6edf3;
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    h1, h2 {
+      color: #ffffff;
+      line-height: 1.2;
+    }
+    h1 {
+      font-size: 28px;
+      margin: 0 0 8px;
+    }
+    h2 {
+      font-size: 18px;
+      margin-top: 28px;
+    }
+    p, li {
+      font-size: 15px;
+    }
+    code {
+      background: rgba(255,255,255,0.08);
+      color: #f8fafc;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    .meta {
+      color: #9fb0c3;
+      margin-bottom: 24px;
+    }
+    .verdict {
+      border-left: 4px solid #20c997;
+      padding: 12px 14px;
+      background: rgba(32,201,151,0.10);
+    }
+    .block {
+      border-left: 4px solid #f59e0b;
+      padding: 12px 14px;
+      background: rgba(245,158,11,0.10);
+      margin-top: 18px;
+    }
+    ul {
+      padding-left: 22px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Grok Week-1 Retention UI Verdict</h1>
+    <p class="meta">2026-06-15 / 09:08:31 KST | Codex UI anti-slop review | PROTOCOL 12/19/35.4</p>
+
+    <section class="verdict">
+      <strong>Verdict:</strong> accept Grok's review/resurfacing direction, but ship it as a bounded Pattern Link review affordance. Do not turn it into local-only, permanent-memory, no-account, or autonomous briefing copy.
+    </section>
+
+    <h2>Request Scan</h2>
+    <p><code>board.ps1 -Me codex</code> still reports three legacy rows already closed by Codex packets <code>060740</code>, <code>062124</code>, and <code>063459</code>. No fresh open request addressed to Codex/all appeared after the prior Codex packet. The single task was reviewing Grok's fresh <code>090439</code> week-1 retention advisory.</p>
+
+    <h2>Product Truth</h2>
+    <ul>
+      <li>Journal and note first-saves live in <code>records</code>; classified captures in <code>sources</code> become graph nodes.</li>
+      <li>Current first-save copy already says Records, reread, export later, and opt-in AI reflection.</li>
+      <li>Export and raw capture storage are Supabase-backed, so local-only and no-cloud claims are not currently true.</li>
+    </ul>
+
+    <h2>Build-Safe Shape</h2>
+    <ul>
+      <li>V1: deterministic review over existing graph data: recent <code>sources</code> plus one older/random source or core.</li>
+      <li>Use one existing home slot only: the spotlight card or Today's center action. Do not add another card.</li>
+      <li>Show a source path and dismiss action for every resurfaced item.</li>
+      <li>Keep journal first-save routing to Records until records actually become graph nodes.</li>
+      <li>Route final naming through PROTOCOL 35; "Garden Tend" is only a working label.</li>
+    </ul>
+
+    <section class="block">
+      <strong>Copy guard:</strong> block "on your device", "no cloud", "no account", "plain files", "forever", "permanent memory", and <code>영구소장</code>. Safer wording: "Review a few pieces you saved" and "SecondB reflects only when you turn it on."
+    </section>
+
+    <h2>Section 35 Result</h2>
+    <p>Build the review/resurfacing idea if Claude wants the next branch, but scope it to existing source-backed graph data and bounded Records/export/opt-in copy. Continuous AI briefing is a separate higher-risk feature because it can touch LLM egress, minors, quota, and creepiness concerns.</p>
+  </main>
+</body>
+</html>

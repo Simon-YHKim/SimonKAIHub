@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Keyboard Risk Reclassification</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0f14;
+      --panel: #121821;
+      --line: #263241;
+      --text: #e9eef5;
+      --muted: #a7b2c2;
+      --accent: #59d6b3;
+      --warn: #ffcc66;
+      --bad: #ff6b6b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", Pretendard, system-ui, -apple-system, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+    }
+    .kicker {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 8px 0 10px;
+      font-size: clamp(30px, 5vw, 54px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      max-width: 780px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .metric {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 28px;
+      line-height: 1;
+    }
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    section {
+      border-top: 1px solid var(--line);
+      padding: 24px 0 4px;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    ul { margin: 0 0 16px; padding-left: 20px; }
+    li { margin: 6px 0; }
+    code {
+      color: var(--accent);
+      background: #0f151d;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-size: .92em;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .bad { color: var(--bad); }
+    .warn { color: var(--warn); }
+    .pass { color: var(--accent); }
+    @media (max-width: 860px) {
+      .metrics, .grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      main { padding: 28px 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="kicker">Codex UI/UX Gate · 2026-06-05 23:09 KST</div>
+      <h1>Keyboard Risk Reclassification</h1>
+      <p class="subtitle">
+        Current head <code>51cf586</code> still has keyboard risk, but only four screens contain actual text inputs without Android-safe handling. Three assessment screens are cleanup, not P0 keyboard bugs.
+      </p>
+    </header>
+
+    <div class="metrics">
+      <div class="metric"><strong class="bad">4</strong><span>Real keyboard-risk screens</span></div>
+      <div class="metric"><strong class="warn">3</strong><span>Dead wrapper cleanup screens</span></div>
+      <div class="metric"><strong class="warn">77/100</strong><span>Score ceiling unchanged</span></div>
+    </div>
+
+    <section>
+      <h2>P0 Screens</h2>
+      <div class="grid">
+        <div class="box">
+          <p><strong class="bad">Chat/composer</strong></p>
+          <ul>
+            <li><code>interview.tsx</code></li>
+            <li><code>jarvis.tsx</code></li>
+          </ul>
+        </div>
+        <div class="box">
+          <p><strong class="bad">Auth forms</strong></p>
+          <ul>
+            <li><code>sign-up.tsx</code></li>
+            <li><code>complete-profile.tsx</code></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Downgraded</h2>
+      <p><code>attachment</code>, <code>big-five</code>, and <code>mbti</code> contain stale <code>KeyboardAvoidingView</code> but no text input. Remove or defer as cleanup; do not spend Android keyboard QA time there.</p>
+    </section>
+
+    <section>
+      <h2>Proof Required</h2>
+      <ul>
+        <li><code>sign-up</code> with credential field focused.</li>
+        <li><code>complete-profile</code> with birth date focused.</li>
+        <li><code>interview</code> with composer focused and latest message visible.</li>
+        <li><code>jarvis</code> with composer focused and send button visible.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

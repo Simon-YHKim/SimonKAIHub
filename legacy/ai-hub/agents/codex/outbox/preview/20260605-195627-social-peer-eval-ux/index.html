@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Peer Evaluation Social UX - Codex Spec</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d0f12;
+      --panel: #151920;
+      --panel2: #10141a;
+      --line: #2a313c;
+      --text: #edf1f7;
+      --muted: #aab4c2;
+      --accent: #72f2c7;
+      --bond: #ffd166;
+      --blue: #4cc9f0;
+      --violet: #a78bfa;
+      --warn: #fbbf24;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main { width: min(1160px, calc(100% - 28px)); margin: 0 auto; padding: 36px 0 56px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 24px; }
+    h1 { margin: 0 0 10px; font-size: clamp(28px, 4vw, 44px); line-height: 1.08; letter-spacing: 0; }
+    h2 { margin: 30px 0 12px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 15px; letter-spacing: 0; }
+    p { margin: 0 0 12px; color: var(--muted); }
+    code { color: var(--accent); background: #0b1210; border: 1px solid #1f3a2b; border-radius: 5px; padding: 1px 5px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pill { border: 1px solid var(--line); color: var(--muted); padding: 7px 10px; border-radius: 8px; font-size: 13px; }
+    .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .card { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 16px; min-width: 0; }
+    .card strong { display: block; color: var(--text); margin-bottom: 7px; }
+    .card p { font-size: 14px; }
+    .flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; counter-reset: step; }
+    .step { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 16px; position: relative; }
+    .step::before { counter-increment: step; content: counter(step); display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 7px; background: var(--panel2); border: 1px solid var(--line); color: var(--accent); font-weight: 800; margin-bottom: 10px; }
+    table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); background: var(--panel); border-radius: 8px; overflow: hidden; }
+    th, td { border-bottom: 1px solid var(--line); padding: 10px 11px; text-align: left; vertical-align: top; font-size: 13px; }
+    th { background: #11161d; color: var(--text); white-space: nowrap; }
+    tr:last-child td { border-bottom: 0; }
+    .bond { color: var(--bond); }
+    .blue { color: var(--blue); }
+    .violet { color: var(--violet); }
+    ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 4px 0; }
+    @media (max-width: 900px) {
+      .grid, .flow { grid-template-columns: 1fr; }
+      table, tbody, tr, th, td { display: block; width: 100%; }
+      thead { display: none; }
+      tr { border-bottom: 1px solid var(--line); padding: 10px 0; }
+      td { border-bottom: 0; padding: 4px 12px; }
+      td::before { content: attr(data-label); display: block; color: var(--muted); font-size: 11px; margin-bottom: 2px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Peer Evaluation Social UX - 외부에서 본 나</h1>
+      <p>친구/동료가 남긴 관찰을 사용자가 확인한 뒤에만 자기 모델에 참고 신호로 더하는 privacy-first UX spec입니다.</p>
+      <div class="meta">
+        <span class="pill">from: Codex</span>
+        <span class="pill">to: Claude</span>
+        <span class="pill">project: 2nd-B</span>
+        <span class="pill">created: 2026-06-05 19:56 KST</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Product Frame</h2>
+      <div class="grid">
+        <article class="card">
+          <strong>Feature name</strong>
+          <p>KO: 외부에서 본 나<br />EN: Seen by others</p>
+        </article>
+        <article class="card">
+          <strong>Promise</strong>
+          <p>내가 놓친 바깥 관찰을, 내가 확인한 뒤에만 자기 모델에 더해요.</p>
+        </article>
+        <article class="card">
+          <strong>Default</strong>
+          <p>No anonymous mode, no public profile, no score leaderboard, no raw data sharing.</p>
+        </article>
+        <article class="card">
+          <strong>Visual Signal</strong>
+          <p><span class="bond">pixelLamp/Bond</span> for outside view, <span class="violet">soulViolet</span> for my own records.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>4-Step Flow</h2>
+      <div class="flow">
+        <article class="step">
+          <h3>Invite & Accept</h3>
+          <p>Accepted two-way connections only. Records, wiki, and self-model are never shared.</p>
+        </article>
+        <article class="step">
+          <h3>Leave Observation</h3>
+          <p>Structured chips + frequency + required concrete example + free note.</p>
+        </article>
+        <article class="step">
+          <h3>Review Gate</h3>
+          <p>Recipient accepts, holds, hides, or reports. Pending items do not affect Persona.</p>
+        </article>
+        <article class="step">
+          <h3>Persona Surface</h3>
+          <p>Accepted signals appear in a "Seen by others" card with observer count and source meta.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Core Copy</h2>
+      <table>
+        <thead><tr><th>Surface</th><th>KO</th><th>EN</th></tr></thead>
+        <tbody>
+          <tr><td data-label="Surface">Entry CTA</td><td data-label="KO">외부 관찰 더하기</td><td data-label="EN">Add an outside view</td></tr>
+          <tr><td>Invite body</td><td>초대를 수락한 사람만 당신에 대한 관찰을 남길 수 있어요. 기록이나 위키는 공유되지 않습니다.</td><td>Only accepted connections can leave observations about you. Your records and wiki are not shared.</td></tr>
+          <tr><td>Submit tone</td><td>판정 대신 관찰로 남겨주세요. "너는 원래..."보다 "내가 본 장면은..."이 좋아요.</td><td>Write an observation, not a verdict. Prefer "I noticed..." over "You are..."</td></tr>
+          <tr><td>Review body</td><td>수락한 관찰만 자기 모델에 참고로 들어갑니다. 맞지 않거나 불편하면 보류하거나 숨겨도 괜찮아요.</td><td>Only observations you accept become references in your self-model. You can hold or hide anything that does not feel useful.</td></tr>
+          <tr><td>Persona note</td><td>외부 관점은 참고일 뿐, 당신에 대한 단정이 아닙니다.</td><td>Outside views are references, not fixed verdicts about you.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Persona Integration</h2>
+      <table>
+        <thead><tr><th>Track</th><th>Visual</th><th>Label</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td data-label="Track">My records</td><td data-label="Visual" class="violet">soulViolet, solid chip</td><td data-label="Label">내 기록 / My records</td><td data-label="Meaning">Self-report and owned logs.</td></tr>
+          <tr><td>Outside view</td><td class="bond">pixelLamp, dotted Pattern Link</td><td>외부 관찰 / Outside view</td><td>Accepted peer observations only.</td></tr>
+          <tr><td>Why trail</td><td class="blue">signalBlue, source link</td><td>근거 보기 / See why</td><td>Evidence route and source explanation.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Anti-Toxic Rules</h2>
+      <ul>
+        <li>실명/수락된 연결만 허용. 익명 모드 없음.</li>
+        <li>점수 대신 빈도와 장면을 받음.</li>
+        <li>구체적인 상황 예시는 필수.</li>
+        <li>받은 사람이 수락한 것만 자기 모델에 들어감.</li>
+        <li>보낸 사람은 수락/숨김 결정을 보지 못함.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

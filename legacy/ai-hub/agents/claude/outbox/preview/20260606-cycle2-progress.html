@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>2nd-B cycle-2 진행 보고 — Claude</title>
+<style>
+  :root { --bg:#16151c; --surface:#1e1d26; --line:#2c2b37; --text:#e7e6ee; --muted:#9b99ad; --mint:#7fd8c2; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text);
+    font-family:'Pretendard','Pretendard Variable',-apple-system,system-ui,sans-serif;
+    line-height:1.65; font-size:15px; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:860px; margin:0 auto; padding:56px 28px 80px; }
+  h1 { font-size:23px; font-weight:700; letter-spacing:-0.01em; margin:0 0 6px; }
+  .sub { color:var(--muted); font-size:13px; margin:0 0 36px; }
+  h2 { font-size:15px; font-weight:700; color:var(--mint); margin:36px 0 12px;
+    padding-bottom:8px; border-bottom:1px solid var(--line); letter-spacing:0.01em; }
+  p { margin:0 0 12px; }
+  code { background:var(--surface); border:1px solid var(--line); border-radius:4px;
+    padding:1px 6px; font-family:'SFMono-Regular',Consolas,monospace; font-size:12.5px; color:var(--mint); }
+  table { width:100%; border-collapse:collapse; margin:8px 0 18px; font-size:13.5px; }
+  th,td { text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--muted); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:0.04em; }
+  td.k { color:var(--mint); font-family:'SFMono-Regular',Consolas,monospace; font-size:12.5px; white-space:nowrap; }
+  ul { margin:0 0 14px; padding-left:18px; }
+  li { margin:0 0 6px; }
+  .muted { color:var(--muted); }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:18px 20px; margin:0 0 14px; }
+  .score { font-size:32px; font-weight:700; letter-spacing:-0.02em; }
+  .score span { font-size:15px; color:var(--muted); font-weight:400; }
+  .foot { color:var(--muted); font-size:12px; margin-top:40px; padding-top:16px; border-top:1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>2nd-B · cycle-2 진행 보고</h1>
+  <p class="sub">작성: Claude (오케스트레이터) · 브랜치 <code>claude/cycle-2-concept-consistency</code> @ <code>65e5ac4</code> · 2026-06-06 KST</p>
+
+  <div class="card">
+    <div class="score">95<span> / 100 · Codex 잠정 (91 → 94 → 95 상승 중)</div></div>
+    <p class="muted" style="margin:6px 0 0;">UX 완벽 목표. <code>npm run verify</code> 전 커밋 green (lint·type·i18n·lexicon·llm-boundary·constraints·emdash·jest 91 suites/823 tests).</p>
+  </div>
+
+  <h2>이번 사이클 완료 작업</h2>
+  <table>
+    <tr><th>커밋</th><th>내용</th></tr>
+    <tr><td class="k">944d2dc</td><td>리스트 가상화 — records·inbox·wiki를 ScrollView→FlatList(행 memo, 메모리 prune cap5). 성능 #1(긴 리스트 OOM) 해소. wiki 훅순서 P0 동반 수정.</td></tr>
+    <tr><td class="k">b7472d5</td><td>raw 에러 카피 일소 — 11개 화면(account·attachment·capture·big-five·import·insights·interview·research·trinity·wiki·inbox·AddFormatFlow)의 <code>(e as Error).message</code> 노출을 제품톤+재시도로 교체, 원문은 console 로그만.</td></tr>
+    <tr><td class="k">d4a55ec</td><td>NavGraph tier-4 LOD — 노드 30개 초과 시 tier-4 drift 루프·엣지 fade 생략(정적), tier1-3는 유지. 작은 칩 tap target hitSlop 2→8(capture·wiki·TemplateEditor).</td></tr>
+    <tr><td class="k">5bf11c0</td><td>Simon 결정 3건 반영 — persona 비임상 카피, consent 재시도, social provider 게이팅.</td></tr>
+    <tr><td class="k">65e5ac4</td><td>persona 카피 의료프레임 완전제거(Codex 제안 채택) + sign-up도 social 게이팅 동기화.</td></tr>
+  </table>
+
+  <h2>Simon 결정 3건 — 반영 결과</h2>
+  <table>
+    <tr><th>항목</th><th>결정 · 구현</th></tr>
+    <tr><td>persona "진단"</td><td>재표현. <code>"진단이 아니며"</code> → <code>"기록에서 보이는 패턴일 뿐, 판단이나 평가는 아니에요"</code>. 금지어 진단/diagnosis 제거 + 의료프레임 없음. lexicon allowlist에서 persona 제외 → DESIGN vs lexicon 충돌 해소.</td></tr>
+    <tr><td>consent 재시도</td><td><code>recordConsentBestEffort</code>가 일시적 실패는 3회 재시도(400/800ms 백오프), 영구에러(테이블 없음·스키마·권한)는 재시도 제외. 계정 생성은 계속 비차단(PIPA).</td></tr>
+    <tr><td>social config</td><td><code>isProviderEnabled()</code>로 Google·Apple·Kakao 버튼 게이팅(env <code>EXPO_PUBLIC_ENABLE_*</code>, 기본 on) + 미설정 에러 시 세션 자동 숨김. sign-in·sign-up 양쪽. 죽은 버튼 제거.</td></tr>
+  </table>
+
+  <h2>남은 100점 항목</h2>
+  <ul>
+    <li><span class="muted">[Simon/법무]</span> consent 법무 카피 사인오프(<code>ConsentNotice</code> placeholder, <code>LEXICON_LAST_LEGAL_REVIEW=null</code>) — 런치 게이트 결정 필요.</li>
+    <li><span class="muted">[런타임 증명]</span> 로그인/가입/persona/capture/NavGraph(노드 30+) 화면 증명 — AG가 Gradle 8.13 핀으로 에뮬(Pixel_9_Pro_XL) 빌드 성공, 스크린샷 수급 예정.</li>
+    <li><span class="muted">[선택]</span> consent durable 재시도 큐(앱 재시작 후 재전송) — 현재 in-memory 바운드 재시도로 사용자 요청은 충족.</li>
+  </ul>
+
+  <h2>AG 네이티브 성능 가이드 (수용)</h2>
+  <p>Pattern Link·crew 로봇 안드로이드 병목 사전검토 수용: 선 렌더에 React state 금지·Reanimated UI스레드 펄스, crew Max Cap 10–15(현 CrewLayer 12 부합), WebP/PNG 스프라이트 1장+expo-image. 내 LOD 방향과 일치 — 확장 시 적용.</p>
+
+  <p class="foot">규칙 §10.6 — Claude도 작업 완료마다 HTML 보고 + 전체 AI 공유. 다음: Codex <code>65e5ac4</code> 재게이트 → 97+ 도달 시 push & PR(squash, <code>feat:</code>) & 라이브(GitHub Pages). 라이브: https://simon-yhkim.github.io/2nd-B/</p>
+</div>
+</body>
+</html>

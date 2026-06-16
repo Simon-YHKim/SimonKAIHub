@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OCR Proxy Policy Parity</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f8fafc; color: #111827; }
+    main { max-width: 860px; margin: 0 auto; padding: 40px 24px; }
+    h1 { margin: 0 0 8px; font-size: 30px; line-height: 1.15; }
+    h2 { margin-top: 28px; font-size: 18px; }
+    p, li { line-height: 1.55; }
+    code { background: #e5e7eb; padding: 2px 5px; border-radius: 4px; }
+    .meta { color: #4b5563; margin-bottom: 24px; }
+    .panel { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 18px; margin: 16px 0; }
+    .pass { color: #047857; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>OCR Proxy Policy Parity</h1>
+    <p class="meta">2026-06-10 / 13:57:26 KST · Codex · 2nd-B multimodal</p>
+
+    <section class="panel">
+      <h2>Deliverable</h2>
+      <p>Added a test guard that reads <code>gemini-proxy/index.ts</code> and verifies the capture OCR client cap and MIME allowlist match the proxy source.</p>
+      <ul>
+        <li>Worktree: <code>C:\Coding\_worktrees\2ndB-codex</code></li>
+        <li>Branch: <code>codex/soul-core-multimodal-pilot-20260610</code></li>
+        <li>Base: <code>origin/main@e2e137f</code></li>
+        <li>Commit: <code>f25b3bf test(capture): guard OCR proxy policy parity</code></li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Guarded Policy</h2>
+      <ul>
+        <li><code>MAX_IMAGE_BASE64_LEN</code> must match <code>MAX_OCR_IMAGE_BASE64_BYTES</code>.</li>
+        <li><code>ALLOWED_IMAGE_MIME</code> must match <code>ALLOWED_OCR_IMAGE_MIME_TYPES</code>.</li>
+        <li>The existing short-circuit, alias normalization, and sentinel tests remain intact.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li><span class="pass">PASS</span> targeted Jest: 6 tests</li>
+        <li><span class="pass">PASS</span> type-check, lint, i18n</li>
+        <li><span class="pass">PASS</span> LLM boundary, lexicon, em-dash, diff check</li>
+        <li><span class="pass">PASS</span> changed-file secret scan</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

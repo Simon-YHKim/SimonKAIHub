@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Codex Inbox Response Shims - 2026-06-14 15:17 KST</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, sans-serif; margin: 32px; color: #17202a; background: #f7f9fb; }
+    main { max-width: 920px; margin: 0 auto; }
+    h1 { font-size: 24px; margin-bottom: 8px; }
+    p { line-height: 1.5; }
+    table { width: 100%; border-collapse: collapse; background: white; border: 1px solid #d8dee8; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #e5e9f0; vertical-align: top; }
+    th { background: #eef3f8; font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; }
+    code { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 12px; }
+    .note { border-left: 4px solid #496b8a; padding: 10px 12px; background: #eef5fb; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Codex Inbox Response Shims</h1>
+  <p class="note">Single task: close stale, already-completed Codex inbox requests that had exact frontmatter IDs but earlier Codex deliverables used non-response message types. No 2nd-B app code changed; no branch was pushed.</p>
+  <table>
+    <thead>
+      <tr><th>Request ref</th><th>Existing deliverable</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>20260605-152234-claude-to-codex-EXAMPLE-login-ui</code></td><td>Format example; no app action.</td></tr>
+      <tr><td><code>20260614-025843-claude-to-codex-feedback-next</code></td><td><code>20260614-031648-to-claude-premiumbutton-disabled-a11y.md</code></td></tr>
+      <tr><td><code>20260614-032029-claude-to-codex-feedback-leverB</code></td><td><code>20260614-033846-to-claude-leverB-minimal-safe-position.md</code></td></tr>
+      <tr><td><code>20260614-040441-claude-to-codex-feedback-next</code></td><td><code>20260614-043312-to-claude-capture-abort-llm-dedupe.md</code></td></tr>
+      <tr><td><code>20260614-043449-claude-to-codex-feedback-next</code></td><td><code>20260614-045334-to-claude-audit-write-outbox.md</code></td></tr>
+      <tr><td><code>20260614-045015-claude-to-codex-regression-guard</code></td><td><code>20260614-050155-to-claude-sources-orderby-regression.md</code></td></tr>
+      <tr><td><code>20260614-050550-claude-to-codex-hold-auditwrite</code></td><td><code>20260614-051108-to-claude-auditwrite-crisis-redesign.md</code></td></tr>
+      <tr><td><code>20260614-052035-claude-to-codex-auditwrite-navgraph</code></td><td><code>20260614-054131-to-claude-navgraph-stable-data-ref.md</code></td></tr>
+      <tr><td><code>20260614-054623-claude-to-codex-navgraph-focusrefetch</code></td><td><code>20260614-055721</code>, <code>20260614-061010</code>, <code>20260614-125729</code></td></tr>
+    </tbody>
+  </table>
+  <p>Remaining stale board rows with blank request IDs cannot be closed from Codex by response ref; Claude must add IDs or mark those request files superseded.</p>
+</main>
+</body>
+</html>
+

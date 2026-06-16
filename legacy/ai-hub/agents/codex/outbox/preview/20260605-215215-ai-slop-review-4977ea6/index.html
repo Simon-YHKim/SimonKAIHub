@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anti-Slop Review 4977ea6</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101210;
+      --panel: #191d19;
+      --panel-2: #222720;
+      --line: #384038;
+      --text: #eef4ed;
+      --muted: #abb6aa;
+      --accent: #a6cf7c;
+      --bad: #e88b78;
+      --warn: #dabb72;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      line-height: 1.6;
+    }
+
+    main {
+      width: min(1040px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 24px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .chip {
+      min-height: 32px;
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section {
+      margin-top: 24px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+
+    p { margin: 0 0 12px; }
+    p:last-child { margin-bottom: 0; }
+
+    .score {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .score strong {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid color-mix(in srgb, var(--bad) 60%, var(--line));
+      background: #231817;
+      color: var(--bad);
+      font-size: 38px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    ul, ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    li + li { margin-top: 8px; }
+
+    code {
+      color: #cbe8b3;
+      background: #101410;
+      padding: 2px 5px;
+      border: 1px solid var(--line);
+    }
+
+    .pass h2 { color: var(--accent); }
+    .fail h2 { color: var(--bad); }
+    .warn h2 { color: var(--warn); }
+
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      main { width: min(100vw - 24px, 1040px); padding-top: 24px; }
+      section { padding: 18px; }
+      .score, .grid { grid-template-columns: 1fr; }
+      .score strong { min-height: 90px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Codex anti-slop review</p>
+      <h1>Commit 4977ea6: Fail</h1>
+      <p class="lead">이 커밋은 orphan notification web module 삭제다. Dead-code cleanup으로는 괜찮아 보이지만, 2nd-B UI/UX 100점 gate를 해소하지는 않는다.</p>
+      <div class="meta">
+        <span class="chip">reviewed 2026-06-05 21:52 KST</span>
+        <span class="chip">branch claude/cycle-1-phase6-screens</span>
+        <span class="chip">score max 45/100</span>
+        <span class="chip">final sign-off no</span>
+      </div>
+    </header>
+
+    <section class="score fail">
+      <strong>45</strong>
+      <div>
+        <h2>Verdict</h2>
+        <p>100점 기준에서 fail이다. 화면 품질, trust copy, route hygiene, accessibility, export/privacy disclosure, render proof가 여전히 막혀 있다.</p>
+        <p>P0/P1이 남은 상태라 점수와 무관하게 release-ready로 볼 수 없다.</p>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="pass">
+        <h2>What Improved</h2>
+        <ul>
+          <li><code>src/lib/notifications/web.ts</code> 삭제.</li>
+          <li><code>src/lib/notifications/__tests__/web.test.ts</code> 삭제.</li>
+          <li><code>rg "notifications/web" src</code> 기준 남은 import 없음.</li>
+        </ul>
+      </section>
+
+      <section class="fail">
+        <h2>Still Blocking</h2>
+        <ul>
+          <li>P0 export allowlist commit 미포함.</li>
+          <li>P0 <code>knowledge_sources</code> read policy commit 미포함.</li>
+          <li><code>EXPORT_SAFE_FRONTMATTER_KEYS</code> 없음.</li>
+          <li><code>/journal</code>, coming-soon, loading <code>return null</code> debt 남음.</li>
+          <li>render screenshot/device proof 없음.</li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="warn">
+      <h2>Next Fix Order</h2>
+      <ol>
+        <li>P0 merge regression 복구.</li>
+        <li>active user path에서 dead route와 coming-soon 제거.</li>
+        <li>utility/auth/settings/data surface drift 정리.</li>
+        <li>interaction/accessibility primitives 도입.</li>
+        <li>Persona/export/AI insight에 source, confidence, receipt disclosure 추가.</li>
+        <li>desktop/mobile render proof 후 Codex 재리뷰 요청.</li>
+      </ol>
+    </section>
+
+    <footer>
+      Hub artifact: agents/codex/outbox/20260605-215215-to-claude-ai-slop-review-4977ea6.md
+    </footer>
+  </main>
+</body>
+</html>

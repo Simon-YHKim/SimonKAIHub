@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Handoff - README Advisor Residue Cleanup</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: rgba(167, 139, 250, 0.08);
+      --line: #2a345a;
+      --text: #e8ecf8;
+      --muted: #c9d0e6;
+      --mint: #72f2c7;
+      --violet: #a78bfa;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+    h1, h2 { line-height: 1.2; }
+    h1 { font-size: 32px; margin: 0 0 8px; }
+    h2 { font-size: 18px; margin: 28px 0 10px; color: var(--mint); }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--text);
+      background: rgba(114, 242, 199, 0.08);
+      border: 1px solid rgba(114, 242, 199, 0.18);
+      border-radius: 6px;
+      padding: 1px 5px;
+    }
+    .stamp { color: var(--violet); margin-bottom: 28px; }
+    .panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-top: 16px;
+    }
+    ul { padding-left: 20px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Codex Handoff - README Advisor Residue Cleanup</h1>
+    <div class="stamp">[2026-06-08 / 01:21:03 KST]</div>
+
+    <section class="panel">
+      <h2>Summary</h2>
+      <p>After #244, Codex scanned public README copy for stale visible guidance terminology. README still listed feature 4 as <code>Advisor</code>, even though current product surfaces present the user-facing chat as SecondB.</p>
+    </section>
+
+    <section class="panel">
+      <h2>App Commit</h2>
+      <ul>
+        <li>Worktree: <code>E:\Coding Infra\_worktrees\2ndB-codex</code></li>
+        <li>Branch: <code>codex/core-label-tail-cleanup</code></li>
+        <li>Commit: <code>16d3e8c fix(copy): replace README Advisor residue with SecondB</code></li>
+        <li>Divergence after commit: <code>0 1</code> from <code>origin/main</code></li>
+        <li>Push/PR: not pushed by Codex</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Changes</h2>
+      <ul>
+        <li><code>README.md</code>: feature 4 now reads <code>SecondB chat</code> and describes analytic/new-angle reflections grounded in saved records and validated frameworks.</li>
+        <li><code>scripts/check-constraints.ts</code>: <code>OldGuidanceCopyResidue</code> now also guards README against old <code>Advisor</code>/<code>Toggle-mode guidance</code> phrasing.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm run check:constraints</code> PASS.</li>
+        <li><code>npm run verify</code> PASS.</li>
+        <li>Full verify covered lint, type-check, i18n, lexicon, LLM boundary, constraints, emdash, and Jest.</li>
+        <li>Jest total: 98 suites / 856 tests.</li>
+        <li><code>git diff --check</code> PASS.</li>
+        <li>Sensitive-pattern scan: clean.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Notes</h2>
+      <p>Scope is public README copy plus its regression guard only. Runtime internal <code>advisor</code> function/type names were not changed. This is a local app commit ready for Claude review/merge handling.</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>O-12 Phase C Public Live Audit</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070914;
+      --panel: #101426;
+      --panel2: #151b32;
+      --text: #ecf3ff;
+      --muted: #aeb9d4;
+      --mint: #67f5d2;
+      --amber: #ffd166;
+      --line: rgba(103, 245, 210, 0.28);
+    }
+    body {
+      margin: 0;
+      font-family: Inter, "Noto Sans KR", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.62;
+    }
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 32px 18px 56px;
+    }
+    header {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, var(--panel), rgba(16, 20, 38, 0.7));
+      border-radius: 8px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+    h1, h2, h3 { line-height: 1.18; }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    h2 { margin: 26px 0 10px; font-size: 20px; color: var(--mint); }
+    h3 { margin: 18px 0 8px; font-size: 16px; color: var(--amber); }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--mint);
+      background: rgba(103, 245, 210, 0.08);
+      padding: 2px 5px;
+      border-radius: 5px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    figure {
+      margin: 0;
+      border: 1px solid rgba(174, 185, 212, 0.22);
+      background: var(--panel2);
+      border-radius: 8px;
+      padding: 10px;
+    }
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    figcaption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .callout {
+      border-left: 3px solid var(--amber);
+      background: rgba(255, 209, 102, 0.08);
+      padding: 12px 14px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>O-12 Phase C Public Live Audit</h1>
+      <p>[2026-06-08 / 16:33:49 KST] Codex live-browser pass on signed-out public surfaces.</p>
+    </header>
+
+    <section class="callout">
+      <p><strong>Privacy boundary:</strong> sign-in screenshots were deleted because Chrome autofilled personal credentials. Authenticated Phase C screens need a clean test profile/session.</p>
+    </section>
+
+    <h2>Findings</h2>
+    <h3>P1 - Manual still says village map</h3>
+    <p>Live <code>/manual</code> and source <code>src/app/manual.tsx:155</code> still use <code>마을을 읽는 짧은 지도</code> / <code>A compact map of the village</code>. This conflicts with the current O-12 first-impression direction toward Soul/Core/tree/Gameboy framing.</p>
+
+    <h3>P1 - Research action redirects to sign-in</h3>
+    <p>The public manual offers <code>큐레이션된 자료</code>, but signed-out <code>/research</code> redirects to <code>/sign-in</code>. Source confirms the button at <code>src/app/manual.tsx:277-283</code> and guard at <code>src/app/research.tsx:77-79</code>.</p>
+
+    <h3>P2 - Claim tone</h3>
+    <p><code>검증된 심리학</code> is defensible, but it may read too clinical/certification-like for unauthenticated trust copy. Consider <code>연구 기반 자기 이해</code> if the softer position is preferred.</p>
+
+    <h2>Evidence</h2>
+    <div class="grid">
+      <figure>
+        <img src="../screenshots/o12-phase-c-live-audit/20260608-162600-manual.png" alt="Manual page screenshot" />
+        <figcaption>Live /manual: old village-map hero copy visible.</figcaption>
+      </figure>
+      <figure>
+        <img src="../screenshots/o12-phase-c-live-audit/20260608-1630-permissions.png" alt="Permissions page screenshot" />
+        <figcaption>Live /permissions: visually coherent public trust surface.</figcaption>
+      </figure>
+    </div>
+  </main>
+</body>
+</html>

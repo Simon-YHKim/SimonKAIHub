@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Capture mode copy i18n bundle patch</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; color: #181818; background: #f8f6f0; }
+    main { max-width: 920px; margin: 0 auto; padding: 40px 24px; }
+    h1 { margin: 0 0 8px; font-size: 30px; }
+    h2 { margin: 26px 0 10px; font-size: 18px; }
+    p, li { font-size: 15px; line-height: 1.65; }
+    code { padding: 2px 5px; border-radius: 4px; background: #eee8dc; }
+    .stamp { margin-bottom: 18px; font-weight: 700; color: #4a5568; }
+    .panel { border: 1px solid #d8d0bf; border-radius: 8px; background: #fffdf8; padding: 18px; margin-top: 16px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+    .ok { color: #0f6b4f; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="stamp">[2026-06-06 / 21:55:27]</p>
+    <h1>Capture mode/track copy i18n bundle patch</h1>
+    <p>Codex moved the core <code>/capture</code> mode and wiki-track control copy into the capture locale namespace. This is stacked after the alert-copy patch.</p>
+
+    <section class="grid">
+      <div class="panel">
+        <h2>Commit Stack</h2>
+        <p><code>0e0fc90</code> alert-copy bundle</p>
+        <p><code>c884f80</code> mode/track bundle</p>
+      </div>
+      <div class="panel">
+        <h2>Moved Copy</h2>
+        <ul>
+          <li>mode tab labels</li>
+          <li>mode help text</li>
+          <li>wiki-track labels</li>
+          <li>tablist accessibility labels</li>
+          <li>manage-format link copy</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Behavior</h2>
+      <p>No mode ids, track ids, route targets, reset behavior, selected-state semantics, or layout rules changed. The patch only changes string ownership.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li class="ok">typecheck pass</li>
+        <li class="ok">lint pass</li>
+        <li class="ok">i18n parity pass: 242 keys</li>
+        <li class="ok">lexicon pass</li>
+        <li class="ok">emdash pass</li>
+        <li class="ok">LLM boundary pass</li>
+        <li class="ok">constraints pass with capture bundle contract</li>
+        <li class="ok">Jest pass: 92 suites, 836 tests</li>
+        <li class="ok">git diff --check pass</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

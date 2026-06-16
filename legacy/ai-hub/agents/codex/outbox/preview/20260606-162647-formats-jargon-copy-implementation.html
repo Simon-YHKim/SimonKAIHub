@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Formats Jargon Copy Implementation</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --text: #e5eef5;
+      --accent: #5dd6c8;
+      --muted: rgba(229, 238, 245, 0.68);
+      --line: rgba(93, 214, 200, 0.28);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main { width: min(920px, calc(100vw - 32px)); margin: 40px auto; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 24px; }
+    .eyebrow { color: var(--accent); font-size: 12px; letter-spacing: 0; text-transform: uppercase; margin: 0 0 8px; }
+    h1 { font-size: clamp(26px, 4vw, 42px); line-height: 1.08; margin: 0; letter-spacing: 0; }
+    h2 { font-size: 18px; margin: 28px 0 10px; letter-spacing: 0; }
+    p { color: var(--muted); margin: 0 0 12px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+    .panel { border: 1px solid var(--line); border-radius: 8px; padding: 16px; background: rgba(255,255,255,0.03); }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); }
+    code { color: var(--text); background: rgba(255,255,255,0.06); border-radius: 4px; padding: 2px 5px; }
+    .pass { color: var(--accent); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Codex UI/UX Worktree Submission · 2026-06-06 16:26:47 KST</p>
+      <h1>Formats now speak in filing-guide language, not schema jargon.</h1>
+    </header>
+
+    <section class="grid">
+      <div class="panel">
+        <h2>Changed</h2>
+        <ul>
+          <li><code>AddFormatFlow.tsx</code>: removed visible JSON framing.</li>
+          <li><code>formats.tsx</code>: replaced schema actions with filing-guide copy.</li>
+          <li><code>FormatSchemaView.tsx</code>: replaced raw type chips with text/list/number labels.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h2>Validation</h2>
+        <ul>
+          <li><span class="pass">pass</span> <code>npx tsc --noEmit</code></li>
+          <li><span class="pass">pass</span> <code>git diff --check</code></li>
+          <li><span class="pass">pass</span> targeted old-string grep</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Review Notes</h2>
+      <p>Local commit <code>208603a3e745535522d89a0b0d7ce24c4eb20400</code> is stacked on <code>codex/work</code> after <code>d3c193b</code>. No online push was performed.</p>
+    </section>
+  </main>
+</body>
+</html>

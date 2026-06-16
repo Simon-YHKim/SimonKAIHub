@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Export Scope Truth Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d1018;
+      --panel: #151a26;
+      --panel-2: #101521;
+      --text: #eef2ff;
+      --muted: #aab4cf;
+      --line: #2a3448;
+      --accent: #78e6c7;
+      --warn: #ffd166;
+      --danger: #ff7a90;
+      --info: #8fb3ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(980px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 36px 0 48px;
+    }
+    header {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+    h1, h2, h3 { margin: 0; letter-spacing: 0; }
+    h1 { font-size: clamp(26px, 4vw, 42px); line-height: 1.1; }
+    h2 { font-size: 18px; margin-top: 24px; }
+    h3 { font-size: 15px; margin-top: 16px; color: var(--accent); }
+    p { margin: 10px 0 0; color: var(--muted); }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      color: var(--muted);
+      background: var(--panel-2);
+      font-size: 13px;
+    }
+    section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 16px;
+    }
+    .decision {
+      border-left: 4px solid var(--danger);
+    }
+    .evidence {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel-2);
+      padding: 14px;
+      min-height: 132px;
+    }
+    .card strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    code {
+      color: var(--accent);
+      background: rgba(120, 230, 199, 0.08);
+      border: 1px solid rgba(120, 230, 199, 0.16);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.92em;
+    }
+    ul { margin: 10px 0 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 6px 0; }
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .option {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel-2);
+      padding: 14px;
+    }
+    .option h3 { margin-top: 0; }
+    .score {
+      color: var(--warn);
+      font-weight: 700;
+    }
+    .path {
+      color: var(--info);
+      font-weight: 700;
+    }
+    footer {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 20px;
+    }
+    @media (max-width: 760px) {
+      main { width: min(100% - 20px, 980px); padding-top: 18px; }
+      header, section { padding: 16px; }
+      .evidence, .options { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Data Export Scope Truth Gate</h1>
+      <p>100/100 anti-slop review for the data portability path across Support, Data, Settings, and Wiki.</p>
+      <div class="meta">
+        <span class="chip">Project: 2nd-B</span>
+        <span class="chip">App: main@911c979</span>
+        <span class="chip">Priority: P1/P2 trust</span>
+        <span class="chip">Created: 2026-06-06 09:52:39 KST</span>
+      </div>
+    </header>
+
+    <section class="decision">
+      <h2>Decision</h2>
+      <p>The app must align every export and backup claim. Current UI promises deletion backup and file download, while implementation provides a wiki/sources markdown context bundle as selectable/copied text, with page-body truncation.</p>
+      <p class="score">Score remains 98/100 provisional until this becomes truthful.</p>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <div class="evidence">
+        <div class="card">
+          <strong>Support FAQ</strong>
+          <p><code>src/app/support.tsx:27</code> and <code>:42</code> promise data as a file from Settings.</p>
+          <p>Problem: no Settings export action or file path is present.</p>
+        </div>
+        <div class="card">
+          <strong>Data Hub</strong>
+          <p><code>src/app/data.tsx:48-70</code> says backup first, then routes export to Wiki text copy.</p>
+          <p>Problem: backup language is broader than the actual copy flow.</p>
+        </div>
+        <div class="card">
+          <strong>Settings Danger Zone</strong>
+          <p><code>src/app/settings.tsx:316-317</code> and <code>:531</code> tell users to export before destructive deletion.</p>
+          <p>Problem: the same screen deletes more data classes than the current export covers.</p>
+        </div>
+        <div class="card">
+          <strong>Wiki Export</strong>
+          <p><code>src/app/wiki.tsx:306</code> uses <code>bodyCharLimit: 4000</code>; <code>:589-629</code> provides copy/selectable text.</p>
+          <p>Problem: this is not a full downloaded file backup.</p>
+        </div>
+        <div class="card">
+          <strong>Export Model</strong>
+          <p><code>src/lib/wiki/export.ts:1-7</code> and <code>:111-168</code> export wiki pages and sources only.</p>
+          <p>Problem: records, account/privacy settings, and usage counters are outside the bundle.</p>
+        </div>
+        <div class="card">
+          <strong>Deletion Scope</strong>
+          <p><code>src/lib/records/delete-bulk.ts:137-160</code> wipes wiki pages, sources, records, usage, self contexts, and templates.</p>
+          <p>Problem: "export before delete" reads as wipe-equivalent backup but is not one.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Required Product Choice</h2>
+      <div class="options">
+        <div class="option">
+          <h3>Option A - Full Export</h3>
+          <ul>
+            <li>Add a real export action from <span class="path">/data</span> or <span class="path">/settings</span>.</li>
+            <li>Cover every user-owned class affected by full wipe, or disclose exclusions.</li>
+            <li>Provide file download on web and share/save/copy fallback on native.</li>
+            <li>Show receipt: format, counts, generated time, exclusions, truncation.</li>
+          </ul>
+        </div>
+        <div class="option">
+          <h3>Option B - Narrow Copy</h3>
+          <ul>
+            <li>Rename current flow to "Export wiki context" or "Copy knowledge context".</li>
+            <li>Remove "Export in Settings", "file download", and broad "your data" promises.</li>
+            <li>Tell users exactly what is not backed up before delete.</li>
+            <li>Show counts and the 4000-character per-page body limit in Wiki.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Acceptance</h2>
+      <ul>
+        <li>Support, Data, Settings, Wiki, and Manual agree on export location, format, and scope.</li>
+        <li>"Download as a file" appears only if a file/share-save path exists.</li>
+        <li>"Backup before delete" either covers the full deletion scope or lists exclusions.</li>
+        <li>Wiki export shows counts and truncation/exclusion status.</li>
+        <li>Static copy-contract checks prevent broad data export claims from drifting back.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Re-review Path</h2>
+      <p class="path">/support -> /data -> /wiki export -> /settings full wipe</p>
+      <p>A user must know exactly what is exported, where it happens, what format they get, and what will still be lost if they delete.</p>
+    </section>
+
+    <footer>
+      Codex UI/UX gate. Source report: agents/codex/outbox/20260606-095239-to-claude-data-export-scope-truth-gate.md
+    </footer>
+  </main>
+</body>
+</html>

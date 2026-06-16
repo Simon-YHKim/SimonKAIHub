@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Branch Disposition Refresh</title>
+  <style>
+    body { margin: 0; font: 15px/1.5 Arial, sans-serif; color: #16181d; background: #f6f7f9; }
+    main { max-width: 1040px; margin: 0 auto; padding: 28px; }
+    h1 { margin: 0 0 8px; font-size: 26px; }
+    h2 { margin: 24px 0 8px; font-size: 18px; }
+    code { background: #eceff3; padding: 1px 5px; border-radius: 4px; }
+    .meta { color: #596171; margin-bottom: 18px; }
+    .panel { background: #fff; border: 1px solid #dfe3ea; border-radius: 8px; padding: 18px; margin: 14px 0; }
+    table { width: 100%; border-collapse: collapse; background: #fff; font-size: 13px; }
+    th, td { border: 1px solid #dfe3ea; padding: 8px; vertical-align: top; text-align: left; }
+    th { background: #eef2f6; }
+    .take { color: #0f6b3f; font-weight: 700; }
+    .skip { color: #9a4a00; font-weight: 700; }
+    .review { color: #31539b; font-weight: 700; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Codex Branch Disposition Refresh</h1>
+  <div class="meta">2026-06-15 / 06:50:09 KST · PROTOCOL 12/19/35.4 · one task only</div>
+
+  <section class="panel">
+    <h2>Request Scan</h2>
+    <p><code>board.ps1 -Me codex</code> still lists the same three legacy rows, all now answered by Codex superseded packets at 06:07, 06:21, and 06:34. The fresh outbox scan after that found only Grok responses to Claude, with no actionable <code>to: codex</code> or <code>to: all</code> request.</p>
+  </section>
+
+  <section class="panel">
+    <h2>Task</h2>
+    <p>Read-only merge-queue refresh under the Codex discovery throttle. App repo base: <code>origin/main@8d589fa</code>. No app writes, push, PR, or merge.</p>
+  </section>
+
+  <h2>Recommended Batch</h2>
+  <table>
+    <thead><tr><th>Disposition</th><th>Commit</th><th>Branch</th><th>Reason</th></tr></thead>
+    <tbody>
+      <tr><td class="take">take first</td><td><code>af1e957</code></td><td><code>codex/offline-profile-null-probe-20260615-0409</code></td><td>Current auth probe unresolved-state fix.</td></tr>
+      <tr><td class="take">take first</td><td><code>6a919f3</code></td><td><code>codex/unknown-minor-failclosed-20260615-043149</code></td><td>Ops egress fails closed on unresolved minor state.</td></tr>
+      <tr><td class="take">take first</td><td><code>440618d</code></td><td><code>codex/analytics-unknown-minor-failclosed-20260615-045633</code></td><td>Analytics fails closed on unresolved minor state.</td></tr>
+      <tr><td class="take">take first</td><td><code>63b96c9</code></td><td><code>codex/minor-egress-gates-20260615-045630</code></td><td>Core Brain persona build minor-status gate.</td></tr>
+      <tr><td class="take">take first</td><td><code>11d4ceb</code></td><td><code>codex/secondb-chat-minor-gate-20260615-053421</code></td><td>SecondB chat minor-status gate.</td></tr>
+      <tr><td class="skip">skip duplicate</td><td><code>a7b980c</code></td><td><code>codex/offline-profile-bounce-20260615-034105</code></td><td>Superseded by <code>af1e957</code>.</td></tr>
+      <tr><td class="review">take latest only</td><td><code>eb89abd</code></td><td><code>codex/recommendations-runtime-gate-rebased-20260614-1542</code></td><td>Latest D-20 recommendation privacy gate.</td></tr>
+      <tr><td class="skip">skip duplicate</td><td><code>79a5374</code>, <code>675f5a1</code></td><td>older recommendation gate refs</td><td>Same-file older variants.</td></tr>
+      <tr><td class="review">take latest only</td><td><code>d81fa7f</code></td><td><code>codex/persona-records-sweep-20260614-122538</code></td><td>Latest attachment assessment guard.</td></tr>
+      <tr><td class="skip">skip duplicate</td><td><code>7344aa3</code></td><td><code>codex/persona-records-sweep-20260614-093114</code></td><td>Older attachment guard.</td></tr>
+      <tr><td class="review">keep/review</td><td><code>35d13da</code>, <code>524df43</code>, <code>17c7cfe</code>, <code>ec94a5e</code></td><td>low-risk queue cleanup</td><td>KO brand, data contract, first-save claim guard, Android elevation.</td></tr>
+    </tbody>
+  </table>
+
+  <section class="panel">
+    <h2>Self-Panel</h2>
+    <p>No Section 35.1 decision trigger; Section 19 not applicable. No destructive, cost, secrets, app-write, push, PR, or merge action.</p>
+  </section>
+</main>
+</body>
+</html>

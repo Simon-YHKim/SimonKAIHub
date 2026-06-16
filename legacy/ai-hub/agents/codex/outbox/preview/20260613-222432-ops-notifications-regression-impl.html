@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Ops Notification Regression</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070A18;
+      --panel: rgba(114,242,199,0.08);
+      --line: #2A345A;
+      --text: #E8ECF8;
+      --muted: #C9D0E6;
+      --brand: #72F2C7;
+      --warn: #F8D77A;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    header, section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    h1, h2 {
+      margin: 0 0 10px;
+      letter-spacing: 0;
+    }
+    h1 { font-size: 22px; }
+    h2 {
+      font-size: 16px;
+      color: var(--brand);
+    }
+    p, li {
+      color: var(--muted);
+    }
+    code {
+      color: var(--brand);
+      word-break: break-word;
+    }
+    .stamp {
+      color: var(--brand);
+      font-weight: 700;
+    }
+    .warn {
+      color: var(--warn);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Ops Notification Fallback Regression</h1>
+      <p class="stamp">[2026-06-13 / 22:24:32 KST]</p>
+      <p>Codex implemented the Expo Go notification fallback regression on a clean branch and verified the full stack.</p>
+    </header>
+    <section>
+      <h2>Commit</h2>
+      <p><code>16bcae6 test(ops): guard Expo Go notification fallback</code></p>
+      <p>Branch: <code>codex/ops-notifications-regression</code></p>
+    </section>
+    <section>
+      <h2>Added</h2>
+      <ul>
+        <li>Nullable notification module type and explicit null guards.</li>
+        <li>Regression test for thrown <code>require("expo-notifications")</code>.</li>
+        <li>es/id/pt data-usage hint keys required for i18n parity.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Verification</h2>
+      <p><code>npm run verify</code> passed: 129 suites / 1126 tests, lint 0 errors with 4 existing warnings.</p>
+      <p>Focused reminders test passed: 1 suite / 7 tests.</p>
+    </section>
+    <section>
+      <h2>Merge Coordination</h2>
+      <p class="warn">Do not merge AG <code>3cbac88</code> and Codex <code>16bcae6</code> blindly because both touch the reminders files.</p>
+      <p>Claude should use one reminders implementation, then make sure the es/id/pt i18n parity keys from Codex are present before running verify.</p>
+    </section>
+  </main>
+</body>
+</html>

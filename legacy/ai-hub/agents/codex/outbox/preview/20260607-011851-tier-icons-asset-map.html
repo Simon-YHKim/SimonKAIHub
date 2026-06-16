@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>E9 Tier Icon Asset Map</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101318;
+      --panel: #171c23;
+      --panel2: #202731;
+      --text: #f4f7fb;
+      --muted: #a9b3c0;
+      --brand: #72d2b4;
+      --line: #33404f;
+    }
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 22px 64px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 31px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin-top: 28px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    .stamp {
+      color: var(--brand);
+      font-weight: 700;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-top: 18px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+    }
+    .card {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    code {
+      color: var(--brand);
+      overflow-wrap: anywhere;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin: 7px 0;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="stamp">[2026-06-07 / 01:18:51]</p>
+    <h1>E9 Tier Icon Asset Map</h1>
+    <p>Codex mapped every production tier icon asset into code without deleting asset directories.</p>
+
+    <section class="panel">
+      <h2>Commit</h2>
+      <div class="grid">
+        <div class="card"><div class="label">Branch</div><code>codex/work</code></div>
+        <div class="card"><div class="label">Baseline</div><code>origin/main@e53e49d</code></div>
+        <div class="card"><div class="label">Commit</div><code>b223464a929999251c7112c635121a7e4bb87c36</code></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>What Changed</h2>
+      <ul>
+        <li>Added four missing production icon mappings: archive scroll, clock, dream crystal, idea lamp.</li>
+        <li>Moved icon IDs and source-kind mapping into a pure testable contract file.</li>
+        <li>Added Jest coverage that compares the production folder against the canonical 13 icon IDs.</li>
+        <li>Added repo constraint coverage for the new E9 mapping contract.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Validation</h2>
+      <ul>
+        <li>TypeScript, ESLint, i18n, lexicon, em dash, LLM boundary, constraints, and diff check all passed.</li>
+        <li>Jest passed: 95 suites, 848 tests.</li>
+        <li>Native smoke QA requested from Antigravity at low priority.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Offline Profile Probe Fix</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0b1020; --fg:#eef3ff; --muted:#aab5cc; --line:#2e3a55; }
+    body { margin:0; font-family: Arial, sans-serif; background:var(--bg); color:var(--fg); line-height:1.5; }
+    main { max-width: 880px; margin: 0 auto; padding: 32px 20px 48px; }
+    h1 { margin: 0 0 10px; font-size: 28px; }
+    h2 { margin: 28px 0 10px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 18px; }
+    p, li { color: var(--muted); }
+    code { color: var(--fg); }
+    ul { padding-left: 20px; }
+    .status { color: var(--fg); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Offline Profile Probe Fix</h1>
+    <p class="status">Submitted to Claude for review. Codex did not push, open a PR, or merge.</p>
+
+    <h2>Branch</h2>
+    <ul>
+      <li><code>codex/offline-profile-null-probe-20260615-0409</code></li>
+      <li>Base: <code>origin/main@8d589faf2ba41e20ed79962f7d4e7496ce821434</code></li>
+      <li>Commit: <code>af1e957e6e293ba517401a128d029a3a72c9d6a0</code></li>
+    </ul>
+
+    <h2>Scope</h2>
+    <ul>
+      <li>Profile probe errors and timeouts now stay unresolved with <code>hasProfile:null</code>.</li>
+      <li>Definitive no-row probes still return <code>hasProfile:false</code> for the real complete-profile path.</li>
+      <li>Known minor or adult truth is preserved across same-user missing or unknown re-probes.</li>
+    </ul>
+
+    <h2>Verification</h2>
+    <ul>
+      <li>Focused regression failed before the production fix, then passed after it.</li>
+      <li><code>npm test -- src/lib/auth/__tests__/auth-context-probe.test.ts --runInBand</code> PASS, 1 suite / 6 tests.</li>
+      <li><code>npm run type-check</code> PASS.</li>
+      <li><code>git diff --check HEAD~1..HEAD</code> PASS.</li>
+      <li><code>npm run verify</code> PASS, 148 suites / 1209 tests.</li>
+    </ul>
+
+    <h2>C10 Note</h2>
+    <p>Same-user known-minor preservation is covered. A broader unknown-minor fail-closed audit is still recommended because some LLM/crisis call sites pass <code>isMinor === true</code> and should be reviewed separately.</p>
+  </main>
+</body>
+</html>

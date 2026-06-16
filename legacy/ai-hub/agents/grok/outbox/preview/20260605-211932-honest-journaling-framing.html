@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Honest Journaling Framing — 2nd-B Consumer Research</title>
+<style>
+:root {
+  --bg: #0d1018;
+  --panel: #141925;
+  --panel2: #1a2030;
+  --line: #2a3145;
+  --ink: #e6e9f2;
+  --muted: #aab2c8;
+  --subtle: #7e879e;
+  --accent: #72f2c7;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", sans-serif; line-height: 1.6; font-size: 15px; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 48px 24px 80px; }
+header { margin-bottom: 32px; }
+h1 { font-size: 22px; font-weight: 700; margin: 0 0 6px; letter-spacing: -.01em; }
+.meta { color: var(--subtle); font-size: 12.5px; margin-top: 8px; }
+h2 { font-size: 16px; font-weight: 700; margin: 36px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 14px; font-weight: 600; margin: 18px 0 6px; color: var(--accent); }
+.lead { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 16px 0; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
+ul, ol { margin: 8px 0; padding-left: 20px; }
+li { margin: 4px 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.muted { color: var(--muted); }
+.small { font-size: 12.5px; }
+.key { border-left: 3px solid var(--accent); background: rgba(114, 242, 199, 0.05); padding: 10px 14px; margin: 12px 0; border-radius: 0 6px 6px 0; }
+.warn { border-left: 3px solid var(--accent); background: rgba(114, 242, 199, 0.06); padding: 10px 14px; margin: 12px 0; border-radius: 0 6px 6px 0; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .03em; }
+code { background: var(--panel2); padding: 1px 5px; border-radius: 3px; font-size: 12px; font-family: ui-monospace, Menlo, Consolas, monospace; color: #cdd6f0; }
+.source { font-size: 11.5px; color: var(--subtle); word-break: break-all; margin-top: 4px; }
+footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--subtle); }
+.copy { background: var(--panel2); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; font-size: 13px; margin: 8px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Honest Journaling Framing — Benefit Claims &amp; AI Insight Tone</h1>
+  <p class="meta">Grok · science + X/social/reviews · 2026-06-05 · 2nd-B · ref: honest-journaling-framing task</p>
+  <p class="meta">Protocol §10.6 — dark theme, 3 colors, no emoji</p>
+</header>
+
+<div class="lead">
+  <strong>Executive summary</strong><br>
+  Expressive writing / journaling shows a <em>small</em> average benefit (Frattaroli meta-analysis: Cohen's <code>d</code> ≈ 0.15 on psychological outcomes) and roughly half of major meta-analyses find null effects. It can <strong>backfire</strong> for low emotional-expressiveness users (anxiety increase at follow-up). Consumers reward honesty + evidence-from-your-entries; they punish therapy-grade promises, Barnum-style confident profiling, and "observation and whining" AI fatigue. <strong>2nd-B should sell compound memory + optional reflection, not wellness transformation.</strong> AI insights should default to <strong>tentative, cited observations</strong>; confidence scales with entry count and user confirmation.
+</div>
+
+<h2>0. Science anchor (verified)</h2>
+
+<table>
+  <tr><th>Claim</th><th>Finding</th><th>Source</th></tr>
+  <tr>
+    <td>Small average effect</td>
+    <td>Frattaroli (2006) meta-analysis of 146 EW studies: significant but <strong>small</strong> effects on self-reported psychological symptoms (e.g. depression) and related outcomes. Widely cited as <code>d</code> ≈ 0.15 for psychological well-being.</td>
+    <td><a href="https://psycnet.apa.org/record/2006-20202-001">APA PsycNet Frattaroli 2006</a> · <a href="https://bpb-us-e2.wpmucdn.com/faculty.sites.uci.edu/dist/c/602/files/2019/08/Frattaroli-psych-bulletin-2006.pdf">UCI PDF</a></td>
+  </tr>
+  <tr>
+    <td>Null meta-analyses (~half)</td>
+    <td>Three supportive meta-analyses (Smyth 1998; Frisina 2004; Frattaroli 2006) vs three null (Meads &amp; Nouwen 2005; Mogk 2006; Reinhold 2018 on depression at follow-up). Frontiers 2023: "effect has proven elusive."</td>
+    <td><a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2023.1192595/full">Frontiers 2023 Rude et al.</a></td>
+  </tr>
+  <tr>
+    <td>Not universal</td>
+    <td>Pennebaker benefit review notes improvement is common but <strong>not universal</strong>; moderators and engagement matter.</td>
+    <td><a href="https://journals.sagepub.com/doi/full/10.1177/1745691617707315">Sage — Pennebaker expressive writing review</a> · cited in <a href="https://mashable.com/article/rosebud-ai-journaling">Mashable Rosebud 2024</a></td>
+  </tr>
+  <tr>
+    <td>Backfire (low expressiveness)</td>
+    <td>RCT (N=116): no main effect of EW on anxiety/depression/physical symptoms. <strong>Emotional expressiveness moderated anxiety</strong>: high expressiveness → anxiety reduction at 3 months; <strong>low expressiveness → significant anxiety increase</strong>. Authors: EW about stressful events may be <strong>contraindicated</strong> for those who do not typically express emotions.</td>
+    <td><a href="https://pubmed.ncbi.nlm.nih.gov/23742666/">PubMed 23742666</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3830620/">PMC full text</a></td>
+  </tr>
+  <tr>
+    <td>Engagement moderator</td>
+    <td>2023 trial: EW benefits only for participants who wrote <strong>longer essays</strong> (engagement proxy). Acceptance-enhanced instructions beat traditional EW for engaged writers.</td>
+    <td><a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2023.1192595/full">Frontiers 2023</a></td>
+  </tr>
+</table>
+
+<div class="warn">
+  <strong>Product implication</strong>: Any copy implying "daily journaling will improve your mental health" is scientifically overstated and exposes 2nd-B to backlash from skeptics and harmed low-expressiveness users. Mashable's Rosebud coverage already hedges: "effect isn't universal" and links the expressiveness moderator study.
+</div>
+
+<h2>1. How should 2nd-B position journaling's benefit? (without over-promising)</h2>
+
+<h3>1.1 What consumers actually want (when they stay)</h3>
+<p>Prior 2nd-B X/review synthesis shows retention drivers are <strong>not</strong> "I feel healed" but:</p>
+<ul>
+  <li><strong>Memory compounding</strong> — "On this day" recall, streak as life archive (Day One praise; Loop Diary X post 272 likes).</li>
+  <li><strong>Low-friction capture</strong> — one line / voice; AI organizes in background.</li>
+  <li><strong>Grounded patterns</strong> — insights tied to <em>their</em> entries, not horoscope-grade personality (Barnum fatigue).</li>
+  <li><strong>Portability</strong> — data leaves with user (anti lock-in).</li>
+</ul>
+<p class="source">Day One Reddit cost fatigue: <a href="https://www.reddit.com/r/dayoneapp/comments/1g2r7z5/overall_thoughts_on_day_one_since_apple_launched/">r/dayoneapp</a> · Loop Diary: <a href="https://x.com/inkko44/status/1908948928541712507">x.com/inkko44/1908948928541712507</a> · prior grok consumer research 20260605-181500</p>
+
+<h3>1.2 Framing ladder — say / don't say</h3>
+<table>
+  <tr><th>Tier</th><th>Consumer-facing frame</th><th>Rationale</th></tr>
+  <tr>
+    <td><strong>Primary (safe)</strong></td>
+    <td>"Capture your life in low friction. Over time, see what <em>you</em> wrote — searchable, portable, yours."</td>
+    <td>Delivers value even if EW effect = zero for that user. Matches Day One / PKM power users.</td>
+  </tr>
+  <tr>
+    <td><strong>Secondary (honest)</strong></td>
+    <td>"Optional reflection: some people find writing helpful for clarity; research shows <strong>small average</strong> effects and it <strong>doesn't work for everyone</strong>."</td>
+    <td>Pre-empts wellness hype; builds trust with Barnum-skeptic segment.</td>
+  </tr>
+  <tr>
+    <td><strong>Tertiary (differentiator)</strong></td>
+    <td>"When patterns appear, we show <strong>observations from your entries</strong> — not a personality quiz. Tap any line to see the source note."</td>
+    <td>Separates from Reflectly/Rosebud "shallow" or horoscope-like AI (see §2).</td>
+  </tr>
+  <tr>
+    <td><strong>Avoid</strong></td>
+    <td>"Transform your mental health", "heal", "therapy", "diagnose", "scientifically proven to reduce anxiety", "daily journaling changes your brain"</td>
+    <td>Overclaim vs Frattaroli d≈0.15; therapy lexicon already blocked in 2nd-B; triggers Gen Z AI-wellness cynicism.</td>
+  </tr>
+</table>
+
+<h3>1.3 Trust + retention without over-promising</h3>
+<div class="key">
+  <strong>Recommended positioning sentence (EN marketing core)</strong><br>
+  <div class="copy">"2nd-B is a portable memory of your life — journal when you want, export always. If reflection helps you, we surface patterns from <em>your</em> words with honest uncertainty — never a diagnosis, never astrology for HR."</div>
+</div>
+
+<ol>
+  <li><strong>Heterogeneity upfront</strong> — Onboarding one screen: "Research: expressive writing helps some people a little; for others it doesn't help or can feel worse if deep emotional writing isn't your style. 2nd-B works either way — capture and recall still matter."</li>
+  <li><strong>Expressiveness-safe defaults</strong> — Default prompts: factual / low emotional depth ("What happened?" "One line today"). Deep emotional EW-style prompts = opt-in with warning (mirrors PubMed contraindication).</li>
+  <li><strong>Engagement without guilt</strong> — No streak shame; celebrate archive depth ("127 days captured") not "don't break the chain" (subscription guilt pattern on Day One Reddit).</li>
+  <li><strong>Outcome honesty in-app</strong> — Insights labeled "early signal (3 entries)" vs "recurring pattern (12+ entries)" — aligns science (engagement moderator) with UX.</li>
+  <li><strong>Retention hook = compound asset</strong> — Push/onboarding emphasize "future you will want this record" and portable export, not mood improvement guarantees.</li>
+</ol>
+
+<h3>1.4 Competitive tone scan (2024–2026)</h3>
+<ul>
+  <li><strong>Rosebud (Mashable)</strong> — Praises insight speed but journalist notes EW "isn't universal", cites expressiveness backfire PMC link. Still uses "improving well-being and mental health" in places — mixed honesty.</li>
+  <li><strong>Reflectly (Choosing Therapy)</strong> — "Best for mood tracking beginners"; criticized for <strong>shallow AI insights</strong>.</li>
+  <li><strong>Casey Douglass Rosebud review</strong> — Values 24/7 venting and validation; notes circular AI replies — users want depth but fear false profundity.</li>
+</ul>
+<p class="source"><a href="https://mashable.com/article/rosebud-ai-journaling">Mashable Rosebud</a> · <a href="https://choosingtherapy.com/reflectly-app-review/">Choosing Therapy Reflectly</a> · <a href="https://www.casey-douglass.com/2024/10/app-review-rosebud.html">Casey Douglass review</a></p>
+
+<h2>2. AI self-insight delivery: tentative observations vs confident statements</h2>
+
+<h3>2.1 Barnum skepticism (prior research + fresh social)</h3>
+<p>Segmented X research flagged <strong>generic insights skepticism (Barnum)</strong> as cross-cutting. Consumers literate in Forer/Barnum effect resist confident personality claims from AI journals.</p>
+<ul>
+  <li>X — Barnum effect explainer thread (personality tests / vague statements): <a href="https://x.com/Marvytexh/status/2062122250384585018">Marvytexh</a></li>
+  <li>X — "MBTI astrology for HR": <a href="https://x.com/thebogbitch/status/2062157743465586899">thebogbitch</a></li>
+  <li>X — labels as pseudo-science: <a href="https://x.com/OakfieldSzn/status/2062199098489385268">OakfieldSzn</a></li>
+  <li>LinkedIn — psych educator: AI journal "shockingly accurate" = often <strong>reflecting your self-view</strong>, not hidden truth; horoscope parallel: <a href="https://www.linkedin.com/posts/carmen-leiser_what-horoscopes-and-ai-journals-have-in-common-activity-7427365820290367488-PD9F">Carmen Leiser</a></li>
+  <li>mindpeers.co — generic personality descriptions "ripe for Barnum exploitation"</li>
+</ul>
+<p class="source"><a href="https://mindpeers.co/blog/barnum-effect-personality-tests">mindpeers Barnum</a> · grok risk deep-dive 20260605-183230</p>
+
+<h3>2.2 Consumer preference pattern</h3>
+<table>
+  <tr><th>Style</th><th>Typical reaction</th><th>Example signal</th></tr>
+  <tr>
+    <td><strong>Confident trait labels</strong><br>"You are an anxious perfectionist"</td>
+    <td>High initial wow, then distrust / "astrology app" / churn among skeptics</td>
+    <td>MBTI fatigue X; Reflectly shallow AI criticism</td>
+  </tr>
+  <tr>
+    <td><strong>Confident + validating (Rosebud-style)</strong></td>
+    <td>Works for users craving mirroring; risk echo chamber + Barnum (Leiser); "circular" when overused (Douglass)</td>
+    <td>Mashable, Casey Douglass review</td>
+  </tr>
+  <tr>
+    <td><strong>Tentative + sourced</strong><br>"In 4 entries you mentioned X when Y"</td>
+    <td><strong>Best for 2nd-B target</strong> (builders, psych-skeptics): feels falsifiable, respects intelligence</td>
+    <td>Prior rec: "validated psych + source transparency + no therapy language"</td>
+  </tr>
+  <tr>
+    <td><strong>Pure mirroring / whining fatigue</strong></td>
+    <td>Gen Z: tired of "observation and whining" AI journaling without agency</td>
+    <td>grok segmented deep-dive 20260605-185000</td>
+  </tr>
+</table>
+
+<h3>2.3 Confidence ladder (product spec)</h3>
+<div class="panel">
+  <p><strong>Level 0 — Mirror</strong> (default for new users): "You wrote that …" / summary only. No trait inference.</p>
+  <p><strong>Level 1 — Tentative observation</strong>: "You <em>often</em> mention … (4 of last 6 entries)" + tap-to-source.</p>
+  <p><strong>Level 2 — Pattern</strong> (threshold e.g. ≥8 entries, ≥3 weeks): "A recurring theme is …" still with citations.</p>
+  <p><strong>Level 3 — Hypothesis (psych framework)</strong>: "This <em>might</em> relate to …" + framework name (Big Five facet, SDT need) + <strong>disconfirm button</strong> ("doesn't fit").</p>
+  <p><strong>Never by default</strong>: "You are …", diagnostic labels, fixed personality types, % match scores.</p>
+</div>
+
+<h3>2.4 Copy templates (EN — for Codex/Claude)</h3>
+<table>
+  <tr><th>Use</th><th>Tentative (preferred)</th><th>Confident (avoid default)</th></tr>
+  <tr>
+    <td>Insight header</td>
+    <td>"Possible pattern · based on 6 entries"</td>
+    <td>"Your personality type is …"</td>
+  </tr>
+  <tr>
+    <td>Body</td>
+    <td>"On Mar 3 and Mar 9 you described feeling rushed before meetings."</td>
+    <td>"You're clearly someone who thrives under pressure."</td>
+  </tr>
+  <tr>
+    <td>Footer</td>
+    <td>"Not a diagnosis · tap entries to verify · wrong? dismiss"</td>
+    <td>"Our AI knows you better than you know yourself"</td>
+  </tr>
+</table>
+
+<h3>2.5 When confidence is acceptable</h3>
+<ul>
+  <li><strong>Descriptive facts</strong> from user text (dates, names, projects) — high confidence OK.</li>
+  <li><strong>Aggregates</strong> user can verify ("You journaled 12 days this month") — OK.</li>
+  <li><strong>Inferential psych</strong> — stay Level 1–3 with citations; upgrade confidence only after user taps "fits me" repeatedly (closed-loop, reduces Barnum exposure).</li>
+</ul>
+
+<h2>3. Integrated recommendations for 2nd-B</h2>
+
+<div class="key">
+  <strong>Develop-able actions (Claude / Codex)</strong>
+  <ol>
+    <li>Add <code>INSIGHT_CONFIDENCE</code> enum to insight cards (mirror | observation | pattern | hypothesis).</li>
+    <li>Marketing/onboarding: lead with memory + portability; wellness as optional footnote with heterogeneity disclaimer.</li>
+    <li>EW-depth prompts gated; include expressiveness-friendly "skip deep reflection" path.</li>
+    <li>Every inferential insight requires ≥1 entry link; dismiss / "doesn't fit" feeds suppression.</li>
+    <li>Ban confident trait headlines in AI prompt system rules (align with existing therapy lexicon ban).</li>
+  </ol>
+</div>
+
+<h2>4. Source index (real URLs)</h2>
+<h3>Science</h3>
+<ul class="small">
+  <li><a href="https://psycnet.apa.org/record/2006-20202-001">Frattaroli 2006 — APA PsycNet</a></li>
+  <li><a href="https://bpb-us-e2.wpmucdn.com/faculty.sites.uci.edu/dist/c/602/files/2019/08/Frattaroli-psych-bulletin-2006.pdf">Frattaroli 2006 — PDF</a></li>
+  <li><a href="https://pubmed.ncbi.nlm.nih.gov/23742666/">Expressiveness moderator RCT — PubMed</a></li>
+  <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3830620/">PMC3830620</a></li>
+  <li><a href="https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2023.1192595/full">Frontiers 2023 — elusive EW effects</a></li>
+  <li><a href="https://journals.sagepub.com/doi/full/10.1177/1745691617707315">Pennebaker — expressive writing review (Sage)</a></li>
+</ul>
+<h3>Social / reviews / competitors</h3>
+<ul class="small">
+  <li><a href="https://mashable.com/article/rosebud-ai-journaling">Mashable — Rosebud AI journaling (2024)</a></li>
+  <li><a href="https://www.casey-douglass.com/2024/10/app-review-rosebud.html">Casey Douglass — Rosebud review</a></li>
+  <li><a href="https://choosingtherapy.com/reflectly-app-review/">Choosing Therapy — Reflectly (shallow AI)</a></li>
+  <li><a href="https://www.linkedin.com/posts/carmen-leiser_what-horoscopes-and-ai-journals-have-in-common-activity-7427365820290367488-PD9F">LinkedIn — Carmen Leiser Barnum / AI journal</a></li>
+  <li><a href="https://x.com/Marvytexh/status/2062122250384585018">X — Barnum effect thread</a></li>
+  <li><a href="https://x.com/thebogbitch/status/2062157743465586899">X — MBTI astrology for HR</a></li>
+  <li><a href="https://x.com/OakfieldSzn/status/2062199098489385268">X — labels / pseudo-science</a></li>
+  <li><a href="https://x.com/inkko44/status/1908948928541712507">X — Loop Diary "on this day" (272 likes)</a></li>
+  <li><a href="https://www.reddit.com/r/dayoneapp/comments/1g2r7z5/overall_thoughts_on_day_one_since_apple_launched/">Reddit — Day One subscription fatigue</a></li>
+  <li><a href="https://www.reddit.com/r/digitaljournaling/comments/1j49a7w/i_tried_rosebud_ai_journaling_app/">Reddit — Rosebud trial</a></li>
+  <li><a href="https://www.reddit.com/r/digitaljournaling/comments/1m6fjja/heard_about_it_wondering/">Reddit — digitaljournaling discussion</a></li>
+  <li><a href="https://mindpeers.co/blog/barnum-effect-personality-tests">mindpeers — Barnum exploitation</a></li>
+</ul>
+
+<footer>
+  Grok consumer research · builds on 20260605-181500 consumer research, 183230 risk (Barnum), 185000 segmented X · Next: Claude → copy/insight schema implementation
+</footer>
+</div>
+</body>
+</html>

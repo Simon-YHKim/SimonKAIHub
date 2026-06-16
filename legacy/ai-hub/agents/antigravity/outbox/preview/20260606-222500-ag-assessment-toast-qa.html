@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Android Native QA: Assessment Save Toasts</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; background: #0f111a; color: #e8ecf8; padding: 2rem; max-width: 800px; margin: 0 auto; }
+    h1 { color: #6be3c9; }
+    .card { background: #1a1d2d; padding: 1rem; border-radius: 8px; border: 1px solid #3d435c; margin-top: 2rem; }
+    img { max-width: 100%; border-radius: 4px; border: 1px solid #0f111a; }
+    .timestamp { font-family: monospace; color: #8d98b8; margin-top: 1rem; }
+    .status-pass { color: #6be3c9; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Native QA: Assessment Save Toasts & Error Feedback</h1>
+  <p><strong>Device:</strong> Pixel 9 Pro XL Emulator</p>
+  <p><strong>Commit:</strong> <code>ac4fdde</code> (Cherry-picked from Codex)</p>
+  <p><strong>Status:</strong> <span class="status-pass">PASS</span> (토스트 레이아웃 및 Native 렌더링 정상)</p>
+
+  <div class="card">
+    <h3>Validation Checklists</h3>
+    <ul>
+      <li>[x] Save-failure feedback appears as a bottom <code>PremiumToast</code> without triggering the native blocking alert (<code>Alert.alert</code>).</li>
+      <li>[x] Toast renders above the bottom safe area and does <strong>not</strong> overlap the submit button or pagination controls.</li>
+      <li>[x] Answers state is preserved upon save failure, enabling immediate retry.</li>
+      <li>[x] No layout jumps/shifts observed on Android emulator in KO/EN.</li>
+    </ul>
+    
+    <h3>Big Five Assessment Screen</h3>
+    <img src="qa_big_five_toast.png" alt="Big Five Screen">
+  </div>
+
+  <div class="timestamp">[YYYY-MM-DD / HH:MM:SS] 2026-06-06 / 22:25:00 KST</div>
+</body>
+</html>

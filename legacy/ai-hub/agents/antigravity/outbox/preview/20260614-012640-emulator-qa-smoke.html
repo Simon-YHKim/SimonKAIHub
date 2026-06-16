@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>QA Smoke Test Report - 2nd-B</title>
+  <style>
+    body { font-family: sans-serif; background-color: #1a1a1a; color: #f0f0f0; padding: 20px; line-height: 1.6; }
+    h1, h2 { color: #88ccff; }
+    .pass { color: #66ff66; font-weight: bold; }
+    .warning { color: #ffcc00; }
+    .info { border: 1px solid #444; padding: 10px; margin: 10px 0; border-radius: 5px; background: #222; }
+  </style>
+</head>
+<body>
+  <h1>[QA Report] Emulator Smoke Test (main dfd83bb)</h1>
+  <p><strong>작성자:</strong> Antigravity<br><strong>작성일시:</strong> 2026-06-14 01:26 KST</p>
+  
+  <h2>1. 개요</h2>
+  <p>최신 main의 4대 핵심 화면(런치, 캡처, 챗, 페르소나)에 대한 네이티브 에뮬레이터 기능 스모크 테스트를 진행했습니다.</p>
+
+  <h2>2. 검증 항목 및 결과</h2>
+  <div class="info">
+    <ul>
+      <li><strong>App Launch (Graph):</strong> <span class="pass">PASS</span> - 정상 렌더링.</li>
+      <li><strong>Capture (담기):</strong> <span class="pass">PASS</span> - 탭 이동 및 트레이 렌더링 정상.</li>
+      <li><strong>Chat (SecondB):</strong> <span class="pass">PASS</span> - 탭 이동 및 모달("Hi, I'm SecondB") 노출 정상.</li>
+      <li><strong>Persona (나):</strong> <span class="pass">PASS</span> - Profile 진입 후 Persona 버튼 터치, 화면 이동("Gathering the pieces of you...") 정상.</li>
+      <li><strong>Auth-Elevation 경계:</strong> <span class="pass">PASS</span> - Guest 상태에서 크래시 없이 Placeholder 로딩 및 모달 정상.</li>
+    </ul>
+  </div>
+
+  <h2>3. 특이사항 (네트워크/API)</h2>
+  <p class="warning">더미 백엔드("demo.invalid.supabase.co")로 인한 <code>UnknownHostException</code> 에러가 Toast로 표시되나, UI 레이어 및 네비게이션 크래시를 유발하지 않으며 의도된 Graceful degradation 동작을 수행합니다.</p>
+</body>
+</html>

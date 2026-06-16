@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2nd-B UI Implementation Blueprint v2</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d0f12;
+      --panel: #151920;
+      --panel2: #10141a;
+      --line: #2a313c;
+      --text: #edf1f7;
+      --muted: #aab4c2;
+      --accent: #7dd3fc;
+      --danger: #fca5a5;
+      --warn: #fbbf24;
+      --ok: #86efac;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 36px 0 56px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 24px; }
+    h1 { margin: 0 0 10px; font-size: clamp(28px, 4vw, 44px); line-height: 1.08; letter-spacing: 0; }
+    h2 { margin: 30px 0 12px; font-size: 20px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 15px; letter-spacing: 0; }
+    p { margin: 0 0 12px; color: var(--muted); }
+    code { color: var(--ok); background: #0b1210; border: 1px solid #1f3a2b; border-radius: 5px; padding: 1px 5px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pill { border: 1px solid var(--line); background: var(--panel2); color: var(--muted); padding: 7px 10px; border-radius: 8px; font-size: 13px; }
+    .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .stat { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 14px; min-width: 0; }
+    .stat strong { display: block; font-size: 28px; line-height: 1; margin-bottom: 8px; }
+    .stat span { color: var(--muted); font-size: 13px; }
+    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .card { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 16px; min-width: 0; }
+    .card p { font-size: 14px; }
+    .tag { display: inline-block; margin-bottom: 9px; color: var(--accent); font-size: 12px; font-weight: 700; }
+    table { width: 100%; border-collapse: collapse; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--panel); }
+    th, td { border-bottom: 1px solid var(--line); padding: 11px 12px; text-align: left; vertical-align: top; font-size: 14px; }
+    th { color: var(--text); background: #11161d; width: 22%; }
+    tr:last-child td, tr:last-child th { border-bottom: 0; }
+    .warn { color: var(--warn); }
+    .danger { color: var(--danger); }
+    .ok { color: var(--ok); }
+    ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 4px 0; }
+    @media (max-width: 900px) {
+      .grid, .cards { grid-template-columns: 1fr; }
+      th, td { display: block; width: 100%; }
+      th { border-bottom: 0; padding-bottom: 4px; }
+      td { padding-top: 4px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>2nd-B UI 구현 블루프린트 v2</h1>
+      <p>현재 <code>claude/cycle-1-docs-consistency</code> 기준 전체 route를 다시 스캔하고, Claude가 바로 구현할 수 있는 PR 단위로 정리했습니다.</p>
+      <div class="meta">
+        <span class="pill">from: Codex</span>
+        <span class="pill">to: Claude</span>
+        <span class="pill">project: 2nd-B</span>
+        <span class="pill">created: 2026-06-05 19:40 KST</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Current Scan</h2>
+      <div class="grid">
+        <div class="stat"><strong>44</strong><span>current route files</span></div>
+        <div class="stat"><strong>5</strong><span>dev preview routes remain</span></div>
+        <div class="stat"><strong>22</strong><span>long ScrollView no virtualization candidates</span></div>
+        <div class="stat"><strong>4</strong><span>coming-soon user-copy clusters</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>PR Plan</h2>
+      <div class="cards">
+        <article class="card">
+          <span class="tag">PR-A</span>
+          <h3>Branch 정합 + dead route 제거</h3>
+          <p><code>asset-motion-preview*</code> 5개 route, layout stack entry, BackArrow pre-auth path를 제거하고 Phase6 UI 정리를 current docs branch에 통합합니다.</p>
+        </article>
+        <article class="card">
+          <span class="tag">PR-B</span>
+          <h3>ScreenLane + Public Trust</h3>
+          <p>auth/manual/support/settings 화면에 max-width lane을 적용하고, support/manual/sign-in/sign-up에서 export/delete/source/no-diagnosis를 로그인 전 노출합니다.</p>
+        </article>
+        <article class="card">
+          <span class="tag">PR-C</span>
+          <h3>/journal CTA + Coming Soon sweep</h3>
+          <p><code>/journal</code>은 redirect compatibility로만 유지하고, 사용자 버튼/링크는 <code>/capture</code> 또는 <code>/records</code>로 바꿉니다. coming-soon CTA도 제거합니다.</p>
+        </article>
+        <article class="card">
+          <span class="tag">PR-D</span>
+          <h3>Evidence Trail</h3>
+          <p>Persona, Insights, Core Brain, assessment 결과 카드에 evidence/source/count/why link를 붙여 AI memory drift/accountability 리스크를 줄입니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Screen Groups</h2>
+      <table>
+        <tr>
+          <th>Public/Auth</th>
+          <td><code>sign-in</code>, <code>sign-up</code>, <code>complete-profile</code>, <code>manual</code>, <code>permissions</code>, <code>support</code>. Lane + public trust + placeholder removal이 우선입니다.</td>
+        </tr>
+        <tr>
+          <th>Capture/Records</th>
+          <td><code>capture</code>, <code>records</code>, <code>wiki</code>, <code>inbox</code>, <code>record/[id]</code>. /journal CTA sweep, FlatList 후보 고정, export-first UX가 필요합니다.</td>
+        </tr>
+        <tr>
+          <th>AI/Advisor</th>
+          <td><code>jarvis</code>, <code>interview</code>, <code>import</code>, <code>research</code>, <code>imagine redirect</code>. Keyboard/safe-area QA와 evidence/source copy 정리가 필요합니다.</td>
+        </tr>
+        <tr>
+          <th>Self Model</th>
+          <td><code>audit</code>, <code>big-five</code>, <code>attachment</code>, <code>mbti</code>, <code>persona</code>, <code>core-brain</code>, <code>insights</code>, <code>trinity</code>. Evidence Trail과 MBTI demotion이 핵심입니다.</td>
+        </tr>
+        <tr>
+          <th>Settings</th>
+          <td><code>settings</code>, <code>profile</code>, <code>privacy</code>, <code>account</code>, <code>data</code>, <code>theme</code>. Danger zone은 export-first로 재정렬하고 stale TIPI/full-wipe redirect를 고칩니다.</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Top Fixes</h2>
+      <table>
+        <tr>
+          <th>ScreenLane</th>
+          <td>Add <code>ScreenLane</code> to <code>src/components/premium/background.tsx</code>, export it, then wrap auth/form/guide/settings/wide screens.</td>
+        </tr>
+        <tr>
+          <th>Support Public</th>
+          <td>Remove <code>useAuth</code>/<code>Redirect</code> from <code>src/app/support.tsx</code>. Replace FAQ placeholder with concrete support/trust actions.</td>
+        </tr>
+        <tr>
+          <th>/journal Sweep</th>
+          <td>Change user-facing links in <code>+not-found</code>, <code>audit</code>, <code>core-brain</code>, <code>index</code>, <code>insights</code>, <code>onboarding</code>, <code>persona</code>, <code>settings</code>, <code>trinity</code>, <code>wiki</code>, <code>village-ui</code>.</td>
+        </tr>
+        <tr>
+          <th>Evidence Trail</th>
+          <td>Keep Core Brain drawer, then add source/count/why affordances to Persona and Insights cards. MBTI remains reference-only.</td>
+        </tr>
+        <tr>
+          <th>Settings/Data</th>
+          <td>Fix <code>router.replace("/journal")</code>, stale <code>Big Five (TIPI)</code>, and surface export before destructive actions.</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Acceptance</h2>
+      <ul>
+        <li><code>rg -n 'asset-motion-preview|Stack\.Screen name="asset' src/app src/components src/lib</code> has no user-facing route leftovers.</li>
+        <li><code>rg -n 'router\.(replace|push)\("/journal"|href="/journal"|primaryRoute:\s*"/journal"'</code> has no user-facing CTA leftovers.</li>
+        <li><code>rg -n 'coming soon|Coming soon|곧 지원|곧 추가|준비 중' src/app src/components</code> has no user-facing placeholder.</li>
+        <li>390x844 and 1440x1100 render checks show no horizontal overflow on public/auth/settings screens.</li>
+        <li>Persona, Insights, Core Brain judgment cards expose source/evidence/count/why affordances.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>미성년 AI-리터러시 ENABLEMENT — 제한이 아니라 학습자 면허 (2026-06-14)</title>
+<style>
+  @font-face{font-family:'Pretendard';font-weight:45 920;font-display:swap;
+    src:url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/woff2/PretendardVariable.woff2') format('woff2-variations');}
+  :root{
+    --bg:#f6f6fb; --surface:#ffffff; --ink:#1b1b24; --muted:#6b6b7a;
+    --line:#e6e6ef; --accent:#3f7a4f; --accent-soft:#eaf4ec;
+    --keep:#3f7a4f; --keep-soft:#eaf4ec; --flip:#5a4bd4; --flip-soft:#efedfb;
+    --rail:#a23a4d; --rail-soft:#f7e9ec;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard',system-ui,sans-serif;background:var(--bg);color:var(--ink);
+    line-height:1.62;-webkit-font-smoothing:antialiased;padding:48px 20px;font-size:15px;letter-spacing:-.01em}
+  .wrap{max-width:1060px;margin:0 auto}
+  header{margin-bottom:30px;border-bottom:1px solid var(--line);padding-bottom:22px}
+  .kicker{font-size:12.5px;color:var(--accent);font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px}
+  h1{font-size:26px;font-weight:780;letter-spacing:-.025em;line-height:1.25}
+  .sub{color:var(--muted);margin-top:10px;font-size:14px}
+  .hero{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:12px;padding:20px 22px;margin:26px 0 34px;font-size:15.5px}
+  .hero b{color:var(--accent)}
+  .bike{font-size:17px;font-weight:740;color:var(--accent);margin-top:10px;display:block}
+  h2{font-size:18px;font-weight:740;letter-spacing:-.02em;margin:38px 0 13px;display:flex;align-items:baseline;gap:10px}
+  h2 .n{color:var(--muted);font-size:13px;font-weight:600}
+  table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);
+    border-radius:12px;overflow:hidden;font-size:13px;margin-top:6px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#fafafe;font-weight:680;font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:#fafaff}
+  code{font-family:'SFMono-Regular',Consolas,monospace;font-size:.87em;background:#f1f1f8;padding:.5px 4px;border-radius:4px}
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;padding:1.5px 7px;border-radius:20px;white-space:nowrap}
+  .t-keep{background:var(--keep-soft);color:var(--keep)} .t-flip{background:var(--flip-soft);color:var(--flip)} .t-rail{background:var(--rail-soft);color:var(--rail)}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+  @media(max-width:760px){.cols{grid-template-columns:1fr}}
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .panel.keep{border-left:3px solid var(--keep)} .panel.flip{border-left:3px solid var(--flip)}
+  .panel h3{font-size:14px;font-weight:720;margin-bottom:8px}
+  .panel.keep h3{color:var(--keep)} .panel.flip h3{color:var(--flip)}
+  .panel ul{list-style:none;font-size:12.5px}
+  .panel li{padding:4px 0;border-bottom:1px dashed var(--line)}
+  .panel li:last-child{border-bottom:none}
+  .lanes{display:flex;flex-direction:column;gap:11px;margin-top:6px}
+  .lane{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:14px 16px;border-left:3px solid var(--flip);font-size:13px}
+  .lane.star{border-left-color:var(--accent);background:var(--accent-soft)}
+  .lane h3{font-size:14px;font-weight:720;margin-bottom:3px}
+  .lane .m{color:var(--muted);font-size:12px;margin-top:5px}
+  .lane .seat{font-size:11px;color:var(--flip);font-weight:600;margin-top:5px}
+  .stage td:first-child{font-weight:700;color:var(--accent);white-space:nowrap}
+  .railbox{background:var(--rail-soft);border:1px solid var(--line);border-left:3px solid var(--rail);border-radius:12px;padding:16px 20px;margin-top:6px;font-size:13.5px}
+  .railbox b{color:var(--rail)}
+  .railbox ol{margin:8px 0 0 18px}
+  .railbox li{padding:3px 0}
+  .flags{background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:14px 18px;margin-top:6px;font-size:12.5px;color:var(--muted)}
+  .flags b{color:var(--ink)}
+  footer{margin-top:42px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .copybtn{position:fixed;top:18px;right:18px;background:var(--ink);color:#fff;border:none;border-radius:9px;
+    padding:9px 15px;font-size:12.5px;font-weight:640;font-family:inherit;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.12);transition:background .15s}
+  .copybtn:hover{background:var(--accent)} .copybtn.ok{background:var(--keep)}
+</style>
+</head>
+<body>
+<button class="copybtn" id="cp">Copy as Markdown</button>
+<div class="wrap">
+
+<header>
+  <div class="kicker">2nd-B × 4-AI Hub · Minor handling</div>
+  <h1>미성년 AI-리터러시 ENABLEMENT — 제한이 아니라 학습자 면허</h1>
+  <div class="sub">5렌즈 워크플로(2nd-B 코드 + AI-리터러시 교육학 + scaffold-vs-prohibition + 법규 + 실위험) grounded · 6 agents / 147 tool-calls / ~807K tokens · 2026-06-14 KST</div>
+</header>
+
+<div class="hero">
+  <b>가장 중요한 발견:</b> 지금 2nd-B 코드에는 "미성년에게 AI를 끄는" 역량 제한이 <b>사실상 존재하지 않는다</b>. <code>isMinor</code>(&lt;18)는 LLM 파이프라인 전체에서 단 하나 — <b>위기 핫라인을 청소년전화 1388로 라우팅</b>하는 데에만 닿는다(<code>safety.ts:266</code>, <code>classifier.ts:58</code>). 모델·프롬프트·RAG·페르소나 깊이는 14세나 40세나 바이트 단위로 동일하다.
+  나머지 미성년 조건부 동작은 전부 <b>데이터·웰빙 레일</b>(가입 하한·egress 잠금·광고/training 차단·위기 라우팅)이고, 이건 아이의 <b>데이터</b>를 지킬 뿐 <b>AI가 무엇을 가르칠지</b>는 안 건드린다.
+  <span class="bike">→ 풀 게 없다. "보조바퀴(scaffolding)"는 얹었다 빼되, "자전거(AI 역량)"는 절대 느려지지 않는다. 미션은 안전설계에 맞서서가 아니라 안전설계에 의해 달성된다.</span>
+</div>
+
+<h2>1. 유지 vs 뒤집기 <span class="n">— (A)데이터 레일 [법적·학습무관] vs (B)역량 제한 [선택]</span></h2>
+<div class="cols">
+  <div class="panel keep">
+    <h3>KEEP — 법적 의무, DATA에 관한 것, 학습 안 건드림</h3>
+    <ul>
+      <li><b>K1</b> 만 14세 미만 가입 차단 — PIPA §22-2 / COPPA / GDPR Art.8</li>
+      <li><b>K2</b> 위기→청소년 핫라인(1388), 항상 ON·tier무관 — <b>진짜 하드레일</b></li>
+      <li><b>K3</b> 미성년 egress 잠금(ads/share/analytics/training=false) — Children's Code Std7 / GDPR Art.25</li>
+      <li><b>K5</b> 불변 동의 원장 — GDPR Art.7(1)</li>
+      <li><b>K6</b> 민감(정신건강) 별도 동의 — GDPR Art.9 / PIPA §23</li>
+      <li><b>K10</b> 비임상 어휘 가드 — <b>이건 enabling</b>(자유롭게 가르치게 함)</li>
+      <li><b>K11</b> AI-vs-인간 고지 — <b>신설 필요</b>(EU AI Act Art.50 / 韓 AI기본법 §13)</li>
+      <li><b>K12</b> 아동 DPIA — <b>최우선 부채(미작성)</b></li>
+    </ul>
+  </div>
+  <div class="panel flip">
+    <h3>FLIP — 법이 아닌 선택 → enablement로 교체</h3>
+    <ul>
+      <li><b>F0</b> "미성년 AI 기본 OFF" → <b>돌아가는 코드엔 없음</b>. 명칭만 "data-protection rails"로 개명, AI는 풀 ON 유지</li>
+      <li><b>F1</b> recommendations 미성년 OFF → <b>ON + "왜 이걸?" 투명성 + 원터치 OFF</b>(egress 없음 = 학습용)</li>
+      <li><b>F2</b> scaffold가 유료 Advisor에만 → <b>tier무관 무료 경로에 부착</b>(가격에 의한 (B)캡 방지)</li>
+      <li><b>F3</b> long_term_memory opt-in → <b>retention(A,잠금) / personalization(B,graded) 분리</b></li>
+      <li><b>F4</b> 비임상 가드 = 미성년 제한? <b>아님</b>. K10 유지</li>
+    </ul>
+  </div>
+</div>
+
+<h2>2. 학습자 면허 모델 <span class="n">— OFF/ON의 대체 (보조바퀴만 사라짐)</span></h2>
+<table>
+  <thead><tr><th>단계</th><th>AI 역량</th><th>보이는 scaffolding</th><th>과의존 friction</th></tr></thead>
+  <tbody class="stage">
+    <tr><td>L0 학습자<br>(신규 기본)</td><td>Full</td><td>provenance 1줄 + evidence 칩 + verify-nudge + 리터러시 micro-lesson 회전</td><td>5연속 무수정 수용 시 "이번 건 반박해볼래?"</td></tr>
+    <tr><td>L1 임시</td><td>Full</td><td>scaffold collapsible, nudge↓, lesson 온디맨드</td><td>streak에만</td></tr>
+    <tr><td>L2 독립</td><td>Full</td><td>nudge는 저신뢰/YELLOW존/고위험에만, provenance 1탭 뒤</td><td>회귀 시에만</td></tr>
+    <tr><td>L3 멘토</td><td>Full</td><td>최소 레일. AI가 가끔 역할전환("뭘 보고 확인했어?")</td><td>없음</td></tr>
+  </tbody>
+</table>
+<p class="sub" style="margin-top:10px">역량 축 = 모든 미성년에게 <b>MAX·상수</b>(코드가 이미 그러함). competence 신호(evidence_open_rate·ai_override_rate·flagged_wrong)는 전부 <b>first-party·on-device</b>(미성년 external_analytics 잠김 → 외부 송출 0). 과의존 회귀 시 가이던스가 <b>두꺼워질 뿐 AI는 약해지지 않음</b> — 처벌 아닌 harm-reduction. 성인도 opt-in 가능 → "kid mode" 아니라 "좋은 AI 시민성"(non-stigmatizing). 비대칭 hysteresis(승급 ≥0.6·14일 / 강등 &lt;0.4·7일)로 깜빡임 방지.</p>
+
+<h2>3. 추가할 ENABLING 역할 <span class="n">— "제한 말고 다른 것"의 답</span></h2>
+<div class="lanes">
+  <div class="lane star">
+    <h3>★ Lane 1 · AI-리터러시 / Scaffolded-Autonomy (센터피스 = 미션 그 자체)</h3>
+    <div>프롬프트 리터러시·출력 비판평가·메타인지(UNESCO/DigComp). <code>users.learner_stage</code> 1열 + 후속 카드에 provenance/evidence/verify-nudge/micro-lesson/"이거 이상한데" 플래그. 기존 XP 엔진 재사용 → 아트 비용 ~0.</div>
+    <div class="seat">Claude(교육로직) · Codex(렌더+copy) · Gemini-AG(14세 a11y QA) · Grok(UNESCO 1차출처) · 와이어 §29→§26→aha-moment · §30 paywall 금지 · §35 ai-debate 필수 · leverage 최상/effort 중</div>
+  </div>
+  <div class="lane">
+    <h3>Lane 2 · "Show-your-work" 투명성을 모든 AI 표면으로</h3>
+    <div>자동화 편향·오라클화 방지. 챗에 이미 있는 grounding strip + 레퍼런스 drawer를 Advisor/persona 카드로 일반화(<code>create.ts</code>가 이미 evidence[]+DOI 반환). <span class="seat">Codex · Gemini-AG · leverage 높음 / effort 낮음(절반 구현됨)</span></div>
+  </div>
+  <div class="lane">
+    <h3>Lane 3 · Calibrated-humility "금지 프레이밍" copy-law (CI 강제)</h3>
+    <div>sycophancy·자기상 왜곡 방지. 어휘가드 확장으로 "we know you better than yourself"류 차단 + dual display 의무("너는 X라 했고 기록은 Y에 가까워 — 둘 다 사실일 수 있어"). <span class="seat">Claude(정본) · Grok · leverage 높음 / effort 낮음</span></div>
+  </div>
+  <div class="lane">
+    <h3>Lane 4 · "내 생각 먼저" 인지강제 (skippable·fade)</h3>
+    <div>과의존 직격(Buçinca 2021: 먼저 견해 commit→overreliance↓). 응답 공개 전 한 줄 해석→나란히 비교. friction caveat 내장(XP 보상+skippable). <span class="seat">Codex · Gemini-AG(14 vs 17세 QA) · §35 토론(default-on 논쟁)</span></div>
+  </div>
+  <div class="lane">
+    <h3>Lane 5 · "AI는 네 치료사가 아냐" 경계 온보딩 + Art.50 고지 (1surface)</h3>
+    <div>"false sense of competence"를 이름으로 가르침. 온보딩 1스크린(나는 AI다·틀릴 수 있다·확인법·결정은 너·어떤 건 사람에게). <b>K11 법적 고지 동시 충족</b>. <span class="seat">Codex · Claude(법문구) · Grok(KR/글로벌 변형) · leverage 높음(1타2피)/effort 낮음</span></div>
+  </div>
+  <div class="lane">
+    <h3>Lane 6 · 과의존 self-mirror / 의존 코치 (캡 아님)</h3>
+    <div>파라소셜 의존 방지(APA 2025). cadence 급증 시 코칭 한 줄("한 사람에게 한 문장이라도 말해볼까?"). <b>명시적으로 분/일 캡 아님</b> — 진짜 도움받는 아이를 안 벌함. <span class="seat">Gemini-AG · Codex · Grok · leverage 중상/effort 중</span></div>
+  </div>
+  <div class="lane">
+    <h3>Lane 7·8 · "Check it yourself" 검증 카드 + recommendations ON + 데이터주권 뷰</h3>
+    <div>evidence payload를 인터랙티브로(동의·의심·검증). F1 실행(미성년 recommendations ON+투명성). "내 계정에서 나간 것 보기" → 데이터 주권 리터러시. <span class="seat">Codex · Gemini-AG(egress 경로 audit) · §35 토론</span></div>
+  </div>
+</div>
+
+<h2>4. 진짜 하드레일 <span class="n">— 단 5개, 전부 데이터/안전/투명, AI 교육 비제한</span></h2>
+<div class="railbox">
+  <b>가르침으로 대체 불가 + 법적 의무. "enablement" 명목으로도 약화 금지:</b>
+  <ol>
+    <li><b>위기→인간 핸드오프</b> — 결정론·인간작성 고정 템플릿(LLM 생성 절대 X)·미성년 1388·3중 차단. AI가 멈추고 사람에게 넘김.</li>
+    <li>동의 전 민감정보 egress 없음</li>
+    <li>미성년 데이터로 training/ads 없음</li>
+    <li>알려진 isMinor 무단 다운그레이드 없음</li>
+    <li>AI-vs-인간 고지(anti-deception, Art.50 — 현 빌드 갭, 신설)</li>
+  </ol>
+  <div style="margin-top:10px">과의존은 <b>코칭(분/일 캡 아님)</b>. CSM/Stanford "18세 미만 companion 금지"(2025.11)는 <b>judo</b> — 2nd-B = scaffolded reflection + 하드 위기 핸드오프 + 리터러시 커리큘럼이지 <b>companion bot 아님</b>을 §35 토론에서 입증(D-19).</div>
+</div>
+
+<h2>5. 토론 게이트 + 컴플라이언스 부채 <span class="n">— 혼자 결정 금지 / Simon 법무</span></h2>
+<table>
+  <thead><tr><th>안건</th><th>내용</th><th>게이트</th></tr></thead>
+  <tbody>
+    <tr><td><b>D-18</b></td><td>학습자면허 인지강제 미성년 default-on (enablement-default)</td><td>§35 ai-debate(소수의견: 8–13 memory 단순 OFF=최저비용 보존)</td></tr>
+    <tr><td><b>D-19</b></td><td>2nd-B = scaffolded reflection ≠ companion bot (CSM 긴장 해소)</td><td>§35 ai-debate</td></tr>
+    <tr><td><b>D-20</b></td><td>recommendations 미성년 ON + 투명성 (F1, 프라이버시 기본값 준가역)</td><td>§35 ai-debate</td></tr>
+    <tr><td class="t-rail" style="border-radius:6px"><b>빌드</b></td><td>위 enablement 기능 구현 착수</td><td><b>§11-5 Simon 법무 게이트</b>(동의·미성년 데이터핸들링)</td></tr>
+  </tbody>
+</table>
+
+<div class="flags">
+  <b>정직한 flag (counsel 사인오프 / 1차출처 확인 대기):</b> ① <b>K12 DPIA 미작성</b> = EU/UK 노출 전 법적 필수(최우선) · ② jurisdiction KR=14 하드코딩, 실 신호 부재(<code>LEXICON_LAST_LEGAL_REVIEW=null</code>) — counsel 전 비-KR 값 의존 금지 · ③ <b>export 경로 부재</b>(delete만, GDPR Art.20 갭) · ④ DOB 자기신고 = 가장 약한 age assurance(Children's Code Std3) · ⑤ unverified 수치(offloading↔비판사고 상관 등)는 방향성으로만 사용(14–17 인과 아님).
+  <br><br><b>출처(검증):</b> UNESCO AI Competency Framework for Students(2024) · CSM+Stanford(2025.11) · Buçinca/Gajos CSCW 2021 · DigComp 2.2 · APA Health Advisory(2025) · ICO Children's Code · FTC COPPA 2025 · GDPR Art.8/9/25 · PIPA §22-2/§23 · Raine v. OpenAI(2025) · EU AI Act Art.5/50 · 韓 AI기본법 §13.
+</div>
+
+<footer>
+  <span>미성년 ENABLEMENT 설계 · PROTOCOL §36 정본 · DECISIONS D-18~20</span>
+  <span>2026-06-14 KST · workflow wvx2pd0f6</span>
+</footer>
+
+</div>
+<script>
+const md = `# 미성년 AI-리터러시 ENABLEMENT — 제한이 아니라 학습자 면허 (2026-06-14)
+
+**핵심 발견**: 2nd-B 코드엔 미성년 AI 역량 제한이 사실상 없음 (isMinor는 위기 핫라인 라우팅에만 닿음). 나머지는 전부 데이터 레일(학습 무관). → 풀 게 없다. 보조바퀴(scaffolding)는 얹었다 빼되, 자전거(AI 역량)는 절대 느려지지 않는다. 미션은 안전설계에 의해 달성된다.
+
+## KEEP (법적·데이터·학습무관)
+K1 14세 가입하한 · K2 위기→1388(하드레일) · K3 egress 잠금 · K5 동의원장 · K6 민감동의 · K10 비임상가드(enabling) · K11 AI고지(신설) · K12 DPIA(최우선 부채)
+
+## FLIP (선택 → enablement)
+F0 "AI 기본 OFF"=코드엔 없음, 명칭만 개명 · F1 recommendations ON+투명성 · F2 scaffold를 무료 tier무관 경로에 · F3 retention(A)/personalization(B) 분리
+
+## 학습자 면허 (OFF/ON 대체)
+L0 학습자→L3 멘토. 역량은 모든 단계 Full·상수. scaffolding만 fade. competence 신호 first-party·on-device. 과의존 회귀→가이던스 두꺼워질 뿐 AI 안 약해짐(harm-reduction).
+
+## 추가 ENABLING 역할
+1.★AI-리터러시/scaffolded-autonomy(센터피스) 2.show-your-work 투명성 3.calibrated-humility copy-law 4."내 생각 먼저" 인지강제 5.경계 온보딩+Art.50 6.과의존 코치(캡 아님) 7/8.검증카드+recommendations ON+데이터주권뷰
+
+## 하드레일 5개 (약화 금지)
+위기→인간 · 동의전 egress없음 · training/ads없음 · isMinor 다운그레이드없음 · AI고지. 과의존=코칭(캡 아님). 2nd-B≠companion bot(D-19).
+
+## 게이트
+D-18/19/20 §35 ai-debate · 빌드=Simon 법무. 부채: DPIA 미작성·export 부재·KR=14 하드코딩.
+`;
+document.getElementById('cp').addEventListener('click',function(){
+  navigator.clipboard.writeText(md).then(()=>{this.textContent='✓ Copied';this.classList.add('ok');
+    setTimeout(()=>{this.textContent='Copy as Markdown';this.classList.remove('ok')},1600)}.bind(this));
+});
+</script>
+</body>
+</html>

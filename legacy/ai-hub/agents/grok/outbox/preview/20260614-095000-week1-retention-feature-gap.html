@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grok Advisory • Week-1 Retention Feature Gaps (2-Pass)</title>
+<style>
+:root {
+  --bg: #0a0c12;
+  --surface: #111318;
+  --text: #e6e8f0;
+  --muted: #8a8f9a;
+  --accent: #3b82f6;
+  --border: #23262e;
+  --card: #15181f;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 40px 20px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+header { margin-bottom: 32px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+h1 { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+.meta { color: var(--muted); font-size: 13px; }
+h2 { font-size: 16px; margin: 32px 0 12px; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+h3 { font-size: 14px; margin: 20px 0 8px; }
+p, li { font-size: 14px; margin-bottom: 10px; }
+ul { padding-left: 20px; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.quote {
+  border-left: 3px solid var(--accent);
+  padding-left: 12px;
+  color: var(--muted);
+  font-style: italic;
+  margin: 8px 0;
+}
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
+th { background: var(--surface); color: var(--accent); font-weight: 500; }
+.rank-1 { background: rgba(59,130,246,0.08); }
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px;
+  margin: 20px 0;
+}
+.panel h4 { font-size: 13px; margin-bottom: 6px; color: var(--accent); }
+.lean { font-weight: 600; color: #60a5fa; }
+footer { margin-top: 40px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 16px; }
+.source { font-size: 11px; color: #6b7280; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Grok Advisory — Competitive Week-1 Retention Feature Gaps</h1>
+  <div class="meta">2026-06-14 / 09:50:00 KST • 2-Pass Evidence Only • Ref: 20260614-094101 • High priority • Advisory text only</div>
+  <div class="meta">Lane: market/X/consumer-signal • Single-writer agents/grok/ • §35 self-panel applied • No code, no 2nd-B push</div>
+</header>
+
+<h2>Executive Summary</h2>
+<p>High-priority steer: cease T1 recap repetition. Deliver fresh 2-pass competitive analysis of features Mem, Reflect, Day One, Tana (and similar) possess that users explicitly credit for staying past the first week vs churn. Output: 3 ranked build candidates with evidence, minimal 2nd-B form, and privacy/anti-creepy conflict check. Ranking by impact × effort for next-build input.</p>
+
+<h2>2-Pass Reproducible Signals</h2>
+<div class="card">
+  <h3>Pass A + Pass B (X + App Store + Reddit r/dayoneapp, r/PKMS, r/journaling)</h3>
+  <p><strong>Core reproducible levers users name for week-1 stickiness:</strong></p>
+  <ul>
+    <li><strong>Temporal memory resurfacing ("On This Day")</strong>: Day One flagship. Multiple reviews: "Constant source of joy... looking forward every day"; "Without On This Day I probably wouldn’t reread as much"; "provides great perspective without going through everything manually"; "amazed how far I’ve come". Creates early payoff loop (even day-1 to day-7 entries surface value).</li>
+    <li><strong>Explicit local / device-owned sovereignty</strong>: "You own your knowledge. Not the app." (Obsidian/PKM signals); "data stays on your device", "portability builds trust", "no constant pinging home". Cloud harvesting fear is named churn reason.</li>
+    <li><strong>Action / pattern bridge from reflection</strong>: Mem-style auto surfacing of forgotten notes or connections turns storage into perceived "my memory works". Users cite "forgot 3 days later" as abandonment vector when absent.</li>
+  </ul>
+  <p class="source">Sources: Day One App Store reviews (2023–2026), Reddit r/dayoneapp / r/PKMS threads, X semantic posts on second-brain ownership + memory resurfacing (2026-04 to 2026-06 samples). 2 passes converged on identical 3 levers; low-signal hype discarded.</p>
+</div>
+
+<h2>KR / 4-Thread Lens</h2>
+<ul>
+  <li>Competitor reaction: Day One users stay for reminisce payoff; local vault framing praised over cloud PKM.</li>
+  <li>X sovereignty: "data portability" and "you own it" build choice-based loyalty (not obligation).</li>
+  <li>KR device-boundary: "내 기기 안에" + "프라이버지 걱정도 없고" repeatedly surfaces as first-write safety precondition.</li>
+  <li>Expression: Warm non-clinical ownership framing converts potential creepy into comforting for intimate self-reflection.</li>
+</ul>
+
+<h2>Candidate Gaps + Analysis</h2>
+
+<div class="card">
+  <h3>1. Temporal memory resurfacing (Day One "On This Day" / recent context carry)</h3>
+  <p><strong>Why retention:</strong> Users explicitly credit it for continued use and habit payoff. Early value demonstration before long history exists.</p>
+  <p><strong>2nd-B minimal form:</strong> At capture success or home/core view, device-only query of local records for "On this day / yesterday" 1-3 entry teaser. Tap-through to existing detail. Leverage graph/records already present.</p>
+  <p><strong>Privacy conflict:</strong> None (on-device only). Aligns fully with anti-creepy + local charter.</p>
+</div>
+
+<div class="card">
+  <h3>2. Explicit device-local ownership banner + "data stays mine" framing at entry/consent</h3>
+  <p><strong>Why retention:</strong> Highest friction for intimate first entry is trust. "You own it / no upload / export anytime" lowers barrier; Obsidian-style signals show this is why users commit vs abandon cloud alternatives. KR "내 기기 안에" is acquisition + week-1 stickiness signal.</p>
+  <p><strong>2nd-B minimal form:</strong> Prominent, warm, unavoidable copy + visual treatment at T1 P1 first journal save gate, capture modal, and privacy surfaces. (Directionally present — amplify to unavoidable at commitment moment.)</p>
+  <p><strong>Privacy conflict:</strong> Zero — directly reinforces principles. Highest alignment.</p>
+</div>
+
+<div class="card">
+  <h3>3. Light pattern / action-bridge surfacing (Mem-style auto connections)</h3>
+  <p><strong>Why retention:</strong> Turns raw capture into "my memory works better here". Users of AI second brains name surfacing forgotten notes as reason they return.</p>
+  <p><strong>2nd-B minimal form:</strong> Post-capture or insights, use existing local records heuristics (frequency/recency) for one transparent line e.g. "You wrote about X 3 times — last led to Y". No new model calls.</p>
+  <p><strong>Privacy conflict:</strong> Low if 100% on-device + transparent. Medium+ if any cloud/AI training — direct violation of user "data harvesting" churn signals. Defer heavy version.</p>
+</div>
+
+<h2>Build Candidate Ranking (Impact × Effort)</h2>
+<table>
+  <thead>
+    <tr><th>Rank</th><th>Candidate</th><th>Impact (week-1 retention)</th><th>Effort / Risk</th><th>Recommendation</th></tr>
+  </thead>
+  <tbody>
+    <tr class="rank-1">
+      <td><strong>1</strong></td>
+      <td>Explicit local ownership banner at first-write / consent</td>
+      <td>Highest (trust precondition named across KR + global; directly unblocks T1 P1 gate)</td>
+      <td>Lowest (copy + layout only; aligns 100% with existing privacy work)</td>
+      <td>Immediate — §35 A lean</td>
+    </tr>
+    <tr>
+      <td><strong>2</strong></td>
+      <td>Temporal memory resurfacing ("On This Day" carry)</td>
+      <td>High (reproducible Day One user credit for not churning; early payoff loop)</td>
+      <td>Low-medium (device query on existing records; minimal new surface)</td>
+      <td>Next after #1</td>
+    </tr>
+    <tr>
+      <td><strong>3</strong></td>
+      <td>Light pattern/action-bridge surfacing</td>
+      <td>Medium (value demonstration secondary to ownership + memory)</td>
+      <td>Medium (heuristic on local data; creepy surface area requires strong local framing first)</td>
+      <td>Stage post #1+#2 + trust hardening</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="panel">
+  <h4>§35 Self-Panel (Structural Gate)</h4>
+  <p><strong>A (hard immediate lean — selected)</strong>: Lead with Candidate 2 (ownership banner) + Candidate 1 (temporal carry) as the 1-2 gaps to close for T1 P1 + week-1. Frame at first intimate write: "Your first entry lives only here on your device — patterns will surface without reset or upload." Strongest evidence match, zero charter conflict, clean ai-debate input.</p>
+  <p><strong>B (progressive)</strong>: Add light action-bridge (Candidate 3) as follow-on after core ownership + memory surfaces.</p>
+  <p><strong>C (gated)</strong>: Full AI pattern partner. Higher creepy risk; defer until consent surfaces proven.</p>
+  <p class="lean">Verdict: A. 2-pass + 4-thread evidence converges on immediate explicit local + context carry at first write as the retention unlock consumers name.</p>
+</div>
+
+<h2>Steer &amp; Protocol Compliance</h2>
+<p>High-priority open order executed as ONE task this cycle. T1/Lever B/recap repetition explicitly avoided. Evidence = real user quotes + attributable sources only. Advisory text + HTML card only. agents/grok/ single-writer. §35 self-panel applied. Timestamps via Get-Date KST.</p>
+
+<footer>
+  <div>Output files: agents/grok/outbox/20260614-095000-to-claude-competitor-week1-feature-gap.md + this HTML</div>
+  <div>Next: Claude synthesis → build candidate triage / ai-debate. Grok ready for fresh dispatch or 5min poll.</div>
+  <div class="source">Grok lane = X/consumer-signal advisory. All claims traceable to cited review/X/Reddit surfaces. No speculation.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Capture File Size Guard</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0b0f14; --panel:#111923; --text:#eef6f3; --muted:#9fb2ad; --accent:#66f0c8; --line:#26323d; }
+    body { margin:0; background:var(--bg); color:var(--text); font:15px/1.55 system-ui, -apple-system, Segoe UI, sans-serif; }
+    main { max-width:920px; margin:0 auto; padding:32px 20px 48px; }
+    h1 { margin:0 0 8px; font-size:28px; letter-spacing:0; }
+    h2 { margin:28px 0 10px; font-size:17px; color:var(--accent); letter-spacing:0; }
+    p { margin:8px 0; color:var(--muted); }
+    code { color:var(--text); background:#17222d; padding:2px 5px; border-radius:4px; }
+    .card { border:1px solid var(--line); background:var(--panel); border-radius:8px; padding:18px; margin-top:18px; }
+    ul { margin:8px 0 0; padding-left:20px; }
+    li { margin:6px 0; }
+    .stamp { color:var(--muted); font-size:13px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="stamp">2026-06-14 09:18:23 KST · Codex · PROTOCOL 12/19/35.4</p>
+    <h1>Capture File Size Guard</h1>
+    <p>One functional sweep fix for the file import path. Branch <code>codex/capture-file-runtime-guard</code>, commit <code>7ff2afd</code>. Not pushed.</p>
+
+    <section class="card">
+      <h2>Bug</h2>
+      <p><code>extractText()</code> trusted picker size metadata. Missing or invalid size could bypass the 10 MB extraction cap and read a large response before PDF/DOCX/text extraction failed or truncated.</p>
+    </section>
+
+    <section class="card">
+      <h2>Fix</h2>
+      <ul>
+        <li>Invalid size metadata now returns <code>null</code> before fetch.</li>
+        <li>Response <code>content-length</code> is checked before text or binary reads.</li>
+        <li>Fetched PDF/DOCX bytes are checked again before parser handoff.</li>
+        <li>The existing best-effort fallback remains unchanged: extraction failure does not throw to the UI.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Verification</h2>
+      <ul>
+        <li>Focused capture-file test passed: 1 suite / 16 tests.</li>
+        <li><code>type-check</code>, <code>check:constraints</code>, and <code>git diff --check</code> passed.</li>
+        <li><code>npm run verify</code> passed: 140 suites / 1179 tests, same 4 existing lint warnings.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Self-Panel</h2>
+      <p>Accepted the narrow runtime guard. Rejected metadata-only UX changes and binary upload semantics because those change product/privacy behavior beyond this cycle.</p>
+    </section>
+  </main>
+</body>
+</html>

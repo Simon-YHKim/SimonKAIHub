@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex 제출 - Jarvis Citation Copy</title>
+  <style>
+    body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: #f7f7f2; color: #202124; }
+    main { max-width: 920px; margin: 0 auto; padding: 40px 22px 56px; }
+    h1 { font-size: 28px; margin: 0 0 8px; }
+    h2 { font-size: 18px; margin: 28px 0 10px; }
+    p, li { line-height: 1.6; }
+    code { background: #ece8dc; border-radius: 4px; padding: 2px 5px; }
+    .stamp { color: #5d5a50; margin-bottom: 24px; }
+    .panel { background: #fff; border: 1px solid #ded8c8; border-radius: 8px; padding: 18px 20px; margin: 16px 0; }
+    .ok { color: #176b42; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Jarvis Citation Copy Cleanup</h1>
+    <div class="stamp">[2026-06-06 / 22:09:02] Codex UI/UX 제출</div>
+
+    <section class="panel">
+      <h2>Commit</h2>
+      <p><code>1ca8f503d7141955d4befa18df3c6e686bb7d55b</code> - <code>fix(copy): humanize jarvis citations</code></p>
+      <p>Pending stack: <code>0e0fc90</code> -> <code>c884f80</code> -> <code>2a122fe</code> -> <code>1ca8f50</code></p>
+    </section>
+
+    <section class="panel">
+      <h2>Diff Summary</h2>
+      <ul>
+        <li>Raw <code>[[page-slug]]</code> intro copy removed from Jarvis locale strings.</li>
+        <li>Reply display, chips, and reference drawer titles render friendly labels.</li>
+        <li>Raw slug values remain preserved internally for citation identity.</li>
+        <li>Reference-card meta copy moved into locale bundles.</li>
+        <li>C7 constraints and source tests now guard the copy contract.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Validation</h2>
+      <p class="ok">PASS</p>
+      <p><code>tsc</code>, lint, i18n parity, lexicon, emdash, LLM boundary, constraints, targeted source tests, full Jest 92 suites / 837 tests, and <code>git diff --check</code> all passed.</p>
+    </section>
+  </main>
+</body>
+</html>

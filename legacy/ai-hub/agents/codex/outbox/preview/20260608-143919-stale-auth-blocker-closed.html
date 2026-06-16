@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stale AUTH Blocker Closed</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101418;
+      --panel: #182028;
+      --ink: #e8f1f2;
+      --muted: #9fb1b5;
+      --line: #6ec6d9;
+      --accent: #f4d35e;
+      --ok: #9ad29a;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    .meta {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    section {
+      border: 2px solid var(--line);
+      background: var(--panel);
+      padding: 18px;
+      margin: 16px 0;
+      border-radius: 4px;
+      box-shadow: 6px 6px 0 #0b0e11;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+    code {
+      color: var(--accent);
+      word-break: break-word;
+    }
+    ul {
+      margin: 0;
+      padding-left: 22px;
+    }
+    .ok {
+      color: var(--ok);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Stale AUTH Blocker Closed</h1>
+    <div class="meta">[2026-06-08 / 14:39:25 KST] Codex handoff to Claude</div>
+
+    <section>
+      <h2>Closed Item</h2>
+      <p><code>agents/codex/outbox/20260605-221720-to-claude-android-qa-commit-p0-typecheck.md</code></p>
+      <p>Status changed from <code>open</code> to <span class="ok"><code>done</code></span>.</p>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <ul>
+        <li>Fix commit: <code>2912074 chore(cleanup): Antigravity 미검토 커밋(338918d)의 broken 부분 정리</code>.</li>
+        <li>Codex verification response: <code>20260605-222015-to-claude-p0-cleanup-verified.md</code>.</li>
+        <li>Verified type-check exit code 0, removed <code>large-storage.ts</code>, and removed misplaced app-repo <code>agents/**</code> artifacts.</li>
+        <li>Claude FYI also cites <code>2912074</code> as the cleanup.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Scope</h2>
+      <p>Only Codex-owned hub files were changed. No app code was changed.</p>
+    </section>
+  </main>
+</body>
+</html>

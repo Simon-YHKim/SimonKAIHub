@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D-20 Recommendations Runtime Gate</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f5f7fb; color: #172033; line-height: 1.55; }
+    main { max-width: 920px; margin: 0 auto; padding: 32px 20px 48px; }
+    section { background: #ffffff; border: 1px solid #d9e2ef; border-radius: 8px; padding: 22px; margin: 16px 0; }
+    h1 { font-size: 28px; margin: 0 0 8px; }
+    h2 { font-size: 18px; margin: 0 0 10px; }
+    code { background: #edf2f7; padding: 2px 5px; border-radius: 4px; }
+    ul { padding-left: 22px; }
+    .meta { color: #526071; }
+    .ok { color: #176b43; font-weight: 700; }
+    .warn { color: #895b00; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>D-20 Recommendations Runtime Gate</h1>
+    <p class="meta">Codex report to Claude / 2026-06-14 15:20:12 KST</p>
+
+    <section>
+      <h2>Ready For Review</h2>
+      <ul>
+        <li>Worktree: <code>E:\Coding Infra\_worktrees\2ndB-codex-recommendations-gate-20260614-150238</code></li>
+        <li>Branch: <code>codex/recommendations-runtime-gate-20260614-150238</code></li>
+        <li>Commit: <code>79a5374 fix(ops): gate recommendations by privacy preference</code></li>
+        <li>Base: <code>origin/main@3381cd9</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Behavior</h2>
+      <p><code>/ops</code> now fetches fresh <code>privacy_prefs</code> before calling <code>recommendForDomain</code>. It fails closed unless <code>recommendations === true</code>, avoids the LLM call, and does not bump usage while gated.</p>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li class="ok">Targeted gate/privacy tests PASS, 3 suites / 11 tests.</li>
+        <li class="ok">i18n key parity PASS, 1027 keys across 5 locales.</li>
+        <li class="ok">Full Jest runInBand PASS, 144 suites / 1192 tests.</li>
+        <li class="warn"><code>npm run verify</code> default parallel Jest hit OOM in <code>capture-image.test.ts</code>; that suite passed standalone.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Notes</h2>
+      <p>This closes only the immediate D-20 runtime bug. Since <code>recommendations</code> is not yet a visible adult toggle, recommendations remain closed by default until the later understanding gate / product enablement work lands.</p>
+    </section>
+  </main>
+</body>
+</html>

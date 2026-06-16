@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>허브 규칙 고도화 리포트 · 2026-06-07</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+  :root{
+    --bg:#141319; --surface:#1c1a24; --surface2:#23212d; --border:#2e2b39;
+    --text:#e7e4f0; --muted:#9a96ab; --accent:#72f2c7; --accent-dim:#3d6b5e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;
+    line-height:1.65;font-size:15px;-webkit-font-smoothing:antialiased;padding:0 0 120px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  header{border-bottom:1px solid var(--border);padding:56px 0 32px;margin-bottom:8px}
+  header .kicker{color:var(--accent);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+  header h1{font-size:30px;font-weight:700;margin:14px 0 10px;letter-spacing:-.01em}
+  header .meta{color:var(--muted);font-size:13px;display:flex;flex-wrap:wrap;gap:18px;margin-top:14px}
+  header .meta b{color:var(--text);font-weight:600}
+  section{margin:48px 0}
+  h2{font-size:20px;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+  h2 .num{color:var(--accent);font-weight:700;margin-right:10px}
+  .lead{color:var(--muted);font-size:14px;margin-bottom:20px;max-width:80ch}
+  h3{font-size:15.5px;font-weight:650;margin:26px 0 10px;color:var(--text)}
+  p{margin:10px 0;max-width:84ch}
+  .muted{color:var(--muted)}
+  .accent{color:var(--accent)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+    background:var(--surface);position:sticky;top:0}
+  tr:hover td{background:var(--surface)}
+  td code,p code,li code{background:var(--surface2);color:var(--accent);padding:1px 6px;border-radius:4px;
+    font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12px}
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.05em;padding:2px 8px;border-radius:4px;
+    border:1px solid var(--border);white-space:nowrap}
+  .tag.major{color:var(--accent);border-color:var(--accent-dim)}
+  .tag.minor{color:var(--muted)}
+  .tag.done{color:var(--bg);background:var(--accent);border-color:var(--accent)}
+  .tag.gap{color:var(--accent);border-color:var(--accent-dim)}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:12px 0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:16px 0}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px}
+  .stat .n{font-size:26px;font-weight:700;color:var(--accent);letter-spacing:-.02em}
+  .stat .l{font-size:12.5px;color:var(--muted);margin-top:4px}
+  ul,ol{margin:10px 0 10px 22px}
+  li{margin:6px 0;max-width:82ch}
+  .toc{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin:24px 0}
+  .toc a{color:var(--text);text-decoration:none;display:block;padding:4px 0;font-size:13.5px;border-bottom:1px solid transparent}
+  .toc a:hover{color:var(--accent)}
+  .toc .n{color:var(--accent);display:inline-block;width:26px}
+  .tier{border-left:2px solid var(--accent-dim);padding:2px 0 2px 18px;margin:18px 0}
+  .tier h3{margin-top:0}
+  .pill{display:inline-block;font-size:11px;color:var(--muted);border:1px solid var(--border);border-radius:20px;padding:2px 10px;margin:0 6px 6px 0}
+  .quote{border-left:2px solid var(--accent-dim);padding:6px 0 6px 16px;color:var(--muted);font-style:normal;margin:10px 0}
+  .rec{background:var(--surface2);border:1px solid var(--accent-dim);border-radius:10px;padding:18px 22px;margin:16px 0}
+  .rec h3{color:var(--accent);margin-top:0}
+  .small{font-size:12px;color:var(--muted)}
+  footer{border-top:1px solid var(--border);margin-top:60px;padding-top:24px;color:var(--muted);font-size:12px}
+  a.src{color:var(--accent);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">4-AI Hub · Rule Hardening</div>
+  <h1>허브 규칙 고도화 리포트</h1>
+  <p class="muted" style="max-width:78ch">§27 운용강화 편집의 적대적 재점검 + Simon이 4-AI·Claude에게 내린 규칙·작업방법 지시 전수 마이닝 → 갭 분석 → 고도화 제안.</p>
+  <div class="meta">
+    <span>생성 <b>[2026-06-07 / 09:04:03 KST]</b></span>
+    <span>방법 <b>8-에이전트 워크플로</b> (리뷰1 + 마이너6 + 갭분석1)</span>
+    <span>코퍼스 <b>712 커밋 · 784 outbox · 81 src:user · 메모리/위키/루트설정</b></span>
+    <span>작성 <b>Claude (오케스트레이터)</b></span>
+  </div>
+</header>
+
+<div class="grid">
+  <div class="stat"><div class="n">5</div><div class="l">§27 재점검 MAJOR 결함</div></div>
+  <div class="stat"><div class="n">6</div><div class="l">즉시 수정·커밋 완료 (a3302a5)</div></div>
+  <div class="stat"><div class="n">100+</div><div class="l">마이닝된 Simon 규칙·방법 지시</div></div>
+  <div class="stat"><div class="n">29</div><div class="l">고도화 후보 (강화7·신설12·모순10)</div></div>
+</div>
+
+<div class="toc">
+  <a href="#s1"><span class="n">1</span>요약 — 무엇을 했고 무엇을 결정해야 하나</a>
+  <a href="#s2"><span class="n">2</span>§27 재점검 결과 (적대적 리뷰)</a>
+  <a href="#s3"><span class="n">3</span>즉시 적용한 수정 6건</a>
+  <a href="#s4"><span class="n">4</span>Simon 지시 전수 카탈로그 (규칙·작업방법)</a>
+  <a href="#s5"><span class="n">5</span>갭 분석 — 강화·신설·모순</a>
+  <a href="#s6"><span class="n">6</span>고도화 제안 (티어별) + 권고</a>
+</div>
+
+<!-- ============ 1 ============ -->
+<section id="s1">
+  <h2><span class="num">1</span>요약</h2>
+  <p class="lead">두 가지 작업을 했다. (A) 직전에 추가한 PROTOCOL §27(운용강화 10규칙)을 적대적으로 재점검했고, (B) Simon이 허브 출범(2026-06-05) 이후 4-AI와 Claude에게 내린 규칙·작업방법 지시를 6개 소스에서 전수 마이닝해 현행 헌법과 대조했다.</p>
+  <div class="card">
+    <p><b>핵심 발견.</b> §27 자체의 충실성(10개 지시 반영)·activate 4종 일관성은 양호하나, <span class="accent">실행 무결성에 MAJOR 5건</span>이 있었다 — 그중 일부는 §27이 만든 게 아니라 <b>기존 헌법의 버그(미정의 큐 버킷 E)를 전파</b>한 것이었다. 이 중 이론의 여지가 없는 <b>버그·내부모순 6건은 즉시 수정·커밋</b>했다. 마이닝 결과, Simon 지시는 시간순으로 <b>권한 위임 확대 → 사용자 개입 축소 → 자율·지속성 강화 → 검증 깊이 강화 → 적극성 의무화</b>로 진화했고, 위키·메모리·2nd-B 문서에 <b>아직 헌법에 안 올라온 검증된 작업방법(인코딩 안전·추측fix 금지·디자인-우선 등) 12건</b>이 잠들어 있다.</p>
+  </div>
+  <p><b>결정이 필요한 것:</b> §6의 고도화 제안 중 Tier 2~4(신설 §28/§29, 모순 정리, 레이어 이관)를 어디까지 적용할지. Tier 1(버그/모순 6건)은 이미 반영됨.</p>
+</section>
+
+<!-- ============ 2 ============ -->
+<section id="s2">
+  <h2><span class="num">2</span>§27 재점검 결과 — 적대적 리뷰</h2>
+  <p class="lead">독립 리뷰 에이전트가 PROTOCOL §27 + CONTROL + activate 4종을 정독하고 충실성·모순·교차참조·배치·실행가능성을 점검했다. 심각도순.</p>
+  <table>
+    <thead><tr><th>심각도</th><th>위치</th><th>문제</th><th>조치</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tag major">MAJOR</span></td><td>§25.1 ↔ §26.3 ↔ §27.9</td><td>존재하지 않는 큐 버킷 <b>"E"</b> 참조. §25.1은 큐를 A~D <b>4분류</b>로만 정의하는데 §26.3·§27.9가 "E. UX" 적재를 지시 → 깨진 교차참조(§27이 기존 버그 전파).</td><td><span class="tag done">FIXED</span> §25.1에 E 버킷 정식 추가·5분류로 정정</td></tr>
+      <tr><td><span class="tag major">MAJOR</span></td><td>§27.7</td><td>Windows라 Xcode/iOS 시뮬 <b>물리적 불가</b>인데 "Apple 생태계 시뮬레이션"을 한계 없이 나열 + "스크린샷·로그 증거" 요구 → AI가 iOS 동작을 <b>환각해 '검증됨' 보고</b>(허위증거 → 머지게이트 오염) 위험.</td><td><span class="tag done">FIXED</span> "정적/가정 점검만, iOS 실측 보고 금지" 명문화 + CONTROL 동기화</td></tr>
+      <tr><td><span class="tag major">MAJOR</span></td><td>§27.5·27.6·27.9</td><td>고비용 작업(deep-research 상시·멀티모달 생성·페르소나 200+)을 "적극 수행" 독려하면서 <b>비용 안전레일(§11-5) 미재기재</b> → §27만 읽는 AI가 비용 가드 우회 여지.</td><td><span class="tag done">FIXED</span> §27 서두에 "안전레일 불변(비용·파괴·secrets)" 헤더 추가</td></tr>
+      <tr><td><span class="tag major">MAJOR</span></td><td>섹션 배치</td><td>§16→§25→§26→§27→§17~§24 <b>비순차</b>. §27이 §19/§20/§21을 참조하나 모두 뒤쪽 섹션을 가리키는 <b>전방참조</b> → 내비게이션 무결성 저하.</td><td><span class="tag gap">제안</span> Tier 4: §25~§27 블록을 §24 뒤로 재배치(번호순 복원)</td></tr>
+      <tr><td><span class="tag major">MAJOR</span></td><td>§27.9</td><td>페르소나 규모 "연령대별 각 20명+"=200+ × 전기능 완주 → 토큰/시간 폭증, §12.2 throttle·비용과 충돌. CONTROL 요약 대비 <b>수치가 §27에서만 증폭</b>(과specification 가능성).</td><td><span class="tag gap">제안</span> Tier 3: 표본·빈도 현실화(밴드당 3~5명/분기) + 비용가드 연동, 또는 Simon 원지시 확인</td></tr>
+      <tr><td><span class="tag minor">MINOR</span></td><td>§27.4</td><td>"도태/써주지" 경쟁 인센티브가 §12.2 throttle·§25.4 중복방지·§20.1 자의채점금지와 긴장 → 가시성 위한 저가치 제안 양산 위험.</td><td><span class="tag gap">제안</span> "적극성=가치(머지·수렴) 기준, 제안 수 아님" 단서</td></tr>
+      <tr><td><span class="tag minor">MINOR</span></td><td>§12 ↔ §27.1 ↔ CONTROL</td><td>핵심 파라미터 "5분 주기"가 차터(§12) 정본엔 없고 가변 CONTROL·prose에만 산재 → 유실 위험.</td><td><span class="tag gap">제안</span> §12.1에 cadence 정본 명기</td></tr>
+      <tr><td><span class="tag minor">MINOR</span></td><td>§27.4 ↔ §23.3</td><td>"4-AI 공통 자발적 review 의무"가 "Grok 코드평가 안 함"과 충돌(blanket 표현).</td><td><span class="tag gap">제안</span> "review 의무는 자기 lane 한정(Grok=소비자 신호)" 단서</td></tr>
+      <tr><td><span class="tag minor">MINOR</span></td><td>§27.10·5·4·2</td><td>기존 §10.3/§16/§10.7/CONTROL과 중복·재정의 → 한쪽만 갱신 시 드리프트.</td><td><span class="tag gap">제안</span> "기존 §NN 강화"로 명시·중복 본문 참조 축약</td></tr>
+      <tr><td><span class="tag minor">MINOR</span></td><td>§27.1</td><td>비-Claude 압축 지침 모호 + 외장기억 목록에 PROPOSAL_QUEUE(Claude 전용)를 공통처럼 나열.</td><td><span class="tag gap">제안</span> 비-Claude는 "STATUS/outbox flush"로 구체화, QUEUE에 (Claude 전용) 주석</td></tr>
+    </tbody>
+  </table>
+  <p class="small">그 외 NIT 1건(§27.4 구어체 인용 톤). 양호 확인: §27.1~10 = 정확히 10개로 지시 수량 일치, activate 4종 일관, §27 내 §NN 참조는 버킷 E 1건 빼고 전부 정상 해결.</p>
+</section>
+
+<!-- ============ 3 ============ -->
+<section id="s3">
+  <h2><span class="num">3</span>즉시 적용한 수정 6건 <span class="small">— commit a3302a5</span></h2>
+  <p class="lead">이론의 여지 없는 버그·헌법 내부모순만 선반영(가역적 문서 수정, 비용/파괴/secrets 무관 → dev grant 범위).</p>
+  <table>
+    <thead><tr><th>#</th><th>수정</th><th>근거</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>§25.1 큐 <b>버킷 E(UX·자산일관성) 신설</b>, "4분류→5분류"</td><td>§26.3·§27.9가 참조하던 미정의 버킷(깨진 ref)</td></tr>
+      <tr><td>2</td><td>§27.7 <b>Apple-on-Windows 정직성 가드</b> — 정적/가정 점검만, iOS 실측 보고 금지</td><td>허위증거 → 머지게이트 오염 차단</td></tr>
+      <tr><td>3</td><td>§27 서두 <b>비용 안전레일 헤더</b> 추가(§11-5 불변)</td><td>고비용 §27.5/6/9의 가드 우회 차단</td></tr>
+      <tr><td>4</td><td>§10.5 AG <b>"직접 코딩·푸시"→"로컬 커밋"</b>(온라인 push는 Claude §11.1)</td><td>D-1 헌법 내부모순(2026-06-05 원문 vs A안)</td></tr>
+      <tr><td>5</td><td>§12.3 <b>Grok=요청기반 어드바이저리</b>(자율발의 보류), 5분루프는 코딩3-AI 기준 명시</td><td>D-2 §12.3 30분자율 vs §11/ROUTING advisory 충돌</td></tr>
+      <tr><td>6</td><td>CONTROL #6 <b>Apple 한계·안전레일</b> 동기화</td><td>broadcast와 §27 정합</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ 4 ============ -->
+<section id="s4">
+  <h2><span class="num">4</span>Simon 지시 전수 카탈로그</h2>
+  <p class="lead">"규칙·작업방법"에 해당하는 지시만 6개 소스에서 추출·정규화했다. 일회성 작업지시(가격 D-09, lumi=Iris 등)는 제외. 원문 인용은 따옴표.</p>
+
+  <h3>4.1 타임라인 — 지시의 진화</h3>
+  <table>
+    <thead><tr><th>시기</th><th>국면</th><th>대표 지시</th></tr></thead>
+    <tbody>
+      <tr><td>05-19~29</td><td>위키/instincts 교훈 (선행 학습층)</td><td>llm-wiki 누적자산화(T-001~006), 추측fix self-stop(M-013), 버전 metadata 확인(M-014), anti-LLM voice(M-005), 디자인-우선(M-004), HTML 기본 출력(T-016), <span class="accent">"미루지 말고 전부 다 진행"(T-003)</span></td></tr>
+      <tr><td>06-05</td><td>허브 부트스트랩</td><td>Single-Writer·md+git 통신, 2nd-B 메인, 라이브검증 사이클, 항상 브로드캐스트, 자동승인 모드, <b>개발 전권위임</b>, AG 검수→네이티브 코딩, 프롬프트 인젝션 금지, 전AI HTML 보고</td></tr>
+      <tr><td>06-06</td><td>v2 무인 자율 (B모델)</td><td>발견 자율·통합/온라인git Claude 단독, 코딩=Claude·Codex·AG, worktree 격리(A안)·cherry-pick, 4-AI 합의(§14)·외부의존만 에스컬레이션, 멀티모달 페어, peer 리뷰 등급제, 제안점검 루프, UX 4원칙</td></tr>
+      <tr><td>06-07</td><td>운용 강화</td><td>페르소나 4축, 5분 루프·KST 타임스탬프·적극성·별도공간→Claude검토·4-AI토론(CONTROL 6규칙), <b>§27 운용강화 10규칙</b></td></tr>
+    </tbody>
+  </table>
+
+  <h3>4.2 카테고리별 핵심 지시</h3>
+  <div class="grid">
+    <div class="card"><h3 style="margin-top:0">운영모델 · 권한</h3>
+      <ul class="small">
+        <li>자율 B모델: 발견 자율 / 통합·온라인git Claude 단독 / 사용자는 외부의존만</li>
+        <li>개발 전권위임(blanket dev grant), <code>bypassPermissions</code> 의도적</li>
+        <li>코딩 가능 = Claude·Codex·AG, Grok=리서치만(advisory)</li>
+        <li>사용자 개입 최소화 → 4-AI 합의(§14)로 결정</li>
+        <li>규칙 변경은 CLAUDE.md 먼저(SoT) → AGENTS/GEMINI 동기화</li>
+      </ul>
+    </div>
+    <div class="card"><h3 style="margin-top:0">작업 방법 · 루프</h3>
+      <ul class="small">
+        <li>"완료까지 계속·반복", "할일 찾아서 병렬로"(다수 원문)</li>
+        <li>5분 루프(2분→밤샘→5분 표준화), 수동대기 금지</li>
+        <li>worktree 격리·cherry-pick·미머지중 <code>reset --hard</code> 금지</li>
+        <li>병렬이 기본·직렬은 예외(공유 git만 직렬)</li>
+        <li>세션관리: rewind 1순위, 70~80% 선제 compact, subagent 위임</li>
+        <li>항상 허브 기록(<code>src:</code>)·"조용히 일하지 말 것"</li>
+      </ul>
+    </div>
+    <div class="card"><h3 style="margin-top:0">안전레일 · 에스컬레이션</h3>
+      <ul class="small">
+        <li><b>3대 불변 레일</b>: ①비용 ②파괴적 ③secrets — 합의로도 우회 불가, 항상 Simon</li>
+        <li>가격·계약·법무·런치일 = Simon 결정(§15)</li>
+        <li>스코프 자율(야간): 가역·로컬만 자율, 불가역·공개영향은 승인 전 보류</li>
+        <li>verify EXITCODE=0에만 push 게이트</li>
+        <li>main 직접 push 금지(항상 PR), force/rebase는 명시 확인</li>
+      </ul>
+    </div>
+    <div class="card"><h3 style="margin-top:0">디자인 · UX · anti-slop</h3>
+      <ul class="small">
+        <li>UX 4원칙: 자연스러움·직관성·정보위계·자산일관성</li>
+        <li>디자인 요청 시 바로 코드 금지 → 진단·레퍼런스3-5·폰트선택권 먼저</li>
+        <li>AI slop 방지: 3색 이내·이모지/장식 금지·tinted-neutral</li>
+        <li>금지: Inter/bounce/elastic/pill/gradient/em-dash·임상어휘</li>
+        <li>2nd-B: DESIGN.md 단일 SoT, hex 리터럴 금지(토큰 경유), NeoDunggeunmo 폰트</li>
+        <li>페르소나 4축(연령·직업·소득·문화국가) KR+글로벌, 터치타깃 ≥44px</li>
+      </ul>
+    </div>
+    <div class="card"><h3 style="margin-top:0">검증 · 리뷰 · 품질</h3>
+      <ul class="small">
+        <li>peer 리뷰: 5차원 루브릭·정량수렴·적대적 refute·Solo/Pair/Panel</li>
+        <li>편향통제: 자기리뷰 금지·앵커링 차단·로테이션</li>
+        <li>리뷰게이트(독립 안전리뷰)는 무감독 머지 전 필수</li>
+        <li>멀티모달 페어 Codex⇄AG 상호평가 2~3R</li>
+        <li>2nd-B 12 hard constraints(C1~C12) 약화 금지</li>
+      </ul>
+    </div>
+    <div class="card"><h3 style="margin-top:0">도구 함정 · 지식관리</h3>
+      <ul class="small">
+        <li>한글 파일(BOARD/DECISIONS)은 Edit 툴로만(PS 라운드트립 깨짐)</li>
+        <li>커밋 메시지 본문 <code>"</code>·em-dash 금지(word-split 실패)</li>
+        <li>헤드리스 긴 한글 프롬프트는 파일/stdin(CLI 인자 금지)</li>
+        <li>병렬 호출 cancel 트랩: 비표준 exit는 단독격리/<code>exit 0</code></li>
+        <li>workflow schema 미호출 버그 → raw 회수+수동 종합</li>
+        <li>반복실수 "또 틀렸어" → 즉시 instincts append</li>
+      </ul>
+    </div>
+  </div>
+  <p class="small">전체 행(100+) 원본: 워크플로 마이너 1~6 결과. 가장 원본에 가까운 Simon 발화는 <code>agents/grok/STATUS.md</code>·<code>agents/codex/STATUS.md</code>·<code>agents/codex/RULES.md</code>·<code>agents/grok/autonomous-loop-rules.md</code>, 그리고 위키 <code>LESSONS_LEARNED.md</code>(T-시리즈)·<code>recurring-mistakes.md</code>(M-시리즈).</p>
+</section>
+
+<!-- ============ 5 ============ -->
+<section id="s5">
+  <h2><span class="num">5</span>갭 분석 — 강화·신설·모순</h2>
+  <p class="lead">마이닝한 지시를 현행 PROTOCOL/CONTROL과 대조. [a]이미 인코딩 / [b]부분(약함) / [c]미인코딩.</p>
+
+  <h3>B. 부분 인코딩 — 강화 필요 (7)</h3>
+  <table>
+    <thead><tr><th>#</th><th>지시</th><th>약점 / 강화안</th></tr></thead>
+    <tbody>
+      <tr><td>B-1</td><td>verify→push 게이트 <b>메커니즘</b></td><td>"통과 필수" 의도만, 실제 사고(verify exit1인데 push) 방지 부재 → §8에 "push는 verify EXITCODE=0에만, 별도 단계 확인"</td></tr>
+      <tr><td>B-2</td><td>무감독 머지 전 <b>독립 리뷰게이트</b></td><td>Claude 자기머지 시 공백. 안전(consent·삭제·결제·인증) 변경은 어드바이저리→<b>필수</b>로 승급(§23.1)</td></tr>
+      <tr><td>B-3</td><td>세션종료 <b>교훈 캡처 절차</b>(T/M코드)</td><td>§18 "축적" 원칙만, 언제·무엇을 자동기록할지 절차 부재 → 반복실수 2회+ 시 즉시 M-xxx/T-xxx append</td></tr>
+      <tr><td>B-4</td><td><b>카피/문체 slop</b> 차단</td><td>slop 방지가 시각물에만. LLM 어투·임상어휘는 hub 규칙 부재 → §26에 "카피 voice" 축 추가</td></tr>
+      <tr><td>B-5</td><td>스코프 자율 <b>가역성 4분류</b></td><td>B모델이 "발견 자율" 광범위 허용, 가역성 차등 미반영 → 불가역·공개영향은 승인 전 보류</td></tr>
+      <tr><td>B-6</td><td>코딩 전 <b>레포 컨텍스트 필독</b></td><td>worktree 코딩 전 DESIGN.md·CONSTRAINTS·ANDROID_QA·CONTEXT 필독 규칙 부재 → §11.1에 명시</td></tr>
+      <tr><td>B-7</td><td>상시규칙이 <b>가변 CONTROL에 거주</b></td><td>5분주기·타임스탬프 등 항구 규칙이 런-스테이트 파일에 → 헌법(§12)으로 이관, CONTROL은 §27 참조로 축약</td></tr>
+    </tbody>
+  </table>
+
+  <h3>C. 미인코딩 갭 — 신설 후보 (우선순위순, 12)</h3>
+  <table>
+    <thead><tr><th>순위</th><th>갭</th><th>왜 중요 / 신설안</th></tr></thead>
+    <tbody>
+      <tr><td><b>C-1</b></td><td>한글 파일 인코딩 안전</td><td>Claude 단독작성 BOARD/DECISIONS가 한글 → PS 라운드트립 시 <b>무성 손상</b>(무인 중 허브 무결성 훼손). <b>신설 §28</b>: 갱신은 Edit 툴로만, 깨지면 <code>git checkout HEAD~1</code></td></tr>
+      <tr><td><b>C-2</b></td><td>추측fix 2회 self-stop</td><td>5분 무인 루프서 동일 가설 반복=사이클 무한낭비 → <b>§12.2</b>: 2회 연속 fail 시 정지, evidence-first 전환</td></tr>
+      <tr><td><b>C-3</b></td><td>커밋 따옴표/em-dash 트랩</td><td>4-AI 매사이클 커밋, 본문 <code>"</code>가 pathspec 실패(2회 발생) → <b>§5</b>: 금지, 필요시 <code>-F</code> 파일</td></tr>
+      <tr><td><b>C-4</b></td><td>병렬 cancel 트랩</td><td>§27.10 "항상 병렬"의 함정: 비표준 exit가 형제+Write 취소 → <b>§27.10 caveat</b>: read-only만 안전, 단독격리/<code>exit 0</code></td></tr>
+      <tr><td><b>C-5</b></td><td>디자인-우선 인테이크</td><td>§27.6이 멀티모달 생성 권장하나 인테이크 없으면 <b>생성=대량 slop</b> → <b>신설 §29</b>: 진단·레퍼런스·폰트선택권·방향확정(2nd-B는 DESIGN.md 준수)</td></tr>
+      <tr><td><b>C-6</b></td><td>fan-out schema 실패 처리</td><td>§27.9·§20-24 패널이 fan-out 의존, "0-0 abstain"은 버그 → <b>§27.9 주</b>: schema 없는 텍스트 회수</td></tr>
+      <tr><td><b>C-7</b></td><td>버전 추측 금지</td><td>AG gradle/네이티브 bump 전 metadata 미확인=빌드 실패 단골 → <b>§28/§12.2</b>: published metadata 확인·URL cite</td></tr>
+      <tr><td><b>C-8</b></td><td>헤드리스 한글 프롬프트</td><td>background fan-out 시 긴 한글 CLI 인자 깨짐 → <b>§28</b>: UTF-8 파일/stdin</td></tr>
+      <tr><td><b>C-9</b></td><td>반복실수 즉시 instincts</td><td>4-AI 같은 실수 반복 시 품질 저하, 경량 학습루프 부재 → <b>§18</b>: 감지 즉시 4-bucket append</td></tr>
+      <tr><td>C-10</td><td>한국어 카피 일관성</td><td>존댓말 혼용·직역·keep-all 미적용 → B-4 카피 voice와 통합</td></tr>
+      <tr><td>C-11</td><td>2nd-B 라이브 수단 갱신</td><td>§8이 "Vercel"로 stale, 실제=GitHub Pages → §8 갱신</td></tr>
+      <tr><td>C-12</td><td>"전부 다 진행" 일괄·병렬</td><td>T-003 명시 선호(분리 말 것), anti-pattern 미기록 → §25.3/§27.10 주석</td></tr>
+    </tbody>
+  </table>
+
+  <h3>D. 모순·긴장점 (10)</h3>
+  <table>
+    <thead><tr><th>#</th><th>긴장</th><th>해소</th></tr></thead>
+    <tbody>
+      <tr><td>D-1</td><td>AG "직접 푸시" vs "온라인git Claude 단독"</td><td><span class="tag done">FIXED</span> §10.5 "로컬 커밋"으로 정정</td></tr>
+      <tr><td>D-2</td><td>Grok 30분 자율 vs 자율루프 보류</td><td><span class="tag done">FIXED</span> §12.3 "요청기반 advisory"로 통일</td></tr>
+      <tr><td>D-3</td><td>적극성 의무 vs 미머지 8건 throttle</td><td>§27.4: throttle 도달 시 적극성=리뷰·통합·페르소나로 방향전환</td></tr>
+      <tr><td>D-4</td><td>병렬 기본 vs git 직렬 vs cancel 트랩</td><td>C-4 caveat로 보강</td></tr>
+      <tr><td>D-5</td><td>5분 sleep vs 유휴 금지</td><td>CONTROL: "사이클 간 5분은 케이던스, 사이클 내부는 유휴금지"</td></tr>
+      <tr><td>D-6</td><td>HTML 매사이클 자동 open vs 5분×4AI</td><td>§16: 자동 open은 마일스톤/대형 산출물 한정</td></tr>
+      <tr><td>D-7</td><td>Simon 직접지시 vs Claude 단독 온라인git</td><td>§27.3: 직접지시가 온라인git/안전레일 요구 시 수행 대신 fyi 확인유도</td></tr>
+      <tr><td>D-8</td><td>타임스탬프 양식 3중 불일치</td><td>루트 CLAUDE/AGENTS/GEMINI §19를 hub 양식(KST)으로 동기화</td></tr>
+      <tr><td>D-9</td><td>온보딩 "코딩 안 함" vs 현행 "직접 코딩"</td><td>onboarding §2를 "worktree 직접 코딩"으로 갱신</td></tr>
+      <tr><td>D-10</td><td>섹션 번호 비순차</td><td>§25~27을 §24 뒤로 재배치(저우선)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ 6 ============ -->
+<section id="s6">
+  <h2><span class="num">6</span>고도화 제안 (티어별) + 권고</h2>
+  <p class="lead">위험도·가치 기준으로 4티어. Tier 1은 이미 반영. Tier 2~4는 승인 필요.</p>
+
+  <div class="tier">
+    <h3><span class="tag done">DONE</span> Tier 1 — 버그·모순 (6건, commit a3302a5)</h3>
+    <p class="small">버킷 E 정의 · Apple 정직성 · 비용레일 헤더 · AG 푸시 모순 · Grok cadence · CONTROL 동기화. (§3 참조)</p>
+  </div>
+
+  <div class="tier">
+    <h3>Tier 2 — 무성 실패 봉합 (최우선 권고)</h3>
+    <p>무인 운용에서 가장 치명적인 건 <b>조용히 깨지는 것</b>. 모두 MEMORY에 이미 발생한 사고로 기록됨.</p>
+    <span class="pill">신설 §28 운영안전·인코딩</span><span class="pill">C-1 한글 Edit-only</span><span class="pill">C-3 커밋 따옴표</span><span class="pill">C-7 버전 metadata</span><span class="pill">C-8 헤드리스 한글</span><span class="pill">C-4 병렬 cancel</span>
+    <span class="pill">§12.2 추측fix self-stop (C-2)</span><span class="pill">§8 verify EXITCODE 게이트 (B-1)</span><span class="pill">§11.1 레포 컨텍스트 필독 (B-6)</span>
+  </div>
+
+  <div class="tier">
+    <h3>Tier 3 — 생성 품질 게이트</h3>
+    <p>§27.6이 멀티모달 <b>생성</b>을 확대한 만큼, 품질 게이트가 없으면 무인 운용이 slop 양산기가 된다. 생성 확대와 게이트는 한 쌍.</p>
+    <span class="pill">신설 §29 디자인-우선 인테이크 (C-5)</span><span class="pill">§26 카피 voice 축 (B-4)</span><span class="pill">한국어 일관성 (C-10)</span><span class="pill">§23.1 안전변경 리뷰게이트 필수 (B-2)</span><span class="pill">§27.9 페르소나 표본 현실화</span><span class="pill">§18 교훈 캡처 절차 (B-3·C-9)</span>
+  </div>
+
+  <div class="tier">
+    <h3>Tier 4 — 레이어 정리·긴장 해소</h3>
+    <p>헌법(PROTOCOL)=불변 규칙, CONTROL=상태 신호로 분리. 긴장점은 1줄 단서로.</p>
+    <span class="pill">상시규칙 CONTROL→§12 이관 (B-7)</span><span class="pill">§25~27 재배치 (D-10)</span><span class="pill">긴장 단서 D-3·5·6·7</span><span class="pill">onboarding 동기화 (D-9)</span><span class="pill">루트 타임스탬프 동기화 (D-8)</span><span class="pill">§8 라이브수단 갱신 (C-11)</span>
+  </div>
+
+  <div class="rec">
+    <h3>권고</h3>
+    <p><b>Tier 2를 지금 바로 적용</b>하기를 권한다 — 전부 이미 발생한 사고의 재발 방지이고, 무인 5분 루프가 본격 가동되면 가장 먼저 터질 것들이다. <b>Tier 3</b>는 멀티모달 생성(§27.6)을 실제로 켜기 전에 함께 넣는 게 맞다(게이트 없이 생성만 켜면 slop). <b>Tier 4</b>는 급하지 않은 정리 작업이라 후속 사이클로 미뤄도 된다.</p>
+    <p class="small">단 §27.9 페르소나 "20명+" 수치는 Simon 원지시인지 AI 과specification인지 확인이 필요하다 — 원래 의도가 "대규모"였다면 비용가드 연동으로, "예시 수치"였다면 현실 표본으로 조정.</p>
+  </div>
+</section>
+
+<footer>
+  <p>생성 [2026-06-07 / 09:04:03 KST] · Claude (4-AI Hub 오케스트레이터) · 8-에이전트 워크플로 wf_fc47e9cb-977 기반</p>
+  <p>원본: <span class="src">E:\Coding Infra\AI Infra\Communication\PROTOCOL.md</span> (§0-27) · 마이닝 소스 6종(PROTOCOL/docs·git712·src:user81·memory·wiki·2nd-B). 본 리포트는 제안이며 Tier 2~4는 승인 후 적용.</p>
+</footer>
+
+</div>
+</body>
+</html>

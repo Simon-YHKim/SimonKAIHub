@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Re-Gate - 9b03f04</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d10;
+      --panel: #151922;
+      --panel-2: #1d2430;
+      --text: #f3f6fb;
+      --muted: #a9b2c3;
+      --line: #2b3342;
+      --warn: #ffcc66;
+      --ok: #7bd88f;
+      --bad: #ff7b7b;
+      --accent: #7aa7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 18px 48px;
+    }
+    header {
+      display: grid;
+      gap: 16px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(26px, 5vw, 44px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 10px; color: var(--muted); }
+    code {
+      color: #dbe7ff;
+      background: #10141c;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 999px;
+      padding: 6px 10px;
+      color: var(--muted);
+    }
+    .score {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 22px 0;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      min-width: 0;
+    }
+    .card strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.15;
+      margin-bottom: 4px;
+    }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .item {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .item h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+    ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 5px 0; }
+    .full { grid-column: 1 / -1; }
+    .callout {
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid #53451f;
+      background: #1e1a0e;
+      border-radius: 8px;
+    }
+    @media (max-width: 760px) {
+      .score, .grid { grid-template-columns: 1fr; }
+      main { padding: 24px 14px 36px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="meta">
+        <span class="pill">Codex UI/UX</span>
+        <span class="pill">2nd-B</span>
+        <span class="pill">claude/cycle-3-hardening@9b03f04</span>
+        <span class="pill">2026-06-06 03:46 KST</span>
+      </div>
+      <h1>Cycle-3 Re-Gate: still 97/100 provisional</h1>
+      <p>Claude's cycle-3 hardening improves safety, data integrity, and race handling. It does not yet close the open 100/100 UI proof gates.</p>
+    </header>
+
+    <section class="score" aria-label="summary">
+      <div class="card">
+        <strong class="warn">97/100</strong>
+        <p>Score remains provisional. No increase until proof gates close.</p>
+      </div>
+      <div class="card">
+        <strong class="ok">Verify PASS</strong>
+        <p>Lint, type-check, i18n, lexicon, constraints, emdash, Jest 91/823 all green.</p>
+      </div>
+      <div class="card">
+        <strong class="bad">Not 100</strong>
+        <p>Deployment truth, legal sign-off, runtime screenshots, a11y semantics, mobile rows still open.</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="item">
+        <h3>Accepted Fix Direction</h3>
+        <ul>
+          <li>Crisis ledger, fail-closed safety merge, chat injection guard.</li>
+          <li>Honest account-deletion branch, consent age-band guard, privacy race fix.</li>
+          <li>Reduced motion, loading double-continue guard, Quant timer/ref fixes, KST prompt rotation.</li>
+        </ul>
+      </article>
+      <article class="item">
+        <h3>Deployment Truth</h3>
+        <ul>
+          <li><code>.env.example</code> still uses <code>EXPO_PUBLIC_FORCE_TIER=brain</code>.</li>
+          <li><code>env.ts</code> still defaults force tier to <code>brain</code>.</li>
+          <li>Google, Apple, Kakao provider flags still default to true.</li>
+        </ul>
+      </article>
+      <article class="item">
+        <h3>Legal/Consent</h3>
+        <ul>
+          <li><code>ConsentNotice.tsx</code> still says placeholder pending legal review.</li>
+          <li><code>LEXICON_LAST_LEGAL_REVIEW</code> is still <code>null</code>.</li>
+          <li>Consent copy cannot be scored final without sign-off or release gating.</li>
+        </ul>
+      </article>
+      <article class="item">
+        <h3>Runtime Proof</h3>
+        <ul>
+          <li>No new Pixel_9_Pro_XL screenshot package after the previous AG report.</li>
+          <li>Need login, sign-up, complete-profile, capture, inbox, wiki, and NavGraph proof.</li>
+          <li>Static green tests are not enough for all-screen visual perfection.</li>
+        </ul>
+      </article>
+      <article class="item">
+        <h3>Jargon Cleanup</h3>
+        <ul>
+          <li><code>manual.tsx</code> still exposes LLM, RAG, RLS, auth.uid(), system context, Phase 2.</li>
+          <li><code>formats.tsx</code> still uses schema/view schema language.</li>
+          <li>Help and first-run surfaces need product language, not implementation labels.</li>
+        </ul>
+      </article>
+      <article class="item">
+        <h3>Pressable Semantics</h3>
+        <ul>
+          <li>Static scan: 109 Pressables, 64 without nearby <code>accessibilityRole</code>.</li>
+          <li>Top offenders: wiki, jarvis, inbox, capture, sign-in, NavGraph.</li>
+          <li>Close with shared primitives or documented exceptions.</li>
+        </ul>
+      </article>
+      <article class="item">
+        <h3>Mobile Action Rows</h3>
+        <ul>
+          <li><code>wiki.tsx</code> still renders Export / Graph detail / Back as a 3-up row.</li>
+          <li><code>actionsUtility</code> is fixed row and <code>actionBtn</code> is <code>flex: 1</code>.</li>
+          <li>Need responsive wrap/stack or 320px KO/EN screenshot proof.</li>
+        </ul>
+      </article>
+      <article class="item">
+        <h3>Route Shell</h3>
+        <ul>
+          <li><code>/oauth-callback</code> is not hidden in <code>PRE_AUTH_PATHS</code>.</li>
+          <li>BackArrow pushes <code>/</code> but announces hardcoded <code>Back</code>.</li>
+          <li>BackArrow Pressable lacks explicit button role.</li>
+        </ul>
+      </article>
+      <article class="item full">
+        <h3>Next Proof Bundle</h3>
+        <ul>
+          <li>Provide deployment env proof or safe defaults.</li>
+          <li>Provide legal/consent sign-off or explicit release blocker.</li>
+          <li>Provide Pixel/mobile screenshot proof for primary screens and narrow rows.</li>
+          <li>Provide Pressable role/state audit delta and documented exceptions.</li>
+          <li>Clean up manual/formats/wiki/capture/import jargon and route-shell back affordance.</li>
+        </ul>
+      </article>
+    </section>
+
+    <div class="callout">
+      <p><strong>Codex verdict:</strong> keep the cycle-3 commits, but do not call the UI perfect. The score remains <span class="warn">97/100 provisional</span> until the proof gates above are closed.</p>
+    </div>
+  </main>
+</body>
+</html>

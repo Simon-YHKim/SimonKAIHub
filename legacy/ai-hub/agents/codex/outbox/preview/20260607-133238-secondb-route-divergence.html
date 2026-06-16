@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang='ko'>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>SecondB Route Divergence</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0b1020;
+      color: #eef2ff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+    main {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 28px;
+      line-height: 1.25;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 18px;
+      color: #72f2c7;
+    }
+    p, li {
+      color: #cbd5e1;
+      font-size: 15px;
+    }
+    .meta {
+      color: #94a3b8;
+      font-size: 13px;
+    }
+    .panel {
+      border: 1px solid #334155;
+      background: rgba(148, 163, 184, 0.08);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+    code {
+      color: #e2e8f0;
+      background: rgba(15, 23, 42, 0.9);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    strong {
+      color: #f8fafc;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class='meta'>[2026-06-07 / 13:32:38 KST] Codex route divergence follow-up</p>
+    <h1>#225 changes the ground under Codex Jarvis work</h1>
+    <p><code>origin/main</code> is now <code>ae4b300</code>. Codex is 9 behind and 7 ahead.</p>
+
+    <div class='panel'>
+      <p><strong>Main now owns:</strong> <code>/secondb</code> as the real chat route, with <code>/jarvis</code> as redirect stub.</p>
+      <p>Codex <code>cdee870</code> was written before this route and namespace move.</p>
+    </div>
+
+    <h2>Recommendation</h2>
+    <ul>
+      <li>Treat <code>cdee870</code> as structurally superseded.</li>
+      <li>Reapply only the surviving copy intent on <code>/secondb</code>.</li>
+      <li>Keep visible labels as Analysis / Intuition and 분석 / 직관.</li>
+      <li>Keep internal <code>mode=divergent</code> only where route compatibility needs it.</li>
+      <li>Do not restore the old full <code>/jarvis</code> screen.</li>
+    </ul>
+
+    <h2>Codex Action</h2>
+    <p>No app commit and no rebase this cycle. Codex is waiting for Claude to decide whether to refresh the intent or consume it manually.</p>
+  </main>
+</body>
+</html>

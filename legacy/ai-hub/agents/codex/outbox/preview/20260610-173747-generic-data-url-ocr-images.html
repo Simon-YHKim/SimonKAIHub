@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2ndB Generic Data URL OCR Images</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --surface: #151a2f;
+      --text: #e8ecf8;
+      --muted: #c9d0e6;
+      --brand: #72f2c7;
+      --line: #2a345a;
+      --warn: #ffd166;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    header {
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 26px 0 10px;
+      font-size: 18px;
+      color: var(--brand);
+      letter-spacing: 0;
+    }
+    p { margin: 8px 0; }
+    ul { margin: 8px 0 0; padding-left: 22px; }
+    li { margin: 5px 0; }
+    code {
+      color: var(--brand);
+      background: rgba(114, 242, 199, 0.08);
+      border: 1px solid rgba(114, 242, 199, 0.22);
+      padding: 1px 5px;
+    }
+    .meta {
+      color: var(--muted);
+      display: grid;
+      gap: 6px;
+    }
+    .panel {
+      background: var(--surface);
+      border: 2px solid var(--line);
+      padding: 18px;
+      margin-top: 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .ok { color: var(--brand); font-weight: 700; }
+    .warn { color: var(--warn); }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Generic Data URL OCR Images</h1>
+      <div class="meta">
+        <span>[2026-06-10 / 17:37:47 KST]</span>
+        <span>2ndB local commit: <code>f3c2f64 fix(ocr): accept generic data URL images</code></span>
+        <span>Branch: <code>codex/soul-core-multimodal-pilot-20260610</code>, delta: <code>ahead 40</code>, <code>behind 8</code></span>
+      </div>
+    </header>
+
+    <section class="panel">
+      <h2>What Changed</h2>
+      <ul>
+        <li>Accepted <code>data:application/octet-stream;base64,...</code> when the bytes sniff as an allowed image.</li>
+        <li>Applied the same behavior in client OCR, direct/Vertex wrapper, and <code>gemini-proxy</code>.</li>
+        <li>Kept explicit unsupported or conflicting MIME declarations fail-closed.</li>
+        <li>Added regression tests for capture OCR and direct/Vertex multimodal preflight.</li>
+      </ul>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <h2>Why</h2>
+        <p>Some file and clipboard pipelines preserve bytes but collapse MIME to a generic envelope. OCR should accept that only after signature sniffing proves the content is a supported image.</p>
+      </div>
+      <div class="panel">
+        <h2>Boundary</h2>
+        <p>Generic MIME is treated as undeclared, not trusted. Unsupported explicit MIME and MIME/signature conflicts still reject before any Gemini call.</p>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <p class="ok">PASS</p>
+      <ul>
+        <li><code>capture-image.test.ts</code>: 36 tests</li>
+        <li><code>gemini.test.ts</code>: 12 tests</li>
+        <li><code>type-check</code>, <code>lint</code>, <code>i18n</code>, <code>lexicon</code>, <code>llm-boundary</code>, <code>constraints</code>, <code>emdash</code></li>
+        <li><code>git diff --check</code> and changed-line secret scan</li>
+      </ul>
+      <p class="warn">Deno CLI is not installed, so standalone proxy type checking was not run.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Notes</h2>
+      <p>Online push was not performed. No direct edit was made to <code>C:\Coding\2ndB</code>. Unrelated hub files from other agents were left untouched.</p>
+    </section>
+  </main>
+</body>
+</html>

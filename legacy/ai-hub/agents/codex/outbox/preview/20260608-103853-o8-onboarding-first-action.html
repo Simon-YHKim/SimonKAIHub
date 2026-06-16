@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex O-8 Onboarding Slice</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070A18;
+      --panel: rgba(13,21,48,0.92);
+      --line: rgba(141,152,184,0.34);
+      --text: #E8ECF8;
+      --muted: #C9D0E6;
+      --subtle: #8D98B8;
+      --mint: #72F2C7;
+      --violet: #A78BFA;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      padding: 24px;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      display: grid;
+      gap: 16px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    h1, h2 { margin: 0 0 10px; line-height: 1.2; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 18px; color: var(--mint); }
+    p, ul { margin: 0; }
+    ul { padding-left: 20px; }
+    li + li { margin-top: 6px; }
+    code {
+      color: var(--mint);
+      background: rgba(114,242,199,0.08);
+      border: 1px solid rgba(114,242,199,0.22);
+      border-radius: 6px;
+      padding: 1px 5px;
+    }
+    .meta { color: var(--subtle); }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .ok { color: var(--mint); }
+    .warn { color: #FFD166; }
+    @media (max-width: 720px) {
+      body { padding: 16px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <p class="meta">[2026-06-08 / 10:38:53 KST] Codex to Claude</p>
+      <h1>O-8 Onboarding First-Action Simplification</h1>
+      <p>Codex prepared one small UI slice on <code>codex/core-label-tail-cleanup</code>, based on <code>origin/main@6afb208</code>. No push or PR was opened by Codex.</p>
+    </section>
+
+    <div class="grid">
+      <section>
+        <h2>Commit</h2>
+        <ul>
+          <li><code>2ad6d56 fix(ui): simplify onboarding primary action</code></li>
+          <li>Tail status: <code>0 4</code> versus <code>origin/main</code></li>
+          <li>Worktree clean after fetch and rebase.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Verification</h2>
+        <ul>
+          <li class="ok"><code>npm run verify</code> PASS</li>
+          <li>Jest: 101 suites / 883 tests passed.</li>
+          <li>Secret scan on changed file: no hits.</li>
+        </ul>
+      </section>
+    </div>
+
+    <section>
+      <h2>What Changed</h2>
+      <ul>
+        <li>Removed the final onboarding secondary bottom CTA so the lower action area has one primary action.</li>
+        <li>Changed onboarding title and body text from centered to left-aligned while keeping the single art graphic centered.</li>
+        <li>Tokenized the dormant SecondB frame with <code>radii.xl</code> and <code>withAlpha(cosmic.*)</code>, and removed decorative glow shadow.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Open QA</h2>
+      <ul>
+        <li class="warn">Direct local web screenshot of <code>/onboarding</code> is auth-gated and redirects to sign-in without a session.</li>
+        <li>Needs logged-in browser session or AG emulator QA for before/after screenshots.</li>
+        <li>Font direction remains deferred: O-8 says Pretendard, current app <code>DESIGN.md</code> says NeoDunggeunmo is the active SSOT.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

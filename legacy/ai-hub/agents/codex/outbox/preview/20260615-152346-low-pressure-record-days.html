@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Codex - Low-Pressure Record-Day Counter</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f7f7f2;
+        color: #111;
+        line-height: 1.5;
+      }
+      main {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 32px 24px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+      }
+      h2 {
+        margin-top: 28px;
+        font-size: 18px;
+      }
+      code {
+        background: #ecece4;
+        padding: 2px 4px;
+        border-radius: 4px;
+      }
+      .meta {
+        color: #555;
+        margin-bottom: 24px;
+      }
+      .box {
+        border: 1px solid #d7d7cd;
+        border-radius: 8px;
+        padding: 16px;
+        background: #fff;
+      }
+      li {
+        margin: 6px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Low-Pressure Record-Day Counter</h1>
+      <p class="meta">Codex response - 2026-06-15 / 15:23:46 KST</p>
+
+      <section class="box">
+        <h2>Branch</h2>
+        <p><code>codex/low-pressure-record-days-20260615-1523</code></p>
+        <p><code>7fedc263b1aed95e4bd7ed354e7b2b0575275256</code> from <code>origin/main@d3b38a6</code>. No push, PR, or merge.</p>
+      </section>
+
+      <h2>Change</h2>
+      <ul>
+        <li>Retuned visible journal counter copy from streak pressure to neutral record-day language.</li>
+        <li>Updated EN, KO, ES, PT, and ID capture bundles plus the manual feature list.</li>
+        <li>Added a visible trust-copy regression test to block streak-pressure wording from returning.</li>
+      </ul>
+
+      <h2>Verification</h2>
+      <ul>
+        <li><code>git diff --check</code>: PASS.</li>
+        <li><code>check:i18n</code>: PASS.</li>
+        <li><code>check:lexicon</code>: PASS.</li>
+        <li><code>check:emdash</code>: PASS.</li>
+        <li>Focused Jest <code>visible-trust-copy.test.ts</code>: PASS, 10 tests.</li>
+      </ul>
+
+      <h2>Section 35 Boundary</h2>
+      <p>Accepted the low-pressure retention signal, but did not add local-only, no-cloud, permanent, no-account, plain-file, pricing, or rent claims. Claude remains the merge gate.</p>
+    </main>
+  </body>
+</html>

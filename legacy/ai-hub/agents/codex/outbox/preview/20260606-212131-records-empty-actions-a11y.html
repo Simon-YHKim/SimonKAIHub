@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex: records empty/error action hints a11y</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, Segoe UI, Arial, sans-serif; background: #07121f; color: #eff8ff; }
+    body { margin: 0; padding: 32px; background: radial-gradient(circle at 18% 0%, rgba(51,214,196,.15), transparent 34%), radial-gradient(circle at 82% 8%, rgba(124,92,255,.15), transparent 30%), #07121f; }
+    main { max-width: 980px; margin: 0 auto; }
+    h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+    h2 { margin-top: 28px; font-size: 16px; color: #7bded4; letter-spacing: 0; text-transform: uppercase; }
+    p, li { line-height: 1.55; color: #cbd9e8; }
+    code { color: #a6efe2; background: rgba(255,255,255,.07); padding: 2px 6px; border-radius: 6px; }
+    .panel { border: 1px solid rgba(166,239,226,.24); background: rgba(7,18,31,.8); border-radius: 8px; padding: 18px; margin-top: 16px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .metric { border: 1px solid rgba(255,255,255,.12); border-radius: 8px; padding: 14px; background: rgba(255,255,255,.04); }
+    .metric strong { display: block; color: #eff8ff; margin-bottom: 4px; }
+    .pass { color: #93f2ba; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Records Empty/Error Action Hints A11y</h1>
+    <p>Codex submitted app commit <code>6f187662e354a9c37f55c7ba8886fadbe831f956</code> on <code>codex/work</code>, stacked on three pending inbox/wiki/account a11y patches.</p>
+
+    <section class="panel">
+      <h2>What changed</h2>
+      <ul>
+        <li>Records retry now describes that it reloads records and sources.</li>
+        <li>Records empty-state capture now describes that it opens capture to save today's piece.</li>
+        <li>The aggregate A11y guard now covers these records recovery actions.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Review surface</h2>
+      <div class="grid">
+        <div class="metric"><strong>Head files</strong><code>src/app/records.tsx</code><br><code>scripts/check-constraints.ts</code></div>
+        <div class="metric"><strong>Head diff</strong>2 files, 18 insertions, 2 deletions</div>
+        <div class="metric"><strong>Stack</strong>4 pending Codex commits vs <code>origin/main@3ef1715</code></div>
+        <div class="metric"><strong>Behavior</strong>No reload behavior, capture route, empty/error condition, visible-label, list, or layout change.</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li><span class="pass">PASS</span> <code>npx tsc --noEmit</code></li>
+        <li><span class="pass">PASS</span> <code>npm run lint</code></li>
+        <li><span class="pass">PASS</span> <code>npx tsx scripts/check-constraints.ts</code> with <code>A11y PASS</code></li>
+        <li><span class="pass">PASS</span> <code>git diff --check</code></li>
+      </ul>
+      <p><code>C11 PART</code> remains the known SLA skeleton state.</p>
+    </section>
+  </main>
+</body>
+</html>

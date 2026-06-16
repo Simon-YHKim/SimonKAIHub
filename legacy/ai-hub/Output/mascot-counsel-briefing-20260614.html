@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>mascot 재보이스 — counsel 브리핑 (D-21)</title>
+<style>
+:root{--bg:#16161c;--card:#1d1d25;--line:#2c2c38;--tx:#e7e7ee;--mut:#a0a0b2;--acc:#8b8bf0;--warn:#e0b24a;--ok:#5bbf8a}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Pretendard,system-ui,sans-serif;line-height:1.65;padding:30px 18px}
+.wrap{max-width:880px;margin:0 auto}
+h1{font-size:21px;margin:0 0 3px}.sub{color:var(--mut);font-size:12.5px;margin-bottom:8px}
+.disc{color:var(--warn);font-size:12px;border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin:14px 0;background:#20201a}
+h2{font-size:16px;margin:24px 0 8px;border-left:3px solid var(--acc);padding-left:9px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0}
+.q{border-left:3px solid var(--warn)}
+code{background:#24242f;padding:1px 5px;border-radius:4px;font-size:12px}
+ul{margin:6px 0;padding-left:20px}li{margin:4px 0}
+.tag{display:inline-block;font-size:11px;color:var(--mut);border:1px solid var(--line);border-radius:5px;padding:1px 6px;margin-right:4px}
+b.ok{color:var(--ok)}
+</style></head><body><div class="wrap">
+<h1>mascot 재보이스 — counsel 브리핑</h1>
+<div class="sub">DECISIONS D-21 + persona-sim 게이트 후속 · 2026-06-14 · 정본 코드=PR #382 (main에 랜딩됨)</div>
+<div class="disc">⚠ 이 문서는 <b>법률 자문이 아니라 counsel 검토용 사실·쟁점 정리</b>입니다(Claude 작성). 분류·결론은 변호사 판단. 코드 재보이스는 이미 머지됐고, 아래 2개 쟁점은 launch 전 검토 항목.</div>
+
+<h2>0. 무엇이 이미 바뀌었나 (검토 대상의 현재 상태)</h2>
+<div class="card">
+PR #382로 <b>user-addressed 마스코트 카피가 observational + sourced + user-owned로 재등록</b>됨, 그리고 <code>scripts/check-mascot-voice.ts</code> <b>copy-law CI 룰</b>로 회귀가 차단됨(2중벽: anti-presence/companion + anti-oracle, 미래 편집에도 lint로 강제).
+<ul>
+<li><code>gadi.role</code>: "Warm relationship guide / 관계의 따뜻한 길잡이" → <b>"relationship-pattern reflector / 관계 패턴 길잡이"</b></li>
+<li><code>secondb.greeting</code>: "I'm here. What's on your mind?" → "Your records are here. What do you want to look at first?"</li>
+<li><code>personaHero.speech</code> / <code>heroSpeech.default</code> / <code>gadi.greeting</code> / <code>gadi.systemHint</code> 동일 방향(5 locale)</li>
+<li>1인칭 <b>독백(monologues)은 유지</b>(addressee 없음=parasocial 벡터 없음). 5 하드 안전레일 불변.</li>
+</ul>
+</div>
+
+<h2>1. 쟁점 A — CA SB 243 "companion chatbot" 분류</h2>
+<div class="card">
+<b>적용 테스트(요지)</b>: SB243은 "사용자의 사회적 욕구를 충족할 수 있고, 상호작용 전반에서 <b>관계를 지속(sustains a relationship across interactions)</b>하는 적응형·인간형 응답 AI"를 companion chatbot으로 본다 → 해당 시 미성년 대상 의무세트 부착.
+<br><br>
+<b>재보이스 후 사실관계</b>:
+<ul>
+<li>정적 카피는 더 이상 presence/관계-지속 프레임을 쓰지 않음(CI 강제). <code>gadi.role</code>이 SB243 social-need element와 near-verbatim이던 "relationship guide"에서 "pattern reflector"로 이동 → <b class="ok">triggering class에서 벗어나는 방향</b>.</li>
+<li>그러나 <code>gadi.systemHint</code>는 여전히 <b>LLM을 구동하는 프롬프트</b>이고, 모델은 적응형 응답을 생성함 → "정적 카피"가 아니라 "<b>생성된 응답</b>"이 관계를 지속시킬 수 있는지가 잔존 쟁점.</li>
+</ul>
+</div>
+<div class="card q"><b>counsel 질문</b>:
+<ol>
+<li>재보이스된 정적 카피 + systemHint 제약으로 2nd-B가 SB243 "companion chatbot" <b>분류 밖</b>인가, 아니면 LLM이 적응형 응답을 내는 한 분류 안인가?</li>
+<li>분류 밖으로 유지하려면 <b>런타임 출력 측</b>에 어떤 추가 가드가 필요한가(쟁점 B와 연결)?</li>
+</ol></div>
+
+<h2>2. 쟁점 B — systemHint = LLM 프롬프트, 라이브 출력 안전(최우선)</h2>
+<div class="card">
+<code>gadi.systemHint</code>는 미성년에게 응답하는 LLM의 프롬프트다. 정적 프롬프트는 개선됨("기록에서 드러나는 패턴을 비추되, 본인보다 잘 안다고 단정·친구/동반자처럼 굴지 말 것, 2인칭, 임상어 없이"). 그러나 <b>11pm 14세에게 가는 모델의 실제 생성 출력은 copy-review로 게이트 불가</b>(persona-sim도 이를 ship-gate 밖 counsel 항목으로 명시).
+<br><br>
+<b>이미 있는 가드</b>: <span class="tag">C9 classifyInput() 선행</span><span class="tag">crisis 라우팅</span><span class="tag">C10 14+ age-gate</span><span class="tag">forbidden lexicon(런타임+CI)</span>
+</div>
+<div class="card q"><b>counsel + safety-eng 질문</b>:
+<ol>
+<li>위 입력측 가드가 Relia의 <b>생성된 관계 발화</b>를 충분히 가두는가?</li>
+<li>출력측 추가 가드가 필요한가 — 예: 생성 후 companion/parasocial register 분류기, 응답 길이 제한, 세션 빈도 캡, "관계 조언" 토픽 디플렉션?</li>
+<li>US launch 전 필수 가드의 최소 집합은?</li>
+</ol></div>
+
+<h2>3. 후속(문서화) — DPIA</h2>
+<div class="card">de-voiced register를 <b>parasocial-dependence 완화 조치</b>로 DPIA(K12, ICO Children's Code)에 기록 권장. KEEP(현행 유지)였다면 DPIA가 미완화 위험면을 기록해야 했음 — 재보이스가 그 면을 줄였다는 점을 명시.</div>
+
+<h2>참고 — 검토 불요(이미 처리)</h2>
+<div class="card" style="color:var(--mut);font-size:13px">
+코드 재보이스 + copy-law CI = 머지됨(#382). es/id/pt 로케일 = 네이티브 검수(번역 품질) 별도 follow-up. characters.ts about-page role = user-addressed 아님(별도 surface). 정제카피 전문 = <code>Output/mascot-persona-sim-gate-20260614.html</code>.
+</div>
+</div></body></html>

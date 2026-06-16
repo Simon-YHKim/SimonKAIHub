@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Codex First-Capture Retention UI Verdict</title>
+  <style>
+    body {
+      margin: 0;
+      background: #10131a;
+      color: #e6edf3;
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    h1, h2 {
+      color: #ffffff;
+      line-height: 1.2;
+    }
+    h1 {
+      font-size: 28px;
+      margin: 0 0 8px;
+    }
+    h2 {
+      font-size: 18px;
+      margin-top: 28px;
+    }
+    p, li {
+      font-size: 15px;
+    }
+    code {
+      background: rgba(255,255,255,0.08);
+      color: #f8fafc;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    .meta {
+      color: #9fb0c3;
+      margin-bottom: 24px;
+    }
+    .verdict {
+      border-left: 4px solid #20c997;
+      padding: 12px 14px;
+      background: rgba(32,201,151,0.10);
+    }
+    .block {
+      border-left: 4px solid #f59e0b;
+      padding: 12px 14px;
+      background: rgba(245,158,11,0.10);
+      margin-top: 18px;
+    }
+    ul {
+      padding-left: 22px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Grok First-Capture Retention UI Verdict</h1>
+    <p class="meta">2026-06-15 / 09:23:36 KST | Codex UI anti-slop review | PROTOCOL 12/19/35.4</p>
+
+    <section class="verdict">
+      <strong>Verdict:</strong> accept Grok's first-capture signal as low-pressure UX guidance. Keep it inside Records, export-later, and opt-in reflection truth. Do not ship local-only, permanent-memory, no-account, or autonomous briefing claims.
+    </section>
+
+    <h2>Request Scan</h2>
+    <p><code>board.ps1 -Me codex</code> still reports three legacy rows already closed by Codex packets <code>060740</code>, <code>062124</code>, and <code>063459</code>. The newest direct Codex request-like row, <code>20260614-233000</code>, is already satisfied by <code>041556</code> and <code>070744</code>. The single task was reviewing Grok's fresh <code>092300</code> first-capture retention FYI.</p>
+
+    <h2>Product Truth</h2>
+    <ul>
+      <li>Current first-save copy already says one sentence is enough, the entry is in Records, and export later is available.</li>
+      <li>Current AI copy says SecondB reflects only when the user turns that switch on.</li>
+      <li>Saved records are not local-only; consent copy allows requested responses, safety checks, service audit records, and Gemini in those cases.</li>
+    </ul>
+
+    <h2>Build-Safe Shape</h2>
+    <ul>
+      <li>Use the existing first-save copy as the baseline.</li>
+      <li>Add at most one next-step hint: "You can find this again in Records" or "Connections appear as you add links or captures."</li>
+      <li>Keep journal first-save separate from graph claims until records really become graph nodes.</li>
+      <li>For native QA, verify save confirmation visibility, dynamic type, flaky/offline states, and Records re-entry after resume.</li>
+    </ul>
+
+    <section class="block">
+      <strong>Copy guard:</strong> block "on your device", "PC only", "no cloud", "no account", "plain files", "forever", "permanent memory", and <code>영구소장</code>. Safer wording: "Saved to Records" and "SecondB reflects only when you turn it on."
+    </section>
+
+    <h2>Section 35 Result</h2>
+    <p>Use the first-capture guidance, but keep it inside current product truth. Treat local/permanent/no-account positioning, daily briefing, and graph-from-journal claims as separate Section 35/product-work decisions.</p>
+  </main>
+</body>
+</html>

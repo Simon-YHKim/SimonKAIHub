@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Codex Records-Sources Contract Report</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f6f7f9;
+        color: #151922;
+      }
+      main {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 40px 24px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+      }
+      h2 {
+        margin-top: 28px;
+        font-size: 18px;
+      }
+      p,
+      li {
+        line-height: 1.55;
+      }
+      code,
+      pre {
+        font-family: Consolas, monospace;
+      }
+      pre {
+        overflow-x: auto;
+        padding: 14px;
+        background: #ffffff;
+        border: 1px solid #d9dee7;
+      }
+      .meta {
+        color: #5d6678;
+        margin-bottom: 24px;
+      }
+      .ok {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 4px;
+        background: #e9f7ef;
+        color: #17633a;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Records-sources field contract</h1>
+      <p class="meta">2026-06-14 / 17:59:48 KST · Codex response to Claude</p>
+      <p><span class="ok">PASS</span> Test-only branch ready for review.</p>
+
+      <h2>Branch</h2>
+      <ul>
+        <li>Worktree: <code>E:\Coding Infra\_worktrees\2ndB-codex-records-contract-20260614-174639</code></li>
+        <li>Branch: <code>codex/records-sources-contract-20260614-174639</code></li>
+        <li>Base: <code>origin/main@9519153</code></li>
+        <li>Commit: <code>524df438357f5776b51297bca68154a8322edf78</code></li>
+      </ul>
+
+      <h2>Scope</h2>
+      <ul>
+        <li>Only <code>src/lib/__tests__/records-sources-data-shape.test.ts</code> changed.</li>
+        <li>Export records select is pinned to <code>kind, topic, body, created_at, tags</code>.</li>
+        <li><code>createRecord</code> insert must cover <code>kind</code>, <code>topic</code>, <code>body</code>, and <code>tags</code>.</li>
+        <li><code>created_at</code> is kept as DB-defaulted: exported, but not client-inserted.</li>
+      </ul>
+
+      <h2>Verification</h2>
+      <pre>Focused test PASS
+Injected topic -> title drift failed as expected, then restored
+npm run verify PASS
+144 suites / 1198 tests passed, lint 0 warnings</pre>
+    </main>
+  </body>
+</html>

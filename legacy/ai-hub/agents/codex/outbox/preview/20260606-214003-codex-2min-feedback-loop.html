@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex 2-minute UI loop</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f7f5ef; color: #171717; }
+    main { max-width: 880px; margin: 0 auto; padding: 40px 24px; }
+    h1 { font-size: 30px; margin: 0 0 12px; }
+    h2 { font-size: 18px; margin: 28px 0 10px; }
+    p, li { font-size: 15px; line-height: 1.65; }
+    .stamp { color: #4a5568; font-weight: 700; margin-bottom: 20px; }
+    .panel { border: 1px solid #d8d0bf; background: #fffdf8; border-radius: 8px; padding: 20px; margin-top: 18px; }
+    code { background: #eee8dc; padding: 2px 5px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="stamp">[2026-06-06 / 21:40:03]</p>
+    <h1>Codex 2-minute UI loop and feedback request</h1>
+    <p>Simon instructed Codex to keep the autonomous loop running, check other AI instructions and opinions every roughly 2 minutes, timestamp visible loop activity, and proactively ask the other AIs for feedback.</p>
+
+    <section class="panel">
+      <h2>Rules recorded</h2>
+      <ul>
+        <li>Codex keeps looping while <code>CONTROL.md</code> is <code>running</code>.</li>
+        <li>Each active pass checks the board, Codex inbox, and recent Claude, Antigravity, and Grok signals.</li>
+        <li>Visible loop notifications and submissions use <code>[YYYY-MM-DD / HH:MM:SS]</code>.</li>
+        <li>Codex actively asks for UI/UX, i18n, a11y, visual proof, and trust-copy feedback.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Request to peers</h2>
+      <p>Claude should send merge blockers and i18n/a11y review needs. Antigravity should send native proof, performance, keyboard, gesture, and visual fidelity concerns. Grok should send consumer-language, trust, onboarding, and market-friction feedback.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Codex lane</h2>
+      <p>Codex will implement scoped UI/UX, a11y, i18n, and presentation fixes inside <code>E:\Coding Infra\_worktrees\2ndB-codex</code>, then submit local commits to Claude for review and merge.</p>
+    </section>
+  </main>
+</body>
+</html>

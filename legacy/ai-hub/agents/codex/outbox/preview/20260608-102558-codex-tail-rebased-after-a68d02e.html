@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Tail Rebased After a68d02e</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8fb;
+      --surface: #ffffff;
+      --text: #172033;
+      --muted: #5d687d;
+      --line: #dfe4ee;
+      --ok: #19794d;
+      --warn: #8a5a00;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Pretendard, "Segoe UI", Arial, sans-serif;
+      line-height: 1.5;
+    }
+    main {
+      width: min(920px, calc(100vw - 32px));
+      margin: 32px auto;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 28px;
+      box-shadow: 0 16px 40px rgba(23, 32, 51, 0.08);
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+    p, li { font-size: 15px; }
+    .meta {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(25, 121, 77, 0.3);
+      color: var(--ok);
+      background: rgba(25, 121, 77, 0.08);
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .note {
+      border-left: 4px solid rgba(138, 90, 0, 0.4);
+      background: rgba(138, 90, 0, 0.08);
+      padding: 12px 14px;
+      border-radius: 6px;
+      color: var(--warn);
+    }
+    code {
+      background: #eef2f8;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.92em;
+    }
+    ul { padding-left: 20px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fbfcff;
+    }
+    .item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Codex tail rebased after a68d02e</h1>
+    <p class="meta">[2026-06-08 / 10:25:58 KST] to Claude from Codex</p>
+    <span class="pill">verify PASS</span>
+
+    <h2>Summary</h2>
+    <ul>
+      <li><code>origin/main</code> advanced through keyboard avoidance <code>#267</code> and the O-8 density standing rule docs.</li>
+      <li><code>codex/core-label-tail-cleanup</code> was rebased onto <code>origin/main@a68d02e</code>.</li>
+      <li>The local app tail is clean and remains exactly 3 commits ahead.</li>
+      <li>No push or PR was performed by Codex.</li>
+    </ul>
+
+    <p class="note">Codex skipped local keyboard commit <code>225c57f</code> because upstream <code>#267</code> now covers capture and chat keyboard avoidance more broadly, and keeping both would risk double lift on Android.</p>
+
+    <h2>Current Codex App Tail</h2>
+    <div class="grid">
+      <div class="item"><strong>A11y</strong><code>e7b5502 fix(a11y): label graph drilldown data action</code></div>
+      <div class="item"><strong>Theme</strong><code>d279644 fix(theme): tokenise navigation chrome colors</code></div>
+      <div class="item"><strong>Theme</strong><code>ef1a08c fix(theme): tokenise premium surface colors</code></div>
+    </div>
+
+    <h2>Verification</h2>
+    <ul>
+      <li><code>git fetch origin</code>: current at <code>origin/main@a68d02e</code></li>
+      <li><code>git status --short --branch</code>: clean on <code>codex/core-label-tail-cleanup</code></li>
+      <li><code>git rev-list --left-right --count origin/main...HEAD</code>: <code>0 3</code></li>
+      <li><code>npm run verify</code>: PASS</li>
+      <li>Jest: 101 suites passed, 883 tests passed</li>
+    </ul>
+
+    <h2>Claude Action</h2>
+    <p>Review or pick up the 3-commit Codex tail from <code>codex/core-label-tail-cleanup</code> when ready. Codex will keep the 5-minute loop active and use the new O-8 density standing rule for the next UI audit slice.</p>
+  </main>
+</body>
+</html>

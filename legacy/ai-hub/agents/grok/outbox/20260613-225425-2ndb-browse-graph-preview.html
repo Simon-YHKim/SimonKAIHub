@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2nd-B 시장 신호 — 가입 전 둘러보기 vs 그래프 홈 화면 (2-Pass)</title>
+<style>
+:root {
+  --bg: #070A18;
+  --panel: #121626;
+  --panel2: #1a2030;
+  --line: #2a345a;
+  --ink: #e8ecf8;
+  --muted: #c9d0e6;
+  --subtle: #8d98b8;
+  --accent: #72f2c7;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", "Pretendard", sans-serif; line-height: 1.6; font-size: 14.5px; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 32px 20px 80px; }
+header { margin-bottom: 24px; }
+h1 { font-size: 19px; font-weight: 700; margin: 0 0 4px; letter-spacing: -.01em; }
+.meta { color: var(--subtle); font-size: 11.5px; margin-top: 4px; }
+h2 { font-size: 14px; font-weight: 700; margin: 28px 0 8px; padding-bottom: 4px; border-bottom: 1px solid var(--line); color: var(--ink); }
+h3 { font-size: 12.5px; font-weight: 600; margin: 14px 0 4px; color: var(--accent); }
+.lead { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; margin: 12px 0; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; margin: 8px 0; }
+.key { border-left: 3px solid var(--accent); background: rgba(114, 242, 199, 0.05); padding: 8px 11px; margin: 8px 0; border-radius: 0 5px 5px 0; }
+ul, ol { margin: 4px 0 4px 16px; padding-left: 2px; }
+li { margin: 2px 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.muted { color: var(--muted); }
+.small { font-size: 11.5px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 9px 11px; margin: 7px 0; }
+.source { font-size: 10.5px; color: var(--subtle); margin-top: 2px; }
+.quote { background: var(--panel2); border: 1px solid var(--line); border-radius: 4px; padding: 7px 9px; font-size: 12.5px; margin: 4px 0; line-height: 1.45; }
+footer { margin-top: 36px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 10.5px; color: var(--subtle); }
+.badge { display: inline-block; font-size: 9.5px; padding: 0 5px; border-radius: 2px; background: var(--line); color: var(--subtle); margin-right: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>2nd-B 시장 신호 — 가입 전 둘러보기 vs 그래프 홈 화면</h1>
+  <p class="meta">Grok · X consumer signals (Golden Q1/Q3/Q4/Q5) · 2-pass reproducible only · 2026-06-13 22:54 KST</p>
+  <p class="meta">dark 3-color (bg/panel/mint accent) · no emoji · self-contained · advisory</p>
+</header>
+
+<div class="lead">
+  <strong>질문</strong><br>
+  개인 second-brain / self-knowledge 앱에서 (a) browse-before-signup 시 Convert 만드는 요소 vs Bounce, (b) visually heavy/ornate graph home screen에 대한 사용자 반응 (delight vs perf/clutter). Golden Q1 trust, Q3 subscription fatigue, Q4 virality, Q5 competitor perception 신호 수집.
+</div>
+
+<h2>Summary (2-pass 동일 결론)</h2>
+<div class="card">
+  <strong>(a) Browse-before-signup</strong><br>
+  Convert: no account + offline + free forever + "write first → 즉시 owned 확인".<br>
+  Bounce: account wall 먼저 + 가치 미체험 + 데이터 소유/ sub 암시 불안.<br>
+  <span class="muted">대표: "Tired of journaling apps that require accounts... built offline... no account required. Free forever."</span>
+</div>
+<div class="card">
+  <strong>(b) Visually heavy/ornate graph</strong><br>
+  Delight: "beautiful... mind blown", virality (screenshot share).<br>
+  Clutter/Perf: "bloat turned financial disaster", "beautiful but forgets", "completely useless" (user processing 없으면).<br>
+  <span class="muted">Ornate 초기 호기심 좋으나 신규/대형/모바일에서 이탈 위험. Ownership + progressive 필수.</span>
+</div>
+
+<h2>Q1 Trust + Q3 Sub Fatigue</h2>
+<div class="key">
+  Local architectural privacy + "stays yours" = 최강 신호.<br>
+  Notion sub 취소 → local selfhost (SiYuan "Forever free", "Sync included", "subscription notes business = holding your files") 이동 반복 재현.
+</div>
+
+<h2>Q4 Virality + Q5 Competitor</h2>
+<div class="key">
+  Graph viz = 공유 트리거 ("my own thinking visualized")지만 "outsourced = library of someone else's thinking" 강한 부정.<br>
+  Incumbents (Notion) = sub/hype/cloud 피로. Local owned = rising quiet alternative perception.
+</div>
+
+<h2>대표 신호 (인용, 2-pass 재현)</h2>
+<div class="panel">
+  <div class="quote">"Tired of journaling apps that require accounts, subscriptions, or an internet connection? I built an offline journaling app with no account required. ... Free forever."</div>
+  <div class="source">2026-06-12 · direct high resonance</div>
+</div>
+<div class="panel">
+  <div class="quote">Obsidian graph "looked beautiful in the Obsidian graph view. but vector search bloat turned the context into a financial disaster"</div>
+  <div class="source">30-day migration case, high engagement</div>
+</div>
+<div class="panel">
+  <div class="quote">"beautiful graph view. completely useless. those aren't his notes. he didn't process a single idea."</div>
+  <div class="source">outsourced thinking 경고 (karpathy 맥락)</div>
+</div>
+<div class="panel">
+  <div class="quote">SiYuan "self-hosts the entire thing ... Forever free. ... The subscription notes business has one product: holding your files."</div>
+  <div class="source">43.9k stars 언급, Notion sub cancel 유도</div>
+</div>
+
+<h2>즉시 적용 권고 (T1/T3)</h2>
+<ol>
+  <li><strong>Browse-before</strong>: Hero에서 "계정 없이 한 줄 써보기" 즉시 local 저장 데모 + "지금 저장됨, 당신의 것" 확인. Account = export/sync 후 optional.</li>
+  <li><strong>Graph home</strong>: Default minimal/local links (perf safe). Full ornate = opt-in. Copy: "내가 직접 연결한 생각의 지도 — 당신의 처리 과정이 핵심".</li>
+  <li><strong>Trust everywhere</strong>: "local first, only what you captured, stays yours, AI opt-in only". Account = convenience layer.</li>
+  <li><strong>Sub 대비</strong>: Core (journal + basic graph + local) 절대 sub-free. Plans = "sync/AI inference only".</li>
+  <li><strong>Virality</strong>: "My graph" share hook + "이 연결은 내가 만든 것" attribution. Auto-build outsourced 회피.</li>
+</ol>
+
+<footer>
+  2-pass (keyword + semantic, fixed golden queries, same conclusions both passes). Measured signals only. advisory to claude. Protocol §10.6 / §34.
+</footer>
+</div>
+</body>
+</html>

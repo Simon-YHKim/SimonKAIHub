@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex UI Gate - Form Label/Error Association</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --panel: #151923;
+      --panel2: #10141c;
+      --text: #eef2f7;
+      --muted: #a9b2c3;
+      --line: #2b3342;
+      --warn: #ffd166;
+      --bad: #ff7272;
+      --good: #79e0aa;
+      --accent: #8db7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
+    header, section, .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    header {
+      padding: 26px;
+      background: linear-gradient(180deg, #171c27, #10141c);
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(26px, 4vw, 42px); line-height: 1.1; letter-spacing: 0; }
+    h2 { font-size: 20px; margin-bottom: 12px; }
+    h3 { font-size: 16px; margin-bottom: 8px; }
+    section { margin-top: 18px; padding: 18px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 10px;
+      color: var(--muted);
+      background: #0e121a;
+      font-size: 13px;
+    }
+    .score { color: var(--warn); border-color: #6a5523; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .card {
+      padding: 16px;
+      min-height: 170px;
+    }
+    .bad { border-color: #673238; }
+    .bad h3 { color: var(--bad); }
+    .good { border-color: #2f6547; }
+    .good h3 { color: var(--good); }
+    .path {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      color: var(--accent);
+      word-break: break-all;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 6px 0; }
+    .field {
+      display: grid;
+      gap: 6px;
+      margin-top: 12px;
+      color: var(--muted);
+    }
+    .input {
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel2);
+    }
+    .error { color: var(--bad); }
+    .semantic {
+      margin-top: 12px;
+      border: 1px solid #2f6547;
+      background: rgba(121, 224, 170, 0.08);
+      padding: 10px;
+      border-radius: 8px;
+    }
+    code {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      background: #0b0f16;
+      border: 1px solid var(--line);
+      padding: 2px 5px;
+      border-radius: 5px;
+    }
+    .small { color: var(--muted); font-size: 13px; }
+    @media (max-width: 840px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="small">Codex -> Claude / 2026-06-06 07:43 KST</p>
+      <h1>Form labels and errors are not consistently associated</h1>
+      <p>라벨과 오류가 화면에는 보이지만 입력과 연결되는 계약이 없습니다. 100점 기준에서는 폼 상태도 시각 배치만으로 끝나면 안 됩니다.</p>
+      <div class="meta">
+        <span class="pill score">Score: 98/100 provisional</span>
+        <span class="pill">Priority: P2</span>
+        <span class="pill">Scope: Auth / Account / Settings / TemplateEditor</span>
+        <span class="pill">No app code changed by Codex</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Pattern</h2>
+      <div class="grid">
+        <div class="card bad">
+          <h3>Visual Only</h3>
+          <div class="field">
+            <span>Birth date</span>
+            <div class="input"></div>
+            <span class="error">Invalid date</span>
+          </div>
+          <p class="small">Adjacent text is not the same as a field-label/error contract.</p>
+        </div>
+        <div class="card good">
+          <h3>Semantic Field</h3>
+          <div class="semantic">Birth date, YYYY-MM-DD. Error: invalid date.</div>
+          <p class="small">The label, helper, and error are available as field state.</p>
+        </div>
+        <div class="card bad">
+          <h3>Primitive Gap</h3>
+          <p><code>Input</code> wraps <code>TextInput</code> but provides no form-field API.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <div class="grid">
+        <div class="card bad">
+          <h3>Input</h3>
+          <p class="path">src/components/ui/Input.tsx:8-39</p>
+          <p>Styled TextInput only; no label/helper/error contract.</p>
+        </div>
+        <div class="card bad">
+          <h3>BirthDateField</h3>
+          <p class="path">src/components/auth/BirthDateField.tsx:37-50</p>
+          <p>Label and error are adjacent but not linked to the input.</p>
+        </div>
+        <div class="card bad">
+          <h3>Account Delete</h3>
+          <p class="path">src/app/account.tsx:225-234</p>
+          <p>Destructive confirmation input is unlabeled beyond placeholder.</p>
+        </div>
+        <div class="card bad">
+          <h3>Settings Full Wipe</h3>
+          <p class="path">src/app/settings.tsx:515-524</p>
+          <p>Full-wipe confirmation input has no explicit label/hint association.</p>
+        </div>
+        <div class="card bad">
+          <h3>TemplateEditor</h3>
+          <p class="path">src/components/wiki/TemplateEditor.tsx:105-126, 239-246, 269-276</p>
+          <p>Field wrappers and error summary are visual, not associated per input.</p>
+        </div>
+        <div class="card good">
+          <h3>Good Local Examples</h3>
+          <p class="path">import.tsx, jarvis.tsx, records.tsx, wiki.tsx</p>
+          <p>Some inputs already pass accessibility labels manually.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Required Fix</h2>
+      <ul>
+        <li>Add a shared <code>FormField</code> or extend <code>Input</code> with label/helper/error support.</li>
+        <li>Associate helper and error copy with the input where possible; otherwise include them in explicit accessibility labels/hints.</li>
+        <li>Give destructive confirmation inputs localized labels and hints.</li>
+        <li>Update BirthDateField, Account, Settings, and TemplateEditor first.</li>
+        <li>Add a static scan or exception ledger for unlabeled <code>&lt;Input&gt;</code>.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

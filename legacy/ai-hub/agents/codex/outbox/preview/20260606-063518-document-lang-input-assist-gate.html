@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Gate - Document Language And Input Assistance</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090b12;
+      --panel: #111520;
+      --panel-2: #161b28;
+      --text: #f4f7fb;
+      --muted: #aab4c5;
+      --line: #293246;
+      --p1: #ff6b7a;
+      --p2: #f7bf5f;
+      --ok: #77d897;
+      --accent: #7cc7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1120px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+    header {
+      display: grid;
+      gap: 12px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 5vw, 58px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+    p { margin: 0; color: var(--muted); }
+    code {
+      color: #d9e8ff;
+      background: #0b1020;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: .92em;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+    .card {
+      grid-column: span 12;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .half { grid-column: span 6; }
+    .third { grid-column: span 4; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .p1 { color: #19070a; background: var(--p1); }
+    .p2 { color: #1a1100; background: var(--p2); }
+    .ok { color: #06150c; background: var(--ok); }
+    ul {
+      margin: 10px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+    li + li { margin-top: 7px; }
+    .metric {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      color: var(--muted);
+    }
+    .metric:last-child { border-bottom: 0; }
+    .metric strong { color: var(--text); }
+    .note {
+      background: var(--panel-2);
+      border-left: 4px solid var(--accent);
+    }
+    @media (max-width: 760px) {
+      main { width: min(100vw - 24px, 1120px); padding-top: 28px; }
+      .half, .third { grid-column: span 12; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Gate - 2026-06-06 06:35 KST</div>
+      <h1>Document Language And Input Assistance</h1>
+      <p>Score remains <strong>98/100 provisional</strong>. This gate blocks 100 until the web language semantics and high-risk field input contracts are fixed and proven.</p>
+    </header>
+
+    <section class="grid" aria-label="Summary">
+      <article class="card third">
+        <span class="badge p1">P1</span>
+        <h2>Root language mismatch</h2>
+        <p><code>src/app/+html.tsx:44</code> hard-codes <code>&lt;html lang="ko"&gt;</code>, while the UI can switch to English.</p>
+      </article>
+      <article class="card third">
+        <span class="badge p2">P2</span>
+        <h2>Input hints are partial</h2>
+        <p>Auth has a good precedent, but consent birth date and destructive confirmation fields lack a complete platform input-purpose contract.</p>
+      </article>
+      <article class="card third">
+        <span class="badge p2">P2</span>
+        <h2>No regression guard</h2>
+        <p>There is no automated check that document language follows KO/EN toggles or that high-risk fields keep their required hints.</p>
+      </article>
+    </section>
+
+    <section class="grid" aria-label="Evidence">
+      <article class="card half">
+        <h2>Evidence</h2>
+        <ul>
+          <li><code>+html.tsx:44</code> sets the document language to Korean for every web render.</li>
+          <li><code>i18n/index.ts:36-48</code> detects language and persists changes, but does not sync <code>document.documentElement.lang</code>.</li>
+          <li><code>rg</code> found no documentElement sync in app, lib, or components.</li>
+          <li><code>BirthDateField.tsx:39-45</code> uses a numeric punctuation keyboard but no birth-date autocomplete or text content hint.</li>
+          <li><code>account.tsx:228-234</code> and <code>settings.tsx:518-524</code> have destructive phrase inputs without an explicit autofill-off contract.</li>
+        </ul>
+      </article>
+      <article class="card half">
+        <h2>Static Input Scan</h2>
+        <div class="metric"><span>TextInput hits</span><strong>12</strong></div>
+        <div class="metric"><span>&lt;Input hits</span><strong>26</strong></div>
+        <div class="metric"><span>autoComplete hits</span><strong>4</strong></div>
+        <div class="metric"><span>textContentType hits</span><strong>0</strong></div>
+        <div class="metric"><span>keyboardType hits</span><strong>3</strong></div>
+        <div class="metric"><span>returnKeyType hits</span><strong>3</strong></div>
+      </article>
+    </section>
+
+    <section class="grid" aria-label="Acceptance">
+      <article class="card note">
+        <h2>Acceptance Before 100</h2>
+        <ul>
+          <li>Sync <code>document.documentElement.lang</code> to <code>en</code> or <code>ko</code> on i18n init and language changes.</li>
+          <li>Provide browser or automated proof that KO/EN toggles update the root document language.</li>
+          <li>Create a field-purpose ledger for auth, consent/profile, capture, interview, Jarvis, wiki/template, settings, and account.</li>
+          <li>Guard the highest-risk fields with a static check or web runtime test.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

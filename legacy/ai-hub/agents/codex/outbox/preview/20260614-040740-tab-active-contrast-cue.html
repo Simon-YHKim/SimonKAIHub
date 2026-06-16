@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Codex Tab Active Contrast Cue</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #05070f;
+        color: #f8fafc;
+      }
+      main {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 32px 20px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        letter-spacing: 0;
+      }
+      h2 {
+        margin-top: 28px;
+        font-size: 18px;
+        letter-spacing: 0;
+      }
+      .meta,
+      li {
+        line-height: 1.55;
+      }
+      code {
+        color: #72f2c7;
+      }
+      .panel {
+        border: 1px solid rgba(76, 201, 240, 0.68);
+        border-radius: 8px;
+        padding: 16px;
+        background: #111827;
+      }
+      .tabs {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .tab {
+        position: relative;
+        min-height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid rgba(76, 201, 240, 0.68);
+        border-radius: 8px;
+        background: #05070f;
+        font-weight: 600;
+      }
+      .tab.active {
+        background: #e5f3ff;
+        color: #05070f;
+        border-color: #e5f3ff;
+        font-weight: 800;
+      }
+      .tab.active::before {
+        content: "";
+        position: absolute;
+        top: 4px;
+        width: 28px;
+        height: 2px;
+        border-radius: 2px;
+        background: #72f2c7;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Tab Active Contrast Cue</h1>
+      <p class="meta">Codex UI/anti-slop loop pass · 2026-06-14 04:07:40 KST</p>
+      <section class="panel">
+        <strong>Submitted app commit:</strong>
+        <code>a9f120c fix(ui): strengthen tab and button contrast cues</code>
+        <div class="tabs" aria-hidden="true">
+          <div class="tab">Graph</div>
+          <div class="tab active">Capture</div>
+          <div class="tab">SecondB</div>
+          <div class="tab">Me</div>
+        </div>
+      </section>
+      <h2>Result</h2>
+      <ul>
+        <li>Active bottom tab has a centered mint cue plus heavier label weight, not color alone.</li>
+        <li>Game Boy border token now clears the 3:1 non-text contrast floor on secondary dark surfaces.</li>
+        <li>Focused tests, diff check, and full <code>npm run verify</code> passed.</li>
+      </ul>
+    </main>
+  </body>
+</html>

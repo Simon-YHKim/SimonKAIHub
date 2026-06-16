@@ -1,0 +1,174 @@
+# commit.ps1 -- 허브 커밋 헬퍼 (AI별 기여자 표기)
+# 목적: 공유 .git의 author가 전부 "AI Hub"로 뭉개지는 문제 해결.
+#       각 AI가 자기 정체성으로 커밋해 git log/blame에 기여가 드러나게 한다.
+#
+# 사용:
+#   powershell tools/commit.ps1 -As codex -m "docs(comm): gate ..." -Files "agents/codex/STATUS.md","agents/codex/outbox/x.md"
+#   powershell tools/commit.ps1 -As claude -m "feat(comm): ..."   # -Files 생략 시 이미 stage된 것만 커밋
+#
+# 규칙(PROTOCOL §10.5): 자기 파일만 명시 stage. `git add -A`/`git add .` 금지.
+#   -Files 를 주면 그 경로들만 stage 후 커밋. 안 주면 현재 staged 인덱스 그대로 커밋.
+
+param(
+  [Parameter(Mandatory=$true)][ValidateSet("claude","codex","antigravity","grok")][string]$As,
+  [Parameter(Mandatory=$true)][string]$Message,
+  [string[]]$Files = @(),
+  [Alias("SkipGuard")][switch]$Force
+)
+
+$utf8 = [System.Text.UTF8Encoding]::new($false)
+[Console]::InputEncoding = $utf8
+[Console]::OutputEncoding = $utf8
+$OutputEncoding = $utf8
+
+$identities = @{
+  claude      = @{ name = "Claude";      email = "claude@2nd-b.ai" }
+  codex       = @{ name = "Codex";       email = "codex@2nd-b.ai" }
+  antigravity = @{ name = "Antigravity"; email = "antigravity@2nd-b.ai" }
+  grok        = @{ name = "Grok";        email = "grok@2nd-b.ai" }
+}
+$id = $identities[$As]
+
+$root = Split-Path $PSScriptRoot -Parent
+Set-Location $root
+
+# Concurrent-writer safety: the hub .git index is shared by Claude + the codex/grok/AG
+# daemons. Retry git ops that fail on a transient index.lock (commit.ps1 had none, so
+# colliding autonomous commits silently failed).
+function Invoke-GitRetry {
+  param([Parameter(Mandatory=$true)][string[]]$GitArgs, [int]$Retries = 8)
+  for ($i = 0; $i -lt $Retries; $i++) {
+    $out = & git @GitArgs 2>&1
+    if ($LASTEXITCODE -eq 0) { return $true }
+    if ("$out" -match 'index\.lock|another git process|Unable to create') {
+      Start-Sleep -Milliseconds (400 + $i * 350)
+      continue
+    }
+    Write-Host ("[commit] git failed: " + (("$out" -split "`n")[0])) -ForegroundColor Yellow
+    return $false
+  }
+  Write-Host "[commit] aborted: hub index.lock persisted after $Retries retries (another AI mid-commit?)." -ForegroundColor Yellow
+  return $false
+}
+
+# Cross-process mutex: genuinely serialize index-touching ops across the codex/grok/AG
+# daemon processes + Claude's own loop. Retry handles transient locks; the mutex prevents
+# the race itself. Times out to retry-only behavior after 20s rather than block forever.
+$hubMutex = New-Object System.Threading.Mutex($false, "Global\hub-git-commit")
+try { [void]$hubMutex.WaitOne(20000) } catch [System.Threading.AbandonedMutexException] { }  # prior holder died -> we own it
+
+if ($Files.Count -gt 0) {
+  foreach ($f in $Files) { [void](Invoke-GitRetry @('add','--',$f)) }
+}
+
+# ----------------------------------------------------------------------------
+# LANE GUARD (single-writer §1): a non-Claude agent may only commit files under
+# its own agents/<As>/ dir. Shared files (BOARD/PROTOCOL/CONTROL/DECISIONS, other
+# agents' dirs, tools/, repo root) are Claude-only. Blocks the recurring case of a
+# daemon marking shared state directly (e.g. AG editing BOARD.md). Always on.
+# ----------------------------------------------------------------------------
+if ($As -ne "claude") {
+  $stagedAll = git diff --cached --name-only --diff-filter=ACMRD
+  $offlane = @($stagedAll | Where-Object { $_ -and ($_ -notmatch "^agents/$As/") })
+  if ($offlane.Count -gt 0) {
+    try { $hubMutex.ReleaseMutex() } catch {}
+    Write-Host "[commit] LANE GUARD: '$As' may only commit under agents/$As/ (single-writer Sec.1)." -ForegroundColor Red
+    foreach ($f in $offlane) { Write-Host "  off-lane: $f" -ForegroundColor Red }
+    Write-Host "  Shared files are Claude-only. Unstage them; report status in your own STATUS.md/outbox instead." -ForegroundColor Yellow
+    exit 1
+  }
+}
+
+# ----------------------------------------------------------------------------
+# PRE-COMMIT GUARD (recurrence prevention for incidents #2 and #3)
+#   #2  cp949 / U+FFFD corruption -- a file saved via Out-File default cp949
+#       (or otherwise mojibaked) silently lands in git and breaks all readers.
+#   #3  unbounded STATUS bloat   -- agents/*/STATUS.md grows without bound and
+#       eventually wrecks the hub (must stay small; rotate to a gitignored log).
+# Default ON. Bypass for legitimately large/binary-ish files with -Force.
+# ----------------------------------------------------------------------------
+$SizeLimitBytes = 256 * 1024   # 256 KB threshold for committed .md files
+$StatusLimitBytes = 64 * 1024  # O-15 #2: tighter cap for STATUS.md (rotate old detail to a gitignored *.log)
+$TextExtForEnc  = @(".md", ".json", ".ps1", ".sh")
+
+function Get-StagedFiles {
+  # Files actually about to be committed = current staged index.
+  $out = git diff --cached --name-only --diff-filter=ACMR
+  if (-not $out) { return @() }
+  return @($out | Where-Object { $_ -and $_.Trim() -ne "" })
+}
+
+function Test-FileEncoding([string]$path) {
+  # Returns the offending reason string, or $null if clean.
+  # (a) explicit U+FFFD replacement-char byte sequence EF BF BD
+  # (b) strict UTF-8 decode failure (throws on invalid bytes)
+  $bytes = [System.IO.File]::ReadAllBytes($path)
+  for ($i = 0; $i -le $bytes.Length - 3; $i++) {
+    if ($bytes[$i] -eq 0xEF -and $bytes[$i+1] -eq 0xBF -and $bytes[$i+2] -eq 0xBD) {
+      return "U+FFFD replacement char (EF BF BD) at byte offset $i"
+    }
+  }
+  try {
+    $strict = [System.Text.UTF8Encoding]::new($false, $true)  # throwOnInvalidBytes = true
+    [void]$strict.GetString($bytes)
+  } catch {
+    return "not valid UTF-8 (strict decode failed: $($_.Exception.Message))"
+  }
+  return $null
+}
+
+if (-not $Force) {
+  $staged = Get-StagedFiles
+  if ($staged.Count -gt 0) {
+    $problems = @()
+    foreach ($rel in $staged) {
+      $abs = Join-Path $root $rel
+      if (-not (Test-Path -LiteralPath $abs)) { continue }  # deletes etc.
+      $ext = [System.IO.Path]::GetExtension($rel).ToLowerInvariant()
+
+      # (a) ENCODING guard for text-ish files
+      if ($TextExtForEnc -contains $ext) {
+        $reason = Test-FileEncoding $abs
+        if ($reason) {
+          $problems += "  [ENC]  ${rel}: $reason"
+        }
+      }
+
+      # (b) SIZE guard for committed .md files -- STATUS.md capped tighter (O-15 #2)
+      if ($ext -eq ".md") {
+        $len = (Get-Item -LiteralPath $abs).Length
+        $isStatus = [System.IO.Path]::GetFileName($rel) -ieq "STATUS.md"
+        $cap = if ($isStatus) { $StatusLimitBytes } else { $SizeLimitBytes }
+        if ($len -gt $cap) {
+          $kb = [math]::Round($len / 1KB, 1)
+          $extra = if ($isStatus) { " (STATUS cap -- rotate old detail to a gitignored *.log)" } else { "" }
+          $problems += "  [SIZE] ${rel}: ${kb} KB exceeds $([int]($cap/1KB)) KB$extra"
+        }
+      }
+    }
+
+    if ($problems.Count -gt 0) {
+      Write-Host ""
+      Write-Host "[commit] PRE-COMMIT GUARD 차단 -- 커밋을 중단합니다." -ForegroundColor Red
+      foreach ($p in $problems) { Write-Host $p -ForegroundColor Red }
+      Write-Host ""
+      Write-Host "조치:" -ForegroundColor Yellow
+      Write-Host "  [ENC]  cp949/Out-File 손상 가능성. 해당 파일을 Edit/Write로 UTF-8(no BOM) 재저장하세요." -ForegroundColor Yellow
+      Write-Host "  [SIZE] STATUS.md 등은 작게 유지. 내용을 잘라내거나 .gitignore된 *.log 로 회전하세요." -ForegroundColor Yellow
+      Write-Host "  정당한 대용량/예외 파일이면 -Force (별칭 -SkipGuard) 로 가드를 건너뛸 수 있습니다." -ForegroundColor Yellow
+      exit 1
+    }
+  }
+} else {
+  Write-Host "[commit] PRE-COMMIT GUARD 건너뜀 (-Force)." -ForegroundColor DarkYellow
+}
+
+# author + committer 둘 다 해당 AI로 박는다 (git log/blame/contributors에 드러남)
+$ok = Invoke-GitRetry @('-c', "user.name=$($id.name)", '-c', "user.email=$($id.email)", 'commit', '-m', $Message)
+try { $hubMutex.ReleaseMutex() } catch {}
+if ($ok) {
+  Write-Host "[commit] committed as ${As}: $Message" -ForegroundColor Green
+} else {
+  Write-Host "[commit] failed. Check staged files, conflicts, and git status." -ForegroundColor Yellow
+  exit 1
+}

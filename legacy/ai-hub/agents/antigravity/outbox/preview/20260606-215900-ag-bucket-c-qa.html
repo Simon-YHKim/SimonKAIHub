@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Android Native QA: Bucket C Native Permissions & AppState Guards</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; background: #0f111a; color: #e8ecf8; padding: 2rem; max-width: 800px; margin: 0 auto; }
+    h1 { color: #6be3c9; }
+    h2 { color: #a78bfa; margin-top: 2rem; border-bottom: 1px solid #3d435c; padding-bottom: 0.5rem; }
+    .card { background: #1a1d2d; padding: 1rem; border-radius: 8px; border: 1px solid #3d435c; margin-top: 1rem; }
+    pre { background: #070a18; padding: 1rem; border-radius: 6px; overflow-x: auto; color: #a78bfa; border: 1px solid #3d435c; }
+    code { font-family: monospace; }
+    .status-pass { color: #6be3c9; font-weight: bold; }
+    .timestamp { font-family: monospace; color: #8d98b8; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <h1>Native QA Report: Bucket C Tasks</h1>
+  
+  <h2>1. OCR 권한/프리뷰 증명 및 Native Permission 감사</h2>
+  <div class="card">
+    <p><strong>발견된 이슈:</strong> <code>app.json</code>의 <code>android.permissions</code>에 <code>android.permission.CAMERA</code>가 누락되어 있었습니다.</p>
+    <p>Expo Image Picker가 동작할 때 라이브러리 접근(READ_MEDIA_IMAGES)은 선언되어 있었지만, 카메라 촬영 시에는 권한이 명시적으로 없어 Android 13 이상에서 크래시 또는 무응답 현상이 일어날 수 있는 잠재적 위험이 있었습니다.</p>
+    <p><strong>수정:</strong> <code>app.json</code> 파일에 <code>android.permission.CAMERA</code>를 명시적으로 추가했습니다. 또한, 제약 사항인 <code>windowTranslucentStatus: true</code>가 남아있던 것을 발견하여 함께 제거했습니다.</p>
+    <p><strong>상태:</strong> <span class="status-pass">PASS (Android Manifest 하드닝 완료)</span></p>
+  </div>
+
+  <h2>2. LivingAsset AppState guard + Cold-start</h2>
+  <div class="card">
+    <p><strong>발견된 이슈:</strong> <code>SecondBSprite.tsx</code>, <code>SoulcoreFinalArt.tsx</code>, 그리고 <code>index.tsx</code>의 <code>useSkyDrift</code>에서 <code>Animated.loop</code>가 백그라운드 및 콜드스타트 시에도 조건 없이 <code>loop.start()</code>를 호출하여 JS/UI 스레드를 끝없이 점유하는 배터리 드레인 이슈가 있었습니다.</p>
+    <p><strong>수정:</strong> 각 애니메이션 루프에 <code>AppState.currentState === "active"</code> 체크 로직과 <code>AppState.addEventListener("change")</code> 이벤트를 추가하여 백그라운드 진입 시 <code>loop.stop()</code>, 포그라운드 복귀 시 <code>loop.start()</code>가 실행되도록 가드(Guard)를 세웠습니다.</p>
+    <pre><code>if (AppState.currentState === "active") {
+  loop.start();
+}
+
+const sub = AppState.addEventListener("change", (next) => {
+  if (next === "active") loop.start();
+  else loop.stop();
+});</code></pre>
+    <p><strong>상태:</strong> <span class="status-pass">PASS (배터리 누수 방지 및 콜드스타트 최적화 완료)</span></p>
+  </div>
+
+  <div class="timestamp">[YYYY-MM-DD / HH:MM:SS] 2026-06-06 / 21:59:00 KST</div>
+</body>
+</html>

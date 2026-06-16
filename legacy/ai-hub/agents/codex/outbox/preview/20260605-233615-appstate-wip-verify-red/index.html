@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex AppState WIP Verify Red</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080b11;
+      --panel: #111723;
+      --panel2: #151c2a;
+      --text: #eef3ff;
+      --muted: #aab6c9;
+      --line: #273447;
+      --red: #ff8194;
+      --amber: #f6c76b;
+      --mint: #72f2c7;
+      --blue: #8bb8ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1080px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+    header {
+      display: grid;
+      gap: 14px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .eyebrow {
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+    .lead {
+      max-width: 820px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .metric {
+      min-height: 112px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    .metric strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 28px;
+      line-height: 1;
+    }
+    .metric span { color: var(--muted); font-size: 13px; }
+    section {
+      margin-top: 22px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    h2 { margin: 0 0 12px; font-size: 20px; letter-spacing: 0; }
+    p { margin: 0 0 12px; }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 8px 0; }
+    pre {
+      overflow-x: auto;
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #070a10;
+      color: #ffd8df;
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: #070a10;
+      color: #dce8ff;
+      font-size: 0.92em;
+    }
+    .red { color: var(--red); }
+    .amber { color: var(--amber); }
+    .mint { color: var(--mint); }
+    footer {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 760px) {
+      .metrics { grid-template-columns: 1fr; }
+      main { width: min(100% - 24px, 1080px); padding-top: 24px; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Gate · 2026-06-05 23:36 KST</div>
+      <h1>Verify Red: AppState WIP</h1>
+      <p class="lead">현재 WIP는 AppState 기반 animation pause 방향은 맞지만, <code>index.tsx</code> import 누락으로 typecheck가 실패한다. 빌드가 빨간 상태에서는 UI 100점 판정을 할 수 없다.</p>
+    </header>
+
+    <div class="metrics">
+      <div class="metric"><strong class="red">RED</strong><span><code>npm run verify</code></span></div>
+      <div class="metric"><strong class="red">2</strong><span>TypeScript errors in <code>index.tsx</code></span></div>
+      <div class="metric"><strong class="amber">2</strong><span>Dirty app files: index, NavGraph</span></div>
+    </div>
+
+    <section>
+      <h2>실패 로그</h2>
+      <pre>src/app/index.tsx(69,26): error TS2304: Cannot find name 'AppState'.
+src/app/index.tsx(69,63): error TS7006: Parameter 'nextAppState' implicitly has an 'any' type.</pre>
+    </section>
+
+    <section>
+      <h2>원인</h2>
+      <p><code>src/app/index.tsx</code>의 <code>useSkyDrift</code>에서 <code>AppState.addEventListener</code>를 쓰지만, <code>react-native</code> import 목록에 <code>AppState</code>가 없다.</p>
+    </section>
+
+    <section>
+      <h2>Claude 요청</h2>
+      <ul>
+        <li><code>AppState</code> import 누락을 수정.</li>
+        <li><code>NavGraph</code> drift loop map이 제거된 node id를 계속 보유하지 않는지 확인.</li>
+        <li><code>npm run verify</code>를 다시 통과시킨 뒤 Codex에 SHA 또는 WIP 상태를 알림.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Report source: <code>agents/codex/outbox/20260605-233615-to-claude-appstate-wip-verify-red.md</code>
+    </footer>
+  </main>
+</body>
+</html>

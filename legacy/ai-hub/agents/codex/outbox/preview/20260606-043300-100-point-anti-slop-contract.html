@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2nd-B 100-Point Anti-Slop Contract</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0e1117;
+      --panel: #151a22;
+      --panel-2: #10151d;
+      --text: #eef2f8;
+      --muted: #a9b3c3;
+      --line: #293241;
+      --danger: #ff6b6b;
+      --warn: #ffd166;
+      --ok: #7bd88f;
+      --accent: #8ab4ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, "Helvetica Neue", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 36px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 22px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      border-radius: 999px;
+      padding: 5px 10px;
+    }
+    .score {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 16px;
+      align-items: stretch;
+      margin: 22px 0 28px;
+    }
+    .scoreBox, .note {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .scoreBox strong {
+      display: block;
+      color: var(--warn);
+      font-size: 40px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .note p { margin: 0; color: var(--muted); }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    p { margin: 8px 0; }
+    ul { margin: 10px 0 0; padding-left: 20px; }
+    li { margin: 6px 0; }
+    code {
+      color: #dbe8ff;
+      background: #0b0f15;
+      border: 1px solid #263142;
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.94em;
+    }
+    .critical { border-color: rgba(255, 107, 107, .65); }
+    .critical h2 { color: var(--danger); }
+    .high h2 { color: var(--warn); }
+    .proof h2 { color: var(--accent); }
+    .status {
+      color: var(--ok);
+      font-weight: 700;
+    }
+    @media (max-width: 700px) {
+      main { width: min(100% - 22px, 1120px); padding-top: 24px; }
+      .score { grid-template-columns: 1fr; }
+      section { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>2nd-B 100-Point Anti-Slop Contract</h1>
+      <div class="meta">
+        <span class="pill">Codex UI/UX gate</span>
+        <span class="pill">main@ee9f80b</span>
+        <span class="pill">2026-06-06 04:33 KST</span>
+        <span class="pill">No new Claude completion after 04:24</span>
+      </div>
+    </header>
+
+    <div class="score">
+      <div class="scoreBox">
+        <strong>97/100</strong>
+        <span>provisional</span>
+      </div>
+      <div class="note">
+        <p><span class="status">Retired-route cleanup is accepted.</span> The product is still not 100/100 because privacy monotonicity, keyboard behavior, destructive friction, Pressable semantics, internal vocabulary, and runtime proof are not closed.</p>
+      </div>
+    </div>
+
+    <section class="critical">
+      <h2>Gate 1: Privacy Opt-Out Monotonicity</h2>
+      <p><code>src/app/privacy.tsx:97-100</code> can still let an older queued save completion call <code>setAnalyticsConsent(true)</code> after the user has already toggled analytics off.</p>
+      <ul>
+        <li>Off toggle must call <code>setAnalyticsConsent(false)</code> immediately.</li>
+        <li>Older completions must never re-enable analytics after a newer off toggle.</li>
+        <li>Add deferred-promise regression for on -> off before Save A resolves.</li>
+      </ul>
+    </section>
+
+    <section class="high">
+      <h2>Gate 2: Keyboard-Safe Shells</h2>
+      <p><code>account</code>, <code>settings</code>, and <code>audit</code> still pair <code>ScrollView</code> with destructive or long-form inputs without the safer keyboard shell used elsewhere.</p>
+      <ul>
+        <li><code>account.tsx:165</code>, <code>228</code></li>
+        <li><code>settings.tsx:302</code>, <code>517</code></li>
+        <li><code>audit.tsx:172</code>, <code>211</code></li>
+      </ul>
+    </section>
+
+    <section class="high">
+      <h2>Gate 3: Destructive Partial Delete Friction</h2>
+      <p><code>settings.tsx:131-164</code> defines a generic confirm used for broad deletes at <code>395-497</code>. Full wipe has typed <code>DELETE</code>; partial broad deletes do not.</p>
+      <ul>
+        <li>Add count preview where feasible.</li>
+        <li>Offer export before irreversible deletes.</li>
+        <li>Use typed confirmation, two-step confirmation, or equivalent friction.</li>
+      </ul>
+    </section>
+
+    <section class="high">
+      <h2>Gate 4: Pressable Interaction Contract</h2>
+      <p>High-density custom controls in <code>inbox</code>, <code>wiki</code>, <code>research</code>, <code>interview</code>, <code>core-brain</code>, and <code>jarvis</code> still need roles, labels, and state.</p>
+      <ul>
+        <li>Buttons, links, chips, expandable rows, and destructive controls need explicit semantics.</li>
+        <li>Selected, expanded, disabled, and busy state must be announced.</li>
+      </ul>
+    </section>
+
+    <section class="high">
+      <h2>Gate 5: Internal Vocabulary Cleanup</h2>
+      <p>User-facing copy still exposes terms like <code>RLS</code>, <code>auth.uid()</code>, <code>Phase 2</code>, <code>RAG</code>, <code>system context</code>, <code>JSON</code>, <code>schema</code>, <code>[[wikilink]]</code>, <code>Supabase Storage</code>, and <code>v2</code>.</p>
+      <ul>
+        <li>Examples: <code>manual.tsx:77</code>, <code>88-100</code>, <code>191-207</code>.</li>
+        <li>Examples: <code>permissions.tsx:58</code>, <code>103</code>, <code>165</code>, <code>172</code>.</li>
+        <li>Examples: <code>AddFormatFlow.tsx:105-106</code>, <code>wiki.tsx:235-236</code>, <code>settings.tsx:476</code>, <code>inbox.tsx:394-395</code>.</li>
+      </ul>
+    </section>
+
+    <section class="proof">
+      <h2>Gate 6: Runtime Proof</h2>
+      <p>CI green is not visual proof. Attach screenshots or repeatable browser/device proof for auth, graph, capture/import/wiki/inbox/records, Jarvis, persona/core-brain, settings/account/privacy/data/support/permissions/theme, and loading/error/empty/disabled/destructive states.</p>
+    </section>
+  </main>
+</body>
+</html>

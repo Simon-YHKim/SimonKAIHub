@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Split ③ Capture OCR UI/A11y Feedback</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: #11182b;
+      --panel-2: #142238;
+      --line: #2a345a;
+      --text: #e8ecf8;
+      --muted: #c9d0e6;
+      --subtle: #8d98b8;
+      --mint: #72f2c7;
+      --blue: #4cc9f0;
+      --amber: #ffd166;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 "Segoe UI", Pretendard, system-ui, sans-serif;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 18px 48px;
+    }
+    header, section {
+      border: 2px solid var(--line);
+      background: var(--panel);
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    h1, h2 { margin: 0 0 10px; line-height: 1.2; }
+    h1 { font-size: 26px; }
+    h2 { font-size: 18px; color: var(--mint); }
+    p { margin: 0 0 10px; }
+    ul { margin: 8px 0 0; padding-left: 20px; }
+    li { margin: 4px 0; }
+    code {
+      color: var(--mint);
+      background: var(--panel-2);
+      padding: 2px 5px;
+      border: 1px solid var(--line);
+    }
+    .meta {
+      color: var(--muted);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .pill {
+      display: inline-block;
+      border: 1px solid var(--line);
+      color: var(--mint);
+      padding: 2px 6px;
+      margin-right: 6px;
+    }
+    .ok { color: var(--mint); font-weight: 700; }
+    .warn { color: var(--amber); }
+    .small { color: var(--subtle); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p><span class="pill">Codex</span><span class="pill">2nd-B</span><span class="pill">capture OCR</span></p>
+      <h1>Split ③ Capture OCR UI/A11y Feedback</h1>
+      <p>[2026-06-11 / 02:11:25 KST] Codex completed the greenlit third multimodal split after the OCR normalization split.</p>
+      <div class="meta">
+        <div>Branch: <code>codex/split-capture-ocr-ui-a11y-feedback</code></div>
+        <div>Commit: <code>3f04b3f</code></div>
+        <div>Base: <code>origin/main@19c1387</code></div>
+        <div>Remote delta: <code>0 behind / 1 ahead</code></div>
+      </div>
+    </header>
+
+    <section>
+      <h2>Result</h2>
+      <ul>
+        <li>OCR extracted text is now framed as the user's own text in EN and KO.</li>
+        <li>OCR mode shows a direct disclosure that the image is sent to an external text-reading service and that 2nd-B does not keep the image or use it for learning.</li>
+        <li>Saving an OCR capture is disabled until the user reviews and approves the extracted text.</li>
+        <li>Editing the extracted text clears approval, so save requires approval of the current text.</li>
+        <li>The image preview exposes image semantics and a locale label for screen readers.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Files</h2>
+      <ul>
+        <li><code>src/app/capture.tsx</code></li>
+        <li><code>locales/en/capture.json</code></li>
+        <li><code>locales/ko/capture.json</code></li>
+        <li><code>scripts/check-constraints.ts</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><span class="ok">PASS</span> <code>npm run verify</code> (112 suites, 978 tests)</li>
+        <li><span class="ok">PASS</span> <code>git diff --check</code></li>
+        <li><span class="ok">PASS</span> post-commit <code>git diff --check HEAD~1..HEAD</code></li>
+        <li><span class="ok">PASS</span> changed-line credential scan</li>
+        <li><span class="ok">PASS</span> post-commit credential scan</li>
+      </ul>
+      <p class="small">Known test console warnings are exercised failure-path mocks; the command exited 0.</p>
+    </section>
+
+    <section>
+      <h2>Boundaries</h2>
+      <ul>
+        <li>No PR was created.</li>
+        <li>No direct edit was made to <code>C:\Coding\2ndB</code>.</li>
+        <li>No push to <code>main</code> was performed.</li>
+        <li>No changes to <code>src/lib/llm/gemini.ts</code>, <code>supabase/functions/gemini-proxy/index.ts</code>, or OCR normalization lib files were included.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

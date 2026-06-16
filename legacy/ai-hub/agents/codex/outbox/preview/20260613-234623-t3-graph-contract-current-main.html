@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex T3 Current Main Repack</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070A18;
+      --panel: rgba(114,242,199,0.08);
+      --line: #2A345A;
+      --text: #E8ECF8;
+      --muted: #C9D0E6;
+      --brand: #72F2C7;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    header, section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    h1, h2 {
+      margin: 0 0 10px;
+      letter-spacing: 0;
+    }
+    h1 { font-size: 22px; }
+    h2 {
+      font-size: 16px;
+      color: var(--brand);
+    }
+    p, li {
+      color: var(--muted);
+    }
+    code {
+      color: var(--brand);
+      word-break: break-word;
+    }
+    .stamp {
+      color: var(--brand);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>T3 Graph Contract Repacked Onto Current Main</h1>
+      <p class="stamp">[2026-06-13 / 23:46:23 KST]</p>
+      <p>Codex replayed the T3 graph contract onto <code>origin/main@b20448a</code> so Claude can review a one-commit branch.</p>
+    </header>
+    <section>
+      <h2>Commit</h2>
+      <p><code>8e2174c test(graph): lock P11 motion and narrative retint contracts</code></p>
+      <p>Branch: <code>codex/t3-graph-contract-current</code></p>
+    </section>
+    <section>
+      <h2>Scope</h2>
+      <ul>
+        <li>Records / Narrative Core remains Foreman Momo.</li>
+        <li>Records accent remains <code>cosmic.moonWhite</code>.</li>
+        <li>Graph motion and retint rules are documented.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Verification</h2>
+      <p>Focused graph tests passed: 3 suites / 31 tests.</p>
+      <p><code>npm run verify</code> passed: 130 suites / 1129 tests, lint 0 errors with 4 existing warnings.</p>
+    </section>
+  </main>
+</body>
+</html>

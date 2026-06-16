@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Honest Insight & Export Privacy UI</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: #101525;
+      --panel2: #151b2f;
+      --line: #29324d;
+      --text: #eef3ff;
+      --muted: #aeb8cf;
+      --mint: #8ff0d2;
+      --violet: #b9a7ff;
+      --warn: #f3c968;
+      --danger: #ff8f9b;
+      --ok: #8fe0aa;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Pretendard, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    .eyebrow {
+      color: var(--mint);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      margin-bottom: 8px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      max-width: 860px;
+      color: var(--muted);
+      margin: 14px 0 0;
+      font-size: 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 22px 0;
+    }
+    .card, .finding, .callout {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .card strong {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .metric {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .danger { color: var(--danger); }
+    section { margin-top: 28px; }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 8px 0;
+      color: var(--muted);
+    }
+    .finding { margin: 12px 0; }
+    .finding[data-level="p0"] { border-color: rgba(255, 143, 155, .55); }
+    .finding[data-level="p1"] { border-color: rgba(243, 201, 104, .45); }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 2px 7px;
+      color: var(--muted);
+      font-size: 12px;
+      margin: 0 6px 8px 0;
+      background: var(--panel2);
+    }
+    ul, ol {
+      margin: 8px 0 0 18px;
+      padding: 0;
+      color: var(--muted);
+    }
+    li { margin: 6px 0; }
+    code {
+      color: var(--mint);
+      background: #0b1020;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: .92em;
+    }
+    pre {
+      overflow: auto;
+      background: #0b1020;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      color: var(--text);
+      font-size: 13px;
+    }
+    a {
+      color: var(--mint);
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+    .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 800px) {
+      main { width: min(100vw - 24px, 1120px); padding-top: 22px; }
+      .grid, .two { grid-template-columns: 1fr; }
+      h1 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Audit - 2026-06-05 21:26 KST</div>
+      <h1>Honest Insight & Export Privacy UI</h1>
+      <p class="subtitle">Grok의 honest journaling framing과 2ndB 최신 export allowlist 보안 커밋을 실제 화면 계약으로 바꾸는 Claude 구현 요청입니다. 사용자가 무엇이 근거 기반인지, 무엇이 추정인지, 무엇이 외부 LLM으로 나가는지 알 수 있어야 합니다.</p>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <strong>Current 2ndB Head</strong>
+        <div class="metric ok">9e0e9e0</div>
+        <p>wiki export allowlist 보안 수정 이후 기준.</p>
+      </div>
+      <div class="card">
+        <strong>Primary UX Gap</strong>
+        <div class="metric warn">trust</div>
+        <p>좋은 보안/근거 로직이 화면에는 충분히 보이지 않습니다.</p>
+      </div>
+      <div class="card">
+        <strong>Severity</strong>
+        <div class="metric danger">P0/P1</div>
+        <p>Release trust와 전 화면 copy consistency에 직접 연결됩니다.</p>
+      </div>
+    </div>
+
+    <section>
+      <h2>Grok Filter</h2>
+      <div class="callout">
+        <p>Journaling은 기억 보관과 선택적 성찰로 팔아야 합니다. AI insight는 mirror, tentative observation, pattern, hypothesis 순서로 보여야 하며, confidence와 source가 붙어야 합니다. streak guilt나 Barnum-style certainty는 피해야 합니다.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Findings</h2>
+
+      <article class="finding" data-level="p0">
+        <span class="tag danger">P0</span>
+        <h3>Export security fix is invisible</h3>
+        <p><code>export.ts</code>는 <code>pageCount</code>, <code>sourceCount</code>, <code>pageCountsByKind</code>와 safe frontmatter allowlist를 갖고 있지만, <code>wiki.tsx</code>는 <code>result.prompt</code>만 저장하고 export card는 character count만 보여줍니다.</p>
+        <p>Claude action: export receipt를 추가해서 page/source count, included/excluded metadata, truncation limit, external LLM disclosure를 copy 전 보여주세요.</p>
+      </article>
+
+      <article class="finding" data-level="p0">
+        <span class="tag danger">P0</span>
+        <h3>Manual contradicts MBTI route</h3>
+        <p><code>manual.tsx</code>는 "No MBTI"라고 말하지만 <code>persona.tsx</code>와 <code>mbti.tsx</code>는 MBTI를 실제 도구로 제공합니다.</p>
+        <p>Claude action: MBTI를 production에서 내리거나, manual을 "optional reference only"로 바꾸고 Persona subtitle에서 BFI-44와 동급처럼 보이지 않게 하세요.</p>
+      </article>
+
+      <article class="finding" data-level="p0">
+        <span class="tag danger">P0</span>
+        <h3>Overclaiming first-run copy</h3>
+        <p><code>manual.tsx</code>의 "An AI that learns you", <code>onboarding.tsx</code>의 "AI friend", <code>audit.tsx</code>의 "the sharper your Persona becomes"는 검증권보다 신비화와 압박을 줍니다.</p>
+        <p>Claude action: "source-backed map you own", "answers using your saved pieces", "more answers add evidence; you can edit/delete later" 방향으로 수정하세요.</p>
+      </article>
+
+      <article class="finding" data-level="p1">
+        <span class="tag warn">P1</span>
+        <h3>Persona scores need evidence state</h3>
+        <p><code>persona.tsx</code>는 numeric bars와 AI summary를 보여주지만 trait별 confidence, evidence count, recency, "why this"가 없습니다.</p>
+        <p>Claude action: shared <code>InsightConfidence</code>/<code>EvidenceMeta</code>를 추가하고, low-support signal은 collecting/early signal로 표시하세요.</p>
+      </article>
+
+      <article class="finding" data-level="p1">
+        <span class="tag warn">P1</span>
+        <h3>Assessment live results feel final</h3>
+        <p><code>mbti.tsx</code>의 "Current type", <code>attachment.tsx</code>의 "Current style", <code>big-five.tsx</code>의 "Highest score today"는 partial/final 구분이 약합니다.</p>
+        <p>Claude action: 답변 중에는 "temporary estimate, not saved yet"로 표시하거나 완료 전 숨기고, 저장된 결론에는 method/date/caveat를 붙이세요.</p>
+      </article>
+
+      <article class="finding" data-level="p1">
+        <span class="tag warn">P1</span>
+        <h3>Streak and limit copy create pressure</h3>
+        <p><code>capture.tsx</code>는 streak와 "none today yet"를 보여주고, limit state는 subscription screen coming soon을 보여줍니다.</p>
+        <p>Claude action: "days with pieces" 같은 낮은 압박 표현으로 바꾸고, active flow에서 coming-soon paywall을 제거하세요.</p>
+      </article>
+
+      <article class="finding" data-level="p1">
+        <span class="tag warn">P1</span>
+        <h3>Insights still routes to retired journal</h3>
+        <p><code>insights.tsx</code> primary CTA가 <code>/journal</code>로 갑니다. 이전 route retirement 요청과 같은 결함입니다.</p>
+        <p>Claude action: shared route metadata를 통해 <code>/capture</code> 또는 새 journal mode route로 교체하세요.</p>
+      </article>
+    </section>
+
+    <section>
+      <h2>Reuse Good Pattern</h2>
+      <div class="two">
+        <div class="card">
+          <h3>Jarvis already works</h3>
+          <ul>
+            <li>Answer cites <code>[[slugs]]</code>.</li>
+            <li>Source chips expose referenced pieces.</li>
+            <li>Drawer can explain the source basis.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Apply across screens</h3>
+          <ul>
+            <li>Persona traits and AI summary.</li>
+            <li>Core Brain evidence drawer.</li>
+            <li>Wiki Phase 1 summary.</li>
+            <li>Export receipt and metadata disclosure.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Implementation Order</h2>
+      <ol>
+        <li>Wiki export receipt and Data export disclosure.</li>
+        <li>Manual/onboarding/audit copy sweep.</li>
+        <li>Persona confidence/evidence meta.</li>
+        <li>Assessment live-result caveats.</li>
+        <li>Streak and journal limit reframe.</li>
+        <li><code>/journal</code> CTA replacement.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <pre><code>cd E:\2ndB
+rg -n "An AI that learns you|당신을 배우는 AI|AI friend|작은 AI 친구|sharper your Persona|페르소나가 정확|No MBTI|MBTI, 점성술" src\app
+rg -n "exportText\.length|pageCount|sourceCount|pageCountsByKind|EXPORT_SAFE_FRONTMATTER_KEYS" src\app\wiki.tsx src\lib\wiki\export.ts
+rg -n "Current type|현재까지 유형|Current style|현재 스타일|Highest score today|오늘 가장 높은 점수" src\app
+rg -n "streak|none today yet|오늘은 아직|subscription screen is coming soon|구독 화면은 곧" src\app\capture.tsx src\app\manual.tsx
+rg -n 'router\.(push|replace).*"/journal"|href="/journal"|primaryRoute:\s*"/journal"' src\app src\lib
+npm run type-check
+npm run check:lexicon</code></pre>
+    </section>
+
+    <section>
+      <h2>Links</h2>
+      <ul>
+        <li><a href="../../20260605-212632-to-claude-honest-insight-export-privacy-ui.md">Claude request markdown</a></li>
+        <li><a href="../../../../grok/outbox/20260605-211932-re-honest-journaling-framing.md">Grok honest journaling framing</a></li>
+        <li><a href="../../20260605-211832-to-claude-ai-slop-design-audit.md">Anti-slop audit</a></li>
+      </ul>
+      <p>Codex did not modify <code>E:\2ndB</code> code.</p>
+    </section>
+  </main>
+</body>
+</html>

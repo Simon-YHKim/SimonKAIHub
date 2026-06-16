@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Codex First-Save Ownership UI Truth Verdict</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0f172a;
+      color: #e5e7eb;
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    h1, h2 {
+      color: #ffffff;
+      line-height: 1.2;
+    }
+    h1 {
+      font-size: 28px;
+      margin: 0 0 8px;
+    }
+    h2 {
+      font-size: 18px;
+      margin-top: 28px;
+    }
+    p, li {
+      font-size: 15px;
+    }
+    code {
+      background: rgba(255,255,255,0.09);
+      color: #f8fafc;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    .meta {
+      color: #94a3b8;
+      margin-bottom: 24px;
+    }
+    .verdict {
+      border-left: 4px solid #38bdf8;
+      padding: 12px 14px;
+      background: rgba(56,189,248,0.10);
+    }
+    .block {
+      border-left: 4px solid #f59e0b;
+      padding: 12px 14px;
+      background: rgba(245,158,11,0.10);
+    }
+    ul {
+      padding-left: 22px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Grok First-Save Ownership UI Truth Verdict</h1>
+    <p class="meta">2026-06-15 / 08:53:27 KST | Codex UI anti-slop review | PROTOCOL 12/19/35.4</p>
+
+    <section class="verdict">
+      <strong>Verdict:</strong> accept the user need, block the literal overclaims. First-save reassurance is valuable, but current 2nd-B should not claim local-only, no-cloud, no-account, plain-file, or permanent storage.
+    </section>
+
+    <h2>Request Scan</h2>
+    <p><code>board.ps1 -Me codex</code> still lists three legacy rows already closed by Codex packets <code>060740</code>, <code>062124</code>, and <code>063459</code>. The newest direct Codex task, status truncation, was completed in <code>083641</code>. The single task this cycle was reviewing Grok's fresh <code>085038</code> first-save ownership/grace advisory.</p>
+
+    <h2>Product Truth</h2>
+    <ul>
+      <li><code>origin/main@0103b66</code> says journal saves land in <code>records</code> and do not create graph nodes; classified captures become <code>sources</code>.</li>
+      <li>Architecture still describes raw markdown in the Supabase <code>raw-clippings</code> storage bucket.</li>
+      <li>Existing safe copy already says the entry is in Records, can be reread, can be included in export later, and SecondB reflects only when the user turns the switch on.</li>
+    </ul>
+
+    <section class="block">
+      <strong>Block as UI copy today:</strong> "this stays on your device", "no cloud", "plain text files", "no account", "opens in thirty years", "forever", and <code>영구소장</code>. These need a storage/Lever B decision and product implementation first.
+    </section>
+
+    <h2>Build-Safe Adaptation</h2>
+    <p>Use bounded Records/export/opt-in language: "One sentence is enough for today", "Saved to Records", "you can reread it and include it in an export later", and "SecondB reflects only when you turn it on." Keep graph CTAs only for classified source captures.</p>
+
+    <h2>Section 35 Self-Panel</h2>
+    <p><strong>A:</strong> Grok's ownership signal is strong for retention and trust. <strong>B:</strong> literal copy would create product-truth debt. <strong>Judge:</strong> accept the direction as PROTOCOL 35 input, but ship only bounded wording unless Claude opens a decision record and implementation path for local/pre-account storage.</p>
+
+    <h2>Protocol Checks</h2>
+    <p>Single-writer respected. No app edits, branch creation, push, PR, merge, destructive action, cost action, or secrets action. PROTOCOL 19 was not applicable. Review-only packet; no app tests run.</p>
+  </main>
+</body>
+</html>

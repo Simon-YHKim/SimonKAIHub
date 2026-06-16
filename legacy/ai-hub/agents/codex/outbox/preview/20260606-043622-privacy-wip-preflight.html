@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy WIP Preflight</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0e1117;
+      --panel: #151a22;
+      --panel-2: #10151d;
+      --text: #eef2f8;
+      --muted: #a9b3c3;
+      --line: #293241;
+      --danger: #ff6b6b;
+      --warn: #ffd166;
+      --ok: #7bd88f;
+      --accent: #8ab4ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, "Helvetica Neue", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1060px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 36px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      background: var(--panel-2);
+      border-radius: 999px;
+      padding: 5px 10px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    p { margin: 8px 0; }
+    ul { margin: 10px 0 0; padding-left: 20px; }
+    li { margin: 6px 0; }
+    code, pre {
+      color: #dbe8ff;
+      background: #0b0f15;
+      border: 1px solid #263142;
+      border-radius: 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+    }
+    code { padding: 1px 5px; font-size: 0.94em; }
+    pre { padding: 14px; overflow: auto; }
+    .ok h2 { color: var(--ok); }
+    .warn h2 { color: var(--warn); }
+    .critical h2 { color: var(--danger); }
+    .score {
+      color: var(--warn);
+      font-weight: 700;
+    }
+    @media (max-width: 700px) {
+      main { width: min(100% - 22px, 1060px); padding-top: 24px; }
+      section { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Privacy WIP Preflight</h1>
+      <div class="meta">
+        <span class="pill">Codex read-only review</span>
+        <span class="pill">main@ee9f80b dirty WIP</span>
+        <span class="pill">2026-06-06 04:36 KST</span>
+        <span class="pill">done with concerns</span>
+      </div>
+    </header>
+
+    <section class="ok">
+      <h2>What Passes</h2>
+      <p>The WIP fixes the original stale-success path directionally. The queue applies opt-out immediately, reconciles from latest state, and the new regression test covers on -> off before Save A resolves.</p>
+      <ul>
+        <li><code>npm test -- src/lib/privacy/__tests__/analytics-consent-queue.test.ts --runInBand</code> PASS.</li>
+        <li><code>npm run type-check</code> PASS.</li>
+        <li><code>git diff --check</code> PASS.</li>
+        <li><code>npm run verify</code> PASS, 92 suites / 829 tests.</li>
+      </ul>
+    </section>
+
+    <section class="critical">
+      <h2>Remaining Concern</h2>
+      <p>A failed opt-out can still re-enable analytics locally. If the user starts from analytics on, toggles off, and the save rejects, the React <code>onError</code> can revert the latest ref to true. The queue then reconciles and applies true.</p>
+      <pre>{
+  "applied": [false, true],
+  "finalLatest": true
+}</pre>
+      <p>This keeps the P1 privacy gate open. A failed opt-out should fail closed locally.</p>
+    </section>
+
+    <section class="warn">
+      <h2>Acceptance Delta</h2>
+      <ul>
+        <li>Add a regression test for failed opt-out from true -> off -> save reject.</li>
+        <li>Assert <code>setAnalyticsConsent(true)</code> is not called after the opt-out attempt.</li>
+        <li>Show save error and retry if needed, but keep local analytics consent off until explicit user action or successful retry.</li>
+      </ul>
+      <p class="score">Score remains 97/100 provisional.</p>
+    </section>
+  </main>
+</body>
+</html>

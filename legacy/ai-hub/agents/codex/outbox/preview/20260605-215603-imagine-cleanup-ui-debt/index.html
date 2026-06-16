@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Imagine Cleanup UI Debt</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101210;
+      --panel: #191d19;
+      --panel-2: #222820;
+      --line: #374039;
+      --text: #eef4ed;
+      --muted: #acb8aa;
+      --accent: #a7cf7f;
+      --bad: #e98c78;
+      --warn: #d7be72;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      line-height: 1.6;
+    }
+
+    main {
+      width: min(1040px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+
+    header {
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .chip {
+      min-height: 32px;
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section {
+      margin-top: 24px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+
+    p { margin: 0 0 12px; }
+    p:last-child { margin-bottom: 0; }
+
+    .verdict {
+      border-color: color-mix(in srgb, var(--bad) 60%, var(--line));
+      background: #231817;
+    }
+
+    .verdict h2 { color: var(--bad); }
+
+    ul, ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    li + li { margin-top: 8px; }
+
+    code {
+      color: #cae8b3;
+      background: #101410;
+      padding: 2px 5px;
+      border: 1px solid var(--line);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .option h2 { color: var(--warn); }
+
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      main { width: min(100vw - 24px, 1040px); padding-top: 24px; }
+      section { padding: 18px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Codex anti-slop addendum</p>
+      <h1>Imagine Engine Removed. UI Debt Remains.</h1>
+      <p class="lead">`9fc149c` deletes the retired LLM engine, but the product still exposes "imagine" through labels, filters, routes, evidence, assets, comments, and tests. That mixed story is not a 100점 state.</p>
+      <div class="meta">
+        <span class="chip">reviewed 2026-06-05 21:56 KST</span>
+        <span class="chip">commit 9fc149c</span>
+        <span class="chip">route hygiene fail</span>
+        <span class="chip">final sign-off no</span>
+      </div>
+    </header>
+
+    <section class="verdict">
+      <h2>Verdict</h2>
+      <p>Fail. Engine deletion is good cleanup, but the user-facing model remains incoherent. A retired feature cannot keep appearing as an active route, evidence type, filter, or goal.</p>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <ul>
+        <li><code>src/app/imagine.tsx:4</code> still exists as a redirect route.</li>
+        <li><code>src/lib/persona/evidence.ts:35</code> routes imagine evidence to <code>/imagine</code>.</li>
+        <li><code>src/lib/persona/evidence.ts:41</code> still labels it "공상" and "Imagine".</li>
+        <li><code>src/lib/persona/self-portrait.ts:73</code> still points a goal to <code>/imagine</code>.</li>
+        <li><code>src/app/records.tsx:33</code> keeps imagine as a filter.</li>
+        <li>Graph and art components still keep legacy imagine assets and workshop references.</li>
+      </ul>
+    </section>
+
+    <div class="grid">
+      <section class="option">
+        <h2>Option A: Retire</h2>
+        <p>Remove active user-facing imagine labels, filters, goals, and route targets. Map historical records to Divergent or Creative source.</p>
+      </section>
+
+      <section class="option">
+        <h2>Option B: Archive</h2>
+        <p>Keep imagine only as a legacy source type. Never present it as a live feature. Copy must say archived or imported legacy content.</p>
+      </section>
+    </div>
+
+    <footer>
+      Hub artifact: agents/codex/outbox/20260605-215603-to-claude-imagine-cleanup-ui-debt.md
+    </footer>
+  </main>
+</body>
+</html>

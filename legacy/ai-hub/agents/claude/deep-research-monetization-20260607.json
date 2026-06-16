@@ -1,0 +1,385 @@
+{
+  "summary": "Deep research harness — fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report.",
+  "agentCount": 114,
+  "logs": [
+    "Q: 셀프-디스커버리/저널링/퍼스널-AI 모바일 앱(Day One, Reflectly, Stoic, Finch, How We Feel, Rosebud…",
+    "Decomposed into 6 angles: 가격·티어 벤치마크 (PPP 포함), 결제수단·PG + 앱스토어 IAP 수수료, 무료티어 관대함 vs 전환·activation, 구독피로·리텐션·평생/광고 모델, 로컬우선·프라이버시 차별화 포지셔닝, 정신건강 인접 규제·앱스토어 정책 리스크",
+    "무료티어 관대함 vs 전환·activation: 6 results",
+    "로컬우선·프라이버시 차별화 포지셔닝: 6 results",
+    "구독피로·리텐션·평생/광고 모델: 6 results",
+    "구독피로·리텐션·평생/광고 모델: 5 novel (1 filtered)",
+    "정신건강 인접 규제·앱스토어 정책 리스크: 6 results",
+    "정신건강 인접 규제·앱스토어 정책 리스크: 5 novel (1 filtered)",
+    "가격·티어 벤치마크 (PPP 포함): 6 results",
+    "가격·티어 벤치마크 (PPP 포함): 4 novel (2 filtered)",
+    "결제수단·PG + 앱스토어 IAP 수수료: 6 results",
+    "결제수단·PG + 앱스토어 IAP 수수료: 5 novel (1 filtered)",
+    "Fetched 31 sources → 146 claims → verifying top 25",
+    "\"Day One offers a free Basic tier ($0) that include…\": 3-0 ✓",
+    "\"Day One Premium 'Silver' tier costs $49.99/year an…\": 2-1 ✓",
+    "\"Rosebud's free tier caps personalized AI prompts a…\": 2-1 ✓",
+    "\"Day One has a higher 'Gold' tier at $74.99/year th…\": 3-0 ✓",
+    "\"Rosebud's paid tier 'Bloom' is priced at $12.99/mo…\": 0-3 ✗",
+    "\"Day One markets end-to-end encryption, passcode pr…\": 3-0 ✓",
+    "\"When a developer in South Korea uses an Apple-appr…\": 3-0 ✓",
+    "\"Free trials lasting 17–32 days achieve a median tr…\": 0-3 ✗",
+    "\"Hard paywalls convert far better than freemium: 12…\": 3-0 ✓",
+    "\"Longer free trials convert substantially better th…\": 1-2 ✗",
+    "\"Regional/PPP pricing is steep: India/SEA annual pl…\": 0-3 ✗",
+    "\"Hard paywalls convert downloads to paid at roughly…\": 3-0 ✓",
+    "\"AI-powered apps monetize better per payer but reta…\": 3-0 ✓",
+    "\"Global median subscription prices for Lifestyle ap…\": 0-3 ✗",
+    "\"Pricing localization is the single highest-ROI lev…\": 3-0 ✓",
+    "\"One-time/lifetime purchases have risen to 26% of L…\": 3-0 ✓",
+    "\"Day One enables end-to-end encryption (AES-GCM-256…\": 3-0 ✓",
+    "\"Day One positions itself as local-first with expli…\": 2-1 ✓",
+    "\"Local-first software treats the copy of data on th…\": 3-0 ✓",
+    "\"The APA advises that GenAI chatbots and wellness a…\": 3-0 ✓",
+    "\"Apps that claim to offer 'therapy', to be licensed…\": 3-0 ✓",
+    "\"Local-first architecture delivers privacy and secu…\": 1-2 ✗",
+    "\"Apps must explicitly disclose where personal data …\": 3-0 ✓",
+    "\"Apple's App Store Small Business Program drops the…\": 3-0 ✓",
+    "\"Apple mandates that any unlock of premium features…\": 1-2 ✗",
+    "Verify done: 25 claims → 18 confirmed, 7 killed"
+  ],
+  "result": {
+    "question": "셀프-디스커버리/저널링/퍼스널-AI 모바일 앱(Day One, Reflectly, Stoic, Finch, How We Feel, Rosebud AI journal, Mindsera, Jour 등)의 2025~2026 수익화·시장 전략을 조사해 2nd-B(로컬-우선 셀프-디스커버리 + AI 어드바이저, Expo RN, 한국+글로벌 동시 타겟)에 적용 가능한 근거를 만든다. 5각도: (1) 티어/가격 벤치마크 — 무료 vs 유료, 월/연 가격대(USD·KRW), 무료티어 한도와 프리미엄 전환율; (2) 결제수단·PG — 한국(토스페이먼츠·카카오페이·휴대폰결제) vs 글로벌(Stripe·Apple/Google IAP·UPI·Pix·LINE Pay) 및 앱스토어 IAP 수수료(15~30%)가 가격에 미치는 영향; (3) 무료티어 관대함 vs 전환 — 저널링 앱에서 free-tier가 너무 빡빡하면 이탈, aha-moment 도달까지 필요한 무료 사용량; (4) 구독피로·리텐션·원타임/평생·광고지원 모델의 효과; (5) 포지셔닝·획득 채널 — 데이터주권/프라이버시·로컬우선(Obsidian/PKM 정서) 차별화, 정신건강 인접 카테고리 임상어휘 규제·앱스토어 정책 리스크. 한국 특이사항(신용카드 미보유층·프라이버시 민감도)과 글로벌 PPP 가격 포함. 각 주장은 출처와 함께.",
+    "summary": "조사한 셀프-디스커버리/저널링 앱들의 2025-26 수익화 패턴은 2nd-B에 명확한 방향을 제시한다. (1) 저널링 자체는 무료로 풀고 AI·개인화·미디어·동기화를 유료화하며, AI는 최상위 가격 티어의 업셀 레이어로 배치하는 것이 업계 표준이다(Day One 3티어: 무료 Basic / Silver $49.99/yr / Gold $74.99/yr=AI; Rosebud 무료 AI 프롬프트 2회/일 → Bloom 무제한). (2) 하드 페이월은 프리미엄(freemium) 대비 D35 전환을 약 5배(10.7~12.11% vs 2.1~2.18%) 높이지만, 저널링은 aha-moment 도달까지 무료 사용량이 필요하므로 전환 레버를 '저널링 볼륨'이 아닌 'AI 사용 한도'에 두는 것이 합리적이다. (3) AI 기능은 결제자당 매출을 41% 높이지만 이탈은 30% 빠르므로 리텐션·구독피로 완화가 결정적 제약이며, 라이프스타일 카테고리에서 원타임/평생 결제가 매출의 26%(월구독은 2023년 36%→2025년 29%)로 부상해 비반복 수익모델이 유효하다. (4) 가격 현지화는 LTV 개선 승률 62.3%로 최고 ROI 레버라 한국+글로벌 동시 타겟에 PPP/국가별 가격이 필수이며, 한국 Apple 서드파티 PSP는 26%+PSP 수수료로 사실상 30%에 근접해 Small Business Program(<$1M, 15%) 활용이 유리하다. (5) 포지셔닝은 로컬-우선·데이터주권(Day One의 E2EE 기본·데이터 소유권 모델)이 검증된 차별화 축이나, 정신건강 인접 마케팅은 APA 권고(전문가 대체 금지·'therapy'/면허 주장 금지)와 Apple 가이드라인 5.1.2(i)(서드파티 AI 데이터 공유 명시 동의)를 반드시 준수해야 한다.",
+    "findings": [
+      {
+        "claim": "[티어/가격 벤치마크 — 각도1] 저널링 핵심 기능은 무료로 풀고 AI·개인화·미디어·동기화를 유료화하며, AI는 최상위 가격 티어의 업셀 레이어로 배치하는 것이 업계 표준이다. 2nd-B도 '저널링 무료 + AI 어드바이저 유료', AI를 최상위 티어로 분리하는 구조가 검증된 패턴.",
+        "confidence": "high",
+        "vote": "통합: claim1·claim3 3-0, claim0·claim2 2-1 (가격/기능 사실은 모두 1차 벤더 페이지로 확인)",
+        "evidence": "Day One 3티어 구조(2026 현행): Basic 무료(무제한 텍스트 엔트리·무제한 저널, 단 사진 1장/엔트리·1기기 제한) / Silver $49.99/yr(미디어 30개/엔트리·오디오·전사·전 기기 동기화) / Gold $74.99/yr(AI 전용: Daily Chat 가이드 리플렉션, Reflective AI 요약·프롬프트, 이미지 생성, 엔트리 요약 — Silver·Basic에는 AI 전혀 없음, Gold는 ~2026년 4월 출시). Rosebud: 무료 티어는 개인화 AI 프롬프트를 2회/일로 제한하고 저널링 자체는 무료(Dig deeper, Entry reflection, Auto-tagging, Weekly report 무료), 유료 Bloom이 무제한 개인화 프롬프트 해제 — 전환 레버가 '저널링'이 아니라 'AI 개인화 사용량'에 위치. 핵심 시사점: AI = 프리미엄 업셀, 무료층은 저널링 풀 액세스.",
+        "sources": [
+          "https://dayoneapp.com/plans/",
+          "https://help.rosebud.app/getting-started/pricing"
+        ]
+      },
+      {
+        "claim": "[무료티어 관대함 vs 전환 — 각도3] 하드 페이월은 프리미엄(freemium) 대비 다운로드→유료 전환을 약 5배(D35 기준 10.7~12.11% vs 2.1~2.18%) 높이지만, 이는 선별된 모수의 전환'율'이지 총수익이 아니다. 저널링은 aha-moment 도달에 무료 사용이 필요하므로, 2nd-B는 저널링을 무료로 두고 전환 게이트를 'AI 사용 한도'에 두는 freemium이 합리적. 인접 카테고리 Health&Fitness 다운로드→유료 중앙값은 2.9%.",
+        "confidence": "high",
+        "vote": "통합: claim6 3-0, claim7 3-0 (각각 2025·2026 RevenueCat 리포트, 방향 일치)",
+        "evidence": "RevenueCat State of Subscription Apps 2025: 하드 페이월 D35 전환 중앙값 12.11% vs freemium 2.18%. 2026판(앱 115,000+, $16B+): 10.7% vs 2.1%(약 5배). 카테고리별: Health&Fitness 2.9%(상위 25%는 6.2%+), Gaming 1.0%(최저). 중요 단서(반박 아님): 이것은 전환'율'로 모수(분모)와 선별편향이 달라 높은 율 != 더 많은 총수익·유저 — 하드 페이월 다운로더는 사전 선별되고 freemium은 훨씬 넓은 모수에 도달. Adapty 2026은 다른 퍼널 지점(페이월 노출→결제)에서 soft 4.85% vs hard 3.34%로 정반대 결과. Day One/Rosebud가 저널링은 무료·AI만 게이팅하는 것이 freemium 관대함의 실증. '17~32일 장기 트라이얼이 전환을 높인다'는 보조 주장은 본 검증에서 반박됨(vote 0-3 / 1-2) — 트라이얼 길이는 신뢰할 근거 아님.",
+        "sources": [
+          "https://www.revenuecat.com/state-of-subscription-apps-2025/",
+          "https://www.revenuecat.com/state-of-subscription-apps/",
+          "https://dayoneapp.com/plans/",
+          "https://help.rosebud.app/getting-started/pricing"
+        ]
+      },
+      {
+        "claim": "[리텐션·AI 경제성 — 각도1·4] AI 앱은 결제자당 매출이 41% 높지만(WTP↑) 이탈은 30% 빠르다. 2nd-B처럼 AI 어드바이저가 코어인 제품에서는 AI 훅이 지불의사를 끌어올리는 동력이되, 리텐션·구독피로 완화가 '바인딩 제약(binding constraint)'이다. Day One이 AI를 최상위 Gold 티어($74.99/yr)로 분리한 것이 AI의 높은 WTP를 실증.",
+        "confidence": "high",
+        "vote": "claim8 3-0 (claim3 Gold 티어가 보강)",
+        "evidence": "RevenueCat 2026: AI 앱은 결제자당 매출 41% 높음(Year1 실현 LTV 중앙값 $30.16 vs 비AI $21.37), 동시에 'AI 월구독 12개월 리텐션 36% 악화' / 'AI 앱 30% 빠른 이탈'. 데이터셋 115,000+ 앱, SaaStr·Subscription Insider·RocketShipHQ 교차 확인. 리포트는 이를 'AI app trap'으로 명명 — AI는 결제자당 매출은 높이나 전환을 더 높이지는 않음(per payer지 better conversion 아님). 상관 데이터를 'drives'로 표현한 점은 해석 영역. 2nd-B 적용: AI를 상위 티어로 두되 리텐션 루프(주간 리포트·장기 메모리·습관화)와 구독피로 완화 장치 필수.",
+        "sources": [
+          "https://www.revenuecat.com/state-of-subscription-apps/"
+        ]
+      },
+      {
+        "claim": "[구독피로·원타임/평생 — 각도4] 라이프스타일 카테고리에서 원타임/평생 결제가 매출의 26%로 부상(상승)했고 월구독은 2023년 36%→2025년 29%로 하락 — 비반복 수익모델(평생 라이선스·원타임 언락)이 이 카테고리에서 실질적 viability를 가짐. 2nd-B는 구독 외 원타임/평생 옵션을 병행 검토할 근거.",
+        "confidence": "high",
+        "vote": "claim10 3-0",
+        "evidence": "Adapty 'In-App Subscription Benchmarks for Lifestyle Apps'(2026-04, 2025 데이터): 라이프스타일 2025 매출구성 Weekly 31%, Monthly 29%(2023년 36%에서 하락), One-time 26%(상승). 단서(해석): (1)'구독피로'는 부분 과장 — 주간(weekly)이 31%로 선두이고 글로벌 비중도 증가(43.3%→55.6%), 즉 지배적 변화는 월→주 이동이라는 '더 공격적 반복과금'이고 원타임 증가는 실재하나 2차 트렌드. (2)Adapty의 'one-time'은 소모성(consumable)+평생구독을 포함하므로 '평생이 구독을 대체'로 단순화 불가. 글로벌 전체 one-time은 10.3%(2023년 6.4%)로, 라이프스타일 26%는 카테고리 outlier(모순 아님). '글로벌 라이프스타일 중앙값 $7.48주/$12.99월/$38.42년' 가격 앵커 보조주장은 반박됨(vote 0-3) — 가격 앵커로 인용 금지.",
+        "sources": [
+          "https://adapty.io/blog/lifestyle-app-subscription-benchmarks/"
+        ]
+      },
+      {
+        "claim": "[PPP·현지화 가격 — 각도1·2] 가격 현지화는 LTV 개선 승률 62.3%로 모든 실험 유형 중 최고이며, 지역 가격은 체계적으로 분기한다(유럽이 북미보다 29~39% 높음, 영국 1.3x vs 터키 0.5x로 2.6배 격차). 한국+글로벌 동시 타겟인 2nd-B는 국가별/PPP 가격을 '나중'이 아닌 초기에 적용해야 함.",
+        "confidence": "high",
+        "vote": "claim9 3-0 (Adapty + RevenueCat 별도 데이터셋 교차확인)",
+        "evidence": "Adapty State of In-App Subscriptions 2026(~$3B, 16,000+ 앱): 현지화 테스트 62.3% LTV 승률(트라이얼 59.6%·플랜기간 58.7%·플랜수 57.1%·가격변경 45.5%·비주얼/카피 34.6% 보다 높음), 유럽 29~39% 프리미엄, 영국 1.3x·터키 0.5x. RevenueCat 2026 교차확인: 월구독 중앙값 북미 $9.99 vs 인도/SEA $3.75, 연 $39.99 vs $18.32, '시장은 이미 지역별로 다르게 가격책정되며 그 격차는 체계적' '현지화는 나중 최적화가 아님' '일본 현지화 페이월 +>20%'. 과장 2건(비치명): (1)'최고 ROI 레버'는 '최고 승률'의 의역(승률 != 효과크기) — Adapty 자신은 얕은 지표 승리가 net-negative일 수 있어 3/6개월 재확인 권고. (2)한국은 인용된 UK/터키/EU/NA/일본 수치에 부재 — 한국 직접근거 아님(다만 승률 통계는 글로벌·전 카테고리). 보조주장 'IN/SEA 연 $18.32·RLTV 5배 낮음'은 vote 0-3 반박.",
+        "sources": [
+          "https://adapty.io/blog/lifestyle-app-subscription-benchmarks/",
+          "https://www.revenuecat.com/state-of-subscription-apps/"
+        ]
+      },
+      {
+        "claim": "[결제수단·PG·앱스토어 수수료 — 각도2] 한국에서 Apple 승인 서드파티 PSP를 써도 Apple이 총액의 26% 수수료(표준 30% 대비 4%p 인하)를 부과하고 이는 결제처리 가치를 제외하므로 PSP 자체 수수료가 위에 더해져 총비용이 사실상 30%에 근접한다. 반면 Small Business Program은 연매출 $1M 미만 개발자에게 수수료를 30%→15%로 절반으로 낮춰, 2nd-B가 작을 때 결정적으로 유리.",
+        "confidence": "high",
+        "vote": "claim5 3-0, claim17 3-0 (Apple 1차 문서 + RevenueCat 보강)",
+        "evidence": "Apple developer.apple.com/support/storekit-external-entitlement-kr: '26% commission on the price paid by the user, gross of any VAT... excludes value related to payment processing'. 승인 PSP는 KCP/Inicis/Toss/NICE만, 각 ~2~5% 수수료 → 26%+PSP+관리오버헤드 = 30% 이상 도달(Digital Trends·AppleInsider·9to5Mac 비판 일치). 단, Small Business Program 회원/구독 2년차+는 11%. Small Business Program: 연 proceeds $1M 미만(전년+당년) 시 유료앱·IAP·구독 전부 15%(developer.apple.com/app-store/small-business-program, apple.com/newsroom/2020/11 확인). 구독은 프로그램 밖에서도 구독자 1년차 후 15%로 떨어지므로 프로그램의 절반 효과는 1년차에 가장 큼. 2nd-B 적용: 한국 외부결제 우회의 실익은 거의 없고, SBP 등록(15%)이 우선. (참고: 토스페이먼츠/카카오페이/휴대폰결제/UPI/Pix/LINE Pay 등 한국·글로벌 PG 세부 비교는 본 검증 클레임에 직접 확인된 수치 없음 — open question 참조.)",
+        "sources": [
+          "https://developer.apple.com/support/storekit-external-entitlement-kr/",
+          "https://www.revenuecat.com/blog/engineering/small-business-program/"
+        ]
+      },
+      {
+        "claim": "[앱스토어 정책 리스크 — 각도2·5] Apple App Review 가이드라인 5.1.2(i)(2025-11-13 발효)는 개인 데이터를 서드파티(서드파티 AI 명시)와 공유하는 경우 명확히 공개하고 사전에 명시적 사용자 동의를 받을 것을 강제한다. 저널 내용을 외부 LLM API로 보내는 2nd-B에는 하드 요구사항이며, 프라이버시/데이터주권 포지셔닝과 직결.",
+        "confidence": "high",
+        "vote": "claim16 3-0 (Apple 1차 + TechCrunch·TechRepublic 등 다수 확인)",
+        "evidence": "가이드라인 5.1.2(i) 원문: 'You must clearly disclose where personal data will be shared with third parties, including with third-party AI, and obtain explicit permission before doing so.' 위반 시 앱 제거. 동의는 최초 전송 전에 받아야 하고(소급 동의 불가) 특정 AI 제공자(OpenAI/Anthropic/Google)를 명시해야 함 — 일반 'service providers' 문구는 불충분. 온디바이스 Core ML 처리는 예외이나 Expo RN 앱에서 온디바이스 LLM은 비실용적이라 외부 API 가정이 현실적 → 규칙 적용됨. 2nd-B 적용: 온보딩에 '저널 내용이 [Anthropic/OpenAI 등]에 전송됨' 명시 동의 UI 필수, 프라이버시 약속과 정합되게 설계.",
+        "sources": [
+          "https://developer.apple.com/app-store/review/guidelines/"
+        ]
+      },
+      {
+        "claim": "[포지셔닝·차별화 — 각도5] 로컬-우선(local-first) + 데이터주권('네 데이터는 네 것')은 저널링 앱에서 검증된 획득 내러티브다. Day One은 E2EE(AES-GCM-256) 기본·직원도 못 읽음·전 티어 무료 프라이버시 베이스라인·무조건 내보내기 권리·로컬 우선 저장을 차별화 축으로 마케팅한다. 2nd-B의 로컬-우선+PKM(Obsidian 정서) 포지셔닝에 직접적 근거.",
+        "confidence": "high",
+        "vote": "통합: claim4·claim11·claim13 3-0, claim12 2-1",
+        "evidence": "Day One: E2EE/패스코드/생체인증/보안 클라우드 백업을 무료 Basic 포함 전 티어 베이스라인으로 제공(동기화·미디어·AI만 유료 게이팅) — 프라이버시는 페이월 아님. E2EE는 AES-GCM-256, v4.2 이후 iOS/Mac 신규 저널 기본 활성(Android·레거시 저널은 수동 opt-in — '모든 저널 기본'은 약간의 과장), 키는 서버 미전송이라 직원·법적 절차로도 복호화 불가. 'You own your data, not us' + '구독 상태와 무관하게' 내보내기 권리(무조건). Ink & Switch 정전 에세이(용어 창시): 로컬 기기 사본을 'primary copy'로 취급, 로컬 저장·로컬 네트워크를 원격 데이터센터보다 우선 — 이상(ideals) #6 '기본 보안·프라이버시', #7 '사용자 통제·소유'가 프라이버시 포지셔닝의 아키텍처 근거. 단서: '로컬-우선이 중앙 DB 부재로 breach 타깃을 없앤다'는 강한 주장은 본 검증에서 반박(vote 1-2) — breach-target 논거는 과신 금지.",
+        "sources": [
+          "https://dayoneapp.com/plans/",
+          "https://dayoneapp.com/privacy-faqs/",
+          "https://www.inkandswitch.com/essay/local-first/"
+        ]
+      },
+      {
+        "claim": "[정신건강 인접 규제·임상어휘 리스크 — 각도5] APA(미국심리학회) 2025-11 권고는 GenAI 챗봇·웰니스 앱을 자격 있는 정신건강 전문가의 '대체재'로 포지셔닝/사용하지 말 것을 권고하고, 임상검증 없이 'therapy 제공'·'면허'·'특정 치료양식 훈련'을 주장하면 거짓 신뢰감을 만든다고 경고한다. 2nd-B의 AI 어드바이저 마케팅 카피에 직접적 윤리·평판·(간접) 규제 제약.",
+        "confidence": "high",
+        "vote": "통합: claim14 3-0, claim15 3-0",
+        "evidence": "APA Health Advisory(2025-11): 'GenAI chatbots, wellness apps that use GenAI, and digital wellness apps should not be used as a replacement for a qualified mental health care provider' / 'AI supports, rather than replaces, human professionals'. Recommendation1: '...create a false sense of credibility by claiming to offer therapy, be licensed, or purporting to have training in various specialized therapeutic modalities, despite having no clinical validation, not going through a formal regulatory approval process...'. APA는 'AI 챗봇의 면허 전문가 사칭 금지 입법'과 FDA 감독공백 보완도 권고. 중요 단서: APA 권고는 '윤리·전문가 지침'이지 '법'이 아님 — 'legally'는 과장, 실제 법적 제약은 FTC·주(州) AI-therapy 법(IL/UT/NV)·Apple/Google 스토어 정책에서 옴. 2nd-B 적용: '치료'·'테라피'·'면허'·'진단' 표현 회피, '자기탐색/리플렉션 도구'로 포지셔닝, 면책·전문가 연계 안내 삽입.",
+        "sources": [
+          "https://www.apa.org/topics/artificial-intelligence-machine-learning/health-advisory-chatbots-wellness-apps"
+        ]
+      }
+    ],
+    "caveats": "시간 민감성: 모든 가격/수수료/정책 수치는 2025-2026 시점 기준이며 변동 잦음 — Day One은 2026년 3월 Premium→Silver 개명, Gold(AI) 티어는 ~2026년 4월 출시, Apple 5.1.2(i)는 2025-11-13, APA 권고는 2025-11. 재인용 전 1차 페이지 재확인 권장.\n\n데이터 한계 1 (한국 직접근거 부재): 검증된 클레임에 한국 PPP 가격, 한국 PG(토스페이먼츠·카카오페이·휴대폰결제) 수수료율, 한국 신용카드 미보유층·프라이버시 민감도에 대한 직접 수치가 없다. 현지화 ROI(62.3% 승률)와 지역 가격분기는 글로벌/EU/UK/터키/일본 데이터 기반이며 한국은 추론. Apple 26% 외부결제 수치만 한국 특정.\n\n데이터 한계 2 (조사 대상 앱 커버리지 편중): 가격·기능 1차 벤치마크가 사실상 Day One과 Rosebud 2개에 집중됨. 질문에 명시된 Reflectly, Stoic, Finch, How We Feel, Mindsera, Jour의 구체적 티어/가격/전환율은 검증 클레임에 없음.\n\n해석 vs 사실 구분: '하드 페이월이 전환을 5배 높인다'는 전환'율'(분모·선별편향 상이)이지 총수익 우위 아님 — 동일 리포트도 freemium 관대함을 권하고 다른 퍼널 지점(Adapty)에서는 soft 페이월이 우세. '구독피로'(원타임 26%)도 실제 지배 트렌드는 월→주 이동으로, 비반복 모델 부상은 2차 트렌드. '현지화=최고 ROI'는 '최고 승률'의 의역.\n\n소스 품질: 시장 데이터는 RevenueCat·Adapty(둘 다 페이월 A/B 벤더로 경미한 이해상충, 단 업계 표준 벤치마크·교차확인됨). 제품 사실은 벤더 1차 페이지, 정책/규제는 Apple·APA 1차 — 강도 적절. 분할표결(2-1) 클레임(Rosebud 2회/일, Day One Silver $49.99, Day One 데이터소유권)은 사실 자체는 1차 확인됐고 표결 분기는 해석 레이어 때문.\n\n반박된 보조주장(인용 금지): 장기 트라이얼(17-32일) 전환 우위, IN/SEA 연 $18.32·RLTV 5배, 글로벌 라이프스타일 가격 앵커($7.48주/$12.99월/$38.42년), Rosebud Bloom $12.99/월 단일가, 로컬-우선의 'breach-target 제거' 논거, iOS 프리미엄 언락 전부 IAP 강제 — 모두 본 검증에서 반박(0-3 또는 1-2).",
+    "openQuestions": [
+      "한국 PG 실수수료·전환 영향: 토스페이먼츠·카카오페이·휴대폰결제·네이버페이의 실제 수수료율과, 한국 신용카드 미보유/저신용층에게 휴대폰결제·간편결제가 IAP 대비 전환을 얼마나 높이는가? (웹 결제 우회 가능 영역 한정)",
+      "한국 PPP 포지셔닝: 한국은 EU/NA 대비 어느 가격 인덱스에 두어야 하나(예: NA 1.0 기준 한국 0.7~0.9?)? 검증 데이터에 한국 수치가 없어 실험 필요.",
+      "미커버 경쟁앱 벤치마크: Reflectly·Stoic·Finch·How We Feel·Mindsera·Jour의 구체적 무료티어 한도·가격(월/연)·전환율은? 특히 Finch(게이미피케이션)·How We Feel(무료·비영리)·Mindsera(AI 코어)는 2nd-B와 직접 경쟁군.",
+      "광고지원 모델: 질문 각도4의 '광고지원 모델 효과'에 대한 직접 근거가 검증 클레임에 없음 — 저널링/프라이버시 포지셔닝 앱에서 광고가 신뢰·리텐션에 미치는 영향(특히 로컬-우선 정서와의 충돌)은 별도 조사 필요.",
+      "Google Play 측 대칭 정책: Apple 26%(한국)·15%(SBP)·5.1.2(i)에 대응하는 Google Play의 한국 외부결제 수수료(인하분)·서드파티 AI 데이터 공개 정책·15% 구간은? Android 동시 타겟이므로 확인 필요."
+    ],
+    "refuted": [
+      {
+        "claim": "Rosebud's paid tier 'Bloom' is priced at $12.99/month (the page shows only this monthly price; no annual/yearly price, free trial, or PPP/regional pricing is listed).",
+        "vote": "0-3",
+        "source": "https://help.rosebud.app/getting-started/pricing"
+      },
+      {
+        "claim": "Free trials lasting 17–32 days achieve a median trial-to-paid conversion of 45.7%, versus 26.8% for shorter trials — i.e., more generous trial length raises conversion, not lowers it.",
+        "vote": "0-3",
+        "source": "https://www.revenuecat.com/state-of-subscription-apps-2025/"
+      },
+      {
+        "claim": "Longer free trials convert substantially better than short ones: 17-32 day trials hit 42.5% median trial-to-paid vs 25.5% for trials of 4 days or less — evidence that a generous free runway (enough to reach the aha-moment) outperforms aggressive gating in self-discovery/journaling apps.",
+        "vote": "1-2",
+        "source": "https://www.revenuecat.com/state-of-subscription-apps/"
+      },
+      {
+        "claim": "Regional/PPP pricing is steep: India/SEA annual plans median $18.32 vs North America $39.99 (about 46% of NA), and RLTV per payer is roughly 5x lower in IN/SEA ($14) than North America ($32). This quantifies the PPP discount 2nd-B should apply for global vs Korea/NA pricing.",
+        "vote": "0-3",
+        "source": "https://www.revenuecat.com/state-of-subscription-apps/"
+      },
+      {
+        "claim": "Global median subscription prices for Lifestyle apps in 2025 were $7.48/week, $12.99/month, and $38.42/year — useful tier/price anchors for 2nd-B benchmarking against journaling/self-discovery peers.",
+        "vote": "0-3",
+        "source": "https://adapty.io/blog/lifestyle-app-subscription-benchmarks/"
+      },
+      {
+        "claim": "Local-first architecture delivers privacy and security by default because each device stores only its owner's data, avoiding a centralized cloud database that aggregates everyone's data and becomes a breach target — the core differentiation argument for a privacy-positioned journaling app.",
+        "vote": "1-2",
+        "source": "https://www.inkandswitch.com/essay/local-first/"
+      },
+      {
+        "claim": "Apple mandates that any unlock of premium features (subscriptions, premium content, full-version unlocks) inside an iOS app MUST go through Apple's in-app purchase system; apps may not use their own license keys, QR codes, or other external mechanisms. This forces Apple's IAP and its associated commission, directly constraining how 2nd-B can price premium AI features on iOS.",
+        "vote": "1-2",
+        "source": "https://developer.apple.com/app-store/review/guidelines/"
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://help.rosebud.app/getting-started/pricing",
+        "quality": "primary",
+        "angle": "가격·티어 벤치마크 (PPP 포함)",
+        "claimCount": 5
+      },
+      {
+        "url": "https://dayoneapp.com/plans/",
+        "quality": "primary",
+        "angle": "가격·티어 벤치마크 (PPP 포함)",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.mirava.io/blog/why-purchasing-power-parity-pricing-is-a-must-for-mobile-apps",
+        "quality": "blog",
+        "angle": "가격·티어 벤치마크 (PPP 포함)",
+        "claimCount": 5
+      },
+      {
+        "url": "https://developer.apple.com/support/storekit-external-entitlement-kr/",
+        "quality": "primary",
+        "angle": "가격·티어 벤치마크 (PPP 포함)",
+        "claimCount": 3
+      },
+      {
+        "url": "https://www.revenuecat.com/blog/engineering/small-business-program/",
+        "quality": "secondary",
+        "angle": "결제수단·PG + 앱스토어 IAP 수수료",
+        "claimCount": 5
+      },
+      {
+        "url": "https://adapty.io/blog/can-you-use-stripe-for-in-app-purchases/",
+        "quality": "blog",
+        "angle": "결제수단·PG + 앱스토어 IAP 수수료",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.revenuecat.com/blog/growth/apple-anti-steering-ruling-monetization-strategy/",
+        "quality": "secondary",
+        "angle": "결제수단·PG + 앱스토어 IAP 수수료",
+        "claimCount": 5
+      },
+      {
+        "url": "https://blog.portone.io/opi_pg-comparison2026/",
+        "quality": "blog",
+        "angle": "결제수단·PG + 앱스토어 IAP 수수료",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.mirava.io/blog/regional-pricing-subscriptions-best-practices",
+        "quality": "blog",
+        "angle": "결제수단·PG + 앱스토어 IAP 수수료",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.revenuecat.com/blog/growth/activation-metrics/",
+        "quality": "blog",
+        "angle": "무료티어 관대함 vs 전환·activation",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.revenuecat.com/state-of-subscription-apps-2025/",
+        "quality": "primary",
+        "angle": "무료티어 관대함 vs 전환·activation",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.revenuecat.com/blog/growth/how-to-turn-freemium-users-into-loyal-subscribers/",
+        "quality": "blog",
+        "angle": "무료티어 관대함 vs 전환·activation",
+        "claimCount": 4
+      },
+      {
+        "url": "https://www.businessofapps.com/data/health-fitness-app-benchmarks/",
+        "quality": "secondary",
+        "angle": "무료티어 관대함 vs 전환·activation",
+        "claimCount": 4
+      },
+      {
+        "url": "https://amplitude.com/blog/freemium-free-trial-metrics",
+        "quality": "blog",
+        "angle": "무료티어 관대함 vs 전환·activation",
+        "claimCount": 4
+      },
+      {
+        "url": "https://adapty.io/blog/trial-conversion-rates-for-in-app-subscriptions/",
+        "quality": "secondary",
+        "angle": "무료티어 관대함 vs 전환·activation",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.revenuecat.com/state-of-subscription-apps/",
+        "quality": "primary",
+        "angle": "구독피로·리텐션·평생/광고 모델",
+        "claimCount": 5
+      },
+      {
+        "url": "https://adapty.io/blog/lifestyle-app-subscription-benchmarks/",
+        "quality": "primary",
+        "angle": "구독피로·리텐션·평생/광고 모델",
+        "claimCount": 5
+      },
+      {
+        "url": "https://retentioncheck.com/churn-benchmarks/meditation-apps",
+        "quality": "secondary",
+        "angle": "구독피로·리텐션·평생/광고 모델",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.airbridge.io/en/blog/should-you-offer-a-lifetime-subscription",
+        "quality": "blog",
+        "angle": "구독피로·리텐션·평생/광고 모델",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.readless.app/blog/subscription-fatigue-statistics-2026",
+        "quality": "secondary",
+        "angle": "구독피로·리텐션·평생/광고 모델",
+        "claimCount": 5
+      },
+      {
+        "url": "https://dayoneapp.com/privacy-faqs/",
+        "quality": "primary",
+        "angle": "로컬우선·프라이버시 차별화 포지셔닝",
+        "claimCount": 4
+      },
+      {
+        "url": "https://techcrunch.com/2025/06/04/rosebud-lands-6m-to-scale-its-interactive-ai-journaling-app/",
+        "quality": "secondary",
+        "angle": "로컬우선·프라이버시 차별화 포지셔닝",
+        "claimCount": 5
+      },
+      {
+        "url": "https://fueler.io/blog/obsidian-usage-revenue-valuation-growth-statistics",
+        "quality": "blog",
+        "angle": "로컬우선·프라이버시 차별화 포지셔닝",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.inkandswitch.com/essay/local-first/",
+        "quality": "primary",
+        "angle": "로컬우선·프라이버시 차별화 포지셔닝",
+        "claimCount": 5
+      },
+      {
+        "url": "https://locark.com/privacy-first-knowledge-management-2025/",
+        "quality": "blog",
+        "angle": "로컬우선·프라이버시 차별화 포지셔닝",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.appearan.com/2026/02/the-rise-of-local-first-ai-why-cloud.html",
+        "quality": "blog",
+        "angle": "로컬우선·프라이버시 차별화 포지셔닝",
+        "claimCount": 3
+      },
+      {
+        "url": "https://www.apa.org/topics/artificial-intelligence-machine-learning/health-advisory-chatbots-wellness-apps",
+        "quality": "primary",
+        "angle": "정신건강 인접 규제·앱스토어 정책 리스크",
+        "claimCount": 5
+      },
+      {
+        "url": "https://www.americanbar.org/groups/health_law/news/2025/ftc-consumer-ai-chatbots-health-care/",
+        "quality": "secondary",
+        "angle": "정신건강 인접 규제·앱스토어 정책 리스크",
+        "claimCount": 4
+      },
+      {
+        "url": "https://www.dlapiper.com/en/insights/publications/2025/08/ai-mental-health-chatbots",
+        "quality": "secondary",
+        "angle": "정신건강 인접 규제·앱스토어 정책 리스크",
+        "claimCount": 5
+      },
+      {
+        "url": "https://developer.apple.com/app-store/review/guidelines/",
+        "quality": "primary",
+        "angle": "정신건강 인접 규제·앱스토어 정책 리스크",
+        "claimCount": 5
+      },
+      {
+        "url": "https://practiceguides.chambers.com/practice-guides/data-protection-privacy-2026/south-korea/trends-and-developments",
+        "quality": "secondary",
+        "angle": "정신건강 인접 규제·앱스토어 정책 리스크",
+        "claimCount": 5
+      }
+    ],
+    "stats": {
+      "angles": 6,
+      "sourcesFetched": 31,
+      "claimsExtracted": 146,
+      "claimsVerified": 25,
+      "confirmed": 18,
+      "killed": 7,
+      "afterSynthesis": 9,
+      "urlDupes": 1,
+      "budgetDropped": 4,
+      "agentCalls": 114
+    }
+  }
+}

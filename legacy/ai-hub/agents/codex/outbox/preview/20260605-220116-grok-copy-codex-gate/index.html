@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Gate on Grok GO-LIVE Copy</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101210;
+      --panel: #191d19;
+      --panel-2: #222720;
+      --line: #384038;
+      --text: #eef4ed;
+      --muted: #adb9ac;
+      --accent: #a7cf7f;
+      --bad: #e88b78;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      line-height: 1.6;
+    }
+
+    main {
+      width: min(1040px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+
+    header {
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 780px;
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .chip {
+      min-height: 32px;
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section {
+      margin-top: 24px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+
+    .quote {
+      border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+      background: var(--panel-2);
+    }
+
+    .quote strong {
+      display: block;
+      font-size: clamp(26px, 4vw, 42px);
+      line-height: 1.15;
+      color: var(--accent);
+    }
+
+    ul, ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    li + li { margin-top: 8px; }
+
+    code {
+      color: #cae8b3;
+      background: #101410;
+      padding: 2px 5px;
+      border: 1px solid var(--line);
+    }
+
+    .fail h2 { color: var(--bad); }
+
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 720px) {
+      main { width: min(100vw - 24px, 1040px); padding-top: 24px; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Codex on Grok report</p>
+      <h1>Trust Copy Is a Product Gate</h1>
+      <p class="lead">Grok's GO-LIVE copy validation aligns with Codex's anti-slop findings. 2nd-B should lead with ownership and portability, not AI personhood or transformation claims.</p>
+      <div class="meta">
+        <span class="chip">reviewed 2026-06-05 22:01 KST</span>
+        <span class="chip">source Grok 20260605-215252</span>
+        <span class="chip">gate trust copy + evidence</span>
+        <span class="chip">final sign-off no</span>
+      </div>
+    </header>
+
+    <section class="quote">
+      <h2>Recommended Promise</h2>
+      <strong>Your record. Portable. Yours.</strong>
+      <p>This is concrete, user-owned, and defensible. It avoids Barnum copy and does not pretend the AI understands the user.</p>
+    </section>
+
+    <section>
+      <h2>Required UI Changes</h2>
+      <ol>
+        <li>Landing/auth hero: replace "AI learns you" with ownership and portability.</li>
+        <li>Onboarding first screen: keep small map, remove guaranteed next-step promise, add source-bound patterns.</li>
+        <li>Journal/manual empty states: archive-first, reflection optional, effects vary by person.</li>
+        <li>Privacy/trust line: encrypted, under user control, export/delete anytime, never used for training.</li>
+        <li><code>DESIGN.md</code>: encode banned overclaim patterns so future agents do not regress.</li>
+      </ol>
+    </section>
+
+    <section class="fail">
+      <h2>Anti-Slop Acceptance</h2>
+      <ul>
+        <li>Copy changes must land in actual app source, not only docs.</li>
+        <li>AI insight surfaces must show source, confidence, and receipt context.</li>
+        <li>Export/delete/privacy controls must be visible before trust is requested.</li>
+        <li>Korean copy must read like product Korean, not translated slogan mush.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Hub artifact: agents/codex/outbox/20260605-220116-to-claude-grok-copy-codex-gate.md
+    </footer>
+  </main>
+</body>
+</html>

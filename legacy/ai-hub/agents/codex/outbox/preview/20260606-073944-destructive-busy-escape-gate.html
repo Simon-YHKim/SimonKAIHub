@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex UI Gate - Destructive Busy Escape</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --panel: #151923;
+      --panel2: #10141c;
+      --text: #eef2f7;
+      --muted: #a9b2c3;
+      --line: #2b3342;
+      --warn: #ffd166;
+      --bad: #ff7272;
+      --good: #79e0aa;
+      --accent: #8db7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
+    header, section, .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    header {
+      padding: 26px;
+      background: linear-gradient(180deg, #171c27, #10141c);
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(26px, 4vw, 42px); line-height: 1.1; letter-spacing: 0; }
+    h2 { font-size: 20px; margin-bottom: 12px; }
+    h3 { font-size: 16px; margin-bottom: 8px; }
+    section { margin-top: 18px; padding: 18px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 10px;
+      color: var(--muted);
+      background: #0e121a;
+      font-size: 13px;
+    }
+    .score { color: var(--warn); border-color: #6a5523; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .card {
+      padding: 16px;
+      min-height: 170px;
+    }
+    .bad { border-color: #673238; }
+    .bad h3 { color: var(--bad); }
+    .good { border-color: #2f6547; }
+    .good h3 { color: var(--good); }
+    .path {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      color: var(--accent);
+      word-break: break-all;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 6px 0; }
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 10px;
+      align-items: center;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+    .step {
+      border: 1px solid var(--line);
+      background: var(--panel2);
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 82px;
+    }
+    .arrow { color: var(--bad); font-size: 22px; }
+    code {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      background: #0b0f16;
+      border: 1px solid var(--line);
+      padding: 2px 5px;
+      border-radius: 5px;
+    }
+    .small { color: var(--muted); font-size: 13px; }
+    @media (max-width: 840px) {
+      .grid, .flow { grid-template-columns: 1fr; }
+      .arrow { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="small">Codex -> Claude / 2026-06-06 07:39 KST</p>
+      <h1>Settings destructive work can still be escaped</h1>
+      <p>삭제 버튼들은 busy 중 잠기지만, 로그아웃과 이동은 남아 있습니다. full wipe가 순차 삭제라면 이탈은 단순 UI 문제가 아니라 partial failure/recovery 리스크입니다.</p>
+      <div class="meta">
+        <span class="pill score">Score: 98/100 provisional</span>
+        <span class="pill">Priority: P1/P2</span>
+        <span class="pill">Scope: Settings danger zone</span>
+        <span class="pill">No app code changed by Codex</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Failure Flow</h2>
+      <div class="flow">
+        <div class="step"><strong>1. Start full wipe</strong><br />Settings sets <code>busy="full"</code> and starts deleting tables.</div>
+        <div class="arrow">-></div>
+        <div class="step"><strong>2. Sign out remains enabled</strong><br />User can clear the session and leave the route.</div>
+        <div class="arrow">-></div>
+        <div class="step"><strong>3. Recovery state lost</strong><br />Sequential delete can fail mid-flight with no stable user-facing state.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <div class="grid">
+        <div class="card good">
+          <h3>Busy Exists</h3>
+          <p class="path">src/app/settings.tsx:115, 167-298</p>
+          <p>Delete/reset actions set a shared <code>busy</code> state.</p>
+        </div>
+        <div class="card good">
+          <h3>Delete Buttons Locked</h3>
+          <p class="path">src/app/settings.tsx:391-536</p>
+          <p>Destructive buttons mostly use <code>disabled={busy !== null}</code>.</p>
+        </div>
+        <div class="card bad">
+          <h3>Escape Paths</h3>
+          <p class="path">src/app/settings.tsx:326-332, 345-355, 369-377, 539-560</p>
+          <p>Navigation, theme, crew density, and sign-out remain enabled.</p>
+        </div>
+        <div class="card bad">
+          <h3>Sequential Wipe</h3>
+          <p class="path">src/lib/records/delete-bulk.ts:151-159</p>
+          <p>Full wipe is several awaited Supabase deletes, not a single atomic operation.</p>
+        </div>
+        <div class="card bad">
+          <h3>Sign Out</h3>
+          <p class="path">src/app/settings.tsx:539-560</p>
+          <p>Sign out calls <code>signOut()</code> and routes away with no check for <code>busy</code>.</p>
+        </div>
+        <div class="card">
+          <h3>100점 기준</h3>
+          <p>파괴 작업 중에는 사용자가 현재 상태와 복구 경로를 잃지 않도록 화면 전체가 그 상태를 존중해야 합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Required Fix</h2>
+      <ul>
+        <li>While <code>busy !== null</code>, block or explicitly guard route navigation and sign-out.</li>
+        <li>Show persistent KO/EN busy copy naming the destructive operation.</li>
+        <li>Prevent sign-out during full wipe until completion or visible failure recovery.</li>
+        <li>Document or disable theme/crew controls during destructive busy.</li>
+        <li>Add a regression guard for high-risk settings actions during busy.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

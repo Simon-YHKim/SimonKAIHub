@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dirty WIP Touch/Graph Gate</title>
+  <style>
+    :root {
+      --bg: #070A18;
+      --panel: #101524;
+      --panel2: #171D30;
+      --line: #2A3351;
+      --text: #EEF2FF;
+      --muted: #AEB8D6;
+      --subtle: #7F89AA;
+      --mint: #72F2C7;
+      --warn: #FFD166;
+      --danger: #FF7A90;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif;
+      line-height: 1.62;
+    }
+    main { max-width: 980px; margin: 0 auto; padding: 40px 22px 84px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 22px; }
+    h1 { font-size: 24px; line-height: 1.2; margin: 0 0 8px; letter-spacing: 0; }
+    h2 { font-size: 16px; margin: 26px 0 10px; letter-spacing: 0; }
+    p { margin: 8px 0; }
+    ul { margin: 8px 0 8px 20px; padding: 0; }
+    li { margin: 5px 0; }
+    code, pre {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      color: #DDE5FF;
+    }
+    code { padding: 1px 5px; font-size: 12px; }
+    pre { padding: 12px; overflow: auto; font-size: 12px; white-space: pre-wrap; }
+    .meta { color: var(--subtle); font-size: 12px; }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 14px 0;
+    }
+    .p1 { border-left: 3px solid var(--danger); }
+    .p2 { border-left: 3px solid var(--warn); }
+    .ok { border-left: 3px solid var(--mint); }
+    .label { color: var(--subtle); font-size: 11px; text-transform: uppercase; font-weight: 700; }
+    footer { margin-top: 34px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--subtle); font-size: 12px; }
+    @media (max-width: 700px) {
+      main { padding: 28px 16px 64px; }
+      h1 { font-size: 21px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Dirty WIP Touch/Graph Gate</h1>
+      <div class="meta">Codex pre-commit gate · 2026-06-06 01:15 KST · head <code>e29f1d1 + dirty WIP</code></div>
+    </header>
+
+    <section class="panel p1">
+      <div class="label">P1 If Committed</div>
+      <h2>Global touch-action none</h2>
+      <pre>- touch-action: pan-x pan-y;
++ touch-action: none;</pre>
+      <p>This is global on <code>html, body, #root, #__next</code>. It can suppress native pan/scroll gestures on every route, not only the graph.</p>
+      <p><strong>Required proof:</strong> mobile web scroll on wiki/inbox/records/settings/account/audit/capture, plus graph pinch/pan proof.</p>
+    </section>
+
+    <section class="panel ok">
+      <div class="label">Acceptable With Proof</div>
+      <h2>Base href</h2>
+      <p><code>&lt;base href="/2nd-B/" /&gt;</code> likely helps GitHub Pages static pathing. Verify direct load, nested refresh, assets, fonts, and internal navigation.</p>
+    </section>
+
+    <section class="panel p2">
+      <div class="label">Proof Needed</div>
+      <h2>Capture keyboard/safe-area WIP</h2>
+      <p><code>keyboardVerticalOffset={0}</code> is behaviorally no-op. <code>contentInsetAdjustmentBehavior="never"</code> may be fine, but needs iOS/Android capture keyboard screenshots.</p>
+    </section>
+
+    <section class="panel p2">
+      <div class="label">Proof Needed</div>
+      <h2>NavGraph resize clamp</h2>
+      <p>Viewport resize re-clamp and <code>runOnJS</code> debounce are plausible. Require pan, pinch, double-tap reset, reset-button visibility, and resize/resume proof.</p>
+    </section>
+
+    <section class="panel p2">
+      <div class="label">Cleanup</div>
+      <h2>Root script residue</h2>
+      <p><code>refactor_wiki.py</code> is untracked at repo root. Do not commit it.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Still Open</h2>
+      <ul>
+        <li>Permission copy/surface cleanup.</li>
+        <li>Keyboard-safe destructive/input screens.</li>
+        <li><code>expo-image</code> <code>contentFit</code> cleanup.</li>
+        <li>Android/mobile visual proof for go-live surfaces.</li>
+        <li>Unused import warnings from FlatList follow-up.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Markdown report: <code>agents/codex/outbox/20260606-011522-to-claude-wip-touch-action-gate.md</code>
+    </footer>
+  </main>
+</body>
+</html>

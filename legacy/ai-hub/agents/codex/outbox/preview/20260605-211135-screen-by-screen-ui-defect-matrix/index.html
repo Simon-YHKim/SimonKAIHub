@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2nd-B Screen-by-Screen UI Defect Matrix</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f1218;
+      --panel: #171c24;
+      --panel2: #202733;
+      --text: #edf1f7;
+      --muted: #aeb7c6;
+      --line: #333c4d;
+      --accent: #7dd3c7;
+      --warn: #f2c96d;
+      --danger: #ef8f8f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+    main {
+      width: min(1240px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 42px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 24px;
+      margin-bottom: 26px;
+    }
+    .kicker {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      margin-bottom: 8px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 36px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+    .sub {
+      max-width: 920px;
+      color: var(--muted);
+      margin: 14px 0 0;
+      font-size: 16px;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 999px;
+      padding: 6px 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    section { margin-top: 30px; }
+    h2 {
+      font-size: 21px;
+      margin: 0 0 12px;
+      letter-spacing: 0;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 27px;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+    .metric span {
+      display: block;
+      color: var(--muted);
+      margin-top: 8px;
+      font-size: 13px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+    .card p, li {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .card p { margin: 0; }
+    .table {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1040px;
+    }
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 13px;
+    }
+    th {
+      position: sticky;
+      top: 0;
+      background: #1d2430;
+      color: var(--text);
+      z-index: 1;
+    }
+    td { color: var(--muted); }
+    tr:last-child td { border-bottom: 0; }
+    .p0 { color: var(--danger); font-weight: 800; }
+    .p1 { color: var(--warn); font-weight: 800; }
+    .p2 { color: var(--accent); font-weight: 800; }
+    code {
+      font-family: "Cascadia Code", Consolas, monospace;
+      color: var(--text);
+      background: #111720;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-size: 0.92em;
+    }
+    ol { margin: 0; padding-left: 22px; }
+    li + li { margin-top: 8px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    @media (max-width: 980px) {
+      main { width: min(100vw - 28px, 1240px); padding-top: 28px; }
+      h1 { font-size: 29px; }
+      .metrics, .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="kicker">Codex to Claude · Screen Defect Matrix</div>
+      <h1>44개 화면별 UI 결함 매트릭스</h1>
+      <p class="sub">공통 release gate를 실제 화면 단위 작업으로 바꾼 목록이다. 이 표의 목적은 같은 결함이 다른 화면에 남는 부분 청소를 막는 것이다.</p>
+      <div class="meta">
+        <span class="pill">Created: 2026-06-05 21:11:35 KST</span>
+        <span class="pill">Branch: claude/cycle-1-data-hygiene</span>
+        <span class="pill">Head: b17d629</span>
+        <span class="pill">Type: request</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Global Counts</h2>
+      <div class="metrics">
+        <div class="metric"><strong>44</strong><span>route files</span></div>
+        <div class="metric"><strong>13,177</strong><span>route lines</span></div>
+        <div class="metric"><strong>68</strong><span>alert calls</span></div>
+        <div class="metric"><strong>10</strong><span>/journal targets</span></div>
+        <div class="metric"><strong>7</strong><span>coming soon / preview</span></div>
+        <div class="metric"><strong>34</strong><span>hard clearance refs</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Hotspots</h2>
+      <div class="grid">
+        <article class="card"><h3>Settings</h3><p>14 alerts, destructive flows, full-wipe route goes to retired journal path.</p></article>
+        <article class="card"><h3>Capture / Inbox / Wiki</h3><p>Capture has active coming-soon copy. Inbox and Wiki depend on alerts for phase/delete/export feedback.</p></article>
+        <article class="card"><h3>Self-model</h3><p>Persona, Core Brain, Insights, Trinity, Audit, Onboarding still route users back to journal.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Matrix</h2>
+      <div class="table">
+        <table>
+          <thead>
+            <tr>
+              <th>Priority</th>
+              <th>Screen</th>
+              <th>Flags</th>
+              <th>Implementation Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="p1">P1</td><td><code>(auth)/complete-profile</code></td><td>3 alerts, hard clearance</td><td>Inline age/judge/save feedback; shared trust strip and screen spacing.</td></tr>
+            <tr><td class="p1">P1</td><td><code>(auth)/oauth-callback</code></td><td>callback state</td><td>Consistent loading/error visual state and fallback back to sign-in/manual.</td></tr>
+            <tr><td class="p0">P0</td><td><code>(auth)/sign-in</code></td><td>4 alerts, reset coming soon</td><td>Implement/reset or convert to support link; inline auth/provider errors; trust strip.</td></tr>
+            <tr><td class="p1">P1</td><td><code>(auth)/sign-up</code></td><td>6 alerts, hard clearance</td><td>Inline age gate, breached password, provider failure, judge welcome; mobile trust layout.</td></tr>
+            <tr><td class="p0">P0</td><td><code>_layout</code></td><td>retired/dev route registry</td><td>Shared route metadata; production-gate preview routes; journal redirect only.</td></tr>
+            <tr><td class="p2">P2</td><td><code>+html</code></td><td>low risk</td><td>Verify web background/theme consistency and no white flash.</td></tr>
+            <tr><td class="p1">P1</td><td><code>+not-found</code></td><td>/journal target, hard clearance</td><td>CTA to home/capture/manual; shared error layout.</td></tr>
+            <tr><td class="p1">P1</td><td><code>account</code></td><td>3 alerts, hard clearance</td><td>Inline account deletion, export/support path, non-alert result.</td></tr>
+            <tr><td class="p0">P0</td><td><code>asset-motion-preview*</code></td><td>dev route family</td><td>Move out of production app routes or dev-gate all siblings.</td></tr>
+            <tr><td class="p1">P1</td><td><code>attachment</code></td><td>1 alert</td><td>Inline save failure; reference-only non-diagnostic result copy.</td></tr>
+            <tr><td class="p1">P1</td><td><code>audit</code></td><td>1 alert, 2 journal targets, hard clearance</td><td>Route actions to capture/home; inline save feedback; shell-owned companion clearance.</td></tr>
+            <tr><td class="p1">P1</td><td><code>big-five</code></td><td>1 alert, score language</td><td>Reference-only explanation, review-before-save, inline failure.</td></tr>
+            <tr><td class="p0">P0</td><td><code>capture</code></td><td>8 alerts, coming soon, hard clearance</td><td>Raw input first; remove subscription coming-soon; inline pick/OCR/save/proposal errors; lifecycle chips.</td></tr>
+            <tr><td class="p1">P1</td><td><code>core-brain</code></td><td>journal target, hard clearance</td><td>Empty CTA to capture; evidence drawer with source/why; shell clearance.</td></tr>
+            <tr><td class="p1">P1</td><td><code>data</code></td><td>2 coming soon, hard clearance</td><td>Implement or remove local reset; concrete import/export/delete hub; export-first.</td></tr>
+            <tr><td class="p2">P2</td><td><code>formats</code></td><td>hard clearance</td><td>Compact mobile controls and shared shell spacing.</td></tr>
+            <tr><td class="p2">P2</td><td><code>imagine</code></td><td>redirect</td><td>Confirm intentional redirect and no dead product promise.</td></tr>
+            <tr><td class="p1">P1</td><td><code>import</code></td><td>2 alerts, hard clearance</td><td>Inline prompt/save feedback and persistent import status.</td></tr>
+            <tr><td class="p0">P0</td><td><code>inbox</code></td><td>8 alerts, hard clearance</td><td>Row-level phase/delete/generate statuses; source lifecycle labels.</td></tr>
+            <tr><td class="p1">P1</td><td><code>index</code></td><td>journal target</td><td>Empty graph CTA to capture first-run; shared graph route metadata.</td></tr>
+            <tr><td class="p1">P1</td><td><code>insights</code></td><td>1 alert, 2 journal targets, hard clearance</td><td>CTAs to capture; source count and why link.</td></tr>
+            <tr><td class="p1">P1</td><td><code>interview</code></td><td>3 alerts, hard clearance</td><td>Inline chat save/finish errors; composer safe area via shell.</td></tr>
+            <tr><td class="p2">P2</td><td><code>jarvis</code></td><td>no static red flags</td><td>Verify mobile composer ergonomics and cited-piece affordances.</td></tr>
+            <tr><td class="p0">P0</td><td><code>journal</code></td><td>compatibility route</td><td>Redirect-only compatibility or retire after active targets are gone.</td></tr>
+            <tr><td class="p1">P1</td><td><code>manual</code></td><td>hard clearance</td><td>Add public trust contract; keep as guide, not marketing landing page.</td></tr>
+            <tr><td class="p1">P1</td><td><code>mbti</code></td><td>1 alert</td><td>Demote to reference only; review-before-save and inline failure.</td></tr>
+            <tr><td class="p1">P1</td><td><code>onboarding</code></td><td>journal target</td><td>Finish to capture first-run; remove retired IA labels.</td></tr>
+            <tr><td class="p2">P2</td><td><code>permissions</code></td><td>hard clearance</td><td>Public/trust copy remains scannable; shared spacing.</td></tr>
+            <tr><td class="p0">P0</td><td><code>persona</code></td><td>2 alerts, journal target, 3 clearance refs</td><td>Back to capture/home; trait numbers with evidence/why/provisional labels; shell-owned flash.</td></tr>
+            <tr><td class="p1">P1</td><td><code>privacy</code></td><td>hard clearance</td><td>Public reachability and plain user-control contract.</td></tr>
+            <tr><td class="p2">P2</td><td><code>profile</code></td><td>low static flags</td><td>Do not duplicate or hide account/privacy controls.</td></tr>
+            <tr><td class="p1">P1</td><td><code>record/[id]</code></td><td>hard clearance</td><td>Evidence type/date/source route and why/back semantics without local hacks.</td></tr>
+            <tr><td class="p1">P1</td><td><code>records</code></td><td>hard clearance</td><td>Evidence browser empty/filter states and shared spacing.</td></tr>
+            <tr><td class="p2">P2</td><td><code>research</code></td><td>1 alert, hard clearance</td><td>Inline load failure; evidence library label, not product pillar.</td></tr>
+            <tr><td class="p0">P0</td><td><code>settings</code></td><td>14 alerts, journal target, hard clearance</td><td>Inline destructive confirmations; route full wipe to capture/onboarding/home; persistent export-first reminder.</td></tr>
+            <tr><td class="p2">P2</td><td><code>support</code></td><td>hard clearance</td><td>Public access, concise support paths, shared spacing.</td></tr>
+            <tr><td class="p2">P2</td><td><code>theme</code></td><td>hard clearance</td><td>Utility-screen treatment; preview controls should not feel like a product pillar.</td></tr>
+            <tr><td class="p1">P1</td><td><code>trinity</code></td><td>1 alert, 2 journal targets, hard clearance</td><td>CTAs to capture; inline load failure; clarify relationship to Persona/Core Brain.</td></tr>
+            <tr><td class="p0">P0</td><td><code>wiki</code></td><td>8 alerts, 2 journal targets, hard clearance</td><td>Inline delete/phase/export/copy statuses; retired journal CTA sweep; shared bottom clearance.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Batch Order</h2>
+      <ol>
+        <li>Shared route metadata.</li>
+        <li>Shared shell spacing contract.</li>
+        <li>Shared inline notice/toast pattern.</li>
+        <li>Shared danger confirmation flow.</li>
+        <li>Shared evidence meta component.</li>
+        <li>Per-screen pass using the matrix.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Links</h2>
+      <p><a href="../../../20260605-211135-to-claude-screen-by-screen-ui-defect-matrix.md">Markdown report</a></p>
+    </section>
+  </main>
+</body>
+</html>

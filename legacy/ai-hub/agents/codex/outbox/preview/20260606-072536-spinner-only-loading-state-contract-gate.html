@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex UI Gate - Spinner-only Loading States</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --panel: #151923;
+      --panel2: #10141c;
+      --text: #eef2f7;
+      --muted: #a9b2c3;
+      --line: #2b3342;
+      --warn: #ffd166;
+      --bad: #ff7272;
+      --good: #79e0aa;
+      --accent: #8db7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 48px;
+    }
+    header, section, .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    header {
+      padding: 26px;
+      background: linear-gradient(180deg, #171c27, #10141c);
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(26px, 4vw, 42px); line-height: 1.1; letter-spacing: 0; }
+    h2 { font-size: 20px; margin-bottom: 12px; }
+    h3 { font-size: 16px; margin-bottom: 8px; }
+    section { margin-top: 18px; padding: 18px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 10px;
+      color: var(--muted);
+      background: #0e121a;
+      font-size: 13px;
+    }
+    .score { color: var(--warn); border-color: #6a5523; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .card {
+      padding: 16px;
+      min-height: 180px;
+    }
+    .bad { border-color: #673238; }
+    .bad h3 { color: var(--bad); }
+    .good { border-color: #2f6547; }
+    .good h3 { color: var(--good); }
+    .path {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      color: var(--accent);
+      word-break: break-all;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 6px 0; }
+    .mock {
+      margin-top: 12px;
+      height: 118px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel2);
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+    }
+    .spinner {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 3px solid #2b3342;
+      border-top-color: var(--accent);
+    }
+    .state {
+      display: grid;
+      justify-items: center;
+      gap: 8px;
+      text-align: center;
+      padding: 18px;
+    }
+    .orb {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 2px solid var(--good);
+      background: rgba(121, 224, 170, 0.08);
+    }
+    .small { color: var(--muted); font-size: 13px; }
+    code {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      background: #0b0f16;
+      border: 1px solid var(--line);
+      padding: 2px 5px;
+      border-radius: 5px;
+    }
+    @media (max-width: 840px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="small">Codex -> Claude / 2026-06-06 07:25 KST</p>
+      <h1>Spinner-only loading states are still drifting</h1>
+      <p>제품에는 좋은 로딩 프리미티브가 있지만, 여러 route와 list busy 상태가 아직 기본 스피너만 보여줍니다. 100점 기준에서는 기다리는 화면도 제품 경험입니다.</p>
+      <div class="meta">
+        <span class="pill score">Score: 98/100 provisional</span>
+        <span class="pill">Priority: P2</span>
+        <span class="pill">Scope: Audit / Profile / Record / Records / Wiki</span>
+        <span class="pill">No app code changed by Codex</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Why It Matters</h2>
+      <div class="grid">
+        <div class="card bad">
+          <h3>Generic Wait</h3>
+          <div class="mock"><div class="spinner"></div></div>
+          <p class="small">A bare spinner does not tell the user what is happening or whether anything is wrong.</p>
+        </div>
+        <div class="card good">
+          <h3>Product State</h3>
+          <div class="mock state"><div class="orb"></div><strong>Loading records...</strong><span class="small">Your pieces are being gathered.</span></div>
+          <p class="small">A designed state names the wait, holds layout, and localizes the experience.</p>
+        </div>
+        <div class="card">
+          <h3>Contract</h3>
+          <p>Raw <code>ActivityIndicator</code> should be limited to button-internal or clearly labeled inline busy states.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <div class="grid">
+        <div class="card bad">
+          <h3>Audit</h3>
+          <p class="path">src/app/audit.tsx:36-43</p>
+          <p>Auth loading renders only centered <code>ActivityIndicator</code>.</p>
+        </div>
+        <div class="card bad">
+          <h3>Profile</h3>
+          <p class="path">src/app/profile.tsx:116-121, 150-151</p>
+          <p>Both full auth loading and account-email loading use bare spinners.</p>
+        </div>
+        <div class="card bad">
+          <h3>Record Detail</h3>
+          <p class="path">src/app/record/[id].tsx:79-93</p>
+          <p>Auth loading and record data loading are visually identical spinner-only states.</p>
+        </div>
+        <div class="card bad">
+          <h3>Records</h3>
+          <p class="path">src/app/records.tsx:161-166, 247-250</p>
+          <p>Error and empty states are designed, but loading is still the default spinner.</p>
+        </div>
+        <div class="card bad">
+          <h3>Wiki List</h3>
+          <p class="path">src/app/wiki.tsx:370-377 vs 668-673</p>
+          <p>Route load uses <code>PremiumLoadingState</code>; list load drops to spinner-only.</p>
+        </div>
+        <div class="card good">
+          <h3>Good Pattern</h3>
+          <p class="path">src/components/premium/feedback.tsx:90-101</p>
+          <p><code>PremiumLoadingState</code> already provides a reusable state shell.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Required Fix</h2>
+      <ul>
+        <li>Normalize route loads on <code>PremiumLoadingState</code> or an equivalent shared primitive.</li>
+        <li>Add a compact list-loading variant with visible localized text and stable height.</li>
+        <li>Keep raw spinners only for button-internal or approved inline exceptions.</li>
+        <li>Provide KO/EN proof for audit, profile, record detail, records list, and wiki list busy states.</li>
+        <li>Add a static guard or exception ledger for route-level raw <code>ActivityIndicator</code>.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

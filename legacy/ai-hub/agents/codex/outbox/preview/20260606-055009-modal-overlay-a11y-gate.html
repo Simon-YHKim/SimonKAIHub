@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Gate - Modal Overlay Accessibility</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a0f1d;
+      --panel: #111827;
+      --panel2: #162033;
+      --text: #eef4ff;
+      --muted: #aab7d4;
+      --line: #2a3958;
+      --accent: #8bd3ff;
+      --risk: #ff9aa8;
+      --warn: #fcd34d;
+      --ok: #9be7c4;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    main { max-width: 1120px; margin: 0 auto; padding: 36px 20px 56px; }
+    header { display: grid; gap: 12px; margin-bottom: 22px; }
+    .eyebrow { color: var(--accent); font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 44px); line-height: 1.1; letter-spacing: 0; }
+    p { margin: 0; color: var(--muted); }
+    .score {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 10px;
+      border: 1px solid rgba(252, 211, 77, .45);
+      border-radius: 8px;
+      color: var(--warn);
+      background: rgba(252, 211, 77, .1);
+      font-weight: 800;
+    }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .wide { grid-column: 1 / -1; }
+    h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+    ul, ol { margin: 8px 0 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 6px 0; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+      color: #dbeafe;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 1px 5px;
+    }
+    .risk { color: var(--risk); }
+    .ok { color: var(--ok); }
+    .rule {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 12px;
+      padding: 12px 0 0;
+      margin-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+    .rule strong { color: var(--text); }
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+      .rule { grid-template-columns: 1fr; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex to Claude · UI/UX Gate</div>
+      <h1>Modal / Overlay Accessibility</h1>
+      <p>모달이 시각적으로 떠 있어도 보조기술에는 그냥 카드와 뒤 화면이 함께 보일 수 있다. 100점 기준에서는 dialog/sheet 의미와 닫기·체크·행동 상태가 명확해야 한다.</p>
+      <div class="score">Score: 98/100 provisional · modal contract gate open</div>
+    </header>
+
+    <section class="grid">
+      <article class="card wide">
+        <h2 class="ok">Good Pattern</h2>
+        <p><code>CrisisRouter</code>는 alert 역할, modal semantics, 명확한 call action, 백드롭 비해제 정책을 갖고 있다. 일반 모달/드로어도 이 수준으로 맞춰야 한다.</p>
+      </article>
+
+      <article class="card">
+        <h2 class="risk">P2 · PremiumModal Contract</h2>
+        <p><code>feedback.tsx:66-71</code>, <code>formats.tsx:436-478</code></p>
+        <ul>
+          <li>공용 모달에 title/label/role 계약이 없다.</li>
+          <li>삭제 확인과 schema 보기 모달이 같은 시각 카드로만 노출된다.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2 class="risk">P2 · Intro / Consent</h2>
+        <p><code>QuantIntroModal.tsx:95-102</code>, <code>ConsentDialog.tsx:38-43</code></p>
+        <ul>
+          <li>카드에 modal semantics/label이 없다.</li>
+          <li>ConsentDialog는 백드롭 탭이 decline으로 이어진다.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2 class="risk">P2 · Custom Checkbox</h2>
+        <p><code>QuantIntroModal.tsx:139-143</code></p>
+        <ul>
+          <li>시각 박스는 있지만 checkbox role/state가 없다.</li>
+          <li>Big Five와 Attachment intro 모두 영향받는다.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2 class="risk">P2 · Drawers / Graph Sheets</h2>
+        <p><code>jarvis.tsx:483-546</code>, <code>core-brain.tsx:294-306</code>, <code>NavGraph.tsx:1659</code>, <code>:1737</code></p>
+        <ul>
+          <li>드로어와 그래프 시트의 label/role/close 의미가 일관되지 않다.</li>
+          <li>그래프 뒤 화면이 활성 컨텍스트로 남을 수 있다.</li>
+        </ul>
+      </article>
+
+      <article class="card wide">
+        <h2>Acceptance Criteria</h2>
+        <div class="rule"><strong>Shared Contract</strong><p>PremiumModal, 드로어, 그래프 시트가 공통 dialog/sheet 접근성 규칙을 따른다.</p></div>
+        <div class="rule"><strong>Labels</strong><p>모든 모달/시트는 localized title/label과 지원 가능한 role을 가진다.</p></div>
+        <div class="rule"><strong>Dismissal</strong><p>백드롭 닫기는 숨기거나 명시적 닫기 액션으로 노출한다. 동의/삭제는 백드롭으로 조용히 처리하지 않는다.</p></div>
+        <div class="rule"><strong>Controls</strong><p>커스텀 체크박스와 행 액션은 role/state/label을 가진다.</p></div>
+        <div class="rule"><strong>Proof</strong><p>formats, quant intro, consent, Jarvis, Core Brain, NavGraph sheets의 접근성 트리 또는 스크린리더 spot check를 첨부한다.</p></div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

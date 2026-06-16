@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Re-Gate: 74dc39f</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0c1118;
+      --panel: #141b25;
+      --panel2: #101722;
+      --text: #e7edf6;
+      --muted: #9fb0c4;
+      --line: #263344;
+      --ok: #7bd88f;
+      --warn: #f4c76f;
+      --danger: #ff6b7a;
+      --info: #7bb7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.55 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main { max-width: 1120px; margin: 0 auto; padding: 32px 18px 56px; }
+    header, .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    header { padding: 24px; background: linear-gradient(180deg, #17202c, #101722); }
+    h1 { margin: 0; font-size: clamp(24px, 4vw, 40px); line-height: 1.1; letter-spacing: 0; }
+    h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+    p { margin: 0; color: var(--muted); }
+    ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
+    li + li { margin-top: 6px; }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: #0a111b;
+      color: #d7e7ff;
+      font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+    }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 9px;
+      min-height: 26px;
+      color: var(--muted);
+      background: #1b2532;
+      font-size: 12px;
+    }
+    .chip.ok { color: var(--ok); border-color: rgba(123,216,143,.35); background: rgba(123,216,143,.1); }
+    .chip.score { color: var(--warn); border-color: rgba(244,199,111,.35); background: rgba(244,199,111,.1); }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; margin-top: 16px; }
+    .card { grid-column: span 12; padding: 18px; }
+    @media (min-width: 820px) {
+      .half { grid-column: span 6; }
+      .third { grid-column: span 4; }
+    }
+    .accepted { border-left: 4px solid var(--ok); }
+    .blocker { border-left: 4px solid var(--danger); }
+    .warn { border-left: 4px solid var(--warn); }
+    .info { border-left: 4px solid var(--info); }
+    .evidence {
+      margin-top: 10px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      background: var(--panel2);
+      border-radius: 8px;
+    }
+    .footer { margin-top: 18px; font-size: 12px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Re-Gate: <code>74dc39f</code></h1>
+      <p>Retired-route cleanup is accepted. The overall 100/100 anti-slop gate remains open.</p>
+      <div class="meta">
+        <span class="chip ok">Retired route gate: PASS</span>
+        <span class="chip ok">npm run verify: PASS</span>
+        <span class="chip ok">Jest: 91 / 826</span>
+        <span class="chip score">Overall: 97/100 provisional</span>
+      </div>
+    </header>
+
+    <section class="grid">
+      <article class="card accepted half">
+        <h2>Accepted</h2>
+        <ul>
+          <li><code>village-ui</code> primary CTAs now emit <code>/capture</code>.</li>
+          <li><code>evidenceRoute</code> maps journal/imagine to current destinations.</li>
+          <li><code>self-portrait</code> routes use <code>/capture</code> and <code>/jarvis?mode=divergent</code>.</li>
+          <li><code>BackArrow</code> no longer labels retired <code>/mbti</code>.</li>
+          <li>Regression tests now prevent retired routes from active metadata.</li>
+        </ul>
+      </article>
+
+      <article class="card blocker half">
+        <h2>P1 Still Open: Privacy Opt-Out</h2>
+        <p><code>privacy.tsx:100</code> still applies analytics consent from a queued payload after async save completion.</p>
+        <div class="evidence">
+          <p>Opt-out must disable immediately and older completions must not re-enable analytics.</p>
+        </div>
+      </article>
+
+      <article class="card warn half">
+        <h2>P2: Keyboard + Destructive Settings</h2>
+        <ul>
+          <li><code>account.tsx:228</code>, <code>audit.tsx:211</code>, <code>settings.tsx:517</code> need keyboard-safe shells.</li>
+          <li>Broad partial deletes in <code>settings.tsx:391-500</code> still use generic Alert friction.</li>
+        </ul>
+      </article>
+
+      <article class="card warn half">
+        <h2>P2/P3: Pressable Accessibility Debt</h2>
+        <ul>
+          <li><code>inbox.tsx</code>: row/action pressables need roles, labels, and busy/disabled states.</li>
+          <li><code>research.tsx</code>: filter chips and DOI/URL links need role/selected/link semantics.</li>
+          <li><code>interview.tsx</code>: life-period cards need button semantics.</li>
+          <li><code>wiki.tsx</code>: export, tag filters, row expand, nested actions need labels/states.</li>
+          <li><code>trinity.tsx</code>: capture link pressable needs explicit role/label.</li>
+        </ul>
+      </article>
+
+      <article class="card info">
+        <h2>Runtime Proof Required</h2>
+        <p>Static checks are green, but 100/100 requires runtime screenshots for auth, graph, capture, Jarvis, persona/core-brain, records/wiki, settings/account/privacy/data/support/permissions, and loading/error/empty states on mobile plus web if claimed.</p>
+      </article>
+    </section>
+
+    <p class="footer">Generated 2026-06-06 04:16:51 KST. Hub artifact only; app code was not modified by Codex.</p>
+  </main>
+</body>
+</html>

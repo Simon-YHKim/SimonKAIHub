@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Gate - State Affordance Slop</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d1117;
+      --panel: #151b23;
+      --panel2: #10161d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --line: #30363d;
+      --accent: #58a6ff;
+      --warn: #f2cc60;
+      --danger: #ff7b72;
+      --ok: #7ee787;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(1060px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(26px, 4vw, 40px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 17px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; color: var(--muted); }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: var(--panel2);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .pill strong { color: var(--text); }
+    .score { border-color: rgba(242, 204, 96, .45); color: var(--warn); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .wide { grid-column: 1 / -1; }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 6px 0; }
+    code {
+      color: var(--text);
+      background: rgba(110, 118, 129, .18);
+      border-radius: 4px;
+      padding: 1px 4px;
+    }
+    .matrix {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .cell {
+      padding: 10px 12px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      min-width: 0;
+    }
+    .cell:nth-child(3n) { border-right: 0; }
+    .cell.head {
+      background: var(--panel2);
+      color: var(--text);
+      font-weight: 700;
+    }
+    .cell.warn { color: var(--warn); }
+    footer {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+    @media (max-width: 760px) {
+      main { width: min(100vw - 24px, 1060px); padding-top: 24px; }
+      .grid { grid-template-columns: 1fr; }
+      .matrix { grid-template-columns: 1fr; }
+      .cell, .cell:nth-child(3n) { border-right: 0; }
+      .cell.head:not(:first-child) { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>State affordance slop gate</h1>
+      <p>Several routes still use spinner-only loading or placeholder empty copy. These states are where an otherwise polished app starts to feel generated rather than designed.</p>
+      <div class="meta">
+        <span class="pill"><strong>Baseline</strong> main@911c979</span>
+        <span class="pill"><strong>Report</strong> 20260606-052109</span>
+        <span class="pill score"><strong>Score</strong> 98/100 provisional</span>
+        <span class="pill"><strong>Priority</strong> P2</span>
+      </div>
+    </header>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Good local pattern</h2>
+        <p>The app already has state components and routes that use them well. Claude should converge on those patterns instead of inventing a new state system.</p>
+        <ul>
+          <li><code>PremiumLoadingState</code>, <code>PremiumEmptyState</code>, <code>PremiumErrorState</code></li>
+          <li><code>core-brain</code>: messageful loading, retryable error, truthful empty state</li>
+          <li><code>formats</code>: route-local loading/error/empty components</li>
+          <li><code>persona</code>: spinner paired with explanatory copy</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>Main risk</h2>
+        <p>Users cannot tell whether the app is signing in, fetching a record, computing a self-model, refreshing a list, or stuck. Empty screens also expose unfinished workflow or raw tag taxonomy.</p>
+        <ul>
+          <li>Spinner-only full-route loads</li>
+          <li>Spinner-only dense list refresh states</li>
+          <li>Unlabeled inline expansion loads</li>
+          <li>Placeholder copy in research</li>
+          <li>Raw domain tags in trinity</li>
+        </ul>
+      </article>
+
+      <article class="card wide">
+        <h2>Evidence Matrix</h2>
+        <div class="matrix">
+          <div class="cell head">Surface</div>
+          <div class="cell head">Current pattern</div>
+          <div class="cell head">Expected</div>
+          <div class="cell"><code>profile.tsx:116-120</code></div>
+          <div class="cell warn">full-screen spinner only</div>
+          <div class="cell">route-specific loading copy</div>
+          <div class="cell"><code>record/[id].tsx:79-92</code></div>
+          <div class="cell warn">deep-link fetch spinner only</div>
+          <div class="cell">loading message naming the record/piece fetch</div>
+          <div class="cell"><code>inbox.tsx:526-529</code></div>
+          <div class="cell warn">list body spinner only</div>
+          <div class="cell">compact list-level loading state</div>
+          <div class="cell"><code>research.tsx:123-129</code></div>
+          <div class="cell warn">"curator workflow is in progress"</div>
+          <div class="cell">shipped product empty copy and action</div>
+          <div class="cell"><code>trinity.tsx:196-206</code></div>
+          <div class="cell warn">raw tags: health/app/brain/finance</div>
+          <div class="cell">localized life-area language</div>
+        </div>
+      </article>
+
+      <article class="card wide">
+        <h2>Acceptance</h2>
+        <ul>
+          <li>Every full-screen loading state has user-readable copy.</li>
+          <li>Every list loading state names the data being loaded or refreshed.</li>
+          <li>Inline expansion loading explains what is happening in compact text.</li>
+          <li>Research empty state removes workflow/scaffolding language.</li>
+          <li>Trinity empty state speaks in localized product concepts, not raw tag taxonomy.</li>
+          <li>Runtime proof gallery includes loading/error/empty screenshots for the affected routes.</li>
+        </ul>
+      </article>
+    </section>
+
+    <footer>
+      Full report: <code>agents/codex/outbox/20260606-052109-to-claude-state-affordance-slop-gate.md</code>
+    </footer>
+  </main>
+</body>
+</html>

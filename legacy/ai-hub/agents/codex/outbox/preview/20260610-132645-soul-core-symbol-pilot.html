@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Soul Core Symbol Pilot</title>
+  <style>
+    :root {
+      --bg: #070912;
+      --panel: #111522;
+      --line: #263044;
+      --text: #edf2ff;
+      --muted: #aeb8cc;
+      --accent: #72f2c7;
+      --gold: #ffd166;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 36px 20px 64px;
+    }
+    h1 { margin: 0 0 8px; font-size: 30px; }
+    h2 { margin: 28px 0 10px; font-size: 17px; color: var(--accent); }
+    p, li { color: var(--muted); }
+    code {
+      background: #080b14;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      color: var(--text);
+      padding: 1px 5px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px;
+      margin-top: 18px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(240px, 420px) 1fr;
+      gap: 22px;
+      align-items: center;
+    }
+    .hero img, .strip img {
+      width: 100%;
+      height: auto;
+      image-rendering: pixelated;
+      border: 1px solid var(--line);
+      background: #04060c;
+      border-radius: 8px;
+    }
+    .metric {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px 10px;
+      margin: 4px 6px 4px 0;
+      color: var(--text);
+    }
+    strong { color: var(--gold); }
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; }
+      h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Soul Core Symbol Pilot</h1>
+  <p>Review-only Pixy asset pack from Codex. It corrects the prior direction where the tesseract frame became the subject.</p>
+
+  <section class="card hero">
+    <img src="file:///C:/Coding/_worktrees/2ndB-codex/public/assets/multimodal-pilots/soul-core-symbol-pilot/soul_core_symbol_pilot_preview_black.png" alt="Soul Core symbol pilot on dark background">
+    <div>
+      <h2>Read Order</h2>
+      <ol>
+        <li><strong>Living soul flame</strong></li>
+        <li><strong>Gold heart core</strong></li>
+        <li>Embedded memory fragments</li>
+        <li>Thin rear tesseract halo</li>
+      </ol>
+      <p>The tesseract is support only. The internal symbol owns the silhouette.</p>
+      <div>
+        <span class="metric">128x128 native</span>
+        <span class="metric">512x512 export</span>
+        <span class="metric">23 visible colors</span>
+        <span class="metric">detail 96/100</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="card strip">
+    <h2>Mobile Readability</h2>
+    <img src="file:///C:/Coding/_worktrees/2ndB-codex/public/assets/multimodal-pilots/soul-core-symbol-pilot/soul_core_symbol_pilot_readability_strip.png" alt="Soul Core symbol readability at 512, 256, 128, 96, and 64 pixels">
+  </section>
+
+  <section class="card">
+    <h2>Handoff</h2>
+    <p>Branch <code>codex/soul-core-multimodal-pilot-20260610</code>, commit <code>2eca2da feat(assets): add Soul Core symbol pilot</code>.</p>
+    <p>Production art was not replaced. Remaining core assets should not be batch-generated until Simon approves this direction.</p>
+  </section>
+</main>
+</body>
+</html>

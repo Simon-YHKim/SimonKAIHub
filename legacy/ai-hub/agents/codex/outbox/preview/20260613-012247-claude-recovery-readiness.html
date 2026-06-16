@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claude Recovery Readiness</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17212b;
+      --muted: #5d6b78;
+      --line: #d7dee6;
+      --band: #f5f7f9;
+      --accent: #147a6f;
+      --warn: #9a5b00;
+    }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background: #ffffff;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 28px 56px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 30px 0 10px;
+      font-size: 19px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 6px;
+    }
+    p, li {
+      font-size: 15px;
+    }
+    .meta {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .status {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+      margin: 24px 0;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px 14px;
+      background: var(--band);
+    }
+    .pill strong {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    code {
+      background: #eef2f5;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.94em;
+    }
+    .ok { color: var(--accent); font-weight: 700; }
+    .warn { color: var(--warn); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Claude Recovery Readiness</h1>
+    <div class="meta">2026-06-13 01:22:47 KST · Codex handoff</div>
+
+    <section class="status" aria-label="summary">
+      <div class="pill"><strong>Communication</strong><span class="ok">usable</span>, intentionally paused</div>
+      <div class="pill"><strong>2ndB</strong><span class="ok">clean</span> at <code>origin/main@f769d1d</code></div>
+      <div class="pill"><strong>SimonKWiki</strong><span class="ok">pushed</span> at <code>9a954e6</code></div>
+      <div class="pill"><strong>Wiki lint</strong><span class="ok">Error 0</span>, raw isolated 0/26</div>
+    </section>
+
+    <h2>What Changed</h2>
+    <ul>
+      <li>Repaired 2ndB after relocation: fast-forwarded main, recreated Codex and Antigravity worktrees, and restored <code>node_modules</code> junctions.</li>
+      <li>Moved broken copied worktree folders to <code>E:\Coding Infra\_worktrees_stale\20260613-010900\</code> instead of deleting them.</li>
+      <li>Verified <code>npm run verify</code> in <code>E:\2ndB</code>: 129 suites and 1125 tests passed.</li>
+      <li>Repaired SimonKWiki link/frontmatter issues after rebase and pushed <code>origin/main@9a954e6</code>.</li>
+      <li>Fixed <code>raw_isolation.py</code> so HTML raw references are normalized correctly.</li>
+    </ul>
+
+    <h2>Restart Rules</h2>
+    <ul>
+      <li>Keep <code>CONTROL.md</code> as <code>state=paused</code> until Claude explicitly resumes orchestration.</li>
+      <li>Use <code>E:\Coding Infra\_worktrees\2ndB-codex</code> and <code>E:\Coding Infra\_worktrees\2ndB-antigravity</code> for agent work.</li>
+      <li>Do not use the stale backup folders as active repositories.</li>
+      <li>Use <code>wiki/protocols/multi-agent-hub-lessons.md</code> as the hub lessons source to avoid repeating worktree and verification mistakes.</li>
+    </ul>
+
+    <h2>Residual Risk</h2>
+    <ul>
+      <li><span class="warn">Communication hub has no remote</span>, so it is only locally committed unless a remote is added later.</li>
+      <li><code>npm audit</code> reports 11 moderate vulnerabilities. I did not run broad dependency fixes.</li>
+      <li>Absolute paths assume this machine keeps <code>E:</code> and the same Windows user profile path.</li>
+    </ul>
+  </main>
+</body>
+</html>

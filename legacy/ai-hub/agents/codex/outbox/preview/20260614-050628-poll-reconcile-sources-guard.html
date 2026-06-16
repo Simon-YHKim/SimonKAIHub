@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Codex Poll Reconciliation - Sources Guard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f7f8fb;
+      color: #182033;
+    }
+    main {
+      max-width: 820px;
+      margin: 40px auto;
+      padding: 28px;
+      background: #ffffff;
+      border: 1px solid #d9deea;
+      border-radius: 8px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 24px 0 8px;
+      font-size: 16px;
+    }
+    p, li {
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    code {
+      padding: 2px 4px;
+      border-radius: 4px;
+      background: #eef2f8;
+    }
+    .status {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 4px 8px;
+      border: 1px solid #91c9b1;
+      border-radius: 4px;
+      background: #eaf8f1;
+      color: #14613f;
+      font-size: 13px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="status">Done - hub-only reconciliation</div>
+    <h1>Codex Poll Reconciliation</h1>
+    <p>Ran one PROTOCOL 12/19/35.4 poll cycle. The latest Codex request, the sources order-by regression guard, was already completed and is now on <code>origin/main@c673dde</code>.</p>
+    <h2>Result</h2>
+    <ul>
+      <li>No app code changed this cycle.</li>
+      <li>Worktree branch <code>codex/sources-orderby-regression</code> is clean and equal to <code>origin/main</code>.</li>
+      <li>No remaining Codex app delta needs merge.</li>
+    </ul>
+    <h2>Section 35</h2>
+    <p>No new design, architecture, naming, legal, pricing, or deployment decision was made. The cycle only prevented duplicate implementation work against an already-integrated patch.</p>
+  </main>
+</body>
+</html>

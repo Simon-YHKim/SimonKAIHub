@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2nd-B 수익화 권고안 v2 — 시장 검증 반영</title>
+<style>
+  :root{--bg:#14131a;--surface:#1c1b24;--surface2:#232230;--text:#e9e7f2;--muted:#a09cb4;--line:#302e3e;--accent:#8b7cf6;--warn:#e0a96d;--ok:#7fb98a}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:Pretendard,-apple-system,"Segoe UI",sans-serif;line-height:1.62;font-size:15px}
+  .wrap{max-width:1080px;margin:0 auto;padding:44px 26px 90px}
+  h1{font-size:25px;font-weight:700;letter-spacing:-.01em;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:14px}
+  .banner{background:linear-gradient(180deg,#211c14,#1c1b24);border:1px solid #5a4a2e;border-radius:12px;padding:14px 16px;margin:18px 0 28px;font-size:14px}
+  .banner b{color:var(--warn)}
+  h2{font-size:18px;font-weight:700;margin:38px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  p{margin:8px 0}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+  td.tier{font-weight:700;color:var(--accent);white-space:nowrap}
+  .price{font-weight:700;white-space:nowrap}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:10px 0}
+  .decide{border-color:#5a4a2e}.decide .k{color:var(--warn);font-weight:700}
+  .ev{border-left:3px solid var(--ok);background:var(--surface)}
+  .ev .src{color:var(--muted);font-size:11.5px;margin-top:4px}
+  .muted{color:var(--muted)} ul{margin:8px 0;padding-left:20px} li{margin:5px 0}
+  code{background:var(--surface2);padding:1px 6px;border-radius:5px;font-size:12.5px}
+  .tag{display:inline-block;font-size:11px;font-weight:700;color:var(--ok);border:1px solid var(--ok);border-radius:999px;padding:1px 8px;margin-right:6px}
+  .new{color:var(--warn);font-weight:700}
+  footer{margin-top:46px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>2nd-B 수익화 권고안 v2 <span class="muted" style="font-size:15px">— 시장 검증 반영</span></h1>
+  <div class="sub">v1(3-프레임 종합) + deep-research(114 에이전트·31출처·25주장 적대검증) · 2026-06-07 04:06 KST</div>
+  <div class="banner"><b>권고안 — Simon 결정 대기.</b> 코드·과금 변경 없음. v1 대비 <b>검증된 시장 데이터로 보강</b>했고, 새로 발견된 <b class="new">2개 치명 사실(Apple 수수료·App Store AI 동의)</b>을 추가했습니다.</div>
+
+  <h2>검증이 v1을 뒷받침함 (high-confidence, 출처有)</h2>
+  <div class="card ev"><b>① 저널링 무료 + AI를 최상위 유료 티어로</b> = 업계 표준. 전환 게이트는 <b>저널링 볼륨이 아니라 'AI 사용 한도'</b>에 둔다.
+    <div class="src">Day One: Basic 무료(무제한 텍스트 저널) / Silver $49.99/yr / <b>Gold $74.99/yr = AI 전용</b>. Rosebud: 저널링 무료, <b>무료 AI 프롬프트 2회/일 → Bloom 무제한</b>. 출처: dayoneapp.com/plans, help.rosebud.app/pricing</div>
+  </div>
+  <div class="card ev"><b>② 무료티어는 저널링에 관대하게, AI에만 게이트</b> — 저널링은 aha-moment 도달에 무료 사용이 필요. (하드페이월이 전환율은 5배지만 율≠총수익이고 저널링엔 부적합.)
+    <div class="src">RevenueCat 2026: 하드페이월 D35 10.7% vs freemium 2.1%(선별편향 주의). H&F 다운로드→유료 2.9%. → v1의 'journal 2→5 + AI 샘플' 방향 정합.</div>
+  </div>
+  <div class="card ev"><b>③ AI 앱 트랩</b>: 결제자당 매출 +41%지만 이탈 30% 빠름 → <b>리텐션 루프가 결정적 제약</b>(주간 리포트·장기 메모리·습관화). AI는 상위 티어 업셀로.
+    <div class="src">RevenueCat 2026: AI앱 Y1 LTV $30.16 vs 비AI $21.37, AI 월구독 12개월 리텐션 36% 악화. → M4(구독피로/리텐션) 최우선.</div>
+  </div>
+  <div class="card ev"><b>④ 원타임/평생 결제 viable</b> — 라이프스타일 매출의 26%(상승), 월구독 36%→29%(하락). → <b>Brain 평생(₩299,000) 옵션 유효</b>.
+    <div class="src">Adapty 2026(라이프스타일). 단 'one-time'은 소모성+평생 포함 — 평생이 구독을 대체하는 건 아님(병행).</div>
+  </div>
+  <div class="card ev"><b>⑤ 가격 현지화 = 최고 ROI 레버</b>(LTV 개선 승률 62.3%, 전 실험 유형 1위). 지역 가격 격차 큼(EU가 NA보다 +29~39%). → <b>PPP/국가별 가격을 초기부터</b>.
+    <div class="src">Adapty 2026 + RevenueCat(월 NA $9.99 vs 인도/SEA $3.75). → M3 PPP 확정.</div>
+  </div>
+
+  <h2 class="new">🔴 새로 발견된 치명 사실 (v1에 없던 것)</h2>
+  <div class="card decide"><span class="k new">N1 — Apple Small Business Program(15%)이 한국 외부결제보다 유리</span><br>
+    한국에서 Apple 승인 서드파티 PSP를 써도 <b>Apple이 26% + PSP 수수료 ≈ 사실상 30%</b>. 외부결제 우회 실익 거의 없음. 대신 <b>연매출 $1M 미만이면 SBP 등록으로 IAP 15%</b>(절반). → <b>M3 권고 변경: 초기엔 토스/외부PG 우회보다 Apple/Google IAP + SBP(15%)가 단순·저비용.</b> (구독은 1년차 후 자동 15%.)
+    <div class="src">출처: developer.apple.com/support/storekit-external-entitlement-kr (26% 명시), developer.apple.com/app-store/small-business-program. 단 KR 토스/카카오/휴대폰결제 자체 수수료는 본 조사에서 직접수치 미확인 → open question.</div>
+  </div>
+  <div class="card decide"><span class="k new">N2 — App Store 5.1.2(i): 외부 AI에 데이터 보내려면 'AI 제공자 명시 + 사전 명시동의' 필수</span><br>
+    2025-11-13 발효. 저널 내용을 외부 LLM(예: Google Gemini/Anthropic)으로 보내는 2nd-B는 <b>일반 '서비스 제공자' 문구로 불충분 — 제공자를 이름으로 적고, 최초 전송 전에 동의</b>를 받아야 함(소급 동의 불가). 위반 시 앱 제거. → <b>M5/consent 하드 요구사항</b>(Codex E18 consent 카피와 직결). 온디바이스 처리는 예외이나 Expo RN에선 비현실적.
+    <div class="src">출처: Apple App Review Guidelines 5.1.2(i). + APA: 'therapy'·면허·전문가대체 주장 금지(우리 forbidden lexicon과 정합).</div>
+  </div>
+
+  <h2>권고 티어 (검증 반영)</h2>
+  <table>
+    <tr><th>티어</th><th>KRW</th><th>USD</th><th>포함 — AI 게이트 중심</th></tr>
+    <tr><td class="tier">Free</td><td class="price">₩0</td><td class="price">$0</td><td><b>저널링 풀 액세스</b>(메모 무제한·일기 관대) + <b>AI 인사이트 맛보기 한도</b>(예: 주 1~일 2회, Rosebud식) + 그래프·위키 열람</td></tr>
+    <tr><td class="tier">Soma</td><td class="price">₩4,900/월·₩49,000/년</td><td class="price">$4.99</td><td>일기·메모 무제한 + AI 인사이트 일상 한도 + export + 동기화</td></tr>
+    <tr><td class="tier">Cortex</td><td class="price">₩9,900/월·₩99,000/년</td><td class="price">$9.99</td><td>+ AI 인사이트 일간·패턴/추세 + 평가 무제한</td></tr>
+    <tr><td class="tier">Brain</td><td class="price">₩19,900/월·₩199,000/년</td><td class="price">$19.99</td><td>+ <b>advisor·planner(AI 코어)</b> + 장기 메모리·주간 리포트(<b>리텐션 루프</b>) + 평생 보관</td></tr>
+    <tr><td class="tier">Brain 평생</td><td class="price">₩299,000</td><td class="price">$299</td><td>Brain 영구(원타임). 검증: 라이프스타일 원타임 26% — 구독피로 회피층</td></tr>
+  </table>
+  <p class="muted">v1 가격은 유지(경쟁 Day One Silver $49.99/Gold $74.99/yr 대비 우리 Soma $59.88/yr·Brain $239/yr은 합리적 범위). 핵심 변경: <b>전환 게이트를 일기 개수가 아니라 AI 사용 한도로</b>(검증①②), <b>Brain에 리텐션 루프 필수</b>(검증③), <b>PPP 초기 적용</b>(검증⑤), <b>IAP+SBP 15%</b>(N1).</p>
+
+  <h2>🔴 Simon 결정 포인트 (갱신)</h2>
+  <div class="card decide"><span class="k">M0 결제(P0):</span> 여전히 미구현. <b>권고: Apple/Google IAP + Small Business Program(15%) 먼저</b>(N1), KR 외부PG는 후순위. RevenueCat 같은 IAP 래퍼로 월/연/원타임 통합.</div>
+  <div class="card decide"><span class="k">M1 가격:</span> Soma/Cortex/Brain ₩4,900/9,900/19,900 + 연 20% + Brain 평생 ₩299,000. (경쟁 벤치마크 부합.)</div>
+  <div class="card decide"><span class="k">M2 무료티어:</span> 저널링 관대 + <b>AI 사용 한도로 게이트</b>(일기 개수 아님). 검증②.</div>
+  <div class="card decide"><span class="k">M3 결제/현지화:</span> IAP+SBP 우선(N1) + <b>PPP 국가별 가격 초기 적용</b>(검증⑤, 인도/브라질/SEA 인하).</div>
+  <div class="card decide"><span class="k">M4 구독피로/리텐션:</span> <b>Brain 리텐션 루프 필수</b>(AI앱 트랩, 검증③) + 단일구독·연간·평생·일시정지.</div>
+  <div class="card decide"><span class="k">M5 신뢰/컴플라이언스:</span> <b class="new">App Store 5.1.2(i) — 외부 AI 제공자 명시 + 사전 동의 필수</b>(N2). consent 화면에 'AI 제공자(예: Google/Anthropic)에게 전송' 명시 + 최초 전송 전 동의. APA: 임상/치료 주장 금지.</div>
+
+  <h2>남은 미확인 (open questions)</h2>
+  <ul class="muted">
+    <li>한국 토스페이먼츠·카카오페이·휴대폰결제 <b>자체 수수료 정확치</b> 미확인(IAP 외 웹결제 경로 쓸 경우). KR 특화 전환율 데이터도 부재.</li>
+    <li>KRW PPP 정확 배수(인용 출처는 NA/EU/인도/SEA 위주, 한국 직접수치 없음).</li>
+    <li>광고지원 모델의 저널링 카테고리 실효는 본 조사 범위 밖 — 별도 검토.</li>
+  </ul>
+
+  <footer>
+    근거: deep-research <code>wtvyc07m3</code>(114 agents·31 sources, raw: <code>agents/claude/deep-research-monetization-20260607.json</code>) · v1: <code>20260607-0149-monetization-recommendation.html</code> ·
+    페르소나 M1~M5: <code>persona-ux-findings-expand-20260607.json</code> · 주요출처: dayoneapp.com, rosebud.app, revenuecat.com, adapty.io, developer.apple.com
+  </footer>
+</div>
+</body>
+</html>

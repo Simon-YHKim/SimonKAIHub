@@ -1,0 +1,275 @@
+{
+  "summary": "O-R1 페르소나 시뮬 — §20 4축 교차 6인 여정 워크스루",
+  "agentCount": 6,
+  "logs": [
+    "페르소나 6/6 완주, blocker 30건 (P1 12)"
+  ],
+  "result": {
+    "personas": [
+      {
+        "persona": "67세 한국 은퇴 교사 · 저시력(글자 크게 설정) · 낮은 테크 리터러시 · 보통 가격민감 · 스마트폰 한 손 조작 · 돋보기 사용\""
+      },
+      {
+        "persona": "14세 한국 중학생, 무소득 (결제수단 없음), 높은 테크 리터러시, 짧은 세션",
+        "journeyNotes": "가입(sign-up) → 미성년 동의(ConsentNotice 고-프라이버시 배너) → 온보딩(skip가능) → 첫기록(capture 일기/메모/링크) → 그래프(index 노드 탐색) → 채팅제한(세컨비 2회/일, /plans로 유도) → 인사이트(기록 패턴 분석) → 플랜(결제 미오픈 상태). 모드별로: 일기/메모/링크/사진/문서는 모두 무제한. 세컨비 조언(Advisor) 기능만 Brain 요구 (UI 잠금, /plans 링크). 결제 게이트웨이는 없고 \"곧 제공\" 상태로 진정성 있게 처리됨."
+      },
+      {
+        "persona": "28-year-old US-based startup designer, EN locale, high tech literacy, 9 existing subscriptions (fatigue), values data mobility"
+      },
+      {
+        "persona": "41-year-old Japanese company employee, EN locale, privacy-sensitive, skeptical of self-reflection apps, uses during commute",
+        "journeyNotes": "Sign-up: Privacy ask (DOB) comes before privacy promise (consent layer), triggering distrust. Onboarding: never mentions Google Gemini integration—user discovers external AI only post-signup in consent copy. First capture: journal mode (recommended first activity) locked behind invisible XP gate; persona sees arbitrary progression barrier instead of simple note-taking. Graph (landing page): visualizes their data but never reminds them it's being sent to external AI; no persistent disclosure. Insights: claims computation is local but no record-level transparency or selective export/deletion options; only nuclear account removal available. Plans: monetization clear but no data-handling tiers or privacy-related feature gates. The entire journey treats privacy as a checkbox (consent form) rather than a design principle—post-signup, the user sees data flow outward (to Gemini) with no path to audit, control, or selectively withdraw consent from specific features."
+      },
+      {
+        "persona": "33-year-old Indonesian freelancer; English locale; low-income, price-sensitive; unstable network; budget Android (small screen, slow device)",
+        "journeyNotes": "Persona (Indonesian freelancer, 33, low-income, EN locale) walks: Sign-up→Complete Profile (OAuth)→Onboarding (3-step, skip works)→First Capture (Journal, auto-advance)→Graph (empty card dismissed)→Insights (empty, redirects to Capture)→Plans (sees USD prices, no IDR, no checkout button). At Plans, hits dead-end: price is high (USD display obscures real burden), checkout unavailable. Back to Capture, tries Journal + Advisor checkbox, finds locked behind Brain ($199.90/yr = 2-3× monthly freelance income). Tries OCR mode (via 'More' tab, which may not be visible on small screen), image upload times out on 2G, error message is generic. No clear 'retry' or 'check network' path. Leaves app with unresolved intent: wants to record thoughts, cannot afford AI features, UI doesn't guide next step."
+      },
+      {
+        "persona": "52세 한국 자영업자. 중소득. 한 손 조작(다른 손은 일). 1-3분 짧은 세션. 알림에서 중간 진입 잦음.",
+        "journeyNotes": "여정 흐름: [가입(sign-up) → router.replace('/') → index 온보딩체크 → onboarding 리다이렉트 → 온보딩 3단계 → index 공허한카드 → capture firstRun 진입 → 기록 저장 → capture.tsx savedPanel → router.push('/') → index 그래프(새데이터 로드 비동기)] 중 P1 2건, P2 2건 발견. 기지사항(재보고 금지): auth 웹 폭 해결됨, CTA 가중치 해결됨(completeProfile cancel demote), 그래프홈 카드 중복 해결됨(emptyGraphCard 하나만), interview 진행표시 해결됨(DrillProgress 있음). 이 페르소나는 1-3분 짧은 세션과 한 손 조작이 핵심 제약이므로, 즉시 피드백(저장 완료 시각화, 모드 전환 명확화)이 최우선."
+      }
+    ],
+    "blockers": [
+      {
+        "stage": "첫기록",
+        "severity": "P1",
+        "title": "기본 모드(journal) 첫 입장 시 모드 선택 복잡성으로 진행 불가",
+        "evidence": "src/app/capture.tsx:74-75, 179-181 — BASIC_CAPTURE_MODES는 journal만, 하지만 UI에서 모드 탭이 초기 상태에도 표시. 신입 사용자가 '일기'와 '메모' 구분 불명확. 탭 크기가 저시력+한 손 조작 시 정확도 떨어짐(maxWidth 미설정).",
+        "why": "67세 저시력 사용자는 픽셀 아트 아이콘만으로 '일기'의 의미 파악 어려움. 첫 화면에서 기본 선택지(journal)가 명확하지 않아 혼동 후 다른 모드 실수로 선택 → 의도한 기록 저장 실패 → 이탈.",
+        "persona": "67세 한국 은퇴 교사 · 저시력(글자 크게 설정) · 낮은 테크 리터러시 · 보통 가격민감 · 스마트폰 한 손 조작 · 돋보기 사용\""
+      },
+      {
+        "stage": "가입",
+        "severity": "P1",
+        "title": "비밀번호 요건 안내 글자가 너무 작아 읽을 수 없음(12px subtle variant)",
+        "evidence": "src/app/(auth)/sign-up.tsx:258-260 — Text variant='subtle' (typography.sizes.xs = 12px)로 '8자 이상. 대소문자와 숫자를 섞으면 더 안전해요' 표시. 저시력 사용자가 요건 읽지 못함 → 비밀번호 검증 실패 이유 모름.",
+        "why": "저시력 사용자가 보기 좋게 설정(font scale 1.3~1.7배)한 환경에서도 12px는 너무 작음. 안내 없이 진행 → 8자 미만 입력 → canSubmit false → 제출 버튼 비활성화 → 왜 안 되는지 모르고 이탈.",
+        "persona": "67세 한국 은퇴 교사 · 저시력(글자 크게 설정) · 낮은 테크 리터러시 · 보통 가격민감 · 스마트폰 한 손 조작 · 돋보기 사용\""
+      },
+      {
+        "stage": "그래프",
+        "severity": "P2",
+        "title": "Empty state 카드에서 '첫 조각 남기기' → capture 진입 후 모드 선택 화면이 과도함",
+        "evidence": "src/app/index.tsx:431-452 (empty card CTA) → src/app/capture.tsx:74-75 (CAPTURE_MODES 5개). empty card는 단순하지만 진입 후 갑자기 5가지 모드 + track toggle이 나타남.",
+        "why": "온보딩 마지막 단계('먼저 한 문장만 저장해요')에서 '첫 기록 저장' 버튼 → 기대: 간단한 입력 창. 실제: 복잡한 모드 선택 + wiki 토글 + 다수의 입력 옵션. 신입이 '이게 뭐가' 느낌으로 닫기 → 기록 저장 스톱.",
+        "persona": "67세 한국 은퇴 교사 · 저시력(글자 크게 설정) · 낮은 테크 리터러시 · 보통 가격민감 · 스마트폰 한 손 조작 · 돋보기 사용\""
+      },
+      {
+        "stage": "온보딩",
+        "severity": "P2",
+        "title": "일상 Wiki / Pro Wiki 구분 없이 'wiki_track' 토글만 있어 신입 사용자가 의미 파악 불가",
+        "evidence": "src/app/capture.tsx:30-33, 77, 180-181 — TRACK_OPTIONS = ['daily', 'pro']. 화면에는 TrackGlyph로 아이콘 + 텍스트 '일상 Wiki' / 'Pro Wiki'. 신입이 차이를 모름 → 기본값(daily) 사용하되 선택지의 필요성 의문.",
+        "why": "낮은 테크 리터러시 사용자는 'Wiki'라는 용어 자체가 낮설음. 온보딩에서 이 선택지 설명 없음. capture 진입 시 갑자기 나타나 혼동 → 첫 기록을 어디에 저장할지 불확실 → 진행 미루기 → 이탈.",
+        "persona": "67세 한국 은퇴 교사 · 저시력(글자 크게 설정) · 낮은 테크 리터러시 · 보통 가격민감 · 스마트폰 한 손 조작 · 돋보기 사용\""
+      },
+      {
+        "stage": "플랜",
+        "severity": "P2",
+        "title": "유료 플랜 가격 표시 + '곧 제공' 상태로 가격민감 사용자 불신 유발",
+        "evidence": "src/app/plans.tsx:71-100, locales/ko/plans.json:10-11 — tiers 카드에 구체적 가격(₩4,900/월, ₩9,900/월 등) 표시하면서 동시에 notifyPanel에서 '결제는 아직 열리지 않았어요. 가격은 확정됐고, 여기서 직접 선택하기 전엔 과금되지 않아요.' 메시지. 가격민감 사용자는 이 메시지를 '언제든 과금될 수 있다'로 읽을 수 있음.",
+        "why": "가격민감 은퇴교사는 명확한 '결제 시작 예정 날짜' 없이 구체 가격 + '아직 안 열림' 상태 → 신뢰 하락. '과금되지 않아요'라는 표현이 보험사 고지문처럼 들림 → 불안감 → 앱 재사용 의욕 감소.",
+        "persona": "67세 한국 은퇴 교사 · 저시력(글자 크게 설정) · 낮은 테크 리터러시 · 보통 가격민감 · 스마트폰 한 손 조작 · 돋보기 사용\""
+      },
+      {
+        "stage": "chat (세컨비)",
+        "severity": "P1",
+        "title": "채팅 한도 도달 후 업그레이드 유도 - 결제 불가능으로 인한 막힘",
+        "evidence": "src/app/secondb.tsx:320-333 (limit check), src/lib/chat/limits.ts:12-17 (free tier 2/day), src/lib/chat/conversation.ts:118-127 (BLOCKED_HINT). 한도 도달 시 '플랜 보기' 누르면 /plans로 이동. src/app/plans.tsx:94-100 '유료 플랜은 곧 제공돼요'라고만 표시되고 결제 방법이 없음. 이 페르소나는 결제수단이 없으므로 업그레이드 불가 → 다음날까지 채팅 못함.",
+        "why": "이 페르소나는 무소득 미성년이므로 신용카드/결제수단이 없음. 채팅 2회 제한이 실제 제약이 되고, /plans에서 '곧 제공' 상태가 무기한 막힘으로 체감됨. 하지만 '결제 미오픈' 상태이므로 사기 우려는 낮음. 다만 사용자 경험상 '한도 → 결제 옵션 없음'의 순환이 이탈을 유도함.",
+        "persona": "14세 한국 중학생, 무소득 (결제수단 없음), 높은 테크 리터러시, 짧은 세션"
+      },
+      {
+        "stage": "capture - advisor (journal)",
+        "severity": "P2",
+        "title": "일기 조언 기능 Brain 플랜 잠금 - 미성년 고급 기능 접근 불가",
+        "evidence": "src/app/capture.tsx:278 (advisorUnlocked = canUsePremium('advisor', 'free') → false), src/app/capture.tsx:944-962 (locked state UI). 잠금 텍스트: '이 기록을 세컨비에게 물어보기 (Brain)' + lockedHelper: 'Brain 플랜에서 열려요'. /plans 링크가 있지만 결제 불가능 상태.",
+        "why": "기본 일기 작성은 가능하지만, '기록을 물어보기' 기능이 잠겨있어 가치 인식 저하. UI에서 명시적으로 Premium feature임을 표시해 혼동은 없으나, 결제 불가능한 미성년의 경우 기능 탐색 중 좌절감. /plans '곧 제공' 상태도 마찬가지로 무기한 대기 느낌.",
+        "persona": "14세 한국 중학생, 무소득 (결제수단 없음), 높은 테크 리터러시, 짧은 세션"
+      },
+      {
+        "stage": "graph (index)",
+        "severity": "P2",
+        "title": "초기 empty state에서 중복 CTA - 조각 담기 vs 그래프 보기 혼재",
+        "evidence": "src/app/index.tsx (index 분석 필요 - 코드 길이 초과로 미확인). 일반적인 empty-state 패턴: 첫 조각 전에 '조각 담기' CTA. 다만 onboarding 완료 후 capture로 자동 라우팅되므로 실제 발생 가능성은 낮음. src/app/onboarding.tsx:105-111: 온보딩 마지막 단계 'finishToCapture'로 /capture 이동.",
+        "why": "Onboarding 완료 후 자동으로 capture로 가므로 실제 empty-graph state를 보기 어려움. 다만 graph 로드 느림이나 오류 시 fallback을 보게 될 가능성. 단순 정보 아키텍처 개선 이슈이지 기능 막힘은 아님.",
+        "persona": "14세 한국 중학생, 무소득 (결제수단 없음), 높은 테크 리터러시, 짧은 세션"
+      },
+      {
+        "stage": "onboarding",
+        "severity": "P3",
+        "title": "스킵 버튼 가중치 - 주요 액션(첫 기록 저장) vs 이탈 도피 구분 불명확",
+        "evidence": "src/app/onboarding.tsx:159-168 (last step). 마지막 단계에 두 개 버튼: primary '첫 기록 저장' vs ghost '건너뛰고 둘러보기'. variant 가중치는 맞지만 버튼 위치 / 탭 순서 상 둘러보기가 먼저 올 수 있음 (accessibility tree 순서 미확인).",
+        "why": "청소년의 짧은 세션 집중력을 고려하면 주요 CTA 강조는 중요. 다만 코드 상 가중치 구분(primary vs ghost)은 명확함. 접근성 트리 순서 문제일 수 있음 - DESIGN.md 준수 문제로 분류.",
+        "persona": "14세 한국 중학생, 무소득 (결제수단 없음), 높은 테크 리터러시, 짧은 세션"
+      },
+      {
+        "stage": "sign-up (consent)",
+        "severity": "P3",
+        "title": "미성년 동의 고-프라이버시 배너 - 부모 동의 미확인으로 인한 법적 리스크",
+        "evidence": "src/app/(auth)/sign-up.tsx:70 (isMinorAge 판정), src/components/consent/ConsentNotice.tsx:59-64 (minorBanner), locales/ko/consent.json:28 (minorBanner text). PIPA §22-2 준수 선언만 있고 실제 부모/보호자 동의 전자서명 프로세스는 /complete-profile에서도 없음 (src/app/(auth)/complete-profile.tsx 읽음). C10 문서에서 'verifiable guardian consent' 언급되지만 구현 미확인.",
+        "why": "한국 PIPA §22-2 및 미국 COPPA는 14-17세 미성년 가입 시 부모 동의를 요구. 현재 앱은 '미성년 동의 단계 롤아웃 중' (CONSTRAINTS.md 진술) 상태. 실제 부모 인증 게이트가 없으면 법적 문제. 기지사항에서 언급된 'auth 웹 폭 해결'과 다른 이슈일 수 있음.",
+        "persona": "14세 한국 중학생, 무소득 (결제수단 없음), 높은 테크 리터러시, 짧은 세션"
+      },
+      {
+        "stage": "capture",
+        "severity": "P1",
+        "title": "Advisor (SecondB reflection) locked behind Brain tier ($19.99/mo) immediately after onboarding",
+        "evidence": "src/app/capture.tsx:944-958 shows locked UI when advisorUnlocked=false. src/lib/progression/entitlements.ts:32 confirms advisor requires 'brain' tier. src/app/onboarding.tsx:42-48 teaches step 2 'Answers start from your records' suggesting Advisor is core, but locales/en/capture.json:127-129 reveals 'Ask SecondB on this entry (Brain)' + 'unlock with Brain plan'. Persona sees lock message while composing their FIRST journal entry, before saving.",
+        "why": "This persona is subscription-fatigued (9 existing subscriptions) and data-conscious. Onboarding Step 2 teaches them SecondB's core value prop (answering from their records), but then immediately gates it behind the highest tier. For a designer skeptical of SaaS lock-in, this bait-and-switch (teach feature → lock it) signals potential dark patterns.",
+        "persona": "28-year-old US-based startup designer, EN locale, high tech literacy, 9 existing subscriptions (fatigue), values data mobility"
+      },
+      {
+        "stage": "plans",
+        "severity": "P2",
+        "title": "Paywalls show pricing but checkout is closed ('Coming soon'), creating trap-feeling for subscription-fatigued users",
+        "evidence": "src/app/plans.tsx:94-100 shows notifyPanel with 'Paid plans are coming soon' + 'Checkout is not open yet...Nothing charged'. locales/en/plans.json:10-11 confirms 'comingSoon: Paid plans are coming soon'. When user hits Advisor lock and clicks 'Tap to view plans' → /plans, they see 4 tiers but cannot subscribe. For a designer with subscription fatigue, viewing a full paywall they can't act on (yet) may feel like a commitment trap rather than transparency.",
+        "why": "Subscription-fatigued persona navigating from Advisor lock expects to evaluate upgrade paths. Instead, they see complete pricing (triggering commitment anxiety) with no ability to act ('coming soon'). This liminal state—prices visible but purchase impossible—reinforces skepticism about whether monetization is transparent or manipulative.",
+        "persona": "28-year-old US-based startup designer, EN locale, high tech literacy, 9 existing subscriptions (fatigue), values data mobility"
+      },
+      {
+        "stage": "onboarding",
+        "severity": "P2",
+        "title": "Soma (highlighted/default upgrade) requires Brain tier for core taught feature, mismatch between messaging and gating",
+        "evidence": "src/app/plans.tsx:26-28 shows Soma highlighted (key: highlight=true) as 'the first step past the daily limit' with f3='The first step past daily limit'. But src/lib/progression/entitlements.ts:32 restricts advisor to 'brain' only. Onboarding teaches Advisor in step 2, suggesting it's core. Persona would upgrade to Soma expecting Advisor, discover it's locked, feel lied to.",
+        "why": "This persona is a designer (UX/product-sensitive) with subscription fatigue. The plans page highlights Soma and frames it as the logical upgrade, but the actual feature taught in onboarding (Advisor) requires doubling the price to Brain. This positioning gap (Soma = first upgrade, but feature = Brain) signals either poor product design or deliberate misdirection.",
+        "persona": "28-year-old US-based startup designer, EN locale, high tech literacy, 9 existing subscriptions (fatigue), values data mobility"
+      },
+      {
+        "stage": "onsourcing",
+        "severity": "P2",
+        "title": "No explicit 'free vs paid' feature matrix on onboarding or home, users must infer which taught features are paid",
+        "evidence": "src/app/onboarding.tsx teaches 3 steps (step 2: 'Answers start from your records' = Advisor). locales/en/capture.json describes journal mode as having 'optional SecondB reflection' without disclosing tier gate upfront. No feature table or 'what's free' messaging in onboarding. Persona must discover Advisor lock by attempting to use it, not by reading clear upfront terms.",
+        "why": "A SaaS-experienced designer expects upfront clarity: 'Free tier includes X, Y, Z. Paid unlocks Advisor.' Instead, onboarding teaches Advisor as a feature without disclosing the Brain-tier lock. For someone already fatigued by subscriptions, discovering lock-in mid-flow (instead of upfront) erodes trust and suggests the app is hiding costs to drive conversion.",
+        "persona": "28-year-old US-based startup designer, EN locale, high tech literacy, 9 existing subscriptions (fatigue), values data mobility"
+      },
+      {
+        "stage": "insights",
+        "severity": "P3",
+        "title": "Data export discoverable only via /data → /wiki menu; not advertised upfront to data-conscious persona",
+        "evidence": "locales/en/data.json:15-19 documents export as free and available from /wiki. But export is only reachable via Settings → Data management. Persona arriving from subscription-fatigued background (data mobility concern) has no upfront assurance data is portable. Homepage, onboarding, and plans pages do not advertise export or 'own your data' messaging.",
+        "why": "This persona values 'data mobility' per brief. While export exists and is free, lack of upfront visibility creates anxiety: 'If I add data here, can I get it out?' Without explicit 'Export anytime' messaging on landing or onboarding, a skeptical SaaS user may assume lock-in.",
+        "persona": "28-year-old US-based startup designer, EN locale, high tech literacy, 9 existing subscriptions (fatigue), values data mobility"
+      },
+      {
+        "stage": "sign-up",
+        "severity": "P1",
+        "title": "Age gate forces entry of full birth date (even DOB retention concern not surfaced until consent screen after).",
+        "evidence": "src/app/(auth)/sign-up.tsx:264-285 renders BirthDateField (YYYY-MM-DD required), plus src/locales/en/auth.json:51 says 'We don't share your date of birth' — but ONLY after the user has already entered it. The consent notice (ConsentNotice component) comes *after* the birth-date field is filled. For this persona, asking for full DOB first, then explaining privacy, is the wrong sequence.",
+        "why": "Privacy-extremist users need proof of data handling BEFORE surrendering sensitive ID data. Showing \"we don't share it\" only in the consent layer (after DOB entry) reads as retroactive justification, not genuine privacy-first. This persona will not trust the app from that point forward—they see the form design as 'lock in the date first, then tell them it's safe.'",
+        "persona": "41-year-old Japanese company employee, EN locale, privacy-sensitive, skeptical of self-reflection apps, uses during commute"
+      },
+      {
+        "stage": "onboarding",
+        "severity": "P1",
+        "title": "Onboarding steps 1–3 never explain what 'SecondB' actually does with captured data—only aspirational framing ('patterns and next actions').",
+        "evidence": "src/app/onboarding.tsx:31-59, all three STEPS describe the *benefit* (organize, find patterns) but never state how. Step 2 (STEPS[1]) says '세컨비가 답할 때 참고한 기록을 함께 보여줘요' (SecondB shows the records it used)—but no mention that it sends data to Google Gemini. The privacy layer is completely missing from the intro flow. Only after sign-up does consent.json:12-13 surface 'entries are sent to Google Gemini only when needed.'",
+        "why": "A privacy-first skeptic reaching capture and discovering the AI uses Google Gemini (especially post-sign-up) will feel deceived. The onboarding never foreshadowed external LLM usage. This is abandonment risk: they invested sign-up only to learn the core feature requires external AI processing they may not consent to.",
+        "persona": "41-year-old Japanese company employee, EN locale, privacy-sensitive, skeptical of self-reflection apps, uses during commute"
+      },
+      {
+        "stage": "first-capture",
+        "severity": "P2",
+        "title": "Journal mode (first recommended capture) locks behind Level 3 progression gate with no visibility into XP costs before commitment.",
+        "evidence": "src/app/capture.tsx:273-275 checks journalGate.unlocked via checkGate('journal', progression.totalXp). When unlocked=false, lines 818-837 show a card saying 'Level 3 unlock required' but never explain what earns XP or how long to Lv3. The persona enters capture expecting to simply write a reflection, hits a gate, sees no path forward except 'tap /audit'—a detour from the core task.",
+        "why": "This persona came to save 'today's thought' (per onboarding step 3 'Start with one sentence'), not grind levels. The gate appears arbitrary and punitive. They may close the app rather than navigate the progression system. High abandonment risk on the *first* real use.",
+        "persona": "41-year-old Japanese company employee, EN locale, privacy-sensitive, skeptical of self-reflection apps, uses during commute"
+      },
+      {
+        "stage": "graph",
+        "severity": "P2",
+        "title": "No visible 'data origin' label or disclosure on the graph nodes themselves—user sees pretty visualization but has no on-screen reminder that those nodes represent their sensitive personal data being analyzed by external AI.",
+        "evidence": "src/app/index.tsx:1-100 (NavGraph component renders the constellation). The graph footer or any node-level tooltip never states 'these nodes are your entries, sent to Gemini for AI analysis.' The user sees patterns, insights, pretty nodes—but no persistent on-screen labeling that this is their data being processed. By contrast, the insights screen (src/app/insights.tsx) at least says 'Computed directly from records' in the hero (line 20: subtitle), but the graph itself (the main landing view) has no such transparency.",
+        "why": "A privacy-sensitive user will periodically look at the graph and wonder: 'Is my data still being sent out? Is this being used for training?' The absence of a constant, visible data-processing disclosure creates ambient distrust. Over time, this erodes confidence in the entire platform.",
+        "persona": "41-year-old Japanese company employee, EN locale, privacy-sensitive, skeptical of self-reflection apps, uses during commute"
+      },
+      {
+        "stage": "insights",
+        "severity": "P3",
+        "title": "Insights screen says 'Computed directly from records' but user never sees *which* records were used or can export/delete subsets—only all-or-nothing account deletion.",
+        "evidence": "src/app/insights.tsx:20 claims 'Computed directly from records,' but there is no breakdown showing 'you contributed these 12 entries, 7 of which drove this insight.' The account deletion option (src/app/account.tsx:96-119) is nuclear: delete *all* data or keep everything. There's no granular data-export or selective-deletion feature. The consent.json lines 62-65 mention 'Profile export' as a privacy key, but the UI (src/app/persona.tsx would need to be read) likely does not surface actual *entry* export.",
+        "why": "This persona, being privacy-sensitive and skeptical, may want to see exactly which of their entries contributed to an insight—both to verify accuracy and to audit data use. The inability to export or selectively delete entries (only wholesale account removal) signals the app views their data as locked in. Distrust compounds.",
+        "persona": "41-year-old Japanese company employee, EN locale, privacy-sensitive, skeptical of self-reflection apps, uses during commute"
+      },
+      {
+        "stage": "plans",
+        "severity": "P1",
+        "title": "Pricing displayed in USD only, no IDR equivalent for Indonesian user",
+        "evidence": "src/app/plans.tsx:71 displays t(`tiers.${key}.price`), which loads from locales/en/plans.json:14-48. All prices hardcoded as USD ($4.99, $9.99, $19.99, $99). No currency conversion or local pricing shown. For INR-earning freelancer, $4.99/month = ~75,000 IDR/month — major portion of income — but this magnitude is not visible in the UI.",
+        "why": "Price-sensitive user cannot assess affordability without manual mental conversion. Trust eroded when local currency value is hidden. Barrier to purchase intent.",
+        "persona": "33-year-old Indonesian freelancer; English locale; low-income, price-sensitive; unstable network; budget Android (small screen, slow device)"
+      },
+      {
+        "stage": "plans",
+        "severity": "P1",
+        "title": "Checkout unavailable (\"Coming soon\") blocks purchase path entirely",
+        "evidence": "src/app/plans.tsx:97-100 renders notifyPanel with t(\"comingSoon\") → locales/en/plans.json:10-11: 'Paid plans are coming soon' and 'Checkout is not open yet.' No IAP wired, no email capture, no forward path. User sees price, wants to buy, finds no button.",
+        "why": "User intent to convert is blocked at final step. No alternative (sign-up for waitlist, email, manual purchase). Clear dead-end screen = abandonment signal for persona who has overcome earlier friction.",
+        "persona": "33-year-old Indonesian freelancer; English locale; low-income, price-sensitive; unstable network; budget Android (small screen, slow device)"
+      },
+      {
+        "stage": "capture",
+        "severity": "P1",
+        "title": "Journal 'Ask SecondB' (Advisor) feature locked behind Brain tier ($19.99/mo), no clear exit ramp",
+        "evidence": "src/app/capture.tsx:923-962: advisorUnlocked check routes to /plans if false. Plans show Brain = $199.90/yr. For low-income user, this is 2.5× monthly income. Entry tier (Soma) is $4.99/mo but does NOT include Advisor (only Brain does per src/lib/progression/entitlements.ts:31-34 PREMIUM_MIN_TIER.advisor='brain'). User cannot get Advisor without 4× price jump.",
+        "why": "Feature feels accessible (checkbox visible in journal form) but surprise-gated behind highest tier. No mid-tier option. Persona may abandon journaling entirely rather than pay 4× entry price for 'optional' feature.",
+        "persona": "33-year-old Indonesian freelancer; English locale; low-income, price-sensitive; unstable network; budget Android (small screen, slow device)"
+      },
+      {
+        "stage": "capture",
+        "severity": "P2",
+        "title": "OCR image extraction fails silently or shows generic 'couldn't read' error; network retry unclear",
+        "evidence": "src/app/capture.tsx:323-339: runExtract() catches error and shows feedback modal t('alerts.ocrRead.title'/'message') from locales/en/capture.json:178-180: 'Couldn't read the text. Try again with a clearer photo.' No distinction between network timeout, image quality, or service error. Retry button exists but only shows if feedbackModal.retry is set (line 1164-1173). On slow/unstable network, timeout leaves user with no 'check connection' signal.",
+        "why": "On unreliable 3G/2G network (Indonesian freelancer context), image processing stalls. User receives vague error, assumes image fault, may not retry. No explicit 'check your connection' path.",
+        "persona": "33-year-old Indonesian freelancer; English locale; low-income, price-sensitive; unstable network; budget Android (small screen, slow device)"
+      },
+      {
+        "stage": "onboarding",
+        "severity": "P2",
+        "title": "Capture mode tabs overflow on small screens (width <320px); 'More' toggle may not fit",
+        "evidence": "src/app/capture.tsx:744-803: modeRow has flex:1 minWidth:72 per styles.modeTab (line 1399-1400). On 320px screen width with 16px padding, 5 tabs + 'More' = 6 × 72 = 432px needed vs. 288px available. Flex wrap wraps to 2 rows. 'More' toggle at end of row may drop below fold on small screen, user doesn't discover advanced modes.",
+        "why": "Budget Android phones (common in Indonesia) often 320-360px wide. User stays in Journal-only mode, never discovers Note/Link/OCR options, experiences limited feature set.",
+        "persona": "33-year-old Indonesian freelancer; English locale; low-income, price-sensitive; unstable network; budget Android (small screen, slow device)"
+      },
+      {
+        "stage": "첫 기록",
+        "severity": "P1",
+        "title": "기록 저장 후 저장 확인 불가 → 중복 저장 의심",
+        "evidence": "capture.tsx:626 '그래프 보기' 클릭 → index.tsx로 이동하지만, 새 기록이 dataNodes 배열에 즉시 반영되지 않음 (useEffect 419-423에서 listRecentRecords 비동기 로드, 첫 렌더링에서 데이터 누락). 사용자는 저장 후 그래프에서 자신의 기록을 찾을 수 없어 '저장이 실패했나?' 의심",
+        "why": "1-3분 짧은 세션 사용자는 로딩 완료를 기다리지 않고 이탈하거나 다시 저장하려 함. 그래프에 즉시 반영이 없으면 불신.",
+        "persona": "52세 한국 자영업자. 중소득. 한 손 조작(다른 손은 일). 1-3분 짧은 세션. 알림에서 중간 진입 잦음."
+      },
+      {
+        "stage": "온보딩",
+        "severity": "P1",
+        "title": "가입 후 온보딩 강제 → 공허한 상태 화면 중복 노출",
+        "evidence": "sign-up.tsx:115에서 router.replace('/') 후 index.tsx:330에서 onboardingComplete 체크. 온보딩 미완료면 /onboarding 리다이렉트. 3단계 모두 거친 후에야 /capture로 가능(onboarding.tsx:105-108). 그 전까지는 index.tsx:374에서 emptyGraphCard 표시. 가입자는 (1)그래프 공허함 보기 (2)온보딩 3단계 보기 (3)다시 그래프 공허함 보기 → 4단계 후 캡처 진입.",
+        "why": "50대 자영업자는 과정의 의도를 모르고 반복 화면을 '버그'로 인식할 수 있음. 특히 한 손 조작 중 백버튼으로 실수 진입 시 흐름이 깨짐.",
+        "persona": "52세 한국 자영업자. 중소득. 한 손 조작(다른 손은 일). 1-3분 짧은 세션. 알림에서 중간 진입 잦음."
+      },
+      {
+        "stage": "첫 기록",
+        "severity": "P1",
+        "title": "캡처 모드 전환 시 입력창 혼동 → 중복 입력 불확실성",
+        "evidence": "capture.tsx:972-1015에서 linkclip과 memo 모드 모두 동일한 `body` 상태값으로 관리. 시각적으로는 별개 입력 필드처럼 보이지만, 내부적으로 같은 변수. reset() 호출(764줄)로 초기화되지만, UI 전환 순간 '내 입력이 사라졌나?' 불안감 발생.",
+        "why": "한 손 조작 사용자는 탭 전환 후 입력창을 다시 찾아야 하는데, 모드별 입력 필드가 분리되어 있으면 더 쉬움. 현재는 내부 상태 통합이 UI에 보이지 않아 혼동.",
+        "persona": "52세 한국 자영업자. 중소득. 한 손 조작(다른 손은 일). 1-3분 짧은 세션. 알림에서 중간 진입 잦음."
+      },
+      {
+        "stage": "플랜",
+        "severity": "P2",
+        "title": "Advisor 기능 설명 불일치 → 가격 신뢰도 저하",
+        "evidence": "plans.json:46에서 Brain 플랜만 '기록마다 세컨비 회신' 지원 표시. 하지만 capture.tsx:956-963에서는 canUsePremium('advisor') 체크 후 모든 사용자가 Advisor 옵션을 보게 됨. 오픈소스 공개(hasProfile 체크 후) 일반 사용자도 UI상 '세컨비에게 물어보기' 옵션 표시됨.",
+        "why": "사용자는 무료로도 Advisor를 쓸 수 있다고 오해했다가 기능 제한 만남 → 가격 페이지 신뢰도 저하.",
+        "persona": "52세 한국 자영업자. 중소득. 한 손 조작(다른 손은 일). 1-3분 짧은 세션. 알림에서 중간 진입 잦음."
+      },
+      {
+        "stage": "그래프",
+        "severity": "P2",
+        "title": "알림에서 중간 진입 시 컨텍스트 손실 → 진입점 명확화 부재",
+        "evidence": "index.tsx:179-190에서 highlight 파라미터 지원하지만, 알림 출발점(예: 하루 요약 알림)에서 /index?highlight=... 링크를 생성하는 코드가 보이지 않음. 알림 탭(inbox.tsx)이 있지만, 알림→기록/그래프 진입 시 사용자가 '지금 뭘 봤는데?' 상태가 됨.",
+        "why": "52세 자영업자는 알림으로 앱 진입했을 때 그 알림의 출처/목적을 빠르게 파악해야 함. 중간 진입에서 컨텍스트가 없으면 이탈.",
+        "persona": "52세 한국 자영업자. 중소득. 한 손 조작(다른 손은 일). 1-3분 짧은 세션. 알림에서 중간 진입 잦음."
+      }
+    ]
+  }
+}

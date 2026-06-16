@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex UI Gate - Persona Export Share Fallback</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --surface: #151923;
+      --surface2: #10141c;
+      --text: #eef2f7;
+      --muted: #a9b2c3;
+      --line: #2b3342;
+      --warn: #ffd166;
+      --bad: #ff7272;
+      --good: #79e0aa;
+      --accent: #8db7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.58 "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      letter-spacing: 0;
+    }
+    main {
+      width: min(1080px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+    header, section, .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+    header { padding: 24px; }
+    section { margin-top: 16px; padding: 18px; }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(25px, 3.8vw, 40px); line-height: 1.12; letter-spacing: 0; }
+    h2 { font-size: 19px; margin-bottom: 10px; }
+    h3 { font-size: 15px; margin-bottom: 8px; }
+    p { color: var(--muted); }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .tag {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 5px 9px;
+      color: var(--muted);
+      background: var(--surface2);
+      font-size: 13px;
+    }
+    .score { color: var(--warn); border-color: #6a5523; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .card {
+      padding: 15px;
+      min-height: 150px;
+    }
+    .bad { border-color: #673238; }
+    .bad h3 { color: var(--bad); }
+    .good { border-color: #2f6547; }
+    .good h3 { color: var(--good); }
+    .path {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      color: var(--accent);
+      overflow-wrap: anywhere;
+      word-break: keep-all;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 6px 0; }
+    code, pre {
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 13px;
+    }
+    pre {
+      margin: 12px 0 0;
+      padding: 12px;
+      background: var(--surface2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--text);
+      overflow-x: auto;
+    }
+    .note {
+      border-left: 3px solid var(--warn);
+      padding-left: 12px;
+      color: var(--text);
+    }
+    @media (max-width: 800px) {
+      main { width: min(100% - 24px, 1080px); padding-top: 22px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Persona Export Share Fallback</h1>
+      <p style="margin-top: 10px;">The Persona export path depends on `Share.share` with no in-product fallback. Export trust remains 98/100 provisional.</p>
+      <div class="meta">
+        <span class="tag score">Score: 98/100 provisional</span>
+        <span class="tag">Priority: P2</span>
+        <span class="tag">Baseline: 2ndB main@911c979</span>
+        <span class="tag">Created: 2026-06-06 08:17 KST</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Finding</h2>
+      <p class="note">Persona's primary self-model export calls the platform share sheet. If that fails, the user can only retry the same failing action or dismiss.</p>
+      <div class="grid">
+        <div class="card bad">
+          <h3>Opaque Handoff</h3>
+          <div class="path">src/app/persona.tsx:149-152</div>
+          <p>`handleExport` calls `Share.share({ message: persona.markdownExport })` directly.</p>
+        </div>
+        <div class="card bad">
+          <h3>No Fallback</h3>
+          <div class="path">src/app/persona.tsx:156-164</div>
+          <p>The catch path offers Try again and Dismiss only. There is no copy, preview, or download option.</p>
+        </div>
+        <div class="card good">
+          <h3>Better Pattern Nearby</h3>
+          <div class="path">src/app/wiki.tsx:591</div>
+          <p>Wiki export already uses clipboard as a concrete fallback-style action. Persona needs equivalent resilience.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <pre>persona.tsx:2       import { ..., Share } from "react-native"
+persona.tsx:151     await Share.share({ message: persona.markdownExport, title: "2nd-Brain Persona" })
+persona.tsx:162     Try again calls handleExport() again
+persona.tsx:340-344 Export as Markdown primary action calls handleExport
+wiki.tsx:591        wiki export attempts navigator.clipboard.writeText(exportText)</pre>
+    </section>
+
+    <section>
+      <h2>Required Fix</h2>
+      <ul>
+        <li>Cover `Share.share` in the shared handoff guard or ledger.</li>
+        <li>Add a Persona export fallback: copy markdown, in-app preview, or web `.md` download.</li>
+        <li>On share failure, offer a recovery action that does not use the same failing share sheet.</li>
+        <li>Show an export receipt or disclosure for format, scope, and excluded private/internal metadata.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Acceptance</h2>
+      <ul>
+        <li>Persona export remains usable when platform share is unavailable.</li>
+        <li>KO and EN failure paths offer a non-share fallback.</li>
+        <li>Static guard catches new raw `Share.share` usage without fallback handling.</li>
+        <li>`npm run verify` passes after implementation.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

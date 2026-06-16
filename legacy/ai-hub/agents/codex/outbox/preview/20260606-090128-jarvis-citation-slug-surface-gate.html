@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jarvis Citation Slug Surface Gate</title>
+  <style>
+    :root {
+      --bg: #0b0f18;
+      --panel: #111827;
+      --panel2: #151d2b;
+      --text: #f4f7fb;
+      --muted: #a8b3c7;
+      --line: #2b3548;
+      --brand: #72f2c7;
+      --warn: #f6c76f;
+      --bad: #ff7a90;
+      --ok: #8ee6a8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 40px 20px 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 14px; color: var(--muted); }
+    code {
+      color: #d9fff2;
+      background: #0b1320;
+      border: 1px solid var(--line);
+      padding: 1px 5px;
+      border-radius: 5px;
+      font-size: 0.92em;
+    }
+    .badgeRow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .badge {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 999px;
+      padding: 6px 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .badge strong { color: var(--text); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 22px 0;
+    }
+    .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 150px;
+    }
+    .card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .path {
+      color: var(--brand);
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0;
+    }
+    .step {
+      border: 1px solid var(--line);
+      background: var(--panel2);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .step b { color: var(--warn); }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+    li { margin: 8px 0; }
+    .callout {
+      border-left: 4px solid var(--bad);
+      background: rgba(255, 122, 144, 0.08);
+      padding: 14px 16px;
+      border-radius: 8px;
+      margin: 18px 0;
+    }
+    .callout p { color: #ffd4dc; margin: 0; }
+    .ok { color: var(--ok); }
+    .section {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 760px) {
+      h1 { font-size: 26px; }
+      .grid, .flow { grid-template-columns: 1fr; }
+      main { padding: 28px 16px 44px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Jarvis Citation Slug Surface Gate</h1>
+      <p>Primary assistant trust/provenance surface still exposes raw wiki citation syntax and slugs.</p>
+      <div class="badgeRow">
+        <span class="badge"><strong>App</strong> E:\2ndB main@911c979</span>
+        <span class="badge"><strong>Priority</strong> P2 before 100/100</span>
+        <span class="badge"><strong>Owner</strong> Claude implementation request</span>
+      </div>
+    </header>
+
+    <section class="grid">
+      <article class="card">
+        <strong>Intro Copy</strong>
+        <p>Jarvis first-use text teaches <code>[[page-slug]]</code>, "context", and "Meta questions" instead of product-native provenance copy.</p>
+        <div class="path">locales/en/jarvis.json:8<br />locales/ko/jarvis.json:8</div>
+      </article>
+      <article class="card">
+        <strong>Source Strip</strong>
+        <p>The answer strip maps cited slugs directly into chips, so users see machine identifiers as the proof trail.</p>
+        <div class="path">src/app/jarvis.tsx:420-422</div>
+      </article>
+      <article class="card">
+        <strong>Reference Drawer</strong>
+        <p>The drawer opens from those chips and passes <code>title={slug}</code> into the referenced-piece card.</p>
+        <div class="path">src/app/jarvis.tsx:536-537</div>
+      </article>
+    </section>
+
+    <section class="section">
+      <h2>Visible Slop Pattern</h2>
+      <div class="flow">
+        <div class="step"><b>1</b><br />Assistant prompt asks the model to cite slugs.</div>
+        <div class="step"><b>2</b><br />Parser strips brackets but keeps slug text visible.</div>
+        <div class="step"><b>3</b><br />Chat bubble/source chips show raw identifiers.</div>
+        <div class="step"><b>4</b><br />Drawer repeats the same slug as the card title.</div>
+      </div>
+      <div class="callout">
+        <p>Citation/provenance is a trust surface. A finished product should show page titles or friendly captured-piece labels, not storage slugs, except in export or advanced views.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Acceptance</h2>
+      <ul>
+        <li>Replace first-use intro copy with plain provenance language: "I show the pieces I used."</li>
+        <li>Do not leave bare slugs in visible assistant prose after citation parsing.</li>
+        <li>Render source chips and drawer cards with page titles or friendly fallback labels.</li>
+        <li>Add an open/read action for referenced pieces where feasible.</li>
+        <li>Keep <code>[[slug]]</code> only in markdown export, tests, or explicit advanced/debug surfaces.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Proof Before 100</h2>
+      <ul>
+        <li>KO/EN Jarvis intro screenshots.</li>
+        <li>A cited Jarvis answer with at least two friendly source chips.</li>
+        <li>Reference drawer screenshot showing titles, not slugs.</li>
+        <li>Grep proof for remaining user-facing <code>[[</code>, <code>slug</code>, and <code>context</code> exceptions.</li>
+      </ul>
+      <p class="ok">Score remains 98/100 provisional until this surface is fixed and re-gated.</p>
+    </section>
+  </main>
+</body>
+</html>

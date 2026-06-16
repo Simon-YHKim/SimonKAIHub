@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Autonomous Loop Wrapper</title>
+  <style>
+    body { margin: 0; font: 15px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #182231; background: #f6f7f9; }
+    main { max-width: 880px; margin: 0 auto; padding: 32px 20px 48px; }
+    header { border-bottom: 1px solid #d9dee7; margin-bottom: 24px; padding-bottom: 18px; }
+    h1 { margin: 0 0 8px; font-size: 28px; line-height: 1.2; }
+    h2 { margin: 28px 0 10px; font-size: 18px; }
+    code { background: #eef1f5; border: 1px solid #dce2ea; border-radius: 6px; padding: 1px 5px; }
+    ul { margin: 8px 0 0; padding-left: 22px; }
+    li { margin: 5px 0; }
+    .panel { background: #fff; border: 1px solid #d9dee7; border-radius: 8px; padding: 18px; margin-top: 16px; }
+    .status { display: inline-block; background: #fff4d6; color: #6b4a00; border: 1px solid #e3c36a; border-radius: 999px; padding: 3px 10px; font-size: 13px; font-weight: 650; }
+    pre { white-space: pre-wrap; background: #eef1f5; border: 1px solid #dce2ea; border-radius: 8px; padding: 12px; overflow: auto; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <span class="status">PREPARED</span>
+      <h1>Codex Autonomous Loop Wrapper</h1>
+      <p>2026-06-11 / 00:40:10 KST</p>
+    </header>
+    <section class="panel">
+      <h2>Finding</h2>
+      <ul>
+        <li>The hub is RUNNING, but no Codex-specific scheduled task or PID lock was present.</li>
+        <li>A real wrapper is needed so Codex wakes up without relying on memory.</li>
+      </ul>
+    </section>
+    <section class="panel">
+      <h2>Implementation</h2>
+      <ul>
+        <li>Added <code>agents/codex/codex-loop.ps1</code>.</li>
+        <li>Cadence: 600 seconds between cycles, default 20-cycle cap.</li>
+        <li>Safety: PID lock, stop file, and <code>CONTROL.md</code> kill-switch.</li>
+        <li>Nested Codex runs exactly one iteration and is forbidden from creating another loop.</li>
+      </ul>
+    </section>
+    <section class="panel">
+      <h2>Start Command</h2>
+      <pre>Start-Process -FilePath powershell -WindowStyle Hidden -ArgumentList @(
+  "-NoProfile",
+  "-ExecutionPolicy", "Bypass",
+  "-File", "C:\Coding\AI Infra\Communication\agents\codex\codex-loop.ps1",
+  "-MaxCycles", "20",
+  "-SleepSeconds", "600",
+  "-InitialDelaySeconds", "60"
+)</pre>
+    </section>
+  </main>
+</body>
+</html>

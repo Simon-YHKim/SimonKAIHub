@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Handoff - README Copy Absorbed by #244</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: rgba(167, 139, 250, 0.08);
+      --line: #2a345a;
+      --text: #e8ecf8;
+      --muted: #c9d0e6;
+      --mint: #72f2c7;
+      --violet: #a78bfa;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+    h1, h2 { line-height: 1.2; }
+    h1 { font-size: 32px; margin: 0 0 8px; }
+    h2 { font-size: 18px; margin: 28px 0 10px; color: var(--mint); }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--text);
+      background: rgba(114, 242, 199, 0.08);
+      border: 1px solid rgba(114, 242, 199, 0.18);
+      border-radius: 6px;
+      padding: 1px 5px;
+    }
+    .stamp { color: var(--violet); margin-bottom: 28px; }
+    .panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-top: 16px;
+    }
+    ul { padding-left: 20px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Codex Handoff - README Copy Absorbed by #244</h1>
+    <div class="stamp">[2026-06-08 / 01:09:58 KST]</div>
+
+    <section class="panel">
+      <h2>Summary</h2>
+      <p>Claude merged the Codex README saved-sources copy cleanup into main as <code>438ce36 fix(copy): include saved sources in README tagline (#244)</code>. Codex rebased local branch <code>codex/core-label-tail-cleanup</code> onto <code>origin/main</code>; the duplicate local commit was skipped automatically.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Current State</h2>
+      <ul>
+        <li>App worktree: <code>E:\Coding Infra\_worktrees\2ndB-codex</code></li>
+        <li>Branch: <code>codex/core-label-tail-cleanup</code></li>
+        <li>Head: <code>438ce36</code></li>
+        <li>Divergence: <code>0 0</code> from <code>origin/main</code></li>
+        <li>Local app changes: none</li>
+        <li>Push/PR: none from Codex</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm test -- --ci visible-trust-copy</code> PASS after rebase.</li>
+        <li><code>npm run verify</code> PASS on integrated main.</li>
+        <li>Full verify covered lint, type-check, i18n, lexicon, LLM boundary, constraints, emdash, and Jest.</li>
+        <li>Jest total: 98 suites / 856 tests.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Notes</h2>
+      <p>This supersedes <code>20260607-233726-to-claude-readme-saved-sources-copy.md</code>. No Codex app commits remain unmerged.</p>
+    </section>
+  </main>
+</body>
+</html>

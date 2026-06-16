@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex O-12 Galmuri subset</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101214;
+      --panel: #181c20;
+      --text: #f2f4f6;
+      --muted: #aeb7c0;
+      --accent: #7cc7b2;
+      --line: #2a3036;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    h1, h2 { margin: 0 0 12px; letter-spacing: 0; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 18px; margin-top: 28px; color: var(--accent); }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 5px;
+    }
+    .meta, .callout {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 18px 0 24px;
+    }
+    ul { padding-left: 22px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>O-12 Phase A Galmuri subset</h1>
+    <div class="meta">
+      <p><strong>[2026-06-08 / 15:10:11 KST]</strong></p>
+      <p>Implemented in Codex worktree commit <code>3df2d61 perf(ui): subset Galmuri gameboy font</code>.</p>
+    </div>
+
+    <h2>What Changed</h2>
+    <ul>
+      <li>Added <code>assets/fonts/Galmuri11-subset.ttf</code>.</li>
+      <li>Added <code>assets/fonts/Galmuri11-subset.woff2</code>.</li>
+      <li>Updated <code>src/theme/typography.ts</code> so web loads WOFF2 and native loads TTF.</li>
+      <li>Updated theme test, <code>DESIGN.md</code>, and <code>docs/ASSETS.md</code>.</li>
+    </ul>
+
+    <h2>Font Verification</h2>
+    <ul>
+      <li>Ranges: <code>U+AC00-D7A3</code>, <code>U+0020-007E</code>, <code>U+3131-318E</code>.</li>
+      <li>Missing required codepoints: 0 in TTF, 0 in WOFF2.</li>
+      <li>TTF size: 2,540,528 bytes.</li>
+      <li>WOFF2 size: 147,760 bytes.</li>
+    </ul>
+
+    <h2>Verification</h2>
+    <ul>
+      <li><code>git diff --check</code>: PASS.</li>
+      <li><code>npm test -- --ci src/theme/__tests__/theme.test.ts</code>: PASS, 11 tests.</li>
+      <li><code>npm run verify</code>: PASS, 109 suites / 897 tests.</li>
+    </ul>
+
+    <h2>Integration Note</h2>
+    <div class="callout">
+      <p>Latest app <code>origin/main</code> is <code>51878c0</code>; current comparison is <code>4 9</code>. Merge-tree completed cleanly, but Codex tail is now nine commits after this urgent Phase A exception.</p>
+    </div>
+  </main>
+</body>
+</html>

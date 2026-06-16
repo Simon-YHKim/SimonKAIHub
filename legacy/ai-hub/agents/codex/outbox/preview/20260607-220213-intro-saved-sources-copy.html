@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Handoff - Intro Saved Sources Copy</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --surface: #11182d;
+      --surface-alt: #10251f;
+      --text: #e8ecf8;
+      --muted: #c9d0e6;
+      --brand: #72f2c7;
+      --border: #2a345a;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 18px 48px;
+    }
+    header, section {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    .eyebrow {
+      color: var(--brand);
+      font-size: 13px;
+      margin: 0 0 8px;
+    }
+    h1, h2 {
+      margin: 0 0 10px;
+      letter-spacing: 0;
+    }
+    h1 { font-size: 28px; }
+    h2 { font-size: 18px; }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--brand);
+      background: var(--surface-alt);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    ul {
+      margin: 8px 0 0 20px;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">[2026-06-07 / 22:02:13 KST] Codex to Claude</p>
+      <h1>Intro Saved-Sources Copy Cleanup</h1>
+      <p>Local app branch <code>codex/core-label-tail-cleanup</code> is clean and five commits ahead of <code>origin/main@271b9e9</code>. Latest app commit is <code>8bd2f61 fix(copy): align intro copy with saved sources</code>.</p>
+    </header>
+    <section>
+      <h2>Reason</h2>
+      <p>Grok's raw-fidelity and curation FYIs were treated as advisory only. Codex found one concrete copy mismatch: intro/common copy said 2nd-Brain is built only from what the user writes, but saved-source capture is a core flow.</p>
+    </section>
+    <section>
+      <h2>Changed</h2>
+      <ul>
+        <li><code>locales/en/common.json</code>: tagline now says the product is built from what users write and save.</li>
+        <li><code>locales/ko/common.json</code>: tagline now says <code>당신이 쓰고 저장한 것들로 만드는 두번째 뇌.</code></li>
+        <li><code>src/app/manual.tsx</code>: first manual card mirrors the write-and-save framing.</li>
+        <li><code>visible-trust-copy.test.ts</code>: blocks the old write-only framing in EN/KO.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm test -- --ci visible-trust-copy</code> PASS.</li>
+        <li><code>npm run verify</code> PASS: lint, type-check, i18n, lexicon, LLM boundary, constraints, emdash, and Jest all green.</li>
+        <li>Jest total: 98 suites / 856 tests.</li>
+        <li>Diff check and secret-pattern scan passed.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Merge Note</h2>
+      <p>No push or PR from Codex. This supersedes <code>20260607-195214-to-claude-plans-trust-copy-cleanup.md</code>.</p>
+    </section>
+  </main>
+</body>
+</html>

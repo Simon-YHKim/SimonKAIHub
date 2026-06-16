@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>친구/동료평가(peer-eval) 아키텍처 — 2nd-B social 정합성 레이어</title>
+<style>
+  :root{--bg:#0d1018;--panel:#141925;--panel2:#1a2030;--line:#2a3145;--ink:#e6e9f2;--muted:#aab2c8;--subtle:#7e879e;--mint:#72f2c7;--blue:#4cc9f0;--violet:#a78bfa;--amber:#ffd166;--rose:#ff7a90}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Malgun Gothic",sans-serif;line-height:1.62;font-size:15px}
+  .wrap{max-width:1000px;margin:0 auto;padding:40px 28px 80px}
+  h1{font-size:24px;font-weight:700;margin:0 0 6px}
+  h2{font-size:18px;font-weight:700;margin:40px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  h3{font-size:15px;font-weight:600;margin:20px 0 6px;color:var(--mint)}
+  .sub{color:var(--muted);font-size:14px;margin:0}
+  .meta{color:var(--subtle);font-size:12.5px;margin-top:9px}
+  .lead{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:20px 0}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em}
+  td code,p code,li code{background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:12px;font-family:ui-monospace,Menlo,Consolas,monospace;color:#cdd6f0}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:12px 0}
+  ul,ol{margin:8px 0;padding-left:22px} li{margin:5px 0}
+  a{color:var(--blue);text-decoration:none}
+  .muted{color:var(--muted)} .small{font-size:12.5px}
+  .crit{border-left:3px solid var(--rose);background:rgba(255,122,144,.06);padding:11px 16px;margin:12px 0;border-radius:0 8px 8px 0}
+  .key{border-left:3px solid var(--mint);background:rgba(124,242,199,.05);padding:11px 16px;margin:12px 0;border-radius:0 8px 8px 0}
+  .warn{border-left:3px solid var(--amber);background:rgba(255,209,102,.06);padding:10px 16px;margin:12px 0;border-radius:0 8px 8px 0}
+  pre{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow:auto;font-size:12px;font-family:ui-monospace,Menlo,Consolas,monospace;color:#cdd6f0;line-height:1.5}
+  .num{display:inline-flex;width:23px;height:23px;border-radius:7px;background:var(--panel2);border:1px solid var(--line);align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--mint);margin-right:8px;flex:0 0 auto}
+  .pr{display:flex;gap:0;margin:9px 0;align-items:flex-start}
+  .tag{font-size:11px;padding:1px 8px;border-radius:999px;font-weight:600}
+  .claude{background:rgba(167,139,250,.14);color:#c4b5fd}
+  .codex{background:rgba(76,201,240,.12);color:#7dd9f5}
+  .grok{background:rgba(124,242,199,.12);color:var(--mint)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>친구/동료평가(peer-eval) — 2nd-B social 정합성 레이어 아키텍처</h1>
+  <p class="sub">"타인이 보는 나"를 사용자 확인 게이트로 받아 자기모델 정확도(정합성)를 높이는 구조</p>
+  <div class="meta">2026-06-05 KST · Claude(아키텍처·보안) lane · 병렬: <span class="tag codex">Codex UX 스펙</span> <span class="tag grok">Grok 소비자 리서치</span> 진행 중 → 종합 예정</div>
+</header>
+
+<div class="lead">
+  <strong>왜 이게 "기능 추가"가 아니라 "정확도의 과학적 핵심"인가.</strong> deep-research(검증됨): 자기보고는 <b>평가적·도덕적·외현 특성</b>에서 가장 부정확(SOKA, Vazire 2010). <b>타인 평가가 정확히 그 사각지대를 메우고 증분타당도</b>를 준다(Connelly & Ones 메타 N=44,178). 정확도는 <b>여러 독립 관찰의 누적</b>에서 온다(1~2명도 가치, 5~10명 이상적). 사용자의 <b>"본인 확인 과정"</b>은 *"잠정 제시 + 사용자 검증"* 원칙과 정확히 일치(verdict 방지). → 이 social 레이어는 <a href="accurate-person-model-structure.html">"정확히 파악하는 구조"</a>의 원칙 #6(외부 관점)을 제품으로 실현한 것.
+</div>
+
+<div class="crit">
+  <strong>⚠️ 보안 1순위.</strong> 이건 <b>교차사용자 데이터 공유</b> — 방금 감사가 지적한 <code>knowledge_sources</code> 전역읽기·인젝션과 같은 위험군이다. 설계 철칙: ① <b>전역 read 절대 금지</b>(친구관계+소유권으로만 스코프) ② peer 텍스트가 LLM(persona/Advisor)에 들어가므로 <b>저장형 프롬프트 인젝션 방어</b> 필수 — <b>사용자 확인 게이트가 1차 보안 통제</b>(확인된 것만 모델에 진입) + <code>&lt;UNTRUSTED&gt;</code> 펜싱(retrieve.ts 패턴) ③ 미성년(C10) 평가는 별도 보호.
+</div>
+
+<!-- DATA MODEL -->
+<h2>1. 데이터 모델 (제안)</h2>
+<pre>-- 양방향 친구 연결 (동의 기반)
+connections(
+  id, requester_id → users, addressee_id → users,
+  status: 'pending'|'accepted'|'blocked',   -- accepted 만 평가 가능
+  -- 무엇을 공유할지 granular consent (양쪽 각각)
+  requester_shares jsonb, addressee_shares jsonb,
+  created_at, responded_at,
+  UNIQUE(requester_id, addressee_id)
+)
+
+-- 동료평가 (A가 B에 대해)
+peer_evaluations(
+  id, evaluator_id → users (A),  subject_id → users (B),
+  -- 구조화 신호: 관찰된 강점/특성 (코드화, 자유텍스트와 분리)
+  observed_traits jsonb,         -- 예: [{trait, valence, note}] (lexicon-safe)
+  free_note_evaluator text,      -- "느낀점 / 내가 보는 너" (UNTRUSTED 취급)
+  -- 본인(subject) 확인 상태 — subject 만 변경 가능
+  subject_status: 'pending'|'confirmed'|'hidden',
+  confirmed_at,
+  created_at,
+  CONSTRAINT must_be_connected  -- 아래 RLS/CHECK 로 강제
+)</pre>
+<p class="small muted">provenance(C8 정신): 모든 peer eval은 evaluator + 타임스탬프를 carry. 익명 공격 차단 = 실명·상호 동의 전제(Codex UX/Grok 리서치가 확정).</p>
+
+<!-- AUTHZ -->
+<h2>2. Authz / RLS — 교차사용자 최소권한 (핵심)</h2>
+<table>
+<tr><th>작업</th><th>누가</th><th>RLS 정책 (개념)</th></tr>
+<tr><td>connection INSERT</td><td>requester=self</td><td><code>requester_id = auth.uid()</code></td></tr>
+<tr><td>connection 수락(UPDATE status)</td><td>addressee=self</td><td><code>addressee_id = auth.uid()</code> 만 accept/block</td></tr>
+<tr><td>peer_eval <b>INSERT</b></td><td>evaluator=self <b>+ accepted 연결 존재</b></td><td><code>evaluator_id = auth.uid()</code> <b>AND EXISTS(accepted connection between evaluator & subject)</b> — 친구 아닌 사람 평가 불가</td></tr>
+<tr><td>peer_eval <b>SELECT</b></td><td>subject 또는 evaluator 본인만</td><td><code>subject_id = auth.uid() OR evaluator_id = auth.uid()</code> — <b>제3자·전역 read 금지</b></td></tr>
+<tr><td>peer_eval 확인/숨김(UPDATE subject_status)</td><td><b>subject 만</b></td><td><code>subject_id = auth.uid()</code> — evaluator는 자기 평가의 상태를 못 바꿈</td></tr>
+<tr><td>persona 추론 진입</td><td>시스템</td><td><b><code>subject_status = 'confirmed'</code> 인 것만</b> 자기모델/프롬프트에 사용</td></tr>
+</table>
+<div class="key small">
+  <b>인젝션 방어 3중</b>: ① 친구-스코프 INSERT(아무나 못 씀) ② <b>사용자 확인 게이트</b>(confirmed 만 LLM 진입 — 가장 강한 통제) ③ <code>&lt;UNTRUSTED type="peer_note"&gt;</code> 펜싱 + sanitize(retrieve.ts 재사용). knowledge_sources 감사 교훈을 처음부터 반영.
+</div>
+
+<!-- SCIENCE INTEGRATION -->
+<h2>3. 과학 통합 — peer 신호를 어디에 어떻게 쓰나</h2>
+<div class="panel">
+<div class="pr"><span class="num">1</span><div><b>평가적·외현·도덕 특성에 가중</b>. SOKA상 자기보고가 약한 영역(대인 인상·성실성-실행·도덕)에 peer 신호를 1급으로, 내적 상태(불안·기분)는 자기보고 유지.</div></div>
+<div class="pr"><span class="num">2</span><div><b>누적 = confidence</b>. 평가자 수 N을 신뢰도로 표기("3명이 관찰"). 1명도 증분가치, 다수일수록 강함(Connelly & Ones).</div></div>
+<div class="pr"><span class="num">3</span><div><b>자기보고 vs 외부관점 분리 표시</b>. persona에 "내가 본 나" / "밖에서 본 나" 두 트랙. 불일치(blind spot)는 *성장 단서*로 잠정 제시 — 단정 금지.</div></div>
+<div class="pr"><span class="num">4</span><div><b>삼각측량</b>. 자기보고 + 행동 흔적(기록) + peer 신호 3소스가 수렴하면 고신뢰, 갈리면 "탐구 질문"으로. (Bollich: 일치가 아니라 행동 준거로 벤치마킹.)</div></div>
+<div class="pr"><span class="num">5</span><div><b>확인 게이트 = 과학+보안 둘 다</b>. subject가 검토·수용 → 잠정성·자율성 보장(라벨 효과 완화) + 인젝션 차단.</div></div>
+</div>
+
+<!-- RISKS -->
+<h2>4. 리스크 & 완화</h2>
+<table>
+<tr><th>리스크</th><th>완화</th></tr>
+<tr><td><b>toxicity·harsh 피드백</b>(익명 honest-feedback 앱 셧다운 패턴 — Grok 리서치 확인 중)</td><td>실명·상호 동의 전제, 강점-우선 구조화, subject가 hide 가능, C9 안전분류기 적용, 금지 lexicon</td></tr>
+<tr><td><b>creepiness·프라이버시</b>("친구가 내 데이터를 봄")</td><td>opt-in·granular 공유 동의, subject가 무엇이 보이고 쓰이는지 통제, 평가는 "나에 대한 평가"만(데이터 전체 공유 아님)</td></tr>
+<tr><td><b>저장형 프롬프트 인젝션</b>(악의적 친구)</td><td>§2 3중 방어(친구스코프·확인게이트·UNTRUSTED 펜싱)</td></tr>
+<tr><td><b>관계 손상</b>(부정 평가로 갈등)</td><td>건설적 프레이밍(Codex), 평가는 subject에게만 보임, 누적·집계로 개별 노출 완화 옵션</td></tr>
+<tr><td><b>미성년(C10)</b></td><td>미성년 대상/주체 평가는 별도 정책 — 기본 비활성 또는 보호자 맥락. consent_records 연동</td></tr>
+</table>
+
+<!-- OPEN -->
+<h2>5. Simon 결정 필요 (제품)</h2>
+<ol>
+  <li><b>실명 vs 가명 / 상호 공개</b>? (toxicity·신뢰 trade-off — Grok 리서치 반영)</li>
+  <li><b>일방 vs 상호 평가</b> 필수? (상호면 reciprocity, 일방이면 단순)</li>
+  <li><b>peer 신호 가중치</b> — 자기보고 대비 얼마나? (과학은 평가적 특성에 외부 우위라 하나 제품 보정 필요)</li>
+  <li><b>출시 범위</b> — XPRIZE 데모에 넣을지(차별화 강점) vs v-next(보안·QA 비용)</li>
+  <li><b>프라이버시 기본값</b> — opt-in 확정(필수)</li>
+</ol>
+
+<div class="warn small">
+  <strong>이 문서는 Claude(아키텍처/보안) lane 산출.</strong> <span class="tag codex">Codex</span>가 UX·플로우·카피를, <span class="tag grok">Grok</span>가 소비자 수용·toxicity 리스크를 병렬 작성 중 → 세 산출을 <b>단일 "social 정합성 레이어 제안서"</b>로 종합해 Simon 결정에 올림. 구현은 결정 후(보안 민감 + 신규 RLS 마이그레이션 = 배포 게이트).
+</div>
+
+<p class="small muted" style="margin-top:32px;border-top:1px solid var(--line);padding-top:14px">
+근거: deep-research(SOKA·informant·multi-observer 검증) + knowledge_sources 인젝션 감사 교훈 + 기존 C8/C9/C10. 산출: 허브 <code>projects/2nd-B/social-peer-eval-architecture.html</code>.
+</p>
+</div>
+</body>
+</html>

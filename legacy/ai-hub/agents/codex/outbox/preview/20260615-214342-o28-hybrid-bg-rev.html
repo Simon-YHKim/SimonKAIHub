@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex O-28 Hybrid Background Revision</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #05070a;
+      --panel: rgba(70, 182, 255, 0.08);
+      --line: rgba(70, 182, 255, 0.28);
+      --text: #ccfaff;
+      --muted: rgba(149, 218, 255, 0.72);
+      --accent: #46b6ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 30% 0%, rgba(70, 182, 255, 0.12), transparent 34%), var(--bg);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+      padding: 40px 20px;
+    }
+    main { max-width: 920px; margin: 0 auto; }
+    .hero {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    h2 { margin: 26px 0 10px; font-size: 16px; color: var(--accent); }
+    p { margin: 0 0 10px; color: var(--muted); }
+    ul { margin: 0; padding-left: 20px; color: var(--muted); }
+    code { color: var(--text); background: rgba(204, 250, 255, 0.08); padding: 1px 5px; border-radius: 4px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .card { border: 1px solid var(--line); border-radius: 8px; padding: 16px; background: rgba(5, 7, 10, 0.58); }
+    @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <h1>O-28 Hybrid Background Revision</h1>
+      <p>Codex implemented the ⑤-rev comparison-board candidate on branch <code>codex/o28-concept5b-rev-20260615-2137</code>.</p>
+      <p>Commit: <code>5d6831735dbad05435876b2379bdc65842e16168</code></p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Scope</h2>
+        <ul>
+          <li>Added <code>concept-5b-hybrid-rev.html</code>.</li>
+          <li>Added <code>shot-5b.png</code>.</li>
+          <li>Updated the board to 6 concepts.</li>
+          <li>Fixed concept ⑤ character asset path.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Verification</h2>
+        <ul>
+          <li><code>git diff --check HEAD^ HEAD</code> PASS.</li>
+          <li>Em dash checks PASS.</li>
+          <li>Headless Chrome thumbnail render PASS.</li>
+          <li>Board render PASS.</li>
+        </ul>
+      </div>
+    </section>
+
+    <h2>Section 19 Note</h2>
+    <p>O-28 triggers the multimodal pair path. No fresh Antigravity O-28 spec packet was present, so this is Codex's visual slice from Simon's concrete parameters. Claude can request AG review before merge if strict pair signoff is required.</p>
+  </main>
+</body>
+</html>

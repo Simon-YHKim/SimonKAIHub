@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>de19f41 Re-Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d10;
+      --panel: #151922;
+      --panel2: #1d2430;
+      --text: #f4f7fb;
+      --muted: #a9b2c3;
+      --line: #2d3544;
+      --ok: #7bd88f;
+      --warn: #ffcc66;
+      --bad: #ff7b7b;
+      --accent: #7aa7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 18px 48px;
+    }
+    header {
+      display: grid;
+      gap: 14px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 22px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(26px, 5vw, 42px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    h2, h3 { margin: 0; letter-spacing: 0; }
+    h3 { font-size: 15px; margin-bottom: 8px; }
+    p { margin: 0 0 10px; color: var(--muted); }
+    code {
+      color: #dce8ff;
+      background: #10141c;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+    }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 999px;
+      padding: 6px 10px;
+      color: var(--muted);
+    }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 22px 0;
+    }
+    .card, .box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .card strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.15;
+      margin-bottom: 4px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .box { background: var(--panel2); }
+    .full { grid-column: 1 / -1; }
+    ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 5px 0; }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .callout {
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid #4d3d1a;
+      background: #1e1a0e;
+      border-radius: 8px;
+    }
+    @media (max-width: 760px) {
+      main { padding: 24px 14px 36px; }
+      .summary, .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="meta">
+        <span class="pill">Codex Re-Gate</span>
+        <span class="pill">2nd-B</span>
+        <span class="pill">claude/cycle-3-hardening@de19f41</span>
+        <span class="pill">2026-06-06 03:59 KST</span>
+      </div>
+      <h1>de19f41 improves safety, but not 100/100</h1>
+      <p>Full verification passed. Account, persona, and safety tests improved. Privacy analytics consent still needs stale-completion protection.</p>
+    </header>
+
+    <section class="summary">
+      <div class="card">
+        <strong class="warn">97/100</strong>
+        <p>Score remains provisional. Prior proof gates are still open.</p>
+      </div>
+      <div class="card">
+        <strong class="ok">Verify PASS</strong>
+        <p>Lint, type-check, checks, and Jest 91 suites / 824 tests passed.</p>
+      </div>
+      <div class="card">
+        <strong class="bad">P1 Open</strong>
+        <p>Queued privacy saves can still run stale analytics consent side effects.</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="box">
+        <h3>Accepted</h3>
+        <ul>
+          <li>Account failure copy no longer claims intact data after destructive wipe starts.</li>
+          <li>Persona build waits for <code>isMinor !== null</code>.</li>
+          <li>RouteCrisis and unknown-zone tests were added.</li>
+          <li>Streak query limit increased to 500.</li>
+        </ul>
+      </article>
+      <article class="box">
+        <h3>Privacy Blocker</h3>
+        <ul>
+          <li><code>saveChain</code> improves DB write ordering.</li>
+          <li>Each queued completion still calls <code>setAnalyticsConsent(...)</code>.</li>
+          <li>An older completion can briefly re-enable analytics after opt-out.</li>
+        </ul>
+      </article>
+      <article class="box">
+        <h3>Required Next</h3>
+        <ul>
+          <li>Guard analytics side effects with latest-payload or version checks.</li>
+          <li>Add rapid-toggle regression coverage.</li>
+          <li>Re-run full <code>npm run verify</code>.</li>
+        </ul>
+      </article>
+      <article class="box">
+        <h3>Still Open</h3>
+        <ul>
+          <li>Deployment env truth, legal sign-off, runtime screenshots.</li>
+          <li>Pressable semantics, route shell, action rows, jargon cleanup.</li>
+          <li>Settings/account/audit keyboard and broad-delete proof.</li>
+        </ul>
+      </article>
+      <article class="box full">
+        <h3>Recommendation</h3>
+        <ul>
+          <li>Do not call PR213 ready for live merge yet.</li>
+          <li>One small privacy patch can close the new P1 if it includes tests.</li>
+          <li>The larger UI proof bundle is still required before 100/100.</li>
+        </ul>
+      </article>
+    </section>
+
+    <div class="callout">
+      <p><strong>Codex verdict:</strong> keep <code>de19f41</code>, but follow it with a privacy stale-completion guard and proof. This is not ready for a 100/100 label.</p>
+    </div>
+  </main>
+</body>
+</html>

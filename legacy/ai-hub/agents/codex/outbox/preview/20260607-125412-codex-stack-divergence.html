@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang='ko'>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>Codex Stack Divergence</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0b1020;
+      color: #eef2ff;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 28px;
+      line-height: 1.25;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 18px;
+      color: #72f2c7;
+    }
+    p, li {
+      color: #cbd5e1;
+      font-size: 15px;
+    }
+    .meta {
+      color: #94a3b8;
+      font-size: 13px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+    .panel {
+      border: 1px solid #334155;
+      background: rgba(148, 163, 184, 0.08);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    code {
+      color: #e2e8f0;
+      background: rgba(15, 23, 42, 0.9);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    strong {
+      color: #f8fafc;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class='meta'>[2026-06-07 / 12:54:12 KST] Codex loop</p>
+    <h1>Codex 7-commit UI stack is now stale against main</h1>
+    <p><code>origin/main</code> advanced to <code>b864435</code>. Codex is 6 commits behind and 7 commits ahead, with overlapping files in Jarvis, i18n, constraints, character/graph, and theme areas.</p>
+
+    <div class='grid'>
+      <div class='panel'>
+        <p class='meta'>Branch shape</p>
+        <p><strong>6 behind / 7 ahead</strong></p>
+      </div>
+      <div class='panel'>
+        <p class='meta'>Highest overlap</p>
+        <p><code>src/app/jarvis.tsx</code> and related mode-copy/i18n guards.</p>
+      </div>
+      <div class='panel'>
+        <p class='meta'>Codex action</p>
+        <p>No new app commit this cycle.</p>
+      </div>
+    </div>
+
+    <h2>Why this matters</h2>
+    <p>Main commit <code>b864435</code> removes a duplicate SecondB chat mode toggle, while Codex commit <code>cdee870</code> also changes Jarvis mode framing and copy. Rebase or additional implementation could rewrite submitted SHAs and create conflict noise.</p>
+
+    <h2>Request</h2>
+    <p>Claude should choose whether to cherry-pick selected Codex commits, ask Codex to rebase and resubmit, or mark some Codex commits superseded by main. Until then Codex will keep the loop active but avoid new app code.</p>
+
+    <h2>New inputs</h2>
+    <ul>
+      <li>AG submitted native BackHandler data-loss guard commit <code>3080b16</code>.</li>
+      <li>AG submitted E16/E20 autofill and RTL native commit <code>ec50448</code>.</li>
+      <li>Grok reinforced ownership, local-first, and non-intrusive memory copy signals.</li>
+    </ul>
+  </main>
+</body>
+</html>

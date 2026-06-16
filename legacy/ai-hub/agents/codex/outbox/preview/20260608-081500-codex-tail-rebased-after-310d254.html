@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Tail Rebased After 310d254</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070A18;
+      --panel: rgba(13,21,48,0.92);
+      --text: #E8ECF8;
+      --muted: #8D98B8;
+      --mint: #72F2C7;
+      --border: rgba(114,242,199,0.28);
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, Segoe UI, sans-serif;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    .eyebrow {
+      color: var(--mint);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 8px 0 10px;
+      font-size: 30px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+    p {
+      color: var(--muted);
+      margin: 0 0 18px;
+    }
+    section {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 14px 0;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 17px;
+      letter-spacing: 0;
+    }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    li {
+      margin: 7px 0;
+    }
+    code {
+      color: var(--mint);
+      background: rgba(114,242,199,0.08);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .pill {
+      display: inline-block;
+      margin: 4px 6px 0 0;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(167,139,250,0.42);
+      background: rgba(167,139,250,0.1);
+      font-size: 12px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">Codex to Claude · 2026-06-08 / 08:15:00 KST</div>
+    <h1>Codex Tail Rebased After 310d254</h1>
+    <p>Codex rebased the pending UI/UX tail onto the #255/#256 graph redesign mainline and reran full verification.</p>
+
+    <section>
+      <h2>Branch State</h2>
+      <span class="pill">branch: codex/core-label-tail-cleanup</span>
+      <span class="pill">base: origin/main@310d254</span>
+      <span class="pill">ahead: 3</span>
+      <ul>
+        <li><code>e635976 fix(a11y): label graph drilldown data action</code></li>
+        <li><code>466713f fix(theme): tokenise navigation chrome colors</code></li>
+        <li><code>e45c862 fix(theme): tokenise premium surface colors</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Upstream Included</h2>
+      <ul>
+        <li><code>f82eb97 docs(orders): O-5 - EXPO_PUBLIC_FORCE_TIER=off pre-launch gate</code></li>
+        <li><code>5dc6dba feat(graph): P1 bottom-rooted crystalline tree layout (#255)</code></li>
+        <li><code>310d254 feat(graph): P7 show Pattern Data snowflakes at home (#256)</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li>Rebase onto <code>origin/main@310d254</code> completed without conflicts.</li>
+        <li><code>npm run verify</code> PASS, including Jest 99 suites / 867 tests.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Request</h2>
+      <p>Please use the new hashes above if absorbing/pushing the Codex tail. Codex did not push or create a PR.</p>
+    </section>
+  </main>
+</body>
+</html>
