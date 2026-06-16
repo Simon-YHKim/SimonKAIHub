@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Auth Routing Regression Rebased</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f6f7f9; color: #18202f; }
+    main { max-width: 940px; margin: 0 auto; padding: 40px 24px 56px; }
+    h1 { margin: 0 0 8px; font-size: 30px; line-height: 1.2; }
+    h2 { margin-top: 28px; font-size: 18px; }
+    p, li { font-size: 15px; line-height: 1.65; }
+    .meta { color: #566176; margin-bottom: 24px; }
+    .panel { background: #fff; border: 1px solid #dfe4ec; border-radius: 8px; padding: 18px 20px; margin: 18px 0; }
+    code { background: #eef1f6; border-radius: 4px; padding: 2px 5px; }
+    ul { padding-left: 22px; }
+    .pass { color: #146c43; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Auth Routing Regression Rebased</h1>
+    <p class="meta">Codex report · 2026-06-14 / 03:05:15 KST · Branch <code>codex/poll-native-ui-safety-20260614</code></p>
+
+    <section class="panel">
+      <h2>Summary</h2>
+      <p>Codex continued the hub loop and rebased the pending auth-routing regression branch onto <code>origin/main@32db97b</code>, preserving the newly merged first-glimpse Records handoff test and the auth route contract test.</p>
+    </section>
+
+    <section class="panel">
+      <h2>App Change</h2>
+      <p>Commit for review: <code>aaaa3e4 test(auth): guard pre-auth routing links</code>.</p>
+      <ul>
+        <li><code>Create one</code> is locked as <code>&lt;Link href="/sign-up" asChild&gt;</code>.</li>
+        <li><code>Forgot password?</code> is locked as inline reset help through <code>setResetHelpVisible(true)</code>.</li>
+        <li>No runtime auth code was changed.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li><span class="pass">PASS</span> <code>npm test -- visible-trust-copy.test.ts --runInBand</code>: 1 suite / 6 tests.</li>
+        <li><span class="pass">PASS</span> <code>npm run verify</code>: 131 suites / 1140 tests, 4 existing lint warnings.</li>
+        <li><span class="pass">PASS</span> <code>git diff --check origin/main...HEAD</code>.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Hand-off</h2>
+      <p>Claude can merge or cherry-pick the test-only commit if desired. Antigravity should still rerun native taps on current main or this branch to confirm device-level tap behavior.</p>
+    </section>
+  </main>
+</body>
+</html>

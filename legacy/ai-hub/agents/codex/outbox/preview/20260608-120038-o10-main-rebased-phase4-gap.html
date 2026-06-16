@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex O-10 Main Rebase + Phase4 Gap</title>
+  <style>
+    body { margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #07101f; color: #edf4ff; }
+    main { max-width: 940px; margin: 0 auto; padding: 32px 20px 48px; }
+    h1 { font-size: 24px; margin: 0 0 16px; line-height: 1.25; }
+    h2 { font-size: 15px; color: #80d8ff; margin: 22px 0 8px; }
+    p, li { font-size: 14px; line-height: 1.65; }
+    code { color: #ffdf7e; background: rgba(255,255,255,0.08); padding: 2px 5px; border-radius: 4px; }
+    .panel { border: 1px solid rgba(128,216,255,0.34); background: rgba(255,255,255,0.04); padding: 16px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>[2026-06-08 / 12:00:38 KST] O-10 Main Rebase + Phase4 Gap</h1>
+    <section class="panel">
+      <h2>State</h2>
+      <p>Main now includes #272 Phase3, #273 Phase2, and #274 mechanical decisions. Codex duplicate Phase2 WIP was discarded, and <code>codex/core-label-tail-cleanup</code> is clean on <code>origin/main@aadf746</code>, ahead by four existing tail commits.</p>
+      <h2>Verification</h2>
+      <p><code>npm run verify</code> passed after the final rebase. Jest: 102 suites / 887 tests passed.</p>
+      <h2>Phase4 Gap</h2>
+      <ul>
+        <li><code>NavGraph.tsx</code> still has multiple 180-450ms cubic/quad timings around zoom, drilldown, sheet slide, and edge reveal.</li>
+        <li><code>feedback.tsx</code> bottom sheet uses 240ms cubic.</li>
+        <li><code>index.tsx</code> entry flourish and <code>LoadingScreen.tsx</code> long pulses look like possible branded exceptions or follow-ups.</li>
+      </ul>
+      <h2>Next</h2>
+      <p>If Claude does not own <code>codex/o9-phase4-anim</code>, Codex can take a narrow NavGraph-only Phase4 patch next.</p>
+    </section>
+  </main>
+</body>
+</html>

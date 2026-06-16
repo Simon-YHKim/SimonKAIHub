@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>원격 오더 파이프라인 — 핸드폰에서 4-AI 허브 지시</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e1018; --panel:#161a26; --panel2:#1d2230; --line:#2a3142;
+    --ink:#e8ecf6; --muted:#9aa3ba; --faint:#6b7490;
+    --mint:#72f2c7; --mint-dim:rgba(114,242,199,.14); --warn:#f2b872;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:Pretendard,system-ui,-apple-system,sans-serif;line-height:1.6;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:40px 22px 80px}
+  h1{font-size:25px;font-weight:700;letter-spacing:-.02em;margin:0 0 6px}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 28px}
+  .status{display:inline-flex;align-items:center;gap:8px;background:var(--mint-dim);
+    color:var(--mint);font-size:13px;font-weight:600;padding:5px 12px;border-radius:7px;
+    border:1px solid rgba(114,242,199,.25);margin-bottom:24px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);
+    box-shadow:0 0 8px var(--mint)}
+  h2{font-size:16px;font-weight:700;margin:34px 0 12px;letter-spacing:-.01em}
+  h2 .n{color:var(--faint);font-weight:600;margin-right:9px}
+  p{margin:0 0 12px;font-size:14.5px;color:#cfd6e8}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:18px 20px;margin:14px 0}
+  .diag{font-size:14px;color:var(--muted)}
+  .diag b{color:var(--ink);font-weight:600}
+  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:8px 0 4px;
+    font-size:13px}
+  .flow .step{background:var(--panel2);border:1px solid var(--line);border-radius:8px;
+    padding:8px 12px;color:var(--ink);font-weight:500}
+  .flow .arr{color:var(--mint);font-weight:700}
+  .flow .me{border-color:rgba(114,242,199,.4);background:var(--mint-dim);color:var(--mint)}
+  /* prompt card */
+  .promptbox{position:relative;background:#0a0c13;border:1px solid var(--line);
+    border-radius:12px;margin:12px 0}
+  .promptbar{display:flex;justify-content:space-between;align-items:center;
+    padding:11px 14px;border-bottom:1px solid var(--line)}
+  .promptbar .label{font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.02em}
+  .copybtn{background:var(--mint);color:#06120d;border:0;border-radius:7px;
+    padding:7px 15px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;
+    transition:transform .08s ease,background .15s ease}
+  .copybtn:hover{transform:translateY(-1px)}
+  .copybtn.done{background:#3a6;color:#fff}
+  pre{margin:0;padding:16px 16px 18px;overflow-x:auto;font-size:12.5px;line-height:1.65;
+    font-family:"SF Mono",ui-monospace,"Cascadia Code",Consolas,monospace;color:#d6deef;
+    white-space:pre-wrap;word-break:break-word}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px}
+  th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--faint);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+  td b{color:var(--ink)}
+  .chip{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:5px;
+    background:var(--panel2);border:1px solid var(--line);color:var(--muted);margin-right:5px}
+  ol{margin:8px 0;padding-left:20px}ol li{margin:7px 0;font-size:14px;color:#cfd6e8}
+  code{background:var(--panel2);padding:1px 6px;border-radius:5px;font-size:12.5px;
+    font-family:"SF Mono",ui-monospace,Consolas,monospace;color:var(--mint)}
+  .note{font-size:13px;color:var(--faint);margin-top:6px}
+  .ex{background:var(--panel2);border-left:2px solid var(--mint);padding:10px 14px;
+    border-radius:0 8px 8px 0;font-size:13px;color:#cfd6e8;margin:8px 0}
+  .foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+    color:var(--faint);font-size:12.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="status"><span class="dot"></span> 원격 오더 파이프라인 LIVE — 4-AI 허브 정상 가동</div>
+  <h1>핸드폰에서 4-AI 허브에 지시하기</h1>
+  <p class="sub">Simon이 밖에서 모바일로 지시 → PC의 Claude 오케스트레이터가 받아 codex·grok·antigravity에 분배·수행 → 결과 회신. 2026-06-15 셋업.</p>
+
+  <h2><span class="n">01</span>왜 안 먹었나 (진단)</h2>
+  <div class="panel diag">
+    <p style="margin-bottom:8px">채널 설계(<b>2nd-B 레포의 <code>ORDERS.md</code></b>, PROTOCOL §33)는 이미 있었는데, <b>그 파일을 읽던 허브 데몬이 죽어 있었다</b>(no PID, CONTROL=paused). 그래서 네가 핸드폰으로 남긴 오더를 <b>아무도 폴링하지 않아</b> 실행이 안 됐다.</p>
+    <p style="margin:0">고친 것 → ① <b>CONTROL.md = running</b> 복원(대기 중이던 codex/grok/AG 깨움) · ② <b>PC의 Claude <code>/loop</code> 세션이 데몬 대신 ORDERS 폴러+분배자 인계</b> · ③ AG는 <code>agy-pty</code> ConPTY 래퍼로 헤드리스 부활(Gemini CLI 6/18 폐기 대비).</p>
+  </div>
+
+  <h2><span class="n">02</span>핸드폰 세션에 붙여넣을 프롬프트 (디렉터 모드)</h2>
+  <p>핸드폰 Claude Code 세션을 열고 <b>아래 프롬프트를 한 번 붙여넣어</b> 디렉터로 세팅한 뒤, 그다음부터는 그냥 <b>자연어로 시키면</b> 알아서 오더를 포맷·푸시한다.</p>
+
+  <div class="promptbox">
+    <div class="promptbar">
+      <span class="label">📋 디렉터 세션 프롬프트 — 핸드폰에 1회 붙여넣기</span>
+      <button class="copybtn" onclick="cp(this,'p1')">복사</button>
+    </div>
+    <pre id="p1">[역할] 너는 Simon의 2nd-B 모바일 "오더 디렉터"다. Simon이 자연어로 지시하면, 그걸 PC에서 도는 Claude 오케스트레이터(/loop 실행자)가 픽업하도록 2nd-B 레포 ORDERS.md 의 "## OPEN"에 정식 오더로 기록하고 push 한다.
+
+[절대 경계 — single-writer 충돌 방지]
+- 너는 ORDERS.md 의 "## OPEN"에 "오더 블록만 추가"한다.
+- BOARD.md · CONTROL.md · agents/ · 다른 코드/브랜치는 절대 건드리지 않는다 (그건 PC 실행자 단독 소유).
+- OPEN→DONE 이동, 결과 회신도 PC가 한다. 너는 오더만 넣는다.
+
+[매 지시마다 이 절차를 그대로 수행]
+1. 2nd-B 레포 확보: 있으면 cd, 없으면  git clone https://github.com/Simon-YHKim/2nd-B  후 진입
+2. git fetch origin && git checkout main && git pull --ff-only origin main
+3. 현재 KST 시각 확보:  date "+%Y-%m-%d / %H:%M:%S"
+4. ORDERS.md 에서 "## OPEN" 줄 바로 아래(맨 위 공지 다음)에 직전 최대 O-번호+1 로 아래 블록 삽입:
+
+### [O-<번호> / <YYYY-MM-DD / HH:MM:SS KST>] <한 줄 제목>
+- 지시: <Simon 지시 원문 + 네가 명확히 보강한 구체 요구>
+- 대상: <auto | codex | grok | ag | claude>   (모르면 auto — PC가 라우팅)
+- 우선순위: <critical | high | normal>
+- 게이트: <none | 파괴 | 비용 | secrets | 임상 | 법무>
+- 완료기준: <PC가 무엇을 보여주면 끝인가, 1~2줄>
+
+5. git add ORDERS.md && git commit -m "chore(orders): O-<번호> <제목>" && git push origin main
+6. push 성공 시 정확히 한 줄만 출력: "✅ O-<번호> 전송 — PC Claude가 다음 폴(≤10분)에 픽업. 결과는 ORDERS.md ## DONE." 실패하면 에러를 그대로 보여줘라.
+
+[게이트] 파괴/실비용(결제·API폭증)/secrets/안전임상/법무 성격이면 "- 게이트:"에 명시 — PC가 수행 전 Simon에게 확인한다.
+
+준비 끝. 다음 메시지부터 내가 시키는 게 곧 오더다. 첫 지시를 기다려.</pre>
+  </div>
+  <p class="note">※ 위를 1회 붙여넣은 뒤 → 예: "그래프 첫 화면 줌 더 키우고 파워온 스윕 0.2초로" 라고만 치면, 디렉터가 O-번호 블록으로 포맷해서 push 한다.</p>
+
+  <h2><span class="n">03</span>흐름 한눈에</h2>
+  <div class="panel">
+    <div class="flow">
+      <span class="step">📱 핸드폰 지시</span><span class="arr">→</span>
+      <span class="step">디렉터가 ORDERS.md push</span><span class="arr">→</span>
+      <span class="step me">PC Claude /loop 폴링·수행</span><span class="arr">→</span>
+      <span class="step">담당 AI 분배·실행</span><span class="arr">→</span>
+      <span class="step">## DONE 회신 + 라이브</span>
+    </div>
+    <p class="note" style="margin-top:10px">PC Claude가 ≤10분마다 <code>git fetch</code>로 <code>## OPEN</code>을 읽어 새 오더를 잡고, 분해해서 담당 AI를 헤드리스로 spawn, 결과를 통합해 <code>## DONE</code>에 KST 타임스탬프로 회신한 뒤 그 블록을 OPEN→DONE으로 옮긴다.</p>
+  </div>
+
+  <h2><span class="n">04</span>누가 무엇을 받나 (분배 라우팅)</h2>
+  <table>
+    <tr><th>대상</th><th>역할 (ROUTING.md)</th><th>이런 오더</th></tr>
+    <tr><td><b>🟦 claude</b></td><td>오케스트레이션·코딩·아키텍처·통합·git·리뷰</td><td>구현, 버그픽스, 리팩토링, 머지, QA 종합</td></tr>
+    <tr><td><b>🟨 codex</b></td><td>UI/UX·이미지/에셋 + 자기공간 직접 구현</td><td>화면 디자인, 컴포넌트, 에셋 생성, UI 결함 수정</td></tr>
+    <tr><td><b>🟩 ag</b></td><td>Android 네이티브·에뮬 디바이스 QA</td><td>실기기/에뮬 검수, 크래시·ANR·성능, 네이티브 빌드</td></tr>
+    <tr><td><b>🟪 grok</b></td><td>X(소셜)·글로벌 소비자 리서치 (인사이트만)</td><td>"이 기능/문구 글로벌 반응?" 결정 전 리서치</td></tr>
+    <tr><td><b>auto</b></td><td>PC Claude가 내용 보고 라우팅 + 필요시 멀티 분배</td><td>잘 모르겠으면 auto — 알아서 쪼개 분배</td></tr>
+  </table>
+
+  <h2><span class="n">05</span>게이트 &amp; 약속</h2>
+  <div class="panel">
+    <p style="margin-bottom:6px"><span class="chip">자동 수행</span> 일반 dev 오더(구현·QA·리서치·디자인)는 확인 없이 바로 분배·수행한다.</p>
+    <p style="margin:0"><span class="chip" style="border-color:rgba(242,184,114,.4);color:var(--warn)">수행 전 확인</span> 파괴적 작업 · 실제 비용(결제/API 폭증) · secrets/credentials · 안전·임상 표현 · 법무 — 이 5개만 수행 전에 너한테 묻는다.</p>
+  </div>
+
+  <div class="ex">
+    <b>팁</b> — PC 앞에 있을 땐 이 채널 안 거쳐도 돼. 이 <code>/loop</code> 세션에 직접 말하면 즉시 분배한다. ORDERS.md 채널은 <b>외출 중 비동기 지시</b>용이야.
+  </div>
+
+  <div class="foot">
+    셋업: 2026-06-15 · CONTROL=running · 채널=2nd-B <code>ORDERS.md</code> ## OPEN(O-13부터) · 폴러=PC Claude <code>/loop</code> · 분배=codex/grok/ag 헤드리스 spawn · 보고=## DONE + 라이브 URL.
+  </div>
+
+</div>
+<script>
+function cp(btn,id){
+  const t=document.getElementById(id).innerText;
+  navigator.clipboard.writeText(t).then(()=>{
+    const o=btn.textContent;btn.textContent="✓ 복사됨";btn.classList.add("done");
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove("done")},1600);
+  }).catch(()=>{
+    const r=document.createRange();r.selectNodeContents(document.getElementById(id));
+    const s=getSelection();s.removeAllRanges();s.addRange(r);
+    try{document.execCommand("copy");btn.textContent="✓ 복사됨";}catch(e){btn.textContent="수동 복사";}
+    setTimeout(()=>{btn.textContent="복사"},1600);
+  });
+}
+</script>
+</body>
+</html>

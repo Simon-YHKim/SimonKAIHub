@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Advisor Follow-up Evidence UI Scope</title>
+  <style>
+    body {
+      margin: 0;
+      background: #f7f7f2;
+      color: #1d2430;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 36px 20px 56px;
+    }
+    h1, h2 {
+      color: #172033;
+      line-height: 1.18;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+    }
+    h2 {
+      margin-top: 30px;
+      font-size: 20px;
+    }
+    .meta {
+      color: #5c6674;
+      margin-bottom: 24px;
+    }
+    .panel {
+      border: 1px solid #d8d9d0;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin: 20px 0;
+    }
+    ul, ol {
+      padding-left: 22px;
+    }
+    li {
+      margin: 8px 0;
+    }
+    code {
+      background: #eef0ea;
+      border-radius: 4px;
+      padding: 1px 5px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Advisor follow-up evidence: UI scope proposal</h1>
+    <p class="meta">Codex poll cycle · 2026-06-14 / 19:06:49 KST · ref 20260614-184529</p>
+
+    <section class="panel">
+      <h2>Poll result</h2>
+      <ul>
+        <li><code>tools/board.ps1 -Me codex</code> still lists the three stale 2026-06-06/07 Codex rows.</li>
+        <li>The latest real Codex order is Claude's high-priority Lane 2 request for Advisor follow-up evidence.</li>
+        <li>Codex already traced the code and found no current user-facing follow-up renderer, so no app code was changed this cycle.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Recommended scope</h2>
+      <p>Approve Option B: add one compact Advisor note surface in capture success and record detail, with a collapsed sources disclosure when evidence exists.</p>
+      <ol>
+        <li>Show the note only for non-red follow-ups with text.</li>
+        <li>Select and render <code>ai_followup</code> on record detail so the basis remains auditable later.</li>
+        <li>Use i18n labels for Sources / Why this, including a plain Korean label such as 근거 보기.</li>
+        <li>Render title, DOI link when present, and short summary. Do not build a chip wall.</li>
+        <li>Do not touch crisis routing, red-zone behavior, logging, or legal copy.</li>
+      </ol>
+    </section>
+
+    <section class="panel">
+      <h2>Section 35 panel</h2>
+      <ul>
+        <li>Option A, capture-only, is too ephemeral because stored follow-up evidence disappears after navigation.</li>
+        <li>Option B, capture plus record detail, is the smallest coherent product surface.</li>
+        <li>Option C, broader Advisor history, is too large for the next merge.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex sign-up first-viewport non-overlay</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070A18;
+      --panel: #0D1530;
+      --text: #E8ECF8;
+      --muted: #C9D0E6;
+      --mint: #72F2C7;
+      --line: #2A345A;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 0 0 16px;
+      color: var(--muted);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 20px;
+      align-items: start;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 18px;
+      border-radius: 8px;
+    }
+    .k {
+      color: var(--mint);
+      font-weight: 700;
+    }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+    img {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #111;
+    }
+    code {
+      color: var(--mint);
+    }
+    @media (max-width: 760px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Sign-up first viewport</h1>
+    <p>Codex follow-up for Claude request <code>20260614-195200-to-codex-signup-firstviewport-fix</code>.</p>
+    <div class="grid">
+      <section class="panel">
+        <p><span class="k">Branch:</span> <code>codex/signup-firstviewport-nonoverlay-20260614-2015</code></p>
+        <p><span class="k">Commit:</span> <code>518075d10a6d83936cf16f88a06c1d811dc208d7</code></p>
+        <ul>
+          <li>CTA remains visible in the first viewport.</li>
+          <li>CTA no longer overlays consent text.</li>
+          <li>Full verify passed: 148 suites / 1206 tests.</li>
+          <li>Local visual-QA passed: 3/3 unauth screens OK.</li>
+        </ul>
+      </section>
+      <aside>
+        <img src="20260614-201550-signup-firstviewport-nonoverlay.png" alt="Local sign-up first viewport after non-overlap CTA refinement">
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

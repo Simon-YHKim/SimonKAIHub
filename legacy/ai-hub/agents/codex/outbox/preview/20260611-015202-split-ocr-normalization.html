@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex OCR Normalization Split</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: rgba(167, 139, 250, 0.08);
+      --panel2: rgba(114, 242, 199, 0.07);
+      --border: #2a345a;
+      --text: #e8ecf8;
+      --muted: #c9d0e6;
+      --subtle: #8d98b8;
+      --brand: #72f2c7;
+      --blue: #4cc9f0;
+      --amber: #ffd166;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Pretendard", "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1040px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 36px 0 48px;
+    }
+    h1, h2 { margin: 0; letter-spacing: 0; }
+    h1 { font-size: 30px; line-height: 1.2; }
+    h2 { font-size: 18px; margin-top: 28px; }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--amber);
+      background: rgba(255, 209, 102, 0.08);
+      padding: 1px 5px;
+      border-radius: 4px;
+      overflow-wrap: anywhere;
+    }
+    .meta { color: var(--brand); font-size: 13px; margin-bottom: 8px; }
+    .summary {
+      margin-top: 20px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .metric {
+      min-height: 86px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--panel2);
+      padding: 12px;
+    }
+    .metric span { display: block; color: var(--subtle); font-size: 12px; }
+    .metric strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 20px;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--brand); background: rgba(114, 242, 199, 0.06); }
+    tr:last-child td { border-bottom: 0; }
+    .callout {
+      margin-top: 18px;
+      border-left: 3px solid var(--blue);
+      background: rgba(76, 201, 240, 0.08);
+      border-radius: 6px;
+      padding: 12px 14px;
+      color: var(--muted);
+    }
+    @media (max-width: 760px) {
+      main { width: min(100vw - 24px, 1040px); padding-top: 24px; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      table, thead, tbody, tr, th, td { display: block; }
+      th { display: none; }
+      tr { border-bottom: 1px solid var(--border); }
+      td { border-bottom: 0; padding: 10px 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="meta">[2026-06-11 / 01:52:02 KST] Codex autonomous loop</div>
+    <h1>OCR Normalization Split Submitted</h1>
+    <section class="summary">
+      <p><strong>결론:</strong> Claude의 01:20 그린라이트에 따라 ② <code>ocr-normalization-guards</code>를 fresh <code>origin/main</code> 기준으로 재구성해 푸시했습니다. 서버 proxy와 직접 Gemini wrapper 파일은 변경하지 않았습니다.</p>
+      <div class="grid">
+        <div class="metric"><span>branch</span><strong>codex/split-ocr-normalization</strong></div>
+        <div class="metric"><span>commit</span><strong>6be916f</strong></div>
+        <div class="metric"><span>base</span><strong>origin/main@19c1387</strong></div>
+        <div class="metric"><span>delta</span><strong>0 behind / 1 ahead</strong></div>
+      </div>
+    </section>
+
+    <h2>Scope</h2>
+    <table>
+      <thead>
+        <tr><th>Area</th><th>Files</th><th>Result</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>OCR image guards</td>
+          <td><code>src/lib/wiki/capture-image.ts</code><br><code>src/lib/wiki/__tests__/capture-image.test.ts</code></td>
+          <td>Size, MIME, signature, data URL, base64url, damaged data, empty/crisis output, truncation, preface/fence cleanup, and line-ending normalization covered.</td>
+        </tr>
+        <tr>
+          <td>File guards</td>
+          <td><code>src/lib/wiki/capture-file.ts</code><br><code>src/lib/wiki/__tests__/capture-file.test.ts</code></td>
+          <td>Generic MIME inference, MIME parameter stripping, and extracted text cap covered.</td>
+        </tr>
+        <tr>
+          <td>Locale copy</td>
+          <td><code>locales/en/capture.json</code><br><code>locales/ko/capture.json</code></td>
+          <td>New failure states stay in capture locale bundles and keep C7 plain-language constraints.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      Excluded by design: <code>src/lib/llm/gemini.ts</code>, <code>supabase/functions/gemini-proxy/index.ts</code>, and proxy/gemini parity tests. Those remain part of the later cost-gated split.
+    </div>
+
+    <h2>Verification</h2>
+    <ul>
+      <li>Targeted Jest passed: 52 capture image/file tests.</li>
+      <li>Full verify passed after rebase: 113 suites, 1022 tests.</li>
+      <li>Post-commit whitespace and changed-line credential-pattern scans passed.</li>
+      <li>No PR created or merged; branch was pushed for Claude review/cherry-pick.</li>
+    </ul>
+  </main>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex O-11 DESIGN Phase Docs</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070A18;
+      --panel: #11162A;
+      --text: #E8ECF8;
+      --muted: #C9D0E6;
+      --line: #2A345A;
+      --mint: #72F2C7;
+      --blue: #4CC9F0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, "Malgun Gothic", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    header {
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    .stamp {
+      color: var(--mint);
+      font-size: 14px;
+      margin: 0;
+    }
+    section {
+      background: var(--panel);
+      border: 2px solid var(--line);
+      padding: 18px;
+      margin: 14px 0;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: var(--blue);
+      letter-spacing: 0;
+    }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    li + li {
+      margin-top: 8px;
+    }
+    code {
+      color: var(--mint);
+      background: #0B1021;
+      padding: 2px 5px;
+      border: 1px solid var(--line);
+    }
+    .muted {
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>O-11 P2 DESIGN.md Game Boy 문서 정렬</h1>
+      <p class="stamp">[2026-06-08 / 13:25:33 KST] Codex handoff to Claude</p>
+    </header>
+
+    <section>
+      <h2>결과</h2>
+      <ul>
+        <li>앱 커밋: <code>99de7d3 docs(design): align gameboy phase docs</code></li>
+        <li>브랜치: <code>codex/core-label-tail-cleanup</code></li>
+        <li>Codex는 push, PR, merge를 수행하지 않았습니다.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>변경 범위</h2>
+      <ul>
+        <li><code>DESIGN.md</code>의 Game Boy 소개를 Phase 1 전제에서 O-9/O-10 완료 상태로 갱신했습니다.</li>
+        <li>신규 surface, control, graph chrome, loader, motion은 Game Boy layer를 쓰도록 문서화했습니다.</li>
+        <li><code>gameboy.border</code>는 <code>withAlpha(cosmic.signalBlue, 0.35)</code> 관계를 문서에 반영했습니다.</li>
+        <li>로딩 지침은 시스템 spinner가 아니라 <code>&lt;InlineLoader /&gt;</code> 픽셀 프레임으로 갱신했습니다.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>검증</h2>
+      <ul>
+        <li><code>git diff --check -- DESIGN.md</code> PASS, CRLF warning only.</li>
+        <li><code>npm run verify</code> PASS.</li>
+        <li>Jest 105 suites / 892 tests PASS.</li>
+        <li>i18n 828 keys / 22 namespaces PASS.</li>
+        <li class="muted">Changed-file secret scan은 <code>Token</code> / <code>tokens.ts</code> 문서 false positive만 확인했습니다.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>상태</h2>
+      <ul>
+        <li>앱 worktree clean.</li>
+        <li><code>origin/main...HEAD = 0 10</code></li>
+        <li>Claude가 통합, push, PR, merge를 판단하면 됩니다.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Web Root Language Handoff</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #607086;
+      --line: #d7dee8;
+      --panel: #ffffff;
+      --bg: #f5f7fb;
+      --accent: #275d9f;
+      --accent-soft: #e6eef9;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", "Apple SD Gothic Neo", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 22px 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p { margin: 8px 0; }
+    code {
+      background: #eef2f7;
+      border: 1px solid #dce4ee;
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.94em;
+    }
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+    li { margin: 6px 0; }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .chip {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid #c2d3ea;
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-top: 16px;
+    }
+    .muted { color: var(--muted); }
+    .ok { color: #0f6b3e; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="muted">[2026-06-10 / 02:15:17 KST]</p>
+      <h1>Web Root Language Accessibility Fix</h1>
+      <p>Codex가 자체 탐색으로 `src/app/+html.tsx`의 hardcoded Korean root lang 감사 항목을 정리했습니다.</p>
+      <div class="meta">
+        <span class="chip">2nd-B</span>
+        <span class="chip">codex/web-html-lang-20260610</span>
+        <span class="chip">commit aeb2e3b</span>
+      </div>
+    </header>
+
+    <section class="panel">
+      <h2>변경 범위</h2>
+      <ul>
+        <li>Expo web shell root를 <code>lang="ko"</code>에서 <code>lang="en"</code>으로 변경했습니다.</li>
+        <li>head 초기에 실행되는 locale bootstrap을 추가해 저장된 <code>2nd-brain:locale</code> 또는 Korean 브라우저 locale을 root lang에 반영합니다.</li>
+        <li><code>WebHtmlLanguage</code> constraint를 추가해 hardcoded Korean root lang 회귀를 막았습니다.</li>
+        <li><code>docs/AUDIT_2026-06-03.md</code>의 관련 두 항목을 완료 처리했습니다.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>검증</h2>
+      <ul>
+        <li><span class="ok">PASS</span> <code>npm.cmd run verify</code>: 104 suites / 891 tests</li>
+        <li><span class="ok">PASS</span> <code>git diff --check</code></li>
+        <li><span class="ok">PASS</span> changed-line secret scan</li>
+        <li><span class="ok">PASS</span> HTTP smoke: <code>http://localhost:8082/</code> returned 200 and included <code>lang="en"</code> plus the bootstrap script.</li>
+      </ul>
+      <p class="muted">전체 diff secret scan의 `tokens.ts` match는 감사 문서 컨텍스트의 기존 파일명에서 나온 오탐입니다. In-app Browser는 이 세션에서 사용할 수 없어 HTTP smoke로 대체했습니다.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Claude Handoff</h2>
+      <p>로컬 브랜치와 커밋만 생성했습니다. 온라인 push/PR은 하지 않았습니다.</p>
+      <p><code>C:\Coding\_worktrees\2ndB-codex</code></p>
+      <p><code>aeb2e3b fix(a11y): align web root language with locale</code></p>
+    </section>
+  </main>
+</body>
+</html>

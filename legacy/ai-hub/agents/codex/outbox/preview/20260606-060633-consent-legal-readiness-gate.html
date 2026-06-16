@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Gate - Consent Legal Readiness</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0f14;
+      --panel: #121923;
+      --panel-2: #172131;
+      --text: #edf4ff;
+      --muted: #a9b7c8;
+      --line: #2b3a4d;
+      --accent: #77d7b7;
+      --warn: #ffd27a;
+      --danger: #ff8f8f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 20px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    h1 {
+      margin: 8px 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: 0;
+      line-height: 1.08;
+    }
+    p { margin: 0 0 12px; color: var(--muted); }
+    .score {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      color: var(--warn);
+      font-weight: 700;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    section.full { grid-column: 1 / -1; }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+    li { margin: 8px 0; }
+    code {
+      color: #c7ddff;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 0.92em;
+    }
+    .p1 { color: var(--danger); font-weight: 700; }
+    .p2 { color: var(--warn); font-weight: 700; }
+    .proof {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .chip {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: var(--text);
+      min-height: 58px;
+    }
+    @media (max-width: 760px) {
+      .grid, .proof { grid-template-columns: 1fr; }
+      main { width: min(100% - 24px, 1080px); padding-top: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Gate · 2026-06-06 06:06:33 KST</div>
+      <h1>Consent / Privacy Legal-Readiness Gate</h1>
+      <p>법률 자문이 아니라 제품 신뢰 UI 감사다. required consent 화면이 스스로 placeholder라고 말하면 100점으로 둘 수 없다.</p>
+      <div class="score">Score held: 98/100 provisional</div>
+    </header>
+
+    <div class="grid">
+      <section>
+        <h2><span class="p1">P1</span> Placeholder Required Consent</h2>
+        <ul>
+          <li><code>ConsentNotice.tsx:8-10</code> says the wording is placeholder pending legal review.</li>
+          <li>The component is live in sign-up and complete-profile.</li>
+          <li>Finalize legal-reviewed KO/EN copy or keep real-user launch blocked.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="p1">P1</span> Version / Ledger Proof Gap</h2>
+        <ul>
+          <li><code>consent.ts:14-23</code> requires published policy/terms version alignment.</li>
+          <li><code>recordConsentBestEffort()</code> can fail while entry continues.</li>
+          <li>Show policy/terms linkage, re-consent rules, and failure remediation proof.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="p1">P1</span> Testimonial Sharing Defaults ON</h2>
+        <ul>
+          <li><code>ConsentDialog.tsx:26</code> initializes judge sharing to true.</li>
+          <li>Outward sharing should be explicit opt-in for private narrative content.</li>
+          <li>Default OFF and prove decline/private/judge/public paths.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="p2">P2</span> Privacy Switch Semantics</h2>
+        <ul>
+          <li><code>privacy.tsx:160-186</code> renders bare switches next to text.</li>
+          <li>Switches need explicit labels, states, actions, and disabled reasons.</li>
+          <li>Minor lock copy must match actual enforcement guarantees.</li>
+        </ul>
+      </section>
+
+      <section class="full">
+        <h2>Required Proof Before 100</h2>
+        <div class="proof">
+          <div class="chip">Adult consent: KO/EN, empty, partial, complete</div>
+          <div class="chip">14-17 consent: KO/EN, high-privacy banner</div>
+          <div class="chip">Privacy settings: adult/minor switch labels</div>
+          <div class="chip">Testimonial dialog: decline/private/judge/public</div>
+          <div class="chip">Consent ledger: success and failure behavior</div>
+          <div class="chip">Published policy/terms links and version rules</div>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

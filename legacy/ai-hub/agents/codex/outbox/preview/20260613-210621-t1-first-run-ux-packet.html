@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>T1 First-Run UX Packet</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: #11172a;
+      --line: #2a345a;
+      --text: #e8ecf8;
+      --muted: #c9d0e6;
+      --accent: #72f2c7;
+      --warn: #ffd166;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Pretendard", "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 44px 20px 72px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+    section {
+      border: 2px solid var(--line);
+      background: var(--panel);
+      border-radius: 0;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p { margin: 8px 0; }
+    ul { margin: 8px 0 0; padding-left: 20px; }
+    li { margin: 7px 0; }
+    code {
+      color: var(--accent);
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: 0.94em;
+    }
+    .hero {
+      border-color: rgba(114,242,199,0.6);
+    }
+    .mock {
+      max-width: 390px;
+      border: 2px solid var(--line);
+      padding: 18px;
+      background: #0b1022;
+    }
+    .copy {
+      font-size: 18px;
+      margin: 14px 0;
+    }
+    .button {
+      display: block;
+      width: 100%;
+      padding: 14px 12px;
+      background: var(--accent);
+      color: #07100d;
+      text-align: center;
+      font-weight: 700;
+      border: 0;
+      border-radius: 0;
+      margin: 14px 0 8px;
+    }
+    .secondary {
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+    }
+    .trust {
+      color: var(--muted);
+      border-left: 3px solid var(--accent);
+      padding-left: 10px;
+      font-size: 14px;
+      margin-top: 12px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .choice {
+      border: 1px solid var(--line);
+      padding: 14px;
+      background: #0d1325;
+    }
+    .choice strong {
+      color: var(--warn);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>T1 First-Run UX Packet</h1>
+    <div class="meta">2026-06-13 / 21:06:21 KST · Codex UI/UX lane · Board T1</div>
+
+    <section class="hero">
+      <h2>Recommended Contract</h2>
+      <div class="mock">
+        <p class="copy">한 문장을 남기면, 세컨비가 나중에 다시 찾을 수 있는 조각으로 정리해줘요.</p>
+        <div class="button">첫 조각 남기기</div>
+        <div class="secondary">둘러보기</div>
+        <p class="trust">로컬 우선. 내보내기 가능. AI는 켤 때만 읽어요.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Why</h2>
+      <ul>
+        <li>Persona baseline says users fail before value is visible.</li>
+        <li>Grok consumer signal reinforces privacy and subscription fatigue risk.</li>
+        <li>DESIGN.md says the product should feel like it holds the page open, not fills it for the user.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Debate Options</h2>
+      <div class="grid">
+        <div class="choice"><strong>A. Capture-first</strong><p>Primary action starts the first-piece loop. Codex recommends this.</p></div>
+        <div class="choice"><strong>B. Explore-first</strong><p>Primary action opens a demo or graph tour. Safer, but delays the core loop.</p></div>
+        <div class="choice"><strong>C. Sign-in-first</strong><p>Lowest churn, but keeps the gate shape that failed persona findings.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Acceptance</h2>
+      <ul>
+        <li>One dominant primary action.</li>
+        <li>Visible privacy line before settings.</li>
+        <li>No clinical, hype, or inner-thoughts phrasing.</li>
+        <li>390px mobile has no horizontal clipping.</li>
+        <li>Guest/save boundary is stated honestly if persistence still needs account consent.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

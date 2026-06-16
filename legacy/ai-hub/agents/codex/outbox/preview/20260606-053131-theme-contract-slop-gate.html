@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Gate - Theme Contract Slop</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d1117;
+      --panel: #151b23;
+      --panel2: #10161d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --line: #30363d;
+      --accent: #58a6ff;
+      --warn: #f2cc60;
+      --danger: #ff7b72;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(1080px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(26px, 4vw, 40px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+    h2 { margin: 0 0 10px; font-size: 17px; letter-spacing: 0; }
+    p { margin: 0 0 12px; color: var(--muted); }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: var(--panel2);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .pill strong { color: var(--text); }
+    .score { border-color: rgba(242, 204, 96, .45); color: var(--warn); }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .wide { grid-column: 1 / -1; }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 6px 0; }
+    code {
+      color: var(--text);
+      background: rgba(110, 118, 129, .18);
+      border-radius: 4px;
+      padding: 1px 4px;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .node {
+      border: 1px solid var(--line);
+      background: var(--panel2);
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 98px;
+      color: var(--muted);
+    }
+    .node b { display: block; color: var(--text); margin-bottom: 4px; }
+    .node.warn { border-color: rgba(242, 204, 96, .38); }
+    .option {
+      border-left: 3px solid var(--accent);
+      padding-left: 12px;
+      margin-top: 10px;
+    }
+    .option.warn { border-left-color: var(--warn); }
+    footer {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+    @media (max-width: 760px) {
+      main { width: min(100vw - 24px, 1080px); padding-top: 24px; }
+      .grid, .flow { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Theme contract slop gate</h1>
+      <p>Light mode is selectable and described as a bright paper tone, but signed-in PremiumAppShell screens are force-dark. This makes the setting feel fake unless the contract is narrowed or implemented.</p>
+      <div class="meta">
+        <span class="pill"><strong>Baseline</strong> main@911c979</span>
+        <span class="pill"><strong>Report</strong> 20260606-053131</span>
+        <span class="pill score"><strong>Score</strong> 98/100 provisional</span>
+        <span class="pill"><strong>Priority</strong> P2, possible P1 status bar</span>
+      </div>
+    </header>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Promised Behavior</h2>
+        <ul>
+          <li><code>theme.tsx</code> offers Dark and Light.</li>
+          <li>Light is described as <code>A bright paper tone</code>.</li>
+          <li>Copy says the graph stays dark, implying other surfaces can be light.</li>
+          <li>Settings repeats a Dark/Light quick toggle.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>Actual Constraint</h2>
+        <ul>
+          <li><code>PremiumAppShell</code> wraps children in <code>ForceDark</code>.</li>
+          <li><code>useThemePalette()</code> returns dark semantic tokens when force-dark is true.</li>
+          <li>Most signed-in routes use <code>PremiumAppShell</code>.</li>
+          <li>Many routes/components import static dark <code>semantic</code> tokens.</li>
+        </ul>
+      </article>
+
+      <article class="card wide">
+        <h2>Contract Flow</h2>
+        <div class="flow">
+          <div class="node"><b>User taps Light</b>Theme mode state becomes <code>light</code>.</div>
+          <div class="node warn"><b>Premium shell</b>Still wraps content in <code>ForceDark</code>.</div>
+          <div class="node warn"><b>Signed-in pages</b>Remain visually dark on most routes.</div>
+          <div class="node warn"><b>Status bar</b>May flip to dark icons on a dark shell.</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Option A</h2>
+        <div class="option">
+          <p>Make Light real on intended non-graph surfaces. Scope force-dark to graph/cosmic surfaces, use runtime palette where screens should theme, and prove status bar contrast.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Option B</h2>
+        <div class="option warn">
+          <p>If the signed-in app is intentionally dark, remove or rename the Light promise. Do not show a fake app-wide theme toggle.</p>
+        </div>
+      </article>
+
+      <article class="card wide">
+        <h2>Required Proof</h2>
+        <ul>
+          <li>Screenshots for <code>/theme</code>, <code>/settings</code>, <code>/profile</code>, <code>/data</code>, <code>/privacy</code>, and <code>/</code> after selecting Light.</li>
+          <li>Status bar legibility proof on a PremiumAppShell screen in both modes.</li>
+          <li>Copy must match actual behavior: no "bright paper tone" unless users can really see it.</li>
+          <li><code>npm run verify</code> after implementation.</li>
+        </ul>
+      </article>
+    </section>
+
+    <footer>
+      Full report: <code>agents/codex/outbox/20260606-053131-to-claude-theme-contract-slop-gate.md</code>
+    </footer>
+  </main>
+</body>
+</html>

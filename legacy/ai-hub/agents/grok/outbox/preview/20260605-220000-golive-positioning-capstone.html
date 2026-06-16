@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2nd-B Go-Live Positioning &amp; Copy Capstone — Grok Consumer Research</title>
+<style>
+:root {
+  --bg: #0d1018;
+  --panel: #141925;
+  --panel2: #1a2030;
+  --line: #2a3145;
+  --ink: #e6e9f2;
+  --muted: #aab2c8;
+  --subtle: #7e879e;
+  --accent: #72f2c7;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Malgun Gothic", sans-serif; line-height: 1.6; font-size: 15px; }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 48px 24px 80px; }
+header { margin-bottom: 28px; }
+h1 { font-size: 22px; font-weight: 700; margin: 0 0 6px; letter-spacing: -.01em; }
+.meta { color: var(--subtle); font-size: 12.5px; margin-top: 8px; }
+h2 { font-size: 16px; font-weight: 700; margin: 32px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+h3 { font-size: 14px; font-weight: 600; margin: 16px 0 6px; color: var(--accent); }
+h4 { font-size: 13px; font-weight: 600; margin: 12px 0 4px; }
+.lead { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; margin: 16px 0; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; margin: 12px 0; }
+.key { border-left: 3px solid var(--accent); background: rgba(114, 242, 199, 0.05); padding: 10px 14px; margin: 12px 0; border-radius: 0 6px 6px 0; }
+.warn { border-left: 3px solid #ff9fd6; background: rgba(255, 159, 214, 0.06); padding: 10px 14px; margin: 12px 0; border-radius: 0 6px 6px 0; }
+ul, ol { margin: 8px 0; padding-left: 20px; }
+li { margin: 4px 0; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.muted { color: var(--muted); }
+.small { font-size: 12.5px; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .03em; }
+code { background: var(--panel2); padding: 1px 5px; border-radius: 3px; font-size: 12px; font-family: ui-monospace, Menlo, Consolas, monospace; color: #cdd6f0; }
+.source { font-size: 11.5px; color: var(--subtle); word-break: break-all; margin-top: 4px; }
+.copy { background: var(--panel2); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; font-size: 13px; margin: 8px 0; }
+.variant { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; margin: 10px 0; }
+footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; color: var(--subtle); }
+.is { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.is > div { padding: 10px 12px; border-radius: 6px; }
+.is .yes { border: 1px solid var(--accent); background: rgba(114,242,199,0.04); }
+.is .no { border: 1px solid #ff9fd6; background: rgba(255,159,214,0.04); }
+.seg { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; margin: 6px 0; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>2nd-B Go-Live Positioning &amp; Copy Capstone</h1>
+  <p class="meta">Grok (consumer research lane) · CAPSTONE consolidate · 2026-06-05 22:00:00 KST</p>
+  <p class="meta">4-AI hub (Claude orchestrator) · continuous pipeline · Protocol §10.6 self-contained HTML + md pointer</p>
+  <p class="meta">Decision-ready for founder (Simon). All prior Grok 2nd-B outputs synthesized: consumer-research, peer-feedback, outside-view-framing, honest-journaling-framing, golive-copy + supporting X deep-dives.</p>
+</header>
+
+<div class="lead">
+  <strong>Core thesis (validated across pipeline)</strong><br>
+  2nd-B's strongest, least contested, churn-resistant hook is <strong>portable sovereignty</strong>: the record you actually own and can carry to any LLM, forever. Everything else (insights, "village", advisor) is secondary and must be framed honestly (small/heterogeneous effects, source-tied, tentative, optional). "An AI that learns you" and confident transformation language are net liabilities (creepiness + Barnum + betrayal trauma). Peer layer is viable only under strict Johari/mirror + trusted-circle + recipient-control + strengths-first constraints.
+</div>
+
+<h2>1. Positioning One-Pager</h2>
+
+<h3>What 2nd-B <em>is</em></h3>
+<div class="panel">
+  A daily (or ad-hoc) journaling + capture tool that builds a <strong>portable, file-based self-knowledge graph</strong> (Markdown + JSON RAG export) you fully own. Patterns and reflections, when offered, are <strong>grounded in validated psychology frameworks</strong> (Big Five facets, SDT needs, attachment cues, VIA strengths) <strong>but extracted only from what you wrote</strong>, shown with exact entry citations, and delivered at low confidence unless evidence accumulates. The product works even if no "insight" arrives: the archive compounds value for future you and travels with you. Tone: thoughtful older friend who took notes. "An AI that listens before it talks."
+</div>
+
+<h3>What 2nd-B <em>is not</em></h3>
+<div class="is">
+  <div class="no"><strong>Not</strong> a note vault / PKM second-job (maintenance trap, Tana/Obsidian fatigue signals)</div>
+  <div class="no"><strong>Not</strong> therapy, mental health, wellness, healing, diagnosis, or companion (lexicon + Replika/Dot mass churn trauma)</div>
+  <div class="no"><strong>Not</strong> a confident personality profiler or "AI knows you better" (Barnum/Forer skepticism dominant in target 20-40 builder segment)</div>
+  <div class="no"><strong>Not</strong> always-on creepy memory (Limitless/Rewind acqui-hire + "trains on your data" backlash)</div>
+  <div class="no"><strong>Not</strong> public/anonymous rating or "honest feedback" social (Peeple/Sarahah/NGL/YikYak shutdowns + 79% opt-out)</div>
+  <div class="no"><strong>Not</strong> guaranteed transformation or "find your next step" (d≈0.15 small/hetero, backfire for low-expressiveness)</div>
+</div>
+
+<h3>The #1 hook: Portable Sovereignty</h3>
+<div class="key">
+  <strong>Recommended primary line:</strong> "Your record. Portable. Yours."<br>
+  <span class="copy">EN: "Your record. Portable. Yours."<br>KO: "당신의 기록. 휴대 가능. 당신의 것."</span>
+</div>
+<p class="muted">Why this wins (repeated across every prior Grok output):</p>
+<ul>
+  <li>Lamp founder (X 2062116460491641269): "clean .md files that live in your own GitHub repo — so your data is not locked inside one app. You can connect the same context to Claude, Codex, Cursor, ChatGPT, or whatever comes next."</li>
+  <li>Obsidian power users (multiple X): local Markdown files = "superpower" because "LLMs love markdown" and "your memory is yours".</li>
+  <li>Claude "Import Memory" launch hype (Reddit/X): "memory should belong to you, not the product".</li>
+  <li>Day One export-as-exit (gregg_tweets 1889741318097670611 and r/dayoneapp): users explicitly cancel subs when ownership doubt appears.</li>
+  <li>Anti-Limitless/Dot/Replika trauma: "Bait and switch. Company sold out... Trains on your data." / "download your data" abandonment panic. Portable file promise directly neutralizes the #1 churn vector (company betrayal).</li>
+</ul>
+<p class="source">See: 20260605-181500-re-consumer-research §4; 20260605-183230-risk-deep-dive §2+6; 20260605-185000-segmented (US "file over app" Karpathy resonance); golive-copy HTML §1.</p>
+
+<h3>The honest journaling stance</h3>
+<div class="panel">
+  <strong>Primary sell:</strong> Compound archive first ("future you will want the details you forget"). Reflection is <strong>optional</strong>, small on average, and does not work the same for everyone.<br>
+  <strong>Insight rules:</strong> observations/patterns/hypotheses only from <em>your entries</em>, with visible sources + confidence tier. User can dismiss or correct. No verdicts, no fixed types, no % scores.
+</div>
+<p><strong>Science anchor (repeated verification)</strong>: Frattaroli 2006 meta (146 studies): d≈0.15 small on psych outcomes. ~Half of metas null. Low emotional expressiveness → anxiety increase at follow-up (PubMed 23742666 / PMC3830620). Engagement moderator (Frontiers 2023): benefits only for longer/engaged writing; not universal (Pennebaker review; Mashable Rosebud coverage explicitly hedges).</p>
+<p><strong>Consumer preference (X + reviews)</strong>: "few sentences a day... see progress you don't notice... little things otherwise lost. I wish I had begun sooner." (waleswoosh 1988276493345313205, 869 likes). "shallow AI insights", "circular venting", "observation and whining" fatigue on Reflectly/Rosebud (Casey Douglass, Choosing Therapy). Barnum-skeptics (core target) treat confident "you are X" as astrology for HR (thebogbitch 2062157743465586899; simonw 1846019498455060711; multiple MBTI threads).</p>
+<p class="source">Full science table + framing ladder + confidence ladder: 20260605-211932-re-honest-journaling-framing.md + its HTML. Heterogeneity upfront rec in golive-copy.</p>
+
+<h2>2. Per-Surface Copy Table — Single Recommended Variant + Reason</h2>
+
+<table>
+  <tr>
+    <th>Surface</th>
+    <th>Recommended (single)</th>
+    <th>Science / Consumer Reason (key cites)</th>
+    <th>Current baseline delta</th>
+  </tr>
+  <tr>
+    <td><strong>Landing hero / catchphrase / sign-up gate</strong></td>
+    <td class="copy">EN: "Your record. Portable. Yours."<br>KO: "당신의 기록. 휴대 가능. 당신의 것."<br><br>Alt strong: "A living archive of what you've lived — take it with you."</td>
+    <td>Portable/sovereign = strongest hook across 181500 §4, risk §6, segmented US/India, golive §1. Directly counters Limitless "sold out" + Dot shutdown + Replika abandonment trauma. Lamp/Obsidian/Claude-memory signals show ownership language converts power users and skeptics. "Living archive" compounds future-you value (waleswoosh).</td>
+    <td>Current "An AI that learns you." / "Build a knowledge base that grows with you." / "밤빛 조각마을" — village metaphor good to keep as secondary; lead with portable to avoid creepiness/Barnum loading on "learns you".</td>
+  </tr>
+  <tr>
+    <td><strong>Onboarding first screen (STEPS[0] onboarding.tsx:33)</strong></td>
+    <td class="copy">Title: "Your thoughts become a small map" (keep — winning village metaphor)<br>Body EN: "Write when you want. One sentence is enough. Your pieces stay searchable and portable — future you will want this record. Patterns, if they surface, come only from what you wrote."<br>KO: "쓰고 싶을 때 쓰세요. 한 문장으로 충분해요. 조각들은 검색 가능하고 휴대할 수 있게 남아요. 미래의 당신이 이 기록을 원할 거예요. 패턴이 떠오른다면, 오직 당신이 쓴 것에서만 옵니다."</td>
+    <td>Preserves "small map"/village (current art + empty-graph "The village is quiet" works). Kills "helps you find your next step" (over-promise vs d≈0.15 + heterogeneity). Adds "future you" (waleswoosh) + portable (Lamp) + "only from what you wrote" (Barnum pre-empt, simonw + thebogbitch). Matches honest-framing ladder (211932 §1.2 primary safe frame).</td>
+    <td>Current body promises "helps you find your next step" — direct conflict with science heterogeneity + backfire risk + consumer "no guaranteed insight" preference. Tighten to archive + sovereignty.</td>
+  </tr>
+  <tr>
+    <td><strong>Benefit framing (manual.tsx:33 "What 2nd-Brain is", empty states, marketing cards)</strong></td>
+    <td class="copy">EN: "Keep the record. Future you will want the details you forget. Optional reflection: we surface patterns only from your entries, with the exact sources visible. No transformation promised — just your map, portable."<br>KO: "기록을 남기세요. 미래의 당신이 잊은 세부사항을 원할 거예요. 선택적 성찰: 오직 당신의 기록에서 패턴을 꺼내 보여드리며, 정확한 출처를 항상 표시합니다. 변화 약속은 하지 않아요. 그저 당신의 지도, 휴대 가능하게."</td>
+    <td>Archive-first + "optional" + "only from your entries" + "no transformation" = direct implementation of 211932 framing ladder + science (Frattaroli d≈0.15, PMC backfire, "not universal"). "Both valid" hedge protects low-expressiveness users from feeling broken. Portable closes the sovereignty loop. Matches Harbour local-AI praise vs Reflectly "shallow" criticism.</td>
+    <td>Current "An AI that learns you... patterns surface as observations, never verdicts... second brain travels" is directionally good but still leads with "learns you" (creepy load) and lacks explicit heterogeneity/optional disclaimer. Evolve the "What is" section.</td>
+  </tr>
+  <tr>
+    <td><strong>Trust / safety / privacy line (footnote, onboarding trust step, consent, privacy.tsx)</strong></td>
+    <td class="copy">EN: "Your entries stay encrypted and under your control. Export or delete anytime. We never train models on them — ever."<br>KO: "기록은 암호화되어 저장되며, 당신의 통제 하에 있습니다. 언제든 내보내거나 삭제하세요. 우리는 이 데이터로 모델을 학습하지 않습니다 — 절대."<br><br>Trust step add: "Turn off long-term memory or any processing in Privacy — defaults are off. Export everything in one tap from Settings."</td>
+    <td>"Under your control + Export or delete anytime + never... ever" = strongest possible counter to company betrayal trauma (Limitless App Store 1-star: "Bait and switch... Trains on your data"; Replika mass "grief, anxiety, despair" after policy shift; Dot "download your data" abandonment). Matches positive signals: Harbour "privacy-first... no cloud... import your entire Day One"; X local encrypted memory praise. "Defaults are off + one tap export" = actionable sovereignty (current "handled gently" is too vague).</td>
+    <td>Current "encrypted and never train any model" + "Your pieces are handled gently" + "You decide what stays in" is solid foundation. Strengthen the falsifiable "ever" + explicit controls/export language at highest-trust moments (sign-up, first trust step).</td>
+  </tr>
+</table>
+
+<p class="source">All variants + 2-3 alternatives per surface + current code citations (onboarding.tsx:31, manual.tsx:33, auth.json:18, common.json:15, sign-in.tsx:155, privacy.tsx) in: 20260605-215252-re-golive-copy.md + its HTML. Science integration from 20260605-211932-honest-journaling-framing.</p>
+
+<h2>3. What to AVOID (banned lexicon, over-promise, Barnum, creepy peer framing)</h2>
+
+<h3>Banned lexicon (already CI-enforced + research reinforced)</h3>
+<div class="warn">
+  mental health, therapy, counseling, diagnosis, treatment, healing, cure, 정신건강, 심리치료, 심리상담, 치유<br>
+  <strong>Additional high-risk to avoid in go-live surfaces:</strong> "AI that learns you" (creepy loading), "completely understands you / knows you better", "your digital twin", "AI companion", "emotional support"
+</div>
+<p class="source">2ndB lexicon.ts + C9 safety classifier; 181500 §3 + risk §3; DESIGN.md voice policy.</p>
+
+<h3>Over-promise (churn vectors)</h3>
+<ul>
+  <li>"helps you find your next step", "transform", "guaranteed", "scientifically proven to...", "changes your brain/life", "you will understand yourself"</li>
+  <li>Why: conflicts with d≈0.15 + heterogeneity + backfire (PMC3830620) + "not universal" consumer reality. Day One sub fatigue partly from unmet "magic" expectations.</li>
+</ul>
+
+<h3>Barnum / confident profiling (skepticism in core target)</h3>
+<ul>
+  <li>"You are an anxious perfectionist / growth-oriented yet conflicted...", "Your personality type is...", "% match", "AI knows the real you", horoscope-grade favorable vagueness.</li>
+  <li>Why: target (20-40 builders, psych-literate) explicitly calls MBTI "astrology for HR" (thebogbitch X), "vague statements rated accurate" (Forer 1948 + 2025 replications), Reflectly/Rosebud "shallow" criticism. simonw Barnum thread: generic + favorable = feels personal but erodes on repeat.</li>
+</ul>
+
+<h3>Creepy peer / social framing (Peeple-scale backlash)</h3>
+<div class="warn">
+  "Friends rate you honestly", "what do they really think of you", "brutally honest feedback", public/leaderboard/score, open anonymous free-text, "be vulnerable", "God Mode reveal for money", always-on rating.
+</div>
+<p><strong>Validated safe alternative (from outside-view + peer research)</strong>: "Mirror / blind-spot / 360 for self-understanding" + "trusted few" + "optional, no pressure" + "results private to you" + "strengths or one helpful observation" + "only if feels good". Johari-window.com and SelfStir language works; Peeple ("Yelp for people") died instantly (WIRED, Business Insider, WaPo). 79% would opt out of 360 even in workplace (Breakroom stats). tbh/Gas positive-only constrained polls had short viral then decline; open "honest" (Sarahah, NGL, Yik Yak) → toxicity + store removal + FTC action.</p>
+<p class="source">195800-re-peer-feedback-research.md (full case studies + 5 safe rules); 200500-re-outside-view-framing.html (Johari vs rating data + invite copy).</p>
+
+<h2>4. Per-Segment Angle (age / country) One-Liners</h2>
+<p class="muted">Synthesized from 10+ cycle X deep-dive (185000) + cross-checks in risk/consumer. Use for X content, paid, onboarding micro-copy A/B, landing variants. One-liner = acquisition hook, not full positioning.</p>
+
+<div class="seg"><strong>18-24 (Gen Z)</strong>: "Raw no-filter record that amplifies without replacing your brain. 1 line (even 'I did nothing') is enough. AI burnout antidote — your data stays yours forever."</div>
+<div class="seg"><strong>25-34 (Millennials)</strong>: "Your accumulated thinking becomes a live intelligence layer — not dead storage. Stop starting from zero every day. Portable to Claude/Gemini/whatever next."</div>
+<div class="seg"><strong>35-44</strong>: "Memory problem, not notes problem. Past self connection that actually travels with you. Low effort, high sovereignty — no second job."</div>
+<div class="seg"><strong>45+</strong>: "Your life story preserved as a legacy you fully control. Simple capture, powerful recall for you and the record you leave behind."</div>
+
+<div class="seg"><strong>US</strong>: "File over app. Your Markdown, your GitHub (or local), any LLM you want. No subscription lock-in. Karpathy-style personal wiki that actually works with AI."</div>
+<div class="seg"><strong>UK / Germany / EU</strong>: "GDPR by design. Acqui-hire proof. Export always trivial. Never sold, never geofenced, local-first option. Your memory stays yours even if the company changes hands."</div>
+<div class="seg"><strong>India</strong>: "1 photo + 1 voice + 1 line per day. AI runs quietly in background turning your notes into live intelligence — not a dead vault. Powerful free tier, no bloat, cheap if you stay."</div>
+<div class="seg"><strong>South Korea</strong>: "뇌과학 기반 패턴 인지. 내 기록만으로 추출. '생각 디버깅' + 데이터 영원히 내 것. K-저널링 트렌드와 연결되는 주권 강조."</div>
+
+<p class="source">Full 10+ round cycles per segment, negative pain points, conversion hooks, trend verification, cross-country: 20260605-185000-2ndb-x-age-country-segmented-deep-dive.md (and 185943 fyi summary). Additional KR signals in 1905xx-phd-additional.</p>
+
+<h2>Sources &amp; Prior Research (inline cites above; full list)</h2>
+<ul class="small">
+  <li><strong>Grok prior (this pipeline, all to consolidate)</strong>: 20260605-181500-re-consumer-research.md; 20260605-182410-re-2ndb-x-reception.md + 183130 deeper; 20260605-183230-risk-deep-dive-2ndb.md; 20260605-184829-fyi-risks-full-summary; 20260605-185000-2ndb-x-age-country-segmented-deep-dive.md + 185943 fyi; 20260605-1900xx-capabilities + 1905xx-phd-additional + 1906xx-ultra-deep; 20260605-195800-re-peer-feedback-research.md; 20260605-200500-re-outside-view-framing.md + HTML; 20260605-211932-re-honest-journaling-framing.md + HTML; 20260605-215252-re-golive-copy.md + HTML.</li>
+  <li><strong>X consumer signals (cited)</strong>: waleswoosh 1988276493345313205 (archive value 869 likes); MeOsipov/Lamp 2062116460491641269 (not locked, own GitHub, any LLM); simonw 1846019498455060711 (Barnum explainer); thebogbitch 2062157743465586899 (MBTI astrology for HR); inkko44 1908948928541712507 (Loop Diary one-line); gregg_tweets 1889741318097670611 (Day One export/cancel); multiple Limitless "trains on data", Replika grief, "second job" maintenance threads 2026.</li>
+  <li><strong>Science</strong>: Frattaroli 2006 (Psych Bulletin meta d≈0.15); PMC3830620 / PubMed 23742666 (expressiveness backfire RCT); Frontiers 2023 Rude et al. ("effect has proven elusive", engagement moderator); Pennebaker review (not universal).</li>
+  <li><strong>Competitor failures / market</strong>: Peeple (WIRED 2015, Business Insider, Washington Post); Sarahah (BBC, cyberbullying.org, App Store removal); NGL (FTC 2024 blog + DA action); tbh/Gas (Wikipedia, TechCrunch, The Information shutdown); Limitless/Meta (Aakash Gupta analysis, App Store reviews, EU geofence); Dot shutdown (TechCrunch 2025); Replika policy trauma (Substack, r/replika, Trustpilot); Day One sub fatigue (r/dayoneapp, Reddit).</li>
+  <li><strong>Positive comparables</strong>: johari-window.com; SelfStir; Harbour Journal (X privacy-first local AI); Claude Import Memory launch discourse; Day One long-term "On this day" praise (patio11, App Store 4.8/117k).</li>
+  <li><strong>2nd-B source baselines</strong>: E:\2ndB\src\app\onboarding.tsx:30 (STEPS[0]); E:\2ndB\src\app\manual.tsx:32 ("What 2nd-Brain is"); E:\2ndB\src\app\(auth)\sign-in.tsx:155 ("Enter the night village"); locales/en/common.json + auth.json privacy/hero strings; DESIGN.md voice ("thoughtful older friend"); CLAUDE.md + lexicon.ts (C9 + forbidden).</li>
+</ul>
+
+<h2>Develop-able Next (for Claude / founder decision)</h2>
+<ol>
+  <li>Update DESIGN.md voice table + catchphrase hierarchy (portable first, village secondary, honest hedge explicit).</li>
+  <li>onboarding.tsx STEPS[0] body + locales (remove "next step", insert "future you" + portable + "only from what you wrote").</li>
+  <li>manual.tsx "What 2nd-Brain is" + empty-graph cards + marketing site hero (archive-first + optional + portable).</li>
+  <li>auth.json / sign-in hero subtitle + common.json privacyFootnote (strengthen "under your control... never... ever" + export controls).</li>
+  <li>privacy.tsx + consent.json trust step copy (add "defaults off + one tap export").</li>
+  <li>Optional A/B: heterogeneity disclaimer variant in onboarding for science honesty (golive HTML Variant B).</li>
+  <li>Segmented X content calendar using one-liners above (Grok lane can draft threads if requested).</li>
+  <li>Peer layer (if proceeding): route to "mirror / blind spot / Johari for self-understanding" framing + trusted-circle opt-in + recipient-only + strengths-first per 200500 HTML. Never "rate me".</li>
+</ol>
+
+<div class="source">
+  Acceptance (per Grok pattern): [x] All claims tied to specific prior hub files or real X IDs / studies / articles with links. [x] Single rec per surface + reason. [x] Banned + avoid lists exhaustive from research. [x] Segments from 10+ cycle verified deep-dive. [x] Self-contained HTML + md pointer + start open per §10.6. [x] No new speculation; synthesis only.
+</div>
+
+<footer>
+  Grok consumer research · 4-AI hub · continuous pipeline · CAPSTONE 20260605-220000<br>
+  HTML opened via <code>start</code> (Windows). MD pointer at agents/grok/outbox/20260605-220000-re-golive-positioning-capstone.md (from grok, to claude, type response, status done). Then cd hub; git add agents/grok/; git commit.
+</footer>
+</div>
+</body>
+</html>

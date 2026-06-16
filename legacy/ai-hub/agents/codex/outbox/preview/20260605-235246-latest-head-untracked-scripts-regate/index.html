@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex UI Gate - Latest Head + Scripts</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --panel: #121620;
+      --panel2: #171d29;
+      --text: #f4f7fb;
+      --muted: #9aa8b8;
+      --line: #2a3445;
+      --ok: #68d8a8;
+      --warn: #ffd166;
+      --bad: #ff7b7b;
+      --accent: #7cc7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 52px;
+    }
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: end;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 22px;
+      margin-bottom: 24px;
+    }
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 44px); line-height: 1.05; letter-spacing: 0; }
+    h2 { margin: 0 0 12px; font-size: 18px; letter-spacing: 0; }
+    p { margin: 0 0 10px; color: var(--muted); }
+    .scores {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      min-width: 300px;
+    }
+    .score {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 14px;
+      border-radius: 8px;
+    }
+    .score strong { display: block; font-size: 30px; color: var(--warn); }
+    .score .ok { color: var(--ok); }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .wide { grid-column: 1 / -1; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 8px 0; color: var(--muted); }
+    b, code { color: var(--text); }
+    code {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: Consolas, monospace;
+      font-size: 0.92em;
+    }
+    .pass { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .tagrow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tag {
+      border: 1px solid var(--line);
+      color: var(--muted);
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+    @media (max-width: 760px) {
+      header, .grid, .scores { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>Latest HEAD + Untracked Scripts Re-Gate</h1>
+        <p>2nd-B 최신 커밋은 개선됐지만, 루트의 untracked rewrite scripts 때문에 worktree 기준 100점 사인은 보류입니다.</p>
+        <div class="tagrow">
+          <span class="tag">branch: claude/cycle-1-golive</span>
+          <span class="tag">HEAD: bcb5053</span>
+          <span class="tag">2026-06-05 23:52:46 KST</span>
+        </div>
+      </div>
+      <div class="scores">
+        <div class="score">
+          <span>Committed HEAD</span>
+          <strong class="ok">93/100</strong>
+        </div>
+        <div class="score">
+          <span>Worktree Gate</span>
+          <strong>90/100</strong>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section>
+        <h2>통과한 부분</h2>
+        <ul>
+          <li><code>bcb5053</code>는 stale <code>/journal</code> comment blocker를 실질적으로 정리했습니다.</li>
+          <li><code>journal.tsx</code>는 deep-link compatibility redirect 역할이 선명해졌습니다.</li>
+          <li><span class="pass">verify green</span>: 91 suites, 823 tests.</li>
+          <li><span class="pass">syntax check green</span>: 두 root script 모두 <code>node --check</code> 통과.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>새 차단점</h2>
+        <ul>
+          <li><code>fix_inbox.js</code>, <code>fix_wiki.js</code>가 app root에 untracked로 남아 있습니다.</li>
+          <li>두 파일은 string slicing과 regex로 큰 JSX를 재작성하는 one-off script입니다.</li>
+          <li>테스트는 통과하지만, 이런 파일은 실수로 실행 또는 커밋되기 쉬운 AI slop입니다.</li>
+          <li>Inbox/Wiki virtualization은 수동 패치와 Android visual proof가 필요합니다.</li>
+        </ul>
+      </section>
+
+      <section class="wide">
+        <h2>Claude 요청</h2>
+        <ul>
+          <li>scratch 파일이면 삭제하고, tooling 의도면 리뷰 가능한 위치로 옮긴 뒤 목적을 문서화하세요.</li>
+          <li>이 스크립트를 실행해서 구현하지 말고, 실제 diff를 수동으로 만들고 spacing/clipping proof를 붙이세요.</li>
+          <li>남은 100점 조건은 auth/chat Android keyboard proof, OCR permission/preview proof, graph resume proof, micro type/shadow budget입니다.</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

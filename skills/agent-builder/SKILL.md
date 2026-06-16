@@ -1,6 +1,7 @@
 ---
 name: agent-builder
-description: "사용자가 만드는 AI 제품/기능에 에이전트형(tool use / function calling) 시스템을 설계·구현할 때 쓴다. 트리거: \"AI 에이전트 만들어\", \"tool use\", \"function calling\", \"함수 호출 루프\", \"멀티에이전트\", \"agent loop\", \"tool 정의\", \"에이전트 설계\", /agent-builder. 산출물: (1) 도구/함수 스키마 정의, (2) 계획·실행 루프 설계, (3) 메모리/상태 관리, (4) 멀티에이전트 토폴로지(팬아웃·파이프라인·수퍼바이저), (5) 가드레일·종료조건·루프방지, (6) 관측성·비용상한. Claude(@anthropic-ai/sdk tool_use) 또는 Gemini(@google/genai function calling) 둘 다 커버. 이건 사용자 앱에 들어갈 에이전트를 만드는 스킬이지, Claude Code 내부 subagent 위임이 아니다 — 그건 agent-delegate[Core]."
+description: >
+  Use when designing or implementing an agent-style (tool use / function calling) system inside the user's AI product. 트리거: "AI 에이전트 만들어", "tool use", "function calling", "함수 호출 루프", "멀티에이전트", "agent loop", "tool 정의", /agent-builder. Produces tool/function schemas, a plan-execute loop, memory/state design, multi-agent topology (fan-out/pipeline/supervisor), guardrails with termination + loop-prevention, and observability/cost caps. Covers Claude tool_use and Gemini function calling. Not Claude Code subagent delegation — that is agent-delegate[Core].
 allowed-tools: Read, Write, Edit, Bash, AskUserQuestion
 version: 1.0.0
 author: simon-stack
@@ -191,3 +192,10 @@ loop:
 - `claude-api` — Claude tool_use / MCP / 토큰·캐싱·모델 ID 레퍼런스
 - `llm-eval` — 에이전트 출력 정량 평가·회귀 테스트
 - `authz-designer` / `paid-api-guard` — 쓰기·결제 도구의 권한·비용 가드
+
+## 완료 보고 (HTML) — 표준
+작업을 끝내면 **HTML 완료 보고서**를 생성한다 (SimonKCore `completion-report` 표준).
+- 첫 화면은 **심플 요약**(한눈 카드 한 줄) + 직관 그래픽/차트(인라인 SVG)·이미지.
+- 각 항목 옆 **[자세히] 버튼**(`<details>`)을 펼치면 상세 — 처음부터 쏟지 않는다(progressive disclosure).
+- 자체완결 1파일(인라인 CSS/SVG, 무JS) · 사용자 언어 · 현지시간 스탬프.
+- Core 있으면 `completion-report` 호출, 없으면 동일 형식으로 인라인 생성.

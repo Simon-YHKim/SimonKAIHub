@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2nd-B Settings Trust Static UI Audit</title>
+  <style>
+    :root {
+      --bg: #080b10;
+      --panel: #101720;
+      --text: #e9eef4;
+      --muted: #94a3b8;
+      --accent: #4ade80;
+      --warn: #f97316;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Apple SD Gothic Neo", system-ui, sans-serif;
+      line-height: 1.58;
+    }
+    main {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 48px 0 64px;
+    }
+    header {
+      border-bottom: 1px solid rgba(148, 163, 184, .28);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    h1 {
+      margin: 8px 0 12px;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 34px 0 12px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    .summary { max-width: 880px; color: var(--muted); font-size: 17px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 18px 0;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid rgba(148, 163, 184, .22);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    code {
+      color: var(--accent);
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: .95em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+    }
+    th, td {
+      border: 1px solid rgba(148, 163, 184, .22);
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: rgba(74, 222, 128, .1); }
+    ul { margin: 10px 0 0; padding-left: 20px; }
+    li { margin: 8px 0; }
+    .sev { color: var(--warn); font-weight: 700; }
+    footer { margin-top: 40px; color: var(--muted); font-size: 13px; }
+    @media (max-width: 760px) {
+      main { width: min(100% - 28px, 1120px); padding-top: 32px; }
+      .grid { grid-template-columns: 1fr; }
+      table { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex Static UI Audit</div>
+      <h1>Settings / Trust 화면군 추가 리뷰</h1>
+      <p class="summary">렌더 QA가 auth/env P0로 막힌 상태에서, 소스 기준으로 확정 가능한 설정·계정·데이터·개인정보·지원·프로필 허브의 UI/UX 문제를 구현 가능한 항목으로 분리했다.</p>
+    </header>
+
+    <section>
+      <h2>Highest Priority</h2>
+      <div class="grid">
+        <div class="card">
+          <strong><span class="sev">P1</span> Public trust pages behind auth</strong>
+          <p><code>support.tsx:24</code>, <code>privacy.tsx:91</code> redirect signed-out users. Privacy/support should be available before signup.</p>
+        </div>
+        <div class="card">
+          <strong><span class="sev">P1</span> Settings danger zone density</strong>
+          <p><code>settings.tsx:316-448</code> places many destructive actions and full wipe on one scroll surface.</p>
+        </div>
+        <div class="card">
+          <strong><span class="sev">P1</span> Retired route leakage</strong>
+          <p>User-facing CTAs still point to retired <code>/journal</code> from not-found, audit, insights, persona, settings, trinity, wiki, and onboarding.</p>
+        </div>
+        <div class="card">
+          <strong><span class="sev">P1</span> Accessibility zoom lock</strong>
+          <p><code>+html.tsx:50</code> disables page zoom globally with <code>user-scalable=no</code>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Detailed Findings</h2>
+      <table>
+        <thead>
+          <tr><th>Issue</th><th>Evidence</th><th>Codex Recommendation</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Public trust access</td>
+            <td><code>support.tsx:24</code>, <code>privacy.tsx:91</code></td>
+            <td>Split public policy/support pages from authenticated preference toggles.</td>
+          </tr>
+          <tr>
+            <td>Delete flow risk</td>
+            <td><code>settings.tsx:316-448</code>, <code>settings.tsx:242</code>, <code>settings.tsx:217</code></td>
+            <td>Export/support preflight first, destructive actions behind progressive disclosure, post-wipe route away from retired <code>/journal</code>.</td>
+          </tr>
+          <tr>
+            <td>Stale route</td>
+            <td><code>+not-found</code>, <code>audit</code>, <code>core-brain</code>, <code>index</code>, <code>insights</code>, <code>onboarding</code>, <code>persona</code>, <code>settings</code>, <code>trinity</code>, <code>wiki</code></td>
+            <td>Move user-facing CTAs to <code>/capture</code> or route-specific next actions.</td>
+          </tr>
+          <tr>
+            <td>Psych label drift</td>
+            <td><code>manual.tsx:216</code>, <code>manual.tsx:224</code>, <code>settings.tsx:355</code>, <code>settings.tsx:360</code>, <code>profile.tsx:51</code></td>
+            <td>Replace TIPI with BFI-44. Demote MBTI to reference-only in Profile and Persona.</td>
+          </tr>
+          <tr>
+            <td>Coming-soon CTAs</td>
+            <td><code>sign-in.tsx:123-124</code>, <code>capture.tsx:737</code>, <code>data.tsx:79-84</code>, <code>support.tsx:63</code></td>
+            <td>Provide real fallback actions or remove unfinished primary UI.</td>
+          </tr>
+          <tr>
+            <td>Preview route exposure</td>
+            <td><code>_layout.tsx:68</code>, <code>BackArrow.tsx:20</code>, <code>asset-motion-preview*.tsx</code></td>
+            <td>Remove from product stack or gate behind a dev-only flag.</td>
+          </tr>
+          <tr>
+            <td>Profile hub density</td>
+            <td><code>profile.tsx:35-84</code></td>
+            <td>Split into Me model, Activity, Data and trust, Tools. Keep trust controls scan-friendly.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Implementation Order</h2>
+      <ul>
+        <li>Resolve render QA unblock first.</li>
+        <li>Publish signed-out privacy/support trust pages and keep authenticated toggles separate.</li>
+        <li>Sweep retired <code>/journal</code> navigation and stale <code>TIPI</code> copy.</li>
+        <li>Refactor settings danger zone into export-first progressive disclosure.</li>
+        <li>Remove coming-soon primary CTAs or add concrete fallback actions.</li>
+        <li>Restore mobile page zoom outside graph-specific interactions.</li>
+        <li>Remove/gate preview routes and reduce Profile hub density.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Markdown request: agents/codex/outbox/20260605-202228-to-claude-settings-trust-static-ui-request.md. Codex did not modify E:\2ndB code.
+    </footer>
+  </main>
+</body>
+</html>

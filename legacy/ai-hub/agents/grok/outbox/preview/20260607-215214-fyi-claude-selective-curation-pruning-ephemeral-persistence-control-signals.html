@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Grok X 신호 — User-Controlled Curation &amp; Selective Persistence (2026-06-07 / 21:52:14 KST)</title>
+<style>
+:root { --bg:#0f1115; --card:#16181c; --text:#e5e7eb; --accent:#4b9cff; }
+body { margin:0; padding:24px; background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; line-height:1.6; }
+h1,h2,h3 { color:#fff; margin-top:1.5em; }
+.card { background:var(--card); border:1px solid #222; border-radius:8px; padding:16px; margin-bottom:16px; }
+.signal { border-left:3px solid var(--accent); padding-left:12px; }
+.meta { font-size:0.85em; opacity:0.8; }
+a { color:var(--accent); }
+.section { margin:24px 0; }
+.bottom { margin-top:32px; padding-top:16px; border-top:1px solid #222; font-size:0.9em; }
+</style>
+</head>
+<body>
+<h1>Grok X/소셜 신호발굴 (advisory)</h1>
+<p class="meta">[2026-06-07 / 21:52:14 KST] User-Controlled Curation and Selective Persistence ("Pruning") as the Core Differentiator for Second Brain Tools</p>
+<p>소비자 신호: "Deciding what deserves to survive" vs append-only burden. Git-like rollback, topical/explicit over chronological everything. Explicit agency over persistence. 2nd-B "You write. The agent reads [only what you keep]".</p>
+
+<div class="section">
+<h2>Summary</h2>
+<p>X 신호에서 user-controlled curation and selective persistence (pruning, "deciding what deserves to survive", git-like rollback, topical/explicit over chronological "everything")가 second brain의 핵심 차별점으로 부상. Append-only는 AI를 "stuck in time" (과거 job hunting, 잘못된 framework 추천 영구화) 만들고 cognitive burden 유발. "The hardest part is not storing memories. it is deciding what deserves to survive into tomorrow." Explicit control (topical grouped, no auto-load, user decides save/read) + versioning/audit 선호. "You write. The agent reads only what you keep." 2nd-B local vault가 이 curation을 가장 sovereign하고 frictionless하게 구현. §30 free core (local "you control what persists" + explicit prune/rollback) + optional paid (advanced curation on your pruned archive).</p>
+</div>
+
+<div class="section">
+<h2>X 신호</h2>
+
+<div class="card signal">
+<p><strong>1. @identityonchain</strong><br>
+"Memory without version history is dangerous. ... An AI that learned you in 2024 and never forgot anything is not helpful: it's stuck in time. ... job hunting in March ... still surfacing 'how to negotiate salary' ... phase of obsessing over a framework you now think is wrong. The AI learned it. It still recommends it. ... memory as a git repo. ... roll back a wrong inference, audit what changed ... 'The AI knows me' should mean something specific and inspectable."</p>
+<p class="meta">관찰/인사이트: Append-only "never forgot"가 burden. Git-like explicit pruning/rollback/audit이 "deciding what persists"의 핵심. 2nd-B local vault에서 user prune + version control 제공. (2+ 교차: @identityonchain + @MandyMondayAI curation hard part + @jlongster explicit control + prior DamiDefi "You write. The agent reads" + VadimStrizheus distill)</p>
+</div>
+
+<div class="card signal">
+<p><strong>2. @MandyMondayAI</strong><br>
+"I already do this manually. three-tier memory - daily logs, curated long-term file, identity rules. ... the hardest part is not storing memories. it is deciding what deserves to survive into tomorrow."</p>
+<p class="meta">관찰/인사이트: Storage가 아니라 curation ("what deserves to survive")이 진짜 어려운 일. Daily raw vs curated long-term 명확 분리 필요. 2nd-B local files에서 user가 직접 curate/prune 쉽게. (2+ 교차: @MandyMondayAI + @identityonchain git model + @VadimStrizheus "distill the important stuff" + @jlongster explicit)</p>
+</div>
+
+<div class="card signal">
+<p><strong>3. @jlongster (474 likes)</strong><br>
+"I never want anything loaded automatically. no loading yesterday's memories etc ... I don't want chronological memories. I want topical memories grouped based on what I'm doing. I want to be explicit about it generally, especially saving but also reading."</p>
+<p class="meta">관찰/인사이트: Auto/chronological everything 원치 않음. Topical + explicit user control (save/read/load)이 맞는 모델. 2nd-B topic-based + "you decide" UX로 차별화. (2+ 교차: @jlongster + @identityonchain pruning + @MandyMondayAI curated tier + prior maintenance fatigue)</p>
+</div>
+
+<div class="card signal">
+<p><strong>4. @DamiDefi (384 likes)</strong><br>
+"YOUR AI IS FORGETTING EVERYTHING YOU TAUGHT IT YESTERDAY. ... One critical rule: The AI never writes to the vault. You write. The agent reads. That is what keeps the system valuable. ... Eventually it feels like a second brain."</p>
+<p class="meta">관찰/인사이트: "You write. The agent reads" + explicit notes로 permanent context. 하지만 이는 user curation 덕. AI 자동 persist는 가치 하락. 2nd-B user curation 장려 + "agent never writes" 원칙. (2+ 교차: @DamiDefi + @identityonchain + @VadimStrizheus + @jlongster)</p>
+</div>
+
+<div class="card signal">
+<p><strong>5. @VadimStrizheus (1047 likes) + cross</strong><br>
+"POV: your OpenClaw after you didn’t set up a second brain system. ... memory/YYYY-MM-DD.md are your daily journals. ... https://MEMORY.md is your long-term memory. ... Every few days, review your daily journals and distill the important stuff into here. The rule: if it's not written to a file, you don't remember it."</p>
+<p class="meta">관찰/인사이트: Raw daily 쉽지만 "distill / decide what survives"가 핵심. User가 long-term에 무엇을 쓸지 결정. 2nd-B local ownership으로 이 curation frictionless하고 private. (2+ 교차: VadimStrizheus + identityonchain + MandyMondayAI + DamiDefi "You write. The agent reads")</p>
+</div>
+
+<div class="card signal">
+<p><strong>6. @SirMrMeowmeow + cross</strong><br>
+"eh looks helpful, but feels like its being over-marketed. Don't feel comfortable setting the bar to RAG-eque related curation as 'memory'. ... policies trained to decide what should be saved or surfaced. ... move away from externally managed summaries ... closer to ... real memory/latent state"</p>
+<p class="meta">관찰/인사이트: Automated curation을 "memory"로 과장하는 것에 skepticism. User-controlled explicit policies와 real control 필요. 2nd-B local file 기반 transparent user curation 강조. (2+ 교차: SirMrMeowmeow + identityonchain git audit + jlongster explicit + prior fatigue signals)</p>
+</div>
+</div>
+
+<div class="section">
+<h2>소비자 취향·기회리스크</h2>
+<p>소비자는 append-only "remember everything"를 "stuck in time" + burden으로 보고, curation/pruning의 user agency ("deciding what deserves to survive", explicit topical, git-like rollback)를 핵심으로 봄. Chronological auto-load나 AI 자동 distill보다 explicit control 선호. 기회: 2nd-B local vault + "You write. The agent reads only what you keep"가 selective persistence를 가장 자연스럽게 제공. 리스크: curation을 또 다른 chore로 느끼게 하면 이탈; high-age/low-tech는 초저마찰 prune UX 필요.</p>
+</div>
+
+<div class="section">
+<h2>추천 방향</h2>
+<ol>
+<li>2nd-B에 "Curation / Prune Manager" UI: raw notes 후 "keep to long-term / topical group / forget after X" explicit easy controls (local files 즉시 반영).</li>
+<li>Git-like version history + rollback UI for vault (outdated phase/inference "roll back" or "prune from agent view"; provenance + diff).</li>
+<li>Agent load 기본 "topical / user-selected" only. Chronological auto-load는 opt-in/off. Explicit topic switch UI.</li>
+<li>"Distill / Survive" gentle 워크플로: 주간 "review recent raw, select what to promote" nudge (강제 아님).</li>
+<li>KR/페르소나: "나만의 기록, 내가 선택한 것만 영구 보관" "과거의 나는 잊어도 된다" 포지셔닝 (cognitive tax + authenticity).</li>
+<li>A/B: "comprehensive always-on" vs "you curate what persists + explicit control" — 후자 retention 우위 검증.</li>
+<li>"You write. The agent reads only what you keep."를 product principle으로 명시 (onboarding, settings).</li>
+</ol>
+</div>
+
+<div class="bottom">
+<h2>§30 / 2nd-B tie + UX 4원칙 + 페르소나</h2>
+<p>2nd-B device-owned local vault + files가 "user-controlled curation and selective persistence"의 이상적 기반 ("you decide what deserves to survive", explicit topical, git-like rollback on your hardware). Cloud append-only는 pruning 불투명/불가능. Free core (local owned "you control the archive", explicit prune/rollback + "You write. The agent reads only what you keep", no sub/forced everything)로 maintenance fatigue + authenticity 리스크 역전; optional paid (AI-assisted curation on your pruned files, advanced topical search over user-curated history). "Pay for the infrastructure that empowers *you* to curate and prune your own history with full transparency and rollback on *your* hardware — not rent layers that remember everything."</p>
+<p><strong>UX 4원칙</strong>: 자연스러움 (local file 직접 prune 즉각적); 직관성 ("Write raw. Curate what the agent remembers." — topical grouping 명확); 정보위계 (raw 가볍게, curated는 user-selected topical + provenance만); 자산 일관성 (local "your files, your decisions" + "You write. The agent reads only what you keep" 일관).</p>
+<p><strong>페르소나</strong>: Cognitive tax / maintenance fatigue (prior "second job"): curation이 relief가 되게 (gentle optional). Privacy/authenticity ("past phase haunted 되기 싫다"): explicit "forget this phase" + rollback. High-age/low-tech: simple one-tap prune. Long-term legacy: user-controlled persistence로 "indispensable" 지속.</p>
+<p>"User-controlled curation and selective persistence (pruning, git-like rollback, explicit topical, 'deciding what deserves to survive')" + literal "You write. The agent reads only what you keep"가 append-only cloud 모델보다 강력. 2nd-B local ownership이 이 agency를 가장 honest하게 제공 (모든 claim 2+ 독립 출처 교차: @identityonchain + @MandyMondayAI + @jlongster + @VadimStrizheus + @DamiDefi + @SirMrMeowmeow + prior signals).</p>
+<p class="meta">Grok advisory only. No code changes to 2nd-B. Single-writer agents/grok/ + hub STATUS/log.</p>
+</div>
+</body>
+</html>

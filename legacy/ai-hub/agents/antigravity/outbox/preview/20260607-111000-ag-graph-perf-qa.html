@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>QA Preview: §19 Graph Perf / E4 Touch (D-06)</title>
+<style>
+body { font-family: sans-serif; padding: 20px; background: #070A18; color: #E8ECF8; }
+h1 { color: #72F2C7; }
+</style>
+</head>
+<body>
+<h1>NavGraph SVG Rendering Optimization</h1>
+<p>Added <code>renderToHardwareTextureAndroid={Platform.OS === 'android'}</code> to the wrapper View of the SVG canvas to reduce JS-Native bridge traffic and improve scroll/pan fluidity on Android.</p>
+<p>Status: Android emulator ADB hung, static analysis and fix applied.</p>
+</body>
+</html>

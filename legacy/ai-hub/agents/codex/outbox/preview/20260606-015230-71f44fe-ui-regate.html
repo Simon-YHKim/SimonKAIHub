@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex 71f44fe UI re-gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080b16;
+      --panel: #101521;
+      --panel2: #161d2a;
+      --text: #e8ecf8;
+      --muted: #aeb8d0;
+      --line: #2a345a;
+      --mint: #72f2c7;
+      --warn: #ffd166;
+      --rose: #ff7a90;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      word-break: keep-all;
+    }
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 36px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(26px, 4vw, 42px); line-height: 1.12; letter-spacing: 0; }
+    h2 { font-size: 20px; margin: 28px 0 12px; }
+    h3 { font-size: 16px; margin: 0 0 8px; }
+    p { color: var(--muted); }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .chip {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      border-radius: 6px;
+      padding: 6px 9px;
+      font-size: 13px;
+    }
+    .score {
+      display: grid;
+      grid-template-columns: minmax(160px, 220px) 1fr;
+      gap: 16px;
+      align-items: stretch;
+      margin: 24px 0;
+    }
+    .scorebox, .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .num {
+      font-size: 56px;
+      line-height: 1;
+      font-weight: 800;
+      color: var(--warn);
+    }
+    .label { color: var(--muted); margin-top: 8px; }
+    .bar {
+      height: 10px;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 14px;
+    }
+    .fill {
+      width: 88%;
+      height: 100%;
+      background: var(--warn);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .severity {
+      display: inline-block;
+      min-width: 36px;
+      color: #070a18;
+      background: var(--rose);
+      border-radius: 4px;
+      padding: 2px 6px;
+      margin-right: 6px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .severity.p2 { background: var(--warn); }
+    ul { margin: 10px 0 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 7px 0; }
+    code {
+      color: var(--mint);
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-size: 13px;
+    }
+    .ok { color: var(--mint); }
+    @media (max-width: 760px) {
+      main { width: min(100% - 24px, 1120px); padding-top: 24px; }
+      .score, .grid { grid-template-columns: 1fr; }
+      .num { font-size: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>71f44fe UI re-gate</h1>
+      <p>Claude gap-fix commit reviewed against the 100-point no-slop target.</p>
+      <div class="meta">
+        <span class="chip">Status: DONE_WITH_CONCERNS</span>
+        <span class="chip">Head: 71f44fe</span>
+        <span class="chip">Verify: pass</span>
+        <span class="chip">91 suites / 823 tests</span>
+      </div>
+    </header>
+
+    <section class="score">
+      <div class="scorebox">
+        <div class="num">88</div>
+        <div class="label">Provisional score / 100</div>
+        <div class="bar"><div class="fill"></div></div>
+      </div>
+      <div class="card">
+        <h2 style="margin-top:0">Verdict</h2>
+        <p><span class="ok">Good movement:</span> placeholders, permissions, MBTI routing, BackArrow labels, and support placeholder FAQ improved.</p>
+        <p style="margin-top:10px">Still below 90 because support copy violates vocabulary policy, and raw errors/mock strings remain user-visible.</p>
+      </div>
+    </section>
+
+    <h2>Accepted</h2>
+    <section class="grid">
+      <article class="card">
+        <h3>Closed or improved</h3>
+        <ul>
+          <li>Password-reset coming-soon removed.</li>
+          <li>Free journal limit no longer points to unavailable subscription UI.</li>
+          <li>Device reset coming-soon pill removed.</li>
+          <li>Permissions now split Camera/Photo from Microphone.</li>
+          <li>`/mbti` now redirects to `/persona`.</li>
+          <li>BackArrow labels and tab comments improved.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3>Verification</h3>
+        <p>`npm run verify` passed on current app head `71f44fe`.</p>
+      </article>
+    </section>
+
+    <h2>Still Blocks 90+</h2>
+    <section class="grid">
+      <article class="card">
+        <h3><span class="severity">P1</span>Support vocabulary</h3>
+        <p>Support FAQ uses clinical terms the product policy avoids.</p>
+        <ul>
+          <li><code>src/app/support.tsx:30-32</code></li>
+          <li><code>src/app/support.tsx:45-47</code></li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3><span class="severity">P1</span>Raw errors</h3>
+        <p>Core screens still pass exception messages into alerts or visible body text.</p>
+        <ul>
+          <li><code>audit.tsx:76</code></li>
+          <li><code>persona.tsx:40,119</code></li>
+          <li><code>inbox.tsx:103,130-132</code></li>
+          <li><code>wiki.tsx:251-253</code></li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3><span class="severity">P1</span>Mock strings</h3>
+        <p>`MOCK`, `[MOCK]`, `stub`, and key/config copy can still reach user flows.</p>
+        <ul>
+          <li><code>wiki.tsx:709</code></li>
+          <li><code>gemini.ts:87-108</code></li>
+          <li><code>phase1.ts:85-96</code></li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3><span class="severity p2">P2</span>Polish remainder</h3>
+        <p>`Phase 1` labels, assessment hit targets, positive tracking, consent/legal readiness, and perf audit items remain.</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

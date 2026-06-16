@@ -1,0 +1,955 @@
+{
+  "summary": "O-R1 전화면 UI/UX 감사 — Interaction Principles 캐논 + §20 4축 채점",
+  "agentCount": 6,
+  "logs": [
+    "화면 38개 채점, 위반 94건 (P1 7 / P2 73 / P3 14)"
+  ],
+  "result": {
+    "screens": [
+      {
+        "route": "/sign-in",
+        "score": 6,
+        "oneLiner": "Email/password CTA is clear but 4 OAuth buttons dilute primary action and violate Hick's law; forgot-password help card causes layout shift."
+      },
+      {
+        "route": "/sign-up",
+        "score": 5.5,
+        "oneLiner": "Three-stage form (email+password+DOB) lacks progress indicator; checklist and consent notice compete visually without breathing room; locale button sizing inconsistent with sign-in."
+      },
+      {
+        "route": "/complete-profile",
+        "score": 5,
+        "oneLiner": "Required single-field form has equal-weight primary and destructive cancel buttons; cancel signs out user without clear warning. No language toggle; no back affordance."
+      },
+      {
+        "route": "/oauth-callback",
+        "score": 6,
+        "oneLiner": "Loading state omits context message; error state shows generic failure without next steps or clear retry path. Callback loop risk (error→sign-in→callback again)."
+      },
+      {
+        "route": "/onboarding",
+        "score": 6.5,
+        "oneLiner": "Three-step intro with clear art and copy, but final step has equal-weight CTAs (violates Hick); skip button top-right breaks top-to-bottom scan; progress dots below 44px minimum."
+      },
+      {
+        "route": "/permissions",
+        "score": 6,
+        "oneLiner": "7 permission entries all visible at once creates cognitive load; no grouping by status or priority. Only action is 'Manual' link—no in-app way to grant permissions."
+      },
+      {
+        "route": "/capture",
+        "score": 6.5,
+        "oneLiner": "Multi-mode capture unified entry with excessive mode choices and journal prompt card breaking scan flow"
+      },
+      {
+        "route": "/records",
+        "score": 7,
+        "oneLiner": "Records browser with 7 simultaneous type filters and inconsistent empty-state affordances"
+      },
+      {
+        "route": "/record/[id]",
+        "score": 8,
+        "oneLiner": "Record detail view with clear hierarchy but three equal-weight secondary CTAs create decision fatigue"
+      },
+      {
+        "route": "/import",
+        "score": 6,
+        "oneLiner": "Import workflow split across two sequential cards presenting parallel UI instead of linear flow"
+      },
+      {
+        "route": "/esm",
+        "score": 7,
+        "oneLiner": "ESM check-in with acceptable energy scale but 6-item context tag grid exceeds Hick threshold"
+      },
+      {
+        "route": "/journal",
+        "score": 10,
+        "oneLiner": "Pure redirect to /capture—no UX assessment needed"
+      },
+      {
+        "route": "/",
+        "score": 6.5,
+        "oneLiner": "Graph + ribbon + 2 insight cards + tab bar create 6+ concurrent CTAs; graphTouched guards cards but doesn't reduce cognitive load from competing visual hierarchies."
+      },
+      {
+        "route": "/manual",
+        "score": 7,
+        "oneLiner": "Hero + 8 sections + glossary + recent features densely packed without progressive disclosure; language toggle breaks column scan."
+      },
+      {
+        "route": "/imagine",
+        "score": 2,
+        "oneLiner": "Silent redirect stub to /secondb divergent mode offers no transition, leaving user without affordance or context."
+      },
+      {
+        "route": "/jarvis",
+        "score": 2,
+        "oneLiner": "Silent redirect stub to /secondb preserving params; backward-compat link masks route change from user."
+      },
+      {
+        "route": "/insights",
+        "score": 6,
+        "oneLiner": "Hero dominates but six card variants and inconsistent eyebrows create visual noise; primary CTA unreachable in thumb zone."
+      },
+      {
+        "route": "/persona",
+        "score": 5,
+        "oneLiner": "Empty state shows 3 tools with 3 buttons each (Hick violation); filled state buries 6+ sections without progressive disclosure."
+      },
+      {
+        "route": "/core-brain",
+        "score": 6,
+        "oneLiner": "Self-portrait field interactivity is hidden; evidence drawer footer buttons unreachable without scrolling."
+      },
+      {
+        "route": "/trinity",
+        "score": 7,
+        "oneLiner": "Clean domain card layout but empty state uses inline link instead of button; tag guide lacks context."
+      },
+      {
+        "route": "/audit",
+        "score": 5,
+        "oneLiner": "Period selection lacks primary action; progress bar is visually heavy (3 elements); completion actions in center not thumb zone."
+      },
+      {
+        "route": "/interview",
+        "score": 4,
+        "oneLiner": "Three competing progress indicators clutter screen; period selection shows 5 identical cards with no recommended entry point."
+      },
+      {
+        "route": "/data",
+        "score": 7,
+        "oneLiner": "Four identical sections differentiated only by border color; all buttons secondary (no primary action)."
+      },
+      {
+        "route": "/big-five",
+        "score": 6,
+        "oneLiner": "Solid paginated form with redundant scale labels and wrapping buttons that break visual consistency on mobile."
+      },
+      {
+        "route": "/attachment",
+        "score": 6,
+        "oneLiner": "Similar paginated form but 7-point scale exceeds Hick threshold with wrapping; live header feedback creates inconsistency vs. big-five."
+      },
+      {
+        "route": "/mbti",
+        "score": 10,
+        "oneLiner": "Clean redirect stub (deprecated route handled correctly)."
+      },
+      {
+        "route": "/secondb",
+        "score": 6.5,
+        "oneLiner": "Chat screen has competing interface elements (mode toggle, usage meter, clear link) that fragment visual flow and place secondary controls in premium real estate above the composer."
+      },
+      {
+        "route": "/plans",
+        "score": 5,
+        "oneLiner": "Four plan cards with identical structure and a 'coming soon' wall create decision fatigue instead of guiding the user toward an upgrade path."
+      },
+      {
+        "route": "/profile",
+        "score": 6,
+        "oneLiner": "Hub screen combines a settings button, subscription card, account strip, and 4 quick-chips in a 2x2 grid, creating unclear visual hierarchy and no single entry action."
+      },
+      {
+        "route": "/settings",
+        "score": 4.5,
+        "oneLiner": "25+ interactive elements (7 nav buttons + 3 disclosure sections with 15+ destructive ops) on one screen overwhelm with choices; danger-zone deletions are hidden in a collapsed panel instead of progressed through a wizard."
+      },
+      {
+        "route": "/account",
+        "score": 6.5,
+        "oneLiner": "Three unrelated sections (DOB, privacy link, account delete) rendered sequentially with equal weight, creating unclear primary task."
+      },
+      {
+        "route": "/privacy",
+        "score": 7,
+        "oneLiner": "Clear toggle-based privacy pref interface, but locked (minor) states are signaled by opacity alone; missing lock icon or visual badge."
+      },
+      {
+        "route": "/support",
+        "score": 7,
+        "oneLiner": "Well-structured contact + FAQ, but FAQ is unbounded list with no search or collapse; scrolling fatigue on growing content."
+      },
+      {
+        "route": "/theme",
+        "score": 7,
+        "oneLiner": "Simple binary choice (Dark/Light) with immediate live-switch, but lacks side-by-side preview or undo affordance for comparison."
+      },
+      {
+        "route": "/wiki",
+        "score": 6.5,
+        "oneLiner": "Content browser with PremiumLoadingState + PremiumModal pattern, but empty/error states vary from /inbox and /formats screens, breaking consistency."
+      },
+      {
+        "route": "/inbox",
+        "score": 6.5,
+        "oneLiner": "Source list with expandable body preview and toast feedback, but loading/error UX differs from /wiki and /formats; no shared content-browsing template."
+      },
+      {
+        "route": "/formats",
+        "score": 6.5,
+        "oneLiner": "Format editor + share/delete toggles, but mixing PremiumCard/Button/Modal styles without a unified content-browsing template."
+      },
+      {
+        "route": "/research",
+        "score": 7,
+        "oneLiner": "Clean framework-filtered reference browser, but uses different error/loading pattern than /wiki, /inbox, /formats; no shared state component."
+      }
+    ],
+    "findings": [
+      {
+        "route": "/sign-in",
+        "principle": "simple",
+        "severity": "P2",
+        "title": "Multiple competing primary actions reduce clarity of intent",
+        "evidence": "sign-in.tsx:244-319 — Email/password submit is canonical path, but four OAuth buttons (Google, Apple, Kakao, Naver) with equal visual weight and minHeight:44 suggest equivalence. Divider + 'or' label make all options appear equal.",
+        "fix": "Reorder: email/password form → submit → optional OAuth section below. Use smaller button variants or progressive disclosure. De-emphasize OAuth visually."
+      },
+      {
+        "route": "/sign-in",
+        "principle": "fitts",
+        "severity": "P2",
+        "title": "Password visibility toggle placement causes baseline misalignment",
+        "evidence": "sign-in.tsx:212-226 — Eye icon button 44×44 with hitSlop:10, but vertically centered in labelRow competing with label text. Icon should be flush-right with clear separation.",
+        "fix": "Add padding or move eye icon to input suffix pattern. Keep touch target but improve visual spacing."
+      },
+      {
+        "route": "/sign-in",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "Forgot-password help card inline blocks scroll flow and causes layout shift",
+        "evidence": "sign-in.tsx:334-343 — resetHelpCard conditionally renders in form section, pushing content down and occupying ~1/3 mobile viewport. Only dismissable via re-press or external navigation.",
+        "fix": "Move resetHelpCard to BottomSheet or modal overlay. Preserve scroll flow and use gesture-based dismiss (swipe down) matching gstack BottomSheet pattern."
+      },
+      {
+        "route": "/sign-in",
+        "principle": "states",
+        "severity": "P3",
+        "title": "OAuth button loading indicators inconsistent (Google/Apple/Kakao show '…', Naver doesn't)",
+        "evidence": "sign-in.tsx:263-319 — When oauthSubmitting=true, Google/Apple/Kakao buttons display '…' (line 273, 288, 303), Naver button does not show any indicator (line 317). Confuses user about progress.",
+        "fix": "Standardize all OAuth buttons: show animated '…' or spinner icon when processing. Naver should match Google/Apple/Kakao pattern."
+      },
+      {
+        "route": "/sign-in",
+        "principle": "realworld",
+        "severity": "P3",
+        "title": "Error state lacks explicit retry affordance or connection guidance",
+        "evidence": "sign-in.tsx:132-138 — Generic 'signInFailed' toast (CSO R3 enumeration protection) shown on all errors. User cannot distinguish network failure from invalid credentials. No 'Retry' button or offline affordance.",
+        "fix": "Toast should hint cause: 'Check connection and try again' or 'Email or password incorrect'. Add explicit retry CTA or allow re-submit without leaving screen."
+      },
+      {
+        "route": "/sign-up",
+        "principle": "simple",
+        "severity": "P2",
+        "title": "Three-field form (email, password, DOB) with no visual progress indicator or stage breaks",
+        "evidence": "sign-up.tsx:230-287 — Email/password/BirthDateField in single ScrollView with no step indicator, section dividers, or visual separation. Checklist appears conditionally (line 266) after typing starts, complicating understanding of form structure.",
+        "fix": "Add explicit progress indicator ('1/3', '2/3', '3/3') or visual section breaks (dividers, spacing.lg gaps). Consider progressive disclosure: reveal next field only after current is valid or allow scroll with next-step highlight."
+      },
+      {
+        "route": "/sign-up",
+        "principle": "fitts",
+        "severity": "P2",
+        "title": "Locale button sizing inconsistent vs sign-in; minHeight not enforced on button wrapper",
+        "evidence": "sign-up.tsx:182-202 — Locale button is Text variant='caption', missing explicit minHeight:44. sign-in.tsx:410 enforces minHeight:44 + minWidth:44. sign-up relies on Text lineHeight only, creating size mismatch.",
+        "fix": "Enforce consistent touch target: minWidth:44, minHeight:44 on all auth locale buttons. Wrap Text in pressable container with explicit dimensions."
+      },
+      {
+        "route": "/sign-up",
+        "principle": "flow",
+        "severity": "P2",
+        "title": "Checklist and ConsentNotice compete visually; too close spacing (gap:xs only)",
+        "evidence": "sign-up.tsx:266-288 — Checklist (3 items, gap:xs) immediately followed by ConsentNotice (toggles + text). Two dense information blocks with only spacing.xs between. Second block appears before first is fully understood.",
+        "fix": "Increase spacing to spacing.md (12px) between checklist and consent. Or merge checklist into form helper text above sections, not a separate visible card."
+      },
+      {
+        "route": "/sign-up",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "PremiumAppShell vs sign-in's raw background; nested hierarchy differs between screens",
+        "evidence": "sign-up.tsx:173 wraps KeyboardAvoidingView inside PremiumAppShell; sign-in.tsx:155-157 nests CosmicBackground inside KeyboardAvoidingView. Different layouts may cause safe-area inset, padding, or background color inconsistencies on notch phones or landscape.",
+        "fix": "Standardize both auth screens: use identical shell pattern (both PremiumAppShell or both bare background). Test safe-area behavior on iOS notch and Android system bars."
+      },
+      {
+        "route": "/complete-profile",
+        "principle": "simple",
+        "severity": "P1",
+        "title": "Two CTA buttons of equal visual weight in required single-field form",
+        "evidence": "complete-profile.tsx:181-199 — Submit button (primary blue) and Cancel button (secondary gray) both minHeight:46+, full width. In OAuth-required flow, Cancel is destructive (signs out, line 121-127) but visually equivalent. User may tap it thinking it skips.",
+        "fix": "Demote Cancel to tertiary/text button or move to header. Primary should be the only prominent CTA. Add confirmation modal if Cancel is unavoidable: 'Signing out will end this setup. Continue?'"
+      },
+      {
+        "route": "/complete-profile",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "No locale toggle or back affordance; differs from sign-in/sign-up",
+        "evidence": "complete-profile.tsx:140-160 — Header shows only brand text + hero. sign-in and sign-up both have locale toggles (lines 165-178, 187-202). User cannot change language mid-setup without canceling and restarting entire OAuth flow.",
+        "fix": "Add locale toggle to complete-profile header (consistent with sign-in/sign-up). Keep copy minimal; language change should not break form state (save inputs before toggle)."
+      },
+      {
+        "route": "/complete-profile",
+        "principle": "states",
+        "severity": "P2",
+        "title": "Checklist and ConsentNotice both conditionally visible; renders blank if neither populated",
+        "evidence": "complete-profile.tsx:166-177 — Checklist appears only if birthDate.length>0. ConsentNotice always visible. If user hasn't entered DOB yet, form appears empty except for single input and two buttons. No scaffolding or hint text.",
+        "fix": "Show inline helper: 'Enter your birth date to continue.' under BirthDateField when blank. Keep form layout stable (no conditional appearance/disappearance) to avoid layout thrashing."
+      },
+      {
+        "route": "/oauth-callback",
+        "principle": "states",
+        "severity": "P2",
+        "title": "Loading state uses generic InlineLoader without context about which provider is processing",
+        "evidence": "oauth-callback.tsx:72 — InlineLoader rendered with no message prop. sign-in.tsx:73 passes t('common.checking'). User sees spinner but doesn't know if Naver is signing in or callback is stuck.",
+        "fix": "Pass context message to InlineLoader: t('oauthCallback.signingIn') or similar, mentioning provider name if possible."
+      },
+      {
+        "route": "/oauth-callback",
+        "principle": "realworld",
+        "severity": "P2",
+        "title": "Error state lacks clear next steps or retry guidance; callback loop risk",
+        "evidence": "oauth-callback.tsx:49-71 — If failed=true, shows text + single 'Retry' link to /sign-in. But user is already on /oauth-callback after attempting sign-in, creating a loop: sign-in → oauth → error → sign-in → oauth again. No guidance on what failed.",
+        "fix": "Show detailed error (e.g., 'Naver sign-in cancelled' vs. 'Connection error') + two options: 'Retry Naver' (re-initiate OAuth flow) and 'Sign in with email' (fallback to email form)."
+      },
+      {
+        "route": "/onboarding",
+        "principle": "simple",
+        "severity": "P1",
+        "title": "Final step has two equal-weight CTAs; violates Hick's law (ambiguous primary action)",
+        "evidence": "onboarding.tsx:157-167 — Steps 1–2 show single button. Step 3 (isLast=true) shows 'Save my first note' (primary) and 'Skip and look around' (secondary) with identical opacity, margin, and visual prominence. User must choose between two equally valid paths.",
+        "fix": "Make secondary button visually tertiary: smaller, text-only style, or reduce opacity. Ensure primary is clearly dominant. Or remove secondary button and provide skip via header affordance."
+      },
+      {
+        "route": "/onboarding",
+        "principle": "flow",
+        "severity": "P2",
+        "title": "Skip button top-right breaks top-to-bottom visual scan; interrupts progress tracking",
+        "evidence": "onboarding.tsx:135-146 — Skip button positioned top-right in topBar next to progress indicator. User scan: progress (top-left) → skip (top-right) → art (center) → text (center) → buttons (bottom). Skip affordance at top competes with progress; unclear if it's metadata or action.",
+        "fix": "Move skip to footer near primary buttons, or make it text-only and subtle (color:textMuted). Top bar = progress tracking only. Actions = bottom."
+      },
+      {
+        "route": "/onboarding",
+        "principle": "fitts",
+        "severity": "P2",
+        "title": "Progress dots 8×8 pixels; well below 44px minimum touch target. Caption text 11px hard to read.",
+        "evidence": "onboarding.tsx:122-133 — Dots are width:8, height:8 (active width:22). Dot tap target is 8px. progressText variant='caption' (sizes.xs=11px). User must look closely or scroll to see step progress on small phones.",
+        "fix": "Enlarge active dot to ~44px height for safe tap, or keep display as indicator only (not interactive). Increase progressText to variant='sm' (13px) for readability."
+      },
+      {
+        "route": "/onboarding",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "No UI back affordance; Android BackHandler steps backward but iOS users cannot reverse",
+        "evidence": "onboarding.tsx:70-79 — BackHandler.addEventListener steps backward (line 72-75) on Android only. iOS has no hardware back, so iOS users stuck stepping forward only. Inconsistent platform UX without explicit UI affordance.",
+        "fix": "Add explicit back arrow or left-chevron button at top-left on all platforms (use BackArrow component from _layout.tsx:87 or similar). Make backward navigation discoverable across iOS and Android."
+      },
+      {
+        "route": "/permissions",
+        "principle": "simple",
+        "severity": "P2",
+        "title": "Seven permission entries all visible, no grouping or progressive disclosure by status",
+        "evidence": "permissions.tsx:24-32 — ENTRIES array has 7 items (network, clipboard, calendar, camera, microphone, location, SMS). All rendered as cards (lines 62-81) with title, description, status tag, platform note. At once: 1 inUse, 2 optional, 1 planned, 3 notUsed. No categorization or collapsible sections. Cognitive load = 7 cards ≥ Hick's 5-choice limit.",
+        "fix": "Group by status: 'Active (1)' ⇒ 'Optional (2)' ⇒ 'Planned (1)' ⇒ 'Not used (3, collapsible)'. Or show 'In use' only by default; 'Show all' reveals rest. Reduce initial visible choices to <5."
+      },
+      {
+        "route": "/permissions",
+        "principle": "realworld",
+        "severity": "P3",
+        "title": "No way to grant permissions from this screen; user must navigate to OS settings manually",
+        "evidence": "permissions.tsx:95-103 — Actions section only has 'Manual' button linking to /manual. User reads all permissions but cannot grant clipboard/camera/location from in-app flow. Must navigate to native OS settings manually.",
+        "fix": "Add 'Grant permissions' button or section that requests native permission dialogs in context. Provide 'Back to app' primary button so user can navigate to features that naturally prompt for permissions."
+      },
+      {
+        "route": "/permissions",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "Permissions screen uses SceneHero; auth group screens do not. Visual system mismatch.",
+        "evidence": "permissions.tsx:48-56 — Uses SceneHero component with island + worker + accent + speech. sign-in/sign-up/complete-profile use flat hero images (authHero) or onboarding art. SceneHero appears to be post-auth premium component. Permissions visually misaligned with auth group.",
+        "fix": "Migrate permissions to simpler hero (match sign-up heroRow: text-copy + image) or move permissions to main app if post-auth. Ensure auth group stays visually consistent (flat or simple hero only)."
+      },
+      {
+        "route": "/capture",
+        "principle": "hick",
+        "severity": "P2",
+        "title": "Capture mode tabs expose all 5 modes + toggle when advanced opens",
+        "evidence": "src/app/capture.tsx:74-75, 250-252. CAPTURE_MODES=[journal,memo,linkclip,ocr,file]; when showAdvancedModes=true, visibleModes renders all 5 tabs + a '...more' toggle (line 750-802), creating 6 simultaneous choices. setShowAdvancedModes(true) is called automatically on non-journal mode switch (line 761). Per Hick's law (O-R1 principle 4), simultaneous choices should not exceed 5. The '...more' toggle is a 6th item.",
+        "fix": "Restructure the mode selector: (1) default view shows journal only, (2) tapping 'more modes' reveals a disclosure with memo/link/ocr grouped as 'quick captures' and file separate. Or render as a modal selector to hide the choice count."
+      },
+      {
+        "route": "/capture",
+        "principle": "flow",
+        "severity": "P2",
+        "title": "Daily prompt card mid-form breaks scan line (line 876-895)",
+        "evidence": "src/app/capture.tsx:876-895. Inside journal mode, after body textarea, a styles.dailyPromptCard appears with independent prompt text + 'use as topic' link, then topic input follows below (896-901). This mid-form card interrupts the linear top-to-bottom scan. Per DESIGN.md O-R1 principle 2: 'Nothing may break the scan line: no left/right zigzag, no banner wedged mid-flow. Order content title, then evidence, then action.' The daily prompt is evidence but sits as a sibling card, not integrated into the topic field context.",
+        "fix": "Move daily prompt into the topic input's helper text or as a disabled suggestion chip. Keep the linear flow: body textarea → topic field (with inline prompt as label/placeholder) → conclusion optional → submit."
+      },
+      {
+        "route": "/capture",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "Three distinct success/confirmation panels with different button arrangements",
+        "evidence": "src/app/capture.tsx:607-630 (savedPanel line 626-627 horizontal buttons), 634-688 (proposalPanel line 652-663 horizontal buttons), 1147-1175 (feedbackModal line 1156-1174 stacked buttons). All use variant={primary|secondary} but in different layouts: savedPanel stacks shard + title + horizontal button row; proposalPanel stacks text + horizontal row; feedbackModal renders centered stacked buttons. Per O-R1 principle 6 consistency: 'same action uses same component in same position on every screen.' Buttons should all use the same arrangement.",
+        "fix": "Unify all post-capture panels to a canonical layout: PremiumCard with centered title + subtitle, then action buttons in a consistent row or stack. Apply to all confirmation flows (capture saved, proposal, import result, esm saved)."
+      },
+      {
+        "route": "/capture",
+        "principle": "fitts",
+        "severity": "P1",
+        "title": "Primary submit button positioned mid-scroll, not in thumb zone",
+        "evidence": "src/app/capture.tsx:1106-1124. The tossBtn is rendered inside ScrollView content (not sticky). On typical mobile (375w × 667h with 56px tab bar + 44px safe area), after scrolling past tabs/fields/tags, the submit button sits at scroll offset 400+, well above the 180px thumb zone (bottom third). The TAB_BAR_HEIGHT constant is added to padding (line 170) but the button itself floats mid-content. Per O-R1 principle 3: 'Primary actions live in the thumb zone (bottom third of screen).'",
+        "fix": "Pin the submit button using a sticky footer pattern: absolute positioning at bottom: TAB_BAR_HEIGHT + insets.bottom, or via a separate PremiumButton container with position:absolute. Ensure it stays visible at all scroll depths."
+      },
+      {
+        "route": "/capture",
+        "principle": "states",
+        "severity": "P2",
+        "title": "Empty tag state (line 1100-1102) lacks next action",
+        "evidence": "src/app/capture.tsx:1100-1102. When tagsEditable.length===0, the UI renders a helper text t('tags.emptyHelper') but provides no affordance showing that tags auto-fill post-save or allowing the user to see AI-proposed suggestions. Per O-R1 principle 7: 'An empty state that does not point somewhere is a dead end.' The tags row should guide the user toward the next step (save + auto-suggest or add manually).",
+        "fix": "Display: 'Tags auto-suggest after save. Add manually here →' and keep the hashtag input always visible, never conditional. Remove the toggle between emptyHelper and removeHelper; always show the path forward."
+      },
+      {
+        "route": "/capture",
+        "principle": "realworld",
+        "severity": "P3",
+        "title": "KeyboardAvoidingView behavior='height' on Android cuts submit button during typing",
+        "evidence": "src/app/capture.tsx:579-582, 166. KeyboardAvoidingView uses behavior={Platform.OS === 'ios' ? 'padding' : 'height'}. On Android, behavior='height' resizes the entire view when keyboard opens, pushing the submit button off-screen if the keyboard is tall (landscape, swipe KB, etc.). Per O-R1 principle 8: 'Design for...1-3 minute sessions (enter, write, save in under a minute).' A user typing the conclusion field suddenly cannot see the save button.",
+        "fix": "Use behavior='padding' uniformly on iOS and Android, or implement a sticky footer that persists above the keyboard regardless of KAV behavior."
+      },
+      {
+        "route": "/records",
+        "principle": "hick",
+        "severity": "P2",
+        "title": "Type filter row displays 7 simultaneous options (all + 6 types)",
+        "evidence": "src/app/records.tsx:33, 229-245. TYPE_FILTERS = ['all', 'journal', 'capture', 'audit', 'interview', 'imagine', 'wiki'] = 7 items in a horizontal ScrollView. While scrollable, the first view exposes 4-5 chips before scroll, and all 7 are cognitively available as a single filter choice set. Per Hick's law (O-R1 principle 4): 'More than 5 menu items: group them or split into steps.' Collapse less common types (interview, imagine, wiki) into a secondary panel or dropdown.",
+        "fix": "Primary filters: All / Journal / Capture / ...More. Secondary panel or sticky footer shows audit, interview, imagine, wiki. Or use a dropdown selector for type instead of a chip strip."
+      },
+      {
+        "route": "/records",
+        "principle": "states",
+        "severity": "P2",
+        "title": "Empty state button appears only when shards.length===0, not on filter-no-match",
+        "evidence": "src/app/records.tsx:275-292. The 'Leave today's piece' button renders only if shards.length===0 (line 283). When a user applies a type filter and no matches exist (filtered.length===0 but shards.length>0), the empty state text reads 'No pieces match that filter' with no CTA. Per O-R1 principle 7: 'empty states must point somewhere.' Users filtering with zero results get stuck with no next action.",
+        "fix": "Render the 'capture' button whenever filtered.length===0, regardless of shards.length. Change button label to 'Start your first piece' if shards.length===0, or 'Add a new piece' if the filter itself is empty."
+      },
+      {
+        "route": "/records",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "Type chip styling diverges from capture mode chip patterns",
+        "evidence": "src/app/records.tsx:334-344. Type chips use TouchableOpacity with styles.chip (border + transparent bg on inactive, line 334-343) and styles.chipActive (brand bg + border, line 344). In /capture.tsx:1369-1386, track chips use Pressable with border + transparent bg, then trackChipActive fills with brand. Semantic intent is identical (filter selection) but component patterns differ (TouchableOpacity vs Pressable, gap spacing, text color logic). Per O-R1 principle 6: 'same action uses same component in same position.'",
+        "fix": "Migrate records chips to use the same Pressable + style pattern as /capture track chips. Standardize on one canonical chip component (prefer Pressable + brand accent fill on active)."
+      },
+      {
+        "route": "/record/[id]",
+        "principle": "simple",
+        "severity": "P3",
+        "title": "Three equal-weight secondary CTAs create decision fatigue",
+        "evidence": "src/app/record/[id].tsx:193-205. Three buttons stacked vertically with equal minHeight=44: seeGraph (secondary), askSecondB (secondary), openSource (primary). While primary is visually distinct, two equal secondaries below it force the user to evaluate three choices for a detail-view exit. Per O-R1 principle 1: 'one primary action per screen, minimum visible elements.' The secondary handoffs should be deprioritized.",
+        "fix": "Keep primary openSource button; move seeGraph and askSecondB to ghost or caption-text links below (less visual weight). Or collapse them behind a 'More' menu (⋮) button."
+      },
+      {
+        "route": "/import",
+        "principle": "flow",
+        "severity": "P2",
+        "title": "Prompt and paste cards split sequential workflow into parallel UI",
+        "evidence": "src/app/import.tsx:149-191. Input flow is split: promptCard (line 149-163, copy prompt button) and pasteCard (line 165-190, textarea + sort button). A user must: (1) open app, (2) copy prompt, (3) leave app, (4) run prompt elsewhere, (5) return, (6) paste, (7) tap sort. The two-card visual layout implies parallel steps when the cognitive flow is strictly sequential. Per O-R1 principle 2: 'Order content title, then evidence, then action; follow top-to-bottom scan.' The cards appear as siblings when they are dependencies.",
+        "fix": "Consolidate into one PremiumCard: hero → collapsible 'View prompt template' section → textarea label 'Paste result here' → sort button. Removes visual parallelism; clarifies the linear dependency."
+      },
+      {
+        "route": "/esm",
+        "principle": "hick",
+        "severity": "P2",
+        "title": "Context tag grid displays 6 simultaneous multi-select items",
+        "evidence": "src/app/esm.tsx:18, 156-181. CONTEXT_TAGS = 6 items (alone, with_people, work_study, moving, resting, outside). Rendered in a styles.tagGrid (line 161-180) as a wrap-flow of clickable chips with multi-select semantics. While the energy scale (1-5, exactly at threshold) is acceptable, the context grid of 6 with toggle behavior may exceed Hick's law cognitive load. Especially problematic for a quick check-in (5-second flow), where the user must evaluate 6 mutually-selectable options.",
+        "fix": "Reduce to 5 items: keep alone, with_people, work_study, resting, outside; remove 'moving' (rarely used). Or show 3 primary tags (alone, with_people, work_study) with '+3 more' disclosure to expand the rest."
+      },
+      {
+        "route": "/journal",
+        "principle": "consistency",
+        "severity": "P3",
+        "title": "Redirect stub /journal creates no UX but maintains compatibility",
+        "evidence": "src/app/journal.tsx:1-17. This is a redirect-only stub (returns <Redirect href='/capture' />). No UX to audit, but its presence in the tab bar routes (line 55 in _layout.tsx mentions journal via characterForRoute) and in the URL namespace creates a hidden coupling. If the menu ever regenerates, a stale backlink to /journal will now redirect instead of 404, hiding the user's intention.",
+        "fix": "No fix needed for UX; this is intentional per the comment (line 1-11). Document the redirect in the routes glossary so future navigation changes preserve it."
+      },
+      {
+        "route": "/",
+        "principle": "simple",
+        "severity": "P2",
+        "title": "Insight cards stack + tab bar create cognitive overload on primary action",
+        "evidence": "src/app/index.tsx:483-531 (insightCardStack with 2 pressable cards) + tab-bar.tsx:33-38 (4 tab destinations). Landing screen renders: (1) graph with village nodes (infinite zoom space), (2) top ribbon with 오뉸의 중심 + SecondB sprite, (3) 2 insight cards (SecondB touch + Pattern Core touch), (4) bottom tab bar (graph/capture/secondb/profile). Primary action is ambiguous: tap graph node to explore? tap insight card? Or tap tab? Screen has no single 'lure' — at least 6 interactive zones compete for attention.",
+        "fix": "Hide insight cards until user has explicitly touched the graph (graphTouched state already exists). Current code shows cards immediately after first touch (line 483), but this still splits attention. Keep only: ribbon (read-only hint) + graph + tab bar. Cards become a secondary layer (swipe-up gesture or explicit 'see recommendations' action) revealed on subsequent visits or via hint."
+      },
+      {
+        "route": "/",
+        "principle": "fitts",
+        "severity": "P2",
+        "title": "Insight cards positioned 104px from bottom, outside comfortable thumb zone",
+        "evidence": "src/app/index.tsx:487: `bottom: Math.max(insets.bottom + 92, 104)`. On iPhone SE (667px height), thumb-friendly zone is bottom ~200px. At 104px from bottom edge, cards sit at mid-reach (uncomfortable). Tab bar sits at 62px (TAB_BAR_HEIGHT) + safe area, which is ideal. Cards should stack just above tab bar or be gesture-triggered, not permanently visible mid-screen.",
+        "fix": "Change positioning to `bottom: Math.max(insets.bottom + TAB_BAR_HEIGHT + spacing.md, insets.bottom + 168)` to push cards into thumb reach above the bar. OR: convert to swipeable overlay triggered by ribbon tap, freeing the main screen real estate."
+      },
+      {
+        "route": "/",
+        "principle": "flow",
+        "severity": "P2",
+        "title": "오뉸의 중심 ribbon and insight card stack are visually redundant top + mid calls to SecondB",
+        "evidence": "src/app/index.tsx:536-574 (ribbon shows SecondB sprite + insight text, routes to /core-brain) vs. 491-510 (insight card #1 is SecondB pressable, routes to /secondb chat). Both offer SecondB interaction, at different visual weights and locations. Ribbon is at top, card is mid-screen. This is a zag when it should be a straight line (up-scan).",
+        "fix": "Merge: make the ribbon a navigation hint only (read-only, no tap affordance). The first insight card can then be the sole SecondB entry point. Or: remove the ribbon during onboarding (first 3 visits), show only cards. This clarifies the visual flow."
+      },
+      {
+        "route": "/",
+        "principle": "hick",
+        "severity": "P1",
+        "title": "6+ concurrent primary actions violate Hick's Law (max 5)",
+        "evidence": "src/app/index.tsx + tab-bar.tsx. Visible on home screen: (1) tap graph node, (2) tap ribbon (SecondB center), (3) tap insight card #1 (SecondB), (4) tap insight card #2 (Pattern Core), (5) /capture tab, (6) /secondb tab, (7) /profile tab. Each is at a different visual hierarchy (graph nodes are central, ribbon is border-top, cards are mid-screen, tabs are bottom). No grouping signal — user must parse 7 distinct decision points before acting.",
+        "fix": "Reduce to 2-3: (1) tap graph (primary), (2) tab bar navigation (4 destinations, but treated as ONE meta-choice: 'where am I?'). Hide insight cards in early onboarding. This keeps the home screen clean: graph fills the frame, tab bar provides nav. Cards appear only on return visits (day 2+) or after explicit request."
+      },
+      {
+        "route": "/",
+        "principle": "states",
+        "severity": "P2",
+        "title": "Empty state not visually distinct from loading state during initial data fetch",
+        "evidence": "src/app/index.tsx:177 `const [hasAnyPiece, setHasAnyPiece] = useState<boolean | null>(null)`. During the Promise.all (lines 289-301), hasAnyPiece stays null while data resolves. Line 385 condition: `hasAnyPiece === false` means empty card only shows when data has resolved AND no pieces exist. Until then, user sees graph + ribbon alone, with no loading indicator. This could read as stalled. When data loads, the card appears suddenly.",
+        "fix": "Show a subtle skeleton or loading bar while hasAnyPiece is null. Or: display empty card with spinner during resolution, then fade spinner when resolved. State feedback: 'Loading your pieces...' (null) → 'No pieces yet' (false) or 'Ready!' (true)."
+      },
+      {
+        "route": "/",
+        "principle": "consistency",
+        "severity": "P3",
+        "title": "Empty graph card uses different dismissal pattern than insight cards (modal vs. stacked)",
+        "evidence": "src/app/index.tsx:419-481 (emptyGraphCard: full-screen modal backdrop with pointerEvents='auto' blocking all interaction), vs. 483-532 (insightCardStack: overlaid but allows graph interaction via pointerEvents='box-none'). Only one is ever shown (line 419 vs. 483 if guards). User never sees both, so the inconsistency is latent, but if design ever shows them together, the interaction model breaks.",
+        "fix": "Unify: both should be non-modal (pointerEvents='box-none'), allowing graph exploration. Empty card should hint 'tap to dismiss + explore' rather than block. This keeps interaction consistent across all UI layers on home screen."
+      },
+      {
+        "route": "/manual",
+        "principle": "simple",
+        "severity": "P2",
+        "title": "8 sections + 8 glossary terms + 6 recent features packed into one scrollable list",
+        "evidence": "src/app/manual.tsx:154-247. ScrollView shows: hero, 8 SECTIONS cards (lines 169-183), 8-row glossary (lines 186-219), 6-item recent list (lines 222-246), 3 action buttons, footer. All are primary text, equally emphasized. User lands on a wall of information. No progressive disclosure — entry point is the same as detail depth.",
+        "fix": "Use tabs or accordion: Hero at top, then Tab 1='Sections (learn basics)' shows first 3-4 sections only. Tab 2='Full guide' shows all. Glossary and 'What's new' are separate tabs. This preserves learning progression while keeping initial cognitive load low."
+      },
+      {
+        "route": "/manual",
+        "principle": "flow",
+        "severity": "P2",
+        "title": "Language toggle (EN/한국어) positioned top-right, breaks left-to-right column scan",
+        "evidence": "src/app/manual.tsx:135-152. languageRow uses justify-between, placing pill far right. Reader scans: top-left eyebrow → right pill → body text (back to left). This zags out of the single-column flow.",
+        "fix": "Move toggle to bottom of scroll (below footer) or into settings. If toggle must stay visible, place it top-left next to eyebrow, or integrate into hero subtitle. Avoid right-side positions on primary content screens."
+      },
+      {
+        "route": "/manual",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "Primary action (capture/sign-up) is conditional, buried in button list",
+        "evidence": "src/app/manual.tsx:249-289. Actions view conditionally shows 'Leave today's piece' (primary, if userId) or 'Get started' (primary, if !userId), followed by two secondary buttons. The primary CTA is not visually anchored to the hero; it's at the end of a scroll. On auth'd users, it's buried as the first of three buttons.",
+        "fix": "Hero should include a single primary action at the bottom (no scroll needed to see it). For auth'd: 'Go to Capture'. For non-auth'd: 'Get Started'. Secondary actions (permissions, research) can stay in the footer. This creates a clear top-down funnel: hero → content → one next step."
+      },
+      {
+        "route": "/imagine",
+        "principle": "simple",
+        "severity": "P1",
+        "title": "Redirect stub with no transition or explanation",
+        "evidence": "src/app/imagine.tsx:7-10. Silent Redirect to /secondb with mode=divergent. User sees redirect happen with no visual feedback or explanation. Comment at line 1-5 is internal history, invisible to user. If user arrives via old bookmark, they're dumped into SecondB chat with no context for 'divergent mode'.",
+        "fix": "Show 0.3-0.5sec transition screen: fade to dark, show 'Loading divergent mode...' or similar. Then push to /secondb with mode flag. This provides affordance closure instead of silent redirect."
+      },
+      {
+        "route": "/jarvis",
+        "principle": "consistency",
+        "severity": "P1",
+        "title": "Redirect stub with no transition; backward-compat link breaks UX flow",
+        "evidence": "src/app/jarvis.tsx:5-9. Like /imagine, silent Redirect to /secondb preserving params. Comment notes this is for backward-compat (old bookmarks), but user sees no indication. If they navigate via saved link, the route silently changes without acknowledgment.",
+        "fix": "Add brief transition (same as /imagine). Also: log redirect event ('old_route: jarvis') to analytics so team can decide if deprecation is safe. Alternatively, keep the redirect but add a useEffect that fires a toast notification (100ms post-redirect) saying 'SecondB is now your chat' for context."
+      },
+      {
+        "route": "/insights",
+        "principle": "simple",
+        "severity": "P2",
+        "title": "Multiple competing card types create visual hierarchy confusion",
+        "evidence": "src/app/insights.tsx:228–279. Six distinct card variants with mixed visual patterns; `borderStartColor: semantic.brand` used uniformly for eyebrows.",
+        "fix": "Consolidate to 2–3 card patterns; reserve `borderStartColor` for conceptual grouping."
+      },
+      {
+        "route": "/insights",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "Eyebrow label styling inconsistent across screens",
+        "evidence": "src/app/insights.tsx:198,230,256,272 use `color=\"brand\"` but persona.tsx:228 uses `color=\"textMuted\"`.",
+        "fix": "Define one eyebrow pattern in design tokens; enforce across all 7 screens."
+      },
+      {
+        "route": "/insights",
+        "principle": "fitts",
+        "severity": "P2",
+        "title": "Primary CTA buried in mid-scroll, not thumb zone",
+        "evidence": "src/app/insights.tsx:163–167. Action is inside SceneHero at scroll top; unreachable without re-scrolling.",
+        "fix": "Move primary action to sticky bottom footer or floating button."
+      },
+      {
+        "route": "/persona",
+        "principle": "hick",
+        "severity": "P2",
+        "title": "Empty state shows 3 tools with 3 buttons each (exceeds 5-choice limit)",
+        "evidence": "src/app/persona.tsx:119–168. Total 6 pressables plus hero action + back.",
+        "fix": "Simplify to single primary: 'Start life audit'; nest others in collapsed section."
+      },
+      {
+        "route": "/persona",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "Traits card vs. attachment card bar heights differ (8px vs. 6px)",
+        "evidence": "src/app/persona.tsx:462–479 vs. 537–555.",
+        "fix": "Extract shared `<PercentBar>` component."
+      },
+      {
+        "route": "/persona",
+        "principle": "simple",
+        "severity": "P2",
+        "title": "Six nested sections after persona card without progressive disclosure",
+        "evidence": "src/app/persona.tsx:268–359. Mobile scroll ~2500px.",
+        "fix": "Move MBTI, attachment, values to collapsed 'More insights' section per CLAUDE.md density rule."
+      },
+      {
+        "route": "/core-brain",
+        "principle": "fitts",
+        "severity": "P2",
+        "title": "Evidence drawer footer buttons unreachable without scrolling modal",
+        "evidence": "src/app/core-brain.tsx:364–372. maxHeight 70% makes drawer ~600px tall.",
+        "fix": "Sticky button footer or swipe-dismissible modal with top affordance."
+      },
+      {
+        "route": "/core-brain",
+        "principle": "flow",
+        "severity": "P2",
+        "title": "Self-portrait field rows hide interactivity; no visual affordance for tappable filled rows",
+        "evidence": "src/app/core-brain.tsx:250–272. 'Fill' button only shows on 'collecting' rows.",
+        "fix": "Highlight interactive rows with surfaceAlt background + chevron on press to signal navigability."
+      },
+      {
+        "route": "/core-brain",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "Section border-start width is 3px here, 4px in trinity (no standard)",
+        "evidence": "src/app/core-brain.tsx:407 vs. src/app/trinity.tsx:346.",
+        "fix": "Define borderStartWidth in theme tokens; enforce across all screens."
+      },
+      {
+        "route": "/trinity",
+        "principle": "simple",
+        "severity": "P2",
+        "title": "Empty state uses inline link instead of button; breaks single-column flow",
+        "evidence": "src/app/trinity.tsx:210–229. `<Link>` styled as `emptyLink` with `color=\"brand\"` in body text.",
+        "fix": "Replace with button below text (variant='secondary')."
+      },
+      {
+        "route": "/trinity",
+        "principle": "gestalt",
+        "severity": "P2",
+        "title": "Tag guide section at bottom lacks visual grouping and context",
+        "evidence": "src/app/trinity.tsx:285–294. Appears as orphaned help text below grid.",
+        "fix": "Move to hero OR collapse under 'More info' OR integrate into empty state."
+      },
+      {
+        "route": "/audit",
+        "principle": "flow",
+        "severity": "P2",
+        "title": "Progress indicator (dots + track + text) is visually heavy; 3 elements for 1 concept",
+        "evidence": "src/app/audit.tsx:193–211. ~80px consumed; no hierarchy distinction.",
+        "fix": "Simplify to single bar with count label; remove dot array."
+      },
+      {
+        "route": "/audit",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "Period selection buttons all variant='secondary'; no visual primary action",
+        "evidence": "src/app/audit.tsx:114–126.",
+        "fix": "First period button should be variant='primary'."
+      },
+      {
+        "route": "/audit",
+        "principle": "fitts",
+        "severity": "P2",
+        "title": "Completion screen actions in center, not thumb zone",
+        "evidence": "src/app/audit.tsx:157–167. Centered flex layout.",
+        "fix": "Move both actions to sticky bottom footer."
+      },
+      {
+        "route": "/interview",
+        "principle": "simple",
+        "severity": "P2",
+        "title": "Three competing progress indicators (topBar + matrix + banner) clutter screen",
+        "evidence": "src/app/interview.tsx:301–342.",
+        "fix": "Keep only ONE progress affordance (matrix OR text count); move banner to toast."
+      },
+      {
+        "route": "/interview",
+        "principle": "hick",
+        "severity": "P2",
+        "title": "Period selection grid shows 5 identical cards with no recommended entry point",
+        "evidence": "src/app/interview.tsx:273–291. All styled identically.",
+        "fix": "Highlight 'current' with variant='primary'; stack others in secondary section."
+      },
+      {
+        "route": "/interview",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "Bubble styling (qBubble/aBubble) not reused across LLM chat surfaces",
+        "evidence": "src/app/interview.tsx:345–361.",
+        "fix": "Extract shared `<ChatBubble>` component."
+      },
+      {
+        "route": "/data",
+        "principle": "simple",
+        "severity": "P2",
+        "title": "Four identical sections differentiated only by left-border color",
+        "evidence": "src/app/data.tsx:47–91.",
+        "fix": "Add icons or type labels; simplify to 2–3 primary sections."
+      },
+      {
+        "route": "/data",
+        "principle": "hick",
+        "severity": "P2",
+        "title": "All button CTAs are variant='secondary'; no visual primary action",
+        "evidence": "src/app/data.tsx:52–83.",
+        "fix": "Make most-used action (export?) primary."
+      },
+      {
+        "route": "_layout (shared)",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "Tab bar hidden on detail routes; inconsistent exit affordance",
+        "evidence": "src/app/_layout.tsx:87–88, src/components/premium/tab-bar.tsx:113.",
+        "fix": "Ensure BackArrow is always visible (min 44px) when tab bar hidden."
+      },
+      {
+        "route": "_layout (shared)",
+        "principle": "gestalt",
+        "severity": "P3",
+        "title": "Tab bar active state uses dark background color (gameboy.screen) instead of high-contrast accent",
+        "evidence": "src/components/premium/tab-bar.tsx:122. Active icon is `gameboy.screen`; low contrast vs. inactive (mint).",
+        "fix": "Active tab icon + label both use mint (gameboy.power) for 4.5:1 contrast minimum."
+      },
+      {
+        "route": "/big-five, /attachment",
+        "principle": "simple",
+        "severity": "P2",
+        "title": "Scale legend text duplicates visible choice buttons",
+        "evidence": "src/app/big-five.tsx:177-184; src/app/attachment.tsx:186-193 — scaleLegend renders text at bottom ('전혀 아니다' / '매우 그렇다') below the Likert group. These labels already appear as button text in LikertChoiceGroup.tsx:26-46.",
+        "fix": "Remove scaleLegend View entirely. Button labels already communicate scale direction. If pole emphasis needed, use numeric badges or increased contrast on extreme buttons."
+      },
+      {
+        "route": "/big-five, /attachment",
+        "principle": "fitts",
+        "severity": "P2",
+        "title": "Likert scale buttons wrap on mobile; touch targets become unpredictable",
+        "evidence": "src/components/quant/LikertChoiceGroup.tsx:54-59 — scaleRow uses flexWrap with flex:1 minWidth:44. 5 choices (Big Five) wrap 2 rows; 7 choices (Attachment) wrap 2-3 rows. Breaks Hick grouping and makes target position change per page swipe.",
+        "fix": "Use fixed-width buttons in single horizontal row with scroll, or constrain to 2 fixed rows (e.g., 3+2 or 4+3 buttons). Maintain 44px touch target. Alternatively, use a slider/segmented control for 7-point scale."
+      },
+      {
+        "route": "/attachment",
+        "principle": "hick",
+        "severity": "P2",
+        "title": "7-point Likert scale exceeds cognitive threshold; wrapping compounds disorientation",
+        "evidence": "src/app/attachment.tsx:26-34 — ECR-S uses 7-point scale, at the edge of Hick's threshold. When wrapped 2-3 rows, users must scan vertically to compare opposing poles ('전혀 아니다' vs '매우 그렇다'), adding cognitive load.",
+        "fix": "Switch to 3-visual-pole design (Low/Medium/High) mapped to 1-7 internally, or use horizontal slider. If keeping 7 buttons, stack as clear 2-row matrix (4 top + 3 bottom) without wrapping."
+      },
+      {
+        "route": "/big-five, /attachment",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "Header state feedback is inconsistent between big-five and attachment",
+        "evidence": "src/app/attachment.tsx:144-156 shows live attachment style ('현재 스타일: Secure · 불안 2.1 · 회피 3.0') once 2+ items answered. src/app/big-five.tsx header (lines 140-148) shows no live trait scores, only static instruction text. Users get zero live feedback on big-five progress.",
+        "fix": "Standardize: either show live scores on BOTH (e.g., 'Lead: Openness 4.2 / Agreeableness 3.8') or NEITHER. If showing, update on every response and keep header text stable (no reflow)."
+      },
+      {
+        "route": "/big-five, /attachment",
+        "principle": "simple",
+        "severity": "P3",
+        "title": "Multiple overlapping terminal states (celebration modal, toast, pager) create confusing exit flow",
+        "evidence": "src/app/big-five.tsx:113-204 — after handleSubmit succeeds, setSaved(true) triggers QuantSaveCelebration (lines 192-197) which auto-navigates after 1.6s. On failure, toast appears and user remains in pager. Two different ending experiences; retrying save can stack toasts.",
+        "fix": "Consolidate: show inline success state (glowing border or checkmark) in progress card, disable save button, auto-navigate after 800ms. For errors, use inline alert in progress card, not floating toast."
+      },
+      {
+        "route": "/big-five, /attachment",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "QuantIntroModal eyebrow uses locale-specific letter-spacing",
+        "evidence": "src/components/quant/QuantIntroModal.tsx:115 — EN gets letterSpacing:1.5, KO gets 0. DESIGN.md §Typography (line 186) forbids letter-spacing on captions; eyebrow is a caption, not heading.",
+        "fix": "Remove locale-conditional letterSpacing. Use 0 for both EN and KO. If emphasis needed, increase fontWeight or change color instead."
+      },
+      {
+        "route": "/big-five, /attachment",
+        "principle": "hick",
+        "severity": "P2",
+        "title": "QuantIntroModal stats row presents 3 equally-weighted facts without clear hierarchy",
+        "evidence": "src/components/quant/QuantIntroModal.tsx:122-137 — statsRow shows items/time/pages with equal visual weight. Why 'pages' appears separately is not obvious; 3 parallel options at cognitive threshold (Hick 4-7 range).",
+        "fix": "Show (items) and (time) only, or move pages to caption below description. Add label above row and lighten dividers (opacity 0.3). Reduces parallel options to 2."
+      },
+      {
+        "route": "/big-five, /attachment",
+        "principle": "realworld",
+        "severity": "P3",
+        "title": "Back arrow allows mid-flight escape without unsaved-changes confirmation",
+        "evidence": "src/app/_layout.tsx:87 — BackArrow is always visible on all screens. Tapping it during assessment (at any page) routes away without guard or warning. QuantPager has no unsaved-changes detector.",
+        "fix": "Add onBack handler in QuantPager: if any items answered, show confirmation sheet ('Discard answers and go back?') with secondary/danger buttons. Or auto-save progress to a draft."
+      },
+      {
+        "route": "/big-five, /attachment",
+        "principle": "states",
+        "severity": "P2",
+        "title": "No loading state shown during createRecord(...) API call",
+        "evidence": "src/app/big-five.tsx:74-111, src/app/attachment.tsx:74-112 — handleSubmit calls createRecord() but does not show PremiumLoadingState. submitLoading only controls button text. On slow networks, save appears frozen with zero feedback.",
+        "fix": "Wrap submit handler in PremiumLoadingState modal with message 'Saving assessment…' and pulse animation. Show before createRecord() call."
+      },
+      {
+        "route": "/big-five, /attachment",
+        "principle": "consistency",
+        "severity": "P1",
+        "title": "QuantPager nav row Back button visually equals Next/Save button",
+        "evidence": "src/components/quant/QuantPager.tsx:96-117 — both Back and Next/Save use primary/secondary variants. DESIGN.md says secondary is for 'adjacent actions,' but both appear equally weighted. Back mid-assessment should be less prominent.",
+        "fix": "Make Back text-only (no background) or low-opacity on pages 2-8. On final page, grey out Back or use a smaller style. Reserve the prominent button row for forward action and save only. Alternatively, move Back to top-left icon-only."
+      },
+      {
+        "route": "/secondb",
+        "principle": "simple",
+        "severity": "P2",
+        "title": "Secondary interface elements compete with primary chat interaction — composer visibility weakened",
+        "evidence": "src/app/secondb.tsx:275-376 — compactHeader (title/usage/mode indicator) appears above chat scroll, modeRow with two toggles + hint text appears before composer. The mode toggle (lines 361-392) is a 5-element horizontal group (Analytic chip, Divergent chip, pulse dot, hint text, semantic signal). This creates dual focal points before the user can send a message, violating Simple (1 CTA per screen) and Hick's law.",
+        "fix": "Move mode selector (Analytic/Divergent) into a compact icon-only toggle in the header instead of a full-row group. Hide the hint text 'New perspectives & what-ifs' by default; show only on first divergent-mode entry via an inline tip or a persistent but subtle element in the hint section. Primary action: send a message at the bottom (already correct in composerPrimary, lines 308–318)."
+      },
+      {
+        "route": "/secondb",
+        "principle": "flow",
+        "severity": "P2",
+        "title": "Visual scan order is disrupted by staggered information hierarchy — usage meter and mode row fragment attention",
+        "evidence": "src/app/secondb.tsx:275–406 — order is: compactHeader (28px sprite + title + usage + mode label) → composerPrimary → modeRow → contextPill → scroll. The usage counter (used/limit) and mode label both appear in the header but the full mode toggle is a separate section below. Reader's eye bounces: header hint → composer → row of chips → scroll. No single downward flow.",
+        "fix": "Consolidate all chat metadata (usage, mode, clear link) into a single compact header strip. Remove the separate modeRow and contextPill sections or merge them into a post-message quick-access area (as quick-actions already do, line 510–532). Establish: header → scroll area (hero once, then turns) → composer at bottom → quick actions. Single column, top-to-bottom."
+      },
+      {
+        "route": "/secondb",
+        "principle": "fitts",
+        "severity": "P3",
+        "title": "Mode toggle sits in upper third, far from thumb zone on mobile; secondary affordance placed in premium real estate",
+        "evidence": "src/app/secondb.tsx:690–712 (modeRow) — the Analytic/Divergent toggle is positioned at y ~380–440px on a typical mobile (after header + composer). The toggle itself is two buttons at 44px min-height, but they are Fitts-hard because the user's thumb has to travel up from the composer or down from the header. The real primary action (send, button at line 317) is correctly positioned at the bottom, but the mode toggle intrudes on the conversational flow zone.",
+        "fix": "Option 1 (recommended): Move mode to a single icon or dropdown in the compactHeader, at 28px height, next to the title. Option 2: Embed mode toggle inside the composerPrimary area as a small leading icon (currently there is only Input + Button). Preserve the bottom composer location as Fitts-prime."
+      },
+      {
+        "route": "/secondb",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "Chat mode toggle (Analytic/Divergent) has no counterpart or exit path on other screens; inconsistent mental model",
+        "evidence": "src/app/secondb.tsx:358–392 — the mode toggle is modal-state within the chat but appears nowhere else in the settings, profile, or other screens. Users cannot carry mode preference across sessions (no persistence shown), and the toggle is unique to /secondb. Other screens (/settings lines 440–493) show toggles for theme and crew density, but they follow a disclosure pattern (DisclosureSection). The chat mode uses a flat row of chips.",
+        "fix": "Add a 'Preferred chat mode' setting in /settings (within the theme/crew disclosure area or a new 'Chat' section) so the default is saved and consistent across sessions. On /secondb, remember the last-used mode in localStorage (like INTRO_DISMISS_KEY at line 60) and apply it on entry. Unify toggle styling: use the same DisclosureSection component or a shared toggle pattern across all preference screens."
+      },
+      {
+        "route": "/secondb",
+        "principle": "states",
+        "severity": "P2",
+        "title": "Empty state and loading state overlap visually; SceneHero rendered while loading is ambiguous",
+        "evidence": "src/app/secondb.tsx:182–190 (auth/progression check) returns InlineLoader; 335–357 (empty state) shows SceneHero unconditionally when hasTurns===false. However, lines 343–347 show speech text that changes based on sending state. If sending===true and turns.length===0, SceneHero's speech says 'I'm reading the pieces' but the scroll area (line 409–425) has a secondary empty message. Two states are rendered simultaneously: hero + empty-state mascot.",
+        "fix": "Clarify: when turns.length===0, show ONLY the SceneHero (hero is lure). Once the first turn arrives (hasTurns===true), hide SceneHero and show the scroll with messages. Do not render both. The secondary mascot at line 415–420 is redundant; remove it or move it into the hero illustration itself."
+      },
+      {
+        "route": "/plans",
+        "principle": "simple",
+        "severity": "P2",
+        "title": "Four plan cards with identical structure create visual noise; no hierarchy differentiates them beyond a highlight border",
+        "evidence": "src/app/plans.tsx:52–92 — CARD_TIERS array renders 4 cards (free, soma, cortex, brain) with the same internal layout: name, price, features, lifetime note. Only soma has borderStartColor=brand and borderStartWidth=4 (cardHighlight, line 127–131). Free tier is equally prominent as premium tiers visually; no visual weight differentiation besides the side-bar border.",
+        "fix": "Apply Hick's law: reduce displayed tiers. Show 2–3 tiers max with a clear recommended tier (soma) at the top in a different visual treatment (slight background highlight, pin icon). Move 'brain' to a 'see all plans' collapsible or separate card. Alternatively, collapse free into a dismissible 'current plan' header above the premium options, so the user's choice is crystal clear."
+      },
+      {
+        "route": "/plans",
+        "principle": "flow",
+        "severity": "P2",
+        "title": "Hero message does not guide action; 'coming soon' notice breaks assumed conversion funnel",
+        "evidence": "src/app/plans.tsx:40–100 — SceneHero (lines 42–50) states title/subtitle/speech but no explicit 'upgrade now' or 'next step' guidance. The notifyPanel (97–100) reads 'Coming soon' with explanation text, but the card list above is not flagged as 'unavailable' or 'simulation'. User lands on /plans expecting to upgrade (from /secondb when chat limit is hit, line 322), sees pricing, then hits a wall ('coming soon'). Visual flow implies checkout, but the exit is a back button (line 102–110).",
+        "fix": "Option 1: Move 'coming soon' notice to the top (after hero, before cards) and style the cards as grayed-out/disabled so the user knows they cannot act yet. Option 2: Keep only 1–2 featured tiers (soma + brain) in an active treatment; grey out others and add a note per tier that it is 'unlocks later'. Add a button below the hero 'Notify me when ready' (fake email signup, or re-route to /support with a contact form)."
+      },
+      {
+        "route": "/profile",
+        "principle": "simple",
+        "severity": "P2",
+        "title": "Primary hub screen has too many destinations (4 quick-chips + subscription card + settings button) and no clear 1st action",
+        "evidence": "src/app/profile.tsx:173–191 (quickGrid) — renders 4 chips (coreBrain, esm, persona, insights) in a 2x2 wrap. Plus topBar settings button (line 122–132) and subscriptionCard (135–161). Plus accountStrip (163–171). Total: 1 header + 1 card + 1 section + 4 chips + 1 button. Profile is a hub, not a screen with a single action. Per Canon 1 (Simple), the 1st action should be immediately obvious.",
+        "fix": "Restructure /profile as a true hub: 1 large hero card ('your second brain') with settings gear, then a single-column list of major destinations (Core Brain, Current Plan, Account, Privacy, Support, Formats) — 5–6 max, each with an icon + label + arrow. Remove the quick-grid of 4 chips; consolidate into the vertical list. The settings button moves to the top-right corner of the hero card (already at line 123)."
+      },
+      {
+        "route": "/profile",
+        "principle": "gestalt",
+        "severity": "P2",
+        "title": "Quickgrid 2x2 wrap creates misaligned spacing; visual weight of coreBrain/esm (capital hue) differs from persona/insights (different accent colors)",
+        "evidence": "src/app/profile.tsx:181–191 (quickChip) — each chip is 48% width with borderColor=item.accent. coreBrain and esm use semantic.brand (mint); persona uses cosmic.soulViolet (violet); insights uses cosmic.signalBlue (blue). The grid wraps, causing uneven gaps. Gestalt spacing rule: same meaning = same gap + color. These four chips have four different colors and no clear grouping, creating visual fragmentation.",
+        "fix": "Group the 4 chips into 2 coherent sections: (1) 'Explore your patterns' = coreBrain + esm (both mint, one section), (2) 'Know yourself' = persona + insights (different colors, separate section). Or simplify: show coreBrain only (the hero) and move others to a settings menu or sub-screen. Ensure all 4 share a consistent spacing rule (e.g., all gap=sm, or a grid with equal gutter)."
+      },
+      {
+        "route": "/settings",
+        "principle": "simple",
+        "severity": "P2",
+        "title": "Navigation hub with 7 buttons + 3 disclosure sections creates overwhelming action count; first screen should have 1 clear task",
+        "evidence": "src/app/settings.tsx:392–438 (nav section) — renders 7 full-width buttons (profile, privacy, account, theme, data, records, support). Lines 440–493: 2 more disclosure sections (theme toggle, crew density). Lines 495–675: massive 'data' disclosure with 15+ destructive buttons. Total affordances on one scroll: ~25 interactive elements before the user scrolls. Violates Hick's law (5 choices max per level) and Simple (1 action per screen).",
+        "fix": "Flatten /settings structure: show ONLY a 5–7 item vertical list of major settings categories (Account, Privacy, Theme, Data, Support) — no action buttons on the main screen. Each routes to a sub-screen (e.g., /settings/account, /settings/data). The current nav buttons (lines 396–437) ARE the goal; make them the only content of /settings. Move the disclosure sections to their respective sub-screens."
+      },
+      {
+        "route": "/settings",
+        "principle": "flow",
+        "severity": "P2",
+        "title": "Danger-zone data deletion is collapsed but visually peer with non-destructive theme/crew toggles; no progressive warning",
+        "evidence": "src/app/settings.tsx:495–675 (data disclosure) — the full destructive tree (delete journals, notes, wiki pages, full wipe, etc.) is hidden under a single disclosure that opens to 15+ buttons. There is no prior warning, no summary of what 'data' means, and the CTA is collapsed at the same level as theme/crew. A misclick on 'data' disclosure and a second misclick on 'Delete everything' could lead to account deletion.",
+        "fix": "Separate data-deletion into its own sub-screen (/settings/data) with a prominent warning banner at the top (red/danger zone styling). Show a flowchart or wizard: 'What do you want to clear?' → 'Partial' (kind-by-kind) vs. 'Full wipe' → confirmation ritual (type 'DELETE'). The /settings main screen should link to this sub-screen with a clear warning label ('Danger: Delete data'). Never hide destructive ops under a collapse-disclosure."
+      },
+      {
+        "route": "/settings",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "Button styles inconsistent: SettingsActionButton has custom disabled state but theme/crew toggles use the shared Button component; affordance signals differ",
+        "evidence": "src/app/settings.tsx:54–107 (SettingsActionButton) vs. lines 451–492 (theme/crew buttons use Button). SettingsActionButton uses custom labelColor logic (lines 66–72) and settingsButtonLabel style (fontFamily=pixelKo, line 861). Theme/crew buttons call the shared Button with variant='primary'|'secondary', no custom label logic. Disabled state in SettingsActionButton is settingsButtonDisabled (lines 849–852); in shared Button it is default. The two button types look different and behave differently in a disabled state.",
+        "fix": "Use the shared Button component exclusively in settings screens. If a custom style is needed, pass it via the `style` prop override (already supported per DESIGN.md #277). Remove the SettingsActionButton wrapper; call Button directly. Ensure disabled state is visually consistent across all action buttons (line 79–85 already handles variant+disabled, so no custom logic needed)."
+      },
+      {
+        "route": "/account",
+        "principle": "simple",
+        "severity": "P2",
+        "title": "Three major sections (DOB correction, privacy controls, account deletion) crammed into one screen; no clear entry task",
+        "evidence": "src/app/account.tsx:191–263 — three equally-weighted sections (dob, privacy link, delete account) are rendered sequentially. Each section is a View with borderStartColor and padding (lines 192, 216, 232). No section is larger or more prominent than the other; there is no visual hierarchy guiding which one the user should interact with first. A user entering /account from /profile expects a single coherent task, but sees three unrelated forms.",
+        "fix": "Clarify intent: /account is for 'account admin' (DOB correction, deletion, privacy). Simplify to two sections: (1) 'Correct your info' (DOB only), (2) 'Danger zone' (delete). Move privacy controls to a dedicated /privacy screen (already exists, line 406, so link there instead). Or split /account into /account/edit (DOB) and /account/delete, each with a single clear task."
+      },
+      {
+        "route": "/privacy",
+        "principle": "fitts",
+        "severity": "P3",
+        "title": "Preference toggle rows use opacity (muted prop) to signal locked (minor) state, but lock icon is missing; visual affordance unclear",
+        "evidence": "src/app/privacy.tsx:177–193 (PreferenceToggleRow) — lines 185–186 set `muted={!editable}` and `lockedLabel` only when !editable. The muted prop likely reduces opacity, but there is no icon, chevron, or badge flagging the locked state visually. A 14-year-old user scrolling /privacy sees greyed-out toggles with no visual reason; the `lockedLabel` text is small (caption, line 187).",
+        "fix": "Add a lock icon (via Svg or an icon component) next to locked toggle labels. Use a consistent locked-state treatment across all UIs that have permission-gating. Ensure the lock is visible without hovering or tapping. Alternatively, render locked and unlocked prefs in separate sections with clear headers ('Your privacy settings' vs. 'Locked until age 18')."
+      },
+      {
+        "route": "/support",
+        "principle": "hick",
+        "severity": "P3",
+        "title": "FAQ list is unbounded; no summary or search; scrolling fatigue on long-form content",
+        "evidence": "src/app/support.tsx:71–76 (faq.map) — renders all FAQ items in a flat loop with only marginTop=md (line 72) separating them. No count of items, no collapse/expand per item, no search. If the FAQ grows to 20+ items, the screen becomes a long scroll with no affordance to jump to relevant items.",
+        "fix": "Add a search input at the top of the FAQ section (line 70). Wrap each FAQ item in an expandable disclosure (like DisclosureSection from settings.tsx), so only the question shows initially and the answer expands on tap. Add a count or category pill above the search ('10 questions about X')."
+      },
+      {
+        "route": "/theme",
+        "principle": "flow",
+        "severity": "P3",
+        "title": "Theme selection is visual-first, but no preview or immediate live-switch feedback; user lands on /theme expecting to preview, not to select blind",
+        "evidence": "src/app/theme.tsx:49–75 (theme options list) — renders two rows, each with a label + description + button (or status pill). There is no preview pane showing what 'dark' vs. 'light' looks like, and tapping 'Use' switches the theme immediately (line 67, setMode(o.id)). The user cannot compare side-by-side.",
+        "fix": "Add a split-screen preview: left half shows 'Dark' theme sample, right half shows 'Light' theme sample (using temporary css classes or a canvas overlay). On selection, apply live and show a 'Undo' button for 10 seconds. Keep the current row-based selection but add visual previews above."
+      },
+      {
+        "route": "/wiki",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "Content-browsing screens (wiki, inbox, formats, research) use different empty/loading/error state components; no shared pattern across the group",
+        "evidence": "src/app/wiki.tsx:29 uses PremiumLoadingState + PremiumModal; src/app/inbox.tsx:11 uses PremiumLoadingState + PremiumModal + PremiumToast; src/app/formats.tsx:20–22 uses PremiumLoadingState + PremiumErrorState + PremiumModal + PremiumToast; src/app/research.tsx:14 uses PremiumErrorState + PremiumLoadingState. Each uses a different subset of premium components. No shared pattern (e.g., all use Modal for confirm, but only some use Toast for feedback). A user jumping between these screens sees inconsistent feedback styling.",
+        "fix": "Define a 'Content Screen' template component (or shared composition pattern) that wraps: SceneHero → ScrollView → content (PremiumCard, PremiumEmptyState, etc.) → Toast/Modal for feedback. All content-browsing screens must use this. Map the error/loading/empty states to shared color + icon treatment."
+      },
+      {
+        "route": "/",
+        "principle": "consistency",
+        "severity": "P2",
+        "title": "Tab bar navigation routes to 4 primary tabs (/graph, /capture, /secondb, /profile) but sub-screens are not visually nested; no breadcrumb or hierarchy hint",
+        "evidence": "src/components/premium/tab-bar.tsx:33–38 — TABS has 4 items. src/app/_layout.tsx:52–75 — Stack.Screen for settings, privacy, account, theme, etc. are all root routes, not nested under /profile or /secondb. When user is on /settings (reached from /profile → settings button), the tab bar still shows /profile as active, but there is no indication that /settings is a child. The BackArrow (line 87) is the only hint.",
+        "fix": "Option 1: Nest the sub-screens (settings, account, privacy, theme, data) under a profile group so /profile/* routes are visually hierarchy-aware. Option 2: Use the BackArrow alone (current) but ensure it is always visible on sub-screens and clearly labeled (accessibility). Add a breadcrumb or screen title that says 'Me > Settings' (currently just 'Settings')."
+      }
+    ]
+  }
+}

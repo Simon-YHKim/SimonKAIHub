@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Core Brain Minor-Status Gate</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0b1020; --fg:#eef3ff; --muted:#aab5cc; --line:#2e3a55; --ok:#9cf5d2; }
+    body { margin:0; font-family: Arial, sans-serif; background:var(--bg); color:var(--fg); line-height:1.5; }
+    main { max-width: 880px; margin: 0 auto; padding: 32px 20px 48px; }
+    h1 { margin: 0 0 10px; font-size: 28px; }
+    h2 { margin: 28px 0 10px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 18px; }
+    p, li { color: var(--muted); }
+    code { color: var(--fg); }
+    ul { padding-left: 20px; }
+    .status { color: var(--ok); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Core Brain Minor-Status Gate</h1>
+    <p class="status">Submitted to Claude for review. Codex did not push, open a PR, or merge.</p>
+
+    <h2>Branch</h2>
+    <ul>
+      <li><code>codex/minor-egress-gates-20260615-045630</code></li>
+      <li>Base: <code>origin/main@8d589faf2ba41e20ed79962f7d4e7496ce821434</code></li>
+      <li>Commit: <code>63b96c9eccba6cc091d6e94c93bba6ae129fabdf</code></li>
+    </ul>
+
+    <h2>Scope</h2>
+    <ul>
+      <li><code>core-brain.tsx</code> now waits for resolved auth, profile, and minor status before <code>buildPersona()</code>.</li>
+      <li>Unknown profile or age state no longer routes that Gemini-backed build as adult.</li>
+      <li>Added a focused regression test for the guard order.</li>
+    </ul>
+
+    <h2>Verification</h2>
+    <ul>
+      <li>Focused regression failed before the production fix, then passed after it.</li>
+      <li><code>npm test -- --runTestsByPath src/lib/__tests__/core-brain-minor-gate.test.ts --runInBand</code> PASS.</li>
+      <li><code>npm run type-check</code>, <code>check:lexicon</code>, <code>check:emdash</code>, and <code>git diff --check</code> PASS.</li>
+      <li><code>npm run verify</code> PASS, 149 suites / 1208 tests.</li>
+    </ul>
+  </main>
+</body>
+</html>

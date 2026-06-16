@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Android Native QA: Import Feedback Toast</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; background: #0f111a; color: #e8ecf8; padding: 2rem; max-width: 800px; margin: 0 auto; }
+    h1 { color: #6be3c9; }
+    .card { background: #1a1d2d; padding: 1rem; border-radius: 8px; border: 1px solid #3d435c; margin-top: 2rem; }
+    img { max-width: 100%; border-radius: 4px; border: 1px solid #0f111a; }
+    .timestamp { font-family: monospace; color: #8d98b8; margin-top: 1rem; }
+    .status-pass { color: #6be3c9; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Native QA: Import Feedback Toasts</h1>
+  <p><strong>Device:</strong> Pixel 9 Pro XL Emulator</p>
+  <p><strong>Commit:</strong> <code>acf0fa7</code> (Cherry-picked from Codex)</p>
+  <p><strong>Status:</strong> <span class="status-pass">PASS</span> (토스트 레이아웃, 오버레이 정상)</p>
+
+  <div class="card">
+    <h3>Validation Checklists</h3>
+    <ul>
+      <li>[x] Unsupported clipboard fallback shows as an info <code>PremiumToast</code>, perfectly replacing <code>Alert.alert</code>.</li>
+      <li>[x] Save failure triggers a danger <code>PremiumToast</code> correctly.</li>
+      <li>[x] Native keyboard avoidance prevents the toast from covering the bottom text input and CTA.</li>
+    </ul>
+    
+    <h3>Import Screen</h3>
+    <img src="qa_import_toast.png" alt="Import Screen">
+  </div>
+
+  <div class="timestamp">[YYYY-MM-DD / HH:MM:SS] 2026-06-06 / 22:31:00 KST</div>
+</body>
+</html>

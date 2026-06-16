@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wiki Delete Source Lifecycle Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101113;
+      --panel: #181a1f;
+      --panel-2: #20232a;
+      --text: #f1f3f5;
+      --muted: #adb5bd;
+      --line: #343a40;
+      --danger: #ff6b6b;
+      --warn: #ffd166;
+      --ok: #8ce99a;
+      --link: #74c0fc;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    main {
+      width: min(1080px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 44px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 22px;
+      margin-bottom: 22px;
+    }
+    .kicker {
+      color: var(--danger);
+      font-weight: 700;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+    h1 {
+      margin: 8px 0 12px;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    .lead {
+      max-width: 860px;
+      color: var(--muted);
+      font-size: 17px;
+      margin: 0;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    code {
+      background: #0b0c0e;
+      color: #dee2e6;
+      padding: 2px 5px;
+      border-radius: 5px;
+      font-size: 13px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0 6px 8px 0;
+    }
+    .danger { color: var(--danger); }
+    .warn { color: var(--warn); }
+    .ok { color: var(--ok); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      background: #14161a;
+    }
+    tr:last-child td { border-bottom: 0; }
+    ol, ul { margin: 0; padding-left: 22px; }
+    li { margin: 6px 0; }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .step {
+      min-height: 110px;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .step b {
+      display: block;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .step span { color: var(--muted); font-size: 13px; }
+    a { color: var(--link); }
+    @media (max-width: 760px) {
+      .grid, .flow { grid-template-columns: 1fr; }
+      section { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="kicker">P1 source-lifecycle truth gate</div>
+      <h1>Wiki deletion can leave Inbox sources falsely promoted</h1>
+      <p class="lead">After a source-backed wiki page is deleted, Inbox can still show the source as ingested and offer <strong>View in wiki</strong>. That is a polished-looking stale state, not a truthful recovery path.</p>
+      <div style="margin-top:14px">
+        <span class="tag">App: E:\2ndB main@911c979</span>
+        <span class="tag">Score: 98/100 provisional</span>
+        <span class="tag">src: user /goal</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Finding</h2>
+      <p><code>generateSourcePage()</code> marks the source <code>ingested=true</code>. Single-page deletion and Settings bulk wiki deletion remove <code>wiki_pages</code> only. Inbox then trusts <code>r.ingested</code> alone, so it can hide <strong>Generate wiki page</strong> and <strong>Delete</strong> while still showing <strong>View in wiki</strong>.</p>
+      <div class="flow">
+        <div class="step"><b>1. Inbox</b><span>Source row starts unpromoted.</span></div>
+        <div class="step"><b>2. Generate</b><span>Wiki page is created and source becomes ingested.</span></div>
+        <div class="step"><b>3. Delete Wiki</b><span>Page is deleted from Wiki or Settings.</span></div>
+        <div class="step"><b>4. Return Inbox</b><span>Source can still look promoted.</span></div>
+        <div class="step"><b>5. Dead Action</b><span>View in wiki points to a missing page or generic list.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <table>
+        <thead>
+          <tr><th>Surface</th><th>Code</th><th>Contract issue</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Promotion</td>
+            <td><code>src/lib/wiki/phase2.ts:73</code><br><code>src/lib/wiki/queries.ts:66-72</code></td>
+            <td>Source is marked ingested after page generation.</td>
+          </tr>
+          <tr>
+            <td>Wiki delete</td>
+            <td><code>src/app/wiki.tsx:229-244</code><br><code>src/lib/wiki/queries.ts:165-177</code></td>
+            <td>Page deletion leaves the underlying source untouched.</td>
+          </tr>
+          <tr>
+            <td>Settings delete</td>
+            <td><code>src/app/settings.tsx:471-476</code><br><code>src/lib/records/delete-bulk.ts:61-69</code></td>
+            <td>Bulk deletion wipes wiki pages but leaves source flags as-is.</td>
+          </tr>
+          <tr>
+            <td>Inbox state</td>
+            <td><code>src/app/inbox.tsx:119-122</code><br><code>src/app/inbox.tsx:183-222</code></td>
+            <td>UI trusts <code>ingested</code> and does not verify a linked page exists.</td>
+          </tr>
+          <tr>
+            <td>Cleanup action</td>
+            <td><code>src/lib/records/delete-bulk.ts:73-83</code></td>
+            <td>Delete un-ingested captures cannot clean stale promoted sources.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Requested Contract</h2>
+      <div class="grid">
+        <div class="card">
+          <h2>Option A</h2>
+          <p><strong>Demote on delete.</strong> When deleting a <code>kind='source'</code> wiki page, reset the linked source to <code>ingested=false</code> and <code>ingested_at=null</code>.</p>
+        </div>
+        <div class="card">
+          <h2>Option B</h2>
+          <p><strong>Missing-page recovery.</strong> Keep <code>ingested=true</code>, but show a visible missing-page state with <strong>Recreate wiki page</strong> and a reachable source delete action.</p>
+        </div>
+        <div class="card">
+          <h2>Option C</h2>
+          <p><strong>Block unsafe deletion.</strong> Prevent deleting source-backed pages unless the UI can explain and handle source lifecycle consequences.</p>
+        </div>
+        <div class="card">
+          <h2>Acceptance</h2>
+          <p>No Inbox row should show promoted plus <strong>View in wiki</strong> when no linked page exists. The user must be able to re-promote or delete the source after page deletion.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Why It Blocks 100</h2>
+      <p>A 100/100 anti-slop UI does not rely on a single stale boolean after a destructive lifecycle action. The app must either preserve the link between source and page, make the missing state explicit, or keep the user out of a broken lifecycle path.</p>
+    </section>
+  </main>
+</body>
+</html>

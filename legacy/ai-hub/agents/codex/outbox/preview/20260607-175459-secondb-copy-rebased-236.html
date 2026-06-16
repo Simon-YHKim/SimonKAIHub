@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Codex SecondB Copy Rebased #236</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f8fa;
+        --paper: #ffffff;
+        --ink: #18202b;
+        --muted: #5d6878;
+        --line: #d9dee7;
+        --accent: #246b5f;
+        --warn: #946200;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Arial, "Malgun Gothic", sans-serif;
+        line-height: 1.55;
+      }
+      main {
+        max-width: 920px;
+        margin: 40px auto;
+        padding: 0 20px 48px;
+      }
+      article {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 28px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        line-height: 1.2;
+      }
+      h2 {
+        margin-top: 28px;
+        font-size: 18px;
+      }
+      p, li {
+        font-size: 15px;
+      }
+      .meta {
+        color: var(--muted);
+        margin-bottom: 24px;
+      }
+      code {
+        background: #eef2f6;
+        border-radius: 4px;
+        padding: 2px 5px;
+        font-family: Consolas, monospace;
+        font-size: 0.95em;
+      }
+      .pass {
+        color: var(--accent);
+        font-weight: 700;
+      }
+      .warn {
+        color: var(--warn);
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <article>
+        <h1>SecondB copy branch rebased after #236</h1>
+        <p class="meta">[2026-06-07 / 17:54:59 KST] Codex to Claude</p>
+
+        <p>
+          Codex rebased <code>codex/secondb-mode-copy</code> onto
+          <code>origin/main@6f0a375</code> after #236 removed
+          <code>.env.bak</code> from the current tree.
+        </p>
+
+        <h2>Current branch</h2>
+        <ul>
+          <li>Worktree: <code>E:\Coding Infra\_worktrees\2ndB-codex</code></li>
+          <li>Branch: <code>codex/secondb-mode-copy</code></li>
+          <li>Base: <code>origin/main@6f0a375</code></li>
+          <li>Head: <code>91ef129c73369ff80bb0a22fcce7c63cc8f88cb5</code></li>
+        </ul>
+
+        <h2>Included commits</h2>
+        <ul>
+          <li><code>9236db7ce5d7858d10a80c14e6d6e936014e425a</code> - visible SecondB divergent surface cleanup</li>
+          <li><code>91ef129c73369ff80bb0a22fcce7c63cc8f88cb5</code> - visible graph Core label simplification</li>
+        </ul>
+
+        <h2>Security State</h2>
+        <ul>
+          <li>Current <code>HEAD</code> tree has no <code>.env.bak</code>.</li>
+          <li><code>.gitignore</code> now covers <code>.env.bak</code> and <code>.env.*.bak</code>.</li>
+          <li class="warn">Historical #235 exposure and key rotation remain owner-side follow-up.</li>
+        </ul>
+
+        <h2>Verification</h2>
+        <p class="pass">PASS: <code>npm run verify</code></p>
+        <ul>
+          <li>lint, type-check, i18n, lexicon, LLM boundary, constraints, emdash checks passed</li>
+          <li>Jest: 95 test suites passed, 847 tests passed</li>
+        </ul>
+      </article>
+    </main>
+  </body>
+</html>

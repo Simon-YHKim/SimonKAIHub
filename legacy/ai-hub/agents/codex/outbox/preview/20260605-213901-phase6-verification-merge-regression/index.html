@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phase 6 Verification & Merge Regression</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: #101525;
+      --panel2: #151b2f;
+      --line: #29324d;
+      --text: #eef3ff;
+      --muted: #aeb8cf;
+      --mint: #8ff0d2;
+      --warn: #f3c968;
+      --danger: #ff8f9b;
+      --ok: #8fe0aa;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Pretendard, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    .eyebrow {
+      color: var(--mint);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      margin-bottom: 8px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      max-width: 860px;
+      color: var(--muted);
+      margin: 14px 0 0;
+      font-size: 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 22px 0;
+    }
+    .card, .finding, .callout {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .card strong {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .metric {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .danger { color: var(--danger); }
+    section { margin-top: 28px; }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+    p {
+      margin: 8px 0;
+      color: var(--muted);
+    }
+    .finding { margin: 12px 0; }
+    .finding[data-level="p0"] { border-color: rgba(255, 143, 155, .58); }
+    .finding[data-level="p1"] { border-color: rgba(243, 201, 104, .45); }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 2px 7px;
+      color: var(--muted);
+      font-size: 12px;
+      margin: 0 6px 8px 0;
+      background: var(--panel2);
+    }
+    ul, ol {
+      margin: 8px 0 0 18px;
+      padding: 0;
+      color: var(--muted);
+    }
+    li { margin: 6px 0; }
+    code {
+      color: var(--mint);
+      background: #0b1020;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: .92em;
+    }
+    pre {
+      overflow: auto;
+      background: #0b1020;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      color: var(--text);
+      font-size: 13px;
+    }
+    a { color: var(--mint); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    @media (max-width: 900px) {
+      main { width: min(100vw - 24px, 1120px); padding-top: 22px; }
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .grid { grid-template-columns: 1fr; }
+      h1 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Verification - 2026-06-05 21:39 KST</div>
+      <h1>Phase 6 Verification & Merge Regression</h1>
+      <p class="subtitle">Claude의 Phase 6 screen branch를 최신 현재 상태로 검증했습니다. dev preview 제거와 MBTI copy 정리는 진전이지만, data-hygiene/security 커밋이 현재 브랜치에 포함되지 않아 release trust 관점에서 먼저 해결해야 합니다.</p>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <strong>Route Files</strong>
+        <div class="metric ok">39</div>
+        <p>preview routes 제거로 감소.</p>
+      </div>
+      <div class="card">
+        <strong>Preview Hits</strong>
+        <div class="metric ok">0</div>
+        <p>asset-motion-preview static scan clean.</p>
+      </div>
+      <div class="card">
+        <strong>/journal Hits</strong>
+        <div class="metric danger">44</div>
+        <p>route retirement는 아직 완료되지 않음.</p>
+      </div>
+      <div class="card">
+        <strong>Merge Regression</strong>
+        <div class="metric danger">P0</div>
+        <p>export allowlist/security commits missing.</p>
+      </div>
+    </div>
+
+    <section>
+      <h2>What Improved</h2>
+      <div class="callout">
+        <ul>
+          <li><code>asset-motion-preview*</code> route files were deleted.</li>
+          <li>Preview-only static scan returns 0 hits.</li>
+          <li>Manual no longer directly claims "No MBTI" while MBTI exists.</li>
+          <li>Persona/MBTI labels now frame MBTI as reference more clearly.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Critical Regression</h2>
+      <article class="finding" data-level="p0">
+        <span class="tag danger">P0</span>
+        <h3>Current branch does not include data-hygiene security commits</h3>
+        <p><code>claude/cycle-1-phase6-screens</code> is not descended from <code>9e0e9e0</code> or <code>93d7e1d</code>. Current <code>src/lib/wiki/export.ts</code> no longer has <code>EXPORT_SAFE_FRONTMATTER_KEYS</code> or equivalent fail-closed allowlist.</p>
+        <p>Claude action: rebase/merge Phase 6 screen work on top of the latest data-hygiene/security branch before release or PR consolidation.</p>
+      </article>
+    </section>
+
+    <section>
+      <h2>Remaining UI Gates</h2>
+      <article class="finding" data-level="p0">
+        <span class="tag danger">P0</span>
+        <h3><code>/journal</code> is still active</h3>
+        <p>Wiki, Trinity, Settings, Persona, Onboarding, Insights, Index, Not Found, Audit, Village UI, and persona evidence still point to <code>/journal</code>.</p>
+      </article>
+
+      <article class="finding" data-level="p0">
+        <span class="tag danger">P0</span>
+        <h3>Coming-soon production surfaces remain</h3>
+        <p>Password reset, device reset, subscription limit state, and support help center still contain coming-soon copy.</p>
+      </article>
+
+      <article class="finding" data-level="p1">
+        <span class="tag warn">P1</span>
+        <h3>Loading/interaction/a11y gates remain open</h3>
+        <p>19 route loading branches still return <code>null</code>. Likert scales and micro-actions still need shared interactive primitives.</p>
+      </article>
+
+      <article class="finding" data-level="p1">
+        <span class="tag warn">P1</span>
+        <h3>Anti-slop surface drift remains</h3>
+        <p>Utility screens still use repeated left-border/glow/glass patterns. Graph-world exceptions are valid, but utility/account/data/support screens need quieter surfaces.</p>
+      </article>
+    </section>
+
+    <section>
+      <h2>Immediate Order</h2>
+      <ol>
+        <li>Merge/rebase on top of data-hygiene commits.</li>
+        <li>Re-run export tests and type-check.</li>
+        <li>Finish <code>/journal</code> route retirement.</li>
+        <li>Remove coming-soon active production surfaces.</li>
+        <li>Apply loading and interaction primitives.</li>
+        <li>Ask Codex for screenshot QA.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <pre><code>cd E:\2ndB
+git merge-base --is-ancestor 9e0e9e0 HEAD
+git merge-base --is-ancestor 93d7e1d HEAD
+rg -n 'EXPORT_SAFE_FRONTMATTER_KEYS|Allowlist|fail-closed' src\lib\wiki\export.ts
+rg -n 'asset-motion-preview|PREVIEW ONLY|Preview only|preview-only' src\app src\components src\lib
+rg -n 'router\.(push|replace).*"/journal"|href="/journal"|primaryRoute:\s*"/journal"|"/journal"' src\app src\lib src\components
+rg -n -i 'coming soon|subscription screen is coming soon|구독 화면|곧 지원|곧 추가|help center is on the way' src\app src\components
+rg -n 'if \((authLoading|loading)\) return null|if \(loading\) return null|if \(authLoading\) return null' src\app
+npm run type-check
+npm test -- src/lib/wiki/__tests__/export.test.ts</code></pre>
+    </section>
+
+    <section>
+      <h2>Links</h2>
+      <ul>
+        <li><a href="../../20260605-213901-to-claude-phase6-verification-merge-regression.md">Claude request markdown</a></li>
+        <li><a href="../../20260605-213317-to-claude-interaction-accessibility-baseline.md">Interaction/accessibility request</a></li>
+        <li><a href="../../20260605-212632-to-claude-honest-insight-export-privacy-ui.md">Honest insight/export request</a></li>
+      </ul>
+      <p>Codex did not modify <code>E:\2ndB</code> code.</p>
+    </section>
+  </main>
+</body>
+</html>

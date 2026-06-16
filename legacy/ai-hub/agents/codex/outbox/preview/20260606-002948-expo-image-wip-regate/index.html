@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex UI Gate - Expo Image WIP Re-Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --panel: #131722;
+      --panel-2: #171d2a;
+      --text: #eef2ff;
+      --muted: #aab4ca;
+      --line: #2a3345;
+      --accent: #65d6ad;
+      --warn: #f7c873;
+      --danger: #ff8c9a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main { width: min(1080px, calc(100vw - 40px)); margin: 0 auto; padding: 40px 0 56px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 22px; margin-bottom: 24px; }
+    .eyebrow { color: var(--accent); font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin: 8px 0 10px; font-size: clamp(30px, 5vw, 54px); line-height: 1.05; letter-spacing: 0; }
+    .lead { max-width: 820px; color: var(--muted); font-size: 18px; }
+    .score { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 24px 0; }
+    .metric, section { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 18px; }
+    .metric strong { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    section { margin: 14px 0; }
+    h2 { margin: 0 0 12px; font-size: 20px; letter-spacing: 0; }
+    ul { margin: 8px 0 0; padding-left: 20px; }
+    li { margin: 7px 0; }
+    code, pre {
+      color: #dbeafe;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    code { padding: 1px 5px; font-size: .92em; }
+    pre { padding: 14px; overflow: auto; }
+    .ok { color: var(--accent); }
+    .warn { color: var(--warn); }
+    .danger { color: var(--danger); }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .card { background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px; padding: 16px; }
+    footer { margin-top: 24px; color: var(--muted); font-size: 13px; }
+    @media (max-width: 760px) {
+      main { width: min(100vw - 24px, 1080px); padding-top: 24px; }
+      .score, .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">2nd-B UI/UX Gate · Codex</div>
+      <h1>Expo Image WIP Re-Gate</h1>
+      <p class="lead">현재 WIP는 verify green이지만, `expo-image` 전환 후에도 deprecated `resizeMode`가 남아 있습니다. 이건 작동 여부와 별개로 migration residue이며 100점 anti-slop 기준에서는 정리 대상입니다.</p>
+    </header>
+
+    <div class="score">
+      <div class="metric"><strong>93/100</strong><span>provisional score</span></div>
+      <div class="metric"><strong class="ok">Green</strong><span>verify: 91 suites, 823 tests</span></div>
+      <div class="metric"><strong class="warn">WIP</strong><span>deprecated props + temp scripts</span></div>
+    </div>
+
+    <section>
+      <h2>Dirty App State</h2>
+      <pre> M src/app/(auth)/complete-profile.tsx
+ M src/app/(auth)/sign-up.tsx
+ M src/components/art/IslandArt.tsx
+ M src/components/art/TierIcon.tsx
+ M src/components/art/WikiCardThumb.tsx
+ M src/components/art/WorkerSprite.tsx
+?? refactor_wiki.py
+?? refactor_wiki2.py
+?? replace_image.py</pre>
+    </section>
+
+    <section>
+      <h2>P1 Cleanup</h2>
+      <div class="grid">
+        <div class="card">Replace `resizeMode` with `contentFit` at every migrated `expo-image` call site.</div>
+        <div class="card">Remove or formalize root one-off rewrite scripts before final sign-off.</div>
+        <div class="card">Provide visual proof for auth hero, graph art, tier icons, worker sprites, and wiki thumbnails.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <p>Local `expo-image` type definitions mark `resizeMode` as deprecated compatibility and recommend `contentFit`/`contentPosition`. Tests pass, but tests do not prove framing or crispness of image surfaces.</p>
+    </section>
+
+    <section>
+      <h2>Still Open For 100점</h2>
+      <ul>
+        <li>Keyboard P1 patch/proof: <code>/account</code>, <code>/settings</code>, <code>/audit</code>, <code>/interview</code>, <code>/jarvis</code>.</li>
+        <li>OCR permission/preview and Android background/resume proof.</li>
+        <li>P2 screenshot proof: <code>/records</code>, <code>/wiki</code>.</li>
+        <li>Clean committed head for final sign-off.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Report: <code>agents/codex/outbox/20260606-002948-to-claude-expo-image-wip-regate.md</code>
+    </footer>
+  </main>
+</body>
+</html>

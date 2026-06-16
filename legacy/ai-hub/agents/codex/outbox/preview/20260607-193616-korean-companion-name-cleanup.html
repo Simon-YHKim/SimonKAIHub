@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Korean Companion Name Cleanup</title>
+  <style>
+    :root {
+      --bg: #11161d;
+      --panel: #18212b;
+      --text: #e9eef4;
+      --muted: #aab6c2;
+      --accent: #78d6c6;
+      --line: #2a3846;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 20px 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 26px 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; color: var(--muted); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin: 18px 0 8px;
+    }
+    .tile {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .label { color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+    .value { color: var(--text); font-weight: 700; }
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+    li { margin: 6px 0; }
+    code {
+      color: var(--accent);
+      background: #0d1218;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+    }
+    .pass { color: var(--accent); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Codex Korean Companion Name Cleanup</h1>
+      <p>[2026-06-07 / 19:36:16 KST] Local handoff to Claude. No push or PR from Codex.</p>
+    </header>
+
+    <section class="grid">
+      <div class="tile">
+        <div class="label">Branch</div>
+        <div class="value"><code>codex/core-label-tail-cleanup</code></div>
+      </div>
+      <div class="tile">
+        <div class="label">Base</div>
+        <div class="value"><code>origin/main@271b9e9</code></div>
+      </div>
+      <div class="tile">
+        <div class="label">Head</div>
+        <div class="value"><code>3d5ea29</code></div>
+      </div>
+      <div class="tile">
+        <div class="label">Verify</div>
+        <div class="value pass">PASS, 97 suites / 854 tests</div>
+      </div>
+    </section>
+
+    <h2>What Changed</h2>
+    <ul>
+      <li>Korean user-facing AI companion copy now uses <code>세컨비</code>.</li>
+      <li>App, storage, and product surfaces still use <code>2nd-Brain</code>.</li>
+      <li>Home, wiki, and SecondB accessibility labels no longer expose <code>세컨드비</code>.</li>
+      <li>Constraints and visible brand tests now guard against regressions.</li>
+    </ul>
+
+    <h2>Verification</h2>
+    <ul>
+      <li><code>npm test -- --ci visible-brand-copy</code> passed.</li>
+      <li><code>npm run check:constraints</code> passed after expected-string sync.</li>
+      <li><code>npm run verify</code> passed: lint, type-check, i18n, lexicon, LLM boundary, constraints, emdash, Jest.</li>
+      <li>Regex scans found no Korean locale <code>SecondB</code> and no visible <code>세컨드비</code> in app/component/locale surfaces.</li>
+      <li>Pre-commit diff secret-pattern scan found no matches.</li>
+    </ul>
+
+    <h2>Claude Handoff</h2>
+    <p>The app branch is clean and three commits ahead of #241: <code>420cc6f</code>, <code>ecf8ba7</code>, <code>3d5ea29</code>. Claude owns review, online git, PR, and merge.</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Loop Status: Photo Note Graph</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8f5;
+      --panel: #ffffff;
+      --text: #18201c;
+      --muted: #56615b;
+      --line: #d8ded7;
+      --accent: #2f6f5e;
+      --warn: #8a5a14;
+      --code: #eef3ef;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 36px 20px 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      letter-spacing: 0;
+    }
+    .stamp {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 16px 0;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 0 0 10px;
+      letter-spacing: 0;
+    }
+    ul {
+      margin: 8px 0 0 20px;
+      padding: 0;
+    }
+    li { margin: 6px 0; }
+    code, pre {
+      background: var(--code);
+      border-radius: 6px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+    }
+    code { padding: 2px 5px; }
+    pre {
+      overflow-x: auto;
+      padding: 12px;
+      border: 1px solid var(--line);
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #e5f0eb;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 6px;
+    }
+    .warn {
+      border-left: 4px solid var(--warn);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Codex Loop Status: Photo Note Graph</h1>
+      <div class="stamp">[2026-06-11 / 03:23:12 KST] · one autonomous loop iteration only · corrected at 03:25:27 KST</div>
+    </header>
+
+    <section>
+      <h2>상태</h2>
+      <p><span class="badge">CONTROL running</span><span class="badge">No app edit</span><span class="badge">PR #332 landed</span><span class="badge">No nested loop</span></p>
+      <p>Codex는 wrapper wakeup <code>2026-06-11 / 03:21:07 KST</code>에 대해 정확히 1회만 실행했다. 새 루프 생성, 시작, 수정, 예약은 하지 않았다.</p>
+    </section>
+
+    <section>
+      <h2>2nd-B Verification Evidence</h2>
+      <ul>
+        <li>Worktree: <code>C:\Coding\_worktrees\2ndB-codex</code></li>
+        <li>Branch: <code>codex/physical-note-ownership-20260611</code></li>
+        <li>Submitted commit: <code>388ebe8f9825d21aa9471ff8479242649f027ff7</code></li>
+        <li>Subject: <code>fix(capture): clarify OCR photo ownership</code></li>
+        <li>Latest main: <code>65d19bd fix(capture): clarify OCR photo ownership (#332)</code></li>
+      </ul>
+      <pre>- 388ebe8f9825d21aa9471ff8479242649f027ff7 fix(capture): clarify OCR photo ownership</pre>
+      <p><code>git cherry</code> now marks the Codex patch as equivalent to <code>origin/main</code>. The local branch was not reset or rebased, so raw branch count can still show behind/ahead.</p>
+    </section>
+
+    <section class="warn">
+      <h2>Decision</h2>
+      <p>이번 사이클에서는 새 앱 코드를 작성하지 않았다. 시작 시점에는 merge-wait였고, 종료 전 late verification에서 PR #332가 이미 landing된 것을 확인했다. 같은 wakeup 안에서 두 번째 앱 코드 task를 시작하지 않고 상태 정정으로 마무리한다.</p>
+      <p>다음 Codex slice 권장: fresh <code>origin/main@65d19bd</code>에서 접근성 있는 photo-note "see in graph" 경로와 personal/shared graph ownership 문구.</p>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>tools/board.ps1 -Me codex</code></li>
+        <li>CONTROL / BOARD / DECISIONS review</li>
+        <li>PROTOCOL sections 11, 12, 25, 26, 27, 31, 32 review</li>
+        <li>Grok cycle28 and Claude graphify FYI review</li>
+        <li><code>git fetch origin --prune</code></li>
+        <li><code>git rev-parse --short origin/main</code></li>
+        <li><code>git log --oneline --grep='photo ownership' origin/main -5</code></li>
+        <li><code>git cherry -v origin/main HEAD</code></li>
+        <li><code>git log --left-right --cherry-pick origin/main...HEAD</code></li>
+        <li><code>git rev-list --left-right --count origin/main...HEAD</code></li>
+      </ul>
+      <p>앱 파일 변경이 없어 앱 테스트는 실행하지 않았다.</p>
+    </section>
+  </main>
+</body>
+</html>

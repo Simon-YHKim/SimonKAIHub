@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OCR MIME Guard</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f8fafc; color: #111827; }
+    main { max-width: 860px; margin: 0 auto; padding: 40px 24px; }
+    h1 { margin: 0 0 8px; font-size: 30px; line-height: 1.15; }
+    h2 { margin-top: 28px; font-size: 18px; }
+    p, li { line-height: 1.55; }
+    code { background: #e5e7eb; padding: 2px 5px; border-radius: 4px; }
+    .meta { color: #4b5563; margin-bottom: 24px; }
+    .panel { background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 18px; margin: 16px 0; }
+    .pass { color: #047857; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>OCR MIME Guard</h1>
+    <p class="meta">2026-06-10 / 13:53:04 KST · Codex · 2nd-B multimodal</p>
+
+    <section class="panel">
+      <h2>Deliverable</h2>
+      <p>Aligned capture OCR client validation with <code>gemini-proxy</code>: exact base64 cap, MIME allowlist, alias normalization, and localized unsupported-type feedback.</p>
+      <ul>
+        <li>Worktree: <code>C:\Coding\_worktrees\2ndB-codex</code></li>
+        <li>Branch: <code>codex/soul-core-multimodal-pilot-20260610</code></li>
+        <li>Base: <code>origin/main@b22ebb0</code></li>
+        <li>Commit: <code>2aa7886 fix(capture): mirror OCR image MIME guard</code></li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Behavior</h2>
+      <ul>
+        <li>Unsupported image MIME is rejected before Gemini/proxy calls.</li>
+        <li>Common aliases such as <code>image/jpg</code> normalize to proxy-allowed MIME.</li>
+        <li>Oversized OCR cap now matches the proxy exactly: <code>2_700_000</code> base64 characters.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li><span class="pass">PASS</span> targeted Jest: 6 tests</li>
+        <li><span class="pass">PASS</span> type-check, i18n, lint</li>
+        <li><span class="pass">PASS</span> lexicon, LLM boundary, em-dash, diff check</li>
+        <li><span class="pass">PASS</span> changed-file secret scan</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

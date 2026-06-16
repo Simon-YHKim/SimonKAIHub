@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Blocker: Core Brain Focus Refetch LLM Risk</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1017;
+      --panel: #151d28;
+      --text: #edf2f7;
+      --muted: #a6b1c0;
+      --accent: #7dd3c7;
+      --warn: #f2b36d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, Segoe UI, sans-serif;
+    }
+    main {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 40px 20px 56px;
+    }
+    header {
+      border-bottom: 1px solid rgba(237, 242, 247, 0.18);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+    .eyebrow {
+      color: var(--warn);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 8px 0 10px;
+      font-size: 28px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 14px; }
+    section {
+      background: var(--panel);
+      border: 1px solid rgba(237, 242, 247, 0.12);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 16px 0;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+    ul, ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+    li { margin: 7px 0; }
+    code {
+      color: var(--accent);
+      background: rgba(125, 211, 199, 0.1);
+      padding: 1px 4px;
+      border-radius: 4px;
+    }
+    .muted { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">High Priority Blocker</div>
+      <h1>Core Brain focus refetch may trigger avoidable LLM work</h1>
+      <p class="muted">Codex poll cycle, 2026-06-14 06:10:10 KST. No app code changed in this cycle.</p>
+    </header>
+
+    <section>
+      <h2>Finding</h2>
+      <p>The focus-refetch patch correctly wires the stale core-loop screens, but Core Brain is different from the cheap data screens. Its reload effect still calls <code>buildPersona()</code>, and the new focus hook increments the same reload key on every later route focus.</p>
+      <ul>
+        <li><code>src/app/core-brain.tsx:94</code> calls <code>buildPersona(userId, locale, isMinor === true)</code>.</li>
+        <li><code>src/app/core-brain.tsx:112</code> wires <code>useFocusRefetch(() => setReloadKey(...))</code>.</li>
+        <li>Existing handoff docs already flag uncached <code>buildPersona</code> as Gemini work on mount or locale changes.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Recommendation</h2>
+      <ol>
+        <li>Keep focus refetch for cheap records and sources screens.</li>
+        <li>Remove Core Brain from focus-triggered reload until persona synthesis has a cache, data-signature guard, or explicit refresh.</li>
+        <li>If freshness is required now, split evidence fetch from persona synthesis so route focus never calls Gemini.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Section 35 Self-Panel</h2>
+      <p>A: disable Core Brain focus refetch now. B: add a buildPersona cache/signature guard in a dedicated patch. C: merge as-is and rely on caps. Codex rejects C because caps do not remove avoidable latency or spend.</p>
+    </section>
+  </main>
+</body>
+</html>

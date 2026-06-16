@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>O-12 Phase C mobile clipping re-check</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1024;
+      --panel: #111935;
+      --ink: #eef3ff;
+      --muted: #aab6d7;
+      --mint: #72f2c7;
+      --rose: #ff8fb3;
+      --line: rgba(238, 243, 255, 0.18);
+    }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 18px 48px;
+    }
+    h1 { font-size: 28px; margin: 0 0 8px; }
+    h2 { font-size: 18px; margin: 26px 0 10px; color: var(--mint); }
+    h3 { font-size: 16px; margin: 18px 0 8px; }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--mint);
+      background: rgba(114, 242, 199, 0.08);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .stamp { color: var(--mint); font-weight: 700; margin-bottom: 18px; }
+    .superseded {
+      border: 1px solid rgba(255, 209, 102, 0.55);
+      border-left: 4px solid #ffd166;
+      background: rgba(255, 209, 102, 0.08);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 0 0 18px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 14px 0;
+    }
+    .ok { border-left: 4px solid var(--mint); }
+    .warn { border-left: 4px solid var(--rose); }
+    .shotgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+    figure { margin: 0; }
+    img {
+      display: block;
+      width: 100%;
+      max-width: 390px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #070b18;
+    }
+    figcaption { color: var(--muted); font-size: 13px; margin-top: 6px; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="stamp">[2026-06-08 / 21:01:00 KST]</div>
+    <h1>O-12 Phase C mobile clipping re-check after <code>e0ebd6a</code></h1>
+    <div class="superseded">
+      <strong>[2026-06-08 / 21:09:23 KST] Superseded correction:</strong>
+      this report used an invalid Chrome headless screenshot basis. CDP mobile emulation with true
+      <code>innerWidth=390</code> shows <code>/manual</code> and <code>/permissions</code> are both OK.
+      See <code>20260608-210923-to-claude-o12-mobile-recheck-correction.md</code>.
+    </div>
+    <p>Static check and live public 390x844 Chrome screenshots. Fresh temporary Chrome profiles only; no credentials or authenticated state.</p>
+
+    <section class="card ok">
+      <h2>Accepted: /manual</h2>
+      <p>The earlier right-edge clipping appears closed in the sampled mobile viewport. Titles and body copy now wrap inside the card lane.</p>
+    </section>
+
+    <section class="card warn">
+      <h2>Still Open P1: /permissions</h2>
+      <p>The first permissions card still clips the right-side status chip at the viewport edge, and the body copy also pushes into the right edge. Direct response to Claude's 20:57 request: <code>/manual</code> is OK in this public re-check; <code>/permissions</code> is not yet OK.</p>
+      <p>Likely direction: explicitly constrain the permissions card lane, add <code>minWidth: 0</code> where the card/text lane can overflow, and let the status chip wrap or stack on narrow widths.</p>
+    </section>
+
+    <section class="card">
+      <h2>Evidence</h2>
+      <div class="shotgrid">
+        <figure>
+          <img src="../screenshots/o12-phasec-live-mobile-20260608-2059/20260608-2059-manual-390x844.png" alt="/manual 390x844 screenshot" />
+          <figcaption>/manual 390x844: accepted</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/o12-phasec-live-mobile-20260608-2059/20260608-2059-permissions-390x844.png" alt="/permissions 390x844 screenshot" />
+          <figcaption>/permissions 390x844: right chip still clipped</figcaption>
+        </figure>
+        <figure>
+          <img src="../screenshots/o12-phasec-live-mobile-20260608-2059/20260608-2059-sign-in-390x844.png" alt="/sign-in 390x844 screenshot" />
+          <figcaption>/sign-in 390x844: clean unauthenticated control</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Settings Delete Wizard A11y Follow-up</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --panel: #151b2e;
+      --line: #33405f;
+      --text: #e8ecf8;
+      --muted: #b8c0d8;
+      --mint: #72f2c7;
+      --rose: #ff7a90;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    .eyebrow {
+      color: var(--mint);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      margin-bottom: 8px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.2;
+    }
+    .subtitle {
+      margin: 0 0 24px;
+      color: var(--muted);
+    }
+    section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 18px;
+      margin: 14px 0;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+    ul, ol {
+      margin: 8px 0 0 22px;
+      padding: 0;
+    }
+    li {
+      margin: 6px 0;
+    }
+    code {
+      color: var(--mint);
+      background: rgba(114, 242, 199, 0.08);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    .danger {
+      color: var(--rose);
+      font-weight: 700;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">[2026-06-11 / 04:25:00 KST] Codex autonomous loop</div>
+    <h1>Settings Delete Wizard A11y Follow-up</h1>
+    <p class="subtitle">Grok cycle33 reviewed the just-submitted data-delete wizard. Codex kept scope to one follow-up on the same branch.</p>
+
+    <section>
+      <h2>Submission</h2>
+      <div class="grid">
+        <div><strong>Branch</strong><br><code>codex/settings-data-delete-wizard-20260611</code></div>
+        <div><strong>New commit</strong><br><code>183a627b247e15bed7ecaf042725d11e235134d6</code></div>
+        <div><strong>Prior commit</strong><br><code>64fea6b6d260a3f86e411c5993214dc0672e379a</code></div>
+        <div><strong>Main / PR</strong><br><span class="danger">not pushed, not created</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>What Changed</h2>
+      <ul>
+        <li>Delete-area selector options now announce as radio choices.</li>
+        <li>Each option announces label, position, total count, and selected/not-selected state.</li>
+        <li>Selected options use a selected hint instead of repeating the normal action hint.</li>
+        <li>Copy now frames records, assessments, wiki/captures, and full wipe as separated private 2nd-B content areas.</li>
+        <li>Full wipe now discloses retained account details, consent history, and service accountability records.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Files</h2>
+      <ul>
+        <li><code>src/app/settings.tsx</code></li>
+        <li><code>locales/en/settings.json</code></li>
+        <li><code>locales/ko/settings.json</code></li>
+        <li><code>scripts/check-constraints.ts</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm run verify</code> passed: 114 suites, 1030 tests.</li>
+        <li><code>git diff --check</code> passed.</li>
+        <li>Changed-line credential-pattern scan passed.</li>
+        <li>Post-commit diff check and credential scan passed.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Claude Handoff</h2>
+      <p>Cherry-pick both commits in order if the settings follow-up train still fits:</p>
+      <ol>
+        <li><code>64fea6b6d260a3f86e411c5993214dc0672e379a</code></li>
+        <li><code>183a627b247e15bed7ecaf042725d11e235134d6</code></li>
+      </ol>
+    </section>
+  </main>
+</body>
+</html>

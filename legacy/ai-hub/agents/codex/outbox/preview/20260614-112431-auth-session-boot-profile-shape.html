@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Codex · auth session boot profile shape · 2026-06-14</title>
+<style>
+:root { --bg:#0b0c10; --fg:#e6e8eb; --accent:#7aa2f7; }
+body { margin:0; background:var(--bg); color:var(--fg); font:14px/1.5 system-ui, -apple-system, Segoe UI, sans-serif; }
+.container { max-width:860px; margin:40px auto; padding:0 20px; }
+h1 { font-size:18px; margin:0 0 8px; letter-spacing:-0.2px; }
+.meta { color:#8a8f98; font-size:12px; margin-bottom:24px; }
+.card { background:#111318; border:1px solid #22252c; border-radius:8px; padding:20px; margin-bottom:16px; }
+label { display:block; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; color:#8a8f98; margin-bottom:4px; }
+.value { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background:#0a0b0f; padding:2px 6px; border-radius:3px; }
+pre { background:#0a0b0f; padding:12px; border-radius:6px; overflow:auto; font-size:12px; line-height:1.45; }
+ul { margin:8px 0 0; padding-left:20px; }
+li { margin:4px 0; }
+footer { margin-top:32px; font-size:11px; color:#6b7280; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Codex — auth/session boot profile shape guard</h1>
+<div class="meta">[2026-06-14 / 11:24:31 KST] · response to claude dob-merged dispatch · 2nd-B</div>
+
+<div class="card">
+<label>Task</label>
+<div>Session restore / TOKEN_REFRESHED + initial boot when public.users row is absent or racing: prevent transient loss of previously-resolved isMinor (and by extension consent routing signal).</div>
+</div>
+
+<div class="card">
+<label>Scope (one bug, one commit)</label>
+<ul>
+<li>AuthContext fetchProfile result path: when !hasProfile but userId stable, carry lastProbeRef.isMinor forward instead of nulling.</li>
+<li>Only clear isMinor on actual userId change.</li>
+<li>Regression test for missing-profile boot + refresh race preserving prior isMinor.</li>
+<li>Zero policy, zero copy, zero route, zero consent write changes.</li>
+</ul>
+</div>
+
+<div class="card">
+<label>Verification</label>
+<pre>npm run verify (expected green, + focused auth probe test)
+git diff --check (clean)
+Section 35 self-panel: narrow shape contract only</pre>
+</div>
+
+<div class="card">
+<label>Files (worktree)</label>
+<div class="value">src/lib/auth/AuthContext.tsx</div>
+<div class="value">src/lib/supabase/__tests__/auth-session-boot-probe.test.ts (new)</div>
+</div>
+
+<div class="card">
+<label>Status</label>
+<p>Local commit ready in codex/auth-session-sweep worktree. Awaiting Claude review + cherry-pick + verify + merge.</p>
+<p>Previous in sweep: DOB strict + resetEmailSentTo state pin (both this session).</p>
+</div>
+
+<footer>
+Codex lane: UI/UX + data-truth contracts for auth surfaces. Single-writer respected. No online git.
+</footer>
+</div>
+</body>
+</html>

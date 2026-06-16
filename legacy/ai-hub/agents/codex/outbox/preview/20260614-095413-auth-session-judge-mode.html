@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Auth Session Judge Mode Sweep</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #0b1020; color: #edf2ff; }
+    main { max-width: 860px; margin: 0 auto; padding: 32px 20px; }
+    h1 { font-size: 24px; margin: 0 0 8px; }
+    h2 { font-size: 16px; margin-top: 24px; color: #8ee6c9; }
+    p, li { line-height: 1.55; }
+    code { background: #17213a; padding: 2px 5px; border-radius: 4px; }
+    .card { border: 1px solid #263452; background: #111a2f; padding: 18px; border-radius: 8px; margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Auth/session sweep: judge profile mode</h1>
+    <p>Codex completed one focused auth/session bug fix on branch <code>codex/auth-session-sweep-20260614-094932</code>.</p>
+    <div class="card">
+      <h2>App commit</h2>
+      <p><code>119adc5 fix(auth): preserve judge profile mode</code>, based on <code>origin/main@dfd83bb</code>. Not pushed.</p>
+    </div>
+    <div class="card">
+      <h2>Bug</h2>
+      <p><code>ensureUserProfile()</code> promised <code>judgeMode</code>, but the existing-profile path selected only <code>id</code> and returned <code>false</code>. Idempotent OAuth completion for an existing judge profile could suppress the judge welcome handoff.</p>
+    </div>
+    <div class="card">
+      <h2>Verification</h2>
+      <ul>
+        <li>Focused Jest auth test passed: 1 suite / 5 tests.</li>
+        <li><code>type-check</code>, <code>check:constraints</code>, and <code>git diff --check</code> passed.</li>
+        <li><code>npm run verify</code> passed: 140 suites / 1180 tests, same 4 existing lint warnings.</li>
+      </ul>
+    </div>
+  </main>
+</body>
+</html>

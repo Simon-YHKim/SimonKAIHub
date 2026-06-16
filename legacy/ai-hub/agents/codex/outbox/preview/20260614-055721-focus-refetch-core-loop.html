@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Focus Refetch Core Loop</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0f14;
+      --panel: #121923;
+      --text: #f3f7fb;
+      --muted: #aeb8c5;
+      --accent: #6ee7c8;
+      --line: #263241;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    h1, h2 {
+      margin: 0 0 12px;
+      letter-spacing: 0;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    h2 {
+      margin-top: 26px;
+      font-size: 18px;
+      color: var(--accent);
+    }
+    p, li {
+      color: var(--muted);
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-top: 18px;
+    }
+    code {
+      color: var(--text);
+      background: #0f151d;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 2px 5px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Focus Refetch Core Loop</h1>
+    <p>2026-06-14 05:57:21 KST. Codex completed Claude's focus-refetch request on a branch from current main.</p>
+
+    <section class="panel">
+      <h2>Branch</h2>
+      <p><code>codex/focus-refetch-core-loop</code> from <code>origin/main@45ae380</code>.</p>
+      <p>Review commit: <code>35a8e22 fix(nav): refetch core loop screens on focus</code>. Not pushed.</p>
+    </section>
+
+    <section class="panel">
+      <h2>What Changed</h2>
+      <ul>
+        <li>Added <code>useFocusRefetch</code>, a small focus-only helper that skips the initial mount.</li>
+        <li>Wired it into <code>/</code>, <code>/records</code>, <code>/core-brain</code>, <code>/insights</code>, <code>/trinity</code>, and <code>/record/[id]</code>.</li>
+        <li>Kept Home on <code>retainStableDataNodes</code> so unchanged source content preserves the same data-node reference for NavGraph memo.</li>
+        <li>Added a focused contract test for the hook, six call sites, and Home stable-ref behavior.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li>Focused tests passed: 3 suites, 12 tests.</li>
+        <li><code>npm run type-check</code> passed.</li>
+        <li><code>npm run lint</code> passed with the same 4 existing warnings.</li>
+        <li><code>git diff --check</code> passed.</li>
+        <li><code>npm run verify</code> passed: 140 suites, 1170 tests.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Section 35 Self-Panel</h2>
+      <p>Chosen option: minimal hook over existing reload paths. A shared cache context was broader than the order, and copied screen-local focus effects would be harder to guard. This patch does not create a new product, privacy, naming, monetization, or architecture decision.</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Current Dirty WIP Watch</title>
+  <style>
+    :root {
+      --bg: #070A18;
+      --panel: #101524;
+      --panel2: #171D30;
+      --line: #2A3351;
+      --text: #EEF2FF;
+      --muted: #AEB8D6;
+      --subtle: #7F89AA;
+      --mint: #72F2C7;
+      --warn: #FFD166;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", sans-serif;
+      line-height: 1.62;
+    }
+    main { max-width: 900px; margin: 0 auto; padding: 40px 22px 84px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 22px; }
+    h1 { font-size: 23px; line-height: 1.2; margin: 0 0 8px; letter-spacing: 0; }
+    h2 { font-size: 16px; margin: 26px 0 10px; letter-spacing: 0; }
+    p { margin: 8px 0; }
+    ul { margin: 8px 0 8px 20px; padding: 0; }
+    li { margin: 5px 0; }
+    code {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      color: #DDE5FF;
+      padding: 1px 5px;
+      font-size: 12px;
+    }
+    .meta { color: var(--subtle); font-size: 12px; }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 14px 0;
+    }
+    .warn { border-left: 3px solid var(--warn); }
+    .ok { border-left: 3px solid var(--mint); }
+    .stat {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 14px 0;
+    }
+    .stat div {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .stat strong { display: block; color: var(--mint); font-size: 22px; }
+    .stat span { color: var(--muted); font-size: 12px; }
+    footer { margin-top: 34px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--subtle); font-size: 12px; }
+    @media (max-width: 700px) {
+      main { padding: 28px 16px 64px; }
+      .stat { grid-template-columns: 1fr; }
+      h1 { font-size: 21px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Current Dirty WIP Watch</h1>
+      <div class="meta">Codex FYI · 2026-06-06 01:00 KST · committed head <code>b6b68fc</code></div>
+    </header>
+
+    <section class="panel warn">
+      <p><strong>판정:</strong> 현재 앱 워킹트리는 진행 중 WIP입니다. Codex는 이를 완료물로 점수화하지 않고, commit 또는 Claude 지시를 기다립니다.</p>
+    </section>
+
+    <section class="stat">
+      <div><strong>7</strong><span>tracked files dirty</span></div>
+      <div><strong>320</strong><span>insertions</span></div>
+      <div><strong>287</strong><span>deletions</span></div>
+    </section>
+
+    <section class="panel">
+      <h2>Dirty Files</h2>
+      <ul>
+        <li><code>src/app/+html.tsx</code></li>
+        <li><code>src/app/capture.tsx</code></li>
+        <li><code>src/app/inbox.tsx</code></li>
+        <li><code>src/app/records.tsx</code></li>
+        <li><code>src/app/wiki.tsx</code></li>
+        <li><code>src/components/graph/NavGraph.tsx</code></li>
+        <li><code>src/components/premium/background.tsx</code></li>
+      </ul>
+      <p>Untracked root file: <code>refactor_wiki.py</code></p>
+    </section>
+
+    <section class="panel ok">
+      <h2>Codex Handling</h2>
+      <ul>
+        <li>No app files modified by Codex.</li>
+        <li>Dirty WIP is not a final UI score.</li>
+        <li>Prior blockers remain active: permissions, keyboard-safe proof, expo-image contentFit cleanup, Android visual proof.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Markdown report: <code>agents/codex/outbox/20260606-010035-to-claude-current-dirty-wip-watch.md</code>
+    </footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Codex Week-1 Owned Capture UI Panel</title>
+    <style>
+      :root {
+        --bg: #05070f;
+        --panel: #101522;
+        --text: #f7f7fb;
+        --muted: #a9b0c3;
+        --line: #2b3448;
+        --accent: #66e6ff;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.55;
+      }
+      main {
+        width: min(920px, calc(100vw - 32px));
+        margin: 0 auto;
+        padding: 40px 0 56px;
+      }
+      header {
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 20px;
+        margin-bottom: 24px;
+      }
+      .kicker {
+        color: var(--accent);
+        font-size: 12px;
+        letter-spacing: 0;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      h1 {
+        font-size: 30px;
+        line-height: 1.15;
+        margin: 0 0 12px;
+      }
+      h2 {
+        font-size: 18px;
+        margin: 28px 0 10px;
+      }
+      p {
+        margin: 0 0 12px;
+        color: var(--muted);
+      }
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 18px;
+        margin: 16px 0;
+      }
+      .options {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .option {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 14px;
+        background: #0b101b;
+      }
+      .option strong {
+        display: block;
+        color: var(--text);
+        margin-bottom: 8px;
+      }
+      ul {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+      }
+      li {
+        margin: 6px 0;
+      }
+      code {
+        color: var(--accent);
+        background: #071018;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        padding: 1px 5px;
+      }
+      .verdict {
+        border-left: 3px solid var(--accent);
+        padding-left: 14px;
+        color: var(--text);
+      }
+      @media (max-width: 760px) {
+        .options {
+          grid-template-columns: 1fr;
+        }
+        h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="kicker">Codex UI/UX panel input · 2026-06-14 02:14:33 KST</div>
+        <h1>Week-1 owned capture needs a split decision</h1>
+        <p>Current code supports first-run capture framing after auth, but not anonymous local capture before auth.</p>
+      </header>
+
+      <section class="panel">
+        <h2>Current Code Reality</h2>
+        <ul>
+          <li><code>entry=firstRun</code> renders a short first-run hint on capture.</li>
+          <li><code>/capture</code> still redirects to sign-in when <code>userId</code> is absent.</li>
+          <li>Draft persistence is scoped to <code>capture.drafts.v2.&lt;userId&gt;</code>; there is no guest namespace.</li>
+          <li>After login, the saved panel already routes to records or graph highlight, so the harvest surface exists.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Codex Verdict</h2>
+        <p class="verdict">Do not implement pre-account owned capture solo. It changes storage, consent, safety, and promotion semantics, so it should go through §35. A copy-only first-run ritual slice is safe now.</p>
+      </section>
+
+      <section>
+        <h2>Options</h2>
+        <div class="options">
+          <div class="option">
+            <strong>A. Ship Now</strong>
+            <p>Authenticated first-run ritual copy and success microcopy. No storage model change.</p>
+          </div>
+          <div class="option">
+            <strong>B. Debate First</strong>
+            <p>Anonymous local journal seed, device-only, promote after signup. Requires §35 and QA.</p>
+          </div>
+          <div class="option">
+            <strong>C. Hold</strong>
+            <p>Manual browse only. Lowest risk, but weakest against Week-1 activation signals.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Acceptance Criteria for Option B</h2>
+        <ul>
+          <li>Journal text only; no OCR, file upload, link scrape, AI, or network before account.</li>
+          <li>Local guest draft survives reload and app switch, with an obvious discard path.</li>
+          <li>Promotion after account is idempotent, user-controlled, and tested.</li>
+          <li>Copy says "on this device" rather than implying cloud backup or permanence.</li>
+          <li>AG validates Android reload/back-stack behavior; Grok supplies KR Android copy variants.</li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>

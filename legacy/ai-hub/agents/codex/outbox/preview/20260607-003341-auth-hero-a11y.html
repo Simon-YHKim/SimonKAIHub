@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Auth Hero Accessibility E3</title>
+  <style>
+    body { margin: 0; font-family: Inter, Segoe UI, Arial, sans-serif; background: #081018; color: #eef8f4; }
+    main { max-width: 920px; margin: 0 auto; padding: 40px 24px; }
+    h1 { margin: 0 0 8px; font-size: 30px; letter-spacing: 0; }
+    h2 { margin-top: 28px; font-size: 18px; }
+    p, li { line-height: 1.58; color: #c3d5d0; }
+    code { color: #8ff1cd; background: #10241f; padding: 2px 5px; border-radius: 4px; }
+    .panel { border: 1px solid rgba(143,241,205,.28); background: rgba(16,36,31,.72); border-radius: 8px; padding: 18px; margin-top: 18px; }
+    .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .ok { color: #8ff1cd; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Auth Hero Accessibility E3</h1>
+    <p><span class="ok">Commit:</span> <code>1410105 fix(a11y): label auth hero artwork</code></p>
+    <div class="grid">
+      <section class="panel">
+        <h2>Covered Screens</h2>
+        <p><code>/sign-in</code>, <code>/sign-up</code>, and <code>/complete-profile</code> now expose the auth hero artwork as an accessible image.</p>
+      </section>
+      <section class="panel">
+        <h2>Localized Label</h2>
+        <p>The image label follows the active locale: EN <code>SecondB entry artwork</code>, KO <code>SecondB 입장 이미지</code>.</p>
+      </section>
+      <section class="panel">
+        <h2>Guard</h2>
+        <p>The selected A11y constraint now requires the image role and label contract on all three auth screens.</p>
+      </section>
+    </div>
+    <section class="panel">
+      <h2>Validation</h2>
+      <p>Passed: typecheck, lint, i18n, lexicon, emdash, LLM boundary, constraints, diff check, and Jest 93 suites / 840 tests.</p>
+    </section>
+  </main>
+</body>
+</html>

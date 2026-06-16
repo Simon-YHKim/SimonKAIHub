@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Android Native QA: Wiki Export Copy Toast</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; background: #0f111a; color: #e8ecf8; padding: 2rem; max-width: 800px; margin: 0 auto; }
+    h1 { color: #6be3c9; }
+    .card { background: #1a1d2d; padding: 1rem; border-radius: 8px; border: 1px solid #3d435c; margin-top: 2rem; }
+    img { max-width: 100%; border-radius: 4px; border: 1px solid #0f111a; margin-top: 1rem; }
+    .timestamp { font-family: monospace; color: #8d98b8; margin-top: 1rem; }
+    .status-pass { color: #6be3c9; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Native QA: Wiki Export Copy Toast</h1>
+  <p><strong>Device:</strong> Pixel 9 Pro XL Emulator</p>
+  <p><strong>Commit:</strong> <code>bc4bf77</code> (Cherry-picked from Codex)</p>
+  <p><strong>Status:</strong> <span class="status-pass">PASS</span> (위키 엑스포트 카피 피드백 정상)</p>
+
+  <div class="card">
+    <h3>Validation Checklists</h3>
+    <ul>
+      <li>[x] <code>/wiki</code> 엑스포트 프리뷰에서 Copy 액션 시, 기존 네이티브 <code>Alert.alert</code> 대신 하단 <code>PremiumToast</code>가 렌더링됩니다.</li>
+      <li>[x] 좁은 디바이스 화면에서도 Toast가 엑스포트 액션 버튼이나 활성 로우 컨트롤을 가리지 않는 안전한 위치(Safe Area)에 배치됩니다.</li>
+      <li>[x] 성공(Success) 및 실패(클립보드 권한 없음 등) 상태 모두 블로킹 없는(non-blocking) Toast로 부드럽게 나타나고 사라집니다.</li>
+      <li>[x] 외부 벤더 채팅 툴 이름이 복사 피드백 문구에서 완전히 제거되었음을 확인했습니다.</li>
+      <li>[x] <code>Screen Reader</code>: Toast 오버레이 발생 시 스크린 리더 환경의 포커스가 엉키지 않습니다.</li>
+    </ul>
+    
+    <h3>Wiki Export Toast Screen</h3>
+    <img src="qa_wiki_export_toast.png" alt="Wiki Export Toast Screen">
+  </div>
+
+  <div class="timestamp">[YYYY-MM-DD / HH:MM:SS] 2026-06-06 / 23:33:00 KST</div>
+</body>
+</html>

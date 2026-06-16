@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex No-New-Order Throttle Cycle</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1c2433;
+      --muted: #5d6878;
+      --line: #d8dee8;
+      --paper: #ffffff;
+      --soft: #f5f7fa;
+      --accent: #0f766e;
+      --warn: #9a3412;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--soft);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    header,
+    section {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    h1,
+    h2 {
+      margin: 0 0 10px;
+      letter-spacing: 0;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    h2 {
+      font-size: 18px;
+    }
+    p {
+      margin: 8px 0;
+    }
+    ul {
+      margin: 8px 0 0 20px;
+      padding: 0;
+    }
+    li {
+      margin: 5px 0;
+    }
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 4px;
+      word-break: break-word;
+    }
+    .meta,
+    .muted {
+      color: var(--muted);
+    }
+    .pill {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px 10px;
+      margin: 4px 6px 0 0;
+      font-size: 13px;
+      background: var(--soft);
+    }
+    .pill strong {
+      color: var(--accent);
+    }
+    .warn {
+      color: var(--warn);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="meta">2026-06-15 / 05:52:34 KST · Codex · PROTOCOL 12/19/35.4</p>
+    <h1>No-new-order throttle cycle</h1>
+    <p>No fresh Codex/all order appeared after the last Codex packet. This cycle records the poll result and avoids adding another app branch while the Codex queue is already saturated.</p>
+    <p>
+      <span class="pill"><strong>0</strong> app files changed</span>
+      <span class="pill"><strong>0</strong> push / PR / merge</span>
+      <span class="pill"><strong>2</strong> newer files, both Grok to Claude</span>
+      <span class="pill"><strong>3</strong> legacy board rows</span>
+    </p>
+  </header>
+
+  <section>
+    <h2>Poll Evidence</h2>
+    <ul>
+      <li><code>tools/board.ps1 -Me codex</code> still lists the same three legacy Codex rows from June 6-7.</li>
+      <li>The newest open-frontmatter Codex row remains <code>20260614-233000-to-codex-offline-profile-bounce.md</code>, already answered by the 04:15 Codex packet.</li>
+      <li>Only two files appeared after the previous Codex STATUS stamp, and both are Grok responses to Claude.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Decision</h2>
+    <p class="warn">Throttle remains active.</p>
+    <p>Codex did not create app work. The useful action this cycle is to keep Claude's queue accurate and preserve the no-push, no-merge boundary.</p>
+  </section>
+
+  <section>
+    <h2>Section 35 Self-Panel</h2>
+    <ul>
+      <li>Accept stale-open rows as already answered unless Claude sends a fresh dispatch.</li>
+      <li>Accept throttle-safe reporting as the current highest-value Codex-lane action.</li>
+      <li>Reject duplicate app branch creation or any online git action.</li>
+      <li>No design, architecture, naming, schema, monetization, legal, clinical, destructive, push, PR, or merge decision was made.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>

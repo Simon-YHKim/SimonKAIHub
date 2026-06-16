@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Post-97 Microtype Proof Gate</title>
+  <style>
+    :root {
+      --bg: #070a18;
+      --panel: #11162a;
+      --panel2: #151d33;
+      --text: #e8ecf8;
+      --muted: #aab4d0;
+      --line: #2a345a;
+      --mint: #72f2c7;
+      --warn: #ffd166;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Noto Sans KR", system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    main { width: min(980px, calc(100% - 32px)); margin: 0 auto; padding: 36px 0 52px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 20px; }
+    .eyebrow { color: var(--mint); font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 42px); line-height: 1.15; letter-spacing: 0; }
+    .sub { margin-top: 10px; color: var(--muted); max-width: 760px; }
+    section { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 18px; margin-top: 14px; }
+    h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+    ul { margin: 8px 0 0; padding-left: 20px; }
+    li { margin: 7px 0; }
+    .finding {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--warn);
+      border-radius: 8px;
+      padding: 14px;
+      margin-top: 10px;
+    }
+    code { color: var(--mint); background: rgba(114, 242, 199, 0.08); padding: 1px 5px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Gate · 2026-06-06 02:55 KST</div>
+      <h1>Post-97 microtype + proof gate</h1>
+      <p class="sub">65e5ac4는 97/100으로 유지한다. 최종 100점 전 polish로 nonzero letterSpacing과 999 radius 예외, provider/legal/runtime proof를 닫아야 한다.</p>
+    </header>
+
+    <section>
+      <h2>P2 Microtype</h2>
+      <div class="finding">
+        <p>다음 UI 표면에 nonzero <code>letterSpacing</code>이 남아 있다: <code>capture.tsx:831</code>, <code>index.tsx:581/588</code>, <code>ConsentNotice.tsx:67</code>, <code>QuantIntroModal.tsx:99</code>.</p>
+        <p>권고: 0으로 통일하고 색/굵기/크기로 계층을 잡는다.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Graph-Art Exception</h2>
+      <ul>
+        <li><code>NavGraph.tsx:1866</code> focused graph halo.</li>
+        <li><code>SoulcoreFinalArt.tsx:506</code> flame glow.</li>
+      </ul>
+      <p>둘 다 장식/그래프 맥락이면 예외로 문서화하고, UI chrome이면 tokenized radii로 바꾸는 것이 안전하다.</p>
+    </section>
+
+    <section>
+      <h2>Still Required For 100</h2>
+      <ul>
+        <li>Provider deploy/live proof or default-off flags for unproven providers.</li>
+        <li>Consent legal sign-off or visible release gate.</li>
+        <li>Runtime screenshots/device proof across auth, consent, capture, inbox/wiki, persona, settings/account, and large NavGraph.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex all-screen trust/state ledger</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080b16;
+      --panel: #101521;
+      --panel2: #161d2a;
+      --text: #e8ecf8;
+      --muted: #aeb8d0;
+      --line: #2a345a;
+      --mint: #72f2c7;
+      --warn: #ffd166;
+      --rose: #ff7a90;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      word-break: keep-all;
+    }
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 36px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(26px, 4vw, 42px); line-height: 1.12; letter-spacing: 0; }
+    h2 { font-size: 20px; margin: 28px 0 12px; }
+    h3 { font-size: 16px; margin: 0 0 8px; }
+    p { color: var(--muted); }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .chip {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      border-radius: 6px;
+      padding: 6px 9px;
+      font-size: 13px;
+    }
+    .score {
+      display: grid;
+      grid-template-columns: minmax(160px, 220px) 1fr;
+      gap: 16px;
+      align-items: stretch;
+      margin: 24px 0;
+    }
+    .scorebox, .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .num {
+      font-size: 56px;
+      line-height: 1;
+      font-weight: 800;
+      color: var(--warn);
+    }
+    .label { color: var(--muted); margin-top: 8px; }
+    .bar {
+      height: 10px;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 14px;
+    }
+    .fill {
+      width: 84%;
+      height: 100%;
+      background: var(--warn);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .card strong { color: var(--text); }
+    .severity {
+      display: inline-block;
+      min-width: 36px;
+      color: #070a18;
+      background: var(--rose);
+      border-radius: 4px;
+      padding: 2px 6px;
+      margin-right: 6px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .severity.p2 { background: var(--warn); }
+    ul { margin: 10px 0 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 7px 0; }
+    code {
+      color: var(--mint);
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-size: 13px;
+    }
+    .ok { color: var(--mint); }
+    @media (max-width: 760px) {
+      main { width: min(100% - 24px, 1120px); padding-top: 24px; }
+      .score, .grid { grid-template-columns: 1fr; }
+      .num { font-size: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>All-screen trust/state ledger</h1>
+      <p>Login through settings static audit, focused on no-slop polish and user trust.</p>
+      <div class="meta">
+        <span class="chip">Status: DONE_WITH_CONCERNS</span>
+        <span class="chip">Branch: claude/cycle-2-concept-consistency</span>
+        <span class="chip">Head: f1ced87</span>
+        <span class="chip">Scope: auth, consent, assessments, wiki, inbox, settings</span>
+      </div>
+    </header>
+
+    <section class="score">
+      <div class="scorebox">
+        <div class="num">84</div>
+        <div class="label">Provisional score / 100</div>
+        <div class="bar"><div class="fill"></div></div>
+      </div>
+      <div class="card">
+        <h2 style="margin-top:0">Verdict</h2>
+        <p>The build can pass tests and still feel unfinished. This pass found trust and state issues that users can hit directly: legal placeholder status, raw error copy, small assessment controls, and internal lifecycle terms.</p>
+      </div>
+    </section>
+
+    <h2>New Findings</h2>
+    <section class="grid">
+      <article class="card">
+        <h3><span class="severity">P1</span>Consent/legal UX</h3>
+        <p>Consent UI is wired, but legal copy and ledger durability are explicitly not launch-grade.</p>
+        <ul>
+          <li><code>ConsentNotice.tsx:8-10</code></li>
+          <li><code>consent-age.ts:12-14</code></li>
+          <li><code>supabase/consent.ts:14-17</code></li>
+          <li><code>sign-up.tsx:75-80</code></li>
+          <li><code>complete-profile.tsx:66-70</code></li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3><span class="severity">P1</span>Raw error alerts</h3>
+        <p>Multiple screens still expose implementation errors or hardcoded English alerts.</p>
+        <ul>
+          <li><code>audit.tsx:76</code></li>
+          <li><code>persona.tsx:40,119</code></li>
+          <li><code>inbox.tsx:103,130-132</code></li>
+          <li><code>wiki.tsx:251-253</code></li>
+          <li><code>settings.tsx:155-227</code></li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3><span class="severity">P1/P2</span>Assessment tap targets</h3>
+        <p>Scale controls use tiny hitSlop and need 44x44 mobile proof or larger score cells.</p>
+        <ul>
+          <li><code>attachment.tsx:158-164</code></li>
+          <li><code>big-five.tsx:160-165</code></li>
+          <li><code>mbti.tsx:153-158</code></li>
+        </ul>
+      </article>
+      <article class="card">
+        <h3><span class="severity p2">P2</span>Internal labels</h3>
+        <p>`Phase 1` is an implementation lifecycle term and appears in user-facing Inbox/Wiki/Manual copy.</p>
+        <ul>
+          <li><code>inbox.tsx:240-241</code></li>
+          <li><code>inbox.tsx:311-320</code></li>
+          <li><code>wiki.tsx:690-700</code></li>
+          <li><code>manual.tsx:191,201</code></li>
+        </ul>
+      </article>
+    </section>
+
+    <h2>Microtype Drift</h2>
+    <div class="card">
+      <p>Positive tracking remains on visible Korean/English labels in home, capture, and consent surfaces. This is lower severity than mock/permission issues, but it is classic generated-looking polish debt.</p>
+      <ul>
+        <li><code>index.tsx:553-567</code></li>
+        <li><code>capture.tsx:768-770</code>, <code>capture.tsx:1103-1105</code>, <code>capture.tsx:1150</code></li>
+        <li><code>ConsentNotice.tsx:165</code></li>
+      </ul>
+    </div>
+
+    <h2>Gate Rule</h2>
+    <div class="card">
+      <p>Score stays below 90 until mock, placeholder, permission, provider, and raw-error issues close. It stays below 95 until consent/legal readiness is hard-gated or resolved and assessment tap targets are proven. 100 requires route-by-route screenshot or device proof.</p>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>I18n Namespace Divergence</title>
+  <style>
+    body {
+      margin: 0;
+      background: #101417;
+      color: #f8fafc;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+    main {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 28px;
+      line-height: 1.25;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 18px;
+      color: #86efac;
+    }
+    p, li {
+      color: #d8e2dc;
+      font-size: 15px;
+    }
+    .meta {
+      color: #a7b4ad;
+      font-size: 13px;
+    }
+    .panel {
+      border: 1px solid #334155;
+      background: rgba(134, 239, 172, 0.08);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+    code {
+      color: #e2e8f0;
+      background: rgba(15, 23, 42, 0.9);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    strong {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="meta">[2026-06-07 / 13:45:15 KST] Codex i18n namespace follow-up</p>
+    <h1>#227 removes a namespace Codex still has in its stale stack</h1>
+    <p><code>origin/main</code> is now <code>448a771</code>. Codex is 11 behind and 7 ahead.</p>
+
+    <div class="panel">
+      <p><strong>Main now owns:</strong> removal of the dead <code>mascot</code> locale namespace.</p>
+      <p>Codex i18n changes should be reauthored against current main rather than replayed wholesale.</p>
+    </div>
+
+    <h2>Recommendation</h2>
+    <ul>
+      <li>Keep <code>locales/*/mascot.json</code> deleted.</li>
+      <li>Keep <code>mascot</code> out of i18n imports, namespaces, and resources.</li>
+      <li>Keep #225's <code>secondb</code> namespace and <code>/secondb</code> route shape.</li>
+      <li>Apply Codex copy intent only to still-live namespaces on latest main.</li>
+    </ul>
+
+    <h2>Codex Action</h2>
+    <p>No app commit and no rebase this cycle. Codex is waiting for Claude to decide stack handling.</p>
+  </main>
+</body>
+</html>

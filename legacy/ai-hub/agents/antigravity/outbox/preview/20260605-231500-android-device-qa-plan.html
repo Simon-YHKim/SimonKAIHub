@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device-QA Plan: 2nd-B Android Native Readiness</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #2980b9; margin-top: 30px; }
+        .metadata { background: #ecf0f1; padding: 15px; border-radius: 5px; margin-bottom: 20px; font-size: 0.9em; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #3498db; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .notes { background: #fff3cd; border-left: 5px solid #ffc107; padding: 15px; margin-top: 20px; }
+        .footer { margin-top: 40px; font-size: 0.8em; color: #7f8c8d; text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>[Device-QA Plan] 2nd-B Android Native Readiness Audit</h1>
+    
+    <div class="metadata">
+        <strong>Agent:</strong> Antigravity (Android device-QA)<br>
+        <strong>Date:</strong> 2026-06-05<br>
+        <strong>Device/Env:</strong> Pixel 9 Pro XL (Android 14+, API 34), Emulator/Real Device<br>
+        <strong>Scope:</strong> P0 UX/Layout Verification for Android Platform
+    </div>
+
+    <h2>1. 개요 (Overview)</h2>
+    <p>본 계획서는 2nd-B 안드로이드 앱의 고유 UX 요소 및 레이아웃 무결성을 검증하기 위한 상세 QA 절차를 정의한다. 특히 하드웨어 뒤로가기 버튼 처리, Safe-Area 대응, 키보드 가림 현상 등 안드로이드 특화 항목에 집중한다.</p>
+
+    <h2>2. 검증 항목 및 절차 (QA Items & Procedures)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>항목</th>
+                <th>검증 대상</th>
+                <th>재현 절차 (Reproduction)</th>
+                <th>기대 동작 (Expected Behavior)</th>
+                <th>합격 기준 (Success Criteria)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>1</strong></td>
+                <td><strong>Empty Graph Safe-Area</strong></td>
+                <td>1. 신규 계정으로 로그인 (데이터 없음)<br>2. 메인 그래프 화면(index) 진입<br>3. 하단 'Empty Graph' 카드 확인</td>
+                <td>하단 네비게이션 바/제스처 바와 카드 버튼 사이에 충분한 간격이 유지됨.</td>
+                <td><code>paddingBottom</code>이 적용되어 CTA 버튼('Leave a first piece')이 가려지지 않고 온전히 클릭 가능해야 함.</td>
+            </tr>
+            <tr>
+                <td><strong>2</strong></td>
+                <td><strong>Onboarding Hardware Back</strong></td>
+                <td>1. 온보딩 진입<br>2. 2~3단계까지 진행<br>3. 안드로이드 하드웨어 뒤로가기 버튼 클릭</td>
+                <td>앱이 종료되지 않고 온보딩의 이전 단계(Step)로 이동함.</td>
+                <td>단계별 후퇴가 정상 작동하며, 0단계에서 버튼 클릭 시에만 앱 종료/백그라운드 이동이 발생해야 함.</td>
+            </tr>
+            <tr>
+                <td><strong>3</strong></td>
+                <td><strong>PremiumBottomSheet Back</strong></td>
+                <td>1. 피드백 또는 설정 등 BottomSheet 호출<br>2. 시트가 열린 상태에서 하드웨어 뒤로가기 버튼 클릭</td>
+                <td>현재 열려 있는 바텀 시트만 닫힘.</td>
+                <td>화면 뒤로가기(Navigation Back)가 발생하지 않고 시트만 성공적으로 Dismiss 되어야 함.</td>
+            </tr>
+            <tr>
+                <td><strong>4</strong></td>
+                <td><strong>Keyboard Avoiding (Sign-in/Capture)</strong></td>
+                <td>1. 로그인 또는 캡처 화면 진입<br>2. 입력칸 터치하여 키보드 호출</td>
+                <td>키보드가 올라오면서 입력칸이 키보드 위로 노출되거나 화면이 적절히 시프트됨.</td>
+                <td>키보드가 입력 중인 텍스트 필드를 가리지 않아야 하며, <code>pan</code> 모드에서의 시인성 확인.</td>
+            </tr>
+            <tr>
+                <td><strong>5</strong></td>
+                <td><strong>Edge-to-Edge Layout (Notch/Status)</strong></td>
+                <td>1. 앱 실행 후 최상단 상태표시줄 영역 확인<br>2. Pixel 9 Pro XL의 중앙 펀치홀(Notch) 주변 UI 확인</td>
+                <td>배경색/이미지가 상태표시줄 영역까지 확장되면서도, 텍스트나 버튼은 노치에 가려지지 않음.</td>
+                <td><code>windowTranslucentStatus</code>가 적용되어 배경이 상단 끝까지 차오르되, UI는 Safe Area 내부에서 렌더링되어야 함.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="notes">
+        <h3>3. 기술적 진단 메모 (Antigravity's Notes)</h3>
+        <ul>
+            <li><strong>Empty Graph</strong>: <code>src/app/index.tsx</code>에서 <code>Math.max(88, insets.bottom + 64)</code>를 통해 동적 패딩을 부여하고 있음. 제스처 모드와 3버튼 모드 각각에서 버튼 가림 여부 정밀 확인 필요.</li>
+            <li><strong>BackHandler</strong>: <code>onboarding.tsx</code>와 <code>feedback.tsx</code>에서 <code>BackHandler</code>를 사용해 하드웨어 이벤트를 가로채고 있음. <code>return true</code> 로직이 정상 작동하여 시스템 뒤로가기가 전파되지 않는지 확인.</li>
+            <li><strong>Keyboard</strong>: <code>app.json</code>에 <code>softwareKeyboardLayoutMode: "pan"</code>으로 설정됨. <code>adjustResize</code> 대신 <code>pan</code>을 사용함에 따라 입력 필드가 가려지지 않는지 집중 점검 필요.</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>본 문서는 PROTOCOL 10.5에 의거하여 진단 및 계획 용도로만 작성되었으며, 코드 수정은 포함하지 않습니다.</p>
+    </div>
+</body>
+</html>

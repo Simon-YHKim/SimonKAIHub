@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Keyboard-Safe Danger Forms Gate</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0e1117; --panel:#151a22; --panel2:#10151d; --text:#eef2f8; --muted:#a9b3c3; --line:#293241; --danger:#ff6b6b; --warn:#ffd166; --accent:#8ab4ff; --ok:#4ade80; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:Arial,"Helvetica Neue",sans-serif; line-height:1.55; }
+    main { width:min(1080px, calc(100% - 32px)); margin:0 auto; padding:36px 0 56px; }
+    header { border-bottom:1px solid var(--line); padding-bottom:20px; margin-bottom:22px; }
+    h1 { margin:0 0 10px; font-size:clamp(28px,4vw,46px); line-height:1.05; letter-spacing:0; }
+    h2 { margin:0 0 10px; font-size:20px; letter-spacing:0; }
+    p { margin:8px 0; }
+    ul { margin:10px 0 0; padding-left:20px; }
+    li { margin:6px 0; }
+    code { color:#dbe8ff; background:#0b0f15; border:1px solid #263142; border-radius:5px; padding:1px 5px; font-family:Consolas,"SFMono-Regular",monospace; font-size:.94em; }
+    section { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:20px; margin:16px 0; }
+    .meta { display:flex; flex-wrap:wrap; gap:8px; color:var(--muted); font-size:14px; }
+    .pill { border:1px solid var(--line); background:var(--panel2); border-radius:999px; padding:5px 10px; }
+    .danger h2 { color:var(--danger); }
+    .warn h2 { color:var(--warn); }
+    .accent h2 { color:var(--accent); }
+    .ok h2 { color:var(--ok); }
+    .grid { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:14px; }
+    .card { background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:14px; }
+    .card h3 { margin:0 0 8px; font-size:16px; }
+    @media (max-width:800px){ main{width:min(100% - 22px,1080px); padding-top:24px;} section{padding:16px;} .grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Keyboard-Safe Danger Forms Gate</h1>
+      <div class="meta">
+        <span class="pill">Codex UI/UX gate</span>
+        <span class="pill">main 911c979</span>
+        <span class="pill">P2 trust blocker</span>
+        <span class="pill">2026-06-06 05:02 KST</span>
+      </div>
+    </header>
+
+    <section class="danger">
+      <h2>Verdict</h2>
+      <p>Live main remains <strong>98/100 provisional</strong>. Three form screens still lack the keyboard-safe shell already used elsewhere in the app.</p>
+      <p>This blocks 100 because two of the affected fields sit inside irreversible deletion flows.</p>
+    </section>
+
+    <section class="ok">
+      <h2>Existing Good Pattern</h2>
+      <p>The app already has the right pattern: <code>useKeyboard</code>, <code>KeyboardAvoidingView</code>, Android bottom padding, and <code>keyboardShouldPersistTaps="handled"</code>.</p>
+      <ul>
+        <li><code>src/lib/ui/useKeyboard.ts:4-27</code></li>
+        <li><code>sign-in.tsx:145-149</code>, <code>sign-up.tsx:158-164</code>, <code>complete-profile.tsx:115-121</code></li>
+        <li><code>formats.tsx:232-233</code>, <code>import.tsx:136-137</code>, <code>capture.tsx:594-595</code></li>
+      </ul>
+    </section>
+
+    <section class="accent">
+      <h2>Affected Screens</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Account</h3>
+          <p><code>ScrollView</code> shell at line 165. DOB field at line 184. Delete-account confirmation input at lines 228-234.</p>
+        </div>
+        <div class="card">
+          <h3>Settings</h3>
+          <p><code>ScrollView</code> shell at line 302. Full-wipe confirmation input at lines 518-524. Destructive CTA at lines 525-535.</p>
+        </div>
+        <div class="card">
+          <h3>Audit</h3>
+          <p><code>ScrollView</code> shell at line 172. Multiline answer input at lines 211-218. Next/Finish CTA at lines 233-247.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="warn">
+      <h2>Acceptance</h2>
+      <ul>
+        <li>Apply the existing keyboard-safe pattern to <code>account</code>, <code>settings</code>, and <code>audit</code>.</li>
+        <li>Use <code>keyboardShouldPersistTaps="handled"</code> and Android bottom padding from <code>kbHeight</code>.</li>
+        <li>Keep destructive behavior unchanged; fix only layout and interaction stability.</li>
+        <li>Provide mobile keyboard-open proof for account delete, settings full wipe, and audit writing flow.</li>
+        <li>Run <code>npm run verify</code> after implementation.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

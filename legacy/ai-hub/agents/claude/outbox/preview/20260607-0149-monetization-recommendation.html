@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2nd-B 수익화 권고안 — Simon 결정용</title>
+<style>
+  :root{
+    --bg:#14131a; --surface:#1c1b24; --surface2:#232230;
+    --text:#e9e7f2; --muted:#a09cb4; --line:#302e3e;
+    --accent:#8b7cf6; --warn:#e0a96d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:Pretendard,-apple-system,"Segoe UI",sans-serif;line-height:1.62;font-size:15px}
+  .wrap{max-width:1080px;margin:0 auto;padding:44px 26px 90px}
+  h1{font-size:25px;font-weight:700;letter-spacing:-.01em;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:13px;margin-bottom:14px}
+  .banner{background:linear-gradient(180deg,#211c14,#1c1b24);border:1px solid #5a4a2e;border-radius:12px;
+    padding:14px 16px;margin:18px 0 30px;color:var(--text);font-size:14px}
+  .banner b{color:var(--warn)}
+  h2{font-size:18px;font-weight:700;margin:38px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+  p{margin:8px 0}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+  td.tier{font-weight:700;color:var(--accent);white-space:nowrap}
+  .price{font-weight:700;white-space:nowrap}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:10px 0}
+  .decide{border-color:#5a4a2e}
+  .decide .k{color:var(--warn);font-weight:700}
+  .muted{color:var(--muted)}
+  ul{margin:8px 0;padding-left:20px}
+  li{margin:5px 0}
+  .pill{display:inline-block;background:var(--surface2);border:1px solid var(--line);border-radius:999px;
+    padding:2px 10px;font-size:11px;color:var(--muted);margin:0 6px 6px 0}
+  code{background:var(--surface2);padding:1px 6px;border-radius:5px;font-size:12.5px;color:var(--text)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.two{grid-template-columns:1fr}}
+  footer{margin-top:46px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>2nd-B 수익화 권고안</h1>
+  <div class="sub">3-프레임 병렬 설계(구독·하이브리드·데이터주권) 종합 · 2026-06-07 01:49 KST · 페르소나 시뮬 M1~M5 근거</div>
+  <div class="banner">
+    <b>이 문서는 권고안입니다 — Simon 결정 대기.</b> 코드·과금 변경은 하지 않았습니다. 가격·티어·결제수단은 비즈니스+실비용 결정이라 승인 후 구현합니다. 아래 “Simon 결정 포인트” 6개에 방향만 정해주시면 됩니다.
+  </div>
+
+  <h2>3개 전략안이 합의한 것 (강한 수렴)</h2>
+  <div class="card">
+    <ul>
+      <li><b>무료 한도 상향</b> — 현재 일기 2개는 <b>패턴이 보이기 전(3~5일)에 막혀</b> 빈 화면만 보고 이탈(M2). 세 안 모두 <b>일기 월 5개 + 주 1회 샘플 인사이트(읽기)</b>로 상향 권고. 핵심가치를 먼저 경험시키고 유료 전환.</li>
+      <li><b>티어 가격</b> — 세 안 모두 동일 수렴: Soma <b>₩4,900</b> · Cortex <b>₩9,900</b> · Brain <b>₩19,900</b> (연 20% 할인).</li>
+      <li><b>KR 결제는 카드만으론 안 됨</b>(M3) — 신용카드 없는 다수 → <b>토스페이먼츠(계좌이체·휴대폰결제·토스·카카오페이) + Stripe(카드)</b> 이중 구조.</li>
+      <li><b>글로벌은 지역 PG + PPP 가격</b> — LINE Pay(일본)·Razorpay/UPI(인도)·Pix(브라질)·Telr/HyperPay(중동).</li>
+      <li><b>구독 피로 완화</b>(M4) — 한 번에 한 티어·업그레이드 자동 프로레이션·일시정지(취소 아님)·연간 할인.</li>
+    </ul>
+  </div>
+
+  <h2>권고 구조 (종합안)</h2>
+  <table>
+    <tr><th>티어</th><th>KRW</th><th>USD</th><th>포함</th></tr>
+    <tr><td class="tier">Free<br><span class="muted">영구</span></td><td class="price">₩0</td><td class="price">$0</td>
+      <td>일기 5/월 · 메모 무제한 · <b>주 1회 샘플 인사이트(읽기)</b> · 그래프·위키 열람 · ESM 체크인 · 평가(열람) · 프라이버시 통제 · 광고/판매 없음</td></tr>
+    <tr><td class="tier">Soma</td><td class="price">₩4,900/월<br><span class="muted">₩49,000/년</span></td><td class="price">$4.99</td>
+      <td>일기·메모 무제한 · 인사이트 월간 · 평가 2/월 · Jarvis 30/일 · 데이터 export · 오프라인 캡처</td></tr>
+    <tr><td class="tier">Cortex</td><td class="price">₩9,900/월<br><span class="muted">₩99,000/년</span></td><td class="price">$9.99</td>
+      <td>Soma + 평가 무제한 · 인사이트 일간 · Jarvis 80/일 · 패턴·추세 분석 · 가족 공유(읽기 1인)</td></tr>
+    <tr><td class="tier">Brain</td><td class="price">₩19,900/월<br><span class="muted">₩199,000/년</span></td><td class="price">$19.99</td>
+      <td>Cortex + advisor(1:1 성찰) · planner(목표 분해) · Jarvis 250/일 · 평생 데이터 보관 · API(베타)</td></tr>
+    <tr><td class="tier">크레딧 팩<br><span class="muted">원타임</span></td><td class="price">₩1,000(10) ~ ₩10,000(150)</td><td class="price">$0.99 ~ $9.99</td>
+      <td><b>구독 없이 충전식</b>(무카드·저소득용). 일기 2cr·메모 1cr·평가 3cr. 미사용 평생 보관, 구독과 병렬. <span class="muted">(하이브리드안)</span></td></tr>
+    <tr><td class="tier">Brain 평생<br><span class="muted">얼리어답터</span></td><td class="price">₩299,000</td><td class="price">$299</td>
+      <td>Brain 영구(가격 인상 무관) + 데이터 소유 보장. 구독 피로·데이터주권 선호층. <span class="muted">(주권안, 2026~2027 한정)</span></td></tr>
+  </table>
+  <p class="muted">크레딧 팩(저소득·무카드 흡수)과 Brain 평생(반구독·주권 마케팅)은 선택 옵션 — 채택 여부는 결정 포인트 M3·M4 참조.</p>
+
+  <h2>결제수단 (M3)</h2>
+  <div class="two">
+    <div class="card"><b>한국</b>
+      <ul>
+        <li><b>토스페이먼츠</b>(권장 주PG): 계좌이체·휴대폰결제·토스·카카오페이 네이티브</li>
+        <li>Stripe: 신용/체크카드 폴백</li>
+        <li>저소득: <b>크레딧 팩 ₩1,000~</b>(소액·비구독)</li>
+        <li>신뢰 배지: “토스 간편결제 / KG이니시스 보안결제”, “결제정보 암호화·비공유”</li>
+      </ul>
+    </div>
+    <div class="card"><b>글로벌</b>
+      <ul>
+        <li>미국/EU: Stripe(카드·Apple/Google Pay·SEPA)·PayPal</li>
+        <li>일본: LINE Pay + 카드 · ¥499/¥999/¥1,999</li>
+        <li>인도: Razorpay(UPI) · ₹349/₹749/₹1,499 (PPP)</li>
+        <li>브라질: Pix·Mercado Pago · R$24.9/49.9/99.9</li>
+        <li>중동: Telr/HyperPay · 동남아: Dana/GCash/Momo</li>
+        <li>통화 GeoIP 자동감지 + 설정 토글</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>KR ↔ 글로벌 차이</h2>
+  <table>
+    <tr><th>차원</th><th>한국</th><th>글로벌</th></tr>
+    <tr><td>결제 1순위</td><td>계좌이체·간편결제(무카드층)</td><td>신용카드·Apple/Google Pay</td></tr>
+    <tr><td>가격</td><td>₩ 기준(환율 1,300 내재)</td><td>PPP 적용(인도·브라질 30~50% 인하)</td></tr>
+    <tr><td>신뢰 톤</td><td>보안·프라이버시·국내저장·“광고/판매 없음”(정부감시 우려)</td><td>생산성·인사이트·“언제든 취소”·GDPR 명시</td></tr>
+    <tr><td>문화</td><td>가족 맥락·존댓말 톤</td><td>개인 자기지식·선택권</td></tr>
+    <tr><td>위기 라우팅</td><td>1393/1388</td><td>국가별(US 988 등)</td></tr>
+  </table>
+
+  <h2>🔴 Simon 결정 포인트</h2>
+  <div class="card decide"><span class="k">M0 — 결제 시스템(P0·치명):</span> 현재 코드엔 <b>티어 정의(entitlements.ts)만 있고 결제 로직이 없습니다.</b> 가격이 아무리 좋아도 Stripe/토스/IAP 연동 없이는 수익 ₩0. <b>가장 먼저 결정·구현할 항목.</b> Stripe(글로벌) → 토스(KR) → 스토어 IAP 순 권고.</div>
+  <div class="card decide"><span class="k">M1 — 가격 확정:</span> Soma/Cortex/Brain = ₩4,900/9,900/19,900 (+연 20%)로 갈까요? 조정 의향?</div>
+  <div class="card decide"><span class="k">M2 — 무료 티어:</span> 일기 2 → <b>5/월 + 주1 샘플 인사이트</b>로 상향(이탈 방지)에 동의?</div>
+  <div class="card decide"><span class="k">M3 — 결제수단:</span> 토스페이먼츠+Stripe 이중 + <b>크레딧 팩(₩1,000~)</b> 채택? 글로벌 지역 PG 우선순위?</div>
+  <div class="card decide"><span class="k">M4 — 구독 모델:</span> 단일구독+연간+일시정지 기본. <b>Brain 평생(₩299,000)</b> 옵션 추가? 광고 지원(저소득)은?</div>
+  <div class="card decide"><span class="k">M5 — 신뢰:</span> 국외전송 안심 카피(Codex가 E18로 일부 반영)·SOC2 등 인증 로드맵 진행?</div>
+
+  <h2>참고 — 3개 원안 요지</h2>
+  <p><span class="pill">A 구독 freemium</span> 단순·예측가능 매출. 관대한 무료 + 월구독 4단계.
+     <span class="pill">B 하이브리드</span> + 원타임 크레딧(무카드·저소득 흡수), 구독 강제 없음.
+     <span class="pill">C 데이터주권</span> 코어 영구무료 + Brain 평생, 반-lock-in·Obsidian 정서 마케팅.</p>
+  <p class="muted">권고: A를 기본 골격으로, B의 크레딧 팩(저소득·KR 무카드)과 C의 Brain 평생(반구독·주권)을 옵션으로 흡수. 무료티어 상향(M2)은 세 안 공통이라 최우선·저위험.</p>
+
+  <footer>
+    원본: <code>tasks/wqu2431op</code> 3안 전문 · 페르소나 근거: <code>persona-ux-findings-expand-20260607.json</code>(M1~M5 65건) ·
+    티어 코드: <code>src/lib/progression/entitlements.ts</code> · 결정 시 Claude가 티어게이팅·요금제·결제 구현
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Retired Route Slop Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d10;
+      --panel: #151922;
+      --panel2: #1d2430;
+      --text: #f4f7fb;
+      --muted: #a9b2c3;
+      --line: #2d3544;
+      --warn: #ffcc66;
+      --bad: #ff7b7b;
+      --ok: #7bd88f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main { max-width: 1060px; margin: 0 auto; padding: 32px 18px 48px; }
+    header {
+      display: grid;
+      gap: 14px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 22px;
+    }
+    h1 { margin: 0; font-size: clamp(26px, 5vw, 42px); line-height: 1.08; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 15px; letter-spacing: 0; }
+    p { margin: 0 0 10px; color: var(--muted); }
+    code {
+      color: #dce8ff;
+      background: #10141c;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+    }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 999px;
+      padding: 6px 10px;
+      color: var(--muted);
+    }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 22px 0;
+    }
+    .card, .box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .card strong { display: block; font-size: 24px; line-height: 1.15; margin-bottom: 4px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .box { background: var(--panel2); }
+    .full { grid-column: 1 / -1; }
+    ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 5px 0; }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .ok { color: var(--ok); }
+    .callout {
+      margin-top: 18px;
+      border: 1px solid #4d3d1a;
+      background: #1e1a0e;
+      border-radius: 8px;
+      padding: 16px;
+    }
+    @media (max-width: 760px) {
+      main { padding: 24px 14px 36px; }
+      .summary, .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="meta">
+        <span class="pill">Codex UI/UX</span>
+        <span class="pill">2nd-B</span>
+        <span class="pill">de19f41</span>
+        <span class="pill">2026-06-06 04:03 KST</span>
+      </div>
+      <h1>Retired routes should not be active UI destinations</h1>
+      <p>Compatibility redirects are useful. Current in-app helpers should still point to the real destination, not a retired route that silently bounces elsewhere.</p>
+    </header>
+
+    <section class="summary">
+      <div class="card">
+        <strong class="warn">P2</strong>
+        <p>Silent redirect tax in active UI metadata.</p>
+      </div>
+      <div class="card">
+        <strong class="bad">3 routes</strong>
+        <p><code>/journal</code>, <code>/imagine</code>, <code>/mbti</code> are retired redirects.</p>
+      </div>
+      <div class="card">
+        <strong class="warn">97/100</strong>
+        <p>Score remains provisional. This is part of the cleanup bundle.</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="box">
+        <h3>Current Redirects</h3>
+        <ul>
+          <li><code>/journal</code> redirects to <code>/capture</code>.</li>
+          <li><code>/imagine</code> redirects to <code>/jarvis?mode=divergent</code>.</li>
+          <li><code>/mbti</code> redirects to <code>/persona</code>.</li>
+        </ul>
+      </article>
+      <article class="box">
+        <h3>Still Emitted</h3>
+        <ul>
+          <li><code>village-ui.ts</code> primary routes still include <code>/journal</code>.</li>
+          <li><code>evidence.ts</code> maps journal/imagine to retired routes.</li>
+          <li><code>self-portrait.ts</code> maps goal/do to retired routes.</li>
+        </ul>
+      </article>
+      <article class="box">
+        <h3>User Impact</h3>
+        <ul>
+          <li>Tap label and land somewhere else with no transition explanation.</li>
+          <li>Back/history/analytics can inherit compatibility-route semantics.</li>
+          <li>Creates a small but visible "why did I land here?" moment.</li>
+        </ul>
+      </article>
+      <article class="box">
+        <h3>Cleaner Pattern Exists</h3>
+        <ul>
+          <li><code>NavGraph</code> already opens Divergent mode directly.</li>
+          <li>Use direct <code>/capture</code> and <code>/jarvis</code> destinations in active helpers.</li>
+          <li>Keep redirects only for external/saved links.</li>
+        </ul>
+      </article>
+      <article class="box full">
+        <h3>Acceptance</h3>
+        <ul>
+          <li>Active helper routes emit real destinations.</li>
+          <li>Tests prevent retired routes from re-entering active UI data.</li>
+          <li>Any retained retired route has visible transition copy or documented proof.</li>
+        </ul>
+      </article>
+    </section>
+
+    <div class="callout">
+      <p><strong>Codex verdict:</strong> keep compatibility redirects, but remove retired routes from active UI metadata before calling the app 100/100.</p>
+    </div>
+  </main>
+</body>
+</html>

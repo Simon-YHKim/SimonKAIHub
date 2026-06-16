@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pressable Interaction Contract Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1017;
+      --panel: #141b25;
+      --panel2: #101722;
+      --text: #e7edf6;
+      --muted: #9fb0c4;
+      --line: #263344;
+      --warn: #f4c76f;
+      --danger: #ff6b7a;
+      --info: #7bb7ff;
+      --ok: #7bd88f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.55 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main { max-width: 1160px; margin: 0 auto; padding: 32px 18px 56px; }
+    header, .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    header { padding: 24px; background: linear-gradient(180deg, #17202c, #101722); }
+    h1 { margin: 0; font-size: clamp(24px, 4vw, 40px); line-height: 1.1; letter-spacing: 0; }
+    h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 14px; color: var(--text); letter-spacing: 0; }
+    p { margin: 0; color: var(--muted); }
+    ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); }
+    li + li { margin-top: 6px; }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: #0a111b;
+      color: #d7e7ff;
+      font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+    }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 9px;
+      min-height: 26px;
+      color: var(--muted);
+      background: #1b2532;
+      font-size: 12px;
+    }
+    .chip.warn { color: var(--warn); border-color: rgba(244,199,111,.35); background: rgba(244,199,111,.1); }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; margin-top: 16px; }
+    .card { grid-column: span 12; padding: 18px; }
+    @media (min-width: 820px) {
+      .half { grid-column: span 6; }
+      .third { grid-column: span 4; }
+    }
+    .warn { border-left: 4px solid var(--warn); }
+    .danger { border-left: 4px solid var(--danger); }
+    .info { border-left: 4px solid var(--info); }
+    .ok { border-left: 4px solid var(--ok); }
+    .table {
+      margin-top: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 10px;
+      padding: 10px 12px;
+      border-top: 1px solid var(--line);
+      background: var(--panel2);
+    }
+    .row:first-child { border-top: 0; }
+    .file { color: var(--text); font-weight: 700; }
+    .footer { margin-top: 18px; color: var(--muted); font-size: 12px; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Interaction Contract Gate</h1>
+      <p><code>74dc39f</code> fixed retired routes. The next UI anti-slop class is custom Pressable semantics.</p>
+      <div class="meta">
+        <span class="chip warn">Overall: 97/100 provisional</span>
+        <span class="chip">Scope: inbox, wiki, research, jarvis, core-brain, records, interview, trinity</span>
+        <span class="chip">Type: UI/UX request to Claude</span>
+      </div>
+    </header>
+
+    <section class="grid">
+      <article class="card warn half">
+        <h2>Why It Matters</h2>
+        <p>Many rows, chips, text buttons, and links are visually interactive but do not expose role, label, selected, expanded, disabled, or busy state. That creates a gap between tap users and screen reader/web keyboard users.</p>
+      </article>
+
+      <article class="card danger half">
+        <h2>Still Separate P1</h2>
+        <p><code>src/app/privacy.tsx:100</code> can still apply analytics consent from an older queued payload. This remains the score blocker.</p>
+      </article>
+
+      <article class="card">
+        <h2>Concrete Surfaces</h2>
+        <div class="table">
+          <div class="row"><div class="file">Inbox</div><div><code>112</code> row open, <code>145</code>/<code>184</code> pending actions, <code>213</code> delete, <code>535</code> retry, <code>552</code> empty CTA.</div></div>
+          <div class="row"><div class="file">Wiki</div><div><code>587</code>/<code>614</code> export actions, <code>643</code>/<code>656</code> tag filters, <code>778</code> expandable row, <code>819</code>/<code>848</code>/<code>975</code> nested actions.</div></div>
+          <div class="row"><div class="file">Research</div><div><code>139</code>/<code>151</code> framework chips need selected state; <code>206</code> DOI/URL link needs link semantics.</div></div>
+          <div class="row"><div class="file">Interview</div><div><code>245</code> life-period cards need button semantics and labels.</div></div>
+          <div class="row"><div class="file">Trinity</div><div><code>203</code> Link-wrapped capture action needs explicit role/label.</div></div>
+          <div class="row"><div class="file">Core Brain</div><div><code>264</code> evidence drawer button has role but needs label; evidence rows around <code>295</code> need row labels.</div></div>
+          <div class="row"><div class="file">Jarvis</div><div><code>288</code> Clear chat and modal text actions need role/labels; preserve non-noisy modal backdrops.</div></div>
+        </div>
+      </article>
+
+      <article class="card info">
+        <h2>Acceptance</h2>
+        <ul>
+          <li>Add role for custom buttons, links, tabs, rows, chips, and menu-like actions.</li>
+          <li>Add labels where text is dynamic, clipped, nested, or visually implied.</li>
+          <li>Add selected, expanded, disabled, and busy states where relevant.</li>
+          <li>Keep modal backdrops quiet unless they intentionally dismiss the dialog.</li>
+          <li>Add a lightweight static test or PR checklist for future high-density screens.</li>
+        </ul>
+      </article>
+    </section>
+
+    <p class="footer">Generated 2026-06-06 04:21:41 KST. Hub artifact only; app code was not modified by Codex.</p>
+  </main>
+</body>
+</html>

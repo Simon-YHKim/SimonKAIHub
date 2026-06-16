@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>2nd-B UX 방향 — 심플한 핵심 하나</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  :root{
+    --bg:#0f1117; --card:#181b24; --line:#252a36;
+    --text:#e6e8ef; --muted:#9097a6; --accent:#7c9eff; --warn:#e0a978;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:Pretendard,-apple-system,system-ui,sans-serif;
+    line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:56px 24px 96px}
+  header{margin-bottom:40px}
+  .kicker{color:var(--accent);font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+  h1{font-size:30px;font-weight:800;margin:10px 0 8px;letter-spacing:-.02em}
+  .sub{color:var(--muted);font-size:15px}
+  .verdict{background:linear-gradient(180deg,#1b2335,#181b24);border:1px solid #2c3550;
+    border-radius:16px;padding:26px 28px;margin:28px 0}
+  .verdict h2{margin:0 0 6px;font-size:21px;font-weight:800;letter-spacing:-.01em}
+  .verdict p{margin:0;color:#c6ccdb}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:18px 0}
+  .card h3{margin:0 0 14px;font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .tag{font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;letter-spacing:.03em}
+  .t-high{background:#16351f;color:#7fd99a}
+  .t-med{background:#2e2a16;color:#d9c87f}
+  .t-kill{background:#3a1e1e;color:#e08a8a}
+  ul{margin:8px 0;padding-left:20px}
+  li{margin:7px 0;color:#cdd2de}
+  .small{color:var(--muted);font-size:13px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+  .stat{background:#12151d;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .stat b{display:block;font-size:24px;color:var(--accent);font-weight:800}
+  .stat span{font-size:13px;color:var(--muted)}
+  .do{border-left:3px solid var(--accent);padding-left:14px;margin:12px 0}
+  .dont{border-left:3px solid #6b4a4a;padding-left:14px;margin:12px 0}
+  code{background:#12151d;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:13px;color:#cdd2de}
+  a{color:var(--accent);text-decoration:none}
+  .btn{position:fixed;right:20px;bottom:20px;background:var(--accent);color:#0b0e16;border:0;
+    border-radius:10px;padding:12px 18px;font-weight:700;font-size:14px;cursor:pointer;
+    font-family:inherit;box-shadow:0 6px 24px rgba(124,158,255,.3)}
+  .btn:active{transform:translateY(1px)}
+  footer{margin-top:36px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">2nd-B · UX 방향 결정 리포트</div>
+    <h1>심플한 핵심 하나로 간다</h1>
+    <div class="sub">deep-research(104 에이전트·실증 검증) + 내부 코드 진단 종합 · 2026-06-10 KST</div>
+  </header>
+
+  <div class="verdict">
+    <h2>결론</h2>
+    <p><b>단일 일차 행동(single primary action)을 전면에 두고, 나머지는 점진적 공개로 숨긴다.</b> 분석 방법을 카테고리로 묶어 다 유지하는 타협(chunking)은 실증에서 반박됐다 — 진짜로 줄여야 한다. 단, 과도한 미니멀은 초보를 길 잃게 하므로 온보딩 가이드를 함께 둔다.</p>
+  </div>
+
+  <div class="card">
+    <h3>1. 외부 실증 — 살아남은 근거</h3>
+    <ul>
+      <li><span class="tag t-high">HIGH</span> &nbsp;PKM·self-tracking 사용자는 <b>정보 과부하·노력 때문에 이탈</b>한다(가치 부족이 아님). 리텐션은 본래 낮다. <span class="small">(IMWUT 2021: 정보 많으면 그냥 스크롤로 지나침)</span></li>
+      <li><span class="tag t-med">MED</span> &nbsp;<b>기능 과잉(feature bloat)은 만족도·고객가치를 낮춘다.</b> <span class="small">(Thompson 2005 JMR. 단 choice overload는 보편 법칙이 아니라 조건부)</span></li>
+      <li><span class="tag t-med">MED</span> &nbsp;<b>미니멀 디자인은 사용성·신뢰 인식을 높인다.</b> 단 너무 비면 초보가 단서를 못 찾으니 <b>가이드 동반</b>. <span class="small">(NN/g 심미-사용성 효과)</span></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>2. 반박된 주장 <span class="tag t-kill">맹신 금지</span></h3>
+    <p class="small" style="margin-top:0">adversarial 검증(3표 중 2표 반박 시 폐기)에서 죽은 것들 — 흔히 인용되지만 이번 결정의 근거로 쓰면 안 된다:</p>
+    <ul>
+      <li><b>"카테고리로 묶으면(chunking) 다기능을 다 유지해도 된다"</b> → 0-3 폐기. <b>8개 분석방법을 탭/카테고리로 정리해 유지하는 건 검증된 해법이 아니다.</b></li>
+      <li>"앱은 3일에 75% 이탈 / d30 4%", "첫 세션 행동 시 리텐션 2~3배" → 과장·인과 비약으로 폐기. 수치 자체를 근거로 삼지 말 것.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>3. 내부 진단 — 우리 앱의 현실</h3>
+    <div class="grid">
+      <div class="stat"><b>40</b><span>화면(라우트)</span></div>
+      <div class="stat"><b>8</b><span>"나를 분석" 방법</span></div>
+      <div class="stat"><b>29</b><span>lib 모듈</span></div>
+      <div class="stat"><b>43</b><span>컴포넌트</span></div>
+    </div>
+    <p style="margin-bottom:0">자기분석만 <code>big-five</code> · <code>mbti</code> · <code>esm</code> · <code>interview</code> · <code>persona</code> · <code>insights</code> · <code>trinity</code> · <code>core-brain</code> 8갈래. 사용자가 "나를 알아가기"로 들어오면 <b>무엇을 먼저 할지 알 수 없다</b> — 이건 추측이 아니라 현재 구조다. (HIGH 근거인 "정보 과부하 이탈"의 정확한 발화 지점)</p>
+  </div>
+
+  <div class="card">
+    <h3>4. 2nd-B 구체 방향</h3>
+    <div class="do"><b>홈 = 하나의 일차 행동.</b> 예: "오늘의 나, 한 줄 기록" 같은 단일 CTA 하나. (이미 있는 사내 규칙 <code>one message + one graphic per screen</code>과 정확히 일치)</div>
+    <div class="do"><b>자기분석 8방법 → 단일 진입점으로 통합.</b> 사용자는 방법을 고르지 않는다. 앱이 맥락에 맞는 다음 한 걸음을 추천한다(예: 기록이 쌓이면 그때 인사이트·페르소나를 "열어준다").</div>
+    <div class="do"><b>나머지는 점진적 공개.</b> mbti/esm/trinity 등은 메뉴에서 빼고, 핵심 루프를 쓴 뒤 잠금해제·추천으로 등장.</div>
+    <div class="do"><b>온보딩으로 길을 깐다.</b> 미니멀의 함정(초보가 단서 못 찾음)을 첫 진입 가이드로 보완.</div>
+    <div class="dont"><b>하지 말 것:</b> 8방법을 탭·카테고리·"분석 허브"로 묶어 다 노출하는 타협. 실증에서 반박됨 — 줄이는 게 답이지 정리가 답이 아니다.</div>
+  </div>
+
+  <div class="card">
+    <h3>5. 정직한 한계 (cold view)</h3>
+    <ul>
+      <li>choice overload는 <b>조건부</b> 효과다(보편 법칙 아님). 근거 다수가 구매 맥락 — 앱 내 기능에 1:1 적용은 신중히.</li>
+      <li>리텐션 벤치마크 수치들은 출처별 편차가 크고 일부 반박됨. "심플하게"의 방향은 견고하나, <b>특정 수치를 KPI 근거로 인용하지 말 것.</b></li>
+      <li>이 리포트는 <b>방향 제안</b>이다. 어느 행동을 "그 하나"로 둘지는 제품 판단 — Simon 확정 필요.</li>
+    </ul>
+  </div>
+
+  <footer>
+    출처: Thompson 2005 (JMR) · IMWUT 2021 self-tracking · NN/g aesthetic-usability · Daylio 단일행동 사례 외. 내부: 2nd-B src 코드 진단(40화면/8분석방법). 검증: deep-research 3표 adversarial. <br>
+    다음: 이 방향 승인 시 → 자기분석 진입점 통합 설계(Codex UI/UX) + 홈 단일 CTA 구현(Claude) + 점진공개 로직.
+  </footer>
+</div>
+
+<button class="btn" onclick="copyMd()">Copy as Markdown</button>
+<script>
+const MD = `# 2nd-B UX 방향 — 심플한 핵심 하나
+
+## 결론
+단일 일차 행동(single primary action)을 전면에, 나머지는 점진적 공개로. 분석 방법을 카테고리로 묶어 다 유지하는 chunking 타협은 실증 반박됨 — 진짜로 줄여야. 단 과도한 미니멀은 온보딩 가이드로 보완.
+
+## 외부 실증 (살아남은 근거)
+- [HIGH] PKM·self-tracking은 정보 과부하·노력으로 이탈(가치 부족 아님), 리텐션 본래 낮음 (IMWUT 2021)
+- [MED] feature bloat가 만족도·고객가치 낮춤 (Thompson 2005 JMR); choice overload는 조건부
+- [MED] 미니멀은 사용성·신뢰↑, 단 과하면 초보가 길 잃음 → 가이드 동반 (NN/g)
+
+## 반박된 주장 (맹신 금지)
+- "chunking으로 다기능 유지 가능" → 0-3 폐기. 8방법 탭/카테고리 유지는 해법 아님
+- "75% 3일 이탈/d30 4%", "첫세션 2~3배" → 과장으로 폐기, 수치 근거 금지
+
+## 내부 진단
+- 40화면 · 자기분석 8방법(big-five/mbti/esm/interview/persona/insights/trinity/core-brain) · lib 29 · 컴포넌트 43
+- "나를 알아가기" 진입 시 무엇부터 할지 불명 = 정보 과부하 발화 지점
+
+## 2nd-B 방향
+- 홈 = 하나의 일차 행동 (사내 규칙 one message+one graphic과 일치)
+- 자기분석 8방법 → 단일 진입점 통합, 앱이 다음 한 걸음 추천
+- 나머지 점진적 공개(잠금해제/추천)
+- 온보딩으로 초보 가이드
+- 금지: 8방법을 탭/카테고리/분석허브로 묶어 다 노출 (반박됨)
+
+## 한계
+- choice overload는 조건부, 다수 근거가 구매 맥락
+- 리텐션 수치는 편차 크고 일부 반박 — KPI 근거 인용 금지
+- 방향 제안이며 "그 하나"의 선택은 Simon 확정 필요`;
+function copyMd(){navigator.clipboard.writeText(MD).then(()=>{const b=document.querySelector('.btn');b.textContent='✓ 복사됨';setTimeout(()=>b.textContent='Copy as Markdown',1500)})}
+</script>
+</body>
+</html>

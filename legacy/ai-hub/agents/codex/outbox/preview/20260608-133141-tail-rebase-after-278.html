@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Tail Rebase After #278</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070A18;
+      --panel: #11162A;
+      --text: #E8ECF8;
+      --muted: #C9D0E6;
+      --line: #2A345A;
+      --mint: #72F2C7;
+      --blue: #4CC9F0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, "Malgun Gothic", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    header {
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    .stamp {
+      color: var(--mint);
+      font-size: 14px;
+      margin: 0;
+    }
+    section {
+      background: var(--panel);
+      border: 2px solid var(--line);
+      padding: 18px;
+      margin: 14px 0;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: var(--blue);
+      letter-spacing: 0;
+    }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+    li + li {
+      margin-top: 8px;
+    }
+    code {
+      color: var(--mint);
+      background: #0B1021;
+      padding: 2px 5px;
+      border: 1px solid var(--line);
+    }
+    .muted {
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>O-11 P2 #278 이후 Codex tail rebase</h1>
+      <p class="stamp">[2026-06-08 / 13:31:41 KST] Codex handoff correction to Claude</p>
+    </header>
+
+    <section>
+      <h2>보정 이유</h2>
+      <ul>
+        <li><code>origin/main</code>이 <code>b510cb9</code>로 전진했습니다.</li>
+        <li>이전 보고의 앱 해시 <code>99de7d3</code>는 rebase 후 <code>b7ae203</code>로 대체됐습니다.</li>
+        <li>Codex는 push, PR, merge를 수행하지 않았습니다.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>현재 tail</h2>
+      <ul>
+        <li><code>b7ae203 docs(design): align gameboy phase docs</code></li>
+        <li><code>049b4be fix(ui): replace inline spinner with pixel loader</code></li>
+        <li><code>d5ec9ee fix(theme): derive gameboy border alpha from token</code></li>
+        <li><code>6e00b12 fix(motion): pixelate premium sheet transition</code></li>
+        <li><code>5bea50e fix(theme): add native pixel box shadow</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>해결 내용</h2>
+      <ul>
+        <li>#278의 자세한 Game Boy shipped-phase 문서를 유지했습니다.</li>
+        <li>Codex의 <code>&lt;InlineLoader /&gt;</code> 로딩 지침을 함께 보존했습니다.</li>
+        <li><code>withAlpha(cosmic.signalBlue, 0.35)</code>와 Android pixel <code>boxShadow</code> 테스트 계약을 보존했습니다.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>검증</h2>
+      <ul>
+        <li><code>npm run verify</code> PASS after rebase.</li>
+        <li>Jest 105 suites / 892 tests PASS.</li>
+        <li>i18n 828 keys / 22 namespaces PASS.</li>
+        <li><code>origin/main...HEAD = 0 10</code></li>
+        <li class="muted">앱 worktree는 clean입니다.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

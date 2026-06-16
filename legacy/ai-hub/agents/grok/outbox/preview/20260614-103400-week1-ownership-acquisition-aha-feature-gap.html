@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grok · Week-1 Ownership Acquisition Feature Gap</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --text: #e6e6e6;
+  --accent: #3b82f6;
+  --muted: #8a8a9a;
+  --card: #121217;
+  --border: #222228;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 40px 20px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+header { margin-bottom: 32px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+h1 { font-size: 22px; font-weight: 600; margin: 0 0 8px; }
+.meta { color: var(--muted); font-size: 13px; }
+h2 { font-size: 16px; font-weight: 600; margin: 32px 0 12px; border-left: 3px solid var(--accent); padding-left: 10px; }
+h3 { font-size: 14px; font-weight: 600; margin: 20px 0 8px; color: var(--accent); }
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.quote {
+  border-left: 3px solid var(--accent);
+  padding-left: 14px;
+  margin: 12px 0;
+  color: #d0d0d8;
+  font-style: normal;
+}
+ul { padding-left: 20px; }
+li { margin: 6px 0; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+th, td { text-align: left; padding: 8px 10px; border: 1px solid var(--border); }
+th { background: #18181f; font-weight: 600; }
+.rank { font-weight: 600; color: var(--accent); }
+footer { margin-top: 40px; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); padding-top: 16px; }
+.badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 999px; background: #1a2333; color: #9bb3ff; border: 1px solid #2a3a55; }
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">GROK LANE · ADVISORY ONLY</div>
+  <h1>Week-1 Acquisition &amp; Retention Feature Gap: Explicit Local Ownership + Temporal Memory Carry</h1>
+  <div class="meta">2026-06-14 / 10:34:00 KST · 2-pass Q1/Q5/Q6/Q4/Q7 (golden set) · §35 self-panel applied · ref: 094101 high order (processed) + autonomous feature-gap #1</div>
+</header>
+
+<h2>Key Reproducible Signals (2-Pass Confirmed)</h2>
+<div class="card">
+  <strong>Pass A + Pass B consensus (identical conclusions):</strong>
+  <ul>
+    <li><strong>Ownership aha (highest engagement):</strong> "You own your knowledge. Not the app." Obsidian core signal (519+ likes) + echoes: stores locally, no account required to start, no tracking, plain Markdown, optional E2EE sync. Users cite this as instant commitment trigger vs cloud lock-in churn.</li>
+    <li><strong>Local-first as baseline:</strong> "local-first isn’t a feature you pay extra for. it’s the baseline you were robbed of." Cloud round-trip for capture kills perceived instant value and ownership.</li>
+    <li><strong>Temporal memory carry complements:</strong> Day One "On This Day" / resurfacing repeatedly named as retention reason ("wouldn’t reread as much", "looking forward every day", early payoff in week-1). Lightweight recency/date match creates habit loop without volume.</li>
+    <li><strong>KR / sovereignty precondition:</strong> Device-boundary language ("내 기기 안에", "폰에만 저장... 프라이버지 걱정도 없고") surfaces as trust trigger for first intimate write + low-pressure restart tolerance.</li>
+  </ul>
+</div>
+
+<h2>4-Thread Grounding</h2>
+<div class="card">
+  <ul>
+    <li><strong>Competitor (Q5):</strong> Obsidian praised for ownership + no-account as why users choose and stick. Day One memory love real but entry often layered with account expectations. Cloud PKM fatigue on data harvesting/privacy named churn vector.</li>
+    <li><strong>X sovereignty:</strong> High positive for "data stays on your device / you control what leaves", "no silent extraction". Local AI memory positioned as different path from broken privacy bargain.</li>
+    <li><strong>KR (Q6):</strong> "내 기기 안에" + grace ("작심삼일" tolerance) as acquisition precondition. Local vault framing reduces shame vs pressure.</li>
+    <li><strong>Expression/virality (Q4/Q7):</strong> Warm ownership language ("your knowledge, your control") converts intimate entry from creepy risk to comforting control. Shareable as "I built this on my device".</li>
+  </ul>
+</div>
+
+<h2>Candidate Gaps + 2nd-B Minimal Form (Evidence-Only)</h2>
+<div class="card">
+  <h3>1. Explicit local ownership banner at first-write / capture / pre-account</h3>
+  <p><strong>What:</strong> Unavoidable warm one-liner at T1 P1 first journal save + capture entry: "Your entries live only on this device. No upload. You own your knowledge. Not the app. Export plain files anytime."</p>
+  <p><strong>Why week-1:</strong> Matches strongest reproducible signal for instant aha + trust precondition. Enables Lever B (pre-account) with zero barrier. Users name this as "why I stayed".</p>
+  <p><strong>Min form:</strong> Copy + layout treatment at first-write success / capture modal. Leverage existing local-only arch.</p>
+  <p><strong>Conflict:</strong> Zero. Reinforces charter.</p>
+
+  <h3>2. Lightweight temporal memory carry / resurfacing at first-write or home</h3>
+  <p><strong>What:</strong> On save or re-entry, surface 1 prior local entry (yesterday / same day prior) as "Your words from this day".</p>
+  <p><strong>Why week-1:</strong> Creates immediate payoff ("this is already valuable") before habit solidifies. Day One users credit for not churning.</p>
+  <p><strong>Min form:</strong> On-device query on existing records (date/recency). 1-line card, tap to view. No LLM, no network.</p>
+  <p><strong>Conflict:</strong> None if local-only.</p>
+</div>
+
+<h2>Ranking (Impact × Effort)</h2>
+<table>
+  <tr><th>Rank</th><th>Candidate</th><th>Impact (week-1 / acquisition)</th><th>Effort</th><th>Lean</th></tr>
+  <tr><td class="rank">1</td><td>Explicit local ownership banner at first-write</td><td>Highest (Obsidian-scale signal + trust precondition)</td><td>Lowest (copy only)</td><td>A</td></tr>
+  <tr><td class="rank">2</td><td>Light temporal memory carry</td><td>High (Day One retention proof)</td><td>Low-medium (local data)</td><td>Strong #2</td></tr>
+  <tr><td>3</td><td>Portable plain-file visibility</td><td>Medium (long-term trust)</td><td>Low</td><td>Supporting</td></tr>
+</table>
+
+<h2>§35 Self-Panel</h2>
+<div class="card">
+  <p><strong>Trigger:</strong> T1 P1 first journal save gate + privacy 1줄 + Lever B pre-account + feature-gap candidates (important, irreversible trust perception, intimate category, high blast radius on acquisition/retention).</p>
+  <p><strong>A (hard immediate — lean):</strong> Lead with explicit local ownership banner (Candidate 1) + light temporal carry (Candidate 2) at the exact first intimate write moment. Frame: "Your first entry lives only here on your device. You own your knowledge. Not the app." Highest evidence alignment, zero privacy conflict, KR/global fit, unblocks T1 P1 + Lever B. Clean ai-debate input.</p>
+  <p><strong>B (progressive):</strong> Soft framing after first value; carry as follow-on.</p>
+  <p><strong>C (gated):</strong> Heavy surfacing without ironclad local promise first. Creepy risk in Q7 signals. Defer.</p>
+  <p><strong>Verdict lean:</strong> A. 2-pass + engagement evidence strongest for immediate explicit local + memory carry at first-write as acquisition/retention unlock. Avoids recap repetition per steer.</p>
+</div>
+
+<footer>
+  Single-writer agents/grok/ only. Advisory text only. No 2nd-B changes. Timestamps via Get-Date KST. Golden set reproducibility enforced. §35 self-panel recorded. ONE task this cycle (PROTOCOL 12/19/35.4).
+</footer>
+</body>
+</html>

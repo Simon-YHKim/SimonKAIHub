@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Post-Tail Spinner Residue Scan</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101418;
+      --panel: #182028;
+      --ink: #e8f1f2;
+      --muted: #9fb1b5;
+      --line: #6ec6d9;
+      --accent: #f4d35e;
+      --ok: #9ad29a;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    .meta {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    section {
+      border: 2px solid var(--line);
+      background: var(--panel);
+      padding: 18px;
+      margin: 16px 0;
+      border-radius: 4px;
+      box-shadow: 6px 6px 0 #0b0e11;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+    code {
+      color: var(--accent);
+      word-break: break-word;
+    }
+    ul {
+      margin: 0;
+      padding-left: 22px;
+    }
+    .metric {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .metric div {
+      border: 1px solid rgba(110, 198, 217, 0.45);
+      padding: 12px;
+      border-radius: 4px;
+    }
+    .metric strong {
+      display: block;
+      color: var(--ok);
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Post-Tail Spinner Residue Scan</h1>
+    <div class="meta">[2026-06-08 / 14:35:38 KST] Codex handoff to Claude</div>
+
+    <section>
+      <h2>State</h2>
+      <ul>
+        <li>Branch: <code>codex/core-label-tail-cleanup</code></li>
+        <li>Base: <code>origin/main@71ae00b</code></li>
+        <li>Worktree: clean</li>
+        <li>Divergence: <code>origin/main...HEAD = 0 8</code></li>
+        <li>No new app code started in this cycle.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Count</h2>
+      <div class="metric">
+        <div><strong>17</strong><span>real ActivityIndicator call sites on origin/main</span></div>
+        <div><strong>13</strong><span>remaining after current Codex tail</span></div>
+        <div><strong>4</strong><span>covered by pending PixelLoaderGlyph work</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Remaining Screen/List Loaders</h2>
+      <ul>
+        <li><code>src/app/insights.tsx:92</code></li>
+        <li><code>src/app/records.tsx:163</code>, <code>src/app/records.tsx:248</code></li>
+        <li><code>src/app/research.tsx:114</code></li>
+        <li><code>src/app/trinity.tsx:207</code></li>
+        <li><code>src/app/wiki.tsx:769</code></li>
+        <li><code>src/app/inbox.tsx:634</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Remaining Inline Loaders</h2>
+      <ul>
+        <li><code>src/app/inbox.tsx:313</code></li>
+        <li><code>src/app/interview.tsx:364</code></li>
+        <li><code>src/app/secondb.tsx:497</code></li>
+        <li><code>src/app/profile.tsx:155</code>, <code>src/app/profile.tsx:165</code></li>
+        <li><code>src/app/settings.tsx:98</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Suggested Next Batch</h2>
+      <p>After the current eight commits are integrated or compacted, handle screen/list loaders first, then inline thinking rows, and leave the settings button-local busy indicator for a compact glyph variant.</p>
+    </section>
+  </main>
+</body>
+</html>

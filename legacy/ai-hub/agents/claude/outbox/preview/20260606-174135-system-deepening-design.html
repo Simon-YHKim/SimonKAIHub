@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>2nd-B 시스템 고도화 설계 — 자기이해·수익화·peer리뷰</title>
+<style>
+  :root { --bg:#16151c; --surface:#1e1d26; --line:#2c2b37; --text:#e7e6ee; --muted:#9b99ad; --mint:#7fd8c2; --amber:#d8c27f; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text);
+    font-family:'Pretendard','Pretendard Variable',-apple-system,system-ui,sans-serif;
+    line-height:1.65; font-size:15px; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:940px; margin:0 auto; padding:56px 28px 90px; }
+  h1 { font-size:23px; font-weight:700; letter-spacing:-0.01em; margin:0 0 6px; }
+  .sub { color:var(--muted); font-size:13px; margin:0 0 30px; }
+  h2 { font-size:15.5px; font-weight:700; color:var(--mint); margin:36px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--line); }
+  h2.amber { color:var(--amber); }
+  h3 { font-size:14px; font-weight:700; margin:18px 0 6px; }
+  p { margin:0 0 11px; }
+  code { background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:1px 6px; font-family:Consolas,monospace; font-size:12.5px; color:var(--mint); }
+  table { width:100%; border-collapse:collapse; margin:8px 0 16px; font-size:13px; }
+  th,td { text-align:left; padding:8px 11px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--muted); font-weight:600; font-size:11.5px; text-transform:uppercase; letter-spacing:0.03em; }
+  ul { margin:0 0 13px; padding-left:18px; } li { margin:0 0 6px; }
+  .muted { color:var(--muted); } .mint { color:var(--mint); } .amber { color:var(--amber); }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin:0 0 14px; }
+  .dec { border-left:3px solid var(--amber); }
+  .foot { color:var(--muted); font-size:12px; margin-top:38px; padding-top:16px; border-top:1px solid var(--line); }
+  .pill { display:inline-block; font-size:11px; padding:1px 7px; border-radius:4px; border:1px solid var(--line); color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>2nd-B 시스템 고도화 설계</h1>
+  <p class="sub">Claude (오케스트레이터) · 2026-06-06 KST · 4-AI 병렬 리서치(웹 근거) 종합 · 자기이해 방식 · 수익화(KR+Global) · peer 리뷰 강화 · [마케팅 진행 중]</p>
+
+  <div class="card">
+    <p style="margin:0 0 4px;"><strong>한 줄 요약</strong></p>
+    <p class="muted" style="margin:0;">자기이해 = <span class="mint">하이브리드 3층(질문지 시드→인터뷰→ESM) + 특성별 신뢰도(SOKA)</span>. 수익화 = <span class="mint">Freemium + 2~3 구독 티어</span>(인프라 거의 준비됨, 가격·런치 결정만 남음). peer 리뷰 = <span class="mint">§20~§24 강화 구현 완료</span>. 마케팅 = 리서치 진행 중.</p>
+  </div>
+
+  <h2>1. 자기이해 시스템 — 질문지 vs 인터뷰 vs ESM</h2>
+  <p><strong>결론: 셋 다, 3층 누적.</strong> 단독은 모두 정확도 천장(질문지=1회 스냅샷·평가적 특성 사각, 인터뷰=비정량·모바일 이탈, ESM=서사 없음). 2nd-B는 이미 질문지(BFI-44/ECR-S)+인터뷰(probe.ts)+저널을 보유 → "택1"이 아니라 <span class="mint">SOKA(특성별 소스 분리) + 시계열 누적</span>으로 결합하는 게 근거상 정답.</p>
+  <table>
+    <tr><th>층</th><th>역할</th><th>2nd-B 현황</th></tr>
+    <tr><td>질문지(시드)</td><td>내적·비평가 특성(신경증·불안) 고신뢰. 단 BFI-44는 온보딩에 길다(12분↑ 이탈 3배)</td><td>있음</td></tr>
+    <tr><td>인터뷰(심화)</td><td>서사·의미(McAdams). 자기개방↑·대충답↓. 모바일 이탈 방어 필요</td><td>있음(probe.ts 우수)</td></tr>
+    <tr><td>ESM(미세조정)</td><td>회상편향 제거·행동흔적(평가적/외현 특성). 컴플라이언스 79%</td><td><span class="amber">없음(최대 공백)</span></td></tr>
+  </table>
+  <h3>구현 우선순위</h3>
+  <ul>
+    <li><strong>① persona 특성별 confidence/source 모델</strong>(<code>build.ts</code>) — flat number → <code>{value, source, confidence, observationCount, evidenceRefs}</code>. 정확도+신뢰 카피("당신의 N월 기록에서") 즉시 개선. 코드 국소. <span class="mint">verify 가능, 내 lane → 다음 구현</span>.</li>
+    <li><strong>② 온보딩 시드화</strong>(<code>onboarding.tsx</code>) — 풀 BFI-44 강등, 대화형 시드 1~2개로. 이탈 3배 차단.</li>
+    <li><strong>③ ESM 층 신규</strong>(<code>esm.tsx</code> + <code>esm_responses</code> + expo-notifications) — 가장 큰 정확도 레버. 공수 큼(중기). <span class="amber">도입 go/no-go 결정 필요</span>.</li>
+  </ul>
+  <p class="muted">KR/Global 분기: KR=간접 유도("장면→감정→의미")·ESM 1회/일·맥락질문·중간값을 저참여로 오독 금지. Global=직접 Likert·ESM 2~3회/일·자기서사 적극. 근거: SOKA·Vazire2010·EMA메타 PMC9999286·대화형AI arXiv2504.13908·Park2024 TALE-K.</p>
+
+  <h2>2. 수익화 — KR + Global</h2>
+  <p><strong>결론: Freemium + 구독(일회성·광고 배제).</strong> 광고는 미성년 강제 <code>ads=false</code>로 불가, 일회성은 LTV·AI변동비와 안 맞음. <span class="mint">현 코드 4티어(free/soma/cortex/brain) enum 유지, 상업적으로는 3개만 판매</span>(공통 core + 지역 가격/결제 분기).</p>
+  <table>
+    <tr><th>티어</th><th>enum</th><th>가치</th><th>Global</th><th>KR</th></tr>
+    <tr><td>Free</td><td>free</td><td>맛보기 + <span class="mint">프라이버시·암호화·내보내기 무료</span></td><td>$0</td><td>₩0</td></tr>
+    <tr><td>Plus</td><td>cortex/soma</td><td>무제한 기록·노트·위키 + 챗 30~80/일</td><td>$4.99 / $29.99yr</td><td>₩4,900~6,900 / ₩39,000yr</td></tr>
+    <tr><td>Pro</td><td>brain</td><td>+ 고급 AI(advisor·planner) + 챗 250/일</td><td>$9.99 / $59.99yr</td><td>₩9,900~12,000 / ₩69,000yr</td></tr>
+  </table>
+  <ul>
+    <li><strong>페이월 축</strong>: AI 대화 일일 한도(유일 변동비, 이미 <code>CHAT_DAILY_LIMIT</code> 구현) 1차 + 기록 용량 2차. <strong>프라이버시는 무료 기본값 = 셀링포인트(절대 유료화 금지).</strong></li>
+    <li><strong>결제 스택</strong>: <span class="mint">RevenueCat 하이브리드</span>(모바일 IAP + 웹 Billing) — 코드 주석이 이미 "RevenueCat=SoT"로 설계됨. Apple/Google Small Business 15% 즉시 등록(Google 5%↓ 제안 추이 주시).</li>
+    <li><strong>구현은 거의 배선</strong>: <code>entitlements.ts</code> 한 줄 리맵 + <code>useProgression.ts:66</code>의 <code>FORCE_TIER=off</code> 전환 + 페이월 UI + RevenueCat 웹훅. 코어/게이팅 chokepoint 이미 완성.</li>
+    <li><strong>KR 미성년 컴플라이언스(중요)</strong>: 민법 §5(미성년 계약 취소·전액환불) → 미성년 과금은 스토어 IAP만(부모 승인 대행), 웹 직결제는 성인 전용. 전자상거래법 2025.2(무료→유료 14일·인상 30일 사전동의, 다크패턴 금지). 코드가 이미 14세 게이트·미성년 강제 절반 완료.</li>
+  </ul>
+  <p class="muted">근거: RevenueCat SoSA 2025(freemium 2~5%/하드페이월 10.7%, 연간 리텐션 44% vs 월 17%, 트라이얼 5~9일·opt-out 2.5×)·Adapty 가격지수·전자상거래법·민법§5·토스페이먼츠/오픈서베이.</p>
+
+  <h2>3. peer 리뷰 강화 — 구현 완료</h2>
+  <p>PROTOCOL <strong>§20~§24 머지 완료</strong>(허브 커밋): 5차원 루브릭(0~10)·정량 수렴기준(전차원≥7·총점≥40·blocker0)·refute 적대검증(최소결함1·보안/결제 의무)·Solo/Pair/Panel 위험등급제·코드 교차평가(Codex⇄Claude, AG 네이티브)·편향통제(자기리뷰금지·앵커링차단·로테이션·메타평가). §10.5/§11(Claude 머지 게이트) 불변.</p>
+
+  <h2 class="amber">4. 마케팅 — 리서치 진행 중</h2>
+  <p class="muted">marketing GTM 워크플로(KR/Global 포지셔닝·채널·ASO·런치) + Grok(X 소비자·메시징·바이럴) 진행 중. 도착 시 별도 섹션/문서로 종합 + §19 멀티모달 교차검증.</p>
+
+  <h2 class="amber">5. Simon 결정 필요 (DECISIONS 이관)</h2>
+  <div class="card dec">
+    <ul style="margin:0;">
+      <li><span class="amber">D-01 FORCE_TIER</span> — 현재 <code>brain</code>(페이월 전면 무력화). 실과금 활성화하려면 <code>off</code> 전환(런치 게이트). <strong>승인?</strong></li>
+      <li><span class="amber">D-09 가격·패키징</span> — 위 표의 KR/Global 가격·티어명 확정(Plus를 cortex로 매핑 등). 4-AI 합의 가능하나 최종 가격은 Simon 권한.</li>
+      <li><span class="amber">D-10 ESM 도입</span> — 정확도 최대 레버지만 알림인프라+신규테이블 공수. go/no-go.</li>
+      <li><span class="amber">외부의존(§15)</span> — 사업자등록·통신판매신고·PG(토스)계약·Apple/Google/RevenueCat 계정·약관/환불 SOP 법무. AI 불가 → Simon/외부. 그동안 코드는 "계약 끝나면 즉시 켜지는" 상태로 준비.</li>
+    </ul>
+  </div>
+
+  <p class="foot">§16 — 작업 HTML 보고. 자기이해 persona 모델(우선순위①)은 다음 구현 사이클로 착수. 가격/FORCE_TIER/ESM 결정 주시면 수익화 인프라 배선 시작(외부 계약과 병렬). "그만" 전까지 자율 지속.</p>
+</div>
+</body>
+</html>

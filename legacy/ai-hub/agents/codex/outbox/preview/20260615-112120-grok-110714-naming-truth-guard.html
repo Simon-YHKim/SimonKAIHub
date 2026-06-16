@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex UI Truth Guard - Grok 11:07 Naming Advisory</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: rgba(167, 139, 250, 0.08);
+      --panel-alt: rgba(114, 242, 199, 0.07);
+      --border: #2a345a;
+      --text: #e8ecf8;
+      --muted: #c9d0e6;
+      --subtle: #8d98b8;
+      --brand: #72f2c7;
+      --warn: #ffd166;
+      --danger: #ff7a90;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      line-height: 1.15;
+    }
+    h2 {
+      margin: 28px 0 12px;
+      font-size: 18px;
+      color: var(--brand);
+    }
+    p, li { color: var(--muted); }
+    .meta {
+      color: var(--subtle);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+    }
+    .card {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .card.alt { background: var(--panel-alt); }
+    .label {
+      color: var(--text);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .pass { color: var(--brand); }
+    .hold { color: var(--warn); }
+    .block { color: var(--danger); }
+    code {
+      color: var(--text);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 5px;
+    }
+    ul { padding-left: 20px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Grok 11:07 Naming Advisory - UI Truth Guard</h1>
+    <div class="meta">Codex report · 2026-06-15 11:21:20 KST · 2nd-B origin/main@6dd680e</div>
+
+    <section class="grid">
+      <article class="card alt">
+        <div class="label pass">Accept</div>
+        <ul>
+          <li><code>Pattern Link</code> as the link/edge mechanic.</li>
+          <li><code>Foreman Momo</code> / <code>모모 반장</code> as Narrative Core records foreman.</li>
+          <li>Low-pressure records-compound-later framing tied to Records, export, and opt-in SecondB reflection.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <div class="label block">Block</div>
+        <ul>
+          <li>Local-only, no-cloud, PC-only, plain Markdown, no-account, permanent-memory, and <code>영구소장</code> claims.</li>
+          <li><code>Link Core</code> as a new Core layer.</li>
+        </ul>
+      </article>
+      <article class="card">
+        <div class="label hold">Route Through Section 35</div>
+        <ul>
+          <li>Replacing <code>Analytic / Divergent</code> with <code>Focus / Reflect</code>.</li>
+          <li>Lumen capture-role expansion.</li>
+          <li>Iris/Lumina canon drift.</li>
+        </ul>
+      </article>
+    </section>
+
+    <h2>Product Truth</h2>
+    <p><code>CONTEXT.md</code> and <code>docs/VISION.md</code> already canonize Pattern Link. <code>DESIGN.md</code>, <code>src/lib/characters.ts</code>, and <code>src/lib/chat/personas.ts</code> already canonize Foreman Momo, Lumen, and Lumina.</p>
+    <p>The existing tests lock Lumina over Iris, lock SecondB Analytic/Divergent mode language, and block unsupported visible trust claims around local-device, account-free, and local-first storage.</p>
+
+    <h2>Validation</h2>
+    <p class="pass">PASS: <code>npm test -- --runTestsByPath src/lib/__tests__/visible-trust-copy.test.ts src/lib/__tests__/worldview-naming.test.ts --ci</code> · 2 suites / 15 tests.</p>
+  </main>
+</body>
+</html>

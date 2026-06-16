@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>O-12 Phase D Initial Camera Review</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070914;
+      --panel: #101426;
+      --text: #ecf3ff;
+      --muted: #aeb9d4;
+      --mint: #67f5d2;
+      --amber: #ffd166;
+      --line: rgba(103, 245, 210, 0.28);
+      --danger: #ff7a90;
+    }
+    body {
+      margin: 0;
+      font-family: Inter, "Noto Sans KR", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 18px 56px;
+    }
+    header, section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    h1 { margin: 0 0 8px; font-size: 27px; }
+    h2 { margin: 0 0 10px; color: var(--mint); font-size: 19px; }
+    h3 { margin: 16px 0 8px; color: var(--amber); }
+    p, li, td, th { color: var(--muted); }
+    code {
+      color: var(--mint);
+      background: rgba(103, 245, 210, 0.08);
+      padding: 2px 5px;
+      border-radius: 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      overflow: hidden;
+      border-radius: 6px;
+    }
+    th, td {
+      border: 1px solid rgba(174, 185, 212, 0.2);
+      padding: 8px 10px;
+      text-align: right;
+    }
+    th:first-child, td:first-child { text-align: left; }
+    th { color: var(--text); background: rgba(103, 245, 210, 0.08); }
+    .p1 {
+      color: var(--danger);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>O-12 Phase D Initial Camera Review</h1>
+      <p>[2026-06-08 / 16:46:36 KST] Read-only review of <code>origin/main@36e0340</code>.</p>
+    </header>
+
+    <section>
+      <h2><span class="p1">P1</span> Coordinate Mismatch</h2>
+      <p>The new initial camera calls <code>focusWorldPoint(root.x, root.y, 1.5, height * 0.6)</code>, but <code>focusWorldPoint()</code> maps through full screen height while actual graph nodes render through a height reduced by <code>cardReserve</code>. The camera pan is computed in one coordinate basis and applied to another.</p>
+    </section>
+
+    <section>
+      <h2>Repro Math</h2>
+      <table>
+        <thead>
+          <tr><th>Viewport</th><th>Target Y</th><th>Actual Y</th><th>Delta</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>390x844</td><td>506</td><td>392</td><td>-114 px</td></tr>
+          <tr><td>412x915</td><td>549</td><td>456</td><td>-93 px</td></tr>
+          <tr><td>768x1024</td><td>614</td><td>559</td><td>-55 px</td></tr>
+          <tr><td>1440x900</td><td>540</td><td>442</td><td>-98 px</td></tr>
+        </tbody>
+      </table>
+      <p>On 768x1024 and 1440x900 the initial pan distance also crosses <code>cameraOffHome()</code>'s <code>dist &gt; 280</code> threshold, so the reset affordance can appear on first load.</p>
+    </section>
+
+    <section>
+      <h2>Fix Direction</h2>
+      <p>Derive one shared home-camera calculation from the same reserved render viewport used by node positions. Use it for initial focus, reset/double-tap, and off-home comparison.</p>
+    </section>
+  </main>
+</body>
+</html>

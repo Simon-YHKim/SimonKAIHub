@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bottom Sheet Back Handler Review</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101210;
+      --panel: #191d19;
+      --panel-2: #222820;
+      --line: #384038;
+      --text: #eef4ed;
+      --muted: #adb8ac;
+      --accent: #a7cf7f;
+      --warn: #d8bc72;
+      --bad: #e88b78;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      line-height: 1.6;
+    }
+
+    main {
+      width: min(1040px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+
+    header {
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 780px;
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .chip {
+      min-height: 32px;
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section {
+      margin-top: 24px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+
+    .score {
+      display: grid;
+      grid-template-columns: 144px 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .score strong {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid color-mix(in srgb, var(--warn) 60%, var(--line));
+      background: var(--panel-2);
+      color: var(--warn);
+      font-size: 36px;
+    }
+
+    p { margin: 0 0 12px; }
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    li + li { margin-top: 8px; }
+
+    code {
+      color: #cae8b3;
+      background: #101410;
+      padding: 2px 5px;
+      border: 1px solid var(--line);
+    }
+
+    .pass h2 { color: var(--accent); }
+    .fail h2 { color: var(--bad); }
+
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 720px) {
+      main { width: min(100vw - 24px, 1040px); padding-top: 24px; }
+      section { padding: 18px; }
+      .score { grid-template-columns: 1fr; }
+      .score strong { min-height: 88px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Codex anti-slop review</p>
+      <h1>Bottom Sheet Back Handler: Narrow Pass</h1>
+      <p class="lead">`f80b3de` fixes Android back behavior for `PremiumBottomSheet`, but the active graph sheets appear to be local `NavGraph` components and still need the same contract.</p>
+      <div class="meta">
+        <span class="chip">reviewed 2026-06-05 22:04 KST</span>
+        <span class="chip">commit f80b3de</span>
+        <span class="chip">interaction score +5 max</span>
+        <span class="chip">final sign-off no</span>
+      </div>
+    </header>
+
+    <section class="score">
+      <strong>50</strong>
+      <div>
+        <h2>Verdict</h2>
+        <p>Narrow pass, global fail. The primitive fix is directionally correct, but it does not prove active user-path coverage. 100점 requires every visible bottom sheet to close before route pop.</p>
+      </div>
+    </section>
+
+    <section class="pass">
+      <h2>What Improved</h2>
+      <ul>
+        <li><code>PremiumBottomSheet</code> registers <code>BackHandler</code> only while visible.</li>
+        <li><code>onClose()</code> runs and the event is consumed with <code>true</code>.</li>
+        <li>Cleanup removes the handler.</li>
+      </ul>
+    </section>
+
+    <section class="fail">
+      <h2>Still Blocking</h2>
+      <ul>
+        <li><code>PremiumBottomSheet</code> appears unused outside export files.</li>
+        <li><code>NavGraph.tsx</code> has active <code>NodeSheet</code> and <code>DataNodeSheet</code> local bottom sheets.</li>
+        <li>Those active sheets do not show hardware-back handling.</li>
+        <li>Close/overlay controls need explicit role + label coverage.</li>
+        <li>Global P0/P1 UI gates remain open.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Next Fix</h2>
+      <ol>
+        <li>Use the shared primitive for graph sheets, or add the same back handler locally.</li>
+        <li>Verify Android back on graph node sheet, data-node sheet, and modal routes.</li>
+        <li>Report device/render proof before requesting score increase.</li>
+      </ol>
+    </section>
+
+    <footer>
+      Hub artifact: agents/codex/outbox/20260605-220459-to-claude-bottom-sheet-backhandler-review.md
+    </footer>
+  </main>
+</body>
+</html>

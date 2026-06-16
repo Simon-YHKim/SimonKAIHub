@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Report - OCR Fenced Output Prevention</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f4ef;
+      --panel: #ffffff;
+      --ink: #17211d;
+      --muted: #5d6962;
+      --line: #d8ded7;
+      --accent: #0d766e;
+      --code: #eef5f1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.55 "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    main {
+      width: min(980px, calc(100% - 32px));
+      margin: 32px auto;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 28px;
+      box-shadow: 0 18px 50px rgba(23, 33, 29, 0.08);
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      font-size: 30px;
+      max-width: 760px;
+    }
+
+    h2 {
+      margin-top: 26px;
+      font-size: 18px;
+    }
+
+    p {
+      margin: 12px 0 0;
+      color: var(--muted);
+    }
+
+    ul {
+      margin: 12px 0 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    code {
+      background: var(--code);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 0.93em;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .meta div {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px 12px;
+      background: #fbfcfa;
+    }
+
+    .label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .value {
+      display: block;
+      margin-top: 4px;
+      font-weight: 650;
+    }
+
+    .status {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>OCR fenced-output artifacts discouraged at the source</h1>
+    <p>[2026-06-10 / 18:14:18 KST] Codex refined 2ndB OCR prompting and result cleanup.</p>
+
+    <section class="meta" aria-label="Report metadata">
+      <div>
+        <span class="label">Commit</span>
+        <span class="value"><code>6f40ccb</code> fix(ocr): discourage fenced OCR output</span>
+      </div>
+      <div>
+        <span class="label">Branch</span>
+        <span class="value"><code>codex/soul-core-multimodal-pilot-20260610</code></span>
+      </div>
+      <div>
+        <span class="label">Remote</span>
+        <span class="value"><code>origin/main@5d7facb</code></span>
+      </div>
+      <div>
+        <span class="label">Delta</span>
+        <span class="value">ahead 46, behind 13</span>
+      </div>
+    </section>
+
+    <h2>Scope</h2>
+    <ul>
+      <li>OCR prompt now explicitly asks for only the transcription or brief no-text description.</li>
+      <li>Prompt also asks Gemini not to add prefaces or code-fence wrappers.</li>
+      <li>Normalization handles compact full-response <code>md</code>/<code>markdown</code>/<code>text</code> fences.</li>
+      <li>Language-specific code fences are still preserved for code screenshots.</li>
+    </ul>
+
+    <h2>Verification</h2>
+    <ul>
+      <li class="status">PASS: capture OCR focused tests, 40 tests.</li>
+      <li class="status">PASS: type-check, lint, i18n, lexicon, LLM boundary, constraints, emdash, diff check, and changed-line secret scan.</li>
+      <li class="status">PASS: post-commit diff check and changed-line secret scan for <code>HEAD~1..HEAD</code>.</li>
+    </ul>
+
+    <h2>Notes</h2>
+    <ul>
+      <li>Online push was not performed.</li>
+      <li>No direct edit was made to <code>C:\Coding\2ndB</code>.</li>
+      <li>Behind commits are O-R1 cycle UI/docs updates through PR #318 (<code>5d7facb</code>); this branch was not merged or rebased.</li>
+    </ul>
+  </main>
+</body>
+</html>

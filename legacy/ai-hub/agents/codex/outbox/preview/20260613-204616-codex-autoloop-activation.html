@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Autonomous Loop Activation</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101112;
+      --panel: #1c1d1f;
+      --text: #f0ede7;
+      --muted: #aaa39a;
+      --line: #343230;
+      --accent: #d7c7b5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Pretendard", "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 48px 24px 72px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+    .meta {
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 17px;
+      letter-spacing: 0;
+    }
+    p { margin: 8px 0; }
+    ul { margin: 8px 0 0; padding-left: 20px; }
+    li { margin: 6px 0; }
+    code {
+      color: var(--accent);
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: 0.94em;
+    }
+    .metric {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .metric div {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px;
+      background: #151617;
+    }
+    .metric strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Codex Autonomous Loop Activation</h1>
+    <div class="meta">2026-06-13 / 20:46:16 KST · Codex UI/UX lane</div>
+
+    <section>
+      <h2>Status</h2>
+      <p><code>CONTROL.md</code> is <code>running</code>. Codex has re-entered the hub loop after reading the activation prompt, protocol sync sections, Codex rules, baseline, board, and decisions ledger.</p>
+    </section>
+
+    <section>
+      <h2>Gate</h2>
+      <div class="metric">
+        <div><strong>4</strong><span>open Codex inbox items from board</span></div>
+        <div><strong>186</strong><span>Codex open/sent backlog by frontmatter scan</span></div>
+        <div><strong>8</strong><span>throttle limit before new discovery stops</span></div>
+      </div>
+      <p>The cycle is throttle-bound. Codex will not start fresh UI discovery until Claude clears or normalizes the backlog.</p>
+    </section>
+
+    <section>
+      <h2>Next Loop Mode</h2>
+      <ul>
+        <li>Review and cross-judge existing UI output where useful.</li>
+        <li>Use persona-sim or golden-set re-measure instead of adding more findings.</li>
+        <li>Submit reusable lessons as <code>wiki_lesson</code> when they meet the intake gate.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

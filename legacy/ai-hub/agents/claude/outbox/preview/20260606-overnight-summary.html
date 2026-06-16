@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>2nd-B 밤샘 자율작업 종합 보고 — Claude</title>
+<style>
+  :root { --bg:#16151c; --surface:#1e1d26; --line:#2c2b37; --text:#e7e6ee; --muted:#9b99ad; --mint:#7fd8c2; --amber:#d8c27f; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text);
+    font-family:'Pretendard','Pretendard Variable',-apple-system,system-ui,sans-serif;
+    line-height:1.65; font-size:15px; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:900px; margin:0 auto; padding:56px 28px 90px; }
+  h1 { font-size:23px; font-weight:700; letter-spacing:-0.01em; margin:0 0 6px; }
+  .sub { color:var(--muted); font-size:13px; margin:0 0 32px; }
+  h2 { font-size:15px; font-weight:700; color:var(--mint); margin:34px 0 12px;
+    padding-bottom:8px; border-bottom:1px solid var(--line); letter-spacing:0.01em; }
+  h2.amber { color:var(--amber); }
+  p { margin:0 0 12px; }
+  code { background:var(--surface); border:1px solid var(--line); border-radius:4px;
+    padding:1px 6px; font-family:'SFMono-Regular',Consolas,monospace; font-size:12.5px; color:var(--mint); }
+  table { width:100%; border-collapse:collapse; margin:8px 0 18px; font-size:13.5px; }
+  th,td { text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--muted); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:0.04em; }
+  td.k { color:var(--mint); font-family:'SFMono-Regular',Consolas,monospace; font-size:12px; white-space:nowrap; }
+  ul { margin:0 0 14px; padding-left:18px; }
+  li { margin:0 0 7px; }
+  .muted { color:var(--muted); }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:18px 20px; margin:0 0 14px; }
+  .live a { color:var(--mint); text-decoration:none; font-weight:600; }
+  .tag { display:inline-block; font-size:11px; padding:1px 7px; border-radius:4px; border:1px solid var(--line); color:var(--muted); margin-right:4px; }
+  .foot { color:var(--muted); font-size:12px; margin-top:40px; padding-top:16px; border-top:1px solid var(--line); }
+  .q { color:var(--amber); font-weight:600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>2nd-B · 밤샘 자율작업 종합 보고</h1>
+  <p class="sub">Claude (오케스트레이터) · 2026-06-06 새벽 KST · "할일찾아서 진행" 위임 하에 안전·되돌릴 수 있는 작업만 자율 수행, 불확실/Simon 결정은 보류</p>
+
+  <div class="card live">
+    <p style="margin:0 0 6px;"><strong>라이브</strong>: <a href="https://simon-yhkim.github.io/2nd-B/">https://simon-yhkim.github.io/2nd-B/</a></p>
+    <p class="muted" style="margin:0;">main <code>ada9bd2</code> · cycle-1(#211) → cycle-2(#212, Codex 97) → cycle-3(#213, Codex 8.5 MERGE-SAFE) 모두 라이브 반영</p>
+  </div>
+
+  <h2>밤새 완료한 것</h2>
+  <table>
+    <tr><th>단계</th><th>결과</th></tr>
+    <tr><td><strong>cycle-2</strong> UX 완벽화</td><td>FlatList 가상화·NavGraph tier-4 LOD·raw에러 11화면·tap target·Simon 결정 3건(persona 비임상카피·consent 재시도·social 게이팅). Codex 91→97. <strong>main 머지 + 라이브</strong>.</td></tr>
+    <tr><td><strong>cycle-3</strong> 적대적 버그헌트</td><td>8 서브시스템 fan-out(find→skeptic verify→synthesis, 17 에이전트) → 42발견 → 검증 후 <strong>P0:0 / P1:3 / P2:11 / P3:13</strong>.</td></tr>
+    <tr><td><strong>cycle-3</strong> 수정 + 리뷰게이트</td><td>18건 수정 → Codex 독립 안전리뷰가 <strong>2 HIGH 블로커</strong> 발견(DO-NOT-MERGE) → 수정 → 재리뷰 <strong>8.5/10 MERGE-SAFE</strong> → main 머지 + 라이브.</td></tr>
+  </table>
+
+  <h2>cycle-3에서 잡은 실제 버그 (검증된 것만)</h2>
+  <p><span class="tag">P1 안전/데이터</span></p>
+  <ul>
+    <li><strong>crisis_events 레저 누락</strong> — <code>gemini.ts</code> routeCrisis가 모든 위기개입을 기록 안 함(callAdvisor와 비대칭). 미성년 위기 안전망의 감사추적 공백. → 레저 쓰기 추가 + 회귀테스트.</li>
+    <li><strong>계정삭제 거짓 안심</strong> — 콘텐츠 삭제 후 실패 시 "데이터 그대로" + 재시도 표시(GDPR/개인정보보호법 삭제권 오표시). → <strong>부분 삭제 포함 진실화</strong>, 거짓안심·재시도 제거.</li>
+    <li><strong>소스 브리프 미갱신</strong> — wiki "요약 만들기"가 영영 안 보임. → 재프로모션 수정.</li>
+  </ul>
+  <p><span class="tag">P2/P3 (수정)</span> 미성년 위기핫라인 게이트, 동의 연령밴드(저장안된 DOB), <strong>privacy 토글 DB 레이스</strong>(직렬화), core-brain 에러무시, inbox 재시도, persona Big5 인터뷰오염, safety fail-closed(미지 zone이 RED 강등 못함), chat 프롬프트 인젝션 가드, streak 20캡 절단, import 더블탭/클립보드, 모션 reduced-motion, 타이머/렌더 레이스, KST 자정.</p>
+  <p class="muted">리뷰게이트가 실제로 안전치명 버그를 잡은 사례: Codex가 <strong>부분삭제 오표시</strong>(account)와 <strong>동의/설정 DB 레이스</strong>(privacy)를 1차 통과시키지 않음 → 둘 다 수정 후 머지.</p>
+
+  <h2 class="amber">Simon 결정/검토 필요 (펀치리스트 — 자력 보류)</h2>
+  <ul>
+    <li><span class="q">FORCE_TIER 기본값</span> — <code>EXPO_PUBLIC_FORCE_TIER="brain"</code>(페이월 전면 개방). 코드 주석도 "런치타임 결정". judge/release 빌드 전 <code>off</code> 전환 여부 + 소유자? (무감독 변경 안 함 — judge 데모 동작 바뀜)</li>
+    <li><span class="q">HIBP 네이티브 폴리필</span> — 유출비번 검사가 네이티브에서 무력화(crypto.subtle 부재). 미성년 비번 강제가 런치 필수면 expo-crypto 의존성 추가 필요.</li>
+    <li><span class="q">account 삭제 카피 법무</span> — 진실화는 했으나 "삭제권" 문구 + support@2nd-brain.app 메일박스 운영은 법무/운영 확인.</li>
+    <li><span class="q">consent durable 큐</span> — 현재 in-memory 재시도(사용자 요청 충족). 앱 재시작 후 재전송하는 durable 큐는 별도 구현(법무 민감 → 감독 패스 권장).</li>
+    <li><span class="q">social provider 실설정</span> — 라이브 Supabase에 실제 등록된 OAuth provider 알려주면 나머지 <code>EXPO_PUBLIC_ENABLE_*=false</code> 정리(미설정은 자동숨김 중).</li>
+    <li><span class="q">런타임 device 증명</span> — AG Gradle 8.13 에뮬 빌드 성공. login/persona/capture/NavGraph 스크린샷 수급 시 Codex 100점 패스.</li>
+    <li><span class="q">NavGraph perf ×3 + chat quota 타이밍</span> — perf-churn/edge(복잡파일) + 과금 타이밍. 감독 패스에서 처리.</li>
+  </ul>
+
+  <h2>상태</h2>
+  <ul>
+    <li>레포: <code>github.com/Simon-YHKim/2nd-B</code> · main <code>ada9bd2</code> · 라이브 GitHub Pages</li>
+    <li>verify green(91 suites/824 tests) · CI green · cycle-3 브랜치는 머지됨</li>
+    <li>전체 버그헌트 결과: <code>agents/claude/outbox/20260606-cycle3-bughunt-synthesis.md</code></li>
+    <li>Codex 리뷰: <code>agents/codex/outbox/20260606-040119-...rereview.md</code>(8.5 MERGE-SAFE)</li>
+  </ul>
+
+  <p class="foot">§10.6 — 작업 완료 HTML 보고 + 전체 AI 공유. 밤샘 안전작업 소진. 추가 자율작업은 위 펀치리스트(Simon 결정 의존)라 폴링 종료. 아침에 결정 주시면 이어서 진행합니다.</p>
+</div>
+</body>
+</html>

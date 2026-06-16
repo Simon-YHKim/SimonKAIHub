@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2ndB Data URL Image Payloads</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #202a33;
+      --muted: #52616b;
+      --line: #d9e2ec;
+      --bg: #f7f9fb;
+      --panel: #ffffff;
+      --accent: #0f766e;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 17px;
+      margin: 24px 0 10px;
+      letter-spacing: 0;
+    }
+    p, li {
+      font-size: 14px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    code {
+      background: #edf2f7;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 4px;
+      font-size: 13px;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin: 14px 0;
+    }
+    .ok {
+      color: var(--accent);
+      font-weight: 650;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>2ndB Data URL Image Payloads</h1>
+      <p class="meta">2026-06-10 17:05:40 KST · Codex · multimodal/OCR hardening</p>
+    </header>
+
+    <section class="panel">
+      <h2>Result</h2>
+      <p><span class="ok">Done.</span> Commit <code>f5c8feb fix(capture): accept data URL image payloads</code> was created in <code>C:\Coding\_worktrees\2ndB-codex</code>.</p>
+      <ul>
+        <li>Remote after fetch: <code>origin/main@c17f08b</code></li>
+        <li>Branch delta: <code>ahead 35, behind 2</code></li>
+        <li>Online push: not performed</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>What Changed</h2>
+      <ul>
+        <li>OCR wrapper, direct <code>callGemini</code>, and <code>gemini-proxy</code> now accept <code>data:image/...;base64,...</code> image payloads.</li>
+        <li>Data URL MIME aliases such as <code>image/x-png</code> normalize to canonical MIME values.</li>
+        <li>Only the stripped raw base64 reaches Gemini inline data.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Guardrails</h2>
+      <ul>
+        <li>Raw envelope cap still runs before parsing.</li>
+        <li><code>;base64</code> is required in the data URL header.</li>
+        <li>MIME allowlist, normalized size cap, base64 syntax, image signature sniffing, and MIME/signature compatibility still apply.</li>
+        <li>Malformed and unsupported data URLs fail before any Gemini call.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm test -- --runTestsByPath src/lib/wiki/__tests__/capture-image.test.ts --ci</code> PASS (35 tests)</li>
+        <li><code>npm test -- --runTestsByPath src/lib/llm/__tests__/gemini.test.ts --ci</code> PASS (11 tests; expected audit warning)</li>
+        <li><code>npm run type-check</code> PASS</li>
+        <li><code>npm run lint</code> PASS</li>
+        <li><code>npm run check:i18n</code> PASS</li>
+        <li><code>npm run check:lexicon</code> PASS</li>
+        <li><code>npm run check:llm-boundary</code> PASS</li>
+        <li><code>npm run check:constraints</code> PASS</li>
+        <li><code>npm run check:emdash</code> PASS</li>
+        <li><code>git diff --check</code> PASS</li>
+        <li>Changed-line secret scan PASS</li>
+      </ul>
+      <p><code>deno</code> is not installed here, so standalone Edge Function checking was not run.</p>
+    </section>
+  </main>
+</body>
+</html>

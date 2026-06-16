@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>2nd-B 메인 그래프 재설계 — 4AI 공동 방향 리포트</title>
+<style>
+  :root{
+    --bg:#0b0e1a; --panel:#141829; --panel2:#1b2036; --line:#2a3050;
+    --text:#e7e9f2; --muted:#9aa0bd; --cyan:#4cc9f0; --mint:#72f2c7;
+    --rose:#f0789f; --green:#5fd38b; --violet:#9b8cff; --warn:#f0a85a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:Pretendard,-apple-system,"Segoe UI",Roboto,sans-serif;
+    line-height:1.65;font-size:15px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:32px 20px 80px}
+  h1{font-size:24px;letter-spacing:-.02em;margin:0 0 6px}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 28px}
+  h2{font-size:17px;margin:34px 0 12px;letter-spacing:-.01em;
+    border-left:3px solid var(--cyan);padding-left:10px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:18px 20px;margin:14px 0}
+  .card.flat{background:var(--panel2)}
+  .tag{display:inline-block;font-size:11px;color:var(--cyan);
+    border:1px solid var(--line);border-radius:999px;padding:2px 10px;margin:0 6px 6px 0}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .ai{border-radius:12px;padding:14px 16px;border:1px solid var(--line);background:var(--panel2)}
+  .ai h3{margin:0 0 6px;font-size:14px}
+  .ai .role{color:var(--muted);font-size:12px;margin-bottom:8px}
+  .ai p{margin:0;font-size:13.5px;color:#cfd3e8}
+  .claude h3{color:var(--cyan)} .codex h3{color:var(--mint)}
+  .ag h3{color:var(--green)} .grok h3{color:var(--violet)}
+  ol,ul{margin:8px 0;padding-left:22px} li{margin:5px 0}
+  .p{font-weight:600;color:var(--cyan)}
+  .defect{border-left:3px solid var(--warn);padding-left:12px;margin:10px 0}
+  .defect b{color:var(--warn)}
+  code{background:#0a0c16;border:1px solid var(--line);border-radius:5px;
+    padding:1px 6px;font-size:12.5px;color:var(--mint);font-family:"SF Mono",Consolas,monospace}
+  .lead{font-size:15.5px;color:#eef0fa}
+  .ok{color:var(--mint)} .bad{color:var(--rose)}
+  hr{border:0;border-top:1px solid var(--line);margin:30px 0}
+  .foot{color:var(--muted);font-size:12.5px;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>2nd-B 메인 그래프 재설계 — 4AI 공동 방향</h1>
+  <p class="sub">Simon 피드백("이미지의 구조·의도를 제대로 보고 다시 적용하라") 대응 · 2026-06-08 KST · Claude·Codex·Antigravity·Grok 공동 수립 + adversarial 검증</p>
+
+  <div class="card">
+    <span class="tag">핵심 진단</span>
+    <p class="lead">레퍼런스 2장은 "예쁜 원형 네트워크"가 아니라 <b>하단 Soul Core 뿌리에서 위로 자라는 발광 크리스탈 테서랙트 트리</b>입니다. 최근 작업(#250-254)의 <b>조각들은 맞았으나</b>(테서랙트 큐브 아트·눈송이·링크·카드), 그것들을 <b class="bad">여전히 중앙 radial 좌표 + Soul Core가 화면중앙에 하드핀된 구조</b> 위에 얹어서 "전체 구조·의도"가 안 나온 것이 원인입니다.</p>
+  </div>
+
+  <h2>무엇이 잘못됐나 (검증된 코드 사실)</h2>
+  <div class="card flat">
+    <ul>
+      <li><b>Soul Core 하드핀</b> — <code>NavGraph.tsx</code>에서 <code>cx,cy = width/2, height/2</code>로 화면 정중앙에 고정(4곳). 좌표를 바꿔도 이게 덮어써서 <span class="bad">레이아웃 변경이 안 보임.</span></li>
+      <li><b>radial 좌표</b> — <code>world-layout.ts</code>가 <code>WORLD_CENTER</code>+RING2~4 원형 섹터. 레퍼런스의 "하단뿌리 상향"과 정반대.</li>
+      <li><b>트렁크 링크가 cyan이 아님</b> — tier≤2 = <code>signalMint</code>(초록), tier4 = <code>soulViolet</code>(보라). 데이터 링크는 opacity ~0.065로 <span class="bad">사실상 안 보임.</span> 레퍼런스는 전부 시안.</li>
+      <li><b>눈송이가 숨겨짐</b> — tier-4는 zoom ≥1.8에서만 노출. 홈 화면(scale 1)엔 눈송이 0개 → REF1과 전혀 다름.</li>
+      <li><b>주황 불꽃 오버레이</b> — v10 큐브엔 이미 시안 연꽃이 구워져 있는데 그 위에 주황 <code>SoulFlameFlicker</code>를 덧칠 → 쿨톤 팔레트 충돌.</li>
+      <li><b>카드 주체 오류</b> — 카드2가 코어가 아니라 페르소나를 스포트라이트(<code>아콘가/루멘가</code> 조사 버그 포함). 카드1도 2불릿 리포트가 아님.</li>
+    </ul>
+  </div>
+
+  <h2>목표 (통합 방향)</h2>
+  <div class="card">
+    <p><b>다크 네이비 위 살아있는 크리스탈 테서랙트 트리:</b></p>
+    <ul>
+      <li><b>뿌리</b> — 가장 크고 밝은 <span style="color:var(--cyan)">시안</span> Soul Core 큐브를 <b>하단-중앙</b>에 앵커(연꽃 글로우, 주황 불꽃 제거).</li>
+      <li><b>수관(canopy)</b> — 색별 5 Pattern Core 큐브를 뿌리 <b>위로</b> 2-2-1 다이아몬드 배치(뿌리보다 아래 금지). 각 코어 ~65% 크기 + 고유색 글로우.</li>
+      <li><b>잎</b> — 균일 <span style="color:var(--cyan)">파란 6각 눈송이</span> 데이터가 부모 코어 근처/위로 상향 콘. <b>상시 노출·밝게.</b></li>
+      <li><b>링크</b> — 전부 시안 신경선 + 상시 언더글로우, 뿌리 근처 굵고 밝게·잎은 얇지만 보이게.</li>
+      <li><b>깊이</b> — 크기 위계(큰 큐브 : 작은 결정) + 트렁크 밝기로 표현(잎을 흐리지 않음).</li>
+      <li><b>카드</b> — 상시 2장: ① 세컨비 "무엇이 바뀌었나 / 무엇을 보강" 2불릿(시안 키워드) ② 코어 스포트라이트(큐브 아이콘+코어명+"…이야기에요. 더 자세히?"). 드릴다운=캐릭터 카드+눈송이 데이터 카드.</li>
+    </ul>
+  </div>
+
+  <h2>4 AI 기여</h2>
+  <div class="grid">
+    <div class="ai claude"><h3>Claude</h3><div class="role">5차원 갭분석 + 종합 + adversarial 검증</div><p>백본. 코드 line-level 검증으로 "하드핀 un-pin이 필수 페어링"임을 발견. 자기 계획의 4개 결함을 스스로 잡음(아래). v10 자산 6개 시각확인.</p></div>
+    <div class="ai codex"><h3>Codex</h3><div class="role">아트·레이아웃 코드</div><p>신규 <code>tree-layout.ts</code> 좌표모델(TreeFrame/TreeEdgeRole 타입, CORE_ANCHORS, upward twig, 드릴다운 좌표) + feature-flag로 기존 로직 보존하는 실용 경로 제시.</p></div>
+    <div class="ai ag"><h3>Antigravity</h3><div class="role">device 렌더·성능</div><p>하단앵커 트리 확인 + 성능 경고: SVG+JS Animated 글로우는 native &lt;10fps. <b>Skia+Reanimated</b> 마이그레이션(UI스레드 worklet) 옵션 제안. 단기는 SVG 유지.</p></div>
+    <div class="ai grok"><h3>Grok</h3><div class="role">UX·감성</div><p>은유(자아 뿌리/패턴 가지/조각 서리), 정보위계 3초 시나리오, non-slop 디테일(쿨톤·고요+소수 living 모션·여백), 피해야 할 10함정.</p></div>
+  </div>
+
+  <h2>adversarial 검증이 잡은 결함 (적용 전 수정)</h2>
+  <div class="card flat">
+    <div class="defect"><b>결함1 (치명)</b> — 뿌리를 0.82에 두고 전체화면 fit하면 <b class="bad">카드 뒤에 가려짐.</b> → 카드 높이를 입력으로 받아 "카드 위 영역"에 트리를 fit.</div>
+    <div class="defect"><b>결함2 (높음)</b> — tier-3 서브메뉴 노드(wiki-daily·past-* 등)는 레퍼런스에 없음. → 홈은 tier 1/2/4만, tier-3 숨김.</div>
+    <div class="defect"><b>결함3 (높음)</b> — 깊이 falloff 강화(P10)가 "눈송이 밝게"(P4)와 모순. → falloff 강화 폐기, 깊이=크기+트렁크밝기.</div>
+    <div class="defect"><b>결함4 (중간)</b> — 눈송이 상시노출(P7)은 polish 아니라 P1과 동급 필수. → 승격.</div>
+    <p style="margin-top:10px;color:var(--muted);font-size:13px">+ 트렁크가 초록인 점 명시, <code>sectorFocus</code> 재루팅, 4개 테스트(world-layout·tier-visibility·depth-style·pattern-link) 재작성, 드릴다운 코어 클램프 갱신, un-pin 4번째 지점.</p>
+  </div>
+
+  <h2>실행 계획 (우선순위)</h2>
+  <div class="card">
+    <ol>
+      <li><span class="p">P1</span> 하단뿌리 상향 트리 — <code>world-layout.ts</code> 재작성 + <b>Soul Core un-pin(4곳)</b> + 카드인지 framing + sectorFocus 재루팅 + 테스트. <i>(구조의 핵심, 같이 착지해야 함)</i></li>
+      <li><span class="p">P1·동급</span> 눈송이 홈 상시노출(tier 1/2/4) — <code>tier-visibility.ts</code></li>
+      <li><span class="p">P2</span> 큐브 우위 크기 위계(tier1=128·2=82·3=38·4=30)</li>
+      <li><span class="p">P3</span> 주황 불꽃 제거 + v10 유지 + narrative 큐브 은색 재틴트(자산)</li>
+      <li><span class="p">P4</span> 균일 파란 6각 눈송이(SNOWFLAKE_CELLS hex)</li>
+      <li><span class="p">P5</span> 링크 전부 시안 + 트렁크 가중 + 가시성</li>
+      <li><span class="p">P6</span> 상시 글로우/블룸 시스템(native-safe) <i>— Skia는 후속 검토</i></li>
+      <li><span class="p">P8</span> 드릴다운 REF2 매칭(코어 하단 + 데이터 상향 2-3행)</li>
+      <li><span class="p">P9</span> 인사이트 카드(오버뷰 2불릿 + 코어 스포트라이트 / 드릴다운 캐릭터+데이터)</li>
+      <li><span class="p">P11</span> 모션 폴리시(트렁크 고요·잎 흔들림·성장연출·reduced-motion)</li>
+    </ol>
+    <p style="color:var(--muted);font-size:13px">분담: <b>Claude</b>=un-pin·tierSize·링크글로우·카드·드릴다운(크래시 민감 통합) · <b>Codex</b>=world-layout·card-insights·glow-style·snowflake·pattern-link(순수/테스트) · <b>AG</b>=device QA(#251 회귀·Android 글로우·픽셀 대조).</p>
+  </div>
+
+  <h2>가드레일</h2>
+  <div class="card flat">
+    <ul>
+      <li><b>크래시(#251)</b> — 모든 SVG line props는 <code>useNativeDriver:false</code> 유지(언더글로우 라인 포함).</li>
+      <li><b>verify 게이트</b> — <code>npm run verify</code> exit 0 + CI green 확인 후 머지. 레퍼런스 테스트 4개 재작성 동반.</li>
+      <li><b>네이밍 정본</b> · <b>쿨톤 ≤3색</b>(주황 불꽃·보라 링크 제거) · <b>reduced-motion·no bounce</b> · <b>v10 유지(v49 아님)</b> · 큐브 아트 유지(FinalCoreArt 보존).</li>
+    </ul>
+  </div>
+
+  <p class="foot">단계별로 라이브(simon-yhkim.github.io/2nd-B)에 반영하며 진행합니다. 모바일로 확인하시고 방향 한 줄 주시면 즉시 반복합니다.</p>
+</div>
+</body>
+</html>

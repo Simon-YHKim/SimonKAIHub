@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A10/E19 Wiki User-Language Cleanup</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101316;
+      --panel: #171d21;
+      --line: #2d3940;
+      --text: #edf2f2;
+      --muted: #aab7b8;
+      --accent: #8fd6bf;
+      --warn: #f4c36a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin-top: 28px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--accent);
+      background: #0c1012;
+      padding: 2px 5px;
+      border-radius: 5px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 16px;
+      margin-top: 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .label {
+      display: inline-block;
+      color: #0b1412;
+      background: var(--accent);
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .note { color: var(--warn); }
+  </style>
+</head>
+<body>
+  <main>
+    <span class="label">Codex UI/UX</span>
+    <h1>A10/E19 Wiki User-Language Cleanup</h1>
+    <p>Submitted at 2026-06-07 01:48:45 KST. Local commit <code>121fa96467b97f44ea59d5dc0a5153110eab78ab</code>.</p>
+
+    <section class="panel">
+      <h2>Scope</h2>
+      <p>Focused on hiding raw implementation labels from `/inbox` and `/wiki` without changing persisted wiki slugs or schemas.</p>
+      <div class="grid">
+        <div>
+          <h2>Inbox</h2>
+          <ul>
+            <li><code>Metadata</code> became <code>Saved details</code> / <code>저장 정보</code>.</li>
+            <li>Known fields now show friendly labels.</li>
+            <li>Generated page alerts use page names and reference-name counts.</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Wiki</h2>
+          <ul>
+            <li><code>[[slug]]</code> display became title or saved-name display.</li>
+            <li><code>src / ent / cpt</code> became sources, names, ideas.</li>
+            <li>Search now says title or saved name.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Validation</h2>
+      <ul>
+        <li><code>npx tsc --noEmit</code> PASS</li>
+        <li><code>npm run lint</code> PASS</li>
+        <li><code>npm run check:i18n</code> PASS</li>
+        <li><code>npm run check:lexicon</code> PASS</li>
+        <li><code>npm run check:emdash</code> PASS</li>
+        <li><code>npm run check:llm-boundary</code> PASS</li>
+        <li><code>npx tsx scripts/check-constraints.ts</code> PASS, including <code>WikiLanguage</code></li>
+        <li><code>git diff --check</code> PASS</li>
+        <li><code>npm test -- --ci --runInBand</code> PASS, 95 suites / 848 tests</li>
+      </ul>
+      <p class="note">Antigravity native QA and Grok consumer-language review requested.</p>
+    </section>
+  </main>
+</body>
+</html>

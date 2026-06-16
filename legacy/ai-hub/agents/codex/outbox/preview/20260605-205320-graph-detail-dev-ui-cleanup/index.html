@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2nd-B Graph Detail Dev UI Cleanup</title>
+  <style>
+    :root {
+      --bg: #090b10;
+      --panel: #111722;
+      --line: #263349;
+      --text: #eef4ff;
+      --muted: #9aa8bd;
+      --mint: #69f5c8;
+      --violet: #b8a7ff;
+      --warn: #ffd17a;
+      --danger: #ff8e8e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Apple SD Gothic Neo", system-ui, sans-serif;
+      line-height: 1.58;
+    }
+    main {
+      width: min(1180px, calc(100vw - 36px));
+      margin: 0 auto;
+      padding: 44px 0 68px;
+    }
+    header, section {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    header {
+      padding: 30px;
+      background: linear-gradient(135deg, rgba(105, 245, 200, 0.08), rgba(184, 167, 255, 0.08));
+      margin-bottom: 18px;
+    }
+    section {
+      padding: 24px;
+      margin-top: 18px;
+    }
+    .eyebrow {
+      color: var(--mint);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    h1, h2, h3 { margin: 0; letter-spacing: 0; }
+    h1 {
+      max-width: 920px;
+      font-size: clamp(30px, 5vw, 56px);
+      line-height: 1.03;
+    }
+    h2 {
+      color: var(--mint);
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+    h3 {
+      color: var(--violet);
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+    p { margin: 0; color: var(--muted); }
+    .summary {
+      max-width: 900px;
+      margin-top: 18px;
+      color: #d7e3f5;
+      font-size: 17px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: rgba(105, 245, 200, 0.04);
+    }
+    .metric strong {
+      display: block;
+      color: var(--text);
+      font-size: 20px;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .metric span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.025);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 11px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      color: var(--text);
+      background: rgba(105, 245, 200, 0.08);
+      font-size: 13px;
+    }
+    td {
+      color: #d8e3f2;
+      font-size: 14px;
+    }
+    code {
+      color: var(--mint);
+      background: rgba(105, 245, 200, 0.08);
+      border: 1px solid rgba(105, 245, 200, 0.2);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.92em;
+    }
+    ul, ol {
+      color: #d8e3f2;
+      margin: 10px 0 0 18px;
+      padding: 0;
+    }
+    li { margin: 7px 0; }
+    .p1 { color: var(--warn); font-weight: 700; }
+    .p2 { color: var(--violet); font-weight: 700; }
+    footer {
+      padding: 20px 4px 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 820px) {
+      main { width: min(100vw - 24px, 1180px); padding-top: 24px; }
+      header, section { padding: 18px; }
+      .grid, .metrics { grid-template-columns: 1fr; }
+      h1 { font-size: 34px; }
+      table, thead, tbody, tr, th, td { display: block; }
+      thead { display: none; }
+      tr { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin-top: 10px; }
+      td { border: 0; border-top: 1px solid var(--line); }
+      td:first-child { border-top: 0; color: var(--mint); font-weight: 700; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex Static UI Audit</div>
+      <h1>Graph/Home, Detail, and Dev Preview UI Cleanup</h1>
+      <p class="summary">홈 그래프는 2nd-B의 첫 제품 경험이다. 현재 first-run CTA와 village route contract는 아직 retired <code>/journal</code>에 기대고 있고, asset preview route들은 앱 라우트로 살아 있다. 그래프 UI 계약과 dev route gate를 출시 전에 정리해야 한다.</p>
+      <div class="metrics">
+        <div class="metric"><strong>1830</strong><span>NavGraph lines</span></div>
+        <div class="metric"><strong>5</strong><span>asset preview routes</span></div>
+        <div class="metric"><strong>92</strong><span>hard-coded sheet bottom</span></div>
+        <div class="metric"><strong>14</strong><span>surfaces audited</span></div>
+      </div>
+    </header>
+
+    <section>
+      <h2>Complexity Matrix</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Surface</th>
+            <th>Lines</th>
+            <th>Buttons</th>
+            <th>Routes</th>
+            <th>Modal refs</th>
+            <th>Primary UI Risk</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>/</code></td><td>549</td><td>4</td><td>6</td><td>1</td><td>First-run graph card routes to retired <code>/journal</code>.</td></tr>
+          <tr><td><code>NavGraph</code></td><td>1830</td><td>10</td><td>9</td><td>56</td><td>Camera, gestures, sheets, routes, and layers are one component.</td></tr>
+          <tr><td><code>/record/[id]</code></td><td>187</td><td>4</td><td>5</td><td>0</td><td>Evidence detail lacks shared evidence meta and prioritized action.</td></tr>
+          <tr><td><code>/data</code></td><td>118</td><td>3</td><td>4</td><td>0</td><td>Export/delete hub points elsewhere and contains coming-soon reset.</td></tr>
+          <tr><td><code>/account</code></td><td>226</td><td>3</td><td>3</td><td>0</td><td>Deletion flow is alert-heavy and not export-first.</td></tr>
+          <tr><td><code>/research</code></td><td>260</td><td>3</td><td>1</td><td>0</td><td>Manual links to auth-gated route.</td></tr>
+          <tr><td><code>/asset-motion-preview*</code></td><td>74-291</td><td>0-1</td><td>0-3</td><td>0-3</td><td>Dev preview routes are live app routes.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>P1 Findings</h2>
+      <div class="grid">
+        <div class="card">
+          <h3><span class="p1">P1</span> Home First-Run CTA</h3>
+          <p>The empty graph CTA still pushes to <code>/journal</code>. The route redirects, but current UI should not depend on retired route aliases.</p>
+          <ul>
+            <li>Route first-run graph CTA to <code>/capture</code>.</li>
+            <li>Sweep <code>VILLAGE_UI.primaryRoute</code> away from <code>/journal</code>.</li>
+            <li>Keep <code>/journal</code> only for deep-link compatibility.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="p1">P1</span> Graph UI Contract</h3>
+          <p><code>NavGraph</code> is handling camera, gestures, sheets, data shards, routing, and overlays in one 1830-line component.</p>
+          <ul>
+            <li>Split graph surface, layers, sheets, controls.</li>
+            <li>Replace hard-coded sheet <code>bottom: 92</code> with shared clearance.</li>
+            <li>Stack sheet actions on narrow mobile or long labels.</li>
+            <li>Add graph help/legend affordance.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="p1">P1</span> Dev Preview Routes</h3>
+          <p>Five asset preview files live under <code>src/app</code>. They use versioned preview copy and should not be production routes.</p>
+          <ul>
+            <li>Move previews to dev-only route group or gate with <code>__DEV__</code>.</li>
+            <li>Remove production pre-auth exception for asset preview.</li>
+            <li>Do not expose previews in product navigation or 404 destinations.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="p2">P2</span> Detail/Data/Account</h3>
+          <p>Secondary screens repeat earlier shell and trust problems: route-local bottom padding, alerts, indirect export/delete, and weak evidence context.</p>
+          <ul>
+            <li>Add evidence meta to record detail.</li>
+            <li>Make <code>/data</code> a real export/delete hub.</li>
+            <li>Replace account deletion alert with in-screen flow.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Implementation Order</h2>
+      <ol>
+        <li>Sweep active graph/home/village <code>/journal</code> targets to <code>/capture</code>.</li>
+        <li>Gate or move asset preview routes out of production navigation.</li>
+        <li>Replace graph sheet hard-coded clearance and add mobile action wrapping.</li>
+        <li>Add graph help/legend affordance.</li>
+        <li>Add evidence meta to record detail.</li>
+        <li>Turn <code>/data</code> into a real action hub and remove coming-soon reset.</li>
+        <li>Replace <code>/account</code> deletion alert with an in-screen flow.</li>
+        <li>Resolve public manual to auth-gated research link.</li>
+        <li>Clarify or inline <code>/theme</code>.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Release Acceptance</h2>
+      <ul>
+        <li>Home empty graph first-run CTA routes to <code>/capture</code>.</li>
+        <li>Active UI destinations no longer target <code>/journal</code>; the route remains only as compatibility redirect.</li>
+        <li>Graph bottom sheet uses shared safe-area/bottom-tab clearance.</li>
+        <li>Graph sheet actions do not overflow on mobile Korean labels.</li>
+        <li>Production builds cannot navigate to asset preview routes.</li>
+        <li><code>/record/[id]</code> explains how the record participates in graph/persona evidence.</li>
+        <li><code>/data</code> has only concrete current actions and shows export before delete.</li>
+        <li>Manual does not link to a surprise auth wall for Research.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Markdown request: agents/codex/outbox/20260605-205320-to-claude-graph-detail-dev-ui-cleanup-request.md. Codex did not modify E:\2ndB code.
+    </footer>
+  </main>
+</body>
+</html>

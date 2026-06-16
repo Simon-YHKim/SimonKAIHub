@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Settings Destructive + Keyboard Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d10;
+      --panel: #151922;
+      --panel2: #1d2430;
+      --text: #f4f7fb;
+      --muted: #a9b2c3;
+      --line: #2c3444;
+      --warn: #ffcc66;
+      --danger: #ff7b7b;
+      --ok: #7bd88f;
+      --accent: #7aa7ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 18px 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 22px;
+      display: grid;
+      gap: 14px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(26px, 5vw, 42px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    h2, h3 { margin: 0; letter-spacing: 0; }
+    h2 { font-size: 18px; margin-bottom: 10px; }
+    h3 { font-size: 15px; margin-bottom: 8px; }
+    p { margin: 0 0 10px; color: var(--muted); }
+    code {
+      color: #dce8ff;
+      background: #10141c;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+    }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 999px;
+      padding: 6px 10px;
+      color: var(--muted);
+    }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 22px 0;
+    }
+    .card, .finding {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .card strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.15;
+      margin-bottom: 4px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .finding {
+      background: var(--panel2);
+    }
+    .full { grid-column: 1 / -1; }
+    ul { margin: 8px 0 0; padding-left: 18px; color: var(--muted); }
+    li { margin: 5px 0; }
+    .warn { color: var(--warn); }
+    .danger { color: var(--danger); }
+    .ok { color: var(--ok); }
+    .callout {
+      margin-top: 18px;
+      border: 1px solid #4d3d1a;
+      background: #1e1a0e;
+      border-radius: 8px;
+      padding: 16px;
+    }
+    @media (max-width: 760px) {
+      main { padding: 24px 14px 36px; }
+      .summary, .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="meta">
+        <span class="pill">Codex UI/UX</span>
+        <span class="pill">2nd-B</span>
+        <span class="pill">claude/cycle-3-hardening@9b03f04</span>
+        <span class="pill">2026-06-06 03:51 KST</span>
+      </div>
+      <h1>Settings, account, audit: destructive + keyboard gate</h1>
+      <p>Additional all-screen review focused on deletion flows, support promises, permissions copy, and mobile keyboard behavior.</p>
+    </header>
+
+    <section class="summary">
+      <div class="card">
+        <strong class="warn">97/100</strong>
+        <p>Score remains provisional. This gate blocks 100.</p>
+      </div>
+      <div class="card">
+        <strong class="danger">P1</strong>
+        <p>Destructive confirmation inputs lack keyboard-safe layout proof.</p>
+      </div>
+      <div class="card">
+        <strong class="danger">P1</strong>
+        <p>Broad partial deletes are still too easy for irreversible data changes.</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="finding">
+        <h3>Keyboard-Safe Inputs</h3>
+        <ul>
+          <li><code>settings.tsx</code>: <code>ScrollView</code> + <code>DELETE</code> input, no <code>KeyboardAvoidingView</code>.</li>
+          <li><code>account.tsx</code>: account deletion input at bottom, no keyboard-safe wrapper.</li>
+          <li><code>audit.tsx</code>: multiline answer plus Next/Continue actions, no keyboard-safe wrapper.</li>
+        </ul>
+      </article>
+      <article class="finding">
+        <h3>Deletion Confirmation</h3>
+        <ul>
+          <li>Full wipe has a typed phrase.</li>
+          <li>Partial broad deletes use generic alert title and one destructive button.</li>
+          <li>Need count preview, stronger confirmation, or proof this is intentional.</li>
+        </ul>
+      </article>
+      <article class="finding">
+        <h3>Operational Promise</h3>
+        <ul>
+          <li>Account deletion fallback promises support will complete deletion.</li>
+          <li>Support page promises two business days KST.</li>
+          <li>Needs workflow proof or softer copy.</li>
+        </ul>
+      </article>
+      <article class="finding">
+        <h3>Settings Copy</h3>
+        <ul>
+          <li><code>permissions.tsx</code> exposes <code>RLS</code>.</li>
+          <li>Platform labels foreground implementation rather than user impact.</li>
+          <li>Data/support export copy points through Settings while export lives in Wiki.</li>
+        </ul>
+      </article>
+      <article class="finding full">
+        <h3>Acceptance</h3>
+        <ul>
+          <li>Use the existing keyboard-safe primitive for settings/account/audit or provide Pixel + 320px keyboard screenshots.</li>
+          <li>Upgrade broad partial deletes with counts, export-first CTA, and stronger confirmation.</li>
+          <li>Align support/account deletion copy with a proven support workflow.</li>
+          <li>Replace implementation terms with product language on permissions/data/support.</li>
+        </ul>
+      </article>
+    </section>
+
+    <div class="callout">
+      <p><strong>Codex verdict:</strong> these are not visual decoration issues. They are trust and interaction-safety gaps in the settings path, so they block a 100/100 UI score.</p>
+    </div>
+  </main>
+</body>
+</html>

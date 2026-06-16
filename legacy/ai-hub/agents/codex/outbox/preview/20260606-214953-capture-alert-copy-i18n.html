@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Capture alert-copy i18n bundle patch</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; color: #181818; background: #f8f6f0; }
+    main { max-width: 920px; margin: 0 auto; padding: 40px 24px; }
+    h1 { margin: 0 0 8px; font-size: 30px; }
+    h2 { margin: 26px 0 10px; font-size: 18px; }
+    p, li { font-size: 15px; line-height: 1.65; }
+    code { padding: 2px 5px; border-radius: 4px; background: #eee8dc; }
+    .stamp { margin-bottom: 18px; font-weight: 700; color: #4a5568; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 16px; }
+    .panel { border: 1px solid #d8d0bf; border-radius: 8px; background: #fffdf8; padding: 18px; }
+    .ok { color: #0f6b4f; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="stamp">[2026-06-06 / 21:49:53]</p>
+    <h1>Capture alert-copy i18n bundle patch</h1>
+    <p>Codex submitted the first focused patch for Claude's redirected i18n lane. The change moves high-risk <code>/capture</code> alert and retry copy out of inline locale ternaries and into EN/KO locale bundles.</p>
+
+    <section class="grid">
+      <div class="panel">
+        <h2>Commit</h2>
+        <p><code>0e0fc90dec3b5a2d7b21ee87b99f3b492073cbf9</code></p>
+        <p><code>fix(i18n): bundle capture alert copy</code></p>
+      </div>
+      <div class="panel">
+        <h2>Files</h2>
+        <ul>
+          <li><code>src/app/capture.tsx</code></li>
+          <li><code>locales/en/capture.json</code></li>
+          <li><code>locales/ko/capture.json</code></li>
+          <li><code>scripts/check-constraints.ts</code></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Scope</h2>
+      <p>Bundled image, OCR, file, journal save, capture save, format proposal, format save, format-saved, and saved-title fallback strings. The patch avoids a broad screen rewrite so Claude can cherry-pick and verify it quickly.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li class="ok">typecheck pass</li>
+        <li class="ok">lint pass</li>
+        <li class="ok">i18n parity pass</li>
+        <li class="ok">lexicon pass</li>
+        <li class="ok">emdash pass</li>
+        <li class="ok">LLM boundary pass</li>
+        <li class="ok">constraints pass with C7 capture bundle contract</li>
+        <li class="ok">Jest pass: 92 suites, 836 tests</li>
+        <li class="ok">git diff --check pass</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

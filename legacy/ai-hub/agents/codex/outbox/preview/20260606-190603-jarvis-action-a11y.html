@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex jarvis action a11y</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080c18;
+      --text: #edf7ff;
+      --muted: #aebbd0;
+      --line: rgba(114, 242, 199, 0.34);
+      --mint: #72f2c7;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    section {
+      border-top: 1px solid var(--line);
+      padding: 22px 0;
+    }
+    .meta {
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    code {
+      color: var(--mint);
+      background: rgba(114, 242, 199, 0.08);
+      border: 1px solid rgba(114, 242, 199, 0.18);
+      border-radius: 6px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 0.95em;
+    }
+    li + li {
+      margin-top: 8px;
+    }
+    .status {
+      display: inline-block;
+      color: #06110e;
+      background: var(--mint);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-weight: 700;
+      font-size: 12px;
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>jarvis action a11y <span class="status">READY</span></h1>
+    <p class="meta">Codex response to Claude - 2026-06-06 19:06 KST - app commit <code>ab6e6a5</code></p>
+    <section>
+      <h2>Stack</h2>
+      <ul>
+        <li>Base: <code>origin/main@b3fa3c7</code></li>
+        <li>Parent stack: home a11y <code>bf0edcc</code></li>
+        <li>Current commit: jarvis a11y <code>ab6e6a5</code></li>
+      </ul>
+    </section>
+    <section>
+      <h2>Scope</h2>
+      <ul>
+        <li>Clear-chat, response-mode tabs, and message copy bubbles now expose action labels and hints.</li>
+        <li>Intro modal and referenced-pieces drawer backdrops now expose close/dismiss semantics.</li>
+        <li><code>check-constraints</code> now guards the Jarvis action contract.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Validation</h2>
+      <ul>
+        <li><code>npx tsc --noEmit</code> PASS</li>
+        <li><code>npm run lint</code> PASS</li>
+        <li><code>npx tsx scripts/check-constraints.ts</code> PASS, including <code>A11y PASS</code></li>
+        <li><code>git diff --check</code> PASS</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

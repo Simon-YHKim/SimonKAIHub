@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2nd-B Self-Model Assessment UI Cleanup</title>
+  <style>
+    :root {
+      --bg: #090b10;
+      --panel: #111722;
+      --line: #263349;
+      --text: #eef4ff;
+      --muted: #9aa8bd;
+      --mint: #69f5c8;
+      --violet: #b8a7ff;
+      --warn: #ffd17a;
+      --danger: #ff8e8e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Apple SD Gothic Neo", system-ui, sans-serif;
+      line-height: 1.58;
+    }
+    main {
+      width: min(1180px, calc(100vw - 36px));
+      margin: 0 auto;
+      padding: 44px 0 68px;
+    }
+    header, section {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    header {
+      padding: 30px;
+      background: linear-gradient(135deg, rgba(105, 245, 200, 0.08), rgba(184, 167, 255, 0.08));
+      margin-bottom: 18px;
+    }
+    section {
+      padding: 24px;
+      margin-top: 18px;
+    }
+    .eyebrow {
+      color: var(--mint);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    h1, h2, h3 { margin: 0; letter-spacing: 0; }
+    h1 {
+      max-width: 920px;
+      font-size: clamp(30px, 5vw, 56px);
+      line-height: 1.03;
+    }
+    h2 {
+      color: var(--mint);
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+    h3 {
+      color: var(--violet);
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+    p { margin: 0; color: var(--muted); }
+    .summary {
+      max-width: 900px;
+      margin-top: 18px;
+      color: #d7e3f5;
+      font-size: 17px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.025);
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: rgba(105, 245, 200, 0.04);
+    }
+    .metric strong {
+      display: block;
+      color: var(--text);
+      font-size: 20px;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .metric span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 11px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      color: var(--text);
+      background: rgba(105, 245, 200, 0.08);
+      font-size: 13px;
+    }
+    td {
+      color: #d8e3f2;
+      font-size: 14px;
+    }
+    code {
+      color: var(--mint);
+      background: rgba(105, 245, 200, 0.08);
+      border: 1px solid rgba(105, 245, 200, 0.2);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.92em;
+    }
+    ul, ol {
+      color: #d8e3f2;
+      margin: 10px 0 0 18px;
+      padding: 0;
+    }
+    li { margin: 7px 0; }
+    .p1 { color: var(--warn); font-weight: 700; }
+    .p2 { color: var(--violet); font-weight: 700; }
+    .danger { color: var(--danger); font-weight: 700; }
+    footer {
+      padding: 20px 4px 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 820px) {
+      main { width: min(100vw - 24px, 1180px); padding-top: 24px; }
+      header, section { padding: 18px; }
+      .grid, .metrics { grid-template-columns: 1fr; }
+      h1 { font-size: 34px; }
+      table, thead, tbody, tr, th, td { display: block; }
+      thead { display: none; }
+      tr { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin-top: 10px; }
+      td { border: 0; border-top: 1px solid var(--line); }
+      td:first-child { border-top: 0; color: var(--mint); font-weight: 700; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex Static UI Audit</div>
+      <h1>Self-Model & Assessment UI Cleanup</h1>
+      <p class="summary">자기모델 화면은 2nd-B 신뢰의 중심이다. MBTI/Trinity 같은 reference 또는 personal framework가 검증된 BFI/ECR-S와 같은 위계로 보이면 Barnum/typology 리스크가 커진다. 결과 카드에는 source, confidence, why link가 반복되어야 한다.</p>
+      <div class="metrics">
+        <div class="metric"><strong>11</strong><span>screens/components audited</span></div>
+        <div class="metric"><strong>490</strong><span>/persona lines</span></div>
+        <div class="metric"><strong>350</strong><span>/core-brain lines</span></div>
+        <div class="metric"><strong>6</strong><span>/journal route clusters</span></div>
+      </div>
+    </header>
+
+    <section>
+      <h2>Complexity Matrix</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Surface</th>
+            <th>Lines</th>
+            <th>Buttons</th>
+            <th>Routes</th>
+            <th>Alerts</th>
+            <th>Primary UI Risk</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>/profile</code></td><td>214</td><td>1</td><td>3</td><td>0</td><td>Reference tools appear at primary hierarchy.</td></tr>
+          <tr><td><code>/persona</code></td><td>490</td><td>6</td><td>9</td><td>2</td><td>Judgment cards lack repeated evidence meta.</td></tr>
+          <tr><td><code>/core-brain</code></td><td>350</td><td>11</td><td>11</td><td>0</td><td>Good evidence drawer, but stale routes and shell drift remain.</td></tr>
+          <tr><td><code>/insights</code></td><td>259</td><td>0</td><td>3</td><td>1</td><td>Insights need source count and current capture language.</td></tr>
+          <tr><td><code>/trinity</code></td><td>280</td><td>1</td><td>4</td><td>1</td><td>Personal operating lens can read as universal model.</td></tr>
+          <tr><td><code>/big-five</code></td><td>225</td><td>1</td><td>3</td><td>1</td><td>No review-before-save state.</td></tr>
+          <tr><td><code>/attachment</code></td><td>223</td><td>1</td><td>3</td><td>1</td><td>Provisional style appears mid-assessment.</td></tr>
+          <tr><td><code>/mbti</code></td><td>218</td><td>1</td><td>3</td><td>1</td><td>Reference-only tool still feels first-class.</td></tr>
+          <tr><td><code>/audit</code></td><td>294</td><td>6</td><td>6</td><td>1</td><td>Accuracy copy over-promises Persona sharpness.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>P1 Findings</h2>
+      <div class="grid">
+        <div class="card">
+          <h3><span class="p1">P1</span> Profile Hierarchy</h3>
+          <p><code>/profile</code> exposes Persona, Big Five, MBTI, Attachment, and Trinity in a flat hub. MBTI is caveated later, but the hub gives it equal weight.</p>
+          <ul>
+            <li>Order by evidence strength: Persona/Core Brain, BFI-44, ECR-S, interview/audit, MBTI reference.</li>
+            <li>Badge each entry: validated, reference only, personal framework, needs records.</li>
+            <li>Separate account/settings from self-model cards.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="p1">P1</span> Persona Evidence</h3>
+          <p>Trait bars and narrative cards need visible source count, last source date, confidence, and why link. Caveats should live in each relevant card.</p>
+          <ul>
+            <li>Add shared <code>EvidenceMeta</code>.</li>
+            <li>Do not present 0-100 values as absolute scores.</li>
+            <li>Replace build failure alerts with inline recovery.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="p1">P1</span> Assessment Flow</h3>
+          <p>MBTI and Attachment show provisional labels while users are still answering. The save celebration navigates away before review.</p>
+          <ul>
+            <li>Hide provisional type/style, or label as incomplete estimate.</li>
+            <li>Add review-before-save: instrument, version, item count, caveat, result.</li>
+            <li>Keep MBTI reference-only visible in the result review.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="p1">P1</span> Retired Journal CTAs</h3>
+          <p>Self-model flows still route users to <code>/journal</code> from onboarding, insights, trinity, core-brain, persona, and audit.</p>
+          <ul>
+            <li>Replace user-facing CTAs with <code>/capture</code>.</li>
+            <li>Use labels like today's piece, capture, or write one thing.</li>
+            <li>Keep <code>/journal</code> only as redirect/internal compatibility.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>P2 Findings</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Area</th>
+            <th>Issue</th>
+            <th>Requested Direction</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>/core-brain</code></td>
+            <td>Evidence drawer exists, but empty state routes to journal and shell clearance is hard-coded.</td>
+            <td>Make evidence drawer reusable; route empty state to Capture; use shared shell clearance.</td>
+          </tr>
+          <tr>
+            <td><code>/audit</code></td>
+            <td>"Sharper Persona" copy can overstate precision.</td>
+            <td>Use evidence humility: adds one source, helps notice patterns, not a diagnosis.</td>
+          </tr>
+          <tr>
+            <td><code>/insights</code> / <code>/trinity</code></td>
+            <td>Insight/domain cards do not expose enough source provenance.</td>
+            <td>Add source count, last source date, and record drilldown.</td>
+          </tr>
+          <tr>
+            <td>Overlays</td>
+            <td>Companion flash and bottom padding use route-local constants.</td>
+            <td>Use shared overlay and shell clearance from the navigation shell contract.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Implementation Order</h2>
+      <ol>
+        <li>Sweep self-model user-facing <code>/journal</code> CTAs to <code>/capture</code>.</li>
+        <li>Update <code>/profile</code> hierarchy and badges.</li>
+        <li>Add shared self-model <code>EvidenceMeta</code> to Persona and Core Brain.</li>
+        <li>Add review-before-save to BFI/ECR-S/MBTI and hide provisional labels.</li>
+        <li>Rewrite Audit humility copy and completion review.</li>
+        <li>Add source drilldowns to Insights and Trinity.</li>
+        <li>Clean shell clearance and companion overlay positioning.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Release Acceptance</h2>
+      <ul>
+        <li>MBTI is clearly reference-only and not visually equal to BFI-44/ECR-S.</li>
+        <li>Persona/Core Brain judgment cards show source count, last source, confidence or early signal, and why link.</li>
+        <li>Assessment results are reviewed before saving into Persona.</li>
+        <li>Incomplete assessments do not display definitive type/style labels.</li>
+        <li>Self-model routes have no user-facing <code>/journal</code> CTAs.</li>
+        <li>Trinity is labeled as a personal operating lens, not a universal scientific framework.</li>
+        <li>No audited route uses hard-coded bottom clearance or absolute companion bottom offsets.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Markdown request: agents/codex/outbox/20260605-204305-to-claude-self-model-assessment-ui-cleanup-request.md. Codex did not modify E:\2ndB code.
+    </footer>
+  </main>
+</body>
+</html>

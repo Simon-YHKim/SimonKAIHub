@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Review - Android Keyboard Edge Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0f14;
+      --panel: #121821;
+      --line: #263241;
+      --text: #e9eef5;
+      --muted: #a7b2c2;
+      --accent: #59d6b3;
+      --warn: #ffcc66;
+      --bad: #ff6b6b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", Pretendard, system-ui, -apple-system, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 24px;
+      margin-bottom: 24px;
+    }
+    .kicker {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 8px 0 10px;
+      font-size: clamp(30px, 5vw, 54px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+    .score {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .metric {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 28px;
+      line-height: 1;
+    }
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    section {
+      border-top: 1px solid var(--line);
+      padding: 24px 0 4px;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    ul {
+      margin: 0 0 16px;
+      padding-left: 20px;
+    }
+    li { margin: 6px 0; }
+    code {
+      color: var(--accent);
+      background: #0f151d;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-size: .92em;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .box {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .pass { color: var(--accent); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .quote {
+      border-left: 3px solid var(--accent);
+      padding-left: 12px;
+      color: var(--muted);
+    }
+    @media (max-width: 760px) {
+      main { padding: 28px 16px 48px; }
+      .score, .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="kicker">Codex UI/UX Gate · 2026-06-05 22:41 KST</div>
+      <h1>Android Keyboard / Edge Review</h1>
+      <p class="subtitle">
+        Claude commit <code>44f9fbe</code> improves sign-in and capture, but it does not satisfy the product-wide
+        AI slop 100 gate. Narrow pass, global fail.
+      </p>
+    </header>
+
+    <div class="score">
+      <div class="metric"><strong class="bad">64/100</strong><span>Current ceiling</span></div>
+      <div class="metric"><strong class="pass">823</strong><span>Tests passed</span></div>
+      <div class="metric"><strong class="warn">7</strong><span>Input screens still unpatched</span></div>
+    </div>
+
+    <section>
+      <h2>What Passed</h2>
+      <div class="grid">
+        <div class="box">
+          <p class="pass"><strong>Verification green</strong></p>
+          <p><code>npm run verify</code> passed: 91 suites, 823 tests.</p>
+        </div>
+        <div class="box">
+          <p class="pass"><strong>Targeted Android fixes</strong></p>
+          <p><code>softwareKeyboardLayoutMode: "pan"</code>, <code>windowTranslucentStatus: true</code>, and <code>useKeyboard</code> were added.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Blocking Findings</h2>
+      <ul>
+        <li><strong class="bad">Keyboard is not product-wide:</strong> <code>attachment</code>, <code>big-five</code>, <code>formats</code>, <code>import</code>, <code>interview</code>, <code>jarvis</code>, and <code>mbti</code> still use the old Android pattern.</li>
+        <li><strong class="bad">No Android visual proof:</strong> edge-to-edge and keyboard-open states need emulator/device screenshots or video.</li>
+        <li><strong class="bad">Trust copy still over-claims:</strong> "learns you", "AI friend", "find your next step", and "sharper your Persona" remain in product surfaces.</li>
+        <li><strong class="warn">Blank loading remains:</strong> 19 routes still return <code>null</code> during auth/loading.</li>
+        <li><strong class="warn">Dirty worktree:</strong> <code>E:\2ndB\CLAUDE.md</code> has an uncommitted banner removal.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Trust Copy Direction</h2>
+      <p class="quote">Grok's latest report agrees with Codex: the product should feel like a user-owned record and tool, not an AI entity that knows, befriends, or guides the user.</p>
+      <ul>
+        <li>Tagline: "A second brain built only from what you write."</li>
+        <li>AI line: "SecondB answers from the pieces you've captured."</li>
+        <li>Next-step line: "Links your pieces into one concrete step you can test today."</li>
+        <li>Audit line: "The more pieces you add, the clearer the patterns in your self-model become."</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Required Next Actions</h2>
+      <ul>
+        <li>Apply keyboard-safe scroll behavior to every input screen or document exact exemptions.</li>
+        <li>Attach Android proof for keyboard-open and notch/status-bar states.</li>
+        <li>Replace over-claiming copy with tool-honest, user-sovereign language.</li>
+        <li>Replace blank auth/loading returns with visible product shells or skeletons.</li>
+        <li>Continue prior gate items: retired routes, export receipt UI, graph sheet back proof, tiny text and shadow budget.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

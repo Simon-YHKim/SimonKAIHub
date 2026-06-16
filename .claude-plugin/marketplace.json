@@ -5,7 +5,7 @@
   "owner": { "name": "Simon Kim", "url": "https://github.com/Simon-YHKim" },
   "plugins": [
     { "name": "simonk-aihub", "source": "./", "description": "AI 제품/기능 빌드 오케스트레이션 플러그인",
-      "version": "0.1.0", "category": "productivity", "homepage": "https://github.com/Simon-YHKim/SimonKAIHub" }
+      "version": "0.2.0", "category": "productivity", "homepage": "https://github.com/Simon-YHKim/SimonKAIHub" }
   ],
-  "version": "0.1.0"
+  "version": "0.2.0"
 }

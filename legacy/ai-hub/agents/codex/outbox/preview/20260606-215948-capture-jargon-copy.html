@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Capture jargon-copy cleanup</title>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; color: #181818; background: #f8f6f0; }
+    main { max-width: 920px; margin: 0 auto; padding: 40px 24px; }
+    h1 { margin: 0 0 8px; font-size: 30px; }
+    h2 { margin: 26px 0 10px; font-size: 18px; }
+    p, li { font-size: 15px; line-height: 1.65; }
+    code { padding: 2px 5px; border-radius: 4px; background: #eee8dc; }
+    .stamp { margin-bottom: 18px; font-weight: 700; color: #4a5568; }
+    .panel { border: 1px solid #d8d0bf; border-radius: 8px; background: #fffdf8; padding: 18px; margin-top: 16px; }
+    .ok { color: #0f6b4f; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="stamp">[2026-06-06 / 21:59:48]</p>
+    <h1>Capture jargon-copy cleanup</h1>
+    <p>Codex removed user-facing technical jargon from the capture locale bundle and added a static guard to keep it out.</p>
+
+    <section class="panel">
+      <h2>Commit Stack</h2>
+      <p><code>0e0fc90</code> alert-copy bundle</p>
+      <p><code>c884f80</code> mode/track bundle</p>
+      <p><code>2a122fe</code> capture jargon cleanup</p>
+    </section>
+
+    <section class="panel">
+      <h2>Removed Terms</h2>
+      <p><code>markdown</code>, <code>frontmatter</code>, <code>H1</code>, <code>Obsidian</code>, <code>Web Clipper</code>, and Korean equivalents are no longer present in <code>locales/en|ko/capture.json</code>.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li class="ok">typecheck pass</li>
+        <li class="ok">lint pass</li>
+        <li class="ok">i18n parity pass: 245 keys</li>
+        <li class="ok">lexicon pass</li>
+        <li class="ok">emdash pass</li>
+        <li class="ok">LLM boundary pass</li>
+        <li class="ok">constraints pass with no-jargon capture bundle contract</li>
+        <li class="ok">Jest pass: 92 suites, 836 tests</li>
+        <li class="ok">git diff --check pass</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Native P2 A11y Keyboard Hardening</title>
+  <style>
+    body { margin: 0; font: 15px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #182231; background: #f6f7f9; }
+    main { max-width: 880px; margin: 0 auto; padding: 32px 20px 48px; }
+    header { border-bottom: 1px solid #d9dee7; margin-bottom: 24px; padding-bottom: 18px; }
+    h1 { margin: 0 0 8px; font-size: 28px; line-height: 1.2; }
+    h2 { margin: 28px 0 10px; font-size: 18px; }
+    p { margin: 0 0 12px; }
+    code { background: #eef1f5; border: 1px solid #dce2ea; border-radius: 6px; padding: 1px 5px; }
+    ul { margin: 8px 0 0; padding-left: 22px; }
+    li { margin: 5px 0; }
+    .panel { background: #fff; border: 1px solid #d9dee7; border-radius: 8px; padding: 18px; margin-top: 16px; }
+    .status { display: inline-block; background: #dff4e8; color: #145c32; border: 1px solid #a8dec0; border-radius: 999px; padding: 3px 10px; font-size: 13px; font-weight: 650; }
+    button { margin-top: 18px; border: 1px solid #b8c2cf; background: #fff; color: #182231; border-radius: 6px; padding: 8px 12px; cursor: pointer; }
+    textarea { position: absolute; left: -9999px; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <span class="status">DONE</span>
+      <h1>Native P2 A11y Keyboard Hardening</h1>
+      <p>2026-06-10 / 23:01:10 KST</p>
+    </header>
+    <section class="panel">
+      <h2>Result</h2>
+      <ul>
+        <li>2ndB commit: <code>d28d781 fix(a11y): harden native assessment controls</code></li>
+        <li>Branch pushed: <code>origin/codex/native-p2-a11y-keyboard-20260610</code></li>
+        <li>Base: <code>origin/main@0e04573</code>; branch is 1 ahead, 0 behind.</li>
+        <li>No PR created or merged.</li>
+      </ul>
+    </section>
+    <section class="panel">
+      <h2>Scope</h2>
+      <ul>
+        <li>Interview period cards now hold a 48px minimum touch target.</li>
+        <li>Interview footer now accounts for Android keyboard height with <code>useKeyboard()</code>.</li>
+        <li>QuantPager exposes progressbar value plus Back, Next, and Save action hints.</li>
+        <li>A11y constraints now guard the new native contract.</li>
+      </ul>
+    </section>
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm run verify</code> passed.</li>
+        <li>Jest passed: 111 suites, 969 tests.</li>
+        <li>Diff checks and changed-line credential-pattern scans passed before and after commit.</li>
+      </ul>
+    </section>
+    <button type="button" onclick="copyMarkdown()">Copy as Markdown</button>
+    <textarea id="md"># Native P2 a11y keyboard hardening
+
+- 2ndB commit: `d28d781 fix(a11y): harden native assessment controls`
+- Branch pushed: `origin/codex/native-p2-a11y-keyboard-20260610`
+- Added 48px minimum interview period-card touch target.
+- Added Android keyboard-height footer padding for interview input.
+- Added QuantPager progressbar value and Back/Next/Save hints.
+- `npm run verify` passed: 111 suites, 969 tests.
+- No PR created or merged.</textarea>
+  </main>
+  <script>
+    function copyMarkdown() {
+      const text = document.getElementById("md").value;
+      navigator.clipboard.writeText(text);
+    }
+  </script>
+</body>
+</html>

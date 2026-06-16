@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex T4 v3 Asset Unification Packet</title>
+  <style>
+    :root { color-scheme: dark; --bg:#070a18; --panel:#10182f; --ink:#e8ecf8; --muted:#aab4d2; --line:#2a345a; --mint:#72f2c7; --violet:#a78bfa; --amber:#ffd166; --rose:#ff7a90; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:Inter,Segoe UI,Arial,sans-serif; line-height:1.55; }
+    main { max-width:960px; margin:0 auto; padding:32px 20px 56px; }
+    h1 { font-size:28px; margin:0 0 8px; }
+    h2 { font-size:19px; margin:28px 0 10px; color:var(--mint); }
+    h3 { font-size:16px; margin:20px 0 8px; color:var(--amber); }
+    p, li { color:var(--muted); }
+    code { color:var(--ink); background:#17203c; padding:2px 5px; border:1px solid var(--line); border-radius:4px; }
+    .meta, section { border:1px solid var(--line); background:var(--panel); border-radius:8px; padding:16px; margin-top:16px; }
+    .badge { display:inline-block; color:#071018; background:var(--mint); font-weight:700; border-radius:4px; padding:2px 7px; margin-right:8px; }
+    .warn { color:var(--rose); }
+    ul { padding-left:22px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>T4 v3 Asset Unification Packet</h1>
+    <div class="meta"><span class="badge">Codex</span>2026-06-13 21:10:15 KST to Claude</div>
+    <section>
+      <h2>Corrected Current State</h2>
+      <ul>
+        <li><code>EXPO_PUBLIC_USE_V3_ART</code> now defaults true. The older v3 brief is stale.</li>
+        <li>Data/log/core v3 maps already exist in <code>soulcore-v3.ts</code>.</li>
+        <li>Live graph links still render as animated SVG lines, not textured link art.</li>
+        <li><code>feedback.tsx</code> uses primitive local glyphs instead of a shared v3 state asset slot.</li>
+        <li><code>SecondBSprite</code> mixes legacy and ad-hoc state overlays.</li>
+        <li class="warn">Product naming is Lumina, but some v3 asset paths/docs still say Iris.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Recommended PR Split</h2>
+      <h3>PR A - Asset Source-Of-Truth Cleanup</h3>
+      <p>Sync docs and tests around v3 default, Lumina naming, and active vs archived legacy assets.</p>
+      <h3>PR B - Premium Feedback State Asset Layer</h3>
+      <p>Add one fixed pixel asset slot for loading, empty, error, and safety states.</p>
+      <h3>PR C - SecondB State Cues</h3>
+      <p>Move all state overlays to a canonical cue map or explicit fallback policy.</p>
+      <h3>PR D - Pattern Link Mounting Decision</h3>
+      <p>Either mount textured pattern-link art in NavGraph or document it as preview-only until QA.</p>
+    </section>
+    <section>
+      <h2>Section 35 Debate Fork</h2>
+      <p>Codex recommends keeping <code>Lumina</code> as product canonical and treating <code>iris/*</code> as temporary legacy asset paths. v10 remains production default where it exists; v49 supplies log/link fallback; v45 stays historical/reference unless explicitly selected.</p>
+    </section>
+  </main>
+</body>
+</html>

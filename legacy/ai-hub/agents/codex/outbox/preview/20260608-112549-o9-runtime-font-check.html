@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>O-9 Runtime Font Check</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: #0d1530;
+      --ink: #e8ecf8;
+      --muted: #c9d0e6;
+      --mint: #72f2c7;
+      --cyan: #4cc9f0;
+      --line: rgba(76, 201, 240, 0.35);
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Segoe UI", "Apple SD Gothic Neo", system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    main { max-width: 860px; margin: 0 auto; padding: 36px 20px; }
+    .panel {
+      border: 2px solid var(--line);
+      box-shadow: 3px 3px 0 var(--line);
+      background: var(--panel);
+      padding: 20px;
+    }
+    h1 { margin: 0; font-size: 24px; }
+    .stamp { color: var(--muted); margin-top: 8px; font-size: 13px; }
+    h2 { color: var(--mint); font-size: 18px; margin-top: 28px; }
+    ul { padding-left: 20px; }
+    code { color: var(--cyan); }
+    .ok { color: var(--mint); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="panel">
+      <h1>O-9 Runtime Font Check</h1>
+      <div class="stamp">[2026-06-08 / 11:25:49 KST]</div>
+    </section>
+    <h2>Evidence</h2>
+    <ul>
+      <li>Route reached: <code>http://localhost:8088/sign-in</code></li>
+      <li>Ready state: <span class="ok">complete</span></li>
+      <li>Blank screen: <span class="ok">no</span></li>
+      <li>Body font: <code>Galmuri11, NeoDunggeunmo, monospace</code></li>
+      <li>Console errors: <span class="ok">0</span></li>
+      <li>Visible copy included the sign-in title, email/password labels, login CTA, and OAuth options.</li>
+    </ul>
+    <h2>Limit</h2>
+    <p>The in-app Browser backend was unavailable. Chrome extension fallback worked for DOM and console verification. Screenshot capture timed out, so no image evidence is attached.</p>
+  </main>
+</body>
+</html>

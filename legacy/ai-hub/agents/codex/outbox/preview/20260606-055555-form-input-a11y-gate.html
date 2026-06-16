@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Gate - Form Input Accessibility</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a0f1d;
+      --panel: #111827;
+      --panel2: #162033;
+      --text: #eef4ff;
+      --muted: #aab7d4;
+      --line: #2a3958;
+      --accent: #8bd3ff;
+      --risk: #ff9aa8;
+      --warn: #fcd34d;
+      --ok: #9be7c4;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    main { max-width: 1120px; margin: 0 auto; padding: 36px 20px 56px; }
+    header { display: grid; gap: 12px; margin-bottom: 22px; }
+    .eyebrow { color: var(--accent); font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 44px); line-height: 1.1; letter-spacing: 0; }
+    p { margin: 0; color: var(--muted); }
+    .score {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 10px;
+      border: 1px solid rgba(252, 211, 77, .45);
+      border-radius: 8px;
+      color: var(--warn);
+      background: rgba(252, 211, 77, .1);
+      font-weight: 800;
+    }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .wide { grid-column: 1 / -1; }
+    h2 { margin: 0 0 10px; font-size: 18px; letter-spacing: 0; }
+    ul, ol { margin: 8px 0 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 6px 0; }
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+      color: #dbeafe;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 1px 5px;
+    }
+    .risk { color: var(--risk); }
+    .ok { color: var(--ok); }
+    .rule {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 12px;
+      padding: 12px 0 0;
+      margin-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+    .rule strong { color: var(--text); }
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+      .rule { grid-template-columns: 1fr; gap: 4px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex to Claude · UI/UX Gate</div>
+      <h1>Form Input Accessibility / Validation Semantics</h1>
+      <p>버튼은 공용 계약이 있지만 입력 필드는 아직 없다. 화면상 라벨과 placeholder가 있어도 보조기술에는 필드명, 오류, required/invalid 상태가 일관되게 전달되지 않는다.</p>
+      <div class="score">Score: 98/100 provisional · form field contract gate open</div>
+    </header>
+
+    <section class="grid">
+      <article class="card wide">
+        <h2 class="ok">Good Patterns</h2>
+        <p><code>records</code>, <code>wiki</code>, <code>jarvis</code>, <code>import</code> 일부 입력은 explicit label을 가진다. <code>ConsentNotice</code> 체크박스와 <code>PremiumButton</code> role/state도 좋은 기준이다.</p>
+      </article>
+
+      <article class="card">
+        <h2 class="risk">P2 · Shared Input Contract</h2>
+        <p><code>Input.tsx:10-35</code>, <code>surfaces.tsx:307-321</code></p>
+        <ul>
+          <li>TextInput props를 그대로 넘기지만 label/helper/error 계약이 없다.</li>
+          <li>새 폼이 생길 때 unlabeled field가 계속 재발한다.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2 class="risk">P2 · Auth Fields</h2>
+        <p><code>sign-in.tsx:181-220</code>, <code>sign-up.tsx:209-224</code>, <code>BirthDateField.tsx:39-47</code></p>
+        <ul>
+          <li>시각 라벨은 있지만 필드 자체 label/invalid semantics가 없다.</li>
+          <li>생년월일 오류는 색상 텍스트로만 연결된다.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2 class="risk">P2 · Danger Confirm Inputs</h2>
+        <p><code>account.tsx:228-234</code>, <code>settings.tsx:517-523</code></p>
+        <ul>
+          <li>정확한 문구 입력이 필요한 위험 작업인데 placeholder만 있다.</li>
+          <li>비활성 danger button의 이유가 필드 상태로 전달되지 않는다.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2 class="risk">P2 · Long-Form Core Surfaces</h2>
+        <p><code>capture.tsx:845-947</code>, <code>audit.tsx:211-215</code>, <code>interview.tsx:347-351</code></p>
+        <ul>
+          <li>핵심 기록/성찰 입력이 placeholder 중심이다.</li>
+          <li>optional 여부도 label이 아니라 placeholder에 섞인다.</li>
+        </ul>
+      </article>
+
+      <article class="card wide">
+        <h2>Acceptance Criteria</h2>
+        <div class="rule"><strong>Input Contract</strong><p><code>Input</code>, <code>PremiumInput</code>, <code>PremiumTextarea</code>에 label/helper/error/required/invalid 규칙을 만든다.</p></div>
+        <div class="rule"><strong>Coverage</strong><p>auth, capture, audit, interview, account/settings danger, AddFormatFlow, TemplateEditor 입력에 explicit label을 추가한다.</p></div>
+        <div class="rule"><strong>Validation</strong><p>오류와 체크리스트/필드 상태는 색상만이 아니라 접근성 상태 또는 alert/live announcement로 전달한다.</p></div>
+        <div class="rule"><strong>Custom Controls</strong><p>Ask Advisor 등 커스텀 토글은 checkbox role/state를 가진다.</p></div>
+        <div class="rule"><strong>Proof</strong><p>남은 unlabeled input이 없다는 static audit과 주요 폼의 accessibility tree spot check를 첨부한다.</p></div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>O-10 Profile IA Handoff</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #09111f;
+      --panel: #101b31;
+      --line: rgba(114, 242, 199, 0.3);
+      --text: #eef3ff;
+      --muted: #a9b7d0;
+      --mint: #72f2c7;
+      --blue: #4cc9f0;
+      --amber: #ffd166;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(980px, calc(100vw - 32px));
+      margin: 32px auto;
+    }
+    header, section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 3px 3px 0 rgba(76, 201, 240, 0.18);
+    }
+    h1, h2 { margin: 0 0 10px; line-height: 1.25; }
+    h1 { font-size: 24px; color: var(--mint); }
+    h2 { font-size: 17px; color: var(--blue); }
+    p { margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 20px; }
+    code {
+      color: var(--amber);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .meta {
+      color: var(--muted);
+      display: grid;
+      gap: 4px;
+    }
+    .stamp { color: var(--mint); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="stamp">[2026-06-08 / 12:38:08 KST]</div>
+      <h1>O-10 Profile IA Simplification</h1>
+      <div class="meta">
+        <div>from: codex / to: claude</div>
+        <div>commit: <code>afc44ed fix(profile): make plan card primary CTA</code></div>
+        <div>branch: <code>codex/core-label-tail-cleanup</code></div>
+      </div>
+    </header>
+
+    <section>
+      <h2>Outcome</h2>
+      <p><code>나</code> 탭을 계정 허브 + 설정 1-depth 구조로 단순화했고, 플랜/구독 카드를 첫 번째 primary CTA로 올렸습니다.</p>
+      <ul>
+        <li>기본 <code>SceneHero</code> 제거.</li>
+        <li>우상단 설정 gear는 <code>/settings</code>로 이동.</li>
+        <li>플랜 카드는 <code>/plans</code>로 이동.</li>
+        <li>기타 도구는 <code>Open tools</code> disclosure 뒤로 정리.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Files</h2>
+      <ul>
+        <li><code>src/app/profile.tsx</code></li>
+        <li><code>locales/en/profile.json</code></li>
+        <li><code>locales/ko/profile.json</code></li>
+        <li><code>src/lib/__tests__/profile-ia.test.ts</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm run verify</code> PASS.</li>
+        <li>104 Jest suites / 890 tests PASS.</li>
+        <li>i18n 841 keys / 22 namespaces PASS.</li>
+        <li>Secret scan은 theme <code>tokens</code> import false-positive만 확인.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Limit</h2>
+      <p><code>/profile</code>은 인증 세션 없이 보호 화면을 직접 캡처하기 어려워 이번 슬라이스는 정적 가드와 전체 검증으로 고정했습니다.</p>
+    </section>
+  </main>
+</body>
+</html>

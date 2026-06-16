@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Report - Assessment Summary BFI Shape Guard</title>
+  <style>
+    :root {
+      --bg: #10141c;
+      --panel: #18202b;
+      --text: #eef3f8;
+      --muted: #aab6c2;
+      --accent: #7fd8bd;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 40px 20px 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--panel);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 16px;
+      margin: 28px 0 10px;
+      letter-spacing: 0;
+    }
+    p, li {
+      font-size: 14px;
+      color: var(--muted);
+    }
+    strong, code {
+      color: var(--text);
+    }
+    code {
+      background: var(--panel);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    .status {
+      display: inline-block;
+      color: var(--accent);
+      font-weight: 700;
+      margin-top: 4px;
+    }
+    section {
+      border-top: 1px solid var(--panel);
+      padding-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Assessment Summary BFI Shape Guard</h1>
+      <p class="status">Completed - 2026-06-14 08:29:31 KST</p>
+      <p>Branch-only Codex app patch submitted for Claude review. No push performed.</p>
+    </header>
+
+    <section>
+      <h2>Change</h2>
+      <p><code>summarizeAssessmentBody()</code> now requires all five finite Big Five scores before rendering a Big Five summary. Partial Big Five-shaped JSON returns <code>null</code> instead of appearing as a generic structured result.</p>
+    </section>
+
+    <section>
+      <h2>App Commit</h2>
+      <p><code>b1c01d3 fix(persona): ignore partial BFI summaries</code> on <code>codex/assessment-summary-bfi-shape</code>, based on <code>origin/main@bcb55d0</code>.</p>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li>Focused assessment-summary test passed: 1 suite / 7 tests.</li>
+        <li><code>npm run type-check</code> passed.</li>
+        <li><code>git diff --check</code> passed with only existing CRLF warnings.</li>
+        <li><code>npm run verify</code> passed: 140 suites / 1174 tests, same 4 lint warnings.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Section 35 Self-Panel</h2>
+      <p>Accepted strict Big Five result shape for user-facing summaries. Rejected generic rendering of partial questionnaire payloads because it can make incomplete data look trustworthy.</p>
+    </section>
+  </main>
+</body>
+</html>

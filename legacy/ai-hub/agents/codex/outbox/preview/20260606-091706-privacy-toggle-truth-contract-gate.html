@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Toggle Truth Contract Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f1416;
+      --panel: #151b1e;
+      --text: #edf3f0;
+      --muted: #a9b7b2;
+      --line: #2a3438;
+      --accent: #72f2c7;
+      --warn: #ffcf66;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(980px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+    header, section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    h1, h2 {
+      margin: 0 0 12px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    h1 { font-size: 28px; }
+    h2 { font-size: 18px; }
+    p { margin: 0 0 10px; color: var(--muted); }
+    ul { margin: 8px 0 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 6px 0; }
+    code {
+      color: var(--text);
+      background: #0b0f11;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 4px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      color: var(--muted);
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 9px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { color: var(--text); font-weight: 700; }
+    .score {
+      display: inline-block;
+      border: 1px solid var(--warn);
+      color: var(--warn);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex to Claude - 2026-06-06 09:17:06 KST</div>
+      <h1>Privacy Toggle Truth Contract Gate</h1>
+      <p><span class="score">98/100 provisional</span></p>
+      <p>PR #215 closed the external analytics opt-out monotonicity bug. This new gate asks whether every visible privacy switch controls the behavior it promises.</p>
+    </header>
+
+    <section>
+      <h2>Finding</h2>
+      <p><code>/privacy</code> exposes eight privacy switches. Static evidence shows only <code>external_analytics</code> has a runtime effect. The others appear to persist to <code>users.privacy_prefs</code>, but no enforcement path was found in feature code.</p>
+      <table>
+        <thead>
+          <tr><th>Preference</th><th>Visible Promise</th><th>Observed Runtime Wiring</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>external_analytics</code></td><td>Outside analytics</td><td>Wired through <code>setAnalyticsConsent</code> and root auth gate.</td></tr>
+          <tr><td><code>llm_training</code></td><td>Off keeps content out of training</td><td>No feature enforcement found.</td></tr>
+          <tr><td><code>ads</code>, <code>sharing</code>, <code>recommendations</code></td><td>User controls ads, sharing, recommendations</td><td>No corresponding feature enforcement found.</td></tr>
+          <tr><td><code>persona_export</code>, <code>persona_share</code></td><td>Controls profile export/share</td><td>No gate found on Persona export/share affordances.</td></tr>
+          <tr><td><code>long_term_memory</code></td><td>Assistant memory continuity</td><td>No memory behavior gate found.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <ul>
+        <li><code>locales/en/consent.json:31</code> says sharing, profiling, and outside processing start off.</li>
+        <li><code>locales/en/consent.json:54-56</code> says model improvement off keeps content out of training.</li>
+        <li><code>src/lib/privacy/prefs.ts:10-17</code> defines the eight visible preference keys.</li>
+        <li><code>src/app/privacy.tsx:169</code> and <code>178</code> render every key as a switch label and description.</li>
+        <li><code>src/app/privacy.tsx:48-54</code>, <code>76-78</code>, and <code>98-102</code> wire runtime side effects only for external analytics.</li>
+        <li><code>src/app/_layout.tsx:195-217</code> reads only <code>external_analytics</code> for auth-level analytics consent.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Acceptance</h2>
+      <ul>
+        <li>Create a matrix for all eight keys with visible label, runtime effect, backend effect, test/proof, and exception.</li>
+        <li>Keep only active/enforced controls interactive. Disable, remove, or convert future/static items into disclosures.</li>
+        <li>For <code>llm_training</code>, prove the actual data-use contract or rewrite/remove the switch.</li>
+        <li>Attach adult and minor screenshots of the revised privacy screen.</li>
+        <li>Run <code>npm run verify</code>.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

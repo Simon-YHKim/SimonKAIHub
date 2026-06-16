@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DESIGN.md Signal-Glow Exception Decision</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --ink: #e7edf4;
+      --signal: #8f6cff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    main {
+      width: min(1080px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 48px 0 64px;
+    }
+
+    header {
+      border-bottom: 1px solid rgba(231, 237, 244, 0.16);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      letter-spacing: 0;
+      line-height: 1.15;
+    }
+
+    h1 {
+      font-size: clamp(30px, 4vw, 48px);
+      max-width: 920px;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 16px;
+      margin-top: 20px;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+
+    p {
+      margin: 0 0 14px;
+      color: rgba(231, 237, 244, 0.72);
+      max-width: 940px;
+    }
+
+    strong {
+      color: var(--ink);
+    }
+
+    code {
+      color: var(--ink);
+      background: rgba(231, 237, 244, 0.08);
+      border: 1px solid rgba(231, 237, 244, 0.16);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 0.92em;
+    }
+
+    section {
+      border-bottom: 1px solid rgba(231, 237, 244, 0.16);
+      padding: 0 0 26px;
+      margin-bottom: 26px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 6px;
+      background: rgba(231, 237, 244, 0.05);
+      border: 1px solid rgba(231, 237, 244, 0.16);
+    }
+
+    th,
+    td {
+      text-align: left;
+      vertical-align: top;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(231, 237, 244, 0.16);
+      color: rgba(231, 237, 244, 0.72);
+    }
+
+    th {
+      color: var(--ink);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: rgba(231, 237, 244, 0.08);
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .kicker {
+      color: var(--signal);
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 13px;
+    }
+
+    .decision {
+      border: 1px solid rgba(231, 237, 244, 0.16);
+      background: rgba(231, 237, 244, 0.05);
+      padding: 18px;
+      margin-top: 18px;
+    }
+
+    .callout {
+      border-left: 3px solid var(--signal);
+      padding: 12px 0 12px 16px;
+      margin: 16px 0;
+      background: rgba(231, 237, 244, 0.05);
+    }
+
+    .callout p {
+      margin-bottom: 0;
+    }
+
+    ul {
+      margin: 10px 0 0 20px;
+      padding: 0;
+      color: rgba(231, 237, 244, 0.72);
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    pre {
+      margin: 14px 0 0;
+      padding: 16px;
+      overflow: auto;
+      background: rgba(231, 237, 244, 0.05);
+      border: 1px solid rgba(231, 237, 244, 0.16);
+      color: var(--ink);
+      border-radius: 6px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="kicker">Decision Spec</div>
+      <h1>DESIGN.md Signal-Glow Exception for Premium Shared Surfaces</h1>
+      <p>Prepared by Codex for the shared-surfaces consistency fix. Scope is documentation only: no application code changes are included in this artifact.</p>
+    </header>
+
+    <section>
+      <h2>Decision</h2>
+      <div class="decision">
+        <p><strong>Sanction one narrow glow family:</strong> named, colored <code>signal-halo</code> glows using the design tokens <code>soulViolet</code> and <code>mint</code>, only for art, aura, and ambient signal moments in premium backgrounds.</p>
+        <p><strong>Remove black elevation shadows:</strong> any <code>#000</code>, <code>black</code>, or opacity-black <code>box-shadow</code>/<code>drop-shadow</code> used to lift dark cards, glass panels, shells, controls, or shared surfaces must be removed from premium shared components.</p>
+      </div>
+      <div class="callout">
+        <p>This resolves the apparent conflict between the shadow/glass/gradient audit finding and the intentional premium art direction: colored aura is a content signal; black shadow elevation on dark UI is not.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Sanctioned Glow</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Tokens</th>
+            <th>Allowed Use</th>
+            <th>Constraints</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>signal-halo.soulViolet</code></td>
+            <td><code>rgba(var(--soul-violet-rgb), 0.18)</code> to <code>0.28</code></td>
+            <td>Ambient premium background aura, art-only edge bloom, non-interactive hero signal.</td>
+            <td>No layout elevation. No text container glow. No card shadow. Must be behind content or clipped to decorative art.</td>
+          </tr>
+          <tr>
+            <td><code>signal-halo.mint</code></td>
+            <td><code>rgba(var(--mint-rgb), 0.12)</code> to <code>0.22</code></td>
+            <td>Secondary signal accent paired with violet in premium background art.</td>
+            <td>Use sparingly. Mint may not become the dominant page wash. Must not imply focus, success, or active state unless the component explicitly owns that semantic.</td>
+          </tr>
+          <tr>
+            <td><code>signal-halo.mixed</code></td>
+            <td>Layered <code>soulViolet</code> and <code>mint</code> only</td>
+            <td>Soft multi-stop aura in <code>premium/background.tsx</code> and decorative brand art.</td>
+            <td>Maximum two colored halo layers per component. No blur value above <code>72px</code> on mobile. Prefer static gradients over runtime blur filters on Android.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Disallowed Shadow</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pattern</th>
+            <th>Decision</th>
+            <th>Replacement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>box-shadow: 0 ... rgba(0, 0, 0, ...)</code></td>
+            <td>Remove from dark shared surfaces, including premium cards, panes, sheets, shells, and glass panels.</td>
+            <td>Use <code>border: 1px solid var(--surface-border)</code> plus a subtle top highlight token if needed.</td>
+          </tr>
+          <tr>
+            <td><code>filter: drop-shadow(... #000 ...)</code></td>
+            <td>Remove. It is visually muddy on dark surfaces and expensive when combined with blur/elevation on Android.</td>
+            <td>Use no filter. If separation is required, adjust surface fill contrast by one token step.</td>
+          </tr>
+          <tr>
+            <td>Glass panel with backdrop blur plus black shadow</td>
+            <td>Remove the shadow. The blur and border already define the material.</td>
+            <td>Use <code>--surface-glass-fill</code>, <code>--surface-border</code>, and <code>--surface-highlight</code>.</td>
+          </tr>
+          <tr>
+            <td>Large black ambient shadow under premium art</td>
+            <td>Remove unless it is a literal image asset shadow from the artwork itself.</td>
+            <td>Use sanctioned <code>signal-halo</code> tokens only when the glow is part of the art direction.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Token Recommendations</h2>
+      <p>Add or align these semantic tokens in the design guidance. Names are intentionally semantic so implementation can map to the existing palette without hard-coding color literals across components.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Recommended Value</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>--signal-halo-soul-violet</code></td>
+            <td><code>rgba(var(--soul-violet-rgb), 0.24)</code></td>
+            <td>Default sanctioned violet aura for premium art and background signal.</td>
+          </tr>
+          <tr>
+            <td><code>--signal-halo-soul-violet-soft</code></td>
+            <td><code>rgba(var(--soul-violet-rgb), 0.16)</code></td>
+            <td>Mobile or low-density violet aura where blur/elevation cost should be lower.</td>
+          </tr>
+          <tr>
+            <td><code>--signal-halo-mint</code></td>
+            <td><code>rgba(var(--mint-rgb), 0.18)</code></td>
+            <td>Secondary premium signal accent.</td>
+          </tr>
+          <tr>
+            <td><code>--surface-border</code></td>
+            <td><code>rgba(255, 255, 255, 0.10)</code></td>
+            <td>Primary separation for dark panels instead of black shadows.</td>
+          </tr>
+          <tr>
+            <td><code>--surface-border-strong</code></td>
+            <td><code>rgba(255, 255, 255, 0.16)</code></td>
+            <td>Higher-contrast separation for nested or active dark surfaces.</td>
+          </tr>
+          <tr>
+            <td><code>--surface-highlight</code></td>
+            <td><code>rgba(255, 255, 255, 0.06)</code></td>
+            <td>Optional top-edge material highlight when a panel needs depth without shadow.</td>
+          </tr>
+          <tr>
+            <td><code>--surface-glass-fill</code></td>
+            <td><code>rgba(255, 255, 255, 0.045)</code></td>
+            <td>Dark glass fill that does not rely on black elevation.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Exact DESIGN.md Wording</h2>
+      <p>Add the following section to DESIGN.md under visual effects, premium surfaces, or the shared component rules.</p>
+      <pre>### Signal-Glow Exception
+
+Premium shared surfaces must not use black elevation shadows on dark UI. Remove `#000`, `black`, and opacity-black `box-shadow` or `drop-shadow` effects from dark cards, glass panels, shells, controls, and shared surface components. Depth on dark surfaces comes from fill contrast, `--surface-border`, `--surface-border-strong`, and the optional top-edge `--surface-highlight` token.
+
+The only sanctioned glow exception is the named `signal-halo` family. `signal-halo` is a colored art effect, not an elevation model. It may use only `soulViolet` and `mint` tokens, and only for premium background aura, decorative brand art, or non-interactive ambient signal. It must not be applied to text containers, cards, buttons, menus, sheets, dialogs, or other UI surfaces as a substitute for elevation.
+
+Recommended signal tokens:
+- `--signal-halo-soul-violet: rgba(var(--soul-violet-rgb), 0.24)`
+- `--signal-halo-soul-violet-soft: rgba(var(--soul-violet-rgb), 0.16)`
+- `--signal-halo-mint: rgba(var(--mint-rgb), 0.18)`
+
+Recommended surface separation tokens:
+- `--surface-border: rgba(255, 255, 255, 0.10)`
+- `--surface-border-strong: rgba(255, 255, 255, 0.16)`
+- `--surface-highlight: rgba(255, 255, 255, 0.06)`
+- `--surface-glass-fill: rgba(255, 255, 255, 0.045)`
+
+Implementation rule: `src/components/premium/background.tsx` may retain or migrate colored premium aura to `signal-halo` tokens when the glow is decorative art. `src/components/premium/surfaces.tsx` and other shared UI surfaces must remove black shadows and use border, fill, and highlight tokens for separation. On Android, prefer static gradient fills and lower blur radii over backdrop blur plus shadow stacks.</pre>
+    </section>
+
+    <section>
+      <h2>Follow-On Fix Scope</h2>
+      <ul>
+        <li><strong>Keep:</strong> colored violet and mint premium background halos when named as <code>signal-halo</code> and constrained to decorative art.</li>
+        <li><strong>Remove:</strong> black drop shadows from <code>surfaces.tsx</code> cards, panes, glass wrappers, and reusable premium surface primitives.</li>
+        <li><strong>Replace:</strong> visual separation with surface border, fill, and highlight tokens.</li>
+        <li><strong>Android:</strong> avoid combining backdrop blur, large blur filters, and black shadows on the same dark surface.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

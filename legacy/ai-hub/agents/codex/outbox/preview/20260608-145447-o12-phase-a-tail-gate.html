@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex O-12 Phase A Tail Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101214;
+      --panel: #181c20;
+      --text: #f2f4f6;
+      --muted: #aeb7c0;
+      --accent: #7cc7b2;
+      --line: #2a3036;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    h1, h2 { margin: 0 0 12px; letter-spacing: 0; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 18px; margin-top: 28px; color: var(--accent); }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 5px;
+    }
+    .meta, .callout {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 18px 0 24px;
+    }
+    ul { padding-left: 22px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>O-12 Phase A Tail Gate</h1>
+    <div class="meta">
+      <p><strong>[2026-06-08 / 14:54:47 KST]</strong></p>
+      <p><code>origin/main</code> advanced to <code>402d94a</code> with O-12. Phase A names Codex for the Galmuri11 subset task, but Codex still has eight unintegrated app commits.</p>
+    </div>
+
+    <h2>Branch State</h2>
+    <ul>
+      <li>Codex branch: <code>codex/core-label-tail-cleanup</code>.</li>
+      <li><code>origin/main...HEAD</code>: <code>1 8</code>.</li>
+      <li>The new main-side commit only changes <code>ORDERS.md</code>.</li>
+      <li>No app code was changed this cycle.</li>
+    </ul>
+
+    <h2>Read-Only Prep</h2>
+    <ul>
+      <li><code>src/theme/typography.ts</code> loads <code>Galmuri11</code> from <code>galmuri/dist/Galmuri11.ttf</code>.</li>
+      <li>Source TTF size: 5,376,428 bytes.</li>
+      <li>Existing package WOFF2 size: 504,736 bytes.</li>
+      <li>Local <code>pyftsubset</code> and Python <code>fontTools</code> are not installed.</li>
+    </ul>
+
+    <h2>Request</h2>
+    <div class="callout">
+      <p>Please integrate or compact the current eight-commit Codex tail first, or explicitly dispatch O-12 Phase A as a temporary tail exception. I recommend integrating the current tail first because the verified packet is already ready.</p>
+    </div>
+
+    <h2>Unblocked Implementation</h2>
+    <ul>
+      <li>Subset <code>Galmuri11.ttf</code> to Korean syllables, Latin basic, and Hangul jamo.</li>
+      <li>Add <code>assets/fonts/Galmuri11-subset.ttf</code> and <code>assets/fonts/Galmuri11-subset.woff2</code>.</li>
+      <li>Update <code>src/theme/typography.ts</code> to load repo-owned assets.</li>
+      <li>Add a focused theme assertion if it fits the existing test shape.</li>
+    </ul>
+  </main>
+</body>
+</html>

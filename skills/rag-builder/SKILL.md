@@ -1,6 +1,7 @@
 ---
 name: rag-builder
-description: "사용자가 만드는 제품에 검색증강생성(RAG) 파이프라인을 설계·구축할 때 사용. 트리거: \"RAG 만들어\", \"문서 기반 챗봇\", \"벡터 검색\", \"지식베이스 Q&A\", \"내 문서로 답하는 봇\", \"PDF 질의응답\", \"document QA\", \"vector search\", \"retrieval augmented\", /rag-builder. 인제스천·청킹 → 임베딩 모델 선택 → 벡터스토어 선택(pgvector·Pinecone·Chroma·Qdrant 표) → 검색(하이브리드·리랭크) → 근거/인용 강제 → 평가(faithfulness·relevance·recall) → 실패모드 대응 7단계를 비용·레이턴시와 함께 산출한다. 이 스킬은 '사용자가 만드는 RAG 제품'을 돕는 것이지 플러그인 내부 동작이 아니다."
+description: >
+  Use when designing or building a retrieval-augmented-generation (RAG) pipeline in the user's product. 트리거: "RAG 만들어", "문서 기반 챗봇", "벡터 검색", "지식베이스 Q&A", "PDF 질의응답", "document QA", "vector search", /rag-builder. Produces a seven-stage design (ingestion/chunking, embedding choice, vector store selection [pgvector/Pinecone/Chroma/Qdrant], hybrid retrieval + rerank, grounded citations, eval [faithfulness/relevance/recall], failure-mode handling) with cost/latency. Helps the user's RAG product, not this plugin.
 allowed-tools: Read, Write, Edit, Bash, WebSearch, AskUserQuestion
 version: 1.1.0
 author: simon-stack
@@ -304,3 +305,10 @@ node ../llm-eval/scripts/gate.mjs --baseline runs/baseline.json --result runs/re
   - `authz-designer` — 권한별 문서 검색 차단(멀티테넌트)
   - `paid-api-guard` — 임베딩/LLM 외부 API 비용 가드
   - `analytics-integrator` — 검색 품질·만족도 이벤트 추적
+
+## 완료 보고 (HTML) — 표준
+작업을 끝내면 **HTML 완료 보고서**를 생성한다 (SimonKCore `completion-report` 표준).
+- 첫 화면은 **심플 요약**(한눈 카드 한 줄) + 직관 그래픽/차트(인라인 SVG)·이미지.
+- 각 항목 옆 **[자세히] 버튼**(`<details>`)을 펼치면 상세 — 처음부터 쏟지 않는다(progressive disclosure).
+- 자체완결 1파일(인라인 CSS/SVG, 무JS) · 사용자 언어 · 현지시간 스탬프.
+- Core 있으면 `completion-report` 호출, 없으면 동일 형식으로 인라인 생성.

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Android Fix Punchlist</title>
+    <style>
+        body { background-color: #070A18; color: #A78BFA; font-family: monospace; padding: 40px; }
+        h1, h2 { color: #72F2C7; border-bottom: 1px solid #72F2C7; padding-bottom: 10px; }
+        .finding { margin-bottom: 20px; padding: 15px; border: 1px solid #72F2C7; border-radius: 4px; }
+        .real { border-left: 8px solid #72F2C7; }
+        .speculative { border-left: 8px solid #A78BFA; }
+        code { color: #72F2C7; }
+        .fix { color: #72F2C7; margin-top: 10px; border-top: 1px dotted #A78BFA; padding-top: 5px; }
+    </style>
+</head>
+<body>
+    <h1>ANDROID FIX PUNCHLIST</h1>
+    
+    <h2>REAL FINDINGS</h2>
+    
+    <div class="finding real">
+        <strong>BACKHANDLER MISSING</strong>
+        <p>Verified: No BackHandler in src/. PremiumBottomSheet fails to close.</p>
+        <div class="fix">
+            FIX: src/components/premium/feedback.tsx -> Add BackHandler listener in useEffect.
+        </div>
+    </div>
+
+    <div class="finding real">
+        <strong>ELEVATION/SHADOW</strong>
+        <p>Verified: elevation low/missing in surfaces.tsx. Shadows invisible.</p>
+        <div class="fix">
+            FIX: src/components/premium/surfaces.tsx -> Set elevation: 4 in styles.panel and styles.btn.
+        </div>
+    </div>
+
+    <div class="finding real">
+        <strong>ASYNCSTORAGE LIMIT</strong>
+        <p>Verified: Large JSON in lib/supabase/client.ts. 2MB CursorWindow risk.</p>
+        <div class="fix">
+            FIX: src/lib/supabase/client.ts -> Implement chunking or FileSystem storage.
+        </div>
+    </div>
+
+    <div class="finding real">
+        <strong>NAVGRAPH SVG PERF</strong>
+        <p>Verified: Complex SVG in NavGraph.tsx. ANR risk on Android.</p>
+        <div class="fix">
+            FIX: src/components/graph/NavGraph.tsx -> Add renderToHardwareTextureAndroid={true}.
+        </div>
+    </div>
+
+    <h2>SPECULATIVE / OTHER</h2>
+    <div class="finding speculative">KEYBOARDAVOIDINGVIEW: Behavior conflict with adjustResize.</div>
+    <div class="finding speculative">SCROLLVIEW PERF: Nested ScrollViews in app/records.tsx.</div>
+    <div class="finding speculative">PERMISSIONS: expo-image-picker missing in app.json.</div>
+    <div class="finding speculative">TEXT CLIPPING: numberOfLines cutting descenders on Android.</div>
+
+</body>
+</html>

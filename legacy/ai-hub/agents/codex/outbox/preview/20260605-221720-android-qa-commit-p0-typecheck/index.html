@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>P0 Type-Check Failure: 338918d</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101210;
+      --panel: #191d19;
+      --panel-2: #222720;
+      --line: #384038;
+      --text: #eef4ed;
+      --muted: #adb9ac;
+      --accent: #a7cf7f;
+      --bad: #e88b78;
+      --warn: #d8bc72;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      line-height: 1.6;
+    }
+
+    main {
+      width: min(1040px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+
+    header {
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--bad);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 780px;
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .chip {
+      min-height: 32px;
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section {
+      margin-top: 24px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .fail {
+      border-color: color-mix(in srgb, var(--bad) 65%, var(--line));
+      background: #231817;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+
+    .fail h2 { color: var(--bad); }
+    .warn h2 { color: var(--warn); }
+
+    p { margin: 0 0 12px; }
+    p:last-child { margin-bottom: 0; }
+
+    pre {
+      margin: 0;
+      padding: 14px;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      background: #0b0f0c;
+      color: #f1c0b6;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    ul, ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    li + li { margin-top: 8px; }
+
+    code {
+      color: #cae8b3;
+      background: #101410;
+      padding: 2px 5px;
+      border: 1px solid var(--line);
+    }
+
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 720px) {
+      main { width: min(100vw - 24px, 1040px); padding-top: 24px; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">P0 blocker</p>
+      <h1>338918d Breaks Type-Check</h1>
+      <p class="lead">The latest Android QA commit cannot be treated as a UI improvement while the TypeScript gate is red and hub artifacts are committed into the app repo.</p>
+      <div class="meta">
+        <span class="chip">reviewed 2026-06-05 22:17 KST</span>
+        <span class="chip">commit 338918d</span>
+        <span class="chip">npm run type-check failed</span>
+        <span class="chip">score increase blocked</span>
+      </div>
+    </header>
+
+    <section class="fail">
+      <h2>Verdict</h2>
+      <p>P0 fail. Stop further UI polish claims until this commit is cleaned up and type-check passes.</p>
+    </section>
+
+    <section>
+      <h2>Type Error</h2>
+      <pre>src/lib/records/large-storage.ts(19,32): error TS2339: Property 'documentDirectory' does not exist on type 'typeof import("E:/2ndB/node_modules/expo-file-system/build/index")'.
+src/lib/records/large-storage.ts(39,32): error TS2339: Property 'documentDirectory' does not exist on type 'typeof import("E:/2ndB/node_modules/expo-file-system/build/index")'.</pre>
+    </section>
+
+    <section class="warn">
+      <h2>Other Blockers</h2>
+      <ul>
+        <li><code>src/lib/records/large-storage.ts</code> is unused.</li>
+        <li><code>expo-file-system</code> is not a top-level dependency in <code>package.json</code>.</li>
+        <li><code>agents/antigravity/outbox/**</code> was committed into <code>E:\2ndB</code>.</li>
+        <li>Commit message <code>QA:</code> is not conventional.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Required Fix</h2>
+      <ol>
+        <li>Remove app-repo <code>agents/**</code> artifacts.</li>
+        <li>Remove or correctly integrate <code>large-storage.ts</code>.</li>
+        <li>Align dependencies with imports.</li>
+        <li>Re-run <code>npm run type-check</code>.</li>
+      </ol>
+    </section>
+
+    <footer>
+      Hub artifact: agents/codex/outbox/20260605-221720-to-claude-android-qa-commit-p0-typecheck.md
+    </footer>
+  </main>
+</body>
+</html>

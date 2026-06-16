@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Go-Live Merge AI Slop Re-Gate</title>
+  <style>
+    :root {
+      --bg: #101116;
+      --panel: #181a22;
+      --panel2: #20232d;
+      --text: #f4f1e8;
+      --muted: #b8b2a2;
+      --line: #343846;
+      --bad: #ff6b6b;
+      --warn: #f2c86b;
+      --good: #72f2c7;
+      --blue: #8fb3ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+      line-height: 1.55;
+    }
+    main { max-width: 1120px; margin: 0 auto; padding: 40px 20px 64px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 24px; }
+    h1 { margin: 0 0 12px; font-size: clamp(30px, 5vw, 48px); line-height: 1.08; letter-spacing: 0; }
+    h2 { margin: 0 0 12px; font-size: 20px; }
+    h3 { margin: 0 0 8px; font-size: 15px; }
+    p { margin: 0 0 12px; }
+    code, pre { font-family: "Cascadia Mono", Consolas, monospace; }
+    pre { overflow: auto; padding: 14px; background: #0b0c10; border: 1px solid var(--line); border-radius: 8px; }
+    .meta { color: var(--muted); font-size: 14px; margin-bottom: 10px; }
+    .score { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px; }
+    .score strong { font-size: 36px; color: var(--warn); line-height: 1; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin-top: 24px; }
+    .card {
+      grid-column: span 6;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    .card.full { grid-column: 1 / -1; }
+    .card.third { grid-column: span 4; }
+    .good { color: var(--good); }
+    .bad { color: var(--bad); }
+    .warn { color: var(--warn); }
+    .blue { color: var(--blue); }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; padding: 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    .next { background: var(--panel2); }
+    @media (max-width: 860px) {
+      main { padding-top: 28px; }
+      .card, .card.third { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="meta">2nd-B · claude/cycle-1-golive · HEAD 99d71fa · 2026-06-05 22:34 KST</div>
+      <h1>Go-Live Merge Re-Gate</h1>
+      <p>Safety merge는 들어왔습니다. 그래서 이전보다 나아졌습니다. 하지만 사용자 화면 기준 100점은 아직 아닙니다.</p>
+      <div class="score">
+        <strong>≤62/100</strong>
+        <span class="pill good">verify pass</span>
+        <span class="pill good">export allowlist merged</span>
+        <span class="pill bad">trust copy fail</span>
+        <span class="pill bad">retired route leakage</span>
+        <span class="pill bad">blank loading 19 routes</span>
+      </div>
+    </header>
+
+    <section class="grid">
+      <article class="card full">
+        <h2>Resolved Since Last Gate</h2>
+        <pre>9e0e9e0 in HEAD
+93d7e1d in HEAD
+
+npm run verify
+PASS: 91 suites, 823 tests</pre>
+        <p class="good">Export frontmatter allowlist and knowledge_sources curated-read migration are now present. This closes one prior P0.</p>
+      </article>
+
+      <article class="card">
+        <h2>P0 · Trust Copy</h2>
+        <p>Rejected wording still exists in manual, onboarding, audit, and locale tagline.</p>
+        <ul>
+          <li><code>An AI that learns you</code></li>
+          <li><code>small AI friend</code></li>
+          <li><code>handled gently</code></li>
+          <li><code>the sharper your Persona becomes</code></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>P0 · Retired Routes</h2>
+        <p><code>/journal</code> and <code>/imagine</code> remain active outputs from screens and model helpers.</p>
+        <ul>
+          <li>Wiki, Trinity, Settings, Persona, Onboarding, Index, Core Brain, Audit, Not Found</li>
+          <li>Persona evidence and self-portrait helpers</li>
+          <li>Village primary routes</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>P1 · Blank Loading</h2>
+        <p>19 route files still return null during auth/loading resolution.</p>
+        <pre>account, attachment, capture, data, import, inbox,
+insights, interview, manual, onboarding, privacy,
+research, settings, support, theme, trinity, wiki...</pre>
+      </article>
+
+      <article class="card">
+        <h2>P1 · Export Receipt</h2>
+        <p>The safe export logic exists, but the UI still mostly shows character count. The user needs a receipt.</p>
+        <ul>
+          <li>page count</li>
+          <li>source count</li>
+          <li>included metadata</li>
+          <li>excluded private/internal fields</li>
+        </ul>
+      </article>
+
+      <article class="card third">
+        <h2>P1 · Android Back</h2>
+        <p>Graph <code>NodeSheet</code> and <code>DataNodeSheet</code> still need close-first hardware back proof.</p>
+      </article>
+
+      <article class="card third">
+        <h2>P1 · Tiny Text</h2>
+        <p>10-13px text remains across auth, graph tags, tab bar, drill progress, safety, and wiki schema.</p>
+      </article>
+
+      <article class="card third">
+        <h2>P1 · Glow Budget</h2>
+        <p>Shadow/elevation is spread across auth, graph, capture, settings, account, and premium surfaces. Needs a budget.</p>
+      </article>
+
+      <article class="card full next">
+        <h2>Next Required Pass</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Priority</th>
+              <th>Action</th>
+              <th>Proof</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>P0</td>
+              <td>Replace overclaim copy with evidence-first copy.</td>
+              <td>Rejected phrase search returns zero.</td>
+            </tr>
+            <tr>
+              <td>P0</td>
+              <td>Stop emitting retired routes from active IA.</td>
+              <td>Route helper tests expect /capture and /jarvis divergent.</td>
+            </tr>
+            <tr>
+              <td>P1</td>
+              <td>Replace blank route loading with shared shell.</td>
+              <td>Route-level loading return-null count near zero.</td>
+            </tr>
+            <tr>
+              <td>P1</td>
+              <td>Add Wiki export receipt.</td>
+              <td>UI shows counts and excluded metadata.</td>
+            </tr>
+            <tr>
+              <td>P1</td>
+              <td>Prove Android safe-area/back behavior.</td>
+              <td>Device screenshots and hardware-back proof.</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

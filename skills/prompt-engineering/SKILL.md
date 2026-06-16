@@ -1,6 +1,7 @@
 ---
 name: prompt-engineering
-description: "사용자가 만드는 AI 제품·기능의 프롬프트를 설계·개선할 때 사용. 트리거: \"프롬프트 만들어\", \"프롬프트 개선\", \"프롬프트 짜줘\", \"시스템 프롬프트\", \"structured output\", \"JSON으로 출력\", \"프롬프트 인젝션 방어\", \"탈옥 막아줘\", \"few-shot\", \"prompt engineering\", \"system prompt\", \"prompt injection\", /prompt-engineering. 산출물: (1) 작업 정의(입력·출력·성공조건), (2) 패턴 선택(zero/few-shot · CoT · role · structured/JSON schema), (3) 시스템 프롬프트 초안, (4) 인젝션·탈옥 방어층(구분자·권한분리·출력검증), (5) eval 셋과 반복 개선 루프(나쁜 예 수집→수정). Claude tool-use / structured output 관점 기본. 이건 사용자 제품의 프롬프트를 만드는 스킬이지, 이 플러그인 내부 동작이 아니다."
+description: >
+  Use when designing or improving prompts for the user's AI product. 트리거: "프롬프트 만들어", "프롬프트 개선", "시스템 프롬프트", "structured output", "JSON으로 출력", "프롬프트 인젝션 방어", "few-shot", "prompt injection", /prompt-engineering. Produces a task definition (input/output/success), a pattern choice (zero/few-shot, CoT, role, structured/JSON schema), a system-prompt draft, an injection/jailbreak defense layer (delimiters, privilege separation, output validation), and an eval set + iteration loop. Builds the product's prompts, not this plugin's behavior.
 allowed-tools: Read, Write, Edit, WebSearch, AskUserQuestion
 version: 1.0.0
 author: simon-stack
@@ -164,3 +165,10 @@ author: simon-stack
 - `claude-api` — Claude tool-use·structured output·prefill·토큰/캐싱 API 레퍼런스(§4 강제 출력 구현 시).
 - `paid-api-guard` — 유료 LLM 호출 비용·rate 가드(eval 대량 실행 전 확인).
 - `/grill-me` — 작업 정의(§1)가 모호할 때 사양 구멍 먼저 메우기.
+
+## 완료 보고 (HTML) — 표준
+작업을 끝내면 **HTML 완료 보고서**를 생성한다 (SimonKCore `completion-report` 표준).
+- 첫 화면은 **심플 요약**(한눈 카드 한 줄) + 직관 그래픽/차트(인라인 SVG)·이미지.
+- 각 항목 옆 **[자세히] 버튼**(`<details>`)을 펼치면 상세 — 처음부터 쏟지 않는다(progressive disclosure).
+- 자체완결 1파일(인라인 CSS/SVG, 무JS) · 사용자 언어 · 현지시간 스탬프.
+- Core 있으면 `completion-report` 호출, 없으면 동일 형식으로 인라인 생성.

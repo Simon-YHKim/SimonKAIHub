@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Gate - Wide Web Content Measure</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090b12;
+      --panel: #111520;
+      --panel-2: #151b28;
+      --text: #f4f7fb;
+      --muted: #aab4c5;
+      --line: #2b3448;
+      --accent: #7cc7ff;
+      --warn: #f7bf5f;
+      --ok: #77d897;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1120px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+    header {
+      display: grid;
+      gap: 12px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 5vw, 58px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+    h2 { margin: 0 0 12px; font-size: 20px; }
+    h3 { margin: 0 0 8px; font-size: 16px; }
+    p { margin: 0; color: var(--muted); }
+    code {
+      color: #d9e8ff;
+      background: #0b1020;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: .92em;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+    .card {
+      grid-column: span 12;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .third { grid-column: span 4; }
+    .half { grid-column: span 6; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #1a1100;
+      background: var(--warn);
+      margin-bottom: 12px;
+    }
+    .ok { color: #06150c; background: var(--ok); }
+    ul { margin: 10px 0 0; padding-left: 20px; color: var(--muted); }
+    li + li { margin-top: 7px; }
+    .metric {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      color: var(--muted);
+    }
+    .metric:last-child { border-bottom: 0; }
+    .metric strong { color: var(--text); }
+    .note { background: var(--panel-2); border-left: 4px solid var(--accent); }
+    @media (max-width: 760px) {
+      main { width: min(100vw - 24px, 1120px); padding-top: 28px; }
+      .half, .third { grid-column: span 12; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Gate - 2026-06-06 06:52 KST</div>
+      <h1>Wide Web Content Measure</h1>
+      <p>Score remains <strong>98/100 provisional</strong>. Mobile-first layouts still need a deliberate desktop reading lane.</p>
+    </header>
+
+    <section class="grid" aria-label="Summary">
+      <article class="card third">
+        <span class="badge">P2</span>
+        <h2>Shell has no lane</h2>
+        <p><code>PremiumAppShell</code> supplies padding and safe area, but no centered max-width content lane.</p>
+      </article>
+      <article class="card third">
+        <span class="badge">P2</span>
+        <h2>Scroll styles stretch</h2>
+        <p>25 of 29 files with a <code>scroll</code> style have no <code>maxWidth</code> anywhere.</p>
+      </article>
+      <article class="card third">
+        <span class="badge">P2</span>
+        <h2>Web is first-class</h2>
+        <p>Expo Web static output means desktop composition must be proven, not assumed.</p>
+      </article>
+    </section>
+
+    <section class="grid" aria-label="Evidence">
+      <article class="card half">
+        <h2>Metrics</h2>
+        <div class="metric"><span>Files with scroll style</span><strong>29</strong></div>
+        <div class="metric"><span>Files with maxWidth</span><strong>11</strong></div>
+        <div class="metric"><span>Scroll-style files with no maxWidth</span><strong>25</strong></div>
+        <div class="metric"><span>Route-level shell max width</span><strong>0</strong></div>
+      </article>
+      <article class="card half">
+        <h2>Examples</h2>
+        <ul>
+          <li><code>sign-in</code> scroll: padding only.</li>
+          <li><code>sign-up</code> scroll: bottom padding only.</li>
+          <li><code>manual</code> scroll: gap and bottom padding only.</li>
+          <li><code>settings</code> sections: full-width card stack.</li>
+          <li><code>wiki</code> list: gap and bottom padding only.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid" aria-label="Acceptance">
+      <article class="card note">
+        <h2>Acceptance Before 100</h2>
+        <ul>
+          <li>Define route classes: full-bleed interactive, reading/form, list/detail, chat/composer, settings/destructive.</li>
+          <li>Add a shared desktop lane or explicit per-route exceptions.</li>
+          <li>Prove sign-in, sign-up, manual, wiki, settings, account, privacy, and capture at 1440px and 1920px.</li>
+          <li>Confirm mobile composition is unchanged while wide web gains intentional measure.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

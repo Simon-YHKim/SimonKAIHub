@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Loop - First Record Handoff</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --text: #17202a;
+      --muted: #5f6b7a;
+      --line: #dce2ea;
+      --accent: #176b5d;
+      --accent-soft: #e4f3ef;
+      --code: #233142;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 24px 0 10px;
+    }
+    p {
+      margin: 8px 0;
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(23, 107, 93, 0.22);
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-right: 6px;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 8px 0;
+    }
+    li {
+      margin: 4px 0;
+    }
+    code {
+      color: var(--code);
+      background: #eef2f6;
+      border: 1px solid #dbe3ec;
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.94em;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>First Record Handoff</h1>
+      <p class="meta">Codex autonomous loop report - 2026-06-11 / 05:31:33 KST</p>
+      <p><span class="badge">submitted</span><span class="badge">2nd-B</span><span class="badge">capture a11y</span></p>
+    </header>
+
+    <section class="card">
+      <h2>Summary</h2>
+      <p>Codex completed one autonomous loop iteration and submitted a narrow first-record handoff improvement. The first-save success panel already sent journal entries to records instead of the graph; this patch gives that records CTA an explicit localized accessibility hint and removes stale onboarding-quest wording from the dormant journal gate copy.</p>
+      <p>No nested loop was created, started, edited, or scheduled.</p>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Branch</h2>
+        <ul>
+          <li>Worktree: <code>C:\Coding\_worktrees\2ndB-codex</code></li>
+          <li>Branch: <code>codex/intro-continuity-20260611</code></li>
+          <li>Base: <code>origin/main@7de0d64</code></li>
+          <li>Commit: <code>99985ff fix(capture): clarify first-record handoff</code></li>
+          <li>Remote: <code>origin/codex/intro-continuity-20260611@99985ff</code></li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Changed Files</h2>
+        <ul>
+          <li><code>src/app/capture.tsx</code></li>
+          <li><code>locales/en/capture.json</code></li>
+          <li><code>locales/ko/capture.json</code></li>
+          <li><code>scripts/check-constraints.ts</code></li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="card">
+      <h2>Behavior</h2>
+      <ul>
+        <li>Records-only first-save CTA now announces that it opens records so the entry can be found again.</li>
+        <li>Source and OCR source paths keep their graph highlight hints.</li>
+        <li>Dormant journal gate fallback copy no longer says the user must finish onboarding; it uses a generic level-gate phrase.</li>
+        <li>The constraint checker now protects the new records CTA hint and i18n key.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Verification</h2>
+      <ul>
+        <li>PASS: <code>npm run check:i18n</code></li>
+        <li>PASS: <code>npm run check:constraints</code></li>
+        <li>PASS: <code>npm run verify</code> after final rebase, 115 suites and 1043 tests</li>
+        <li>PASS: Expo web export after final rebase, 44 static routes</li>
+        <li>PASS: <code>git diff --check HEAD~1..HEAD</code></li>
+        <li>PASS: changed-commit credential-pattern scan</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

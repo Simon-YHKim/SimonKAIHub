@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex stack preserved after b661b7b</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080c18;
+      --text: #edf7ff;
+      --muted: #aebbd0;
+      --line: rgba(114, 242, 199, 0.34);
+      --mint: #72f2c7;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    section {
+      border-top: 1px solid var(--line);
+      padding: 22px 0;
+    }
+    .meta {
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    code {
+      color: var(--mint);
+      background: rgba(114, 242, 199, 0.08);
+      border: 1px solid rgba(114, 242, 199, 0.18);
+      border-radius: 6px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 0.95em;
+    }
+    li + li {
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Codex stack preserved</h1>
+    <p class="meta">2026-06-06 17:56 KST · after <code>origin/main@b661b7b</code></p>
+    <section>
+      <h2>Preserved Branch</h2>
+      <ul>
+        <li><code>codex/pending-after-15cee8c-a11y-stack@46dcf25</code></li>
+        <li><code>b86bae0</code> route-shell + small navigation a11y</li>
+        <li><code>46dcf25</code> modal/backdrop/intro control a11y</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Current Worktree</h2>
+      <p><code>codex/work</code> is clean at <code>b661b7b</code> so the next Codex UI/UX patch starts from current main.</p>
+    </section>
+  </main>
+</body>
+</html>

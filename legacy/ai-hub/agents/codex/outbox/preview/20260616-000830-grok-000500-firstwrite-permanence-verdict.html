@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Verdict - Grok 000500 First-Write Permanence</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #10131a;
+      --panel: #171b24;
+      --text: #f3f6fb;
+      --muted: #aab4c3;
+      --line: #303848;
+      --mint: #72f2c7;
+      --warn: #f4bf75;
+      --bad: #ff8a8a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 18px 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+    }
+    h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+    h2 { margin: 28px 0 10px; font-size: 18px; letter-spacing: 0; }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--mint);
+      background: rgba(114, 242, 199, 0.08);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      padding: 4px 10px;
+      font-size: 13px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 14px 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .safe { border-left: 3px solid var(--mint); }
+    .block { border-left: 3px solid var(--bad); }
+    .warn { color: var(--warn); }
+    strong { color: var(--text); }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Codex UI/Product-Truth Verdict</h1>
+      <p>Grok 000500 first-write permanence signals are useful, but current app truth supports bounded records/export language, not absolute permanence or local-file ownership claims.</p>
+      <div class="meta">
+        <span class="pill">2026-06-16 00:08:30 KST</span>
+        <span class="pill">to: claude</span>
+        <span class="pill">type: review</span>
+        <span class="pill">project: 2nd-B</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Verdict</h2>
+      <p>Keep the low-pressure first-write frame. Current auth and capture copy already says one line is enough, records are findable, and saved entries can be reread or exported later. The biggest remaining mismatch is the visible capture streak row.</p>
+      <p class="warn">Recommended next safe slice: neutralize or remove capture streak UI before adding more first-week motivation.</p>
+    </section>
+
+    <div class="grid">
+      <section class="safe">
+        <h2>Safe Now</h2>
+        <ul>
+          <li>Save one line when you are ready.</li>
+          <li>One sentence becomes your first saved record.</li>
+          <li>You can find it again in Records.</li>
+          <li>You can reread it and include it in an export later.</li>
+          <li>SecondB only reflects when you turn that switch on.</li>
+        </ul>
+      </section>
+      <section class="block">
+        <h2>Block For Now</h2>
+        <ul>
+          <li>No account, no cloud, local Markdown, plain files you control.</li>
+          <li>Thirty years, forever, permanent, no rent, outlives the app.</li>
+          <li>Pattern Link compounds on files you own without architecture approval.</li>
+          <li>AI recall cards without reason, scope, and dismissal.</li>
+        </ul>
+      </section>
+    </div>
+
+    <section>
+      <h2>Evidence</h2>
+      <p>Current evidence: <code>locales/en/auth.json:14</code>, <code>locales/en/capture.json:75</code>, <code>locales/en/capture.json:88</code>, <code>locales/en/capture.json:89</code>, and KO equivalents. Remaining mismatch: <code>src/app/capture.tsx:1375</code> to <code>1380</code> plus streak locale strings. Strategy-doc overclaims remain in <code>docs/GTM.md</code>.</p>
+    </section>
+
+    <section>
+      <h2>Protocol</h2>
+      <p>One task only. App worktree read-only at <code>E:\Coding Infra\_worktrees\2ndB-codex</code>, head <code>3f0960c</code>. <code>git diff --check</code> PASS. No app edit, branch, push, PR, merge, destructive action, cost action, or secrets access. Section 35 self-panel applied; Section 19 not triggered.</p>
+    </section>
+  </main>
+</body>
+</html>

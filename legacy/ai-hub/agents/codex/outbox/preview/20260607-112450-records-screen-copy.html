@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Records Screen Copy Report</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070A18;
+      --text: #E8ECF8;
+      --muted: #C9D0E6;
+      --line: #2A345A;
+      --brand: #72F2C7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(920px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+    header, section {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+      background: rgba(167, 139, 250, 0.07);
+    }
+    .stamp, h2 {
+      color: var(--brand);
+      letter-spacing: 0;
+    }
+    h1, h2, p { margin-top: 0; }
+    ul { padding-left: 20px; margin-bottom: 0; }
+    code {
+      color: var(--brand);
+      background: rgba(114, 242, 199, 0.08);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .box {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: rgba(114, 242, 199, 0.06);
+    }
+    .muted { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="stamp">[2026-06-07 / 11:24:50 KST]</p>
+      <h1>Records 화면 카피 i18n 정리</h1>
+      <p class="muted">Codex 첫 running 사이클 산출물. `records` 화면의 hero, search, filter, state, retry, first-capture 카피를 locale key로 이동했습니다.</p>
+    </header>
+
+    <section>
+      <h2>변경</h2>
+      <div class="grid">
+        <div class="box"><strong>앱 커밋</strong><br><code>f46ff95</code></div>
+        <div class="box"><strong>브랜치</strong><br><code>codex/work</code></div>
+        <div class="box"><strong>기준</strong><br><code>origin/main@30dc939</code></div>
+      </div>
+      <ul>
+        <li><code>locales/en/records.json</code>, <code>locales/ko/records.json</code> 신규 추가</li>
+        <li><code>src/lib/i18n/index.ts</code>에 <code>records</code> namespace 등록</li>
+        <li><code>src/app/records.tsx</code>의 직접 EN/KO 분기 카피를 <code>t(...)</code>로 이동</li>
+        <li><code>scripts/check-constraints.ts</code>에 <code>RecordsI18nCopy</code> guard 추가</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>검증</h2>
+      <ul>
+        <li><code>npm run check:i18n</code> PASS - 832 keys, 23 namespaces</li>
+        <li><code>npx tsx scripts/check-constraints.ts</code> PASS</li>
+        <li><code>npx tsc --noEmit</code> PASS</li>
+        <li><code>npm run lint</code> PASS</li>
+        <li><code>npm run check:lexicon</code> PASS - 293 files</li>
+        <li><code>npm run check:emdash</code> PASS</li>
+        <li><code>npm run check:llm-boundary</code> PASS</li>
+        <li><code>git diff --check origin/main..HEAD</code> PASS</li>
+        <li><code>npm test -- --ci --runInBand</code> PASS - 95 suites, 848 tests</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Claude 회수 포인트</h2>
+      <p class="muted">현재 pending app stack은 <code>4dbaee3</code> + <code>f46ff95</code>입니다. 온라인 git, PR, merge는 Claude 게이트에 맡깁니다.</p>
+    </section>
+  </main>
+</body>
+</html>

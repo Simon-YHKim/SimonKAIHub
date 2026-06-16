@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex 121bc87 Re-gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #10131a;
+      --panel: #171b24;
+      --panel-2: #202633;
+      --text: #eef2f8;
+      --muted: #aeb8c9;
+      --line: #2b3445;
+      --accent: #7cc7ff;
+      --ok: #8ee6a8;
+      --warn: #ffcf70;
+      --bad: #ff9d9d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Pretendard", "Segoe UI", system-ui, sans-serif;
+      line-height: 1.58;
+      word-break: keep-all;
+    }
+    main {
+      width: min(1040px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 22px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(30px, 5vw, 52px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+    .summary {
+      max-width: 780px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+    .score {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 18px;
+      align-items: center;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+    .score strong {
+      display: block;
+      font-size: 42px;
+      line-height: 1;
+      color: var(--ok);
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      margin-top: 16px;
+    }
+    h2 { font-size: 20px; margin: 0 0 14px; letter-spacing: 0; }
+    h3 { font-size: 16px; margin: 18px 0 8px; letter-spacing: 0; }
+    p { margin: 0 0 10px; }
+    ul, ol { margin: 0; padding-left: 21px; }
+    li + li { margin-top: 7px; }
+    code {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      color: #d8e8ff;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 0.94em;
+    }
+    .tag {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 9px;
+      margin-right: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .mini {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .mono-list { columns: 2; column-gap: 22px; }
+    @media (max-width: 720px) {
+      main { width: min(100vw - 22px, 1040px); padding-top: 24px; }
+      .score, .grid { grid-template-columns: 1fr; }
+      .mono-list { columns: 1; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Codex UI/UX Re-gate</p>
+      <h1>121bc87 Crosses 90</h1>
+      <p class="summary">Claude의 88-regate cleanup과 AppState perf hardening을 완료 커밋 기준으로 재검수했다. 큰 slop는 많이 닫혔지만, 모든 화면 100점 기준에는 아직 raw error, consent/legal, provider/device proof가 남아 있다.</p>
+    </header>
+
+    <div class="score">
+      <strong>91</strong>
+      <div>
+        <span class="tag">provisional</span>
+        <span class="tag">verify pass</span>
+        <span class="tag">not 100</span>
+        <p style="margin-top:10px;">이전 88점 게이트는 넘었다. 단, 현재 점수는 `121bc87` 커밋 기준이며 이후 생긴 FlatList WIP는 포함하지 않는다.</p>
+      </div>
+    </div>
+
+    <section>
+      <h2>Accepted</h2>
+      <div class="grid">
+        <div class="mini"><b class="ok">Support vocabulary</b><p>지원 FAQ의 진단/치료 계열 visible copy는 제거됐다.</p></div>
+        <div class="mini"><b class="ok">Offline preview</b><p>사용자-facing <code>[MOCK]</code>와 key/stub 문구는 제품 톤으로 바뀌었다.</p></div>
+        <div class="mini"><b class="ok">Source brief</b><p>Phase 1 노출은 대부분 Source brief / 요약과 질문으로 바뀌었다.</p></div>
+        <div class="mini"><b class="ok">Perf edge</b><p><code>LivingAsset</code> background loop와 cold-start ticker 문제는 코드상 닫혔다.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Still Blocking 100</h2>
+      <h3><span class="bad">P1</span> Raw implementation errors</h3>
+      <p>all-screen 기준에서는 아직 여러 화면이 raw <code>message</code>를 alert/state에 노출할 수 있다.</p>
+      <ul class="mono-list">
+        <li><code>account</code></li>
+        <li><code>attachment</code></li>
+        <li><code>capture</code></li>
+        <li><code>big-five</code></li>
+        <li><code>inbox</code></li>
+        <li><code>import</code></li>
+        <li><code>insights</code></li>
+        <li><code>interview</code></li>
+        <li><code>research</code></li>
+        <li><code>trinity</code></li>
+        <li><code>wiki</code></li>
+        <li><code>AddFormatFlow</code></li>
+      </ul>
+
+      <h3><span class="bad">P1</span> Diagnosis source-of-truth conflict</h3>
+      <p><code>persona.tsx</code> still shows <code>진단이 아니며</code> / <code>Not a diagnosis</code>. CI allowlists this as mandatory, but <code>DESIGN.md</code> and <code>CLAUDE.md</code> forbid diagnosis vocabulary. Resolve the policy before 100.</p>
+
+      <h3><span class="bad">P1</span> Consent/legal readiness</h3>
+      <p><code>ConsentNotice</code> still marks the legal wording as placeholder pending legal review.</p>
+
+      <h3><span class="warn">P2</span> Small hit targets</h3>
+      <p>Assessment scale controls are fixed, but some chips/editors still use <code>hitSlop={2}</code>.</p>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <p><code>npm run verify</code> passed during this re-gate: 91 suites, 823 tests.</p>
+      <p>New uncommitted WIP appeared after <code>121bc87</code> in <code>inbox</code>, <code>records</code>, and <code>wiki</code>. It is not scored here.</p>
+    </section>
+  </main>
+</body>
+</html>

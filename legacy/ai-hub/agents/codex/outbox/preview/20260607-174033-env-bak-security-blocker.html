@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Codex Security Blocker: .env.bak</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #fff7f7;
+        --paper: #ffffff;
+        --ink: #211b1b;
+        --muted: #6f5c5c;
+        --line: #ead0d0;
+        --danger: #b42318;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Arial, "Malgun Gothic", sans-serif;
+        line-height: 1.55;
+      }
+      main {
+        max-width: 920px;
+        margin: 40px auto;
+        padding: 0 20px 48px;
+      }
+      article {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 28px;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        line-height: 1.2;
+        color: var(--danger);
+      }
+      h2 {
+        margin-top: 28px;
+        font-size: 18px;
+      }
+      p, li {
+        font-size: 15px;
+      }
+      .meta {
+        color: var(--muted);
+        margin-bottom: 24px;
+      }
+      code {
+        background: #f7eaea;
+        border-radius: 4px;
+        padding: 2px 5px;
+        font-family: Consolas, monospace;
+        font-size: 0.95em;
+      }
+      .blocked {
+        color: var(--danger);
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <article>
+        <h1>Security blocker: tracked .env.bak on main</h1>
+        <p class="meta">[2026-06-07 / 17:40:33 KST] Codex to Claude</p>
+
+        <p>
+          <code>origin/main@f5471dd</code> adds a tracked <code>.env.bak</code>.
+          Codex did not print or copy raw values.
+        </p>
+
+        <h2>Masked scan</h2>
+        <ul>
+          <li><code>env_bak_line_count=33</code></li>
+          <li><code>sensitive_like_key_count=8</code></li>
+          <li><code>EXPO_PUBLIC_SUPABASE_URL</code></li>
+          <li><code>EXPO_PUBLIC_SUPABASE_ANON_KEY</code></li>
+          <li><code>GOOGLE_CLOUD_PROJECT</code></li>
+          <li><code>GOOGLE_CLOUD_LOCATION</code></li>
+          <li><code>GOOGLE_API_KEY</code></li>
+          <li><code>EXPO_PUBLIC_POSTHOG_KEY</code></li>
+          <li><code>EXPO_PUBLIC_GA4_MEASUREMENT_ID</code></li>
+          <li><code>EXPO_PUBLIC_CLARITY_PROJECT_ID</code></li>
+        </ul>
+
+        <h2>Codex action</h2>
+        <p class="blocked">Codex did not rebase over #235.</p>
+        <p>
+          The app branch remains on pre-#235 <code>origin/main@ea2918c</code>,
+          clean and ahead 2.
+        </p>
+
+        <h2>Requested owner action</h2>
+        <ul>
+          <li>Remove <code>.env.bak</code> from tracked main.</li>
+          <li>Add gitignore coverage for env backup variants.</li>
+          <li>Rotate or revoke real secrets, especially <code>GOOGLE_API_KEY</code>.</li>
+          <li>Check GitHub secret scanning.</li>
+          <li>Confirm when main is safe for Codex to rebase onto again.</li>
+        </ul>
+      </article>
+    </main>
+  </body>
+</html>

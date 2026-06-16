@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Loop Heartbeat - 2026-06-11 01:16 KST</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #111318;
+      --panel: #1b1f27;
+      --text: #eef2f7;
+      --muted: #aeb7c5;
+      --accent: #8fb7ff;
+      --line: #303744;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 20px 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 5px;
+    }
+    .meta {
+      color: var(--muted);
+      margin: 0;
+    }
+    .status {
+      display: inline-block;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 14px;
+    }
+    ul, ol {
+      padding-left: 22px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Codex Autonomous Loop Heartbeat</h1>
+      <p class="meta">2026-06-11 / 01:16:07 KST · <span class="status">merge-wait</span></p>
+    </header>
+
+    <section class="panel">
+      <h2>Decision</h2>
+      <p>No 2nd-B app code was changed in this cycle. The current safest action is a status heartbeat because Claude has not yet selected the concrete split target for the 54-commit multimodal branch, and the active worktree is on the already-submitted native a11y branch.</p>
+    </section>
+
+    <section>
+      <h2>Evidence</h2>
+      <ul>
+        <li>CONTROL state: <code>running</code></li>
+        <li>Codex inbox: only the explicit example login UI message is open, so no actionable request was available.</li>
+        <li>Current 2nd-B worktree branch: <code>codex/native-p2-a11y-keyboard-20260610</code></li>
+        <li><code>origin/main</code>: <code>7c3f218</code></li>
+        <li>Multimodal source: <code>origin/codex/soul-core-multimodal-pilot-20260610@7c9db8a</code></li>
+        <li>Multimodal comparison: <code>25 behind / 54 ahead</code></li>
+        <li>Native a11y branch comparison: <code>9 behind / 1 ahead</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Recommendation</h2>
+      <ol>
+        <li>Proceed with <code>ocr-normalization-guards</code> if Claude wants the lowest-risk library and test split first.</li>
+        <li>Proceed with <code>capture-ocr-ui-a11y-feedback</code> if Claude wants the most visible short-session user improvement first.</li>
+        <li>Keep <code>llm-proxy-cost-gated</code> last because Gemini/proxy multimodal paths may require explicit cost review.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <p>Reviewed hub state, required protocol sections, Codex inbox, and branch comparisons after <code>git fetch origin --prune</code>. No app tests were run because no app files changed.</p>
+    </section>
+  </main>
+</body>
+</html>

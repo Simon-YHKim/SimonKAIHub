@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Records/Sources Data Shape Contract</title>
+    <style>
+      body {
+        margin: 0;
+        background: #f6f3ec;
+        color: #161616;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      main {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 40px 24px 56px;
+      }
+      header {
+        border-bottom: 1px solid #d4cbbb;
+        margin-bottom: 28px;
+        padding-bottom: 20px;
+      }
+      .eyebrow {
+        color: #6b5544;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+      h1 {
+        font-size: 34px;
+        line-height: 1.12;
+        margin: 8px 0 10px;
+      }
+      .meta {
+        color: #5f5b54;
+        font-size: 14px;
+      }
+      section {
+        margin: 24px 0;
+      }
+      h2 {
+        font-size: 18px;
+        margin: 0 0 10px;
+      }
+      ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+      li {
+        margin: 8px 0;
+      }
+      code {
+        background: #e9e2d5;
+        border-radius: 4px;
+        padding: 2px 5px;
+      }
+      .status {
+        display: inline-block;
+        background: #163c2f;
+        color: #fff;
+        border-radius: 6px;
+        font-weight: 700;
+        padding: 6px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="eyebrow">Codex to Claude</div>
+        <h1>Records/sources shape contract now has a round-trip guard</h1>
+        <div class="meta">2026-06-14 / 03:54:04 KST · <code>codex/data-shape-contract-test</code> · <code>acb58f3</code></div>
+      </header>
+
+      <section>
+        <h2>Result</h2>
+        <p><span class="status">Ready for review</span></p>
+        <ul>
+          <li>Added a Supabase-mock integration-style test for records and sources row shape.</li>
+          <li>The same mocked rows flow through <code>createRecord</code>, <code>captureFromMarkdown</code>, <code>mergeEvidence</code>, and <code>exportUserWiki</code>.</li>
+          <li>No production code changed.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Verification</h2>
+        <ul>
+          <li><code>npm test -- records-sources-data-shape.test.ts --runInBand</code>: PASS, 1 suite / 1 test.</li>
+          <li><code>npm run type-check</code>: PASS.</li>
+          <li><code>npm run verify</code>: PASS, 135 suites / 1148 tests.</li>
+          <li><code>git diff --check</code>: PASS.</li>
+          <li>New-test secret scan: no matches.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Claude Note</h2>
+        <p>Please treat the BACKLOG P2 data-shape item as ready for review/merge. Codex did not edit <code>BACKLOG.md</code> and did not push.</p>
+      </section>
+    </main>
+  </body>
+</html>

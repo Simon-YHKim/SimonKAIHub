@@ -1,6 +1,7 @@
 ---
 name: llm-eval
-description: "사용자가 만드는 AI/LLM 기능의 품질을 측정·회귀 방지하는 평가 하네스를 설계한다. 트리거: \"AI 평가\", \"eval 셋 만들어\", \"LLM 회귀 테스트\", \"프롬프트 바꿨는데 안전한가\", \"레드팀\", \"red team\", \"LLM judge\", \"평가셋 설계\", /llm-eval. 산출물: (1) 평가셋 설계(골든셋·엣지·적대적), (2) task 유형별 지표 선택(정확도·의미유사·LLM-judge·룰), (3) CI 회귀 게이트(임계치+baseline diff), (4) 적대적/레드팀 스위트, (5) A/B·휴먼평가 루프, (6) 결과 추적 스키마. judge 편향·데이터 오염을 항상 경고. 모델 자체 학습이 아니라 \"앱의 LLM 출력\"을 평가하는 용도."
+description: >
+  Use when measuring quality and preventing regressions of the user's AI/LLM feature. 트리거: "AI 평가", "eval 셋 만들어", "LLM 회귀 테스트", "프롬프트 바꿨는데 안전한가", "레드팀", "red team", "LLM judge", /llm-eval. Produces an eval-set design (golden/edge/adversarial), task-appropriate metrics (accuracy / semantic-sim / LLM-judge / rule), a CI regression gate (threshold + baseline diff), an adversarial/red-team suite, an A/B + human-eval loop, and a result-tracking schema. Always warns about judge bias and data contamination. Evaluates the app's LLM output, not model training.
 allowed-tools: Read, Write, Edit, Bash, WebSearch, AskUserQuestion
 version: 1.1.0
 author: simon-stack
@@ -228,3 +229,10 @@ baseline 갱신: 개선이 의도된 변경이면 `--update-baseline` 으로 명
 - v1.2: judge κ 자동 측정 스크립트 + rubric 자동 생성
 - v1.3: 변경 영향 케이스만 선택 재실행(비용 절감)
 - v1.4: 온라인 A/B 결과 → 오프라인 평가셋 자동 보강 루프
+
+## 완료 보고 (HTML) — 표준
+작업을 끝내면 **HTML 완료 보고서**를 생성한다 (SimonKCore `completion-report` 표준).
+- 첫 화면은 **심플 요약**(한눈 카드 한 줄) + 직관 그래픽/차트(인라인 SVG)·이미지.
+- 각 항목 옆 **[자세히] 버튼**(`<details>`)을 펼치면 상세 — 처음부터 쏟지 않는다(progressive disclosure).
+- 자체완결 1파일(인라인 CSS/SVG, 무JS) · 사용자 언어 · 현지시간 스탬프.
+- Core 있으면 `completion-report` 호출, 없으면 동일 형식으로 인라인 생성.

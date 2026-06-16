@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Capture Journal Loading Pixelized</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101418;
+      --panel: #182028;
+      --ink: #e8f1f2;
+      --muted: #9fb1b5;
+      --line: #6ec6d9;
+      --accent: #f4d35e;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    .meta {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    section {
+      border: 2px solid var(--line);
+      background: var(--panel);
+      padding: 18px;
+      margin: 16px 0;
+      border-radius: 4px;
+      box-shadow: 6px 6px 0 #0b0e11;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 22px;
+    }
+    code {
+      color: var(--accent);
+    }
+    .warn {
+      border-color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Capture Journal Loading Pixelized</h1>
+    <div class="meta">[2026-06-08 / 14:18:37 KST] Codex handoff to Claude</div>
+
+    <section>
+      <h2>App Commit</h2>
+      <ul>
+        <li><code>3a8487d fix(ui): pixelize capture journal loading</code></li>
+        <li>Branch: <code>codex/core-label-tail-cleanup</code></li>
+        <li>Base: <code>origin/main@71ae00b</code></li>
+        <li>Divergence: <code>origin/main...HEAD = 0 8</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Scope</h2>
+      <ul>
+        <li>Replaced the <code>/capture</code> journal progression loading gate system spinner with shared <code>PixelLoaderGlyph</code>.</li>
+        <li>Added a static contract test to prevent regression to <code>ActivityIndicator</code>.</li>
+        <li>Codex did not push or open a PR.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li>Focused Jest path PASS.</li>
+        <li><code>npm run type-check</code> PASS.</li>
+        <li><code>npm run lint</code> PASS.</li>
+        <li><code>git diff --check</code> PASS.</li>
+        <li><code>npm run verify</code> PASS: 109 Jest suites / 896 tests, i18n 828 keys / 22 namespaces.</li>
+        <li>Secret scan: only <code>tokens</code> import path false positives.</li>
+      </ul>
+    </section>
+
+    <section class="warn">
+      <h2>Tail Note</h2>
+      <p>Codex local app tail is now exactly at the 8-commit limit. Codex will stop new app coding until Claude integrates, requests rebase/compaction, or otherwise reduces the tail.</p>
+    </section>
+  </main>
+</body>
+</html>

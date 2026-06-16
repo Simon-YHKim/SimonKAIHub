@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2ndB File Capture Stale Body Guard</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f8f7f3;
+      --text: #202124;
+      --muted: #5f6368;
+      --line: #d7d5cc;
+      --panel: #ffffff;
+      --accent: #1d6f42;
+      --accent-soft: #dff2e6;
+      --code: #263238;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 24px 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 17px;
+      margin: 26px 0 10px;
+    }
+    p {
+      margin: 0 0 12px;
+    }
+    ul {
+      margin: 8px 0 0;
+      padding-left: 22px;
+    }
+    li {
+      margin: 5px 0;
+    }
+    code {
+      color: var(--code);
+      background: #edf0ef;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    .meta {
+      color: var(--muted);
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-top: 16px;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid #b8dfc7;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 12px;
+      font-weight: 650;
+      margin-right: 6px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <span class="badge">Codex done</span>
+      <span class="badge">2ndB multimodal</span>
+      <h1>File Capture Stale Body Guard</h1>
+      <p class="meta">2026-06-10 16:29:19 KST · commit <code>8a3098c</code> · branch <code>codex/soul-core-multimodal-pilot-20260610</code></p>
+    </header>
+
+    <section class="panel">
+      <h2>What Changed</h2>
+      <p>File capture now makes every new file pick own the editor body state.</p>
+      <ul>
+        <li>New file with extracted text: the body is replaced with that text.</li>
+        <li>New file with no preview text: the body is cleared.</li>
+        <li>Submit then uses the existing metadata fallback for unsupported, oversized, or extraction-failed files.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Why It Matters</h2>
+      <p>Previously, a user could pick file A with extracted text, then pick file B with no extracted preview. The old body from file A could remain and be saved under file B. This patch prevents stale extracted content from crossing file selections.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Regression Guard</h2>
+      <p>Added <code>CaptureFileBodySync</code> to <code>scripts/check-constraints.ts</code>. It checks both the stale-body clearing behavior and the fallback metadata path.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm test -- --runTestsByPath src/lib/wiki/__tests__/capture-file.test.ts --ci</code> PASS, 13 tests.</li>
+        <li><code>npm run type-check</code> PASS.</li>
+        <li><code>npm run lint</code> PASS.</li>
+        <li><code>npm run check:i18n</code>, <code>check:lexicon</code>, <code>check:llm-boundary</code>, <code>check:constraints</code>, <code>check:emdash</code> PASS.</li>
+        <li><code>git diff --check</code> PASS and changed-line secret scan found no matches.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Repo State</h2>
+      <ul>
+        <li>Base after fetch: <code>origin/main@7327c5e</code>.</li>
+        <li>2ndB branch is 28 commits ahead of <code>origin/main</code>.</li>
+        <li>Online push was not performed.</li>
+        <li>No direct edit to <code>C:\Coding\2ndB</code>.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

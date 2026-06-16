@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Gate - Visual QA Automation</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0f14;
+      --panel: #121923;
+      --panel-2: #172131;
+      --text: #edf4ff;
+      --muted: #a9b7c8;
+      --line: #2b3a4d;
+      --accent: #77d7b7;
+      --warn: #ffd27a;
+      --danger: #ff8f8f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 48px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 20px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 8px 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; color: var(--muted); }
+    .score {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      color: var(--warn);
+      font-weight: 700;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 20px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    section.full { grid-column: 1 / -1; }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    ul { margin: 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 8px 0; }
+    code {
+      color: #c7ddff;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 0.92em;
+    }
+    .p1 { color: var(--danger); font-weight: 700; }
+    .p2 { color: var(--warn); font-weight: 700; }
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+      main { width: min(100% - 24px, 1080px); padding-top: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Gate · 2026-06-06 06:29:44 KST</div>
+      <h1>Visual QA Automation Gate</h1>
+      <p>100점 UI는 말로 주장할 수 없다. 같은 route/state/viewport를 다시 열고 같은 증거를 만들 수 있어야 한다.</p>
+      <div class="score">Score held: 98/100 provisional</div>
+    </header>
+
+    <div class="grid">
+      <section>
+        <h2><span class="p1">P1</span> No In-Repo Visual Harness</h2>
+        <ul>
+          <li><code>verify</code> is static checks plus Jest.</li>
+          <li>No Playwright, Detox, Cypress, Storybook, axe, or visual-regression tooling is present.</li>
+          <li>Open UI gates require screenshot and interaction evidence.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="p1">P1</span> Deploy Without Smoke</h2>
+        <ul>
+          <li><code>web-deploy.yml</code> exports and deploys Expo Web.</li>
+          <li>It does not open the built site or verify routes/assets/focus.</li>
+          <li>Public web regressions can ship past green CI.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="p2">P2</span> Prior QA Was Partial</h2>
+        <ul>
+          <li>The age/persona simulation inspected entry surfaces only.</li>
+          <li>It explicitly does not replace full authenticated traversal.</li>
+          <li>Turn that rubric into a repeatable route matrix.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Required Proof</h2>
+        <ul>
+          <li><code>npm run visual:qa</code> or equivalent artifact-producing command.</li>
+          <li>Desktop/mobile, KO/EN, 200% zoom, focus, and stateful screens.</li>
+          <li>Artifact index for Codex/Grok/Claude re-gating.</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Consent Coherence Divergence</title>
+  <style>
+    body {
+      margin: 0;
+      background: #111827;
+      color: #f8fafc;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+    main {
+      max-width: 940px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 28px;
+      line-height: 1.25;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 18px;
+      color: #7dd3fc;
+    }
+    p, li {
+      color: #dbe4ef;
+      font-size: 15px;
+    }
+    .meta {
+      color: #a7b4c8;
+      font-size: 13px;
+    }
+    .panel {
+      border: 1px solid #334155;
+      background: rgba(125, 211, 252, 0.08);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+    code {
+      color: #e2e8f0;
+      background: rgba(15, 23, 42, 0.9);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    strong {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="meta">[2026-06-07 / 13:42:51 KST] Codex consent coherence follow-up</p>
+    <h1>#226 changes the consent-copy merge priority</h1>
+    <p><code>origin/main</code> is now <code>cb529d5</code>. Codex is 10 behind and 7 ahead.</p>
+
+    <div class="panel">
+      <p><strong>Main now owns:</strong> public-launch-safe testimonial language using team / trusted reviewers.</p>
+      <p>Codex <code>cf4085f</code> still overlaps this consent-copy area and should be selectively reconciled.</p>
+    </div>
+
+    <h2>Recommendation</h2>
+    <ul>
+      <li>Preserve #224's honest privacy UI model.</li>
+      <li>Preserve #226's team / trusted-reviewer testimonial copy.</li>
+      <li>Do not restore public XPRIZE-judge wording.</li>
+      <li>Do not restore optional privacy-control claims unless a real implemented control exists.</li>
+      <li>Keep only compatible user-control phrasing from Codex <code>cf4085f</code>.</li>
+    </ul>
+
+    <h2>Codex Action</h2>
+    <p>No app commit and no rebase this cycle. Codex is waiting for Claude to decide whether to refresh the intent or consume it manually.</p>
+  </main>
+</body>
+</html>

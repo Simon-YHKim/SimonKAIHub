@@ -1,0 +1,2403 @@
+{
+  "summary": "연령 10밴드 페르소나 시뮬 + 자산일관성 + 자연스러움(애니/이징/테마) 감사 → UX 개선 백로그",
+  "agentCount": 12,
+  "logs": [
+    "페르소나 UX 시뮬: 10 연령밴드 + 자산 + 모션 감사 시작",
+    "수집 264건 — 유형: {\"accessibility\":47,\"hidden\":42,\"overload\":42,\"non-intuitive\":87,\"stiffness\":31,\"asset-inconsistency\":15} / 담당: {\"codex\":190,\"claude\":33,\"ag\":34,\"simon\":7}"
+  ],
+  "result": {
+    "total": 264,
+    "byType": {
+      "accessibility": 47,
+      "hidden": 42,
+      "overload": 42,
+      "non-intuitive": 87,
+      "stiffness": 31,
+      "asset-inconsistency": 15
+    },
+    "byDoable": {
+      "codex": 190,
+      "claude": 33,
+      "ag": 34,
+      "simon": 7
+    },
+    "findings": [
+      {
+        "screen": "onboarding.tsx",
+        "persona": "72세 은퇴교사",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "진행 표시 점들(7x7px)이 너무 작아 터치하기 어려움. 각 단계의 제목과 본문이 충분히 크지 않으며, 다음 행동이 불명확함",
+        "suggestion": "진행 표시 점을 최소 20x20px로 확대하고, 보조 텍스트(현재 단계 X/5) 추가. 본문 텍스트 크기를 최소 16px로 높이고, 행간을 1.5 이상으로 설정",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "시각장애(저시력) 사용자",
+        "issueType": "hidden",
+        "severity": "high",
+        "description": "아트 워크(IslandArt, SecondBSprite 등)가 스크린리더 접근성이 없음. 시각 정보 전달만으로, 아트 없이는 화면이 완전히 비어있음",
+        "suggestion": "각 아트 요소에 accessibilityLabel 추가. 예: 'welcome 단계: 마을 풍경' 등. 아트 스테이지 View에 accessibilityRole='image' 및 설명 라벨 적용",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "(auth)/sign-in.tsx",
+        "persona": "근력약화(파킨슨병) 노인",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "이메일/비밀번호 입력 필드가 작고, OAuth 버튼들이 정렬되어 있지만 정확한 터치가 어려움. 비밀번호 보기/숨기기 토글(EyeIcon)의 터치 영역이 44x44px 미만",
+        "suggestion": "입력 필드 높이를 48px 이상으로 확대. 모든 터치 타깃을 최소 44x44px(iOS) 또는 48x48px(Android) 확보. hitSlop을 {top:8, bottom:8, left:8, right:8} 이상으로 설정",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "(auth)/sign-in.tsx",
+        "persona": "시각장애(저시력) 사용자",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "OAuth 제공자 버튼들이 아이콘만 있거나 작은 텍스트로만 표시. 비밀번호 필드 label이 부족함. authHero 이미지가 스크린리더 접근성 없음",
+        "suggestion": "각 OAuth 버튼에 명확한 accessibilityLabel 추가('Google로 로그인', '애플로 로그인' 등). 비밀번호 입력 필드에 accessibilityLabel 추가. authHero 이미지에 accessibilityLabel='SecondB 입장 이미지'",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "인지능력 저하(경증 치매) 사용자",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "5개의 모드 탭(journal, memo, linkclip, ocr, file)이 한 화면에 있고, 각 모드마다 다른 UI. 트랙 토글(daily/pro)도 동시에 표시. 첫 사용자는 뭘 눌러야 할지 알 수 없음",
+        "suggestion": "기본 모드를 '메모'로 설정하고 처음엔 하나의 입력 박스만 보이도록 함. 고급 모드(ocr, file)는 '더보기' 메뉴 뒤에 숨김. 트랙 토글을 모드 선택 후 2번째 단계로 이동",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "글을 못 읽는 사용자(비문해)",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "모드 선택 탭이 SVG 아이콘만으로 표시됨(ModeGlyph). 각 아이콘이 무엇을 의미하는지 불명확. 트랙 아이콘(TrackGlyph)도 마찬가지",
+        "suggestion": "각 모드 탭 아래에 텍스트 라벨 추가('메모', '링크', 'OCR', '파일' 등). 아이콘의 accessibilityLabel 설정. 트랙 토글 옆에 명확한 라벨 텍스트 추가",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "settings.tsx",
+        "persona": "인지능력 저하(경증 치매) 사용자",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "데이터 삭제 섹션에서 커스텀 확인 문구 입력(CONFIRM_PHRASE = 'DELETE')이 비표준이고 복잡함. 부주의로 모든 데이터를 지울 수 있음",
+        "suggestion": "확인 문구 입력 단계 제거. 대신 2단계 확인 사용: (1) '정말 삭제하시겠습니까?' Alert (2) '이 작업은 되돌릴 수 없습니다' 재확인. 삭제 버튼을 danger 색상으로 명확히 표시",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "index.tsx (NavGraph)",
+        "persona": "시각장애(저시력) 사용자",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "NavGraph의 노드들이 시각적으로만 표현되며, 작은 tier-4 데이터 점들(아이콘도 없음)은 스크린리더로 인식 불가. 그래프 구조가 완전히 숨겨짐",
+        "suggestion": "NavGraph 전체에 accessibilityRole='list' 설정. 각 노드(NavNode)를 accessibilityRole='button'으로 표현하고, accessibilityLabel='${label} 코어'로 설정. tier 3/4 노드는 hierarchical 구조를 accessibilityLabel에 포함 ('관계 카테고리 > 10대')",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "index.tsx (NavGraph)",
+        "persona": "운동장애(손떨림) 사용자",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "노드들이 작음(특히 tier-4 데이터 점들). 터치 타깃이 44x44px 미만일 가능성 높음. 스와이프/핀치 제스처가 정확성 요구",
+        "suggestion": "모든 노드의 터치 영역을 최소 44x44px 이상으로 확보(hitSlop 사용). tier-4 노드는 시각 크기는 작지만 터치 영역은 확대. 줌인/줌아웃 대신 버튼 기반 계층 탐색 제공 ('다음 카테고리 보기', '이전으로')",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "index.tsx (NavGraph)",
+        "persona": "인지능력 저하(경증 치매) 사용자",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "4개 tier 계층 구조, 노드 간 엣지, 5개의 Pattern Core + Soul Core 개념이 매우 추상적. 첫 사용자는 뭘 눌러야 할지, 어디로 가야 할지 전혀 모름",
+        "suggestion": "초보자 모드 추가: tier 1-2만 먼저 표시하고, tier 3 이상은 '더 보기' 버튼으로 단계적 공개. 각 노드에 accessibilityLabel에 '여기를 누르면 일과 성장 기록을 볼 수 있습니다' 같은 설명 추가. 첫 방문 시 간단한 가이드 팝업 표시",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "big-five.tsx, attachment.tsx, audit.tsx (평가 도구)",
+        "persona": "고령 사용자(78세)",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "평가 화면의 선택지(예: Likert scale 버튼들)가 가로 배열되어 있고, 터치 타깃이 작을 가능성. 텍스트 설명이 복잡하거나 작음",
+        "suggestion": "선택지 버튼을 세로 배열로 변경 또는 버튼 크기 확대(최소 44x44px). 텍스트 크기를 최소 16px로 설정. Likert scale 레이블(예: '매우 동의함' ~ '매우 동의하지 않음')을 명확하고 크게 표시",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "14세 중학생",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "5개 모드(journal/memo/link/ocr/file) 탭 + 트랙 토글 + 해시태그 추가 + 분류 결과 + 제안 형식 섹션이 한 화면에 겹쳐 있음. 간단한 일기도 복잡해 보임.",
+        "suggestion": "기본 모드는 'journal'만 보이게 하고, '더보기' 누르면 다른 모드 노출. 또는 탭 인터페이스 대신 선택 후 상세 화면 이동.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "16세 알바생",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "\"영차영차 던지기\" 버튼 텍스트가 무엇을 하는지 불명확. 영어 사용자는 \"Send to the cells\"이 의미하는 바를 모름. 원칙적이고 직관적인 이름 필요.",
+        "suggestion": "\"조각 저장\", \"기록 남기기\" 같은 직관적이고 간결한 텍스트로 변경. i18n 기존 패턴 참고(캡처 vs 담기).",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "wiki.tsx",
+        "persona": "19세 SNS크리에이터",
+        "issueType": "hidden",
+        "severity": "high",
+        "description": "Export 기능이 있지만 위치가 \"유틸리티 행\"에 숨겨져 있고, 내보낸 텍스트를 어디에 쓸지 명확하지 않음. 콘텐츠 재사용/공유 가능성이 드러나지 않음.",
+        "suggestion": "Export를 주요 액션으로 승격(상단 또는 별도 버튼). 내보낸 내용 용도 예시 제시('Claude에 붙여넣으면 같은 맥락으로 이어갈 수 있어요' 같은 설명).",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "components/graph/NavGraph.tsx, (auth)/sign-in.tsx",
+        "persona": "17세 운동선수",
+        "issueType": "hidden",
+        "severity": "high",
+        "description": "설정(theme toggle, crew density) 접근이 settings.tsx인데, 네비게이션에서 쉽게 찾을 수 없음. 무언가 바꾸고 싶을 때 어디 가야 할지 명확하지 않음.",
+        "suggestion": "NavGraph에 floating settings 버튼 추가 (기존 Jarvis 버튼처럼). 또는 하단 탭바(탭 없으면 다른 위치)에 설정 아이콘 배치.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "15세 밴드부원",
+        "issueType": "hidden",
+        "severity": "high",
+        "description": "협업/공유 기능이 보이지 않음. \"조각\"을 밴드 친구들과 나누거나 함께 쓸 수 있는 방법이 없어 보임.",
+        "suggestion": "향후 협업 기능 추가 계획이 있으면, 베타 진입 후에도 '곧 올 예정' UI로 안내. 현재는 감춤.",
+        "doableBy": "simon"
+      },
+      {
+        "screen": "components/graph/NavGraph.tsx",
+        "persona": "15세 웹툰작가지망",
+        "issueType": "hidden",
+        "severity": "high",
+        "description": "그래프는 텍스트 기반 '조각' 저장에 최적화됨. 스케치, 드로잉, 이미지 콘텐츠를 중심으로 만드는 창작자 입장에서는 capture에 \"파일\" 모드만 있어 부족함. 그림 갤러리나 스튜디오 뷰가 없음.",
+        "suggestion": "향후 비전: \"이미지 갤러리\" 또는 \"스튜디오\" 탭 추가. 현재는 /capture 파일 모드 설명에 '이미지 포함 가능' 명시.",
+        "doableBy": "simon"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "22세 대학생",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "첫 화면 진입 시 일기/메모/링크/OCR/파일 5개 탭이 동시에 노출. 각 탭 아래 필드그룹, 트랙토글, 해시태그 어더, 제안 패널까지 한 화면에 담겨있음. 어느 것부터 시작해야 할지 불명확",
+        "suggestion": "기본 모드(일기 또는 메모)만 보여주고 나머지 모드는 '더보기' 또는 탭으로 접근. 초기 사용자에게는 단순 메모→저장 흐름만 가능하게 점진 공개",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "NavGraph",
+        "persona": "20세 대학원생",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "그래프 노드의 tier-ordered spawn, connection line illumination, bubble pop-in 등이 시각적으로 복잡함. 특히 Tier 2 (5개 코어: 일과성장/관계와사랑/배움과지식/기록보관소/취향과영감)의 의미가 아이콘+라벨만으로는 부족",
+        "suggestion": "첫 진입 시 각 코어별로 짧은 설명 팝업 (한 줄씩). 또는 각 노드에 '?' 호버 아이콘으로 가이드 텍스트 표시",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "wiki.tsx",
+        "persona": "21세 바리스타",
+        "issueType": "hidden",
+        "severity": "high",
+        "description": "Wiki 첫 진입 시 '아직 모을 조각이 부족해요' 메시지만 보임. 세 가지 평가 도구(Life Audit/Big Five/Attachment)가 그리드로 나열되지만 '단 한 개만 끝내도 자기 모델 v1을 만들 수 있다'는 점이 눈에 띄지 않음. 텍스트로만 있음",
+        "suggestion": "평가 도구 중 하나를 visual highlight (border: brand mint 3px) 처리. 또는 '가장 빠른 평가: 애착 스타일 (3분)' 같은 리콜 배지 추가",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "38세 자영업자",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "온보딩 완료 후 /capture로 이동 vs /로 이동(그래프) 중 \"첫 조각 저장\" 선택지만 capture로 가고, \"건너뛰고 둘러보기\"만 그래프로 감. 사용자가 온보딩을 완료하는 의미가 무엇인지 불명확.",
+        "suggestion": "완료-프로필 단계에서 두 경로(그래프 먼저 vs 첫 기록 먼저)를 명시적으로 선택하게 UI 개선. finishToCapture() vs finishToGraph() 로직을 사용자에게 노출.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "(auth)/sign-up.tsx",
+        "persona": "32세 워킹맘",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "비밀번호 입력 후 조건 체크리스트(체크마크)가 3개 항목으로 떠나 시각적 부담. 소셜 로그인 4개 옵션(Google, Apple, Kakao, Naver) 추가로 택할 것이 많음. 한 화면에 50개 이상의 시각 요소.",
+        "suggestion": "조건 체크리스트를 숨겨진 상세 팝오버로 옮기거나 최소 필수만(이메일, 비밀번호, 나이)을 표시. 소셜 로그인을 탭으로 축소(한 줄 수평 스크롤)하거나 \"더보기\" 드롭다운으로 처리. 시각 위계 단순화를 위해 codex 리뷰 필수.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "(auth)/sign-in.tsx",
+        "persona": "35세 직장인",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "cosmicSky 배경(deep space blue)위의 회색 텍스트(textMuted) 콘트라스트가 WCAG AA 기준(4.5:1)을 만족하지 않을 가능성. 특히 밝은 실내나 야외 환경에서 가독성 저하.",
+        "suggestion": "sign-in.tsx의 PALETTE 색상 검토. textMuted를 더 밝게(lightness 증가) 또는 텍스트 weight를 600→700으로 올리기. 콘트라스트 검사 도구(WebAIM)로 검증. tokens 파일에서 semantic.textMuted 값 조정 필요.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "32세 워킹맘",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "CAPTURE_MODES 5개(journal, memo, linkclip, ocr, file)가 탭 행으로 표시되고, 각 모드마다 다른 입력 UI가 나타남. 모드 선택이 무엇을 의미하는지(어떤 결과가 다른지) 명확하지 않음. 추가로 wiki_track 토글(일상 vs Pro), 분류 결과, 태그 칩 등이 겹침.",
+        "suggestion": "모드 탭 클릭 시 각 모드에 대한 1줄 설명 또는 아이콘+라벨 조합으로 의도 명확화. 예: \"메모 - 자유로운 글쓰기\", \"링크 - 웹페이지 저장\". 또는 각 모드를 카드형 선택 모달로 분리하여 진입 단계를 명확하게.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "insights.tsx",
+        "persona": "33세 마케터",
+        "issueType": "hidden",
+        "severity": "high",
+        "description": "기록이 없거나 (sources + records) 합이 부족하면 computeInsights() 결과가 null 또는 빈 상태가 될 가능성. 사용자에게 \"데이터 부족\" 상태 화면이 무엇인지 명확하지 않음.",
+        "suggestion": "기록 개수 임계값 설정(예: 5개 미만) 후 \"아직 패턴을 찾을 수 없습니다. 더 많은 기록을 남기면 여기서 나타납니다.\" 같은 명시적 빈 상태 메시지와 /capture로 유도하는 CTA 추가.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "trinity.tsx",
+        "persona": "38세 자영업자",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "4개 도메인(health, app, brain, finance)이 정의되지만, 자영업자 입장에서 \"앱\", \"뇌\" 도메인이 자신의 비즈니스 관점과 맞지 않음. 기록 태그에서 \"app\", \"brain\" 태그를 어떻게 붙여야 할지 불명확.",
+        "suggestion": "trinity.tsx에서 각 도메인에 대한 예시 태그/활동 표시: health (운동, 식단), app (프로젝트, 개발), brain (학습, 공부), finance (예산, 투자). 또는 사용자가 커스텀 도메인을 만들 수 있는 옵션 추가.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "settings.tsx",
+        "persona": "32세 워킹맘",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "\"위험 영역\"에서 데이터 삭제 옵션들(부분/전체)이 있는데, 확인 절차가 간단한 \"DELETE\" 텍스트 입력만 있음. 실수로 데이터를 잃을 위험이 높음. 백업이나 복구 옵션이 없음.",
+        "suggestion": "deleteAllUserData() 호출 전에 2단계 확인: 1) 명확한 경고 모달 (\"이 작업은 되돌릴 수 없습니다. 정말로 삭제하시겠습니까?\") 2) 확인 버튼 클릭 시 별도 인증(비밀번호 재입력) 또는 시간 지연(3초 카운트다운).",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "big-five.tsx",
+        "persona": "35세 직장인",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "BFI-44: 44개 문항, 5점 척도. 직장 업무로 바쁜 사용자는 완료에 15-20분이 소요될 가능성. 중간에 나가기 기능이나 진행률 표시가 없으면 포기 가능성 높음.",
+        "suggestion": "QuantPager에서 진행률 표시(\"15/44\") 추가. 또는 \"건너뛰기\" 버튼으로 불완전한 응답 저장 허용. 또는 섹션 단위(trait별) 저장으로 끊어서 완료 가능하도록 개선.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "jarvis.tsx",
+        "persona": "32세 워킹맘",
+        "issueType": "hidden",
+        "severity": "high",
+        "description": "jarvis.tsx에서 readChatUsage()로 일일 한도(CHAT_DAILY_LIMIT)를 확인하지만, 사용자는 \"남은 횟수\"를 UI에서 볼 수 없음. 한도 도달 시 에러 메시지가 명확하지 않음.",
+        "suggestion": "chat 화면 상단에 \"오늘 남은 질문: 3/10\" 같은 사용량 표시. 또는 한도 도달 시 \"오늘의 세컨비 상담이 끝났습니다. 내일 다시 이용 가능합니다.\" 명확한 메시지.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "NavGraph.tsx",
+        "persona": "35세 직장인",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "Tier 1-4 노드, 버블, 엣지, 아이콘, 라벨이 모두 화면에 렌더링되어 시각적으로 복잡함. Tier 3 노드(7개 이상)가 외부 고리를 형성하고, Tier 4는 N개 데이터 점이라 화면이 매우 혼란스러워 보임. 사용자는 어디서 시작해야 할지, 어떤 노드를 탭해야 할지 모름.",
+        "suggestion": "NavGraph에 \"튜토리얼 오버레이\" 추가: 첫 방문 시 \"중심(Core)을 탭하면 나의 모습을 봅니다. 외부 노드들은 관심사를 나타냅니다.\" 같은 단계별 가이드 표시(1회만). 또는 Tier 3를 기본으로 숨기고 expand 옵션 추가.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "NavGraph.tsx",
+        "persona": "37세 엔지니어",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "Tier 2 Wiki 노드의 bubbleAction: 'upload'로 아이콘이 + 모양인데, UI에 명확하지 않음. 사용자가 이 + 아이콘을 탭할 수 있다는 것을 모름. 또한 \"Wiki 탭 → 일상/Pro 선택지\"와 \"+ 아이콘 탭 → /capture로 이동\" 두 가지 상호작용이 있어 혼동 가능.",
+        "suggestion": "Wiki 노드 버블에서 + 아이콘 위에 \"기록 추가\" 라벨 또는 tooltip 추가. 또는 bubbleAction의 두 가지 경로(Wiki 보기 vs 기록 추가)를 사용자에게 명확히 표시: \"탭: 지식창고 보기 / 좌측 +: 새 기록 추가\".",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "55세 택시기사",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "'마을', '조각', '세컨비' 등 추상적 메타포를 이미지 + 1-2줄 텍스트로만 설명. 개념이 명확하지 않아 온보딩 포기 가능성 높음.",
+        "suggestion": "각 단계별 구체적 사용 사례 추가(예: '세컨비는 당신이 쓴 일기나 메모에서 직접 답합니다'), 이미지 아래 텍스트 한 문장 추가",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "43세 요리사",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "5가지 입력 모드(journal/memo/linkclip/ocr/file)가 아이콘(SVG 글리프)으로만 표시됨. 텍스트 레이블 없이는 터치할 때마다 어떤 모드인지 불명확.",
+        "suggestion": "각 모드 탭 아래 텍스트 레이블 추가('일기', '메모', '링크/클립', 'OCR', '파일'), 또는 탭 선택 시 모드 이름 토스트 표시",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "big-five.tsx",
+        "persona": "52세 전업주부",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "BFI-44는 44개 항목이 너무 많아 40대 사용자가 중도 포기할 가능성 높음. 진행율 표시 없어 '얼마나 더 해야 하나' 불안감 유발.",
+        "suggestion": "진행률 바(progress bar) 상단에 추가('15/44'), 또는 페이지 단위 분할(10개씩 5 페이지) 후 단계별 저장",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "settings.tsx",
+        "persona": "51세 보험설계사",
+        "issueType": "hidden",
+        "severity": "high",
+        "description": "데이터 삭제 옵션이 'DANGER ZONE'으로 강조되지만, 실수로 삭제할 가능성 여전함. 'DELETE' 입력 확인이 과도한가 불명확.",
+        "suggestion": "2단계 확인(경고 모달 후 확인 입력) 유지, 하지만 'DELETE' 입력 필드 라벨을 '삭제 확인을 위해 DELETE를 입력하세요' 형태로 더 명확하게 표시",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "NavGraph.tsx",
+        "persona": "45세 중간관리자",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "4 tier의 복잡한 노드 계층(Tier 1: 중심, Tier 2: 3노드, Tier 3: 7노드, Tier 4: N개 데이터)이 한 화면에 표시되어 정보 과잉. 각 노드의 상호작용 방식이 불명확(탭 vs 롱프레스 vs 스와이프).",
+        "suggestion": "Tier 3 이상은 기본 숨김 처리, '+ 펼쳐보기' 버튼으로 단계적 공개. 또는 포커스 줌(tap a node → 그 서브트리만 표시) 구현",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "58세 귀농인 (returned farmer, limited tech use)",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "5단계 온보딩 흐름이 추상적 메타포('조각', '지도', '마을')로 구성. '조각이 지도가 돼요'는 개념적 어색함. 점 인디케이터(7px)가 작고 선택된 상태 애니메이션이 없어 진행 상황 인식 어려움.",
+        "suggestion": "각 단계를 더 구체적 행동으로: 1) 기록하기 2) 만나기 3) 보기 4) 시작하기 로 변경. 진행 바를 점이 아닌 선형 진행도(progress bar) 형태로 변경하고 현재 단계 숫자 더 크게 표시.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "sign-up.tsx",
+        "persona": "52세 자영업자 (busy, pragmatic)",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "가입 폼이 4개 섹션(이메일/비번, 생년월일, 체크리스트, 동의 고지)으로 나뉨. 동의 고지(ConsentNotice)와 약관이 길고 복잡. 여러 OAuth 버튼(Google/Apple/Kakao/Naver) 있어 선택 마비. 필드당 유효성 검사 체크마크가 6-7개 항목으로 많음.",
+        "suggestion": "폼을 2단계 스텝으로 분리: 스텝1 = 이메일/비번만, 스텝2 = DOB + 핵심 동의만 (필수). 언어별 제1 선택 OAuth 1개만 표시하고 '다른 방법' 토글 숨김. 체크리스트를 실시간 '완료도' 진행도(%)로 단순화.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "51세 상담사 (detail-oriented, reflective)",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "캡처 모드 5개(일기/메모/링크/OCR/파일)가 탭 행 위에 작은 아이콘+라벨로 표시(스타일 일관성 없음). 각 모드마다 입력 영역, 트랙 토글, 태그 관리, 분류 결과 등이 중첩. 일기 모드는 추가로 스트릭, 일일 프롬프트, 토픽/본문/결론, Advisor 옵션 표시. 스크롤 깊이가 매우 큼(1342줄).",
+        "suggestion": "캡처 모드를 3개로 통합: 1) 개인 기록(일기/메모), 2) 외부 콘텐츠(링크/파일), 3) 이미지. 각 모드별로 다른 화면으로 분리하거나 중첩 옵션 50% 축소. 태그 관리를 별도 모달로. 분류 결과는 제출 후에만 표시.",
+        "doableBy": "simon"
+      },
+      {
+        "screen": "big-five.tsx & mbti.tsx & attachment.tsx",
+        "persona": "55세 세무사 (methodical, detail-sensitive)",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "Big Five 평가는 44개 항목, 5점 리커트 척도. Mbti 평가는 유사 문항 다수. 한 화면에 모든 문항을 스크롤식으로 보여줌. 페이지당 4-6개 문항씩 끊어서 표시하는 페이저(QuantPager)가 있지만 진행도 표시가 불명확. 문항 번호와 읽기 수준이 전문용어 많음('일반적으로 예약적이고…').",
+        "suggestion": "페이저를 기본으로 하되, 진행도를 '%' 숫자와 진행 바로 명확하게 표시. 각 페이지는 2-3개 문항만 표시. 어려운 표현은 쉬운 동의어로 변경(접근성 레벨 낮춤). 모바일에서는 세로 카드형, 태블릿에서는 가로 그리드로.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "NavGraph.tsx",
+        "persona": "58세 귀농인 (spatial reasoning limited)",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "4-tier 별자리 구조: Tier1=중심, Tier2=현재/과거/위키, Tier3=세부(유년/10대/위키-일상/위키-Pro), Tier4=데이터 점. 노드 애니메이션(drift, pulse, spawn 시퀀스)이 복잡. 엣지(선)가 animated SVG로 노드 움직임에 따라 실시간 업데이트. 레이아웃이 극좌표계 기반이라 직관적 탐색 어려움. 처음 사용자는 각 노드가 무엇인지, 누르면 어디로 가는지 불명확.",
+        "suggestion": "초기 사용자용 투어: 각 tier/노드를 순서대로 하이라이트하고 1-2줄 설명 표시(밝기 조절로 현재 노드만 돋보이게). 노드에 라벨 텍스트를 항상 표시(현재는 tapped 후 bubble에만 나타남). 애니메이션 off 옵션 제공(accessibility, prefersReducedMotion 활용).",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "settings.tsx",
+        "persona": "55세 세무사 (risk-averse, careful with data)",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "'Danger zone'으로 레이블된 데이터 삭제 섹션. 3가지 삭제 옵션(select-only / 부분 / 전체) 모두 한 화면에 있고, 사용자가 입력한 confirm phrase('DELETE')를 입력해야 삭제 활성화. 위험 버튼이 coral(#FF7A90)로 표시되지만 미세한 색상만 다름. 실수로 삭제할 가능성.",
+        "suggestion": "삭제 옵션을 별도 모달이나 서브 화면으로 분리. 부분 삭제를 기본으로 하고 전체 삭제는 2단계 확인(비활성화 버튼 → 1차 확인 후 활성화 → 2차 확인). Confirm phrase를 'DELETE'에서 더 구체적으로(예: '완전히 삭제' 3회 입력).",
+        "doableBy": "simon"
+      },
+      {
+        "screen": "Text.tsx & typography",
+        "persona": "모든 50대 페르소나",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "기본 body 폰트 크기는 15px(md), caption/subtle은 13px/11px. NeoDunggeunmo는 픽셀 비트맵 폰트로 작은 크기에서 가독성 저하. 일부 설명 텍스트는 7-11px의 subtle 스타일로 명도 대비가 약함(#8D98B8 on #070A18, WCAG AA 미충족 가능성). 줄 간격(line-height) 기본값이 1.5인데, 한글 픽셀 폰트는 더 필요할 수 있음.",
+        "suggestion": "기본 body 16px 이상으로 올리기. Caption/subtle 최소 12px. 밝은 모드와 다크 모드 모두에서 명도 대비 검사 (AA 4.5:1 최소). 줄 간격을 1.6-1.8로 증가. 설정에서 '글자 크기 확대' 옵션 추가 (1.1x / 1.2x / 1.3x 배율).",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "overall (app-wide)",
+        "persona": "모든 50대 페르소나",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "다크 모드만 존재. 밝은 모드 옵션 없음. 누군가는 야간 모드를 불편해할 수 있음. iOS/Android accessibility 색상 필터(color filter) 사용자 고려 부족. 포커스 링(focus ring)이 일부 버튼/입력에서 시각적으로 약함. 터치 범위 guidance가 명확하지 않음 (hitSlop 대부분 4-8, 권장 44x44 미충족).",
+        "suggestion": "시스템 설정(OS light/dark preference)에 따르는 light mode 추가. 색상 대비 WCAG AA 검사 자동화. 모든 interactive 요소 최소 44x44pt 터치 타깃 보장. Focus ring을 눈에 띄는 색(mint) + 3px 굵기로.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "sign-up.tsx",
+        "persona": "71세 경비원",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "4개의 OAuth 선택지(Google, Apple, Kakao, Naver) + 이메일/비밀번호 + 생년월일 + 동의사항. 첫 사용자가 어느 경로로 가야 할지 명확하지 않음. 선택지가 너무 많아 결정장애 발생 가능",
+        "suggestion": "OAuth 선택지를 3개로 줄이고, '이메일로 계속하기 (권장)' 같은 명확한 CTA를 상단에. 나머지 소셜 옵션은 '다른 방법' 섹션에 축소",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "70세 요양보호사",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "5개 모드(journal, memo, linkclip, ocr, file)가 픽셀 SVG 아이콘으로만 표현됨. 각 아이콘의 의미가 모호하고, 모드 전환 후 입력 영역 변화가 부드럽지 못함. 어느 모드를 선택했는지 시각적 피드백 부족. '이 버튼을 누르면 뭐가 달라지나'가 불명확",
+        "suggestion": "각 모드 탭에 명확한 한국어 라벨 추가('일기', '메모' 등). 선택된 모드를 하이라이트. 모드 전환 시 입력 영역 변화에 200ms 트랜지션 애니메이션 추가. 각 모드 설명 헬퍼 텍스트",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "wiki.tsx",
+        "persona": "71세 경비원",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "source/entity/concept 분류, tag filter, backlinks, 'living brain' 통계. 초보자 입장에선 각 개념이 뭐하는 것인지 불명확. 진입하자마자 복잡한 정보구조에 압도됨. '내가 뭘 할 수 있는 화면이야?'라는 물음에 답변 부족",
+        "suggestion": "Wiki 첫 진입 시 간단한 인라인 onboarding. '소스 = 당신이 담은 기사, 링크, 파일들', '엔티티 = 중요한 사람, 장소', '개념 = 배운 아이디어'. Empty state에 '첫 기록 추가' CTA 버튼. 각 탭에 tooltips",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "components/graph/NavGraph.tsx",
+        "persona": "72세 은퇴교사",
+        "issueType": "hidden",
+        "severity": "high",
+        "description": "4단계 계층 구조(중심 Soul Core → 3개 mid nodes → 7개 outer nodes → data dots). 어느 버튼을 눌러야 뭐가 나오는지 불명확. 노드의 이름만으로는 용도를 알 수 없음('현재의 나'라는 노드를 누르면 뭐가 열릴까?). '뽁' 애니메이션이 멋있지만 의도가 불분명. Pan/zoom 제스처 조작 난제",
+        "suggestion": "각 tier-2, tier-3 노드에 롱프레스 또는 정보 아이콘으로 설명 tooltip. '현재의 나 > 최근 7일 기록'처럼 명시적 라벨 추가. 초보 사용자용 'NavGraph 가이드' 스크린 또는 인터랙티브 튜토리얼",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "75세 노인정 이용자",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "Onboarding metaphors ('조각'/pieces, '마을'/village, '그래프'/graph, '세컨비') are abstract spatial concepts unfamiliar to users unfamiliar with digital graphs or RAG systems. No concrete examples of what 'pieces' are until the 5th step (\"first piece\" save).",
+        "suggestion": "Replace abstract metaphors with concrete personal benefit language: 'Your daily notes → connected insights about yourself' rather than graph/village terminology. Show a 30-second video example of how a piece becomes useful.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "sign-up.tsx + complete-profile.tsx",
+        "persona": "72세 은퇴교사",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "Sign-up form stacks email → password → BirthDateField → ConsentNotice (2 checkboxes) + 4 OAuth buttons in a single scroll. The form card (lines 401-412) is dense. For tech-skeptical users, this is too much state to manage at once.",
+        "suggestion": "Break into 2 steps: (1) Email + password only, (2) Birthdate + consent on a success screen. Reduces cognitive load per screen. OAuth buttons can stay on step 1 as always-visible shortcuts.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "68세 스마트폰 초보자",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "Five input modes (journal, memo, linkclip, ocr, file) presented as horizontal tabs with custom SVG glyphs (ModeGlyph, lines 78–121). Icons are stroke-based and small (24×24); their meaning is opaque without labels. No in-situ help text explaining when to use each.",
+        "suggestion": "Replace icon-only tabs with icon+label format: [📝 Journal] [📝 Memo] [🔗 Link] [📸 Photo] [📄 File]. Add a one-liner under the tab row: 'What are you capturing today?' Or provide a tooltip on long-press of each icon.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "sign-up.tsx + complete-profile.tsx",
+        "persona": "76세 시력저하",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "BirthDateField (BirthDateField.tsx line 48) uses variant='subtle' (11px) for helper text and error messages. At 76 with presbyopia, 11px is unreadable. Input field is 46px tall (line 432, Input.tsx) but text inside is still 15px (md).",
+        "suggestion": "Change subtle text to variant='caption' (13px minimum) for helper/error. Consider bumping body text in forms from md (15px) to lg (18px) for users 70+. Implement dynamic type scaling from system accessibility settings.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "sign-up.tsx + sign-in.tsx",
+        "persona": "76세 시력저하",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "Sign-up form uses dark mode default (cosmic.space950 background, #070A18) with mint accents (#72F2C7). While claimed AAA contrast in DESIGN.md, dark mode with small text (15px input) reduces readability for presbyopic elderly. No light-mode toggle visible on auth screens (only language toggle at line 184).",
+        "suggestion": "Offer a 'High contrast' or 'Light mode' toggle on sign-in/sign-up screens. Auth screens are often the last place users get help, so offer it there. Implement system-level reduced-motion and text-scale respecting.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "index.tsx (NavGraph + graph-based navigation)",
+        "persona": "68세 스마트폰 초보자",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "Main navigation is a graph-based clickable starfield (NavGraph, index.tsx line 35). Tapping tier dots opens bubbles to confirm navigation. This is not a conventional smartphone pattern (no bottom tab bar, no hamburger menu). First-time smartphone user has no mental model for this.",
+        "suggestion": "Provide a 'Guide' screen explaining how the graph works (\"Tier dots = places to explore\"). Or add a conventional bottom tab bar for main sections: Capture, Wiki, Insights, Persona, Settings. The graph can be an advanced/optional view.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "77세 백내장 초기 시각저하",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "폰트 크기가 theme tokens에서 정의되나 명시되지 않음 (heading, body, caption). 시각저하자가 기본 사이즈를 읽기 어려움. 시스템 폰트 스케일 미지원.",
+        "suggestion": "최소 폰트 16px (body), 18px (heading) 기본값 설정. 사용자 시스템 폰트 스케일 (iOS Dynamic Type, Android Large Text) 적용",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "sign-in.tsx",
+        "persona": "82세 폐쇄적 인지 구조",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "이메일/비밀번호 + 비밀번호 표시 토글 + OAuth 4개(구글/애플/카카오/네이버) + 언어 전환 토글 + 비밀번호 재설정 별도 섹션. 선택지가 너무 많음 (7개 이상의 주요 상호작용).",
+        "suggestion": "OAuth 선택을 단계별 모달로 분리. 언어 토글은 설정으로 이동. 기본 흐름: 이메일 → 비밀번호 (단계적). 비밀번호 재설정은 입력 후 실패 시에만 표시.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "sign-in.tsx",
+        "persona": "77세 백내장 초기 시각저하",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "텍스트 크기: 라벨 11px, 입력 15px, 부제 13px. 고령자 권장 최소 16px 미달. 글자 간격(letterSpacing) 0으로 영어 약자 (EN) 가독성 저하.",
+        "suggestion": "모든 텍스트 최소 14px (라벨/부제), 16px (입력/본문). 배경-텍스트 명도 대비 WCAG AA 이상 (최소 4.5:1). 라벨과 입력 간격 명확히 (현재 flexDirection: row 혼합).",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "sign-up.tsx",
+        "persona": "82세 폐쇄적 인지 구조",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "회원가입 단계 과다: 이메일 + 비밀번호 + 생년월일 + 동의(ConsentNotice, 복수 선택) + 체크리스트(3개 항목). 단계별 설명 부족, 모든 필드가 한 화면에 스크롤 필요.",
+        "suggestion": "단계별 흐름으로 분리: 1) 이메일 2) 비밀번호 3) 생년월일 4) 동의. 각 단계마다 진행률 표시 (1/4, 2/4...). 현재 단계만 입력 가능하도록.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "78세 손떨림 있는 독거노인",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "모드 탭이 5개 (일기/메모/링크클립/OCR/파일), 각 탭이 flex: 1로 좁음. 손떨림으로 정확한 탭 선택 어려움. 기본 hitSlop=8으로 충분하지 않음.",
+        "suggestion": "모드 탭 높이 증가 (현재 paddingVertical: sm, 변경 필요). hitSlop=12로 확대. 또는 드롭다운/라디오 버튼으로 변경하여 터치 타깃 확대.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "77세 백내장 초기 시각저하",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "일기 모드: 스트릭 표시 + 일일 질문 카드 + 주제 입력 + 본문 입력(minHeight: 160) + 결론 토글 + AI 조언 체크박스 + 해시태그 + 제출. 한 화면에 너무 많은 입력 요소. 시각적으로 혼란스러움.",
+        "suggestion": "필수 필드와 선택 필드 시각적 분리. 결론/AI조언을 '고급 옵션' 아코디언으로 접기. 일일 질문을 더 명확한 카드 형식으로 강조. 스크롤 위치 시각 표시.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "inbox.tsx",
+        "persona": "78세 손떨림 있는 독거노인",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "행 액션 버튼(요약+4질문/위키생성/삭제) minHeight: 30, paddingVertical: 5 매우 작음. 터치 타깃 30x30 미만으로 손떨림 사용자가 정확히 누르기 거의 불가능.",
+        "suggestion": "행 액션 버튼 minHeight: 44, paddingVertical: 12로 증가. 버튼 간 gap: spacing.sm (현재 spacing.xs) 확대하여 오터치 방지.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "core-brain.tsx",
+        "persona": "82세 폐쇄적 인지 구조",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "페이지 전체가 메타포 기반: '나의 중심', '밝아진 동네', '자주 보이는 나의 모습' 등. Persona AI 합성 결과가 추상적이며, 저-인지 사용자는 화면 목적과 각 섹션의 의미 이해 불가.",
+        "suggestion": "메타포를 병렬로 설명 추가: '당신의 핵심 가치 (나의 중심)', '최근 관심 분야 변화 (밝아진 동네)' 같은 명확한 텍스트 레이블. 섹션마다 '이것이 무엇인가?' 설명 버튼.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "big-five.tsx",
+        "persona": "77세 백내장 초기 시각저하",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "Likert 척도 5개 선택지(전혀 아니다~매우 그렇다)가 가로 배열되고, 텍스트 크기 작음 (caption/subtle 추정). 선택지 간 시각적 구분 불명확.",
+        "suggestion": "선택지를 세로 배열로 변경 (라디오 버튼 + 텍스트). 텍스트 크기 14px 이상. 선택된 항목 명확한 강조 (배경색 변경, 체크마크 표시).",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "NavGraph.tsx",
+        "persona": "82세 폐쇄적 인지 구조",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "4계층 그래프(Tier 1 중심 + Tier 2 현재/과거/Wiki + Tier 3 분류 + Tier 4 데이터)가 매우 복잡. 메타포 '마을', '섬', '길' 등이 저-인지 사용자에게 이해 불가. 처음 보는 화면에서 '뭘 해야 하나?'라는 혼란.",
+        "suggestion": "온보딩 투어 추가: '2nd Brain은 당신의 생각을 마을처럼 연결해요. 중심(녹색)은 당신, 주변은 관심사, 아래는 저장한 자료입니다.' 같은 단계별 설명 오버레이. 또는 '가이드 모드'에서 각 노드 설명 제시.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "account.tsx",
+        "persona": "78세 손떨림 있는 독거노인",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "계정 삭제 기능이 account.tsx에 있으나, 생년월일 수정, 개인정보 동의 등 여러 액션이 혼재. 계정 삭제는 최종적 위험 조작이므로 시각적으로 분리 필요.",
+        "suggestion": "계정 삭제를 별도 섹션 'Danger Zone'으로 이동(settings.tsx처럼). account.tsx는 '개인정보 수정'에만 집중. 계정 삭제 전 이메일 확인/2단계 인증 추가.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "sign-in.tsx",
+        "persona": "81세 요양원 거주자 (초기 치매)",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "입력 필드 2개(이메일/비밀번호)에 비밀번호 표시 토글, OAuth 선택, 언어 선택, 비밀번호 재설정이 혼재. 초기 치매 사용자는 화면 요소 순서/목적 기억 어려움.",
+        "suggestion": "필수 흐름만 강조: 이메일 입력 → 비밀번호 입력 → 로그인 버튼. 기타 (OAuth/언어/재설정)는 보조 영역에 배치. 또는 단계별 모달로 분리.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "72세 은퇴교사",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "5단계 도트 인디케이터가 7x7px 또는 18px로 매우 작아서 시력 약한 고령자가 현재 단계를 파악하기 어려움. 활성 도트도 18px에 불과함.",
+        "suggestion": "도트 크기를 최소 12x12px(비활성) / 24x24px(활성)로 확대. 색상 대비도 semantic.border vs cosmic.signalMint 간의 명도 차이 강화 필요.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "sign-up.tsx, sign-in.tsx",
+        "persona": "72세 은퇴교사",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "Input 컴포넌트의 minHeight 46은 터치 영역으로는 충분하지만, 입력 폰트 크기(15)와 라벨 크기(11 uppercase)가 작아 읽기 어려움. 특히 비밀번호 입력 시 화면 상 텍스트 크기가 더 작아 보임.",
+        "suggestion": "폰트 크기를 최소 16-18px으로 확대. 라벨을 모두 대문자 변환하지 말고 정상 문법 유지. placeholder도 명도 대비 높이기.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "sign-up.tsx",
+        "persona": "79세 독거노인",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "헤로 이미지(112x112), 제목, 부제, 나이 공지, 이메일 입력, 비밀번호 입력, 동의 항목, 체크리스트, 검사 툴 비교, OAuth 버튼 4개가 한 스크린에 과도하게 배열되어 있음. ScrollView 필수이지만 스크롤해야 할 내용이 너무 많음.",
+        "suggestion": "회원가입을 다단계 플로우로 분할: (1단계) 이메일/비밀번호, (2단계) 생년월일, (3단계) 동의. 각 단계마다 한 가지 핵심 입력에만 집중. OAuth 버튼은 필요할 때만 표시.",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "91세 복지관 이용자",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "5가지 모드(journal, memo, linkclip, ocr, file)가 탭으로 표시되고, 각 모드별로 다른 UI가 나타남. 추가로 Track toggle(일상/Pro), 해시태그 추가, 분류 결과 보기 등이 한 화면에 있음. 고령자는 \"어디서 무엇을 해야 하는가\"를 파악하기 어려움.",
+        "suggestion": "모드를 3가지로 축소: 일기 → 담기 → 파일. 첫 로드 시 가장 단순한 \"일기\" 모드로 기본 설정. 다른 모드는 \"추가 도구\" 섹션에서 선택 가능하게 배치.",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "inbox.tsx",
+        "persona": "79세 독거노인",
+        "issueType": "hidden",
+        "severity": "high",
+        "description": "본문 미리보기가 기본으로 숨겨져 있고, 탭해야만 inline 예시(일부)를 볼 수 있음. \"요약 + 4질문\" 버튼도 별도 tap 필요. 고령자는 먼저 무엇이 들어있는지 봐야 다음 행동을 결정할 수 있는데, 모든 정보가 숨겨짐.",
+        "suggestion": "목록 화면에서 각 항목마다 제목 + 첫 50자 본문 미리보기를 항상 노출. \"요약 보기\" 버튼을 더 명확하게 \"요약과 질문 보기\"로 레이블링.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "wiki.tsx",
+        "persona": "91세 요양시설 거주",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "\"Core\", \"Library\", \"Wiki\" 개념 자체가 추상적. \"살고 있는 곳 / You're here\" 같은 메타포도 고령자에게 실제 의미가 불명확. 태그 필터링도 \"#health를 누르면 건강 관련 것만 본다\"는 개념이 복잡.",
+        "suggestion": "메타포 제거. \"내 지식 보관소\"라는 직관적 이름 사용. 태그 필터를 아예 숨기고, 초기에는 모든 항목을 보여주기. 필요할 때만 검색 기능 제공.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "core-brain.tsx",
+        "persona": "79세 독거노인",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "\"나의 중심\"이 로드되면 여러 섹션이 한 번에 표시됨: 밝은 연결, 밝아진 동네, 자주 보이는 모습, 조각들, 다음 한 걸음, 세컨비 질문. 각 섹션도 복잡한 카드 형태로, 고령자가 \"지금 뭘 해야 하는가\"를 파악하기 어려움.",
+        "suggestion": "섹션을 한 번에 하나씩만 표시. 또는 탭으로 구분: \"이런 모습\", \"다음 한 걸음\", \"조각들\". 각 화면은 최대 1-2개의 행동(카드) 표시.",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "trinity.tsx",
+        "persona": "91세 복지관",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "\"4영역 관리 / Brain Trinity\"라는 개념 자체가 고령자에게 불명확. \"건강 · 앱 · 뇌 · 재정\"의 4영역을 왜 따로 볼 필요가 있는지, 각 영역에서 뭘 해야 하는지 불명확.",
+        "suggestion": "\"4영역\"이 아니라 \"생활의 4가지 중요한 것: 건강, 일, 공부, 돈\"으로 순화. 각 카드에 실제 예시 표시: \"건강: 운동 기록 3개\", \"돈: 예산 메모 5개\" 같은 구체적인 수치와 의미.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "persona.tsx",
+        "persona": "91세 요양시설",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "\"자기 모델\", \"페르소나\"라는 개념이 고령자에게 전혀 직관적이지 않음. 왜 이런 것이 필요한지, 무엇에 쓰이는지 불명확.",
+        "suggestion": "\"나에 대해 알아가기\", \"나의 성향 파악하기\" 같은 구체적인 언어 사용. 페르소나가 \"앞으로 더 나은 결정을 하는 데 도움\"이라는 실질적 이점 설명.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "big-five.tsx, attachment.tsx",
+        "persona": "79세 독거노인",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "한 페이지에 5개 문항이 나타나고, 각 문항마다 Likert scale (5점 또는 7점) 선택지가 표시됨. QuantPager의 itemCard 안에 문항ID(번호), 한글 문장, subtitle, 5-7개 선택 버튼이 모두 표시되어 매우 혼잡해 보임.",
+        "suggestion": "1페이지 = 1문항만 표시. 선택지를 가로 버튼이 아니라 슬라이더나 숫자 입력(1~5)으로 대체. 다음/이전 버튼으로 문항별로 진행.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "big-five.tsx, attachment.tsx",
+        "persona": "85세 거동불편",
+        "issueType": "accessibility",
+        "severity": "high",
+        "description": "LikertChoiceGroup의 선택 버튼(Pressable)이 작음. View style에 padding 정의가 불명확하고, 실제 터치 영역이 이론상 최소 44-48px보다 작을 수 있음. 한손 조작 중 실수로 다른 버튼 누를 가능성 높음.",
+        "suggestion": "각 선택 버튼의 최소 크기를 56x56px로 설정. Pressable의 hitSlop을 8 이상으로 확대. 버튼들 사이 간격을 최소 12px로 유지.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "jarvis.tsx",
+        "persona": "91세 복지관",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "세컨비(Jarvis) 채팅 화면이 복잡함. 이전 대화 회전(turns), 입력창, 빠른 액션(Quick Actions) 5개, 인사 모달, 모드 전환(Analytic/Divergent) 등이 혼재되어 있음. 고령자는 \"지금 뭘 입력해야 하나\" 불명확.",
+        "suggestion": "첫 진입 시 간단한 인사만 보여주기. 입력창과 \"보내기\" 버튼만 강조. Quick Actions는 답변을 받은 후에만 나타내기. 모드 전환은 설정에서만 가능하도록 이동.",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "settings.tsx",
+        "persona": "80세 사업가",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "\"Danger zone\"이라는 섹션 제목이 불명확. 고령자(또는 모든 사용자)는 여기서 뭘 주의해야 하는지 모름. 데이터 삭제 옵션들이 많아서 실수로 중요한 데이터를 삭제할 가능성 높음.",
+        "suggestion": "\"Danger zone\" 대신 \"데이터 관리\" 또는 \"기록 삭제\" 같은 명확한 제목 사용. 삭제 버튼 누르기 전에 다단계 확인 (버튼 → 확인창 → 최종 입력 필수). 삭제 대상을 명시: \"이 작업은 되돌릴 수 없습니다.\"",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "account.tsx",
+        "persona": "91세 요양시설",
+        "issueType": "hidden",
+        "severity": "high",
+        "description": "계정 삭제(\"DELETE\" 확인 입력 필수)는 보호되어 있지만, 전체 데이터 삭제의 결과를 고령자가 완전히 이해하지 못할 수 있음. 실수 후 복구 불가능.",
+        "suggestion": "계정 삭제 전에 명확한 단계별 확인: (1) \"모든 기록이 삭제됩니다\" 경고, (2) \"정말 지우시나요?\" 다시 확인, (3) 이메일 확인 링크를 통한 최종 승인 (7일 유예 기간).",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "NavGraph.tsx",
+        "persona": "79세 독거노인",
+        "issueType": "overload",
+        "severity": "high",
+        "description": "NavGraph의 4-Tier 계층 구조(Core → 5개 Pattern Cores → 하위 nodes → Data dots)가 개념적으로 매우 복잡. 고령자는 \"지금 이것이 무엇인가\", \"어디서 어디로 가야 하는가\"를 파악하기 어려움.",
+        "suggestion": "초기에는 Tier 1-2만 표시. Tier 3, 4는 \"자세히 보기\" 버튼 후에만 나타나게 함. 또는 flat한 메뉴 목록으로 단순화: \"나의 기록\", \"배운 것\", \"관계\", \"건강\", \"설정\" 같은 탭 방식 네비게이션.",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "NavGraph.tsx",
+        "persona": "85세 거동불편",
+        "issueType": "stiffness",
+        "severity": "high",
+        "description": "NavGraph의 애니메이션이 매우 많고 빠름. 노드 spawn (overshoot 1.25x), drift sway, edge fade, pulse interval(2800ms), bubble pop 등이 동시에 실행되어 시각적으로 과도함. 고령자의 시각 피로와 motion sickness 유발 가능.",
+        "suggestion": "prefersReducedMotion() 체크를 모든 애니메이션에 적용 (현재 divergentPulse에만 적용). 기본적으로 동작 줄이기: overshoot 비활성화, drift sway 느리게(pulse interval을 4000ms 이상으로), edge fade 무시. 사용자 선택으로만 활성화.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "NavGraph.tsx",
+        "persona": "88세 전직간호사",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "팬(pan)과 핀치(pinch) 제스처로 네비게이션이 이루어짐. 고령자(손떨림, 미세한 움직임 어려움)는 정확한 핀치를 할 수 없어 원하는 영역으로 확대 불가. \"뒤로 가기\"도 애매함.",
+        "suggestion": "제스처 제거. 대신: (1) 노드 탭 → 상세 화면 전환, (2) 하단 탭바로 주요 5개 영역 접근, (3) \"뒤로\" 버튼 명확히 표시. 또는 한손 조작 전용 모드 추가.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "index.tsx (main graph)",
+        "persona": "91세 복지관",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "앱 진입 후 메인 화면이 NavGraph(복잡한 별자리 같은 시각화)인데, 고령자는 이것이 \"뭐를 해야 하는가\"를 전혀 모름. 아무 안내도 없고, 각 노드를 탭해야만 기능을 알 수 있음.",
+        "suggestion": "메인 화면을 NavGraph에서 더 단순한 \"오늘의 할일\" 리스트 또는 탭바 기반 네비게이션으로 변경. 또는 NavGraph를 별도 \"맵 보기\" 옵션으로 이동 (기본 숨김).",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "전체 앱",
+        "persona": "79세 독거노인",
+        "issueType": "non-intuitive",
+        "severity": "high",
+        "description": "\"조각\", \"그래프\", \"마을\", \"중심\", \"연결\" 같은 메타포가 일관되게 사용되고 있는데, 고령자는 실제 의미를 파악하기 어려움. 온보딩에서 설명되지만, 실제 사용 흐름(capture → wiki → core → persona)과 메타포의 관계가 불명확.",
+        "suggestion": "메타포 사용 최소화. 명확한 목적 기반 라벨 사용: \"오늘의 일기\", \"내 지식\", \"나의 특징\", \"AI 조언\" 등. 온보딩도 메타포가 아니라 실제 기능 설명으로 변경.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "public/assets/2ndb-production-premium-v1/workers*",
+        "persona": "asset:characters",
+        "issueType": "asset-inconsistency",
+        "severity": "high",
+        "description": "Triple worker directory versions (workers/, workers-redraw-v1/, workers-sharp/) create confusion. Code uses only workers-redraw-v1. The vela character pair (vela_premium_idle.png, vela_premium_walk_strip_6f.png) exists in all three but is never referenced in CompanionSprite or WorkerSprite.",
+        "suggestion": "Delete workers/ and workers-sharp/ directories; keep workers-redraw-v1 as canonical. Remove vela assets or document if they are intentional fallbacks.",
+        "doableBy": "simon"
+      },
+      {
+        "screen": "src/components/art/TierIcon.tsx",
+        "persona": "asset:ui-icons",
+        "issueType": "asset-inconsistency",
+        "severity": "high",
+        "description": "Naming mismatch: TierIcon.tsx maps internal key names (paper_journal, book_wiki, etc.) to files with _premium suffix (flying_paper_premium.png, book_premium.png). TierIcon component defines 9 icons but 2ndb-production-premium-v1/tier-icons contains 13 files. Unused icons: archive_scroll_premium.png, clock_premium.png, dream_crystal_premium.png, idea_lamp_premium.png are defined in asset folder but unmapped in code.",
+        "suggestion": "Rename icon keys in TierIcon.tsx to match filenames exactly, OR document which 4 icons are intentional reserves. Move unused icons to a separate /archive/ folder with a manifest explaining deprecation status.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "feedback.tsx - PremiumToast",
+        "persona": "Feedback/Transitions",
+        "issueType": "stiffness",
+        "severity": "high",
+        "description": "Toast component appears instantly with no entrance animation. Lacks the smooth fade-in that would signal 'soft notification' rather than 'jarring interruption'.",
+        "suggestion": "Wrap toast content in Animated.View with opacity fade: 0 → 1 over 280ms using Easing.out(Easing.cubic). Add optional slideUp transform (translateY: 20 → 0) to give it more presence. Call animation when message prop changes.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "색약(적록색약) 사용자",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "진행 표시 점이 색상만으로 구분됨(회색 vs 민트). 색각이상인 사용자는 현재 단계를 인식하지 못함",
+        "suggestion": "진행 점에 색상 외 추가 구별 요소 필요: 테두리, 크기 차이, 또는 텍스트 라벨. 예: 현재 단계는 더 큰 원형, 나머지는 작은 원형",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "인지능력 저하(경증 치매) 사용자",
+        "issueType": "overload",
+        "severity": "med",
+        "description": "5단계 온보딩이 길고, 각 단계의 개념(마을, 세컨비, 그래프, 조각 등)이 추상적이어서 따라가기 어려움",
+        "suggestion": "온보딩을 3단계로 축약(시작 → 첫 기록 저장 → 마을 보기). 각 단계마다 구체적 행동 1가지만 제시. 추상적 은유 최소화",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "(auth)/sign-in.tsx",
+        "persona": "색약(적록색약) 사용자",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "비밀번호 보기/숨기기 토글이 아이콘만으로 표시. 에러 메시지(danger 토스트)가 색상만으로 구분됨(빨강)",
+        "suggestion": "EyeIcon 옆에 '비밀번호 보기' 텍스트 라벨 추가. 토스트 메시지 좌측에 경고 아이콘(⚠️) 또는 'Error:' 텍스트 prefix 추가",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "근력약화(손떨림) 사용자",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "분류 결과(chips)의 X 버튼이 작고 정확한 터치가 필요함. 트랙 토글 버튼이 작음",
+        "suggestion": "chip 삭제 버튼을 최소 32x32px로 확대. 터치 타깃 padding 증가. 토글 버튼 크기를 48px 이상으로 설정",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "inbox.tsx",
+        "persona": "색약(적록색약) 사용자",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "소스 종류(kind)별 칩(chip)이 색상으로만 구분됨. 'ingested' 상태도 색상 기반(KIND_LABEL의 색상). 색각이상 사용자는 구분 불가",
+        "suggestion": "각 칩에 텍스트 라벨 포함 유지(이미 있음). 추가로 칩 좌측에 아이콘(📰 for article, 🎥 for video 등) 추가하여 색상 외 구별 수단 제공",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "inbox.tsx",
+        "persona": "인지능력 저하(경증 치매) 사용자",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "행 토글(확대/축소) 패턴이 암묵적임. accessibilityHint는 있지만 시각적 피드백(화살표, 점 증가 등)이 부족. 본문 미리보기가 로드되지 않으면 스피너 보임",
+        "suggestion": "각 행의 우측에 삼각형 화살표(▶️ / ▼) 추가. 확장 시 배경 색상 변화 또는 border 추가. 로딩 상태를 명확한 메시지로 표시('불러오는 중...' 텍스트 + spinner)",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "inbox.tsx",
+        "persona": "근력약화(손떨림) 사용자",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "각 행의 액션 버튼(요약+질문, 생성, 삭제)이 작고 정렬되어 있음. 실수로 다른 버튼을 누르기 쉬움",
+        "suggestion": "버튼 간격을 spacing.sm(8px) 이상으로 확대. 각 버튼을 최소 44x44px 크기 확보. 위험한 삭제 버튼은 색상 강조(danger) 유지",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "settings.tsx",
+        "persona": "시각장애(저시력) 사용자",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "crew density 토글이 segmented control 형태이고, selected 상태가 색상 변화만으로 표시될 가능성 있음. 현재 선택이 명확하지 않음",
+        "suggestion": "선택된 density 옵션에 accessibilityState={{selected: true}} 설정 완료(코드에 이미 있음). 추가로 selected 옵션에 테두리나 체크마크 시각 피드백 추가. 스크린리더 사용자를 위해 'CREW_DENSITY 설정: 현재 few 선택' 같은 라벨 추가",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "index.tsx (NavGraph)",
+        "persona": "전정기관장애(현기증) 사용자",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "prefersReducedMotion 체크가 있지만, useSkyDrift 애니메이션이 느린 움직임으로 계속 진행될 수 있음. Animated.loop 기반 배경 변화가 부드럽지 않으면 어지러움 유발",
+        "suggestion": "prefersReducedMotion이 true일 때 모든 애니메이션 완전 정지. useSkyDrift에서 return () => null 또는 정적 배경. 노드 drift도 prefersReducedMotion 시 완전 비활성화",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "index.tsx (NavGraph)",
+        "persona": "색약(적록색약) 사용자",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "노드 색상이 캐릭터 색상(cosmic 팔레트)과 연동되어 있음. 예: growth/work=signalBlue, relation=pixelLamp, knowledge=signalMint. 색감만으로는 tier-3 노드 구분 불가",
+        "suggestion": "각 노드에 아이콘 또는 라벨 텍스트 추가. 색상 외 추가 구별 수단 필요(예: 타일 모양 다르게 하기, 아이콘 다양화). Tier 3 노드는 숫자나 문자 badge 추가('A1', 'A2' 등)",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "wiki.tsx",
+        "persona": "시각장애(저시력) 사용자",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "wiki 화면의 정렬, 필터링 UI(tag chips, track toggle 등)이 스크린리더에 적절히 노출되지 않을 가능성",
+        "suggestion": "모든 필터 요소에 accessibilityLabel, accessibilityRole 설정. 현재 필터 상태를 accessibilityLabel에 포함 ('현재 일상 지식 필터링 중' 등)",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "persona.tsx",
+        "persona": "인지능력 저하(경증 치매) 사용자",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "자기 모델이 없을 때 3개 평가 도구(라이프 오딧, Big Five, 애착)이 동시에 표시됨. 어느 것을 먼저 해야 할지, 시간이 얼마나 걸릴지 명확하지 않음",
+        "suggestion": "추천 순서를 명시('1단계: 라이프 오딧으로 시작하세요. 8분 소요'). 첫 도구에만 'Start' 버튼을 주목하게 하고, 나머지는 secondary 버튼으로 표시. 완료 진행률 표시('0/3 완료')",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "persona.tsx",
+        "persona": "근력약화(손떨림) 사용자",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "도구 카드의 'Start' 버튼이 작고, 내보내기 버튼(Share)도 정확한 터치 필요",
+        "suggestion": "버튼 높이를 최소 44px로 설정. 각 버튼 간격을 spacing.md(12px) 이상으로 확대",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "account.tsx",
+        "persona": "시각장애(저시력) 사용자",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "프로필 정보 입력/편집 필드의 라벨이 부족하거나, 입력 필드의 현재 값이 스크린리더에 명확하게 전달되지 않을 가능성",
+        "suggestion": "모든 입력 필드에 명확한 accessibilityLabel 설정. 현재 값도 accessibilityValue에 포함 예: accessibilityLabel='이름 입력', accessibilityValue={{text: currentName}}",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "모든 화면 (글로벌)",
+        "persona": "한국어-영어 이중언어 사용자",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "언어 전환 버튼이 화면마다 다른 위치에 있거나, 위치가 불명확함. sign-in 화면에는 우상단, 다른 화면에서는 찾기 어려움",
+        "suggestion": "모든 화면에서 일관된 위치(예: 좌상단 또는 설정 메뉴)에 언어 전환 버튼 배치. 현재 언어 상태를 명확히 표시('한국어' 또는 'EN')",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "모든 화면 (글로벌)",
+        "persona": "글자 크기 확대 필요 사용자(OS 설정 200%)",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "미리 설정된 폰트 크기(xs=12px, sm=14px, md=15px)가 OS 스케일링 비율을 반영하지 못할 가능성. 일부 텍스트가 잘려나갈 수 있음",
+        "suggestion": "React Native의 allowFontScaling 설정 확인 및 활성화. useWindowDimensions 기반 반응형 레이아웃 강화. 긴 텍스트는 numberOfLines 제한 제거 또는 스크롤 가능하게 변경",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "모든 화면 (아이콘 기반 네비게이션)",
+        "persona": "아이콘 문해도 낮은 사용자(노인)",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "하단 네비게이션 탭이나 모달 내 아이콘들(메모 아이콘, 링크 아이콘 등)이 텍스트 라벨 없이 표시될 가능성. 누구나 쉽게 이해할 수 없음",
+        "suggestion": "모든 아이콘 요소에 accessibilityLabel 필수 설정. UI/UX 가능 범위 내 아이콘 아래에 텍스트 라벨 추가 (예: 📝 메모, 🔗 링크)",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "18세 입시생",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "해시태그 자동 분류('던질 때 자동으로 달아줘요')가 기본 동작인데, 사용자가 직접 태그를 제어하려는 의도가 명확하지 않음. 태그가 예상과 다르면 어떻게 수정하나?",
+        "suggestion": "\"태그 자동 제안: 끄기/켜기\" 토글을 눈에 띄는 위치에 배치. 사용자 태그 vs 자동 태그를 구분해서 표시.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "components/graph/NavGraph.tsx",
+        "persona": "17세 게이머",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "노드 스폰 애니메이션(pop 시퀀스)은 좋지만, 한 번 플레이되면 다음 방문 시 바로 정착 상태로 나타남. 반복 방문 시 로직이 명확하지 않아 UI가 답답해 보임.",
+        "suggestion": "스폰 애니메이션을 매 방문마다 재생하거나, 설정에서 재생 여부를 토글할 수 있도록. 현재 sessionStorage 기반 플래그를 사용자 설정으로 전환.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "components/graph/NavGraph.tsx",
+        "persona": "16세 코딩동아리원",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "4단계 티어 구조(Tier 1=Core, Tier 2=5개 마을, Tier 3=세부 장소, Tier 4=데이터)와 줌 기반 가시성 전환이 문서화되지 않음. 줌 수준에 따라 계층이 갑자기 나타났다 사라짐.",
+        "suggestion": "첫 방문 시 투어 또는 튜토리얼 오버레이로 계층 구조 설명. 줌 임계값을 명시적으로 표시(예: \"마을을 더 가깝게 보려면 확대하세요\").",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "wiki.tsx",
+        "persona": "15세 웹툰작가지망",
+        "issueType": "overload",
+        "severity": "med",
+        "description": "헤더에 3개 facet 카드(Core/Library/Imagine) + pulse strip(조각/연결/외딴 조각) + 검색창 + 유틸리티 버튼(export/stats/back) + 태그 필터가 모두 스크롤 가능한 FlatList 헤더에 쌓여 있음. 첫 접근 시 너무 많음.",
+        "suggestion": "Facet 카드를 1행으로 축소 또는 아이콘만 표시. Stats 버튼을 주요 화면에서 숨기고 필요 시 전개. 태그 필터는 접기/펼치기 구간 제공.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "onboarding.tsx, (auth)/sign-up.tsx",
+        "persona": "14세 중학생",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "\"조각\", \"마을\", \"세컨비\" 같은 앱 고유 용어가 온보딩에서 빠르게 소개됨. \"조각\"이 정확히 무엇을 뜻하는지 처음 사용자가 파악하기 어려움.",
+        "suggestion": "온보딩 각 스텝에 용어 정의 추가(예: \"조각 = 당신이 남긴 생각, 메모, 기사\"). 팝업 또는 스킵 가능한 설명 재삽입.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "(auth)/sign-up.tsx",
+        "persona": "16세 미성년자",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "PIPA 동의, 미성년자 보호자 동의 같은 법률 텍스트가 작고 읽기 어려운 색상(textMuted)으로 표시됨. 미성년자 사용자가 정확히 동의하는 내용을 이해하기 어려움.",
+        "suggestion": "동의 항목별로 접기/펼치기 섹션 제공. 법률 텍스트 앞에 평이한 한국어 요약(예: \"당신의 생일을 안전하게 보관해요\") 추가.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "big-five.tsx",
+        "persona": "18세 수험생",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "Big-Five 평가 완료 후 결과가 JSON 형식으로 저장되고 \"페르소나에서 다시 만나요\"라고만 안내됨. 자신의 점수를 어떻게 해석하는지, 어디서 다시 보는지 불명확.",
+        "suggestion": "평가 직후 점수 요약 화면 표시(5개 특성별 점수 + 해석). 페르소나 화면 링크 명확하게.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "insights.tsx",
+        "persona": "19세 SNS크리에이터",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "주간 활동, 자주 다룬 주제, 태그, 결론이 표시되지만 이 데이터를 어떻게 활용해야 하는지 불명확. 콘텐츠 전략이나 분석으로 이어지는 경로가 없음.",
+        "suggestion": "Insights 화면 하단에 \"이 패턴을 콘텐츠로\"라는 제안 버튼 또는 세컨비 쿼리 제안(예: \"요즘 가장 자주 다루는 주제 5개를 바탕으로 콘텐츠 아이디어 줄래?\") 추가.",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "capture.tsx, wiki.tsx",
+        "persona": "16세 코딩동아리원",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "Mode 선택(journal/memo/link/ocr/file)과 Track 선택(daily/pro)이 별개 UI로 나뉨. 둘의 관계가 명확하지 않음(track은 mode가 'journal'이 아닐 때만 표시).",
+        "suggestion": "Track을 Mode 선택 근처에 배치하거나, 각 Mode별로 기본 Track을 설정하도록 정보 구조 재정의.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "(auth)/sign-up.tsx",
+        "persona": "14세 중학생",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "비밀번호 요구사항(최소 8자)이 작은 helper 텍스트로만 표시됨. 체크리스트 항목이 나중에 나타남. 형식 피드백이 느림.",
+        "suggestion": "비밀번호 필드 아래에 실시간 체크리스트 표시(길이, 특수문자 등). 각 조건별 OK/NO 아이콘 동적 업데이트.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "wiki.tsx, insights.tsx",
+        "persona": "18세 입시생",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "Wiki와 Insights가 별개 화면이고, 이 둘이 같은 데이터(태그, 주제)를 다루는지 명확하지 않음. 조각을 정리하는 길(Wiki)과 패턴을 보는 길(Insights)의 관계가 불분명.",
+        "suggestion": "각 화면 헤더에 상호 링크(Wiki → \"패턴 보기\" → Insights / Insights → \"조각 정리\" → Wiki) 추가. 또는 통합 \"Analysis\" 탭 고려.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "26세 취업준비생",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "일기 모드에만 스트릭/당일 질문/선택 결론 필드가 있음. 다른 모드와의 상태 차이가 UI상 명확하지 않음. 모드 전환 시 기존 입력이 자동 삭제되지만 사용자에게 경고 없음 (reset() 함수)",
+        "suggestion": "모드 전환 시 '입력을 버릴까요?' 확인 다이얼로그 추가. 또는 모드별 드래프트 자동 저장",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "index.tsx",
+        "persona": "24세 신입사원",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "랜딩 페이지의 4계층 그래프(Tier 1~4)가 시각적으로 거의 구분 안 됨. 각 계층의 의미(나의 중심/코어/특정 도메인/데이터점)가 화면에 표시되지 않음. 타이틀/설명은 노드 탭 시에만 표시됨",
+        "suggestion": "온보딩 단계 추가: 그래프 첫 진입 시 각 계층 설명 슬라이드. 또는 '?' 아이콘으로 인터랙티브 가이드 제공",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "25세 프리랜서디자이너",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "온보딩은 '그래프가 마을이다', '세컨비를 만나보세요' 같은 개념 설명만 함. 실제 '조각을 남기는 법', '그래프 내비게이션' 같은 기본 조작법은 설명하지 않음",
+        "suggestion": "온보딩 마지막 단계에서 '첫 조각 저장'으로 실제 capture 플로우 한 번 타게 함. 또는 온보딩 6번째 단계로 '그래프 보는 법' 추가",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "28세 간호사",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "모드 탭 전환 시 애니메이션이 없음. 필드그룹이 경계선으로만 구분되고 슬라이드/페이드 전환이 없어 기계적으로 느껴짐. 저장 시에만 '뽁' 모션이 있음",
+        "suggestion": "모드 탭 활성화 시 200ms fade-in + 4px translate-up 적용. 필드그룹 전환 시도 subtle하게 처리",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "23세 스타트업개발자",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "일기 모드에 Level/XP 게이팅(journalGate.unlocked) 로직이 있음. Lv3 도달 전에는 '일기 잠김' 카드만 보임. 자유 티어 한도도 명시되어있어 심리적 장벽 느낌",
+        "suggestion": "게이팅 메시지를 더 긍정적으로: '과거의 나 오딧 완료하면 열려요!' 대신 '앞으로 한 발 나가면 일기 모드 열려요! 지금 시작하기 → 클릭'으로 유도",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "27세 인플루언서",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "capture modes 의 SVG 아이콘(📝 펜/🔗 링크/📸 카메라/📄 파일)이 모두 검정+회색톤. 활성 탭과 비활성 탭의 색상 차이가 아이콘으로는 명확하지 않음. 라벨은 작은 caption 크기",
+        "suggestion": "활성 탭 아이콘을 brand mint로 변경. 또는 아이콘 크기를 24px → 28px로 확대",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "24세 군복무중",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "crisis router modal이 입력 중간에 갑자기 나타남 (빨간 zone 감지). 모달 진입/퇴출 전환이 250ms slide-from-bottom이지만 배경 fade가 없어서 충격적으로 느껴짐",
+        "suggestion": "모달 배경 fade-in (0→0.6) 200ms 추가. 또는 crisis 감지 시 먼저 soft prompt로 '혹시 지금 힘든가요?' 토스트 표시 후 1초 뒤에 전체 모달 표시",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "sign-up.tsx & complete-profile.tsx",
+        "persona": "26세 취업준비생",
+        "issueType": "asset-inconsistency",
+        "severity": "med",
+        "description": "auth 페이지의 hero 이미지는 상세한 그라데이션 일러스트(authHero). 하지만 app의 미학은 NeoDunggeunmo 픽셀폰트 + 심플한 아이콘 + cosmic 톤. 불일치 느낌",
+        "suggestion": "hero 이미지를 피크셀 아트로 재제작하거나, 기존 IslandArt/SecondBSprite 같은 기존 컴포넌트로 교체",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "22세 대학생",
+        "issueType": "overload",
+        "severity": "med",
+        "description": "SceneHero(eyebrow '01. 조각 담기') + 제안 패널 + 트랙 토글 섹션 + 모드 탭 행 + 모드 도움말 + 필드그룹 + 액션 행 + 분류 결과 + 제출. 스크롤 깊이가 매우 길고 섹션이 너무 많음",
+        "suggestion": "초기 사용자(days_since_signup < 3)에게는 간단한 폼만 보여주기: body textarea + submit button. 나머지 옵션(트랙, 제안, 고급 태그)은 collapsible drawer 처리",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "index.tsx",
+        "persona": "25세 프리랜서디자이너",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "NavGraph에서 tier-2 'wiki' 노드에만 bubbleAction: 'upload'가 있어서 upload 아이콘 + 주소 버튼이 나타남. 다른 노드에서 바로 capture로 가는 방법이 없음. 직관적이지 않음",
+        "suggestion": "모든 tier-2 노드 (work/relation/knowledge/records/taste)에 floating action button처럼 '+' 아이콘 추가. 또는 graph 하단에 '+ 조각 담기' 고정 버튼",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "28세 간호사",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "온보딩 Step 2 'village' 화면에서 세 개의 작은 island(imagine/knowledge/work_growth)와 큰 island(core)가 나타남. 하지만 실제 그래프는 이것과 레이아웃/구성이 다름. 오해 유발",
+        "suggestion": "온보딩 village 화면을 실제 graph 구조와 동일하게 재현. 또는 '이건 이미지이고, 다음 화면에서 실제 그래프를 보실 거예요' 명시",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "35세 직장인",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "5단계 온보딩 화면 사이 전환이 즉시 발생. 버튼 클릭 후 애니메이션 없이 다음 콘텐츠가 나타나 기계적인 느낌. dotActive 진행 표시기만 업데이트되고 페이드/슬라이드 없음.",
+        "suggestion": "onboarding.tsx의 setIndex 호출 시 Animated.timing으로 부드러운 페이드 인/아웃 추가. 지속시간 300-400ms.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "32세 워킹맘",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "\"마을\", \"조각\", \"지도\" 등의 비유가 바쁜 부모에게 명확하지 않음. 예: \"노드는 장소, 연결선은 길, 기록은 조각이 됩니다\"라는 설명이 추상적이고 실제 기능과의 연결이 약함.",
+        "suggestion": "온보딩 title/body 텍스트(한국어/영어)를 더 직설적으로 개편: \"기록 → 관계 → 나의 패턴 발견\" 같은 구체적 결과 중심으로. i18n 파일(auth.json) 수정.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "(auth)/sign-up.tsx",
+        "persona": "34세 교사",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "BirthDateField 컴포넌트의 입력 형식(DD/MM/YYYY vs YYYY/MM/DD)이 코드에서 명시되지 않음. 사용자가 어떤 순서로 입력해야 하는지 불명확. 라벨에 \"생년월일\"만 있음.",
+        "suggestion": "BirthDateField에 placeholder=\"YYYY-MM-DD\" 추가하고 자동 형식 지정 구현. 또는 datepicker UI(달력) 사용. 라벨 하단에 \"예: 1990-01-15\" 같은 힌트 표시.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "(auth)/sign-up.tsx",
+        "persona": "36세 공무원",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "ConsentNotice 컴포넌트가 minor 상태에 따라 다른 동의항목을 표시하지만, 고청소년(14-17세)과 성인의 동의 차이가 사용자에게 명확하지 않음. \"고프라이버시 공지\"가 뭔지 설명 없음.",
+        "suggestion": "동의 항목 각각에 \"i\" 아이콘 버튼 추가로 상세 설명 모달 제공. 미성년자 잠금 항목을 강조(배경색/테두리)하고 \"만 18세 미만 사용자는 일부 기능이 제한됩니다\" 같은 명시적 알림 추가.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "(auth)/sign-in.tsx",
+        "persona": "39세 PT트레이너",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "\"비밀번호를 잊으셨나요?\" 누르면 \"support@2nd-brain.app에 이메일을 보내세요\"라는 안내가 나옴. 자동 재설정 링크나 이메일 발송이 아닌 수동 이메일 요구가 불편함.",
+        "suggestion": "실제 비밀번호 재설정 플로우 구현: handleForgotPassword()에서 Supabase auth.resetPasswordForEmail() 호출하는 로직 추가. 또는 최소한 \"support@2nd-brain.app으로 자동 이메일 발송\" 버튼 제공.",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "(auth)/complete-profile.tsx",
+        "persona": "37세 엔지니어",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "OAuth 후 /complete-profile 리다이렉트가 명시되지 않음. 코드에서 \"post-OAuth profile completion\"이라 설명되지만 사용자 입장에서는 왜 이 화면이 나타나는지 불명확.",
+        "suggestion": "complete-profile.tsx 상단에 \"Completing your account setup\" 같은 간단한 헤더 추가. 또는 진행 표시기(1/2 등)를 표시해 이것이 단계 중 하나임을 명시.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "35세 직장인",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "분류 결과(classifyClipper 호출 후 제안 태그들)가 자동으로 추가되지만, 사용자가 \"분류\"의 의미나 목적(어디에 저장될 정보인지)을 모름.",
+        "suggestion": "분류 결과 섹션 헤더에 \"AI가 자동으로 분류했습니다 - 수정 가능\" 같은 설명 추가. 각 태그 칩 옆에 \"x\" 제거 버튼이 있는지 확인(코드에서 editable chips 언급하지만 UI 상 명확하지 않음).",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "38세 자영업자",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "일기 모드(journal) 사용 시 \"Lv3 unlock + free-tier use limit\" 게이트가 있다고 코드에 명시되지만, 사용자는 언제 이 제한에 도달하는지 알 수 없음. 에러 메시지가 명확하지 않을 가능성.",
+        "suggestion": "캡처 화면 상단에 \"일기 남은 횟수: 5/10\"처럼 사용량 시각화 추가. 또는 limit에 도달했을 때 명확한 모달: \"오늘의 일기 저장 한도를 모두 사용했습니다. 내일 다시 시도해주세요.\"",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "inbox.tsx",
+        "persona": "33세 마케터",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "각 inbox 항목을 탭하면 \"로컬 알림으로 본문 미리보기\"가 나온다고 코드에 명시되지만, 사용자는 이 상호작용이 일회성인지 저장되는지 불명확. BODY_CACHE_LIMIT=5라는 제약이 숨겨짐.",
+        "suggestion": "각 행 마우스오버/탭 시 \"본문 미리보기\" 아이콘/버튼을 명시적으로 표시. 또는 행 자체를 누르면 상세 화면(별도 라우트 /record/[id])으로 이동하도록 개선 필요(현재는 알림만).",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "inbox.tsx",
+        "persona": "36세 공무원",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "deleteSource() 함수가 swipe 또는 long-press로 숨겨져 있을 가능성. 어떤 제스처로 삭제 옵션을 열 수 있는지 명확하지 않음.",
+        "suggestion": "각 행 우측에 \"...\" 메뉴 버튼 또는 swipe 시 삭제 버튼 노출. 처음 사용자를 위해 \"행을 위로 스와이프하여 삭제\" 같은 헬프 토스트(1회 표시).",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "wiki.tsx",
+        "persona": "32세 워킹맘",
+        "issueType": "overload",
+        "severity": "med",
+        "description": "wiki.tsx에 3개의 facet 카드(Core, Library, Imagine)가 상단에 있고, 페이지 목록 위에 태그 칩 필터가 있음. 페이지 행마다 kind 라벨(source/entity/concept), 연결 카운트, 백링크 등이 표시되어 시각적 부담이 큼.",
+        "suggestion": "태그 칩 필터를 접을 수 있는 패널로 처리. 페이지 행을 간단히: 제목 + 마지막 수정 시각만 표시하고, 상세 정보(kind, 연결수)는 탭/확장 시 표시.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "wiki.tsx",
+        "persona": "34세 교사",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "\"Generate page\" 기능이 코드에만 언급되고 UI 상 버튼이 없거나 위치가 명확하지 않음. 사용자가 페이지를 직접 만드는 방법(Phase 1 extraction)이 불명확.",
+        "suggestion": "wiki.tsx에 FAB(Floating Action Button) 또는 상단 \"+ 페이지 생성\" 버튼 추가. 또는 \"페이지는 기록에서 자동 생성됩니다. 수동 생성하려면 /capture에서 클립 모드 사용.\" 같은 온보딩 카드.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "persona.tsx",
+        "persona": "35세 직장인",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "buildPersona() 로딩 중 PremiumLoadingState 표시되지만, Gemini 호출 지속시간이 불명확. 로딩 진행 표시기가 있는지 없는지 알 수 없음.",
+        "suggestion": "PremiumLoadingState에 진행률 표시(예: 0-100%) 또는 로딩 단계별 메시지 추가(\"기록 분석 중... 30%\", \"성격 분석 중... 60%\" 등). 또는 최대 제한시간(예: 15초) 후 \"시간이 걸리고 있습니다\" 메시지로 UX 개선.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "persona.tsx",
+        "persona": "31세 의사",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "코드에서 \"C10 + crisis routing\"이라 언급되지만, 실제 위기 상황 인식 및 라우팅이 사용자에게 명확하지 않음. 어디서 도움을 받을 수 있는지 모름.",
+        "suggestion": "buildPersona 결과가 위기 신호를 감지했을 경우, 명시적 모달: \"걱정되는 부분이 있으신가요? 전문가 상담 링크\" 제공. 또는 persona.tsx 하단에 \"위기 상황 도움말\" 버튼 추가.",
+        "doableBy": "simon"
+      },
+      {
+        "screen": "trinity.tsx",
+        "persona": "36세 공무원",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "classifyDomain() 함수가 태그를 자동으로 분류하지만, 정규화 로직(\"건강\" → \"health\")이 완벽하지 않을 수 있음. 사용자의 기록이 올바른 도메인에 분류되었는지 확인하는 방법이 없음.",
+        "suggestion": "trinity.tsx에 \"도메인 재분류\" 기능 추가: 각 도메인의 기록 목록에서 개별 항목을 다른 도메인으로 이동할 수 있는 UI. 또는 자동 분류 후 \"다시 분류하시겠습니까?\" 같은 선택지.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "settings.tsx",
+        "persona": "37세 엔지니어",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "CrewDensity 옵션(none, few, some, many)이 UI에서 무엇을 제어하는지(그래프의 companion 밀도인가?) 명확하지 않음.",
+        "suggestion": "settings.tsx의 \"Crew Density\" 레이블 하단에 \"그래프 화면에 표시되는 도우미 캐릭터의 숫자를 조절합니다\" 같은 설명 추가. 또는 각 옵션 옆에 시각적 미리보기(아이콘 개수로 표현).",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "account.tsx",
+        "persona": "31세 의사",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "\"미성년자 잠금\"이라는 개념이 사용자 입장에서 불명확. 생년월일을 수정해도 자동으로 잠금이 해제되는지, 어떤 기능이 잠기는지 명시되지 않음.",
+        "suggestion": "account.tsx에 \"나이에 따른 보호\" 섹션 추가: \"만 18세 미만이면 일부 고급 기능이 제한됩니다. 예: [기능1], [기능2]\" 같이 구체적 나열. 생년월일 수정 후 \"잠금 설정이 업데이트되었습니다\" 메시지.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "account.tsx",
+        "persona": "36세 공무원",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "deleteAllUserData()와 requestAccountDeletion() 두 가지 삭제 함수가 있는데, 차이가 불명확. 로컬 삭제 vs 서버 삭제가 뭔지, 어떤 것을 사용해야 할지 모름.",
+        "suggestion": "account.tsx의 삭제 버튼 옆에 \"i\" 아이콘으로 팝오버: \"로컬 삭제: 앱에서만 삭제 / 계정 삭제: 서버의 모든 데이터도 제거됨\" 구분. 명시적으로 \"계정 삭제 권장\"이라 표시.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "big-five.tsx",
+        "persona": "34세 교사",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "BFI-44의 목적(\"성격 특성 평가\")과 결과가 어디에 사용되는지 명시되지 않음. 교사 입장에서 \"Openness, Conscientiousness\" 같은 특성이 자신의 업무와 어떤 관련이 있는지 모름.",
+        "suggestion": "big-five.tsx 상단에 \"이 검사는 당신의 성격 특성을 5가지로 분류합니다. 결과는 [나의 중심]에 표시되며 AI 상담에 사용됩니다.\" 같은 설명 추가.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "attachment.tsx",
+        "persona": "39세 PT트레이너",
+        "issueType": "overload",
+        "severity": "med",
+        "description": "ECR-S: 12개 문항, 7점 척도(5점보다 많음). 각 선택지가 \"Strongly disagree\"부터 \"Strongly agree\"까지 7가지라 사용자 입력이 복잡함.",
+        "suggestion": "LikertChoiceGroup에서 선택지를 5점 척도로 단순화하거나, 시각적으로 슬라이더 형태로 표현하여 선택 부담 감소. 또는 각 문항에 간단한 해석(예: \"동의함\" 옆에 \"당신은 관계에서 불안감을 느낀다\") 추가.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "esm.tsx",
+        "persona": "38세 자영업자",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "ESM 체크인의 \"맥락\"(Context: 혼자/사람들과/일/움직임/쉼/밖) vs \"에너지\"(Energy: 슬라이더) 차이가 명확하지 않음. 어떤 상황에서 어느 것을 입력해야 할지 불명확.",
+        "suggestion": "esm.tsx에서 각 prompt_kind 선택지에 설명 추가: \"맥락: 지금 당신이 있는 상황\" vs \"에너지: 지금 당신의 체력/정신력 수준\". 예제 입력(\"오전 일하면서, 에너지 60%\" 같이) 모달로 제공.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "core-brain.tsx",
+        "persona": "33세 마케터",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "\"밝은 연결\", \"밝아진 동네\", \"자주 보이는 나의 모습\" 등 추상적 표현이 실제 데이터와 무엇을 의미하는지 불명확. 어떤 알고리즘으로 이 항목들이 선정되었는지 알 수 없음.",
+        "suggestion": "core-brain.tsx의 각 섹션 헤더 옆에 \"i\" 아이콘 추가 → \"밝은 연결: 최근 기록에서 자주 언급되는 주제들을 나열합니다.\" 같은 상세 설명 모달.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "core-brain.tsx",
+        "persona": "35세 직장인",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "buildPersona() 로딩이 긴데, setBuilding(true/false) 상태 전환만 있고 진행률 표시가 없음. UI가 멈춘 것처럼 느껴질 수 있음.",
+        "suggestion": "core-brain.tsx의 PremiumLoadingState에 진행률 애니메이션 추가. 또는 로딩 중 \"기록 수집\", \"패턴 분석\", \"중심 구성\" 같은 단계별 메시지 표시.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "jarvis.tsx",
+        "persona": "37세 엔지니어",
+        "issueType": "overload",
+        "severity": "med",
+        "description": "QUICK_ACTIONS 5개(\"다음 한 걸음\", \"공상 모드로\", \"지식 창고에 저장\", \"왜 이렇게 봤어?\", \"다시 짧게\")가 AI 응답 아래 모두 표시됨. 선택지가 많아서 초기 사용자는 어떤 것을 눌러야 할지 혼동.",
+        "suggestion": "QUICK_ACTIONS를 수평 스크롤 칩으로 표시(한 번에 3개만 보이고 좌우 스크롤). 또는 \"다음 한 걸음\"을 기본으로 강조하고 나머지는 \"더보기\" 메뉴에 숨김.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "jarvis.tsx",
+        "persona": "30세 번역가",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "chat 입력이 한국어/영어만 지원되지만, 다국어 사용자(번역가)의 경우 원문 언어 선택 옵션이 없음. 또는 자동 언어 인식이 있는지 불명확.",
+        "suggestion": "jarvis.tsx의 Input 컴포넌트에 언어 선택 버튼 추가 또는 현재 입력 언어를 자동 감지하여 표시. 또는 프롬프트: \"한국어나 영어로 질문해주세요\" 명시.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "NavGraph.tsx",
+        "persona": "32세 워킹맘",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "노드 스폰 애니메이션(SPAWN_LOGO_DELAY_MS=620ms, 뽁 사운드)이 한 번만 나타남. 그래프로 돌아왔을 때(예: 다른 화면에서 /로 돌아옴) 애니메이션이 재생되지 않으므로 갑작스러워 보임. navGraphSpawnPlayed 플래그가 세션 내내 true 유지.",
+        "suggestion": "\"나의 중심\"(/persona 또는 /capture)에서 돌아왔을 때 약간의 슬라이드-인 또는 페이드 애니메이션 추가. 또는 사용자가 설정에서 motion preference를 선택했다면 prefersReducedMotion() 체크로 비활성화.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "NavGraph.tsx",
+        "persona": "36세 공무원",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "\"과거의 나\" 노드가 Tier 3에서 \"유년/10대/20대/30대\"로 분기되는데, 사용자의 생년월일에 따라 활성 구간이 결정될 것으로 예상되지만 코드에서 명시되지 않음. 30세 사용자라면 \"30대\"만 활성화되는가, 아니면 모두 표시되는가?",
+        "suggestion": "NavGraph의 tier-3 구성 로직을 명확히: 사용자 나이를 계산하여 현재/과거 시대만 노드로 표시. 또는 모든 시대를 표시하되, 현재 시대를 강조(밝은 색/큰 크기).",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "NavGraph.tsx",
+        "persona": "39세 PT트레이너",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "노드 탭 시 버블 팝인(BUBBLE_POP_OVERSHOOT_MS=160ms)에 음향 피드백(pitchForTier, playPop)이 있는데, 음소거 모드 사용자나 청각 장애인은 이 피드백을 못 받음. 시각적 피드백만으로는 부족할 수 있음.",
+        "suggestion": "NavGraph에서 버블 팝인 시 시각적 진동(haptic feedback) 추가: Animated 스케일 + 그림자 변화로 강조. 음향 피드백은 선택사항으로 설정에서 끌 수 있도록.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "45세 중간관리자",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "도트 인디케이터가 매우 작음(활성 상태 18px, 비활성 7x7px)과 '건너뛰기' 버튼이 캡션 텍스트 크기(11px)로 직관적 스캔이 어려움. 화면 진행 상황('1단계 / 5')이 시각적으로 명확하지 않음.",
+        "suggestion": "도트 인디케이터 크기를 12-16px로 확대, '1/5 단계' 텍스트 라벨 추가, 스킵 버튼 최소 44px 터치 타깃 확보",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "52세 전업주부",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "화면 전환 간 애니메이션 없음. 다음 버튼 클릭 후 화면이 즉시 전환되어 딱딱하고 기계적으로 느껴짐.",
+        "suggestion": "화면 진입/퇴출 애니메이션 추가(페이드 또는 슬라이드 200-300ms), 진행 도트의 활성 상태 부드러운 전환",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "(auth)/sign-up.tsx",
+        "persona": "48세 자영업사장",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "생년월일 필드가 수동 입력인지 날짜 피커인지 불명확. BirthDateField 컴포넌트 동작이 명시되지 않아 첫 사용 시 혼란 가능.",
+        "suggestion": "필드 아래 'YYYY-MM-DD 형식 또는 탭해서 선택' 같은 힌트 텍스트 추가, 필드 포커스 시 캘린더 피커 자동 표시",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "(auth)/sign-up.tsx",
+        "persona": "52세 전업주부",
+        "issueType": "overload",
+        "severity": "med",
+        "description": "소셜 로그인 옵션이 4-5개(Google, Apple, Kakao, Naver)나 있고, 각 버튼 아래 텍스트가 길어서 선택이 어려움. 어느 것이 가장 쉬운 방법인지 안내 없음.",
+        "suggestion": "가장 권장하는 옵션 1-2개만 'Continue with ~' 형태로 강조, 나머지는 '다른 방법으로 로그인' 접기 UI로 처리",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "48세 자영업사장",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "'일상 Wiki / Pro Wiki' 토글이 어떤 차이를 만드는지 명확하지 않음. 선택 후 결과가 즉시 보이지 않아 혼란.",
+        "suggestion": "토글 아래 '일상: 일상 기록용, Pro: 전문가 자료용' 같은 한 줄 설명 추가, 또는 각 선택지 옆에 정보 아이콘(?) 추가",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "44세 작가",
+        "issueType": "overload",
+        "severity": "med",
+        "description": "분류 결과(suggested tags, suggested track)가 칩 형태로 보이지만, 칩을 어떻게 편집/제거하는지 UI에 명시되지 않음. 40대 사용자는 드래그/스와이프를 모를 수 있음.",
+        "suggestion": "각 칩 옆에 X 아이콘 추가 또는 롱프레스 후 메뉴 표시, 또는 칩 아래 '탭해서 편집, X로 제거' 같은 힌트",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "inbox.tsx",
+        "persona": "55세 택시기사",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "소스 종류 라벨('received', 'article', 'video', 'paper', 'reddit', 'code', 'ai_tool', 'self_knowledge')이 프로 유저 중심으로 설계됨. '받은편지함'은 이해되지만 'self_knowledge', 'ai_tool' 같은 용어는 모호함.",
+        "suggestion": "KIND_LABEL 매핑에서 '자기 이해' 등 더 직관적 한글명 사용, 또는 라벨 옆에 간단한 설명 아이콘(?) 추가",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "inbox.tsx",
+        "persona": "48세 자영업사장",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "소스 본문을 보려면 행을 탭하고 downloadRawClipping이 실행되는데, 로딩 중 상태 표시가 불명확. 시간이 걸릴 때 사용자가 다시 탭할 가능성 있음.",
+        "suggestion": "본문 로드 중 스피너 표시, 또는 '본문을 불러오는 중...' 토스트 메시지 추가",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "wiki.tsx",
+        "persona": "47세 학원장",
+        "issueType": "overload",
+        "severity": "med",
+        "description": "필터 칩(tag-based filter), 검색 입력, 페이지 목록, 백링크 섹션 등이 한 화면에 모여 정보 과잉. 어디서 시작해야 하는지 불명확.",
+        "suggestion": "검색/필터를 상단에 고정, 필터 수를 3개 이하로 초기 제한, 고급 필터는 '필터 더보기' 접기식 UI로 제공",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "big-five.tsx",
+        "persona": "55세 택시기사",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "5점 리커트 척도('전혀 아니다' vs '아니다' vs '보통')에서 선택지 간 미묘한 차이가 이해되지 않을 수 있음. 응답 방식 설명 없음.",
+        "suggestion": "척도 상단에 '5 = 매우 동의, 3 = 중립, 1 = 매우 비동의' 같은 간단한 가이드 추가",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "account.tsx",
+        "persona": "48세 자영업사장",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "생년월일 수정 후 '저장' 버튼의 상태 변화(disabled → enabled)가 즉시 명확하지 않음. 저장됨 피드백도 토스트로 3초 후 사라져 확인 어려움.",
+        "suggestion": "저장 성공 시 '저장되었습니다' 토스트를 4-5초로 연장, 또는 체크 아이콘 + 텍스트로 상태 명시",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "NavGraph.tsx",
+        "persona": "50세 연구원",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "노드 사이 선(edge)이 Animated SVG Line으로 구현되어 있지만, 40대 사용자는 '선이 왜 흔들리는가' 이유를 모를 수 있음. 애니메이션이 과도해 보일 수 있음.",
+        "suggestion": "prefersReducedMotion 설정 외 사용자를 위해 애니메이션 강도 조절 옵션 추가, 또는 기본값을 더 부드럽게(30% 감소)",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "persona.tsx",
+        "persona": "52세 전업주부",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "페르소나 카드가 빌드되는 동안 로딩 상태만 표시되고, 실패 시 '자기 모델을 만들지 못했어요' 에러 메시지가 발생. 사용자가 왜 실패했는지 알 수 없음.",
+        "suggestion": "에러 메시지에 '(네트워크 확인, 잠시 후 다시 시도)' 같은 구체적 원인/조치 추가",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "complete-profile.tsx",
+        "persona": "48세 자영업사장",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "동의(ConsentNotice) UI가 복잡해 보임. 어떤 동의가 필수이고 어떤 것이 선택인지 시각적 구분 없음.",
+        "suggestion": "필수 동의는 체크박스 옆에 별(*) 표시, 또는 '필수' / '선택' 라벨로 명확히 구분",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "big-five.tsx, attachment.tsx, mbti.tsx",
+        "persona": "55세 택시기사",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "평가 화면들이 모두 작은 텍스트(caption: 13px, subtle: 11px)로 설계됨. 40대 후반 이상 사용자의 시력 저하를 고려하지 않음.",
+        "suggestion": "평가 항목 텍스트를 최소 14px 이상으로 확대, 또는 시스템 글자 크기 설정 존중(enableFontScaling=true 확인)",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "(auth)/sign-in.tsx",
+        "persona": "58세 귀농인",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "로그인 폼 자체는 간단하나 OAuth 옵션 4개가 평등하게 표시됨. 이메일/비번과 소셜 가입 흐름 분리 불명확. '또 없나?'라고 생각할 여지. 언어 전환 버튼(EN/한국어) 위치가 우상단 작은 공간에 있어 발견 어려움.",
+        "suggestion": "이메일 방식을 전면에 큰 버튼으로. OAuth는 '또 다른 방법'이라는 명확한 섹션 헤더 아래 배치. 언어 전환은 하단 푸터로 옮기거나 설정 화면에서만 제공.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx (모드 아이콘)",
+        "persona": "54세 공장반장 (procedure-oriented)",
+        "issueType": "asset-inconsistency",
+        "severity": "med",
+        "description": "모드 글리프(ModeGlyph)가 SVG 직접 드로우 (선, 원, 경로). 스타일이 추상적이고 일관되지 않음: 메모는 펜 모양, OCR은 카메라, 파일은 문서 형태인데 모두 다른 스트로크 가중치·끝점 스타일. 누구든 한눈에 모드 이름을 유추하기 어려움.",
+        "suggestion": "아이콘을 하나의 icon set 라이브러리(예: react-native-vector-icons)로 통일. 모든 아이콘 같은 가중치(2px), 라운드 끝점, 일관된 바운딩박스 사용.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "NavGraph.tsx (tier 상호작용)",
+        "persona": "51세 간병인 (limited screen time, physical activity-focused)",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "bubble(말풍선)이 노드를 tap할 때만 나타남. 첫 방문에는 어떤 노드를 눌러야 할지 모름. Tier1의 jarvis 아이콘(💬)과 Tier2의 upload 아이콘(+)이 작고 힌트 없음. 터치 타깃이 최소 44x44 아님 (일부 노드 bubble이 더 작음).",
+        "suggestion": "온보딩 투어에서 각 특수 노드(jarvis, upload)를 명시적으로 가리키고 '이 아이콘을 눌러서…'라고 설명. 터치 타깃 최소 44x44 유지. Bubble 내 버튼(primary action, secondary action)의 hitSlop을 8px 이상으로.",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "inbox.tsx & wiki.tsx",
+        "persona": "51세 상담사 (information processor)",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "Inbox와 Wiki 화면이 모두 리스트 형태이지만 행 UI가 다름(kind 라벨, 태그 칩, 백링크 수, 생성 버튼 등). 각 행의 터치 영역이 명확하지 않음(누르면 확장, 누르면 상세 화면으로 이동 등이 혼재). 필터링/검색이 UI에서 발견하기 어려움(스크롤 끝에 숨겨짐).",
+        "suggestion": "각 리스트 행을 일관된 구조로: [아이콘] [제목/라벨] [메타] [액션버튼]. 필터/검색을 화면 상단에 sticky하게 배치. 행의 주요 영역(제목)과 액션 버튼(생성/삭제)을 시각적으로 분리.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "모든 PremiumAppShell 기반 화면",
+        "persona": "54세 공장반장 (procedural clarity needed)",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "PremiumAppShell 내 여러 종류의 로딩/알림 상태: PremiumLoadingState(텍스트), PremiumToast(일시적), Alert(시스템), CrisisRouter(모달) 등. 각각이 다른 타이밍/레이아웃으로 나타남. 사용자가 로딩 중인지, 에러가 났는지, 성공했는지 명확하지 않은 경우 있음. 예: capture 저장 후 'setSavedTitle' 인라인 패널이 나타나지만 5초 후 자동 사라짐 (사용자가 못 볼 수도).",
+        "suggestion": "알림 패턴을 1-2가지로 통합: (1) 로딩/진행 = 전면 스핀너 + 텍스트, (2) 결과 = 하단 고정 토스트 5초 유지 or 버튼으로 dismiss. 상태 전환(로딩→성공→닫기)을 명확한 시각/음향 피드백으로.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx & big-five.tsx & inbox.tsx",
+        "persona": "50세 약사 (precision-focused)",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "폼/입력 필드의 '필수' vs '선택' 구분이 명확하지 않음. 예: capture에서 본문(body)은 필수지만 태그는 선택. Big Five에서 모든 44개 항목을 꼭 해야 하는 건지 부분 완료 가능한지 불명확. 입력 필드의 placeholder 텍스트가 짙은 색(textMuted)이라 label처럼 보일 수 있음.",
+        "suggestion": "필수 필드 라벨 옆에 빨간 별(*) or '필수' 배지 추가. 옵션 필드는 라벨 옆에 '(선택)' 명시. Placeholder 색을 더 밝게(textSubtle 대신 background 투명도 50%). 폼 제출 시 필수 필드 미입력 시 각 필드를 빨간색 테두리로 하이라이트.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "onboarding.tsx & sign-up.tsx",
+        "persona": "53세 미용실원장 (time-conscious, customer-service mindset)",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "온보딩 단계 전환 시 애니메이션이 없음(점프). 도트 인디케이터의 active 상태 애니메이션도 없음(크기만 변함). 서명 비밀번호 입력 후 로딩 상태 전환이 급함. iOS에서는 KeyboardAvoidingView가 smooth하지 않을 수 있음.",
+        "suggestion": "단계 전환에 fade-in/out 또는 slide animation 0.3-0.4초. 도트 인디케이터는 scale + fade를 함께. 버튼 press → 로딩 상태로의 색상/opacity 전환을 animated로. Android에서 keyboard 올라올 때 smooth scroll 보장.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "persona.tsx (초기화면)",
+        "persona": "56세 목사 (reflective, community-oriented)",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "persona 화면에서 assessment 도구들(라이프 오딧, Big Five, 애착 스타일)을 제안하는 카드가 있지만, 어느 것부터 시작해야 하는지 권장 순서가 없음. 각 도구의 목적과 결과가 어떻게 쓰일지 설명 부족. \"당신을 이루는 조각들을 모으는 중\" 로딩 메시지는 이미 완료된 assessment의 다시 빌드인데, 사용자는 무한 로딩으로 착각 가능.",
+        "suggestion": "assessment 카드를 추천 순서대로 정렬(라이프 오딧 → Big Five → 애착). 각 카드에 '5분 후 완료' 같은 시간 추정, 그리고 '결과로 알 수 있는 것: OO, OO' 같은 benefit 텍스트 추가. 빌드 로딩 시간 제한(예: 30초) 후 timeout UI 표시.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "72세 은퇴교사",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "5단계 온보딩이 '조각', '마을', '그래프' 등의 은유로만 개념을 전달. 시각적 아트만으로는 이 용어들의 실제 의미를 파악하기 어려움. 학력이 높은 사용자도 다음 단계에서 뭘 할지 명확하지 않음",
+        "suggestion": "각 온보딩 단계마다 명확한 설명 텍스트 추가 (예: '조각 = 당신이 남긴 한 줄, 한 문장이에요'). 아트는 보충 설명일 뿐 메인 메시지는 텍스트로",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "(auth)/sign-up.tsx",
+        "persona": "68세 택배기사",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "BirthDateField가 ISO 형식(YYYY-MM-DD) 텍스트 입력 강제. 생년월일을 직접 타이핑해야 함. 고령자가 정확하게 입력하기 어렵고, 날짜 형식 실수 시 에러 처리가 부족",
+        "suggestion": "날짜 picker(년/월/일 드롭다운) 사용. iOS/Android 네이티브 date picker 활용으로 입력 오류 최소화",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "74세 손주돌봄조부모",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "모드 전환, 파일 업로드, LLM 분류 결과 로딩 등 여러 비동기 작업이 연쇄적으로 일어남. 각 전환 단계에서 피드백이 즉각적이지 못함. '…' 로딩 표시만으로는 언제까지 기다려야 할지 모름. 시간이 없는 사용자가 중간에 포기할 가능성 높음",
+        "suggestion": "각 로딩 단계에 진행률 표시('2/5 단계: 분류 중...') 또는 예상 시간('약 3초'). 모드 전환 시 즉각적인 상태 변화(200ms 애니메이션). 스켈레톤 대신 명확한 'ActivityIndicator + 설명 텍스트' 조합",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "trinity.tsx",
+        "persona": "67세 종교인",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "4개 영역 중 '앱' 영역. 이 영역의 의도가 불명확. '프로젝트', '사이드 프로젝트' 같은 태그로 분류되는데, 은퇴한 종교인이나 개인 사업가는 '내 영역이 뭐지?'라고 혼동. 영역 설명이 없음",
+        "suggestion": "각 Trinity 영역 카드에 간단한 description 추가. '앱: 당신이 진행 중인 프로젝트나 아이디어들'처럼 명시. 또는 emoji나 아이콘으로 각 영역 시각화",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "big-five.tsx",
+        "persona": "74세 손주돌봄조부모",
+        "issueType": "overload",
+        "severity": "med",
+        "description": "44문항 설문을 페이지 단위로 나눔. 진행 상황 표시 부족. '전혀 아니다', '아니다', '보통', '그렇다', '매우 그렇다' 5점 척도는 중간값이 애매해서 고령자가 선택하기 어려움. 총 소요 시간이 길어서 시간 부족한 사용자는 포기",
+        "suggestion": "상단에 진행률 바('15/44') 명시. 4-5문항씩 묶어 스크롤 페이징. Likert 선택지를 버튼으로 명확하게 시각화(선택된 것 강조). '약 8분' 예상 시간 미리 고지",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "all screens (typography)",
+        "persona": "72세 은퇴교사",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "기본 Body 글자 크기가 15px. Caption 13px, Subtle 11px는 60대, 특히 70세 이상 사용자에게 너무 작음. NeoDunggeunmo 픽셀 폰트는 시각적으로 세련되지만 세밀한 글자 모양으로 인해 가독성 저하. 선택 가능한 글자 크기 옵션 없음",
+        "suggestion": "기본 Body 글자 크기를 17px로 올림. Caption 14px, Subtle 12px로 조정. iOS의 Dynamic Type처럼 시스템 글자 크기 설정 존중하기. 고령자 사용자 선호도 테스트 후 대체 폰트 검토(NeoDunggeunmo → sans-serif로 fallback)",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "all screens (color contrast)",
+        "persona": "71세 경비원",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "textSubtle (#8D98B8)과 배경(#070A18) 간 명도 대비가 낮음. 설명 텍스트, 타임스탬프, hint text가 희미해서 고령자 시력에서 읽기 어려움. WCAG AA 4.5:1 명도비 미충족 가능성 높음",
+        "suggestion": "textSubtle을 #B0B8D8 정도로 밝히기(배경 대비 개선). 또는 hint text는 textMuted 사용. 색상 대비 도구(WebAIM, Contrast Ratio)로 검증. 고령자 시력 시뮬레이션 테스트",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "wiki.tsx, inbox.tsx, insights.tsx",
+        "persona": "65세 소상공인",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "Empty state에서 다음 행동 불명확. '아직 기록이 없어요' 메시지만 있고, '어디를 눌러서 뭘 할 수 있는가'가 명시되지 않음. 특히 시간이 없는 사용자는 진입해서 뭔가 할 게 없으면 앱을 닫음",
+        "suggestion": "Empty state에 '첫 기록 추가하기' 같은 명확한 CTA 버튼 추가. 또는 '기록 추가 > 담기' 경로를 한 문장으로 가이드. Inbox는 '링크 붙여넣기', Wiki는 '소스 추가' 같은 구체적 액션 제시",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "65세 소상공인",
+        "issueType": "overload",
+        "severity": "med",
+        "description": "Capture 화면의 최상단에 '일상 Wiki / Pro Wiki' 토글, 그 아래 5개 모드 탭, 그 아래 모드별 입력 영역, 마지막으로 'AI 분류 결과' 영역. 스크린 높이에 비해 많은 정보와 상호작용 요소가 packed. 빠르게 진행하고 싶은 사용자는 혼동",
+        "suggestion": "Wiki 토글을 상단 우측 아이콘으로 축소. 모드 탭 크기 줄이기(텍스트 레이블만). 입력 영역 아래로 'AI 분류' 섹션을 collapse 가능하게. 또는 '간단 모드' vs '고급 모드' 토글 제공",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "components/graph/NavGraph.tsx",
+        "persona": "68세 택배기사",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "NavGraph에서 pan(손가락 드래그), zoom(핀치), tap(노드 선택)이 동시에 동작. 고령자가 멀티터치 제스처를 정확하게 수행하기 어려움. 실수로 드래그하면 화면이 움직이고, 선택 의도와 다른 결과 발생. 제스처 피드백 부족",
+        "suggestion": "모드 토글 추가('탐색 모드' vs '선택 모드'). 또는 탭 후 0.5초 대기 후 드래그 시작으로 tap/drag 구분. 제스처 튜토리얼 스크린 추가(첫 진입 시 한 번만). 드래그 시 visual feedback 강화(반투명 오버레이)",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "capture.tsx, wiki.tsx",
+        "persona": "66세 농부",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "파일 업로드 후 LLM 분류까지의 전환이 갑작스러움. 상태 변화 피드백이 적음. 특히 OCR 모드에서 이미지 선택 > 처리 > 결과 표시까지 부드러운 애니메이션 없음. 기계적으로 느껴짐",
+        "suggestion": "파일 선택 > 업로드 > 처리 > 결과 각 단계에 200ms 페이드인 트랜지션. 또는 progress indicator. CompanionMoment처럼 캐릭터 피드백 추가('조각을 정리하는 중...')",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "68세 스마트폰 초보자",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "Two 'skip' buttons (line 146: '건너뛰기' + line 162: '건너뛰고 둘러보기') on final step create ambiguity: which skips to graph vs. capture? Not obvious that both are valid exits or what happens next.",
+        "suggestion": "Single primary 'Save first piece' with secondary 'I'll try later' that both route the same way. Or use clearer intent: 'Continue to dashboard' vs. 'Skip this intro'.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "big-five.tsx + mbti.tsx + attachment.tsx",
+        "persona": "71세 복지관 수강생",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "Assessment screens (Big Five 44 items, MBTI, attachment) page through with no visible mid-session save or progress bar in the code. User feels trapped in a 9-page flow with no escape except back-arrow (which might lose data). QuantPager component doesn't show persistence cues.",
+        "suggestion": "Add a persistent mini progress bar (\"Page 3 of 9\") + auto-save indicator (\"Saved at 14:23\"). Show a 'Save & exit' secondary button on each page so users feel agency.",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "74세 관절염 있는 사람",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "Tab interaction requires precise tap on small icon glyph (24px width, hitSlop likely 8–10px per surfaces.tsx line 308). User with arthritis or hand tremor may misfire. No hover-to-preview or long-press fallback.",
+        "suggestion": "Increase icon size to 32–36px and add visible hitSlop region (visual padding around tabs). Alternatively, offer a dropdown menu 'Select capture type' instead of tabs.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "settings.tsx",
+        "persona": "68세 전직공무원",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "Settings screen uses a custom SettingsActionButton component (line 48–98) with inline confirmation via Alert.alert for destructive actions. The pattern is: tap button → Alert → tap again. No visual undo, no confirmation screen. User expects a 'Are you SURE?' screen with a typed confirmation phrase.",
+        "suggestion": "Implement a two-step flow: tap delete → show a dedicated confirmation screen with 'Type DELETE to confirm' input (like settings.tsx line 28 CONFIRM_PHRASE). Makes reversal of accidents less likely.",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "inbox.tsx + wiki.tsx",
+        "persona": "74세 관절염 있는 사람",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "Tap-to-expand rows (inbox line 98–150, wiki list) require a precise tap on a small hit region. No visual feedback until after tap. Arthritis user might tap multiple times or miss.",
+        "suggestion": "Increase the Pressable hitSlop on row taps to 12–16px. Add a light opacity change (0.9) on press feedback (already done in surfaces.tsx line 258) to provide immediate visual confirmation before expansion animates.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "persona.tsx + core-brain.tsx",
+        "persona": "73세 서예가",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "Persona card building and center cards (persona.tsx line 49, core-brain.tsx line 93) use abstract language: 'connections', 'patterns', 'pieces'. No concrete examples shown (e.g., \"You mentioned 'morning walks' 5 times → we connected it to your 'routine' pattern\").",
+        "suggestion": "On first load, show a sample persona card with 1–2 annotated examples of how pieces were linked. Provide a 'How we built this' explainer modal with before/after examples.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "big-five.tsx + attachment.tsx",
+        "persona": "75세 노인정 이용자",
+        "issueType": "overload",
+        "severity": "med",
+        "description": "Assessment intro modals (QuantIntroModal, big-five.tsx line 116) show item count (44), estimated time (8 min), and a long description all at once. For a user unfamiliar with self-assessments, this is overwhelming before they commit.",
+        "suggestion": "Shorten intro modal: show only title + '44 questions, ~8 min' + 'No right answers'. Move the long description to a Help screen post-intro, or show it as a collapsible 'Learn more' section.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "core-brain.tsx + persona.tsx",
+        "persona": "71세 복지관 수강생",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "Core-brain screen fetches records + sources (core-brain.tsx line 63–75) but UI does not make clear to user: 'You need to add journal entries or capture items first to build your center.' Empty state is an ActivityIndicator, not a helpful message pointing to /capture.",
+        "suggestion": "When evidence.length === 0 (core-brain.tsx line 93), show a warm message: 'Your center will grow as you add pieces. Start with /capture?' with a button linking to capture.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "75세 노인정 이용자",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "Capture mode toggle (line 150: 'Track toggle') and classification result flow (line 14: '분류 결과') are mentioned in comments but UI logic is not visible in the excerpt. User might not know: where do tags come from? Can I edit them? What does 'pro wiki' track mean?",
+        "suggestion": "Add a clear label: 'Classification (suggested tags)' above the editable chips. Explain the two tracks inline: 'Daily (personal) vs. Pro (professional knowledge)' with icons.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "big-five.tsx",
+        "persona": "76세 시력저하",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "LikertChoiceGroup component (imported line 24) not fully visible in this read, but Big Five's 5-point scale (SCALE array, lines 28–34) uses Korean/English labels. Labels are likely small; 5 buttons in a row with labels might be hard to tap precisely for vision-impaired user.",
+        "suggestion": "Render LikertChoiceGroup as a vertical column (5 full-width buttons) instead of horizontal row. Larger touch targets, clearer labels. Increase button height from minHeight 44 to 48–52px for assessment scales specifically.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "78세 손떨림 있는 독거노인",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "5단계 온보딩의 단계 전환이 즉시 이루어지고 애니메이션이 없어서 기계적으로 느껴짐. 딱딱한 상태 변화로 인지 과정 방해.",
+        "suggestion": "단계 전환 시 페이드인/페이드아웃 애니메이션 (300-500ms) 추가, 현재 단계 강조 시각 개선",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "sign-in.tsx",
+        "persona": "78세 손떨림 있는 독거노인",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "비밀번호 표시 토글 아이콘이 20x20으로 작고 hitSlop=10 (터치 타겟 40x40, 최소 권장 44x44 미달). 손떨림으로 실수 누르기 쉬움.",
+        "suggestion": "아이콘 크기 24x24로 증대, hitSlop=12로 확대하여 터치 타겟 48x48 달성. 아이콘 색상 명도 대비 개선 (현재 PALETTE 기반, 배경색과 명도차 확보).",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "sign-up.tsx",
+        "persona": "78세 손떨림 있는 독거노인",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "생년월일 입력 (BirthDateField) 형식이 명시되지 않음 (code 참조 불가). MM/DD/YYYY vs DD/MM/YYYY vs YYYY-MM-DD 형식 불명확. 손떨림으로 잘못 입력할 가능성 높음.",
+        "suggestion": "생년월일 입력을 드롭다운(년/월/일) 또는 캘린더 피커로 변경하여 수동 입력 제거. 현재 선택된 날짜 명확하게 표시.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "82세 폐쇄적 인지 구조",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "제출 버튼 텍스트 '영차영차 던지기'는 한국어 유머(의인화)로 기술-저 사용자에게 무엇을 하는 것인지 불명확. 영어도 'Send to the cells'는 불명확 (cells = ?).",
+        "suggestion": "'저장', '제출', '완료' 같은 명확한 동작 동사 사용. 현재 액션의 결과를 명시: '조각을 저장하고 그래프에 추가됩니다' 설명문 추가.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "inbox.tsx",
+        "persona": "77세 백내장 초기 시각저하",
+        "issueType": "overload",
+        "severity": "med",
+        "description": "각 행에 텍스트 레이어 과다: 종류 칩(텍스트) + 수집됨 칩 + 날짜 + 제목(2줄) + URL(1줄) + 태그(1줄). 총 6-7개 텍스트 행. 폰트 크기 11-13px 작음. 시각적 위계 불명확.",
+        "suggestion": "행 레이아웃 간소화: 제목 + 날짜만 기본 표시. URL/태그는 확장 시에만. 폰트 최소 14px. 행 간 padding 증가하여 여백 확보.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "inbox.tsx",
+        "persona": "82세 폐쇄적 인지 구조",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "'요약 + 4질문', '위키 페이지 생성' 등의 액션이 추상적. 사용자는 '이것이 무엇인가?', '내가 이를 해야 하나?'라는 의문 보유.",
+        "suggestion": "각 버튼에 accessibilityHint 추가 (이미 있으나 한국어만): '이 자료를 요약하고 5개 반성 질문을 만듭니다. 약 2분 소요.' 같은 명확한 설명.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "inbox.tsx",
+        "persona": "모든 고령자",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "에러 메시지: '받은편지함을 불러오지 못했어요. 아래로 당겨 새로고침해 주세요.' 는 '당겨서 새로고침' 제스처를 설명하는데, 제스처 자체를 모를 수 있음.",
+        "suggestion": "'새로고침 버튼 누르기' 텍스트 버튼과 함께 제시. 또는 '다시 시도' 버튼을 항상 표시.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "core-brain.tsx",
+        "persona": "77세 백내장 초기 시각저하",
+        "issueType": "overload",
+        "severity": "med",
+        "description": "여러 카드/섹션 (요즘 가장 밝은 연결 + 밝아진 동네 + 자주 보이는 나의 모습 + 이걸 만든 조각들 + 다음 한 걸음). 각 섹션 시각적 분리 불명확, 스크롤 필요.",
+        "suggestion": "섹션 간 명확한 구분선 추가. 각 섹션 제목 강조 (크기 증가, 색상 차별화). 세로 간격(marginVertical) 증가.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "persona.tsx",
+        "persona": "82세 폐쇄적 인지 구조",
+        "issueType": "overload",
+        "severity": "med",
+        "description": "평가 도구 3가지 선택 (라이프 오딧 25문항/Big Five 44문항/애착 스타일 12문항). 각 도구 설명이 '문항 수 · 시간' 형식으로만 표시되어, 어떤 도구를 선택해야 하는지 불명확.",
+        "suggestion": "각 도구마다 명확한 설명 추가: '라이프 오딧: 과거 경험 탐색 (직업, 가족, 건강 등)', 'Big Five: 성격 특성 진단 (개방성, 성실성 등)', '애착: 관계 스타일 이해'. 권장 순서 표시 (예: '1단계: 라이프 오딧부터').",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "persona.tsx",
+        "persona": "77세 백내장 초기 시각저하",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "카드 텍스트 크기 subtitle/caption 사용으로 14px 미만. 아이콘도 미포함하여 시각적 단서 부족.",
+        "suggestion": "카드 헤더 텍스트 16px 이상. 각 도구마다 간단한 아이콘 추가 (예: 라이프 오딧 = 시계/책, Big Five = 별 5개, 애착 = 손/하트).",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "big-five.tsx",
+        "persona": "82세 폐쇄적 인지 구조",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "44개 항목을 QuantPager로 페이징하나, 진행 상황 (현재 페이지/총 페이지) 표시 불명확. 사용자가 '아직 얼마나 남았나?' 파악 어려움.",
+        "suggestion": "진행률 바(프로그레스 바) 맨 위에 표시: '문항 12 / 44' 숫자와 시각적 바 결합. QuantPager 내 페이지 표시 강화.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "big-five.tsx",
+        "persona": "78세 손떨림 있는 독거노인",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "44항 Likert 완료 소요 시간 '약 8분'은 길고, 손떨림으로 정확하게 각 항목 선택하기 어려움. 중간 저장 없음.",
+        "suggestion": "중간 저장 기능 추가: 진행률 저장, 나중에 이어하기 버튼. 또는 섹션 단위로 분할 (예: Big Five를 5개 섹션으로 나누기, 각 섹션 4-5분).",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "NavGraph.tsx",
+        "persona": "80세 청력저하 심각",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "노드 탭/드래그 시 오디오 피드백(popSound, pitchForTier) 제공되나, 청력저하자는 들을 수 없음. 시각/진동 피드백만 제공.",
+        "suggestion": "노드 탭 시 진동 피드백 추가 (iOS: HapticFeedback.light(), Android: Vibration.vibrate(100)). 현재 prefersReducedMotion 체크 있으므로, 동시에 hapticFeedback도 체크하여 피드백 커스터마이즈.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "NavGraph.tsx",
+        "persona": "78세 손떨림 있는 독거노인",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "제스처 상호작용(GestureDetector, 핀치줌, 드래그) 기반. 손떨림으로 정확한 제스처 수행 어려움. 예: 2손 핀치줌은 떨릴 때 실패 가능성 높음.",
+        "suggestion": "제스처 외 버튼 제어 옵션 추가: 줌인/줌아웃 버튼 (화면 모서리 또는 탭바). 또는 제스처 감응도(tolerance) 증가하여 손떨림 있어도 인식 가능하게.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "NavGraph.tsx",
+        "persona": "77세 백내장 초기 시각저하",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "아일랜드 아트, 워커 스프라이트, 패턴 데이터 아트 등이 색상과 형태로만 구분됨. 특히 Tier 3 분류(일상/Pro 위키, 유년/10대/20대/30대 분류)의 색상 대비 불명확.",
+        "suggestion": "노드 각각에 명확한 텍스트 라벨 추가 (현재 제목이 있을 수 있으나, 확인 필요). 색상 외 패턴 사용 (예: 줄무늬, 점선 등) 추가하여 색맹자 대응.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "settings.tsx",
+        "persona": "82세 폐쇄적 인지 구조",
+        "issueType": "overload",
+        "severity": "med",
+        "description": "'위험 영역' 섹션이 공포감 유발. 데이터 삭제 3가지 모드(선택/부분/전체) 설명이 추상적. 확인 문구로 'DELETE' 영문 입력 요구.",
+        "suggestion": "데이터 삭제를 별도 화면으로 분리, 단계별 확인 추가. 확인 문구를 'DELETE'(영문)가 아닌 한국어 '삭제합니다' 또는 숫자 입력 (예: '52145' 확인 코드)로 변경하여 의도성 확보. 삭제 전 백업 옵션 제시.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "account.tsx",
+        "persona": "82세 폐쇄적 인지 구조",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "생년월일 수정이 필요한 이유/시기가 명시되지 않음. 사용자가 '왜 내 생년월일을 다시 입력해야 하나?'라는 의문 보유.",
+        "suggestion": "생년월일 수정 전 안내: '18세가 되셨거나, 입력하신 생년월일이 잘못되셨다면 여기서 수정할 수 있습니다.' 텍스트 추가. 또는 접근성/동의 관리와 분리.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "big-five.tsx",
+        "persona": "78세 손떨림 있는 독거노인",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "5점 Likert 선택지가 가로 배열(추정)되면, 각 버튼이 좁고 손떨림으로 인접 버튼을 누르기 쉬움. 버튼 간 간격 부족.",
+        "suggestion": "선택지를 세로 배열로 변경 (라디오 버튼 + 텍스트). 버튼 높이 최소 44px, 간격 12px 이상. 또는 슬라이더(Slider) 대신 이산 버튼 유지.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "wiki.tsx",
+        "persona": "77세 백내장 초기 시각저하",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "페이지 종류(Source/Entity/Concept)를 색상(info/success/warning)으로만 구분. 텍스트 라벨도 있지만 폰트 작음(caption/subtle 추정). 색맹자/시각저하자는 구분 어려움.",
+        "suggestion": "종류별 텍스트 라벨 강조 (폰트 증가), 색상 외 아이콘 또는 패턴 추가 (예: Source=문서, Entity=사람, Concept=전구).",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "wiki.tsx",
+        "persona": "82세 폐쇄적 인지 구조",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "Source/Entity/Concept 분류 개념 자체가 추상적. 사용자가 '이것들이 뭐고, 왜 다른 건가?'라는 의문 보유.",
+        "suggestion": "각 종류마다 설명 추가: 'Source는 당신이 저장한 기사/비디오/논문 같은 외부 자료, Entity는 사람/조직 같은 개념, Concept은 아이디어/기술 같은 추상 개념입니다.'",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "74세 보호자동반 (자녀 도움)",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "모드 선택, 입력, 태그, 제출이 순차적이지 않고 모두 한 화면에 있음. 보호자(자녀)와 함께 사용할 때 어디를 먼저 해야 하는지 불명확.",
+        "suggestion": "튜토리얼/가이드 모드 추가: '첫 번째: 모드 선택 → 두 번째: 내용 입력 → 세 번째: 태그 추가 → 네 번째: 저장' 같은 화살표/번호 표시. 또는 마법사(Wizard) 모드 제공.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "74세 보호자동반 (자녀 도움)",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "온보딩 완료 후 자동으로 /capture 또는 / (그래프)로 라우팅. 보호자는 '다음이 뭔가?' 불명확. 메뉴/네비게이션 훤히 드러나지 않음.",
+        "suggestion": "온보딩 완료 후 랜딩 화면에서 메뉴/주요 기능 명확하게 표시. 또는 완료 후 '메뉴 투어' 제시 (현재 라우팅 없음).",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "onboarding.tsx",
+        "persona": "85세 거동불편(척추)",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "도트와 \"건너뛰기\" 버튼의 의미가 불명확. 현재 진행 상황을 숫자로 명시하지 않아 \"1/5 단계\" 같은 텍스트 라벨이 없음.",
+        "suggestion": "\"1단계/총 5단계\"와 같은 명시적 진행 텍스트를 도트 위나 아래에 항상 표시. accessibilityLabel에만 있는 정보를 시각적으로도 노출.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "sign-in.tsx",
+        "persona": "88세 전직간호사",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "로그인 성공 후 IntroGate로 전환되는 과정이 즉각적이고 애니메이션 없음. \"당신의 조각이 다시 연결될 준비...\" 같은 로딩 메시지도 화면 전환 시 깜박임 현상 발생 가능.",
+        "suggestion": "로그인 버튼 누름 → 로딩 상태 시각화 (스피너나 진행바) → 페이드 인 애니메이션으로 다음 화면 전환. 로딩 메시지를 최소 1초 이상 표시.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "77세 손자보는 할머니",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "해시태그 추가의 \"+ 칩\" 인터페이스가 추상적. 고령자는 \"#\" 기호의 의미를 모를 수 있으며, 왜 태그를 달아야 하는지 불명확.",
+        "suggestion": "\"+ 추가\"라는 명시적 텍스트 버튼 사용. 태그 추가 전에 간단한 설명: \"조각을 나중에 찾기 쉽도록 label을 붙여봅시다\" 같은 문구.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "85세 거동불편",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "모드 탭의 아이콘(SVG)들이 작고, 라벨 텍스트도 xs 사이즈(11px)로 매우 작음. ModeGlyph width/height 24인데 svg 내부 stroke 1.8로 가늘어서 명확하지 않음.",
+        "suggestion": "탭 높이를 최소 56px로 확대(터치 영역 최소 권장 48px). 라벨을 sm(13px)으로 키우고, 아이콘을 32x32로 확대. 한손 조작 시 한 탭씩만 선택 가능하도록 여유 간격 제공.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "inbox.tsx",
+        "persona": "83세 문화생활 취미",
+        "issueType": "asset-inconsistency",
+        "severity": "med",
+        "description": "KIND_LABEL 칩의 색상(kindChipColor)이 일관되지 않음. inbox, article, video, paper 등 각각 다른 배경색인데, 색상 의미가 불명확하고 고령자가 \"색으로 구분\"할 수 없음.",
+        "suggestion": "모든 종류 칩을 동일한 배경색으로 통일하고, 텍스트만 다르게 표시. 또는 아이콘 + 텍스트 조합으로 시각적 구분 강화. 색상에만 의존하지 않기.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "insights.tsx",
+        "persona": "72세 은퇴교사",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "\"패턴이 작다 / Patterns are still small\" 같은 표현이 추상적. 어떤 기준으로 \"패턴\"을 정의하는지, 몇 개의 기록이 필요한지 불명확.",
+        "suggestion": "\"아직 몇 편의 기록이 있으면 흐름이 보여요. 지금 \\${count}편이 있으니 더 남겨봅시다.\"처럼 구체적인 숫자 표시. 진행 상황을 명확히 보여주기.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "core-brain.tsx",
+        "persona": "88세 전직간호사",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "로딩 중 \"중심을 살펴보는 중이에요...\" 메시지가 나타났다 사라지는 과정이 급격함. 부드러운 페이드 인/아웃 없이 즉각 전환되어 화면이 깜박이는 느낌.",
+        "suggestion": "로딩 상태를 0.5초 이상 유지하고, 페이드 인/아웃 애니메이션 추가 (duration 300ms 정도). PremiumLoadingState 컴포넌트에 부드러운 fade 적용.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "trinity.tsx",
+        "persona": "86세 방문봉사 참여",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "\"Top Conclusions\", \"Top Topics\" 같은 통계가 UI에 나타나지만, 기록이 적거나 해당 영역에 태그가 없으면 빈 상태가 됨. 고령자는 왜 아무것도 보이지 않는지, 뭘 해야 하는지 모름.",
+        "suggestion": "빈 상태에 명확한 안내: \"\\${domain}에 아직 기록이 없어요. 기록에 #\\${domain} 태그를 붙여 보세요.\" 또는 \"기록 추가\" 버튼 제공.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "persona.tsx",
+        "persona": "72세 은퇴교사",
+        "issueType": "overload",
+        "severity": "med",
+        "description": "3가지 검사 도구 선택(라이프 오딧, Big Five, 애착 스타일)이 한 번에 제시됨. 고령자는 \"어떤 것부터 해야 하는지\", \"얼마나 오래 걸리는지\" 결정 피로가 높음.",
+        "suggestion": "첫 페이지에는 \"라이프 오딧\" 하나만 권장. 다른 도구는 \"이것도 해보세요\" 섹션으로 이미 첫 검사를 끝낸 후 제시.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "big-five.tsx, attachment.tsx",
+        "persona": "88세 전직간호사",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "Likert scale의 한글 라벨이 긴 편(\"전혀 아니다\", \"조금 그렇다\", \"매우 그렇다\"). 화면이 좁은 기기에서 텍스트가 줄바꿈되거나 잘려서 보임.",
+        "suggestion": "라벨을 축약: \"아니다\", \"중간\", \"그렇다\" (3점 스케일) 또는 \"1~5\"라는 숫자만 표시하고, 좌측 끝과 우측 끝에만 \"전혀 아니다\" / \"매우 그렇다\" 표시.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "jarvis.tsx",
+        "persona": "72세 은퇴교사",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "\"공상 모드 / Divergent mode\"라는 개념이 불명확. \"radically different angles\"라는 설명도 추상적. 고령자는 Analytic과의 차이를 이해하기 어려움.",
+        "suggestion": "\"공상 모드\"를 \"다양한 관점으로 생각해보기\"로 순화. 또는 \"일반 답변\"과 \"창의적 답변\"으로 단순화. 실제 예시 보여주기: 같은 질문에 대한 두 가지 답변 비교.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "jarvis.tsx",
+        "persona": "79세 독거노인",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "인용 칩(parseSourceCitations의 chips)이 작은 텍스트로 inline 표시되고, 탭해서 \"Reference drawer\"를 열어야 함. 고령자는 답변의 출처를 알아야 신뢰할 수 있는데, 이 정보가 숨겨짐.",
+        "suggestion": "인용을 답변 아래에 명확히 나열: \"참고: 조각#1 - 제목, 조각#2 - 제목\" 형태로 탭 가능하게 표시. Drawer 대신 expandable 섹션 사용.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "settings.tsx",
+        "persona": "85세 거동불편",
+        "issueType": "accessibility",
+        "severity": "med",
+        "description": "SettingsActionButton의 텍스트 색상이 rgba(232,236,248,0.58) 또는 cosmic.guardRose 같은 옅은 색으로, 배경이 dark인 경우 명도 대비가 부족해 글자가 잘 보이지 않음.",
+        "suggestion": "활성 상태(primary): 배경 dark일 때 텍스트 white (명도 대비 최소 7:1). 비활성: gray가 아니라 \"사용할 수 없음\"을 명확히 나타내는 distinct한 색 사용.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "account.tsx",
+        "persona": "86세 방문봉사",
+        "issueType": "non-intuitive",
+        "severity": "med",
+        "description": "생년월일 정정(DOB correction) 섹션의 목적이 불명확. \"왜 생년월일을 다시 입력해야 하나\", \"틀렸을 때 어떤 영향이 있나\" 설명 부족.",
+        "suggestion": "\"생년월일 정정\"의 설명을 추가: \"나이 관련 기능이 정확하게 작동하려면 생년월일이 맞아야 합니다.\" 저장 후 \"저장됨\" 메시지를 명확하게 표시 (지금은 success 색상만 사용).",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "NavGraph.tsx",
+        "persona": "77세 손자보는 할머니",
+        "issueType": "hidden",
+        "severity": "med",
+        "description": "Data dots(Tier 4)의 실제 기록들이 기본으로 보이지 않음. \"뽁!\" spawn 후 나타나지만, 인지 속도 느린 고령자는 애니메이션 동안 무엇이 나타났는지 못 봄. 노드를 탭해야 상세를 볼 수 있는데, 먼저 뭐가 들어있는지 알 수 없음.",
+        "suggestion": "Tier 4 dots를 기본으로 표시 (숨기지 말기). 또는 데이터 미리보기: 각 노드 타이틀 위에 \"기록 3개\", \"지식 5개\" 같은 카운트 표시. Tap 전에도 대략의 내용을 알 수 있게.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "public/assets",
+        "persona": "asset:infrastructure",
+        "issueType": "asset-inconsistency",
+        "severity": "med",
+        "description": "Orphan asset pack directories consuming disk space: cosmic-pixel-placeholder-v1 (473 files), cosmic-pixel-v1/v2 (323 files combined), 2ndb-closeout-v3 (45 files), 2ndb-refine (34 files), premium-closing (12 files). None referenced by src code.",
+        "suggestion": "Archive or delete unused packs; maintain only: 2ndb-production-premium-v1, cosmic-pixel-v3-soulcore, cosmic-pixel-v4-tesseract-v49, tesseract-v10. Document retention rationale in DESIGN.md.",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "src/lib/assets/soulcore-v3.ts, src/components/art/SoulcoreFinalArt.tsx",
+        "persona": "asset:characters-core",
+        "issueType": "asset-inconsistency",
+        "severity": "med",
+        "description": "Worker v3 art mapping is incomplete. V3_WORKER_ART has 5 entries (archi, gadi, lulu, momo, lumi) but explicitly skips secondb (comment: 'secondb has no v3 companion sprite'). WorkerSprite.tsx also references 6 workers (secondb + 5 others). This asymmetry may hide a missing asset or intentional design gap.",
+        "suggestion": "Either add secondb v3 SVG to cosmic-pixel-v3-soulcore/companions/ (or document if secondb intentionally stays PNG-only), or add a TODO comment in soulcore-v3.ts explaining the permanent gap. Ensure fallback PNG is always available.",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "public/assets/pattern-link/ vs cosmic-pixel-v4-tesseract-v49/pattern_link/",
+        "persona": "asset:graph-edges",
+        "issueType": "asset-inconsistency",
+        "severity": "med",
+        "description": "Pattern link assets split across two locations: pattern-link/v47-3/ (6 files including bidirectional/focus overlay spritesheet variants) and cosmic-pixel-v4-tesseract-v49/pattern_link/ (2 files). Code imports only from cosmic-pixel-v4-tesseract-v49. The pattern-link/ root directory appears orphaned.",
+        "suggestion": "Consolidate pattern-link assets into cosmic-pixel-v4-tesseract-v49/pattern_link/ with clear v47-3 subfolder. Delete pattern-link/ root or document if it's a live preview/comparison pack.",
+        "doableBy": "simon"
+      },
+      {
+        "screen": "src/components/art/IslandArt.tsx",
+        "persona": "asset:graph-islands",
+        "issueType": "asset-inconsistency",
+        "severity": "med",
+        "description": "IslandArt falls back to 2ndb-production-premium-v1 for retired domains (imagine). However, the code uses require() to load _hq variants (core_center_premium_hq.png) but IslandArt.tsx defines ISLANDS map with keys that include id='core' and id='imagine'. There's no explicit version branching (clean vs hq) in the UI layer.",
+        "suggestion": "Document which breakpoints use hq vs clean variants, or consolidate by deleting the clean variants if hq is always preferred. Add a comment explaining the imagine fallback strategy for the retired core.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "surfaces.tsx - PremiumButton",
+        "persona": "UI/Touch Feedback",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "Button press feedback is minimal and instant - only opacity change (0.82) with no scale, no easing, no timing. Creates mechanical/stiff feel on interaction.",
+        "suggestion": "Add simultaneous scale animation on press: scale 1.0 → 0.96 with Easing.out(Easing.quad) over 120ms. Use onPressIn/onPressOut handlers to create smooth elastic feel matching the node spawn overshoot philosophy.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "surfaces.tsx - PixelIconButton",
+        "persona": "UI/Touch Feedback",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "Icon button press feedback is minimal (opacity 0.7) with no easing. No scale or timing makes it feel instant and flat.",
+        "suggestion": "Mirror PremiumButton fix: add scale 1.0 → 0.92 with Easing.out(Easing.quad) over 100ms on press. Keep opacity fade secondary to the scale primary feedback.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "ThemeContext.tsx - useThemePalette",
+        "persona": "Theme/Color Transition",
+        "issueType": "stiffness",
+        "severity": "med",
+        "description": "Theme toggle swaps color palette instantly with no fade transition. Colors snap from dark to light (or vice versa) in zero time, creating visual disconnect.",
+        "suggestion": "Introduce optional AnimatedValue in ThemeContext that drives opacity 0 → 1 on toggle. Wrap screen backgrounds in Animated.View with this opacity, creating 200-250ms fade between theme palettes using Easing.inOut(Easing.cubic). Requires minimal changes to useThemePalette consumers.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "components/graph/NavGraph.tsx",
+        "persona": "16세 아이돌 지망",
+        "issueType": "asset-inconsistency",
+        "severity": "low",
+        "description": "WorkerSprite 5개(archon/relia/lumen/momo/iris)의 아트 스타일이 약간씩 다름. 시각적으로 일관성 있게 느껴지지 않아 \"마을이 하나\"라는 느낌이 약함.",
+        "suggestion": "모든 worker sprite를 동일한 픽셀 아트 스타일로 재그리기 또는 리터칭. 색상, 크기, 선두께 통일.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "inbox.tsx",
+        "persona": "17세 게이머",
+        "issueType": "stiffness",
+        "severity": "low",
+        "description": "소스 행 확장(row expand)이 갑작스럽게 일어남. 본문 로드 중 스피너가 보이지만 전환 애니메이션이 없어 어색함.",
+        "suggestion": "행 높이 변화에 animated height transition 추가 (200-300ms). 시각적으로 부드러운 전개감 제공.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "23세 스타트업개발자",
+        "issueType": "hidden",
+        "severity": "low",
+        "description": "capture에서 OCR 모드를 선택해도 사진을 선택할 때까지 다음 단계가 명확하지 않음. 버튼 텍스트 '카메라/갤러리'는 작고, 1차 행동이 명확하지 않음",
+        "suggestion": "OCR 탭 활성화 시 아래에 바로 '카메라' 버튼을 크고 강조되게 (primary variant) 표시. 설명 텍스트도 영어로는 '사진을 찍거나 선택하세요'로 명확화",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "NavGraph",
+        "persona": "21세 바리스타",
+        "issueType": "stiffness",
+        "severity": "low",
+        "description": "그래프 노드들의 sway (drift animation)가 있지만, 탭해서 bubble을 열 때의 전환이 매우 빠름(BUBBLE_POP_OVERSHOOT_MS = 160ms). 팝업이 갑자기 나타나는 느낌",
+        "suggestion": "bubble pop 시간을 160ms → 250ms로 늘림. 또는 bubble 진입 시 opacity 0 → 1로 fade-in 추가",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "(auth)/sign-in.tsx",
+        "persona": "50세 연구원",
+        "issueType": "non-intuitive",
+        "severity": "low",
+        "description": "비밀번호 보기/숨기기 아이콘(눈 모양)이 시각적 신호로 명확하지만, 일부 고령 사용자는 이 관례를 모를 수 있음. 눈 아이콘 색상이 theme palette를 따르지 않음.",
+        "suggestion": "아이콘에 accessibilityLabel은 이미 있지만, 정적 힌트 텍스트 '비밀번호 표시/숨김' 추가 고려",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "wiki.tsx",
+        "persona": "50세 연구원",
+        "issueType": "non-intuitive",
+        "severity": "low",
+        "description": "페이지 종류(source/entity/concept)의 경계가 불명확. 'entity'와 'concept'의 차이, 'source'의 역할이 프로 유저 중심 개념으로 설계됨.",
+        "suggestion": "각 종류 레이블 아래 한 문장 설명 추가('소스: 원본 자료, 엔티티: 사람/장소/개념, 컨셉: 아이디어'), 또는 KIND_LABEL 옆 info icon 추가",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "sign-up.tsx, sign-in.tsx",
+        "persona": "52세 전업주부",
+        "issueType": "asset-inconsistency",
+        "severity": "low",
+        "description": "로그인/가입 화면의 brand 로고 텍스트('2ND-BRAIN' vs '2nd-Brain')가 불일치. sign-in.tsx는 대문자 전자, sign-up.tsx는 혼합 대소문자.",
+        "suggestion": "DESIGN.md의 brand 가이드라인에 따라 일관된 표기(권장: '2nd-Brain' 또는 '2ND-B')로 통일",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "onboarding.tsx, capture.tsx, wiki.tsx",
+        "persona": "43세 요리사",
+        "issueType": "accessibility",
+        "severity": "low",
+        "description": "색상 대비: PALETTE.textSubtle과 배경의 대비 비율이 WCAG AA 기준(4.5:1)을 충족하는지 확인 필요. 일부 40대 사용자(색약 포함)에게 텍스트 가독성 낮을 수 있음.",
+        "suggestion": "모든 색상 조합의 명도 대비 검증, 필요시 textSubtle 색상 밝게 조정 또는 중요 UI에는 textMuted 사용",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "(auth)/sign-in.tsx, sign-up.tsx",
+        "persona": "68세 택배기사",
+        "issueType": "non-intuitive",
+        "severity": "low",
+        "description": "Alert.alert()를 사용한 native 모달 팝업. 고령자, 특히 Android 사용자는 팝업을 닫는 방법을 모를 수 있음. '확인' 버튼이 텍스트로만 표시되고, 버튼 위치가 화면 하단(팝업 영역 밖)일 수 있음",
+        "suggestion": "'확인', '취소' 버튼 텍스트를 명확하게 한국어로. Native modal 대신 custom overlay modal 사용(PremiumToast처럼). 모달 하단에 명확한 닫기 버튼 추가",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "all screens (asset variety)",
+        "persona": "69세 시니어 모델",
+        "issueType": "asset-inconsistency",
+        "severity": "low",
+        "description": "화면마다 다른 아트 스타일이 혼재. IslandArt(산, 등대 같은 baked SVG), WorkerSprite(8비트 픽셀 캐릭터), Capture 모드 아이콘(스트로크 SVG). 시각적 일관성 부족. 세련된 UI를 기대하는 시니어 모델 입장에선 디자인 통일감 부족",
+        "suggestion": "모든 아이콘/스프라이트를 NeoDunggeunmo 픽셀 스타일로 통합. 또는 IslandArt와 WorkerSprite의 컬러 팔레트를 일관되게 유지. 디자인 시스템에서 'Asset 가이드' 문서화",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "onboarding.tsx, persona.tsx",
+        "persona": "74세 손주돌봄조부모",
+        "issueType": "hidden",
+        "severity": "low",
+        "description": "로딩 상태에서 '…' 표시와 '당신을 이루는 조각들을 모으는 중이에요...' 텍스트. 명확한 시간 예상 없음. 사용자가 '언제까지 기다려야 하는가' 알 수 없음. 3초? 30초? 불안감 발생",
+        "suggestion": "로딩 메시지에 예상 시간 추가('약 5초 기다려주세요'). 진행률 표시 가능하면 추가(Gemini 호출 진행률). 또는 스켈레톤 UI로 예상 결과물 미리 보여주기",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "wiki.tsx + inbox.tsx",
+        "persona": "69세 등산모임 리더",
+        "issueType": "hidden",
+        "severity": "low",
+        "description": "Share functionality visible in code (wiki.tsx imports Share from React Native, line 2) but no obvious button in the rendered UI excerpt. Social/collaborative features are hidden or missing, limiting use for a group leader who might want to share insights with hiking group.",
+        "suggestion": "Add a visible 'Share persona' or 'Export wiki' button in persona.tsx and wiki.tsx. Make it a featured secondary action so users who want to collaborate can find it.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "sign-up.tsx",
+        "persona": "72세 은퇴교사",
+        "issueType": "stiffness",
+        "severity": "low",
+        "description": "Form validation (lines 262–283: ChecklistItem) uses a green/red dot + text feedback. Feedback appears only after user types. For someone unfamiliar with dynamic form validation, the sudden appearance of checkmarks might startle or confuse (\"why did the form change?\").",
+        "suggestion": "Show the checklist as a static legend above the form explaining requirements upfront: '✓ Email must include @' etc. Then show checkmarks as they're met. Or use a progress indicator instead of dots.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "sign-in.tsx",
+        "persona": "72세 은퇴교사 (높은 tech-literacy)",
+        "issueType": "non-intuitive",
+        "severity": "low",
+        "description": "에러 메시지 '로그인에 실패했어요. 이메일과 비밀번호를 다시 확인해 주세요.' 는 이메일 열거 방지 (CSO R3) 때문에 모호함. 실제 원인(이메일 없음/비밀번호 틀림) 파악 불가.",
+        "suggestion": "사용성과 보안 균형: 1) 이메일 필드 유효성 (이전 알림) 구분 2) 시도 횟수 제한 후 구체 메시지 3) 'Forgot password?' 더 명확히 (이메일 회복 안내).",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "capture.tsx",
+        "persona": "80세 청력저하 심각",
+        "issueType": "accessibility",
+        "severity": "low",
+        "description": "로딩 상태('던지는 중…') 및 제출 피드백이 텍스트 기반만 있음. 진동 피드백(haptics) 없음. 청력저하자는 시각적 신호만 의존.",
+        "suggestion": "제출 후 진동 피드백 (iOS: HapticFeedback.light(), Android: Vibration.vibrate(50)) 추가. 성공 상태 토스트(PremiumToast)가 있지만 진동으로 강화.",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "insights.tsx",
+        "persona": "77세 백내장 초기 시각저하",
+        "issueType": "stiffness",
+        "severity": "low",
+        "description": "로딩 중 ActivityIndicator 표시되고 있으나, 텍스트 설명('인사이트를 불러오는 중이에요…')과 애니메이션이 기계적. 부드러운 전환 부족.",
+        "suggestion": "로딩 상태에 스켈레톤(Skeleton) 또는 페이드 애니메이션 추가. PremiumLoadingState 컴포넌트 활용(이미 사용 중 추정). 완료 시 콘텐츠 페이드인(300ms).",
+        "doableBy": "ag"
+      },
+      {
+        "screen": "public/assets/2ndb-refine/",
+        "persona": "asset:infrastructure",
+        "issueType": "asset-inconsistency",
+        "severity": "low",
+        "description": "2ndb-refine pack (34 files including islands, shards, tier-icons, motion, sector overlays) is a complete parallel to 2ndb-production-premium-v1 but is never imported by src code. Contains motion assets (motion_*.png) that don't appear elsewhere, suggesting this was a design iteration candidate.",
+        "suggestion": "Clarify intent: if 2ndb-refine was a WIP/comparison set, move to .archive/ with a README. If the motion assets are valuable, migrate them to 2ndb-production-premium-v1 with explicit versioning (e.g., 2ndb-production-premium-v1/motion/).",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "public/assets/tesseract-v10/ vs cosmic-pixel-v4-tesseract-v49/",
+        "persona": "asset:versioning",
+        "issueType": "asset-inconsistency",
+        "severity": "low",
+        "description": "Naming convention mismatch: tesseract-v10 uses flat filenames (soul_core.png, bond_core.png) with no version suffix, while cosmic-pixel-v4-tesseract-v49 uses explicit version and size (tier1_soul_core_v49_256.png). Both are in use (SoulcoreFinalArt.tsx defaults to v10 but accepts v49/v45). Directory names suggest 'v4-tesseract-v49' (redundant versioning).",
+        "suggestion": "Standardize naming: either rename tesseract-v10/ to tesseract-v10-production/ and cosmic-pixel-v4-tesseract-v49/ to tesseract-v49-experimental/, OR migrate both into a single tesseract/ parent with /v10, /v49, /v45 subdirs. Update SoulcoreFinalArt.tsx comments to clarify v10 is production default.",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "src/lib/assets/soulcore-v3.ts",
+        "persona": "asset:svg-bindings",
+        "issueType": "asset-inconsistency",
+        "severity": "low",
+        "description": "SVG imports use relative paths (../../../public/assets/cosmic-pixel-v3-soulcore/...) which are fragile to directory structure changes. The file also imports SVGs directly into FC<SvgProps> components, but v45/v49 use PNG fallbacks, creating a rendering mode split (SVG vs PNG) that isn't visually reconciled.",
+        "suggestion": "Extract asset paths into a constants file (e.g., lib/assets/paths.ts) to DRY up the relative paths. Add a comment explaining the design rationale for SVG-in-v3 vs PNG-in-v45 (e.g., file size vs quality trade-off).",
+        "doableBy": "claude"
+      },
+      {
+        "screen": "tokens.ts - cosmic palette (lines 23-57)",
+        "persona": "Design System/Color",
+        "issueType": "stiffness",
+        "severity": "low",
+        "description": "Color palette (deep-space navy + electric mint + violet + rose) feels geometrically correct but lacks warmth. The palette is cool/neutral, reading as 'precise' rather than 'natural' or 'inviting'. No warm anchor like amber, gold, or coral to balance the cool signals.",
+        "suggestion": "Consider warming the palette by (a) shifting violet toward magenta/rose (more organic), (b) adding a warm accent like cosmic.pixelLamp (amber/gold) to more contexts, or (c) raising the saturation/lightness of mint slightly to feel less 'electric' and more 'alive'. See handoff for worldview v-final intent; if locked, add warm tints to component surfaces (buttons, cards) via overlay opacity instead.",
+        "doableBy": "codex"
+      },
+      {
+        "screen": "LoadingScreen.tsx, NavGraph.tsx",
+        "persona": "Animation System",
+        "issueType": "stiffness",
+        "severity": "low",
+        "description": "Good news: node spawns, bubble pops, drifts, pulses, and route fades all use proper easing (Easing.out, Easing.inOut, smooth cosine/sine curves). The graph village motion is already smooth and natural. No stiffness in core animations.",
+        "suggestion": "No action needed on animation system. The codebase already follows best practices: overshoot bounded at 1.25x, easing curves smooth, timing ~200-600ms per motion. Keep this pattern for any new animations.",
+        "doableBy": "claude"
+      }
+    ]
+  }
+}

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Handoff - Rebased After #242</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --surface: #11182d;
+      --surface-alt: #10251f;
+      --text: #e8ecf8;
+      --muted: #c9d0e6;
+      --brand: #72f2c7;
+      --border: #2a345a;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 18px 48px;
+    }
+    header, section {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    .eyebrow {
+      color: var(--brand);
+      font-size: 13px;
+      margin: 0 0 8px;
+    }
+    h1, h2 {
+      margin: 0 0 10px;
+      letter-spacing: 0;
+    }
+    h1 { font-size: 28px; }
+    h2 { font-size: 18px; }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--brand);
+      background: var(--surface-alt);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    ul {
+      margin: 8px 0 0 20px;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">[2026-06-07 / 22:14:58 KST] Codex to Claude</p>
+      <h1>Rebased After #242</h1>
+      <p>Codex branch <code>codex/core-label-tail-cleanup</code> is now based on <code>origin/main@9680429</code> and remains five commits ahead.</p>
+    </header>
+    <section>
+      <h2>Current Commits</h2>
+      <ul>
+        <li><code>54df269</code> remove visible core label residue</li>
+        <li><code>dfbfc96</code> normalize app brand residue</li>
+        <li><code>fd520ba</code> normalize Korean companion name</li>
+        <li><code>e67aa15</code> remove plans storage overclaim</li>
+        <li><code>0298f79</code> align intro copy with saved sources</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Conflict</h2>
+      <p>The only rebase conflict was in <code>scripts/check-constraints.ts</code>. Codex kept the <code>2nd-Brain</code> expectation for KO support/import copy, matching #242 and current brand policy.</p>
+    </section>
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm run verify</code> PASS after rebase.</li>
+        <li>Lint, type-check, i18n, lexicon, LLM boundary, constraints, emdash, and Jest are green.</li>
+        <li>Jest total: 98 suites / 856 tests.</li>
+        <li>Diff check and branch secret-pattern scan passed.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Merge Note</h2>
+      <p>No push or PR from Codex. This supersedes the 22:02 pre-rebase handoff.</p>
+    </section>
+  </main>
+</body>
+</html>

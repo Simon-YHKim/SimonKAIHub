@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2nd-B Core Workflow UI Cleanup</title>
+  <style>
+    :root {
+      --bg: #090b10;
+      --panel: #111722;
+      --line: #263349;
+      --text: #eef4ff;
+      --muted: #9aa8bd;
+      --mint: #69f5c8;
+      --violet: #b8a7ff;
+      --warn: #ffd17a;
+      --danger: #ff8e8e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", "Apple SD Gothic Neo", system-ui, sans-serif;
+      line-height: 1.58;
+    }
+    main {
+      width: min(1180px, calc(100vw - 36px));
+      margin: 0 auto;
+      padding: 44px 0 68px;
+    }
+    header, section {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    header {
+      padding: 30px;
+      background: linear-gradient(135deg, rgba(105, 245, 200, 0.08), rgba(184, 167, 255, 0.08));
+      margin-bottom: 18px;
+    }
+    section {
+      padding: 24px;
+      margin-top: 18px;
+    }
+    .eyebrow {
+      color: var(--mint);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    h1, h2, h3 { margin: 0; letter-spacing: 0; }
+    h1 {
+      max-width: 900px;
+      font-size: clamp(30px, 5vw, 56px);
+      line-height: 1.03;
+    }
+    h2 {
+      color: var(--mint);
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+    h3 {
+      color: var(--violet);
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+    p { margin: 0; color: var(--muted); }
+    .summary {
+      max-width: 900px;
+      margin-top: 18px;
+      color: #d7e3f5;
+      font-size: 17px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.025);
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: rgba(105, 245, 200, 0.04);
+    }
+    .metric strong {
+      display: block;
+      color: var(--text);
+      font-size: 20px;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .metric span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 11px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      color: var(--text);
+      background: rgba(105, 245, 200, 0.08);
+      font-size: 13px;
+    }
+    td {
+      color: #d8e3f2;
+      font-size: 14px;
+    }
+    code {
+      color: var(--mint);
+      background: rgba(105, 245, 200, 0.08);
+      border: 1px solid rgba(105, 245, 200, 0.2);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: Consolas, "SFMono-Regular", monospace;
+      font-size: 0.92em;
+    }
+    ul, ol {
+      color: #d8e3f2;
+      margin: 10px 0 0 18px;
+      padding: 0;
+    }
+    li { margin: 7px 0; }
+    .p1 { color: var(--warn); font-weight: 700; }
+    .p2 { color: var(--violet); font-weight: 700; }
+    .danger { color: var(--danger); font-weight: 700; }
+    .ok { color: var(--mint); font-weight: 700; }
+    footer {
+      padding: 20px 4px 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 820px) {
+      main { width: min(100vw - 24px, 1180px); padding-top: 24px; }
+      header, section { padding: 18px; }
+      .grid, .metrics { grid-template-columns: 1fr; }
+      h1 { font-size: 34px; }
+      table, thead, tbody, tr, th, td { display: block; }
+      thead { display: none; }
+      tr { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin-top: 10px; }
+      td { border: 0; border-top: 1px solid var(--line); }
+      td:first-child { border-top: 0; color: var(--mint); font-weight: 700; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex Static UI Audit</div>
+      <h1>Core Workflow UI Cleanup</h1>
+      <p class="summary">현재 2nd-B 핵심 흐름은 capture, inbox, wiki, AI/chat 화면이 각각 너무 많은 역할을 한 화면에 들고 있다. 사용자가 원본을 남기고, 요약을 확인하고, 위키로 승격하고, AI와 대화하는 흐름이 명확한 lifecycle로 보여야 한다.</p>
+      <div class="metrics">
+        <div class="metric"><strong>1272</strong><span>/capture lines</span></div>
+        <div class="metric"><strong>986</strong><span>/wiki lines</span></div>
+        <div class="metric"><strong>743</strong><span>/jarvis lines</span></div>
+        <div class="metric"><strong>8</strong><span>screens audited</span></div>
+      </div>
+    </header>
+
+    <section>
+      <h2>Complexity Matrix</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Screen</th>
+            <th>Lines</th>
+            <th>Buttons</th>
+            <th>Routes</th>
+            <th>Scrolls</th>
+            <th>Primary UI Risk</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>/capture</code></td><td>1272</td><td>20</td><td>11</td><td>3</td><td>5-mode mega-screen; first action unclear.</td></tr>
+          <tr><td><code>/inbox</code></td><td>480</td><td>8</td><td>8</td><td>3</td><td>Source lifecycle hidden behind row buttons and alerts.</td></tr>
+          <tr><td><code>/wiki</code></td><td>986</td><td>16</td><td>13</td><td>5</td><td>Browser, export, graph stats, Phase 1, delete in one page.</td></tr>
+          <tr><td><code>/records</code></td><td>289</td><td>3</td><td>6</td><td>5</td><td>Retired taxonomy leaks into filters.</td></tr>
+          <tr><td><code>/import</code></td><td>251</td><td>5</td><td>3</td><td>3</td><td>Graph CTA before source review.</td></tr>
+          <tr><td><code>/jarvis</code></td><td>743</td><td>15</td><td>2</td><td>6</td><td>Hero + dual modes + quick chips + composer + modals.</td></tr>
+          <tr><td><code>/interview</code></td><td>391</td><td>6</td><td>3</td><td>6</td><td>Needs progress and review-before-save.</td></tr>
+          <tr><td><code>/formats</code></td><td>513</td><td>10</td><td>2</td><td>3</td><td>Editor/list/delete/schema/toast in one page.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>P1 Findings</h2>
+      <div class="grid">
+        <div class="card">
+          <h3><span class="p1">P1</span> Capture First View</h3>
+          <p><code>/capture</code> should be the lowest-friction raw entry surface. It currently asks the user to process modes, track, gates, format management, daily prompt, tags, and graph CTA.</p>
+          <ul>
+            <li>Keep one primary input and one primary submit action above the fold.</li>
+            <li>Move mode/format/track controls into compact secondary areas.</li>
+            <li>Remove subscription coming-soon copy from the core path.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="p1">P1</span> Source Lifecycle</h3>
+          <p><code>/inbox</code> and <code>/wiki</code> split Phase 1 and promotion feedback across alerts, row buttons, and duplicated actions.</p>
+          <ul>
+            <li>Show Raw, Summarized, Promoted, Linked, Stale chips.</li>
+            <li>Replace Phase 1 alerts with inline recoverable panels.</li>
+            <li>Use one primary row action plus overflow menu.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="p1">P1</span> Wiki Density</h3>
+          <p><code>/wiki</code> mixes browse, export, graph stats, Phase 1, Jarvis, graph handoff, and delete. It also still links to <code>/journal</code>.</p>
+          <ul>
+            <li>Move export into a sheet or drawer.</li>
+            <li>Move destructive delete behind secondary action.</li>
+            <li>Replace <code>/journal</code> links with <code>/capture</code>.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><span class="p1">P1</span> Chat Layout</h3>
+          <p><code>/jarvis</code> and <code>/interview</code> need a composer-safe shell. Chat routes should not share the same vertical assumptions as list pages.</p>
+          <ul>
+            <li>Compact header after first turn.</li>
+            <li>One segmented mode hierarchy.</li>
+            <li>Quick chips remain secondary to composer.</li>
+            <li>Interview adds progress and review-before-save.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>P2 Findings</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Screen</th>
+            <th>Issue</th>
+            <th>Requested Direction</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>/records</code></td>
+            <td>Filters still include legacy <code>journal</code> and <code>imagine</code> labels.</td>
+            <td>Map legacy data to current labels and show provenance in current product language.</td>
+          </tr>
+          <tr>
+            <td><code>/import</code></td>
+            <td>Success promotes graph navigation before source review.</td>
+            <td>Show extracted title, type, tags, confidence, and save/review action before graph.</td>
+          </tr>
+          <tr>
+            <td><code>/formats</code></td>
+            <td>Absolute toast uses raw bottom spacing, independent of shell clearance.</td>
+            <td>Use shared toast/shell clearance, put schema and delete in contained sheets/menus.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Implementation Order</h2>
+      <ol>
+        <li>Shared shell clearance and route metadata from the navigation shell request.</li>
+        <li>Simplify <code>/capture</code> first viewport and remove subscription coming-soon copy.</li>
+        <li>Add source lifecycle chips and inline Phase 1 result pattern to <code>/inbox</code> and <code>/wiki</code>.</li>
+        <li>Contain <code>/wiki</code> export/delete actions and sweep <code>/journal</code> links.</li>
+        <li>Apply composer-safe chat layout to <code>/jarvis</code> and <code>/interview</code>.</li>
+        <li>Clean <code>/records</code>, <code>/import</code>, and <code>/formats</code> taxonomy/review/toast details.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Release Acceptance</h2>
+      <ul>
+        <li><code>/capture</code> first viewport has one primary input and one primary submit action.</li>
+        <li>Phase 1 output is inline and recoverable, not alert-only.</li>
+        <li>No user-facing <code>/journal</code> links remain in <code>/wiki</code>.</li>
+        <li>Chat composer never collides with keyboard or bottom navigation.</li>
+        <li>Legacy <code>imagine</code> and route-era labels do not appear as current IA labels.</li>
+        <li>No arbitrary bottom padding like <code>110</code>, <code>120</code>, or raw <code>spacing.xl</code> remains in audited route shells.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Markdown request: agents/codex/outbox/20260605-203759-to-claude-core-workflow-ui-cleanup-request.md. Codex did not modify E:\2ndB code.
+    </footer>
+  </main>
+</body>
+</html>

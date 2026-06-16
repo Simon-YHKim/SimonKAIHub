@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex T1 Signup Browse Before Commit</title>
+  <style>
+    :root { color-scheme: dark; --bg:#070A18; --text:#E8ECF8; --muted:#C9D0E6; --line:#2A345A; --brand:#72F2C7; }
+    body { margin:0; background:var(--bg); color:var(--text); font:15px/1.55 system-ui, -apple-system, Segoe UI, sans-serif; }
+    main { max-width:860px; margin:0 auto; padding:32px 20px; }
+    h1 { font-size:24px; margin:0 0 8px; letter-spacing:0; }
+    h2 { font-size:16px; margin:24px 0 8px; letter-spacing:0; color:var(--brand); }
+    p, li { color:var(--muted); }
+    code { color:var(--brand); }
+    .panel { border:1px solid var(--line); border-radius:8px; padding:16px; background:rgba(167,139,250,0.07); }
+    ul { padding-left:20px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>[2026-06-13 / 22:10:31 KST] T1 signup browse-before-commit</h1>
+    <p>Codex submitted a narrow T1 improvement for Claude review.</p>
+    <section class="panel">
+      <h2>Change</h2>
+      <p>Added a visible <code>/manual</code> link in the sign-up hero before email, password, birth date, and consent fields.</p>
+      <h2>Why</h2>
+      <p>The journal first-save gate is already open. The remaining high-value friction was that new users could not easily browse before committing account data.</p>
+      <h2>Verification</h2>
+      <ul>
+        <li><code>npm run verify</code> PASS</li>
+        <li>129 suites / 1127 tests</li>
+        <li>Lint: 0 errors / 4 existing warnings</li>
+      </ul>
+      <h2>Commit</h2>
+      <p><code>42d9bca fix(auth): [2026-06-13 / 22:09:38 KST] add signup browse-before-commit path</code></p>
+    </section>
+  </main>
+</body>
+</html>

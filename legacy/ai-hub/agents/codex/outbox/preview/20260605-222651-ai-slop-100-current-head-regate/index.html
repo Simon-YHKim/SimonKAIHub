@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex AI Slop 100 Re-Gate</title>
+  <style>
+    :root {
+      --bg: #101116;
+      --panel: #181a22;
+      --panel-2: #20232d;
+      --text: #f4f1e8;
+      --muted: #b8b2a2;
+      --line: #343846;
+      --bad: #ff6b6b;
+      --warn: #f2c86b;
+      --good: #72f2c7;
+      --blue: #7aa2ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+      line-height: 1.55;
+    }
+    main { max-width: 1120px; margin: 0 auto; padding: 40px 20px 64px; }
+    header { display: grid; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 24px; }
+    h1 { margin: 0; font-size: clamp(28px, 5vw, 48px); line-height: 1.08; letter-spacing: 0; }
+    h2 { margin: 0 0 12px; font-size: 20px; }
+    h3 { margin: 0 0 8px; font-size: 16px; }
+    p { margin: 0 0 12px; }
+    code, pre { font-family: "Cascadia Mono", Consolas, monospace; }
+    pre { overflow: auto; padding: 14px; background: #0b0c10; border: 1px solid var(--line); border-radius: 8px; }
+    .meta { color: var(--muted); font-size: 14px; }
+    .score {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .score strong {
+      font-size: 34px;
+      color: var(--bad);
+      line-height: 1;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin-top: 24px; }
+    .card {
+      grid-column: span 6;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    .card.full { grid-column: 1 / -1; }
+    .card.third { grid-column: span 4; }
+    .bad { color: var(--bad); }
+    .warn { color: var(--warn); }
+    .good { color: var(--good); }
+    .blue { color: var(--blue); }
+    ul { margin: 0; padding-left: 20px; }
+    li { margin: 6px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; padding: 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; }
+    .next { background: var(--panel-2); }
+    @media (max-width: 860px) {
+      main { padding-top: 28px; }
+      .card, .card.third { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="meta">2nd-B · claude/cycle-1-phase6-screens · HEAD 2912074 · 2026-06-05 22:26 KST</div>
+      <h1>AI Slop 100 Re-Gate</h1>
+      <p>CI는 녹색입니다. 제품 화면 기준은 아직 아닙니다. 현재 HEAD는 100점 판정 대상이 아니라, 100점까지 가기 전의 blocker list입니다.</p>
+      <div class="score">
+        <strong>≤55/100</strong>
+        <span class="pill">verify pass</span>
+        <span class="pill">safety commits missing</span>
+        <span class="pill">trust copy fail</span>
+        <span class="pill">route hygiene fail</span>
+        <span class="pill">render proof missing</span>
+      </div>
+    </header>
+
+    <section class="grid">
+      <article class="card full">
+        <h2>검증 결과</h2>
+        <pre>npm run verify
+
+lint PASS
+type-check PASS
+i18n PASS
+lexicon PASS
+llm-boundary PASS
+constraints PASS
+emdash PASS
+jest PASS: 91 suites, 822 tests</pre>
+        <p class="warn">이 결과는 빌드 위생을 통과했다는 뜻입니다. 화면 품질, 신뢰 카피, 라우트 정합성, Android 실제 동작을 보장하지는 않습니다.</p>
+      </article>
+
+      <article class="card">
+        <h2>P0 · Safety Regression</h2>
+        <p><code>9e0e9e0</code> export allowlist와 <code>93d7e1d</code> knowledge_sources policy가 현재 HEAD 조상이 아닙니다.</p>
+        <ul>
+          <li><code>9e0e9e0 NOT in HEAD</code></li>
+          <li><code>93d7e1d NOT in HEAD</code></li>
+          <li>현재 export는 underscore key만 drop합니다. fail-closed allowlist가 아닙니다.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>P0 · Trust Copy</h2>
+        <p>아직 “AI가 나를 배운다/날카롭게 만든다/친구처럼 다룬다”는 식의 과잉 카피가 남아 있습니다.</p>
+        <ul>
+          <li><code>manual.tsx:33</code>, <code>common.json:4</code></li>
+          <li><code>onboarding.tsx:36,49,54</code></li>
+          <li><code>audit.tsx:170</code></li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>P0 · Retired Routes</h2>
+        <p><code>/journal</code>과 <code>/imagine</code>은 redirect stub인데 active IA가 계속 방출합니다.</p>
+        <ul>
+          <li><code>village-ui.ts</code> primaryRoute 다수</li>
+          <li><code>wiki.tsx</code>, <code>trinity.tsx</code> 링크</li>
+          <li><code>persona/evidence.ts</code>, <code>self-portrait.ts</code> 라우트</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>P1 · Blank Loading</h2>
+        <p>route-level auth/loading blank return이 19개입니다.</p>
+        <pre>rg -l 'if \(loading\) return null|if \(authLoading\) return null' src/app
+Count: 19</pre>
+        <p>사용자는 로딩 중 빈 화면을 보면 앱이 죽었다고 판단합니다.</p>
+      </article>
+
+      <article class="card third">
+        <h2>P1 · Safe Area</h2>
+        <p>empty graph는 고쳤지만 다른 화면은 하단 CTA와 tab bar clearance가 일관 primitive로 묶이지 않았습니다.</p>
+      </article>
+
+      <article class="card third">
+        <h2>P1 · Back Handler</h2>
+        <p><code>PremiumBottomSheet</code>만 수정됐고, active <code>NavGraph</code> local sheets는 같은 계약이 증명되지 않았습니다.</p>
+      </article>
+
+      <article class="card third">
+        <h2>P1 · Visual Slop</h2>
+        <p>13 files with 10-13px text. 35 files with shadows/elevation. Glow가 너무 많으면 hierarchy가 사라집니다.</p>
+      </article>
+
+      <article class="card full next">
+        <h2>100점까지 필요한 순서</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>순서</th>
+              <th>작업</th>
+              <th>통과 증거</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Safety commits merge/cherry-pick 또는 동등 구현</td>
+              <td>allowlist/knowledge policy tests pass</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Trust copy를 evidence-first로 교체</td>
+              <td>거부 문구 rg zero</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Retired route active IA 제거</td>
+              <td>/journal, /imagine active route emission tests</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Blank route loading 제거</td>
+              <td>shared route shell loader, rg zero or justified exceptions</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Safe-area and hardware-back contracts</td>
+              <td>Android device screenshots and interaction proof</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Tiny text/shadow budget 정리</td>
+              <td>exception list plus before/after screenshots</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

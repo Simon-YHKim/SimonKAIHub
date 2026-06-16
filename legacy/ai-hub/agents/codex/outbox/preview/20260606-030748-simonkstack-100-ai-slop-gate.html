@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex 100/100 AI Slop Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070a18;
+      --panel: rgba(167, 139, 250, 0.08);
+      --panel2: rgba(114, 242, 199, 0.07);
+      --line: #2a345a;
+      --text: #e8ecf8;
+      --muted: #c9d0e6;
+      --subtle: #8d98b8;
+      --brand: #72f2c7;
+      --warn: #ffd166;
+      --danger: #ff7a90;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    main { width: min(1100px, calc(100% - 32px)); margin: 0 auto; padding: 32px 0 48px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 20px; margin-bottom: 20px; }
+    .eyebrow { color: var(--brand); font-size: 12px; letter-spacing: 0; font-weight: 700; }
+    h1 { margin: 6px 0 10px; font-size: clamp(28px, 5vw, 48px); line-height: 1.1; }
+    h2 { font-size: 18px; margin: 0 0 10px; }
+    p { margin: 0 0 12px; color: var(--muted); }
+    code { color: var(--brand); background: rgba(114, 242, 199, 0.08); padding: 1px 5px; border-radius: 4px; }
+    .score {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 12px;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 18px 0;
+    }
+    .num { font-size: 42px; font-weight: 800; color: var(--warn); }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 12px 0;
+    }
+    section.good { background: var(--panel2); }
+    .tag { display: inline-block; color: var(--brand); border: 1px solid var(--line); border-radius: 4px; padding: 2px 6px; margin: 0 6px 6px 0; font-size: 12px; }
+    ul { margin: 8px 0 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 6px 0; }
+    .p1 { color: var(--danger); font-weight: 700; }
+    .p2 { color: var(--warn); font-weight: 700; }
+    @media (max-width: 760px) {
+      .grid, .score { grid-template-columns: 1fr; }
+      main { width: min(100% - 24px, 1100px); padding-top: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Gate - 2026-06-06 03:07:48 KST</div>
+      <h1>100/100 AI Slop Gate</h1>
+      <p>기준: <code>E:\2ndB main@d8ba4a0</code>, Grok trust-copy gate, SimonK-stack design skills.</p>
+    </header>
+
+    <div class="score">
+      <div class="num">97/100</div>
+      <p>점수는 유지. 100점은 보류. 코드 정적 개선은 충분히 진행됐지만, 배포 진실성, 법무 확정, 런타임 스크린샷, 44px 터치 증빙이 아직 닫히지 않았다.</p>
+    </div>
+
+    <section class="good">
+      <h2>Accepted</h2>
+      <span class="tag">raw errors cleaned</span>
+      <span class="tag">persona medical framing removed</span>
+      <span class="tag">provider gating code added</span>
+      <span class="tag">hitSlop=2 removed</span>
+      <span class="tag">Grok copy direction aligned</span>
+      <p>Grok이 지적한 "learns you", "AI friend", "next step", "sharper Persona" 류의 과장 카피는 현재 방향에서 잘 낮춰졌다.</p>
+    </section>
+
+    <div class="grid">
+      <section>
+        <h2><span class="p1">P1</span> Deployment Truth</h2>
+        <ul>
+          <li><code>EXPO_PUBLIC_ENABLE_GOOGLE/APPLE/KAKAO</code> 기본값이 true다. 라이브 OAuth 증빙 또는 deploy default-off가 필요하다.</li>
+          <li><code>EXPO_PUBLIC_FORCE_TIER</code> 기본값이 brain이다. go-live/judge 빌드는 <code>off</code> 증빙이 필요하다.</li>
+          <li>LLM mock fallback은 사용자 노출 문구는 정리됐지만, 100점에는 live/edge proof 또는 명시적 demo labeling이 필요하다.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="p1">P1</span> Legal And Consent</h2>
+        <ul>
+          <li><code>ConsentNotice.tsx:8-10</code> placeholder legal copy.</li>
+          <li><code>consent.ts:14-17</code> version constants TODO legal.</li>
+          <li><code>lexicon.ts:296</code> has <code>LEXICON_LAST_LEGAL_REVIEW = null</code>.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="p1">P1</span> Runtime Proof</h2>
+        <ul>
+          <li>Auth, consent, capture, import, inbox, wiki, persona, settings, account, privacy screenshots needed.</li>
+          <li>NavGraph 30+ tier-4 nodes, sheet open, reset control, reduced-motion proof needed.</li>
+          <li>Loading, empty, error, disabled, keyboard/focus states need visual proof.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="p1">P1/P2</span> 44px Touch Proof</h2>
+        <ul>
+          <li><code>inbox.tsx</code> generate buttons use <code>minHeight: 30</code> plus <code>hitSlop=4</code>, likely under 44px effective height.</li>
+          <li><code>wiki.tsx</code>, <code>capture.tsx</code>, <code>TemplateEditor.tsx</code> have small text/chip targets needing proof or larger hit areas.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="p2">P2</span> Pixel Microtype</h2>
+        <ul>
+          <li>Non-zero <code>letterSpacing</code> remains in account, privacy, capture, ConsentNotice, index, QuantIntroModal.</li>
+          <li>NeoDunggeunmo should default to 0 tracking unless screenshot proof says otherwise.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="p2">P2</span> Radius Exceptions</h2>
+        <ul>
+          <li><code>NavGraph.tsx:1866</code> and <code>SoulcoreFinalArt.tsx:506</code> use <code>borderRadius: 999</code>.</li>
+          <li>Probably graph/art exceptions. Document them or remove if they are UI chrome.</li>
+        </ul>
+      </section>
+    </div>
+
+    <section>
+      <h2>Re-gate Rule</h2>
+      <p>Claude/AG가 다음 완료물을 올리면 Codex는 provider flags, force tier, legal placeholders, non-zero tracking, low touch targets, pill radius, forbidden copy, and runtime screenshots를 다시 대조한다. 증빙 없는 의도 설명만으로는 100점 처리하지 않는다.</p>
+    </section>
+  </main>
+</body>
+</html>

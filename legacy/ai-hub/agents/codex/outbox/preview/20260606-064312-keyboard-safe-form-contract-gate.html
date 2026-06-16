@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Gate - Keyboard-Safe Form Contract</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090b12;
+      --panel: #111520;
+      --panel-2: #151b28;
+      --text: #f4f7fb;
+      --muted: #aab4c5;
+      --line: #2b3448;
+      --accent: #7cc7ff;
+      --warn: #f7bf5f;
+      --ok: #77d897;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1120px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+    header {
+      display: grid;
+      gap: 12px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 5vw, 58px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+    h2 { margin: 0 0 12px; font-size: 20px; }
+    h3 { margin: 0 0 8px; font-size: 16px; }
+    p { margin: 0; color: var(--muted); }
+    code {
+      color: #d9e8ff;
+      background: #0b1020;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: .92em;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+    .card {
+      grid-column: span 12;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .half { grid-column: span 6; }
+    .third { grid-column: span 4; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #1a1100;
+      background: var(--warn);
+      margin-bottom: 12px;
+    }
+    .ok { background: var(--ok); color: #06150c; }
+    ul { margin: 10px 0 0; padding-left: 20px; color: var(--muted); }
+    li + li { margin-top: 7px; }
+    .metric {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      color: var(--muted);
+    }
+    .metric:last-child { border-bottom: 0; }
+    .metric strong { color: var(--text); }
+    .note { background: var(--panel-2); border-left: 4px solid var(--accent); }
+    @media (max-width: 760px) {
+      main { width: min(100vw - 24px, 1120px); padding-top: 28px; }
+      .half, .third { grid-column: span 12; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Gate - 2026-06-06 06:43 KST</div>
+      <h1>Keyboard-Safe Form Contract</h1>
+      <p>Score remains <strong>98/100 provisional</strong>. Static screens can look clean while keyboard-open states hide the user's final action.</p>
+    </header>
+
+    <section class="grid" aria-label="Summary">
+      <article class="card third">
+        <span class="badge ok">Good precedent</span>
+        <h2>Handled routes</h2>
+        <p>Sign-in, sign-up, capture, import, formats, Jarvis, interview, records, and wiki search have some keyboard handling.</p>
+      </article>
+      <article class="card third">
+        <span class="badge">P2</span>
+        <h2>Missing surfaces</h2>
+        <p>Account, settings, audit, and TemplateEditor inputs are not covered by the same local keyboard contract.</p>
+      </article>
+      <article class="card third">
+        <span class="badge">P2</span>
+        <h2>No proof</h2>
+        <p>No screenshot or visual QA artifact proves keyboard-open states across mobile, safe area, tabbar, and long copy.</p>
+      </article>
+    </section>
+
+    <section class="grid" aria-label="Evidence">
+      <article class="card half">
+        <h2>Existing Pattern</h2>
+        <ul>
+          <li><code>useKeyboard.ts</code> exposes keyboard height.</li>
+          <li><code>sign-in</code> and <code>sign-up</code> wrap forms with <code>KeyboardAvoidingView</code>.</li>
+          <li><code>capture</code>, <code>import</code>, and <code>formats</code> add Android bottom padding from keyboard height.</li>
+          <li><code>PremiumAppShell</code> handles safe area and tabbar clearance, but not keyboard form behavior.</li>
+        </ul>
+      </article>
+      <article class="card half">
+        <h2>Gap List</h2>
+        <div class="metric"><span><code>account.tsx</code></span><strong>delete + DOB</strong></div>
+        <div class="metric"><span><code>settings.tsx</code></span><strong>full wipe</strong></div>
+        <div class="metric"><span><code>audit.tsx</code></span><strong>multiline answer</strong></div>
+        <div class="metric"><span><code>TemplateEditor.tsx</code></span><strong>9 inputs</strong></div>
+        <div class="metric"><span><code>BirthDateField.tsx</code></span><strong>reused field</strong></div>
+      </article>
+    </section>
+
+    <section class="grid" aria-label="Acceptance">
+      <article class="card note">
+        <h2>Acceptance Before 100</h2>
+        <ul>
+          <li>Create a shared keyboard-safe form wrapper or enforce a route-level form checklist.</li>
+          <li>Apply it to account, settings, audit, and wiki template editing without regressing existing handled routes.</li>
+          <li>Prove the lowest focused field keeps context, helper/validation text, CTA, tabbar, and home indicator reachable.</li>
+          <li>Capture keyboard-open screenshots for Pixel-class Android and narrow mobile web.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex audit response crisis fallback</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0f14;
+      --panel: #141a22;
+      --text: #f2f5f8;
+      --muted: #9aa7b4;
+      --accent: #6ee7c8;
+      --warn: #f6c177;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    main {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 32px 20px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    h1, h2 {
+      margin: 0 0 12px;
+      letter-spacing: 0;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    h2 {
+      font-size: 18px;
+      color: var(--accent);
+    }
+    p, li {
+      color: var(--muted);
+    }
+    code {
+      color: var(--text);
+      background: rgba(255,255,255,0.08);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    .status {
+      color: var(--warn);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Audit Response Crisis Fallback</h1>
+    <p class="status">2026-06-14 08:45:05 KST - Codex local branch, not pushed</p>
+
+    <section>
+      <h2>Finding</h2>
+      <p><code>createRecord()</code> already fell back to the local crisis classifier when journal Advisor failed, but the <code>audit_response</code> branch did not. A proxy or LLM failure could save an audit answer without a red-zone fixed-template follow-up.</p>
+    </section>
+
+    <section>
+      <h2>Fix</h2>
+      <p>Branch <code>codex/import-capture-functional-sweep</code>, commit <code>9afadda fix(records): fallback classify audit failures</code>.</p>
+      <ul>
+        <li>Runs <code>classifyRecordTextForCrisis()</code> if audit follow-up throws before a safety result.</li>
+        <li>Keeps record saving best-effort: classifier failure still does not block insert.</li>
+        <li>Adds regression coverage for proxy failure plus local red-zone fallback.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <p>Focused records test passed. <code>type-check</code>, <code>check:llm-boundary</code>, <code>check:constraints</code>, <code>git diff --check</code>, and full <code>npm run verify</code> passed. Full verify: 140 suites, 1175 tests, same 4 existing lint warnings.</p>
+    </section>
+  </main>
+</body>
+</html>

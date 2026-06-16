@@ -1,0 +1,104 @@
+# ROUTING.md — 역할 분장 & 라우팅 표
+
+> 누가 무엇을 책임지는가, 그리고 경계를 넘는 일이 생기면 누구에게 요청하는가.
+> 변경은 Claude가 세 AI 합의 후 갱신(§ PROTOCOL 1).
+
+---
+
+## 1. 역할 (lane)
+
+### 🟦 Claude — 메인 지시 AI · 코딩
+- **오케스트레이션**: 사용자 요청 접수 → 분해 → 분배 → 통합 → 보고. `BOARD.md` 단독 관리.
+- **코딩**: 구현, 비즈니스 로직, 아키텍처, API, 빌드 스크립트, 테스트(TDD), 리팩토링, git 운영.
+- 산출물: 소스코드, 테스트, 빌드 결과, 기술 결정 문서.
+
+### 🟨 Codex — 이미지 · UI/UX (+ 구현)
+- **디자인/비주얼**: 이미지 생성·편집, 아이콘, 일러스트, 에셋.
+- **UI/UX**: 화면 레이아웃, 컴포넌트 디자인, UX 플로우, 인터랙션 명세, 디자인 토큰/시스템.
+- **코딩(2026-06-06 확장)**: UI/UX 결함을 **자기 개별 공간에서 직접 코드 수정**한다(발견만 아님). 완료분을 Claude에 제출 → Claude 최종 보완 → 머지(§11). Simon이 Codex 성능 인정.
+- 산출물: 수정된 코드(자기 공간) + 변경 요약(md), UI 스펙, 에셋 경로, 디자인 토큰.
+
+### 🟩 Antigravity(Gemini) — 안드로이드 네이티브 검수
+- **네이티브 검증**: Android 네이티브 빌드 검증, Gradle/매니페스트/권한 점검, 네이티브 모듈.
+- **디바이스 QA**: 실기기/에뮬 동작 검수, 크래시·ANR·성능(프레임·메모리) 점검, 회귀 확인.
+- 산출물: QA 리포트(md, pass/fail + findings), 재현 절차, 로그 경로, 개선 요청.
+
+### 🟪 Grok — X(소셜) 트렌드·소비자 리서치
+- **소셜 인사이트**: X(트위터) 등에서 글로벌 소비자 취향·반응·트렌드 검색·분석(Grok의 X 실시간 접근 강점).
+- **언제**: 무언가 **추가·변경하기 전 결정 단계** — "이 기능/디자인/문구를 글로벌 소비자·X는 어떻게 받아들일까?" 확인.
+- 산출물: 리서치 리포트(md) — X 반응 요약, 유사 사례, 소비자 취향, 기회/리스크, 추천 방향.
+- **코딩·디자인·QA는 안 함** — 인사이트만 제공. Claude/Codex가 그걸 받아 결정한다.
+
+---
+
+## 1.5 추가 듀티 (2026-06-14 허브 역할분석 — PROTOCOL §31.8/§35.6/§36)
+> 새 AI 없이 기존 좌석의 미사용 역량을 깨운다(§31.8 용량게이트). SPOF=Claude에 더 안 쌓는다.
+- **🟩 Gemini 좌석 (agy-native 헤드리스 차단 동안)**: 에뮬 가동 시 네이티브 QA는 유지하되, 헤드리스 텍스트 역량을 **long-context 전레포 감사관 + 코어레인 독립 반론 검토관**(§35.6 advisory — 최종 판정·머지권은 Claude 불변)으로 재배치. Supabase RLS/IDOR·schema↔type 드리프트·DECISIONS 원장 freshness 감사 포함.
+- **🟪 Grok**: 시장 advisory + **허브 와치독** — 매 사이클 `hub-health.ps1 -Json` 읽고 임계 breach 시 `type: incident`(→Simon+Claude, §15) + **벤더 free→metered 절벽 와처**(주1회). read-only envelope 유지(코드·git 없음).
+- **🟨 Codex**: UI/UX + **독립 테스트-저자**(Claude 머지 safety/data diff에 failing-first 테스트 저술) + **consent/미성년 `verify:safety` 불변식 저술**(§36) + **release scribe**(CHANGELOG/store copy). ⚠ 과적재 주의 — release-readiness 확인은 Gemini/자동.
+- **🟦 Claude**: 제품 LLM 런타임-비용 거버너(§31.6 COST 렌즈, enforcement=hook) + 미성년 enablement 오케스트레이션(§36) + 독립 릴리즈게이트(`tools/release-gate.ps1`) 운용. 신규 노동은 기계적/facilitation으로 최소화.
+
+---
+
+## 2. 라우팅 표 (경계 넘는 작업 → 담당에게 request)
+
+| 일이 생김 | 담당 | 요청 방향 |
+|---|---|---|
+| 화면 구현하려는데 디자인/레이아웃 필요 | Codex | Claude → Codex |
+| 이미지/아이콘/에셋 필요 | Codex | Claude → Codex |
+| UX 플로우·인터랙션 정의 필요 | Codex | Claude → Codex |
+| 코드 구현·로직·버그 수정 | Claude | Codex/Antigravity → Claude |
+| 디자인을 코드로 구현 | Claude | Codex → Claude |
+| 네이티브 빌드/디바이스에서 검수 | Antigravity | Claude → Antigravity |
+| QA에서 버그 발견 → 코드 수정 | Claude | Antigravity → Claude |
+| QA에서 UI/디자인 문제 발견 | Codex | Antigravity → Codex (또는 경유 Claude) |
+| **기능/디자인/문구를 추가·변경하기 전** 소비자 반응 확인 | Grok | Claude/사용자 → Grok |
+| X·소셜 트렌드, 경쟁 제품 반응 리서치 | Grok | Claude/사용자 → Grok |
+
+> 애매하면 **Claude(오케스트레이터) 경유**가 기본. Claude가 BOARD에 올리고 적절한 담당에게 분배.
+
+---
+
+## 3. 표준 흐름 예시 (앱 화면 1개)
+1. 사용자 → Claude: "로그인 화면 만들어줘"
+2. Claude → Codex (request): 로그인 화면 UI/UX 디자인 요청 (`Acceptance`: 레이아웃 + 토큰 + 상태별 정의)
+3. Codex → Claude (response): UI 스펙 md + 에셋 경로
+4. Claude: 스펙대로 구현(코드) → BOARD 갱신
+5. Claude → Antigravity (request): 네이티브 빌드 + 디바이스 QA 요청
+6. Antigravity → Claude (response): QA 리포트(pass/fail, findings)
+7. Claude: findings 반영 → BOARD done → 사용자 보고
+
+> **Grok 끼는 지점**: 새 기능/디자인/문구를 **추가·변경할지 결정하는 단계**(위 1~2 사이)에서 Claude→Grok에 "X·글로벌 소비자 반응" 리서치를 요청 → 그 인사이트로 Codex 디자인·Claude 구현 방향을 잡는다. 즉 Grok은 **만들기 전 의사결정 입력**.
+
+---
+
+## 4. 자율 작업 영역 (Autonomous Lane Loops) — PROTOCOL §12
+
+> 무인 자율 모드에서 각 AI가 **스스로 다음 후보를 찾아 도는** 루프. CONTROL.md `running` 동안만, charter stop-condition(§12.2) 준수.
+
+### 🟦 Claude — 통합 루프 (integration loop)
+- **사이클**: inbox·DECISIONS 처리 → 우선순위 최상위 1건 구현/머지 → `npm run verify` → 온라인 git(2nd-B push·PR·merge) → BOARD·CONTROL·DECISIONS 갱신 → 사이클 HTML 보고.
+- **역할 고유**: 유일한 온라인 git 주체 + 머지 게이트 + 합의 집계자 + Simon 대면.
+- **stop**: 사용자 pause / 미머지 백로그 없음(소비 완료) / 외부의존만 남음.
+
+### 🟨 Codex — UI/UX 코딩 루프 (발견 + 구현)
+- **사이클**: 화면/컴포넌트 1개 점검 → **자기 개별 공간에서 직접 코드 수정** → 변경 요약 + (필요시 HTML preview) → **Claude에 제출**(Claude 최종 보완 후 머지). 단순 발견만 할 땐 gate md.
+- **charter**: 미머지 제출 **8건 초과 시 신규 작업 중지**(Claude 머지 대기). **P3는 통합 1건으로 모아서**. 동일 baseline 중복 영역 금지.
+- **Codex↔AG 피드백**: AG가 UI/디자인 결함을 올리면 Codex로 재라우팅(경유 Claude).
+
+### 🟩 Antigravity — 네이티브 픽스·QA 루프
+- **사이클**: 네이티브 결함 1건(키보드·edge-to-edge·intent filter·AppState·elevation·perf/크래시) **직접 코딩** → 자기 브랜치(`antigravity/*`) 커밋 + 빌드/에뮬(`Pixel_9_Pro_XL`) 증거 + QA HTML → Claude 리뷰게이트.
+- **2026-06-05 변경**: "검수만"이 아니라 **네이티브 개발 직접 수행**(§10.5). 코드는 Claude 리뷰 후 머지.
+- **CLI**: 첫 OAuth 전엔 `gemini -y` 폴백, 인증 후 `agy --dangerously-skip-permissions`.
+
+### 🟪 Grok — 트렌드·결정입력 (검증 전 — 자율 루프 보류)
+- **현 상태(2026-06-06)**: Grok은 아직 검증 안 됨 → **자율 루프 비활성**. **요청 받을 때만** 리서치하고, 결과는 Claude/Simon과 **의견 교환** 모드로 진행.
+- **작업**: 합의/결정에 필요한 소비자·X 리서치(요청 시) → HTML → 합의(§14) 입력. 트렌드 모니터링도 요청 기반.
+- **금지**: 코딩·디자인·QA·git(merge·push). 인사이트만. 자율 발의 보류.
+
+> **공통**: 막히면 유휴 말고 §15 병렬 우회. 모든 사이클 산출은 HTML 자동 open(§16) + 자기 정체성 커밋(§17).
+
+### 🟨🟩 멀티모달 페어 (Codex ⇄ Antigravity, PROTOCOL §19)
+- **멀티모달 산출물**(이미지·에셋·아이콘·스프라이트·마스코트·UI 렌더링·시각 QA·모션)은 둘이 **병렬 생성 → 상호평가(`type: review`, ref 상대) → 피드백 → 반복(최대 2~3R)**.
+- 분담: Codex=디자인·생성·심미, AG=네이티브 렌더링·성능·디바이스 충실도. 서로 약점 보완.
+- 수렴본만 Claude가 머지. 합의 안 되면 Claude 판정.

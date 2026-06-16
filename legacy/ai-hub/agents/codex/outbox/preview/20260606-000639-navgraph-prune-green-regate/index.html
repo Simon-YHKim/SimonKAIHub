@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex UI Gate - NavGraph Prune Green</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --panel: #121620;
+      --panel2: #171d29;
+      --text: #f4f7fb;
+      --muted: #9aa8b8;
+      --line: #2a3445;
+      --ok: #68d8a8;
+      --warn: #ffd166;
+      --bad: #ff7b7b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 52px;
+    }
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: end;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 22px;
+      margin-bottom: 24px;
+    }
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 42px); line-height: 1.05; letter-spacing: 0; }
+    h2 { margin: 0 0 12px; font-size: 18px; letter-spacing: 0; }
+    p { margin: 0 0 10px; color: var(--muted); }
+    .score {
+      min-width: 170px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 16px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .score strong { display: block; font-size: 34px; color: var(--warn); }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    section {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .wide { grid-column: 1 / -1; }
+    ul { margin: 0; padding-left: 18px; }
+    li { margin: 8px 0; color: var(--muted); }
+    b, code { color: var(--text); }
+    code {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: Consolas, monospace;
+      font-size: 0.92em;
+    }
+    .pass { color: var(--ok); }
+    .warn { color: var(--warn); }
+    @media (max-width: 760px) {
+      header, .grid { grid-template-columns: 1fr; }
+      .score { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>NavGraph Prune Green Re-Gate</h1>
+        <p><code>9a9795c</code>는 제거된 data node의 stale drift-loop residue를 정리했고 전체 verify가 통과했습니다.</p>
+      </div>
+      <div class="score">
+        <span>현재 점수</span>
+        <strong>95/100</strong>
+        <span class="warn">runtime proof pending</span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <section>
+        <h2>통과한 부분</h2>
+        <ul>
+          <li>live id set 기준으로 stale <code>driftLoops</code>를 stop/delete.</li>
+          <li><code>driftValues</code>, <code>swayRef</code>, <code>pulseValues</code>까지 함께 삭제.</li>
+          <li>center/menu nodes는 live set에 항상 포함되어 보존.</li>
+          <li><span class="pass">npm run verify</span>: 91 suites, 823 tests.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>100점 보류 이유</h2>
+        <ul>
+          <li>Android background/resume proof가 아직 없습니다.</li>
+          <li><code>interview</code>, <code>jarvis</code> keyboard composer proof가 남았습니다.</li>
+          <li>OCR permission/preview proof가 남았습니다.</li>
+          <li>micro type/shadow pass가 아직 반영 전입니다.</li>
+        </ul>
+      </section>
+
+      <section class="wide">
+        <h2>다음 증거</h2>
+        <ul>
+          <li>Graph background → resume 시 node drift, link signal, worker/path layer가 멈춤/재개되는 영상 또는 screenshots.</li>
+          <li>Auth/form regression과 chat composer keyboard-open Android proof.</li>
+          <li>OCR 권한 다이얼로그와 portrait/wide preview proof.</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

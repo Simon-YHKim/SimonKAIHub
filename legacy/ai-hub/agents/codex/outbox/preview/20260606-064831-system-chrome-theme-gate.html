@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Gate - System Chrome Theme</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090b12;
+      --panel: #111520;
+      --panel-2: #151b28;
+      --text: #f4f7fb;
+      --muted: #aab4c5;
+      --line: #2b3448;
+      --accent: #7cc7ff;
+      --warn: #f7bf5f;
+      --ok: #77d897;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(1120px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+    header {
+      display: grid;
+      gap: 12px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 5vw, 58px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+    h2 { margin: 0 0 12px; font-size: 20px; }
+    h3 { margin: 0 0 8px; font-size: 16px; }
+    p { margin: 0; color: var(--muted); }
+    code {
+      color: #d9e8ff;
+      background: #0b1020;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: .92em;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+    .card {
+      grid-column: span 12;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .third { grid-column: span 4; }
+    .half { grid-column: span 6; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #1a1100;
+      background: var(--warn);
+      margin-bottom: 12px;
+    }
+    .ok { color: #06150c; background: var(--ok); }
+    ul { margin: 10px 0 0; padding-left: 20px; color: var(--muted); }
+    li + li { margin-top: 7px; }
+    .metric {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      color: var(--muted);
+    }
+    .metric:last-child { border-bottom: 0; }
+    .metric strong { color: var(--text); }
+    .note { background: var(--panel-2); border-left: 4px solid var(--accent); }
+    @media (max-width: 760px) {
+      main { width: min(100vw - 24px, 1120px); padding-top: 28px; }
+      .half, .third { grid-column: span 12; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">Codex UI/UX Gate - 2026-06-06 06:48 KST</div>
+      <h1>System Chrome Theme Contract</h1>
+      <p>Score remains <strong>98/100 provisional</strong>. The app surface can be polished while the OS/browser edge still contradicts the screen.</p>
+    </header>
+
+    <section class="grid" aria-label="Summary">
+      <article class="card third">
+        <span class="badge">P2</span>
+        <h2>StatusBar mismatch</h2>
+        <p>The only runtime policy follows global theme mode, but most screens force a dark surface.</p>
+      </article>
+      <article class="card third">
+        <span class="badge">P2</span>
+        <h2>Android system bar</h2>
+        <p>There is no route/theme-aware navigation or system-bar contract in source.</p>
+      </article>
+      <article class="card third">
+        <span class="badge">P2</span>
+        <h2>Web chrome</h2>
+        <p>Web theme color is static dark while secondary light-mode surfaces exist.</p>
+      </article>
+    </section>
+
+    <section class="grid" aria-label="Evidence">
+      <article class="card half">
+        <h2>Evidence</h2>
+        <div class="metric"><span><code>PremiumAppShell</code> usages</span><strong>66</strong></div>
+        <div class="metric"><span>Runtime StatusBar policy</span><strong>1</strong></div>
+        <div class="metric"><span>Graph background</span><strong><code>cosmic.space950</code></strong></div>
+        <div class="metric"><span>Web themeColor</span><strong><code>#070A18</code></strong></div>
+      </article>
+      <article class="card half">
+        <h2>Source Notes</h2>
+        <ul>
+          <li><code>ThemeContext</code> keeps real mode while <code>ForceDark</code> forces dark palette for shell content.</li>
+          <li><code>ThemeScreen</code> says the graph stays dark even in light mode.</li>
+          <li><code>_layout</code> sets status-bar icon style from <code>mode</code>, not actual top surface.</li>
+          <li><code>app.json</code> sets Android translucent status and static web colors.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid" aria-label="Acceptance">
+      <article class="card note">
+        <h2>Acceptance Before 100</h2>
+        <ul>
+          <li>Make native status-bar style derive from the actual route/shell top surface.</li>
+          <li>Define Android navigation/system-bar behavior for dark shell, light secondary surfaces, keyboard, and modals.</li>
+          <li>Decide and document whether web/PWA chrome is always brand-dark or route/theme-aware.</li>
+          <li>Provide screenshots for light mode on graph, settings/theme/account, capture/Jarvis, auth, keyboard-open, and modal states.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

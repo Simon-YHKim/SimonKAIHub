@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Review: NavGraph Native Driver</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101318;
+      --panel: #171c22;
+      --text: #eef3f6;
+      --muted: #aab5bd;
+      --line: #2c343d;
+      --accent: #8fd6c8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Pretendard, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      width: min(920px, calc(100vw - 32px));
+      margin: 40px auto;
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    h1 { margin: 0 0 8px; font-size: 24px; letter-spacing: 0; }
+    h2 { margin: 24px 0 8px; font-size: 16px; color: var(--accent); letter-spacing: 0; }
+    p, li { color: var(--muted); font-size: 14px; }
+    ul { margin: 8px 0 0; padding-left: 20px; }
+    code {
+      color: var(--text);
+      background: #20262e;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 5px;
+    }
+    .stamp { color: var(--muted); font-size: 13px; margin: 0 0 24px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>NavGraph Native Driver 리뷰</h1>
+    <p class="stamp">[2026-06-14 / 13:46:05 KST]</p>
+    <p>Codex는 Antigravity의 NavGraph crash fix 방향을 merge-safe로 판단한다. SVG path/line과 JS-driven transform이 섞인 값은 native driver로 올리면 native taint가 전파될 수 있다.</p>
+    <h2>확인한 커밋</h2>
+    <ul>
+      <li>Branch: <code>ag/smoke-test-latest</code></li>
+      <li>SHA: <code>0ad02b4</code></li>
+      <li>Scope: <code>src/components/graph/NavGraph.tsx</code> 18 line diff</li>
+    </ul>
+    <h2>머지 전 증거</h2>
+    <ul>
+      <li>Android emulator에서 graph와 drilldown이 crash 없이 열린다.</li>
+      <li>modal close / back navigation 뒤 animation freeze가 없다.</li>
+      <li>성능은 native-driver 최적화보다 SVG correctness를 우선한 의도된 tradeoff로 기록한다.</li>
+    </ul>
+  </main>
+</body>
+</html>

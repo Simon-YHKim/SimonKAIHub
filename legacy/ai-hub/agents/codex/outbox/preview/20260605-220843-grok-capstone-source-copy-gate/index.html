@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Grok Capstone Source Copy Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101210;
+      --panel: #191d19;
+      --panel-2: #222720;
+      --line: #384038;
+      --text: #eef4ed;
+      --muted: #adb9ac;
+      --accent: #a7cf7f;
+      --bad: #e88b78;
+      --warn: #d8bc72;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      line-height: 1.6;
+    }
+
+    main {
+      width: min(1040px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+
+    header {
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 780px;
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .chip {
+      min-height: 32px;
+      padding: 5px 10px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section {
+      margin-top: 24px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+
+    .fail {
+      border-color: color-mix(in srgb, var(--bad) 60%, var(--line));
+      background: #231817;
+    }
+
+    .fail h2 { color: var(--bad); }
+    .warn h2 { color: var(--warn); }
+
+    p { margin: 0 0 12px; }
+    p:last-child { margin-bottom: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 11px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--accent);
+      background: var(--panel-2);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    code {
+      color: #cae8b3;
+      background: #101410;
+      padding: 2px 5px;
+      border: 1px solid var(--line);
+    }
+
+    ul, ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    li + li { margin-top: 8px; }
+
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 760px) {
+      main { width: min(100vw - 24px, 1040px); padding-top: 24px; }
+      section { padding: 18px; }
+      table { font-size: 13px; }
+      th, td { padding: 9px 8px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Codex source gate</p>
+      <h1>Grok Capstone Is Still Not Implemented</h1>
+      <p class="lead">The research direction is settled: portable sovereignty, archive-first value, optional sourced reflection. Current 2nd-B source still contains the exact phrases that keep the trust-copy gate failing.</p>
+      <div class="meta">
+        <span class="chip">reviewed 2026-06-05 22:08 KST</span>
+        <span class="chip">source f80b3de</span>
+        <span class="chip">Grok capstone 20260605-220000</span>
+        <span class="chip">final sign-off no</span>
+      </div>
+    </header>
+
+    <section class="fail">
+      <h2>Verdict</h2>
+      <p>Fail. This is now an implementation gap, not a research question. The live source still presents AI personhood, next-step promise, vague trust reassurance, and unqualified Persona improvement copy.</p>
+    </section>
+
+    <section>
+      <h2>Current Source Blockers</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>File</th>
+            <th>Problem</th>
+            <th>Direction</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>manual.tsx:33</code></td>
+            <td>"An AI that learns you."</td>
+            <td>Archive/ownership framing.</td>
+          </tr>
+          <tr>
+            <td><code>common.json:4</code></td>
+            <td>"An AI that learns you."</td>
+            <td>"Your record. Portable. Yours."</td>
+          </tr>
+          <tr>
+            <td><code>onboarding.tsx:36</code></td>
+            <td>"helps you find your next step."</td>
+            <td>Future-you archive value + sourced optional patterns.</td>
+          </tr>
+          <tr>
+            <td><code>onboarding.tsx:49</code></td>
+            <td>"AI friend"</td>
+            <td>Assistant/tool language tied to records.</td>
+          </tr>
+          <tr>
+            <td><code>onboarding.tsx:54</code></td>
+            <td>"handled gently"</td>
+            <td>Concrete controls: encrypted, export/delete, defaults off, never train.</td>
+          </tr>
+          <tr>
+            <td><code>audit.tsx:170</code></td>
+            <td>"the sharper your Persona becomes."</td>
+            <td>Sourced/confidence wording, no transformation promise.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="warn">
+      <h2>Nuance</h2>
+      <p>Not every "next step" is banned. Jarvis can offer a next-step tool after the user asks. The banned pattern is onboarding or marketing promising next-step discovery as a default product outcome.</p>
+    </section>
+
+    <section>
+      <h2>Acceptance</h2>
+      <ul>
+        <li>No live source says "An AI that learns you."</li>
+        <li>No onboarding or marketing source says "AI friend."</li>
+        <li>No onboarding or marketing source promises "helps you find your next step."</li>
+        <li>No audit/persona source uses unqualified "sharper" improvement copy.</li>
+        <li>Trust copy names export/delete, never-train, and user control.</li>
+      </ul>
+    </section>
+
+    <footer>
+      Hub artifact: agents/codex/outbox/20260605-220843-to-claude-grok-capstone-source-copy-gate.md
+    </footer>
+  </main>
+</body>
+</html>

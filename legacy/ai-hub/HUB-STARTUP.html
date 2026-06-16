@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Hub 시작 키트 — 복붙 런치팩</title>
+<style>
+  :root{
+    --bg:#0f0f16; --panel:#16161f; --panel2:#1c1c28; --line:#282838;
+    --text:#e7e7ef; --muted:#a2a2b8; --faint:#8e8eaa;
+    --accent:#8b7cf0; --accent-dim:#2a2440; --ok:#5fc98a; --warn:#e0b04a; --stop:#e6898c;
+    --ps:#7fb0e6; --ps-dim:#1b2735;
+    --mono:'Cascadia Code','Consolas',ui-monospace,monospace;
+    --sans:'Pretendard','Segoe UI',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.55;
+       -webkit-font-smoothing:antialiased;padding:44px 20px 60px;
+       background-image:radial-gradient(900px 420px at 50% -120px,rgba(139,124,240,.10),transparent 70%)}
+  .wrap{max-width:980px;margin:0 auto}
+
+  h1{font-size:25px;font-weight:660;margin:0 0 5px;letter-spacing:-.02em;display:flex;align-items:center;gap:11px}
+  h1 .logo{width:30px;height:30px;color:var(--accent)}
+  .sub{color:var(--muted);font-size:13px;margin:0 0 22px}
+
+  /* legend — the ONE place icons are decoded with words */
+  .legend{display:flex;align-items:center;flex-wrap:wrap;gap:7px 16px;margin:0 0 26px;
+          background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:11px 15px}
+  .legend .h{font-size:11px;font-weight:700;color:var(--faint);letter-spacing:.08em;text-transform:uppercase;margin-right:2px}
+  .legend .lg{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted)}
+  .legend .lg b{color:var(--text);font-weight:600}
+  .pill{width:28px;height:28px;border-radius:8px;flex:none;display:grid;place-items:center;
+        background:#0a0a10;border:1px solid var(--line);color:var(--muted)}
+  .pill svg{width:16px;height:16px}
+  .pill.ps{color:var(--ps);border-color:var(--ps-dim);background:var(--ps-dim)}
+  .pill.cl{color:var(--accent);border-color:var(--accent-dim);background:var(--accent-dim)}
+
+  /* stepper */
+  .stepper{display:flex;align-items:flex-start;gap:0;margin:0 0 30px;
+           background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 10px}
+  .stp{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;
+       text-decoration:none;color:inherit;position:relative;padding:4px 6px}
+  .stp .ico{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;
+            background:var(--accent-dim);color:var(--accent);border:1px solid var(--line);transition:.15s}
+  .stp .ico svg{width:21px;height:21px}
+  .stp:hover .ico{background:var(--accent);color:#0c0c12;transform:translateY(-2px)}
+  .stp .n{font-size:10.5px;font-weight:700;color:var(--accent);letter-spacing:.06em}
+  .stp .lab{font-size:12.5px;font-weight:600}
+  .stp .opt{font-size:10.5px;color:var(--faint)}
+  .stp:not(:last-child)::after{content:"";position:absolute;top:32px;right:-50%;width:100%;height:2px;background:var(--line);z-index:0}
+  .stp .ico,.stp .n,.stp .lab,.stp .opt{position:relative;z-index:1}
+
+  .sec{font-size:11px;color:var(--faint);font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+       margin:32px 4px 12px;display:flex;align-items:center;gap:9px}
+  .sec::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:15px 16px;margin:0 0 12px}
+  .card .top{display:flex;align-items:center;gap:11px;margin:0 0 11px}
+  .card .badge{width:34px;height:34px;border-radius:9px;flex:none;display:grid;place-items:center;
+               background:var(--accent-dim);color:var(--accent)}
+  .card .badge svg{width:18px;height:18px}
+  .card .meta{min-width:0}
+  .card h3{margin:0;font-size:14.5px;font-weight:620;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .card .desc{margin:1px 0 0;font-size:12px;color:var(--muted)}
+  .num{font-size:10px;font-weight:800;color:var(--accent);background:var(--accent-dim);
+       border:1px solid var(--line);border-radius:5px;padding:1px 6px;letter-spacing:.04em}
+  /* paste-target chip: icon-only, pushed to the right */
+  .tgt{margin-left:auto;display:flex;align-items:center;gap:5px;flex:none}
+  .tgt .arrow{color:var(--faint)}
+  .tgt .arrow svg{width:15px;height:15px;display:block}
+
+  .cmdrow{position:relative;background:#0a0a10;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+  pre.cmd{margin:0;padding:13px 84px 13px 13px;font-family:var(--mono);font-size:12px;
+          color:#cfcfe2;white-space:pre-wrap;overflow-wrap:anywhere}
+  .copy{position:absolute;top:9px;right:9px;background:var(--accent);color:#0c0c12;border:0;
+        border-radius:7px;padding:6px 13px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:var(--sans)}
+  .copy:hover{filter:brightness(1.1)}
+  .copy.done{background:var(--ok)}
+  .mini{margin-top:9px;font-size:11px;color:var(--faint)}
+  .mini code{font-family:var(--mono);background:var(--panel2);padding:1px 5px;border-radius:4px;color:#c2c2da}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:640px){.grid,.grid3{grid-template-columns:1fr}.stepper{flex-wrap:wrap;gap:14px}
+        .stp:not(:last-child)::after{display:none}.stp{flex:1 1 40%}}
+
+  .k-stop .badge{background:#3a2326;color:var(--stop)}
+  .k-ok .badge{background:#1f3328;color:var(--ok)}
+
+  .copy:focus-visible,.stp:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:7px}
+
+  footer{margin-top:36px;color:var(--faint);font-size:11px;text-align:center;line-height:1.7}
+  footer code{font-family:var(--mono)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>
+    <svg class="logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.5"/><circle cx="5" cy="6" r="1.8"/><circle cx="19" cy="6" r="1.8"/><circle cx="5" cy="18" r="1.8"/><circle cx="19" cy="18" r="1.8"/><path d="M10 11 6.5 7.3M14 11l3.5-3.7M10 13l-3.5 3.7M14 13l3.5 3.7"/></svg>
+    AI Hub 시작 키트
+  </h1>
+  <p class="sub">Claude Code 재시작 후 4-AI 허브를 복붙으로 가동 · /loop = Simon 원격오더 디렉터 · 업데이트 2026-06-15 KST</p>
+
+  <!-- LEGEND: decode the paste-target icons once -->
+  <div class="legend">
+    <span class="h">붙여넣는 곳</span>
+    <span class="lg"><span class="pill ps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><polyline points="6.5 9.5 9.5 12 6.5 14.5"/><line x1="11.5" y1="14.5" x2="15.5" y2="14.5"/></svg></span><b>PowerShell</b></span>
+    <span class="lg"><span class="pill cl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 2.5v19M2.5 12h19M5.4 5.4l13.2 13.2M18.6 5.4 5.4 18.6"/></svg></span><b>Claude Code</b></span>
+    <span class="lg"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 7 3 12 8 17"/><polyline points="16 7 21 12 16 17"/></svg></span><b>Codex</b></span>
+    <span class="lg"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5.5" y1="5.5" x2="18.5" y2="18.5"/><line x1="18.5" y1="5.5" x2="5.5" y2="18.5"/></svg></span><b>Grok</b></span>
+    <span class="lg"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3.2c.5 4.5 3.8 7.8 8.3 8.3-4.5.5-7.8 3.8-8.3 8.3-.5-4.5-3.8-7.8-8.3-8.3C8.2 11 11.5 7.7 12 3.2z"/></svg></span><b>Antigravity</b></span>
+  </div>
+
+  <!-- STEPPER -->
+  <nav class="stepper">
+    <a class="stp" href="#s1"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><line x1="10" y1="18.5" x2="14" y2="18.5"/></svg></span><span class="n">1 · 선택</span><span class="lab">에뮬레이터</span><span class="opt">네이티브 QA 시</span></a>
+    <a class="stp" href="#s2"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 4 21 9 16 9"/></svg></span><span class="n">2 · 핵심</span><span class="lab">AI 루프</span><span class="opt">데몬 or 인-윈도우</span></a>
+    <a class="stp" href="#s3"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="20" x2="6" y2="13"/><line x1="12" y1="20" x2="12" y2="8"/><line x1="18" y1="20" x2="18" y2="11"/></svg></span><span class="n">3 · 감시</span><span class="lab">모니터</span><span class="opt">전용 터미널</span></a>
+    <a class="stp" href="#s4"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 4 20 12 6 20 6 4"/></svg></span><span class="n">4 · 시작</span><span class="lab">Claude 루프</span><span class="opt">원격오더·머지게이트</span></a>
+  </nav>
+
+  <div class="sec">가동 시퀀스</div>
+
+  <!-- 1 EMU -->
+  <div class="card" id="s1">
+    <div class="top">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><line x1="10" y1="18.5" x2="14" y2="18.5"/></svg></span>
+      <div class="meta"><h3><span class="num">1</span> 에뮬레이터 부팅 <span style="color:var(--faint);font-weight:500;font-size:12px">Pixel 9 Pro XL</span></h3>
+      <p class="desc">네이티브 QA·크래시 스캔용. 이미 떠 있으면 건너뛰기.</p></div>
+      <span class="tgt" title="PowerShell에 붙여넣기"><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg></span><span class="pill ps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><polyline points="6.5 9.5 9.5 12 6.5 14.5"/><line x1="11.5" y1="14.5" x2="15.5" y2="14.5"/></svg></span></span>
+    </div>
+    <div class="cmdrow"><pre class="cmd" id="c-emu">cd "$env:LOCALAPPDATA\Android\Sdk\emulator"; .\emulator.exe -avd Pixel_9_Pro_XL -netdelay none -netspeed full</pre><button class="copy" data-t="c-emu">복사</button></div>
+    <p class="mini" style="margin-top:10px;color:var(--ps)">QA 전 매 사이클 · dev서버 연결 4조건 보장(adb reverse 8081 · Metro 기동 · 에뮬 인식). <code>exit 0</code>=OK. 1회성 <code>adb reverse</code> 금지 — 에뮬/Metro 재시작 시 소실(O-26 · RUNBOOK §7). <code>"Cannot connect to Expo CLI"</code> 차단.</p>
+    <div class="cmdrow" style="margin-top:7px"><pre class="cmd" id="c-preqa">pwsh -File "E:\2ndB\scripts\pre-emulator-qa.ps1" -StartMetro</pre><button class="copy" data-t="c-preqa">복사</button></div>
+  </div>
+
+  <!-- 2 LOOP -->
+  <div class="card" id="s2">
+    <div class="top">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 4 21 9 16 9"/></svg></span>
+      <div class="meta"><h3><span class="num">2</span> AI 루프 가동 <span style="color:var(--warn);font-weight:600;font-size:11.5px">모드 택1 — 둘 다 켜면 중복·git 충돌</span></h3>
+      <p class="desc"><b>A</b> 백그라운드 데몬(창 없이 자동) · <b>B</b> 띄운 AI 창에서 직접 루프(데몬 OFF, 창만 보기).</p></div>
+    </div>
+
+    <p class="mini" style="margin:2px 0 7px;color:var(--ps)">모드 A · 백그라운드 데몬 — codex·grok·AG 3개 숨김창, 10분 주기</p>
+    <div class="cmdrow"><pre class="cmd" id="c-daemon">$file = "E:\Coding Infra\AI Infra\Communication\tools\hub-daemon.ps1"
+'codex','grok','antigravity' | ForEach-Object {
+  Start-Process powershell -ArgumentList "-ExecutionPolicy Bypass -File `"$file`" -Only $_ -IntervalSec 600" -WindowStyle Hidden
+}
+Write-Host "[hub] 3 daemons launched (codex, grok, antigravity) @ 10min"</pre><button class="copy" data-t="c-daemon">복사</button></div>
+    <p class="mini">한 AI만 / 출력 보며 디버깅: <code>-Only</code> 변경 · <code>-MaxTasksPerCycle 2</code>로 백로그 드레인</p>
+    <div class="cmdrow" style="margin-top:7px"><pre class="cmd" id="c-daemon1">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\hub-daemon.ps1" -Only codex -IntervalSec 600</pre><button class="copy" data-t="c-daemon1">복사</button></div>
+  </div>
+
+  <p class="mini" style="margin:14px 4px 10px;font-size:12px;color:var(--muted)"><b style="color:var(--text)">모드 B · 인-윈도우 루프</b> — 데몬 없이, <b>띄워둔 각 AI 창</b>에 아래를 붙여넣으면 그 창에서 5분 주기 자율 동작(activate 규칙을 직접 읽음). Claude는 <b>4단계 /loop</b>가 곧 인-윈도우 루프. 각 AI는 <b style="color:var(--text)">최고모델·최대 effort</b>로 실행(데몬이 spawn 시 자동주입) — 정본 <code style="font-family:var(--mono);font-size:11px">MODELS.md</code>: Claude <code style="font-family:var(--mono);font-size:11px">fable-5 @max</code> · <code style="font-family:var(--mono);font-size:11px">codex -m gpt-5.5 (xhigh)</code> · <code style="font-family:var(--mono);font-size:11px">grok -m grok-build (high)</code> · agy <code style="font-family:var(--mono);font-size:11px">"Gemini 3.1 Pro (High)"</code>.</p>
+  <div class="grid grid3">
+    <div class="card" style="margin:0">
+      <div class="top">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 7 3 12 8 17"/><polyline points="16 7 21 12 16 17"/></svg></span>
+        <div class="meta"><h3>Codex 루프</h3><p class="desc">이미지·UI/UX + 테스트저자</p></div>
+        <span class="tgt" title="Codex 창에 붙여넣기"><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg></span><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 7 3 12 8 17"/><polyline points="16 7 21 12 16 17"/></svg></span></span>
+      </div>
+      <div class="cmdrow"><pre class="cmd" id="c-incodex">너는 4-AI 허브의 Codex(이미지·UI/UX)다. E:\Coding Infra\AI Infra\Communication\prompts\codex-activate.md 를 읽고 그대로 자율 루프(5분 주기)로 동작해. 한국어, 자동승인 -s danger-full-access. 백그라운드 데몬은 띄우지 마.</pre><button class="copy" data-t="c-incodex">복사</button></div>
+    </div>
+    <div class="card" style="margin:0">
+      <div class="top">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5.5" y1="5.5" x2="18.5" y2="18.5"/><line x1="18.5" y1="5.5" x2="5.5" y2="18.5"/></svg></span>
+        <div class="meta"><h3>Grok 루프</h3><p class="desc">시장 advisory + 허브 와치독</p></div>
+        <span class="tgt" title="Grok 창에 붙여넣기"><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg></span><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5.5" y1="5.5" x2="18.5" y2="18.5"/><line x1="18.5" y1="5.5" x2="5.5" y2="18.5"/></svg></span></span>
+      </div>
+      <div class="cmdrow"><pre class="cmd" id="c-ingrok">너는 4-AI 허브의 Grok(시장·소비자 advisory)다. E:\Coding Infra\AI Infra\Communication\prompts\grok-activate.md 를 읽고 그대로 자율 루프(5분 주기)로 동작해. 한국어. 백그라운드 데몬은 띄우지 마.</pre><button class="copy" data-t="c-ingrok">복사</button></div>
+    </div>
+    <div class="card" style="margin:0">
+      <div class="top">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3.2c.5 4.5 3.8 7.8 8.3 8.3-4.5.5-7.8 3.8-8.3 8.3-.5-4.5-3.8-7.8-8.3-8.3C8.2 11 11.5 7.7 12 3.2z"/></svg></span>
+        <div class="meta"><h3>Antigravity 루프</h3><p class="desc">네이티브 QA + 전레포 감사</p></div>
+        <span class="tgt" title="Antigravity 창에 붙여넣기"><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg></span><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3.2c.5 4.5 3.8 7.8 8.3 8.3-4.5.5-7.8 3.8-8.3 8.3-.5-4.5-3.8-7.8-8.3-8.3C8.2 11 11.5 7.7 12 3.2z"/></svg></span></span>
+      </div>
+      <div class="cmdrow"><pre class="cmd" id="c-inag">너는 4-AI 허브의 Antigravity(네이티브·에뮬 QA)다. E:\Coding Infra\AI Infra\Communication\prompts\antigravity-activate.md 를 읽고 그대로 자율 루프(5분 주기)로 동작해. 한국어. 백그라운드 데몬은 띄우지 마.</pre><button class="copy" data-t="c-inag">복사</button></div>
+    </div>
+  </div>
+
+  <!-- 3 MONITOR -->
+  <div class="card" id="s3">
+    <div class="top">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="20" x2="6" y2="13"/><line x1="12" y1="20" x2="12" y2="8"/><line x1="18" y1="20" x2="18" y2="11"/></svg></span>
+      <div class="meta"><h3><span class="num">3</span> 실시간 모니터 <span style="color:var(--faint);font-weight:500;font-size:12px">5초 갱신 · 전용 터미널</span></h3>
+      <p class="desc">state · <b>cyc</b>(누적 사이클) · <b>pend&gt;CL</b>(미처리 ≥3 RED) · 에뮬 · 데몬 · 커밋.</p></div>
+      <span class="tgt" title="PowerShell에 붙여넣기"><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg></span><span class="pill ps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><polyline points="6.5 9.5 9.5 12 6.5 14.5"/><line x1="11.5" y1="14.5" x2="15.5" y2="14.5"/></svg></span></span>
+    </div>
+    <div class="cmdrow"><pre class="cmd" id="c-mon">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\monitor.ps1"</pre><button class="copy" data-t="c-mon">복사</button></div>
+  </div>
+
+  <!-- 4 CLAUDE -->
+  <div class="card" id="s4">
+    <div class="top">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 4 20 12 6 20 6 4"/></svg></span>
+      <div class="meta"><h3><span class="num">4</span> Claude 루프 시작 <span style="color:var(--accent);font-weight:600;font-size:11.5px">= 원격오더 디렉터</span></h3>
+      <p class="desc">매 사이클 <code>orders-poll</code> → 원격오더(<code>ORDERS.md ## OPEN</code>, O-13+) 픽업·분배 → 검토·2nd-B 머지 → <code>## DONE</code> 회신·재배정. 게이트(파괴/비용/secrets/임상/법무)만 Simon 확인.</p></div>
+      <span class="tgt" title="Claude Code 입력창에 붙여넣기 (PowerShell 아님)"><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="20" y2="12"/><polyline points="14 6 20 12 14 18"/></svg></span><span class="pill cl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 2.5v19M2.5 12h19M5.4 5.4l13.2 13.2M18.6 5.4 5.4 18.6"/></svg></span></span>
+    </div>
+    <div class="cmdrow"><pre class="cmd" id="c-loop">/loop 너는 4-AI 허브의 오케스트레이터이자 Simon 원격오더 실행자(디렉터)다. 나한테 판단 맡기지마 — 난 너희들의 판단을 믿어. 주요 타겟은 2nd-B 디벨롭이야. 매 사이클(≤10분): ① orders-poll.ps1로 2nd-B ORDERS.md ## OPEN의 미처리 O-13+ 오더 픽업(git fetch 후) ② 새 오더면 분해·담당AI 분배(codex=UI·이미지, AG=에뮬 네이티브QA[QA 전 pre-emulator-qa.ps1 -StartMetro 필수], grok=소셜·리서치) ③ 산출 수거→framework-aware 검토→verify/export green·release-gate 통과 시만 2nd-B 머지·라이브 ④ 결과를 ## DONE에 [YYYY-MM-DD / HH:MM:SS KST]+라이브URL 회신, OPEN→DONE 이동, BOARD/CONTROL/git 단독 관리 ⑤ 새 오더 없으면 2nd-B 기능·에뮬레이터 문제 계속 점검하며 다음 develop 작업으로(유휴 금지). 게이트(파괴/비용/secrets/임상/법무)만 Simon 확인, 그 외 무확인. 타임스탬프는 실제 Get-Date KST(추정 금지).</pre><button class="copy" data-t="c-loop">복사</button></div>
+  </div>
+
+  <div class="sec">허브 기능 점검 · 모두 PowerShell</div>
+  <div class="card k-ok">
+    <div class="top">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 7.3 9.8 18 4 12.2"/><path d="M21 12a9 9 0 1 1-4-7.5"/></svg></span>
+      <div class="meta"><h3>허브 셀프테스트 (hub-health)</h3><p class="desc">스크립트 구문·commit 가드·상태파일·<b>models.json 최고모델</b>·git/UTF-8·데몬 생존을 read-only 검증. PASS/WARN/FAIL.</p></div>
+      <span class="tgt" title="PowerShell"><span class="pill ps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><polyline points="6.5 9.5 9.5 12 6.5 14.5"/><line x1="11.5" y1="14.5" x2="15.5" y2="14.5"/></svg></span></span>
+    </div>
+    <div class="cmdrow"><pre class="cmd" id="c-health">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\hub-health.ps1"</pre><button class="copy" data-t="c-health">복사</button></div>
+    <p class="mini">깊은 검사(commit 가드 실거동, 임시repo): <code>-Deep</code> · 머신출력: <code>-Json</code></p>
+  </div>
+
+  <div class="sec">점검 도구 · 모두 PowerShell</div>
+  <div class="grid">
+    <div class="card">
+      <div class="top">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+        <div class="meta"><h3>채팅 피드</h3><p class="desc">각 AI 최신 transcript를 대화 흐름으로.</p></div>
+        <span class="tgt" title="PowerShell"><span class="pill ps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><polyline points="6.5 9.5 9.5 12 6.5 14.5"/><line x1="11.5" y1="14.5" x2="15.5" y2="14.5"/></svg></span></span>
+      </div>
+      <div class="cmdrow"><pre class="cmd" id="c-feed">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\feed.ps1"</pre><button class="copy" data-t="c-feed">복사</button></div>
+    </div>
+    <div class="card">
+      <div class="top">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
+        <div class="meta"><h3>AI usage 모니터</h3><p class="desc">AI별 <b>모델·사이클·OK/Err/Quota·커밋·산출물·상태</b>. 구독 CLI라 토큰 미과금 → 활동량 기준. <code>-Html</code> 리포트.</p></div>
+        <span class="tgt" title="PowerShell"><span class="pill ps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><polyline points="6.5 9.5 9.5 12 6.5 14.5"/><line x1="11.5" y1="14.5" x2="15.5" y2="14.5"/></svg></span></span>
+      </div>
+      <div class="cmdrow"><pre class="cmd" id="c-usage">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\hub-usage.ps1" -Html</pre><button class="copy" data-t="c-usage">복사</button></div>
+    </div>
+    <div class="card">
+      <div class="top">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <div class="meta"><h3>자기피드백 (watchdog)</h3><p class="desc">데몬 다운·행·연속실패·백로그를 감지해 <b>Claude inbox에 자동 보고</b>(붙여넣기 불요). <b>10분마다 자동</b> — 예약작업 <code>HubWatchdog</code>. quota-backoff 같은 정상 상태는 제외.</p></div>
+        <span class="tgt" title="PowerShell"><span class="pill ps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><polyline points="6.5 9.5 9.5 12 6.5 14.5"/><line x1="11.5" y1="14.5" x2="15.5" y2="14.5"/></svg></span></span>
+      </div>
+      <div class="cmdrow"><pre class="cmd" id="c-watchdog">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\hub-watchdog.ps1"</pre><button class="copy" data-t="c-watchdog">복사</button></div>
+    </div>
+    <div class="card">
+      <div class="top">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg></span>
+        <div class="meta"><h3>크래시 스캔</h3><p class="desc">logcat FATAL/ANR/Hermes 즉시 판정.</p></div>
+        <span class="tgt" title="PowerShell"><span class="pill ps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><polyline points="6.5 9.5 9.5 12 6.5 14.5"/><line x1="11.5" y1="14.5" x2="15.5" y2="14.5"/></svg></span></span>
+      </div>
+      <div class="cmdrow"><pre class="cmd" id="c-smoke">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\expo-smoke.ps1"</pre><button class="copy" data-t="c-smoke">복사</button></div>
+    </div>
+    <div class="card">
+      <div class="top">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5A2 2 0 0 1 6 3h13v17H6a2 2 0 0 0-2 2z"/><line x1="9" y1="7.5" x2="15" y2="7.5"/></svg></span>
+        <div class="meta"><h3>위키 교훈 수집</h3><p class="desc">outbox <code style="font-size:11px">wiki_lesson</code> 다이제스트.</p></div>
+        <span class="tgt" title="PowerShell"><span class="pill ps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><polyline points="6.5 9.5 9.5 12 6.5 14.5"/><line x1="11.5" y1="14.5" x2="15.5" y2="14.5"/></svg></span></span>
+      </div>
+      <div class="cmdrow"><pre class="cmd" id="c-wiki">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\wiki-ingest.ps1"</pre><button class="copy" data-t="c-wiki">복사</button></div>
+    </div>
+    <div class="card k-ok">
+      <div class="top">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 12 8 12 11 19 14 5 17 12 21 12"/></svg></span>
+        <div class="meta"><h3>데몬 생존 확인</h3><p class="desc">지금 살아있는 데몬 + PID.</p></div>
+        <span class="tgt" title="PowerShell"><span class="pill ps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><polyline points="6.5 9.5 9.5 12 6.5 14.5"/><line x1="11.5" y1="14.5" x2="15.5" y2="14.5"/></svg></span></span>
+      </div>
+      <div class="cmdrow"><pre class="cmd" id="c-check">Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" | Where-Object { $_.CommandLine -match 'hub-daemon\.ps1' } | ForEach-Object { if($_.CommandLine -match '-Only (\w+)'){ "daemon ALIVE: $($matches[1])  (PID $($_.ProcessId))" } }</pre><button class="copy" data-t="c-check">복사</button></div>
+    </div>
+    <div class="card">
+      <div class="top">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>
+        <div class="meta"><h3>릴리즈 게이트</h3><p class="desc">2nd-B 머지 전 <b>GO/NO-GO</b> + 롤백 SHA 기록(§8).</p></div>
+        <span class="tgt" title="PowerShell"><span class="pill ps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><polyline points="6.5 9.5 9.5 12 6.5 14.5"/><line x1="11.5" y1="14.5" x2="15.5" y2="14.5"/></svg></span></span>
+      </div>
+      <div class="cmdrow"><pre class="cmd" id="c-relgate">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\release-gate.ps1"</pre><button class="copy" data-t="c-relgate">복사</button></div>
+    </div>
+    <div class="card">
+      <div class="top">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3.5h6a1 1 0 0 1 1 1V5h2.5A1.5 1.5 0 0 1 20 6.5v13A1.5 1.5 0 0 1 18.5 21h-13A1.5 1.5 0 0 1 4 19.5v-13A1.5 1.5 0 0 1 5.5 5H8v-.5a1 1 0 0 1 1-1z"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="13" y2="15"/></svg></span>
+        <div class="meta"><h3>원격 오더 폴 (orders-poll)</h3><p class="desc">2nd-B <code style="font-size:11px">ORDERS.md ## OPEN</code>의 미처리 <b>O-13+</b> 오더를 git fetch 후 추출. <b>/loop가 매 사이클 호출하는 수신단</b>(O-13+ 파이프라인). <code>-Json</code>=머신용 <code style="font-size:11px">{newCount,newIds,blocks}</code>.</p></div>
+        <span class="tgt" title="PowerShell"><span class="pill ps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><polyline points="6.5 9.5 9.5 12 6.5 14.5"/><line x1="11.5" y1="14.5" x2="15.5" y2="14.5"/></svg></span></span>
+      </div>
+      <div class="cmdrow"><pre class="cmd" id="c-orders">powershell -ExecutionPolicy Bypass -File "E:\Coding Infra\AI Infra\Communication\tools\orders-poll.ps1"</pre><button class="copy" data-t="c-orders">복사</button></div>
+    </div>
+  </div>
+
+  <div class="sec">정지 · PowerShell</div>
+  <div class="card k-stop">
+    <div class="top">
+      <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18.4 6A8 8 0 1 1 5.6 6"/><line x1="12" y1="2.5" x2="12" y2="12"/></svg></span>
+      <div class="meta"><h3>모든 데몬 정지</h3><p class="desc">재부팅·재시작 전. 모니터·Claude는 각 터미널 Ctrl+C.</p></div>
+      <span class="tgt" title="PowerShell"><span class="pill ps"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><polyline points="6.5 9.5 9.5 12 6.5 14.5"/><line x1="11.5" y1="14.5" x2="15.5" y2="14.5"/></svg></span></span>
+    </div>
+    <div class="cmdrow"><pre class="cmd" id="c-stop">Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" | Where-Object { $_.CommandLine -match 'hub-daemon\.ps1' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }; Write-Host "[hub] all daemons stopped"</pre><button class="copy" data-t="c-stop">복사</button></div>
+  </div>
+
+  <footer>
+    원격오더 = Simon 폰 → 2nd-B <code>ORDERS.md ## OPEN</code>(O-13+) → PC Claude /loop 폴·분배·<code>## DONE</code> 회신(§33, 데몬 없이 라이브 루프가 인계) · 머지게이트 = Claude · 정본 <code>PROTOCOL.md</code> · 장애복구 <code>RUNBOOK.md</code>(에뮬 dev서버 §7) · 역할 <code>ROUTING.md</code> · 합의 <code>DECISIONS.md</code> · 모델정본 <code>models.json</code><br>
+    미성년 = enablement(§36, 제한 아님) · 좌석증설 전 용량게이트(§31.8) · 코어레인 독립반론(§35.6, Claude 최종권 불변)<br>
+    <code>E:\Coding Infra\AI Infra\Communication\HUB-STARTUP.html</code> · 업데이트 2026-06-15
+  </footer>
+</div>
+
+<script>
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      if(btn.classList.contains('done')) return;
+      var el = document.getElementById(btn.getAttribute('data-t'));
+      var txt = el.innerText;
+      function ok(){ var o=btn.textContent; btn.textContent='복사됨'; btn.classList.add('done'); setTimeout(function(){btn.textContent=o;btn.classList.remove('done');},1300); }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(ok).catch(function(){fallback(txt,ok);});
+      } else { fallback(txt,ok); }
+    });
+  });
+  function fallback(txt,cb){
+    var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); cb(); }catch(e){}
+    document.body.removeChild(ta);
+  }
+</script>
+</body>
+</html>

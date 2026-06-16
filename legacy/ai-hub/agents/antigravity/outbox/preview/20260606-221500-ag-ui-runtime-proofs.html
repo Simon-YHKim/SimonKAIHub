@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Android Native QA: UI Runtime Validations</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; background: #0f111a; color: #e8ecf8; padding: 2rem; max-width: 900px; margin: 0 auto; }
+    h1 { color: #6be3c9; }
+    h2 { color: #a78bfa; margin-top: 2rem; border-bottom: 1px solid #3d435c; padding-bottom: 0.5rem; }
+    .card { background: #1a1d2d; padding: 1rem; border-radius: 8px; border: 1px solid #3d435c; margin-top: 1rem; }
+    .status-pass { color: #6be3c9; font-weight: bold; }
+    .timestamp { font-family: monospace; color: #8d98b8; margin-top: 2rem; }
+    img { max-width: 100%; border-radius: 4px; border: 1px solid #0f111a; margin-top: 0.5rem; }
+    .grid { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .grid-item { flex: 1; min-width: 250px; }
+  </style>
+</head>
+<body>
+  <h1>Native QA Report: UI Runtime Validations</h1>
+  <p>Claude가 지시한 "네이티브 lane" 검증 항목들에 대한 에뮬레이터 런타임 테스트 결과입니다.</p>
+  
+  <h2>1. Android 키보드 에뮬 증명 (KeyboardAvoidingView)</h2>
+  <div class="card">
+    <p><strong>상태:</strong> <span class="status-pass">PASS</span></p>
+    <p>53b5cdf 커밋이 적용된 상태에서 <code>/sign-up</code>, <code>/jarvis</code> 등 7개 주요 폼 화면에 대해 ADB로 포커스를 주어 키보드를 트리거했습니다. 키보드 오픈 시 입력 필드 및 하단 CTA 버튼이 정상적으로 위로 밀려 올라오며 어떠한 가림 현상도 발생하지 않음을 증명했습니다.</p>
+    <div class="grid">
+      <div class="grid-item">
+        <strong>Sign-up:</strong>
+        <img src="qa_sign_up_keyboard.png" alt="Sign Up Keyboard">
+      </div>
+      <div class="grid-item">
+        <strong>Jarvis:</strong>
+        <img src="qa_jarvis_keyboard.png" alt="Jarvis Keyboard">
+      </div>
+    </div>
+  </div>
+
+  <h2>2. FlatList 런타임 증명</h2>
+  <div class="card">
+    <p><strong>상태:</strong> <span class="status-pass">PASS</span></p>
+    <p>Inbox, Records, Wiki 탭에 진입하여 목록을 스크롤 및 확장/축소 프레임을 렌더링했습니다. 안드로이드 특유의 FlatList 스크롤 튀는 현상이나 OOM, 레이아웃 끊김 없이 부드럽게 목록이 표시됩니다.</p>
+    <div class="grid">
+      <div class="grid-item">
+        <strong>Inbox:</strong>
+        <img src="qa_flatlist_inbox.png" alt="Inbox FlatList">
+      </div>
+      <div class="grid-item">
+        <strong>Records:</strong>
+        <img src="qa_flatlist_records.png" alt="Records FlatList">
+      </div>
+      <div class="grid-item">
+        <strong>Wiki:</strong>
+        <img src="qa_flatlist_wiki.png" alt="Wiki FlatList">
+      </div>
+    </div>
+  </div>
+
+  <h2>3. NavGraph resume/drift 증명 (AppState Guard)</h2>
+  <div class="card">
+    <p><strong>상태:</strong> <span class="status-pass">PASS</span></p>
+    <p>홈(Home) 버튼을 눌러 앱을 백그라운드로 전환(Drift 멈춤)한 뒤, 다시 포그라운드로 복귀시키는 시나리오를 ADB로 시뮬레이션했습니다. 앞서 적용한 <code>AppState</code> 가드가 정확히 동작하여, 복귀 시 애니메이션이 꼬이거나 JS 스레드가 멈추는 현상 없이 Drift가 매끄럽게 재개되었습니다.</p>
+    <img src="qa_navgraph_resume.png" alt="NavGraph Resume">
+  </div>
+
+  <h2>4. §19 그래프빌리지 perf-side (NavGraph SVG 다량 렌더)</h2>
+  <div class="card">
+    <p><strong>상태:</strong> <span class="status-pass">APPROVED (No Skia needed yet)</span></p>
+    <p>Codex의 시각적 3단계 제안(Edge Grammar, Node Readability, Sprite Z-order)을 SVG 기반으로 유지해도 안드로이드 프레임 드랍이 거의 발생하지 않음을 확인했습니다.</p>
+    <p>Tier-4 노드가 기하급수적으로 늘어나지 않는 한 <code>useNativeDriver: true</code>로 우회된 `react-native-svg` 애니메이션 성능은 충분히 안정적입니다. Codex의 제안(Slice A, B, C)대로 렌더 구조를 분리하되, Skia / Sprite 교체까지는 아직 불필요하다고 판단합니다. Codex가 제안한 패치대로 진행하길 권장합니다.</p>
+  </div>
+
+  <div class="timestamp">[YYYY-MM-DD / HH:MM:SS] 2026-06-06 / 22:15:00 KST</div>
+</body>
+</html>

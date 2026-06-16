@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex 89eeaaa Perf Re-gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #10131a;
+      --panel: #171b24;
+      --panel-2: #1d2330;
+      --text: #eef2f8;
+      --muted: #aeb8c9;
+      --line: #2a3242;
+      --accent: #7cc7ff;
+      --warn: #ffcf70;
+      --ok: #8ee6a8;
+      --bad: #ff9d9d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Pretendard", "Segoe UI", system-ui, sans-serif;
+      line-height: 1.58;
+      word-break: keep-all;
+    }
+    main {
+      width: min(980px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 36px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+    h1 {
+      font-size: clamp(30px, 5vw, 52px);
+      line-height: 1.05;
+      margin: 0 0 12px;
+      letter-spacing: 0;
+    }
+    .summary {
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0;
+      font-size: 16px;
+    }
+    .score {
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      gap: 18px;
+      align-items: center;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+    .score strong {
+      font-size: 34px;
+      color: var(--warn);
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      margin-top: 16px;
+    }
+    h2 {
+      font-size: 20px;
+      margin: 0 0 14px;
+      letter-spacing: 0;
+    }
+    h3 {
+      font-size: 16px;
+      margin: 18px 0 8px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 10px; }
+    ul, ol { margin: 0; padding-left: 21px; }
+    li + li { margin-top: 8px; }
+    code {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      color: #d8e8ff;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 0.94em;
+    }
+    .tag {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 9px;
+      margin-right: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .mini {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 120px;
+    }
+    .mini b { display: block; margin-bottom: 6px; }
+    @media (max-width: 720px) {
+      main { width: min(100vw - 22px, 980px); padding-top: 24px; }
+      .score { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Codex UI/UX Re-gate</p>
+      <h1>89eeaaa Perf Review</h1>
+      <p class="summary">Claude/AG의 Android 백그라운드 애니메이션 개선 커밋을 100점 AI slop 기준으로 다시 검수했다. 검증은 통과했지만, 숨은 AppState 경계가 남아 점수는 유지한다.</p>
+    </header>
+
+    <div class="score">
+      <strong>88/100</strong>
+      <div>
+        <span class="tag">verify pass</span>
+        <span class="tag">perf direction accepted</span>
+        <span class="tag">not 100</span>
+        <p style="margin-top:10px;">점수는 변동 없음. 방향은 좋지만 백그라운드 delay loop, cold-start ticker proof, 기존 trust/copy P1이 아직 남아 있다.</p>
+      </div>
+    </div>
+
+    <section>
+      <h2>Accepted</h2>
+      <div class="grid">
+        <div class="mini">
+          <b class="ok">Landing flourish</b>
+          <p><code>src/app/index.tsx</code>의 one-shot entry animation은 opacity/transform만 구동하므로 native driver 전환이 타당하다.</p>
+        </div>
+        <div class="mini">
+          <b class="ok">Worker ticker</b>
+          <p><code>WorkerSprite</code>의 shared interval을 background/inactive에서 clear하는 방향은 배터리 측면에서 명확히 개선이다.</p>
+        </div>
+        <div class="mini">
+          <b class="ok">Graph resident tick</b>
+          <p><code>CharacterPathLayer</code>의 20fps timer도 AppState에 따라 stop/start되어 이전보다 안전하다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Still Not 100</h2>
+      <h3><span class="bad">P1</span> LivingAsset delay loop can start in background</h3>
+      <p><code>setTimeout(startLoop, delay)</code>가 background 전에 예약되면, delay 만료 시 <code>startLoop()</code>가 AppState 확인 없이 <code>Animated.loop</code>를 시작할 수 있다.</p>
+      <p>Claude 요청: background/inactive에서 pending timer를 clear/defer하고, resume 시 loop가 정확히 한 번만 시작되는지 테스트나 Android proof를 추가.</p>
+
+      <h3><span class="warn">P2</span> Strict active check can freeze cold launch motion</h3>
+      <p><code>AppState.currentState === "active"</code> 조건만으로 시작하면 초기 unknown/null 상태에서 첫 랜딩 주민 애니메이션이 멈출 수 있다. Android cold launch proof가 필요하다.</p>
+
+      <h3><span class="warn">P2</span> Timer lifecycle coverage missing</h3>
+      <p>현재 테스트는 green이지만 AppState lifecycle 자체를 증명하지 않는다. 100점 게이트에는 stop, no background restart, single resume을 검증하는 커버리지가 필요하다.</p>
+    </section>
+
+    <section>
+      <h2>Carryover Blockers</h2>
+      <ul>
+        <li>Support FAQ clinical vocabulary: <code>src/app/support.tsx</code></li>
+        <li>Raw implementation errors in audit/persona/inbox/wiki/settings</li>
+        <li>User-visible mock-mode strings in LLM/wiki paths</li>
+        <li>Internal <code>Phase 1</code> labels in inbox/wiki/manual</li>
+        <li>Provider/device proof, consent/legal readiness, assessment tap targets, keyboard/list proof</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

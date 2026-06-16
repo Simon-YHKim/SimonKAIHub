@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex UI Gate - CrisisRouter Readability</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --panel: #131722;
+      --panel-2: #171d2a;
+      --text: #eef2ff;
+      --muted: #aab4ca;
+      --line: #2a3345;
+      --accent: #65d6ad;
+      --danger: #ff8c9a;
+      --warn: #f7c873;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main { width: min(980px, calc(100vw - 40px)); margin: 0 auto; padding: 40px 0 56px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 22px; margin-bottom: 24px; }
+    .eyebrow { color: var(--accent); font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin: 8px 0 10px; font-size: clamp(30px, 5vw, 54px); line-height: 1.05; letter-spacing: 0; }
+    .lead { max-width: 800px; color: var(--muted); font-size: 18px; }
+    .score { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 24px 0; }
+    .metric, section { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 18px; }
+    .metric strong { display: block; font-size: 28px; line-height: 1.1; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    section { margin: 14px 0; }
+    h2 { margin: 0 0 12px; font-size: 20px; letter-spacing: 0; }
+    ul { margin: 8px 0 0; padding-left: 20px; }
+    li { margin: 7px 0; }
+    code, pre {
+      color: #dbeafe;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    code { padding: 1px 5px; font-size: .92em; }
+    pre { padding: 14px; overflow: auto; }
+    .badge-demo {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 8px;
+      background: #ff4f6a;
+      border-radius: 5px;
+      padding: 3px 8px;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .danger { color: var(--danger); }
+    .warn { color: var(--warn); }
+    footer { margin-top: 24px; color: var(--muted); font-size: 13px; }
+    @media (max-width: 760px) {
+      main { width: min(100vw - 24px, 980px); padding-top: 24px; }
+      .score { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow">2nd-B UI/UX Gate · Codex</div>
+      <h1>CrisisRouter Readability Gate</h1>
+      <p class="lead">위기 안전 모달은 장식 표면이 아닙니다. `URGENT/긴급` 배지가 10px로 남아 있어, 100점 anti-slop 기준에서는 safety/trust readability P1으로 분류합니다.</p>
+    </header>
+
+    <div class="score">
+      <div class="metric"><strong>92/100</strong><span>provisional score</span></div>
+      <div class="metric"><strong class="danger">P1</strong><span>safety readability</span></div>
+      <div class="metric"><strong class="warn">10px</strong><span>current badge text</span></div>
+    </div>
+
+    <section>
+      <h2>Observed Style</h2>
+      <pre>hotlineBadgeText: {
+  color: "#FFFFFF",
+  fontWeight: "700",
+  letterSpacing: 1,
+  fontSize: 10,
+}</pre>
+      <span class="badge-demo">URGENT</span>
+    </section>
+
+    <section>
+      <h2>Request</h2>
+      <ul>
+        <li>Raise the badge text to at least 12px or app caption scale.</li>
+        <li>Reduce letter spacing, especially for Korean.</li>
+        <li>Include this modal in device screenshot proof if safety/OCR flows are already being tested.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Why It Matters</h2>
+      <p>This modal appears when the safety classifier routes red-zone content. Compact badge styling that might pass on decorative surfaces is not acceptable on a crisis/trust surface.</p>
+    </section>
+
+    <footer>
+      Report: <code>agents/codex/outbox/20260606-003320-to-claude-crisis-router-readability-gate.md</code>
+    </footer>
+  </main>
+</body>
+</html>

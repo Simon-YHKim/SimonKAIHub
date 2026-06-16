@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex WIP Slop Cleanup Preflight</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #10131a;
+      --panel: #171b24;
+      --panel-2: #202633;
+      --text: #eef2f8;
+      --muted: #aeb8c9;
+      --line: #2b3445;
+      --accent: #7cc7ff;
+      --ok: #8ee6a8;
+      --warn: #ffcf70;
+      --bad: #ff9d9d;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Pretendard", "Segoe UI", system-ui, sans-serif;
+      line-height: 1.58;
+      word-break: keep-all;
+    }
+    main {
+      width: min(1040px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 34px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 22px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(30px, 5vw, 52px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+    .summary {
+      max-width: 760px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      margin-top: 16px;
+    }
+    h2 {
+      font-size: 20px;
+      margin: 0 0 14px;
+      letter-spacing: 0;
+    }
+    h3 {
+      font-size: 16px;
+      margin: 18px 0 8px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 10px; }
+    ul, ol { margin: 0; padding-left: 21px; }
+    li + li { margin-top: 7px; }
+    code {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+      color: #d8e8ff;
+      font-family: "Cascadia Code", Consolas, monospace;
+      font-size: 0.94em;
+    }
+    .banner {
+      display: grid;
+      grid-template-columns: 152px 1fr;
+      gap: 18px;
+      align-items: center;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+    .banner strong {
+      display: block;
+      color: var(--warn);
+      font-size: 28px;
+      line-height: 1.1;
+    }
+    .tag {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px 9px;
+      margin-right: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .mini {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .mono-list {
+      columns: 2;
+      column-gap: 22px;
+    }
+    @media (max-width: 720px) {
+      main { width: min(100vw - 22px, 1040px); padding-top: 24px; }
+      .banner, .grid { grid-template-columns: 1fr; }
+      .mono-list { columns: 1; }
+      section { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Codex UI/UX Preflight</p>
+      <h1>Current WIP Slop Cleanup</h1>
+      <p class="summary">Claude의 미커밋 WIP를 100점 AI slop 기준으로 사전 검수했다. 방향은 크게 좋아졌고 verify도 통과했지만, 아직 100점으로 닫기에는 visible clinical copy와 raw error 표면이 남아 있다.</p>
+    </header>
+
+    <div class="banner">
+      <strong>WIP<br>not final</strong>
+      <div>
+        <span class="tag">verify pass</span>
+        <span class="tag">91 suites</span>
+        <span class="tag">823 tests</span>
+        <p style="margin-top:10px;">커밋/완료 보고 전이므로 최종 점수는 확정하지 않는다. 현재 상태 그대로라면 이전 88점보다는 개선되지만 100점은 아니다.</p>
+      </div>
+    </div>
+
+    <section>
+      <h2>Accepted Direction</h2>
+      <div class="grid">
+        <div class="mini"><b class="ok">Support FAQ</b><p>지원 화면의 진단/치료, diagnoses/treats 표현은 제거됐다.</p></div>
+        <div class="mini"><b class="ok">Offline Preview</b><p>사용자 응답의 <code>[MOCK]</code>, stub, key 설정 문구가 제품 톤으로 바뀌었다.</p></div>
+        <div class="mini"><b class="ok">Phase 1 Label</b><p>인박스/위키/매뉴얼에서 Source brief / 요약과 질문으로 대부분 정리됐다.</p></div>
+        <div class="mini"><b class="ok">Tap + Microtype</b><p>assessment scale hit target과 KO eyebrow tracking이 개선됐다.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Still Blocking 100</h2>
+      <h3><span class="bad">P1</span> Persona clinical vocabulary</h3>
+      <p><code>src/app/persona.tsx:228-229</code> still says <code>진단이 아니며</code> / <code>Not a diagnosis</code>. 같은 clinical vocabulary class가 visible screen에 남아 있다.</p>
+
+      <h3><span class="bad">P1</span> Raw implementation errors remain broad</h3>
+      <p>일부 화면은 정리됐지만 all-screen 기준에는 아직 부족하다. 아래 파일들이 계속 raw <code>message</code>를 alert/state에 노출할 가능성이 있다.</p>
+      <ul class="mono-list">
+        <li><code>account.tsx</code></li>
+        <li><code>attachment.tsx</code></li>
+        <li><code>capture.tsx</code></li>
+        <li><code>big-five.tsx</code></li>
+        <li><code>inbox.tsx</code></li>
+        <li><code>import.tsx</code></li>
+        <li><code>insights.tsx</code></li>
+        <li><code>interview.tsx</code></li>
+        <li><code>research.tsx</code></li>
+        <li><code>trinity.tsx</code></li>
+        <li><code>wiki.tsx</code></li>
+        <li><code>AddFormatFlow.tsx</code></li>
+      </ul>
+
+      <h3><span class="bad">P1</span> Consent/legal readiness</h3>
+      <p><code>ConsentNotice</code> still marks legal copy as placeholder pending review. Trust-heavy launch gate remains open.</p>
+
+      <h3><span class="warn">P2</span> AppState perf edge</h3>
+      <p><code>LivingAsset</code> delayed loop and cold-start AppState proof from the previous perf gate are still open.</p>
+
+      <h3><span class="warn">P2</span> Small hitSlop leftovers</h3>
+      <p><code>capture</code>, <code>wiki</code>, and <code>TemplateEditor</code> still have tiny chip/editor hitSlop cases. Lower priority, but not 100.</p>
+    </section>
+
+    <section>
+      <h2>Verification</h2>
+      <p><code>npm run verify</code> passed on the current WIP after test updates: 91 suites, 823 tests.</p>
+    </section>
+  </main>
+</body>
+</html>

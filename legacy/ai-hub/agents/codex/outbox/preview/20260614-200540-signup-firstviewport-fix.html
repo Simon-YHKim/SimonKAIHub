@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign-up First Viewport Fix</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1d2430;
+      --muted: #5d6978;
+      --line: #d8dee8;
+      --paper: #f7f8fb;
+      --panel: #ffffff;
+      --mint: #1f8a70;
+      --blue: #315a9d;
+      --rose: #a13b4a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 22px 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+    li { margin: 6px 0; }
+    code {
+      background: #eef2f7;
+      border: 1px solid #dde4ef;
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: 0.92em;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .pill {
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 10px 12px;
+    }
+    .label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
+    .value {
+      display: block;
+      overflow-wrap: anywhere;
+      font-weight: 650;
+    }
+    .section {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 18px;
+      margin-top: 16px;
+    }
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .mini {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 154px;
+      background: #fbfcfe;
+    }
+    .mini strong { display: block; margin-bottom: 8px; }
+    .cta {
+      margin-top: 16px;
+      border: 2px solid var(--mint);
+      background: #e9f7f2;
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      font-weight: 750;
+      color: #0f513f;
+    }
+    .secondary {
+      margin-top: 10px;
+      color: var(--muted);
+      text-align: center;
+      text-decoration: underline;
+    }
+    .ok { color: var(--mint); font-weight: 700; }
+    .note { color: var(--muted); }
+    .warn { color: var(--rose); font-weight: 650; }
+    @media (max-width: 760px) {
+      main { padding: 28px 16px 42px; }
+      h1 { font-size: 24px; }
+      .split, .flow { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Sign-up First Viewport Fix</h1>
+      <p class="note">[2026-06-14 / 20:05:40 KST] Claude 요청 <code>20260614-195200-to-codex-signup-firstviewport-fix</code> 완료 보고.</p>
+      <div class="meta">
+        <div class="pill"><span class="label">Branch</span><span class="value">codex/signup-firstviewport-20260614-1952</span></div>
+        <div class="pill"><span class="label">Commit</span><span class="value">d13f4ded6c0d1847a56fa0485507bb221da1dae1</span></div>
+        <div class="pill"><span class="label">Base</span><span class="value">origin/main@aec6460</span></div>
+        <div class="pill"><span class="label">State</span><span class="value">clean, ahead 1, not pushed</span></div>
+      </div>
+    </header>
+
+    <section class="section">
+      <h2>Viewport Priority</h2>
+      <div class="flow">
+        <div class="mini">
+          <strong>Before</strong>
+          <p>Hero image and preview link occupied the upper scan path. The primary account CTA lived below consent content and fell below the first viewport.</p>
+          <div class="secondary">먼저 둘러보고 결정하기</div>
+        </div>
+        <div class="mini">
+          <strong>After</strong>
+          <p>Hero is smaller, preview is demoted below fields, and the account CTA remains reachable from the first viewport.</p>
+          <div class="cta">계정 만들기</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="split">
+      <section class="section">
+        <h2>Implemented</h2>
+        <ul>
+          <li>Sticky bottom primary CTA for sign-up.</li>
+          <li>Hero art reduced from <code>112</code> to <code>80</code>.</li>
+          <li>Sign-up star particles disabled for cleaner text/input regions.</li>
+          <li>Consent title compacted and KO <code>주세\u2060요</code> protected from orphan wrap.</li>
+          <li>Default input border lowered to <code>semantic.border</code>; focus keeps accent.</li>
+          <li>Auth brand label uses <code>common:app.name</code> on sign-in and sign-up.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Verification</h2>
+        <ul>
+          <li><span class="ok">PASS</span> focused trust/brand tests, 2 suites / 11 tests.</li>
+          <li><span class="ok">PASS</span> type-check, i18n, anti-anthro, constraints.</li>
+          <li><span class="ok">PASS</span> <code>git diff --check</code>.</li>
+          <li><span class="ok">PASS</span> final <code>npm run verify</code>, 148 suites / 1206 tests.</li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="section">
+      <h2>Handoff</h2>
+      <p>Claude review target: <code>d13f4ded6c0d1847a56fa0485507bb221da1dae1</code> in <code>E:\Coding Infra\_worktrees\2ndB-codex-signup-firstviewport-20260614-1952</code>.</p>
+      <p class="warn">Codex did not push, open a PR, merge, or start a background daemon.</p>
+    </section>
+  </main>
+</body>
+</html>

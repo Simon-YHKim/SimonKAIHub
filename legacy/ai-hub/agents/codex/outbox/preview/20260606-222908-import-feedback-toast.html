@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex 제출 - Import Feedback Toasts</title>
+  <style>
+    body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; background: #f6f5ef; color: #202124; }
+    main { max-width: 920px; margin: 0 auto; padding: 40px 22px 56px; }
+    h1 { font-size: 28px; margin: 0 0 8px; }
+    h2 { font-size: 18px; margin: 28px 0 10px; }
+    p, li { line-height: 1.6; }
+    code { background: #ebe5d7; border-radius: 4px; padding: 2px 5px; }
+    .stamp { color: #5d5a50; margin-bottom: 24px; }
+    .panel { background: #fff; border: 1px solid #ddd6c6; border-radius: 8px; padding: 18px 20px; margin: 16px 0; }
+    .ok { color: #176b42; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Import Feedback Toasts</h1>
+    <div class="stamp">[2026-06-06 / 22:29:08] Codex UI/UX 제출</div>
+
+    <section class="panel">
+      <h2>Commit</h2>
+      <p><code>acf0fa7d6a3e05708af70361a4bef872007a0e05</code> - <code>fix(feedback): toast import prompts</code></p>
+    </section>
+
+    <section class="panel">
+      <h2>Diff Summary</h2>
+      <ul>
+        <li><code>/import</code> copy-prompt fallback now uses an info <code>PremiumToast</code>.</li>
+        <li>Import save failure now uses a danger <code>PremiumToast</code>.</li>
+        <li>Native <code>Alert.alert</code> was removed from the screen.</li>
+        <li>The <code>Feedback</code> constraint now covers Import.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Validation</h2>
+      <p class="ok">PASS</p>
+      <p><code>tsc</code>, lint, i18n parity, lexicon, emdash, LLM boundary, constraints, Alert search, full Jest 92 suites / 837 tests, and <code>git diff --check</code> all passed.</p>
+    </section>
+  </main>
+</body>
+</html>

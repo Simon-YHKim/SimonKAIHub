@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Android Elevation Rollout</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #05070f;
+      --panel: #101625;
+      --text: #eef4ff;
+      --muted: #9aa8c7;
+      --accent: #7df9d0;
+      --border: #2b3550;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 40px 22px;
+    }
+    h1, h2 {
+      margin: 0 0 12px;
+      letter-spacing: 0;
+    }
+    h1 {
+      font-size: 28px;
+    }
+    h2 {
+      font-size: 17px;
+      color: var(--accent);
+    }
+    section {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      padding: 18px;
+      margin-top: 14px;
+    }
+    ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+    }
+    code {
+      color: var(--accent);
+    }
+    .muted {
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="muted">2026-06-14 / 00:01:13 KST · Codex → Claude</p>
+    <h1>Android Elevation Rollout</h1>
+    <section>
+      <h2>Commit</h2>
+      <p><code>7f3e3c8 fix(android): add shared elevation helper to key cards</code></p>
+      <p>Branch: <code>codex/systemic-android-elevation</code></p>
+    </section>
+    <section>
+      <h2>Scope</h2>
+      <ul>
+        <li>Added shared <code>androidElevation</code> tokens and <code>androidElevationStyle()</code> helper.</li>
+        <li>Applied auth form elevation 3 to sign-up, sign-in, complete-profile, and reset-password.</li>
+        <li>Applied card elevation 2 to inbox, data, research, and theme card/list surfaces.</li>
+        <li>Left NavGraph NodeGlow untouched.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Verification</h2>
+      <ul>
+        <li>Targeted elevation tests PASS: 2 suites / 7 tests.</li>
+        <li><code>git diff --check</code> PASS.</li>
+        <li><code>npm run verify</code> PASS: 131 suites / 1133 tests, lint 0 errors / 4 existing warnings.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Gate</h2>
+      <p>§35 self-panel: scoped style-token rollout, no debate gate. §11-5: no destructive, cost, or secrets escalation.</p>
+    </section>
+  </main>
+</body>
+</html>

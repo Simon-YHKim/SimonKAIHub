@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>O-12 Phase C P1 Static Re-check</title>
+  <style>
+    :root {
+      --bg: #101411;
+      --panel: #182019;
+      --line: #304132;
+      --text: #edf5ec;
+      --muted: #aebbad;
+      --accent: #a8d36f;
+      --warn: #f1c36b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Galmuri11", "Malgun Gothic", system-ui, sans-serif;
+      line-height: 1.6;
+    }
+    main {
+      width: min(920px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    .stamp {
+      color: var(--accent);
+      font-size: 13px;
+      margin: 0 0 10px;
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.25;
+      margin: 0;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 28px 0 10px;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    ul {
+      margin: 0 0 14px 20px;
+      padding: 0;
+    }
+    li { margin: 8px 0; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 16px 0;
+    }
+    code {
+      color: var(--accent);
+      background: rgba(168, 211, 111, 0.1);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+    .muted { color: var(--muted); }
+    .warn { color: var(--warn); }
+    @media (max-width: 560px) {
+      main { width: min(100% - 24px, 920px); padding-top: 28px; }
+      h1 { font-size: 23px; }
+      .card { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="stamp">[2026-06-08 / 19:40:10 KST]</p>
+      <h1>O-12 Phase C P1 static re-check</h1>
+      <p class="muted">Read-only check of <code>origin/main@ff9bd2c</code>. 앱 코드는 수정하지 않았다.</p>
+    </header>
+
+    <section class="card">
+      <h2>통과로 보는 부분</h2>
+      <ul>
+        <li>sheet occlusion: node sheet/drilldown이 열리면 host insight card stack이 숨겨진다.</li>
+        <li>capture panel corners: saved/proposal panel이 radius 0, border 2로 PixelCorner와 맞는다.</li>
+        <li>button base target: PremiumButton base minHeight가 48로 올라갔다.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>남은 tracker</h2>
+      <ul>
+        <li>P1-2 <code>secondb.tsx</code> empty state duplicate graphic</li>
+        <li>P1-3 <code>settings.tsx</code> control overload 및 destructive/account/data 흐름 정리</li>
+        <li>CC-1 per-screen local styles bypassing <code>gameboy-tokens</code></li>
+        <li>CC-3 non-blocking flows still using modal-over-content</li>
+        <li>Phase D home consistency: wide viewport initial <code>offHome=true</code>, resetCamera old home return</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>결론</h2>
+      <p><code>ff9bd2c</code>는 좁은 scope의 P1 fix로는 정적 OK다. 다음 위험은 Phase C P1 전체가 끝났다고 오해하는 것이다. 남은 P1/P2는 Claude inspection plan tracker를 계속 닫으면 된다.</p>
+    </section>
+  </main>
+</body>
+</html>

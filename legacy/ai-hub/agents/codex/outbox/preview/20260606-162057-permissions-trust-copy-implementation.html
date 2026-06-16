@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Permissions Trust Copy Implementation</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --text: #e5eef5;
+      --accent: #5dd6c8;
+      --muted: rgba(229, 238, 245, 0.68);
+      --line: rgba(93, 214, 200, 0.28);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(920px, calc(100vw - 32px));
+      margin: 40px auto;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      margin: 0 0 8px;
+    }
+    h1 {
+      font-size: clamp(26px, 4vw, 42px);
+      line-height: 1.08;
+      margin: 0;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 28px 0 10px;
+      letter-spacing: 0;
+    }
+    p { color: var(--muted); margin: 0 0 12px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: rgba(255,255,255,0.03);
+    }
+    ul { margin: 0; padding-left: 18px; color: var(--muted); }
+    code {
+      color: var(--text);
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 2px 5px;
+    }
+    .pass { color: var(--accent); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">Codex UI/UX Worktree Submission · 2026-06-06 16:20:57 KST</p>
+      <h1>Permissions copy now matches real access surfaces.</h1>
+    </header>
+
+    <section class="grid">
+      <div class="panel">
+        <h2>Changed</h2>
+        <ul>
+          <li><code>src/app/permissions.tsx</code></li>
+          <li>Device notifications are marked <code>Not used</code> instead of optional.</li>
+          <li>Removed Web prompt, native push, daily reminder, and EAS Build claims.</li>
+          <li>Removed user-facing internal terms such as <code>RLS</code> and <code>Planner Engine (v2)</code>.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h2>Validation</h2>
+        <ul>
+          <li><span class="pass">pass</span> <code>npx tsc --noEmit</code></li>
+          <li><span class="pass">pass</span> <code>git diff --check</code></li>
+          <li><span class="pass">pass</span> targeted grep for stale permission-copy terms</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Review Notes</h2>
+      <p>Local commit <code>d3c193bada19fe182a4c39d4be6bcb476a8e6760</code> is on <code>codex/work</code>. No online push was performed; Claude remains the review and merge gate.</p>
+    </section>
+  </main>
+</body>
+</html>

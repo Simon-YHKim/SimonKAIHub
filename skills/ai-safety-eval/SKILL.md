@@ -1,6 +1,7 @@
 ---
 name: ai-safety-eval
-description: "사용자가 만드는 AI 제품/기능의 안전·가드레일을 설계·점검할 때 사용. 트리거: \"AI 안전\", \"가드레일\", \"콘텐츠 필터\", \"탈옥 방어\", \"프롬프트 인젝션\", \"환각 줄이기\", \"PII 마스킹\", \"AI 편향 점검\", \"jailbreak\", \"guardrail\", \"content moderation\", \"hallucination\", /ai-safety-eval. 입력/출력 가드레일 → 콘텐츠 모더레이션 → PII·로깅·감사 → 탈옥/인젝션 레드팀 → 편향·공정성 → 환각 완화(근거·불확실성·휴먼인루프) → 규제(개인정보·연령) 7개 레이어를 위험도별 대응 표로 점검하고, 레드팀 테스트 스위트 + 가드레일 설정 템플릿을 산출한다. 대상은 사용자가 만드는 AI 기능이지 이 플러그인 자체가 아니다."
+description: >
+  Use when designing or auditing the safety and guardrails of the user's AI product. 트리거: "AI 안전", "가드레일", "콘텐츠 필터", "탈옥 방어", "프롬프트 인젝션", "환각 줄이기", "PII 마스킹", "jailbreak", "guardrail", "hallucination", /ai-safety-eval. Produces a risk-rated table across seven layers (input/output guardrails, moderation, PII/logging/audit, jailbreak/injection red-team, bias/fairness, hallucination mitigation, regulation) plus a red-team test suite and a guardrail config template. Targets the user's AI feature, not this plugin.
 allowed-tools: Read, Write, WebSearch, WebFetch, AskUserQuestion, Bash
 version: 1.1.0
 author: simon-stack
@@ -168,3 +169,10 @@ LLM 호출 **전** 단계. 순서대로 통과시켜야 한다.
 - v1.2: 레드팀 스위트 자동 실행 러너(전 카테고리 스냅샷 회귀)
 - v1.3: 편향 평가 셋 생성기(보호속성 변형 쌍 자동 생성)
 - v1.4: vendor 데이터정책 fetch 캐시 + 규제 변경 알림
+
+## 완료 보고 (HTML) — 표준
+작업을 끝내면 **HTML 완료 보고서**를 생성한다 (SimonKCore `completion-report` 표준).
+- 첫 화면은 **심플 요약**(한눈 카드 한 줄) + 직관 그래픽/차트(인라인 SVG)·이미지.
+- 각 항목 옆 **[자세히] 버튼**(`<details>`)을 펼치면 상세 — 처음부터 쏟지 않는다(progressive disclosure).
+- 자체완결 1파일(인라인 CSS/SVG, 무JS) · 사용자 언어 · 현지시간 스탬프.
+- Core 있으면 `completion-report` 호출, 없으면 동일 형식으로 인라인 생성.

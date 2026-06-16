@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Insights Source-Only False Empty Gate</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101217;
+      --panel: #181c24;
+      --panel-2: #202633;
+      --text: #eef2f7;
+      --muted: #a9b2c3;
+      --line: #333b4c;
+      --accent: #7cc7b2;
+      --warn: #f0bd75;
+      --bad: #ff8d8d;
+      --good: #91d99b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 40px 20px 56px;
+    }
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 22px;
+      margin-bottom: 24px;
+    }
+    .kicker {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 8px 0 10px;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+    .sub {
+      margin: 0;
+      max-width: 820px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      min-height: 150px;
+    }
+    .card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+      font-size: 15px;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 16px;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+    ul, ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+    li { margin: 8px 0; }
+    code {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 1px 5px;
+      color: #dbe7ff;
+      font-size: .95em;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .step {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 110px;
+    }
+    .step b {
+      display: block;
+      color: var(--accent);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .step span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .good { color: var(--good); }
+    @media (max-width: 760px) {
+      main { padding: 28px 14px 42px; }
+      .grid, .flow { grid-template-columns: 1fr; }
+      .card, .step { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="kicker">2nd-B UI Gate / Codex to Claude</div>
+      <h1>Insights source-only false empty</h1>
+      <p class="sub">Insights counts only <code>records</code>, while Capture and Records already treat <code>sources</code> as saved user pieces. A source-only user can therefore see an empty insight screen after following the app's own Capture CTA.</p>
+    </header>
+
+    <div class="grid">
+      <article class="card">
+        <strong>Severity</strong>
+        <p><span class="warn">P2 data-truth gate.</span> This blocks a clean 100/100 anti-slop score because the screen can undercount real saved material.</p>
+      </article>
+      <article class="card">
+        <strong>Screen</strong>
+        <p><code>/insights</code> empty and summary states: "Patterns are still small", "Computed from records", and "Total entries".</p>
+      </article>
+      <article class="card">
+        <strong>Decision Needed</strong>
+        <p>Either include source-backed pieces in Insights, or narrow the screen to journal/reflection records with source-only transitional copy.</p>
+      </article>
+    </div>
+
+    <section>
+      <h2>Evidence</h2>
+      <ul>
+        <li><code>src/app/insights.tsx:31-38</code> reads only <code>records</code> and calls <code>computeInsights</code>.</li>
+        <li><code>src/lib/journal/insights.ts:39-45</code> and <code>:99-100</code> compute <code>recordCount</code> from the records array length.</li>
+        <li><code>src/app/insights.tsx:84-103</code> shows the generic empty hero and sends users to <code>/capture</code>.</li>
+        <li><code>src/app/capture.tsx:68-70</code> states journal writes to <code>records</code>, while other capture modes write to <code>sources</code>.</li>
+        <li><code>src/app/records.tsx:94-116</code> already merges <code>records + sources</code> through <code>mergeEvidence</code>.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Failure Flow</h2>
+      <div class="flow">
+        <div class="step"><b>1. Capture</b><span>User saves memo, link, OCR, or file.</span></div>
+        <div class="step"><b>2. Sources</b><span>Non-journal capture persists via <code>captureFromMarkdown</code>.</span></div>
+        <div class="step"><b>3. Records</b><span>The item appears because Records merges both tables.</span></div>
+        <div class="step"><b>4. Insights</b><span>Insights reads only <code>records</code>.</span></div>
+        <div class="step"><b>5. False Empty</b><span>User sees "Patterns are still small" or <code>Total entries = 0</code>.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Acceptance</h2>
+      <ul>
+        <li>A sources-only fixture does not render the generic empty state.</li>
+        <li>A mixed fixture either counts records and sources or labels the count scope precisely.</li>
+        <li><code>Total entries</code> is renamed if the implementation counts only one table.</li>
+        <li>Error, empty, records-only, sources-only, and mixed states are covered.</li>
+        <li>Runtime proof covers <code>/capture</code> non-journal save to <code>/records</code> visibility to <code>/insights</code> state.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

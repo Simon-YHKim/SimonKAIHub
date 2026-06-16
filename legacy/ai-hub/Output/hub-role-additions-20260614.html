@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4-AI 허브 역할 추가 — 우선순위 권고 (2026-06-14)</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<style>
+  @font-face{font-family:'Pretendard';font-weight:45 920;font-display:swap;
+    src:url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/woff2/PretendardVariable.woff2') format('woff2-variations');}
+  :root{
+    --bg:#f6f6fb; --surface:#ffffff; --ink:#1b1b24; --muted:#6b6b7a;
+    --line:#e6e6ef; --accent:#5a4bd4; --accent-soft:#efedfb;
+    --hi:#3f7a4f; --hi-soft:#eaf4ec; --warn:#9a6b2f; --warn-soft:#f6efe3;
+    --crit:#a23a4d; --crit-soft:#f7e9ec;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard',system-ui,sans-serif;background:var(--bg);color:var(--ink);
+    line-height:1.6;-webkit-font-smoothing:antialiased;padding:48px 20px;font-size:15px;letter-spacing:-.01em}
+  .wrap{max-width:1040px;margin:0 auto}
+  header{margin-bottom:36px;border-bottom:1px solid var(--line);padding-bottom:24px}
+  .kicker{font-size:12.5px;color:var(--accent);font-weight:680;letter-spacing:.04em;text-transform:uppercase;margin-bottom:10px}
+  h1{font-size:27px;font-weight:780;letter-spacing:-.025em;line-height:1.25}
+  .sub{color:var(--muted);margin-top:10px;font-size:14px}
+  .conclusion{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:12px;padding:20px 22px;margin:28px 0 36px}
+  .conclusion b{color:var(--accent)}
+  h2{font-size:18px;font-weight:740;letter-spacing:-.02em;margin:40px 0 14px;display:flex;align-items:baseline;gap:10px}
+  h2 .n{color:var(--muted);font-size:13px;font-weight:600}
+  .realities{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px}
+  @media(max-width:720px){.realities{grid-template-columns:1fr}.realities .full{grid-column:auto}}
+  .rcard{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:13.5px}
+  .rcard .t{font-weight:700;margin-bottom:4px}
+  .rcard.spof{border-left:3px solid var(--crit)} .rcard.spof .t{color:var(--crit)}
+  .rcard.park{border-left:3px solid var(--warn)} .rcard.park .t{color:var(--warn)}
+  .rcard.dead{border-left:3px solid var(--muted)}
+  .rcard.codex{border-left:3px solid var(--accent)} .rcard.codex .t{color:var(--accent)}
+  table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);
+    border-radius:12px;overflow:hidden;font-size:13px;margin-top:6px}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#fafafe;font-weight:680;font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:#fafaff}
+  td .rk{font-weight:740;color:var(--accent)}
+  .pill{display:inline-block;font-size:10.5px;font-weight:680;padding:1.5px 7px;border-radius:20px;white-space:nowrap}
+  .lev-HIGH{background:var(--hi-soft);color:var(--hi)} .lev-MED{background:var(--warn-soft);color:var(--warn)} .lev-LOW{background:var(--line);color:var(--muted)}
+  .seat{font-weight:600;font-size:12px}
+  .cards{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px;border-left:3px solid var(--accent)}
+  .card.crit{border-left-color:var(--crit)}
+  .card h3{font-size:15.5px;font-weight:740;letter-spacing:-.02em;margin-bottom:4px}
+  .card .meta{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px}
+  .tag{font-size:10.5px;font-weight:640;padding:2px 8px;border-radius:6px;background:#f1f1f8;color:var(--muted)}
+  .tag.s{background:var(--accent-soft);color:var(--accent)}
+  .card dl{display:grid;grid-template-columns:84px 1fr;gap:6px 14px;font-size:13px}
+  .card dt{color:var(--muted);font-weight:640;font-size:11.5px;padding-top:1px}
+  .card dd{color:var(--ink)}
+  .card dd code,.card dd b{font-weight:680}
+  .card dd.first{color:var(--hi);font-weight:600}
+  .donot td:first-child{font-weight:600}
+  .donot td:last-child{color:var(--muted)}
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .copybtn{position:fixed;top:18px;right:18px;background:var(--ink);color:#fff;border:none;border-radius:9px;
+    padding:9px 15px;font-size:12.5px;font-weight:640;font-family:inherit;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.12);transition:background .15s}
+  .copybtn:hover{background:var(--accent)} .copybtn.ok{background:var(--hi)}
+  .note{font-size:12px;color:var(--muted);margin-top:8px}
+  code{font-family:'SFMono-Regular',Consolas,monospace;font-size:.9em;background:#f1f1f8;padding:.5px 4px;border-radius:4px}
+</style>
+</head>
+<body>
+<button class="copybtn" id="cp">Copy as Markdown</button>
+<div class="wrap">
+
+<header>
+  <div class="kicker">4-AI Hub · Role Addition Analysis</div>
+  <h1>허브에 추가하면 좋은 역할 — 우선순위 권고</h1>
+  <div class="sub">8개 렌즈 병렬 스캔 → 24개 후보 → 실제 PROTOCOL §0–§35·ROUTING·BACKLOG·DECISIONS 대조 적대적 필터 → <b>15개 생존</b> · 9 agents / 103 tool-calls / ~987K tokens · 2026-06-14 KST</div>
+</header>
+
+<div class="conclusion">
+  <b>한 줄 결론.</b> 새 AI는 필요 없다 — 모든 빈자리는 <b>이미 가진 좌석의 미사용 역량</b>이다.
+  단일 최고-레버리지 수는 <b>#1: 죽어있는 Gemini(Antigravity) 좌석을 Claude 코어레인 독립 심판 + 전레포 감사관으로 재배치</b>.
+  <code>agy -p</code> 헤드리스는 깨졌지만 그 좌석의 모델 Gemini-3.1-Pro(1M, 벤치 #1)는 멀쩡하고, 감사·심판은 텍스트 작업이라 네이티브 실행이 불요다.
+  이 한 수가 (판정 SPOF · cross-file 감사 공백 · 죽은 좌석 낭비)를 동시에, <b>비용 0, 5번째 좌석 없이</b> 해소한다.
+  그다음 <b>#2 consent 컴플라이언스 + #3 릴리즈게이트</b> — 미성년 심리데이터 제품에서 유일하게 "치명적" 부류를 막는 두 게이트.
+</div>
+
+<h2>지배적 현실 <span class="n">— 모든 배정의 제약</span></h2>
+<div class="realities">
+  <div class="rcard spof"><div class="t">Claude = SPOF</div>코드작성 + 자기코드 머지 + 유일 online-git + 유일 Simon-대면 + 합의 타이브레이크. → 신규 듀티를 <b>Claude에 더 쌓지 않는다</b>.</div>
+  <div class="rcard park"><div class="t">Grok = 주차됨</div>advisory only · no code/git · 자율루프 보류. → <b>읽기전용 감시·정책 와치</b> 일거리가 딱 맞다.</div>
+  <div class="rcard dead"><div class="t">AG-native = 죽음</div><code>agy -p</code> 비기능(BACKLOG P1). 단 모델 Gemini-3.1-Pro는 멀쩡 → 감사·심판으로 <b>재배치 가능</b>.</div>
+  <div class="rcard codex"><div class="t">Codex = 유일 headless 코딩 좌석</div>비-Claude 중 유일하게 헤드리스 작동 → <b>과적재 위험</b>(아래서 명시 분산).</div>
+</div>
+
+<h2>최종 우선순위 <span class="n">— 15 survivors</span></h2>
+<table>
+  <thead><tr><th>#</th><th>역할</th><th>분류</th><th>좌석</th><th>Lev</th><th>Eff</th><th>신설 위치</th></tr></thead>
+  <tbody>
+    <tr><td><span class="rk">1</span></td><td>Gemini 재배치 = 코어레인 심판 + 전레포 감사관</td><td>NEW LANE</td><td class="seat">Gemini(구 AG)</td><td><span class="pill lev-HIGH">HIGH</span></td><td>M</td><td>§35.6 + ROUTING §1🟩</td></tr>
+    <tr><td><span class="rk">2</span></td><td>Consent/미성년 컴플라이언스 + <code>verify:safety</code></td><td>NEW DUTY+INFRA</td><td class="seat">Codex</td><td><span class="pill lev-HIGH">HIGH</span></td><td>M</td><td>§36 + §11.1</td></tr>
+    <tr><td><span class="rk">3</span></td><td>독립 pre-merge 릴리즈-레디니스 게이트</td><td>INFRA+확인</td><td class="seat">Gemini/자동</td><td><span class="pill lev-HIGH">HIGH</span></td><td>S</td><td>§8/§11.1 + release-gate.ps1</td></tr>
+    <tr><td><span class="rk">4</span></td><td>Supabase 실백엔드 가디언 (RLS/IDOR + 드리프트)</td><td>NEW DUTY+INFRA</td><td class="seat">Gemini분석/Codex수정</td><td><span class="pill lev-HIGH">HIGH</span></td><td>M</td><td>§34.2 + hub-health</td></tr>
+    <tr><td><span class="rk">5</span></td><td>독립 와치독 + leaderless CONTROL=draining</td><td>NEW DUTY+PROTO</td><td class="seat">Grok</td><td><span class="pill lev-HIGH">HIGH</span></td><td>M</td><td>§13/§28.7</td></tr>
+    <tr><td><span class="rk">6</span></td><td>제품 LLM 런타임-비용 거버너</td><td>NEW DUTY+hook</td><td class="seat">Claude</td><td><span class="pill lev-HIGH">HIGH</span></td><td>M</td><td>§31.6/§11.1</td></tr>
+    <tr><td><span class="rk">7</span></td><td>독립 테스트-저자 / 회귀 커스토디언</td><td>NEW DUTY</td><td class="seat">Codex</td><td><span class="pill lev-HIGH">HIGH</span></td><td>M</td><td>§23/§34.2/§24.4</td></tr>
+    <tr><td><span class="rk">8</span></td><td>Activation/North-Star 정의자</td><td>DECISION</td><td class="seat">Claude+Simon</td><td><span class="pill lev-HIGH">HIGH</span></td><td>S</td><td>§35.1 debate→D-code</td></tr>
+    <tr><td><span class="rk">9</span></td><td>벤더 free→metered 절벽 와처</td><td>NEW DUTY</td><td class="seat">Grok</td><td><span class="pill lev-MED">MED-HI</span></td><td>S</td><td>§32.1 + §28.7</td></tr>
+    <tr><td><span class="rk">10</span></td><td>제품-계측 오너 + emission drift 가드</td><td>NEW DUTY+hook</td><td class="seat">Claude</td><td><span class="pill lev-MED">MED-HI</span></td><td>M</td><td>§30.x + PreToolUse</td></tr>
+    <tr><td><span class="rk">11</span></td><td>Post-merge 라이브-헬스 + 롤백</td><td>INFRA+듀티</td><td class="seat">자동/Codex</td><td><span class="pill lev-MED">MED</span></td><td>M</td><td>§8 + live-health.ps1</td></tr>
+    <tr><td><span class="rk">12</span></td><td>Release Scribe (제품 docs)</td><td>NEW DUTY</td><td class="seat">Codex</td><td><span class="pill lev-MED">MED</span></td><td>M</td><td>§32 케이던스</td></tr>
+    <tr><td><span class="rk">13</span></td><td>Per-seat quota 헤드룸 모니터</td><td>NEW DUTY</td><td class="seat">Claude §31.3</td><td><span class="pill lev-MED">MED</span></td><td>M</td><td>§31.3/CONTROL</td></tr>
+    <tr><td><span class="rk">14</span></td><td>DECISIONS 원장 스튜어드</td><td>INFRA(→#1)</td><td class="seat">Gemini</td><td><span class="pill lev-MED">MED</span></td><td>S</td><td>§14/§35.5 + hub-health</td></tr>
+    <tr><td><span class="rk">15</span></td><td>Capacity-before-acquisition 게이트</td><td>PROTOCOL</td><td class="seat">Claude</td><td><span class="pill lev-LOW">MED-LO</span></td><td>S</td><td>§31.8</td></tr>
+    <tr><td>—</td><td>행동분석 소비 루프 (AARRR→실험)</td><td>DEFER(블록)</td><td class="seat">Grok</td><td><span class="pill lev-LOW">defer</span></td><td>—</td><td>데이터 의존(post-launch)</td></tr>
+  </tbody>
+</table>
+<div class="note">분류: <b>NEW LANE</b>=독립 역할 / <b>NEW DUTY</b>=기존 좌석 신규 듀티 / <b>INFRA</b>=훅·스크립트 / <b>DECISION</b>=ai-debate 안건 / <b>PROTOCOL</b>=조항. ⚠️ #10 계측 0-call 주장은 2nd-B 내부 sub-agent claim → 착수 전 <code>captureEvent</code> grep 검증 선행.</div>
+
+<h2>TOP TIER <span class="n">— 지금 추가할 7개 (상세)</span></h2>
+<div class="cards">
+
+  <div class="card">
+    <h3>1. Gemini 좌석 재배치 → 코어레인 독립 심판 + 전레포 감사관</h3>
+    <div class="meta"><span class="tag s">NEW LANE</span><span class="tag">Gemini(구 AG)</span><span class="tag">HIGH · M</span><span class="tag">§35.6 + ROUTING §1🟩</span></div>
+    <dl>
+      <dt>갭</dt><dd>§35.1-①③④ 트리거가 <b>Claude 자기 레인</b>(아키텍처·DB스키마·authz·consent·수익화·비가역머지)에서 발생하면 별도 심판이 없다. §34.4는 Claude 출력만 심판하고, §35.2 타이브레이크는 "Claude 타이브레이크"로 다시 Claude에 붕괴. 동시에 1M-context Gemini 좌석은 놀고 있음.</dd>
+      <dt>왜 중요</dt><dd>외부 판정이 가장 필요한 결정(consent·미성년·authz·schema·수익화)이 정확히 Claude가 자기 숙제 채점하는 케이스. <code>/ai-debate</code> 헤드리스 심판은 StructuredOutput 실패(0-0 abstain)로 신뢰불가 → 또 Claude 폴백. 한 수로 (a)죽은 좌석 회수 (b)판정 SPOF 해소 (c)cross-file consent/데이터 갭 포착.</dd>
+      <dt>배선</dt><dd>신설 <b>§35.6 "core-lane adjudicator"</b> — Claude originate한 35.1-①③④는 비-Claude 좌석(1차 Gemini)이 구속력 판정, Claude는 judge 의자에서 <b>recuse</b>하고 기계적 머지게이트만 유지. §31.7 retro·§34.5 config-drift 감사 finder도 이 좌석으로.</dd>
+      <dt class="first">첫 단계</dt><dd class="first">ROUTING §1🟩 재정의 1블록 + §35.6 초안 → <code>/ai-debate</code>로 "Claude recusal scope"를 첫 안건으로 dogfood.</dd>
+    </dl>
+  </div>
+
+  <div class="card crit">
+    <h3>2. Consent/미성년-안전 컴플라이언스 오너 + 실행형 <code>verify:safety</code></h3>
+    <div class="meta"><span class="tag s">NEW DUTY+INFRA</span><span class="tag">Codex</span><span class="tag">HIGH · M</span><span class="tag">§36 + §11.1</span></div>
+    <dl>
+      <dt>갭</dt><dd>2nd-B 최대 리스크면(consent 지속성·isMinor 클램프·egress no-leak·임상어휘·crisis 라우팅·export/delete parity)에 <b>상시 오너 없음</b>. §23.1a는 Claude가 변경을 "safety"로 <b>자기분류해야 발화</b> = isMinor-flicker P2, sources.created_at P0가 미분류로 샌 바로 그 실패.</dd>
+      <dt>왜 중요</dt><dd>미성년 심리데이터 앱에서 이 부류만이 법적·윤리적으로 <b>치명적</b>. 한 주에 consent 회귀 3건+(opt-out monotonicity P1·isMinor P2·audit-write crisis 갭) = reactive 리뷰가 샌다는 직접 증거. 분류 비의존·매-머지 실행형 불변식이 유일한 영구 가드.</dd>
+      <dt>배선</dt><dd>신설 <b>§36 "Privacy/Minor-Safety Gate"</b> + <code>npm run verify:safety</code>(consent monotonicity·isMinor never-downgrade·AI default OFF·no-egress-before-consent·lexicon scan·export/delete parity). §11.1 머지게이트에 토큰 필수화. cso/security-orchestrator(취약점)와 <b>별개</b>.</dd>
+      <dt class="first">첫 단계</dt><dd class="first">Codex가 worktree에서 4개 불변식(consent monotonic·isMinor clamp·AI default OFF·no-egress-before-consent)부터 실 SHA로 제출 → Claude가 §10.5 게이트에 박음.</dd>
+    </dl>
+  </div>
+
+  <div class="card crit">
+    <h3>3. 독립 pre-merge 릴리즈-레디니스 게이트 (author ≠ go-live 승인자)</h3>
+    <div class="meta"><span class="tag s">INFRA+확인</span><span class="tag">Gemini/자동</span><span class="tag">HIGH · S</span><span class="tag">§8/§11.1 + release-gate.ps1</span></div>
+    <dl>
+      <dt>갭</dt><dd>Claude가 작성→verify→머지결정→유일 online-git = 매 main push가 <b>닫힌 자기인증 루프</b>. author-독립 GO/NO-GO 없음.</dd>
+      <dt>왜 중요</dt><dd><b>#222가 증거</b> — verify FAIL인데 머지→main 깨짐→#223 복구. 30초짜리 독립 사인오프(clean-checkout verify-green + §35.1 토론기록 + rollback SHA 기록)면 차단됐을 사고. "online-git은 Claude 단독" 불변식은 보존.</dd>
+      <dt>배선</dt><dd>§8/§11.1 확장 — Claude는 (1)독립 clean-checkout verify-green 토큰 (2)35.1 트리거면 토론기록 (3)직전 main SHA를 rollback 타깃으로 기록 없이 push 금지. commit.ps1(허브)와 달리 <b>2nd-B push 경로</b>를 가드.</dd>
+      <dt class="first">첫 단계</dt><dd class="first"><code>tools/release-gate.ps1</code>(별도 워킹카피서 <code>npm run verify</code> + EXITCODE + prior-main SHA 로깅) → §8 머지절차에 토큰 게이트 1줄.</dd>
+    </dl>
+  </div>
+
+  <div class="card crit">
+    <h3>4. 상시 Supabase 실백엔드 가디언 — RLS/IDOR 격리 + schema↔type↔query 드리프트</h3>
+    <div class="meta"><span class="tag s">NEW DUTY+INFRA</span><span class="tag">Gemini분석/Codex수정</span><span class="tag">HIGH · M</span><span class="tag">§34.2 + hub-health</span></div>
+    <dl>
+      <dt>갭</dt><dd>모든 보안게이트가 change-bound·분류의존이고, jest가 Supabase를 <b>mock</b>해 CI는 RLS·스키마드리프트에 장님. "user A가 user B 심리데이터 못 읽는다" 불변식과 "라이브 스키마↔TS타입↔실쿼리 일치"를 상시 증명하는 좌석이 없음. authz-designer/security-checklist 스킬은 휴면.</dd>
+      <dt>왜 중요</dt><dd>per-user 심리/미성년 데이터 cross-tenant 유출 = <b>존재적 실패</b>. 비-mock 드리프트가 sources.created_at P0를 잡았고 Claude의 "dev-env 정적" 판정이 틀렸음. Supabase MCP <code>get_advisors</code>가 라이브 RLS 린트를 그냥 반환 = 싸고 고신호.</dd>
+      <dt>배선</dt><dd>§34.2 골든셋에 "비-mock parity" 행. 메커니즘 = <code>get_advisors</code> + cross-user IDOR probe 매트릭스(A 인증→각 테이블서 B행 읽기 시도) + <code>generate_typescript_types</code> vs 쿼리 대조. threat-model md 유지 → §25 PROPOSAL_QUEUE. BACKLOG P2 mock 테스트와 다름(mock은 구조상 드리프트 못 잡음).</dd>
+      <dt class="first">첫 단계</dt><dd class="first">Claude가 1회 <code>get_advisors</code> + <code>list_tables</code> 베이스라인 → RLS 미설정/widened-query 즉시 노출 → threat-model 시드 → 감사좌석 상시 위임.</dd>
+    </dl>
+  </div>
+
+  <div class="card">
+    <h3>5. 독립 허브 와치독 (비-Claude) + leaderless CONTROL=draining 예외</h3>
+    <div class="meta"><span class="tag s">NEW DUTY+PROTO</span><span class="tag">Grok</span><span class="tag">HIGH · M</span><span class="tag">§13/§28.7</span></div>
+    <dl>
+      <dt>갭</dt><dd>monitor.ps1/hub-health.ps1는 <b>신호 생산만</b>(responder 없음), §31.3 건강모니터는 Claude 소유 = 순환(SPOF가 자기 죽음을 못 감지). §13/§28.7 safe-state 전환이 모두 살아있는 Claude 전제 → Claude 죽으면 <b>leaderless runaway</b>('45 branches' 재현).</dd>
+      <dt>왜 중요</dt><dd>심장박동의 심장박동을 SPOF 밖에 둠. 주차된 Grok에 코드/git envelope 안에서(read-only PS + advisory md) 상시 가치.</dd>
+      <dt>배선</dt><dd>Grok 매 사이클 <code>hub-health.ps1 -Json</code> 읽기 → 임계 breach(FAIL / daemon-log stale / Claude last-commit age while running / pending≥알람)면 <code>type: incident</code>를 Simon+Claude 앞으로(§15). leaderless 감지 시 좁은 single-writer 예외 = 와치독이 <code>CONTROL.state=draining</code>(resume 불가) 쓰기 허용. (보조: RUNBOOK.md·INCIDENTS.md)</dd>
+      <dt class="first">첫 단계</dt><dd class="first"><code>agents/grok/autonomous-loop-rules.md</code>에 watchdog 듀티 + golden-set → §13에 draining-on-dead-gate 예외 1절.</dd>
+    </dl>
+  </div>
+
+  <div class="card">
+    <h3>6. 제품 LLM 런타임-비용 거버너 (token-burn 오너 + 비용 렌즈 + 머지 token-delta)</h3>
+    <div class="meta"><span class="tag s">NEW DUTY+hook</span><span class="tag">Claude(enforcement=hook)</span><span class="tag">HIGH · M</span><span class="tag">§31.6/§11.1</span></div>
+    <dl>
+      <dt>갭</dt><dd>2nd-B <b>제품측 Gemini 지출</b>을 아무도 소유 안 함 — per-user 토큰 상한·캐시·abuse 가드 없음. capture가 매 저널마다 <b>2회 직렬·un-abortable·이중과금</b> 호출(BACKLOG P1) + ~13 fire-and-forget LLM write에 비용 회계 0.</dd>
+      <dt>왜 중요</dt><dd>허브가 ~0 비용이라 <b>돈이 새는 유일한 곳 = 제품 LLM 프록시</b>인데 감시 좌석 없음. abuse user/retry-loop = Simon 카드 직격(§11-5가 막으려는 실비용, 단 runtime). paid-api-guard는 LLM 명시 제외.</dd>
+      <dt>배선</dt><dd>(1)§31.6 주기 리뷰에 <b>COST 렌즈</b>(lib/llm 신규/직렬/un-abortable·user_quotas 누락·no-cache 스캔) (2)§11.1 — lib/llm diff는 token-delta 신고 + user_quota + AbortController 확인 없으면 block (3)security-checklist §C/§D를 LLM pre-ship 필수게이트로.</dd>
+      <dt class="first">첫 단계</dt><dd class="first">§11.1에 "lib/llm diff → token-delta 신고 필수" 1줄 + §31.6 COST 렌즈 → 첫 스캔이 BACKLOG P1 이중과금을 정식 회귀가드로 승격.</dd>
+    </dl>
+  </div>
+
+  <div class="card">
+    <h3>7. 독립 테스트-저자 / 회귀 커스토디언 (저자가 자기 게이트 테스트를 안 쓴다)</h3>
+    <div class="meta"><span class="tag s">NEW DUTY</span><span class="tag">Codex</span><span class="tag">HIGH · M</span><span class="tag">§23/§34.2/§24.4</span></div>
+    <dl>
+      <dt>갭</dt><dd>Claude가 코드 AND 그걸 게이트하는 <code>npm run verify</code>를 둘 다 저술 → 테스트가 Claude의 <b>맹점을 그대로 상속</b>. 비-author가 저자 diff에 새 failing-first 적대 테스트를 작성하는 듀티가 없음. 독립성이 READING에서 멈추고 게이트 WRITING엔 안 미침.</dd>
+      <dt>왜 중요</dt><dd>가장 많이 인용된 실패(jest-green≠runtime-safe). 미테스트 경로가 정확히 consent/crisis/PII write(BACKLOG P1 ~13 fire-and-forget). 리뷰는 1회 알아챈 것만, 저술된 테스트는 영원히·매 사이클 잡는다.</dd>
+      <dt>배선</dt><dd>§23/§34.4 아래 "test-authorship independence" 행 — Claude-머지 P0/P1 safety/data 변경마다 Codex가 codex/work서 failing-first 통합/contract 테스트 저술→실 SHA 제출→Claude cherry-pick. §34.2 Codex 골든셋에 "머지 safety-diff당 적대 테스트 ≥1".</dd>
+      <dt class="first">첫 단계</dt><dd class="first">records↔sources contract(BACKLOG P2를 비-mock으로) + consent monotonicity 두 개를 Codex 첫 저술 테스트로.</dd>
+    </dl>
+  </div>
+
+</div>
+
+<h2>좌석 배분 요약 <span class="n">— SPOF-aware</span></h2>
+<table>
+  <thead><tr><th>좌석</th><th>상태</th><th>받는 새 역할</th></tr></thead>
+  <tbody>
+    <tr><td class="seat">Gemini (구 AG)</td><td>죽은 좌석 재배치</td><td>#1 코어레인 심판 + 전레포 감사 + hub-retro 감사 · #4 Supabase 분석 · #14 DECISIONS 원장 → <b>죽은 최상위 좌석을 허브 최고가치 미소유 역량으로</b></td></tr>
+    <tr><td class="seat">Grok</td><td>주차 → read-only 가치</td><td>#5 와치독 · #9 벤더-비용 와처 · (#16 후일) → <b>idle 좌석에 상시 가치</b></td></tr>
+    <tr><td class="seat">Codex</td><td>⚠️ 과적재 주의</td><td>#2 verify:safety · #7 테스트-저자 · #12 release scribe. <b>#3은 Gemini/자동으로, #4는 수정만</b> — Codex를 새 SPOF로 만들지 말 것</td></tr>
+    <tr><td class="seat">Claude</td><td>최소화</td><td>#6 LLM-cost(enforcement=hook) · #8 facilitate · #10 · #13 — 전부 기계적/facilitation, 추가 노동 경량</td></tr>
+  </tbody>
+</table>
+
+<h2>DO NOT ADD <span class="n">— 이미 커버됨 (재피치 방지)</span></h2>
+<table class="donot">
+  <thead><tr><th>솔깃한 아이디어</th><th>이미 있는 곳</th></tr></thead>
+  <tbody>
+    <tr><td>독립 안전 <b>리뷰</b> 게이트</td><td>§23.1a (author≠reviewer consent/delete/PII). 진짜 갭은 review→<b>executable</b> = #2</td></tr>
+    <tr><td>UI/네이티브/리서치 출력 separate-judge</td><td>§34.4 + §23.2 + §20 루브릭 (단 Claude <b>코어로직</b> 심판은 빠짐 = #1)</td></tr>
+    <tr><td>anti-slop / design-first 게이트</td><td>§29 + design-first-gate.sh (PreToolUse 강제)</td></tr>
+    <tr><td>페르소나-sim / UX 4원칙</td><td>§26 + §27.9</td></tr>
+    <tr><td>백로그 트리아지 루프</td><td>§25 PROPOSAL_QUEUE</td></tr>
+    <tr><td>wiki 지식 플라이휠 / 4-AI wiki 기여</td><td>§18 + §34.1</td></tr>
+    <tr><td>CLI timeout / dead-PID liveness / durable scheduler</td><td>BACKLOG P0 (재제안 금지)</td></tr>
+    <tr><td>허브 commit.ps1 secret-scan / .env deny</td><td>BACKLOG P1/P0 (단 #2가 2nd-B 레포 + egress-diff로 확장)</td></tr>
+    <tr><td>mock records↔sources contract 테스트</td><td>BACKLOG P2 (#4는 <b>non-mock 드리프트</b>라 다름)</td></tr>
+    <tr><td>AG 레인 정직 relabel</td><td>BACKLOG P1 (#1은 <b>감사관 역할 배정</b>이라 다름)</td></tr>
+    <tr><td><b>5번째 유료 모델 추가</b></td><td><b>#15 capacity-gate가 기각</b> — 모든 갭이 기존 0-비용 좌석 내 역할로 해결됨</td></tr>
+  </tbody>
+</table>
+
+<footer>
+  <span>4-AI 허브 역할 추가 권고 · Adversarial synthesis (24→15)</span>
+  <span>2026-06-14 KST · workflow wy8o8hdt1</span>
+</footer>
+
+</div>
+
+<script>
+const md = `# 4-AI 허브 역할 추가 — 우선순위 권고 (2026-06-14)
+
+**한 줄 결론**: 새 AI 불요. 모든 빈자리는 이미 가진 좌석의 미사용 역량. 최고-레버리지 = #1 죽은 Gemini(AG) 좌석을 Claude 코어레인 독립 심판 + 전레포 감사관으로 재배치 (비용 0, 5번째 좌석 없이 판정 SPOF·cross-file 감사공백·죽은좌석 동시 해소). 다음 = #2 consent 컴플라이언스 + #3 릴리즈게이트.
+
+## 지배적 현실
+- Claude = SPOF (작성+머지+online-git+Simon대면+타이브레이크) → 신규 듀티 더 안 쌓음
+- Grok = 주차됨 → read-only 감시·정책 와치
+- AG-native = 죽음(agy -p 비기능), 단 Gemini-3.1-Pro 모델은 멀쩡 → 감사·심판 재배치
+- Codex = 유일 headless 코딩 좌석 → 과적재 주의
+
+## 최종 우선순위 (15)
+| # | 역할 | 분류 | 좌석 | Lev | Eff | 위치 |
+|---|---|---|---|---|---|---|
+| 1 | Gemini 재배치 = 코어레인 심판 + 전레포 감사관 | NEW LANE | Gemini(구AG) | HIGH | M | §35.6 + ROUTING§1🟩 |
+| 2 | Consent/미성년 컴플라이언스 + verify:safety | NEW DUTY+INFRA | Codex | HIGH | M | §36 + §11.1 |
+| 3 | 독립 pre-merge 릴리즈게이트 | INFRA+확인 | Gemini/자동 | HIGH | S | §8/§11.1 + release-gate.ps1 |
+| 4 | Supabase 실백엔드 가디언 (RLS/IDOR+드리프트) | NEW DUTY+INFRA | Gemini분석/Codex수정 | HIGH | M | §34.2 + hub-health |
+| 5 | 독립 와치독 + leaderless CONTROL=draining | NEW DUTY+PROTO | Grok | HIGH | M | §13/§28.7 |
+| 6 | 제품 LLM 런타임-비용 거버너 | NEW DUTY+hook | Claude | HIGH | M | §31.6/§11.1 |
+| 7 | 독립 테스트-저자 / 회귀 커스토디언 | NEW DUTY | Codex | HIGH | M | §23/§34.2/§24.4 |
+| 8 | Activation/North-Star 정의자 | DECISION | Claude+Simon | HIGH | S | §35.1 debate→D-code |
+| 9 | 벤더 free→metered 절벽 와처 | NEW DUTY | Grok | MED-HI | S | §32.1 + §28.7 |
+| 10 | 제품-계측 오너 + drift 가드 | NEW DUTY+hook | Claude | MED-HI | M | §30.x + PreToolUse |
+| 11 | Post-merge 라이브-헬스 + 롤백 | INFRA+듀티 | 자동/Codex | MED | M | §8 + live-health.ps1 |
+| 12 | Release Scribe (제품 docs) | NEW DUTY | Codex | MED | M | §32 케이던스 |
+| 13 | Per-seat quota 헤드룸 모니터 | NEW DUTY | Claude§31.3 | MED | M | §31.3/CONTROL |
+| 14 | DECISIONS 원장 스튜어드 | INFRA(→#1) | Gemini | MED | S | §14/§35.5 |
+| 15 | Capacity-before-acquisition 게이트 | PROTOCOL | Claude | MED-LO | S | §31.8 |
+
+## 좌석 배분 (SPOF-aware)
+- Gemini(재배치): #1 심판+감사 · #4 Supabase분석 · #14 원장
+- Grok(주차): #5 와치독 · #9 벤더와처
+- Codex(과적재주의): #2 verify:safety · #7 테스트저자 · #12 scribe
+- Claude(최소화): #6 LLM-cost(hook) · #8 facilitate · #10 · #13
+
+## DO NOT ADD (이미 커버)
+독립 안전리뷰=§23.1a · separate-judge=§34.4 · anti-slop=§29 · 페르소나sim=§26 · 백로그트리아지=§25 · wiki플라이휠=§18 · CLI timeout/liveness/scheduler=BACKLOG P0 · 5번째 유료모델=#15 capacity-gate가 기각
+`;
+document.getElementById('cp').addEventListener('click',function(){
+  navigator.clipboard.writeText(md).then(()=>{this.textContent='✓ Copied';this.classList.add('ok');
+    setTimeout(()=>{this.textContent='Copy as Markdown';this.classList.remove('ok')},1600)}.bind(this));
+});
+</script>
+</body>
+</html>

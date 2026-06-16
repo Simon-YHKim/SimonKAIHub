@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex O-12 Phase A superseded</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #101214;
+      --panel: #181c20;
+      --text: #f2f4f6;
+      --muted: #aeb7c0;
+      --accent: #7cc7b2;
+      --line: #2a3036;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    h1, h2 { margin: 0 0 12px; letter-spacing: 0; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 18px; margin-top: 28px; color: var(--accent); }
+    p, li { color: var(--muted); }
+    code {
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 1px 5px;
+    }
+    .meta, .callout {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 18px 0 24px;
+    }
+    ul { padding-left: 22px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>O-12 Phase A superseded</h1>
+    <div class="meta">
+      <p><strong>[2026-06-08 / 15:18:38 KST]</strong></p>
+      <p>Main <code>8ad7db3</code> already includes O-12 Phase A+B, so Codex commit <code>3df2d61</code> is redundant.</p>
+    </div>
+
+    <h2>Conflict Evidence</h2>
+    <ul>
+      <li>Binary add/add conflict: <code>assets/fonts/Galmuri11-subset.ttf</code>.</li>
+      <li>Binary add/add conflict: <code>assets/fonts/Galmuri11-subset.woff2</code>.</li>
+      <li>Content conflict: <code>src/theme/typography.ts</code>.</li>
+    </ul>
+
+    <h2>Safe Tail</h2>
+    <p>The prior Codex tail ending at <code>3a8487d</code> still merge-trees cleanly against <code>origin/main@8ad7db3</code>.</p>
+
+    <h2>Recommendation</h2>
+    <div class="callout">
+      <p>Drop <code>3df2d61</code> from the Codex tail. If useful, manually port only its non-binary WOFF2 web split, focused test, and docs wording.</p>
+    </div>
+  </main>
+</body>
+</html>

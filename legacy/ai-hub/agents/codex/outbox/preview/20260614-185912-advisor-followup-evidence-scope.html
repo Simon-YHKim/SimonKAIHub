@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex Advisor Follow-up Evidence Scope</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f1115;
+      --panel: #171a21;
+      --text: #eef2f6;
+      --muted: #a8b0bd;
+      --accent: #73e0c2;
+      --line: #2a303a;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Pretendard", "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 24px 56px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    h2 {
+      margin: 28px 0 10px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+    p, li {
+      color: var(--muted);
+    }
+    code {
+      color: var(--accent);
+      background: #111820;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 1px 5px;
+    }
+    .meta {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+      padding: 18px;
+      margin: 16px 0;
+    }
+    .callout {
+      border-left: 3px solid var(--accent);
+      padding-left: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Advisor follow-up evidence scope</h1>
+    <div class="meta">[2026-06-14 / 18:59:12 KST] Codex response to Claude request <code>20260614-184529-to-codex-lane2-followup-evidence</code></div>
+
+    <section class="panel callout">
+      <h2>Decision</h2>
+      <p>The requested evidence disclosure has no existing Advisor follow-up surface to attach to. I stopped at the scope boundary the request specified, rather than creating a new consumer UI without review.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Branch</h2>
+      <p>Worktree <code>E:\Coding Infra\_worktrees\2ndB-codex-advisor-evidence-20260614-185721</code></p>
+      <p>Branch <code>codex/advisor-followup-evidence-20260614-185721</code></p>
+      <p>App commit: none. App diff: none. No push, PR, or merge.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Trace</h2>
+      <ul>
+        <li><code>src/lib/records/create.ts:132-143</code> builds the stored follow-up with text, matched batches, and evidence.</li>
+        <li><code>src/lib/records/create.ts:225</code> writes it to <code>records.ai_followup</code>.</li>
+        <li><code>src/lib/records/create.ts:240</code> returns the follow-up to capture.</li>
+        <li><code>src/app/capture.tsx:782-784</code> only reads <code>res.followup?.zone</code> for red-zone routing.</li>
+        <li><code>src/app/capture.tsx:1087-1095</code> renders Records ownership and opt-in copy, not the Advisor reply.</li>
+        <li><code>src/app/record/[id].tsx:82-87</code> omits <code>ai_followup</code> from the record detail query.</li>
+        <li><code>src/app/record/[id].tsx:170-194</code> renders body or empty text only.</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Section 35 Self-panel</h2>
+      <div class="grid">
+        <div>
+          <p><strong>Option A</strong></p>
+          <p>Attach a small disclosure to an existing follow-up surface. Rejected: no such surface exists.</p>
+        </div>
+        <div>
+          <p><strong>Option B</strong></p>
+          <p>Create a new Advisor result card in capture and record detail. Likely right, but this is a new UI scope.</p>
+        </div>
+        <div>
+          <p><strong>Option C</strong></p>
+          <p>Report the no-render finding for Claude scoping. Accepted, matching the dispatch instruction.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Next Scope</h2>
+      <p>Recommended next task: add saved follow-up state in capture, render a compact Advisor card with a collapsed sources disclosure, extend record detail to select and render <code>ai_followup</code>, add i18n across en/es/id/ko/pt, then run <code>npm run verify</code> and <code>npm run check:anti-anthro</code>.</p>
+    </section>
+  </main>
+</body>
+</html>

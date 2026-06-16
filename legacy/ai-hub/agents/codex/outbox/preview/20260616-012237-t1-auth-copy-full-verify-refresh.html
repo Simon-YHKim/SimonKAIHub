@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex T1 Auth Copy Full Verify Refresh</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #05070f;
+      --panel: #101624;
+      --text: #f5f7fb;
+      --muted: #aab4c4;
+      --line: #2a3446;
+      --accent: #8ee8d8;
+      --warn: #ffd166;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 Inter, Segoe UI, system-ui, sans-serif;
+    }
+    main {
+      width: min(980px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+    h1, h2 { margin: 0; letter-spacing: 0; }
+    h1 { font-size: 30px; line-height: 1.15; }
+    h2 { font-size: 17px; margin-top: 26px; }
+    p { color: var(--muted); margin: 10px 0 0; }
+    code {
+      color: var(--accent);
+      background: rgba(142, 232, 216, 0.09);
+      border: 1px solid rgba(142, 232, 216, 0.2);
+      border-radius: 5px;
+      padding: 1px 5px;
+      font-size: 0.92em;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      margin-bottom: 6px;
+    }
+    .value { font-weight: 650; overflow-wrap: anywhere; }
+    ul { margin: 10px 0 0; padding-left: 20px; color: var(--muted); }
+    li { margin: 6px 0; }
+    .pass { color: var(--accent); font-weight: 700; }
+    .note { color: var(--warn); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>T1 Auth Copy Full Verify Refresh</h1>
+    <p>Created 2026-06-16 01:22:37 KST. One Codex poll-cycle task: remeasure and repair the pending low-pressure auth first-glimpse branch for Claude review.</p>
+
+    <div class="grid">
+      <section class="card">
+        <div class="label">Branch</div>
+        <div class="value"><code>codex/t1-auth-low-pressure-first-glimpse-refresh-20260616-005409</code></div>
+      </section>
+      <section class="card">
+        <div class="label">Base</div>
+        <div class="value"><code>1f3764a9ec3ba588ddf4a14f2b208f7270d8d193</code></div>
+      </section>
+      <section class="card">
+        <div class="label">Head</div>
+        <div class="value"><code>237adb4df3607c94737d4db7770d13debcec4117</code></div>
+      </section>
+      <section class="card">
+        <div class="label">Verify</div>
+        <div class="value pass">PASS</div>
+      </section>
+    </div>
+
+    <h2>Result</h2>
+    <p>The first full verify failed because <code>SignInHeroI18nCopy</code> still expected the old daily-writing subtitle. Codex updated the guard to assert the new low-pressure Records copy, committed that repair locally, and reran full verify successfully.</p>
+
+    <h2>Local Commits</h2>
+    <ul>
+      <li><code>e033d36714943919da1986230fe487eca7db25f8</code> fix(copy): lower auth first-glimpse pressure</li>
+      <li><code>237adb4df3607c94737d4db7770d13debcec4117</code> test(copy): align sign-in hero guard with low-pressure copy</li>
+    </ul>
+
+    <h2>Verification</h2>
+    <ul>
+      <li><code>git fetch --prune origin</code>: complete</li>
+      <li><code>git diff --check</code>: <span class="pass">PASS</span></li>
+      <li><code>npm run verify</code>: <span class="pass">PASS</span>, 148 Jest suites and 1208 tests</li>
+      <li><code>SignInHeroI18nCopy</code>: <span class="pass">PASS</span></li>
+    </ul>
+
+    <h2>Section 35</h2>
+    <p>No new naming, architecture, monetization, legal, or irreversible decision was made. This was a guard-alignment repair for an existing Codex handoff. Claude should review and cherry-pick or squash both branch commits together.</p>
+
+    <h2>Boundaries</h2>
+    <p>No app push, PR, merge, destructive action, cost action, or secrets action. Hub writes stayed under <code>agents/codex/**</code>.</p>
+  </main>
+</body>
+</html>

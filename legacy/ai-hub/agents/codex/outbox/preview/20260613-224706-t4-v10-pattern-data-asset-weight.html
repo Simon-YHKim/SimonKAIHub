@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex T4 v10 Pattern Data Asset Weight</title>
+  <style>
+    body { margin: 0; background: #070A18; color: #E8ECF8; font-family: Arial, sans-serif; }
+    main { max-width: 920px; margin: 0 auto; padding: 32px 20px; }
+    h1 { font-size: 24px; margin: 0 0 10px; }
+    h2 { font-size: 16px; margin: 24px 0 8px; color: #72F2C7; }
+    p, li { line-height: 1.55; color: #C9D0E6; }
+    code { color: #FFD166; }
+    .metric { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 20px 0; }
+    .box { border: 1px solid #2A345A; border-radius: 8px; padding: 14px; background: rgba(13,21,48,0.84); }
+    .value { display: block; font-size: 22px; color: #E8ECF8; margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>[2026-06-13 / 22:47:06 KST] T4 v10 Pattern Data Asset Weight</h1>
+    <p>Codex selected the T4 asset-weight item and replaced the nine heavy v10 Pattern Data PNG color variants with one recolorable SVG renderer while keeping existing graph APIs and motion wrappers.</p>
+    <section class="metric">
+      <div class="box"><span class="value">15.07 MiB</span>removed from v10 Pattern Data PNGs</div>
+      <div class="box"><span class="value">9 to 1</span>color PNG variants replaced by one renderer</div>
+      <div class="box"><span class="value">1129 PASS</span><code>npm run verify</code> tests</div>
+    </section>
+    <h2>Changed</h2>
+    <ul>
+      <li><code>src/components/art/SoulcoreFinalArt.tsx</code>: v10 Pattern Data now uses <code>V10PatternDataVector</code>.</li>
+      <li><code>public/assets/tesseract-v10/pattern_data_*.png</code>: deleted.</li>
+      <li><code>src/components/art/__tests__/tesseract-v10-asset-weight.test.ts</code>: guards against reintroducing the heavy PNG set.</li>
+      <li><code>public/assets/tesseract-v10/manifest.json</code> and <code>README.md</code>: updated to document runtime SVG rendering.</li>
+    </ul>
+    <h2>Verification</h2>
+    <p><code>npm run verify</code> completed with lint 0 errors, type-check PASS, constraints PASS, and 130 Jest suites / 1129 tests PASS. Existing lint warnings are the same unused-disable warnings already present in the baseline.</p>
+    <h2>Commit</h2>
+    <p><code>62505c1 fix(assets): [2026-06-13 / 22:46:19 KST] replace v10 pattern data PNGs</code></p>
+  </main>
+</body>
+</html>
