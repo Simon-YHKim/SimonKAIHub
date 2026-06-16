@@ -1,5 +1,6 @@
 ---
 name: skaihub
+version: 0.1.0
 description: >
   SimonKAIHub 오케스트레이터 — AI 제품/기능 빌드의 단일 진입점. 트리거 "AI 기능 만들어", "LLM 앱", "챗봇",
   "RAG", "AI 에이전트", "프롬프트", "AI 평가", "어떤 모델 쓰지", "skaihub", 또는 /skaihub. 사용자 의도를 러프하게
