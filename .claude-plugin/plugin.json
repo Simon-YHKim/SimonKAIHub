@@ -10,7 +10,6 @@
     "./skills/agent-builder/",
     "./skills/ai-model-selector/",
     "./skills/ai-safety-eval/",
-    "./skills/gcloud-helper/",
     "./skills/llm-eval/",
     "./skills/prompt-engineering/",
     "./skills/rag-builder/",
