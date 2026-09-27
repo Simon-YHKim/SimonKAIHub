@@ -298,7 +298,7 @@ node ../llm-eval/scripts/gate.mjs --baseline runs/baseline.json --result runs/re
 
 - **Templates**: `templates/ingest.py`, `templates/pgvector_schema.sql`, `templates/answer_prompt.md`(채널 분리·spotlighting), `templates/eval_set.jsonl`(골든셋 + redteam 오염문서 케이스)
 - **Scripts**: `scripts/eval_rag.py` (결정적 지표 + judge + 임계 게이트 + gate.mjs 어댑터)
-- **연동**: `llm-eval` `scripts/gate.mjs` — `--emit-result` 로 baseline 회귀 게이트
+- **연동**: `llm-eval`의 `../llm-eval/scripts/gate.mjs` — `--emit-result` 로 baseline 회귀 게이트
 - **연계 스킬**:
   - `db-selector` — 벡터스토어를 포함한 DB 선택
   - `model-router` — 생성/리랭크 단계 모델 배치
