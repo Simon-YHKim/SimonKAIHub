@@ -57,7 +57,7 @@ SimonK 플러그인 스위트의 AI 도메인 워크스테이션. 사용자가 �
 - **안전 게이트**: 출시 전 `ai-safety-eval`(가드레일·레드팀·PII) 필수.
 - **검증 게이트**: 완료 직전 `persona-validate`(Core)로 AI 전문가 + 대상 사용자 패널 점검, 치명 리스크 0.
 - 시크릿(API 키) env, 비용·레이턴시 상한, 모델 호출 로깅, 환각엔 근거·인용·휴먼인루프.
-- 최신 모델만 참조: Claude Opus 4.8 / Sonnet 4.6 / Haiku 4.5 / Fable 5, Gemini 2.x.
+- 모델·effort·구독 가용성은 `/vibe`의 최신 중앙 레지스트리와 실행 시점의 계정·쿼터 관측으로 확인한다. README의 예시 모델명만으로 라우팅하거나 과금 안전성을 판단하지 않는다.
 
 ## 기여
 
@@ -65,8 +65,12 @@ SimonK 플러그인 스위트의 AI 도메인 워크스테이션. 사용자가 �
 자세한 절차·스키마는 [`CONTRIBUTING.md`](./CONTRIBUTING.md) 참고.
 
 ```bash
-python3 .github/skill-ci/run_ci.py   # 머지 전 로컬 게이트
+python -B -m unittest discover -s .github/skill-ci -p test_run_ci_encoding.py
+python -B .github/skill-ci/run_ci.py   # 머지 전 로컬 게이트
 ```
+
+품질 게이트는 자식 Python을 UTF-8로 실행하고 결과를 엄격하게 해석하므로
+Windows 기본 CP949 콘솔에서도 같은 검증을 수행한다. 모델/API 호출은 없다.
 
 ## 라이선스 / 출처
 
