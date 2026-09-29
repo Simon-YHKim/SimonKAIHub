@@ -160,7 +160,7 @@ LLM 호출 **전** 단계. 순서대로 통과시켜야 한다.
   - `security-orchestrator` / `cso` — 제품 전반 보안 감사
   - `authz-designer` — 도구·데이터 접근권한(에이전트 인젝션 방어와 연계)
   - `paid-api-guard` — vendor 호출 비용·남용 가드
-  - `model-router` — 안전 분류용 경량 모델 선택
+  - `ai-model-selector` — 사용자 제품의 안전 분류용 경량 모델 선택 (`model-router`는 스택 내부용)
 
 ## 13. Roadmap
 

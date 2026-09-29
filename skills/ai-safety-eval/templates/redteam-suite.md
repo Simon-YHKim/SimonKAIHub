@@ -91,7 +91,7 @@ node scripts/crisis_fn_gate.mjs --set templates/crisis-fn-eval.jsonl
 #   exit 1 = 놓침 발생(빌드 실패), exit 0 = 모든 must_not_miss 통과
 ```
 
-모델을 연결하려면 `classify.mjs` 의 `callModel()` 만 사용자 앱 분류 호출(Claude Haiku 4.5 / Gemini 2.x Flash)로 교체한다. 결정론 게이트는 모델 없이도 작동하며, 모델은 재현율만 더한다(차단권은 결정론이 보유 — fail-closed).
+모델을 연결하려면 `classify.mjs` 의 `callModel()` 만 공식 확인된 사용자 앱용 경량 분류 모델 호출로 교체한다. 추가 과금 $0이면 유료 API 호출을 배선·실행하지 않는다. 결정론 게이트는 모델 없이도 작동하며, 모델은 재현율만 더한다(차단권은 결정론이 보유 — fail-closed).
 
 ## 회귀 고정
 - 통과율 스냅샷을 CI에 저장하고, 임계값 아래로 떨어지면 빌드 실패시킨다.

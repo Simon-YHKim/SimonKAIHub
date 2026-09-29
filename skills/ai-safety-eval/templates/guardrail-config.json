@@ -58,7 +58,7 @@
         },
         "model_classifier": {
           "role": "advisory_only",
-          "model": "Claude Haiku 4.5 또는 Gemini 2.x Flash (경량 분류용)",
+          "model": "공식 문서로 확인한 제품용 경량 분류 모델 ID",
           "block_threshold": 0.85,
           "note": "모델이 0.85 이상이면 block 으로 상향 제안하나, 최종 차단은 deterministic 와 merge_max_severity 로 결정. 모델 단독 통과(allow)는 deterministic 가 막지 않은 경우에만 유효."
         }
@@ -96,7 +96,7 @@
         },
         "model_classifier": {
           "role": "recall_booster",
-          "model": "Claude Haiku 4.5 또는 Gemini 2.x Flash",
+          "model": "공식 문서로 확인한 제품용 경량 분류 모델 ID",
           "crisis_threshold": 0.4,
           "note": "위기는 임계를 낮게(0.4) 잡아 놓침을 줄인다. 모델이 crisis 신호를 잡으면 deterministic 가 못 잡았어도 crisis 로 상향(OR 결합)."
         },
