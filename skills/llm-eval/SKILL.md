@@ -19,7 +19,7 @@ author: simon-stack
 |---|---|
 | 프롬프트를 바꾸려는데 기존 케이스가 깨질까 걱정 | 회귀 게이트(baseline diff + 임계치) |
 | LLM 출력이 "가끔 이상하다"는 막연한 보고 | 골든셋 + 엣지셋으로 실패 패턴 고정 |
-| 모델 교체(Gemini 2.x ↔ Claude) 검토 | 동일 평가셋에 두 모델 돌려 정량 비교 |
+| 모델·제공자 교체 검토 | 동일 평가셋으로 현행 후보를 비교하되, 호출 비용 허용 범위를 먼저 확인 |
 | 안전/탈옥/프롬프트 인젝션 우려 | 적대적·레드팀 스위트 |
 | 자동 지표만으론 못 잡는 미묘한 품질 | LLM-judge + 샘플 휴먼평가 |
 
@@ -188,7 +188,7 @@ baseline 갱신: 개선이 의도된 변경이면 `--update-baseline` 으로 명
 {
   "run_id": "2026-06-13T10:00Z-prompt-v3",
   "git_sha": "abc1234",
-  "model": "gemini-2.5-flash",
+  "model": "verified-model-id",
   "set_scores": {
     "golden": {"accuracy": 0.91, "refusal_rate": 0.0, "json_valid_rate": 1.0},
     "edge": {"accuracy": 0.74, "refusal_rate": 0.02},
@@ -216,7 +216,7 @@ baseline 갱신: 개선이 의도된 변경이면 `--update-baseline` 으로 명
 - **Scripts**: `scripts/run_eval.mjs`·`run_eval.py` (실행), `scripts/gate.mjs` (회귀 판정)
 - **Templates**: `eval_set.jsonl`, `redteam_set.jsonl`, `result_schema.json`, `judge_rubric.md`, `eval-ci.yml`
 - **연동 skill**:
-  - `model-router` — 모델 교체 후보 선정 → 이 skill 으로 정량 비교
+  - `ai-model-selector` — 제품용 모델 교체 후보 선정 → 이 skill 으로 정량 비교 (`model-router`는 스택 내부용)
   - `analytics-integrator` — 온라인 A/B 지표 수집
   - `paid-api-guard` — 적대셋이 유료/부수효과 호출 안 하게
   - `simon-tdd` — 평가 게이트를 verify 게이트에 합류

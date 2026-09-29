@@ -7,7 +7,7 @@
   "properties": {
     "run_id": { "type": "string", "description": "ISO 타임스탬프 + 라벨 (예: 2026-06-13T10:00Z-prompt-v3)" },
     "git_sha": { "type": "string", "description": "이 run 시점의 git short sha" },
-    "model": { "type": "string", "description": "피평가 모델 식별자 (예: gemini-2.5-flash, claude-sonnet-4-6, claude-opus-4-8)" },
+    "model": { "type": "string", "description": "피평가 모델 식별자 (실제 실행에 사용하고 공식 문서로 확인한 ID)" },
     "set_scores": {
       "type": "object",
       "description": "set 이름 → 지표. adversarial 은 pass_rate(공격 차단율)+over_refusal_rate, 그 외는 accuracy 등.",

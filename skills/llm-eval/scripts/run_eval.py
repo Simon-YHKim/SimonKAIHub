@@ -2,7 +2,7 @@
 """run_eval.py — LLM 기능 평가 러너 (표준 라이브러리만). Python 환경 대안.
 
 사용:
-    python run_eval.py --set eval_set.jsonl --out runs/result.json --model gemini-2.5-flash
+    python run_eval.py --set eval_set.jsonl --out runs/result.json --model verified-model-id
 
 입력 JSONL: 한 줄 = {"id","input","expected","tags","set",["adversarial"]}
 핵심: call_model() 만 사용자 앱의 실제 LLM 호출로 교체하면 돌아간다.
