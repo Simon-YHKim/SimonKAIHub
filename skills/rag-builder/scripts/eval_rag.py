@@ -270,7 +270,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--emit-result", metavar="FILE",
                    help="gate.mjs 호환 result JSON 출력 경로")
     p.add_argument("--model", default="unspecified",
-                   help="피평가 모델 식별자 (예: gemini-2.x, claude-sonnet-4-6)")
+                   help="피평가 모델 식별자 (공식 확인한 실제 모델 ID; 결과 메타데이터에 기록)")
     p.add_argument("--run-id", default=None)
     return p
 

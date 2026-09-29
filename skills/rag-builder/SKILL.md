@@ -20,7 +20,7 @@ RAG 는 만능이 아니다. 먼저 적합성을 판정한다.
 | 자주 바뀌는 문서 / 출처 인용 필요 / 도메인 지식 | **RAG** (이 스킬) |
 | 정적이고 작은 지식 (수십 KB) | 프롬프트에 그냥 전체 첨부 (RAG 불필요) |
 | 말투·포맷 고정이 핵심, 사실 검색 아님 | 파인튜닝 / few-shot |
-| 거대 단일 문서 1개 Q&A | long-context 직접 주입 (Gemini 2.x 1M·Claude 1M) 먼저 검토 |
+| 거대 단일 문서 1개 Q&A | 현재 모델의 공식 컨텍스트 한도를 확인한 뒤 long-context 직접 주입을 먼저 검토 |
 | 구조화 데이터 질의 | text-to-SQL (RAG 아님) |
 
 RAG 로 확정되면 1단계로.
@@ -241,7 +241,7 @@ python scripts/eval_rag.py templates/eval_set.jsonl --min-recall 0.8 --min-faith
 `--emit-result` 로 `llm-eval` 의 `result_schema` 호환 JSON 을 뽑아 `gate.mjs` 로 baseline 대비 회귀를 판정한다. `set_scores.golden.accuracy`(=recall) 와 `set_scores.adversarial.pass_rate` 로 매핑된다.
 
 ```
-python scripts/eval_rag.py templates/eval_set.jsonl --emit-result runs/result.json --model gemini-2.x
+python scripts/eval_rag.py templates/eval_set.jsonl --emit-result runs/result.json --model model-under-test
 node ../llm-eval/scripts/gate.mjs --baseline runs/baseline.json --result runs/result.json
 # adversarial pass_rate 하락 = 새 취약점 → 즉시 fail. golden accuracy 하락폭 > --drop → fail.
 ```
@@ -289,7 +289,7 @@ node ../llm-eval/scripts/gate.mjs --baseline runs/baseline.json --result runs/re
 ## 11. 안전 가드
 
 - **시크릿 금지**: API 키·DB URL 하드코딩 금지. 환경변수/secret store 만 사용.
-- **모델명 환각 금지**: 최신만 참조(Claude Opus 4.8 / Sonnet 4.6 / Haiku 4.5, Gemini 2.x). 검증 안 된 모델명 추천 X.
+- **모델명 환각 금지**: 생성·임베딩·리랭크 모델과 API ID는 결정 시점에 공식 문서로 확인한다. 평가 결과의 `--model`에는 실제 피평가 모델 ID를 기록한다.
 - **간접 프롬프트 인젝션**: 검색 청크 = 데이터, 명령 아님. 채널 분리 + spotlighting + trust 메타로 방어하고, 프롬프트 방어는 완전하지 않으므로 출력 후처리(외부 URL·키·시스템 프롬프트 흔적 마스킹)를 겸한다. `eval_set.jsonl` 의 redteam 케이스로 회귀 검증.
 - **PII·접근권한**: 인제스천 문서에 개인정보·권한별 문서가 섞이면 벡터스토어에 **테넌트/권한 메타 필터** 또는 RLS 적용(미적용 시 정보 유출). 권한 설계는 `authz-designer` 연계.
 - **벤더 종속**: 임베딩/리랭크 벤더 교체 = 재임베딩 비용. 초기에 추상화 레이어 권장.
@@ -301,7 +301,7 @@ node ../llm-eval/scripts/gate.mjs --baseline runs/baseline.json --result runs/re
 - **연동**: `llm-eval`의 `../llm-eval/scripts/gate.mjs` — `--emit-result` 로 baseline 회귀 게이트
 - **연계 스킬**:
   - `db-selector` — 벡터스토어를 포함한 DB 선택
-  - `model-router` — 생성/리랭크 단계 모델 배치
+  - `ai-model-selector` — 사용자 제품의 생성/리랭크 단계 모델 배치 (`model-router`는 스택 내부용)
   - `authz-designer` — 권한별 문서 검색 차단(멀티테넌트)
   - `paid-api-guard` — 임베딩/LLM 외부 API 비용 가드
   - `analytics-integrator` — 검색 품질·만족도 이벤트 추적

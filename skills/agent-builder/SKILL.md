@@ -32,7 +32,7 @@ author: simon-stack
 
 | 항목 | 질문 |
 |---|---|
-| 모델 | Claude(Opus 4.8 / Sonnet 4.6 / Haiku 4.5) vs Gemini 2.x — 이미 정해졌나? |
+| 모델 | 제품용 모델과 제공자를 공식 문서·작업별 평가로 정했나? 미정이면 `ai-model-selector`. |
 | 도구 | 에이전트가 호출할 도구 후보는? (DB 조회, 검색, 계산, 외부 API, 파일 IO) |
 | 부작용 | 쓰기/결제/메일 등 **되돌릴 수 없는 도구**가 있나? (있으면 승인 게이트 필수) |
 | 종료 | "성공"의 정의는? (최종 답 도출 / 특정 도구 결과 / 사용자 승인) |
@@ -163,7 +163,7 @@ loop:
 출하 전 반드시 계측:
 
 - **trace 로깅** — 매 턴: 모델 응답, 호출된 도구·인자, 도구 결과, 누적 토큰. 1 요청 = 1 trace id.
-- **비용 미터** — in/out 토큰 × 모델 단가 누적. 요청·일·사용자 단위 상한. (단가/모델 ID 확인은 `model-router` 또는 `claude-api` skill.)
+- **비용 미터** — in/out 토큰 × 공식 확인 모델 단가 누적. 요청·일·사용자 단위 상한. (제품용 모델 결정은 `ai-model-selector`, 단가·ID는 제공자 공식 문서 확인.)
 - **실패율 대시보드** — 도구별 에러율, max-steps 도달률, 평균 턴 수. 이상 급증 = 회귀.
 - **평가 루프** — 골든 케이스 세트로 회귀 테스트. 정량 평가는 `llm-eval` skill 연계.
 
@@ -188,7 +188,7 @@ loop:
 ## 10. 관련 스킬
 
 - `agent-delegate` (SimonKCore) — Claude Code **세션 내부** 작업 위임. 분해·envelope·contract 원칙 공유 (§6 적용)
-- `model-router` — task 별 best 모델·API ID·단가 선택
+- `ai-model-selector` — 사용자 제품의 task별 모델·API ID·단가 선택 (`model-router`는 스택 내부용)
 - `claude-api` — Claude tool_use / MCP / 토큰·캐싱·모델 ID 레퍼런스
 - `llm-eval` — 에이전트 출력 정량 평가·회귀 테스트
 - `authz-designer` / `paid-api-guard` — 쓰기·결제 도구의 권한·비용 가드

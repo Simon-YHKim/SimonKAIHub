@@ -37,7 +37,7 @@ author: simon-stack
 | 출력 | 형식(자유 텍스트 / JSON / enum)? 다운스트림이 파싱하나, 사람이 읽나? |
 | 성공 조건 | "좋은 출력"의 객관적 기준 3개. eval 의 채점 기준이 된다. |
 | 실패 모드 | 입력이 비거나, 무관하거나, 공격적일 때 무엇을 반환? |
-| 모델 | 어느 모델? 모델 선택 자체가 고민이면 `/model-router`. |
+| 모델 | 제품이 호출할 모델은 정해졌나? 미정이면 `ai-model-selector`. |
 
 원칙: **한 프롬프트 = 한 작업.** 분류 + 생성 + 번역을 한 호출에 욱여넣지 말고 쪼갠다.
 
@@ -61,7 +61,7 @@ author: simon-stack
 - 출력을 **기계가 먹는다** → Structured output 우선, 추론 필요하면 CoT 를 별도 필드로.
 - 라벨/형식이 자꾸 어긋난다 → Few-shot 으로 고정. 그래도 안 되면 tool schema.
 - 정확도가 핵심이고 지연 허용 → CoT(또는 추론형 모델 + 짧은 프롬프트).
-- 대량·저비용 → zero-shot + 엄격한 형식 지시 (`/model-router` BULK_LIGHT).
+- 대량·저비용 → zero-shot + 엄격한 형식 지시. 제품 모델은 `ai-model-selector`로 선택한다.
 
 ---
 
@@ -155,13 +155,13 @@ author: simon-stack
 
 - **프롬프트는 유일 방어선이 아님**: 위험 동작(결제·삭제·PII)은 코드 allowlist/확인으로 이중화. 프롬프트만 믿지 말 것.
 - **비밀 비주입**: API 키·내부 시스템 프롬프트를 사용자 입력과 같은 컨텍스트에 두지 않는다.
-- **모델명 환각 금지**: 특정 모델 거론 필요 시 최신만(Claude Opus 4.8 / Sonnet 4.6 / Haiku 4.5 / Fable 5, Gemini 2.x). 모델 선택은 `/model-router` 위임.
+- **모델명 환각 금지**: 특정 제품용 모델·API ID는 결정 시점의 공식 제공자 문서에서 확인한다. 모델 선택은 `ai-model-selector`에 위임하고 구독형 CLI 사용량을 제품 API 예산으로 간주하지 않는다.
 - **프로젝트 금칙어 준수**: 대상 레포에 lexicon/금지어 규칙(예: 2nd-Brain `src/lib/safety/lexicon.ts`)이 있으면 시스템 프롬프트·예시가 이를 위반하지 않게 확인.
 - **PII·로깅**: eval 셋·로그에 실제 사용자 PII 를 넣지 않는다(합성 데이터 사용).
 
 ## 관련 스킬
 
-- `/model-router` — 작업 type → best 모델 + API ID. §1 모델 선택 시 위임.
+- `ai-model-selector` — 사용자 제품의 작업별 모델·API ID 결정. 스택 내부 라우팅용 `model-router`와 구분한다.
 - `claude-api` — Claude tool-use·structured output·prefill·토큰/캐싱 API 레퍼런스(§4 강제 출력 구현 시).
 - `paid-api-guard` — 유료 LLM 호출 비용·rate 가드(eval 대량 실행 전 확인).
 - `/grill-me` — 작업 정의(§1)가 모호할 때 사양 구멍 먼저 메우기.
