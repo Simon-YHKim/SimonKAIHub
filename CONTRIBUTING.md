@@ -72,7 +72,7 @@ description will fail the gate.
 
 - Skills help the **user's** AI product/feature — not this plugin's own behavior.
 - Never skip the eval and safety gates in any build flow.
-- Reference only current models (Claude Opus 4.8 / Sonnet 4.6 / Haiku 4.5 / Fable 5, Gemini 2.x).
+- Do not hardcode a supposed current model lineup in skill recommendations or templates. Verify exact API IDs, availability, and pricing against provider documentation when making a product decision; keep unknown fields unset. Interactive subscription usage does not imply that a product API call is included.
 - Secrets via env, never hardcoded; state cost/latency caps; log model calls.
 
 ## Commits & PRs

@@ -16,7 +16,21 @@
         },
         {
           "id": "recommends-with-ids",
-          "text": "Recommends primary/secondary/low-cost candidates with concrete API model IDs."
+          "text": "Recommends primary/secondary/low-cost candidates using currently verified official API model IDs, or marks IDs unverified instead of inventing them."
+        }
+      ]
+    },
+    {
+      "id": "ko-zero-extra-spend",
+      "prompt": "Claude와 Codex 구독은 있지만 추가 과금은 $0이야. 내 앱에 쓸 모델을 골라줘. 유료 API 테스트는 하지 마.",
+      "assertions": [
+        {
+          "id": "separates-subscription-api",
+          "text": "Distinguishes interactive subscription usage from product API billing; does not assume a subscription covers product API calls."
+        },
+        {
+          "id": "no-paid-eval",
+          "text": "Produces a recommendation or evaluation plan without making paid API calls under the zero-incremental-spend constraint."
         }
       ]
     },
